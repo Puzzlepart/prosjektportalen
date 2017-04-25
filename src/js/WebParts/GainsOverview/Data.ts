@@ -31,11 +31,12 @@ export interface IMeasurement {
 const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
     const idFieldName = (dataSource === DataSource.Search) ? "ListItemID" : "ID",
         valueFieldName = (dataSource === DataSource.Search) ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
+        lookupFieldName = (dataSource === DataSource.Search) ? "RefinableString58" : "GtGainLookupId",
         desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName;
     return measures
         .filter(m => {
             let gainId = parseInt(gain[idFieldName], 10),
-                gainLookupId = parseInt(m.RefinableString58, 10);
+                gainLookupId = parseInt(m[lookupFieldName], 10);
             switch (dataSource) {
                 case DataSource.List: return (gainLookupId === gainId);
                 case DataSource.Search: return (gainLookupId === gainId) && (gain.SPWebUrl === m.SPWebUrl);
@@ -154,7 +155,7 @@ export const retrieveFromSource = (dataSource: DataSource): Promise<IGainsOvervi
                         .get(),
                     measuresList
                         .items
-                        .select("RefinableString58", "GtMeasurementValue", "GtMeasurementDate")
+                        .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
                         .orderBy("GtMeasurementDate", false)
                         .get(),
                 ]).then(([gains, measures]) => {
