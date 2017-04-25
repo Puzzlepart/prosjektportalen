@@ -1,9 +1,15 @@
 import { Logger, LogLevel, Web, FileAddResult, default as pnp } from "sp-pnp-js";
-import * as Util from "Util";
+import * as Util from "../../../Util";
 import { IListConfig } from "../Config";
 
 const REJECT_TIMEOUT = 20000;
 
+/**
+ * Copy files
+ *
+ * @param conf Configuration
+ * @param destUrl Destination web URL
+ */
 export const CopyFiles = (conf: IListConfig, destUrl: string): Promise<FileAddResult[]> => new Promise<FileAddResult[]>((resolve, reject) => {
     Logger.write(`Copying files from '${conf.SourceList}' to '${conf.DestinationLibrary}'.`, LogLevel.Info);
     let srcWeb = new Web(conf.SourceUrl),

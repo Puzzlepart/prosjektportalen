@@ -14,11 +14,16 @@ export interface IListConfig {
 
 let __CONFIG: { [key: string]: IListConfig } = null;
 
-export const RetrieveConfig = (): Promise<{ [key: string]: IListConfig }> => new Promise((resolve, reject) => {
+/**
+ * Retrieve configuration fron list
+ *
+ * @param configList Configuration list
+ */
+export const RetrieveConfig = (configList = "ListContentConfig"): Promise<{ [key: string]: IListConfig }> => new Promise((resolve, reject) => {
     if (__CONFIG) {
         resolve(__CONFIG);
     } else {
-        pnp.sp.web.lists.getByTitle("ListContentConfig").items.get().then(configItems => {
+        pnp.sp.web.lists.getByTitle(configList).items.get().then(configItems => {
             let config: { [key: string]: IListConfig } = {};
             configItems.forEach(item => {
                 config[item.Title] = {

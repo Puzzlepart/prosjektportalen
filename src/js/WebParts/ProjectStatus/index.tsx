@@ -3,6 +3,7 @@ import { sp } from "sp-pnp-js";
 import { Element } from "react-scroll";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { StickyContainer } from "react-sticky";
+import { default as ProductsList } from "./ProductsList";
 import { default as RiskList } from "./RiskList";
 import { default as RiskMatrix } from "./RiskMatrix";
 import { default as StatusSection } from "./StatusSection";
@@ -72,6 +73,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 statusValue={project.GtStatusQuality}
                                 comment={project.GtStatusQualityComment}
                                 fieldName="GtStatusQuality" />
+                                {/*<ProductsList viewName="Alle elementer" />*/}
                         </Element>
                         <Element name="risiko-section" className="risiko-section section ms-Grid-row">
                             <SectionHeader

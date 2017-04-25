@@ -1,5 +1,5 @@
 import { Logger, LogLevel } from "sp-pnp-js";
-import * as Util from "Util";
+import * as Util from "../../Util";
 import { CopyFiles } from "./Files";
 import { CopyItems } from "./Items";
 import { RetrieveConfig, IListConfig } from "./Config";
@@ -12,7 +12,7 @@ import { RetrieveConfig, IListConfig } from "./Config";
  * @param progressCb Progress callback to caller
  */
 const Copy = (destUrl: string, conf: IListConfig, progressCb: Function): Promise<any> => new Promise<any>((resolve, reject) => {
-    Util.LoadTaxonomy().then(() => {
+    Util.ensureTaxonomy().then(() => {
         progressCb(conf.SourceList);
         if (conf.DestinationLibrary) {
             CopyFiles(conf, destUrl).then(resolve, resolve);
