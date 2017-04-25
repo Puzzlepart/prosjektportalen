@@ -31,34 +31,37 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
 
     public render(): JSX.Element {
         let { items } = this.props;
-        let riskMatrix = Config.RiskMatrix.map((rows, i) => {
-            let entry = rows.map((cell, j) => {
-                let riskElements = items.map((risk, k) => {
-                    if (Config.RiskMatrix[i][j].Probability === risk.GtRiskProbability && Config.RiskMatrix[i][j].Consequence === risk.GtRiskConsequence) {
+        let riskMatrix = Config.RiskMatrix.map((rows, i: number) => {
+            let row = rows.map((cell, j: number) => {
+                const element = Config.RiskMatrix[i][j];
+                const riskElements = items.map((risk, k: number) => {
+                    if (element.Probability === risk.GtRiskProbability && element.Consequence === risk.GtRiskConsequence) {
                         return <RiskElement item={risk} key={k} />;
                     }
                     return null;
                 });
-                if (i > 0 && j > 0) {
+                const isHeader = (i > 0 && j > 0);
+                if (!isHeader) {
                     return <td
                         key={j}
-                        className={`risk-matrix-element-container ${Config.RiskMatrix[i][j].ClassName}`}>
+                        className={`risk-matrix-element-container ${element.ClassName}`}>
                         {riskElements}
                     </td>;
+                } else {
+                    return <td
+                        key={j}
+                        className="headers">
+                        <span>
+                            {cell.Value}
+                        </span>
+                    </td>;
                 }
-                return <td
-                    key={j}
-                    className=" headers">
-                    <span>
-                        {cell.Value}
-                    </span>
-                </td>;
             });
             return (
                 <tr
                     key={i}
                     className="risk-matrix-row">
-                    {entry}
+                    {row}
                 </tr>
             );
         });
