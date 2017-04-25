@@ -1,5 +1,5 @@
 import { sp } from "sp-pnp-js";
-import * as Util from "Util/";
+import * as Util from "../../Util";
 import { GetCurrentProjectPhase } from "../../Project/";
 
 export interface IChecklistData {
@@ -11,7 +11,7 @@ export interface IChecklistData {
  * Fetch phases
  */
 const fetchPases = () => new Promise<any[]>((resolve, reject) => {
-    Util.LoadTaxonomy().then(() => {
+    Util.ensureTaxonomy().then(() => {
         let ctx = SP.ClientContext.get_current(),
             taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
             termStore = taxSession.getDefaultSiteCollectionTermStore(),

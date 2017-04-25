@@ -191,9 +191,11 @@ export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGu
 };
 
 /**
- * Load taxnonomy scripts
+ * Ensure taxonomy
+ *
+ * @param loadTimeout Loading timeout (ms)
  */
-export const LoadTaxonomyScripts = (): Promise<void> => {
+export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         let scriptbase = `${_spPageContextInfo.siteAbsoluteUrl}/_layouts/15`,
             sodKey = "_v_dictSod";
@@ -206,11 +208,11 @@ export const LoadTaxonomyScripts = (): Promise<void> => {
                 resolve();
             });
         }, "sp.js");
-        window.setTimeout(10000, reject);
+        window.setTimeout(loadTimeout, reject);
     });
 };
 
 import { default as WaitDialog } from "./WaitDialog";
 import { default as StampVersion } from "./StampVersion";
 
-export { WaitDialog,  StampVersion };
+export { WaitDialog, StampVersion };
