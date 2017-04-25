@@ -40,8 +40,8 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
                     }
                     return null;
                 });
-                const isHeader = (i > 0 && j > 0);
-                if (!isHeader) {
+                const isCell = (i > 0 && j > 0);
+                if (isCell) {
                     return <td
                         key={j}
                         className={`risk-matrix-element-container ${element.ClassName}`}>
