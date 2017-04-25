@@ -16,6 +16,7 @@ gulp.task("doc", () => {
             name: pkg.name,
             ignoreCompilerErrors: true,
             version: true,
+            excludeExternals: true,
             readme: "./readme.md",
         }));
 });
