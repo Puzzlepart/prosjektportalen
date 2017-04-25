@@ -14,8 +14,13 @@ interface IProjectInfoProps {
     showEditLink?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
+    labelSize?: string;
+    valueSize?: string;
 }
 
+/**
+ * Project information
+ */
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
     constructor() {
         super();
@@ -66,10 +71,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * @param properties Properties to render
      */
     private __renderProperties(properties: IProjectProp[]): JSX.Element {
-        const { showMissingPropsWarning } = this.props;
+        const { showMissingPropsWarning, labelSize, valueSize } = this.props;
         let hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         return (<div>
-            {properties.filter(p => !p.empty).map((d, index) => (<ProjectProp key={index} data={d} />))}
+            {properties.filter(p => !p.empty).map((d, index) => (<ProjectProp key={index} data={d} labelSize={labelSize} valueSize={valueSize} />))}
             <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
                 <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
             </div>

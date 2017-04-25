@@ -6,7 +6,7 @@ const StatusSection = ({ project }) => {
     return (
         <div id="status-section">
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl5" style={{ padding: 25 }}>
-                <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" />
+                <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" labelSize="xl" valueSize="l" />
             </div>
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl7 status-elements-container">
                 <div className="status-elements">
