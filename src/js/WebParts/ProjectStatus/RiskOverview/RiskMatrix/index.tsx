@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
-import * as Config from "../Config";
+import * as Config from "../../Config";
 
 const RiskElement = ({ item, show }) => {
     return (<div onClick={() => show(item)} className={`risk-matrix-element`}> {item.Id} </div>);
@@ -33,15 +33,15 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
         items: [],
     };
 
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             selectedRisk: null,
             showDialog: false,
         };
     }
 
-    public render() {
+    public render(): JSX.Element {
         let { items } = this.props;
         let { selectedRisk, showDialog } = this.state;
         let riskMatrix = Config.RiskMatrix.map((rows, i) => {
@@ -90,11 +90,11 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
         );
     }
 
-    private closeDialog = () => {
+    private closeDialog = (): void => {
         this.setState({ showDialog: false, selectedRisk: null });
     }
 
-    private showRiskItem = (item: any) => {
+    private showRiskItem = (item: any): void => {
         this.setState({ showDialog: true, selectedRisk: item });
     }
 }

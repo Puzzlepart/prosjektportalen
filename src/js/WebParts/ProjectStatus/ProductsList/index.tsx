@@ -70,10 +70,7 @@ export class ProductsList extends React.Component<any, any> {
      * Render item column
      */
     private renderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
-        console.log(item);
-        const fieldValue = (typeof item[column.fieldName] === "string" ? item[column.fieldName] : "");
-        console.log(fieldValue);
-        console.log(column.fieldName);
+        const fieldValue = item[column.fieldName];
         return (<span dangerouslySetInnerHTML={{ __html: fieldValue }}></span>);
     }
 

@@ -1,37 +1,41 @@
 import * as React from "react";
 import { SelectionMode, DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import * as Config from "../Config";
+import { MatrixStyle } from "../../Config";
 
-export class RiskList extends React.Component<any, any> {
-    public static defaultProps = {
-        items: [],
-    };
+export interface IRiskListProps {
+    items: any[];
+    columns: IColumn[];
+}
 
-    constructor(props) {
-        super(props);
+export interface IRiskListState {
+    items: any[];
+    columns: IColumn[];
+}
+
+export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
+    constructor() {
+        super();
         this.state = {
-            sortedItems: null,
+            items: null,
             columns: null,
         };
     }
 
     public componentDidMount(): void {
+        let { items, columns } = this.props;
         this.setState({
-            sortedItems: this
-                .props
-                .items
-                .sort((a, b) => parseFloat(b.GtRiskFactor) - parseFloat(a.GtRiskFactor)),
-            columns: Config.RiskList.Columns,
+            items: items.map(i => i.FieldValuesAsHtml),
+            columns: columns.filter(c => c),
         });
     }
 
     public render(): JSX.Element {
-        let { sortedItems, columns } = this.state;
-        if (sortedItems && columns) {
+        let { items, columns } = this.props;
+        if (items && columns) {
             return (
                 <div className="risk-list ms-Grid">
                     <DetailsList
-                        items={sortedItems}
+                        items={items}
                         columns={columns}
                         onRenderItemColumn={this.renderItemColumn}
                         onColumnHeaderClick={(ev, col) => {
@@ -47,8 +51,8 @@ export class RiskList extends React.Component<any, any> {
 
     private renderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
         const fieldValue = item[column.fieldName];
-        const borderColor = Config.MatrixStyle[item.GtRiskProbability][item.GtRiskConsequence].borderColor;
-        switch (column.key) {
+        const borderColor = MatrixStyle[item.GtRiskProbability][item.GtRiskConsequence].borderColor;
+        switch (column.fieldName) {
             case "ID":
                 return <div style={{ "borderColor": borderColor }} className={`risk-element-id`}><span>{fieldValue}</span></div >;
             case "GtRiskFactor":
@@ -61,25 +65,25 @@ export class RiskList extends React.Component<any, any> {
     }
 
     private onColumnClick(column: IColumn): void {
-        let { sortedItems } = this.state;
+        let { items, columns } = this.state;
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
         }
-        sortedItems = sortedItems.sort((a, b) => {
+        items = [].concat(items).sort((a, b) => {
             let firstValue = parseFloat(a[column.fieldName]);
             let secondValue = parseFloat(b[column.fieldName]);
             return isSortedDescending ? secondValue - firstValue : firstValue - secondValue;
         });
         this.setState({
-            columns: Config.RiskList.Columns.map(col => {
+            columns: columns.map(col => {
                 col.isSorted = (col.key === column.key);
                 if (col.isSorted) {
                     col.isSortedDescending = isSortedDescending;
                 }
                 return col;
             }),
-            sortedItems: sortedItems,
+            items: items,
         });
     }
 }
