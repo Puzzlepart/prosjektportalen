@@ -5,6 +5,10 @@ import { Dialog, DialogType, DialogFooter, Button, ButtonType, TextField, Toggle
 import { IProjectModel } from "Model";
 import * as Util from "Util";
 
+interface INewProjectDialogProps {
+    className: string;
+    hideHandler: (event) => void;
+}
 
 interface INewProjectDialogState {
     showAdvancedSettings: boolean;
@@ -13,7 +17,10 @@ interface INewProjectDialogState {
     listDataConfig?: { [key: string]: ListDataConfig.IListConfig };
 }
 
-export class NewProjectDialog extends React.Component<any, INewProjectDialogState> {
+/**
+ * New Project dialog
+ */
+export class NewProjectDialog extends React.Component<INewProjectDialogProps, INewProjectDialogState> {
     private inputs: { [key: string]: any } = {
         Title: null,
         Description: null,
@@ -41,8 +48,9 @@ export class NewProjectDialog extends React.Component<any, INewProjectDialogStat
         ListDataConfig.RetrieveConfig().then(config => this.setState({ listDataConfig: config }));
     }
 
-    public render() {
-        let [{ className }, { showAdvancedSettings, urlValue, formValid, listDataConfig }] = [this.props, this.state];
+    public render(): JSX.Element {
+        let { className } = this.props;
+        let { showAdvancedSettings, urlValue, formValid, listDataConfig } = this.state;
         if (listDataConfig === null) {
             return null;
         }
@@ -89,21 +97,33 @@ export class NewProjectDialog extends React.Component<any, INewProjectDialogStat
         </Dialog>);
     }
 
-    private _closeDialog = (event) => {
+    /**
+     * Close dialog
+     */
+    private _closeDialog = (event): void => {
         let { hideHandler } = this.props;
         hideHandler(event);
     }
 
+    /**
+     * Toggle advanced settings section
+     */
     private toggleAdvancedSettings = (): void => {
         this.setState(prevState => ({ showAdvancedSettings: !prevState.showAdvancedSettings }));
     }
 
+    /**
+     * On title changed
+     */
     private onTitleChanged = () => window.setTimeout(() => {
         let title = this.inputs.Title.value;
         let url = Util.generateUrl(title);
         this.setState({ urlValue: url, formValid: url.length >= 4 });
     }, 100)
 
+    /**
+     * Get project model
+     */
     private getModel(): IProjectModel {
         let model: IProjectModel = {};
         Object.keys(this.inputs).forEach(key => model[key] = this.inputs[key].value || this.inputs[key].checked);
@@ -112,6 +132,9 @@ export class NewProjectDialog extends React.Component<any, INewProjectDialogStat
         return model;
     }
 
+    /**
+     * Submit handler
+     */
     private onSubmit = (event): void => {
         this._closeDialog(event);
         ProvisionWeb(this.getModel()).then(redirectUrl => {

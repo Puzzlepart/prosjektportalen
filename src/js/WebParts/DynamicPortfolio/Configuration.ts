@@ -1,7 +1,7 @@
 import * as pnp from "sp-pnp-js";
 
-const COLUMN_CONFIG_CT = "0x0100B98DDFB576777B409846155F0D450EB401";
-const REFINER_CONFIG_CT = "0x0100B98DDFB576777B409846155F0D450EB402";
+const COLUMN_CONFIG_CT: string = "0x0100B98DDFB576777B409846155F0D450EB401";
+const REFINER_CONFIG_CT: string = "0x0100B98DDFB576777B409846155F0D450EB402";
 
 export interface IColumnConfig {
     name: string;
@@ -23,8 +23,13 @@ export interface IRefinerConfig {
     defaultHidden: boolean;
 }
 
-export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[] }>((resolve, reject) => {
-    pnp.sp.web.lists.getByTitle("DynamicPortfolioConfig").items.orderBy("GtDpOrder").get().then(items => {
+/**
+ * Get config from lists
+ *
+ * @param configList Configuration list
+ */
+export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[] }>((resolve, reject) => {
+    pnp.sp.web.lists.getByTitle(configList).items.orderBy("GtDpOrder").get().then(items => {
         resolve({
             columnConfig: items.filter(i => i.ContentTypeId.indexOf(COLUMN_CONFIG_CT) !== -1).map(col => ({
                 name: col.GtDpDisplayName,
