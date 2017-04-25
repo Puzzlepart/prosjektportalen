@@ -1,5 +1,5 @@
 {
-  "name": "pnp-prosjektportalen",
+  "name": "prosjektportalen",
   "version": "0.9.3",
   "description": "",
   "main": "index.js",
@@ -26,11 +26,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://omaertin@bitbucket.org/puzzlepart/pnp-prosjektportalen.git"
+    "url": "https://github.com/Puzzlepart/prosjektportalen"
   },
   "author": "@tarjeieo, @olemp",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/puzzlepart/pnp-prosjektportalen#readme",
+  "homepage": "https://github.com/Puzzlepart/prosjektportalen",
   "devDependencies": {
     "@types/react": "^15.0.14",
     "@types/sharepoint": "^2013.1.2",
