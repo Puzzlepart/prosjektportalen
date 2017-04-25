@@ -1,0 +1,42 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "commonjs",
+        "jsx": "react",
+        "declaration": false,
+        "sourceMap": true,
+        "removeComments": false,
+        "baseUrl": ".",
+        "paths": {
+            "Model": [
+                "src/js/Model"
+            ],
+            "Provision": [
+                "src/js/Provision"
+            ]
+        },
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ],
+        "types": [
+            "sharepoint",
+            "node",
+            "react",
+            "i18n-webpack-plugin",
+            "webpack-variables"
+        ],
+        "noImplicitAny": false,
+        "allowUnreachableCode": false,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": false,
+        "pretty": true
+    },
+    "include": [
+        "src/**/*",
+        "node_modules/**/*"
+    ]
+}

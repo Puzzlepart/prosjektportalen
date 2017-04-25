@@ -1,0 +1,90 @@
+@import '../../conf/*';
+
+.navigation {
+    max-height: 100px;
+
+    .nav-status-container {
+        z-index: 99;
+        background: #eff6fa;
+        margin-bottom: 30px;
+        height: 96px;
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+
+            .nav-link {
+                padding: 6px 10px;
+                text-decoration: none;
+                cursor: pointer;
+                text-align: center;
+
+                &.active {
+                    color: white;
+                    background: $SuiteBarBackground;
+                }
+
+                p {
+                    margin-top: 6px;
+                    margin-bottom: 0;
+                    text-align: left;
+                }
+
+                @media (min-width: 1365px) {
+                    min-width: 110px;
+                }
+            }
+        }
+
+        .nav-details {
+            color: white;
+            background: $SuiteBarBackground;
+            max-height: 50px;
+
+            p {
+                line-height: 48px;
+                margin: 0;
+
+                span {
+                    vertical-align: top;
+                }
+            }
+
+            .ms-Dropdown {
+                margin-top: 8px;
+
+                .ms-Dropdown-title {
+                    border: 0;
+                    background: none;
+                    color: white;
+                }
+
+                i {
+                    color: white;
+                }
+            }
+
+            .save-pdf-container {
+                cursor: pointer;
+            }
+        }
+
+        .nav-link {
+            .ms-Icon {
+                font-size: 25px;
+                color: $SuiteBarBackground;
+            }
+
+            &.active {
+                .ms-Icon {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .ms-dialogMainReport {
+        height: 900px;
+        min-width: 800px !important;
+    }
+}

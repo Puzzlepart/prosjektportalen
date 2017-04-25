@@ -1,0 +1,26 @@
+<pnp:ListInstance Title="{resource:Lists_Resources_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="Resources" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-e717-4e80-aa17-d0c71b360101" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Views RemoveExistingViews="true">
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Resources/Forms/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="FileLeafRef" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Title" />
+                <FieldRef Name="Modified" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:Security>
+        <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
+            <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
+            <pnp:RoleAssignment Principal="{associatedvisitorgroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+        </pnp:BreakRoleInheritance>
+    </pnp:Security>
+</pnp:ListInstance>

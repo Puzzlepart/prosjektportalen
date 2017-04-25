@@ -1,0 +1,18 @@
+<webParts>
+    <webPart 
+        xmlns="http://schemas.microsoft.com/WebPart/v3">
+        <metaData>
+            <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+            <importErrorMessage>Cannot import Web Part.</importErrorMessage>
+        </metaData>
+        <data>
+            <properties>
+                <property name="Title" type="string">Oppgaver (gjeldende fase)</property>
+                <property name="Description" type="string"></property>
+                <property name="ListUrl" type="string">{site}/Lists/Oppgaver</property>
+                <property name="TitleUrl" type="string">{site}/Lists/Oppgaver/AllItems.aspx</property>
+                <property name="ShowTimelineIfAvailable" type="bool">true</property>
+            </properties>
+        </data>
+    </webPart>
+</webParts>

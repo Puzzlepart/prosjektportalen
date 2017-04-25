@@ -1,0 +1,3 @@
+<pnp:ListInstance Title="{resource:Lists_Announcements_Title}" Description="" TemplateType="104" Url="Lists/Announcements" EnableFolderCreation="false" EnableAttachments="false" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+</pnp:ListInstance>

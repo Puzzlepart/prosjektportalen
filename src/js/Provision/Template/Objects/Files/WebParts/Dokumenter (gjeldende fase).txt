@@ -1,0 +1,16 @@
+<webParts>
+    <webPart 
+        xmlns="http://schemas.microsoft.com/WebPart/v3">
+        <metaData>
+            <type name="Microsoft.SharePoint.WebPartPages.XsltListViewWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+            <importErrorMessage>Cannot import Web Part.</importErrorMessage>
+        </metaData>
+        <data>
+            <properties>
+                <property name="Title" type="string">Dokumenter (gjeldende fase)</property>
+                <property name="ListUrl" type="string">{site}/Delte dokumenter</property>
+                <property name="TitleUrl" type="string">{site}/Delte dokumenter/Forms/AllItems.aspx</property>
+            </properties>
+        </data>
+    </webPart>
+</webParts>

@@ -1,0 +1,143 @@
+<pnp:ListInstance Title="DynamicPortfolioConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">Title</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Title</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpReadOnly">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">Path</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">URL</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">Created</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Created</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">LastModifiedTime</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Modified</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Phase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtProjectManagerOWSUSER</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Manager</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Persona</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtProjectOwnerOWSUSER</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Owner</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Persona</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString53</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Service Area</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">70</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString54</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Type</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">80</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStartDateOWSDATE</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Start date</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">90</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtEndDateOWSDATE</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">End date</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">100</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtProjectGoalsOWSMTXT</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Goals</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">110</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusTimeOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status time</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">120</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusRiskOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status risk</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">130</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusBudgetOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status budget</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">140</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusGainAchievementOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status gains</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">150</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Phase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString53</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Service Area</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString54</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Type</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>

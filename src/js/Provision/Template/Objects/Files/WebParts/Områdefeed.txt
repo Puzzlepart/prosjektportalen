@@ -1,0 +1,31 @@
+<WebPart 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://schemas.microsoft.com/WebPart/v2">
+    <Title>Områdefeed</Title>
+    <FrameType>None</FrameType>
+    <Description>Områdefeed inneholder mikrobloggingsdiskusjoner på et gruppeområde.</Description>
+    <IsIncluded>true</IsIncluded>
+    <ZoneID>RightColumn</ZoneID>
+    <PartOrder>0</PartOrder>
+    <FrameState>Normal</FrameState>
+    <Height />
+    <Width />
+    <AllowRemove>true</AllowRemove>
+    <AllowZoneChange>true</AllowZoneChange>
+    <AllowMinimize>true</AllowMinimize>
+    <AllowConnect>true</AllowConnect>
+    <AllowEdit>true</AllowEdit>
+    <AllowHide>true</AllowHide>
+    <IsVisible>true</IsVisible>
+    <DetailLink />
+    <HelpLink />
+    <HelpMode>Modeless</HelpMode>
+    <Dir>Default</Dir>
+    <PartImageSmall />
+    <MissingAssembly>Kan ikke importere denne webdelen.</MissingAssembly>
+    <PartImageLarge>/_layouts/15/images/wp_pers.gif</PartImageLarge>
+    <IsIncludedFilter />
+    <Assembly>Microsoft.SharePoint.Portal, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c</Assembly>
+    <TypeName>Microsoft.SharePoint.Portal.WebControls.SiteFeedWebPart</TypeName>
+</WebPart>

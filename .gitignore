@@ -1,0 +1,10 @@
+node_modules/
+dist/
+lib/
+docs/
+release/
+_templates/
+@settings.js
+src/css/conf/Default.spcolor.styl
+npm-debug.log
+src/js/Resources/

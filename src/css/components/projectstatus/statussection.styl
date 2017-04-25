@@ -1,0 +1,53 @@
+.status-section {
+    a, a:visited {
+        color: #1C4269;
+    }
+
+    h2 {
+        color: #99A8AD;
+        text-transform: uppercase;
+    }
+
+    .ms-Icon {
+        font-size: 45px;
+
+        &.positive-status {
+            color: #2da748;
+        }
+
+        &.negative-status {
+            color: #ea5c73;
+        }
+
+        &.neutral-status {
+            color: #e9b359;
+        }
+    }
+
+    background-color: #eff6fa;
+
+    .status-elements {
+        .status-element {
+            display: block;
+            border-color: #c8d5dc;
+            border-style: solid;
+            border-width: 0px 0px 1px 1px;
+            padding: 20px;
+            cursor: pointer;
+
+            &:hover {
+                h1 {
+                    font-weight: bold;
+                }
+            }
+
+            .status-icons {
+                margin-top: 25px;
+            }
+
+            h2 {
+                margin-top: 20px;
+            }
+        }
+    }
+}

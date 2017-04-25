@@ -1,0 +1,31 @@
+<pnp:ListInstance Title="{resource:Lists_Standarddocuments_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="StandardDocuments" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Default="true" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllDocuments_DisplayName}" Url="{site}/StandardDocuments/Forms/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="FileLeafRef" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="DocIcon" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="GtProjectPhase" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Editor" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">100</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:Security>
+        <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
+            <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
+            <pnp:RoleAssignment Principal="{associatedvisitorgroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+        </pnp:BreakRoleInheritance>
+    </pnp:Security>
+</pnp:ListInstance>

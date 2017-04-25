@@ -1,0 +1,45 @@
+<pnp:CustomActions 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:WebCustomActions>
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Portal - Resources"
+            Title="Project Portal - Resources"
+            Url="Resources/Forms/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2001" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Portal - Extensions"
+            Title="Project Portal - Extensions"
+            Url="Extensions/Forms/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2002" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Portal - List Content"
+            Title="Project Portal - List Content"
+            Url="Lists/ListContentConfig/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2003" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Portal - Dynamic Portfolio"
+            Title="Project Portal - Dynamic Portfolio"
+            Url="Lists/DynamicPortfolioConfig/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2004" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Portal - Project Config"
+            Title="Project Portal - Project Config"
+            Url="Lists/ProjectConfig/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2005" />
+    </pnp:WebCustomActions>
+</pnp:CustomActions>

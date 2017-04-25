@@ -1,0 +1,68 @@
+<pnp:Files 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Item_Project.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentTypeId" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen prosjektelement" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Item" />
+            <pnp:Property Key="ManagedPropertyMapping" Value="'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase'" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Item_Project_details.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentTypeId" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen prosjektelement med detaljer" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Item" />
+            <pnp:Property Key="ManagedPropertyMapping" Value="'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase','Created','GtProjectGoalsOWSMTXT','GtStatusTimeOWSCHCS','GtStatusRiskOWSCHCS','GtStatusBudgetOWSCHCS','GtStatusGainAchievementOWSCHCS','LastModifiedTime'" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Control_Table_Erfaringslogg.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentType" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen kontroll for erfaringslogg" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Control" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Item_Erfaringslogg.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentTypeId" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen erfaringsloggelement" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Item" />
+            <pnp:Property Key="ManagedPropertyMapping" Value="'Path','Title','LastModifiedTime','LoggElement':'GtProjectLogTypeOWSCHCS','MeldtAv':'GtProjectLogReporterOWSUSER','Loggbeskrivelse':'GtProjectLogDescriptionOWSMTXT','Ansvarlig':'GtProjectLogResponsibleOWSCHCS','Konsekvens':'GtProjectLogConsequenceOWSMTXT','Anbefaling':'GtProjectLogRecommendationOWSMTXT','TilErfaringslogg':'GtProjectLogExperienceOWSBOOL','Aktorer':'GtProjectLogActorsOWSCHCM','PavirkerProdukt':'GtProjectLogProductLookup','TilProsjektStyre':'GtProjectLogEventLookup','crawltime','SPWebUrl','SiteTitle'" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Control_Table.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentType" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen kontroll for portefølje" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Control" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Search" Src="Search\Glittertind_Control_List.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentType" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen kontroll for prosjekter" />
+            <pnp:Property Key="DisplayTemplateLevel" Value="Control" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Folder="_catalogs/masterpage/Display Templates/Filters" Src="Filters\Glittertind_Control_Refinement_Horizontal.js" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="ContentType" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
+            <pnp:Property Key="Title" Value="Prosjektportalen horisontal filter" />
+            <pnp:Property Key="TargetControlType" Value='["SearchResults"]' />
+            <pnp:Property Key="TemplateHidden" Value="0" />
+        </pnp:Properties>
+    </pnp:File>
+</pnp:Files>

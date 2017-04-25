@@ -1,0 +1,48 @@
+#risk-matrix {
+    padding-top: 40px;
+    border-width: 0px;
+    border-spacing: 0;
+
+    .risk-matrix-row {
+        min-height: 50px;
+
+        .risk-matrix-element-container {
+            border-right: 1px solid #99A8AD;
+            border-bottom: 1px solid #99A8AD;
+            width: 250px;
+
+            .risk-matrix-element {
+                border-radius: 50%;
+                padding: 5px;
+                margin: 4px;
+                text-align: center;
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                cursor: pointer;
+                background-color: #fff;
+                color: #666;
+            }
+
+            &.positive-cell {
+                background-color: #2da748;
+            }
+
+            &.negative-cell {
+                background-color: #ea5c73;
+            }
+
+            &.neutral-cell {
+                background-color: #e9b359;
+            }
+        }
+
+        .headers {
+            line-height: 50px;
+            min-width: 150px;
+            padding-left: 5px;
+            border-right: 1px solid #99A8AD;
+            border-bottom: 1px solid #99A8AD;
+        }
+    }
+}

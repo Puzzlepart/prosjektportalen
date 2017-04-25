@@ -1,0 +1,171 @@
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"> 
+<head>
+<title>Glittertind Kontroll for detaljevisning</title>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:TemplateHidden msdt:dt="string">0</mso:TemplateHidden>
+<mso:MasterPageDescription msdt:dt="string">Dette er standard kontrollvisningsmal som viser elementene.</mso:MasterPageDescription>
+<mso:ContentTypeId msdt:dt="string">0x0101002039C03B61C64EC4A04F5361F385106601</mso:ContentTypeId>
+<mso:TargetControlType msdt:dt="string">;#Content Web Parts;#SearchResults;#</mso:TargetControlType>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+
+    <!--
+            Warning: Do not try to add HTML to this section. Only the contents of the first <div>
+            inside the <body> tag will be used while executing Display Template code. Any HTML that
+            you add to this section will NOT become part of your Display Template.
+    -->
+    <script>
+    </script>
+
+    <!--
+        Use the div below to author your Display Template. Here are some things to keep in mind:
+        * Surround any JavaScript logic as shown below using a "pound underscore" (#_ ... _#) token
+        inside a comment.
+
+        * Use the values assigned to your variables using an "underscore pound equals"
+        (_#= ... =#_) token.
+    -->
+
+    <div id="Control_List">
+
+        <!--#_ 
+            if (!$isNull(ctx.ClientControl) &&
+            !$isNull(ctx.ClientControl.shouldRenderControl) &&
+            !ctx.ClientControl.shouldRenderControl())
+            {
+            return "";
+            }
+            ctx.ListDataJSONGroupsKey = "ResultTables";
+
+            var noResultsClassName = "ms-srch-result-noResults";
+            window.GT = window.GT || {};
+            window.GT.GetStatusCssClass = function(status) {
+	            if (status === undefined || status === null) return 'status-unknown';
+
+	            var statusToCheck = status.toLowerCase();
+
+	            if (statusToCheck === 'etter plan') return 'status-red';
+	            else if (statusToCheck === 'forsinket') return 'status-red';
+	            else if (statusToCheck === 'foran plan') return 'status-green';
+	            else if (statusToCheck === 'på plan') return 'status-green';
+	            else if (statusToCheck === 'høy') return 'status-red';
+	            else if (statusToCheck === 'medium') return 'status-yellow';
+	            else if (statusToCheck === 'mindre overskridelser som kan tas igjen') return 'status-yellow';
+	            else if (statusToCheck === 'mindre forsinkelse som kan tas igjen') return 'status-yellow';
+	            else if (statusToCheck === 'lav') return 'status-green';
+	            else if (statusToCheck === 'over budsjett') return 'status-red';
+	            else if (statusToCheck === 'på budsjett') return 'status-green';
+	            else if (statusToCheck === 'under budsjett') return 'status-green';
+	            else if (statusToCheck === 'vet ikke') return 'status-yellow';
+
+	            return 'status-unknown';
+            };
+
+            var ListRenderRenderWrapper = function(itemRenderResult, inCtx, tpl)
+            {
+                var iStr = [];
+                if (inCtx.CurrentItemIdx % 2 === 0) {
+                    iStr.push('<tr class="ms-HoverBackground-bgColor">');
+                } else {
+                    iStr.push('<tr>');
+                }
+                iStr.push(itemRenderResult);
+                iStr.push('</tr>');
+                return iStr.join('');
+            }
+ctx['ItemRenderWrapper'] = ListRenderRenderWrapper;
+
+var shouldShowClearSearch = function(ctx) {
+    return ctx.DataProvider && ctx.DataProvider.get_currentQueryState() && ctx.DataProvider.get_currentQueryState().k;
+}
+if (shouldShowClearSearch(ctx))
+{
+_#-->
+    <div class="clear-search" onclick="window.location.hash = ''"><i class="ms-Icon ms-Icon--Clear" aria-hidden="true"></i>Nullstill søket</div>
+<!--#_
+}
+_#-->
+    <table class="gt-result-table" >
+		<thead>
+			<tr>
+				<th>Tittel</th>
+				<th>Målsetning</th>
+				<th>Prosjekteier</th>
+				<th>Prosjektleder</th>
+				<th>Status tid</th>
+				<th>Status risiko</th>
+				<th>Status budsjett</th>
+				<th>Status gevinstarbeid</th>
+                <th>Fase</th>
+				<th>Sist endret</th>
+			</tr>
+		</thead>
+		<tbody>
+           _#= ctx.RenderGroups(ctx) =#_
+		 </tbody>
+	</table>
+<!--#_
+                if(ctx.ClientControl.get_showPaging()){
+                    var pagingInfo = ctx.ClientControl.get_pagingInfo();
+                    if(!$isEmptyArray(pagingInfo)){
+_#-->
+                         <div class="ms-srch-result" id="Result" name="Control">
+                             <ul id="Paging" class="ms-srch-Paging gt-srch-paging">
+<!--#_
+                        for (var i = 0; i < pagingInfo.length; i++) {
+                            var pl = pagingInfo[i];
+                            if(!$isNull(pl)) {
+                                var imagesUrl = GetThemedImageUrl('searchresultui.png');
+                                if(pl.startItem == -1) {
+                                    var selfLinkId = "SelfLink_" + pl.pageNumber;
+_#-->
+                                    <li id="PagingSelf"><a id="_#= $htmlEncode(selfLinkId) =#_">_#= $htmlEncode(pl.pageNumber) =#_</a></li>
+<!--#_
+                                } else if(pl.pageNumber == -1) {
+                                    var iconClass = Srch.U.isRTL() ? "ms-srch-pagingNext" : "ms-srch-pagingPrev";
+_#-->
+                                    <li id="PagingImageLink"><a id="PageLinkPrev" href="#" class="ms-commandLink ms-promlink-button ms-promlink-button-enabled ms-verticalAlignMiddle" title="_#= $htmlEncode(pl.title) =#_" onclick="$getClientControl(this).page(_#= $htmlEncode(pl.startItem) =#_);return Srch.U.cancelEvent(event);">
+                                        <span class="ms-promlink-button-image">
+                                            <img src="_#= $urlHtmlEncode(imagesUrl) =#_" class="_#= $htmlEncode(iconClass) =#_" alt="_#= $htmlEncode(pl.title) =#_" />
+                                        </span>
+                                    </a></li>
+<!--#_
+                                } else if(pl.pageNumber == -2) {
+                                    var iconClass = Srch.U.isRTL() ? "ms-srch-pagingPrev" : "ms-srch-pagingNext";
+_#-->
+                                    <li id="PagingImageLink"><a id="PageLinkNext" href="#" class="ms-commandLink ms-promlink-button ms-promlink-button-enabled ms-verticalAlignMiddle" title="_#= $htmlEncode(pl.title) =#_" onclick="$getClientControl(this).page(_#= $htmlEncode(pl.startItem) =#_);return Srch.U.cancelEvent(event);">
+                                        <span class="ms-promlink-button-image">
+                                            <img src="_#= $urlHtmlEncode(imagesUrl) =#_" class="_#= $htmlEncode(iconClass) =#_" alt="_#= $htmlEncode(pl.title) =#_" />
+                                        </span>
+                                    </a></li>
+<!--#_
+                                } else {
+                                    var pageLinkId = "PageLink_" + pl.pageNumber;
+_#-->
+                                    <li id="PagingLink"><a id="_#= $htmlEncode(pageLinkId) =#_" href="#" title="_#= $htmlEncode(pl.title) =#_" onclick="$getClientControl(this).page(_#= $htmlEncode(pl.startItem) =#_);return Srch.U.cancelEvent(event);">_#= $htmlEncode(pl.pageNumber) =#_</a></li>
+<!--#_
+                                }
+                            }
+                        }
+_#-->
+                        </ul></div>
+<!--#_
+                    }
+                }
+
+if (ctx.ClientControl.get_shouldShowNoResultMessage())
+{
+_#-->
+        <div class="_#= noResultsClassName =#_">Ingen elementer å vise</div>
+<!--#_
+}
+_#-->
+
+    </div>
+</body>
+</html>

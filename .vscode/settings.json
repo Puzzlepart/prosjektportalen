@@ -1,0 +1,20 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.DS_Store": true,
+        "**node_modules": true,
+        "dist": true,
+        "lib": true,
+        "docs": true,
+        "release": true,
+        "_templates": true,
+        "src/js/Resources": true,
+        "build/bundle": true
+    },
+    "files.associations": {
+        "**/webparts/**/*.txt": "xml"
+    },
+    "editor.formatOnSave": false,
+    "html.format.unformatted": "a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, script, select, small, span, strong, sub, sup, textarea, tt, var, Value, %@",
+    "powershell.developer.editorServicesLogLevel": "None"
+}

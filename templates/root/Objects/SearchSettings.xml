@@ -1,0 +1,7 @@
+<pnp:SearchSettings 
+  xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+  <pnp:SiteSearchSettings>
+    <xi:include 
+      xmlns:xi="http://www.w3.org/2001/XInclude" href="SearchConfig/SearchConfig.xml" />
+  </pnp:SiteSearchSettings>
+</pnp:SearchSettings>
