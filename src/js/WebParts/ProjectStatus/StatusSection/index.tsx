@@ -11,6 +11,12 @@ const StatusSection = ({ project }) => {
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl7 status-elements-container">
                 <div className="status-elements">
                     <StatusElement
+                        name="Overordnet status"
+                        iconName="BarChart4"
+                        scrollTo="status-section"
+                        statusValue=""
+                        comment={project.GtOverallStatus} />
+                    <StatusElement
                         name="Fremdrift"
                         iconName="DateTime"
                         scrollTo="fremdrift-section"
