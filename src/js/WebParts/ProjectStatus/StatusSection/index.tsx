@@ -6,14 +6,6 @@ const StatusSection = ({ project }) => {
     return (
         <div id="status-section">
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl5" style={{ padding: 25 }}>
-                <div className="status-elements">
-                    <StatusElement
-                        name="Overordnet status"
-                        iconName="BarChart4"
-                        scrollTo="status-section"
-                        statusValue=""
-                        comment={project.GtOverallStatus} />
-                </div>
                 <ProjectInfo showEditLink={false} filterField="GtPcProjectStatus" />
             </div>
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl7 status-elements-container">
