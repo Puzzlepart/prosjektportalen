@@ -15,7 +15,6 @@ import { default as GainsOverview } from "../GainsOverview";
 export interface IProjectStatusState {
     project: any;
     isLoading: boolean;
-    risks: any[];
 }
 
 export default class ProjectStatus extends React.Component<any, IProjectStatusState> {
@@ -24,7 +23,6 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
         this.state = {
             project: null,
             isLoading: true,
-            risks: [],
         };
     }
 
@@ -33,7 +31,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
     };
 
     public render(): JSX.Element {
-        let { isLoading, project, risks } = this.state;
+        let { isLoading, project } = this.state;
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         } else {
@@ -107,11 +105,9 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
     private fetchData(): void {
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
-            sp.web.lists.getByTitle("Usikkerhet").items.get(),
-        ]).then(([project, risks]) => {
+        ]).then(([project]) => {
             this.setState({
                 project: project,
-                risks: risks,
                 isLoading: false,
             });
         });

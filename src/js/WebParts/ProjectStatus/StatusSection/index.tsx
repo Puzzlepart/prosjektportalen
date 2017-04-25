@@ -14,8 +14,8 @@ const StatusSection = ({ project }) => {
                         name="Overordnet status"
                         iconName="BarChart4"
                         scrollTo="status-section"
-                        statusValue=""
-                        comment={project.GtOverallStatus} />
+                        statusValue={project.GtOverallStatus}
+                        comment="" />
                     <StatusElement
                         name="Fremdrift"
                         iconName="DateTime"

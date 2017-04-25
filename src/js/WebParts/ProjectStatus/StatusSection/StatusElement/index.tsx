@@ -25,7 +25,7 @@ const StatusElement = ({ name, iconName, statusValue, comment, scrollTo, fieldNa
             <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
                 <h2>{name}</h2>
                 <h1>{statusValue}</h1>
-                <p>{comment}</p>
+                {/*<p>{comment}</p>*/}
             </div>
         </Link>
     );
