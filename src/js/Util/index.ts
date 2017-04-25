@@ -1,22 +1,37 @@
 import * as moment from "moment";
 
-import { default as WaitDialog } from "./WaitDialog";
-import { default as LoadTaxonomy } from "./LoadTaxonomy";
-import { default as StampVersion } from "./StampVersion";
-
-
+/**
+ * Formats a date using moment.js
+ *
+ * @param date Date
+ * @param dFormat Date format
+ * @param locale Date locale
+ */
 export const dateFormat = (date: string, dFormat = __("MomentDate_DefaultFormat"), locale = __("MomentDate_Locale")): string => {
     return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
 };
 
+/**
+ * Is the page in edit mode
+ */
 export const inEditMode = (): boolean => {
     return document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value === "1";
 };
 
+/**
+ * Make URL relative
+ *
+ * @param absUrl Absolute URL
+ */
 export const makeRelative = (absUrl: string): string => {
     return absUrl.replace(document.location.protocol + "//" + document.location.hostname, "");
 };
 
+/**
+ * Generates URL. Replaces norwegian characters and spaces.
+ *
+ * @param str The string
+ */
 export const generateUrl = (str: string): string => {
     return str
         .toLowerCase()
@@ -26,14 +41,35 @@ export const generateUrl = (str: string): string => {
         .replace(/ø/g, "oe");
 };
 
+/**
+ * Cleans search property name
+ *
+ * @param searchProp Search property name
+ */
 export const cleanSearchPropName = (searchProp: string): string => {
     return searchProp.match(/(.*?)OWS*/)[1];
 };
 
+/**
+ * Get user photo URL from userphoto.aspx
+ *
+ * @param email Email adress
+ * @param size Size S/M/L
+ */
 export const userPhoto = (email: string, size = "L"): string => {
     return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
 };
 
+/**
+ * Shows a user message using SP.UI
+ *
+ * @param title Title
+ * @param message Message
+ * @param color Color
+ * @param duration Duration (ms)
+ * @param reloadWhenDone Reload page when done
+ * @param removeUrlParams Remove url params
+ */
 export const userMessage = (title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void => {
     const status = SP.UI.Status.addStatus(title, message);
     SP.UI.Status.setStatusPriColor(status, color);
@@ -47,6 +83,13 @@ export const userMessage = (title: string, message: string, color: string, durat
     }
 };
 
+/**
+ * Calculates percentage
+ *
+ * @param value1 Value 1
+ * @param value2 Value 2
+ * @param addPrefix Add prefix (%)
+ */
 export const percentage = (value1: number, value2: number, addPrefix = true): any => {
     let value = Math.floor((((value1 / value2)) * 100));
     if (addPrefix) {
@@ -56,10 +99,24 @@ export const percentage = (value1: number, value2: number, addPrefix = true): an
     }
 };
 
+/**
+ * Encodes spaces
+ *
+ * @param str The string
+ */
 export const encodeSpaces = (str: string): string => {
     return str.replace(/ /g, "%20");
 };
 
+/**
+ * Sets item field value
+ *
+ * @param fieldName Field name
+ * @param item SP list item
+ * @param fieldValue Field value
+ * @param ctx Client context
+ * @param list SP list
+ */
 export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void => {
     let fieldValueType = (typeof fieldValue);
     switch (fieldValueType) {
@@ -83,10 +140,18 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
     }
 };
 
+/**
+ * Relods the page
+ */
 export const reloadPage = (): void => {
     document.location.href = _spPageContextInfo.serverRequestPath;
 };
 
+/**
+ * Get safe term. The term object is different depending on if SP.Taxonomy is loaded on the page 
+ *
+ * @param term Term
+ */
 export const getSafeTerm = (term) => {
     let obj = term;
     if (obj !== undefined) {
@@ -103,6 +168,17 @@ export const getSafeTerm = (term) => {
     return obj;
 };
 
+/**
+ * Sets Taxonomy single value
+ *
+ * @param ctx Client context
+ * @param list SP List
+ * @param item SP list item
+ * @param fieldName Field name
+ * @param label Term label
+ * @param termGuid Term GUID
+ * @param wssId Term WSS ID
+ */
 export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGuid, wssId = -1) => {
     let field = list.get_fields().getByInternalNameOrTitle(fieldName),
         taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
@@ -113,5 +189,9 @@ export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGu
     taxField.setFieldValueByValue(item, taxSingle);
     item.update();
 };
+
+import { default as WaitDialog } from "./WaitDialog";
+import { default as LoadTaxonomy } from "./LoadTaxonomy";
+import { default as StampVersion } from "./StampVersion";
 
 export { WaitDialog, LoadTaxonomy, StampVersion };
