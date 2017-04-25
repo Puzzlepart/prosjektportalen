@@ -148,7 +148,7 @@ export const reloadPage = (): void => {
 };
 
 /**
- * Get safe term. The term object is different depending on if SP.Taxonomy is loaded on the page 
+ * Get safe term. The term object is different depending on if SP.Taxonomy is loaded on the page
  *
  * @param term Term
  */
@@ -190,8 +190,27 @@ export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGu
     item.update();
 };
 
+/**
+ * Load taxnonomy scripts
+ */
+export const LoadTaxonomyScripts = (): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+        let scriptbase = `${_spPageContextInfo.siteAbsoluteUrl}/_layouts/15`,
+            sodKey = "_v_dictSod";
+        if (!window[sodKey]["sp.taxonomy.js"]) {
+            SP.SOD.registerSod("sp.taxonomy.js", `${scriptbase}/sp.taxonomy.js`);
+        };
+        SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+            SP.SOD.executeFunc("sp.taxonomy.js", "SP.Taxonomy", () => {
+                SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("sp.taxonomy.js");
+                resolve();
+            });
+        }, "sp.js");
+        window.setTimeout(10000, reject);
+    });
+};
+
 import { default as WaitDialog } from "./WaitDialog";
-import { default as LoadTaxonomy } from "./LoadTaxonomy";
 import { default as StampVersion } from "./StampVersion";
 
-export { WaitDialog, LoadTaxonomy, StampVersion };
+export { WaitDialog,  StampVersion };

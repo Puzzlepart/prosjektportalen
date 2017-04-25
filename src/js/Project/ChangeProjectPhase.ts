@@ -2,7 +2,14 @@ import { sp, Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "Util";
 import * as Config from "./Config";
 
-const UpdateWelcomePage = (phaseName, phaseGuid, phaseFieldName): Promise<void> => new Promise<void>((resolve, reject) => {
+/**
+ * Updates welcome page with a new phase
+ *
+ * @param phaseName Phase term name
+ * @param phaseGuid Phase term GUID
+ * @param phaseFieldName Phase field name
+ */
+const UpdateWelcomePage = (phaseName: string, phaseGuid: string, phaseFieldName: string): Promise<void> => new Promise<void>((resolve, reject) => {
     let ctx = SP.ClientContext.get_current(),
         list = ctx.get_web().get_lists().getById(_spPageContextInfo.pageListId),
         listItem = list.getItemById(_spPageContextInfo.pageItemId);
@@ -16,7 +23,10 @@ const UpdateWelcomePage = (phaseName, phaseGuid, phaseFieldName): Promise<void> 
     });
 });
 
-export const GetCurrentProjectPhase = () => new Promise<any>((resolve, reject) => {
+/**
+ * Get current proejct phase
+ */
+export const GetCurrentProjectPhase = () => new Promise<{ Id: string, Name: string, WssId: number }>((resolve, reject) => {
     let ctx = SP.ClientContext.get_current(),
         welcomePage = ctx.get_web().get_lists().getById(_spPageContextInfo.pageListId).getItemById(_spPageContextInfo.pageItemId);
     ctx.load(welcomePage);
@@ -37,6 +47,11 @@ export const GetCurrentProjectPhase = () => new Promise<any>((resolve, reject) =
     }, reject);
 });
 
+/**
+ * Set metadata defaults
+ *
+ * @param phaseName Phase term name
+ */
 const SetMetadataDefaults = (phaseName: string): Promise<any> => new Promise<any>((resolve, reject) => {
     GetCurrentProjectPhase().then(({ Id, WssId }) => {
         sp.web.lists.getByTitle(Config.DOCUMENT_LIBRARY).expand("RootFolder").get().then(({ RootFolder: { ServerRelativeUrl: rootFolderServerRelativeUrl } }) => {
@@ -53,6 +68,9 @@ const SetMetadataDefaults = (phaseName: string): Promise<any> => new Promise<any
     }, reject);
 });
 
+/**
+ * Ensures LocationBasedMetadataDefaultsReceiver
+ */
 const EnsureLocationBasedMetadataDefaultsReceiverItemAdded = (type: string): Promise<any> => new Promise<any>((resolve, reject) => {
     const recName = `LocationBasedMetadataDefaultsReceiver ${type}`;
     let ctx = SP.ClientContext.get_current(),
@@ -80,6 +98,11 @@ const EnsureLocationBasedMetadataDefaultsReceiverItemAdded = (type: string): Pro
     }, reject);
 });
 
+/**
+ * Updates front page list views
+ *
+ * @param phaseName Phase term name
+ */
 const UpdateFrontpageListViews = (phaseName: string): Promise<any[]> => new Promise<any[]>((resolve, reject) => {
     const viewQuery = String.format(Config.FRONTPAGE_LISTS_VIEQUERY, Config.PROJECTPHASE_FIELD, phaseName);
     let getViewsPromises = Config.FRONTPAGE_LISTS.map(listTitle => sp.web.lists.getByTitle(listTitle).views.get());
@@ -108,6 +131,11 @@ const UpdateFrontpageListViews = (phaseName: string): Promise<any[]> => new Prom
     });
 });
 
+/**
+ * Change project phase
+ *
+ * @param newPhase New phase
+ */
 const ChangeProjectPhase = (newPhase: { Name: string, Id: string }): Promise<any[]> => {
     let [Title, Message] = __("ProjectPhases_ChangingPhase").split(",");
     const waitDlg = new Util.WaitDialog(Title, String.format(Message, newPhase.Name), 120, 600);
