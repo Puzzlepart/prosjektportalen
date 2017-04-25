@@ -1,6 +1,6 @@
 # Prosjektportalen v2.0
 
-Prosjektportalen v2.0 using pnp-js-provisioning and PnP-Sites-Core.
+Prosjektportalen v2.0 using [pnp-js-provisioning](https://github.com/Puzzlepart/pnp-js-provisioning/) and [PnP-Sites-Core](github.com/SharePoint/pnp-sites-core).
 
 ## Installation
 See [Installation](build/install.md)
