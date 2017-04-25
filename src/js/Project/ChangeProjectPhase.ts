@@ -1,5 +1,5 @@
 import { sp, Logger, LogLevel } from "sp-pnp-js";
-import * as Util from "Util";
+import * as Util from "../Util";
 import * as Config from "./Config";
 
 /**
@@ -55,7 +55,6 @@ export const GetCurrentProjectPhase = () => new Promise<{ Id: string, Name: stri
 const SetMetadataDefaults = (phaseName: string): Promise<any> => new Promise<any>((resolve, reject) => {
     GetCurrentProjectPhase().then(({ Id, WssId }) => {
         sp.web.lists.getByTitle(Config.DOCUMENT_LIBRARY).expand("RootFolder").get().then(({ RootFolder: { ServerRelativeUrl: rootFolderServerRelativeUrl } }) => {
-            console.log(rootFolderServerRelativeUrl);
             const contents = [`<MetadataDefaults><a href="${Util.encodeSpaces(rootFolderServerRelativeUrl)}"><DefaultValue FieldName="${Config.PROJECTPHASE_FIELD}">${WssId};#${phaseName}|${Id}</DefaultValue></a></MetadataDefaults>`];
             const blob = new Blob(contents, {
                 type: "text/plain",
@@ -72,8 +71,8 @@ const SetMetadataDefaults = (phaseName: string): Promise<any> => new Promise<any
  * Ensures LocationBasedMetadataDefaultsReceiver
  */
 const EnsureLocationBasedMetadataDefaultsReceiverItemAdded = (type: string): Promise<any> => new Promise<any>((resolve, reject) => {
-    const recName = `LocationBasedMetadataDefaultsReceiver ${type}`;
-    let ctx = SP.ClientContext.get_current(),
+    const recName = `LocationBasedMetadataDefaultsReceiver ${type}`,
+        ctx = SP.ClientContext.get_current(),
         eventReceivers = ctx.get_web().get_lists().getByTitle(Config.DOCUMENT_LIBRARY).get_eventReceivers();
     ctx.load(eventReceivers);
     ctx.executeQueryAsync(() => {

@@ -24,7 +24,7 @@ export default class LatestProjects extends React.PureComponent<any, ILatestProj
         }).catch(_ => this.setState({ isLoading: false }));
     }
 
-    public render() {
+    public render(): JSX.Element {
         let { subwebs, isLoading } = this.state;
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
