@@ -2,11 +2,11 @@ import * as  jQuery from "jquery";
 import * as FormUtils from "./Util";
 
 const __forms = {
-    "Prosjektlogg": require("./Prosjektlogg").default,
-    "Mtekalender": require("./Motekalender").default,
-    "Fasesjekkliste": require("./Fasesjekkliste").default,
-    "Endringsanalyse": require("./Endringsanalyse").default,
-    "Gevinstanalyse og gevinstrealiseringsplan": require("./Gevinstanalyse og gevinstrealiseringsplan").default,
+    "Prosjektlogg": require("./ProjectLog").default,
+    "Mtekalender": require("./MeetingCalendar").default,
+    "Fasesjekkliste": require("./PhaseChecklist").default,
+    "Endringsanalyse": require("./ChangeAnalysis").default,
+    "Gevinstanalyse og gevinstrealiseringsplan": require("./GainsAnalysis").default,
 };
 
 /**
