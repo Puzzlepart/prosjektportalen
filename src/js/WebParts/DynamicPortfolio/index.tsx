@@ -1,8 +1,6 @@
 import * as React from "react";
-import * as extend from "extend";
 import { TextField, DetailsList, SelectionMode, Spinner, SpinnerType } from "office-ui-fabric-react";
-import { IFilter } from "./Filter";
-import { FilterSection } from "./FilterSection";
+import { FilterSection, IFilter } from "./Filter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
@@ -62,7 +60,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         });
     }
 
-    public render() {
+    public render(): JSX.Element {
         let { filteredItems, searchTerm, filters, isLoading, selectedColumns } = this.state;
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
@@ -102,17 +100,18 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
      * @param refinerConfig Refiner configuration from the SP configuration list
      * @param refiners Refiners retrieved by search
      */
-    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners) => {
+    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners: Array<{ Name: string, Entries: { results: any[] } }>): any => {
         return refinerConfig
             .filter(ref => refiners.filter(r => r.Name === ref.key).length > 0)
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
-                return extend(ref, {
-                    items: entries.map(entry => ({
+                return {
+                    ...ref,
+                    items: entries.results.map(entry => ({
                         name: entry.RefinementName,
                         value: entry.RefinementValue,
                     })),
-                });
+                };
             });
     }
 
@@ -175,11 +174,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         filteredItems = filteredItems.concat([]).sort((a, b) => {
             let firstValue = a[column.fieldName];
             let secondValue = b[column.fieldName];
-            if (isSortedDescending) {
-                return firstValue > secondValue ? -1 : 1;
-            } else {
-                return firstValue > secondValue ? 1 : -1;
-            }
+            return isSortedDescending ? (firstValue > secondValue ? -1 : 1) : (firstValue > secondValue ? 1 : -1);
         });
         this.setState({
             filteredItems: filteredItems,

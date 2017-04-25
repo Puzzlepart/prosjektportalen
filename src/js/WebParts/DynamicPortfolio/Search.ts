@@ -22,7 +22,7 @@ export const query = (selectProperties: string[], refiners: string) => new Promi
     })).then(({ PrimarySearchResults, RawSearchResults: { PrimaryQueryResult } }) => {
         resolve({
             primarySearchResults: PrimarySearchResults,
-            refiners: PrimaryQueryResult.RefinementResults ? PrimaryQueryResult.RefinementResults.Refiners : [],
+            refiners: PrimaryQueryResult.RefinementResults ? PrimaryQueryResult.RefinementResults.Refiners.results : [],
         });
     }).catch(reject);
 });

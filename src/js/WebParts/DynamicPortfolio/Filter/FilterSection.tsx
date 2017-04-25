@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Filter } from "./Filter";
+import { Filter, IFilter } from "./Filter";
 
 export const FilterSection = ({ filters, onFilterChange }: { filters: IFilter[], onFilterChange: Function }) => {
     return (<div className="ms-Grid">
