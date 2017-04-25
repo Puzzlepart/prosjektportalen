@@ -29,9 +29,10 @@ export interface IMeasurement {
  * @param dataSource Data source
  */
 const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
-    const idFieldName = (dataSource === DataSource.Search) ? "ListItemID" : "ID",
-        valueFieldName = (dataSource === DataSource.Search) ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
-        lookupFieldName = (dataSource === DataSource.Search) ? "RefinableString58" : "GtGainLookupId",
+    const isSearch = (dataSource === DataSource.Search);
+    const idFieldName = isSearch ? "ListItemID" : "ID",
+        valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
+        lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
         desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName;
     return measures
         .filter(m => {
