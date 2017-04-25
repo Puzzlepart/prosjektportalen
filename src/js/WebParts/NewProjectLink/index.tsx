@@ -1,6 +1,9 @@
 import * as React from "react";
 import { NewProjectDialog } from "./NewProjectDialog";
 
+/**
+ * New Project link
+ */
 export default class NewProjectLink extends React.PureComponent<any, any> {
     constructor() {
         super();
@@ -9,7 +12,7 @@ export default class NewProjectLink extends React.PureComponent<any, any> {
         };
     }
 
-    public render() {
+    public render(): JSX.Element {
         let { showDialog } = this.state;
         return (<div className="container">
             <a className="ms-font-l" href="#" onClick={this.showDialog}>
@@ -20,12 +23,18 @@ export default class NewProjectLink extends React.PureComponent<any, any> {
         </div>);
     }
 
-    private showDialog = (event) => {
+    /**
+     * Shows the dialog
+     */
+    private showDialog = (event): void => {
         event.preventDefault();
         this.setState({ showDialog: true });
     }
 
-    private hideDialog = (event) => {
+    /**
+     * Hides the dialog
+     */
+    private hideDialog = (event): void => {
         event.preventDefault();
         this.setState({ showDialog: false });
     }
