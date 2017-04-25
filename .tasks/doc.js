@@ -11,6 +11,7 @@ gulp.task("doc", () => {
             module: "commonjs",
             jsx: "react",
             includeDeclarations: true,
+            hideGenerator: true,
             out: "./docs",
             name: pkg.name,
             ignoreCompilerErrors: true,
