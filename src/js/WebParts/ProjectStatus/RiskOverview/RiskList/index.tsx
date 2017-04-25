@@ -1,6 +1,5 @@
 import * as React from "react";
 import { SelectionMode, DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import { MatrixStyle } from "../../Config";
 
 export interface IRiskListProps {
     items: any[];
@@ -13,8 +12,8 @@ export interface IRiskListState {
 }
 
 export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             items: null,
             columns: null,
@@ -31,34 +30,26 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
 
     public render(): JSX.Element {
         let { items, columns } = this.props;
-        if (items && columns) {
-            return (
-                <div className="risk-list ms-Grid">
-                    <DetailsList
-                        items={items}
-                        columns={columns}
-                        onRenderItemColumn={this.renderItemColumn}
-                        onColumnHeaderClick={(ev, col) => {
-                            ev.preventDefault();
-                            this.onColumnClick(col);
-                        }}
-                        selectionMode={SelectionMode.none} />
-                </div>
-            );
-        }
-        return null;
+        return (
+            <div className="risk-list ms-Grid">
+                <DetailsList
+                    items={items}
+                    columns={columns}
+                    onRenderItemColumn={this.renderItemColumn}
+                    onColumnHeaderClick={(ev, col) => {
+                        ev.preventDefault();
+                        this.onColumnClick(col);
+                    }}
+                    selectionMode={SelectionMode.none} />
+            </div>
+        );
     }
 
     private renderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
         const fieldValue = item[column.fieldName];
-        const borderColor = MatrixStyle[item.GtRiskProbability][item.GtRiskConsequence].borderColor;
         switch (column.fieldName) {
-            case "ID":
-                return <div style={{ "borderColor": borderColor }} className={`risk-element-id`}><span>{fieldValue}</span></div >;
             case "GtRiskFactor":
-                return <div><span>{Math.round(+ fieldValue)}</span></div>;
-            case "Title":
-                return <div><h3>{fieldValue}</h3></div>;
+                return <span>{Math.round(+ fieldValue)}</span>;
             default:
                 return <span>{fieldValue}</span>;
         }

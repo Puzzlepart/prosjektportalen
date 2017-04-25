@@ -14,8 +14,8 @@ export interface IRiskOverviewState {
 }
 
 export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverviewState> {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             items: null,
             columns: null,
@@ -57,7 +57,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
         if (items && columns) {
             return (<div>
                 <RiskMatrix items={items} />
-                <RiskList items={itemsAsHtml} columns={columns} />
+                <RiskList items={itemsAsHtml} columns={columns}  />
             </div>);
         }
         return null;
