@@ -29,7 +29,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         };
     }
 
-    public componentDidMount() {
+    public componentDidMount(): void {
         Configuration.getConfig().then(({ columnConfig, refinerConfig }) => {
             let fieldNames = columnConfig.map(f => f.fieldName);
             Search.query(fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
@@ -80,7 +80,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                             :
                             <div>
                                 <DetailsList
-                                    items={filteredItems.filter(item => item[this.searchProp].indexOf(searchTerm) !== -1)}
+                                    items={filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)}
                                     columns={selectedColumns}
                                     selectionMode={SelectionMode.none}
                                     onRenderItemColumn={_onRenderItemColumn}
