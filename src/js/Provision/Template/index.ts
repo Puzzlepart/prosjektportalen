@@ -16,6 +16,11 @@ let Template: Schema = {
     WebSettings: WebSettings,
     ComposedLook: ComposedLook,
     PropertyBagEntries: PropertyBagEntries,
+    Features: [{
+        id: "87294c72-f260-42f3-a41b-981a2ffce37a",
+        deactivate: true,
+        force: true,
+    }],
 };
 
 /**
