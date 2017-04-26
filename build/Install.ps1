@@ -26,19 +26,19 @@ Param(
     [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip standard documents, tasks and phase checklist?")]
     [switch]$SkipData,
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip default onfig?")]
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip default config?")]
     [switch]$SkipDefaultConfig
 )
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
 
-Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Taxonomy.dll -ErrorAction SilentlyContinue
-Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.DocumentManagement.dll -ErrorAction SilentlyContinue
-Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.WorkflowServices.dll -ErrorAction SilentlyContinue
-Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Search.dll -ErrorAction SilentlyContinue
-Add-Type -Path $PSScriptRoot\bundle\Newtonsoft.Json.dll -ErrorAction SilentlyContinue
-Import-Module $PSScriptRoot\bundle\SharePointPnPPowerShell2013.psd1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Taxonomy.dll -ErrorAction SilentlyContinue
+# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.DocumentManagement.dll -ErrorAction SilentlyContinue
+# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.WorkflowServices.dll -ErrorAction SilentlyContinue
+# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Search.dll -ErrorAction SilentlyContinue
+# Add-Type -Path $PSScriptRoot\bundle\Newtonsoft.Json.dll -ErrorAction SilentlyContinue
+# Import-Module $PSScriptRoot\bundle\SharePointPnPPowerShell2013.psd1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 
 Write-Host ""
 Write-Host ""
