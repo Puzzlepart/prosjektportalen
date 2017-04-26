@@ -104,9 +104,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             columns.splice(indexOfColumn, 1);
         }
         return {
-            items: data.items.filter(item => {
-                return item.Title.indexOf(searchTerm) !== -1 || item.Title.indexOf(searchTerm) !== -1;
-            }),
+            items: data.items.filter(item => item.Title.toLowerCase().indexOf(searchTerm.toLowerCase())),
             columns: columns,
             groups: groups,
         };
