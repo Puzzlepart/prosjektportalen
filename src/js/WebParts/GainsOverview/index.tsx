@@ -83,10 +83,10 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
         if (groupBy) {
-            let groupItems = data.items.sort((a, b) => {
+            const groupItems = data.items.sort((a, b) => {
                 return a[groupBy] > b[groupBy] ? -1 : 1;
             });
-            let groupNames = groupItems.map(g => g[groupBy]);
+            const groupNames = groupItems.map(g => g[groupBy]);
             groups = unique([].concat(groupNames)).map((name, idx) => ({
                 key: idx,
                 name: name,
@@ -103,8 +103,9 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             let indexOfColumn = data.columns.map(({ fieldName }) => fieldName).indexOf(groupBy);
             columns.splice(indexOfColumn, 1);
         }
+        const filteredItems = data.items.filter(item => item.Title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
         return {
-            items: data.items.filter(item => item.Title.toLowerCase().indexOf(searchTerm.toLowerCase())),
+            items: filteredItems,
             columns: columns,
             groups: groups,
         };
