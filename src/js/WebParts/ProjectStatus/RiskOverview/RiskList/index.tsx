@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SelectionMode, DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { SelectionMode, DetailsList, IColumn } from "office-ui-fabric-react";
 
 export interface IRiskListProps {
     items: any[];

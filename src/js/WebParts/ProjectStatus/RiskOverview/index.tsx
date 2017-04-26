@@ -24,7 +24,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
 
     public componentDidMount(): void {
         const { viewName } = this.props;
-        let list = sp.web.lists.getByTitle("Usikkerhet");
+        let list = sp.web.lists.getByTitle(__("Lists_Uncertainties_Title"));
         let batch = sp.createBatch();
         Promise.all([
             list.items.expand("FieldValuesAsHtml").inBatch(batch).get(),

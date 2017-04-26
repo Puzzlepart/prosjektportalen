@@ -16,6 +16,9 @@ interface IRiskMatrixState {
     showDialog: boolean;
 }
 
+/**
+ * Risk Matrix
+ */
 export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixState> {
     public static defaultProps = {
         items: [],
