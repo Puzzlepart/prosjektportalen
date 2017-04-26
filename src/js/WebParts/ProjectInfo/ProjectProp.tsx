@@ -3,11 +3,11 @@ import * as React from "react";
 export interface IProjectProp {
     internalName: string;
     displayName: string;
-    description: string;
+    description?: string;
     value: string;
-    type: string;
-    empty: boolean;
-    required: any;
+    type?: string;
+    empty?: boolean;
+    required?: any;
 }
 
 /**
