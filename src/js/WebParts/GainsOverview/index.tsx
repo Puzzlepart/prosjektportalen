@@ -50,7 +50,12 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
             return (<div style={{ width: "100%" }}>
-                <TextField hidden={showSearchBox === false} onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder="Søk i alle gevinster" style={{ padding: 25, color: "#777" }} />
+                <TextField
+                    hidden={showSearchBox === false}
+                    onChanged={text => this.setState({ searchTerm: text })}
+                    disabled={isLoading}
+                    placeholder="Søk i alle gevinster"
+                    style={{ padding: 25, color: "#777" }} />
                 {groupByOptions.map((gp, idx) => <Toggle
                     key={idx}
                     onChanged={checked => this.setState({ groupBy: checked ? gp.property : null })}
@@ -72,7 +77,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
     }
 
     /**
-     * Get filtered data based on groupBy and searchTerm
+     * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      *
      * @param items Item collection
      * @param columns Column collection
