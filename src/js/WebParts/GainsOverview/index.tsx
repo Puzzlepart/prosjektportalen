@@ -23,6 +23,9 @@ export interface IGainsOverviewState {
     groupBy: string;
 }
 
+/**
+ * Gains Overview
+ */
 export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
     public static defaultProps: Partial<IGainsOverviewProps> = {
         groupByOptions: [],
