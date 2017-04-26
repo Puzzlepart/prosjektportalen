@@ -1,4 +1,4 @@
-import { Logger, LogLevel, Web, FileAddResult, default as pnp } from "sp-pnp-js";
+import { Logger, LogLevel, Web, FileAddResult } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { IListConfig } from "../Config";
 
@@ -16,8 +16,14 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, timeout = 25000): 
         destWeb = new Web(destUrl),
         destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
     Promise.all([
-        srcList.expand("RootFolder").get(),
-        srcList.items.expand("Folder").select("Title", "LinkFilename", "FileRef", "FileDirRef", "Folder/ServerRelativeUrl").get(),
+        srcList
+            .expand("RootFolder")
+            .get(),
+        srcList
+            .items
+            .expand("Folder")
+            .select("Title", "LinkFilename", "FileRef", "FileDirRef", "Folder/ServerRelativeUrl")
+            .get(),
     ]).then(([{ RootFolder }, items]) => {
         let folders = [], files = [];
         items.forEach(i => {
