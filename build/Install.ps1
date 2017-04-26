@@ -38,7 +38,7 @@ Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.DocumentManageme
 Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.WorkflowServices.dll -ErrorAction SilentlyContinue
 Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Search.dll -ErrorAction SilentlyContinue
 Add-Type -Path $PSScriptRoot\bundle\Newtonsoft.Json.dll -ErrorAction SilentlyContinue
-Import-Module $PSScriptRoot\bundle\SharePointPnPPowerShellOnline.psd1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+Import-Module $PSScriptRoot\bundle\SharePointPnPPowerShell2013.psd1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 
 Write-Host ""
 Write-Host ""
