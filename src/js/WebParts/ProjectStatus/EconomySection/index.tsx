@@ -1,7 +1,10 @@
 import * as React from "react";
-import { ProjectProp } from "../../ProjectInfo/ProjectProp";
+import { ProjectProp, IProjectProp } from "../../ProjectInfo/ProjectProp";
 
-const fieldsToShow = [
+/**
+ * Fields to show in the Economy Section
+ */
+const FIELDS_TO_SHOW: IProjectProp[] = [
     { internalName: "GtProjectFinanceName", displayName: __("SiteFields_GtProjectFinanceName_DisplayName") },
     { internalName: "GtBudgetTotal", displayName: __("SiteFields_GtBudgetTotal_DisplayName") },
     { internalName: "GtCostsTotal", displayName: __("SiteFields_GtCostsTotal_DisplayName") },
@@ -20,7 +23,7 @@ const EconomySection = ({ project }: IEconomySectionProps) => {
         <div className="economy-status">
             <div className="ms-Grid-col ms-u-sm12 economy-elements-container">
                 <div className="status-elements">
-                    {fieldsToShow.map(({ internalName, displayName }, idx) => (
+                    {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
                         <ProjectProp key={idx} data={{ internalName: internalName, displayName: displayName, value: project[internalName] }} labelSize="l" valueSize="xl" />
                     ))}
                 </div>

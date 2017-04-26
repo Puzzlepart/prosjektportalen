@@ -4,7 +4,7 @@ export interface IProjectProp {
     internalName: string;
     displayName: string;
     description?: string;
-    value: string;
+    value?: string;
     type?: string;
     empty?: boolean;
     required?: any;
