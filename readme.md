@@ -9,7 +9,7 @@ See [Installation](https://github.com/Puzzlepart/prosjektportalen/wiki/Installat
 See [Documentation](documentation.md)
 
 ## Development
-See [Development](development.md)
+See [Development](https://github.com/Puzzlepart/prosjektportalen/wiki/Development)
 
 ## Contributing
 See [Contributing](contributing.md)
