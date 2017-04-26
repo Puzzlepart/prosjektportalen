@@ -21,7 +21,7 @@ const EconomySection = ({ project }: IEconomySectionProps) => {
             <div className="ms-Grid-col ms-u-sm12 economy-elements-container">
                 <div className="status-elements">
                     {fieldsToShow.map(({ internalName, displayName }, idx) => (
-                        <ProjectProp key={idx} data={{ internalName: internalName, displayName: displayName, value: project[internalName] }} />
+                        <ProjectProp key={idx} data={{ internalName: internalName, displayName: displayName, value: project[internalName] }} labelSize="l" valueSize="xl" />
                     ))}
                 </div>
             </div>
