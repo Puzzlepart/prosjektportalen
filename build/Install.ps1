@@ -44,15 +44,14 @@ Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" 
 Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
 Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
 Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
-switch($Environment) {
-    case "SharePoint2013": {
+
+switch ($Environment) {
+    "SharePoint2013" {
         Import-Module "$BundlePath\SharePointPnPPowerShell2013.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
     }
-    break;
-    case "SharePointOnline": {
+    "SharePointOnline" {
         Import-Module "$BundlePath\SharePointPnPPowerShellOnline.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
     }
-    break;
 }
 
 Write-Host ""
