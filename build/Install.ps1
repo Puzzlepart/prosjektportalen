@@ -13,6 +13,8 @@ Use the required -Url param to specify the target site collection. You can also 
 https://github.com/prosjektstotte/sp-prosjektportal
 
 #>
+
+
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Where do you want to install the Project Portal?")]
     [string]$Url,
@@ -27,18 +29,31 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip standard documents, tasks and phase checklist?")]
     [switch]$SkipData,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip default config?")]
-    [switch]$SkipDefaultConfig
+    [switch]$SkipDefaultConfig,
+    [Parameter(Mandatory = $false, HelpMessage = "Environment")]
+    [ValidateSet('SharePoint2013','SharePointOnline')]
+    [string]$Environment = "SharePointOnline"
 )
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
 
-# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Taxonomy.dll -ErrorAction SilentlyContinue
-# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.DocumentManagement.dll -ErrorAction SilentlyContinue
-# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.WorkflowServices.dll -ErrorAction SilentlyContinue
-# Add-Type -Path $PSScriptRoot\bundle\Microsoft.SharePoint.Client.Search.dll -ErrorAction SilentlyContinue
-# Add-Type -Path $PSScriptRoot\bundle\Newtonsoft.Json.dll -ErrorAction SilentlyContinue
-# Import-Module $PSScriptRoot\bundle\SharePointPnPPowerShell2013.psd1 -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+$BundlePath = "$PSScriptRoot\bundle\$Environment"
+Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Taxonomy.dll" -ErrorAction SilentlyContinue
+Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" -ErrorAction SilentlyContinue
+Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
+Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
+Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
+switch($Environment) {
+    case "SharePoint2013": {
+        Import-Module "$BundlePath\SharePointPnPPowerShell2013.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+    }
+    break;
+    case "SharePointOnline": {
+        Import-Module "$BundlePath\SharePointPnPPowerShellOnline.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+    }
+    break;
+}
 
 Write-Host ""
 Write-Host ""
