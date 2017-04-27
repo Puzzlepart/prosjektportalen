@@ -11,6 +11,11 @@ gulp.task("copy:build", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
+gulp.task("copy:manualconf", () => {
+    return gulp.src(config.paths.manualConfGlob)
+        .pipe(gulp.dest(config.paths.dist))
+});
+
 gulp.task("zip:dist", (done) => {
     git.hash(hash => {
         gulp.src(format("{0}/**/*", config.paths.dist))
@@ -21,7 +26,7 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
-    runSequence("default::prod", "copy:build", "zip:dist", () => {
+    runSequence("default::prod", "copy:build", "copy:manualconf", "zip:dist", () => {
         done();
     });
 });
