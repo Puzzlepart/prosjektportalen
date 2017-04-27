@@ -55,6 +55,7 @@ export const ProjectHome: IFile = {
                         RowLimit: 10,
                         Paged: true,
                         ViewQuery: "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>",
+                        Scope: 0,
                     },
                 },
             },
