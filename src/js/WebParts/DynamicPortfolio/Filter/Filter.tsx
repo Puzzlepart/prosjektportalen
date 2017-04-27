@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Link } from "office-ui-fabric-react";
+import { Icon } from "../../@Components";
 
 export interface IFilterItem {
     name: string;
@@ -24,7 +25,7 @@ export interface IFilterProps {
 }
 
 export interface IFilterState {
-    isHidden: boolean;
+    isCollapsed: boolean;
 }
 
 /**
@@ -37,36 +38,28 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
     constructor() {
         super();
         this.state = {
-            isHidden: false,
+            isCollapsed: false,
         };
     }
 
     public componentDidMount() {
         let { filter } = this.props;
         if (filter.defaultHidden) {
-            this.setState({ isHidden: filter.defaultHidden });
+            this.setState({ isCollapsed: filter.defaultHidden });
         }
     }
 
-    public render() {
+    public render(): JSX.Element {
         let { filter } = this.props;
-        let { isHidden } = this.state;
+        let { isCollapsed } = this.state;
         return (<div className="ms-Grid-col ms-u-sm4 ms-u-md4 ms-u-lg4 ms-u-xl4 ms-u-xxl12 ms-u-xxxl12" style={{ marginBottom: 20 }}>
-            <h2 onClick={e => this.setState(prevState => ({ isHidden: !prevState.isHidden }))} style={{ cursor: "pointer" }}>{filter.name}</h2>
-            <div hidden={isHidden}>
+            <h2 onClick={e => this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }))} style={{ cursor: "pointer", position: "relative" }}>
+                {filter.name}
+                <Icon name={isCollapsed ? "ChevronDown" : "ChevronUp"} style={{ fontSize: 14, position: "absolute", right: 10, top: 10 }} />
+            </h2>
+            <div hidden={isCollapsed}>
                 <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
-                    {filter.items.length > 0
-                        ? filter.items.map((i, idx) => (<li key={idx} value={i.value}>
-                            {filter.multi && <input
-                                id={`${filter.key}_input_${i.value}`}
-                                type="checkbox"
-                                disabled={i.readOnly}
-                                defaultChecked={i.defaultSelected}
-                                onClick={e => this.onChange(idx, i, e.currentTarget)}
-                                ref={ele => this.inputs[i.value] = ele} />}
-                            <label htmlFor={`${filter.key}_input_${i.value}`}>{i.name}</label>
-                        </li>))
-                        : <li className="ms-metadata">{filter.emptyMessage}</li>}
+                    {this.renderItems()}
                 </ul>
                 <div hidden={!filter.multi || filter.items.length === 0} style={{ marginTop: 10 }}>
                     <Link style={this.linkStyle} onClick={e => this.toggleAll(e, true)}>{__("String_SelectAll")}</Link>
@@ -74,6 +67,25 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
                 </div>
             </div>
         </div>);
+    }
+
+    /**
+     * Render filter items
+     */
+    private renderItems = () => {
+        let { filter } = this.props;
+        return filter.items.length > 0
+            ? filter.items.map((i, idx) => (<li key={idx} value={i.value}>
+                {filter.multi && <input
+                    id={`${filter.key}_input_${i.value}`}
+                    type="checkbox"
+                    disabled={i.readOnly}
+                    defaultChecked={i.defaultSelected}
+                    onClick={e => this.onChange(idx, i, e.currentTarget)}
+                    ref={ele => this.inputs[i.value] = ele} />}
+                <label htmlFor={`${filter.key}_input_${i.value}`}>{i.name}</label>
+            </li>))
+            : <li className="ms-metadata">{filter.emptyMessage}</li>;
     }
 
     /**

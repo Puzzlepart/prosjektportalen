@@ -4,12 +4,17 @@ export interface IIconProps {
     name: string;
     color?: string;
     className?: string;
+    style?: React.CSSProperties;
 }
 
-export const Icon = ({ name, color, className }: IIconProps) => {
+export const Icon = ({ name, color, className, style }: IIconProps) => {
     let classNames = ["ms-Icon", `ms-Icon--${name}`];
     if (className) {
         classNames.push(className);
     }
-    return <i className={classNames.join(" ")} style={color ? { color: color } : {}}></i>;
+    let _style: React.CSSProperties = style || {};
+    if (color) {
+        _style.color = color;
+    }
+    return <i className={classNames.join(" ")} style={style}></i>;
 };
