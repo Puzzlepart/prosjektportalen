@@ -19,7 +19,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpProperty">GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString52</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Fase</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
@@ -27,7 +27,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpProperty">GtProjectManagerOWSUSER</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Prosjektleder</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
@@ -37,7 +37,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpProperty">GtProjectOwnerOWSUSER</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString50</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Prosjekteier</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
