@@ -7,6 +7,9 @@ export interface IIconProps {
     style?: React.CSSProperties;
 }
 
+/**
+ * Icon
+ */
 export const Icon = ({ name, color, className, style }: IIconProps) => {
     let classNames = ["ms-Icon", `ms-Icon--${name}`];
     if (className) {

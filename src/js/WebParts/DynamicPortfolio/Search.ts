@@ -1,6 +1,8 @@
-import * as extend from "extend";
-import * as pnp from "sp-pnp-js";
+import { sp } from "sp-pnp-js";
 
+/**
+ * Search Settings used for sp-pnp-js
+ */
 export const SearchSettings = {
     Querytext: "*",
     RowLimit: 500,
@@ -15,11 +17,18 @@ export const SearchSettings = {
     }],
 };
 
+/**
+ * Query the REST Search API using sp-pnp-js
+ *
+ * @param selectProperties Select properties
+ * @param refiners Refiners
+ */
 export const query = (selectProperties: string[], refiners: string) => new Promise<{ primarySearchResults: any[], refiners: any[] }>((resolve, reject) => {
-    pnp.sp.search(extend(SearchSettings, {
+    sp.search({
+        ...SearchSettings,
         SelectProperties: selectProperties,
         Refiners: refiners,
-    })).then(({ PrimarySearchResults, RawSearchResults: { PrimaryQueryResult } }) => {
+    }).then(({ PrimarySearchResults, RawSearchResults: { PrimaryQueryResult } }) => {
         resolve({
             primarySearchResults: PrimarySearchResults,
             refiners: PrimaryQueryResult.RefinementResults ? PrimaryQueryResult.RefinementResults.Refiners.results : [],

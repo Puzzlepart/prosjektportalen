@@ -2,6 +2,13 @@ import * as React from "react";
 import * as Util from "../../Util";
 import { Persona, PersonaSize, PersonaPresence } from "office-ui-fabric-react";
 
+/**
+ * Rennder item column
+ *
+ * @param item The item
+ * @param index Index
+ * @param column Column
+ */
 export const _onRenderItemColumn = (item: any, index: number, column: any): any => {
     if (column.key === "Title") {
         return (<a href={item.Path}>{item[column.key]}</a>);
