@@ -4,7 +4,7 @@ import { FilterSection, IFilter } from "./Filter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
-import { DownloadWorkbookButton } from "./Workbook";
+import { DownloadWorkbookButton } from "../@Components/Workbook";
 
 export interface IDynamicPortfolioState {
     isLoading: boolean;
