@@ -21,9 +21,12 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["LinkTitle", "GtProjectPhase", "GtChecklistStatus", "GtComment"],
+            ViewFields: ["GtSortOrder", "LinkTitle", "GtProjectPhase", "GtChecklistStatus", "GtComment"],
             AdditionalSettings: {
                 RowLimit: 50,
+                ViewQuery: `<OrderBy>
+                  <FieldRef Name="GtSortOrder" />
+                </OrderBy>`,
             },
         },
         {

@@ -5,8 +5,13 @@
     </pnp:ContentTypeBindings>
     <pnp:Views RemoveExistingViews="true">
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/Fasesjekkliste/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/issuelst.png?rev=44">
-            <Query />
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="GtSortOrder" />
+                </OrderBy>
+            </Query>
             <ViewFields>
+                <FieldRef Name="GtSortOrder" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtProjectPhase" />
                 <FieldRef Name="Modified" />
