@@ -29,6 +29,7 @@ export interface IQueryConfig {
     name: string;
     queryTemplate: string;
     iconName: string;
+    default: boolean;
 }
 
 /**
@@ -58,10 +59,11 @@ export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<
                 defaultHidden: ref.GtDpDefaultHidden,
                 iconName: ref.GtDpIcon,
             })),
-            queryConfig: items.filter(i => i.ContentTypeId.indexOf(QUERY_CONFIG_CT) !== -1).map(query => ({
-                name: query.GtDpDisplayName,
-                queryTemplate: query.GtDpSearchQuery,
-                iconName: query.GtDpIcon,
+            queryConfig: items.filter(i => i.ContentTypeId.indexOf(QUERY_CONFIG_CT) !== -1).map(qc => ({
+                name: qc.GtDpDisplayName,
+                queryTemplate: qc.GtDpSearchQuery,
+                iconName: qc.GtDpIcon,
+                default: qc.GtDpDefault,
             })),
         });
     }).catch(reject);

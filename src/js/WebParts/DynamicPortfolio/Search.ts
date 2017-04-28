@@ -1,33 +1,28 @@
 import { sp } from "sp-pnp-js";
+import { IQueryConfig } from "./Configuration";
 
 /**
- * Search Settings used for sp-pnp-js
+ * Default Search Settings used for sp-pnp-js
  */
-export const SearchSettings = {
+export const DEFAULT_SEARCH_SETTINGS = {
     Querytext: "*",
     RowLimit: 500,
     TrimDuplicates: false,
-    Properties: [{
-        Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
-    },
-    {
-        Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
-    }],
 };
 
 /**
  * Query the REST Search API using sp-pnp-js
  *
+ * @param queryConfig Query configuration
  * @param selectProperties Select properties
  * @param refiners Refiners
  */
-export const query = (selectProperties: string[], refiners: string) => new Promise<{ primarySearchResults: any[], refiners: any[] }>((resolve, reject) => {
+export const query = (queryConfig: IQueryConfig, selectProperties: string[], refiners: string) => new Promise<{ primarySearchResults: any[], refiners: any[] }>((resolve, reject) => {
     sp.search({
-        ...SearchSettings,
+        ...DEFAULT_SEARCH_SETTINGS,
         SelectProperties: selectProperties,
         Refiners: refiners,
+        QueryTemplate: queryConfig.queryTemplate,
     }).then(({ PrimarySearchResults, RawSearchResults: { PrimaryQueryResult } }) => {
         resolve({
             primarySearchResults: PrimarySearchResults,

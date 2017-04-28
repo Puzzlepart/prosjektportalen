@@ -1,10 +1,9 @@
 import * as React from "react";
-import { TextField, DetailsList, SelectionMode, Spinner, SpinnerType } from "office-ui-fabric-react";
+import { TextField, DetailsList, SelectionMode, Spinner, SpinnerType, Button } from "office-ui-fabric-react";
 import { FilterSection, IFilter } from "./Filter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
-import { DownloadWorkbookButton } from "../@Components/Workbook";
 
 export interface IDynamicPortfolioState {
     isLoading: boolean;
@@ -15,10 +14,21 @@ export interface IDynamicPortfolioState {
     fieldNames?: string[];
     searchTerm: string;
     filters?: IFilter[];
+    queryConfig?: Configuration.IQueryConfig[];
+    refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
 }
 
 export default class DynamicPortfolio extends React.Component<any, IDynamicPortfolioState> {
+    private fieldFilter: IFilter = {
+        name: __("DynamicPortfolio_FieldSelector_Name"),
+        key: "Fields",
+        emptyMessage: __("DynamicPortfolio_FieldSelector_EmptyMessage"),
+        multi: true,
+        defaultHidden: true,
+        iconName: "ShowResults",
+        items: [],
+    };
     private searchProp: any = "Title";
 
     constructor() {
@@ -27,28 +37,25 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             isLoading: true,
             searchTerm: "",
             currentFilters: {},
+            queryConfig: [],
         };
     }
 
     public componentDidMount(): void {
-        Configuration.getConfig().then(({ columnConfig, refinerConfig }) => {
-            let fieldNames = columnConfig.map(f => f.fieldName);
-            Search.query(fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                let fieldFilter: IFilter = {
-                    name: __("DynamicPortfolio_FieldSelector_Name"),
-                    key: "Fields",
-                    emptyMessage: __("DynamicPortfolio_FieldSelector_EmptyMessage"),
-                    multi: true,
-                    defaultHidden: true,
-                    iconName: "ShowResults",
-                    items: columnConfig.map(col => ({
-                        name: col.name,
-                        value: col.fieldName,
-                        defaultSelected: col.default,
-                        readOnly: col.readOnly,
-                    })),
-                };
-                let filters = [fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
+        Configuration.getConfig().then(({ columnConfig, refinerConfig, queryConfig }) => {
+            const fieldNames = columnConfig.map(f => f.fieldName);
+            const [defaultQueryConfig] = queryConfig.filter(qc => qc.default);
+            if (!defaultQueryConfig) {
+                return;
+            }
+            Search.query(defaultQueryConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
+                this.fieldFilter.items = columnConfig.map(col => ({
+                    name: col.name,
+                    value: col.fieldName,
+                    defaultSelected: col.default,
+                    readOnly: col.readOnly,
+                }));
+                let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
                 this.setState({
                     columns: columnConfig,
                     selectedColumns: columnConfig.filter(fc => fc.default),
@@ -57,13 +64,15 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     items: primarySearchResults,
                     filteredItems: primarySearchResults,
                     filters: filters,
+                    queryConfig: queryConfig,
+                    refinerConfig: refinerConfig,
                 });
             });
         });
     }
 
     public render(): JSX.Element {
-        let { filteredItems, searchTerm, filters, isLoading, selectedColumns } = this.state;
+        let { filteredItems, searchTerm, filters, isLoading, selectedColumns, queryConfig } = this.state;
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
@@ -77,7 +86,11 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 </div>
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
                     <TextField onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder={__("DynamicPortfolio_SearchBox_Placeholder")} style={{ padding: 25, color: "#777" }} />
-                    <DownloadWorkbookButton fileName="Example.xlsx" sheetName="Sheet 1" buttonLabel="Eksporter til Excel" buttonIconName="ExcelLogo" data={items} columns={selectedColumns}  />
+                    {queryConfig.map((qc, idx) => <Button key={idx} text={qc.name} icon={qc.iconName} onClick={e => {
+                        e.preventDefault();
+                        this.doSearch(qc);
+                    }}
+                    />)}
                     {
                         isLoading ?
                             <Spinner type={SpinnerType.large} />
@@ -189,6 +202,27 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 }
                 return col;
             }),
+        });
+    }
+
+    /**
+     * Does a new search using Search.query
+     *
+     * @param queryConfig Query configuration
+     */
+    private doSearch(queryConfig: Configuration.IQueryConfig): void {
+        this.setState({
+            isLoading: true,
+        });
+        const { fieldNames, refinerConfig } = this.state;
+        Search.query(queryConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
+            let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
+            this.setState({
+                isLoading: false,
+                items: primarySearchResults,
+                filteredItems: primarySearchResults,
+                filters: filters,
+            });
         });
     }
 };
