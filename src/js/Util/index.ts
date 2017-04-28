@@ -109,7 +109,7 @@ export const encodeSpaces = (str: string): string => {
 };
 
 /**
- * Sets item field value
+ * Sets item field value (supports text/choice, number and taxonomy)
  *
  * @param fieldName Field name
  * @param item SP list item
