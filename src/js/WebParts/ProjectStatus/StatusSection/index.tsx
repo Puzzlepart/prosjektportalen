@@ -6,16 +6,17 @@ const StatusSection = ({ project }) => {
     return (
         <div id="status-section">
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl5" style={{ padding: 25 }}>
+                <StatusElement
+                    name="Overordnet status"
+                    iconName="BarChart4"
+                    scrollTo="status-section"
+                    statusValue=""
+                    comment={project.GtOverallStatus} 
+                    fieldName="GtOverallStatus" />
                 <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" labelSize="xl" valueSize="l" />
             </div>
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl7 status-elements-container">
                 <div className="status-elements">
-                    <StatusElement
-                        name="Overordnet status"
-                        iconName="BarChart4"
-                        scrollTo="status-section"
-                        statusValue={project.GtOverallStatus}
-                        comment="" />
                     <StatusElement
                         name="Fremdrift"
                         iconName="DateTime"
