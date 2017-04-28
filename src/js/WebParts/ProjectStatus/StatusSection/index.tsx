@@ -11,7 +11,7 @@ const StatusSection = ({ project }) => {
                     iconName="BarChart4"
                     scrollTo="status-section"
                     statusValue=""
-                    comment={project.GtOverallStatus} 
+                    comment={project.GtOverallStatus}
                     fieldName="GtOverallStatus" />
                 <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" labelSize="xl" valueSize="l" />
             </div>
