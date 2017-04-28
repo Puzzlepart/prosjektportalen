@@ -40,6 +40,7 @@ module.exports = (env = "dev") => ({
                         ],
                         plugins: [
                             require("babel-plugin-transform-class-properties"),
+                            require("babel-plugin-loop-optimizer"),
                         ]
                     }
                 }
