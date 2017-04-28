@@ -3,8 +3,8 @@
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjektnavn i økonomisystemet</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjektnummer</pnp:DataValue>
@@ -13,18 +13,18 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Sak-/arkivreferanse</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Tjenesteområde</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjekttype</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Fase</pnp:DataValue>
@@ -34,12 +34,12 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjektleder</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjekteier</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Startdato</pnp:DataValue>
@@ -54,67 +54,72 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status risiko</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kommentar, risiko</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status, tid</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kommentar, tid</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status budsjett</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kommentar, budsjett</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status gevinstoppnåelse</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kommentar, gevinstoppnåelse</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status kvalitet</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kommentar, kvalitet</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Overordnet status</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Totalbudsjett for prosjektet</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Kostnader påløpt totalt</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Dato for siste rapportering av kostnader</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Målsetning</pnp:DataValue>
