@@ -4,6 +4,7 @@ import { FilterSection, IFilter } from "./Filter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
+import { DownloadWorkbookButton } from "./Workbook";
 
 export interface IDynamicPortfolioState {
     isLoading: boolean;
@@ -63,6 +64,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
 
     public render(): JSX.Element {
         let { filteredItems, searchTerm, filters, isLoading, selectedColumns } = this.state;
+        let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl2 ms-u-xxxl1">
@@ -75,13 +77,14 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 </div>
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
                     <TextField onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder={__("DynamicPortfolio_SearchBox_Placeholder")} style={{ padding: 25, color: "#777" }} />
+                    <DownloadWorkbookButton fileName="Example.xlsx" sheetName="Sheet 1" buttonLabel="Eksporter til Excel" buttonIconName="ExcelLogo" data={items} columns={selectedColumns}  />
                     {
                         isLoading ?
                             <Spinner type={SpinnerType.large} />
                             :
                             <div>
                                 <DetailsList
-                                    items={filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1)}
+                                    items={items}
                                     columns={selectedColumns}
                                     selectionMode={SelectionMode.none}
                                     onRenderItemColumn={_onRenderItemColumn}
