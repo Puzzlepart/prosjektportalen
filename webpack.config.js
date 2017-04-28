@@ -40,12 +40,12 @@ module.exports = (env = "dev") => ({
                         ],
                         plugins: [
                             require("babel-plugin-transform-class-properties"),
-                            require("babel-plugin-loop-optimizer"),
                         ]
                     }
                 }
             }, (env === "dev") ? { exclude: /node_modules/ } : {}),
-            { test: /\.txt$/, use: 'raw-loader' }
+            { test: /\.txt$/, use: 'raw-loader' },
+            {test: /\.json$/, loader: "json-loader"}
         ]
     },
     plugins: [
@@ -71,5 +71,10 @@ module.exports = (env = "dev") => ({
                 }
             }),
         ] : []
-        )
+        ),
+    node: { fs: 'empty' },
+    externals: [
+        { './cptable': 'var cptable' },
+        { './jszip': 'jszip' }
+    ]
 });
