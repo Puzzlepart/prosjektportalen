@@ -71,6 +71,28 @@
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>
         </View>
+        <View MobileView="TRUE" Type="HTML" DisplayName="Queries" Url="{site}/Lists/DynamicPortfolioConfig/Queries.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="GtDpOrder" />
+                </OrderBy>
+                <Where>
+                    <BeginsWith>
+                        <FieldRef Name="ContentTypeId" />
+                        <Value Type="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB403</Value>
+                    </BeginsWith>
+                </Where>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Edit" />
+                <FieldRef Name="GtDpOrder" />
+                <FieldRef Name="GtDpDisplayName" />
+                <FieldRef Name="GtDpDefault" />
+                <FieldRef Name="GtDpIcon" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
