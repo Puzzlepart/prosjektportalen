@@ -1,6 +1,6 @@
 import { Logger, LogLevel } from "sp-pnp-js";
 import { IListConfig } from "../Config";
-import * as Util from "Util";
+import * as Util from "../../../Util";
 
 interface CopyContext {
     CamlQuery: SP.CamlQuery;
@@ -36,14 +36,14 @@ const GetDataContext = (conf: IListConfig, destUrl: string): CopyContext => {
  * @param conf Configuration
  * @param destUrl Destination web URL
  */
-export const CopyItems = (conf: IListConfig, destUrl: string): Promise<any> => new Promise<any>((resolve, reject) => {
-    let dataCtx = GetDataContext(conf, destUrl);
-    let items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
+export const CopyItems = (conf: IListConfig, destUrl: string) => new Promise<void>((resolve, reject) => {
+    const dataCtx = GetDataContext(conf, destUrl);
+    const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
     dataCtx.Source._.load(items);
     dataCtx.Source._.executeQueryAsync(() => {
         Logger.log({ message: `Copying ${items.get_count()} items from '${conf.SourceList}' to '${conf.DestinationList}'.`, data: conf, level: LogLevel.Info });
         items.get_data().forEach((srcItm: SP.ListItem) => {
-            let destItm = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
+            const destItm = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
             conf.Fields.forEach(fieldName => {
                 Util.setItemFieldValue(fieldName, destItm, srcItm.get_item(fieldName), dataCtx.Destination._, dataCtx.Destination.list);
             });
