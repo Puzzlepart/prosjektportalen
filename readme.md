@@ -11,8 +11,15 @@ See [Documentation](documentation.md)
 ## Development
 See [Development](https://github.com/Puzzlepart/prosjektportalen/wiki/Development)
 
-## Contributing
-See [Contributing](contributing.md)
+## License
+See [License](license.md)
+
+<!--## Contact
+For questions and suggestions, contact Geir Graff at Asker Kommune. For assistance with installation of the solution or opportunities for further development and customization, please contact Puzzlepart or Tormod Guldvog. 
+For technical questions, contact [Tarjei Ormestøyl] or [Ole Martin Pettersen]. We note that any assistance will be a billable service.-->
+
+## Maintainers
+Tarjei Ormestøyl [tarjeieo@puzzlepart.com], Ole Martin Pettersen [olemp@puzzlepart.com]
 
 ## License
 Copyright (c) 2017 Puzzlepart
