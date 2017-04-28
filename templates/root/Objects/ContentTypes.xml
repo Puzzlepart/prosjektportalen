@@ -63,7 +63,7 @@
             <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="GtActionResponsible" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070204" Name="{resource:ContentTypes_Sjekkpunkt_Name}" Description="{resource:ContentTypes_Sjekkpunkt_Description}">
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070204" Name="{resource:ContentTypes_Sjekkpunkt_Name}" Description="{resource:ContentTypes_Sjekkpunkt_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
