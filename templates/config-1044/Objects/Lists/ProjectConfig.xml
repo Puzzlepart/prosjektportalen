@@ -63,7 +63,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status, tid</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -73,7 +73,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status budsjett</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -83,7 +83,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status gevinstoppnåelse</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -93,7 +93,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Status kvalitet</pnp:DataValue>
-            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
