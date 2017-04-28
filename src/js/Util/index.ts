@@ -124,6 +124,10 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
             item.set_item(fieldName, fieldValue);
         }
             break;
+        case "number": {
+            item.set_item(fieldName, fieldValue);
+        }
+            break;
         case "object": {
             let { Label, TermGuid, get_termGuid } = fieldValue;
             if (TermGuid || get_termGuid) {
