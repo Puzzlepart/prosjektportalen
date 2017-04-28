@@ -46,14 +46,14 @@
             <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Project Manager</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpRender">Persona</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString50</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Project Owner</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpRender">Persona</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB401</pnp:DataValue>
