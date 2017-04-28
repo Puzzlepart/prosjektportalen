@@ -39,6 +39,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     emptyMessage: __("DynamicPortfolio_FieldSelector_EmptyMessage"),
                     multi: true,
                     defaultHidden: true,
+                    iconName: "ShowResults",
                     items: columnConfig.map(col => ({
                         name: col.name,
                         value: col.fieldName,

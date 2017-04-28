@@ -21,6 +21,7 @@ export interface IRefinerConfig {
     fieldName: string;
     multi: boolean;
     defaultHidden: boolean;
+    iconName: string;
 }
 
 /**
@@ -48,6 +49,7 @@ export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<
                 fieldName: ref.GtDpProperty,
                 multi: ref.GtDpMultiple,
                 defaultHidden: ref.GtDpDefaultHidden,
+                iconName: ref.GtDpIcon,
             })),
         });
     }).catch(reject);

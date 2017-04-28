@@ -124,6 +124,7 @@
             <pnp:DataValue FieldName="GtDpDisplayName">Phase</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">StackIndicator</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
@@ -131,6 +132,7 @@
             <pnp:DataValue FieldName="GtDpDisplayName">Service Area</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">SingleBookmark</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
@@ -138,6 +140,23 @@
             <pnp:DataValue FieldName="GtDpDisplayName">Project Type</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">DocumentSet</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Owner</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB402</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Manager</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>

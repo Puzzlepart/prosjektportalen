@@ -191,42 +191,43 @@
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="Dynamic Portfolio Config Base" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="{3e0e63c8-28d9-46fb-89ea-3e4525abe40b}" Name="GtDpOrder" />
-            <pnp:FieldRef ID="{14dfd5b2-cf1d-4735-9e1b-7fa0d3658430}" Name="GtDpProperty" Required="true" />
-            <pnp:FieldRef ID="{9788aee9-7b21-480f-85e9-cee535e8cc20}" Name="GtDpDisplayName" Required="true" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB401" Name="Dynamic Portfolio Field" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="{3e0e63c8-28d9-46fb-89ea-3e4525abe40b}" Name="GtDpOrder" />
-            <pnp:FieldRef ID="{14dfd5b2-cf1d-4735-9e1b-7fa0d3658430}" Name="GtDpProperty" Required="true" />
-            <pnp:FieldRef ID="{9788aee9-7b21-480f-85e9-cee535e8cc20}" Name="GtDpDisplayName" Required="true" />
-            <pnp:FieldRef ID="{3ccd363c-36ba-49aa-bf1e-52a2eb27a876}" Name="GtDpDefault" />
-            <pnp:FieldRef ID="{6a664141-d681-46b8-a617-d138d8dee9f5}" Name="GtDpReadOnly" />
-            <pnp:FieldRef ID="{d633052d-4d8d-442b-b08d-3dabcfe6b51f}" Name="GtDpRender" />
-            <pnp:FieldRef ID="{d1ce219a-1590-42b6-aefb-debf4e373378}" Name="GtDpMinWidth" />
-            <pnp:FieldRef ID="{915edd68-78cd-48fb-8648-9ec38bc02d86}" Name="GtDpMaxWidth" />
-            <pnp:FieldRef ID="{bedf3697-fb30-4292-a2bc-40fecc8aa90e}" Name="GtDpIsResizable" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+            <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="GtDpDefault" />
+            <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="GtDpReadOnly" />
+            <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="GtDpRender" />
+            <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="GtDpMinWidth" />
+            <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="GtDpMaxWidth" />
+            <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="GtDpIsResizable" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB402" Name="Dynamic Portfolio Refiner" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="{3e0e63c8-28d9-46fb-89ea-3e4525abe40b}" Name="GtDpOrder" />
-            <pnp:FieldRef ID="{14dfd5b2-cf1d-4735-9e1b-7fa0d3658430}" Name="GtDpProperty" Required="true" />
-            <pnp:FieldRef ID="{9788aee9-7b21-480f-85e9-cee535e8cc20}" Name="GtDpDisplayName" Required="true" />
-            <pnp:FieldRef ID="{6cad365d-6424-41ce-a164-6457ee69772d}" Name="GtDpMultiple" />
-            <pnp:FieldRef ID="{3b19f43d-fcd2-4801-b2dc-52a9b12863e7}" Name="GtDpDefaultHidden" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+            <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="GtDpMultiple" />
+            <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="GtDpDefaultHidden" />
+            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="List Content Config" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="{753af53c-e135-4992-9f12-cffa889be1b8}" Name="GtLccSourceUrl"/>
-            <pnp:FieldRef ID="{82c3fe98-7bce-4234-9eea-0ae30984dbd8}" Name="GtLccSourceList"/>
-            <pnp:FieldRef ID="{008bb566-26c3-4cac-8d16-9bf3b1c5fb4b}" Name="GtLccDestinationList"/>
-            <pnp:FieldRef ID="{91d0b1bf-0a05-44f1-9885-cab0f3c3b77c}" Name="GtLccDestinationLibrary"/>
-            <pnp:FieldRef ID="{525a7269-b880-4266-8482-fe7a1bfaac3e}" Name="GtLccFields"/>
-            <pnp:FieldRef ID="{bc92bffb-3ab8-4208-a9c9-8af39e399eec}" Name="GtLccLabel"/>
-            <pnp:FieldRef ID="{19c0c03c-678a-4c2a-ab9b-cb9ffd903012}" Name="GtLccDefault"/>
+            <pnp:FieldRef ID="753af53c-e135-4992-9f12-cffa889be1b8" Name="GtLccSourceUrl"/>
+            <pnp:FieldRef ID="82c3fe98-7bce-4234-9eea-0ae30984dbd8" Name="GtLccSourceList"/>
+            <pnp:FieldRef ID="008bb566-26c3-4cac-8d16-9bf3b1c5fb4b" Name="GtLccDestinationList"/>
+            <pnp:FieldRef ID="91d0b1bf-0a05-44f1-9885-cab0f3c3b77c" Name="GtLccDestinationLibrary"/>
+            <pnp:FieldRef ID="525a7269-b880-4266-8482-fe7a1bfaac3e" Name="GtLccFields"/>
+            <pnp:FieldRef ID="bc92bffb-3ab8-4208-a9c9-8af39e399eec" Name="GtLccLabel"/>
+            <pnp:FieldRef ID="19c0c03c-678a-4c2a-ab9b-cb9ffd903012" Name="GtLccDefault"/>
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A3" Name="Project Config Base" Description="" Group="{resource:ContentTypes_Group}">
@@ -244,30 +245,30 @@
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="{a1a56abd-5b3d-45d2-8617-32b2f8b195de}" Name="GtGainsType" />
-            <pnp:FieldRef ID="{de5cf8b7-6823-4dac-b4a7-916c53bd3376}" Name="GtPrereqProfitAchievement" />
-            <pnp:FieldRef ID="{d79d8a58-1079-4a3a-9f27-02de9a3eace1}" Name="GtGainsTurnover" />
-            <pnp:FieldRef ID="{fcf9c850-8267-4452-8366-74b7a76da177}" Name="GtGainsResponsible" />
-            <pnp:FieldRef ID="{8d497830-9012-437c-aa65-4b05807f4415}" Name="GtMeasureIndicator" />
-            <pnp:FieldRef ID="{c5fc8781-7fbd-43a2-a215-c8c959bbab69}" Name="GtStartValue" />
-            <pnp:FieldRef ID="{8b399cb6-c53e-432c-8ffa-b48e2bfbbf71}" Name="GtDesiredValue" />
-            <pnp:FieldRef ID="{0d38db52-2040-44c1-823e-7642f76519ee}" Name="GtMeasurementUnit" />
-            <pnp:FieldRef ID="{b0d03734-a5b1-4e85-a752-45b2da8df7dd}" Name="GtRealizationTime" />
+            <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="GtGainsType" />
+            <pnp:FieldRef ID="de5cf8b7-6823-4dac-b4a7-916c53bd3376" Name="GtPrereqProfitAchievement" />
+            <pnp:FieldRef ID="d79d8a58-1079-4a3a-9f27-02de9a3eace1" Name="GtGainsTurnover" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" />
+            <pnp:FieldRef ID="8d497830-9012-437c-aa65-4b05807f4415" Name="GtMeasureIndicator" />
+            <pnp:FieldRef ID="c5fc8781-7fbd-43a2-a215-c8c959bbab69" Name="GtStartValue" />
+            <pnp:FieldRef ID="8b399cb6-c53e-432c-8ffa-b48e2bfbbf71" Name="GtDesiredValue" />
+            <pnp:FieldRef ID="0d38db52-2040-44c1-823e-7642f76519ee" Name="GtMeasurementUnit" />
+            <pnp:FieldRef ID="b0d03734-a5b1-4e85-a752-45b2da8df7dd" Name="GtRealizationTime" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004D8897A0212F9A40A4C2209D89E5AD4C" Name="{resource:ContentTypes_Endring_Name}" Description="{resource:ContentTypes_Endring_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="{68a5a2da-048c-4d2d-8ba4-5a8b32b60120}" Name="GtProcess" />
-            <pnp:FieldRef ID="{1fb52a28-81c4-405f-8da6-883c29b6b856}" Name="GtChallengeDescription" />
+            <pnp:FieldRef ID="68a5a2da-048c-4d2d-8ba4-5a8b32b60120" Name="GtProcess" />
+            <pnp:FieldRef ID="1fb52a28-81c4-405f-8da6-883c29b6b856" Name="GtChallengeDescription" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01007A831AC68204F04AAA022CFF06C7BAA2" Name="{resource:ContentTypes_Gevinstoppfolging_Name}" Description="{resource:ContentTypes_Gevinstoppfolging_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="{5c6fafbb-aee4-4e46-b110-5c798916c2ca}" Name="GtMeasurementDate" />
-            <pnp:FieldRef ID="{70dc7c4a-54ec-4674-b238-2b2a889e1b49}" Name="GtMeasurementValue" />
-            <pnp:FieldRef ID="{0b78e51d-84d9-4885-9e79-2fe382a2ceb9}" Name="GtMeasurementComment" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="5c6fafbb-aee4-4e46-b110-5c798916c2ca" Name="GtMeasurementDate" />
+            <pnp:FieldRef ID="70dc7c4a-54ec-4674-b238-2b2a889e1b49" Name="GtMeasurementValue" />
+            <pnp:FieldRef ID="0b78e51d-84d9-4885-9e79-2fe382a2ceb9" Name="GtMeasurementComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
 </pnp:ContentTypes> 

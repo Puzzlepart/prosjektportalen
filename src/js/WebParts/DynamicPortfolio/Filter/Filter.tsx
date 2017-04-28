@@ -17,6 +17,7 @@ export interface IFilter {
     items: IFilterItem[];
     selected?: string[];
     defaultHidden?: boolean;
+    iconName?: string;
 }
 
 export interface IFilterProps {
@@ -54,8 +55,9 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
         let { isCollapsed } = this.state;
         return (<div className="ms-Grid-col ms-u-sm4 ms-u-md4 ms-u-lg4 ms-u-xl4 ms-u-xxl12 ms-u-xxxl12" style={{ marginBottom: 20 }}>
             <h2 onClick={e => this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }))} style={{ cursor: "pointer", position: "relative" }}>
+                <Icon name={filter.iconName} style={{ marginRight: 5 }} />
                 {filter.name}
-                <Icon name={isCollapsed ? "ChevronDown" : "ChevronUp"} style={{ fontSize: 14, position: "absolute", right: 10, top: 10 }} />
+                <Icon name={isCollapsed ? "ChevronDown" : "ChevronUp"} style={{ fontSize: 14, position: "absolute", right: 5, top: 10 }} />
             </h2>
             <div hidden={isCollapsed}>
                 <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
