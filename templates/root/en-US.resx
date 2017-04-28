@@ -370,6 +370,9 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalen site columns</value>
   </data>
+  <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
+    <value>Sort order</value>
+  </data>
   <data name="SiteFields_GtProjectTaskProduct_DisplayName" xml:space="preserve">
     <value>Relevant product</value>
   </data>
@@ -432,6 +435,9 @@
   </data>
   <data name="SiteFields_GtProjectType_DisplayName" xml:space="preserve">
     <value>Project Type</value>
+  </data>
+  <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="SiteFields_GtProjectLogDescription_DisplayName" xml:space="preserve">
     <value>Log description</value>

@@ -370,6 +370,9 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalenkolonner</value>
   </data>
+   <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
+    <value>Sorteringsrekkefølge</value>
+  </data>
   <data name="SiteFields_GtProjectTaskProduct_DisplayName" xml:space="preserve">
     <value>Relevant produkt</value>
   </data>
@@ -645,6 +648,9 @@
   </data>
   <data name="SiteFields_GtBudgetLastReportDate_DisplayName" xml:space="preserve">
     <value>Dato for siste rapportering av kostnader</value>
+  </data>
+  <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value></value>
