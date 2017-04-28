@@ -8,8 +8,6 @@
     <pnp:CurrentNavigation NavigationType="StructuralLocal">
         <pnp:StructuralNavigation RemoveExistingNodes="true">
             <pnp:NavigationNode Title="{res:Navigation_Home_Title}" Url="{site}/SitePages/Home.aspx" />
-            <pnp:NavigationNode Title="{res:Navigation_Portfolio_Title}" Url="{site}/SitePages/Portfolio.aspx" />
-            <pnp:NavigationNode Title="{res:Navigation_PortfolioFollowUp_Title}" Url="{site}/SitePages/PortfolioFollowup.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_PortfolioDynamic_Title}" Url="{site}/SitePages/PortfolioDynamic.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_GainsOverview_Title}" Url="{site}/SitePages/GainsOverview.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_ExperienceLog_Title}" Url="{site}/SitePages/ExperienceLog.aspx" />
