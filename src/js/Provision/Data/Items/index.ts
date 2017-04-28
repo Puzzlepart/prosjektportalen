@@ -30,6 +30,12 @@ const GetDataContext = (conf: IListConfig, destUrl: string): CopyContext => {
     return ctx;
 };
 
+/**
+ * Copies list items to the destination web
+ *
+ * @param conf Configuration
+ * @param destUrl Destination web URL
+ */
 export const CopyItems = (conf: IListConfig, destUrl: string): Promise<any> => new Promise<any>((resolve, reject) => {
     let dataCtx = GetDataContext(conf, destUrl);
     let items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
