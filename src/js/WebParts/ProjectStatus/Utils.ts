@@ -14,7 +14,6 @@ const GetStatusCssClass = (fieldName: string, statusValue: string) => {
         }
         return "no-status";
     }
-
     return "no-status";
 };
 
