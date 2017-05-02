@@ -7,7 +7,7 @@ import { StatusFields } from "./Config";
  * @param statusValue Status value
  */
 const GetStatusCssClass = (fieldName: string, statusValue: string) => {
-    let find = StatusFields[fieldName].Statuses.filter(({ Value }) => (Value === statusValue));
+    let find = StatusFields[fieldName] ? StatusFields[fieldName].Statuses.filter(({ Value }) => (Value === statusValue)) : [];
     if (find.length > 0) {
         return find[0].CssClass;
     }
