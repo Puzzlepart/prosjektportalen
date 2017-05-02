@@ -1,5 +1,4 @@
-Thank you for reporting an issue, suggesting an enhancement, or asking a question. We appreciate your feedback - to help the team understand your
-needs please complete the below template to ensure we have the details to help. Thanks!
+Thank you for reporting an issue, suggesting an enhancement, or asking a question. We appreciate your feedback - to help the team understand your needs please complete the below template to ensure we have the details to help. Thanks!
 
 #### Category
 [ ] Enhancement
@@ -8,9 +7,15 @@ needs please complete the below template to ensure we have the details to help. 
 
 [ ] Question
 
+
 #### Environment
 [ ] SharePoint Online
 [ ] SharePoint 2013
+
+
+#### Summary
+
+Please summarize the issue.
 
 #### Version
 
