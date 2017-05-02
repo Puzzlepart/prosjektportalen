@@ -30,7 +30,6 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
             list.fields.get(),
             list.views.getByTitle(viewName).expand("ViewFields").get(),
         ]).then(([items, fields, view]) => {
-            console.log(items);
             let columns: any[] = view.ViewFields.Items.results.map(viewField => {
                 let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
                 if (field) {
@@ -56,7 +55,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
         if (items && columns) {
             return (<div>
                 <RiskMatrix items={items} />
-                <RiskList items={itemsAsHtml} columns={columns}  />
+                <RiskList items={itemsAsHtml} columns={columns} />
             </div>);
         }
         return null;
