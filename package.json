@@ -61,7 +61,7 @@
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
     "gulp-zip": "^4.0.0",
-    "i18n-webpack-plugin": "git+https://github.com/webpack-contrib/i18n-webpack-plugin#master",
+    "i18n-webpack-plugin": "latest",
     "json-loader": "^0.5.4",
     "merge2": "^1.0.3",
     "path": "^0.12.7",
