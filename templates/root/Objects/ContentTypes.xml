@@ -138,6 +138,7 @@
             <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" Required="true" />
             <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
+            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" Required="false" />
             <pnp:FieldRef ID="fc8a879d-83bc-4670-b1f6-c9817e333614" Name="GtStatusRisk" Required="true" />
             <pnp:FieldRef ID="b5932b1d-bee4-410c-aac2-54a7cd9d5381" Name="GtStatusRiskComment" Required="false" />
             <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="GtStatusTime" Required="true" />
@@ -148,9 +149,8 @@
             <pnp:FieldRef ID="cb41572a-78c6-4e33-8505-b97bfd8fd162" Name="GtStatusGainAchievementComment" Required="false" />
             <pnp:FieldRef ID="0bbe6a84-67e6-4a9c-b26b-a5973dacd473" Name="GtStatusQuality" Required="false" />
             <pnp:FieldRef ID="733a47e1-4465-41c0-89e3-037f9a65c403" Name="GtStatusQualityComment" Required="false" />
-            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" Required="false" />
-            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="GtBudgetTotal" />
-            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" />
+            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="GtBudgetTotal" Required="false" />
+            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" Required="false" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" />
             <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="true" />
         </pnp:FieldRefs>
