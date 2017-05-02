@@ -8,9 +8,13 @@ needs please complete the below template to ensure we have the details to help. 
 
 [ ] Question
 
+#### Environment
+[ ] SharePoint Online
+[ ] SharePoint 2013
+
 #### Version
 
-Please specify what version ou are using: [         ]
+Please specify what version ou are using: [ ]
 
 _If you are not using the latest release, please update and see if the issue is resolved before submitting an issue._
 
