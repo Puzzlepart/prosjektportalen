@@ -3,6 +3,8 @@ import { sp } from "sp-pnp-js";
 import { default as RiskList } from "./RiskList";
 import { default as RiskMatrix } from "./RiskMatrix";
 
+const RISK_CT: string = "0x010088578E7470CC4AA68D566346483107020101";
+
 export interface IRiskOverviewProps {
     viewName: string;
 }
@@ -26,7 +28,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
         const { viewName } = this.props;
         let list = sp.web.lists.getByTitle(__("Lists_Uncertainties_Title"));
         Promise.all([
-            list.items.filter(`startswith(ContentTypeId,'0x010088578E7470CC4AA68D566346483107020101')`).expand("FieldValuesAsHtml").get(),
+            list.items.filter(`startswith(ContentTypeId,'${RISK_CT}')`).expand("FieldValuesAsHtml").get(),
             list.fields.get(),
             list.views.getByTitle(viewName).expand("ViewFields").get(),
         ]).then(([items, fields, view]) => {

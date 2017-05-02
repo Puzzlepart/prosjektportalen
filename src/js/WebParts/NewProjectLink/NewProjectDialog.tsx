@@ -45,7 +45,7 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
     }
 
     public componentDidMount() {
-        ListDataConfig.RetrieveConfig().then(config => this.setState({ listDataConfig: config }));
+        ListDataConfig.RetrieveConfig().then((config: any) => this.setState({ listDataConfig: config }));
     }
 
     public render(): JSX.Element {
