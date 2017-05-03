@@ -219,7 +219,7 @@
             <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="Dynamic Portfolio Search Query" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="Dynamic Portfolio View" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Hidden="true" />
             <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
