@@ -47,14 +47,14 @@ export const Assigned: IFile = {
             },
         },
         {
-            Title: "Prosjektprodukter jeg har ansvar for",
+            Title: "Prosjektleveranser jeg har ansvar for",
             Zone: "RightColumn",
             Order: 0,
             Contents: {
-                Xml: require("./WebParts/Prosjektprodukter jeg har ansvar for"),
+                Xml: require("./WebParts/Prosjektleveranser jeg har ansvar for"),
             },
             ListView: {
-                List: "Prosjektprodukter",
+                List: "Prosjektleveranser",
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProductPhase", "GtProductInteressent", "GtProductAcceptanceMethod", "GtProductAcceptanceDate"],

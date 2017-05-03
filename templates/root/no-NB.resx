@@ -143,7 +143,7 @@
     <value>Prosjektlogg</value>
   </data>
   <data name="Lists_ProjectProducts_Title" xml:space="preserve">
-    <value>Prosjektprodukter</value>
+    <value>Prosjektleveranser</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
     <value>Usikkerhet</value>
@@ -173,7 +173,7 @@
     <value>Lists/Kommunikasjonsplan/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ProjectProducts_Url" xml:space="preserve">
-    <value>Lists/Prosjektprodukter/AllItems.aspx</value>
+    <value>Lists/Prosjektleveranser/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
     <value>Lists/Usikkerhet/AllItems.aspx</value>
