@@ -91,9 +91,6 @@
   <data name="Navigation_PortfolioFollowUp_Title" xml:space="preserve">
     <value>Portfolio FollowUp</value>
   </data>
-  <data name="Navigation_PortfolioDynamic_Title" xml:space="preserve">
-    <value>Dynamic Portfolio</value>
-  </data>
   <data name="Navigation_GainsOverview_Title" xml:space="preserve">
     <value>Gains Overview</value>
   </data>
