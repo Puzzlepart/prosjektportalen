@@ -348,6 +348,6 @@
             <CHOICE>Alvorlig feil</CHOICE>
         </CHOICES>
     </Field>
-    <Field Type="LookupMulti" DisplayName="GtDpFieldsLookup" List="{{listid:DynamicPortfolioFields}}" ShowField="GtDpDisplayName" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="{resource:SiteFields_Group}" ID="{43c79736-a2b6-452c-9995-6b72bba0ec16}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpFieldsLookup" Name="GtDpFieldsLookup" />
-    <Field Type="LookupMulti" DisplayName="GtDpRefinersLookup" List="{{listid:DynamicPortfolioRefiners}}" ShowField="GtDpDisplayName" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="{resource:SiteFields_Group}" ID="{503e35fd-ccee-4d66-af88-e016eab2f80b}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpRefinersLookup" Name="GtDpRefinersLookup" />
+    <Field Type="LookupMulti" DisplayName="Fields" List="{{listid:DynamicPortfolioFields}}" ShowField="GtDpDisplayName" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="{resource:SiteFields_Group}" ID="{43c79736-a2b6-452c-9995-6b72bba0ec16}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpFieldsLookup" Name="GtDpFieldsLookup" />
+    <Field Type="LookupMulti" DisplayName="Refiners" List="{{listid:DynamicPortfolioRefiners}}" ShowField="GtDpDisplayName" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="{resource:SiteFields_Group}" ID="{503e35fd-ccee-4d66-af88-e016eab2f80b}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpRefinersLookup" Name="GtDpRefinersLookup" />
 </pnp:SiteFields>
