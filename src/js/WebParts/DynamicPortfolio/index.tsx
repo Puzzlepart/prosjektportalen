@@ -52,10 +52,10 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 this.fieldFilter.items = columnConfig.map(col => ({
                     name: col.name,
                     value: col.fieldName,
-                    defaultSelected: col.default,
+                    defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
                     readOnly: col.readOnly,
                 }));
-                let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
+                let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
                 this.setState({
                     columns: columnConfig,
                     selectedColumns: columnConfig.filter(fc => fc.default),
@@ -116,10 +116,11 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
      *
      * @param refinerConfig Refiner configuration from the SP configuration list
      * @param refiners Refiners retrieved by search
+     * @param viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners: Array<{ Name: string, Entries: { results: any[] } }>): any => {
+    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
         return refinerConfig
-            .filter(ref => refiners.filter(r => r.Name === ref.key).length > 0)
+            .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
                 return {
@@ -216,7 +217,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         });
         const { fieldNames, refinerConfig } = this.state;
         Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-            let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
+            let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
             this.setState({
                 isLoading: false,
                 items: primarySearchResults,

@@ -34,10 +34,22 @@ export interface IViewConfig {
  * Get config from lists
  */
 export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], viewConfig: IViewConfig[] }>((resolve, reject) => {
+    const lists = pnp.sp.web.lists;
     Promise.all([
-        pnp.sp.web.lists.getByTitle("DynamicPortfolioFields").items.orderBy("GtDpOrder").get(),
-        pnp.sp.web.lists.getByTitle("DynamicPortfolioRefiners").items.orderBy("GtDpOrder").get(),
-        pnp.sp.web.lists.getByTitle("DynamicPortfolioViews").items.orderBy("GtDpOrder").get(),
+        lists.getByTitle("DynamicPortfolioFields")
+            .items
+            .orderBy("GtDpOrder")
+            .get(),
+        lists.getByTitle("DynamicPortfolioRefiners")
+            .items
+            .orderBy("GtDpOrder")
+            .get(),
+        lists.getByTitle("DynamicPortfolioViews")
+            .items
+            .expand("GtDpFieldsLookup", "GtDpRefinersLookup")
+            .select("GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName")
+            .orderBy("GtDpOrder")
+            .get(),
     ]).then(([fields, refiners, views]) => {
         resolve({
             columnConfig: fields.map(col => ({
@@ -59,11 +71,13 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 defaultHidden: ref.GtDpDefaultHidden,
                 iconName: ref.GtDpIcon,
             })),
-            viewConfig: views.map(qc => ({
-                name: qc.GtDpDisplayName,
-                queryTemplate: qc.GtDpSearchQuery,
-                iconName: qc.GtDpIcon,
-                default: qc.GtDpDefault,
+            viewConfig: views.map(({ GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup }) => ({
+                name: GtDpDisplayName,
+                queryTemplate: GtDpSearchQuery,
+                iconName: GtDpIcon,
+                default: GtDpDefault,
+                fields: GtDpFieldsLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
+                refiners: GtDpRefinersLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
             })),
         });
     }).catch(reject);
