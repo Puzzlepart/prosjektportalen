@@ -1,0 +1,26 @@
+<pnp:ListInstance Title="DynamicPortfolioViews" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioViews" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoversikt</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[
+{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web
+            ]]>
+            </pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Checkbox</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoppfølging</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[
+{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR LastModifiedTime<{Today-60})
+            ]]>
+            </pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>
