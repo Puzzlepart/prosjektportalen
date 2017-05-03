@@ -180,7 +180,11 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB403</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoversikt</pnp:DataValue>
-            <!--<pnp:DataValue FieldName="GtDpSearchQuery">{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web</pnp:DataValue>-->
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[
+{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web
+            ]]>
+            </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Checkbox</pnp:DataValue>
@@ -188,7 +192,11 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100B98DDFB576777B409846155F0D450EB403</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoppfølging</pnp:DataValue>
-            <!--<pnp:DataValue FieldName="GtDpSearchQuery">{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR LastModifiedTime<{Today-60})</pnp:DataValue>-->
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[
+{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR LastModifiedTime<{Today-60})
+            ]]>
+            </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
         </pnp:DataRow>
