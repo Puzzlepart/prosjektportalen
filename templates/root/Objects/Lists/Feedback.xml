@@ -1,0 +1,124 @@
+<pnp:ListInstance Title="Tilbakemeldinger" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Tilbakemeldinger" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x0100461A724553D2BC4187101D19A502A9AF" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View Name="{5857065B-2483-48E4-89EC-AB1775A0EFFD}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/Tilbakemeldinger/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="Created" Ascending="FALSE" />
+                </OrderBy>
+                <Where>
+                    <Eq>
+                        <FieldRef Name="GtFeedbackStatus" />
+                        <Value Type="Text">Åpen</Value>
+                    </Eq>
+                </Where>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Edit" />
+                <FieldRef Name="GtFeedbackScope" />
+                <FieldRef Name="GtFeedbackDescription" />
+                <FieldRef Name="GtFeedbackCriticality" />
+                <FieldRef Name="GtFeedbackComment" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="Author" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+        <View Name="{E7E638FD-B3F9-42F9-9D78-04DA3C29E472}" MobileView="TRUE" Type="HTML" DisplayName="Under utvikling" Url="{site}/Lists/Tilbakemeldinger/Under utvikling.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="Created" Ascending="FALSE" />
+                </OrderBy>
+                <Where>
+                    <Eq>
+                        <FieldRef Name="GtFeedbackStatus" />
+                        <Value Type="Text">Under utvikling</Value>
+                    </Eq>
+                </Where>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Edit" />
+                <FieldRef Name="GtFeedbackScope" />
+                <FieldRef Name="GtFeedbackDescription" />
+                <FieldRef Name="GtFeedbackCriticality" />
+                <FieldRef Name="GtFeedbackComment" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="Author" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+        <View Name="{37AAD2F5-7FEC-4DCE-AE75-18405EFBFA28}" MobileView="TRUE" Type="HTML" DisplayName="Fullført" Url="{site}/Lists/Tilbakemeldinger/Fullfrt.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="Created" Ascending="FALSE" />
+                </OrderBy>
+                <Where>
+                    <Eq>
+                        <FieldRef Name="GtFeedbackStatus" />
+                        <Value Type="Text">Fullført</Value>
+                    </Eq>
+                </Where>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Edit" />
+                <FieldRef Name="GtFeedbackScope" />
+                <FieldRef Name="GtFeedbackDescription" />
+                <FieldRef Name="GtFeedbackCriticality" />
+                <FieldRef Name="GtFeedbackComment" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="Author" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+        <View Name="{E04B5365-FC55-4C02-B282-6AFA0FB710D8}" MobileView="TRUE" Type="HTML" DisplayName="Avvist" Url="{site}/Lists/Tilbakemeldinger/Avvist.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="Created" Ascending="FALSE" />
+                </OrderBy>
+                <Where>
+                    <Eq>
+                        <FieldRef Name="GtFeedbackStatus" />
+                        <Value Type="Text">Avvist</Value>
+                    </Eq>
+                </Where>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Edit" />
+                <FieldRef Name="GtFeedbackScope" />
+                <FieldRef Name="GtFeedbackDescription" />
+                <FieldRef Name="GtFeedbackCriticality" />
+                <FieldRef Name="GtFeedbackComment" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="Editor" />
+                <FieldRef Name="Created" />
+                <FieldRef Name="Author" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="4deb5071-24b5-4709-be74-39361ab14adb" Name="GtFeedbackScope" DisplayName="Område" />
+        <pnp:FieldRef ID="fd69746d-b3c5-4676-8659-e6e3fc09e09f" Name="GtFeedbackDescription" DisplayName="Beskrivelse" />
+        <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="GtFeedbackStatus" DisplayName="Status" />
+        <pnp:FieldRef ID="db42d9aa-f4ab-47e0-b0d6-8c0af0d70d70" Name="GtFeedbackCriticality" DisplayName="Kritikalitet" />
+        <pnp:FieldRef ID="8534f635-0d38-4754-b772-48b0a105357c" Name="GtFeedbackComment" DisplayName="Kommentar" />
+    </pnp:FieldRefs>
+</pnp:ListInstance>
