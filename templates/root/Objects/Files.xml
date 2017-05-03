@@ -243,9 +243,9 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\PortfolioDynamic.aspx" Folder="SitePages" Overwrite="true">
+    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Overwrite="true">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="{res:Navigation_PortfolioDynamic_Title}" />
+            <pnp:Property Key="Title" Value="{res:Navigation_Portfolio_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
             <pnp:WebPart Title="dynamicportfolio" Order="1" Zone="LeftColumn">
