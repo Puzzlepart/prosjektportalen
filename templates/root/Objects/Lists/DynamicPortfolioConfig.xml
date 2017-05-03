@@ -87,6 +87,7 @@
                 <FieldRef Name="Edit" />
                 <FieldRef Name="GtDpOrder" />
                 <FieldRef Name="GtDpDisplayName" />
+                <FieldRef Name="GtDpSearchQuery" />
                 <FieldRef Name="GtDpDefault" />
                 <FieldRef Name="GtDpIcon" />
             </ViewFields>
