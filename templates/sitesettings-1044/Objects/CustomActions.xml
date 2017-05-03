@@ -25,14 +25,30 @@
             Url="Lists/ListContentConfig/AllItems.aspx"
             Rights="ManageWeb"
             Sequence="2003" />
-        <!--<pnp:CustomAction
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"            
+            Name="Prosjektportalen - Porteføljeoversikt (Felter)"
+            Title="Prosjektportalen - Porteføljeoversikt (Felter)"
+            Url="Lists/DynamicPortfolioFields/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2004" />
+        <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
-            Name="Prosjektportalen - Dynamisk portefølje"
-            Title="Prosjektportalen - Dynamisk portefølje"
-            Url="Lists/DynamicPortfolioConfig/AllItems.aspx"
+            Name="Prosjektportalen - Porteføljeoversikt (Visninger)"
+            Title="Prosjektportalen - Porteføljeoversikt (Visninger)"
+            Url="Lists/DynamicPortfolioViews/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2004" />-->
+            Sequence="2005" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"            
+            Name="Prosjektportalen - Porteføljeoversikt (Filtre)"
+            Title="Prosjektportalen - Porteføljeoversikt (Filtre)"
+            Url="Lists/DynamicPortfolioRefiners/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2006" />
         <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
@@ -40,7 +56,7 @@
             Title="Prosjektportalen - Prosjektkonfigurasjon"
             Url="Lists/ProjectConfig/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2005" />
+            Sequence="2007" />
         <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
@@ -48,6 +64,6 @@
             Title="Prosjektportalen - Tilbakemeldinger"
             Url="Lists/Feedback/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2006" />
+            Sequence="2008" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>
