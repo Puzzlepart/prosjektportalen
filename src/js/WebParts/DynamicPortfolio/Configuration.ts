@@ -31,7 +31,7 @@ export interface IViewConfig {
 /**
  * Get config from lists
  */
-export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], queryConfig: IViewConfig[] }>((resolve, reject) => {
+export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], viewConfig: IViewConfig[] }>((resolve, reject) => {
     Promise.all([
         pnp.sp.web.lists.getByTitle("DynamicPortfolioFields").items.orderBy("GtDpOrder").get(),
         pnp.sp.web.lists.getByTitle("DynamicPortfolioRefiners").items.orderBy("GtDpOrder").get(),
@@ -57,7 +57,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 defaultHidden: ref.GtDpDefaultHidden,
                 iconName: ref.GtDpIcon,
             })),
-            queryConfig: views.map(qc => ({
+            viewConfig: views.map(qc => ({
                 name: qc.GtDpDisplayName,
                 queryTemplate: qc.GtDpSearchQuery,
                 iconName: qc.GtDpIcon,

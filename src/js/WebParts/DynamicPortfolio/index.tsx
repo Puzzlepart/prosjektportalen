@@ -14,7 +14,7 @@ export interface IDynamicPortfolioState {
     fieldNames?: string[];
     searchTerm: string;
     filters?: IFilter[];
-    queryConfig?: Configuration.IQueryConfig[];
+    viewConfig?: Configuration.IViewConfig[];
     refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
 }
@@ -37,18 +37,18 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             isLoading: true,
             searchTerm: "",
             currentFilters: {},
-            queryConfig: [],
+            viewConfig: [],
         };
     }
 
     public componentDidMount(): void {
-        Configuration.getConfig().then(({ columnConfig, refinerConfig, queryConfig }) => {
+        Configuration.getConfig().then(({ columnConfig, refinerConfig, viewConfig }) => {
             const fieldNames = columnConfig.map(f => f.fieldName);
-            const [defaultQueryConfig] = queryConfig.filter(qc => qc.default);
-            if (!defaultQueryConfig) {
+            const [defaultViewConfig] = viewConfig.filter(qc => qc.default);
+            if (!defaultViewConfig) {
                 return;
             }
-            Search.query(defaultQueryConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
+            Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
                 this.fieldFilter.items = columnConfig.map(col => ({
                     name: col.name,
                     value: col.fieldName,
@@ -64,7 +64,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     items: primarySearchResults,
                     filteredItems: primarySearchResults,
                     filters: filters,
-                    queryConfig: queryConfig,
+                    viewConfig: viewConfig,
                     refinerConfig: refinerConfig,
                 });
             });
@@ -72,7 +72,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
     }
 
     public render(): JSX.Element {
-        let { filteredItems, searchTerm, filters, isLoading, selectedColumns, queryConfig } = this.state;
+        let { filteredItems, searchTerm, filters, isLoading, selectedColumns, viewConfig } = this.state;
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
@@ -86,7 +86,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 </div>
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
                     <TextField onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder={__("DynamicPortfolio_SearchBox_Placeholder")} style={{ padding: 25, color: "#777" }} />
-                    {queryConfig.map((qc, idx) => <Button key={idx} text={qc.name} icon={qc.iconName} onClick={e => {
+                    {viewConfig.map((qc, idx) => <Button key={idx} text={qc.name} icon={qc.iconName} onClick={e => {
                         e.preventDefault();
                         this.doSearch(qc);
                     }}
@@ -208,14 +208,14 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
     /**
      * Does a new search using Search.query
      *
-     * @param queryConfig Query configuration
+     * @param viewConfig Query configuration
      */
-    private doSearch(queryConfig: Configuration.IQueryConfig): void {
+    private doSearch(viewConfig: Configuration.IViewConfig): void {
         this.setState({
             isLoading: true,
         });
         const { fieldNames, refinerConfig } = this.state;
-        Search.query(queryConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
+        Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
             let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners));
             this.setState({
                 isLoading: false,
