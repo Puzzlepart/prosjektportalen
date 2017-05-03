@@ -227,6 +227,8 @@
             <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
             <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="GtDpDefault" />
             <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
+            <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="GtDpFieldsLookup" />
+            <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="GtDpRefinersLookup" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="List Content Config" Description="" Group="{resource:ContentTypes_Group}">
