@@ -21,7 +21,7 @@ export interface IRefinerConfig {
     iconName: string;
 }
 
-export interface IQueryConfig {
+export interface IViewConfig {
     name: string;
     queryTemplate: string;
     iconName: string;
@@ -31,7 +31,7 @@ export interface IQueryConfig {
 /**
  * Get config from lists
  */
-export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], queryConfig: IQueryConfig[] }>((resolve, reject) => {
+export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], queryConfig: IViewConfig[] }>((resolve, reject) => {
     Promise.all([
         pnp.sp.web.lists.getByTitle("DynamicPortfolioFields").items.orderBy("GtDpOrder").get(),
         pnp.sp.web.lists.getByTitle("DynamicPortfolioRefiners").items.orderBy("GtDpOrder").get(),
