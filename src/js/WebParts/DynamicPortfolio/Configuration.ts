@@ -1,9 +1,5 @@
 import * as pnp from "sp-pnp-js";
 
-const COLUMN_CONFIG_CT: string = "0x0100B98DDFB576777B409846155F0D450EB401";
-const REFINER_CONFIG_CT: string = "0x0100B98DDFB576777B409846155F0D450EB402";
-const QUERY_CONFIG_CT: string = "0x0100B98DDFB576777B409846155F0D450EB403";
-
 export interface IColumnConfig {
     name: string;
     key: string;
@@ -34,13 +30,15 @@ export interface IQueryConfig {
 
 /**
  * Get config from lists
- *
- * @param configList Configuration list
  */
-export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], queryConfig: IQueryConfig[] }>((resolve, reject) => {
-    pnp.sp.web.lists.getByTitle(configList).items.orderBy("GtDpOrder").get().then(items => {
+export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refinerConfig: IRefinerConfig[], queryConfig: IQueryConfig[] }>((resolve, reject) => {
+    Promise.all([
+        pnp.sp.web.lists.getByTitle("DynamicPortfolioFields").items.orderBy("GtDpOrder").get(),
+        pnp.sp.web.lists.getByTitle("DynamicPortfolioRefiners").items.orderBy("GtDpOrder").get(),
+        pnp.sp.web.lists.getByTitle("DynamicPortfolioViews").items.orderBy("GtDpOrder").get(),
+    ]).then(([fields, refiners, views]) => {
         resolve({
-            columnConfig: items.filter(i => i.ContentTypeId.indexOf(COLUMN_CONFIG_CT) !== -1).map(col => ({
+            columnConfig: fields.map(col => ({
                 name: col.GtDpDisplayName,
                 key: col.GtDpProperty,
                 fieldName: col.GtDpProperty,
@@ -51,7 +49,7 @@ export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<
                 maxWidth: col.GtDpMaxWidth,
                 isResizable: col.GtDpIsResizable,
             })),
-            refinerConfig: items.filter(i => i.ContentTypeId.indexOf(REFINER_CONFIG_CT) !== -1).map(ref => ({
+            refinerConfig: refiners.map(ref => ({
                 name: ref.GtDpDisplayName,
                 key: ref.GtDpProperty,
                 fieldName: ref.GtDpProperty,
@@ -59,7 +57,7 @@ export const getConfig = (configList = "DynamicPortfolioConfig") => new Promise<
                 defaultHidden: ref.GtDpDefaultHidden,
                 iconName: ref.GtDpIcon,
             })),
-            queryConfig: items.filter(i => i.ContentTypeId.indexOf(QUERY_CONFIG_CT) !== -1).map(qc => ({
+            queryConfig: views.map(qc => ({
                 name: qc.GtDpDisplayName,
                 queryTemplate: qc.GtDpSearchQuery,
                 iconName: qc.GtDpIcon,
