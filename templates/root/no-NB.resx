@@ -88,9 +88,6 @@
   <data name="Navigation_Portfolio_Title" xml:space="preserve">
     <value>Porteføljeoversikt</value>
   </data>
-  <data name="Navigation_PortfolioFollowUp_Title" xml:space="preserve">
-    <value>Porteføljeoppfølging</value>
-  </data>
   <data name="Navigation_GainsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
   </data>
