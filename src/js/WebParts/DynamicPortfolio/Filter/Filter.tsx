@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "office-ui-fabric-react";
+import { Link, Checkbox } from "office-ui-fabric-react";
 import { Icon } from "../../@Components";
 
 export interface IFilterItem {
@@ -78,14 +78,13 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
         let { filter } = this.props;
         return filter.items.length > 0
             ? filter.items.map((i, idx) => (<li key={idx} value={i.value}>
-                {filter.multi && <input
+                {filter.multi && <Checkbox
                     id={`${filter.key}_input_${i.value}`}
-                    type="checkbox"
+                    label={i.name}
                     disabled={i.readOnly}
                     defaultChecked={i.defaultSelected}
-                    onClick={e => this.onChange(idx, i, e.currentTarget)}
+                    onChange={e => this.onChange(idx, i, e.currentTarget)}
                     ref={ele => this.inputs[i.value] = ele} />}
-                <label htmlFor={`${filter.key}_input_${i.value}`}>{i.name}</label>
             </li>))
             : <li className="ms-metadata">{filter.emptyMessage}</li>;
     }
