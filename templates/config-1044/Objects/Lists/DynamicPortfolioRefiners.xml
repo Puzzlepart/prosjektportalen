@@ -1,0 +1,40 @@
+<pnp:ListInstance Title="DynamicPortfolioRefiners" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioRefiners" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString52</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Fase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">StackIndicator</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString53</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Tjenesteområde</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">SingleBookmark</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString54</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Prosjekttype</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">DocumentSet</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Prosjekteier</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Prosjektleder</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefaultHidden">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>

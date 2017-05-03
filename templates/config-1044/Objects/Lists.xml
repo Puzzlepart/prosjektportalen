@@ -3,7 +3,11 @@
     <xi:include 
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ListContentConfig.xml" />
     <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioConfig.xml" />
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioFields.xml" />
+    <xi:include 
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioRefiners.xml" />
+    <xi:include 
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioViews.xml" />
     <xi:include 
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectConfig.xml" />
 </pnp:Lists>
