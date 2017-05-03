@@ -1090,9 +1090,6 @@
   <data name="PortfolioPage_Portfolio_Title" xml:space="preserve">
     <value>Portfolio Summary</value>
   </data>
-  <data name="PortfolioPage_PortfolioFollowUp_Title" xml:space="preserve">
-    <value>Portfolio follow-up</value>
-  </data>
   <data name="PortfolioPage_ExperienceLog_Title" xml:space="preserve">
     <value>Experience Log</value>
   </data>
