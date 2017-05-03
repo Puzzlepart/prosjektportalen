@@ -26,6 +26,8 @@ export interface IViewConfig {
     queryTemplate: string;
     iconName: string;
     default: boolean;
+    fields?: any[];
+    refiners?: any[];
 }
 
 /**
