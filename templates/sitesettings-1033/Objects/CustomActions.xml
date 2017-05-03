@@ -25,14 +25,14 @@
             Url="Lists/ListContentConfig/AllItems.aspx"
             Rights="ManageWeb"
             Sequence="2003" />
-        <pnp:CustomAction
+        <!--<pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
             Name="Project Portal - Dynamic Portfolio"
             Title="Project Portal - Dynamic Portfolio"
             Url="Lists/DynamicPortfolioConfig/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2004" />
+            Sequence="2004" />-->
         <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
