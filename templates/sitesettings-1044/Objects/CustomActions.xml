@@ -41,5 +41,13 @@
             Url="Lists/ProjectConfig/AllItems.aspx"
             Rights="ManageWeb"
             Sequence="2005" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Prosjektportalen - Tilbakemeldinger"
+            Title="Prosjektportalen - Tilbakemeldinger"
+            Url="Lists/Feedback/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2006" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>

@@ -40,6 +40,14 @@
             Title="Project Portal - Project Config"
             Url="Lists/ProjectConfig/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2005" />
+            Sequence="2005" />            
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Prosjektportalen - Feedback"
+            Title="Prosjektportalen - Feedback"
+            Url="Lists/Feedback/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2006" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>
