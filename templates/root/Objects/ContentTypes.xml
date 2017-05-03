@@ -281,4 +281,14 @@
             <pnp:FieldRef ID="0b78e51d-84d9-4885-9e79-2fe382a2ceb9" Name="GtMeasurementComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x0100461A724553D2BC4187101D19A502A9AF" Name="Tilbakemelding" Description="" Group="Prosjektportalen innholdstyper" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="4deb5071-24b5-4709-be74-39361ab14adb" Name="GtFeedbackScope" Required="true" />
+            <pnp:FieldRef ID="fd69746d-b3c5-4676-8659-e6e3fc09e09f" Name="GtFeedbackDescription" Required="true" />
+            <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="GtFeedbackStatus" />
+            <pnp:FieldRef ID="db42d9aa-f4ab-47e0-b0d6-8c0af0d70d70" Name="GtFeedbackCriticality" Required="true" />
+            <pnp:FieldRef ID="8534f635-0d38-4754-b772-48b0a105357c" Name="GtFeedbackComment" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
 </pnp:ContentTypes> 
