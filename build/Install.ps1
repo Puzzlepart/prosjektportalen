@@ -30,6 +30,8 @@ Param(
     [switch]$SkipData,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip default config?")]
     [switch]$SkipDefaultConfig,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
+    [switch]$SkipTaxonomy,
     [Parameter(Mandatory = $false, HelpMessage = "Environment")]
     [ValidateSet('SharePoint2013','SharePointOnline')]
     [string]$Environment = "SharePointOnline"
@@ -100,7 +102,12 @@ catch {
 
 try {
     Connect-PnPOnline $Url -Credentials $creds
-    Write-Host "Deploying fields, content types, lists and pages.." -ForegroundColor Green -NoNewLine
+    if (-not $SkipTaxonomy.IsPresent) {
+        Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
+        Write-Host "DONE"
+    }
+    Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
     Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
     Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
     Apply-PnPProvisioningTemplate ".\templates\display-templates.pnp"

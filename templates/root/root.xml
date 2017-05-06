@@ -10,8 +10,6 @@
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT" Version="0">
             <xi:include 
-                xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/TermGroups.xml" />
-            <xi:include 
                 xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/SiteFields.xml" />
             <xi:include 
                 xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/ContentTypes.xml" />
