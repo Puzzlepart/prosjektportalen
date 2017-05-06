@@ -10,7 +10,7 @@ Use the required -Url param to specify the target site collection. You can also 
 ./Install.ps1 -Url https://puzzlepart.sharepoint.com/sites/prosjektportalen
 
 .LINK
-https://github.com/prosjektstotte/sp-prosjektportal
+https://github.com/Puzzlepart/prosjektportalen
 
 #>
 
@@ -56,19 +56,15 @@ switch ($Environment) {
     }
 }
 
-Write-Host ""
-Write-Host ""
-Write-Host ""
-Write-Host ""
-Write-Host "  ___             _     _   _                 _        _                ___   __  "
-Write-Host " | _ \_ _ ___ ___(_)___| |_| |_ _ __  ___ _ _| |_ __ _| |___ _ __  __ _|_  ) /  \ "
-Write-Host " |  _/ '_/ _ (_-<| / -_) / /  _| '_ \/ _ \ '_|  _/ _` | / -_) '  | \ V // / | () |"
-Write-Host " |_| |_| \___/__// \___|_\_\\__| .__/\___/_|  \__\__,_|_\___|_||_|  \_//___(_)__/ "
-Write-Host "               |__/            |_|                                                "
-Write-Host ""
-Write-Host ""
-Write-Host ""
-Write-Host ""
+Write-Host "############################################################################" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Installing Prosjektportalen" -ForegroundColor Green
+Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Installation url: $Url" -ForegroundColor Green
+Write-Host "Environment: $Environment" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "############################################################################" -ForegroundColor Green
 
 if ($Debug.IsPresent) {
     Set-PnPTraceLog -On -Level Debug
