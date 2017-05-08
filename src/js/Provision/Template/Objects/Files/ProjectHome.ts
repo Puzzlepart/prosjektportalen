@@ -61,17 +61,9 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Om prosjektet",
-            Zone: "RightColumn",
-            Order: 0,
-            Contents: {
-                Xml: require("./WebParts/Om prosjektet"),
-            },
-        },
-        {
             Title: "Gevinstanalyse og gevinstrealiseringsplan",
-            Zone: "RightColumn",
-            Order: 1,
+            Zone: "LeftColumn",
+            Order: 3,
             Contents: {
                 Xml: require("./WebParts/Gevinstanalyse og gevinstrealiseringsplan"),
             },
@@ -89,9 +81,17 @@ export const ProjectHome: IFile = {
             },
         },
         {
+            Title: "Om prosjektet",
+            Zone: "RightColumn",
+            Order: 0,
+            Contents: {
+                Xml: require("./WebParts/Om prosjektet"),
+            },
+        },
+        {
             Title: "Områdefeed",
             Zone: "RightColumn",
-            Order: 2,
+            Order: 1,
             Contents: {
                 Xml: require("./WebParts/Områdefeed"),
             },
@@ -99,7 +99,7 @@ export const ProjectHome: IFile = {
         {
             Title: "Usikkerhet (gjeldende fase)",
             Zone: "RightColumn",
-            Order: 3,
+            Order: 2,
             Contents: {
                 Xml: require("./WebParts/Usikkerhet (gjeldende fase)"),
             },
