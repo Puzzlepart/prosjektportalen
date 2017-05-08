@@ -1,6 +1,14 @@
 import * as React from "react";
 import * as unique from "array-unique";
-import { DetailsList, IGroup, SelectionMode, TextField, Toggle, Spinner, SpinnerType } from "office-ui-fabric-react";
+import {
+    DetailsList,
+    IGroup,
+    SelectionMode,
+    Toggle,
+    Spinner,
+    SpinnerType,
+    SearchBox,
+} from "office-ui-fabric-react";
 import { DataSource } from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
@@ -53,12 +61,11 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
             return (<div style={{ width: "100%" }}>
-                <TextField
-                    hidden={showSearchBox === false}
-                    onChanged={text => this.setState({ searchTerm: text })}
-                    disabled={isLoading}
-                    placeholder="Søk i alle gevinster"
-                    style={{ padding: 25, color: "#777" }} />
+                {showSearchBox !== false &&
+                    <SearchBox
+                        onChange={st => this.setState({ searchTerm: st })}
+                        labelText="Søk i alle gevinster" />
+                }
                 {groupByOptions.map((gp, idx) => <Toggle
                     key={idx}
                     onChanged={checked => this.setState({ groupBy: checked ? gp.property : null })}
