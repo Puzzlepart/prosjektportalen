@@ -162,7 +162,16 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity", "GtRiskFactor"],
+            ViewFields: [
+                "LinkTitle",
+                "GtRiskProximity",
+                "GtRiskProbability",
+                "GtRiskConsequence",
+                "GtRiskFactor",
+                "GtRiskProbabilityPostAction",
+                "GtRiskConsequencePostAction",
+                "GtRiskFactorPostAction",
+            ],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
