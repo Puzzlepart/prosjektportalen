@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_QuickLinks_Title}" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
+<pnp:ListInstance Title="Lenker" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
