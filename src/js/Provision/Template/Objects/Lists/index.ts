@@ -345,11 +345,26 @@ const Lists: IList[] = [
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
+            ViewFields: ["GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
+                                <FieldRef Name="GtGainLookup" />
+                            </GroupBy>
+                            <OrderBy>
+                                <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
+                            </OrderBy>`,
+            },
+        },
+        {
+            Title: "Flat visning",
             ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<OrderBy>
+                                <FieldRef Name="GtGainLookup" />
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
                             </OrderBy>`,
             },
