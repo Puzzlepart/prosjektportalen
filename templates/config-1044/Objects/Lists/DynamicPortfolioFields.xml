@@ -99,24 +99,31 @@
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusQualityOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status kvalitet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDefault">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">160</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Created</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Opprettet</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">0</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpOrder">150</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">170</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">LastModifiedTime</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Sist endret</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpOrder">160</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">180</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectGoalsOWSMTXT</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Prosjektmål</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpOrder">170</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">190</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMinWidth">200</pnp:DataValue>
