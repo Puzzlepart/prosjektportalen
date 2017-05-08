@@ -1,8 +1,13 @@
 import * as React from "react";
 import * as Config from "../../Config";
 
-const RiskElement = ({ item: { Id, Title } }) => {
-    return (<div className={`risk-matrix-element`} title={Title}>
+interface IRiskElementProps {
+    item: any;
+    style?: React.CSSProperties;
+}
+
+const RiskElement = ({ item: { Id, Title }, style }: IRiskElementProps) => {
+    return (<div className={`risk-matrix-element`} title={Title} style={style}>
         {Id}
     </div>);
 };
@@ -46,14 +51,14 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
             postAction,
         } = this.props;
 
-        const probabilityField = postAction ? "GtRiskProbabilityPostAction" : "GtRiskProbability";
-        const consequenceField = postAction ? "GtRiskConsequencePostAction" : "GtRiskConsequence";
-
         const riskMatrix = Config.RiskMatrix.map((rows, i: number) => {
             let row = rows.map((cell, j: number) => {
                 const element = Config.RiskMatrix[i][j];
                 const riskElements = items.map((risk, k: number) => {
-                    if (element.Probability === risk[probabilityField] && element.Consequence === risk[consequenceField]) {
+                    if (element.Probability === risk.GtRiskProbability && element.Consequence === risk.GtRiskConsequence) {
+                        return <RiskElement item={risk} key={k} style={{ opacity: postAction ? 0.5 : 1 }} />;
+                    }
+                    if (postAction && (element.Probability === risk.GtRiskProbabilityPostAction && element.Consequence === risk.GtRiskConsequencePostAction)) {
                         return <RiskElement item={risk} key={k} />;
                     }
                     return null;
