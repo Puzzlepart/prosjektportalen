@@ -243,20 +243,39 @@ export const RiskMatrix: any = [
     ],
 ];
 
-export const StatusFields = {
+export interface IStatusProperties {
+    Value: string;
+    CssClass: string;
+    Color: string;
+    Icon: any;
+}
+
+export interface IStatusFields {
+    [key: string]: {
+        Statuses: IStatusProperties[],
+    };
+}
+
+export const StatusFields: IStatusFields = {
     GtStatusRisk: {
         Statuses: [
             {
                 Value: "Lav",
                 CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
             },
             {
                 Value: "Medium",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Høy",
                 CssClass: "negative-status",
+                Color: "#ea5c73",
+                Icon: "CircleFill",
             },
         ],
     },
@@ -265,22 +284,32 @@ export const StatusFields = {
             {
                 Value: "Under budsjett",
                 CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
             },
             {
                 Value: "På budsjett",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Mindre overskridelser som kan tas igjen",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Vet ikke",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Over budsjett",
                 CssClass: "negative-status",
+                Color: "#ea5c73",
+                Icon: "CircleFill",
             },
         ],
     },
@@ -289,18 +318,26 @@ export const StatusFields = {
             {
                 Value: "Foran plan",
                 CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
             },
             {
                 Value: "På plan",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Mindre forsinkelse som kan tas igjen",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Forsinket",
                 CssClass: "negative-status",
+                Color: "#ea5c73",
+                Icon: "CircleFill",
             },
         ],
     },
@@ -309,14 +346,20 @@ export const StatusFields = {
             {
                 Value: "Lav",
                 CssClass: "negative-status",
+                Color: "#ea5c73",
+                Icon: "CircleFill",
             },
             {
                 Value: "Medium",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Høy",
                 CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
             },
         ],
     },
@@ -325,14 +368,20 @@ export const StatusFields = {
             {
                 Value: "Lav",
                 CssClass: "negative-status",
+                Color: "#ea5c73",
+                Icon: "CircleFill",
             },
             {
                 Value: "Medium",
                 CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
             },
             {
                 Value: "Høy",
                 CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
             },
         ],
     },

@@ -1,6 +1,17 @@
 import * as React from "react";
-import { TextField, DetailsList, SelectionMode, Spinner, SpinnerType, Button } from "office-ui-fabric-react";
-import { FilterSection, IFilter } from "./Filter";
+import {
+    TextField,
+    DetailsList,
+    SelectionMode,
+    Spinner,
+    SpinnerType,
+    Button,
+} from "office-ui-fabric-react";
+import {
+    FilterSection,
+    IFilter,
+    FieldFilter,
+} from "./Filter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
@@ -20,17 +31,11 @@ export interface IDynamicPortfolioState {
 }
 
 export default class DynamicPortfolio extends React.Component<any, IDynamicPortfolioState> {
-    private fieldFilter: IFilter = {
-        name: __("DynamicPortfolio_FieldSelector_Name"),
-        key: "Fields",
-        emptyMessage: __("DynamicPortfolio_FieldSelector_EmptyMessage"),
-        multi: true,
-        defaultHidden: true,
-        iconName: "ShowResults",
-        items: [],
-    };
     private searchProp: any = "Title";
 
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -41,6 +46,9 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         };
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount(): void {
         Configuration.getConfig().then(({ columnConfig, refinerConfig, viewConfig }) => {
             const fieldNames = columnConfig.map(f => f.fieldName);
@@ -49,16 +57,16 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 return;
             }
             Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                this.fieldFilter.items = columnConfig.map(col => ({
+                FieldFilter.items = columnConfig.map(col => ({
                     name: col.name,
                     value: col.fieldName,
                     defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
                     readOnly: col.readOnly,
                 }));
-                let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
+                let filters = [FieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
                 this.setState({
                     columns: columnConfig,
-                    selectedColumns: columnConfig.filter(fc => fc.default),
+                    selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
                     fieldNames: fieldNames,
                     isLoading: false,
                     items: primarySearchResults,
@@ -71,6 +79,9 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         });
     }
 
+    /**
+     * Renders the component
+     */
     public render(): JSX.Element {
         let { filteredItems, searchTerm, filters, isLoading, selectedColumns, viewConfig } = this.state;
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
@@ -86,11 +97,16 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 </div>
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
                     <TextField onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder={__("DynamicPortfolio_SearchBox_Placeholder")} style={{ padding: 25, color: "#777" }} />
-                    {viewConfig.map((qc, idx) => <Button key={idx} text={qc.name} icon={qc.iconName} onClick={e => {
-                        e.preventDefault();
-                        this.doSearch(qc);
-                    }}
-                    />)}
+                    {viewConfig.map((qc, idx) => (
+                        <Button
+                            key={idx}
+                            text={qc.name}
+                            icon={qc.iconName}
+                            onClick={e => {
+                                e.preventDefault();
+                                this.doSearch(qc);
+                            }}
+                        />))}
                     {
                         isLoading ?
                             <Spinner type={SpinnerType.large} />
@@ -217,7 +233,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         });
         const { fieldNames, refinerConfig } = this.state;
         Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-            let filters = [this.fieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
+            let filters = [FieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
             this.setState({
                 isLoading: false,
                 items: primarySearchResults,
