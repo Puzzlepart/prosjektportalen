@@ -5,10 +5,7 @@ import { default as ProjectInfo } from "../../ProjectInfo";
 const StatusSection = ({ project }) => {
     return (
         <div id="status-section">
-            <div className="ms-Grid-col ms-u-lg12 ms-u-xl5" style={{ padding: 25 }}>
-                <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" labelSize="xl" valueSize="l" />
-            </div>
-            <div className="ms-Grid-col ms-u-lg12 ms-u-xl7 status-elements-container">
+            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-project-data status-elements-container">
                 <div className="status-elements">
                     <StatusElement
                         name="Overordnet status"
@@ -17,6 +14,19 @@ const StatusSection = ({ project }) => {
                         statusValue=""
                         comment={project.GtOverallStatus}
                         fieldName="GtOverallStatus" />
+                </div>
+                <a className="status-element ms-Grid-row">
+                    <div className="status-icons ms-Grid-col ms-u-sm12 ms-u-md2 ms-u-lg2">
+                        <i className="ms-Icon ms-Icon--CustomList no-status"></i>
+                    </div>
+                    <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
+                        <h2>Prosjektegenskaper</h2><h1></h1>
+                        <ProjectInfo showEditLink={false} showMissingPropsWarning={false} filterField="GtPcProjectStatus" labelSize="m" valueSize="s" />
+                    </div>
+                </a>
+            </div>
+            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
+                <div className="status-elements">
                     <StatusElement
                         name="Fremdrift"
                         iconName="DateTime"
@@ -38,6 +48,10 @@ const StatusSection = ({ project }) => {
                         statusValue={project.GtStatusQuality}
                         comment={project.GtStatusQualityComment}
                         fieldName="GtStatusQuality" />
+                </div>
+            </div>
+            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
+                <div className="status-elements">
                     <StatusElement
                         name="Risiko"
                         iconName="Warning"

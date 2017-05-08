@@ -55,7 +55,7 @@ const StatusNavigation = () => {
                     {nodes.map(({ title, to, offset, iconName }, idx) => (
                         <Link
                             key={idx}
-                            className="nav-link ms-Grid-col"
+                            className="nav-link ms-Grid-col ms-u-md2"
                             activeClass="active"
                             to={to}
                             offset={offset}
@@ -66,7 +66,7 @@ const StatusNavigation = () => {
                                 <div className="ms-Grid-col ms-u-md4 ms-u-lg4">
                                     <Icon name={iconName} />
                                 </div>
-                                <p className="ms-u-hiddenXlDown ms-Grid-col ms-u-md8 ms-u-lg8">{title}</p>
+                                <p className="ms-u-hiddenLgDown ms-Grid-col ms-u-md8 ms-u-lg8">{title}</p>
                             </div>
                         </Link>
                     ))}
