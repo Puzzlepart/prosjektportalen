@@ -28,6 +28,7 @@ export interface IDynamicPortfolioState {
     viewConfig?: Configuration.IViewConfig[];
     refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
+    error?: string;
 }
 
 export default class DynamicPortfolio extends React.Component<any, IDynamicPortfolioState> {
@@ -43,6 +44,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             searchTerm: "",
             currentFilters: {},
             viewConfig: [],
+            filters: [],
         };
     }
 
@@ -76,6 +78,10 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     refinerConfig: refinerConfig,
                 });
             });
+        }).catch(_ => {
+            this.setState({
+                isLoading: false,
+            });
         });
     }
 
@@ -83,7 +89,14 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
      * Renders the component
      */
     public render(): JSX.Element {
-        let { filteredItems, searchTerm, filters, isLoading, selectedColumns, viewConfig } = this.state;
+        let {
+            filteredItems,
+            searchTerm,
+            filters,
+            isLoading,
+            selectedColumns,
+            viewConfig,
+        } = this.state;
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
