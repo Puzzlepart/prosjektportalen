@@ -189,7 +189,7 @@
             <pnp:DataValue FieldName="GtProjectPhase">Gjennomføre|99d7765a-c786-4792-a1a1-866ef0f982b9</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Levere ferdige prosjektprodukter til linjen</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Levere ferdige prosjektleveranser til linjen</pnp:DataValue>
             <pnp:DataValue FieldName="GtProjectPhase">Gjennomføre|99d7765a-c786-4792-a1a1-866ef0f982b9</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>

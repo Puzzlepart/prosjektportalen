@@ -3,7 +3,7 @@ import * as React from "react";
 export interface IModalLinkOptions {
     HideWebPartMaintenancePageLink?: boolean;
     HideContentTypeChoice?: boolean;
-    HideFormFields?: boolean;
+    HideFormFields?: string;
     HideAddNew?: boolean;
     HideViewSelector?: boolean;
     HideRibbon?: boolean;

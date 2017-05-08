@@ -1,12 +1,15 @@
 import * as  querystring from "querystring";
 import * as  jQuery from "jquery";
 
+/**
+ * Query Params
+ */
 export interface IQueryParams {
-    HideWebPartMaintenancePageLink: "1" | "0";
-    HideContentTypeChoice: "1" | "0";
-    HideFormFields: "1" | "0";
-    HideAddNew: "1" | "0";
-    HideViewSelector: "1" | "0";
+    HideWebPartMaintenancePageLink: string;
+    HideContentTypeChoice: string;
+    HideFormFields: string;
+    HideAddNew: string;
+    HideViewSelector: string;
 }
 
 /**
@@ -44,7 +47,7 @@ export const insertFormContainer = (id: string, refNodeId = "WebPartWPQ1"): HTML
  *
  * @param func Override function
  */
-export const overridePreSaveAction = (func) => {
+export const overridePreSaveAction = (func): void => {
     let f = "PreSaveAction";
     window[f] = func;
 };

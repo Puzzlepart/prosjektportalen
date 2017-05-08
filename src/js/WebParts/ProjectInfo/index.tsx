@@ -22,6 +22,9 @@ interface IProjectInfoProps {
  * Project information
  */
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -31,7 +34,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         };
     }
 
-    public componentDidMount() {
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
         this.fetchData().then(({ config, item, fields }) => {
             this.setState({ isLoading: false, properties: this.createProjectProperties(config, item, fields) });
         }).catch(_ => {
@@ -39,7 +45,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         });
     }
 
-    public render() {
+    /**
+     * Renders the component
+     */
+    public render(): JSX.Element {
         const { showEditLink } = this.props;
         const { isLoading, error, properties } = this.state;
         if (isLoading) {
@@ -51,16 +60,22 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             </div>);
         } else {
             return (<div className="pp-projectInfo">
-                <ModalLink
-                    hidden={showEditLink === false}
-                    url="../SitePages/Forms/EditForm.aspx?ID=3"
-                    label={__("ProjectInfo_EditProperties")}
-                    showLabel={false}
-                    id="pp-edit-properties-link-icon"
-                    icon="EditMirrored"
-                    options={{ HideContentTypeChoice: true, HideWebPartMaintenancePageLink: true, HideRibbon: true, HideFormFields: "GtProjectPhase" }}
-                    reloadOnSuccess={true} />
                 {this.__renderProperties(properties)}
+                <div style={{ marginTop: 20 }}>
+                    <ModalLink
+                        hidden={showEditLink === false}
+                        url="../SitePages/Forms/EditForm.aspx?ID=3"
+                        label={__("ProjectInfo_EditProperties")}
+                        icon="EditMirrored"
+                        options={{
+                            HideContentTypeChoice: true,
+                            HideWebPartMaintenancePageLink: true,
+                            HideRibbon: true,
+                            HideFormFields: "GtProjectPhase",
+                        }}
+                        reloadOnSuccess={true}
+                        showLabel={true} />
+                </div>
             </div>);
         }
     }
