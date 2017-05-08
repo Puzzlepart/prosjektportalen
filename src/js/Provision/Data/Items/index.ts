@@ -53,7 +53,7 @@ export const CopyItems = (conf: IListConfig, destUrl: string) => new Promise<voi
             Logger.log({ message: `Successfully copied ${items.get_count()} items from '${conf.SourceList}' to '${conf.DestinationList}'.`, data: conf, level: LogLevel.Info });
             resolve();
         }, (sender, args) => {
-            Logger.log({ message: `Failed to copy ${items.get_count()} items from '${conf.SourceList}' to '${conf.DestinationList}'.`, data: args, level: LogLevel.Warning });
+            Logger.log({ message: `Failed to copy ${items.get_count()} items from '${conf.SourceList}' to '${conf.DestinationList}'.`, data: { errorCode: args.get_errorCode(), message: args.get_message() }, level: LogLevel.Warning });
             resolve();
         });
     }, resolve);
