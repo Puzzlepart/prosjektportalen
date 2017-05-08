@@ -95,7 +95,6 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             filters,
             isLoading,
             selectedColumns,
-            viewConfig,
         } = this.state;
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) : [];
         return (<div className="ms-Grid">
@@ -110,16 +109,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 </div>
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
                     <TextField onChanged={text => this.setState({ searchTerm: text })} disabled={isLoading} placeholder={__("DynamicPortfolio_SearchBox_Placeholder")} style={{ padding: 25, color: "#777" }} />
-                    {viewConfig.map((qc, idx) => (
-                        <Button
-                            key={idx}
-                            text={qc.name}
-                            icon={qc.iconName}
-                            onClick={e => {
-                                e.preventDefault();
-                                this.doSearch(qc);
-                            }}
-                        />))}
+                    {this.renderViewSelector()}
                     {
                         isLoading ?
                             <Spinner type={SpinnerType.large} />
@@ -136,6 +126,24 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     }
                 </div>
             </div>
+        </div>);
+    }
+
+    /**
+     * Render view selector
+     */
+    private renderViewSelector(): JSX.Element {
+        const { viewConfig } = this.state;
+        return (<div>{viewConfig.map((qc, idx) => (
+            <Button
+                key={idx}
+                text={qc.name}
+                icon={qc.iconName}
+                onClick={e => {
+                    e.preventDefault();
+                    this.doSearch(qc);
+                }}
+            />))}
         </div>);
     }
 
