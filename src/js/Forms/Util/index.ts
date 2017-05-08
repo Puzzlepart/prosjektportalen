@@ -2,11 +2,11 @@ import * as  querystring from "querystring";
 import * as  jQuery from "jquery";
 
 export interface IQueryParams {
-    HideWebPartMaintenancePageLink: string;
-    HideContentTypeChoice: string;
-    HideFormFields: string;
-    HideAddNew: string;
-    HideViewSelector: string;
+    HideWebPartMaintenancePageLink: "1" | "0";
+    HideContentTypeChoice: "1" | "0";
+    HideFormFields: "1" | "0";
+    HideAddNew: "1" | "0";
+    HideViewSelector: "1" | "0";
 }
 
 /**

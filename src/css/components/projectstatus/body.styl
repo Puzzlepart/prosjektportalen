@@ -1,18 +1,33 @@
-body
-    margin 0 !important
-    padding 0 !important
-    overflow-y auto !important
-    overflow-x hidden !important
-    #s4-workspace
-        overflow-x hidden !important
-        height auto !important
-    @media (max-width 800px)
-        #sideNavBox
-            display none
-        #contentBox
-            margin-left 20px
-    #Dropdown1-list0
-        display none
-    .ms-Dialog.ms-Dialog--closenot(.ms-Dialog--lgHeader) .ms-Dialog-button.ms-Dialog-button--close
-        text-align right
-        
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    #s4-workspace {
+        overflow-x: hidden !important;
+        height: auto !important;
+    }
+
+    @media (max-width: 800px) {
+        #sideNavBox {
+            display: none;
+        }
+
+        #contentBox {
+            margin-left: 20px;
+        }
+    }
+
+    #Dropdown1-list0 {
+        display: none;
+    }
+
+    .ms-Dialog.ms-Dialog--closenot(.ms-Dialog--lgHeader) .ms-Dialog-button.ms-Dialog-button--close {
+        text-align: right;
+    }
+
+    .ms-dlgContent {
+        position: fixed !important;
+    }
+}

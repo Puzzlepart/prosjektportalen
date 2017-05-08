@@ -1,11 +1,19 @@
 import * as React from "react";
-import * as extend from "extend";
 
-export interface IProps {
+export interface IModalLinkOptions {
+    HideWebPartMaintenancePageLink?: boolean;
+    HideContentTypeChoice?: boolean;
+    HideFormFields?: boolean;
+    HideAddNew?: boolean;
+    HideViewSelector?: boolean;
+    HideRibbon?: boolean;
+}
+
+export interface IModalLinkProps {
     label?: string;
     showLabel?: boolean;
     url: string;
-    options?: any;
+    options?: IModalLinkOptions;
     reloadOnSuccess?: boolean;
     width?: string;
     height?: string;
@@ -13,10 +21,10 @@ export interface IProps {
     className?: string;
     id?: string;
     style?: Object;
-    hidden: boolean;
+    hidden?: boolean;
 }
 
-const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style = {}, hidden }: IProps) => {
+const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style = {}, hidden }: IModalLinkProps) => {
     const onClick = () => {
         let mOptions: any = {
             title: label,
@@ -55,7 +63,10 @@ const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = fa
         SP.UI.ModalDialog.showModalDialog(mOptions);
     };
 
-    let _style = extend(style, { cursor: "pointer" });
+    let _style = {
+        ...style,
+        cursor: "pointer",
+    };
 
     return (<a hidden={hidden} onClick={onClick} id={id} className={className} style={_style}>
         {(label && showLabel) && label}
