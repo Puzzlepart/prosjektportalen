@@ -1,4 +1,9 @@
-import { Logger, LogLevel, Web, FileAddResult } from "sp-pnp-js";
+import {
+    Logger,
+    LogLevel,
+    Web,
+    FileAddResult,
+} from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { IListConfig } from "../Config";
 
@@ -11,10 +16,10 @@ import { IListConfig } from "../Config";
  */
 export const CopyFiles = (conf: IListConfig, destUrl: string, timeout = 25000) => new Promise<FileAddResult[]>((resolve, reject) => {
     Logger.write(`Copying files from '${conf.SourceList}' to '${conf.DestinationLibrary}'.`, LogLevel.Info);
-    let srcWeb = new Web(conf.SourceUrl),
-        srcList = srcWeb.lists.getByTitle(conf.SourceList),
-        destWeb = new Web(destUrl),
-        destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
+    const srcWeb = new Web(conf.SourceUrl);
+    const srcList = srcWeb.lists.getByTitle(conf.SourceList);
+    const destWeb = new Web(destUrl);
+    const destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
     Promise.all([
         srcList
             .expand("RootFolder")
@@ -43,11 +48,11 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, timeout = 25000) =
             })));
             getFileContents.then(fileContents => {
                 let createFiles = Promise.all(fileContents.map(fc => new Promise<any>((_resolve) => {
-                    destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).files.add(fc.LinkFilename, fc.Blob, true).then(_resolve, _resolve);
+                    destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).files.add(fc.LinkFilename, fc.Blob, true).then(_resolve, reject);
                 })));
-                createFiles.then(resolve, resolve);
-            }, resolve);
-        }, resolve);
-    });
+                createFiles.then(resolve, reject);
+            }, reject);
+        }, reject);
+    }).catch(reject);
     window.setTimeout(reject, timeout);
 });
