@@ -1,6 +1,9 @@
 import * as  querystring from "querystring";
 import * as  jQuery from "jquery";
 
+/**
+ * Query Params
+ */
 export interface IQueryParams {
     HideWebPartMaintenancePageLink: string;
     HideContentTypeChoice: string;
@@ -44,7 +47,7 @@ export const insertFormContainer = (id: string, refNodeId = "WebPartWPQ1"): HTML
  *
  * @param func Override function
  */
-export const overridePreSaveAction = (func) => {
+export const overridePreSaveAction = (func): void => {
     let f = "PreSaveAction";
     window[f] = func;
 };
