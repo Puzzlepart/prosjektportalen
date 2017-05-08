@@ -20,6 +20,3 @@ For technical questions, contact [Tarjei Ormestøyl] or [Ole Martin Pettersen]. 
 
 ## Maintainers
 Tarjei Ormestøyl [tarjeieo@puzzlepart.com], Ole Martin Pettersen [olemp@puzzlepart.com]
-
-## License
-Copyright (c) 2017 Puzzlepart
