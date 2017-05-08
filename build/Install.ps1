@@ -101,7 +101,7 @@ try {
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
-        Write-Host "DONE"
+        Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
     Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
