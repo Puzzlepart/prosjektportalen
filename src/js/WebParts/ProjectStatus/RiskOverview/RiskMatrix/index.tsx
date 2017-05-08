@@ -9,6 +9,7 @@ const RiskElement = ({ item: { Id, Title } }) => {
 
 interface IRiskMatrixProps {
     items: any[];
+    postAction: boolean;
 }
 
 interface IRiskMatrixState {
@@ -22,23 +23,37 @@ interface IRiskMatrixState {
 export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixState> {
     public static defaultProps = {
         items: [],
+        postAction: false,
     };
 
-    constructor(props) {
-        super(props);
+    /**
+     * Constructor
+     */
+    constructor() {
+        super();
         this.state = {
             selectedRisk: null,
             showDialog: false,
         };
     }
 
+    /**
+     * Renders the component
+     */
     public render(): JSX.Element {
-        let { items } = this.props;
-        let riskMatrix = Config.RiskMatrix.map((rows, i: number) => {
+        let {
+            items,
+            postAction,
+        } = this.props;
+
+        const probabilityField = postAction ? "GtRiskProbabilityPostAction" : "GtRiskProbability";
+        const consequenceField = postAction ? "GtRiskConsequencePostAction" : "GtRiskConsequence";
+
+        const riskMatrix = Config.RiskMatrix.map((rows, i: number) => {
             let row = rows.map((cell, j: number) => {
                 const element = Config.RiskMatrix[i][j];
                 const riskElements = items.map((risk, k: number) => {
-                    if (element.Probability === risk.GtRiskProbability && element.Consequence === risk.GtRiskConsequence) {
+                    if (element.Probability === risk[probabilityField] && element.Consequence === risk[consequenceField]) {
                         return <RiskElement item={risk} key={k} />;
                     }
                     return null;

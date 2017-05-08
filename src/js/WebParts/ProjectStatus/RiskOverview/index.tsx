@@ -1,5 +1,6 @@
 import * as React from "react";
 import { sp } from "sp-pnp-js";
+import { Toggle } from "office-ui-fabric-react";
 import { default as RiskList } from "./RiskList";
 import { default as RiskMatrix } from "./RiskMatrix";
 
@@ -13,17 +14,25 @@ export interface IRiskOverviewState {
     items: any[];
     itemsAsHtml?: any[];
     columns: any[];
+    showPostAction: boolean;
 }
 
 export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverviewState> {
-    constructor(props) {
-        super(props);
+    /**
+     * Constructor
+     */
+    constructor() {
+        super();
         this.state = {
             items: null,
             columns: null,
+            showPostAction: false,
         };
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount(): void {
         const { viewName } = this.props;
         let list = sp.web.lists.getByTitle(__("Lists_Uncertainties_Title"));
@@ -52,11 +61,25 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
         });
     }
 
+    /**
+     * Renders the component
+     */
     public render(): JSX.Element {
-        let { items, itemsAsHtml, columns } = this.state;
+        let {
+            items,
+            itemsAsHtml,
+            columns,
+            showPostAction,
+        } = this.state;
         if (items && columns) {
             return (<div>
-                <RiskMatrix items={items} />
+                <RiskMatrix items={items} postAction={showPostAction} />
+                <Toggle
+                    label="Vis"
+                    onText="Etter tiltak"
+                    offText="Før tiltak"
+                    onChanged={checked => this.setState({ showPostAction: checked })}
+                    defaultChecked={false} />
                 <RiskList items={itemsAsHtml} columns={columns} />
             </div>);
         }
