@@ -316,6 +316,7 @@
             <CHOICE>Date</CHOICE>
             <CHOICE>Persona</CHOICE>
             <CHOICE>Note</CHOICE>
+            <CHOICE>Status</CHOICE>
         </CHOICES>
     </Field>
     <Field Type="Number" DisplayName="MinWidth" ID="{d1ce219a-1590-42b6-aefb-debf4e373378}" StaticName="GtDpMinWidth" Name="GtDpMinWidth" Group="{resource:SiteFields_Group}">
