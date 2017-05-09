@@ -33,12 +33,12 @@
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070203" Name="{resource:ContentTypes_Kommunikasjonselement_Name}" Description="{resource:ContentTypes_Kommunikasjonselement_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="27d85299-57fd-4c76-a752-edafe1ca944e" Name="GtActionDescription" />
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
+            <pnp:FieldRef ID="bf340fba-c512-4a07-a543-cdf2d10c578e" Name="GtActionStatus" />
+            <pnp:FieldRef ID="4d5e69a2-2eb5-422c-af04-70b67697cd23" Name="GtActionChannel" />
             <pnp:FieldRef ID="77450582-a061-4416-af17-6dfb99fa9036" Name="GtActionDate" />
             <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="GtActionResponsible" />
-            <pnp:FieldRef ID="4d5e69a2-2eb5-422c-af04-70b67697cd23" Name="GtActionChannel" />
-            <pnp:FieldRef ID="bf340fba-c512-4a07-a543-cdf2d10c578e" Name="GtActionStatus" />
-            <pnp:FieldRef ID="27d85299-57fd-4c76-a752-edafe1ca944e" Name="GtActionDescription" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070204" Name="{resource:ContentTypes_Sjekkpunkt_Name}" Description="{resource:ContentTypes_Sjekkpunkt_Description}" Group="{resource:ContentTypes_Group}">
