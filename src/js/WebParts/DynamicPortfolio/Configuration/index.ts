@@ -46,6 +46,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
             .get(),
         lists.getByTitle("DynamicPortfolioViews")
             .items
+            .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and AuthorId eq ${_spPageContextInfo.userId}))`)
             .expand("GtDpFieldsLookup", "GtDpRefinersLookup")
             .select("GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName")
             .orderBy("GtDpOrder")
