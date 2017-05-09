@@ -23,8 +23,7 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFilterPane
         <Panel
             isOpen={isOpen}
             onDismiss={onDismiss}
-            type={PanelType.smallFixedFar}
-            headerText="Filtrer resultatet">
+            type={PanelType.smallFixedFar}>
             <div className="ms-Grid" style={{ marginTop: 20 }}>
                 <div className="ms-Grid-row">
                     {filters

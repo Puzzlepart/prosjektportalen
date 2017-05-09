@@ -109,53 +109,52 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
-                    {
-                        isLoading ?
+                    <div>
+                        {currentViewConfig && <CommandBar
+                            items={[]}
+                            farItems={[{
+                                key: "View",
+                                name: currentViewConfig.name,
+                                iconProps: { iconName: "List" },
+                                itemType: ContextualMenuItemType.Header,
+                                onClick: e => e.preventDefault(),
+                                items: viewConfig.map((qc, idx) => ({
+                                    key: idx.toString(),
+                                    name: qc.name,
+                                    iconProps: { iconName: qc.iconName },
+                                    onClick: e => {
+                                        e.preventDefault();
+                                        this.doSearch(qc);
+                                    },
+                                })),
+                            },
+                            {
+                                key: "Filters",
+                                name: "",
+                                iconProps: { iconName: "Filter" },
+                                itemType: ContextualMenuItemType.Normal,
+                                onClick: e => {
+                                    e.preventDefault();
+                                    this.setState({ showFilterPanel: true });
+                                },
+                            }]}
+                        />}
+                        <div style={{ height: 10 }}></div>
+                        <SearchBox
+                            onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
+                            labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
+                        {isLoading ?
                             <Spinner type={SpinnerType.large} />
                             :
-                            <div>
-                                <CommandBar
-                                    items={[]}
-                                    farItems={[{
-                                        key: "View",
-                                        name: currentViewConfig.name,
-                                        iconProps: { iconName: "List" },
-                                        itemType: ContextualMenuItemType.Header,
-                                        onClick: e => e.preventDefault(),
-                                        items: viewConfig.map((qc, idx) => ({
-                                            key: idx.toString(),
-                                            name: qc.name,
-                                            iconProps: { iconName: qc.iconName },
-                                            onClick: e => {
-                                                e.preventDefault();
-                                                this.doSearch(qc);
-                                            },
-                                        })),
-                                    },
-                                    {
-                                        key: "Filters",
-                                        name: "",
-                                        iconProps: { iconName: "Filter" },
-                                        itemType: ContextualMenuItemType.Normal,
-                                        onClick: e => {
-                                            e.preventDefault();
-                                            this.setState({ showFilterPanel: true });
-                                        },
-                                    }]}
-                                />
-                                <div style={{ height: 10 }}></div>
-                                <SearchBox
-                                    onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                                <DetailsList
-                                    items={items}
-                                    columns={selectedColumns}
-                                    selectionMode={SelectionMode.none}
-                                    onRenderItemColumn={_onRenderItemColumn}
-                                    onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
-                                />
-                            </div>
-                    }
+                            <DetailsList
+                                items={items}
+                                columns={selectedColumns}
+                                selectionMode={SelectionMode.none}
+                                onRenderItemColumn={_onRenderItemColumn}
+                                onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
+                            />
+                        }
+                    </div>
                 </div>
             </div>
             <FilterPanel
