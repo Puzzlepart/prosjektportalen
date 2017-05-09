@@ -99,6 +99,9 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      */
     private onClick = () => {
         const { toggleElement } = this.props;
+        if (!toggleElement) {
+            return;
+        }
         const { isCollapsed } = this.state;
         jQuery(toggleElement.selector).slideToggle(toggleElement.slideDelay, () => {
             let newState = { isCollapsed: !isCollapsed };
