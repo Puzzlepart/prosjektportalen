@@ -32,7 +32,7 @@ export interface IFilterState {
 /**
  * Filter
  */
-export class Filter extends React.Component<IFilterProps, IFilterState> {
+export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
     private inputs: { [key: string]: HTMLInputElement } = {};
 
     /**
