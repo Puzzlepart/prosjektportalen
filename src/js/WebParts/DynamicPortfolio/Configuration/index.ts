@@ -10,6 +10,7 @@ export interface IColumnConfig {
     minWidth?: number;
     maxWidth?: number;
     isResizable?: boolean;
+    groupBy?: boolean;
 }
 
 export interface IRefinerConfig {
@@ -63,6 +64,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 minWidth: col.GtDpMinWidth,
                 maxWidth: col.GtDpMaxWidth,
                 isResizable: col.GtDpIsResizable,
+                groupBy: col.GtDpGroupBy,
             })),
             refinerConfig: refiners.map(ref => ({
                 name: ref.GtDpDisplayName,

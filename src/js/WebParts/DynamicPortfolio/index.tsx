@@ -1,5 +1,7 @@
 import * as React from "react";
+import * as unique from "array-unique";
 import {
+    IGroup,
     DetailsList,
     SelectionMode,
     Spinner,
@@ -17,6 +19,7 @@ import { _onRenderItemColumn } from "./ItemColumn";
 
 export interface IDynamicPortfolioProps {
     searchProperty?: string;
+    showGroupBy?: boolean;
 }
 
 export interface IDynamicPortfolioState {
@@ -34,14 +37,16 @@ export interface IDynamicPortfolioState {
     currentFilters?: { [key: string]: string[] };
     error?: string;
     showFilterPanel: boolean;
+    groupBy?: Configuration.IColumnConfig;
 }
 
 /**
  * Dynamic Portfolio
  */
 export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
-    public static defaultProps = {
+    public static defaultProps: IDynamicPortfolioProps = {
         searchProperty: "Title",
+        showGroupBy: false,
     };
 
     /**
@@ -102,15 +107,17 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     public render(): JSX.Element {
         const {
-            filteredItems,
-            searchTerm,
             filters,
             showFilterPanel,
             isLoading,
-            selectedColumns,
         } = this.state;
 
-        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
+        const {
+            items,
+            columns,
+            groups,
+        } = this.getFilteredData();
+
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
@@ -125,7 +132,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                             :
                             <DetailsList
                                 items={items}
-                                columns={selectedColumns}
+                                columns={columns}
+                                groups={groups}
                                 selectionMode={SelectionMode.none}
                                 onRenderItemColumn={_onRenderItemColumn}
                                 onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
@@ -149,41 +157,108 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         const {
             viewConfig,
             currentView,
+            selectedColumns,
          } = this.state;
 
         if (!currentView) {
             return null;
         }
 
-        return <CommandBar
-            items={[]}
-            farItems={[{
-                key: "View",
-                name: currentView.name,
-                iconProps: { iconName: "List" },
+        const items = [];
+        const farItems = [];
+
+        if (this.props.showGroupBy) {
+            items.push({
+                key: "Group",
+                name: "",
+                iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: viewConfig.map((qc, idx) => ({
-                    key: idx.toString(),
-                    name: qc.name,
-                    iconProps: { iconName: qc.iconName },
-                    onClick: e => {
-                        e.preventDefault();
-                        this._doSearch(qc);
+                items: [
+                    {
+                        key: "NoGrouping",
+                        name: "Ingen gruppering",
+                        onClick: e => {
+                            e.preventDefault();
+                            this.setState({ groupBy: null });
+                        },
                     },
-                })),
-            },
-            {
-                key: "Filters",
-                name: "",
-                iconProps: { iconName: "Filter" },
-                itemType: ContextualMenuItemType.Normal,
+                    ...selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
+                        key: idx.toString(),
+                        name: col.name,
+                        onClick: e => {
+                            e.preventDefault();
+                            this.setState({ groupBy: col });
+                        },
+                    })),
+                ],
+            });
+        }
+
+        farItems.push({
+            key: "View",
+            name: currentView.name,
+            iconProps: { iconName: "List" },
+            itemType: ContextualMenuItemType.Header,
+            onClick: e => e.preventDefault(),
+            items: viewConfig.map((qc, idx) => ({
+                key: idx.toString(),
+                name: qc.name,
+                iconProps: { iconName: qc.iconName },
                 onClick: e => {
                     e.preventDefault();
-                    this.setState({ showFilterPanel: true });
+                    this._doSearch(qc);
                 },
-            }]}
+            })),
+        });
+        farItems.push({
+            key: "Filters",
+            name: "",
+            iconProps: { iconName: "Filter" },
+            itemType: ContextualMenuItemType.Normal,
+            onClick: e => {
+                e.preventDefault();
+                this.setState({ showFilterPanel: true });
+            },
+        });
+
+        return <CommandBar
+            items={items}
+            farItems={farItems}
         />;
+    }
+
+    /**
+    * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
+    */
+    private getFilteredData = () => {
+        let {
+            selectedColumns,
+            items,
+            groupBy,
+            searchTerm,
+        } = this.state;
+
+        let groups: IGroup[] = null;
+        if (groupBy) {
+            const groupItems = items.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
+            const groupNames = groupItems.map(g => g[groupBy.fieldName]);
+            groups = unique([].concat(groupNames)).map((name, idx) => ({
+                key: idx,
+                name: name,
+                startIndex: groupNames.indexOf(name, 0),
+                count: [].concat(groupNames).filter(n => n === name).length,
+                isCollapsed: false,
+                isShowingAll: true,
+                isDropEnabled: false,
+            }));
+        }
+        const filteredItems = items ? items.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
+        return {
+            items: filteredItems,
+            columns: selectedColumns,
+            groups: groups,
+        };
     }
 
     /**
