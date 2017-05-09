@@ -294,6 +294,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             columns,
             items,
             currentFilters,
+            filters,
         } = this.state;
 
         if (filter.key === "Fields") {
@@ -329,6 +330,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             this.setState({
                 currentFilters: currentFilters,
                 filteredItems: temp,
+                filters: filters.map(f => (f.key === filter.key) ? filter : f),
             });
         }
     }

@@ -10,7 +10,7 @@ import {
 
 export interface IFilterPanelProps {
     filters: IFilter[];
-    onFilterChange: Function;
+    onFilterChange: (filter: IFilter) => void;
     onDismiss: () => void;
     isOpen: boolean;
 }

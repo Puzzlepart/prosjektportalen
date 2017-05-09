@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Util } from "sp-pnp-js";
 import { Checkbox } from "office-ui-fabric-react";
 import { Icon } from "../../@Components";
 
@@ -22,7 +23,7 @@ export interface IFilter {
 
 export interface IFilterProps {
     filter: IFilter;
-    onFilterChange: Function;
+    onFilterChange: (filter: IFilter) => void;
 }
 
 export interface IFilterState {
@@ -96,12 +97,14 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
         let { filter } = this.props;
         return filter.items.map((item, idx) => (
             <li key={idx} value={item.value}>
-                {filter.multi && <Checkbox
-                    label={item.name}
-                    disabled={item.readOnly}
-                    defaultChecked={item.defaultSelected}
-                    onChange={e => this.onChange(item)}
-                    ref={ele => this.inputs[item.value] = ele} />}
+                {filter.multi && (
+                    <Checkbox
+                        label={item.name}
+                        disabled={item.readOnly}
+                        defaultChecked={item.defaultSelected || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.name))}
+                        onChange={e => this.onChange(item)}
+                        ref={ele => this.inputs[item.value] = ele} />
+                )}
             </li>));
     }
 
