@@ -81,6 +81,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
                     className="ms-webpart-titleText">
                     <span>{this.props.title}</span>
                     <Icon
+                        hidden={!this.props.toggleElement}
                         iconName={isCollapsed ? "ChevronDown" : "ChevronUp"}
                         style={{
                             fontSize: 14,
