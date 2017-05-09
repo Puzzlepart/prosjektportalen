@@ -10,7 +10,10 @@ export default new class StampVersion {
      */
     public stamp(container: string, versionKey: string, additionalClassNames = []): void {
         this.getVersion(versionKey).then(v => {
-            document.getElementById(container).innerHTML = String.format(this.template, v, additionalClassNames.join(" "));
+            const _container = document.getElementById(container);
+            if (_container) {
+                _container.innerHTML = String.format(this.template, v, additionalClassNames.join(" "));
+            }
         }, _ => null);
     };
 

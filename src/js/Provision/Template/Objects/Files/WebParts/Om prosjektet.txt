@@ -9,7 +9,7 @@
             <properties>
                 <property name="Title" type="string">Om prosjektet</property>
                 <property name="Description" type="string" null="true" />
-                <property name="ChromeType" type="chrometype">Default</property>
+                <property name="ChromeType" type="chrometype">None</property>
                 <property name="ChromeState" type="chromestate">Normal</property>
                 <property name="Content" type="string">&lt;div id="pp-projectinfo"&gt;&lt;/div&gt;</property>
             </properties>
