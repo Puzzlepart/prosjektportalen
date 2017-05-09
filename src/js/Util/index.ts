@@ -216,6 +216,20 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
     });
 };
 
+/**
+ * Generate storage key with or without web prefix (_spPageContextInfo.webServerRelativeUrl)
+ *
+ * @param parts Parts to include in the key
+ * @param addWebPrefix Should web prefix be added
+ */
+export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
+    const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
+    if (addWebPrefix) {
+        parts.unshift(webPrefix);
+    }
+    return parts.join("_");
+};
+
 import { default as WaitDialog } from "./WaitDialog";
 import { default as StampVersion } from "./StampVersion";
 

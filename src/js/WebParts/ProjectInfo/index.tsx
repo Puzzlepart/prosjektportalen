@@ -1,8 +1,15 @@
 import * as React from "react";
 import { Site, sp } from "sp-pnp-js";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { ModalLink, ModalLinkIconPosition } from "../@Components/ModalLink";
-import { Icon } from "../@Components";
+import {
+    Spinner,
+    SpinnerType,
+    Icon,
+} from "office-ui-fabric-react";
+import {
+    ModalLink,
+    ModalLinkIconPosition,
+} from "../@Components/ModalLink";
+import ChromeTitle from "../@Components/ChromeTitle";
 import { IProjectProp, ProjectProp } from "./ProjectProp";
 
 interface IProjectInfoState {
@@ -51,31 +58,49 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      */
     public render(): JSX.Element {
         const { showEditLink } = this.props;
-        const { isLoading, error, properties } = this.state;
+        const {
+            isLoading,
+            error,
+            properties,
+         } = this.state;
+
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />);
         }
         if (error) {
             return (<div className="ms-metadata">
-                <Icon name="Error" color="#000" />  {__("WebPart_FailedMessage")}
+                <Icon iconName="Error" style={{ color: "#000000" }} />  {__("WebPart_FailedMessage")}
             </div>);
         } else {
             return (<div className="pp-projectInfo">
-                {this.__renderProperties(properties)}
-                <div style={{ marginTop: 20 }}>
-                    <ModalLink
-                        hidden={showEditLink === false}
-                        url="../SitePages/Forms/EditForm.aspx?ID=3"
-                        label={__("ProjectInfo_EditProperties")}
-                        icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left  }}
-                        options={{
-                            HideContentTypeChoice: true,
-                            HideWebPartMaintenancePageLink: true,
-                            HideRibbon: true,
-                            HideFormFields: "GtProjectPhase",
-                        }}
-                        reloadOnSuccess={true}
-                        showLabel={true} />
+                <ChromeTitle
+                    title="Om prosjektet"
+                    toggleElement={{
+                        selector: ".pp-projectInfoInner",
+                        slideDelay: 100,
+                        storage: {
+                            key: "ProjectInfo",
+                            type: "localStorage",
+                        },
+                    }} />
+                <div
+                    className="pp-projectInfoInner">
+                    {this.__renderProperties(properties)}
+                    <div style={{ marginTop: 20 }}>
+                        <ModalLink
+                            hidden={showEditLink === false}
+                            url="../SitePages/Forms/EditForm.aspx?ID=3"
+                            label={__("ProjectInfo_EditProperties")}
+                            icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left }}
+                            options={{
+                                HideContentTypeChoice: true,
+                                HideWebPartMaintenancePageLink: true,
+                                HideRibbon: true,
+                                HideFormFields: "GtProjectPhase",
+                            }}
+                            reloadOnSuccess={true}
+                            showLabel={true} />
+                    </div>
                 </div>
             </div>);
         }

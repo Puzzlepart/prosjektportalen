@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as jQuery from "jquery";
 import { Icon } from "office-ui-fabric-react";
+import * as Util from "../../../Util";
 
 export interface IToggleElementStorage {
     key: string;
@@ -23,6 +24,8 @@ export interface IChromeTitleState {
 }
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+    private toggleStorageKey: string = "";
+
     /**
      * Constructor
      */
@@ -37,6 +40,11 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Component did mount
      */
     public componentDidMount(): void {
+        const { toggleElement: { storage } } = this.props;
+        if (storage) {
+            this.toggleStorageKey = Util.generateStorageKey([storage.key, "CollapsedState"]);
+        }
+
         let newState = {
             isCollapsed: this.getCollapsedState(),
         };
@@ -95,7 +103,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
             let newState = { isCollapsed: !isCollapsed };
             this.setState(newState);
             if (toggleElement.storage) {
-                window[toggleElement.storage.type].setItem(toggleElement.storage.key, JSON.stringify(newState.isCollapsed));
+                window[toggleElement.storage.type].setItem(this.toggleStorageKey, JSON.stringify(newState.isCollapsed));
             }
         });
     }
@@ -105,7 +113,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      */
     private getCollapsedState(): boolean {
         const { toggleElement: { storage } } = this.props;
-        const value = window[storage.type].getItem(storage.key);
+        const value = window[storage.type].getItem(this.toggleStorageKey);
         if (value) {
             return JSON.parse(value);
         } else {
