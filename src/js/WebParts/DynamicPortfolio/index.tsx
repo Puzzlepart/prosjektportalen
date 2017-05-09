@@ -99,8 +99,6 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             searchTerm,
             filters,
             showFilterPanel,
-            currentViewConfig,
-            viewConfig,
             isLoading,
             selectedColumns,
         } = this.state;
@@ -110,35 +108,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
                     <div>
-                        {currentViewConfig && <CommandBar
-                            items={[]}
-                            farItems={[{
-                                key: "View",
-                                name: currentViewConfig.name,
-                                iconProps: { iconName: "List" },
-                                itemType: ContextualMenuItemType.Header,
-                                onClick: e => e.preventDefault(),
-                                items: viewConfig.map((qc, idx) => ({
-                                    key: idx.toString(),
-                                    name: qc.name,
-                                    iconProps: { iconName: qc.iconName },
-                                    onClick: e => {
-                                        e.preventDefault();
-                                        this.doSearch(qc);
-                                    },
-                                })),
-                            },
-                            {
-                                key: "Filters",
-                                name: "",
-                                iconProps: { iconName: "Filter" },
-                                itemType: ContextualMenuItemType.Normal,
-                                onClick: e => {
-                                    e.preventDefault();
-                                    this.setState({ showFilterPanel: true });
-                                },
-                            }]}
-                        />}
+                        {this.renderCommandBar()}
                         <div style={{ height: 10 }}></div>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
@@ -163,6 +133,50 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 filters={filters}
                 onFilterChange={this._onFilterChange} />
         </div>);
+    }
+
+    /**
+     * Renders the command bar from office-ui-fabric-react
+     */
+    private renderCommandBar = () => {
+        const {
+            viewConfig,
+            currentViewConfig,
+         } = this.state;
+
+        if (!currentViewConfig) {
+            return null;
+        }
+
+        return <CommandBar
+            items={[]}
+            farItems={[{
+                key: "View",
+                name: currentViewConfig.name,
+                iconProps: { iconName: "List" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                items: viewConfig.map((qc, idx) => ({
+                    key: idx.toString(),
+                    name: qc.name,
+                    iconProps: { iconName: qc.iconName },
+                    onClick: e => {
+                        e.preventDefault();
+                        this.doSearch(qc);
+                    },
+                })),
+            },
+            {
+                key: "Filters",
+                name: "",
+                iconProps: { iconName: "Filter" },
+                itemType: ContextualMenuItemType.Normal,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ showFilterPanel: true });
+                },
+            }]}
+        />;
     }
 
     /**
