@@ -23,6 +23,7 @@ export interface IRefinerConfig {
 }
 
 export interface IViewConfig {
+    id: number;
     name: string;
     queryTemplate: string;
     iconName: any;
@@ -49,7 +50,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
             .items
             .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and AuthorId eq ${_spPageContextInfo.userId}))`)
             .expand("GtDpFieldsLookup", "GtDpRefinersLookup")
-            .select("GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName")
+            .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName")
             .orderBy("GtDpOrder")
             .get(),
     ]).then(([fields, refiners, views]) => {
@@ -74,7 +75,8 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 defaultHidden: ref.GtDpDefaultHidden,
                 iconName: ref.GtDpIcon,
             })),
-            viewConfig: views.map(({ GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup }) => ({
+            viewConfig: views.map(({ ID, GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup }) => ({
+                id: ID,
                 name: GtDpDisplayName,
                 queryTemplate: GtDpSearchQuery,
                 iconName: GtDpIcon,

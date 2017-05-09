@@ -233,7 +233,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
     */
     private getFilteredData = () => {
-        let {
+        const {
             selectedColumns,
             filteredItems,
             groupBy,
@@ -254,9 +254,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        filteredItems = filteredItems ? filteredItems.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
-            items: filteredItems,
+            items: items,
             columns: selectedColumns,
             groups: groups,
         };
@@ -343,7 +343,10 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param column The column config
      */
     private _onColumnClick = (event, column): void => {
-        let { filteredItems, selectedColumns } = this.state;
+        let {
+            filteredItems,
+            selectedColumns,
+         } = this.state;
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
@@ -368,21 +371,30 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Does a new search using Search.query
      *
-     * @param viewConfig Query configuration
+     * @param viewConfig View configuration
      */
     private _doSearch(viewConfig: Configuration.IViewConfig): void {
+        const {
+            fieldNames,
+            refinerConfig,
+            currentView,
+         } = this.state;
+
+        if (currentView.id === viewConfig.id) {
+            return;
+        }
         this.setState({
             isLoading: true,
-        });
-        const { fieldNames, refinerConfig } = this.state;
-        Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
-            this.setState({
-                isLoading: false,
-                items: primarySearchResults,
-                filteredItems: primarySearchResults,
-                filters: filters,
-                currentView: viewConfig,
+        }, () => {
+            Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
+                let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
+                this.setState({
+                    isLoading: false,
+                    items: primarySearchResults,
+                    filteredItems: primarySearchResults,
+                    filters: filters,
+                    currentView: viewConfig,
+                });
             });
         });
     }
