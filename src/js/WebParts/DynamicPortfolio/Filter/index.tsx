@@ -22,8 +22,9 @@ export interface IFilter {
 }
 
 export interface IFilterProps {
-    filter: IFilter;
-    onFilterChange: (filter: IFilter) => void;
+    filter?: IFilter;
+    onFilterChange?: (filter: IFilter) => void;
+    showIcon?: boolean;
 }
 
 export interface IFilterState {
@@ -34,6 +35,9 @@ export interface IFilterState {
  * Filter
  */
 export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
+    public static defaultProps: IFilterProps = {
+        showIcon: true,
+    };
     private inputs: { [key: string]: HTMLInputElement } = {};
 
     /**
@@ -60,7 +64,10 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
      * Renders the component
      */
     public render(): JSX.Element {
-        let { filter } = this.props;
+        let {
+            filter,
+            showIcon,
+         } = this.props;
         let { isCollapsed } = this.state;
         return (<div style={{ marginBottom: 20 }}>
             <h2
@@ -69,9 +76,11 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
                     cursor: "pointer",
                     position: "relative",
                 }}>
-                <Icon
-                    name={filter.iconName}
-                    style={{ marginRight: 5 }} />
+                {showIcon && (
+                    <Icon
+                        name={filter.iconName}
+                        style={{ marginRight: 5 }} />
+                )}
                 {filter.name}
                 <Icon
                     name={isCollapsed ? "ChevronDown" : "ChevronUp"}

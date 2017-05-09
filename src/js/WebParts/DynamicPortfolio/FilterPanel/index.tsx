@@ -13,12 +13,13 @@ export interface IFilterPanelProps {
     onFilterChange: (filter: IFilter) => void;
     onDismiss: () => void;
     isOpen: boolean;
+    showIcons?: boolean;
 }
 
 /**
  * Filter Panel
  */
-const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFilterPanelProps) => {
+const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: IFilterPanelProps) => {
     return (
         <Panel
             isOpen={isOpen}
@@ -28,10 +29,13 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFilterPane
                 <div className="ms-Grid-row">
                     {filters
                         .filter(filter => filter.items.length > 1)
-                        .map((filter, idx) => (<Filter
-                            key={idx}
-                            filter={filter}
-                            onFilterChange={onFilterChange} />))}
+                        .map((filter, idx) => (
+                            <Filter
+                                key={idx}
+                                filter={filter}
+                                showIcon={showIcons}
+                                onFilterChange={onFilterChange} />
+                        ))}
                 </div>
             </div>
         </Panel>);
