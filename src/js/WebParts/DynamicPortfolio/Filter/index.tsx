@@ -70,27 +70,20 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
          } = this.props;
         let { isCollapsed } = this.state;
         return (<div style={{ marginBottom: 20 }}>
-            <h2
+            <div
                 onClick={e => this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }))}
                 style={{
                     cursor: "pointer",
                     position: "relative",
-                }}>
+                }}
+                className="ms-font-m">
                 {showIcon && (
                     <Icon
                         name={filter.iconName}
                         style={{ marginRight: 5 }} />
                 )}
                 {filter.name}
-                <Icon
-                    name={isCollapsed ? "ChevronDown" : "ChevronUp"}
-                    style={{
-                        fontSize: 14,
-                        position: "absolute",
-                        right: 5,
-                        top: 10,
-                    }} />
-            </h2>
+            </div>
             <div hidden={isCollapsed}>
                 <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
                     {this.renderItems()}
@@ -105,15 +98,15 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
     private renderItems = () => {
         let { filter } = this.props;
         return filter.items.map((item, idx) => (
-            <li key={idx} value={item.value}>
-                {filter.multi && (
+            <li key={idx}>
+                <div className="ms-font-m">
                     <Checkbox
                         label={item.name}
                         disabled={item.readOnly}
                         defaultChecked={item.defaultSelected || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.name))}
                         onChange={e => this.onChange(item)}
                         ref={ele => this.inputs[item.value] = ele} />
-                )}
+                </div>
             </li>));
     }
 

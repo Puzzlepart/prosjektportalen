@@ -146,7 +146,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isOpen={showFilterPanel}
                 onDismiss={() => this.setState({ showFilterPanel: false })}
                 filters={filters}
-                showIcons={true}
+                showIcons={false}
                 onFilterChange={this._onFilterChange} />
         </div>);
     }
