@@ -234,14 +234,14 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     private getFilteredData = () => {
         let {
             selectedColumns,
-            items,
+            filteredItems,
             groupBy,
             searchTerm,
         } = this.state;
 
         let groups: IGroup[] = null;
         if (groupBy) {
-            const groupItems = items.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
+            const groupItems = filteredItems.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
             const groupNames = groupItems.map(g => g[groupBy.fieldName]);
             groups = unique([].concat(groupNames)).map((name, idx) => ({
                 key: idx,
@@ -253,7 +253,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        const filteredItems = items ? items.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
+        filteredItems = filteredItems ? filteredItems.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
             items: filteredItems,
             columns: selectedColumns,
@@ -290,7 +290,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param filter The filter that was changed
      */
     private _onFilterChange = (filter: IFilter): void => {
-        let { columns, items, currentFilters } = this.state;
+        let {
+            columns,
+            items,
+            currentFilters,
+        } = this.state;
+
         if (filter.key === "Fields") {
             this.setState({
                 fieldNames: filter.selected,
