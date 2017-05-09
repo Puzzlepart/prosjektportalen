@@ -26,16 +26,27 @@ export interface IChromeTitleState {
 }
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+    /**
+     * Chrome header style
+     */
     private h2Style: React.CSSProperties = {
         textAlign: "justify",
         position: "relative",
     };
+
+    /**
+     * Icon style
+     */
     private iconStyle: React.CSSProperties = {
         fontSize: 14,
         position: "absolute",
         right: 5,
         top: 10,
     };
+
+    /**
+     * Toggle storage key
+     */
     private toggleStorageKey: string = "";
 
     /**
@@ -112,7 +123,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
     }
 
     /**
-     * Get collapsed state from storage
+     * Get collapsed state from storage (localStorage or sessionStorage)
      */
     private getCollapsedState(): boolean {
         const { toggleElement } = this.props;
