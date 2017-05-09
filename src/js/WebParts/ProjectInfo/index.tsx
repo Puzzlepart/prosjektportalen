@@ -77,7 +77,8 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                     title="Om prosjektet"
                     toggleElement={{
                         selector: ".pp-projectInfoInner",
-                        slideDelay: 100,
+                        animationDelay: 100,
+                        animation: "slideToggle",
                         storage: {
                             key: "ProjectInfo",
                             type: "localStorage",

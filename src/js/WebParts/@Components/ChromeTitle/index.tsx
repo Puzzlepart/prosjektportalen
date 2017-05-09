@@ -10,7 +10,8 @@ export interface IToggleElementStorage {
 
 export interface IToggleElement {
     selector: string;
-    slideDelay: number;
+    animationDelay: number;
+    animation: "fadeToggle" | "slideToggle";
     storage?: IToggleElementStorage;
 }
 
@@ -100,7 +101,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
             return;
         }
         const { isCollapsed } = this.state;
-        jQuery(toggleElement.selector).slideToggle(toggleElement.slideDelay, () => {
+        jQuery(toggleElement.selector)[toggleElement.animation](toggleElement.animationDelay, () => {
             let newState = { isCollapsed: !isCollapsed };
             this.setState(newState);
             if (toggleElement.storage) {
