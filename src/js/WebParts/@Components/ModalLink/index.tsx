@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Icon } from "office-ui-fabric-react";
 
 export interface IModalLinkOptions {
     HideWebPartMaintenancePageLink?: boolean;
@@ -9,6 +10,16 @@ export interface IModalLinkOptions {
     HideRibbon?: boolean;
 }
 
+export enum ModalLinkIconPosition {
+    Left,
+    Right,
+}
+
+export interface IModalLinkIconProps {
+    iconName: any;
+    position: ModalLinkIconPosition;
+}
+
 export interface IModalLinkProps {
     label?: string;
     showLabel?: boolean;
@@ -17,14 +28,14 @@ export interface IModalLinkProps {
     reloadOnSuccess?: boolean;
     width?: string;
     height?: string;
-    icon?: string;
+    icon?: IModalLinkIconProps;
     className?: string;
     id?: string;
     style?: Object;
     hidden?: boolean;
 }
 
-const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style = {}, hidden }: IModalLinkProps) => {
+export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style = {}, hidden }: IModalLinkProps) => {
     const onClick = () => {
         let mOptions: any = {
             title: label,
@@ -68,9 +79,12 @@ const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = fa
         cursor: "pointer",
     };
 
+    console.log(icon);
+
     return (<a hidden={hidden} onClick={onClick} id={id} className={className} style={_style}>
+        {icon && icon.position === ModalLinkIconPosition.Left && <Icon iconName={icon.iconName} style={{ marginRight: 5 }} />}
         {(label && showLabel) && label}
-        {icon && <span className={`ms-Icon ms-Icon--${icon}`}></span>}
+        {icon && icon.position === ModalLinkIconPosition.Right && <Icon iconName={icon.iconName} style={{ marginLeft: 5 }} />}
     </a>);
 };
 

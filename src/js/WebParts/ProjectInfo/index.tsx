@@ -1,7 +1,8 @@
 import * as React from "react";
 import { Site, sp } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { ModalLink, Icon } from "../@Components";
+import { ModalLink, ModalLinkIconPosition } from "../@Components/ModalLink";
+import { Icon } from "../@Components";
 import { IProjectProp, ProjectProp } from "./ProjectProp";
 
 interface IProjectInfoState {
@@ -66,7 +67,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                         hidden={showEditLink === false}
                         url="../SitePages/Forms/EditForm.aspx?ID=3"
                         label={__("ProjectInfo_EditProperties")}
-                        icon="EditMirrored"
+                        icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left  }}
                         options={{
                             HideContentTypeChoice: true,
                             HideWebPartMaintenancePageLink: true,
