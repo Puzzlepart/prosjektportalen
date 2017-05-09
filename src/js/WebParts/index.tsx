@@ -1,14 +1,14 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { default as ProjectInfo } from "./ProjectInfo";
-import { default as ProjectPhases } from "./ProjectPhases";
-import { default as NewProjectLink } from "./NewProjectLink";
-import { default as Announcements } from "./Announcements";
-import { default as LatestProjects } from "./LatestProjects";
-import { default as QuickLinks } from "./QuickLinks";
-import { default as DynamicPortfolio } from "./DynamicPortfolio";
-import { default as GainsOverview } from "./GainsOverview";
-import { default as ProjectStatus } from "./ProjectStatus";
+import ProjectInfo from "./ProjectInfo";
+import ProjectPhases from "./ProjectPhases";
+import NewProjectLink from "./NewProjectLink";
+import Announcements from "./Announcements";
+import LatestProjects from "./LatestProjects";
+import QuickLinks from "./QuickLinks";
+import DynamicPortfolio from "./DynamicPortfolio";
+import GainsOverview from "./GainsOverview";
+import ProjectStatus from "./ProjectStatus";
 import { DataSource } from "./DataSource";
 
 /**
@@ -27,7 +27,10 @@ const wp_map: { [id: string]: JSX.Element } = {
     "pp-projectstatus": <ProjectStatus />,
 };
 
-const Render = () => {
+/**
+ * Render the webparts
+ */
+export const Render = () => {
     Object.keys(wp_map).forEach(id => {
         let container = document.getElementById(id);
         if (container) {
@@ -36,4 +39,3 @@ const Render = () => {
     });
 };
 
-export { Render };

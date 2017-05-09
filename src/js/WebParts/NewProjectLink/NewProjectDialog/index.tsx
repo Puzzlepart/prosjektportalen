@@ -1,7 +1,15 @@
 import * as React from "react";
 import { ProvisionWeb } from "Provision";
-import * as ListDataConfig from "../../Provision/Data/Config";
-import { Dialog, DialogType, DialogFooter, Button, ButtonType, TextField, Toggle } from "office-ui-fabric-react/lib";
+import * as ListDataConfig from "../../../Provision/Data/Config";
+import {
+    Dialog,
+    DialogType,
+    DialogFooter,
+    Button,
+    ButtonType,
+    TextField,
+    Toggle,
+} from "office-ui-fabric-react/lib";
 import { IProjectModel } from "Model";
 import * as Util from "Util";
 
@@ -34,6 +42,9 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
         },
     };
 
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -44,13 +55,27 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
         };
     }
 
-    public componentDidMount() {
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
         ListDataConfig.RetrieveConfig().then((config: any) => this.setState({ listDataConfig: config }));
     }
 
+    /**
+     * Renders the component
+     */
     public render(): JSX.Element {
-        let { className } = this.props;
-        let { showAdvancedSettings, urlValue, formValid, listDataConfig } = this.state;
+        let {
+            className,
+            hideHandler,
+        } = this.props;
+        let {
+            showAdvancedSettings,
+            urlValue,
+            formValid,
+            listDataConfig,
+        } = this.state;
         if (listDataConfig === null) {
             return null;
         }
@@ -58,14 +83,25 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
             className={className}
             isOpen={true}
             type={DialogType.largeHeader}
-            onDismiss={this._closeDialog}
+            onDismiss={e => hideHandler(e)}
             title={__("NewProjectForm_DialogTitle")}
             subText=""
             isBlocking={false}
         >
-            <TextField placeholder={__("NewProjectForm_Title")} ref={ele => this.inputs.Title = ele} onKeyDown={this.onTitleChanged} />
-            <TextField placeholder={__("NewProjectForm_Description")} multiline autoAdjustHeight ref={ele => this.inputs.Description = ele} />
-            <TextField placeholder={__("NewProjectForm_Url")} ref={ele => this.inputs.Url = ele} value={urlValue} disabled={false} />
+            <TextField
+                placeholder={__("NewProjectForm_Title")}
+                ref={ele => this.inputs.Title = ele}
+                onKeyDown={this.onTitleChanged} />
+            <TextField
+                placeholder={__("NewProjectForm_Description")}
+                multiline
+                autoAdjustHeight
+                ref={ele => this.inputs.Description = ele} />
+            <TextField
+                placeholder={__("NewProjectForm_Url")}
+                ref={ele => this.inputs.Url = ele}
+                value={urlValue}
+                disabled={false} />
             <Toggle
                 defaultChecked={false}
                 label={__("NewProjectForm_InheritPermissions")}
@@ -92,17 +128,9 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
             </div>
             <DialogFooter>
                 <Button buttonType={ButtonType.primary} onClick={this.onSubmit} disabled={!formValid}>{__("String_Create")}</Button>
-                <Button onClick={this._closeDialog}>{__("String_Close")}</Button>
+                <Button onClick={e => hideHandler(e)}>{__("String_Close")}</Button>
             </DialogFooter>
         </Dialog>);
-    }
-
-    /**
-     * Close dialog
-     */
-    private _closeDialog = (event): void => {
-        let { hideHandler } = this.props;
-        hideHandler(event);
     }
 
     /**
@@ -136,7 +164,8 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
      * Submit handler
      */
     private onSubmit = (event): void => {
-        this._closeDialog(event);
+        let { hideHandler } = this.props;
+        hideHandler(event);
         ProvisionWeb(this.getModel()).then(redirectUrl => {
             document.location.href = redirectUrl;
         }, (message) => {
