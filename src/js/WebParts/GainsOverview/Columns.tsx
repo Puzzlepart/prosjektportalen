@@ -1,6 +1,8 @@
 import * as React from "react";
-import { IColumn } from "office-ui-fabric-react";
-import { Icon } from "../@Components";
+import {
+    IColumn,
+    Icon,
+} from "office-ui-fabric-react";
 import { DataSource } from "../DataSource";
 
 const Columns = (dataSource: DataSource): any[] => {
@@ -79,6 +81,12 @@ const Columns = (dataSource: DataSource): any[] => {
     }));
 };
 
+/**
+ * Get column by key
+ *
+ * @param key Key
+ * @param dataSource Data source
+ */
 export const GetColumnByKey = (key: string, dataSource: DataSource): IColumn => {
     let find = Columns(dataSource).filter(col => col.key === key);
     let [col] = find;
@@ -112,23 +120,28 @@ export const GenerateColumns = (fields: any[], dataSource: DataSource): any[] =>
     return generatedColumns;
 };
 
+interface ITrendIconProps {
+    latestVal: number;
+    prevVal: number;
+    shouldIncrease: boolean;
+}
+
 /**
- * Get trend icon
+ * TrendIcon
  */
-const getTrendIcon = (latestVal: number, prevVal: number, shouldIncrease: boolean): { type: string, color: string } => {
-    let icon = { type: "", color: "" };
-    if (prevVal !== undefined  && prevVal !== null) {
+const TrendIcon = ({ latestVal, prevVal, shouldIncrease }: ITrendIconProps): JSX.Element => {
+    if (prevVal !== undefined && prevVal !== null) {
         if (prevVal !== latestVal) {
-            icon = { type: "StockUp", color: "green" };
             if (shouldIncrease && (prevVal > latestVal)) {
-                icon = { type: "StockDown", color: "red" };
+                return <Icon iconName="StockDown" style={{ color: "red" }} />;
             }
             if (!shouldIncrease && (latestVal > prevVal)) {
-                icon = { type: "StockDown", color: "red" };
+                return <Icon iconName="StockDown" style={{ color: "red" }} />;
+            } else {
+                return <Icon iconName="StockUp" style={{ color: "green" }} />;
             }
         }
     }
-    return icon;
 };
 
 /**
@@ -141,7 +154,6 @@ const getTrendIcon = (latestVal: number, prevVal: number, shouldIncrease: boolea
 const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => {
     let colValue = item[column.fieldName];
     let { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrese } = item;
-    let trendIconProps = getTrendIcon(LatestValue, PreviousValue, ValueShouldIncrese);
     switch (column.fieldName) {
         case "SiteTitle": {
             let { SPWebUrl, SiteTitle: Title } = item;
@@ -173,9 +185,8 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         }
         case "LatestPercentage": {
             if (LatestPercentage && LatestPercentage !== 0) {
-                return (<div style={{ position: "relative" }
-                }>
-                    {LatestPercentage} % <Icon name={trendIconProps.type} color={trendIconProps.color} />
+                return (<div style={{ position: "relative" }}>
+                    {LatestPercentage} % <TrendIcon latestVal={LatestValue} prevVal={PreviousValue} shouldIncrease={ValueShouldIncrese} />
                 </div>);
             } else {
                 return null;
@@ -184,7 +195,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         case "LatestValue": {
             if (LatestValue && LatestValue !== 0) {
                 return (<div>
-                    {LatestValue} <Icon name={trendIconProps.type} color={trendIconProps.color} />
+                    {LatestValue} <TrendIcon latestVal={LatestValue} prevVal={PreviousValue} shouldIncrease={ValueShouldIncrese} />
                 </div>);
             } else {
                 return null;
