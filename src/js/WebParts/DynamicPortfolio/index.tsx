@@ -17,6 +17,10 @@ import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";
 
+export interface IDynamicPortfolioProps {
+    searchProperty?: string;
+}
+
 export interface IDynamicPortfolioState {
     isLoading: boolean;
     items?: any[];
@@ -26,7 +30,7 @@ export interface IDynamicPortfolioState {
     fieldNames?: string[];
     searchTerm: string;
     filters?: IFilter[];
-    currentViewConfig?: Configuration.IViewConfig;
+    currentView?: Configuration.IViewConfig;
     viewConfig?: Configuration.IViewConfig[];
     refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
@@ -34,8 +38,13 @@ export interface IDynamicPortfolioState {
     showFilterPanel: boolean;
 }
 
-export default class DynamicPortfolio extends React.Component<any, IDynamicPortfolioState> {
-    private searchProp: any = "Title";
+/**
+ * Dynamic Portfolio
+ */
+export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
+    public static defaultProps = {
+        searchProperty: "Title",
+    };
 
     /**
      * Constructor
@@ -79,7 +88,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     filteredItems: primarySearchResults,
                     filters: filters,
                     viewConfig: viewConfig,
-                    currentViewConfig: defaultViewConfig,
+                    currentView: defaultViewConfig,
                     refinerConfig: refinerConfig,
                 });
             });
@@ -94,7 +103,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
      * Renders the component
      */
     public render(): JSX.Element {
-        let {
+        const {
             filteredItems,
             searchTerm,
             filters,
@@ -103,7 +112,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             selectedColumns,
         } = this.state;
 
-        let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
@@ -141,10 +150,10 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
     private renderCommandBar = () => {
         const {
             viewConfig,
-            currentViewConfig,
+            currentView,
          } = this.state;
 
-        if (!currentViewConfig) {
+        if (!currentView) {
             return null;
         }
 
@@ -152,7 +161,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             items={[]}
             farItems={[{
                 key: "View",
-                name: currentViewConfig.name,
+                name: currentView.name,
                 iconProps: { iconName: "List" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -162,7 +171,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     iconProps: { iconName: qc.iconName },
                     onClick: e => {
                         e.preventDefault();
-                        this.doSearch(qc);
+                        this._doSearch(qc);
                     },
                 })),
             },
@@ -280,7 +289,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
      *
      * @param viewConfig Query configuration
      */
-    private doSearch(viewConfig: Configuration.IViewConfig): void {
+    private _doSearch(viewConfig: Configuration.IViewConfig): void {
         this.setState({
             isLoading: true,
         });
@@ -292,7 +301,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 items: primarySearchResults,
                 filteredItems: primarySearchResults,
                 filters: filters,
-                currentViewConfig: viewConfig,
+                currentView: viewConfig,
             });
         });
     }
