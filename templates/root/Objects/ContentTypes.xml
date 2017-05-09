@@ -187,6 +187,7 @@
             <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="GtDpMinWidth" />
             <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="GtDpMaxWidth" />
             <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="GtDpIsResizable" />
+            <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="GtDpGroupBy" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB402" Name="Dynamic Portfolio Refiner" Description="" Group="{resource:ContentTypes_Group}">
