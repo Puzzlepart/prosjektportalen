@@ -24,6 +24,16 @@ export interface IChromeTitleState {
 }
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+    private h2Style: React.CSSProperties = {
+        textAlign: "justify",
+        position: "relative",
+    };
+    private iconStyle: React.CSSProperties = {
+        fontSize: 14,
+        position: "absolute",
+        right: 5,
+        top: 10,
+    };
     private toggleStorageKey: string = "";
 
     /**
@@ -41,17 +51,16 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      */
     public componentDidMount(): void {
         const { toggleElement } = this.props;
-        if (toggleElement.storage) {
+        if (toggleElement && toggleElement.storage) {
             this.toggleStorageKey = Util.generateStorageKey([toggleElement.storage.key, "CollapsedState"]);
-        }
+            let newState = {
+                isCollapsed: this.getCollapsedState(),
+            };
+            this.setState(newState);
+            if (newState.isCollapsed) {
+                jQuery(this.props.toggleElement.selector).hide();
+            }
 
-        let newState = {
-            isCollapsed: this.getCollapsedState(),
-        };
-        this.setState(newState);
-
-        if (newState.isCollapsed) {
-            jQuery(this.props.toggleElement.selector).hide();
         }
     };
 
@@ -60,14 +69,8 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      */
     public render(): JSX.Element {
         const { isCollapsed } = this.state;
-
-        const h2Style: React.CSSProperties = {
-            textAlign: "justify",
-            position: "relative",
-        };
-
         if (this.props.toggleElement) {
-            h2Style.cursor = "pointer";
+            this.h2Style.cursor = "pointer";
         }
 
         return (<div
@@ -77,18 +80,12 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
                 title={this.props.title}
                 className="js-webpart-titleCell">
                 <h2
-                    style={h2Style}
+                    style={this.h2Style}
                     className="ms-webpart-titleText">
                     <span>{this.props.title}</span>
-                    <Icon
-                        hidden={!this.props.toggleElement}
+                    {this.props.toggleElement && <Icon
                         iconName={isCollapsed ? "ChevronDown" : "ChevronUp"}
-                        style={{
-                            fontSize: 14,
-                            position: "absolute",
-                            right: 5,
-                            top: 10,
-                        }} />
+                        style={this.iconStyle} />}
                 </h2>
             </span>
         </div >);
@@ -117,9 +114,6 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      */
     private getCollapsedState(): boolean {
         const { toggleElement } = this.props;
-        if (!toggleElement.storage) {
-            return false;
-        }
         const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
         if (value) {
             return JSON.parse(value);
