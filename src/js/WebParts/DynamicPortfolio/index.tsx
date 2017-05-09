@@ -6,9 +6,11 @@ import {
     SpinnerType,
     Button,
     SearchBox,
+    ContextualMenuItemType,
+    CommandBar,
 } from "office-ui-fabric-react";
 import {
-    FilterSection,
+    FilterPanel,
     IFilter,
     FieldFilter,
 } from "./Filter";
@@ -25,10 +27,12 @@ export interface IDynamicPortfolioState {
     fieldNames?: string[];
     searchTerm: string;
     filters?: IFilter[];
+    currentViewConfig?: Configuration.IViewConfig;
     viewConfig?: Configuration.IViewConfig[];
     refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
     error?: string;
+    showFilterPanel: boolean;
 }
 
 export default class DynamicPortfolio extends React.Component<any, IDynamicPortfolioState> {
@@ -45,6 +49,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             currentFilters: {},
             viewConfig: [],
             filters: [],
+            showFilterPanel: false,
         };
     }
 
@@ -75,6 +80,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     filteredItems: primarySearchResults,
                     filters: filters,
                     viewConfig: viewConfig,
+                    currentViewConfig: defaultViewConfig,
                     refinerConfig: refinerConfig,
                 });
             });
@@ -93,30 +99,55 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
             filteredItems,
             searchTerm,
             filters,
+            showFilterPanel,
+            currentViewConfig,
+            viewConfig,
             isLoading,
             selectedColumns,
         } = this.state;
+
         let items = filteredItems ? filteredItems.filter(item => item[this.searchProp].toLowerCase().indexOf(searchTerm) !== -1) : [];
         return (<div className="ms-Grid">
             <div className="ms-Grid-row">
-                <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl2 ms-u-xxxl1">
-                    {
-                        isLoading ?
-                            <Spinner type={SpinnerType.large} />
-                            :
-                            <FilterSection filters={filters} onFilterChange={this._onFilterChange} />
-                    }
-                </div>
-                <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl10 ms-u-xxxl11">
-                    <SearchBox
-                        onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                    {this.renderViewSelector()}
+                <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
                     {
                         isLoading ?
                             <Spinner type={SpinnerType.large} />
                             :
                             <div>
+                                <CommandBar
+                                    items={[]}
+                                    farItems={[{
+                                        key: "View",
+                                        name: currentViewConfig.name,
+                                        iconProps: { iconName: "List" },
+                                        itemType: ContextualMenuItemType.Header,
+                                        onClick: e => e.preventDefault(),
+                                        items: viewConfig.map((qc, idx) => ({
+                                            key: idx.toString(),
+                                            name: qc.name,
+                                            iconProps: { iconName: qc.iconName },
+                                            onClick: e => {
+                                                e.preventDefault();
+                                                this.doSearch(qc);
+                                            },
+                                        })),
+                                    },
+                                    {
+                                        key: "Filters",
+                                        name: "",
+                                        iconProps: { iconName: "Filter" },
+                                        itemType: ContextualMenuItemType.Normal,
+                                        onClick: e => {
+                                            e.preventDefault();
+                                            this.setState({ showFilterPanel: true });
+                                        },
+                                    }]}
+                                />
+                                <div style={{ height: 10 }}></div>
+                                <SearchBox
+                                    onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
+                                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
                                 <DetailsList
                                     items={items}
                                     columns={selectedColumns}
@@ -128,24 +159,11 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                     }
                 </div>
             </div>
-        </div>);
-    }
-
-    /**
-     * Render view selector
-     */
-    private renderViewSelector(): JSX.Element {
-        const { viewConfig } = this.state;
-        return (<div>{viewConfig.map((qc, idx) => (
-            <Button
-                key={idx}
-                text={qc.name}
-                icon={qc.iconName}
-                onClick={e => {
-                    e.preventDefault();
-                    this.doSearch(qc);
-                }}
-            />))}
+            <FilterPanel
+                isOpen={showFilterPanel}
+                onDismiss={() => this.setState({ showFilterPanel: false })}
+                filters={filters}
+                onFilterChange={this._onFilterChange} />
         </div>);
     }
 
@@ -262,6 +280,7 @@ export default class DynamicPortfolio extends React.Component<any, IDynamicPortf
                 items: primarySearchResults,
                 filteredItems: primarySearchResults,
                 filters: filters,
+                currentViewConfig: viewConfig,
             });
         });
     }

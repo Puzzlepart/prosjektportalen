@@ -24,7 +24,7 @@ export interface IRefinerConfig {
 export interface IViewConfig {
     name: string;
     queryTemplate: string;
-    iconName: string;
+    iconName: any;
     default: boolean;
     fields?: any[];
     refiners?: any[];

@@ -1,4 +1,4 @@
-import { FilterSection } from "./FilterSection";
+import { FilterPanel } from "./FilterPanel";
 import { IFilter } from "./Filter";
 
 const FieldFilter: IFilter = {
@@ -11,4 +11,8 @@ const FieldFilter: IFilter = {
     items: [],
 };
 
-export { FilterSection, IFilter, FieldFilter };
+export {
+    FilterPanel,
+    IFilter,
+    FieldFilter,
+};

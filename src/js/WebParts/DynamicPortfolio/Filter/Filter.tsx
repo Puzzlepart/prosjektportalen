@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Checkbox } from "office-ui-fabric-react";
+import { Checkbox } from "office-ui-fabric-react";
 import { Icon } from "../../@Components";
 
 export interface IFilterItem {
@@ -33,9 +33,11 @@ export interface IFilterState {
  * Filter
  */
 export class Filter extends React.Component<IFilterProps, IFilterState> {
-    private linkStyle: React.CSSProperties = { display: "block", color: "#777", fontSize: 11 };
     private inputs: { [key: string]: HTMLInputElement } = {};
 
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -43,6 +45,9 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
         };
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount() {
         let { filter } = this.props;
         if (filter.defaultHidden) {
@@ -50,6 +55,9 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
         }
     }
 
+    /**
+     * Renders the component
+     */
     public render(): JSX.Element {
         let { filter } = this.props;
         let { isCollapsed } = this.state;
@@ -63,10 +71,6 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
                 <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
                     {this.renderItems()}
                 </ul>
-                <div hidden={!filter.multi || filter.items.length === 0} style={{ marginTop: 10 }}>
-                    <Link style={this.linkStyle} onClick={e => this.toggleAll(e, true)}>{__("String_SelectAll")}</Link>
-                    <Link style={this.linkStyle} onClick={e => this.toggleAll(e, false)}>{__("String_UnselectAll")}</Link>
-                </div>
             </div>
         </div>);
     }
@@ -99,28 +103,6 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
         } else {
             filter.selected = [item];
         }
-        onFilterChange(filter);
-    }
-
-    /**
-     * Toggle all items
-     */
-    private toggleAll = (event: React.MouseEvent<any>, bool: boolean): void => {
-        event.preventDefault();
-        let { filter, onFilterChange } = this.props;
-        let values = filter.items.map(i => i.value);
-        let readOnlyValues = filter.items.filter(i => i.readOnly).map(i => i.value);
-        if (bool) {
-            filter.selected = values;
-        } else {
-            filter.selected = readOnlyValues;
-        }
-
-        Object.keys(this.inputs).filter(key => {
-            let readOnly = filter.items.filter(i => i.readOnly).map(i => i.value);
-            return !Array.contains(readOnly, key);
-        }).forEach(key => this.inputs[key].checked = bool);
-
         onFilterChange(filter);
     }
 };
