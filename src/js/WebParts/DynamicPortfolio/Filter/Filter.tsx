@@ -81,14 +81,13 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
     private renderItems = () => {
         let { filter } = this.props;
         return filter.items.length > 0
-            ? filter.items.map((i, idx) => (<li key={idx} value={i.value}>
+            ? filter.items.map((item, idx) => (<li key={idx} value={item.value}>
                 {filter.multi && <Checkbox
-                    id={`${filter.key}_input_${i.value}`}
-                    label={i.name}
-                    disabled={i.readOnly}
-                    defaultChecked={i.defaultSelected}
-                    onChange={e => this.onChange(idx, i, e.currentTarget)}
-                    ref={ele => this.inputs[i.value] = ele} />}
+                    label={item.name}
+                    disabled={item.readOnly}
+                    defaultChecked={item.defaultSelected}
+                    onChange={e => this.onChange(item)}
+                    ref={ele => this.inputs[item.value] = ele} />}
             </li>))
             : <li className="ms-metadata">{filter.emptyMessage}</li>;
     }
@@ -96,7 +95,7 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
     /**
      * On filter change
      */
-    private onChange = (idx: number, item: any, targetElem: any): void => {
+    private onChange = (item: any): void => {
         let { filter, onFilterChange } = this.props;
         if (filter.multi) {
             filter.selected = Object.keys(this.inputs).filter(key => this.inputs[key].checked);

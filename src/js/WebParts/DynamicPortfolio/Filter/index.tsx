@@ -1,5 +1,7 @@
-import { FilterPanel } from "./FilterPanel";
-import { IFilter } from "./Filter";
+import {
+    IFilter,
+    Filter,
+} from "./Filter";
 
 const FieldFilter: IFilter = {
     name: __("DynamicPortfolio_FieldSelector_Name"),
@@ -12,7 +14,7 @@ const FieldFilter: IFilter = {
 };
 
 export {
-    FilterPanel,
+    Filter,
     IFilter,
     FieldFilter,
 };

@@ -4,16 +4,15 @@ import {
     SelectionMode,
     Spinner,
     SpinnerType,
-    Button,
     SearchBox,
     ContextualMenuItemType,
     CommandBar,
 } from "office-ui-fabric-react";
 import {
-    FilterPanel,
     IFilter,
     FieldFilter,
 } from "./Filter";
+import FilterPanel from "./FilterPanel";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import { _onRenderItemColumn } from "./ItemColumn";

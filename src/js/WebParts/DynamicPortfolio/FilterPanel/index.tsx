@@ -6,7 +6,7 @@ import {
 import {
     Filter,
     IFilter,
-} from "./Filter";
+} from "../Filter";
 
 export interface IFilterPanelProps {
     filters: IFilter[];
@@ -18,7 +18,7 @@ export interface IFilterPanelProps {
 /**
  * Filter Panel
  */
-export const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFilterPanelProps) => {
+const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFilterPanelProps) => {
     return (
         <Panel
             isOpen={isOpen}
@@ -27,11 +27,15 @@ export const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: IFil
             headerText="Filtrer resultatet">
             <div className="ms-Grid" style={{ marginTop: 20 }}>
                 <div className="ms-Grid-row">
-                    {filters.map((f, idx) => (<Filter
-                        key={idx}
-                        filter={f}
-                        onFilterChange={onFilterChange} />))}
+                    {filters
+                        .filter(filter => filter.items.length > 1)
+                        .map((filter, idx) => (<Filter
+                            key={idx}
+                            filter={filter}
+                            onFilterChange={onFilterChange} />))}
                 </div>
             </div>
         </Panel>);
 };
+
+export default FilterPanel;
