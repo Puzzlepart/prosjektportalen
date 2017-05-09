@@ -40,9 +40,9 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Component did mount
      */
     public componentDidMount(): void {
-        const { toggleElement: { storage } } = this.props;
-        if (storage) {
-            this.toggleStorageKey = Util.generateStorageKey([storage.key, "CollapsedState"]);
+        const { toggleElement } = this.props;
+        if (toggleElement.storage) {
+            this.toggleStorageKey = Util.generateStorageKey([toggleElement.storage.key, "CollapsedState"]);
         }
 
         let newState = {
@@ -116,8 +116,11 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Get collapsed state from storage
      */
     private getCollapsedState(): boolean {
-        const { toggleElement: { storage } } = this.props;
-        const value = window[storage.type].getItem(this.toggleStorageKey);
+        const { toggleElement } = this.props;
+        if (!toggleElement.storage) {
+            return false;
+        }
+        const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
         if (value) {
             return JSON.parse(value);
         } else {
