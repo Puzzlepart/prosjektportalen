@@ -8,10 +8,8 @@ import {
     ContextualMenuItemType,
     CommandBar,
 } from "office-ui-fabric-react";
-import {
-    IFilter,
-    FieldFilter,
-} from "./Filter";
+import { IFilter } from "./Filter";
+import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
@@ -72,13 +70,13 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 return;
             }
             Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                FieldFilter.items = columnConfig.map(col => ({
+                FieldSelector.items = columnConfig.map(col => ({
                     name: col.name,
                     value: col.fieldName,
                     defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
                     readOnly: col.readOnly,
                 }));
-                let filters = [FieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
+                let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
                 this.setState({
                     columns: columnConfig,
                     selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
@@ -295,7 +293,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         });
         const { fieldNames, refinerConfig } = this.state;
         Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-            let filters = [FieldFilter].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
+            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
             this.setState({
                 isLoading: false,
                 items: primarySearchResults,
