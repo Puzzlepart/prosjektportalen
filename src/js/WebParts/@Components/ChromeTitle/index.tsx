@@ -13,6 +13,7 @@ export interface IToggleElement {
     animationDelay: number;
     animation: "fadeToggle" | "slideToggle";
     storage?: IToggleElementStorage;
+    defaultCollapsed?: boolean;
 }
 
 export interface IChromeTitleProps {
@@ -119,7 +120,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
         if (value) {
             return JSON.parse(value);
         } else {
-            return false;
+            return toggleElement.defaultCollapsed === true;
         }
     }
 }
