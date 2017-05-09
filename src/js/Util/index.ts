@@ -1,7 +1,7 @@
 import * as moment from "moment";
 
 /**
- * Formats a date using moment.js
+ * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
  *
  * @param date Date
  * @param dFormat Date format

@@ -1,26 +1,60 @@
-import * as pnp from "sp-pnp-js";
+import { Site } from "sp-pnp-js";
 import * as React from "react";
-import * as Util from "Util";
+import {
+    Spinner,
+    SpinnerType,
+} from "office-ui-fabric-react";
+import * as Util from "../../Util";
 
-export default class Announcements extends React.PureComponent<any, any> {
+export interface IAnnouncementsProps {
+    itemsCount?: number;
+}
+export interface IAnnouncementsState {
+    entries: any[];
+    isLoading: boolean;
+}
+
+/**
+ * Announcements
+ */
+export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
+    public static defaultProps = {
+        itemsCount: 5,
+    };
+
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
             entries: null,
-            dataFetched: false,
+            isLoading: true,
         };
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount() {
-        pnp.sp.web.lists.getByTitle(__("Lists_Announcements_Title")).items.get().then(entries => {
-            this.setState({ entries: entries, dataFetched: true });
-        });
+        new Site(_spPageContextInfo.siteAbsoluteUrl)
+            .rootWeb
+            .lists
+            .getByTitle(__("Lists_Announcements_Title"))
+            .items
+            .top(this.props.itemsCount)
+            .get().then(entries => {
+                this.setState({ entries: entries, isLoading: false });
+            });
     }
 
+    /**
+     * Renders the component
+     */
     public render() {
-        let { entries, dataFetched } = this.state;
-        if (!dataFetched) {
-            return null;
+        let { entries, isLoading } = this.state;
+        if (isLoading) {
+            return (<Spinner type={SpinnerType.large} />);
         }
         if (entries.length > 0) {
             return (<ul className="pp-simpleList spacing-s">
