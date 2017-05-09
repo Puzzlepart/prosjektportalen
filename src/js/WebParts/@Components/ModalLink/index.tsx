@@ -79,8 +79,6 @@ export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSucce
         cursor: "pointer",
     };
 
-    console.log(icon);
-
     return (<a hidden={hidden} onClick={onClick} id={id} className={className} style={_style}>
         {icon && icon.position === ModalLinkIconPosition.Left && <Icon iconName={icon.iconName} style={{ marginRight: 5 }} />}
         {(label && showLabel) && label}
