@@ -243,7 +243,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         let groups: IGroup[] = null;
         if (groupBy) {
             const groupItems = filteredItems.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
-            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : "Ikke satt");
+            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : __("String_NotSet"));
             groups = unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
                 name: name,
