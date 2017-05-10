@@ -1,5 +1,6 @@
 import * as React from "react";
-import * as unique from "array-unique";
+import * as array_unique from "array-unique";
+import * as array_sort from "array-sort";
 import {
     IGroup,
     DetailsList,
@@ -40,6 +41,7 @@ export interface IDynamicPortfolioState {
     error?: string;
     showFilterPanel: boolean;
     groupBy?: Configuration.IColumnConfig;
+    currentSort?: { fieldName: string, isSortedDescending: boolean };
 }
 
 /**
@@ -48,7 +50,7 @@ export interface IDynamicPortfolioState {
 export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
     public static defaultProps: IDynamicPortfolioProps = {
         searchProperty: "Title",
-        showGroupBy: false,
+        showGroupBy: true,
     };
 
     /**
@@ -138,7 +140,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         groups={groups}
                         selectionMode={SelectionMode.none}
                         onRenderItemColumn={_onRenderItemColumn}
-                        onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
+                        onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
                     />
                 }
             </div>
@@ -240,17 +242,26 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             filteredItems,
             groupBy,
             searchTerm,
+            currentSort,
         } = this.state;
 
         const { searchProperty } = this.props;
 
         let groups: IGroup[] = null;
         if (groupBy) {
-            const groupItems = filteredItems.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
+            const itemsSort: any = {
+                props: [groupBy.fieldName],
+                opts: {},
+            };
+            if (currentSort) {
+                itemsSort.props.push(currentSort.fieldName);
+                itemsSort.opts.reverse = !currentSort.isSortedDescending;
+            }
+            const groupItems = array_sort(filteredItems, itemsSort.props, itemsSort.opts);
             const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : __("String_NotSet"));
-            groups = unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
+            groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
-                name: name,
+                name: `${groupBy.name}: ${name}`,
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
                 isCollapsed: false,
@@ -345,12 +356,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     }
 
     /**
-     * On column click. Sorts the column on click.
+     * On column sort
      *
      * @param event Event
      * @param column The column config
      */
-    private _onColumnClick = (event, column): void => {
+    private _onColumnSort = (event, column): void => {
         const {
             filteredItems,
             selectedColumns,
@@ -361,6 +372,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         }
         const items = filteredItems.concat([]).sort((a, b) => isSortedDescending ? (a[column.fieldName] > b[column.fieldName] ? -1 : 1) : (a[column.fieldName] > b[column.fieldName] ? 1 : -1));
         this.setState({
+            currentSort: { fieldName: column.fieldName, isSortedDescending: isSortedDescending },
             filteredItems: items,
             selectedColumns: selectedColumns.map(col => {
                 col.isSorted = (col.key === column.key);

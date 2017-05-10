@@ -6,6 +6,7 @@
   "scripts": {},
   "dependencies": {
     "@types/jquery": "^2.0.43",
+    "array-sort": "^0.1.2",
     "array-unique": "^0.3.2",
     "babel-polyfill": "^6.23.0",
     "es6-promise": "^4.1.0",
