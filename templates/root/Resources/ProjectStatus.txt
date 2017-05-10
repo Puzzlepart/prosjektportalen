@@ -20,16 +20,6 @@
         .s4-nothome {
 	        display:none;
         }
-        body {
-            margin: 0 !important;
-            padding: 0 !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-            #s4-workspace {
-                overflow-x: hidden !important;
-                height: auto !important;
-            }
-        }
     </sharepoint:styleblock>
     <sharepoint:scriptblock runat="server">
 	    var navBarHelpOverrideKey = "WSSEndUser";
@@ -44,4 +34,16 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <div id="pp-projectstatus"></div>
+    <style type="text/css">
+        body {
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            #s4-workspace {
+                overflow-x: hidden !important;
+                height: auto !important;
+            }
+        }
+    </style>
 </asp:Content>
