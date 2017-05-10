@@ -121,27 +121,27 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         } = this.getFilteredData();
 
         return (<div>
-                    <div>
-                        {this.renderCommandBar()}
-                        <div style={{ height: 10 }}></div>
-                        <SearchBox
-                            onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                            labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                        {isLoading ?
-                            <Spinner type={SpinnerType.large} />
-                            :
-                            <DetailsList
-                                items={items}
-                                constrainMode={ConstrainMode.horizontalConstrained}
-                                layoutMode={DetailsListLayoutMode.fixedColumns}
-                                columns={columns}
-                                groups={groups}
-                                selectionMode={SelectionMode.none}
-                                onRenderItemColumn={_onRenderItemColumn}
-                                onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
-                            />
-                        }
-                    </div>
+            <div>
+                {this.renderCommandBar()}
+                <div style={{ height: 10 }}></div>
+                <SearchBox
+                    onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
+                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
+                {isLoading ?
+                    <Spinner type={SpinnerType.large} />
+                    :
+                    <DetailsList
+                        items={items}
+                        constrainMode={ConstrainMode.horizontalConstrained}
+                        layoutMode={DetailsListLayoutMode.fixedColumns}
+                        columns={columns}
+                        groups={groups}
+                        selectionMode={SelectionMode.none}
+                        onRenderItemColumn={_onRenderItemColumn}
+                        onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
+                    />
+                }
+            </div>
             <FilterPanel
                 isOpen={showFilterPanel}
                 onDismiss={() => this.setState({ showFilterPanel: false })}
@@ -293,48 +293,52 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param filter The filter that was changed
      */
     private _onFilterChange = (filter: IFilter): void => {
-        let {
+        const {
             columns,
             items,
             currentFilters,
             filters,
         } = this.state;
 
-        if (filter.key === "Fields") {
-            this.setState({
-                fieldNames: filter.selected,
-                selectedColumns: columns.filter(field => Array.contains(filter.selected, field.fieldName)),
-            });
-        } else {
-            if (filter.selected.length > 0) {
-                currentFilters[filter.key] = filter.selected;
-            } else {
-                if (currentFilters.hasOwnProperty(filter.key)) {
-                    delete currentFilters[filter.key];
-                }
+        switch (filter.key) {
+            case "Fields": {
+                this.setState({
+                    fieldNames: filter.selected,
+                    selectedColumns: columns.filter(field => Array.contains(filter.selected, field.fieldName)),
+                });
             }
-            let filterKeys = Object.keys(currentFilters),
-                temp = [];
-            if (filterKeys.length > 0) {
-                items.forEach(item => {
-                    let shouldInclude = true;
-                    filterKeys.forEach(filterKey => {
-                        if (!Array.contains(currentFilters[filterKey], item[filterKey])) {
-                            shouldInclude = false;
+                break;
+            default: {
+                if (filter.selected.length > 0) {
+                    currentFilters[filter.key] = filter.selected;
+                } else {
+                    if (currentFilters.hasOwnProperty(filter.key)) {
+                        delete currentFilters[filter.key];
+                    }
+                }
+                let filterKeys = Object.keys(currentFilters),
+                    temp = [];
+                if (filterKeys.length > 0) {
+                    items.forEach(item => {
+                        let shouldInclude = true;
+                        filterKeys.forEach(filterKey => {
+                            if (!Array.contains(currentFilters[filterKey], item[filterKey])) {
+                                shouldInclude = false;
+                            }
+                        });
+                        if (shouldInclude) {
+                            temp.push(item);
                         }
                     });
-                    if (shouldInclude) {
-                        temp.push(item);
-                    }
+                } else {
+                    temp = items;
+                }
+                this.setState({
+                    currentFilters: currentFilters,
+                    filteredItems: temp,
+                    filters: filters.map(f => (f.key === filter.key) ? filter : f),
                 });
-            } else {
-                temp = items;
             }
-            this.setState({
-                currentFilters: currentFilters,
-                filteredItems: temp,
-                filters: filters.map(f => (f.key === filter.key) ? filter : f),
-            });
         }
     }
 
