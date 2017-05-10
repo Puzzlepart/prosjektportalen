@@ -7,12 +7,18 @@
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/ListContentConfig/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="ID" />
+                    <FieldRef Name="LinkTitle" />
                 </OrderBy>
             </Query>
             <ViewFields>
                 <FieldRef Name="LinkTitle" />
-                <FieldRef Name="Modified" />
+                <FieldRef Name="GtLccLabel" />
+                <FieldRef Name="GtLccSourceUrl" />
+                <FieldRef Name="GtLccSourceList" />
+                <FieldRef Name="GtLccDestinationLibrary" />
+                <FieldRef Name="GtLccDestinationList" />
+                <FieldRef Name="GtLccFields" />
+                <FieldRef Name="GtLccDefault" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>

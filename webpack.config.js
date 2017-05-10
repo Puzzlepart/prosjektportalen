@@ -18,7 +18,7 @@ module.exports = (env = "dev") => ({
         filename: "pp.main.js",
         libraryTarget: "umd",
     },
-    devtool: "eval",
+    devtool: "source-map",
     stats: {
         hash: false,
         timing: false,
