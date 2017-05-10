@@ -12,7 +12,7 @@ const LoadExtension = (file): Promise<any> => new Promise<any>((resolve, reject)
         try {
             json = JSON.parse(textContent);
         } catch (e) {
-            Logger.log({ message: `Extensions in file '${file.LinkFilename}' contains invalid JSON.`, data: Object.assign(obj, { Text: textContent }), level: LogLevel.Warning });
+            Logger.log({ message: `Extensions in file '${file.LinkFilename}' contains invalid JSON.`, data: { Text: textContent }, level: LogLevel.Warning });
         }
         resolve(Object.assign(file, { JSON: json }));
     }, reject);
@@ -33,12 +33,19 @@ export const MergeExtensions = (template) => new Promise<any>((resolve, reject) 
                         let _ = JSON[name];
                         Logger.log({ message: `Adding extensions from file '${LinkFilename}'.`, data: _, level: LogLevel.Info });
                         switch (name) {
+                            /**
+                             * PropertyBagEntries, ComposedLook, WebSettings
+                             */
                             case "PropertyBagEntries":
                             case "ComposedLook":
                             case "WebSettings": {
                                 template[name] = Object.assign(template[name], _);
                             }
                                 break;
+
+                            /**
+                             * Lists
+                             */
                             case "Lists": {
                                 template[name] = template[name] || [];
                                 _.forEach(extList => {
@@ -51,6 +58,10 @@ export const MergeExtensions = (template) => new Promise<any>((resolve, reject) 
                                 });
                             }
                                 break;
+
+                            /**
+                             * Files
+                             */
                             case "Files": {
                                 template[name] = template[name] || [];
                                 _.forEach(extFile => {
@@ -66,6 +77,10 @@ export const MergeExtensions = (template) => new Promise<any>((resolve, reject) 
                                 });
                             }
                                 break;
+
+                            /**
+                             * Navigation
+                             */
                             case "Navigation": {
                                 template[name] = template[name] || {};
                                 template[name].TopNavigationBar = template[name].TopNavigationBar || [];
@@ -82,6 +97,6 @@ export const MergeExtensions = (template) => new Promise<any>((resolve, reject) 
                     });
                 });
             resolve(template);
-        }, reject);
+        }).catch(reject);
     });
 });
