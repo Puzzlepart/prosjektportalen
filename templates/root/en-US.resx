@@ -643,6 +643,9 @@
   <data name="SiteFields_GtCostsTotal_DisplayName" xml:space="preserve">
     <value>Current costs</value>
   </data>
+  <data name="SiteFields_GtProjectForecast_DisplayName" xml:space="preserve">
+    <value>Project prognosis</value>
+  </data>
   <data name="SiteFields_GtBudgetLastReportDate_DisplayName" xml:space="preserve">
     <value>Date of last cost report</value>
   </data>
