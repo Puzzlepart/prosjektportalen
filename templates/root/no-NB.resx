@@ -1042,6 +1042,12 @@
   <data name="String_MoveOn" xml:space="preserve">
     <value>Gå videre</value>
   </data>
+  <data name="String_Filters" xml:space="preserve">
+    <value>Filtre</value>
+  </data>
+  <data name="String_NotSet" xml:space="preserve">
+    <value>Ikke satt</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
