@@ -133,7 +133,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                             <DetailsList
                                 items={items}
                                 constrainMode={ConstrainMode.horizontalConstrained}
-                                layoutMode={DetailsListLayoutMode.justified}
+                                layoutMode={DetailsListLayoutMode.fixedColumns}
                                 columns={columns}
                                 groups={groups}
                                 selectionMode={SelectionMode.none}

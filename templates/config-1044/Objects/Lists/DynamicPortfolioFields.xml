@@ -7,6 +7,7 @@
             <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpReadOnly">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -29,7 +30,7 @@
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -38,7 +39,7 @@
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
