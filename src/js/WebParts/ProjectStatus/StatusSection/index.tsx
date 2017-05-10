@@ -15,7 +15,7 @@ const StatusSection = ({ project }) => {
                         comment={project.GtOverallStatus}
                         fieldName="GtOverallStatus" />
                 </div>
-                <a className="status-element ms-Grid-row">
+                <div className="status-element ms-Grid-row">
                     <div className="status-icons ms-Grid-col ms-u-sm12 ms-u-md2 ms-u-lg2">
                         <i className="ms-Icon ms-Icon--CustomList no-status"></i>
                     </div>
@@ -29,7 +29,7 @@ const StatusSection = ({ project }) => {
                             labelSize="m"
                             valueSize="s" />
                     </div>
-                </a>
+                </div>
             </div>
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
                 <div className="status-elements">
