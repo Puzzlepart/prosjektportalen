@@ -71,10 +71,10 @@ export const MergeExtensions = (template) => new Promise<any>((resolve, reject) 
                                 template[name].TopNavigationBar = template[name].TopNavigationBar || [];
                                 template[name].QuickLaunch = template[name].QuickLaunch || [];
                                 if (Util.isArray(_.TopNavigationBar)) {
-                                    template[name].TopNavigationBar = template[name].TopNavigationBar.concat(_.TopNavigationBar);
+                                    template[name].TopNavigationBar = _.TopNavigationBar;
                                 }
                                 if (Util.isArray(_.QuickLaunch)) {
-                                    template[name].QuickLaunch = template[name].QuickLaunch.concat(_.QuickLaunch);
+                                    template[name].QuickLaunch = _.QuickLaunch;
                                 }
                             }
                                 break;
