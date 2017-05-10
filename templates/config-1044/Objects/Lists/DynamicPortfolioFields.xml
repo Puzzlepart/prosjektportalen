@@ -21,6 +21,7 @@
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
@@ -47,6 +48,7 @@
             <pnp:DataValue FieldName="GtDpOrder">70</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString54</pnp:DataValue>
@@ -55,6 +57,7 @@
             <pnp:DataValue FieldName="GtDpOrder">80</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStartDateOWSDATE</pnp:DataValue>
