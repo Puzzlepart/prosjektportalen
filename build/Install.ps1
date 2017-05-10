@@ -165,7 +165,7 @@ if($ExtensionFolder.IsPresent) {
         }
         catch {
             Write-Host
-            Write-Host "Error installing extensionso $Url" -ForegroundColor Red
+            Write-Host "Error installing extensions to $Url" -ForegroundColor Red
             Write-Host $error[0] -ForegroundColor Red
         }
     }
