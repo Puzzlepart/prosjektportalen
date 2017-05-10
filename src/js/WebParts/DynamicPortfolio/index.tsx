@@ -349,7 +349,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param column The column config
      */
     private _onColumnClick = (event, column): void => {
-        let {
+        const {
             filteredItems,
             selectedColumns,
          } = this.state;
@@ -357,13 +357,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
         }
-        filteredItems = filteredItems.concat([]).sort((a, b) => {
-            let firstValue = a[column.fieldName];
-            let secondValue = b[column.fieldName];
-            return isSortedDescending ? (firstValue > secondValue ? -1 : 1) : (firstValue > secondValue ? 1 : -1);
-        });
+        const items = filteredItems.concat([]).sort((a, b) => isSortedDescending ? (a[column.fieldName] > b[column.fieldName] ? -1 : 1) : (a[column.fieldName] > b[column.fieldName] ? 1 : -1));
         this.setState({
-            filteredItems: filteredItems,
+            filteredItems: items,
             selectedColumns: selectedColumns.map(col => {
                 col.isSorted = (col.key === column.key);
                 if (col.isSorted) {
