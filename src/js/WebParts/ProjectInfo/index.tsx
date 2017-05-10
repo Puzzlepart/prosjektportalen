@@ -24,12 +24,17 @@ interface IProjectInfoProps {
     filterField?: string;
     labelSize?: string;
     valueSize?: string;
+    hideChrome?: boolean;
 }
 
 /**
  * Project information
  */
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
+    public static defaultProps: IProjectInfoProps = {
+        hideChrome: false,
+    };
+
     /**
      * Constructor
      */
@@ -57,7 +62,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Renders the component
      */
     public render(): JSX.Element {
-        const { showEditLink } = this.props;
+        const {
+            showEditLink,
+            hideChrome,
+     } = this.props;
         const {
             isLoading,
             error,
@@ -83,7 +91,9 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                             key: "ProjectInfo",
                             type: "localStorage",
                         },
-                    }} />
+                    }}
+                    hidden={hideChrome}
+                />
                 <div
                     className="pp-projectInfoInner">
                     {this.__renderProperties(properties)}

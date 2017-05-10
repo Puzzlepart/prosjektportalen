@@ -19,6 +19,7 @@ export interface IToggleElement {
 export interface IChromeTitleProps {
     title: string;
     toggleElement?: IToggleElement;
+    hidden?: boolean;
 }
 
 export interface IChromeTitleState {
@@ -81,12 +82,15 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Renders the component
      */
     public render(): JSX.Element {
+        const { hidden } = this.props;
         const { isCollapsed } = this.state;
+
         if (this.props.toggleElement) {
             this.h2Style.cursor = "pointer";
         }
 
         return (<div
+            hidden={hidden}
             className="ms-webpart-chrome-title"
             onClick={this.onClick}>
             <span
