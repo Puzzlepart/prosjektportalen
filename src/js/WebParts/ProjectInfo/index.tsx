@@ -1,5 +1,8 @@
 import * as React from "react";
-import { Site, sp } from "sp-pnp-js";
+import {
+    Site,
+    Web,
+} from "sp-pnp-js";
 import {
     Spinner,
     SpinnerType,
@@ -25,6 +28,8 @@ interface IProjectInfoProps {
     labelSize?: string;
     valueSize?: string;
     hideChrome?: boolean;
+    webUrl?: string;
+    welcomePageId?: number;
 }
 
 /**
@@ -33,6 +38,8 @@ interface IProjectInfoProps {
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
     public static defaultProps: IProjectInfoProps = {
         hideChrome: false,
+        webUrl: _spPageContextInfo.webAbsoluteUrl,
+        welcomePageId: 3,
     };
 
     /**
@@ -65,7 +72,8 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         const {
             showEditLink,
             hideChrome,
-     } = this.props;
+        } = this.props;
+
         const {
             isLoading,
             error,
@@ -139,16 +147,37 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * @param configList Configuration list
      */
     private fetchData = (configList = "ProjectConfig") => new Promise((resolve, reject) => {
+        const {
+            webUrl,
+            welcomePageId,
+        } = this.props;
+
         const site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-        const configPromise = site.rootWeb.lists.getByTitle(configList).items
+        const configPromise = site
+            .rootWeb
+            .lists
+            .getByTitle(configList)
+            .items
             .select("Title", "GtPcProjectStatus", "GtPcFrontpage")
             .get();
-        const fieldsPromise = site.rootWeb.contentTypes.getById(__("ContentTypes_Prosjektforside_ContentTypeId")).fields
+
+        const fieldsPromise = site
+            .rootWeb
+            .contentTypes
+            .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
+            .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .filter(`Group eq '${__("SiteFields_Group")}'`)
             .get();
-        const itemPromise = sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML
+
+        const itemPromise = new Web(webUrl)
+            .lists
+            .getByTitle(__("Lists_SitePages_Title"))
+            .items
+            .getById(welcomePageId)
+            .fieldValuesAsHTML
             .get();
+
         Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
             resolve({
                 config: config,
