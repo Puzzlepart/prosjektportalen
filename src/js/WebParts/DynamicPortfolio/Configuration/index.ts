@@ -6,7 +6,7 @@ export interface IColumnConfig {
     fieldName: string;
     default: boolean;
     readOnly: boolean;
-    render: string;
+    render: "Date" | "Note" | "Persona" | "Status" | "Default";
     minWidth?: number;
     maxWidth?: number;
     isResizable?: boolean;

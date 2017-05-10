@@ -134,7 +134,13 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         const { showMissingPropsWarning, labelSize, valueSize } = this.props;
         let hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         return (<div>
-            {properties.filter(p => !p.empty).map((d, index) => (<ProjectProp key={index} data={d} labelSize={labelSize} valueSize={valueSize} />))}
+            {properties.filter(p => !p.empty).map((d, index) => (
+                <ProjectProp
+                    key={index}
+                    data={d}
+                    labelSize={labelSize}
+                    valueSize={valueSize} />
+            ))}
             <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
                 <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
             </div>
@@ -152,17 +158,15 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             welcomePageId,
         } = this.props;
 
-        const site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-        const configPromise = site
-            .rootWeb
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+        const configPromise = rootWeb
             .lists
             .getByTitle(configList)
             .items
-            .select("Title", "GtPcProjectStatus", "GtPcFrontpage")
+            .select("Title", "GtPcProjectStatus", "GtPcFrontpage", "GtPcPortfolioPage")
             .get();
 
-        const fieldsPromise = site
-            .rootWeb
+        const fieldsPromise = rootWeb
             .contentTypes
             .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
