@@ -22,7 +22,7 @@ const wp_map: { [id: string]: JSX.Element } = {
     "pp-latestprojects": <LatestProjects reloadIntervalMs={20000} />,
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio showGroupBy={true} />,
-    "pp-gainsoverview": <GainsOverview dataSource={DataSource.List} />,
+    "pp-gainsoverview": <GainsOverview />,
     "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} groupByOptions={[{ label: "Grupper på prosjekt", property: "SiteTitle" }]} />,
     "pp-projectstatus": <ProjectStatus />,
 };

@@ -19,7 +19,7 @@ export interface IGroupByOption {
 }
 
 export interface IGainsOverviewProps {
-    dataSource: DataSource;
+    dataSource?: DataSource;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
     searchProperty?: string;
@@ -39,6 +39,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
     public static defaultProps: Partial<IGainsOverviewProps> = {
         groupByOptions: [],
         searchProperty: "Title",
+        dataSource: DataSource.List,
     };
 
     /**
