@@ -29,6 +29,7 @@
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtPcFrontpage" />
                 <FieldRef Name="GtPcProjectStatus" />
+                <FieldRef Name="GtPcPortfolioPage" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />
