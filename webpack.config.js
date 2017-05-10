@@ -18,7 +18,16 @@ module.exports = (env = "dev") => ({
         filename: "pp.main.js",
         libraryTarget: "umd",
     },
-    devtool: "source-map",
+    devtool: "eval",
+    stats: {
+        hash: false,
+        timing: false,
+        assets: false,
+        chunks: false,
+        modules: false,
+        reasons: true,
+        children: false
+    },
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
         alias: {
@@ -45,7 +54,7 @@ module.exports = (env = "dev") => ({
                 }
             }, (env === "dev") ? { exclude: /node_modules/ } : {}),
             { test: /\.txt$/, use: 'raw-loader' },
-            {test: /\.json$/, loader: "json-loader"}
+            { test: /\.json$/, loader: "json-loader" }
         ]
     },
     plugins: [

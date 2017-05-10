@@ -159,6 +159,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             viewConfig,
             currentView,
             selectedColumns,
+            groupBy,
          } = this.state;
 
         if (!currentView) {
@@ -169,9 +170,17 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         const farItems = [];
 
         if (this.props.showGroupBy) {
+            const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
+                key: idx.toString(),
+                name: col.name,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ groupBy: col });
+                },
+            }));
             items.push({
                 key: "Group",
-                name: "",
+                name: groupBy ? groupBy.name : "Ingen gruppering",
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -184,14 +193,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                             this.setState({ groupBy: null });
                         },
                     },
-                    ...selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
-                        key: idx.toString(),
-                        name: col.name,
-                        onClick: e => {
-                            e.preventDefault();
-                            this.setState({ groupBy: col });
-                        },
-                    })),
+                    ...groupByColumns,
                 ],
             });
         }
