@@ -10,7 +10,7 @@ const isExternal = ({ userRequest }) => {
     return userRequest.indexOf('node_modules') !== -1;
 }
 
-module.exports = (env = "dev") => ({
+module.exports = (env = "dev", devtool = "source-map") => ({
     cache: true,
     entry: './lib/js/pp.main.js',
     output: {
@@ -18,7 +18,7 @@ module.exports = (env = "dev") => ({
         filename: "pp.main.js",
         libraryTarget: "umd",
     },
-    devtool: "source-map",
+    devtool: devtool,
     stats: {
         hash: false,
         timing: false,

@@ -33,6 +33,31 @@ gulp.task("watch", (done) => {
     });
 });
 
+gulp.task("watch::eval", (done) => {
+    livereload.listen({
+        start: true,
+    });
+    watch(config.paths.sourceGlob).on("change", (done) => {
+        runSequence("clean:lib", "clean:dist", "package:code::eval", () => {
+            uploadFile(format("{0}/js/*.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
+        })
+    });
+    watch(config.paths.stylesGlob).on("change", (done) => {
+        runSequence("package:styles", () => {
+            uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
+        })
+    });
+    watch(config.paths.searchDispTemplatesGlob).on("change", (file) => {
+        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Search")
+    });
+    watch(config.paths.filtersDispTemplatesGlob).on("change", (file) => {
+        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Filters")
+    });
+    watch(config.resources.glob).on("change", (done) => {
+        runSequence("build:jsonresources");
+    });
+});
+
 function uploadFile(glob, url, folder) {
     gulp.src(glob)
         .pipe(plumber({

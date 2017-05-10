@@ -20,6 +20,18 @@ gulp.task("package:code", ["build:lib"], (done) => {
     });
 });
 
+gulp.task("package:code::eval", ["build:lib"], (done) => {
+    webpack(webpackConfig(env, "eval"), (err, stats) => {
+        if (err) {
+            throw new gutil.PluginError("package:code", err);
+        }
+        console.log(stats.toString({
+            colors: true
+        }));
+        done();
+    });
+});
+
 gulp.task("package:code::prod", ["build:lib"], (done) => {
     webpack(webpackConfig("prod"), (err, stats) => {
         if (err) {

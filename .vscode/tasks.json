@@ -15,6 +15,12 @@
             "showOutput": "always"
         },
         {
+            "taskName": "watch::eval",
+            "args": [],
+            "isBackground": true,
+            "showOutput": "always"
+        },
+        {
             "taskName": "build:pnp",
             "args": [],
             "isBackground": true
