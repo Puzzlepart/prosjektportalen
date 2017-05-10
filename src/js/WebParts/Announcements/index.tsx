@@ -9,6 +9,7 @@ import * as Util from "../../Util";
 
 export interface IAnnouncementsProps {
     itemsCount?: number;
+    itemsFilter?: string;
     listClassName?: string;
     modalHeaderClassName?: string;
     modalBodyClassName?: string;
@@ -26,6 +27,7 @@ export interface IAnnouncementsState {
 export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
     public static defaultProps: IAnnouncementsProps = {
         itemsCount: 5,
+        itemsFilter: `Expires ge datetime'${new Date().toISOString()}'`,
         listClassName: "pp-simpleList spacing-s",
         modalContainerClassName: "pp-announcementsModalContainer",
         modalHeaderClassName: "ms-font-xxl",
@@ -53,6 +55,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
             .lists
             .getByTitle(__("Lists_Announcements_Title"))
             .items
+            .filter(this.props.itemsFilter)
             .top(this.props.itemsCount)
             .get().then(entries => {
                 this.setState({ entries: entries, isLoading: false });
@@ -84,7 +87,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
                 <ul className={listClassName}>
                     {entries.map((entry, idx) => <li key={idx}>
                         <h5>
-                            <a onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                            <a style={{ cursor: "pointer" }} onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                         </h5>
                         <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
                     </li>)}
