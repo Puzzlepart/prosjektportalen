@@ -21,6 +21,7 @@
                 <FieldRef Name="GtDpMinWidth" />
                 <FieldRef Name="GtDpMaxWidth" />
                 <FieldRef Name="GtDpIsResizable" />
+                <FieldRef Name="GtDpGroupBy" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>
