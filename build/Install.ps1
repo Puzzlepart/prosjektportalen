@@ -151,7 +151,7 @@ if (-not $SkipDefaultConfig.IsPresent) {
     }
 }
 
-if($ExtensionFolder.IsPresent) {
+if($ExtensionFolder) {
     $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
     if($extensionFiles.Length -gt 0) {
         try {

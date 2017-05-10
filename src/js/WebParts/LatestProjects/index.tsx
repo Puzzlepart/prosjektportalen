@@ -7,19 +7,34 @@ import {
 } from "office-ui-fabric-react";
 import * as Util from "../../Util";
 
+export interface IWebInfo {
+    Id: number;
+    ServerRelativeUrl: string;
+    Title: string;
+    Created: string;
+}
+
 export interface ILatestProjectsProps {
     itemsCount?: number;
+    itemsOrderBy?: { orderBy: string, ascending: boolean };
+    reloadIntervalMs?: number;
 }
 
 export interface ILatestProjectsState {
-    subwebs: any[];
+    webinfos: IWebInfo[];
     isLoading: boolean;
 }
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
-    public static defaultProps = {
+    public static defaultProps: ILatestProjectsProps = {
         itemsCount: 5,
+        itemsOrderBy: {
+            orderBy: "Created",
+            ascending: false,
+        },
+        reloadIntervalMs: -1,
     };
+    private reloadInterval: number;
 
     /**
      * Constructor
@@ -27,7 +42,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
     constructor() {
         super();
         this.state = {
-            subwebs: null,
+            webinfos: null,
             isLoading: true,
         };
     }
@@ -36,37 +51,74 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
      * Component did mount
      */
     public componentDidMount(): void {
-        new Site(_spPageContextInfo.siteAbsoluteUrl)
-            .rootWeb
-            .webinfos
-            .top(this.props.itemsCount)
-            .select("Id", "ServerRelativeUrl", "Title", "Created")
-            .orderBy("Created", false)
-            .get().then(subwebs => {
-                this.setState({ subwebs: subwebs, isLoading: false });
-            }).catch(_ => this.setState({ isLoading: false }));
+        const { reloadIntervalMs } = this.props;
+
+        this.fetchData()
+            .then(webinfos => {
+                this.setState({
+                    webinfos: webinfos,
+                    isLoading: false,
+                });
+            })
+            .catch(_ => this.setState({ isLoading: false }));
+
+        if (reloadIntervalMs !== -1) {
+            this.reloadInterval = window.setInterval(() => {
+                this.fetchData()
+                    .then(webinfos => {
+                        this.setState({
+                            webinfos: webinfos,
+                        });
+                    });
+            }, reloadIntervalMs);
+        }
     }
 
     /**
      * Renders the component
      */
     public render(): JSX.Element {
-        let { subwebs, isLoading } = this.state;
+        let {
+            webinfos,
+            isLoading,
+        } = this.state;
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }
-        if (subwebs == null) {
+        if (webinfos == null) {
             return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
         }
-        if (subwebs.length > 0) {
+        if (webinfos.length > 0) {
             return (<ul className="pp-simpleList spacing-m">
-                {subwebs.map(({ Id, ServerRelativeUrl, Title, Created }) => <li key={Id}>
-                    <h5><a href={ServerRelativeUrl}>{Title}</a></h5>
-                    <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(Created)}</div>
-                </li>)}
+                {webinfos.map(webinfo => (
+                    <li key={webinfo.Id}>
+                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                    </li>
+                ))}
             </ul>);
         } else {
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
     }
+
+    /**
+     * Fetch data (webinfos)
+     */
+    private fetchData = () => new Promise<IWebInfo[]>((resolve, reject) => {
+        const {
+            itemsCount,
+            itemsOrderBy,
+        } = this.props;
+
+        new Site(_spPageContextInfo.siteAbsoluteUrl)
+            .rootWeb
+            .webinfos
+            .top(itemsCount)
+            .select("Id", "ServerRelativeUrl", "Title", "Created")
+            .orderBy(itemsOrderBy.orderBy, itemsOrderBy.ascending)
+            .get().then(webinfos => {
+                resolve(webinfos);
+            }).catch(reject);
+    })
 };

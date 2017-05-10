@@ -10,6 +10,7 @@ import * as Util from "../../Util";
 export interface IAnnouncementsProps {
     itemsCount?: number;
     itemsFilter?: string;
+    itemsOrderBy?: { orderBy: string, ascending: boolean };
     listClassName?: string;
     modalHeaderClassName?: string;
     modalBodyClassName?: string;
@@ -28,6 +29,10 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
     public static defaultProps: IAnnouncementsProps = {
         itemsCount: 5,
         itemsFilter: `Expires ge datetime'${new Date().toISOString()}'`,
+        itemsOrderBy: {
+            orderBy: "Created",
+            ascending: false,
+        },
         listClassName: "pp-simpleList spacing-s",
         modalContainerClassName: "pp-announcementsModalContainer",
         modalHeaderClassName: "ms-font-xxl",
@@ -50,13 +55,20 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
      * Component did mount
      */
     public componentDidMount() {
+        const {
+            itemsCount,
+            itemsFilter,
+            itemsOrderBy,
+        } = this.props;
+
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
             .getByTitle(__("Lists_Announcements_Title"))
             .items
-            .filter(this.props.itemsFilter)
-            .top(this.props.itemsCount)
+            .filter(itemsFilter)
+            .top(itemsCount)
+            .orderBy(itemsOrderBy.orderBy, itemsOrderBy.ascending)
             .get().then(entries => {
                 this.setState({ entries: entries, isLoading: false });
             });
@@ -65,7 +77,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
     /**
      * Renders the component
      */
-    public render() {
+    public render(): JSX.Element {
         const {
             entries,
             isLoading,
