@@ -242,6 +242,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             searchTerm,
         } = this.state;
 
+        const { searchProperty } = this.props;
+
         let groups: IGroup[] = null;
         if (groupBy) {
             const groupItems = filteredItems.sort((a, b) => a[groupBy.fieldName] > b[groupBy.fieldName] ? -1 : 1);
@@ -256,7 +258,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        let items = filteredItems ? filteredItems.filter(item => item.Title.toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
             items: items,
             columns: selectedColumns,
