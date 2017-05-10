@@ -75,6 +75,13 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
     }
 
     /**
+     * Component will unmount
+     */
+    public componentWillUnmount(): void {
+        window.clearInterval(this.reloadInterval);
+    }
+
+    /**
      * Renders the component
      */
     public render(): JSX.Element {

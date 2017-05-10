@@ -19,7 +19,7 @@ const wp_map: { [id: string]: JSX.Element } = {
     "pp-projectphases": <ProjectPhases />,
     "pp-newprojectlink": <NewProjectLink />,
     "pp-announcements": <Announcements />,
-    "pp-latestprojects": <LatestProjects />,
+    "pp-latestprojects": <LatestProjects reloadIntervalMs={2500} />,
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio showGroupBy={true} />,
     "pp-gainsoverview": <GainsOverview dataSource={DataSource.List} />,
