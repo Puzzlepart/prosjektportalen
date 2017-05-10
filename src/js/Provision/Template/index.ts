@@ -34,8 +34,8 @@ export const Apply = (web, includeExtensions = false, progressCallback?: (progre
     PropertyBag.GetAllProperties().then(({ pp_assetssiteurl }) => {
         Template.WebSettings.AlternateCssUrl = `${pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
         if (includeExtensions) {
-            MergeExtensions(Template).then(t => {
-                new WebProvisioner(web).applyTemplate(t, progressCallback)
+            MergeExtensions(Template).then(mergedTemplate => {
+                new WebProvisioner(web).applyTemplate(mergedTemplate, progressCallback)
                     .then(resolve)
                     .catch(_ => {
                         reject(_);
