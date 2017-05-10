@@ -4,22 +4,32 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import * as Util from "../../Util";
 
 export interface IAnnouncementsProps {
     itemsCount?: number;
+    listClassName?: string;
+    modalHeaderClassName?: string;
+    modalBodyClassName?: string;
+    modalContainerClassName?: string;
 }
 export interface IAnnouncementsState {
     entries: any[];
     isLoading: boolean;
+    showAnnouncement: any;
 }
 
 /**
  * Announcements
  */
 export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
-    public static defaultProps = {
+    public static defaultProps: IAnnouncementsProps = {
         itemsCount: 5,
+        listClassName: "pp-simpleList spacing-s",
+        modalContainerClassName: "pp-announcementsModalContainer",
+        modalHeaderClassName: "ms-font-xxl",
+        modalBodyClassName: "ms-font-l",
     };
 
     /**
@@ -30,6 +40,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
         this.state = {
             entries: null,
             isLoading: true,
+            showAnnouncement: null,
         };
     }
 
@@ -52,17 +63,52 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
      * Renders the component
      */
     public render() {
-        let { entries, isLoading } = this.state;
+        const {
+            entries,
+            isLoading,
+            showAnnouncement,
+        } = this.state;
+
+        const {
+            listClassName,
+            modalContainerClassName,
+            modalHeaderClassName,
+            modalBodyClassName,
+        } = this.props;
+
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }
         if (entries.length > 0) {
-            return (<ul className="pp-simpleList spacing-s">
-                {entries.map(({ Title, Created }, idx) => <li key={idx}>
-                    <h5><a href="#">{Title}</a></h5>
-                    <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(Created)}</span>
-                </li>)}
-            </ul>);
+            return (<div>
+                <ul className={listClassName}>
+                    {entries.map((entry, idx) => <li key={idx}>
+                        <h5>
+                            <a onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                        </h5>
+                        <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
+                    </li>)}
+                </ul>
+                {showAnnouncement && (
+                    <Modal
+                        isOpen={showAnnouncement}
+                        isDarkOverlay={true}
+                        onDismiss={e => this.setState({ showAnnouncement: null })}
+                        containerClassName={modalContainerClassName}
+                        isBlocking={false}
+                    >
+                        <div style={{ padding: 50 }}>
+                            <div className={modalHeaderClassName}>
+                                <span>{showAnnouncement.Title}</span>
+                            </div>
+                            <div className="ms-font-xs" style={{ marginTop: 20 }}>
+                                Publisert {Util.dateFormat(showAnnouncement.Created)}
+                            </div>
+                            <div className={modalBodyClassName} dangerouslySetInnerHTML={{ __html: showAnnouncement.Body }}></div>
+                        </div>
+                    </Modal>
+                )}
+            </div>);
         } else {
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
