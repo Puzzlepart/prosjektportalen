@@ -1,14 +1,10 @@
 import * as React from "react";
-import { Util } from "sp-pnp-js";
-import { Checkbox } from "office-ui-fabric-react";
 import { Icon } from "../../@Components";
+import {
+    IFilterItem,
+    FilterItem,
+} from "../FilterItem";
 
-export interface IFilterItem {
-    name: string;
-    value: string;
-    defaultSelected?: boolean;
-    readOnly?: boolean;
-}
 
 export interface IFilter {
     name: string;
@@ -30,12 +26,11 @@ export interface IFilterProps {
 export interface IFilterState {
     isCollapsed: boolean;
 }
-
 /**
  * Filter
  */
 export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
-    public static defaultProps: IFilterProps = {
+    public static defaultProps: Partial<IFilterProps> = {
         showIcon: true,
     };
     private inputs: { [key: string]: HTMLInputElement } = {};
@@ -98,23 +93,25 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
     private renderItems = () => {
         let { filter } = this.props;
         return filter.items.map((item, idx) => (
-            <li key={idx}>
-                <div className="ms-font-m">
-                    <Checkbox
-                        label={item.name}
-                        disabled={item.readOnly}
-                        defaultChecked={item.defaultSelected || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.name))}
-                        onChange={e => this.onChange(item)}
-                        ref={ele => this.inputs[item.value] = ele} />
-                </div>
-            </li>));
+            <FilterItem
+                key={idx}
+                filter={filter}
+                item={item}
+                className="ms-font-m"
+                onChange={this.onChange}
+                ref={ele => this.inputs[item.value] = ele} />
+        ));
     }
 
     /**
      * On filter change
      */
     private onChange = (item: any): void => {
-        let { filter, onFilterChange } = this.props;
+        let {
+            filter,
+            onFilterChange,
+        } = this.props;
+
         if (filter.multi) {
             filter.selected = Object.keys(this.inputs).filter(key => this.inputs[key].checked);
         } else {
