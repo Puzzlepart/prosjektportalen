@@ -22,6 +22,7 @@ export interface IGainsOverviewProps {
     dataSource: DataSource;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
+    searchProperty?: string;
 }
 
 export interface IGainsOverviewState {
@@ -37,7 +38,12 @@ export interface IGainsOverviewState {
 export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
     public static defaultProps: Partial<IGainsOverviewProps> = {
         groupByOptions: [],
+        searchProperty: "Title",
     };
+
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -47,14 +53,28 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         };
     }
 
-    public componentDidMount() {
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
         let { dataSource } = this.props;
         Data.retrieveFromSource(dataSource).then(data => this.setState({ data: data, isLoading: false }));
     }
 
-    public render() {
-        let { groupByOptions, showSearchBox } = this.props;
-        let { isLoading, data } = this.state;
+    /**
+     * Render the component
+     */
+    public render(): JSX.Element {
+        const {
+            groupByOptions,
+            showSearchBox,
+        } = this.props;
+
+        const {
+            isLoading,
+            data,
+        } = this.state;
+
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
@@ -63,7 +83,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             return (<div style={{ width: "100%" }}>
                 {showSearchBox !== false &&
                     <SearchBox
-                        onChange={st => this.setState({ searchTerm: st })}
+                        onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                         labelText="Søk i alle gevinster" />
                 }
                 {groupByOptions.map((gp, idx) => <Toggle
@@ -94,7 +114,14 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      * @param groups Group collection
      */
     private getFilteredData = (): { items: any[], columns: any[], groups: IGroup[] } => {
-        let { groupBy, data, searchTerm } = this.state;
+        const {
+            groupBy,
+            data,
+            searchTerm,
+        } = this.state;
+
+        const { searchProperty } = this.props;
+
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
         if (groupBy) {
@@ -118,7 +145,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             let indexOfColumn = data.columns.map(({ fieldName }) => fieldName).indexOf(groupBy);
             columns.splice(indexOfColumn, 1);
         }
-        const filteredItems = data.items.filter(item => item.Title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1);
+        const filteredItems = data.items.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1);
         return {
             items: filteredItems,
             columns: columns,
@@ -130,7 +157,8 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      * Sorting on column click
      */
     private _onColumnClick = (event, column): any => {
-        let { data } = this.state;
+        const { data } = this.state;
+
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
