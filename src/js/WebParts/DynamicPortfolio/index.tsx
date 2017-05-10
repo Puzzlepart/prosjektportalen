@@ -12,7 +12,6 @@ import {
     CommandBar,
     ConstrainMode,
     DetailsListLayoutMode,
-    Icon,
 } from "office-ui-fabric-react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { IFilter } from "./Filter";
@@ -20,36 +19,10 @@ import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
-import { _onRenderItemColumn } from "./ItemColumn";
+import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo from "../ProjectInfo";
-
-export interface IDynamicPortfolioProps {
-    searchProperty?: string;
-    showGroupBy?: boolean;
-    modalContainerClassName?: string;
-    modalHeaderClassName?: string;
-    projectInfoFilterField?: string;
-}
-
-export interface IDynamicPortfolioState {
-    isLoading?: boolean;
-    items?: any[];
-    filteredItems?: any[];
-    columns?: any[];
-    selectedColumns?: any[];
-    fieldNames?: string[];
-    searchTerm?: string;
-    filters?: IFilter[];
-    currentView?: Configuration.IViewConfig;
-    viewConfig?: Configuration.IViewConfig[];
-    refinerConfig?: Configuration.IRefinerConfig[];
-    currentFilters?: { [key: string]: string[] };
-    error?: string;
-    showFilterPanel?: boolean;
-    groupBy?: Configuration.IColumnConfig;
-    currentSort?: { fieldName: string, isSortedDescending: boolean };
-    showProjectInfo?: any;
-}
+import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
+import IDynamicPortfolioState from "./IDynamicPortfolioState";
 
 /**
  * Dynamic Portfolio
@@ -61,6 +34,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         modalContainerClassName: "pp-dynamicPortfolioModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         projectInfoFilterField: "GtPcPortfolioPage",
+        constrainMode: ConstrainMode.horizontalConstrained,
+        layoutMode: DetailsListLayoutMode.fixedColumns,
+        selectionMode: SelectionMode.none,
     };
 
     /**
@@ -73,7 +49,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             searchTerm: "",
             currentFilters: {},
             viewConfig: [],
-            filters: [],
             showFilterPanel: false,
         };
     }
@@ -87,20 +62,20 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 ...updatedState,
                 isLoading: false,
             }))
-            .catch(_ => {
-                this.setState({ isLoading: false });
-            });
+            .catch(_ => this.setState({ isLoading: false }));
     }
 
     /**
      * Renders the component
      */
     public render(): JSX.Element {
+        const { isLoading } = this.state;
+
         const {
-            filters,
-            showFilterPanel,
-            isLoading,
-        } = this.state;
+            constrainMode,
+            layoutMode,
+            selectionMode,
+        } = this.props;
 
         const {
             items,
@@ -120,22 +95,17 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     :
                     <DetailsList
                         items={items}
-                        constrainMode={ConstrainMode.horizontalConstrained}
-                        layoutMode={DetailsListLayoutMode.fixedColumns}
+                        constrainMode={constrainMode}
+                        layoutMode={layoutMode}
                         columns={columns}
                         groups={groups}
-                        selectionMode={SelectionMode.none}
+                        selectionMode={selectionMode}
                         onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (i) => this.setState({ showProjectInfo: i }))}
                         onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
                     />
                 }
             </div>
-            <FilterPanel
-                isOpen={showFilterPanel}
-                onDismiss={() => this.setState({ showFilterPanel: false })}
-                filters={filters}
-                showIcons={false}
-                onFilterChange={this._onFilterChange} />
+            {this.renderFilterPanel()}
             {this.renderProjectInfoModal()}
         </div>);
     }
@@ -177,6 +147,28 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     })
 
     /**
+     * Render Filter Panel
+     */
+    private renderFilterPanel = () => {
+        const {
+            filters,
+            showFilterPanel,
+        } = this.state;
+
+        if (filters) {
+            return (
+                <FilterPanel
+                    isOpen={showFilterPanel}
+                    onDismiss={() => this.setState({ showFilterPanel: false })}
+                    filters={filters}
+                    showIcons={false}
+                    onFilterChange={this._onFilterChange} />
+            );
+        }
+        return null;
+    }
+
+    /**
      * Renders the command bar from office-ui-fabric-react
      */
     private renderCommandBar = () => {
@@ -187,6 +179,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             groupBy,
          } = this.state;
 
+        const { showGroupBy } = this.props;
+
         if (!currentView) {
             return null;
         }
@@ -194,7 +188,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         const items = [];
         const farItems = [];
 
-        if (this.props.showGroupBy) {
+        if (showGroupBy) {
             const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
@@ -297,8 +291,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     }
 
     /**
-    * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
-    */
+     * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
+     */
     private getFilteredData = () => {
         const {
             selectedColumns,

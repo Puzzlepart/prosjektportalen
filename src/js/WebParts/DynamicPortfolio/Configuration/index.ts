@@ -54,7 +54,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
             .orderBy("GtDpOrder")
             .get(),
     ]).then(([fields, refiners, views]) => {
-        resolve({
+        const config = {
             columnConfig: fields.map(col => ({
                 name: col.GtDpDisplayName,
                 key: col.GtDpProperty,
@@ -84,6 +84,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 fields: GtDpFieldsLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
                 refiners: GtDpRefinersLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
             })),
-        });
+        };
+        resolve(config);
     }).catch(reject);
 });

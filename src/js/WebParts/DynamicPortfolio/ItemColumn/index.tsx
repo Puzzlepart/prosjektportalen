@@ -17,7 +17,7 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  * @param column Column
  * @param onTitleColumnClick On Title column click
  */
-export const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, onTitleColumnClick: (item: any) => void): any => {
+const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, onTitleColumnClick: (item: any) => void): any => {
     const columnValue = item[column.key];
     if (column.key === "Title") {
         return (
@@ -66,3 +66,5 @@ export const _onRenderItemColumn = (item: any, index: number, column: IColumnCon
         }
     }
 };
+
+export default _onRenderItemColumn;
