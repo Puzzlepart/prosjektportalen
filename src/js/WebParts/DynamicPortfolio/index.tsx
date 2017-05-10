@@ -141,26 +141,27 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     return;
                 }
                 Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(","))
-                .then(({ primarySearchResults, refiners }) => {
-                    FieldSelector.items = columnConfig.map(col => ({
-                        name: col.name,
-                        value: col.fieldName,
-                        defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
-                        readOnly: col.readOnly,
-                    }));
-                    let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
-                    resolve({
-                        columns: columnConfig,
-                        selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
-                        fieldNames: fieldNames,
-                        items: primarySearchResults,
-                        filteredItems: primarySearchResults,
-                        filters: filters,
-                        viewConfig: viewConfig,
-                        currentView: defaultViewConfig,
-                        refinerConfig: refinerConfig,
-                    });
-                });
+                    .then(({ primarySearchResults, refiners }) => {
+                        FieldSelector.items = columnConfig.map(col => ({
+                            name: col.name,
+                            value: col.fieldName,
+                            defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
+                            readOnly: col.readOnly,
+                        }));
+                        let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
+                        resolve({
+                            columns: columnConfig,
+                            selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
+                            fieldNames: fieldNames,
+                            items: primarySearchResults,
+                            filteredItems: primarySearchResults,
+                            filters: filters,
+                            viewConfig: viewConfig,
+                            currentView: defaultViewConfig,
+                            refinerConfig: refinerConfig,
+                        });
+                    })
+                    .catch(reject);
             }).catch(reject);
     })
 
@@ -377,6 +378,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             filteredItems,
             selectedColumns,
          } = this.state;
+
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
