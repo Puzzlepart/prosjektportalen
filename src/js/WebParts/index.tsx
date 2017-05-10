@@ -21,7 +21,7 @@ const wp_map: { [id: string]: JSX.Element } = {
     "pp-announcements": <Announcements />,
     "pp-latestprojects": <LatestProjects />,
     "pp-quicklinks": <QuickLinks />,
-    "pp-dynamicportfolio": <DynamicPortfolio />,
+    "pp-dynamicportfolio": <DynamicPortfolio showGroupBy={true} />,
     "pp-gainsoverview": <GainsOverview dataSource={DataSource.List} />,
     "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} groupByOptions={[{ label: "Grupper på prosjekt", property: "SiteTitle" }]} />,
     "pp-projectstatus": <ProjectStatus />,
