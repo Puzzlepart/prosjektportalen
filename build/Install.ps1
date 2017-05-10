@@ -34,7 +34,9 @@ Param(
     [switch]$SkipTaxonomy,
     [Parameter(Mandatory = $false, HelpMessage = "Environment")]
     [ValidateSet('SharePoint2013','SharePointOnline')]
-    [string]$Environment = "SharePointOnline"
+    [string]$Environment = "SharePointOnline",
+    [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
+    [string]$ExtensionFolder
 )
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
@@ -146,6 +148,26 @@ if (-not $SkipDefaultConfig.IsPresent) {
         Write-Host
         Write-Host "Error installing default config to $Url" -ForegroundColor Red
         Write-Host $error[0] -ForegroundColor Red
+    }
+}
+
+if($ExtensionFolder.IsPresent) {
+    $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
+    if($extensionFiles.Length -gt 0) {
+        try {
+            Connect-PnPOnline $Url -Credentials $creds
+            Write-Host "Deploying extensions.." -ForegroundColor Green -NoNewLine
+            foreach($extension in $extensionFiles) {
+                Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
+            }
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing extensionso $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
+        }
     }
 }
 
