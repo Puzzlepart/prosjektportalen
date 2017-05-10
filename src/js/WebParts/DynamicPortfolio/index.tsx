@@ -180,14 +180,14 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             }));
             items.push({
                 key: "Group",
-                name: groupBy ? groupBy.name : "Ingen gruppering",
+                name: groupBy ? groupBy.name : __("String_NoGrouping"),
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
                 items: [
                     {
                         key: "NoGrouping",
-                        name: "Ingen gruppering",
+                        name: __("String_NoGrouping"),
                         onClick: e => {
                             e.preventDefault();
                             this.setState({ groupBy: null });
