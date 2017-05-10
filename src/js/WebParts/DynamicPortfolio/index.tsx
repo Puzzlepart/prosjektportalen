@@ -26,20 +26,20 @@ export interface IDynamicPortfolioProps {
 }
 
 export interface IDynamicPortfolioState {
-    isLoading: boolean;
+    isLoading?: boolean;
     items?: any[];
     filteredItems?: any[];
     columns?: any[];
     selectedColumns?: any[];
     fieldNames?: string[];
-    searchTerm: string;
+    searchTerm?: string;
     filters?: IFilter[];
     currentView?: Configuration.IViewConfig;
     viewConfig?: Configuration.IViewConfig[];
     refinerConfig?: Configuration.IRefinerConfig[];
     currentFilters?: { [key: string]: string[] };
     error?: string;
-    showFilterPanel: boolean;
+    showFilterPanel?: boolean;
     groupBy?: Configuration.IColumnConfig;
     currentSort?: { fieldName: string, isSortedDescending: boolean };
 }
@@ -48,7 +48,7 @@ export interface IDynamicPortfolioState {
  * Dynamic Portfolio
  */
 export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
-    public static defaultProps: IDynamicPortfolioProps = {
+    public static defaultProps: Partial<IDynamicPortfolioProps> = {
         searchProperty: "Title",
         showGroupBy: true,
     };
@@ -72,38 +72,14 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Component did mount
      */
     public componentDidMount(): void {
-        Configuration.getConfig().then(({ columnConfig, refinerConfig, viewConfig }) => {
-            const fieldNames = columnConfig.map(f => f.fieldName);
-            const [defaultViewConfig] = viewConfig.filter(qc => qc.default);
-            if (!defaultViewConfig) {
-                return;
-            }
-            Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                FieldSelector.items = columnConfig.map(col => ({
-                    name: col.name,
-                    value: col.fieldName,
-                    defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
-                    readOnly: col.readOnly,
-                }));
-                let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
-                this.setState({
-                    columns: columnConfig,
-                    selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
-                    fieldNames: fieldNames,
-                    isLoading: false,
-                    items: primarySearchResults,
-                    filteredItems: primarySearchResults,
-                    filters: filters,
-                    viewConfig: viewConfig,
-                    currentView: defaultViewConfig,
-                    refinerConfig: refinerConfig,
-                });
-            });
-        }).catch(_ => {
-            this.setState({
+        this.fetchInitialData()
+            .then(updatedState => this.setState({
+                ...updatedState,
                 isLoading: false,
+            }))
+            .catch(_ => {
+                this.setState({ isLoading: false });
             });
-        });
     }
 
     /**
@@ -152,6 +128,41 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 onFilterChange={this._onFilterChange} />
         </div>);
     }
+
+    /**
+     * Fetch initial data
+     */
+    private fetchInitialData = () => new Promise<Partial<IDynamicPortfolioState>>((resolve, reject) => {
+        Configuration.getConfig()
+            .then(({ columnConfig, refinerConfig, viewConfig }) => {
+                const fieldNames = columnConfig.map(f => f.fieldName);
+                const [defaultViewConfig] = viewConfig.filter(qc => qc.default);
+                if (!defaultViewConfig) {
+                    return;
+                }
+                Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(","))
+                .then(({ primarySearchResults, refiners }) => {
+                    FieldSelector.items = columnConfig.map(col => ({
+                        name: col.name,
+                        value: col.fieldName,
+                        defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
+                        readOnly: col.readOnly,
+                    }));
+                    let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
+                    resolve({
+                        columns: columnConfig,
+                        selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
+                        fieldNames: fieldNames,
+                        items: primarySearchResults,
+                        filteredItems: primarySearchResults,
+                        filters: filters,
+                        viewConfig: viewConfig,
+                        currentView: defaultViewConfig,
+                        refinerConfig: refinerConfig,
+                    });
+                });
+            }).catch(reject);
+    })
 
     /**
      * Renders the command bar from office-ui-fabric-react
