@@ -23,7 +23,9 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
     return (
         <Panel
             isOpen={isOpen}
+            isBlocking={false}
             onDismiss={onDismiss}
+            headerText="Filtre"
             type={PanelType.smallFixedFar}>
             <div className="ms-Grid" style={{ marginTop: 20 }}>
                 <div className="ms-Grid-row">
