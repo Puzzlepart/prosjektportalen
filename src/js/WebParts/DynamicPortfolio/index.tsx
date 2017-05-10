@@ -9,6 +9,8 @@ import {
     SearchBox,
     ContextualMenuItemType,
     CommandBar,
+    ConstrainMode,
+    DetailsListLayoutMode,
 } from "office-ui-fabric-react";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
@@ -118,9 +120,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             groups,
         } = this.getFilteredData();
 
-        return (<div className="ms-Grid">
-            <div className="ms-Grid-row">
-                <div className="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
+        return (<div>
                     <div>
                         {this.renderCommandBar()}
                         <div style={{ height: 10 }}></div>
@@ -132,6 +132,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                             :
                             <DetailsList
                                 items={items}
+                                constrainMode={ConstrainMode.horizontalConstrained}
+                                layoutMode={DetailsListLayoutMode.justified}
                                 columns={columns}
                                 groups={groups}
                                 selectionMode={SelectionMode.none}
@@ -140,8 +142,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                             />
                         }
                     </div>
-                </div>
-            </div>
             <FilterPanel
                 isOpen={showFilterPanel}
                 onDismiss={() => this.setState({ showFilterPanel: false })}

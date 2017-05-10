@@ -65,6 +65,7 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 minWidth: col.GtDpMinWidth,
                 maxWidth: col.GtDpMaxWidth,
                 isResizable: col.GtDpIsResizable,
+                isCollapsable: true,
                 groupBy: col.GtDpGroupBy,
             })),
             refinerConfig: refiners.map(ref => ({
