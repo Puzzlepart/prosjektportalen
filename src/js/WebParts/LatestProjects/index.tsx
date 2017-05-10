@@ -98,9 +98,18 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
         if (webinfos.length > 0) {
             return (<ul className="pp-simpleList spacing-m">
                 {webinfos.map(webinfo => (
+
                     <li key={webinfo.Id}>
-                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                        {webinfo.Title ?
+                            <div>
+                                <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                                <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                            </div>
+                            : (
+                                <div style={{ width: 100 }}>
+                                    <Spinner type={SpinnerType.normal} />
+                                </div>
+                            )}
                     </li>
                 ))}
             </ul>);
