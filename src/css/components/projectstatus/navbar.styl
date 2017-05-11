@@ -14,14 +14,22 @@
             padding: 0;
 
             .nav-link {
-                padding: 6px 10px;
+                padding: 9px 10px;
                 text-decoration: none;
                 cursor: pointer;
                 text-align: center;
 
-                &.active {
-                    color: white;
-                    background: $SuiteBarBackground;
+                // &.active {
+                //     color: white;
+                //     background: $SuiteBarBackground;
+                //     .ms-Icon {
+                //          color: #fff;
+                //     }
+                // }
+
+                .ms-Icon {
+                    font-size: 25px;
+                    color: $SuiteBarBackground;
                 }
 
                 p {
@@ -66,19 +74,6 @@
 
             .save-pdf-container {
                 cursor: pointer;
-            }
-        }
-
-        .nav-link {
-            .ms-Icon {
-                font-size: 25px;
-                color: $SuiteBarBackground;
-            }
-
-            &.active {
-                .ms-Icon {
-                    color: #fff;
-                }
             }
         }
     }

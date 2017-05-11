@@ -14,20 +14,20 @@ const StatusSection = ({ project }) => {
                         statusValue=""
                         comment={project.GtOverallStatus}
                         fieldName="GtOverallStatus" />
-                </div>
-                <div className="status-element ms-Grid-row">
-                    <div className="status-icons ms-Grid-col ms-u-sm12 ms-u-md2 ms-u-lg2">
-                        <i className="ms-Icon ms-Icon--CustomList no-status"></i>
-                    </div>
-                    <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
-                        <h2>Prosjektegenskaper</h2><h1></h1>
-                        <ProjectInfo
-                            hideChrome={true}
-                            showEditLink={false}
-                            showMissingPropsWarning={false}
-                            filterField="GtPcProjectStatus"
-                            labelSize="m"
-                            valueSize="s" />
+                    <div className="status-element ms-Grid-row">
+                        <div className="status-icons ms-Grid-col ms-u-sm12 ms-u-md2 ms-u-lg2">
+                            <i className="ms-Icon ms-Icon--CustomList no-status"></i>
+                        </div>
+                        <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
+                            <h2>Prosjektegenskaper</h2><h1></h1>
+                            <ProjectInfo
+                                hideChrome={true}
+                                showEditLink={false}
+                                showMissingPropsWarning={false}
+                                filterField="GtPcProjectStatus"
+                                labelSize="m"
+                                valueSize="s" />
+                        </div>
                     </div>
                 </div>
             </div>

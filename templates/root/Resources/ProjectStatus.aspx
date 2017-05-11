@@ -46,14 +46,5 @@
             overflow-x: hidden !important;
             height: auto !important;
         }
-        @media (max-width: 800px) {
-            #sideNavBox {
-                display: none;
-            }
-
-            #contentBox {
-                margin-left: 20px;
-            }
-        }
     </style>
 </asp:Content>
