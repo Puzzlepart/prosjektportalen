@@ -454,6 +454,9 @@
   <data name="SiteFields_GtRiskProbability_DisplayName" xml:space="preserve">
     <value>Probability (P)</value>
   </data>
+  <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
+    <value>Risk strategy</value>
+  </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Log element</value>
   </data>
@@ -1269,6 +1272,30 @@
   </data>
   <data name="Choice_GtStakeholderGroup_Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+    <data name="Choice_GtRiskStrategy_Reduce" xml:space="preserve">
+    <value>Reduce</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Monitor" xml:space="preserve">
+    <value>Monitor</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Avoid" xml:space="preserve">
+    <value>Avoid</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Transfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Increase" xml:space="preserve">
+    <value>Increase</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Exploit" xml:space="preserve">
+    <value>Exploit</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>

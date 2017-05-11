@@ -451,6 +451,9 @@
   <data name="SiteFields_GtRiskProbability_DisplayName" xml:space="preserve">
     <value>Sannsynlighet (S)</value>
   </data>
+  <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
+    <value>Risikostrategi</value>
+  </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Loggelement</value>
   </data>
@@ -1269,6 +1272,30 @@
   </data>
   <data name="Choice_GtStakeholderGroup_Users" xml:space="preserve">
     <value>Brukere</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Reduce" xml:space="preserve">
+    <value>Redusere</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Monitor" xml:space="preserve">
+    <value>Overvåke</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Avoid" xml:space="preserve">
+    <value>Unngå</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Transfer" xml:space="preserve">
+    <value>Overføre</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Share" xml:space="preserve">
+    <value>Dele</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Accept" xml:space="preserve">
+    <value>Akseptere</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Increase" xml:space="preserve">
+    <value>Øke</value>
+  </data>
+  <data name="Choice_GtRiskStrategy_Exploit" xml:space="preserve">
+    <value>Utnytte</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>

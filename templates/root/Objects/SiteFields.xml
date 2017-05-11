@@ -99,14 +99,17 @@
         </CHOICES>
     </Field>
     <Field ID="{0e1b295d-2bfb-4ef6-ae92-e72068e56111}" Name="GtRiskProbability" DisplayName="{resource:SiteFields_GtRiskProbability_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtRiskProbability_Description}" Min="0" Max="5" StaticName="GtRiskProbability"></Field>
-    <Field ID="{04cfd3c0-5f18-4906-bdca-b5f84b693437}" Name="GtRiskStrategy" DisplayName="Risikostrategi" Type="Choice" Group="{resource:SiteFields_Group}" Description="" StaticName="GtRiskStrategy">
+    <Field ID="{04cfd3c0-5f18-4906-bdca-b5f84b693437}" Name="GtRiskStrategy" DisplayName="{resource:SiteFields_GtRiskStrategy_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="" StaticName="GtRiskStrategy">
+        <Default>{resource:Choice_GtRiskStrategy_Reduce}</Default>
         <CHOICES>
-            <CHOICE>Unngå</CHOICE>
-            <CHOICE>Overføre</CHOICE>
-            <CHOICE>Dele</CHOICE>
-            <CHOICE>Akseptere</CHOICE>
-            <CHOICE>Øke</CHOICE>
-            <CHOICE>Utnytte</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Reduce}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Monitor}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Avoid}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Transfer}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Share}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Accept}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Increase}</CHOICE>
+            <CHOICE>{resource:Choice_GtRiskStrategy_Exploit}</CHOICE>
         </CHOICES>
     </Field>
     <Field ID="{2391d165-5d13-46b7-87d2-e32040293210}" Name="GtProjectLogType" DisplayName="{resource:SiteFields_GtProjectLogType_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectLogType_Description}" StaticName="GtProjectLogType">
