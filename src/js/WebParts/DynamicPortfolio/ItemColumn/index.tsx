@@ -6,6 +6,7 @@ import {
     PersonaPresence,
     Icon,
 } from "office-ui-fabric-react";
+import { IColumnConfig } from "../Configuration";
 import { GetStatusProperties } from "../../ProjectStatus/Utils";
 
 /**
@@ -14,11 +15,23 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  * @param item The item
  * @param index Index
  * @param column Column
+ * @param onTitleColumnClick On Title column click
  */
-export const _onRenderItemColumn = (item: any, index: number, column: any): any => {
+export const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, onTitleColumnClick: (item: any) => void): any => {
     const columnValue = item[column.key];
     if (column.key === "Title") {
-        return (<a href={item.Path}>{columnValue}</a>);
+        return (
+            <div>
+                <Icon
+                    iconName="Table"
+                    onClick={e => onTitleColumnClick(item)}
+                    title="Vis prosjektinfo"
+                    style={{
+                        cursor: "pointer",
+                        marginRight: 5,
+                    }} />
+                <a href={item.Path}>{columnValue}</a>
+            </div>);
     }
     switch (column.render) {
         case "Date": {

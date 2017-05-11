@@ -1,5 +1,8 @@
 import * as React from "react";
-import { Site, sp } from "sp-pnp-js";
+import {
+    Site,
+    Web,
+} from "sp-pnp-js";
 import {
     Spinner,
     SpinnerType,
@@ -25,6 +28,8 @@ interface IProjectInfoProps {
     labelSize?: string;
     valueSize?: string;
     hideChrome?: boolean;
+    webUrl?: string;
+    welcomePageId?: number;
 }
 
 /**
@@ -33,6 +38,8 @@ interface IProjectInfoProps {
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
     public static defaultProps: IProjectInfoProps = {
         hideChrome: false,
+        webUrl: _spPageContextInfo.webAbsoluteUrl,
+        welcomePageId: 3,
     };
 
     /**
@@ -65,7 +72,8 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         const {
             showEditLink,
             hideChrome,
-     } = this.props;
+        } = this.props;
+
         const {
             isLoading,
             error,
@@ -126,7 +134,13 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         const { showMissingPropsWarning, labelSize, valueSize } = this.props;
         let hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         return (<div>
-            {properties.filter(p => !p.empty).map((d, index) => (<ProjectProp key={index} data={d} labelSize={labelSize} valueSize={valueSize} />))}
+            {properties.filter(p => !p.empty).map((d, index) => (
+                <ProjectProp
+                    key={index}
+                    data={d}
+                    labelSize={labelSize}
+                    valueSize={valueSize} />
+            ))}
             <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
                 <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
             </div>
@@ -139,16 +153,35 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * @param configList Configuration list
      */
     private fetchData = (configList = "ProjectConfig") => new Promise((resolve, reject) => {
-        const site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-        const configPromise = site.rootWeb.lists.getByTitle(configList).items
-            .select("Title", "GtPcProjectStatus", "GtPcFrontpage")
+        const {
+            webUrl,
+            welcomePageId,
+        } = this.props;
+
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+        const configPromise = rootWeb
+            .lists
+            .getByTitle(configList)
+            .items
+            .select("Title", "GtPcProjectStatus", "GtPcFrontpage", "GtPcPortfolioPage")
             .get();
-        const fieldsPromise = site.rootWeb.contentTypes.getById(__("ContentTypes_Prosjektforside_ContentTypeId")).fields
+
+        const fieldsPromise = rootWeb
+            .contentTypes
+            .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
+            .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .filter(`Group eq '${__("SiteFields_Group")}'`)
             .get();
-        const itemPromise = sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML
+
+        const itemPromise = new Web(webUrl)
+            .lists
+            .getByTitle(__("Lists_SitePages_Title"))
+            .items
+            .getById(welcomePageId)
+            .fieldValuesAsHTML
             .get();
+
         Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
             resolve({
                 config: config,
