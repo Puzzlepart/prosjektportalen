@@ -649,6 +649,15 @@
   <data name="SiteFields_GtBudgetLastReportDate_DisplayName" xml:space="preserve">
     <value>Dato for siste rapportering av kostnader</value>
   </data>
+  <data name="SiteFields_GtActionChannel_DisplayName" xml:space="preserve">
+    <value>Kanal</value>
+  </data>
+  <data name="SiteFields_GtActionStatus_DisplayName" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SiteFields_GtActionDescription_DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1296,6 +1305,18 @@
   </data>
   <data name="Choice_GtRiskStrategy_Exploit" xml:space="preserve">
     <value>Utnytte</value>
+  </data>
+  <data name="Choice_GtActionStatus_NotStarted" xml:space="preserve">
+    <value>Ikke påbegynt</value>
+  </data>
+  <data name="Choice_GtActionStatus_Started" xml:space="preserve">
+    <value>Påbegynt</value>
+  </data>
+  <data name="Choice_GtActionStatus_Completed" xml:space="preserve">
+    <value>Fullført</value>
+  </data>
+  <data name="Choice_GtActionStatus_Delayed" xml:space="preserve">
+    <value>Utsatt</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>

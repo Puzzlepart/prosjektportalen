@@ -652,6 +652,15 @@
   <data name="SiteFields_GtBudgetLastReportDate_DisplayName" xml:space="preserve">
     <value>Date of last cost report</value>
   </data>
+  <data name="SiteFields_GtActionChannel_DisplayName" xml:space="preserve">
+    <value>Channel</value>
+  </data>
+  <data name="SiteFields_GtActionStatus_DisplayName" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SiteFields_GtActionDescription_DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1296,6 +1305,18 @@
   </data>
   <data name="Choice_GtRiskStrategy_Exploit" xml:space="preserve">
     <value>Exploit</value>
+  </data>
+  <data name="Choice_GtActionStatus_NotStarted" xml:space="preserve">
+    <value>Not started</value>
+  </data>
+  <data name="Choice_GtActionStatus_Started" xml:space="preserve">
+    <value>Started</value>
+  </data>
+  <data name="Choice_GtActionStatus_Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Choice_GtActionStatus_Delayed" xml:space="preserve">
+    <value>Delayed</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>
