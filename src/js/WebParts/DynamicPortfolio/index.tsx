@@ -36,7 +36,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         projectInfoFilterField: "GtPcPortfolioPage",
         constrainMode: ConstrainMode.horizontalConstrained,
         layoutMode: DetailsListLayoutMode.fixedColumns,
-        selectionMode: SelectionMode.none,
+        selectionMode: SelectionMode.single,
     };
 
     /**
@@ -100,7 +100,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         columns={columns}
                         groups={groups}
                         selectionMode={selectionMode}
-                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (i) => this.setState({ showProjectInfo: i }))}
+                        onItemInvoked={item => this.setState({ showProjectInfo: item })}
+                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column)}
                         onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
                     />
                 }

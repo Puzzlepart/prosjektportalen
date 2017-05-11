@@ -15,23 +15,11 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  * @param item The item
  * @param index Index
  * @param column Column
- * @param onTitleColumnClick On Title column click
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, onTitleColumnClick: (item: any) => void): any => {
+const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig): any => {
     const columnValue = item[column.key];
     if (column.key === "Title") {
-        return (
-            <div>
-                <Icon
-                    iconName="Table"
-                    onClick={e => onTitleColumnClick(item)}
-                    title="Vis prosjektinfo"
-                    style={{
-                        cursor: "pointer",
-                        marginRight: 5,
-                    }} />
-                <a href={item.Path}>{columnValue}</a>
-            </div>);
+        return <a href={item.Path}>{columnValue}</a>;
     }
     switch (column.render) {
         case "Date": {
