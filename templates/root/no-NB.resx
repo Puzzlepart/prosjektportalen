@@ -640,6 +640,9 @@
   <data name="SiteFields_GtCostsTotal_DisplayName" xml:space="preserve">
     <value>Kostnader påløpt totalt</value>
   </data>
+  <data name="SiteFields_GtProjectForecast_DisplayName" xml:space="preserve">
+    <value>Prognose for prosjektet</value>
+  </data>
   <data name="SiteFields_GtBudgetLastReportDate_DisplayName" xml:space="preserve">
     <value>Dato for siste rapportering av kostnader</value>
   </data>

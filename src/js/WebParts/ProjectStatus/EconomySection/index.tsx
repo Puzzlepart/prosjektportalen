@@ -8,6 +8,7 @@ const FIELDS_TO_SHOW: IProjectProp[] = [
     { internalName: "GtProjectFinanceName", displayName: __("SiteFields_GtProjectFinanceName_DisplayName") },
     { internalName: "GtBudgetTotal", displayName: __("SiteFields_GtBudgetTotal_DisplayName") },
     { internalName: "GtCostsTotal", displayName: __("SiteFields_GtCostsTotal_DisplayName") },
+    { internalName: "GtProjectForecast", displayName: __("SiteFields_GtProjectForecast_DisplayName") },
     { internalName: "GtBudgetLastReportDate", displayName: __("SiteFields_GtBudgetLastReportDate_DisplayName") },
 ];
 
@@ -24,7 +25,7 @@ const EconomySection = ({ project }: IEconomySectionProps) => {
             <div className="ms-Grid-col ms-u-sm12 economy-elements-container">
                 <div className="status-elements">
                     {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
-                        <ProjectProp key={idx} data={{ internalName: internalName, displayName: displayName, value: project[internalName] }} labelSize="l" valueSize="xl" />
+                        <ProjectProp key={idx} data={{ internalName: internalName, displayName: displayName, value: project[internalName] }} labelSize="m" valueSize="l" />
                     ))}
                 </div>
             </div>
