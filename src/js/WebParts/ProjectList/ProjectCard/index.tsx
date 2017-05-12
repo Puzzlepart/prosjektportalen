@@ -69,7 +69,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                         ariaLabel: "Vis prosjektinfo",
                     },
                     ]}
-                views={project.ViewsLifeTime}
+                views={project.Views}
             />
         </DocumentCard>
     );

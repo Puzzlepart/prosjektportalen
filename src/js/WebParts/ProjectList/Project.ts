@@ -1,16 +1,4 @@
-export interface IProject {
-    Title: string;
-    Url: string;
-    Logo: string;
-    Phase: string;
-    ServiceArea: string;
-    Type: string;
-    Manager: string;
-    Owner: string;
-    ViewsLifeTime: number;
-}
-
-export class Project implements IProject {
+export class Project {
     public Title: string;
     public Url: string;
     public Logo: string;
@@ -19,7 +7,7 @@ export class Project implements IProject {
     public Type: string;
     public Manager: string;
     public Owner: string;
-    public ViewsLifeTime: number;
+    public Views: number;
 
     constructor({ Title, Path, SiteLogo, RefinableString52, RefinableString53, RefinableString54, GtProjectManagerOWSUSER, GtProjectOwnerOWSUSER, ViewsLifeTime }) {
         this.Title = Title;
@@ -30,7 +18,7 @@ export class Project implements IProject {
         this.Type = RefinableString54;
         this.Manager = GtProjectManagerOWSUSER;
         this.Owner = GtProjectOwnerOWSUSER;
-        this.ViewsLifeTime = ViewsLifeTime;
+        this.Views = ViewsLifeTime;
     }
 }
 
