@@ -10,24 +10,8 @@ import ProjectInfo from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
-import IProject from "./IProject";
-
-interface IProjectListState {
-    isLoading: boolean;
-    projects?: IProject[];
-    searchTerm?: string;
-    showProjectInfo?: any;
-}
-
-interface IProjectListProps {
-    tileWidth?: number;
-    tileImageHeight?: number;
-    tileGutter?: number;
-    tileClassName?: string;
-    modalContainerClassName?: string;
-    modalHeaderClassName?: string;
-    projectInfoFilterField?: string;
-}
+import IProjectListProps from "./IProjectListProps";
+import IProjectListState from "./IProjectListState";
 
 /**
  * Project information
