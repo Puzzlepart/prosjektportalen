@@ -28,6 +28,7 @@ export { ProjectInfoRenderMode };
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
     public static defaultProps: IProjectInfoProps = {
         hideChrome: false,
+        showEditLink: true,
         webUrl: _spPageContextInfo.webAbsoluteUrl,
         welcomePageId: 3,
         renderMode: ProjectInfoRenderMode.Normal,
@@ -135,7 +136,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Render inner
      */
     private renderInner = () => {
-        const { showEditLink } = this.props;
         const {
             properties,
             isLoading,
@@ -147,10 +147,11 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         return <div
             className="pp-projectInfoInner">
             {this.renderProperties(properties)}
-            <div style={{ marginTop: 20 }}>
+            <div
+                hidden={!this.props.showEditLink}
+                style={{ marginTop: 20 }}>
                 <ModalLink
-                    hidden={showEditLink === false}
-                    url="../SitePages/Forms/EditForm.aspx?ID=3"
+                    url={`${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`}
                     label={__("ProjectInfo_EditProperties")}
                     icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left }}
                     options={{
@@ -161,6 +162,14 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                     }}
                     reloadOnSuccess={true}
                     showLabel={true} />
+                <ModalLink
+                    url={`${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`}
+                    label={__("ProjectInfo_EditLogo")}
+                    icon={{ iconName: "AppIconDefault", position: ModalLinkIconPosition.Left }}
+                    reloadOnSuccess={true}
+                    showLabel={true}
+                    style={{ marginLeft: 10 }}
+                />
             </div>
         </div>;
     }

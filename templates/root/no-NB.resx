@@ -1009,6 +1009,9 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Rediger egenskaper</value>
   </data>
+  <data name="ProjectInfo_EditLogo" xml:space="preserve">
+    <value>Tittel, beskrivelse og logo</value>
+  </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
     <value>Viktig informasjon om prosjektet er ikke satt. Du bør sette disse egenskapene snarest.</value>
   </data>
