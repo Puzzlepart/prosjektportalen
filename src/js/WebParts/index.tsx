@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import ProjectList from "./ProjectList";
 import ProjectInfo from "./ProjectInfo";
 import ProjectPhases from "./ProjectPhases";
 import NewProjectLink from "./NewProjectLink";
@@ -15,6 +16,7 @@ import { DataSource } from "./DataSource";
  * Maps container ids to JSX.Elements (WebParts)
  */
 const wp_map: { [id: string]: JSX.Element } = {
+    "pp-projectlist": <ProjectList />,
     "pp-projectinfo": <ProjectInfo filterField="GtPcFrontpage" />,
     "pp-projectphases": <ProjectPhases />,
     "pp-newprojectlink": <NewProjectLink />,

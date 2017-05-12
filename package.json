@@ -20,6 +20,7 @@
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "react-excel-workbook": "0.0.2",
+    "react-masonry-component": "^5.0.5",
     "react-scroll": "1.5.2",
     "react-sticky": "6.0.1",
     "sp-pnp-js": "latest",
