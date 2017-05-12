@@ -9,7 +9,7 @@ import {
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
 import ILatestProjectsProps from "./ILatestProjectsProps";
-import ILatestProjectsState, { IWebInfo } from "./ILatestProjectsState";
+import ILatestProjectsState from "./ILatestProjectsState";
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
     public static defaultProps: ILatestProjectsProps = {
@@ -40,9 +40,9 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
      */
     public componentDidMount(): void {
         this.fetchData()
-            .then(webinfos => {
+            .then(updatedState => {
                 this.setState({
-                    webinfos: webinfos,
+                    ...updatedState,
                     isLoading: false,
                 });
             })
@@ -51,10 +51,8 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
         if (this.props.reloadInterval !== -1) {
             this.reloadInterval = window.setInterval(() => {
                 this.fetchData()
-                    .then(webinfos => {
-                        this.setState({
-                            webinfos: webinfos,
-                        });
+                    .then(updatedState => {
+                        this.setState(updatedState);
                     });
             }, (this.props.reloadInterval * 1000));
         }
@@ -132,7 +130,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
     /**
      * Fetch data (webinfos)
      */
-    private fetchData = () => new Promise<IWebInfo[]>((resolve, reject) => {
+    private fetchData = () => new Promise<Partial<ILatestProjectsState>>((resolve, reject) => {
         const {
             itemsCount,
             itemsOrderBy,
@@ -145,7 +143,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             .select("Id", "ServerRelativeUrl", "Title", "Created")
             .orderBy(itemsOrderBy.orderBy, itemsOrderBy.ascending)
             .get().then(webinfos => {
-                resolve(webinfos);
+                resolve({ webinfos: webinfos });
             }).catch(reject);
     })
 };
