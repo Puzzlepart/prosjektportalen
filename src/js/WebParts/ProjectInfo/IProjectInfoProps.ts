@@ -12,6 +12,7 @@ interface IProjectInfoProps {
     welcomePageId?: number;
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;
+    containerClassName?: string;
 }
 
 export default IProjectInfoProps;

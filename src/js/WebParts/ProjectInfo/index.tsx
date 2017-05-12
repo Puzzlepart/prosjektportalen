@@ -26,12 +26,16 @@ export { ProjectInfoRenderMode };
  * Project information
  */
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
+    /**
+     * Default properties
+     */
     public static defaultProps: IProjectInfoProps = {
         hideChrome: false,
         showEditLink: true,
         webUrl: _spPageContextInfo.webAbsoluteUrl,
         welcomePageId: 3,
         renderMode: ProjectInfoRenderMode.Normal,
+        containerClassName: "pp-projectInfo",
     };
 
     /**
@@ -75,12 +79,13 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         const {
             renderMode,
             modalOptions,
+            containerClassName,
          } = this.props;
 
 
         switch (renderMode) {
             case ProjectInfoRenderMode.Normal: {
-                return (<div className="pp-projectInfo">
+                return (<div className={containerClassName}>
                     {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
                     {error && (<div className="ms-metadata">
                         <Icon iconName="Error" style={{ color: "#000000" }} />  {__("WebPart_FailedMessage")}
@@ -95,7 +100,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                         isOpen={modalOptions.isOpen}
                         isDarkOverlay={modalOptions.isDarkOverlay}
                         onDismiss={modalOptions.onDismiss}
-                        containerClassName="pp-projectInfo pp-modal"
+                        containerClassName={`${containerClassName} pp-modal`}
                         isBlocking={false}
                     >
                         <div style={{ padding: 50 }}>
@@ -117,19 +122,21 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Render chrome
      */
     private renderChrome = () => {
-        return <ChromeTitle
-            title="Om prosjektet"
-            toggleElement={{
-                selector: ".pp-projectInfoInner",
-                animationDelay: 100,
-                animation: "slideToggle",
-                storage: {
-                    key: "ProjectInfo",
-                    type: "localStorage",
-                },
-            }}
-            hidden={this.props.hideChrome}
-        />;
+        return (
+            <ChromeTitle
+                title={__("WebPart_ProjectInfo_Title")}
+                toggleElement={{
+                    selector: ".pp-projectInfoInner",
+                    animationDelay: 100,
+                    animation: "slideToggle",
+                    storage: {
+                        key: "ProjectInfo",
+                        type: "localStorage",
+                    },
+                }}
+                hidden={this.props.hideChrome}
+            />
+        );
     }
 
     /**
