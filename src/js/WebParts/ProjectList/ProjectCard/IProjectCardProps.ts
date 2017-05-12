@@ -1,7 +1,7 @@
-import IProject from "../IProject";
+import Project from "../Project";
 
 interface IProjectCardProps {
-    project: IProject;
+    project: Project;
     className: string;
     tileWidth: number;
     tileImageHeight: number;

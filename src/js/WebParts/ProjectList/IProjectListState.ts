@@ -1,8 +1,8 @@
-import IProject from "./IProject";
+import Project from "./Project";
 
 interface IProjectListState {
     isLoading: boolean;
-    projects?: IProject[];
+    projects?: Project[];
     searchTerm?: string;
     showProjectInfo?: any;
 }

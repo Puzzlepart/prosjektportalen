@@ -52,7 +52,7 @@ module.exports = (env = "development", devtool = "source-map") => ({
                         ]
                     }
                 }
-            }, (env === "dev") ? { exclude: /node_modules/ } : {}),
+            }, (env === "development") ? { exclude: /node_modules/ } : {}),
             { test: /\.txt$/, use: 'raw-loader' },
             { test: /\.json$/, loader: "json-loader" }
         ]

@@ -14,8 +14,8 @@ import IProjectCardProps from "./IProjectCardProps";
 
 
 const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
-    const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.GtProjectManagerOWSUSER.split(" | ");
-    const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.GtProjectOwnerOWSUSER.split(" | ");
+    const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.Manager.split(" | ");
+    const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.Owner.split(" | ");
     const ManagerUserPhoto = Util.userPhoto(ManagerEmail);
     const OwnerUserPhoto = Util.userPhoto(OwnerEmail);
     return (
@@ -26,9 +26,9 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
         >
             <DocumentCardPreview previewImages={[
                 {
-                    previewImageSrc: project.SiteLogo,
+                    previewImageSrc: project.Logo,
                     imageFit: ImageFit.cover,
-                    accentColor: Util.stringToColour(project.RefinableString52),
+                    accentColor: Util.stringToColour(project.Phase),
                     width: tileWidth,
                     height: tileImageHeight,
                 },
@@ -37,7 +37,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                 title={project.Title}
                 shouldTruncate={true} />
             <DocumentCardLocation
-                location={project.RefinableString52 || __("String_NotSet")} />
+                location={project.Phase || __("String_NotSet")} />
             <DocumentCardActivity
                 activity={__("SiteFields_GtProjectOwner_DisplayName")}
                 people={[
