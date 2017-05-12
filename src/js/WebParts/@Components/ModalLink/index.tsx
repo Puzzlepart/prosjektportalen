@@ -3,7 +3,7 @@ import { Icon } from "office-ui-fabric-react";
 import IModalLinkProps, { ModalLinkIconPosition, IModalLinkIconProps, IModalLinkOptions } from "./IModalLinkProps";
 
 
-export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style = {}, hidden }: IModalLinkProps) => {
+export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style, hidden }: IModalLinkProps) => {
     const onClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -46,6 +46,7 @@ export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSucce
 
     return (
         <a
+            href="#"
             hidden={hidden}
             onClick={onClick}
             id={id}
