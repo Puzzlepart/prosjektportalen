@@ -19,9 +19,6 @@ import IProjectInfoProps from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 
-
-export { ProjectInfoRenderMode };
-
 /**
  * Project information
  */
@@ -321,3 +318,5 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         }, reject);
     })
 };
+
+export { ProjectInfoRenderMode };
