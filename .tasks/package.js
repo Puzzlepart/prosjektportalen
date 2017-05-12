@@ -6,7 +6,7 @@ var gulp = require("gulp"),
     autoprefixer = require('autoprefixer-stylus'),
     config = require('./@configuration.js');
 
-const env = "dev";
+const env = "development";
 
 gulp.task("package:code", ["build:lib"], (done) => {
     webpack(webpackConfig(env), (err, stats) => {

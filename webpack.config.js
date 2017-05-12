@@ -10,7 +10,7 @@ const isExternal = ({ userRequest }) => {
     return userRequest.indexOf('node_modules') !== -1;
 }
 
-module.exports = (env = "dev", devtool = "source-map") => ({
+module.exports = (env = "development", devtool = "source-map") => ({
     cache: true,
     entry: './lib/js/pp.main.js',
     output: {
@@ -64,20 +64,15 @@ module.exports = (env = "dev", devtool = "source-map") => ({
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify(env)
             }
         }),
     ].concat(
-        (env.toLowerCase() === "prod") ? [
+        (env.toLowerCase() === "production") ? [
             new webpack.optimize.UglifyJsPlugin({
                 compress: { warnings: false, drop_console: true },
                 beautify: false,
                 comments: false,
-            }),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
-                }
             }),
         ] : []
         ),
