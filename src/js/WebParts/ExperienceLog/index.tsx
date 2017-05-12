@@ -3,6 +3,10 @@ import {
     Spinner,
     SpinnerType,
     SearchBox,
+    DetailsList,
+    SelectionMode,
+    ConstrainMode,
+    DetailsListLayoutMode,
 } from "office-ui-fabric-react";
 import * as Search from "./Search";
 import IExperienceLogProps from "./IExperienceLogProps";
@@ -12,7 +16,50 @@ import IExperienceLogState from "./IExperienceLogState";
  * Project information
  */
 export default class ProjectList extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
-    public static defaultProps: Partial<IExperienceLogProps> = {};
+    public static defaultProps: Partial<IExperienceLogProps> = {
+        constrainMode: ConstrainMode.horizontalConstrained,
+        layoutMode: DetailsListLayoutMode.fixedColumns,
+        selectionMode: SelectionMode.none,
+        columns: [{
+            key: "Title",
+            fieldName: "Title",
+            name: "Tittel",
+            minWidth: 180,
+        },
+        {
+            key: "SiteTitle",
+            fieldName: "SiteTitle",
+            name: "Prosjekt",
+        },
+        {
+            key: "GtProjectLogDescriptionOWSMTXT",
+            fieldName: "GtProjectLogDescriptionOWSMTXT",
+            name: "Beskrivelse",
+        },
+        {
+            key: "GtProjectLogResponsibleOWSCHCS",
+            fieldName: "GtProjectLogResponsibleOWSCHCS",
+            name: "Ansvarlig",
+        },
+        {
+            key: "GtProjectLogConsequenceOWSMTXT",
+            fieldName: "GtProjectLogConsequenceOWSMTXT",
+            name: "Konsekvens",
+        },
+        {
+            key: "GtProjectLogRecommendationOWSMTXT",
+            fieldName: "GtProjectLogRecommendationOWSMTXT",
+            name: "Anbefaling",
+        },
+        {
+            key: "GtProjectLogActorsOWSCHCM",
+            fieldName: "GtProjectLogActorsOWSCHCM",
+            name: "Aktører",
+        }].map(col => ({
+            ...col,
+            isResizable: true,
+        })),
+    };
 
     /**
      * Constructor
@@ -44,15 +91,24 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
-
-        return null;
+        return (
+            <div>
+                <SearchBox onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
+                <DetailsList
+                    items={this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].indexOf(this.state.searchTerm) !== -1).length > 0)}
+                    columns={this.props.columns}
+                    constrainMode={this.props.constrainMode}
+                    layoutMode={this.props.layoutMode}
+                    selectionMode={this.props.selectionMode} />
+            </div>
+        );
     }
 
     /**
      * Fetch data using sp-pnp-js search
      */
-    private fetchData = () => new Promise<Partial<IExperienceLogProps>>((resolve, reject) => {
-        Search.query()
+    private fetchData = () => new Promise<Partial<IExperienceLogState>>((resolve, reject) => {
+        Search.query(this.props.columns.map(col => col.fieldName))
             .then(({ primarySearchResults }) => resolve({ logItems: primarySearchResults }))
             .catch(reject);
     })
