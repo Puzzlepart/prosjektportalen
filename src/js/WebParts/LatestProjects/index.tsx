@@ -18,7 +18,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             orderBy: "Created",
             ascending: false,
         },
-        reloadIntervalMs: -1,
+        reloadInterval: -1,
         listClassName: "pp-simpleList spacing-m",
         listId: uuid_v1(),
     };
@@ -39,8 +39,6 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
      * Component did mount
      */
     public componentDidMount(): void {
-        const { reloadIntervalMs } = this.props;
-
         this.fetchData()
             .then(webinfos => {
                 this.setState({
@@ -50,7 +48,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             })
             .catch(_ => this.setState({ isLoading: false }));
 
-        if (reloadIntervalMs !== -1) {
+        if (this.props.reloadInterval !== -1) {
             this.reloadInterval = window.setInterval(() => {
                 this.fetchData()
                     .then(webinfos => {
@@ -58,7 +56,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
                             webinfos: webinfos,
                         });
                     });
-            }, reloadIntervalMs);
+            }, (this.props.reloadInterval * 1000));
         }
     }
 

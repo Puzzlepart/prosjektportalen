@@ -1,7 +1,7 @@
 interface ILatestProjectsProps {
     itemsCount?: number;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
-    reloadIntervalMs?: number;
+    reloadInterval?: number;
     listClassName?: string;
     listId?: string;
 }
