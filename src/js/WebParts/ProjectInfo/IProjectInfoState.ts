@@ -1,8 +1,8 @@
-import { IProjectProp } from "./ProjectProp";
+import { ProjectPropertyModel } from "./ProjectProperty";
 
 interface IProjectInfoState {
-    properties?: IProjectProp[];
-    error: boolean;
+    properties?: ProjectPropertyModel[];
+    error?: boolean;
     isLoading: boolean;
 }
 

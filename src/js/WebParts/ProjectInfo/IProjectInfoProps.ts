@@ -9,6 +9,7 @@ interface IProjectInfoProps {
     valueSize?: string;
     hideChrome?: boolean;
     webUrl?: string;
+    rootSiteUrl?: string;
     welcomePageId?: number;
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;

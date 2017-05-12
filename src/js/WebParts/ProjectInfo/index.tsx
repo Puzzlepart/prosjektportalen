@@ -14,7 +14,7 @@ import {
     ModalLinkIconPosition,
 } from "../@Components/ModalLink";
 import ChromeTitle from "../@Components/ChromeTitle";
-import { IProjectProp, ProjectProp } from "./ProjectProp";
+import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
 import IProjectInfoProps from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
@@ -33,6 +33,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         hideChrome: false,
         showEditLink: true,
         webUrl: _spPageContextInfo.webAbsoluteUrl,
+        rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
         welcomePageId: 3,
         renderMode: ProjectInfoRenderMode.Normal,
         containerClassName: "pp-projectInfo",
@@ -54,10 +55,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(properties => {
+        this.fetchData().then(updatedState => {
             this.setState({
+                ...updatedState,
                 isLoading: false,
-                properties: properties,
             });
         }).catch(_ => {
             this.setState({
@@ -151,9 +152,47 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         if (isLoading) {
             return null;
         }
-        return <div
-            className="pp-projectInfoInner">
+        return <div className="pp-projectInfoInner">
             {this.renderProperties(properties)}
+            {this.renderActionLinks()}
+        </div>;
+    }
+
+    /**
+     * Render properties
+     *
+     * @param properties Properties to render
+     */
+    private renderProperties(properties: ProjectPropertyModel[]): JSX.Element {
+        const {
+            showMissingPropsWarning,
+            labelSize,
+            valueSize,
+            } = this.props;
+
+        const hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
+        const propertiesToRender = properties.filter(p => !p.empty);
+        return (
+            <div>
+                {propertiesToRender.map((d, index) => (
+                    <ProjectProperty
+                        key={index}
+                        data={d}
+                        labelSize={labelSize}
+                        valueSize={valueSize} />
+                ))}
+                <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
+                    <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
+                </div>
+            </div>
+        );
+    }
+
+    /**
+     * Render action links
+     */
+    private renderActionLinks = () => {
+        return (
             <div
                 hidden={!this.props.showEditLink}
                 style={{ marginTop: 20 }}>
@@ -178,36 +217,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                     style={{ marginLeft: 10 }}
                 />
             </div>
-        </div>;
-    }
-
-    /**
-     * Render properties
-     *
-     * @param properties Properties to render
-     */
-    private renderProperties(properties: IProjectProp[]): JSX.Element {
-        const {
-            showMissingPropsWarning,
-            labelSize,
-            valueSize,
-            } = this.props;
-
-        const hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
-        const propertiesToRender = properties.filter(p => !p.empty);
-        return (
-            <div>
-                {propertiesToRender.map((d, index) => (
-                    <ProjectProp
-                        key={index}
-                        data={d}
-                        labelSize={labelSize}
-                        valueSize={valueSize} />
-                ))}
-                <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
-                    <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
-                </div>
-            </div>
         );
     }
 
@@ -216,8 +225,8 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      *
      * @param configList Configuration list
      */
-    private fetchData = (configList = "ProjectConfig") => new Promise<IProjectProp[]>((resolve, reject) => {
-        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+    private fetchData = (configList = "ProjectConfig") => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
+        const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
         const configPromise = rootWeb
             .lists
             .getByTitle(configList)
@@ -242,28 +251,41 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             .get();
 
         Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
-            const { filterField } = this.props;
-            let projectProperties: IProjectProp[] = [];
-            Object.keys(item).forEach(fieldName => {
-                const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
-                const value = item[fieldName];
-                if (typeof value === "string" && field) {
-                    const { Title, InternalName, Description, TypeAsString, Required } = field;
-                    const [configItem] = config.filter(c => c.Title === Title);
-                    if (configItem && configItem[filterField] === true) {
-                        projectProperties.push({
-                            internalName: InternalName,
-                            displayName: Title,
-                            description: Description,
-                            value: value,
-                            type: TypeAsString,
-                            required: Required,
-                            empty: value === "",
-                        });
+            let itemFieldNames = Object.keys(item);
+            const properties = itemFieldNames
+                .filter(fieldName => {
+                    /**
+                     * Checking if the field exist
+                     */
+                    const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                    if (!field) {
+                        return false;
                     }
-                }
+
+                    /**
+                     * Checking configuration
+                     */
+                    const [configItem] = config.filter(c => c.Title === field.Title);
+                    if (!configItem) {
+                        return false;
+                    }
+                    const shouldBeShown = configItem[this.props.filterField] === true;
+
+                    /**
+                     * Checking if the value is a string
+                     */
+                    const valueIsString = typeof item[fieldName] === "string";
+                    return (valueIsString && shouldBeShown);
+                })
+                .map(fieldName => ({
+                    field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                    value: item[fieldName],
+                }))
+                .map(({ field, value }) => new ProjectPropertyModel(field, value));
+            resolve({
+                properties: properties,
+                error: false,
             });
-            resolve(projectProperties);
         }, reject);
     })
 };
