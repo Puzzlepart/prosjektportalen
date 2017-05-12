@@ -10,6 +10,7 @@ import QuickLinks from "./QuickLinks";
 import DynamicPortfolio from "./DynamicPortfolio";
 import GainsOverview from "./GainsOverview";
 import ProjectStatus from "./ProjectStatus";
+import ExperienceLog from "./ExperienceLog";
 import DataSource from "./DataSource";
 import IWebPartMapping from "./IWebPartMapping";
 
@@ -28,6 +29,7 @@ const wp_map: IWebPartMapping = {
     "pp-gainsoverview": <GainsOverview />,
     "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} />,
     "pp-projectstatus": <ProjectStatus />,
+    "pp-experiencelog": <ExperienceLog />,
 };
 
 /**
