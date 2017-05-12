@@ -3,12 +3,12 @@ import { Icon } from "office-ui-fabric-react";
 import IModalLinkProps, { ModalLinkIconPosition, IModalLinkIconProps, IModalLinkOptions } from "./IModalLinkProps";
 
 
-export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSuccess = false, width, height, icon, className = "", id, style, hidden }: IModalLinkProps) => {
+export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSubmit = false, reloadOnCancel = false, width, height, icon, className = "", id, style, hidden }: IModalLinkProps) => {
     const onClick = (e) => {
         e.preventDefault();
         e.stopPropagation();
 
-        let mOptions: any = {
+        let mOptions: Partial<SP.UI.DialogOptions> = {
             title: label,
             url: url,
         };
@@ -34,10 +34,13 @@ export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSucce
                 mOptions.url = `${mOptions.url}${u}${urlParams.join("&")}`;
             }
         }
-        if (reloadOnSuccess) {
+        if (reloadOnSubmit || reloadOnCancel) {
             mOptions.dialogReturnValueCallback = (result) => {
-                if (result === 1) {
-                    document.location.href = _spPageContextInfo.serverRequestPath;
+                if (result === 1 && reloadOnSubmit) {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+                }
+                if (result === 0 && reloadOnCancel) {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
                 }
             };
         }

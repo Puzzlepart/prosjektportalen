@@ -24,9 +24,10 @@ interface IModalLinkProps {
     showLabel?: boolean;
     url: string;
     options?: IModalLinkOptions;
-    reloadOnSuccess?: boolean;
-    width?: string;
-    height?: string;
+    reloadOnSubmit?: boolean;
+    reloadOnCancel?: boolean;
+    width?: number;
+    height?: number;
     icon?: IModalLinkIconProps;
     className?: string;
     id?: string;
