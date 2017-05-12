@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Util } from "sp-pnp-js";
 import { Checkbox } from "office-ui-fabric-react";
 import { IFilter } from "../Filter";
 
@@ -8,29 +7,27 @@ export interface IFilterItem {
     value: string;
     defaultSelected?: boolean;
     readOnly?: boolean;
+    selected?: boolean;
 }
 
 export interface IFilterItemProps {
     filter: IFilter;
     item: IFilterItem;
     className: string;
-    ref: any;
-    onChange: (item: any) => void;
+    onChange: (item: any, checked: boolean) => void;
 }
 
 /**
  * Filter Item
  */
-export const FilterItem = ({ filter, item, className, ref, onChange }: IFilterItemProps) => {
-    const defaultChecked = item.defaultSelected || (Util.isArray(filter.selected) && (Array.contains(filter.selected, item.name) || Array.contains(filter.selected, item.value)));
+export const FilterItem = ({ filter, item, className, onChange }: IFilterItemProps) => {
     return (<li>
         <div className={className}>
             <Checkbox
                 label={item.name}
                 disabled={item.readOnly}
-                defaultChecked={defaultChecked}
-                onChange={e => onChange(item)}
-                ref={ref} />
+                defaultChecked={item.selected}
+                onChange={(e, checked) => onChange(item, checked)} />
         </div>
     </li>);
 };

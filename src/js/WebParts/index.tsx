@@ -23,7 +23,7 @@ const wp_map: { [id: string]: JSX.Element } = {
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio />,
     "pp-gainsoverview": <GainsOverview />,
-    "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} groupByOptions={[{ label: "Grupper på prosjekt", property: "SiteTitle" }]} />,
+    "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} />,
     "pp-projectstatus": <ProjectStatus />,
 };
 

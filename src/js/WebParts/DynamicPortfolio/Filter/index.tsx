@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Util } from "sp-pnp-js";
 import { Icon } from "../../@Components";
 import {
     IFilterItem,
@@ -25,6 +26,7 @@ export interface IFilterProps {
 
 export interface IFilterState {
     isCollapsed: boolean;
+    filter?: IFilter;
 }
 /**
  * Filter
@@ -33,7 +35,6 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
     public static defaultProps: Partial<IFilterProps> = {
         showIcon: true,
     };
-    private inputs: { [key: string]: HTMLInputElement } = {};
 
     /**
      * Constructor
@@ -53,6 +54,7 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
         if (filter.defaultHidden) {
             this.setState({ isCollapsed: filter.defaultHidden });
         }
+        this.setState({ filter: filter });
     }
 
     /**
@@ -91,33 +93,39 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
      * Render filter items
      */
     private renderItems = () => {
-        let { filter } = this.props;
-        return filter.items.map((item, idx) => (
-            <FilterItem
-                key={idx}
-                filter={filter}
-                item={item}
-                className="ms-font-m"
-                onChange={this.onChange}
-                ref={ele => this.inputs[item.value] = ele} />
-        ));
+        const { filter } = this.state;
+        if (filter) {
+            return filter.items.map((item, idx) => {
+                item.selected = item.defaultSelected
+                    || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.value)
+                    );
+                return <FilterItem
+                    key={idx}
+                    filter={filter}
+                    item={item}
+                    className="ms-font-m"
+                    onChange={this.onChange} />;
+            });
+        } else {
+            return null;
+        }
     }
 
     /**
      * On filter change
      */
-    private onChange = (item: any): void => {
-        let {
-            filter,
-            onFilterChange,
-        } = this.props;
+    private onChange = (item: IFilterItem, checked: boolean): void => {
+        const { onFilterChange } = this.props;
+        const { filter } = this.state;
+
+        filter.items.filter(itm => itm.value === item.value)[0].selected = checked;
 
         if (filter.multi) {
-            filter.selected = Object.keys(this.inputs).filter(key => this.inputs[key].checked);
+            filter.selected = filter.items.filter(itm => itm.selected).map(itm => itm.value);
         } else {
-            filter.selected = [item];
+            filter.selected = [item.value];
         }
-        onFilterChange(filter);
+        this.setState({ filter: filter }, () => onFilterChange(filter));
     }
 };
 
