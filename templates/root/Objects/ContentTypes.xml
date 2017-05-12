@@ -61,6 +61,8 @@
             <pnp:FieldRef ID="3bcfaa2c-e9bd-4a22-bf65-af4d68c308e7" Name="GtProductAcceptanceMethod" />
             <pnp:FieldRef ID="dc856c1d-0b98-4d38-9918-d7068f74bd8b" Name="GtProductAcceptanceResponsible" />
             <pnp:FieldRef ID="ce9474dd-407b-4480-951a-5381857fad6a" Name="GtProductAcceptanceDate" />
+            <pnp:FieldRef ID="4322afd6-5f0f-4a22-819a-cb61668e6ede" Name="GtProductStatus" />
+            <pnp:FieldRef ID="4393ed3c-1599-4ab3-8444-444ab35754bb" Name="GtProductStatusComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070206" Name="{resource:ContentTypes_Prosjektloggelement_Name}" Description="{resource:ContentTypes_Prosjektloggelement_Description}" Group="{resource:ContentTypes_Group}">
