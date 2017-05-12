@@ -10,8 +10,10 @@ import {
     ImageFit,
 } from "office-ui-fabric-react";
 import * as Util from "../../../Util";
+import IProjectCardProps from "./IProjectCardProps";
 
-const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }): JSX.Element => {
+
+const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
     const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.GtProjectManagerOWSUSER.split(" | ");
     const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.GtProjectOwnerOWSUSER.split(" | ");
     const ManagerUserPhoto = Util.userPhoto(ManagerEmail);
@@ -26,7 +28,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                 {
                     previewImageSrc: project.SiteLogo,
                     imageFit: ImageFit.cover,
-                    accentColor: "#ce4b1f",
+                    accentColor: Util.stringToColour(project.RefinableString52),
                     width: tileWidth,
                     height: tileImageHeight,
                 },

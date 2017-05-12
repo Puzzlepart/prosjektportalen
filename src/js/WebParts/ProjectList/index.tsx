@@ -1,14 +1,6 @@
 import * as React from "react";
 import Masonry from "react-masonry-component";
 import {
-    DocumentCard,
-    DocumentCardPreview,
-    DocumentCardTitle,
-    DocumentCardActivity,
-    DocumentCardActions,
-    DocumentCardLocation,
-    DocumentCardType,
-    ImageFit,
     Spinner,
     SpinnerType,
     SearchBox,
@@ -18,10 +10,11 @@ import ProjectInfo from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
+import IProject from "./IProject";
 
 interface IProjectListState {
     isLoading: boolean;
-    projects?: any[];
+    projects?: IProject[];
     searchTerm?: string;
     showProjectInfo?: any;
 }
@@ -100,7 +93,8 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                 disableImagesLoaded={false}
                 updateOnEachImageLoad={false}>
                 {projects
-                    .filter(({ Title }) => Title.indexOf(searchTerm) !== -1)
+                    .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
+                    .sort((a, b) => a.Title > b.Title ? 1 : -1)
                     .map((project, idx) => (
                         <ProjectCard
                             key={idx}
@@ -130,8 +124,6 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             modalHeaderClassName,
             projectInfoFilterField,
         } = this.props;
-
-        console.log(showProjectInfo);
 
         if (showProjectInfo) {
             return (

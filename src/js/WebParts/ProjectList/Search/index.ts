@@ -26,7 +26,9 @@ export const query = () => new Promise<IQueryResponse>((resolve, reject) => {
             primarySearchResults: PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
                 let item: any = {};
                 Cells.results.forEach(({ Key, Value }) => {
-                    item[Key] = Value ? Value : "";
+                    if (Array.contains(DEFAULT_SEARCH_SETTINGS.SelectProperties, Key)) {
+                        item[Key] = Value ? Value : "";
+                    }
                 });
                 return item;
             }),

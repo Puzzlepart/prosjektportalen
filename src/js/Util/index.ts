@@ -74,6 +74,24 @@ export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx,
 };
 
 /**
+ * Converts a string to a hex color
+ *
+ * @param str The string
+ */
+export const stringToColour = (str: string): string => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let colour = "#";
+    for (let i = 0; i < 3; i++) {
+        let value = (hash >> (i * 8)) & 0xFF;
+        colour += ("00" + value.toString(16)).substr(-2);
+    }
+    return colour;
+};
+
+/**
  * Shows a user message using SP.UI
  *
  * @param title Title
