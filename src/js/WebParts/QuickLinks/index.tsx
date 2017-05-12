@@ -1,22 +1,20 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
+import * as uuid_v1 from "uuid/v1";
 import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react";
+import ChromeTitle from "../@Components/ChromeTitle";
+import IQuickLinksProps from "./IQuickLinksProps";
+import IQuickLinksState from "./IQuickLinksState";
 
-export interface IQuickLinksProps {
-    itemsCount?: number;
-}
-
-export interface IQuickLinksState {
-    links: any[];
-    isLoading: boolean;
-}
 
 export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQuickLinksState> {
     public static defaultProps = {
         itemsCount: 5,
+        listClassName: "pp-simpleList spacing-m",
+        listId: uuid_v1(),
     };
 
     /**
@@ -48,19 +46,49 @@ export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQ
      * Renders the component
      */
     public render(): JSX.Element {
-        let { links, isLoading } = this.state;
+        let {
+            links,
+            isLoading,
+         } = this.state;
+
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }
         if (links.length > 0) {
-            return (<ul className="pp-simpleList spacing-m">
-                {links.map(({ URL: { Url, Description }, Comments }, idx) => <li key={idx}>
-                    <h5><a href={Url}>{Description}</a></h5>
-                    <span className="ms-metadata">{Comments}</span>
-                </li>)}
-            </ul>);
+            return (
+                <div>
+                    {this.renderChrome()}
+                    <ul id={this.props.listId}
+                        className={this.props.listClassName}>
+                        {links.map(({ URL: { Url, Description }, Comments }, idx) => <li key={idx}>
+                            <h5><a href={Url}>{Description}</a></h5>
+                            <span className="ms-metadata">{Comments}</span>
+                        </li>)}
+                    </ul>
+                </div>
+            );
         } else {
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
+    }
+
+    /**
+    * Render chrome
+    */
+    private renderChrome = () => {
+        return (
+            <ChromeTitle
+                title={__("WebPart_Links_Title")}
+                toggleElement={{
+                    selector: `#${this.props.listId}`,
+                    animationDelay: 100,
+                    animation: "slideToggle",
+                    storage: {
+                        key: "QuickLinks",
+                        type: "localStorage",
+                    },
+                }}
+            />
+        );
     }
 };

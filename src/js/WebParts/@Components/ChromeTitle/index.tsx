@@ -27,6 +27,9 @@ export interface IChromeTitleState {
 }
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+    public static defaultProps: Partial<IChromeTitleProps> = {
+        hidden: false,
+    };
     /**
      * Chrome header style
      */
@@ -68,7 +71,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
         if (toggleElement && toggleElement.storage) {
             this.toggleStorageKey = Util.generateStorageKey([toggleElement.storage.key, "CollapsedState"]);
             let newState = {
-                isCollapsed: this.getCollapsedState(),
+                isCollapsed: this.getCollapsedStateFromStorage(),
             };
             this.setState(newState);
             if (newState.isCollapsed) {
@@ -129,7 +132,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
     /**
      * Get collapsed state from storage (localStorage or sessionStorage)
      */
-    private getCollapsedState(): boolean {
+    private getCollapsedStateFromStorage(): boolean {
         const { toggleElement } = this.props;
         const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
         if (value) {

@@ -81,7 +81,7 @@
                                     <property name="Content" type="string">&lt;div id="pp-announcements"&gt;&lt;/div&gt;</property>
                                     <property name="Title" type="string">{res:WebPart_Announcements_Title}</property>
                                     <property name="TitleUrl" type="string">{site}/Lists/Announcements</property>
-                                    <property name="ChromeType" type="chrometype">TitleOnly</property>
+                                    <property name="ChromeType" type="chrometype">None</property>
                                     <property name="TitleIconImageUrl" type="string" />
                                     <property name="ChromeState" type="chromestate">Normal</property>
                                 </properties>
@@ -105,7 +105,7 @@
                                     <property name="Content" type="string">&lt;div id="pp-quicklinks"&gt;&lt;/div&gt;</property>
                                     <property name="Title" type="string">{res:WebPart_Links_Title}</property>
                                     <property name="TitleUrl" type="string">{site}/Lists/QuickLinks</property>
-                                    <property name="ChromeType" type="chrometype">TitleOnly</property>
+                                    <property name="ChromeType" type="chrometype">None</property>
                                     <property name="TitleIconImageUrl" type="string" />
                                     <property name="ChromeState" type="chromestate">Normal</property>
                                 </properties>
@@ -128,7 +128,7 @@
                                     <property name="Description" type="string" null="true" />
                                     <property name="Content" type="string">&lt;div id="pp-latestprojects"&gt;&lt;/div&gt;</property>
                                     <property name="Title" type="string">{res:WebPart_RecentProjects_Title}</property>
-                                    <property name="ChromeType" type="chrometype">TitleOnly</property>
+                                    <property name="ChromeType" type="chrometype">None</property>
                                     <property name="TitleIconImageUrl" type="string" />
                                     <property name="ChromeState" type="chromestate">Normal</property>
                                 </properties>

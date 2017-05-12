@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as uuid_v1 from "uuid/v1";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -6,24 +7,9 @@ import {
     Icon,
 } from "office-ui-fabric-react";
 import * as Util from "../../Util";
-
-export interface IWebInfo {
-    Id: number;
-    ServerRelativeUrl: string;
-    Title: string;
-    Created: string;
-}
-
-export interface ILatestProjectsProps {
-    itemsCount?: number;
-    itemsOrderBy?: { orderBy: string, ascending: boolean };
-    reloadIntervalMs?: number;
-}
-
-export interface ILatestProjectsState {
-    webinfos: IWebInfo[];
-    isLoading: boolean;
-}
+import ChromeTitle from "../@Components/ChromeTitle";
+import ILatestProjectsProps from "./ILatestProjectsProps";
+import ILatestProjectsState, { IWebInfo } from "./ILatestProjectsState";
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
     public static defaultProps: ILatestProjectsProps = {
@@ -33,6 +19,8 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             ascending: false,
         },
         reloadIntervalMs: -1,
+        listClassName: "pp-simpleList spacing-m",
+        listId: uuid_v1(),
     };
     private reloadInterval: number;
 
@@ -96,26 +84,51 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
         }
         if (webinfos.length > 0) {
-            return (<ul className="pp-simpleList spacing-m">
-                {webinfos.map(webinfo => (
-
-                    <li key={webinfo.Id}>
-                        {webinfo.Title ?
-                            <div>
-                                <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
-                            </div>
-                            : (
-                                <div style={{ width: 100 }}>
-                                    <Spinner type={SpinnerType.normal} />
-                                </div>
-                            )}
-                    </li>
-                ))}
-            </ul>);
+            return (
+                <div>
+                    {this.renderChrome()}
+                    <ul id={this.props.listId}
+                        className={this.props.listClassName}>
+                        {webinfos.map(webinfo => (
+                            <li key={webinfo.Id}>
+                                {webinfo.Title ?
+                                    <div>
+                                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                    </div>
+                                    : (
+                                        <div style={{ width: 100 }}>
+                                            <Spinner type={SpinnerType.normal} />
+                                        </div>
+                                    )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
         } else {
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
+    }
+
+    /**
+    * Render chrome
+    */
+    private renderChrome = () => {
+        return (
+            <ChromeTitle
+                title={__("WebPart_RecentProjects_Title")}
+                toggleElement={{
+                    selector: `#${this.props.listId}`,
+                    animationDelay: 100,
+                    animation: "slideToggle",
+                    storage: {
+                        key: "LatestProjects",
+                        type: "localStorage",
+                    },
+                }}
+            />
+        );
     }
 
     /**

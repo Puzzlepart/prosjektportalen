@@ -26,17 +26,22 @@ const waitDlg = new Util.WaitDialog(DlgTitle, DlgMessage, 120, 550);
  *
  * @returns Redirect URL
  */
-const ProvisionWeb = ({ Title, Url, Description, InheritPermissions, IncludeContent }: IProjectModel): Promise<string> => {
+const ProvisionWeb = (project: IProjectModel): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
         waitDlg.start();
-        Subsite.Create(Title, Url, Description, InheritPermissions).then((result: Subsite.ICreateResult) => {
-            waitDlg.update(__("ProvisionWeb_ApplyingTemplate"));
-            Template.Apply(result.web, true, progress => waitDlg.updateMessage(PROGRESS_MAP[progress])).then(() => {
-                Data.CopyListContents(result.url, IncludeContent, msg => {
-                    waitDlg.update(__("ProvisionWeb_CopyListContent"), msg);
-                }).then(() => {
-                    waitDlg.end();
-                    resolve(result.redirectUrl);
+        Subsite.Create(project.Title, project.Url, project.Description, project.InheritPermissions)
+            .then((result: Subsite.ICreateResult) => {
+                waitDlg.update(__("ProvisionWeb_ApplyingTemplate"));
+                Template.Apply(result.web, true, progress => waitDlg.updateMessage(PROGRESS_MAP[progress])).then(() => {
+                    Data.CopyListContents(result.url, project.IncludeContent, msg => {
+                        waitDlg.update(__("ProvisionWeb_CopyListContent"), msg);
+                    }).then(() => {
+                        waitDlg.end();
+                        resolve(result.redirectUrl);
+                    }).catch(_ => {
+                        waitDlg.end();
+                        reject(_);
+                    });
                 }).catch(_ => {
                     waitDlg.end();
                     reject(_);
@@ -45,12 +50,8 @@ const ProvisionWeb = ({ Title, Url, Description, InheritPermissions, IncludeCont
                 waitDlg.end();
                 reject(_);
             });
-        }).catch(_ => {
-            waitDlg.end();
-            reject(_);
-        });
     });
 };
 
 
-export { ProvisionWeb };
+export default ProvisionWeb;

@@ -1,3 +1,4 @@
+// #region Imports
 import * as React from "react";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
@@ -22,6 +23,7 @@ import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
+// #endregion
 
 /**
  * Dynamic Portfolio

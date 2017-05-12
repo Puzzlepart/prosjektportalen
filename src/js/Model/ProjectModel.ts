@@ -3,7 +3,7 @@ export interface IProjectModel {
     Url?: string;
     Description?: string;
     InheritPermissions?: boolean;
-    IncludeContent?: any;
+    IncludeContent?: string[];
     ProjectPhase?: string;
     ProjectPhaseLetter?: string;
     ProjectOwner?: string;
@@ -15,7 +15,7 @@ export class ProjectModel implements IProjectModel {
     public Url?: string;
     public Description?: string;
     public InheritPermissions?: boolean;
-    public IncludeContent?: any;
+    public IncludeContent?: string[];
     public ProjectPhase?: string;
     public ProjectPhaseLetter?: string;
     public ProjectOwner?: string;
