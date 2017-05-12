@@ -14,10 +14,10 @@ import {
     SearchBox,
 } from "office-ui-fabric-react";
 import Modal from "office-ui-fabric-react/lib/Modal";
-import * as Util from "../../Util";
 import ProjectInfo from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
+import ProjectCard from "./ProjectCard";
 
 interface IProjectListState {
     isLoading: boolean;
@@ -81,7 +81,6 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             isLoading,
             projects,
             searchTerm,
-            showProjectInfo,
         } = this.state;
 
         if (isLoading) {
@@ -102,59 +101,18 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                 updateOnEachImageLoad={false}>
                 {projects
                     .filter(({ Title }) => Title.indexOf(searchTerm) !== -1)
-                    .map(project => {
-                        const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.GtProjectManagerOWSUSER.split(" | ");
-                        const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.GtProjectOwnerOWSUSER.split(" | ");
-                        const ManagerUserPhoto = Util.userPhoto(ManagerEmail);
-                        const OwnerUserPhoto = Util.userPhoto(OwnerEmail);
-                        return (
-                            <DocumentCard
-                                className={this.props.tileClassName}
-                                type={DocumentCardType.normal}
-                                onClick={e => window.setTimeout(() => !this.state.showProjectInfo && SP.Utilities.HttpUtility.navigateTo(project.Path), 250)}
-                            >
-                                <DocumentCardPreview previewImages={[
-                                    {
-                                        previewImageSrc: project.SiteLogo,
-                                        imageFit: ImageFit.cover,
-                                        accentColor: "#ce4b1f",
-                                        width: this.props.tileWidth,
-                                        height: this.props.tileImageHeight,
-                                    },
-                                ]} />
-                                <DocumentCardTitle
-                                    title={project.Title}
-                                    shouldTruncate={true} />
-                                <DocumentCardLocation
-                                    location={project.RefinableString52 || __("String_NotSet")} />
-                                <DocumentCardActivity
-                                    activity={__("SiteFields_GtProjectOwner_DisplayName")}
-                                    people={[
-                                        {
-                                            name: OwnerName,
-                                            profileImageSrc: OwnerUserPhoto,
-                                        },
-                                    ]}
-                                />
-                                <DocumentCardActivity
-                                    activity={__("SiteFields_GtProjectManager_DisplayName")}
-                                    people={[
-                                        {
-                                            name: ManagerName,
-                                            profileImageSrc: ManagerUserPhoto,
-                                        },
-                                    ]}
-                                />
-                                <DocumentCardLocation
-                                    location="Vis prosjektinfo"
-                                    onClick={e => {
-                                        e.preventDefault();
-                                        this.setState({ showProjectInfo: project });
-                                    }}
-                                />
-                            </DocumentCard>
-                        );
-                    })}
+                    .map((project, idx) => (
+                        <ProjectCard
+                            key={idx}
+                            project={project}
+                            className={this.props.tileClassName}
+                            tileWidth={this.props.tileWidth}
+                            tileImageHeight={this.props.tileImageHeight}
+                            onClickHref={project.Path}
+                            showProjectInfo={e => {
+                                this.setState({ showProjectInfo: project });
+                            }} />
+                    ))}
             </Masonry>
             {this.renderProjectInfoModal()}
             <Style props={this.props} />
