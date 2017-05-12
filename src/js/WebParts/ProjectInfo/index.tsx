@@ -181,7 +181,9 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                         labelSize={labelSize}
                         valueSize={valueSize} />
                 ))}
-                <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
+                <div
+                    hidden={!hasMissingProps || showMissingPropsWarning === false}
+                    className="ms-metadata" style={{ marginTop: "25px" }}>
                     <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
                 </div>
             </div>
