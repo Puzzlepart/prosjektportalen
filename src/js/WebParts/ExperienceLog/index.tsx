@@ -16,6 +16,9 @@ import IExperienceLogState from "./IExperienceLogState";
  * Project information
  */
 export default class ProjectList extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
+    /**
+     * Default properties
+     */
     public static defaultProps: Partial<IExperienceLogProps> = {
         constrainMode: ConstrainMode.horizontalConstrained,
         layoutMode: DetailsListLayoutMode.fixedColumns,

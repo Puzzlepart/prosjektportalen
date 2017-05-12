@@ -15,10 +15,7 @@ interface IChromeTitleProps {
     title: string;
     toggleElement?: IToggleElement;
     hidden?: boolean;
-}
-
-export interface IChromeTitleState {
-    isCollapsed: boolean;
+    width?: string | number;
 }
 
 export default IChromeTitleProps;

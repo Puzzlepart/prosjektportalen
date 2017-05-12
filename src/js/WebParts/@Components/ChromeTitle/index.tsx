@@ -8,6 +8,7 @@ import IChromeTitleState from "./IChromeTitleState";
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
     public static defaultProps: Partial<IChromeTitleProps> = {
         hidden: false,
+        width: "100%",
     };
     /**
      * Chrome header style
@@ -64,30 +65,31 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Renders the component
      */
     public render(): JSX.Element {
-        const { hidden } = this.props;
-        const { isCollapsed } = this.state;
-
         if (this.props.toggleElement) {
             this.h2Style.cursor = "pointer";
         }
 
-        return (<div
-            hidden={hidden}
-            className="ms-webpart-chrome-title"
-            onClick={this.onClick}>
-            <span
-                title={this.props.title}
-                className="js-webpart-titleCell">
-                <h2
-                    style={this.h2Style}
-                    className="ms-webpart-titleText">
-                    <span>{this.props.title}</span>
-                    {this.props.toggleElement && <Icon
-                        iconName={isCollapsed ? "ChevronDown" : "ChevronUp"}
-                        style={this.iconStyle} />}
-                </h2>
-            </span>
-        </div >);
+        return (
+            <div
+                hidden={this.props.hidden}
+                className="ms-webpart-chrome-title"
+                onClick={this.onClick}
+                style={{ width: this.props.width }}
+            >
+                <span
+                    title={this.props.title}
+                    className="js-webpart-titleCell">
+                    <h2
+                        style={this.h2Style}
+                        className="ms-webpart-titleText">
+                        <span>{this.props.title}</span>
+                        {this.props.toggleElement && <Icon
+                            iconName={this.state.isCollapsed ? "ChevronDown" : "ChevronUp"}
+                            style={this.iconStyle} />}
+                    </h2>
+                </span>
+            </div >
+        );
     }
 
     /**
