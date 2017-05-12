@@ -37,6 +37,12 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         welcomePageId: 3,
         renderMode: ProjectInfoRenderMode.Normal,
         containerClassName: "pp-projectInfo",
+        errorIconProps: {
+            iconName: "Error",
+            style: {
+                color: "#000",
+            },
+        },
     };
 
     /**
@@ -87,11 +93,11 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         switch (renderMode) {
             case ProjectInfoRenderMode.Normal: {
                 return (<div className={containerClassName}>
+                    {this.renderChrome()}
                     {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
                     {error && (<div className="ms-metadata">
-                        <Icon iconName="Error" style={{ color: "#000000" }} />  {__("WebPart_FailedMessage")}
+                        <Icon { ...this.props.errorIconProps} />  {__("WebPart_FailedMessage")}
                     </div>)}
-                    {this.renderChrome()}
                     {this.renderInner()}
                 </div>);
             }
@@ -172,6 +178,20 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
 
         const hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         const propertiesToRender = properties.filter(p => !p.empty);
+        if (hasMissingProps || showMissingPropsWarning) {
+            return (
+                <div className="ms-metadata" style={{ marginTop: "25px" }}>
+                    <Icon { ...this.props.errorIconProps} />  {__("ProjectInfo_MissingProperties")}
+                </div>
+            );
+        }
+        if (propertiesToRender.length === 0) {
+            return (
+                <div className="ms-metadata" style={{ marginTop: "25px" }}>
+                    <Icon { ...this.props.errorIconProps} />  {__("ProjectInfo_MissingProperties")} {__("ProjectInfo_NoProperties")}
+                </div>
+            );
+        }
         return (
             <div>
                 {propertiesToRender.map((d, index) => (
@@ -181,11 +201,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                         labelSize={labelSize}
                         valueSize={valueSize} />
                 ))}
-                <div
-                    hidden={!hasMissingProps || showMissingPropsWarning === false}
-                    className="ms-metadata" style={{ marginTop: "25px" }}>
-                    <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
-                </div>
             </div>
         );
     }

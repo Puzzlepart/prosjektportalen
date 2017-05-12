@@ -1,3 +1,4 @@
+import * as React  from "react";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
 
@@ -14,6 +15,10 @@ interface IProjectInfoProps {
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;
     containerClassName?: string;
+    errorIconProps?: {
+        iconName?: string;
+        style?: React.CSSProperties;
+    };
 }
 
 export default IProjectInfoProps;
