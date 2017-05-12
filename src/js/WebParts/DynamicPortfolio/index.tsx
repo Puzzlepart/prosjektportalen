@@ -30,7 +30,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     public static defaultProps: Partial<IDynamicPortfolioProps> = {
         searchProperty: "Title",
         showGroupBy: true,
-        modalContainerClassName: "pp-dynamicPortfolioModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         projectInfoFilterField: "GtPcPortfolioPage",
         constrainMode: ConstrainMode.horizontalConstrained,
