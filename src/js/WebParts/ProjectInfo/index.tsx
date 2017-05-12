@@ -8,29 +8,19 @@ import {
     SpinnerType,
     Icon,
 } from "office-ui-fabric-react";
+import Modal from "office-ui-fabric-react/lib/Modal";
 import {
     ModalLink,
     ModalLinkIconPosition,
 } from "../@Components/ModalLink";
 import ChromeTitle from "../@Components/ChromeTitle";
 import { IProjectProp, ProjectProp } from "./ProjectProp";
+import IProjectInfoProps from "./IProjectInfoProps";
+import IProjectInfoState from "./IProjectInfoState";
+import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 
-interface IProjectInfoState {
-    properties?: IProjectProp[];
-    error: boolean;
-    isLoading: boolean;
-}
 
-interface IProjectInfoProps {
-    showEditLink?: boolean;
-    showMissingPropsWarning?: boolean;
-    filterField?: string;
-    labelSize?: string;
-    valueSize?: string;
-    hideChrome?: boolean;
-    webUrl?: string;
-    welcomePageId?: number;
-}
+export { ProjectInfoRenderMode };
 
 /**
  * Project information
@@ -40,6 +30,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         hideChrome: false,
         webUrl: _spPageContextInfo.webAbsoluteUrl,
         welcomePageId: 3,
+        renderMode: ProjectInfoRenderMode.Normal,
     };
 
     /**
@@ -76,59 +67,102 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      */
     public render(): JSX.Element {
         const {
-            showEditLink,
-            hideChrome,
-        } = this.props;
-
-        const {
             isLoading,
             error,
+         } = this.state;
+
+        const {
+            renderMode,
+            modalOptions,
+         } = this.props;
+
+
+        switch (renderMode) {
+            case ProjectInfoRenderMode.Normal: {
+                return (<div className="pp-projectInfo">
+                    {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
+                    {error && (<div className="ms-metadata">
+                        <Icon iconName="Error" style={{ color: "#000000" }} />  {__("WebPart_FailedMessage")}
+                    </div>)}
+                    {this.renderChrome()}
+                    {this.renderInner()}
+                </div>);
+            }
+            case ProjectInfoRenderMode.Modal: {
+                return (
+                    <Modal
+                        isOpen={modalOptions.isOpen}
+                        isDarkOverlay={modalOptions.isDarkOverlay}
+                        onDismiss={modalOptions.onDismiss}
+                        containerClassName="pp-projectInfo pp-modal"
+                        isBlocking={false}
+                    >
+                        <div style={{ padding: 50 }}>
+                            <div
+                                className={modalOptions.headerClassName}
+                                style={modalOptions.headerStyle}
+                                hidden={!modalOptions.title}>
+                                <span>{modalOptions.title}</span>
+                            </div>
+                            {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
+                            {this.renderInner()}
+                        </div>
+                    </Modal>);
+            }
+        }
+    }
+
+    /**
+     * Render chrome
+     */
+    private renderChrome = () => {
+        return <ChromeTitle
+            title="Om prosjektet"
+            toggleElement={{
+                selector: ".pp-projectInfoInner",
+                animationDelay: 100,
+                animation: "slideToggle",
+                storage: {
+                    key: "ProjectInfo",
+                    type: "localStorage",
+                },
+            }}
+            hidden={this.props.hideChrome}
+        />;
+    }
+
+    /**
+     * Render inner
+     */
+    private renderInner = () => {
+        const { showEditLink } = this.props;
+        const {
             properties,
+            isLoading,
          } = this.state;
 
         if (isLoading) {
-            return (<Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />);
+            return null;
         }
-        if (error) {
-            return (<div className="ms-metadata">
-                <Icon iconName="Error" style={{ color: "#000000" }} />  {__("WebPart_FailedMessage")}
-            </div>);
-        } else {
-            return (<div className="pp-projectInfo">
-                <ChromeTitle
-                    title="Om prosjektet"
-                    toggleElement={{
-                        selector: ".pp-projectInfoInner",
-                        animationDelay: 100,
-                        animation: "slideToggle",
-                        storage: {
-                            key: "ProjectInfo",
-                            type: "localStorage",
-                        },
+        return <div
+            className="pp-projectInfoInner">
+            {this.renderProperties(properties)}
+            <div style={{ marginTop: 20 }}>
+                <ModalLink
+                    hidden={showEditLink === false}
+                    url="../SitePages/Forms/EditForm.aspx?ID=3"
+                    label={__("ProjectInfo_EditProperties")}
+                    icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left }}
+                    options={{
+                        HideContentTypeChoice: true,
+                        HideWebPartMaintenancePageLink: true,
+                        HideRibbon: true,
+                        HideFormFields: "GtProjectPhase",
                     }}
-                    hidden={hideChrome}
-                />
-                <div
-                    className="pp-projectInfoInner">
-                    {this.__renderProperties(properties)}
-                    <div style={{ marginTop: 20 }}>
-                        <ModalLink
-                            hidden={showEditLink === false}
-                            url="../SitePages/Forms/EditForm.aspx?ID=3"
-                            label={__("ProjectInfo_EditProperties")}
-                            icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left }}
-                            options={{
-                                HideContentTypeChoice: true,
-                                HideWebPartMaintenancePageLink: true,
-                                HideRibbon: true,
-                                HideFormFields: "GtProjectPhase",
-                            }}
-                            reloadOnSuccess={true}
-                            showLabel={true} />
-                    </div>
-                </div>
-            </div>);
-        }
+                    reloadOnSuccess={true}
+                    showLabel={true} />
+            </div>
+        </div>;
     }
 
     /**
@@ -136,8 +170,13 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      *
      * @param properties Properties to render
      */
-    private __renderProperties(properties: IProjectProp[]): JSX.Element {
-        const { showMissingPropsWarning, labelSize, valueSize } = this.props;
+    private renderProperties(properties: IProjectProp[]): JSX.Element {
+        const {
+            showMissingPropsWarning,
+            labelSize,
+            valueSize,
+            } = this.props;
+
         let hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         return (<div>
             {properties.filter(p => !p.empty).map((d, index) => (

@@ -5,8 +5,7 @@ import {
     SpinnerType,
     SearchBox,
 } from "office-ui-fabric-react";
-import Modal from "office-ui-fabric-react/lib/Modal";
-import ProjectInfo from "../ProjectInfo";
+import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
@@ -101,37 +100,34 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
    * Renders the Project Info modal
    */
     private renderProjectInfoModal = () => {
-        const { showProjectInfo } = this.state;
-
         const {
-            modalContainerClassName,
             modalHeaderClassName,
             projectInfoFilterField,
         } = this.props;
 
+
+        const { showProjectInfo } = this.state;
+
         if (showProjectInfo) {
-            return (
-                <Modal
-                    isOpen={showProjectInfo}
-                    isDarkOverlay={true}
-                    onDismiss={e => this.setState({ showProjectInfo: null })}
-                    containerClassName={modalContainerClassName}
-                    isBlocking={false}
-                >
-                    <div style={{ padding: 50 }}>
-                        <div className={modalHeaderClassName} style={{ marginBottom: 20 }}>
-                            <span>{showProjectInfo.Title}</span>
-                        </div>
-                        <ProjectInfo
-                            webUrl={showProjectInfo.Path}
-                            hideChrome={true}
-                            showEditLink={false}
-                            showMissingPropsWarning={false}
-                            filterField={projectInfoFilterField}
-                            labelSize="l"
-                            valueSize="m" />
-                    </div>
-                </Modal>
+            return (<ProjectInfo
+                webUrl={showProjectInfo.Path}
+                hideChrome={true}
+                showEditLink={false}
+                showMissingPropsWarning={false}
+                filterField={projectInfoFilterField}
+                labelSize="l"
+                valueSize="m"
+                renderMode={ProjectInfoRenderMode.Modal}
+                modalOptions={{
+                    isOpen: this.state.showProjectInfo,
+                    isDarkOverlay: true,
+                    isBlocking: false,
+                    onDismiss: e => this.setState({ showProjectInfo: null }),
+                    headerClassName: modalHeaderClassName,
+                    headerStyle: { marginBottom: 20 },
+                    title: showProjectInfo.Title,
+                }}
+            />
             );
         }
         return null;

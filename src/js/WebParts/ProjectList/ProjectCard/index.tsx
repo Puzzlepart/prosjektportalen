@@ -59,7 +59,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
             <DocumentCardActions
                 actions={
                     [{
-                        icon: "AlignCenter",
+                        iconProps: { iconName: "AlignCenter" },
                         onClick: (ev: any) => {
                             ev.preventDefault();
                             ev.stopPropagation();
