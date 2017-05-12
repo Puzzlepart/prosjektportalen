@@ -21,7 +21,6 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
         tileImageHeight: 140,
         tileGutter: 5,
         tileClassName: "pp-projectCard",
-        modalContainerClassName: "pp-projectListModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         projectInfoFilterField: "GtPcPortfolioPage",
     };

@@ -13,7 +13,6 @@ import {
     ConstrainMode,
     DetailsListLayoutMode,
 } from "office-ui-fabric-react";
-import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";

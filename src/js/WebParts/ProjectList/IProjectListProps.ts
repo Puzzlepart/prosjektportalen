@@ -3,7 +3,6 @@ interface IProjectListProps {
     tileImageHeight?: number;
     tileGutter?: number;
     tileClassName?: string;
-    modalContainerClassName?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
 }
