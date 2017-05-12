@@ -2,29 +2,8 @@ import * as React from "react";
 import * as jQuery from "jquery";
 import { Icon } from "office-ui-fabric-react";
 import * as Util from "../../../Util";
-
-export interface IToggleElementStorage {
-    key: string;
-    type: "localStorage" | "sessionStorage";
-}
-
-export interface IToggleElement {
-    selector: string;
-    animationDelay: number;
-    animation: "fadeToggle" | "slideToggle";
-    storage?: IToggleElementStorage;
-    defaultCollapsed?: boolean;
-}
-
-export interface IChromeTitleProps {
-    title: string;
-    toggleElement?: IToggleElement;
-    hidden?: boolean;
-}
-
-export interface IChromeTitleState {
-    isCollapsed: boolean;
-}
+import IChromeTitleProps from "./IChromeTitleProps";
+import IChromeTitleState from "./IChromeTitleState";
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
     public static defaultProps: Partial<IChromeTitleProps> = {
@@ -136,7 +115,12 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
         const { toggleElement } = this.props;
         const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
         if (value) {
-            return JSON.parse(value);
+            try {
+                const parsedValue = JSON.parse(value);
+                return parsedValue;
+            } catch (e) {
+                return toggleElement.defaultCollapsed === true;
+            }
         } else {
             return toggleElement.defaultCollapsed === true;
         }
