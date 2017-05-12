@@ -73,6 +73,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             webinfos,
             isLoading,
         } = this.state;
+
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }

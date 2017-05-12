@@ -186,19 +186,22 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             valueSize,
             } = this.props;
 
-        let hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
-        return (<div>
-            {properties.filter(p => !p.empty).map((d, index) => (
-                <ProjectProp
-                    key={index}
-                    data={d}
-                    labelSize={labelSize}
-                    valueSize={valueSize} />
-            ))}
-            <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
-                <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
+        const hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
+        const propertiesToRender = properties.filter(p => !p.empty);
+        return (
+            <div>
+                {propertiesToRender.map((d, index) => (
+                    <ProjectProp
+                        key={index}
+                        data={d}
+                        labelSize={labelSize}
+                        valueSize={valueSize} />
+                ))}
+                <div hidden={!hasMissingProps || showMissingPropsWarning === false} className="ms-metadata" style={{ marginTop: "25px" }}>
+                    <i className="ms-Icon ms-Icon--Error" aria-hidden="true"></i> {__("ProjectInfo_MissingProperties")}
+                </div>
             </div>
-        </div>);
+        );
     }
 
     /**
