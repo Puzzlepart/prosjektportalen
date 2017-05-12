@@ -4,20 +4,22 @@ import {
     Icon,
 } from "office-ui-fabric-react";
 import NewProjectDialog from "./NewProjectDialog";
-
-export interface INewProjectLinkProps {
-    iconName?: string;
-}
-export interface INewProjectLinkState {
-    showDialog: boolean;
-}
+import INewProjectLinkProps from "./INewProjectLinkProps";
+import INewProjectLinkState from "./INewProjectLinkState";
 
 /**
  * New Project link
  */
 export default class NewProjectLink extends React.PureComponent<INewProjectLinkProps, INewProjectLinkState> {
     public static defaultProps: Partial<INewProjectLinkProps> = {
-        iconName: "CirclePlus",
+        linkClassName: "ms-font-l",
+        iconProps: {
+            iconName: "CirclePlus",
+            style: {
+                verticalAlign: "bottom",
+                marginRight: 5,
+            },
+        },
     };
 
     /**
@@ -34,21 +36,23 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
      * Renders the component
      */
     public render(): JSX.Element {
-        return (<div className="container">
-            <a
-                className="ms-font-l"
-                href="#"
-                onClick={e => this.setState({ showDialog: true })}>
-                <Icon
-                    iconName={this.props.iconName}
-                    style={{
-                        verticalAlign: "bottom",
-                        marginRight: 5,
-                    }} />
-                <span>{__("NewProjectForm_Header")}</span>
-            </a>
-            {this.renderDialog()}
-        </div>);
+        const {
+            linkClassName,
+            iconProps,
+         } = this.props;
+
+        return (
+            <div>
+                <a
+                    className={linkClassName}
+                    href="#"
+                    onClick={e => this.setState({ showDialog: true })}>
+                    <Icon { ...iconProps } />
+                    <span>{__("NewProjectForm_Header")}</span>
+                </a>
+                {this.renderDialog()}
+            </div>
+        );
     }
 
     /**
