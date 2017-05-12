@@ -56,13 +56,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            isLoading,
-            projects,
-            searchTerm,
-        } = this.state;
-
-        if (isLoading) {
+        if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
 
@@ -71,7 +65,24 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                 <SearchBox
                     labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st })} />
-                <Masonry
+                {this.renderCards()}
+                {this.renderProjectInfoModal()}
+                <Style props={this.props} />
+            </div>
+        );
+    }
+
+    /**
+     * Render cards
+     */
+    private renderCards = () => {
+        const {
+            projects,
+            searchTerm,
+        } = this.state;
+
+        return (
+            <Masonry
                     elementType={"div"}
                     options={this.props.masonryOptions}
                     disableImagesLoaded={false}
@@ -92,9 +103,6 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                                 }} />
                         ))}
                 </Masonry>
-                {this.renderProjectInfoModal()}
-                <Style props={this.props} />
-            </div>
         );
     }
 
