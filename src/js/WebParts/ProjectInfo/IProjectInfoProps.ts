@@ -1,13 +1,14 @@
-import * as React  from "react";
+import * as React from "react";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
+import { IModalLinkProps } from "../@Components/ModalLink";
 
 interface IProjectInfoProps {
-    showEditLink?: boolean;
+    showActionLinks?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
-    labelSize?: string;
-    valueSize?: string;
+    labelSize?: "mi" | "xs" | "s" | "s-plus" | "m" | "m-plus" | "l" | "xl" | "xxl";
+    valueSize?: "mi" | "xs" | "s" | "s-plus" | "m" | "m-plus" | "l" | "xl" | "xxl";
     hideChrome?: boolean;
     webUrl?: string;
     rootSiteUrl?: string;
@@ -19,6 +20,15 @@ interface IProjectInfoProps {
         iconName?: string;
         style?: React.CSSProperties;
     };
+    infoIconProps?: {
+        iconName?: string;
+        style?: React.CSSProperties;
+    };
+    metadataProps?: {
+        className: string;
+        style?: React.CSSProperties;
+    };
+    actionLinks?: IModalLinkProps[];
 }
 
 export default IProjectInfoProps;

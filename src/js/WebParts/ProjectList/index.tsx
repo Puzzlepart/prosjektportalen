@@ -83,26 +83,26 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
 
         return (
             <Masonry
-                    elementType={"div"}
-                    options={this.props.masonryOptions}
-                    disableImagesLoaded={false}
-                    updateOnEachImageLoad={false}>
-                    {projects
-                        .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
-                        .sort((a, b) => a.Title > b.Title ? 1 : -1)
-                        .map((project, idx) => (
-                            <ProjectCard
-                                key={idx}
-                                project={project}
-                                className={this.props.tileClassName}
-                                tileWidth={this.props.tileWidth}
-                                tileImageHeight={this.props.tileImageHeight}
-                                onClickHref={project.Url}
-                                showProjectInfo={e => {
-                                    this.setState({ showProjectInfo: project });
-                                }} />
-                        ))}
-                </Masonry>
+                elementType={"div"}
+                options={this.props.masonryOptions}
+                disableImagesLoaded={false}
+                updateOnEachImageLoad={false}>
+                {projects
+                    .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
+                    .sort((a, b) => a.Title > b.Title ? 1 : -1)
+                    .map((project, idx) => (
+                        <ProjectCard
+                            key={idx}
+                            project={project}
+                            className={this.props.tileClassName}
+                            tileWidth={this.props.tileWidth}
+                            tileImageHeight={this.props.tileImageHeight}
+                            onClickHref={project.Url}
+                            showProjectInfo={e => {
+                                this.setState({ showProjectInfo: project });
+                            }} />
+                    ))}
+            </Masonry>
         );
     }
 
@@ -110,31 +110,25 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
    * Renders the Project Info modal
    */
     private renderProjectInfoModal = () => {
-        const {
-            modalHeaderClassName,
-            projectInfoFilterField,
-        } = this.props;
-
-
         const { showProjectInfo } = this.state;
 
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.Path}
+                    webUrl={showProjectInfo.Url}
                     hideChrome={true}
-                    showEditLink={false}
+                    showActionLinks={false}
                     showMissingPropsWarning={false}
-                    filterField={projectInfoFilterField}
+                    filterField={this.props.projectInfoFilterField}
                     labelSize="l"
                     valueSize="m"
                     renderMode={ProjectInfoRenderMode.Modal}
                     modalOptions={{
-                        isOpen: this.state.showProjectInfo,
+                        isOpen: this.state.showProjectInfo !== null,
                         isDarkOverlay: true,
                         isBlocking: false,
                         onDismiss: e => this.setState({ showProjectInfo: null }),
-                        headerClassName: modalHeaderClassName,
+                        headerClassName: this.props.modalHeaderClassName,
                         headerStyle: { marginBottom: 20 },
                         title: showProjectInfo.Title,
                     }}

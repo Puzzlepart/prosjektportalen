@@ -1,24 +1,6 @@
 import * as React from "react";
-
-export class ProjectPropertyModel {
-    public internalName: string;
-    public displayName: string;
-    public value?: string;
-    public description?: string;
-    public type?: string;
-    public empty?: boolean;
-    public required?: any;
-
-    constructor(field, value: string) {
-        this.internalName = field.InternalName;
-        this.displayName = field.Title;
-        this.description = field.Description;
-        this.value = value;
-        this.type = field.TypeAsString;
-        this.required = field.Required;
-        this.empty = value === "";
-    }
-}
+import IProjectPropertyProps from "./IProjectPropertyProps";
+import ProjectPropertyModel from "./ProjectPropertyModel";
 
 /**
  * Project property
@@ -27,7 +9,7 @@ export class ProjectPropertyModel {
  * @param labelSize Size of label
  * @param valueSize Size of value
  */
-const ProjectProperty = ({ data: { internalName, displayName, description, value, type, required }, labelSize, valueSize }: { data: ProjectPropertyModel, labelSize?: string, valueSize?: string }): JSX.Element => {
+const ProjectProperty = ({ data: { internalName, displayName, description, value, type, required }, labelSize, valueSize }: IProjectPropertyProps): JSX.Element => {
     let labelClassName = ["_label", "ms-fontWeight-semibold"];
     let valueClassName = ["_value"];
     if (labelSize) {
@@ -51,4 +33,4 @@ const ProjectProperty = ({ data: { internalName, displayName, description, value
 };
 
 export default ProjectProperty;
-
+export { ProjectPropertyModel };

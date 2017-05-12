@@ -29,9 +29,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     /**
      * Default properties
      */
-    public static defaultProps: IProjectInfoProps = {
+    public static defaultProps: Partial<IProjectInfoProps> = {
         hideChrome: false,
-        showEditLink: true,
+        showActionLinks: true,
+        showMissingPropsWarning: true,
         webUrl: _spPageContextInfo.webAbsoluteUrl,
         rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
         welcomePageId: 3,
@@ -43,13 +44,48 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                 color: "#000",
             },
         },
+        infoIconProps: {
+            iconName: "Info",
+            style: {
+                color: "#000",
+            },
+        },
+        metadataProps: {
+            className: "ms-font-xs",
+            style: {
+                marginTop: 25,
+            },
+        },
+        actionLinks: [{
+            url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
+            label: __("ProjectInfo_EditProperties"),
+            icon: { iconName: "EditMirrored", position: ModalLinkIconPosition.Left },
+            options: {
+                HideContentTypeChoice: true,
+                HideWebPartMaintenancePageLink: true,
+                HideRibbon: true,
+                HideFormFields: "GtProjectPhase",
+            },
+            reloadOnSuccess: true,
+            showLabel: true,
+        },
+        {
+            url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
+            label: __("ProjectInfo_EditLogo"),
+            icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
+            reloadOnSuccess: true,
+            showLabel: true,
+            style: {
+                marginLeft: 8,
+            },
+        }],
     };
 
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             error: false,
             isLoading: true,
@@ -95,9 +131,11 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                 return (<div className={containerClassName}>
                     {this.renderChrome()}
                     {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
-                    {error && (<div className="ms-metadata">
-                        <Icon { ...this.props.errorIconProps} />  {__("WebPart_FailedMessage")}
-                    </div>)}
+                    {error && (
+                        <div { ...this.props.metadataProps }>
+                            <Icon { ...this.props.errorIconProps} />  {__("WebPart_FailedMessage")}
+                        </div>
+                    )}
                     {this.renderInner()}
                 </div>);
             }
@@ -170,25 +208,19 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * @param properties Properties to render
      */
     private renderProperties(properties: ProjectPropertyModel[]): JSX.Element {
-        const {
-            showMissingPropsWarning,
-            labelSize,
-            valueSize,
-            } = this.props;
-
-        const hasMissingProps = (properties.filter(p => p.required && p.empty).length > 0);
         const propertiesToRender = properties.filter(p => !p.empty);
-        if (hasMissingProps || showMissingPropsWarning) {
+        const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
+        if (hasMissingProps && this.props.showMissingPropsWarning) {
             return (
-                <div className="ms-metadata" style={{ marginTop: "25px" }}>
+                <div { ...this.props.metadataProps }>
                     <Icon { ...this.props.errorIconProps} />  {__("ProjectInfo_MissingProperties")}
                 </div>
             );
         }
         if (propertiesToRender.length === 0) {
             return (
-                <div className="ms-metadata" style={{ marginTop: "25px" }}>
-                    <Icon { ...this.props.errorIconProps} />  {__("ProjectInfo_MissingProperties")} {__("ProjectInfo_NoProperties")}
+                <div { ...this.props.metadataProps }>
+                    <Icon { ...this.props.infoIconProps} />  {__("ProjectInfo_NoProperties")}
                 </div>
             );
         }
@@ -198,8 +230,8 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                     <ProjectProperty
                         key={index}
                         data={d}
-                        labelSize={labelSize}
-                        valueSize={valueSize} />
+                        labelSize={this.props.labelSize}
+                        valueSize={this.props.valueSize} />
                 ))}
             </div>
         );
@@ -211,28 +243,11 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     private renderActionLinks = () => {
         return (
             <div
-                hidden={!this.props.showEditLink}
+                hidden={!this.props.showActionLinks}
                 style={{ marginTop: 20 }}>
-                <ModalLink
-                    url={`${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`}
-                    label={__("ProjectInfo_EditProperties")}
-                    icon={{ iconName: "EditMirrored", position: ModalLinkIconPosition.Left }}
-                    options={{
-                        HideContentTypeChoice: true,
-                        HideWebPartMaintenancePageLink: true,
-                        HideRibbon: true,
-                        HideFormFields: "GtProjectPhase",
-                    }}
-                    reloadOnSuccess={true}
-                    showLabel={true} />
-                <ModalLink
-                    url={`${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`}
-                    label={__("ProjectInfo_EditLogo")}
-                    icon={{ iconName: "AppIconDefault", position: ModalLinkIconPosition.Left }}
-                    reloadOnSuccess={true}
-                    showLabel={true}
-                    style={{ marginLeft: 10 }}
-                />
+                {this.props.actionLinks.map((props, idx) => (
+                    <ModalLink key={idx} { ...props } />
+                ))}
             </div>
         );
     }
@@ -248,7 +263,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             .lists
             .getByTitle(configList)
             .items
-            .select("Title", "GtPcProjectStatus", "GtPcFrontpage", "GtPcPortfolioPage")
+            .select("Title", this.props.filterField)
             .get();
 
         const fieldsPromise = rootWeb

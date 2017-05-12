@@ -4,7 +4,7 @@ interface IProjectListState {
     isLoading: boolean;
     projects?: Project[];
     searchTerm?: string;
-    showProjectInfo?: any;
+    showProjectInfo?: Project;
 }
 
 export default IProjectListState;

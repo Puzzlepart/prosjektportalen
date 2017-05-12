@@ -266,7 +266,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             return <ProjectInfo
                 webUrl={showProjectInfo.Path}
                 hideChrome={true}
-                showEditLink={false}
+                showActionLinks={false}
                 showMissingPropsWarning={false}
                 filterField={projectInfoFilterField}
                 labelSize="l"
