@@ -24,7 +24,7 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
             key: "Title",
             fieldName: "Title",
             name: "Tittel",
-            minWidth: 180,
+            minWidth: 220,
         },
         {
             key: "SiteTitle",
@@ -93,9 +93,11 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
         }
         return (
             <div>
-                <SearchBox onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
+                <SearchBox
+                    labelText="Søk i alle loggelementer"
+                    onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 <DetailsList
-                    items={this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].indexOf(this.state.searchTerm) !== -1).length > 0)}
+                    items={this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0)}
                     columns={this.props.columns}
                     constrainMode={this.props.constrainMode}
                     layoutMode={this.props.layoutMode}
