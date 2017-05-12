@@ -90,7 +90,11 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 comment={project.GtStatusGainAchievementComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Gevinstanalyse og gevinstrealiseringsplan`}
                                 fieldName="GtStatusGainAchievement" />
-                            <GainsOverview dataSource={DataSource.List} showSearchBox={false} />
+                            <GainsOverview
+                                dataSource={DataSource.List}
+                                showSearchBox={false}
+                                showCommandBar={false}
+                            />
                         </Element>
                         <Element style={{ minHeight: 600 }} />
                     </StickyContainer >

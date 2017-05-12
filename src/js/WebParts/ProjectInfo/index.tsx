@@ -58,10 +58,16 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(({ config, item, fields }) => {
-            this.setState({ isLoading: false, properties: this.createProjectProperties(config, item, fields) });
+        this.fetchData().then(properties => {
+            this.setState({
+                isLoading: false,
+                properties: properties,
+            });
         }).catch(_ => {
-            this.setState({ isLoading: false, error: true });
+            this.setState({
+                isLoading: false,
+                error: true,
+            });
         });
     }
 
@@ -152,12 +158,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      *
      * @param configList Configuration list
      */
-    private fetchData = (configList = "ProjectConfig") => new Promise((resolve, reject) => {
-        const {
-            webUrl,
-            welcomePageId,
-        } = this.props;
-
+    private fetchData = (configList = "ProjectConfig") => new Promise<IProjectProp[]>((resolve, reject) => {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const configPromise = rootWeb
             .lists
@@ -174,52 +175,37 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             .filter(`Group eq '${__("SiteFields_Group")}'`)
             .get();
 
-        const itemPromise = new Web(webUrl)
+        const itemPromise = new Web(this.props.webUrl)
             .lists
             .getByTitle(__("Lists_SitePages_Title"))
             .items
-            .getById(welcomePageId)
+            .getById(this.props.welcomePageId)
             .fieldValuesAsHTML
             .get();
 
         Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
-            resolve({
-                config: config,
-                item: item,
-                fields: fields,
+            const { filterField } = this.props;
+            let projectProperties: IProjectProp[] = [];
+            Object.keys(item).forEach(fieldName => {
+                const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                const value = item[fieldName];
+                if (typeof value === "string" && field) {
+                    const { Title, InternalName, Description, TypeAsString, Required } = field;
+                    const [configItem] = config.filter(c => c.Title === Title);
+                    if (configItem && configItem[filterField] === true) {
+                        projectProperties.push({
+                            internalName: InternalName,
+                            displayName: Title,
+                            description: Description,
+                            value: value,
+                            type: TypeAsString,
+                            required: Required,
+                            empty: value === "",
+                        });
+                    }
+                }
             });
+            resolve(projectProperties);
         }, reject);
     })
-
-    /**
-     * Create project properties based on the fields and config
-     *
-     * @param config Config items
-     * @param item Project item
-     * @param fields Fields
-     */
-    private createProjectProperties(config: any[], item: Object, fields: any[]): IProjectProp[] {
-        const { filterField } = this.props;
-        let projectProperties: IProjectProp[] = [];
-        Object.keys(item).forEach(key => {
-            const [field] = fields.filter(({ InternalName }) => InternalName === key);
-            const value = item[key];
-            if (typeof value === "string" && field) {
-                const { Title, InternalName, Description, TypeAsString, Required } = field;
-                const [configItem] = config.filter(c => c.Title === Title);
-                if (configItem && configItem[filterField] === true) {
-                    projectProperties.push({
-                        internalName: InternalName,
-                        displayName: Title,
-                        description: Description,
-                        value: value,
-                        type: TypeAsString,
-                        required: Required,
-                        empty: value === "",
-                    });
-                }
-            }
-        });
-        return projectProperties;
-    }
 };
