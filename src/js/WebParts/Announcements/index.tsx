@@ -6,21 +6,8 @@ import {
 } from "office-ui-fabric-react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import * as Util from "../../Util";
-
-export interface IAnnouncementsProps {
-    itemsCount?: number;
-    itemsFilter?: string;
-    itemsOrderBy?: { orderBy: string, ascending: boolean };
-    listClassName?: string;
-    modalHeaderClassName?: string;
-    modalBodyClassName?: string;
-    modalContainerClassName?: string;
-}
-export interface IAnnouncementsState {
-    entries: any[];
-    isLoading: boolean;
-    showAnnouncement: any;
-}
+import IAnnouncementsProps from "./IAnnouncementsProps";
+import IAnnouncementsState from "./IAnnouncementsState";
 
 /**
  * Announcements

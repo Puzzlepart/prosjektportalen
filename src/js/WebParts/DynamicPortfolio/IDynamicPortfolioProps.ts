@@ -11,8 +11,8 @@ interface IDynamicPortfolioProps {
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
     constrainMode?: ConstrainMode;
-    layoutMode: DetailsListLayoutMode;
-    selectionMode: SelectionMode;
+    layoutMode?: DetailsListLayoutMode;
+    selectionMode?: SelectionMode;
 }
 
 export default IDynamicPortfolioProps;
