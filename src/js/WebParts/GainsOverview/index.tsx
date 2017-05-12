@@ -4,42 +4,27 @@ import {
     DetailsList,
     IGroup,
     SelectionMode,
-    Toggle,
     Spinner,
     SpinnerType,
     SearchBox,
+    ContextualMenuItemType,
+    CommandBar,
 } from "office-ui-fabric-react";
 import { DataSource } from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
-
-export interface IGroupByOption {
-    label: string;
-    property: string;
-}
-
-export interface IGainsOverviewProps {
-    dataSource?: DataSource;
-    groupByOptions?: IGroupByOption[];
-    showSearchBox?: boolean;
-    searchProperty?: string;
-}
-
-export interface IGainsOverviewState {
-    data?: Data.IGainsOverviewData;
-    isLoading: boolean;
-    searchTerm: string;
-    groupBy: string;
-}
+import IGainsOverviewProps from "./IGainsOverviewProps";
+import IGainsOverviewState from "./IGainsOverviewState";
 
 /**
  * Gains Overview
  */
 export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
     public static defaultProps: Partial<IGainsOverviewProps> = {
-        groupByOptions: [],
+        groupByOptions: [{ name: "Prosjekt", key: "SiteTitle" }],
         searchProperty: "Title",
         dataSource: DataSource.List,
+        showCommandBar: true,
     };
 
     /**
@@ -50,7 +35,10 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         this.state = {
             isLoading: true,
             searchTerm: "",
-            groupBy: null,
+            groupBy: {
+                key: "NoGrouping",
+                name: __("String_NoGrouping"),
+            },
         };
     }
 
@@ -67,9 +55,9 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      */
     public render(): JSX.Element {
         const {
-            groupByOptions,
             showSearchBox,
-        } = this.props;
+            showCommandBar,
+         } = this.props;
 
         const {
             isLoading,
@@ -82,18 +70,13 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
             return (<div style={{ width: "100%" }}>
+                {showCommandBar && this.renderCommandBar()}                
+                <div style={{ height: 10 }}></div>
                 {showSearchBox !== false &&
                     <SearchBox
                         onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText="Søk i alle gevinster" />
+                        labelText={__("GainsOverview_SearchBox_Placeholder")} />
                 }
-                {groupByOptions.map((gp, idx) => <Toggle
-                    key={idx}
-                    onChanged={checked => this.setState({ groupBy: checked ? gp.property : null })}
-                    defaultChecked={false}
-                    label={gp.label}
-                    onText={__("String_Yes")}
-                    offText={__("String_No")} />)}
                 <DetailsList
                     items={items}
                     columns={columns}
@@ -105,6 +88,49 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             </div>);
         }
         return null;
+    }
+
+    /**
+     * Renders the command bar from office-ui-fabric-react
+     */
+    private renderCommandBar = () => {
+        const {
+            groupBy,
+         } = this.state;
+
+        const { groupByOptions } = this.props;
+
+        const items = [];
+        const farItems = [];
+
+        const noGrouping = {
+            key: "NoGrouping",
+            name: __("String_NoGrouping"),
+        };
+        items.push({
+            key: "Group",
+            name: groupBy.name,
+            iconProps: { iconName: "GroupedList" },
+            itemType: ContextualMenuItemType.Header,
+            onClick: e => e.preventDefault(),
+            items: [
+                {
+                    ...noGrouping,
+                },
+                ...groupByOptions,
+            ].map(item => ({
+                ...item,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ groupBy: item });
+                },
+            })),
+        });
+
+        return <CommandBar
+            items={items}
+            farItems={farItems}
+        />;
     }
 
     /**
@@ -125,26 +151,18 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
 
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
-        if (groupBy) {
-            const groupItems = data.items.sort((a, b) => {
-                return a[groupBy] > b[groupBy] ? -1 : 1;
-            });
-            const groupNames = groupItems.map(g => g[groupBy]);
+        if (groupBy.key !== "NoGrouping") {
+            const groupItems = data.items.sort((a, b) => a[groupBy.key] > b[groupBy.key] ? -1 : 1);
+            const groupNames = groupItems.map(g => g[groupBy.key]);
             groups = unique([].concat(groupNames)).map((name, idx) => ({
                 key: idx,
-                name: name,
+                name: `${groupBy.name}: ${name}`,
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
                 isCollapsed: false,
                 isShowingAll: true,
                 isDropEnabled: false,
             }));
-
-            /**
-             * Remove the column we're grouping by
-             */
-            let indexOfColumn = data.columns.map(({ fieldName }) => fieldName).indexOf(groupBy);
-            columns.splice(indexOfColumn, 1);
         }
         const filteredItems = data.items.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1);
         return {

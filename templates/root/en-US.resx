@@ -1285,6 +1285,10 @@
   <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Difference from previous measurement</value>
   </data>
+  
+  <data name="GainsOverview_SearchBox_Placeholder" xml:space="preserve">
+    <value>Search all gains...</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full Control</value>
   </data>

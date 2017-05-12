@@ -364,7 +364,7 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalenkolonner</value>
   </data>
-   <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
     <value>Sorteringsrekkefølge</value>
   </data>
   <data name="SiteFields_GtProjectTaskProduct_DisplayName" xml:space="preserve">
@@ -1287,6 +1287,9 @@
   </data>
   <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
+  </data>
+  <data name="GainsOverview_SearchBox_Placeholder" xml:space="preserve">
+    <value>Søk i alle gevinster...</value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>
