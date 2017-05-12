@@ -10,7 +10,7 @@ import {
     ContextualMenuItemType,
     CommandBar,
 } from "office-ui-fabric-react";
-import { DataSource } from "../DataSource";
+import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
 import IGainsOverviewProps from "./IGainsOverviewProps";
@@ -70,7 +70,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
             return (<div style={{ width: "100%" }}>
-                {showCommandBar && this.renderCommandBar()}                
+                {showCommandBar && this.renderCommandBar()}
                 <div style={{ height: 10 }}></div>
                 {showSearchBox !== false &&
                     <SearchBox

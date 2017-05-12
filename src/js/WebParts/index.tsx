@@ -10,12 +10,13 @@ import QuickLinks from "./QuickLinks";
 import DynamicPortfolio from "./DynamicPortfolio";
 import GainsOverview from "./GainsOverview";
 import ProjectStatus from "./ProjectStatus";
-import { DataSource } from "./DataSource";
+import DataSource from "./DataSource";
+import IWebPartMapping from "./IWebPartMapping";
 
 /**
  * Maps container ids to JSX.Elements (WebParts)
  */
-const wp_map: { [id: string]: JSX.Element } = {
+const wp_map: IWebPartMapping = {
     "pp-projectlist": <ProjectList />,
     "pp-projectinfo": <ProjectInfo filterField="GtPcFrontpage" />,
     "pp-projectphases": <ProjectPhases />,

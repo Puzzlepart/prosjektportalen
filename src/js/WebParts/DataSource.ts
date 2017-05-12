@@ -1,4 +1,6 @@
-export enum DataSource {
+enum DataSource {
     Search,
     List,
 }
+
+export default DataSource;

@@ -9,7 +9,7 @@ import { default as StatusSection } from "./StatusSection";
 import { default as StatusNavigation } from "./StatusNavigation";
 import { default as EconomySection } from "./EconomySection";
 import SectionHeader from "./SectionHeader";
-import { DataSource } from "../DataSource";
+import DataSource from "../DataSource";
 import { default as GainsOverview } from "../GainsOverview";
 
 export interface IProjectStatusState {

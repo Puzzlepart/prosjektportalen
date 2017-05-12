@@ -50,14 +50,27 @@ export const cleanSearchPropName = (searchProp: string): string => {
     return searchProp.match(/(.*?)OWS*/)[1];
 };
 
+export enum UserPhotoSource {
+    UserPhotoAspx,
+    OWA,
+}
+
 /**
  * Get user photo URL from userphoto.aspx
  *
  * @param email Email adress
+ * @param source User photo source (OWA is not supported on premise)
  * @param size Size S/M/L
  */
-export const userPhoto = (email: string, size = "L"): string => {
-    return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
+export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx, size = "L"): string => {
+    switch (source) {
+        case UserPhotoSource.UserPhotoAspx: {
+            return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
+        }
+        case UserPhotoSource.OWA: {
+            return `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${email}&UA=0&size=HR120x120`;
+        }
+    };
 };
 
 /**

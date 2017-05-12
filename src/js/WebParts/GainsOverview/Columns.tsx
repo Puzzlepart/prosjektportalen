@@ -3,7 +3,7 @@ import {
     IColumn,
     Icon,
 } from "office-ui-fabric-react";
-import { DataSource } from "../DataSource";
+import DataSource from "../DataSource";
 
 const Columns = (dataSource: DataSource): any[] => {
     return [{

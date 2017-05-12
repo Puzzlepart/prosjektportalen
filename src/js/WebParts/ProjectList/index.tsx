@@ -4,12 +4,18 @@ import {
     DocumentCard,
     DocumentCardPreview,
     DocumentCardTitle,
+    DocumentCardActivity,
+    DocumentCardActions,
+    DocumentCardLocation,
     DocumentCardType,
     ImageFit,
     Spinner,
     SpinnerType,
     SearchBox,
 } from "office-ui-fabric-react";
+import Modal from "office-ui-fabric-react/lib/Modal";
+import * as Util from "../../Util";
+import ProjectInfo from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
 
@@ -17,6 +23,7 @@ interface IProjectListState {
     isLoading: boolean;
     projects?: any[];
     searchTerm?: string;
+    showProjectInfo?: any;
 }
 
 interface IProjectListProps {
@@ -24,6 +31,9 @@ interface IProjectListProps {
     tileImageHeight?: number;
     tileGutter?: number;
     tileClassName?: string;
+    modalContainerClassName?: string;
+    modalHeaderClassName?: string;
+    projectInfoFilterField?: string;
 }
 
 /**
@@ -35,6 +45,9 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
         tileImageHeight: 140,
         tileGutter: 5,
         tileClassName: "pp-projectCard",
+        modalContainerClassName: "pp-projectListModalContainer",
+        modalHeaderClassName: "ms-font-xxl",
+        projectInfoFilterField: "GtPcPortfolioPage",
     };
 
     /**
@@ -68,6 +81,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             isLoading,
             projects,
             searchTerm,
+            showProjectInfo,
         } = this.state;
 
         if (isLoading) {
@@ -88,27 +102,105 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                 updateOnEachImageLoad={false}>
                 {projects
                     .filter(({ Title }) => Title.indexOf(searchTerm) !== -1)
-                    .map(({ Title, Path, SiteLogo }) => (
-                        <DocumentCard
-                            className={this.props.tileClassName}
-                            type={DocumentCardType.normal}>
-                            <DocumentCardPreview previewImages={[
-                                {
-                                    previewImageSrc: SiteLogo,
-                                    imageFit: ImageFit.cover,
-                                    accentColor: "#ce4b1f",
-                                    width: this.props.tileWidth,
-                                    height: this.props.tileImageHeight,
-                                },
-                            ]} />
-                            <DocumentCardTitle
-                                title={Title}
-                                shouldTruncate={true} />
-                        </DocumentCard>
-                    ))}
+                    .map(project => {
+                        const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.GtProjectManagerOWSUSER.split(" | ");
+                        const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.GtProjectOwnerOWSUSER.split(" | ");
+                        const ManagerUserPhoto = Util.userPhoto(ManagerEmail);
+                        const OwnerUserPhoto = Util.userPhoto(OwnerEmail);
+                        return (
+                            <DocumentCard
+                                className={this.props.tileClassName}
+                                type={DocumentCardType.normal}
+                                onClick={e => window.setTimeout(() => !this.state.showProjectInfo && SP.Utilities.HttpUtility.navigateTo(project.Path), 250)}
+                            >
+                                <DocumentCardPreview previewImages={[
+                                    {
+                                        previewImageSrc: project.SiteLogo,
+                                        imageFit: ImageFit.cover,
+                                        accentColor: "#ce4b1f",
+                                        width: this.props.tileWidth,
+                                        height: this.props.tileImageHeight,
+                                    },
+                                ]} />
+                                <DocumentCardTitle
+                                    title={project.Title}
+                                    shouldTruncate={true} />
+                                <DocumentCardLocation
+                                    location={project.RefinableString52 || __("String_NotSet")} />
+                                <DocumentCardActivity
+                                    activity={__("SiteFields_GtProjectOwner_DisplayName")}
+                                    people={[
+                                        {
+                                            name: OwnerName,
+                                            profileImageSrc: OwnerUserPhoto,
+                                        },
+                                    ]}
+                                />
+                                <DocumentCardActivity
+                                    activity={__("SiteFields_GtProjectManager_DisplayName")}
+                                    people={[
+                                        {
+                                            name: ManagerName,
+                                            profileImageSrc: ManagerUserPhoto,
+                                        },
+                                    ]}
+                                />
+                                <DocumentCardLocation
+                                    location="Vis prosjektinfo"
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        this.setState({ showProjectInfo: project });
+                                    }}
+                                />
+                            </DocumentCard>
+                        );
+                    })}
             </Masonry>
+            {this.renderProjectInfoModal()}
             <Style props={this.props} />
         </div>;
+    }
+
+    /**
+   * Renders the Project Info modal
+   */
+    private renderProjectInfoModal = () => {
+        const { showProjectInfo } = this.state;
+
+        const {
+            modalContainerClassName,
+            modalHeaderClassName,
+            projectInfoFilterField,
+        } = this.props;
+
+        console.log(showProjectInfo);
+
+        if (showProjectInfo) {
+            return (
+                <Modal
+                    isOpen={showProjectInfo}
+                    isDarkOverlay={true}
+                    onDismiss={e => this.setState({ showProjectInfo: null })}
+                    containerClassName={modalContainerClassName}
+                    isBlocking={false}
+                >
+                    <div style={{ padding: 50 }}>
+                        <div className={modalHeaderClassName} style={{ marginBottom: 20 }}>
+                            <span>{showProjectInfo.Title}</span>
+                        </div>
+                        <ProjectInfo
+                            webUrl={showProjectInfo.Path}
+                            hideChrome={true}
+                            showEditLink={false}
+                            showMissingPropsWarning={false}
+                            filterField={projectInfoFilterField}
+                            labelSize="l"
+                            valueSize="m" />
+                    </div>
+                </Modal>
+            );
+        }
+        return null;
     }
 
     /**

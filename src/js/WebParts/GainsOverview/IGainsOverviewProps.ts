@@ -1,5 +1,5 @@
-import { DataSource } from "../DataSource";
-import  IGroupByOption from "./IGroupByOption";
+import DataSource from "../DataSource";
+import IGroupByOption from "./IGroupByOption";
 
 interface IGainsOverviewProps {
     dataSource?: DataSource;
