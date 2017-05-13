@@ -33,7 +33,7 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
 });
 
 gulp.task("package:code::prod", ["build:lib"], (done) => {
-    webpack(webpackConfig("prod"), (err, stats) => {
+    webpack(webpackConfig("production"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code::prod", err);
         }
