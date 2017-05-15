@@ -31,8 +31,9 @@ let Template: Schema = {
  * @param progressCallback Callback function for progress
  */
 export const Apply = (web, includeExtensions = false, progressCallback?: (progress: string) => void) => new Promise<void>((resolve, reject) => {
-    PropertyBag.GetAllProperties().then(({ pp_assetssiteurl }) => {
-        Template.WebSettings.AlternateCssUrl = `${pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
+    PropertyBag.GetAllProperties().then(({ pp_assetssiteurl: AssetsUrl }) => {
+        Template.WebSettings.AlternateCssUrl = `${AssetsUrl}/siteassets/pp/css/pp.main.css`;
+        Template.WebSetting.SiteLogoUrl = `${AssetsUrl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
         if (includeExtensions) {
             MergeExtensions(Template).then(mergedTemplate => {
                 new WebProvisioner(web).applyTemplate(mergedTemplate, progressCallback)
