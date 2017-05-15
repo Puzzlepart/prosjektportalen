@@ -38,7 +38,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Note": {
-            return <span title={columnValue}>columnValue</span>;
+            return <span title={columnValue}>{columnValue}</span>;
         }
         case "Persona": {
             let [EMail, Name] = columnValue.split(" | ");
@@ -63,10 +63,10 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Default": {
-            return <span title={columnValue}>columnValue</span>;
+            return <span title={columnValue}>{columnValue}</span>;
         }
         default: {
-            return <span title={columnValue}>columnValue</span>;
+            return <span title={columnValue}>{columnValue}</span>;
         }
     }
 };
