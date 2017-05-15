@@ -21,12 +21,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig): a
     if (column.key === "Title") {
         return <a href={item.Path}>{columnValue}</a>;
     }
+    if (column.key === "Path" || column.key === "URL") {
+        return <a href={item.Path}>{columnValue}</a>;
+    }
     switch (column.render) {
         case "Date": {
             return columnValue ? Util.dateFormat(columnValue, "LL") : null;
         }
         case "Note": {
-            return columnValue;
+            return <span title={columnValue}>columnValue</span>;
         }
         case "Persona": {
             let [EMail, Name] = columnValue.split(" | ");
@@ -47,10 +50,10 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig): a
             return <div><Icon iconName={statusProperties.Icon} style={{ color: statusProperties.Color }} />  {columnValue}</div>;
         }
         case "Default": {
-            return columnValue;
+            return <span title={columnValue}>columnValue</span>;
         }
         default: {
-            return columnValue;
+            return <span title={columnValue}>columnValue</span>;
         }
     }
 };
