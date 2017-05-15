@@ -29,6 +29,9 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
     if (column.key === "Path" || column.key === "URL") {
         return <a href={item.Path}>{columnValue}</a>;
     }
+    if (column.key === "Path" || column.key === "URL") {
+        return <a href={item.Path}>{columnValue}</a>;
+    }
     switch (column.render) {
         case "Date": {
             return (
@@ -39,11 +42,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
         }
         case "Note": {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return (
                 <div>
                     {columnValue}
                 </div>
             );
+=======
+            return <span title={columnValue}>columnValue</span>;
+>>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
 =======
             return <span title={columnValue}>columnValue</span>;
 >>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
@@ -72,6 +79,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
         }
         case "Default": {
 <<<<<<< HEAD
+<<<<<<< HEAD
             return (
                 <div>
                     {columnValue}
@@ -86,10 +94,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
 
 =======
+=======
+>>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
             return <span title={columnValue}>columnValue</span>;
         }
         default: {
             return <span title={columnValue}>columnValue</span>;
+<<<<<<< HEAD
+>>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
+=======
 >>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
         }
     }
