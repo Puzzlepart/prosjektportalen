@@ -46,30 +46,12 @@ export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQ
      * Renders the component
      */
     public render(): JSX.Element {
-        let {
-            links,
-            isLoading,
-         } = this.state;
-
-        if (isLoading) {
-            return (<Spinner type={SpinnerType.large} />);
-        }
-        if (links.length > 0) {
-            return (
-                <div>
-                    {this.renderChrome()}
-                    <ul id={this.props.listId}
-                        className={this.props.listClassName}>
-                        {links.map(({ URL: { Url, Description }, Comments }, idx) => <li key={idx}>
-                            <h5><a href={Url}>{Description}</a></h5>
-                            <span className="ms-metadata">{Comments}</span>
-                        </li>)}
-                    </ul>
-                </div>
-            );
-        } else {
-            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
-        }
+        return (
+            <div>
+                {this.renderChrome()}
+                {this.renderItems()}
+            </div>
+        );
     }
 
     /**
@@ -90,5 +72,31 @@ export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQ
                 }}
             />
         );
+    }
+
+    /**
+     * Render items
+     */
+    private renderItems = () => {
+        const {
+            isLoading,
+            links,
+         } = this.state;
+
+        if (isLoading) {
+            return (<Spinner type={SpinnerType.large} />);
+        } else if (links.length > 0) {
+            return (
+                <ul id={this.props.listId}
+                    className={this.props.listClassName}>
+                    {links.map(({ URL: { Url, Description }, Comments }, idx) => <li key={idx}>
+                        <h5><a href={Url}>{Description}</a></h5>
+                        <span className="ms-metadata">{Comments}</span>
+                    </li>)}
+                </ul>
+            );
+        } else {
+            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+        }
     }
 };

@@ -68,36 +68,13 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            entries,
-            isLoading,
-        } = this.state;
-
-        if (isLoading) {
-            return (<Spinner type={SpinnerType.large} />);
-        }
-        if (entries.length > 0) {
-            return (<div>
+        return (
+            <div>
                 {this.renderChrome()}
-                <ul
-                    id={this.props.listId}
-                    className={this.props.listClassName}>
-                    {entries.map((entry, idx) => <li key={idx}>
-                        <h5>
-                            <a
-                                style={{ cursor: "pointer" }}
-                                onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
-                        </h5>
-                        <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
-                    </li>)}
-                </ul>
-                {this.renderModal()}
-            </div>);
-        } else {
-            return (
-                <div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>
-            );
-        }
+                {this.renderItems(this.state)}
+                {this.renderModal(this.props, this.state)}
+            </div>
+        );
     }
 
     /**
@@ -121,17 +98,35 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
     }
 
     /**
+     * Render items
+     */
+    private renderItems = ({ isLoading, entries }: IAnnouncementsState) => {
+        if (isLoading) {
+            return (<Spinner type={SpinnerType.large} />);
+        } else if (entries.length > 0) {
+            return (
+                <ul
+                    id={this.props.listId}
+                    className={this.props.listClassName}>
+                    {entries.map((entry, idx) => <li key={idx}>
+                        <h5>
+                            <a
+                                style={{ cursor: "pointer" }}
+                                onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                        </h5>
+                        <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
+                    </li>)}
+                </ul>
+            );
+        } else {
+            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+        }
+    }
+
+    /**
      * Render modal
      */
-    private renderModal = () => {
-        const { showAnnouncement } = this.state;
-
-        const {
-            modalContainerClassName,
-            modalHeaderClassName,
-            modalBodyClassName,
-        } = this.props;
-
+    private renderModal = ({ modalContainerClassName, modalHeaderClassName, modalBodyClassName }: IAnnouncementsProps, { showAnnouncement }: IAnnouncementsState) => {
         if (showAnnouncement) {
             return (
                 <Modal

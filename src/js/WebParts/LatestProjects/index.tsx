@@ -69,43 +69,12 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
      * Renders the component
      */
     public render(): JSX.Element {
-        let {
-            webinfos,
-            isLoading,
-        } = this.state;
-
-        if (isLoading) {
-            return (<Spinner type={SpinnerType.large} />);
-        }
-        if (webinfos == null) {
-            return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
-        }
-        if (webinfos.length > 0) {
-            return (
-                <div>
-                    {this.renderChrome()}
-                    <ul id={this.props.listId}
-                        className={this.props.listClassName}>
-                        {webinfos.map(webinfo => (
-                            <li key={webinfo.Id}>
-                                {webinfo.Title ?
-                                    <div>
-                                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
-                                    </div>
-                                    : (
-                                        <div style={{ width: 100 }}>
-                                            <Spinner type={SpinnerType.normal} />
-                                        </div>
-                                    )}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            );
-        } else {
-            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
-        }
+        return (
+            <div>
+                {this.renderChrome()}
+                {this.renderItems()}
+            </div>
+        );
     }
 
     /**
@@ -126,6 +95,44 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
                 }}
             />
         );
+    }
+
+    /**
+     * Render items
+     */
+    private renderItems = () => {
+        const {
+            isLoading,
+            webinfos,
+         } = this.state;
+
+        if (isLoading) {
+            return (<Spinner type={SpinnerType.large} />);
+        } else if (webinfos == null) {
+            return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
+        } else if (webinfos.length > 0) {
+            return (
+                <ul id={this.props.listId}
+                    className={this.props.listClassName}>
+                    {webinfos.map(webinfo => (
+                        <li key={webinfo.Id}>
+                            {webinfo.Title ?
+                                <div>
+                                    <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                                    <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                </div>
+                                : (
+                                    <div style={{ width: 100 }}>
+                                        <Spinner type={SpinnerType.normal} />
+                                    </div>
+                                )}
+                        </li>
+                    ))}
+                </ul>
+            );
+        } else {
+            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+        }
     }
 
     /**
