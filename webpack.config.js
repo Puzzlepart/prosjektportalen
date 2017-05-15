@@ -3,12 +3,6 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-const isExternal = ({ userRequest }) => {
-    if (typeof userRequest !== 'string') {
-        return false;
-    }
-    return userRequest.indexOf('node_modules') !== -1;
-}
 
 module.exports = (env = "development", devtool = "source-map") => ({
     cache: true,
@@ -76,9 +70,4 @@ module.exports = (env = "development", devtool = "source-map") => ({
             }),
         ] : []
         ),
-    node: { fs: 'empty' },
-    externals: [
-        { './cptable': 'var cptable' },
-        { './jszip': 'jszip' }
-    ]
 });
