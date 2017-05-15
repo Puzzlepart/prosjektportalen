@@ -1,5 +1,5 @@
 import { sp } from "sp-pnp-js";
-import { IQueryConfig } from "../Configuration";
+import { IViewConfig } from "../Configuration";
 
 /**
  * Default Search Settings used for sp-pnp-js
@@ -18,16 +18,16 @@ export interface IQueryResponse {
 /**
  * Query the REST Search API using sp-pnp-js
  *
- * @param queryConfig Query configuration
+ * @param viewConfig View configuration
  * @param selectProperties Select properties
  * @param refiners Refiners
  */
-export const query = (queryConfig: IQueryConfig, selectProperties: string[], refiners: string) => new Promise<IQueryResponse>((resolve, reject) => {
+export const query = (viewConfig: IViewConfig, selectProperties: string[], refiners: string) => new Promise<IQueryResponse>((resolve, reject) => {
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
         SelectProperties: selectProperties,
         Refiners: refiners,
-        QueryTemplate: queryConfig.queryTemplate,
+        QueryTemplate: viewConfig.queryTemplate,
     }).then(({ RawSearchResults: { PrimaryQueryResult } }) => {
         resolve({
             primarySearchResults: PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
