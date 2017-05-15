@@ -1,10 +1,10 @@
 import { Schema } from "sp-pnp-provisioning/lib/schema";
-import { default as Files } from "./Objects/Files";
-import { default as Lists } from "./Objects/Lists";
-import { default as Navigation } from "./Objects/Navigation";
-import { default as WebSettings } from "./Objects/WebSettings";
-import { default as ComposedLook } from "./Objects/ComposedLook";
-import { default as PropertyBagEntries } from "./Objects/PropertyBagEntries";
+import Files from "./Objects/Files";
+import Lists from "./Objects/Lists";
+import Navigation from "./Objects/Navigation";
+import WebSettings from "./Objects/WebSettings";
+import ComposedLook from "./Objects/ComposedLook";
+import PropertyBagEntries from "./Objects/PropertyBagEntries";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { MergeExtensions } from "../Extensions";
 import * as PropertyBag from "../../Util/PropertyBag";
