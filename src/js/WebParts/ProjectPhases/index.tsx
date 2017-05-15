@@ -1,19 +1,21 @@
 import * as React from "react";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { ProjectPhase } from "./ProjectPhase";
-import { ChangePhaseDialog } from "./ChangePhaseDialog";
+import {
+    Spinner,
+    SpinnerType,
+} from "office-ui-fabric-react/lib/Spinner";
+import ProjectPhase from "./ProjectPhase";
+import ChangePhaseDialog from "./ChangePhaseDialog";
 import { ChangeProjectPhase } from "../../Project";
-import * as Util from "Util";
+import * as Util from "../../Util";
 import * as Data from "./Data";
+import IProjectPhasesProps from "./IProjectPhasesProps";
+import IProjectPhasesState from "./IProjectPhasesState";
 
-export interface IProjectPhasesState {
-    phases: any[];
-    currentPhase: any;
-    checkListData: { [phase: string]: Data.IChecklistData };
-    changePhase?: { Id: string, Name: string };
-}
 
-export default class ProjectPhases extends React.PureComponent<any, IProjectPhasesState> {
+export default class ProjectPhases extends React.PureComponent<IProjectPhasesProps, IProjectPhasesState> {
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -23,14 +25,28 @@ export default class ProjectPhases extends React.PureComponent<any, IProjectPhas
         };
     }
 
-    public componentDidMount() {
-        Data.fetch().then(data => {
-            this.setState(data);
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
+        Data.fetchData().then(initialState => {
+            this.setState({
+                ...initialState,
+            });
         });
     }
 
-    public render() {
-        let { phases, currentPhase, checkListData, changePhase } = this.state;
+    /**
+     * Render
+     */
+    public render(): JSX.Element {
+        const {
+            phases,
+            currentPhase,
+            checkListData,
+            changePhase,
+        } = this.state;
+
         let checkListItems = (currentPhase && checkListData && checkListData[currentPhase.Id]) ? checkListData[currentPhase.Id].items : [];
         if (phases) {
             return (<div>
@@ -63,6 +79,9 @@ export default class ProjectPhases extends React.PureComponent<any, IProjectPhas
         }
     }
 
+    /**
+     * On change phase
+     */
     private onChangePhase = (phase): void => {
         if (phase) {
             this.setState({ changePhase: phase });
@@ -74,7 +93,10 @@ export default class ProjectPhases extends React.PureComponent<any, IProjectPhas
         }
     }
 
-    private hideDialog = (event?) => {
+    /**
+     * Hide dialog
+     */
+    private hideDialog = (event?): void => {
         this.setState({ changePhase: null });
     }
 };

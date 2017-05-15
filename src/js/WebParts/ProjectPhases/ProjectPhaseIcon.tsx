@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export const ProjectPhaseIcon = ({ phase, classList }) => {
+const ProjectPhaseIcon = ({ phase, classList }) => {
     let phaseLetter = phase[0];
     return (<div className={["phaseIcon", ...classList].join(" ")}>
         <span className="phaseLetter">{phaseLetter}</span>
@@ -8,3 +8,5 @@ export const ProjectPhaseIcon = ({ phase, classList }) => {
         <span className="phaseSubText"></span>
     </div>);
 };
+
+export default ProjectPhaseIcon;

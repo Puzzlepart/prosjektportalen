@@ -11,7 +11,7 @@ const GetStatusIcon = (index: number) => {
     }
 };
 
-export const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase }) => {
+const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase }) => {
     const PHASE_CHECKLIST_URL = `../${__("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
     const __RenderChecklistStats = () => {
         return checkListData && checkListData.stats ? (Object.keys(checkListData.stats).map((c, index) => (
@@ -22,13 +22,17 @@ export const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePh
         ))) : (<li>{__("ProjectPhases_NoCheckpointsFoundForPhase")}</li>);
     };
 
-    return (<div className="phaseCallout">
-        <h3>{String.format(__("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
-        <ul className="checkList">
-            {__RenderChecklistStats()}
-            <li className="spacer"></li>
-            <li><a className="se-all" href={PHASE_CHECKLIST_URL}>{__("ProjectPhases_GoToChecklist")}</a></li>
-            {!selected && <li><span style={{ cursor: "pointer" }} onClick={() => onChangePhase(phase)}>{__("ProjectPhases_ChangePase")}</span></li>}
-        </ul>
-    </div>);
+    return (
+        <div className="phaseCallout">
+            <h3>{String.format(__("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
+            <ul className="checkList">
+                {__RenderChecklistStats()}
+                <li className="spacer"></li>
+                <li><a className="se-all" href={PHASE_CHECKLIST_URL}>{__("ProjectPhases_GoToChecklist")}</a></li>
+                {!selected && <li><span style={{ cursor: "pointer" }} onClick={() => onChangePhase(phase)}>{__("ProjectPhases_ChangePase")}</span></li>}
+            </ul>
+        </div>
+    );
 };
+
+export default ProjectPhaseCallout;

@@ -70,7 +70,7 @@ const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }
 /**
  * Fetch data using sp-pnp-js and sp.taxonomy.js
  */
-export const fetch = () => new Promise<any>((resolve, reject) => {
+export const fetchData = () => new Promise<any>((resolve, reject) => {
     Promise.all([
         GetCurrentProjectPhase(),
         fetchPases(),

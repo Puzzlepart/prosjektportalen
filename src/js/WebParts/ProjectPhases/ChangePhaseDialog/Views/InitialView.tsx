@@ -31,25 +31,27 @@ export class InitialView extends React.Component<IInitialViewProps, IInitialView
         }
         const { ID, Title } = currentChecklistItem;
 
-        return (<div className="inner">
-            <h3>#{ID} {Title}</h3>
-            <textarea
-                placeholder={__("String_Comment")}
-                className="ms-TextField-field"
-                style={{ marginTop: 10, width: "90%", padding: 10 }}
-                ref={ele => this.commentsField = ele}
-                onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
-            <div style={{ margin: "20px 0 25px 0" }}>
-                {this._statusOptions().map((opt, idx) => <span key={idx} title={opt.tooltip}>
-                    <Button
-                        disabled={opt.disabled}
-                        onClick={e => {
-                            nextCheckPointAction(opt.value, comment);
-                            this.reset();
-                        }}>{opt.value}</Button>
-                </span>)}
+        return (
+            <div className="inner">
+                <h3>#{ID} {Title}</h3>
+                <textarea
+                    placeholder={__("String_Comment")}
+                    className="ms-TextField-field"
+                    style={{ marginTop: 10, width: "90%", padding: 10 }}
+                    ref={ele => this.commentsField = ele}
+                    onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
+                <div style={{ margin: "20px 0 25px 0" }}>
+                    {this._statusOptions().map((opt, idx) => <span key={idx} title={opt.tooltip}>
+                        <Button
+                            disabled={opt.disabled}
+                            onClick={e => {
+                                nextCheckPointAction(opt.value, comment);
+                                this.reset();
+                            }}>{opt.value}</Button>
+                    </span>)}
+                </div>
             </div>
-        </div>);
+        );
     }
 
     /**

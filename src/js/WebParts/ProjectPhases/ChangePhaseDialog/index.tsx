@@ -17,7 +17,7 @@ export interface IChangePhaseDialogState {
     currentView: View;
 }
 
-export class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
+export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
     private phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
     constructor() {
         super();
