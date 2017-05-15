@@ -120,7 +120,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 const fieldNames = this.configuration.columns.map(f => f.fieldName);
                 const [defaultView] = this.configuration.views.filter(qc => qc.default);
                 if (!defaultView) {
-                    Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Warning });
+                    Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Error });
                 } else {
                     const refiners = this.configuration.refiners.map(ref => ref.key).join(",");
                     Search.query(defaultView, fieldNames, refiners)
