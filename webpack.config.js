@@ -17,6 +17,28 @@ module.exports = (env = "development", devtool = "source-map") => {
                 NODE_ENV: JSON.stringify(env)
             }
         })];
+    let rules = [
+        {
+            test: /\.js$/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        require("babel-preset-es2015"),
+                        require("babel-preset-react")
+                    ],
+                    plugins: [
+                        require("babel-plugin-transform-class-properties")
+                    ]
+                }
+            },
+            exclude: env === "development" ? [
+                path.join(__dirname, "node_modules")
+            ] : []
+        },
+        { test: /\.txt$/, use: 'raw-loader' },
+        { test: /\.json$/, loader: "json-loader" }
+    ]
     if (env === "production") {
         plugins.push(new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -49,25 +71,7 @@ module.exports = (env = "development", devtool = "source-map") => {
             extensions: ['.jsx', '.js', '.json', '.txt']
         },
         module: {
-            rules: [
-                Object.assign({
-                    test: /\.js$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                require("babel-preset-es2015"),
-                                require("babel-preset-react")
-                            ],
-                            plugins: [
-                                require("babel-plugin-transform-class-properties")
-                            ]
-                        }
-                    }
-                }, (env === "development") ? { exclude: /node_modules/ } : {}),
-                { test: /\.txt$/, use: 'raw-loader' },
-                { test: /\.json$/, loader: "json-loader" }
-            ]
+            rules: rules,
         },
         plugins: plugins
     };
