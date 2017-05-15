@@ -74,11 +74,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             selectionMode,
         } = this.props;
 
-        const {
-            items,
-            columns,
-            groups,
-        } = this.getFilteredData(this.state);
+        const data = this.getFilteredData(this.state);
 
         return (<div>
             <div>
@@ -91,11 +87,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     <Spinner type={SpinnerType.large} />
                     :
                     <DetailsList
-                        items={items}
+                        items={data.items}
                         constrainMode={constrainMode}
                         layoutMode={layoutMode}
-                        columns={columns}
-                        groups={groups}
+                        columns={data.columns}
+                        groups={data.groups}
                         selectionMode={selectionMode}
                         onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
                             evt.preventDefault();
@@ -117,13 +113,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         Configuration.getConfig()
             .then(config => {
                 this.configuration = config;
-                const fieldNames = this.configuration.columns.map(f => f.fieldName);
                 const [defaultView] = this.configuration.views.filter(qc => qc.default);
                 if (!defaultView) {
                     Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Error });
                 } else {
-                    const refiners = this.configuration.refiners.map(ref => ref.key).join(",");
-                    Search.query(defaultView, fieldNames, refiners)
+                    const fieldNames = this.configuration.columns.map(f => f.fieldName);
+                    Search.query(defaultView, this.configuration)
                         .then(response => {
                             FieldSelector.items = this.configuration.columns.map(col => ({
                                 name: col.name,
@@ -421,10 +416,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param viewConfig View configuration
      */
     private _doSearch(viewConfig: Configuration.IViewConfig): void {
-        const {
-            fieldNames,
-            currentView,
-        } = this.state;
+        const { currentView } = this.state;
 
         if (currentView.id === viewConfig.id) {
             return;
@@ -433,8 +425,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         this.setState({
             isLoading: true,
         }, () => {
-            const refiners = this.configuration.refiners.map(ref => ref.key).join(",");
-            Search.query(viewConfig, fieldNames, refiners)
+            Search.query(viewConfig, this.configuration)
                 .then(response => {
                     FieldSelector.items = this.configuration.columns.map(col => ({
                         name: col.name,
