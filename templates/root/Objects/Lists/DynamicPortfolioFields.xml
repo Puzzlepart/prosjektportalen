@@ -15,7 +15,6 @@
                 <FieldRef Name="GtDpOrder" />
                 <FieldRef Name="GtDpProperty" />
                 <FieldRef Name="GtDpDisplayName" />
-                <FieldRef Name="GtDpDefault" />
                 <FieldRef Name="GtDpReadOnly" />
                 <FieldRef Name="GtDpRender" />
                 <FieldRef Name="GtDpMinWidth" />
