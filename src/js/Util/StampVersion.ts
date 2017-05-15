@@ -1,4 +1,4 @@
-export default new class StampVersion {
+export default class StampVersion {
     private template = "<span class='ms-metadata {1}'>{0}</span>";
 
     /**
@@ -22,7 +22,7 @@ export default new class StampVersion {
      *
      * @param versionKey Prop bag key
      */
-    private getVersion(versionKey: string): Promise<string> {
+    public getVersion(versionKey: string): Promise<string> {
         return new Promise<string>((resolve, reject) => {
             SP.SOD.executeOrDelayUntilScriptLoaded(() => {
                 let ctx = SP.ClientContext.get_current(),

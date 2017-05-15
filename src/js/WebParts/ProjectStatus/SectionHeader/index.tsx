@@ -2,7 +2,7 @@ import * as React from "react";
 import { Icon } from "../../@Components";
 import { GetStatusCssClass } from "../Utils";
 
-interface ISectionHeaderProps {
+export interface ISectionHeaderProps {
     name: string;
     statusValue: string;
     comment: string;
@@ -13,7 +13,6 @@ interface ISectionHeaderProps {
 
 const SectionHeader = ({ name, statusValue, comment, source, iconName, fieldName }: ISectionHeaderProps) => {
     let statusCssClass = GetStatusCssClass(fieldName, statusValue);
-
     return (
         <div className="ms-Grid">
             <div className="section-header ms-Grid-row">

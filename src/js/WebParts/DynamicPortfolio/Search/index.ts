@@ -30,16 +30,18 @@ export const query = (viewConfig: IViewConfig, configuration: IConfiguration) =>
         SelectProperties: configuration.columns.map(f => f.fieldName),
         Refiners: configuration.refiners.map(ref => ref.key).join(","),
         QueryTemplate: viewConfig.queryTemplate,
-    }).then(({ RawSearchResults: { PrimaryQueryResult } }) => {
-        resolve({
-            primarySearchResults: PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
-                let item: any = {};
-                Cells.results.forEach(({ Key, Value }) => {
-                    item[Key] = Value ? Value : "";
-                });
-                return item;
-            }),
-            refiners: PrimaryQueryResult.RefinementResults ? PrimaryQueryResult.RefinementResults.Refiners.results : [],
-        });
-    }).catch(reject);
+    })
+        .then((response: any) => {
+            resolve({
+                primarySearchResults: response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
+                    let item: any = {};
+                    Cells.results.forEach(({ Key, Value }) => {
+                        item[Key] = Value ? Value : "";
+                    });
+                    return item;
+                }),
+                refiners: response.RawSearchResults.PrimaryQueryResult.RefinementResults ? response.RawSearchResults.PrimaryQueryResult.RefinementResults.Refiners.results : [],
+            });
+        })
+        .catch(reject);
 });

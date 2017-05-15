@@ -21,17 +21,19 @@ export interface IQueryResponse {
 export const query = () => new Promise<IQueryResponse>((resolve, reject) => {
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
-    }).then(({ RawSearchResults: { PrimaryQueryResult } }) => {
-        resolve({
-            primarySearchResults: PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
-                let item: any = {};
-                Cells.results.forEach(({ Key, Value }) => {
-                    if (Array.contains(DEFAULT_SEARCH_SETTINGS.SelectProperties, Key)) {
-                        item[Key] = Value ? Value : "";
-                    }
-                });
-                return item;
-            }),
-        });
-    }).catch(reject);
+    })
+        .then((response: any) => {
+            resolve({
+                primarySearchResults: response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
+                    let item: any = {};
+                    Cells.results.forEach(({ Key, Value }) => {
+                        if (Array.contains(DEFAULT_SEARCH_SETTINGS.SelectProperties, Key)) {
+                            item[Key] = Value ? Value : "";
+                        }
+                    });
+                    return item;
+                }),
+            });
+        })
+        .catch(reject);
 });

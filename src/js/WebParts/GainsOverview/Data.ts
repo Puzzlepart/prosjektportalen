@@ -175,10 +175,10 @@ export const retrieveFromSource = (dataSource: DataSource): Promise<IGainsOvervi
                 sp.search({
                     ...SearchSettings,
                 }),
-            ]).then(([gainsFields, { PrimarySearchResults }]) => {
-                let gains = PrimarySearchResults
+            ]).then(([gainsFields, response]: [ISpField[], any]) => {
+                let gains = response.PrimarySearchResults
                     .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinst_ContentTypeId")) !== -1);
-                let measures = PrimarySearchResults
+                let measures = response.PrimarySearchResults
                     .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
                     .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1);
                 let data: IGainsOverviewData = ({

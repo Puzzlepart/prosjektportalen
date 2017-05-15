@@ -3,7 +3,7 @@ require("babel-polyfill");
 import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
-import { StampVersion } from "./Util";
+import StampVersion from "./Util/StampVersion";
 
 /** Set up pnp logging */
 pnp.log.activeLogLevel = (process.env.NODE_ENV === "development") ? LogLevel.Info : LogLevel.Warning;
@@ -20,6 +20,6 @@ ExecuteOrDelayUntilBodyLoaded(() => {
     ExecuteOrDelayUntilScriptLoaded(() => {
         Forms.Initialize();
         WebParts.Render();
-        StampVersion.stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
+        new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
     }, "sp.js");
 });

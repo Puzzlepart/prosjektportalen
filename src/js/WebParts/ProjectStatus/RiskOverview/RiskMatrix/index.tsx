@@ -2,7 +2,7 @@ import * as React from "react";
 import * as Config from "../../Config";
 import { ModalLink } from "../../../@Components";
 
-interface IRiskElementProps {
+export interface IRiskElementProps {
     item: any;
     style?: React.CSSProperties;
 }
@@ -36,12 +36,12 @@ const MatrixRow = ({ cells }) => {
     </tr>);
 };
 
-interface IRiskMatrixProps {
+export interface IRiskMatrixProps {
     items: any[];
     postAction: boolean;
 }
 
-interface IRiskMatrixState {
+export interface IRiskMatrixState {
     selectedRisk: any;
     showDialog: boolean;
 }
