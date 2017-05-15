@@ -7,6 +7,7 @@ import {
     Spinner,
     SpinnerType,
     Icon,
+    DefaultButton,
 } from "office-ui-fabric-react";
 import Modal from "office-ui-fabric-react/lib/Modal";
 import {
@@ -154,6 +155,16 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                             </div>
                             {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
                             {this.renderInner()}
+                            <DefaultButton
+                                hidden={isLoading}
+                                href={this.props.webUrl}
+                                iconProps={{ iconName: "Home" }}
+                                description=""
+                                text={__("ProjectInfo_ProjectLinkText")}
+                                style={{
+                                    marginLeft: 0,
+                                    marginTop: 20,
+                                }} />
                         </div>
                     </Modal>);
             }

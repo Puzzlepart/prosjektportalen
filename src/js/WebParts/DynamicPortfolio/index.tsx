@@ -101,7 +101,10 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         groups={groups}
                         selectionMode={selectionMode}
                         onItemInvoked={item => this.setState({ showProjectInfo: item })}
-                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column)}
+                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
+                            evt.preventDefault();
+                            this.setState({ showProjectInfo: item });
+                        })}
                         onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
                     />
                 }
@@ -263,24 +266,26 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         const { showProjectInfo } = this.state;
 
         if (showProjectInfo) {
-            return <ProjectInfo
-                webUrl={showProjectInfo.Path}
-                hideChrome={true}
-                showActionLinks={false}
-                showMissingPropsWarning={false}
-                filterField={projectInfoFilterField}
-                labelSize="l"
-                valueSize="m"
-                renderMode={ProjectInfoRenderMode.Modal}
-                modalOptions={{
-                    isOpen: this.state.showProjectInfo,
-                    isDarkOverlay: true,
-                    isBlocking: false,
-                    onDismiss: e => this.setState({ showProjectInfo: null }),
-                    headerClassName: modalHeaderClassName,
-                    headerStyle: { marginBottom: 20 },
-                    title: showProjectInfo.Title,
-                }} />;
+            return (
+                <ProjectInfo
+                    webUrl={showProjectInfo.Path}
+                    hideChrome={true}
+                    showActionLinks={false}
+                    showMissingPropsWarning={false}
+                    filterField={projectInfoFilterField}
+                    labelSize="l"
+                    valueSize="m"
+                    renderMode={ProjectInfoRenderMode.Modal}
+                    modalOptions={{
+                        isOpen: this.state.showProjectInfo,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        headerClassName: modalHeaderClassName,
+                        headerStyle: { marginBottom: 20 },
+                        title: showProjectInfo.Title,
+                    }} />
+            );
         }
         return null;
     }
