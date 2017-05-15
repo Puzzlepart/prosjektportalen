@@ -26,6 +26,9 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
                 onClick={titleOnClick}>{columnValue}</a>
         );
     }
+    if (column.key === "Path" || column.key === "URL") {
+        return <a href={item.Path}>{columnValue}</a>;
+    }
     switch (column.render) {
         case "Date": {
             return (
@@ -35,11 +38,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Note": {
+<<<<<<< HEAD
             return (
                 <div>
                     {columnValue}
                 </div>
             );
+=======
+            return <span title={columnValue}>columnValue</span>;
+>>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
         }
         case "Persona": {
             let [EMail, Name] = columnValue.split(" | ");
@@ -64,6 +71,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Default": {
+<<<<<<< HEAD
             return (
                 <div>
                     {columnValue}
@@ -77,6 +85,12 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
                 </div>
             );
 
+=======
+            return <span title={columnValue}>columnValue</span>;
+        }
+        default: {
+            return <span title={columnValue}>columnValue</span>;
+>>>>>>> dfe86b4cd8389aaa540a75c11b7820724889a38c
         }
     }
 };

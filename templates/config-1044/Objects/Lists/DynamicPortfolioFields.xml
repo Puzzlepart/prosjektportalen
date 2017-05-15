@@ -15,8 +15,11 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Path</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">URL</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMinWidth">200</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">500</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Default</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString52</pnp:DataValue>
