@@ -1,5 +1,5 @@
-// #region Imports
 import * as React from "react";
+import { Logger, LogLevel } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -23,7 +23,6 @@ import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
-// #endregion
 
 /**
  * Dynamic Portfolio
@@ -69,8 +68,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Renders the component
      */
     public render(): JSX.Element {
-        const { isLoading } = this.state;
-
         const {
             constrainMode,
             layoutMode,
@@ -90,7 +87,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 <SearchBox
                     onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                     labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                {isLoading ?
+                {this.state.isLoading ?
                     <Spinner type={SpinnerType.large} />
                     :
                     <DetailsList
@@ -121,29 +118,31 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             .then(config => {
                 this.configuration = config;
                 const fieldNames = this.configuration.columns.map(f => f.fieldName);
-                const [defaultViewConfig] = this.configuration.views.filter(qc => qc.default);
-                if (!defaultViewConfig) {
-                    return;
+                const [defaultView] = this.configuration.views.filter(qc => qc.default);
+                if (!defaultView) {
+                    Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Warning });
+                } else {
+                    const refiners = this.configuration.refiners.map(ref => ref.key).join(",");
+                    Search.query(defaultView, fieldNames, refiners)
+                        .then(response => {
+                            FieldSelector.items = this.configuration.columns.map(col => ({
+                                name: col.name,
+                                value: col.fieldName,
+                                defaultSelected: Array.contains(defaultView.fields, col.name),
+                                readOnly: col.readOnly,
+                            }));
+                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, defaultView));
+                            resolve({
+                                selectedColumns: this.configuration.columns.filter(fc => Array.contains(defaultView.fields, fc.name)),
+                                fieldNames: fieldNames,
+                                items: response.primarySearchResults,
+                                filteredItems: response.primarySearchResults,
+                                filters: filters,
+                                currentView: defaultView,
+                            });
+                        })
+                        .catch(reject);
                 }
-                Search.query(defaultViewConfig, fieldNames, this.configuration.refiners.map(ref => ref.key).join(","))
-                    .then(({ primarySearchResults, refiners }) => {
-                        FieldSelector.items = this.configuration.columns.map(col => ({
-                            name: col.name,
-                            value: col.fieldName,
-                            defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
-                            readOnly: col.readOnly,
-                        }));
-                        let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(this.configuration.refiners, refiners, defaultViewConfig));
-                        resolve({
-                            selectedColumns: this.configuration.columns.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
-                            fieldNames: fieldNames,
-                            items: primarySearchResults,
-                            filteredItems: primarySearchResults,
-                            filters: filters,
-                            currentView: defaultViewConfig,
-                        });
-                    })
-                    .catch(reject);
             }).catch(reject);
     })
 
@@ -309,12 +308,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
      * the filters are checked against the against refiners retrieved by search.
      *
-     * @param refinerConfig Refiner configuration from the SP configuration list
      * @param refiners Refiners retrieved by search
      * @param viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
-        return refinerConfig
+    private getSelectedFiltersWithItems = (refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
+        return this.configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
@@ -435,23 +433,26 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         this.setState({
             isLoading: true,
         }, () => {
-            Search.query(viewConfig, fieldNames, this.configuration.refiners.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                FieldSelector.items = this.configuration.columns.map(col => ({
-                    name: col.name,
-                    value: col.fieldName,
-                    defaultSelected: Array.contains(viewConfig.fields, col.name),
-                    readOnly: col.readOnly,
-                }));
-                let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(this.configuration.refiners, refiners, viewConfig));
-                this.setState({
-                    isLoading: false,
-                    items: primarySearchResults,
-                    filteredItems: primarySearchResults,
-                    filters: filters,
-                    currentView: viewConfig,
-                    selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
-                });
-            });
+            const refiners = this.configuration.refiners.map(ref => ref.key).join(",");
+            Search.query(viewConfig, fieldNames, refiners)
+                .then(response => {
+                    FieldSelector.items = this.configuration.columns.map(col => ({
+                        name: col.name,
+                        value: col.fieldName,
+                        defaultSelected: Array.contains(viewConfig.fields, col.name),
+                        readOnly: col.readOnly,
+                    }));
+                    let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, viewConfig));
+                    this.setState({
+                        isLoading: false,
+                        items: response.primarySearchResults,
+                        filteredItems: response.primarySearchResults,
+                        filters: filters,
+                        currentView: viewConfig,
+                        selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
+                    });
+                })
+                .catch(_ => this.setState({ isLoading: false }));
         });
     }
 };
