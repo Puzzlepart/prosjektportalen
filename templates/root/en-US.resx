@@ -1018,6 +1018,9 @@
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
     <value>Found no information about the project.</value>
   </data>
+  <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
+    <value>Go to project site</value>
+  </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>en</value>
   </data>
