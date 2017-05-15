@@ -243,6 +243,41 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
+    <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Prosjektliste" />
+            <pnp:Property Key="WebPartDescription" Value="Viser prosjekter du har tilgang til i en flisevisning." />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\Announcements.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Kunngjøringer" />
+            <pnp:Property Key="WebPartDescription" Value="Viser aktive kunngjøringer i en listevisning." />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\LatestProjects.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Siste prosjekter" />
+            <pnp:Property Key="WebPartDescription" Value="Viser siste prosjekter i en listevisning." />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\NewProjectLink.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Nytt prosjekt-lenke" />
+            <pnp:Property Key="WebPartDescription" Value="Viser lenke til oppretting av nytt prosjekt." />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\QuickLinks.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Lenker" />
+            <pnp:Property Key="WebPartDescription" Value="Viser lenker i en listevisning." />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
     <pnp:Directory Src="Theme" Folder="_catalogs/theme/15" Overwrite="true" Recursive="false" IncludedExtensions="*.spcolor,*.spfont" />
     <pnp:Directory Src="Resources" Folder="Resources" Overwrite="true" Recursive="false" IncludedExtensions="*.txt" />
 </pnp:Files>
