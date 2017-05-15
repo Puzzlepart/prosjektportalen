@@ -7,24 +7,24 @@
     <data>
       <properties>
         <property name="ExportMode" type="exportmode">All</property>
-        <property name="HelpUrl" type="string" />
+        
         <property name="Hidden" type="bool">False</property>
-        <property name="Description" type="string" />
+        <property name="Description" type="string" null="true" />
         <property name="Content" type="string">&lt;div id="pp-projectlist"&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
         <property name="Title" type="string">ProjectList</property>
         <property name="AllowHide" type="bool">False</property>
         <property name="AllowMinimize" type="bool">False</property>
         <property name="AllowZoneChange" type="bool">False</property>
-        <property name="TitleUrl" type="string" />
+        <property name="TitleUrl" type="string" null="true" />
         <property name="ChromeType" type="chrometype">None</property>
         <property name="AllowConnect" type="bool">False</property>
         <property name="Width" type="unit" />
         <property name="Height" type="unit" />
-        <property name="HelpMode" type="helpmode">Navigate</property>
+        
         <property name="AllowEdit" type="bool">False</property>
-        <property name="TitleIconImageUrl" type="string" />
-        <property name="Direction" type="direction">NotSet</property>
+        
+        
         <property name="AllowClose" type="bool">False</property>
         <property name="ChromeState" type="chromestate">Normal</property>
       </properties>

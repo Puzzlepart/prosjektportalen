@@ -4,7 +4,6 @@ export interface IColumnConfig {
     name: string;
     key: string;
     fieldName: string;
-    default: boolean;
     readOnly: boolean;
     render: "Date" | "Note" | "Persona" | "Status" | "Default";
     minWidth?: number;
@@ -59,7 +58,6 @@ export const getConfig = () => new Promise<{ columnConfig: IColumnConfig[], refi
                 name: col.GtDpDisplayName,
                 key: col.GtDpProperty,
                 fieldName: col.GtDpProperty,
-                default: col.GtDpDefault,
                 readOnly: col.GtDpReadOnly,
                 render: col.GtDpRender,
                 minWidth: col.GtDpMinWidth,
