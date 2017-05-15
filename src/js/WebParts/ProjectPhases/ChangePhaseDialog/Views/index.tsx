@@ -1,5 +1,5 @@
-import { InitialView } from "./InitialView";
-import { SummaryView } from "./SummaryView";
+import InitialView  from "./InitialView";
+import SummaryView  from "./SummaryView";
 
 export enum View {
     Initial,

@@ -14,7 +14,7 @@ export interface IInitialViewState {
 /**
  * Initial view
  */
-export class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
+export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
     private commentsField: HTMLTextAreaElement;
     private commentMinLength = 4;
     constructor() {
@@ -25,7 +25,8 @@ export class InitialView extends React.Component<IInitialViewProps, IInitialView
     }
 
     public render() {
-        let [{ currentChecklistItem, nextCheckPointAction }, { comment }] = [this.props, this.state];
+        const { currentChecklistItem, nextCheckPointAction } = this.props;
+
         if (!currentChecklistItem) {
             return <div className="inner"></div>;
         }
@@ -45,7 +46,7 @@ export class InitialView extends React.Component<IInitialViewProps, IInitialView
                         <Button
                             disabled={opt.disabled}
                             onClick={e => {
-                                nextCheckPointAction(opt.value, comment);
+                                nextCheckPointAction(opt.value, this.state.comment);
                                 this.reset();
                             }}>{opt.value}</Button>
                     </span>)}

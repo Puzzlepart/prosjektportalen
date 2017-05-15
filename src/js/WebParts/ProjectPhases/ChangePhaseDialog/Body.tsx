@@ -1,5 +1,9 @@
 import * as React from "react";
-import { View, InitialView, SummaryView } from "./Views";
+import {
+    View,
+    InitialView,
+    SummaryView,
+} from "./Views";
 
 /**
  * Body
