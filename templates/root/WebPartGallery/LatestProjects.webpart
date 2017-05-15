@@ -12,7 +12,7 @@
         <property name="Description" type="string" />
         <property name="Content" type="string">&lt;div id="pp-latestprojects"&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
-        <property name="Title" type="string">Siste prosjekter</property>
+        <property name="Title" type="string">LatestProjects</property>
         <property name="AllowHide" type="bool">True</property>
         <property name="AllowMinimize" type="bool">True</property>
         <property name="AllowZoneChange" type="bool">True</property>

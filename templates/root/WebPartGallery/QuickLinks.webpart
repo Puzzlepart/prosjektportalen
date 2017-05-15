@@ -12,15 +12,13 @@
         <property name="Description" type="string" />
         <property name="Content" type="string">&lt;div id="pp-quicklinks"&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
-        <property name="Title" type="string">Lenker</property>
+        <property name="Title" type="string">QuickLinks</property>
         <property name="AllowHide" type="bool">True</property>
         <property name="AllowMinimize" type="bool">True</property>
         <property name="AllowZoneChange" type="bool">True</property>
-        <property name="TitleUrl" type="string">/sites/ppv2-04/Lists/QuickLinks</property>
+        <property name="TitleUrl" type="string" null="true" />
         <property name="ChromeType" type="chrometype">None</property>
         <property name="AllowConnect" type="bool">True</property>
-        <property name="Width" type="unit" />
-        <property name="Height" type="unit" />
         <property name="HelpMode" type="helpmode">Navigate</property>
         <property name="AllowEdit" type="bool">True</property>
         <property name="TitleIconImageUrl" type="string" />
