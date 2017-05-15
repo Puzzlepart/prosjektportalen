@@ -1366,4 +1366,25 @@
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>Bare vise</value>
   </data>
+  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+    <value>Prosjektegenskaper</value>
+  </data>
+  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+    <value>Overordnet status</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+    <value>Fremdrift</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+    <value>Økonomi</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+    <value>Kvalitet</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+    <value>Risiko</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
+    <value>Gevinstoppnåelse</value>
+  </data>
 </root>

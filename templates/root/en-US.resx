@@ -497,7 +497,7 @@
     <value>Status risk</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievement_DisplayName" xml:space="preserve">
-    <value>Status gain</value>
+    <value>Status gains achievement</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_DisplayName" xml:space="preserve">
     <value>Consequence (C)</value>
@@ -1362,5 +1362,26 @@
   </data>
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>View Only</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+    <value>Project info</value>
+  </data>
+  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+    <value>Overall status</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+    <value>Economy</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+    <value>Risk</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
+    <value>Gains achievement</value>
   </data>
 </root>
