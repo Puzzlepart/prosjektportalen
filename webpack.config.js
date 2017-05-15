@@ -27,7 +27,7 @@ module.exports = (env = "development", devtool = "source-map") => {
             comments: false,
         }));
     }
-    return {
+    let config = {
         cache: true,
         entry: './lib/js/pp.main.js',
         output: {
@@ -49,7 +49,7 @@ module.exports = (env = "development", devtool = "source-map") => {
             extensions: ['.jsx', '.js', '.json', '.txt']
         },
         module: {
-            loaders: [
+            rules: [
                 Object.assign({
                     test: /\.js$/,
                     use: {
@@ -57,10 +57,10 @@ module.exports = (env = "development", devtool = "source-map") => {
                         options: {
                             presets: [
                                 require("babel-preset-es2015"),
-                                require("babel-preset-react"),
+                                require("babel-preset-react")
                             ],
                             plugins: [
-                                require("babel-plugin-transform-class-properties"),
+                                require("babel-plugin-transform-class-properties")
                             ]
                         }
                     }
@@ -70,5 +70,6 @@ module.exports = (env = "development", devtool = "source-map") => {
             ]
         },
         plugins: plugins
-    }
+    };
+    return config;
 }
