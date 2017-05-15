@@ -12,7 +12,8 @@
         "build/bundle": true
     },
     "files.associations": {
-        "**/webparts/**/*.txt": "xml"
+        "**/webparts/**/*.txt": "xml",
+        "*.webpart": "xml"
     },
     "editor.formatOnSave": false,
     "html.format.unformatted": "a, abbr, acronym, b, bdo, big, br, button, cite, code, dfn, em, i, img, input, kbd, label, map, object, q, samp, script, select, small, span, strong, sub, sup, textarea, tt, var, Value, %@",

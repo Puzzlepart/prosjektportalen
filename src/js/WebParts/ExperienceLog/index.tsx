@@ -114,7 +114,7 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
      */
     private fetchData = () => new Promise<Partial<IExperienceLogState>>((resolve, reject) => {
         Search.query(this.props.columns.map(col => col.fieldName))
-            .then(({ primarySearchResults }) => resolve({ logItems: primarySearchResults }))
+            .then(response => resolve({ logItems: response.primarySearchResults }))
             .catch(reject);
     })
 };

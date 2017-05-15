@@ -1,5 +1,5 @@
-// #region Imports
 import * as React from "react";
+import { Logger, LogLevel } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -23,7 +23,6 @@ import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
-// #endregion
 
 /**
  * Dynamic Portfolio
@@ -36,8 +35,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         projectInfoFilterField: "GtPcPortfolioPage",
         constrainMode: ConstrainMode.horizontalConstrained,
         layoutMode: DetailsListLayoutMode.fixedColumns,
-        selectionMode: SelectionMode.single,
+        selectionMode: SelectionMode.none,
     };
+    private configuration: Configuration.IConfiguration = null;
 
     /**
      * Constructor
@@ -48,7 +48,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             isLoading: true,
             searchTerm: "",
             currentFilters: {},
-            viewConfig: [],
             showFilterPanel: false,
         };
     }
@@ -58,8 +57,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     public componentDidMount(): void {
         this.fetchInitialData()
-            .then(updatedState => this.setState({
-                ...updatedState,
+            .then(initialState => this.setState({
+                ...initialState,
                 isLoading: false,
             }))
             .catch(_ => this.setState({ isLoading: false }));
@@ -69,45 +68,41 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Renders the component
      */
     public render(): JSX.Element {
-        const { isLoading } = this.state;
-
         const {
             constrainMode,
             layoutMode,
             selectionMode,
         } = this.props;
 
-        const {
-            items,
-            columns,
-            groups,
-        } = this.getFilteredData();
+        const data = this.getFilteredData(this.state);
 
         return (<div>
             <div>
-                {this.renderCommandBar()}
+                {this.renderCommandBar(this.state)}
                 <div style={{ height: 10 }}></div>
                 <SearchBox
                     onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                     labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                {isLoading ?
+                {this.state.isLoading ?
                     <Spinner type={SpinnerType.large} />
                     :
                     <DetailsList
-                        items={items}
+                        items={data.items}
                         constrainMode={constrainMode}
                         layoutMode={layoutMode}
-                        columns={columns}
-                        groups={groups}
+                        columns={data.columns}
+                        groups={data.groups}
                         selectionMode={selectionMode}
-                        onItemInvoked={item => this.setState({ showProjectInfo: item })}
-                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column)}
+                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
+                            evt.preventDefault();
+                            this.setState({ showProjectInfo: item });
+                        })}
                         onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
                     />
                 }
             </div>
-            {this.renderFilterPanel()}
-            {this.renderProjectInfoModal()}
+            {this.renderFilterPanel(this.state)}
+            {this.renderProjectInfoModal(this.state)}
         </div>);
     }
 
@@ -116,46 +111,40 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     private fetchInitialData = () => new Promise<Partial<IDynamicPortfolioState>>((resolve, reject) => {
         Configuration.getConfig()
-            .then(({ columnConfig, refinerConfig, viewConfig }) => {
-                const fieldNames = columnConfig.map(f => f.fieldName);
-                const [defaultViewConfig] = viewConfig.filter(qc => qc.default);
-                if (!defaultViewConfig) {
-                    return;
+            .then(config => {
+                this.configuration = config;
+                const [defaultView] = this.configuration.views.filter(qc => qc.default);
+                if (!defaultView) {
+                    Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Error });
+                } else {
+                    const fieldNames = this.configuration.columns.map(f => f.fieldName);
+                    Search.query(defaultView, this.configuration)
+                        .then(response => {
+                            FieldSelector.items = this.configuration.columns.map(col => ({
+                                name: col.name,
+                                value: col.fieldName,
+                                defaultSelected: Array.contains(defaultView.fields, col.name),
+                                readOnly: col.readOnly,
+                            }));
+                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, defaultView));
+                            resolve({
+                                selectedColumns: this.configuration.columns.filter(fc => Array.contains(defaultView.fields, fc.name)),
+                                fieldNames: fieldNames,
+                                items: response.primarySearchResults,
+                                filteredItems: response.primarySearchResults,
+                                filters: filters,
+                                currentView: defaultView,
+                            });
+                        })
+                        .catch(reject);
                 }
-                Search.query(defaultViewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(","))
-                    .then(({ primarySearchResults, refiners }) => {
-                        FieldSelector.items = columnConfig.map(col => ({
-                            name: col.name,
-                            value: col.fieldName,
-                            defaultSelected: Array.contains(defaultViewConfig.fields, col.name),
-                            readOnly: col.readOnly,
-                        }));
-                        let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, defaultViewConfig));
-                        resolve({
-                            columns: columnConfig,
-                            selectedColumns: columnConfig.filter(fc => Array.contains(defaultViewConfig.fields, fc.name)),
-                            fieldNames: fieldNames,
-                            items: primarySearchResults,
-                            filteredItems: primarySearchResults,
-                            filters: filters,
-                            viewConfig: viewConfig,
-                            currentView: defaultViewConfig,
-                            refinerConfig: refinerConfig,
-                        });
-                    })
-                    .catch(reject);
             }).catch(reject);
     })
 
     /**
      * Render Filter Panel
      */
-    private renderFilterPanel = () => {
-        const {
-            filters,
-            showFilterPanel,
-        } = this.state;
-
+    private renderFilterPanel = ({ filters, showFilterPanel }: IDynamicPortfolioState) => {
         if (filters) {
             return (
                 <FilterPanel
@@ -172,16 +161,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the command bar from office-ui-fabric-react
      */
-    private renderCommandBar = () => {
-        const {
-            viewConfig,
-            currentView,
-            selectedColumns,
-            groupBy,
-         } = this.state;
-
-        const { showGroupBy } = this.props;
-
+    private renderCommandBar = ({ currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
         if (!currentView) {
             return null;
         }
@@ -189,7 +169,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         const items = [];
         const farItems = [];
 
-        if (showGroupBy) {
+        if (this.props.showGroupBy) {
             const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
@@ -224,7 +204,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             iconProps: { iconName: "List" },
             itemType: ContextualMenuItemType.Header,
             onClick: e => e.preventDefault(),
-            items: viewConfig.map((qc, idx) => ({
+            items: this.configuration.views.map((qc, idx) => ({
                 key: idx.toString(),
                 name: qc.name,
                 iconProps: { iconName: qc.iconName },
@@ -254,33 +234,33 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the Project Info modal
      */
-    private renderProjectInfoModal = () => {
+    private renderProjectInfoModal = ({ showProjectInfo }: IDynamicPortfolioState) => {
         const {
             modalHeaderClassName,
             projectInfoFilterField,
         } = this.props;
 
-        const { showProjectInfo } = this.state;
-
         if (showProjectInfo) {
-            return <ProjectInfo
-                webUrl={showProjectInfo.Path}
-                hideChrome={true}
-                showActionLinks={false}
-                showMissingPropsWarning={false}
-                filterField={projectInfoFilterField}
-                labelSize="l"
-                valueSize="m"
-                renderMode={ProjectInfoRenderMode.Modal}
-                modalOptions={{
-                    isOpen: this.state.showProjectInfo,
-                    isDarkOverlay: true,
-                    isBlocking: false,
-                    onDismiss: e => this.setState({ showProjectInfo: null }),
-                    headerClassName: modalHeaderClassName,
-                    headerStyle: { marginBottom: 20 },
-                    title: showProjectInfo.Title,
-                }} />;
+            return (
+                <ProjectInfo
+                    webUrl={showProjectInfo.Path}
+                    hideChrome={true}
+                    showActionLinks={false}
+                    showMissingPropsWarning={false}
+                    filterField={projectInfoFilterField}
+                    labelSize="l"
+                    valueSize="m"
+                    renderMode={ProjectInfoRenderMode.Modal}
+                    modalOptions={{
+                        isOpen: this.state.showProjectInfo,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        headerClassName: modalHeaderClassName,
+                        headerStyle: { marginBottom: 20 },
+                        title: showProjectInfo.Title,
+                    }} />
+            );
         }
         return null;
     }
@@ -288,17 +268,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      */
-    private getFilteredData = () => {
-        const {
-            selectedColumns,
-            filteredItems,
-            groupBy,
-            searchTerm,
-            currentSort,
-        } = this.state;
-
-        const { searchProperty } = this.props;
-
+    private getFilteredData = ({ selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) => {
         let groups: IGroup[] = null;
         if (groupBy) {
             const itemsSort: any = {
@@ -321,7 +291,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        let items = filteredItems ? filteredItems.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
             items: items,
             columns: selectedColumns,
@@ -333,12 +303,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
      * the filters are checked against the against refiners retrieved by search.
      *
-     * @param refinerConfig Refiner configuration from the SP configuration list
      * @param refiners Refiners retrieved by search
      * @param viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refinerConfig: Configuration.IRefinerConfig[], refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
-        return refinerConfig
+    private getSelectedFiltersWithItems = (refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
+        return this.configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
@@ -359,7 +328,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     private _onFilterChange = (filter: IFilter): void => {
         const {
-            columns,
             items,
             currentFilters,
             filters,
@@ -371,7 +339,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             case "Fields": {
                 updatedFilterState = {
                     fieldNames: filter.selected,
-                    selectedColumns: columns.filter(field => Array.contains(filter.selected, field.fieldName)),
+                    selectedColumns: this.configuration.columns.filter(field => Array.contains(filter.selected, field.fieldName)),
                     filters: filters.map(f => (f.key === filter.key) ? filter : f),
                 };
             }
@@ -408,8 +376,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 };
             }
         }
-
-        console.log(updatedFilterState);
 
         this.setState(updatedFilterState);
     }
@@ -450,28 +416,34 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * @param viewConfig View configuration
      */
     private _doSearch(viewConfig: Configuration.IViewConfig): void {
-        const {
-        fieldNames,
-            refinerConfig,
-            currentView,
-    } = this.state;
+        const { currentView } = this.state;
 
         if (currentView.id === viewConfig.id) {
             return;
         }
+
         this.setState({
             isLoading: true,
         }, () => {
-            Search.query(viewConfig, fieldNames, refinerConfig.map(ref => ref.key).join(",")).then(({ primarySearchResults, refiners }) => {
-                let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(refinerConfig, refiners, viewConfig));
-                this.setState({
-                    isLoading: false,
-                    items: primarySearchResults,
-                    filteredItems: primarySearchResults,
-                    filters: filters,
-                    currentView: viewConfig,
-                });
-            });
+            Search.query(viewConfig, this.configuration)
+                .then(response => {
+                    FieldSelector.items = this.configuration.columns.map(col => ({
+                        name: col.name,
+                        value: col.fieldName,
+                        defaultSelected: Array.contains(viewConfig.fields, col.name),
+                        readOnly: col.readOnly,
+                    }));
+                    let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, viewConfig));
+                    this.setState({
+                        isLoading: false,
+                        items: response.primarySearchResults,
+                        filteredItems: response.primarySearchResults,
+                        filters: filters,
+                        currentView: viewConfig,
+                        selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
+                    });
+                })
+                .catch(_ => this.setState({ isLoading: false }));
         });
     }
 };

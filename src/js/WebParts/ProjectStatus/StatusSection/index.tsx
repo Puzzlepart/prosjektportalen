@@ -8,7 +8,7 @@ const StatusSection = ({ project }) => {
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-project-data status-elements-container">
                 <div className="status-elements">
                     <StatusElement
-                        name="Overordnet status"
+                        name={__("StatusPage_Heading_OverallStatus")}
                         iconName="BarChart4"
                         scrollTo="status-section"
                         statusValue=""
@@ -19,7 +19,7 @@ const StatusSection = ({ project }) => {
                             <i className="ms-Icon ms-Icon--CustomList no-status"></i>
                         </div>
                         <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
-                            <h2>Prosjektegenskaper</h2><h1></h1>
+                            <h2>{__("StatusPage_Heading_ProjectMetadata")}</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
                                 showActionLinks={false}
@@ -34,21 +34,21 @@ const StatusSection = ({ project }) => {
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
                 <div className="status-elements">
                     <StatusElement
-                        name="Fremdrift"
+                        name={__("StatusPage_Heading_ProjectTime")}
                         iconName="DateTime"
                         scrollTo="fremdrift-section"
                         statusValue={project.GtStatusTime}
                         comment={project.GtStatusTimeComment}
                         fieldName="GtStatusTime" />
                     <StatusElement
-                        name="Økonomi"
+                        name={__("StatusPage_Heading_ProjectBudget")}
                         iconName="Money"
                         scrollTo="budget-section"
                         statusValue={project.GtStatusBudget}
                         comment={project.GtStatusBudgetComment}
                         fieldName="GtStatusBudget" />
                     <StatusElement
-                        name="Kvalitet"
+                        name={__("StatusPage_Heading_ProjectQuality")}
                         iconName="Product"
                         scrollTo="kvalitet-section"
                         statusValue={project.GtStatusQuality}
@@ -59,14 +59,14 @@ const StatusSection = ({ project }) => {
             <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
                 <div className="status-elements">
                     <StatusElement
-                        name="Risiko"
+                        name={__("StatusPage_Heading_ProjectRisk")}
                         iconName="Warning"
                         scrollTo="risiko-section"
                         statusValue={project.GtStatusRisk}
                         comment={project.GtStatusRiskComment}
                         fieldName="GtStatusRisk" />
                     <StatusElement
-                        name="Gevinstoppnåelse"
+                        name={__("StatusPage_Heading_ProjectGainAchievement")}
                         iconName="Trophy"
                         scrollTo="gevinst-section"
                         statusValue={project.GtStatusGainAchievement}

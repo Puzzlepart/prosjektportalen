@@ -15,18 +15,30 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  * @param item The item
  * @param index Index
  * @param column Column
+ * @param titleOnClick Tile column on click
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig): any => {
+const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
     if (column.key === "Title") {
+        return (
+            <a
+                href="#"
+                onClick={titleOnClick}>{columnValue}</a>
+        );
+    }
+    if (column.key === "Path" || column.key === "URL") {
         return <a href={item.Path}>{columnValue}</a>;
     }
     switch (column.render) {
         case "Date": {
-            return columnValue ? Util.dateFormat(columnValue, "LL") : null;
+            return (
+                <span>
+                    {columnValue ? Util.dateFormat(columnValue, "LL") : null}
+                </span>
+            );
         }
         case "Note": {
-            return columnValue;
+            return <span title={columnValue}>{columnValue}</span>;
         }
         case "Persona": {
             let [EMail, Name] = columnValue.split(" | ");
@@ -44,13 +56,17 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig): a
                 return null;
             }
             const statusProperties = GetStatusProperties(Util.cleanSearchPropName(column.fieldName), columnValue);
-            return <div><Icon iconName={statusProperties.Icon} style={{ color: statusProperties.Color }} />  {columnValue}</div>;
+            return (
+                <span>
+                    <Icon iconName={statusProperties.Icon} style={{ color: statusProperties.Color }} />  {columnValue}
+                </span>
+            );
         }
         case "Default": {
-            return columnValue;
+            return <span title={columnValue}>{columnValue}</span>;
         }
         default: {
-            return columnValue;
+            return <span title={columnValue}>{columnValue}</span>;
         }
     }
 };

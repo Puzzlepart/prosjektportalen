@@ -413,13 +413,13 @@
     <value>Approval method</value>
   </data>
   <data name="SiteFields_GtRiskConsequencePostAction_DisplayName" xml:space="preserve">
-    <value>Consequence Post Action</value>
+    <value>Consequence post action</value>
   </data>
   <data name="SiteFields_GtRiskAction_DisplayName" xml:space="preserve">
     <value>Action</value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_DisplayName" xml:space="preserve">
-    <value>Comment, budget</value>
+    <value>Comment, economy</value>
   </data>
   <data name="SiteFields_GtAverageRisk_DisplayName" xml:space="preserve">
     <value>Average Risk</value>
@@ -440,7 +440,7 @@
     <value>Project number</value>
   </data>
   <data name="SiteFields_GtStatusTime_DisplayName" xml:space="preserve">
-    <value>Status, tid</value>
+    <value>Status progress</value>
   </data>
   <data name="SiteFields_GtProjectOwner_DisplayName" xml:space="preserve">
     <value>Project Owner</value>
@@ -491,13 +491,13 @@
     <value>Recommendation</value>
   </data>
   <data name="SiteFields_GtStatusBudget_DisplayName" xml:space="preserve">
-    <value>Status budget</value>
+    <value>Status economy</value>
   </data>
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risk</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievement_DisplayName" xml:space="preserve">
-    <value>Status gain</value>
+    <value>Status gains achievement</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_DisplayName" xml:space="preserve">
     <value>Consequence (C)</value>
@@ -527,10 +527,10 @@
     <value>Interest</value>
   </data>
   <data name="SiteFields_GtRiskProbabilityPostAction_DisplayName" xml:space="preserve">
-    <value>S etter tiltak</value>
+    <value>Probability post action</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
-    <value>Comment, time</value>
+    <value>Comment, progress</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
     <value>Comment, gain</value>
@@ -704,7 +704,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_Description" xml:space="preserve">
-    <value>Comment on status budget set above</value>
+    <value>Comment on status economy set above</value>
   </data>
   <data name="SiteFields_GtAverageRisk_Description" xml:space="preserve">
     <value></value>
@@ -1154,7 +1154,7 @@
     <value>On plan</value>
   </data>
   <data name="Choice_GtStatusTime_AheadOfSchedule" xml:space="preserve">
-    <value>ahead of schedule</value>
+    <value>Ahead of schedule</value>
   </data>
   <data name="Choice_GtStatusTime_SmallDelay" xml:space="preserve">
     <value>Less delay that can be taken back</value>
@@ -1365,5 +1365,26 @@
   </data>
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>View Only</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+    <value>Project info</value>
+  </data>
+  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+    <value>Overall status</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+    <value>Economy</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+    <value>Risk</value>
+  </data>
+  <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
+    <value>Gains achievement</value>
   </data>
 </root>
