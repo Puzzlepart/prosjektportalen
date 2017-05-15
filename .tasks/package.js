@@ -6,7 +6,7 @@ var gulp = require("gulp"),
     autoprefixer = require('autoprefixer-stylus'),
     config = require('./@configuration.js');
 
-const env = "dev";
+const env = "development";
 
 gulp.task("package:code", ["build:lib"], (done) => {
     webpack(webpackConfig(env), (err, stats) => {
@@ -33,7 +33,7 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
 });
 
 gulp.task("package:code::prod", ["build:lib"], (done) => {
-    webpack(webpackConfig("prod"), (err, stats) => {
+    webpack(webpackConfig("production"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code::prod", err);
         }

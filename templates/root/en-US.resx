@@ -1009,8 +1009,14 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Edit Properties</value>
   </data>
+  <data name="ProjectInfo_EditLogo" xml:space="preserve">
+    <value>Title, description and logo</value>
+  </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
     <value>Important information about the project is not set. You should set these properties as soon as possible.</value>
+  </data>
+  <data name="ProjectInfo_NoProperties" xml:space="preserve">
+    <value>Found no information about the project.</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>en</value>
@@ -1089,6 +1095,9 @@
   </data>
   <data name="WebPart_Links_Title" xml:space="preserve">
     <value>Links</value>
+  </data>
+  <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
+    <value>Project Info</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -1282,7 +1291,7 @@
   <data name="Choice_GtStakeholderGroup_Users" xml:space="preserve">
     <value>Users</value>
   </data>
-    <data name="Choice_GtRiskStrategy_Reduce" xml:space="preserve">
+  <data name="Choice_GtRiskStrategy_Reduce" xml:space="preserve">
     <value>Reduce</value>
   </data>
   <data name="Choice_GtRiskStrategy_Monitor" xml:space="preserve">
@@ -1333,7 +1342,6 @@
   <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Difference from previous measurement</value>
   </data>
-  
   <data name="GainsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all gains...</value>
   </data>

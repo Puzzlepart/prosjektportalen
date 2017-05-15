@@ -1,15 +1,27 @@
 import * as React from "react";
-import { NewProjectDialog } from "./NewProjectDialog";
-
-export interface INewProjectLinkProps { }
-export interface INewProjectLinkState {
-    showDialog: boolean;
-}
+import {
+    DialogType,
+    Icon,
+} from "office-ui-fabric-react";
+import NewProjectDialog from "./NewProjectDialog";
+import INewProjectLinkProps from "./INewProjectLinkProps";
+import INewProjectLinkState from "./INewProjectLinkState";
 
 /**
  * New Project link
  */
 export default class NewProjectLink extends React.PureComponent<INewProjectLinkProps, INewProjectLinkState> {
+    public static defaultProps: Partial<INewProjectLinkProps> = {
+        linkClassName: "ms-font-l",
+        iconProps: {
+            iconName: "CirclePlus",
+            style: {
+                verticalAlign: "bottom",
+                marginRight: 5,
+            },
+        },
+    };
+
     /**
      * Constructor
      */
@@ -24,13 +36,41 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
      * Renders the component
      */
     public render(): JSX.Element {
-        let { showDialog } = this.state;
-        return (<div className="container">
-            <a className="ms-font-l" href="#" onClick={e => this.setState({ showDialog: true })}>
-                <i className="ms-Icon ms-Icon--CirclePlus" aria-hidden="true" style={{ verticalAlign: "bottom", marginRight: 5 }}></i>
-                <span>{__("NewProjectForm_Header")}</span>
-            </a>
-            {showDialog && <NewProjectDialog className="pp-newprojectdialog" hideHandler={e => this.setState({ showDialog: false })} />}
-        </div>);
+        const {
+            linkClassName,
+            iconProps,
+         } = this.props;
+
+        return (
+            <div>
+                <a
+                    className={linkClassName}
+                    href="#"
+                    onClick={e => this.setState({ showDialog: true })}>
+                    <Icon { ...iconProps } />
+                    <span>{__("NewProjectForm_Header")}</span>
+                </a>
+                {this.renderDialog()}
+            </div>
+        );
+    }
+
+    /**
+     * Renders the dialog
+     */
+    private renderDialog = () => {
+        return (
+            <NewProjectDialog
+                dialogProps={{
+                    isOpen: this.state.showDialog,
+                    type: DialogType.largeHeader,
+                    isDarkOverlay: true,
+                    isBlocking: false,
+                    title: __("NewProjectForm_DialogTitle"),
+                    subText: "Opprett ett nytt prosjekt basert på Prosjektveiviseren",
+                    className: "pp-newprojectdialog",
+                    onDismiss: () => this.setState({ showDialog: false }),
+                }} />
+        );
     }
 };

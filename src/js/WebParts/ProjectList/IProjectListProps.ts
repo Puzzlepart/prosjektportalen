@@ -1,11 +1,10 @@
 interface IProjectListProps {
     tileWidth?: number;
     tileImageHeight?: number;
-    tileGutter?: number;
     tileClassName?: string;
-    modalContainerClassName?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
+    masonryOptions?: any;
 }
 
 export default IProjectListProps;

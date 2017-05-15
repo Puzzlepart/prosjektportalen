@@ -1,3 +1,4 @@
+// #region Imports
 import * as React from "react";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
@@ -13,16 +14,16 @@ import {
     ConstrainMode,
     DetailsListLayoutMode,
 } from "office-ui-fabric-react";
-import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
-import ProjectInfo from "../ProjectInfo";
+import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
+// #endregion
 
 /**
  * Dynamic Portfolio
@@ -31,7 +32,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     public static defaultProps: Partial<IDynamicPortfolioProps> = {
         searchProperty: "Title",
         showGroupBy: true,
-        modalContainerClassName: "pp-dynamicPortfolioModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         projectInfoFilterField: "GtPcPortfolioPage",
         constrainMode: ConstrainMode.horizontalConstrained,
@@ -255,38 +255,32 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Renders the Project Info modal
      */
     private renderProjectInfoModal = () => {
-        const { showProjectInfo } = this.state;
-
         const {
-            modalContainerClassName,
             modalHeaderClassName,
             projectInfoFilterField,
         } = this.props;
 
+        const { showProjectInfo } = this.state;
+
         if (showProjectInfo) {
-            return (
-                <Modal
-                    isOpen={showProjectInfo}
-                    isDarkOverlay={true}
-                    onDismiss={e => this.setState({ showProjectInfo: null })}
-                    containerClassName={modalContainerClassName}
-                    isBlocking={false}
-                >
-                    <div style={{ padding: 50 }}>
-                        <div className={modalHeaderClassName} style={{ marginBottom: 20 }}>
-                            <span>{showProjectInfo.Title}</span>
-                        </div>
-                        <ProjectInfo
-                            webUrl={showProjectInfo.Path}
-                            hideChrome={true}
-                            showEditLink={false}
-                            showMissingPropsWarning={false}
-                            filterField={projectInfoFilterField}
-                            labelSize="l"
-                            valueSize="m" />
-                    </div>
-                </Modal>
-            );
+            return <ProjectInfo
+                webUrl={showProjectInfo.Path}
+                hideChrome={true}
+                showActionLinks={false}
+                showMissingPropsWarning={false}
+                filterField={projectInfoFilterField}
+                labelSize="l"
+                valueSize="m"
+                renderMode={ProjectInfoRenderMode.Modal}
+                modalOptions={{
+                    isOpen: this.state.showProjectInfo,
+                    isDarkOverlay: true,
+                    isBlocking: false,
+                    onDismiss: e => this.setState({ showProjectInfo: null }),
+                    headerClassName: modalHeaderClassName,
+                    headerStyle: { marginBottom: 20 },
+                    title: showProjectInfo.Title,
+                }} />;
         }
         return null;
     }
@@ -457,10 +451,10 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     private _doSearch(viewConfig: Configuration.IViewConfig): void {
         const {
-            fieldNames,
+        fieldNames,
             refinerConfig,
             currentView,
-         } = this.state;
+    } = this.state;
 
         if (currentView.id === viewConfig.id) {
             return;

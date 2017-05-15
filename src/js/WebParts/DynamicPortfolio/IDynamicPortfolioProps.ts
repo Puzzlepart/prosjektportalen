@@ -7,7 +7,6 @@ import {
 interface IDynamicPortfolioProps {
     searchProperty?: string;
     showGroupBy?: boolean;
-    modalContainerClassName?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
     constrainMode?: ConstrainMode;

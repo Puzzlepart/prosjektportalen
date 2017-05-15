@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as uuid_v1 from "uuid/v1";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -6,24 +7,9 @@ import {
     Icon,
 } from "office-ui-fabric-react";
 import * as Util from "../../Util";
-
-export interface IWebInfo {
-    Id: number;
-    ServerRelativeUrl: string;
-    Title: string;
-    Created: string;
-}
-
-export interface ILatestProjectsProps {
-    itemsCount?: number;
-    itemsOrderBy?: { orderBy: string, ascending: boolean };
-    reloadIntervalMs?: number;
-}
-
-export interface ILatestProjectsState {
-    webinfos: IWebInfo[];
-    isLoading: boolean;
-}
+import ChromeTitle from "../@Components/ChromeTitle";
+import ILatestProjectsProps from "./ILatestProjectsProps";
+import ILatestProjectsState from "./ILatestProjectsState";
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
     public static defaultProps: ILatestProjectsProps = {
@@ -32,7 +18,9 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             orderBy: "Created",
             ascending: false,
         },
-        reloadIntervalMs: -1,
+        reloadInterval: -1,
+        listClassName: "pp-simpleList spacing-m",
+        listId: uuid_v1(),
     };
     private reloadInterval: number;
 
@@ -51,26 +39,22 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
      * Component did mount
      */
     public componentDidMount(): void {
-        const { reloadIntervalMs } = this.props;
-
         this.fetchData()
-            .then(webinfos => {
+            .then(updatedState => {
                 this.setState({
-                    webinfos: webinfos,
+                    ...updatedState,
                     isLoading: false,
                 });
             })
             .catch(_ => this.setState({ isLoading: false }));
 
-        if (reloadIntervalMs !== -1) {
+        if (this.props.reloadInterval !== -1) {
             this.reloadInterval = window.setInterval(() => {
                 this.fetchData()
-                    .then(webinfos => {
-                        this.setState({
-                            webinfos: webinfos,
-                        });
+                    .then(updatedState => {
+                        this.setState(updatedState);
                     });
-            }, reloadIntervalMs);
+            }, (this.props.reloadInterval * 1000));
         }
     }
 
@@ -89,6 +73,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             webinfos,
             isLoading,
         } = this.state;
+
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }
@@ -96,32 +81,57 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
         }
         if (webinfos.length > 0) {
-            return (<ul className="pp-simpleList spacing-m">
-                {webinfos.map(webinfo => (
-
-                    <li key={webinfo.Id}>
-                        {webinfo.Title ?
-                            <div>
-                                <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
-                            </div>
-                            : (
-                                <div style={{ width: 100 }}>
-                                    <Spinner type={SpinnerType.normal} />
-                                </div>
-                            )}
-                    </li>
-                ))}
-            </ul>);
+            return (
+                <div>
+                    {this.renderChrome()}
+                    <ul id={this.props.listId}
+                        className={this.props.listClassName}>
+                        {webinfos.map(webinfo => (
+                            <li key={webinfo.Id}>
+                                {webinfo.Title ?
+                                    <div>
+                                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                    </div>
+                                    : (
+                                        <div style={{ width: 100 }}>
+                                            <Spinner type={SpinnerType.normal} />
+                                        </div>
+                                    )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
         } else {
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
     }
 
     /**
+    * Render chrome
+    */
+    private renderChrome = () => {
+        return (
+            <ChromeTitle
+                title={__("WebPart_RecentProjects_Title")}
+                toggleElement={{
+                    selector: `#${this.props.listId}`,
+                    animationDelay: 100,
+                    animation: "slideToggle",
+                    storage: {
+                        key: "LatestProjects",
+                        type: "localStorage",
+                    },
+                }}
+            />
+        );
+    }
+
+    /**
      * Fetch data (webinfos)
      */
-    private fetchData = () => new Promise<IWebInfo[]>((resolve, reject) => {
+    private fetchData = () => new Promise<Partial<ILatestProjectsState>>((resolve, reject) => {
         const {
             itemsCount,
             itemsOrderBy,
@@ -134,7 +144,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
             .select("Id", "ServerRelativeUrl", "Title", "Created")
             .orderBy(itemsOrderBy.orderBy, itemsOrderBy.ascending)
             .get().then(webinfos => {
-                resolve(webinfos);
+                resolve({ webinfos: webinfos });
             }).catch(reject);
     })
 };

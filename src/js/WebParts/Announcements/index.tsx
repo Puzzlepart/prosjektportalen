@@ -1,4 +1,5 @@
 import { Site } from "sp-pnp-js";
+import * as uuid_v1 from "uuid/v1";
 import * as React from "react";
 import {
     Spinner,
@@ -6,6 +7,7 @@ import {
 } from "office-ui-fabric-react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import * as Util from "../../Util";
+import ChromeTitle from "../@Components/ChromeTitle";
 import IAnnouncementsProps from "./IAnnouncementsProps";
 import IAnnouncementsState from "./IAnnouncementsState";
 
@@ -21,6 +23,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
             ascending: false,
         },
         listClassName: "pp-simpleList spacing-s",
+        listId: uuid_v1(),
         modalContainerClassName: "pp-announcementsModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         modalBodyClassName: "ms-font-l",
@@ -68,52 +71,88 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
         const {
             entries,
             isLoading,
-            showAnnouncement,
         } = this.state;
-
-        const {
-            listClassName,
-            modalContainerClassName,
-            modalHeaderClassName,
-            modalBodyClassName,
-        } = this.props;
 
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         }
         if (entries.length > 0) {
             return (<div>
-                <ul className={listClassName}>
+                {this.renderChrome()}
+                <ul
+                    id={this.props.listId}
+                    className={this.props.listClassName}>
                     {entries.map((entry, idx) => <li key={idx}>
                         <h5>
-                            <a style={{ cursor: "pointer" }} onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                            <a
+                                style={{ cursor: "pointer" }}
+                                onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                         </h5>
                         <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
                     </li>)}
                 </ul>
-                {showAnnouncement && (
-                    <Modal
-                        isOpen={showAnnouncement}
-                        isDarkOverlay={true}
-                        onDismiss={e => this.setState({ showAnnouncement: null })}
-                        containerClassName={modalContainerClassName}
-                        isBlocking={false}
-                    >
-                        <div style={{ padding: 50 }}>
-                            <div className={modalHeaderClassName}>
-                                <span>{showAnnouncement.Title}</span>
-                            </div>
-                            <div className="ms-font-xs" style={{ marginTop: 20 }}>
-                                Publisert {Util.dateFormat(showAnnouncement.Created)}
-                            </div>
-                            <div className={modalBodyClassName} dangerouslySetInnerHTML={{ __html: showAnnouncement.Body }}></div>
-                        </div>
-                    </Modal>
-                )}
+                {this.renderModal()}
             </div>);
         } else {
-            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+            return (
+                <div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>
+            );
         }
     }
 
+    /**
+    * Render chrome
+    */
+    private renderChrome = () => {
+        return (
+            <ChromeTitle
+                title={__("WebPart_Announcements_Title")}
+                toggleElement={{
+                    selector: `#${this.props.listId}`,
+                    animationDelay: 100,
+                    animation: "slideToggle",
+                    storage: {
+                        key: "Announcements",
+                        type: "localStorage",
+                    },
+                }}
+            />
+        );
+    }
+
+    /**
+     * Render modal
+     */
+    private renderModal = () => {
+        const { showAnnouncement } = this.state;
+
+        const {
+            modalContainerClassName,
+            modalHeaderClassName,
+            modalBodyClassName,
+        } = this.props;
+
+        if (showAnnouncement) {
+            return (
+                <Modal
+                    isOpen={showAnnouncement}
+                    isDarkOverlay={true}
+                    onDismiss={e => this.setState({ showAnnouncement: null })}
+                    containerClassName={modalContainerClassName}
+                    isBlocking={false}
+                >
+                    <div style={{ padding: 50 }}>
+                        <div className={modalHeaderClassName}>
+                            <span>{showAnnouncement.Title}</span>
+                        </div>
+                        <div className="ms-font-xs" style={{ marginTop: 20 }}>
+                            Publisert {Util.dateFormat(showAnnouncement.Created)}
+                        </div>
+                        <div className={modalBodyClassName} dangerouslySetInnerHTML={{ __html: showAnnouncement.Body }}></div>
+                    </div>
+                </Modal>
+            );
+        }
+        return null;
+    }
 };

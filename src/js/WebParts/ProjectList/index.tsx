@@ -5,11 +5,11 @@ import {
     SpinnerType,
     SearchBox,
 } from "office-ui-fabric-react";
-import Modal from "office-ui-fabric-react/lib/Modal";
-import ProjectInfo from "../ProjectInfo";
+import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
+import Project from "./Project";
 import IProjectListProps from "./IProjectListProps";
 import IProjectListState from "./IProjectListState";
 
@@ -20,11 +20,13 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
     public static defaultProps: Partial<IProjectListProps> = {
         tileWidth: 206,
         tileImageHeight: 140,
-        tileGutter: 5,
         tileClassName: "pp-projectCard",
-        modalContainerClassName: "pp-projectListModalContainer",
         modalHeaderClassName: "ms-font-xxl",
         projectInfoFilterField: "GtPcPortfolioPage",
+        masonryOptions: {
+            transitionDuration: "slow",
+            gutter: 10,
+        },
     };
 
     /**
@@ -54,26 +56,35 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
      * Renders the component
      */
     public render(): JSX.Element {
+        if (this.state.isLoading) {
+            return <Spinner type={SpinnerType.large} />;
+        }
+
+        return (
+            <div style={{ paddingRight: 40 }}>
+                <SearchBox
+                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
+                    onChanged={st => this.setState({ searchTerm: st })} />
+                {this.renderCards()}
+                {this.renderProjectInfoModal()}
+                <Style props={this.props} />
+            </div>
+        );
+    }
+
+    /**
+     * Render cards
+     */
+    private renderCards = () => {
         const {
-            isLoading,
             projects,
             searchTerm,
         } = this.state;
 
-        if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
-        }
-
-        return <div style={{ paddingRight: 40 }}>
-            <SearchBox
-                labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
-                onChanged={st => this.setState({ searchTerm: st })} />
+        return (
             <Masonry
                 elementType={"div"}
-                options={{
-                    transitionDuration: "slow",
-                    gutter: this.props.tileGutter,
-                }}
+                options={this.props.masonryOptions}
                 disableImagesLoaded={false}
                 updateOnEachImageLoad={false}>
                 {projects
@@ -86,15 +97,13 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                             className={this.props.tileClassName}
                             tileWidth={this.props.tileWidth}
                             tileImageHeight={this.props.tileImageHeight}
-                            onClickHref={project.Path}
+                            onClickHref={project.Url}
                             showProjectInfo={e => {
                                 this.setState({ showProjectInfo: project });
                             }} />
                     ))}
             </Masonry>
-            {this.renderProjectInfoModal()}
-            <Style props={this.props} />
-        </div>;
+        );
     }
 
     /**
@@ -103,35 +112,27 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
     private renderProjectInfoModal = () => {
         const { showProjectInfo } = this.state;
 
-        const {
-            modalContainerClassName,
-            modalHeaderClassName,
-            projectInfoFilterField,
-        } = this.props;
-
         if (showProjectInfo) {
             return (
-                <Modal
-                    isOpen={showProjectInfo}
-                    isDarkOverlay={true}
-                    onDismiss={e => this.setState({ showProjectInfo: null })}
-                    containerClassName={modalContainerClassName}
-                    isBlocking={false}
-                >
-                    <div style={{ padding: 50 }}>
-                        <div className={modalHeaderClassName} style={{ marginBottom: 20 }}>
-                            <span>{showProjectInfo.Title}</span>
-                        </div>
-                        <ProjectInfo
-                            webUrl={showProjectInfo.Path}
-                            hideChrome={true}
-                            showEditLink={false}
-                            showMissingPropsWarning={false}
-                            filterField={projectInfoFilterField}
-                            labelSize="l"
-                            valueSize="m" />
-                    </div>
-                </Modal>
+                <ProjectInfo
+                    webUrl={showProjectInfo.Url}
+                    hideChrome={true}
+                    showActionLinks={false}
+                    showMissingPropsWarning={false}
+                    filterField={this.props.projectInfoFilterField}
+                    labelSize="l"
+                    valueSize="m"
+                    renderMode={ProjectInfoRenderMode.Modal}
+                    modalOptions={{
+                        isOpen: this.state.showProjectInfo !== null,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        headerClassName: this.props.modalHeaderClassName,
+                        headerStyle: { marginBottom: 20 },
+                        title: showProjectInfo.Title,
+                    }}
+                />
             );
         }
         return null;
@@ -142,7 +143,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
      */
     private fetchData = () => new Promise<Partial<IProjectListState>>((resolve, reject) => {
         Search.query()
-            .then(({ primarySearchResults }) => resolve({ projects: primarySearchResults }))
+            .then(({ primarySearchResults }) => resolve({ projects: primarySearchResults.map(result => new Project(result)) }))
             .catch(reject);
     })
 };

@@ -21,6 +21,12 @@
             "showOutput": "always"
         },
         {
+            "taskName": "watch::prod",
+            "args": [],
+            "isBackground": true,
+            "showOutput": "always"
+        },
+        {
             "taskName": "build:pnp",
             "args": [],
             "isBackground": true

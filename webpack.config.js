@@ -3,14 +3,8 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-const isExternal = ({ userRequest }) => {
-    if (typeof userRequest !== 'string') {
-        return false;
-    }
-    return userRequest.indexOf('node_modules') !== -1;
-}
 
-module.exports = (env = "dev", devtool = "source-map") => ({
+module.exports = (env = "development", devtool = "source-map") => ({
     cache: true,
     entry: './lib/js/pp.main.js',
     output: {
@@ -52,7 +46,7 @@ module.exports = (env = "dev", devtool = "source-map") => ({
                         ]
                     }
                 }
-            }, (env === "dev") ? { exclude: /node_modules/ } : {}),
+            }, (env === "development") ? { exclude: /node_modules/ } : {}),
             { test: /\.txt$/, use: 'raw-loader' },
             { test: /\.json$/, loader: "json-loader" }
         ]
@@ -64,26 +58,16 @@ module.exports = (env = "dev", devtool = "source-map") => ({
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify(env)
             }
         }),
     ].concat(
-        (env.toLowerCase() === "prod") ? [
+        (env.toLowerCase() === "production") ? [
             new webpack.optimize.UglifyJsPlugin({
                 compress: { warnings: false, drop_console: true },
                 beautify: false,
                 comments: false,
             }),
-            new webpack.DefinePlugin({
-                'process.env': {
-                    NODE_ENV: JSON.stringify('production')
-                }
-            }),
         ] : []
         ),
-    node: { fs: 'empty' },
-    externals: [
-        { './cptable': 'var cptable' },
-        { './jszip': 'jszip' }
-    ]
 });

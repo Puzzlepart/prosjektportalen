@@ -2,31 +2,14 @@ import * as React from "react";
 import * as jQuery from "jquery";
 import { Icon } from "office-ui-fabric-react";
 import * as Util from "../../../Util";
-
-export interface IToggleElementStorage {
-    key: string;
-    type: "localStorage" | "sessionStorage";
-}
-
-export interface IToggleElement {
-    selector: string;
-    animationDelay: number;
-    animation: "fadeToggle" | "slideToggle";
-    storage?: IToggleElementStorage;
-    defaultCollapsed?: boolean;
-}
-
-export interface IChromeTitleProps {
-    title: string;
-    toggleElement?: IToggleElement;
-    hidden?: boolean;
-}
-
-export interface IChromeTitleState {
-    isCollapsed: boolean;
-}
+import IChromeTitleProps from "./IChromeTitleProps";
+import IChromeTitleState from "./IChromeTitleState";
 
 class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+    public static defaultProps: Partial<IChromeTitleProps> = {
+        hidden: false,
+        width: "100%",
+    };
     /**
      * Chrome header style
      */
@@ -68,7 +51,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
         if (toggleElement && toggleElement.storage) {
             this.toggleStorageKey = Util.generateStorageKey([toggleElement.storage.key, "CollapsedState"]);
             let newState = {
-                isCollapsed: this.getCollapsedState(),
+                isCollapsed: this.getCollapsedStateFromStorage(),
             };
             this.setState(newState);
             if (newState.isCollapsed) {
@@ -82,30 +65,31 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
      * Renders the component
      */
     public render(): JSX.Element {
-        const { hidden } = this.props;
-        const { isCollapsed } = this.state;
-
         if (this.props.toggleElement) {
             this.h2Style.cursor = "pointer";
         }
 
-        return (<div
-            hidden={hidden}
-            className="ms-webpart-chrome-title"
-            onClick={this.onClick}>
-            <span
-                title={this.props.title}
-                className="js-webpart-titleCell">
-                <h2
-                    style={this.h2Style}
-                    className="ms-webpart-titleText">
-                    <span>{this.props.title}</span>
-                    {this.props.toggleElement && <Icon
-                        iconName={isCollapsed ? "ChevronDown" : "ChevronUp"}
-                        style={this.iconStyle} />}
-                </h2>
-            </span>
-        </div >);
+        return (
+            <div
+                hidden={this.props.hidden}
+                className="ms-webpart-chrome-title"
+                onClick={this.onClick}
+                style={{ width: this.props.width }}
+            >
+                <span
+                    title={this.props.title}
+                    className="js-webpart-titleCell">
+                    <h2
+                        style={this.h2Style}
+                        className="ms-webpart-titleText">
+                        <span>{this.props.title}</span>
+                        {this.props.toggleElement && <Icon
+                            iconName={this.state.isCollapsed ? "ChevronDown" : "ChevronUp"}
+                            style={this.iconStyle} />}
+                    </h2>
+                </span>
+            </div >
+        );
     }
 
     /**
@@ -129,11 +113,16 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
     /**
      * Get collapsed state from storage (localStorage or sessionStorage)
      */
-    private getCollapsedState(): boolean {
+    private getCollapsedStateFromStorage(): boolean {
         const { toggleElement } = this.props;
         const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
         if (value) {
-            return JSON.parse(value);
+            try {
+                const parsedValue = JSON.parse(value);
+                return parsedValue;
+            } catch (e) {
+                return toggleElement.defaultCollapsed === true;
+            }
         } else {
             return toggleElement.defaultCollapsed === true;
         }

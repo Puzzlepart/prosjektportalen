@@ -1,45 +1,25 @@
 import * as React from "react";
-import { ProvisionWeb } from "Provision";
+import ProvisionWeb from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
     Dialog,
-    DialogType,
     DialogFooter,
     Button,
     ButtonType,
     TextField,
     Toggle,
 } from "office-ui-fabric-react/lib";
-import { IProjectModel } from "Model";
-import * as Util from "Util";
-
-interface INewProjectDialogProps {
-    className: string;
-    hideHandler: (event) => void;
-}
-
-interface INewProjectDialogState {
-    showAdvancedSettings: boolean;
-    urlValue: string;
-    formValid: boolean;
-    listDataConfig?: { [key: string]: ListDataConfig.IListConfig };
-}
+import * as Util from "../../../Util";
+import INewProjectDialogProps from "./INewProjectDialogProps";
+import INewProjectDialogState from "./INewProjectDialogState";
 
 /**
  * New Project dialog
  */
-export class NewProjectDialog extends React.Component<INewProjectDialogProps, INewProjectDialogState> {
-    private inputs: { [key: string]: any } = {
-        Title: null,
-        Description: null,
-        Url: null,
-        InheritPermissions: null,
-        IncludeContent: {
-            Tasks: null,
-            Documents: null,
-            Stakeholders: null,
-            Checklist: null,
-        },
+export default class NewProjectDialog extends React.Component<INewProjectDialogProps, INewProjectDialogState> {
+    public static defaultProps: Partial<INewProjectDialogProps> = {
+        titleMinLength: 4,
+        advancedSectionClassName: "advanced",
     };
 
     /**
@@ -49,9 +29,15 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
         super();
         this.state = {
             showAdvancedSettings: false,
-            urlValue: "",
             formValid: false,
             listDataConfig: null,
+            urlInputEnabled: true,
+            model: {
+                Title: "",
+                Description: "",
+                Url: "",
+                InheritPermissions: false,
+            },
         };
     }
 
@@ -59,78 +45,117 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
      * Component did mount
      */
     public componentDidMount(): void {
-        ListDataConfig.RetrieveConfig().then((config: any) => this.setState({ listDataConfig: config }));
+        ListDataConfig.RetrieveConfig().then(listDataConfig => {
+            this.setState(prevState => ({
+                listDataConfig: listDataConfig,
+                model: {
+                    ...prevState.model,
+                    IncludeContent: Object.keys(listDataConfig).filter(key => listDataConfig[key].Default),
+                },
+            }));
+        });
     }
 
     /**
      * Renders the component
      */
     public render(): JSX.Element {
-        let {
-            className,
-            hideHandler,
-        } = this.props;
-        let {
-            showAdvancedSettings,
-            urlValue,
-            formValid,
-            listDataConfig,
+        return (
+            <Dialog { ...this.props.dialogProps }>
+                {this.renderForm()}
+                {this.renderAdvancedSection()}
+                {this.renderFooter()}
+            </Dialog >
+        );
+    }
+
+    /**
+     * Render form
+     *
+     * @param titlePlaceHolder Placeholder for title field
+     * @param descPlaceholder Placeholder for description field
+     * @param urlPlaceholder Placeholder for url field
+     */
+    private renderForm = (titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
+        const {
+            model,
+            urlInputEnabled,
         } = this.state;
-        if (listDataConfig === null) {
-            return null;
-        }
-        return (<Dialog
-            className={className}
-            isOpen={true}
-            type={DialogType.largeHeader}
-            onDismiss={e => hideHandler(e)}
-            title={__("NewProjectForm_DialogTitle")}
-            subText=""
-            isBlocking={false}
-        >
+
+        return <div>
             <TextField
-                placeholder={__("NewProjectForm_Title")}
-                ref={ele => this.inputs.Title = ele}
-                onKeyDown={this.onTitleChanged} />
+                placeholder={titlePlaceHolder}
+                onChanged={this.onTitleChanged} />
             <TextField
-                placeholder={__("NewProjectForm_Description")}
+                placeholder={descPlaceholder}
                 multiline
                 autoAdjustHeight
-                ref={ele => this.inputs.Description = ele} />
+                onChanged={newValue => this.setState(prevState => ({
+                    model: {
+                        ...prevState.model,
+                        Description: newValue,
+                    },
+                }))}
+            />
             <TextField
-                placeholder={__("NewProjectForm_Url")}
-                ref={ele => this.inputs.Url = ele}
-                value={urlValue}
-                disabled={false} />
-            <Toggle
-                defaultChecked={false}
-                label={__("NewProjectForm_InheritPermissions")}
-                onText={__("String_Yes")}
-                offText={__("String_No")}
-                ref={ele => this.inputs.InheritPermissions = ele}
-                disabled />
+                placeholder={urlPlaceholder}
+                value={model.Url}
+                onChanged={newValue => this.setState(prevState => ({
+                    model: {
+                        ...prevState.model,
+                        Url: newValue,
+                    },
+                }))}
+                disabled={!urlInputEnabled} />
+        </div>;
+    }
+
+    /**
+     * Render advanced section
+     */
+    private renderAdvancedSection = () => {
+        const {
+            showAdvancedSettings,
+            listDataConfig,
+        } = this.state;
+
+        return (
             <div>
                 <Toggle
-                    defaultChecked={showAdvancedSettings}
+                    defaultChecked={this.state.showAdvancedSettings}
                     label={__("NewProjectForm_ShowAdvancedSettings")}
                     onText={__("String_Yes")}
                     offText={__("String_No")}
                     onChanged={this.toggleAdvancedSettings} />
-                <section className="advanced" style={{ display: showAdvancedSettings ? "block" : "none" }}>
-                    {Object.keys(listDataConfig).map(key => (<Toggle
-                        key={key}
-                        defaultChecked={listDataConfig[key].Default}
-                        label={listDataConfig[key].Label}
-                        onText={__("String_Yes")}
-                        offText={__("String_No")}
-                        ref={ele => this.inputs.IncludeContent[key] = ele} />))}
-                </section>
+                {(showAdvancedSettings && listDataConfig) && (
+                    <section
+                        className={this.props.advancedSectionClassName}>
+                        {Object.keys(listDataConfig).map(key => (
+                            <Toggle
+                                key={key}
+                                defaultChecked={listDataConfig[key].Default}
+                                label={listDataConfig[key].Label}
+                                onChanged={checked => this.toggleContent(key, checked)}
+                                onText={__("String_Yes")}
+                                offText={__("String_No")} />
+                        ))}
+                    </section>
+                )}
             </div>
-            <DialogFooter>
-                <Button buttonType={ButtonType.primary} onClick={this.onSubmit} disabled={!formValid}>{__("String_Create")}</Button>
-                <Button onClick={e => hideHandler(e)}>{__("String_Close")}</Button>
-            </DialogFooter>
-        </Dialog>);
+        );
+    }
+
+    /**
+     * Render footer
+     */
+    private renderFooter = () => {
+        return <DialogFooter>
+            <Button
+                buttonType={ButtonType.primary}
+                onClick={this.onSubmit}
+                disabled={!this.state.formValid}>{__("String_Create")}</Button>
+            <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
+        </DialogFooter>;
     }
 
     /**
@@ -141,35 +166,53 @@ export class NewProjectDialog extends React.Component<INewProjectDialogProps, IN
     }
 
     /**
-     * On title changed
+     * Toggle content
      */
-    private onTitleChanged = () => window.setTimeout(() => {
-        let title = this.inputs.Title.value;
-        let url = Util.generateUrl(title);
-        this.setState({ urlValue: url, formValid: url.length >= 4 });
-    }, 100)
+    private toggleContent = (key: string, checked: boolean): void => {
+        this.setState(prevState => {
+            let { IncludeContent } = prevState.model;
+            if (checked) {
+                IncludeContent.push(key);
+            } else {
+                IncludeContent.splice(IncludeContent.indexOf(key), 1);
+            }
+            return {
+                model: {
+                    ...prevState.model,
+                    IncludeContent: IncludeContent,
+                },
+            };
+        });
+    }
 
     /**
-     * Get project model
+     * On title changed
+     *
+     * @param newTitleValue New Title value
      */
-    private getModel(): IProjectModel {
-        let model: IProjectModel = {};
-        Object.keys(this.inputs).forEach(key => model[key] = this.inputs[key].value || this.inputs[key].checked);
-        model.IncludeContent = {};
-        Object.keys(this.inputs.IncludeContent).forEach(key => model.IncludeContent[key] = this.inputs.IncludeContent[key].checked);
-        return model;
+    private onTitleChanged = (newTitleValue: string): void => {
+        const url = Util.generateUrl(newTitleValue);
+        this.setState(prevState => ({
+            formValid: newTitleValue.length >= this.props.titleMinLength,
+            model: {
+                ...prevState.model,
+                Title: newTitleValue,
+                Url: url,
+            },
+        }));
     }
 
     /**
      * Submit handler
      */
     private onSubmit = (event): void => {
-        let { hideHandler } = this.props;
-        hideHandler(event);
-        ProvisionWeb(this.getModel()).then(redirectUrl => {
-            document.location.href = redirectUrl;
-        }, (message) => {
-            Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
-        });
+        this.props.dialogProps.onDismiss(event);
+        ProvisionWeb(this.state.model)
+            .then(redirectUrl => {
+                document.location.href = redirectUrl;
+            })
+            .catch(message => {
+                Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
+            });
     }
 }

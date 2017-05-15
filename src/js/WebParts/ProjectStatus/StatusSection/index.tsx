@@ -22,7 +22,7 @@ const StatusSection = ({ project }) => {
                             <h2>Prosjektegenskaper</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
-                                showEditLink={false}
+                                showActionLinks={false}
                                 showMissingPropsWarning={false}
                                 filterField="GtPcProjectStatus"
                                 labelSize="m"

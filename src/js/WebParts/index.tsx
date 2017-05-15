@@ -10,6 +10,7 @@ import QuickLinks from "./QuickLinks";
 import DynamicPortfolio from "./DynamicPortfolio";
 import GainsOverview from "./GainsOverview";
 import ProjectStatus from "./ProjectStatus";
+import ExperienceLog from "./ExperienceLog";
 import DataSource from "./DataSource";
 import IWebPartMapping from "./IWebPartMapping";
 
@@ -22,12 +23,13 @@ const wp_map: IWebPartMapping = {
     "pp-projectphases": <ProjectPhases />,
     "pp-newprojectlink": <NewProjectLink />,
     "pp-announcements": <Announcements />,
-    "pp-latestprojects": <LatestProjects reloadIntervalMs={20000} />,
+    "pp-latestprojects": <LatestProjects itemsCount={8} reloadInterval={40} />,
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio />,
     "pp-gainsoverview": <GainsOverview />,
     "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} />,
     "pp-projectstatus": <ProjectStatus />,
+    "pp-experiencelog": <ExperienceLog />,
 };
 
 /**

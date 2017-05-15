@@ -1,14 +1,11 @@
 import * as React from "react";
+import IProjectListProps from "./IProjectListProps";
 
-const Style = ({ props }) => {
+const Style = ({ props }: { props: IProjectListProps }) => {
     return <style type="text/css">{`
                 .${props.tileClassName} {
                     width: ${props.tileWidth}px;
-                    margin-bottom: ${props.tileGutter}px;
-                }
-                .${props.modalContainerClassName} {
-                    margin-left: 25%;
-                    margin-right: 25%;
+                    margin-bottom: ${props.masonryOptions.gutter}px;
                 }
             `}
     </style>;

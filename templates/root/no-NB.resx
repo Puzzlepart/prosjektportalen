@@ -1009,8 +1009,14 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Rediger egenskaper</value>
   </data>
+  <data name="ProjectInfo_EditLogo" xml:space="preserve">
+    <value>Tittel, beskrivelse og logo</value>
+  </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
     <value>Viktig informasjon om prosjektet er ikke satt. Du bør sette disse egenskapene snarest.</value>
+  </data>
+  <data name="ProjectInfo_NoProperties" xml:space="preserve">
+    <value>Finner ingen informasjon om prosjektet.</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>nb</value>
@@ -1089,6 +1095,9 @@
   </data>
   <data name="WebPart_Links_Title" xml:space="preserve">
     <value>Lenker</value>
+  </data>
+  <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
+    <value>Om prosjektet</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
