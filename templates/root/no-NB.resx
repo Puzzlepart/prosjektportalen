@@ -419,7 +419,7 @@
     <value>Tiltak</value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_DisplayName" xml:space="preserve">
-    <value>Kommentar, budsjett</value>
+    <value>Kommentar, økonomi</value>
   </data>
   <data name="SiteFields_GtAverageRisk_DisplayName" xml:space="preserve">
     <value>Snittrisiko</value>
@@ -488,7 +488,7 @@
     <value>Anbefaling</value>
   </data>
   <data name="SiteFields_GtStatusBudget_DisplayName" xml:space="preserve">
-    <value>Status budsjett</value>
+    <value>Status økonomi</value>
   </data>
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risiko</value>
@@ -701,7 +701,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_Description" xml:space="preserve">
-    <value>Kommentar til status budsjett angitt over</value>
+    <value>Kommentar til status økonomi angitt over</value>
   </data>
   <data name="SiteFields_GtAverageRisk_Description" xml:space="preserve">
     <value></value>

@@ -419,7 +419,7 @@
     <value>Action</value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_DisplayName" xml:space="preserve">
-    <value>Comment, budget</value>
+    <value>Comment, economy</value>
   </data>
   <data name="SiteFields_GtAverageRisk_DisplayName" xml:space="preserve">
     <value>Average Risk</value>
@@ -491,7 +491,7 @@
     <value>Recommendation</value>
   </data>
   <data name="SiteFields_GtStatusBudget_DisplayName" xml:space="preserve">
-    <value>Status budget</value>
+    <value>Status economy</value>
   </data>
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risk</value>
@@ -704,7 +704,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtStatusBudgetComment_Description" xml:space="preserve">
-    <value>Comment on status budget set above</value>
+    <value>Comment on status economy set above</value>
   </data>
   <data name="SiteFields_GtAverageRisk_Description" xml:space="preserve">
     <value></value>

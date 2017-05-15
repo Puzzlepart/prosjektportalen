@@ -80,19 +80,19 @@
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Kommentar, tid</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Kommentar, fremdrift</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Status budsjett</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Status økonomi</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Kommentar, budsjett</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Kommentar, økonomi</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
