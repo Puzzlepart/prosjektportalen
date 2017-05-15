@@ -25,26 +25,8 @@
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_Links_Title}" Order="2" Zone="RightColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-quicklinks"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">{res:WebPart_Links_Title}</property>
-                                    <property name="TitleUrl" type="string">{site}/Lists/QuickLinks</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/QuickLinks.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_RecentProjects_Title}" Order="3" Zone="RightColumn">
