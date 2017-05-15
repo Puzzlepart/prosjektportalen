@@ -5,136 +5,34 @@
             <pnp:Property Key="Title" Value="{res:PortfolioPage_Homepage_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
-            <pnp:WebPart Title="ProjectInfo" Order="0" Zone="LeftColumn">
+            <pnp:WebPart Title="ProjectList" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>Kan ikke importere denne webdelen.</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="ExportMode" type="exportmode">All</property>
-                                    <property name="HelpUrl" type="string" />
-                                    <property name="Hidden" type="bool">False</property>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-projectlist"&gt;&lt;/div&gt;</property>
-                                    <property name="CatalogIconImageUrl" type="string" />
-                                    <property name="Title" type="string">ProjectList</property>
-                                    <property name="AllowHide" type="bool">False</property>
-                                    <property name="AllowMinimize" type="bool">False</property>
-                                    <property name="AllowZoneChange" type="bool">False</property>
-                                    <property name="TitleUrl" type="string" />
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="AllowConnect" type="bool">False</property>
-                                    <property name="Width" type="unit" />
-                                    <property name="Height" type="unit" />
-                                    <property name="HelpMode" type="helpmode">Navigate</property>
-                                    <property name="AllowEdit" type="bool">False</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="Direction" type="direction">NotSet</property>
-                                    <property name="AllowClose" type="bool">False</property>
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectList.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_NewProject_Title}" Order="0" Zone="RightColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-newprojectlink"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">{res:WebPart_NewProject_Title}</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/NewProjectLink.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_Announcements_Title}" Order="1" Zone="RightColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-announcements"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">{res:WebPart_Announcements_Title}</property>
-                                    <property name="TitleUrl" type="string">{site}/Lists/Announcements</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/Announcements.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_Links_Title}" Order="2" Zone="RightColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-quicklinks"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">{res:WebPart_Links_Title}</property>
-                                    <property name="TitleUrl" type="string">{site}/Lists/QuickLinks</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/QuickLinks.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{res:WebPart_RecentProjects_Title}" Order="3" Zone="RightColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-latestprojects"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">{res:WebPart_RecentProjects_Title}</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/LatestProjects.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -146,40 +44,8 @@
         <pnp:WebParts>
             <pnp:WebPart Title="Erfaringslogg" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>Kan ikke importere denne webdelen.</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="ExportMode" type="exportmode">All</property>
-                                    <property name="HelpUrl" type="string" />
-                                    <property name="Hidden" type="bool">False</property>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-experiencelog"&gt;&lt;/div&gt;</property>
-                                    <property name="CatalogIconImageUrl" type="string" />
-                                    <property name="Title" type="string">ExperienceLog</property>
-                                    <property name="AllowHide" type="bool">False</property>
-                                    <property name="AllowMinimize" type="bool">False</property>
-                                    <property name="AllowZoneChange" type="bool">False</property>
-                                    <property name="TitleUrl" type="string" />
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="AllowConnect" type="bool">False</property>
-                                    <property name="Width" type="unit" />
-                                    <property name="Height" type="unit" />
-                                    <property name="HelpMode" type="helpmode">Navigate</property>
-                                    <property name="AllowEdit" type="bool">False</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="Direction" type="direction">NotSet</property>
-                                    <property name="AllowClose" type="bool">False</property>
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ExperienceLog.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -191,24 +57,8 @@
         <pnp:WebParts>
             <pnp:WebPart Title="dynamicportfolio" Order="1" Zone="LeftColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-dynamicportfolio"&gt;&lt;/div&gt;</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DynamicPortfolio.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -220,25 +70,8 @@
         <pnp:WebParts>
             <pnp:WebPart Title="Gevinstoversikt" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <webParts>
-                        <webPart 
-                            xmlns="http://schemas.microsoft.com/WebPart/v3">
-                            <metaData>
-                                <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
-                                <importErrorMessage>$Resources:core,ImportErrorMessage;</importErrorMessage>
-                            </metaData>
-                            <data>
-                                <properties>
-                                    <property name="Description" type="string" null="true" />
-                                    <property name="Content" type="string">&lt;div id="pp-gainsoverview-search"&gt;&lt;/div&gt;</property>
-                                    <property name="Title" type="string">Gevinstoversikt</property>
-                                    <property name="ChromeType" type="chrometype">None</property>
-                                    <property name="TitleIconImageUrl" type="string" />
-                                    <property name="ChromeState" type="chromestate">Normal</property>
-                                </properties>
-                            </data>
-                        </webPart>
-                    </webParts>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/GainsOverview.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -295,6 +128,20 @@
     <pnp:File Src="WebPartGallery\ExperienceLog.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Erfaringslogg" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\ProjectInfo.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Om prosjektet" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="Prosjektportalen" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\ProjectPhases.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Fasevelger" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="Prosjektportalen" />
         </pnp:Properties>

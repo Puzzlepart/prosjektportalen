@@ -10,15 +10,15 @@
         
         <property name="Hidden" type="bool">False</property>
         <property name="Description" type="string" null="true" />
-        <property name="Content" type="string">&lt;div id="pp-experiencelog"&gt;&lt;/div&gt;</property>
+        <property name="Content" type="string">&lt;div id="pp-projectinfo"&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
-        <property name="Title" type="string">ExperienceLog</property>
+        <property name="Title" type="string">ProjectInfo</property>
         <property name="AllowHide" type="bool">False</property>
         <property name="AllowMinimize" type="bool">False</property>
-        <property name="AllowZoneChange" type="bool">False</property>
+        <property name="AllowZoneChange" type="bool">True</property>
         <property name="TitleUrl" type="string" null="true" />
         <property name="ChromeType" type="chrometype">None</property>
-        <property name="AllowConnect" type="bool">False</property>
+        
         <property name="Width" type="unit" />
         <property name="Height" type="unit" />
         
