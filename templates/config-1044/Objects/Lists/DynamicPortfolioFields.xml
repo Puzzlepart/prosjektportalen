@@ -73,7 +73,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusTimeOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status tid</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status fremdrift</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">100</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>

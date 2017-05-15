@@ -413,7 +413,7 @@
     <value>Approval method</value>
   </data>
   <data name="SiteFields_GtRiskConsequencePostAction_DisplayName" xml:space="preserve">
-    <value>Consequence Post Action</value>
+    <value>Consequence post action</value>
   </data>
   <data name="SiteFields_GtRiskAction_DisplayName" xml:space="preserve">
     <value>Action</value>
@@ -440,7 +440,7 @@
     <value>Project number</value>
   </data>
   <data name="SiteFields_GtStatusTime_DisplayName" xml:space="preserve">
-    <value>Status, tid</value>
+    <value>Status progress</value>
   </data>
   <data name="SiteFields_GtProjectOwner_DisplayName" xml:space="preserve">
     <value>Project Owner</value>
@@ -527,10 +527,10 @@
     <value>Interest</value>
   </data>
   <data name="SiteFields_GtRiskProbabilityPostAction_DisplayName" xml:space="preserve">
-    <value>S etter tiltak</value>
+    <value>Probability post action</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
-    <value>Comment, time</value>
+    <value>Comment, progress</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
     <value>Comment, gain</value>
@@ -1151,7 +1151,7 @@
     <value>On plan</value>
   </data>
   <data name="Choice_GtStatusTime_AheadOfSchedule" xml:space="preserve">
-    <value>ahead of schedule</value>
+    <value>Ahead of schedule</value>
   </data>
   <data name="Choice_GtStatusTime_SmallDelay" xml:space="preserve">
     <value>Less delay that can be taken back</value>

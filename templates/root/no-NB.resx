@@ -437,7 +437,7 @@
     <value>Prosjektnummer</value>
   </data>
   <data name="SiteFields_GtStatusTime_DisplayName" xml:space="preserve">
-    <value>Status, tid</value>
+    <value>Status fremdrift</value>
   </data>
   <data name="SiteFields_GtProjectOwner_DisplayName" xml:space="preserve">
     <value>Prosjekteier</value>
@@ -527,7 +527,7 @@
     <value>S etter tiltak</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
-    <value>Kommentar, tid</value>
+    <value>Kommentar, fremdrift</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
     <value>Kommentar, gevinstoppnåelse</value>
@@ -812,7 +812,7 @@
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_Description" xml:space="preserve">
-    <value>Kommentar til status tid angitt over</value>
+    <value>Kommentar til status fremdrift angitt over</value>
   </data>
   <data name="SiteFields_GtProjectGoals_Description" xml:space="preserve">
     <value>Beskriv hva prosjektet skal levere</value>
