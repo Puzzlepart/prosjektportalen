@@ -7,14 +7,6 @@
         "sourceMap": true,
         "removeComments": false,
         "baseUrl": ".",
-        "paths": {
-            "Model": [
-                "src/js/Model"
-            ],
-            "Provision": [
-                "src/js/Provision"
-            ]
-        },
         "typeRoots": [
             "./node_modules/@types",
             "./types"
