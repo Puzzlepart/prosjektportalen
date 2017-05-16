@@ -3,8 +3,11 @@
     <pnp:SiteCustomActions>
         <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
         SP.SOD.registerSod('fetch.min.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/fetch.min.js');
+        SP.SOD.registerSod('pp.vendor.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.vendor.js');
         SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?rev=[version]');
         SP.SOD.registerSodDep('pp.main.js', 'fetch.min.js');
-        SP.SOD.executeFunc('pp.main.js', null, function() { console.log('Loaded pp.main.js with dependency fetch.min.js.'); });"  />
+        SP.SOD.registerSodDep('pp.vendor.js', 'fetch.min.js');
+        SP.SOD.registerSodDep('pp.main.js', 'pp.vendor.js');
+        SP.SOD.executeFunc('pp.main.js', null, function() {});"  />
     </pnp:SiteCustomActions>
 </pnp:CustomActions>

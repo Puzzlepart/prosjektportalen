@@ -3,11 +3,23 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
+function isExternal(module) {
+    var userRequest = module.userRequest;
 
+    if (typeof userRequest !== 'string') {
+        return false;
+    }
 
+    return userRequest.indexOf('node_modules') >= 0;
+}
 
 module.exports = (env = "development", devtool = "source-map") => {
     const plugins = [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors',
+            filename: "pp.vendor.js",
+            minChunks: (module) => isExternal(module)
+        }),
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
