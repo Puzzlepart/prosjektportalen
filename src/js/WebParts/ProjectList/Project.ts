@@ -1,5 +1,3 @@
-import { IQueryResult } from "./Search";
-
 export class Project {
     public Title: string;
     public Url: string;
@@ -11,16 +9,16 @@ export class Project {
     public Owner: string;
     public Views: number;
 
-    constructor(data: IQueryResult) {
-        this.Title = data.Title;
-        this.Url = data.Path;
-        this.Logo = data.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11");
-        this.Phase = data.RefinableString52;
-        this.ServiceArea = data.RefinableString53;
-        this.Type = data.RefinableString54;
-        this.Manager = data.GtProjectManagerOWSUSER;
-        this.Owner = data.GtProjectOwnerOWSUSER;
-        this.Views = parseInt(data.ViewsLifeTime, 10);
+    constructor({ Title, Path, SiteLogo, RefinableString52, RefinableString53, RefinableString54, GtProjectManagerOWSUSER, GtProjectOwnerOWSUSER, ViewsLifeTime }) {
+        this.Title = Title;
+        this.Url = Path;
+        this.Logo = SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11");
+        this.Phase = RefinableString52;
+        this.ServiceArea = RefinableString53;
+        this.Type = RefinableString54;
+        this.Manager = GtProjectManagerOWSUSER;
+        this.Owner = GtProjectOwnerOWSUSER;
+        this.Views = ViewsLifeTime;
     }
 }
 
