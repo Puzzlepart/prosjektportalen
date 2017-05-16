@@ -925,11 +925,14 @@
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
+  <data name="NewProjectForm_CreatingProject" xml:space="preserve">
+    <value>Oppretter prosjektområde for {0}</value>
+  </data>
   <data name="ProvisionWeb_CreatingWeb" xml:space="preserve">
-    <value>Oppretter området,Ikke lukk nettleseren din</value>
+    <value>Oppretter SharePoint-område</value>
   </data>
   <data name="ProvisionWeb_ApplyingTemplate" xml:space="preserve">
-    <value>Legger på mal,Ikke lukk nettleseren din</value>
+    <value>Legger på mal</value>
   </data>
   <data name="ProvisionWeb_CopyListContent" xml:space="preserve">
     <value>Kopierer listeinnhold</value>
