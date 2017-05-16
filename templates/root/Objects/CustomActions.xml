@@ -2,14 +2,20 @@
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:SiteCustomActions>
         <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
+        window.__define = window.define;
+        window.__require = window.require;
+        window.define = undefined;
+        window.require = undefined;
         ExecuteOrDelayUntilScriptLoaded(function() {    
             SP.SOD.registerSod('fetch.min.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/fetch.min.js');
-            SP.SOD.registerSod('pp.vendor.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.vendor.js');
             SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?rev=[version]');
             SP.SOD.registerSodDep('pp.main.js', 'fetch.min.js');
-            SP.SOD.registerSodDep('pp.vendor.js', 'fetch.min.js');
-            SP.SOD.registerSodDep('pp.main.js', 'pp.vendor.js');
-            EnsureScriptFunc('pp.main.js', null, function() {});
+            EnsureScriptFunc('pp.main.js', null, function() {
+                window.define = window.__define;
+                window.require = window.__require;
+                window.__define = undefined;
+                window.__require = undefined;
+            });
         }, 'sp.js');"  />
     </pnp:SiteCustomActions>
 </pnp:CustomActions>

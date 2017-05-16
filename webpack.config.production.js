@@ -15,11 +15,6 @@ function isExternal(module) {
 
 module.exports = () => {
     const plugins = [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors',
-            filename: "pp.vendor.js",
-            minChunks: (module) => isExternal(module)
-        }),
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
@@ -36,6 +31,7 @@ module.exports = () => {
             },
             beautify: false,
             comments: false,
+            mangle: false
         })];
     let rules = [
         {
@@ -60,19 +56,20 @@ module.exports = () => {
         cache: true,
         entry: './lib/js/pp.main.js',
         output: {
+            
             path: path.join(__dirname, "dist/js"),
             filename: "pp.main.js",
             libraryTarget: "umd",
         },
         devtool: "source-map",
         stats: {
-            hash: false,
-            timing: false,
-            assets: false,
-            chunks: false,
-            modules: false,
+            hash: true,
+            timing: true,
+            assets: true,
+            chunks: true,
+            modules: true,
             reasons: true,
-            children: false
+            children: true
         },
         resolve: {
             extensions: ['.jsx', '.js', '.json', '.txt']

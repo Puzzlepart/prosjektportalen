@@ -6,7 +6,7 @@ import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
 
 /** Set up pnp logging */
-pnp.log.activeLogLevel = (process.env.NODE_ENV === "development") ? LogLevel.Info : LogLevel.Warning;
+pnp.log.activeLogLevel = LogLevel.Info;
 pnp.log.subscribe(new ConsoleListener());
 
 /** Pnp setup */

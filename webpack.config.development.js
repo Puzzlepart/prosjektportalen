@@ -15,11 +15,6 @@ function isExternal(module) {
 
 module.exports = (devtool = "source-map") => {
     const plugins = [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors',
-            filename: "pp.vendor.js",
-            minChunks: (module) => isExternal(module)
-        }),
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
@@ -61,13 +56,13 @@ module.exports = (devtool = "source-map") => {
         },
         devtool: devtool,
         stats: {
-            hash: false,
-            timing: false,
-            assets: false,
-            chunks: false,
-            modules: false,
+            hash: true,
+            timing: true,
+            assets: true,
+            chunks: true,
+            modules: true,
             reasons: true,
-            children: false
+            children: true
         },
         resolve: {
             extensions: ['.jsx', '.js', '.json', '.txt']
