@@ -36,6 +36,7 @@ module.exports = () => {
             },
             beautify: false,
             comments: false,
+            mangle: false
         })];
     let rules = [
         {
@@ -60,6 +61,7 @@ module.exports = () => {
         cache: true,
         entry: './lib/js/pp.main.js',
         output: {
+            
             path: path.join(__dirname, "dist/js"),
             filename: "pp.main.js",
             libraryTarget: "umd",
