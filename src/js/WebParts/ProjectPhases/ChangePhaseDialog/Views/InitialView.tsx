@@ -14,7 +14,7 @@ export interface IInitialViewState {
 /**
  * Initial view
  */
-export class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
+export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
     private commentsField: HTMLTextAreaElement;
     private commentMinLength = 4;
     constructor() {
@@ -25,31 +25,34 @@ export class InitialView extends React.Component<IInitialViewProps, IInitialView
     }
 
     public render() {
-        let [{ currentChecklistItem, nextCheckPointAction }, { comment }] = [this.props, this.state];
+        const { currentChecklistItem, nextCheckPointAction } = this.props;
+
         if (!currentChecklistItem) {
             return <div className="inner"></div>;
         }
         const { ID, Title } = currentChecklistItem;
 
-        return (<div className="inner">
-            <h3>#{ID} {Title}</h3>
-            <textarea
-                placeholder={__("String_Comment")}
-                className="ms-TextField-field"
-                style={{ marginTop: 10, width: "90%", padding: 10 }}
-                ref={ele => this.commentsField = ele}
-                onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
-            <div style={{ margin: "20px 0 25px 0" }}>
-                {this._statusOptions().map((opt, idx) => <span key={idx} title={opt.tooltip}>
-                    <Button
-                        disabled={opt.disabled}
-                        onClick={e => {
-                            nextCheckPointAction(opt.value, comment);
-                            this.reset();
-                        }}>{opt.value}</Button>
-                </span>)}
+        return (
+            <div className="inner">
+                <h3>#{ID} {Title}</h3>
+                <textarea
+                    placeholder={__("String_Comment")}
+                    className="ms-TextField-field"
+                    style={{ marginTop: 10, width: "90%", padding: 10 }}
+                    ref={ele => this.commentsField = ele}
+                    onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
+                <div style={{ margin: "20px 0 25px 0" }}>
+                    {this._statusOptions().map((opt, idx) => <span key={idx} title={opt.tooltip}>
+                        <Button
+                            disabled={opt.disabled}
+                            onClick={e => {
+                                nextCheckPointAction(opt.value, this.state.comment);
+                                this.reset();
+                            }}>{opt.value}</Button>
+                    </span>)}
+                </div>
             </div>
-        </div>);
+        );
     }
 
     /**

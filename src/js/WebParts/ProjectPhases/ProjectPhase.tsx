@@ -1,8 +1,8 @@
 import * as React from "react";
-import { ProjectPhaseIcon } from "./ProjectPhaseIcon";
-import { ProjectPhaseCallout } from "./ProjectPhaseCallout";
+import ProjectPhaseIcon from "./ProjectPhaseIcon";
+import ProjectPhaseCallout from "./ProjectPhaseCallout";
 
-export const ProjectPhase = ({ phase, classList, checkListData, onChangePhase }) => {
+const ProjectPhase = ({ phase, classList, checkListData, onChangePhase }) => {
     return (<li className={classList.join(" ")}>
         <a href="#">
             <ProjectPhaseIcon phase={phase.Name} classList={classList} />
@@ -10,3 +10,6 @@ export const ProjectPhase = ({ phase, classList, checkListData, onChangePhase })
         <ProjectPhaseCallout phase={phase} selected={Array.contains(classList, "selected")} checkListData={checkListData} onChangePhase={onChangePhase} />
     </li>);
 };
+
+export default ProjectPhase;
+

@@ -41,3 +41,5 @@ export const SummaryView = ({ checkListItems }) => {
         </ul>
     </div>);
 };
+
+export default SummaryView;

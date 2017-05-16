@@ -1,15 +1,14 @@
 var gulp = require("gulp"),
     webpack = require('webpack'),
-    webpackConfig = require('../webpack.config.js'),
+    webpackConfigDev = require('../webpack.config.development.js'),
+    webpackConfigProd = require('../webpack.config.production.js'),
     stylus = require('gulp-stylus'),
     gutil = require('gulp-util'),
     autoprefixer = require('autoprefixer-stylus'),
     config = require('./@configuration.js');
 
-const env = "development";
-
 gulp.task("package:code", ["build:lib"], (done) => {
-    webpack(webpackConfig(env), (err, stats) => {
+    webpack(webpackConfigDev(), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code", err);
         }
@@ -21,7 +20,7 @@ gulp.task("package:code", ["build:lib"], (done) => {
 });
 
 gulp.task("package:code::eval", ["build:lib"], (done) => {
-    webpack(webpackConfig(env, "eval"), (err, stats) => {
+    webpack(webpackConfigDev("eval"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code", err);
         }
@@ -33,7 +32,7 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
 });
 
 gulp.task("package:code::prod", ["build:lib"], (done) => {
-    webpack(webpackConfig("production"), (err, stats) => {
+    webpack(webpackConfigProd(), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code::prod", err);
         }

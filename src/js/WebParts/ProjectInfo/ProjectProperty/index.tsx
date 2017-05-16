@@ -33,4 +33,4 @@ const ProjectProperty = ({ data: { internalName, displayName, description, value
 };
 
 export default ProjectProperty;
-export { ProjectPropertyModel };
+export { ProjectPropertyModel, IProjectPropertyProps };

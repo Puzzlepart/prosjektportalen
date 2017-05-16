@@ -6,8 +6,8 @@ export interface IWebInfo {
 }
 
 interface ILatestProjectsState {
-    webinfos: IWebInfo[];
-    isLoading: boolean;
+    webinfos?: IWebInfo[];
+    isLoading?: boolean;
 }
 
-export default LatestProjectState;
+export default ILatestProjectsState;

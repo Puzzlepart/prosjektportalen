@@ -1,4 +1,5 @@
 import * as moment from "moment";
+declare var MSOWebPartPageFormName: string;
 
 /**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
@@ -262,6 +263,6 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
 };
 
 import { default as WaitDialog } from "./WaitDialog";
-import { default as StampVersion } from "./StampVersion";
+import StampVersion from "./StampVersion";
 
 export { WaitDialog, StampVersion };

@@ -1,9 +1,9 @@
-interface IToggleElementStorage {
+export interface IToggleElementStorage {
     key: string;
     type: "localStorage" | "sessionStorage";
 }
 
-interface IToggleElement {
+export interface IToggleElement {
     selector: string;
     animationDelay: number;
     animation: "fadeToggle" | "slideToggle";

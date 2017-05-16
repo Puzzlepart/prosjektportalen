@@ -17,8 +17,12 @@ export interface IChangePhaseDialogState {
     currentView: View;
 }
 
-export class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
+export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
     private phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
+
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -28,35 +32,43 @@ export class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, 
         };
     }
 
-    public componentDidMount() {
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
         if (this.props.checkListItems.length === 0) {
             this.setState({ currentView: View.Confirm });
         }
     }
 
-    public render() {
+    /**
+     * Render the component
+     */
+    public render(): JSX.Element {
         let [{ onConfirmPhaseChange, checkListItems }, { currentView, isLoading, currentIdx }] = [this.props, this.state];
-        return (<Dialog
-            isOpen={true}
-            type={DialogType.largeHeader}
-            onDismiss={this._closeDialog}
-            title={this._getDialogTitle()}
-            subText={this._getDialogSubText()}
-            isBlocking={false}
-        >
-            <Body
-                currentView={currentView}
-                isLoading={isLoading}
-                checkListItems={checkListItems}
-                currentIdx={currentIdx}
-                nextCheckPointAction={this.nextCheckPoint} />
-            <Footer
-                currentView={currentView}
-                isLoading={isLoading}
-                confirmHandler={onConfirmPhaseChange}
-                closeDialog={this._closeDialog}
-                changeView={this.changeView} />
-        </Dialog>);
+        return (
+            <Dialog
+                isOpen={true}
+                type={DialogType.largeHeader}
+                onDismiss={this._closeDialog}
+                title={this._getDialogTitle()}
+                subText={this._getDialogSubText()}
+                isBlocking={false}
+            >
+                <Body
+                    currentView={currentView}
+                    isLoading={isLoading}
+                    checkListItems={checkListItems}
+                    currentIdx={currentIdx}
+                    nextCheckPointAction={this.nextCheckPoint} />
+                <Footer
+                    currentView={currentView}
+                    isLoading={isLoading}
+                    confirmHandler={onConfirmPhaseChange}
+                    closeDialog={this._closeDialog}
+                    changeView={this.changeView} />
+            </Dialog>
+        );
     }
 
     private _getDialogTitle = () => {

@@ -21,17 +21,19 @@ export const query = (SelectProperties: string[]) => new Promise<IQueryResponse>
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
         SelectProperties,
-    }).then(({ RawSearchResults: { PrimaryQueryResult } }) => {
-        resolve({
-            primarySearchResults: PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
-                let item: any = {};
-                Cells.results.forEach(({ Key, Value }) => {
-                    if (Array.contains(SelectProperties, Key)) {
-                        item[Key] = Value ? Value : "";
-                    }
-                });
-                return item;
-            }),
-        });
-    }).catch(reject);
+    })
+        .then((response: any) => {
+            resolve({
+                primarySearchResults: response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
+                    let item: any = {};
+                    Cells.results.forEach(({ Key, Value }) => {
+                        if (Array.contains(SelectProperties, Key)) {
+                            item[Key] = Value ? Value : "";
+                        }
+                    });
+                    return item;
+                }),
+            });
+        })
+        .catch(reject);
 });

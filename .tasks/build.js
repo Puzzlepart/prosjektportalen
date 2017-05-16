@@ -28,7 +28,7 @@ gulp.task("copy:assets:dist", () => {
 gulp.task("build:lib", ["lint:ts", "copy:assets:lib"], () => {
     var project = tsc.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(tsc.reporter.nullReporter()));
+        .pipe(project(tsc.reporter.fullReporter()));
     return merge([
         built.dts.pipe(gulp.dest(config.paths.lib)),
         built.js.pipe(gulp.dest(config.paths.lib))
