@@ -1,6 +1,6 @@
 require("es6-promise").polyfill();
 require("babel-polyfill");
-import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
+import pnp, { Logger, LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
@@ -16,8 +16,11 @@ pnp.setup({
     },
 });
 
-ExecuteOrDelayUntilBodyLoaded(() => {
-    Forms.Initialize();
-    WebParts.Render();
-    new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
-});
+ExecuteOrDelayUntilScriptLoaded(() => {
+    ExecuteOrDelayUntilBodyLoaded(() => {
+        Logger.log({ message: `Body loaded. Initializing.`, level: LogLevel.Info });
+        Forms.Initialize();
+        WebParts.Render();
+        new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
+    });
+}, "sp.js");
