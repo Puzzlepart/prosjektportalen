@@ -71,7 +71,7 @@ export const ProjectHome: IFile = {
                 List: "Gevinstanalyse og gevinstrealiseringsplan",
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtChangeLookup"],
+                    ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtRealizationTime"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,
@@ -107,7 +107,7 @@ export const ProjectHome: IFile = {
                 List: "Usikkerhet",
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity", "GtRiskFactor"],
+                    ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,
