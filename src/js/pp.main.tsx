@@ -1,5 +1,3 @@
-require("es6-promise").polyfill();
-require("babel-polyfill");
 import pnp, { Logger, LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";

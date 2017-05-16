@@ -1,5 +1,5 @@
 import * as React from "react";
-import ProvisionWeb from "../../../Provision";
+import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
     Dialog,
@@ -12,6 +12,7 @@ import {
 import * as Util from "../../../Util";
 import INewProjectDialogProps from "./INewProjectDialogProps";
 import INewProjectDialogState from "./INewProjectDialogState";
+import CreationModal from "./CreationModal";
 
 /**
  * New Project dialog
@@ -38,6 +39,13 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: "",
                 InheritPermissions: false,
             },
+            errorMessages: {},
+            showCreationModal: false,
+            provisioning: {
+                isCreating: false,
+                step: "",
+                progress: "",
+            },
         };
     }
 
@@ -60,6 +68,19 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Renders the component
      */
     public render(): JSX.Element {
+        if (this.state.showCreationModal) {
+            if (this.state.provisioning.error) {
+                return null;
+            }
+            return (
+                <CreationModal
+                    title={String.format(__("CreationModal_Title"), this.state.model.Title)}
+                    isBlocking={true}
+                    isDarkOverlay={true}
+                    progressLabel={this.state.provisioning.step}
+                    progressDescription={this.state.provisioning.progress} />
+            );
+        }
         return (
             <Dialog
                 isOpen={this.props.dialogProps.isOpen}
@@ -70,8 +91,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 subText={this.props.dialogProps.subText}
                 className={this.props.dialogProps.className}
                 onDismiss={this.props.dialogProps.onDismiss}>
-                {this.renderForm()}
-                {this.renderAdvancedSection()}
+                {this.renderForm(this.state)}
+                {this.renderAdvancedSection(this.state)}
                 {this.renderFooter()}
             </Dialog >
         );
@@ -84,36 +105,24 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param descPlaceholder Placeholder for description field
      * @param urlPlaceholder Placeholder for url field
      */
-    private renderForm = (titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
-        const {
-            model,
-            urlInputEnabled,
-        } = this.state;
-
+    private renderForm = ({ model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
         return <div>
             <TextField
                 placeholder={titlePlaceHolder}
-                onChanged={this.onTitleChanged} />
+                onChanged={newValue => this.onFormChange("Title", newValue)}
+                errorMessage={errorMessages.Title} />
             <TextField
                 placeholder={descPlaceholder}
                 multiline
                 autoAdjustHeight
-                onChanged={newValue => this.setState(prevState => ({
-                    model: {
-                        ...prevState.model,
-                        Description: newValue,
-                    },
-                }))}
+                onChanged={newValue => this.onFormChange("Description", newValue)}
+                errorMessage={errorMessages.Description}
             />
             <TextField
                 placeholder={urlPlaceholder}
                 value={model.Url}
-                onChanged={newValue => this.setState(prevState => ({
-                    model: {
-                        ...prevState.model,
-                        Url: newValue,
-                    },
-                }))}
+                onChanged={newValue => this.onFormChange("Url", newValue)}
+                errorMessage={errorMessages.Url}
                 disabled={!urlInputEnabled} />
         </div>;
     }
@@ -121,12 +130,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * Render advanced section
      */
-    private renderAdvancedSection = () => {
-        const {
-            showAdvancedSettings,
-            listDataConfig,
-        } = this.state;
-
+    private renderAdvancedSection = ({ showAdvancedSettings, listDataConfig }: INewProjectDialogState) => {
         return (
             <div>
                 <Toggle
@@ -157,13 +161,15 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Render footer
      */
     private renderFooter = () => {
-        return <DialogFooter>
-            <Button
-                buttonType={ButtonType.primary}
-                onClick={this.onSubmit}
-                disabled={!this.state.formValid}>{__("String_Create")}</Button>
-            <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
-        </DialogFooter>;
+        return (
+            <DialogFooter>
+                <Button
+                    buttonType={ButtonType.primary}
+                    onClick={this.onSubmit}
+                    disabled={!this.state.formValid}>{__("String_Create")}</Button>
+                <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
+            </DialogFooter>
+        );
     }
 
     /**
@@ -194,33 +200,98 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     }
 
     /**
-     * On title changed
+     * On form change
      *
+     * @param input Input (key) that was changed
      * @param newTitleValue New Title value
      */
-    private onTitleChanged = (newTitleValue: string): void => {
-        const url = Util.generateUrl(newTitleValue);
-        this.setState(prevState => ({
-            formValid: newTitleValue.length >= this.props.titleMinLength,
-            model: {
-                ...prevState.model,
-                Title: newTitleValue,
-                Url: url,
-            },
-        }));
+    private onFormChange = (input: string, newValue: string): void => {
+        const {
+            model,
+            errorMessages,
+         } = this.state;
+
+        switch (input) {
+            case "Title": {
+                const url = Util.generateUrl(newValue);
+                DoesWebExist(url).then(doesExist => {
+                    this.setState({
+                        errorMessages: {
+                            ...errorMessages,
+                            Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                        },
+                        formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
+                        model: {
+                            ...model,
+                            Title: newValue,
+                            Url: url,
+                        },
+                    });
+                });
+            }
+                break;
+            case "Url": {
+                DoesWebExist(newValue)
+                    .then(doesExist => {
+                        this.setState({
+                            errorMessages: {
+                                ...errorMessages,
+                                Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                            },
+                            formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
+                            model: {
+                                ...model,
+                                Url: newValue,
+                            },
+                        });
+                    });
+            }
+                break;
+            case "Description": {
+                this.setState({
+                    formValid: (model.Title.length >= this.props.titleMinLength),
+                    model: {
+                        ...model,
+                        Description: newValue,
+                    },
+                });
+            }
+                break;
+        }
     }
 
     /**
      * Submit handler
      */
     private onSubmit = (event): void => {
-        this.props.dialogProps.onDismiss(event);
-        ProvisionWeb(this.state.model)
-            .then(redirectUrl => {
-                document.location.href = redirectUrl;
+        event.preventDefault();
+        this.setState({
+            showCreationModal: true,
+            provisioning: {
+                isCreating: true,
+            },
+        }, () => {
+            ProvisionWeb(this.state.model, (step, progress) => {
+                this.setState({
+                    provisioning: {
+                        isCreating: true,
+                        step: step,
+                        progress: progress,
+                    },
+                });
             })
-            .catch(message => {
-                Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
-            });
+                .then(redirectUrl => {
+                    document.location.href = redirectUrl;
+                })
+                .catch(error => {
+                    this.setState({
+                        showCreationModal: false,
+                        provisioning: {
+                            isCreating: false,
+                            error: error,
+                        },
+                    });
+                });
+        });
     }
 }

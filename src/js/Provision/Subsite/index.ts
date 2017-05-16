@@ -1,6 +1,6 @@
 import { Site, Web } from "sp-pnp-js";
 
-export interface ICreateResult {
+export interface ICreateWebResult {
     web: Web;
     url: string;
     redirectUrl: string;
@@ -19,6 +19,18 @@ const SetSharedNavigation = (url: string, useShared = true): Promise<void> => ne
 });
 
 /**
+ * Checks if the web exists
+ *
+ * @param url Url
+ */
+export const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reject) => {
+    let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${url}`);
+    web.get()
+        .then(_ => resolve(true))
+        .catch(_ => resolve(false));
+});
+
+/**
  * Creates a new subsite
  *
  * @param title Title
@@ -26,21 +38,22 @@ const SetSharedNavigation = (url: string, useShared = true): Promise<void> => ne
  * @param description Description
  * @param inheritPermissions Inherit permissions
  */
-const Create = (title: string, url: string, description: string, inheritPermissions: boolean): Promise<ICreateResult> => new Promise<ICreateResult>((resolve, reject) => {
+export const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
     let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-    site.rootWeb.webs.add(title, url, description, "STS#0", 1044, inheritPermissions).then(result => {
-        url = result.data.Url;
-        let redirectUrl = inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));
-        SetSharedNavigation(url).then(() => {
-            resolve({
-                web: result.web,
-                url: url,
-                redirectUrl: redirectUrl,
-            });
-        }).catch(reject);
-    }).catch(({ data: { responseBody }, message, status }) => {
-        reject(responseBody["odata.error"].message.value);
-    });
+    site.rootWeb.webs.add(title, url, description, "STS#0", 1044, inheritPermissions)
+        .then(result => {
+            url = result.data.Url;
+            let redirectUrl = inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));
+            SetSharedNavigation(url)
+                .then(() => {
+                    resolve({
+                        web: result.web,
+                        url: url,
+                        redirectUrl: redirectUrl,
+                    });
+                })
+                .catch(reject);
+        })
+        .catch(reject);
 });
 
-export { Create };

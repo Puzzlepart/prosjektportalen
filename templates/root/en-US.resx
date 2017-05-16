@@ -928,11 +928,20 @@
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>New project</value>
   </data>
+  <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
+    <value>The URL is already in use.</value>
+  </data>
+  <data name="CreationModal_Title" xml:space="preserve">
+    <value>Creating project site for {0}</value>
+  </data>
+  <data name="CreationModal_Error" xml:space="preserve">
+    <value>An error occured creating the project site. Please try again later.</value>
+  </data>
   <data name="ProvisionWeb_CreatingWeb" xml:space="preserve">
-    <value>Creating the project site, Do not close your browser</value>
+    <value>Creating SharePoint site</value>
   </data>
   <data name="ProvisionWeb_ApplyingTemplate" xml:space="preserve">
-    <value>Applying template, Do not close your browser</value>
+    <value>Applying template</value>
   </data>
   <data name="ProvisionWeb_CopyListContent" xml:space="preserve">
     <value>Copies list contents</value>

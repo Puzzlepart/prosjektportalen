@@ -14,7 +14,7 @@ gulp.task("watch", (done) => {
     });
     watch(config.paths.sourceGlob).on("change", (done) => {
         runSequence("clean:lib", "clean:dist", "package:code", () => {
-            uploadFile(format("{0}/js/*.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
+            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
         })
     });
     watch(config.paths.stylesGlob).on("change", (done) => {
@@ -39,7 +39,7 @@ gulp.task("watch::eval", (done) => {
     });
     watch(config.paths.sourceGlob).on("change", (done) => {
         runSequence("clean:lib", "clean:dist", "package:code::eval", () => {
-            uploadFile(format("{0}/js/*.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
+            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
         })
     });
     watch(config.paths.stylesGlob).on("change", (done) => {
@@ -55,7 +55,7 @@ gulp.task("watch::prod", (done) => {
     });
     watch(config.paths.sourceGlob).on("change", (done) => {
         runSequence("clean:lib", "clean:dist", "package:code::prod", () => {
-            uploadFile(format("{0}/js/*.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
+            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
         })
     });
     watch(config.paths.stylesGlob).on("change", (done) => {
