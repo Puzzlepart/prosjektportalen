@@ -925,6 +925,9 @@
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
+  <data name="NewProjectForm_SubText" xml:space="preserve">
+    <value>Opprett ett nytt prosjekt basert på Prosjektveiviseren</value>
+  </data>
   <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
     <value>Webområdeadressen er allerede i bruk.</value>
   </data>

@@ -67,7 +67,7 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
                     isDarkOverlay: true,
                     isBlocking: false,
                     title: __("NewProjectForm_DialogTitle"),
-                    subText: "Opprett ett nytt prosjekt basert på Prosjektveiviseren",
+                    subText: __("NewProjectForm_SubText"),
                     className: "pp-newprojectdialog",
                     onDismiss: () => this.setState({ showDialog: false }),
                 }} />

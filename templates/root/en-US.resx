@@ -928,6 +928,9 @@
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>New project</value>
   </data>
+  <data name="NewProjectForm_SubText" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
     <value>The URL is already in use.</value>
   </data>
