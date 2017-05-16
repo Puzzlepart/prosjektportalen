@@ -10,8 +10,18 @@ export const DEFAULT_SEARCH_SETTINGS = {
     TrimDuplicates: false,
 };
 
+export interface IQueryResult {
+    Title: string;
+    SiteTitle: string;
+    GtProjectLogDescriptionOWSMTXT: string;
+    GtProjectLogResponsibleOWSCHCS: string;
+    GtProjectLogConsequenceOWSMTXT: string;
+    GtProjectLogRecommendationOWSMTXT: string;
+    GtProjectLogActorsOWSCHCM: string;
+}
+
 export interface IQueryResponse {
-    primarySearchResults: any[];
+    primarySearchResults: IQueryResult[];
 }
 
 /**

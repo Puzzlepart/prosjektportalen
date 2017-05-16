@@ -11,8 +11,20 @@ export const DEFAULT_SEARCH_SETTINGS = {
     SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"],
 };
 
+export interface IQueryResult {
+    Title: string;
+    Path: string;
+    SiteLogo: string;
+    RefinableString52: string;
+    RefinableString53: string;
+    RefinableString54: string;
+    GtProjectManagerOWSUSER: string;
+    GtProjectOwnerOWSUSER: string;
+    ViewsLifeTime: string;
+}
+
 export interface IQueryResponse {
-    primarySearchResults: any[];
+    primarySearchResults: IQueryResult[];
 }
 
 /**

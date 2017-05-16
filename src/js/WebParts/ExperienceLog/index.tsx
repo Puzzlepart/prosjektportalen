@@ -10,7 +10,7 @@ import {
 } from "office-ui-fabric-react";
 import * as Search from "./Search";
 import IExperienceLogProps from "./IExperienceLogProps";
-import IExperienceLogState from "./IExperienceLogState";
+import IExperienceLogState, { LogElement } from "./IExperienceLogState";
 
 /**
  * Project information
@@ -36,27 +36,27 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
         },
         {
             key: "GtProjectLogDescriptionOWSMTXT",
-            fieldName: "GtProjectLogDescriptionOWSMTXT",
+            fieldName: "Description",
             name: "Beskrivelse",
         },
         {
             key: "GtProjectLogResponsibleOWSCHCS",
-            fieldName: "GtProjectLogResponsibleOWSCHCS",
+            fieldName: "Responsible",
             name: "Ansvarlig",
         },
         {
             key: "GtProjectLogConsequenceOWSMTXT",
-            fieldName: "GtProjectLogConsequenceOWSMTXT",
+            fieldName: "Consequence",
             name: "Konsekvens",
         },
         {
             key: "GtProjectLogRecommendationOWSMTXT",
-            fieldName: "GtProjectLogRecommendationOWSMTXT",
+            fieldName: "Recommendation",
             name: "Anbefaling",
         },
         {
             key: "GtProjectLogActorsOWSCHCM",
-            fieldName: "GtProjectLogActorsOWSCHCM",
+            fieldName: "Actors",
             name: "Aktører",
         }].map(col => ({
             ...col,
@@ -113,8 +113,8 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
      * Fetch data using sp-pnp-js search
      */
     private fetchData = () => new Promise<Partial<IExperienceLogState>>((resolve, reject) => {
-        Search.query(this.props.columns.map(col => col.fieldName))
-            .then(response => resolve({ logItems: response.primarySearchResults }))
+        Search.query(this.props.columns.map(col => col.key))
+            .then(response => resolve({ logItems: response.primarySearchResults.map(r => new LogElement(r)) }))
             .catch(reject);
     })
 };
