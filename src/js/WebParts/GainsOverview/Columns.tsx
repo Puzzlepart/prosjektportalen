@@ -186,7 +186,10 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         case "LatestPercentage": {
             if (LatestPercentage && LatestPercentage !== 0) {
                 return (<div style={{ position: "relative" }}>
-                    {LatestPercentage} % <TrendIcon latestVal={LatestValue} prevVal={PreviousValue} shouldIncrease={ValueShouldIncrese} />
+                    {LatestPercentage} % <TrendIcon
+                        latestVal={LatestValue}
+                        prevVal={PreviousValue}
+                        shouldIncrease={ValueShouldIncrese} />
                 </div>);
             } else {
                 return null;
@@ -195,7 +198,10 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         case "LatestValue": {
             if (LatestValue && LatestValue !== 0) {
                 return (<div>
-                    {LatestValue} <TrendIcon latestVal={LatestValue} prevVal={PreviousValue} shouldIncrease={ValueShouldIncrese} />
+                    {LatestValue} <TrendIcon
+                        latestVal={LatestValue}
+                        prevVal={PreviousValue}
+                        shouldIncrease={ValueShouldIncrese} />
                 </div>);
             } else {
                 return null;
