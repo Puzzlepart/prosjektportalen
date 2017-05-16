@@ -116,7 +116,7 @@
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
             <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="GtProjectManager" Required="true" />
             <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" Required="true" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" Required="true" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" Required="false" />
             <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
             <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" Required="false" />
@@ -134,7 +134,7 @@
             <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" Required="false" />
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" Required="false" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" Required="false" />
-            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="true" />
+            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="false" />
         </pnp:FieldRefs>
         <pnp:DocumentTemplate TargetName="/_layouts/15/spcf.aspx" />
     </pnp:ContentType>

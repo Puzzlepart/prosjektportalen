@@ -892,6 +892,9 @@
   <data name="SiteFields_GtMeasurementComment_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtOverallStatus_Description" xml:space="preserve">
+    <value>Overordnet status for prosjektet</value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
