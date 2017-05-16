@@ -1,4 +1,8 @@
-import * as Subsite from "./Subsite";
+import {
+    CreateWeb,
+    DoesWebExist,
+    ICreateWebResult,
+} from "./Subsite";
 import { IProjectModel } from "../Model/ProjectModel";
 import * as Data from "./Data";
 import * as Template from "./Template";
@@ -25,8 +29,8 @@ const PROGRESS_MAP = {
  */
 const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progress: string) => void) => new Promise<string>((resolve, reject) => {
     onProgress(__("ProvisionWeb_CreatingWeb"), "");
-    Subsite.Create(project.Title, project.Url, project.Description, project.InheritPermissions)
-        .then((result: Subsite.ICreateResult) => {
+    CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
+        .then((result: ICreateWebResult) => {
             onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
             Template.Apply(result.web, true, progress => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[progress]))
                 .then(() => {
@@ -43,5 +47,6 @@ const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progres
         .catch(reject);
 });
 
+export { DoesWebExist };
 
 export default ProvisionWeb;

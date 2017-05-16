@@ -3,6 +3,7 @@ import { IProjectModel } from "../../../Model";
 
 interface INewProjectDialogState {
     model: IProjectModel;
+    errorMessages?: any;
     showAdvancedSettings: boolean;
     urlInputEnabled: boolean;
     formValid: boolean;

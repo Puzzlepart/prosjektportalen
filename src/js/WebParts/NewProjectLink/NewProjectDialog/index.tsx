@@ -1,5 +1,5 @@
 import * as React from "react";
-import ProvisionWeb from "../../../Provision";
+import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
     Dialog,
@@ -39,6 +39,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: "",
                 InheritPermissions: false,
             },
+            errorMessages: {},
             showCreationModal: false,
             provisioning: {
                 isCreating: false,
@@ -104,31 +105,24 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param descPlaceholder Placeholder for description field
      * @param urlPlaceholder Placeholder for url field
      */
-    private renderForm = ({ model, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
+    private renderForm = ({ model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
         return <div>
             <TextField
                 placeholder={titlePlaceHolder}
-                onChanged={this.onTitleChanged} />
+                onChanged={newValue => this.onFormChange("Title", newValue)}
+                errorMessage={errorMessages.Title} />
             <TextField
                 placeholder={descPlaceholder}
                 multiline
                 autoAdjustHeight
-                onChanged={newValue => this.setState(prevState => ({
-                    model: {
-                        ...prevState.model,
-                        Description: newValue,
-                    },
-                }))}
+                onChanged={newValue => this.onFormChange("Description", newValue)}
+                errorMessage={errorMessages.Description}
             />
             <TextField
                 placeholder={urlPlaceholder}
                 value={model.Url}
-                onChanged={newValue => this.setState(prevState => ({
-                    model: {
-                        ...prevState.model,
-                        Url: newValue,
-                    },
-                }))}
+                onChanged={newValue => this.onFormChange("Url", newValue)}
+                errorMessage={errorMessages.Url}
                 disabled={!urlInputEnabled} />
         </div>;
     }
@@ -206,20 +200,64 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     }
 
     /**
-     * On title changed
+     * On form change
      *
+     * @param input Input (key) that was changed
      * @param newTitleValue New Title value
      */
-    private onTitleChanged = (newTitleValue: string): void => {
-        const url = Util.generateUrl(newTitleValue);
-        this.setState(prevState => ({
-            formValid: newTitleValue.length >= this.props.titleMinLength,
-            model: {
-                ...prevState.model,
-                Title: newTitleValue,
-                Url: url,
-            },
-        }));
+    private onFormChange = (input: string, newValue: string): void => {
+        const {
+            model,
+            errorMessages,
+         } = this.state;
+
+        switch (input) {
+            case "Title": {
+                const url = Util.generateUrl(newValue);
+                DoesWebExist(url).then(doesExist => {
+                    this.setState({
+                        errorMessages: {
+                            ...errorMessages,
+                            Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                        },
+                        formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
+                        model: {
+                            ...model,
+                            Title: newValue,
+                            Url: url,
+                        },
+                    });
+                });
+            }
+                break;
+            case "Url": {
+                DoesWebExist(newValue)
+                    .then(doesExist => {
+                        this.setState({
+                            errorMessages: {
+                                ...errorMessages,
+                                Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                            },
+                            formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
+                            model: {
+                                ...model,
+                                Url: newValue,
+                            },
+                        });
+                    });
+            }
+                break;
+            case "Description": {
+                this.setState({
+                    formValid: (model.Title.length >= this.props.titleMinLength),
+                    model: {
+                        ...model,
+                        Description: newValue,
+                    },
+                });
+            }
+                break;
+        }
     }
 
     /**
