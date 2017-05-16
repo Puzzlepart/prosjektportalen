@@ -15,11 +15,6 @@ function isExternal(module) {
 
 module.exports = () => {
     const plugins = [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors',
-            filename: "pp.vendor.js",
-            minChunks: (module) => isExternal(module)
-        }),
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
