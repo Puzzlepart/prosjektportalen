@@ -23,22 +23,25 @@ const PROGRESS_MAP = {
  *
  * @returns Redirect URL
  */
-const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progress: string) => void): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
-        onProgress(__("ProvisionWeb_CreatingWeb"), "");
-        Subsite.Create(project.Title, project.Url, project.Description, project.InheritPermissions)
-            .then((result: Subsite.ICreateResult) => {
-                onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
-                Template.Apply(result.web, true, progress => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[progress])).then(() => {
+const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progress: string) => void) => new Promise<string>((resolve, reject) => {
+    onProgress(__("ProvisionWeb_CreatingWeb"), "");
+    Subsite.Create(project.Title, project.Url, project.Description, project.InheritPermissions)
+        .then((result: Subsite.ICreateResult) => {
+            onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+            Template.Apply(result.web, true, progress => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[progress]))
+                .then(() => {
                     Data.CopyListContents(result.url, project.IncludeContent, msg => {
                         onProgress(__("ProvisionWeb_CopyListContent"), msg);
-                    }).then(() => {
-                        resolve(result.redirectUrl);
-                    }).catch(reject);
-                }).catch(reject);
-            }).catch(reject);
-    });
-};
+                    })
+                        .then(() => {
+                            resolve(result.redirectUrl);
+                        })
+                        .catch(reject);
+                })
+                .catch(reject);
+        })
+        .catch(reject);
+});
 
 
 export default ProvisionWeb;

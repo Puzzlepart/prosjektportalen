@@ -1,5 +1,8 @@
 import * as React from "react";
-import { ProgressIndicator } from "office-ui-fabric-react";
+import {
+    Icon,
+    ProgressIndicator,
+} from "office-ui-fabric-react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { Async } from "office-ui-fabric-react/lib/Utilities";
 import ICreationModalProps from "./ICreationModalProps";
@@ -13,6 +16,9 @@ const RESTART_WAIT_TIME: number = 2000;
  * Creation Modal
  */
 export default class CreationModal extends React.Component<ICreationModalProps, ICreationModalState> {
+    public static defaultProps: Partial<ICreationModalProps> = {
+        isDarkOverlay: true,
+    };
     private _interval: number;
     private _async: Async;
 
@@ -34,18 +40,23 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
         return (
             <Modal
                 isOpen={this.props.show}
-                isBlocking={true}
-                isDarkOverlay={true}
+                onDismiss={this.props.onDismiss}
+                isBlocking={this.props.isBlocking}
+                isDarkOverlay={this.props.isDarkOverlay}
                 containerClassName="pp-modal"
             >
                 <div style={{ padding: 50 }}>
                     <div
                         style={{ marginBottom: 25 }}
                         className="ms-font-xl">{this.props.title}</div>
-                    <ProgressIndicator
-                        label={this.props.progressLabel}
-                        description={this.props.progressDescription}
-                        percentComplete={this.state.percentComplete} />
+                    {this.props.error
+                        ? <div><Icon iconName="Error" /> {__("CreationModal_Error")}</div>
+                        :
+                        <ProgressIndicator
+                            label={this.props.progressLabel}
+                            description={this.props.progressDescription}
+                            percentComplete={this.state.percentComplete} />
+                    }
                 </div>
             </Modal>
         );
@@ -72,6 +83,9 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
         this.setState({
             percentComplete: 0,
         });
+        if (this.props.error) {
+            this._async.dispose();
+        }
         this._interval = this._async.setInterval(() => {
             let percentComplete = this.state.percentComplete + INTERVAL_INCREMENT;
             if (percentComplete >= 1.0) {

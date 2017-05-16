@@ -39,6 +39,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: "",
                 InheritPermissions: false,
             },
+            showCreationModal: false,
             provisioning: {
                 isCreating: false,
                 step: "",
@@ -66,13 +67,17 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Renders the component
      */
     public render(): JSX.Element {
-        if (this.state.provisioning.isCreating) {
+        if (this.state.showCreationModal) {
             return (
                 <CreationModal
                     show={true}
+                    onDismiss={_ => this.setState({ showCreationModal: false })}
                     title={String.format(__("CreationModal_Title"), this.state.model.Title)}
+                    isBlocking={!this.state.provisioning.hasOwnProperty("error")}
+                    isDarkOverlay={!this.state.provisioning.hasOwnProperty("error")}
                     progressLabel={this.state.provisioning.step}
-                    progressDescription={this.state.provisioning.progress} />
+                    progressDescription={this.state.provisioning.progress}
+                    error={this.state.provisioning.error} />
             );
         }
         return (
@@ -233,8 +238,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         this.setState({
             provisioning: {
                 isCreating: true,
-                step: "",
-                progress: "",
             },
         }, () => {
             ProvisionWeb(this.state.model, (step, progress) => {
@@ -249,15 +252,12 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 .then(redirectUrl => {
                     document.location.href = redirectUrl;
                 })
-                .catch(message => {
+                .catch(error => {
                     this.setState({
                         provisioning: {
                             isCreating: false,
-                            step: "",
-                            progress: "",
+                            error: error,
                         },
-                    }, () => {
-                        Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
                     });
                 });
         });
