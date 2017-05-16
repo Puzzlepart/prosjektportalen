@@ -14,7 +14,7 @@ const SCRIPTS: IScript[] = [
     },
 ];
 
-namespace PP.Loader {
+export namespace PP.Loader {
     function injectScripts(siteUrl: string, version: string): void {
         const scriptElements: HTMLScriptElement[] = SCRIPTS.map(({ fileName, appendVersion }) => {
             let element = document.createElement("script");

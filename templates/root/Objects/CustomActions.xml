@@ -1,7 +1,7 @@
 <pnp:CustomActions 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:SiteCustomActions>
-        <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
+        <pnp:CustomAction Name="pp.loader.js" Location="ScriptLink" Sequence="1" ScriptBlock="
             SP.SOD.registerSod('pp.loader.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.loader.js?rev=[version]');
             EnsureScriptFunc('pp.loader.js', 'PP.Loader', function() {
                 PP.Loader.loadBundle('{parameter:AssetsSiteUrl}', '[version]');
