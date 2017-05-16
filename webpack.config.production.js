@@ -54,11 +54,13 @@ module.exports = () => {
     ]
     let config = {
         cache: true,
-        entry: './lib/js/pp.main.js',
-        output: {
-            
+        entry: {
+            main: './lib/js/pp.main.js',
+            loader: './lib/js/pp.loader.js'
+        },
+        output: {            
             path: path.join(__dirname, "dist/js"),
-            filename: "pp.main.js",
+            filename: "pp.[name].js",
             libraryTarget: "umd",
         },
         devtool: "source-map",
