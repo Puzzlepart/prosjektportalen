@@ -50,7 +50,7 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
                     <Icon { ...iconProps } />
                     <span>{__("NewProjectForm_Header")}</span>
                 </a>
-                {this.renderDialog()}
+                {this.renderDialog(this.state)}
             </div>
         );
     }
@@ -58,11 +58,11 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     /**
      * Renders the dialog
      */
-    private renderDialog = () => {
+    private renderDialog = ({ showDialog }: INewProjectLinkState) => {
         return (
             <NewProjectDialog
                 dialogProps={{
-                    isOpen: this.state.showDialog,
+                    isOpen: showDialog,
                     type: DialogType.largeHeader,
                     isDarkOverlay: true,
                     isBlocking: false,
