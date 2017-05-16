@@ -931,6 +931,9 @@
   <data name="CreationModal_Title" xml:space="preserve">
     <value>Creating project site for {0}</value>
   </data>
+  <data name="CreationModal_Error" xml:space="preserve">
+    <value>An error occured creating the project site. Please try again later.</value>
+  </data>
   <data name="ProvisionWeb_CreatingWeb" xml:space="preserve">
     <value>Creating SharePoint site</value>
   </data>

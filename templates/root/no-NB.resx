@@ -928,6 +928,9 @@
   <data name="CreationModal_Title" xml:space="preserve">
     <value>Oppretter prosjektområde for {0}</value>
   </data>
+  <data name="CreationModal_Error" xml:space="preserve">
+    <value>Det skjedde en feil under opprettelse av prosjektområde. Vennligst prøv igjen senere.</value>
+  </data>
   <data name="ProvisionWeb_CreatingWeb" xml:space="preserve">
     <value>Oppretter SharePoint-område</value>
   </data>
