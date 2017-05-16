@@ -2,7 +2,6 @@ import * as Subsite from "./Subsite";
 import { IProjectModel } from "../Model/ProjectModel";
 import * as Data from "./Data";
 import * as Template from "./Template";
-import * as Util from "../Util";
 
 /**
  * Maps the current handler to a text explaining the current handlers action
@@ -16,40 +15,28 @@ const PROGRESS_MAP = {
     PropertyBagEntries: __("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
-let [DlgTitle, DlgMessage] = __("ProvisionWeb_CreatingWeb").split(",");
-const waitDlg = new Util.WaitDialog(DlgTitle, DlgMessage, 120, 550);
-
 /**
  * Provisions a project web
  *
  * @param model The project model
+ * @param onProgress Progress callback function
  *
  * @returns Redirect URL
  */
-const ProvisionWeb = (project: IProjectModel): Promise<string> => {
+const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progress: string) => void): Promise<string> => {
     return new Promise<string>((resolve, reject) => {
-        waitDlg.start();
+        onProgress(__("ProvisionWeb_CreatingWeb"), "");
         Subsite.Create(project.Title, project.Url, project.Description, project.InheritPermissions)
             .then((result: Subsite.ICreateResult) => {
-                waitDlg.update(__("ProvisionWeb_ApplyingTemplate"));
-                Template.Apply(result.web, true, progress => waitDlg.updateMessage(PROGRESS_MAP[progress])).then(() => {
+                onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+                Template.Apply(result.web, true, progress => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[progress])).then(() => {
                     Data.CopyListContents(result.url, project.IncludeContent, msg => {
-                        waitDlg.update(__("ProvisionWeb_CopyListContent"), msg);
+                        onProgress(__("ProvisionWeb_CopyListContent"), msg);
                     }).then(() => {
-                        waitDlg.end();
                         resolve(result.redirectUrl);
-                    }).catch(_ => {
-                        waitDlg.end();
-                        reject(_);
-                    });
-                }).catch(_ => {
-                    waitDlg.end();
-                    reject(_);
-                });
-            }).catch(_ => {
-                waitDlg.end();
-                reject(_);
-            });
+                    }).catch(reject);
+                }).catch(reject);
+            }).catch(reject);
     });
 };
 
