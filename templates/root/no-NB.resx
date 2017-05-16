@@ -925,7 +925,7 @@
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
-  <data name="NewProjectForm_CreatingProject" xml:space="preserve">
+  <data name="CreationModal_Title" xml:space="preserve">
     <value>Oppretter prosjektområde for {0}</value>
   </data>
   <data name="ProvisionWeb_CreatingWeb" xml:space="preserve">

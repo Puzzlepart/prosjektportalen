@@ -70,7 +70,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             return (
                 <CreationModal
                     show={true}
-                    title={String.format(__("NewProjectForm_CreatingProject"), this.state.model.Title)}
+                    title={String.format(__("CreationModal_Title"), this.state.model.Title)}
                     progressLabel={this.state.provisioning.step}
                     progressDescription={this.state.provisioning.progress} />
             );
