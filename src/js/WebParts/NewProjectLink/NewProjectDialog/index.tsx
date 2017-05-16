@@ -67,10 +67,10 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Renders the component
      */
     public render(): JSX.Element {
-        if (this.state.provisioning.error) {
-            return null;
-        }
         if (this.state.showCreationModal) {
+            if (this.state.provisioning.error) {
+                return null;
+            }
             return (
                 <CreationModal
                     title={String.format(__("CreationModal_Title"), this.state.model.Title)}
@@ -247,6 +247,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 })
                 .catch(error => {
                     this.setState({
+                        showCreationModal: false,
                         provisioning: {
                             isCreating: false,
                             error: error,
