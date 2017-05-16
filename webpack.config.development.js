@@ -13,7 +13,7 @@ function isExternal(module) {
     return userRequest.indexOf('node_modules') >= 0;
 }
 
-module.exports = (env = "development", devtool = "source-map") => {
+module.exports = (devtool = "source-map") => {
     const plugins = [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors',
@@ -26,7 +26,7 @@ module.exports = (env = "development", devtool = "source-map") => {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify(env)
+                NODE_ENV: JSON.stringify('development')
             }
         })];
     let rules = [
@@ -44,23 +44,13 @@ module.exports = (env = "development", devtool = "source-map") => {
                     ]
                 }
             },
-            exclude: env === "development" ? [
+            exclude: [
                 path.join(__dirname, "node_modules")
-            ] : []
+            ]
         },
         { test: /\.txt$/, use: 'raw-loader' },
         { test: /\.json$/, loader: "json-loader" }
     ]
-    if (env === "production") {
-        plugins.push(new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: true
-            },
-            beautify: false,
-            comments: false,
-        }));
-    }
     let config = {
         cache: true,
         entry: './lib/js/pp.main.js',
