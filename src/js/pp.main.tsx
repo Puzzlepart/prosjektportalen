@@ -17,9 +17,7 @@ pnp.setup({
 });
 
 ExecuteOrDelayUntilBodyLoaded(() => {
-    ExecuteOrDelayUntilScriptLoaded(() => {
-        Forms.Initialize();
-        WebParts.Render();
-        new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
-    }, "sp.js");
+    Forms.Initialize();
+    WebParts.Render();
+    new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
 });
