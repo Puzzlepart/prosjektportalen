@@ -12,6 +12,7 @@ import {
 import * as Util from "../../../Util";
 import INewProjectDialogProps from "./INewProjectDialogProps";
 import INewProjectDialogState from "./INewProjectDialogState";
+import CreationModal from "./CreationModal";
 
 /**
  * New Project dialog
@@ -38,6 +39,11 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: "",
                 InheritPermissions: false,
             },
+            provisioning: {
+                isCreating: false,
+                step: "",
+                progress: "",
+            },
         };
     }
 
@@ -60,6 +66,15 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Renders the component
      */
     public render(): JSX.Element {
+        if (this.state.provisioning.isCreating) {
+            return (
+                <CreationModal
+                    show={true}
+                    title={String.format(__("NewProjectForm_CreatingProject"), this.state.model.Title)}
+                    progressLabel={this.state.provisioning.step}
+                    progressDescription={this.state.provisioning.progress} />
+            );
+        }
         return (
             <Dialog
                 isOpen={this.props.dialogProps.isOpen}
@@ -214,13 +229,37 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Submit handler
      */
     private onSubmit = (event): void => {
-        this.props.dialogProps.onDismiss(event);
-        ProvisionWeb(this.state.model)
-            .then(redirectUrl => {
-                document.location.href = redirectUrl;
+        event.preventDefault();
+        this.setState({
+            provisioning: {
+                isCreating: true,
+                step: "",
+                progress: "",
+            },
+        }, () => {
+            ProvisionWeb(this.state.model, (step, progress) => {
+                this.setState({
+                    provisioning: {
+                        isCreating: true,
+                        step: step,
+                        progress: progress,
+                    },
+                });
             })
-            .catch(message => {
-                Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
-            });
+                .then(redirectUrl => {
+                    document.location.href = redirectUrl;
+                })
+                .catch(message => {
+                    this.setState({
+                        provisioning: {
+                            isCreating: false,
+                            step: "",
+                            progress: "",
+                        },
+                    }, () => {
+                        Util.userMessage(__("ProvisionWeb_Failed"), `<div>${message}</div>`, "red", 3000);
+                    });
+                });
+        });
     }
 }

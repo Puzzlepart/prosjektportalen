@@ -7,6 +7,9 @@ interface INewProjectDialogState {
     urlInputEnabled: boolean;
     formValid: boolean;
     listDataConfig?: { [key: string]: ListDataConfig.IListConfig };
+    provisioning: {
+        isCreating: boolean; step: string; progress: string;
+    };
 }
 
 export default INewProjectDialogState;
