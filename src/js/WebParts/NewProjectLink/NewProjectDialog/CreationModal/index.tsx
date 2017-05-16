@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-    Icon,
-    ProgressIndicator,
-} from "office-ui-fabric-react";
+import { ProgressIndicator } from "office-ui-fabric-react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { Async } from "office-ui-fabric-react/lib/Utilities";
 import ICreationModalProps from "./ICreationModalProps";
