@@ -67,17 +67,17 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Renders the component
      */
     public render(): JSX.Element {
+        if (this.state.provisioning.error) {
+            return null;
+        }
         if (this.state.showCreationModal) {
             return (
                 <CreationModal
-                    show={true}
-                    onDismiss={_ => this.setState({ showCreationModal: false })}
                     title={String.format(__("CreationModal_Title"), this.state.model.Title)}
-                    isBlocking={!this.state.provisioning.hasOwnProperty("error")}
-                    isDarkOverlay={!this.state.provisioning.hasOwnProperty("error")}
+                    isBlocking={true}
+                    isDarkOverlay={true}
                     progressLabel={this.state.provisioning.step}
-                    progressDescription={this.state.provisioning.progress}
-                    error={this.state.provisioning.error} />
+                    progressDescription={this.state.provisioning.progress} />
             );
         }
         return (
@@ -90,8 +90,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 subText={this.props.dialogProps.subText}
                 className={this.props.dialogProps.className}
                 onDismiss={this.props.dialogProps.onDismiss}>
-                {this.renderForm()}
-                {this.renderAdvancedSection()}
+                {this.renderForm(this.state)}
+                {this.renderAdvancedSection(this.state)}
                 {this.renderFooter()}
             </Dialog >
         );
@@ -104,12 +104,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param descPlaceholder Placeholder for description field
      * @param urlPlaceholder Placeholder for url field
      */
-    private renderForm = (titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
-        const {
-            model,
-            urlInputEnabled,
-        } = this.state;
-
+    private renderForm = ({ model, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
         return <div>
             <TextField
                 placeholder={titlePlaceHolder}
@@ -141,12 +136,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * Render advanced section
      */
-    private renderAdvancedSection = () => {
-        const {
-            showAdvancedSettings,
-            listDataConfig,
-        } = this.state;
-
+    private renderAdvancedSection = ({ showAdvancedSettings, listDataConfig }: INewProjectDialogState) => {
         return (
             <div>
                 <Toggle
@@ -177,13 +167,15 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Render footer
      */
     private renderFooter = () => {
-        return <DialogFooter>
-            <Button
-                buttonType={ButtonType.primary}
-                onClick={this.onSubmit}
-                disabled={!this.state.formValid}>{__("String_Create")}</Button>
-            <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
-        </DialogFooter>;
+        return (
+            <DialogFooter>
+                <Button
+                    buttonType={ButtonType.primary}
+                    onClick={this.onSubmit}
+                    disabled={!this.state.formValid}>{__("String_Create")}</Button>
+                <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
+            </DialogFooter>
+        );
     }
 
     /**
@@ -236,6 +228,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     private onSubmit = (event): void => {
         event.preventDefault();
         this.setState({
+            showCreationModal: true,
             provisioning: {
                 isCreating: true,
             },

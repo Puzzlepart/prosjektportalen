@@ -16,9 +16,6 @@ const RESTART_WAIT_TIME: number = 2000;
  * Creation Modal
  */
 export default class CreationModal extends React.Component<ICreationModalProps, ICreationModalState> {
-    public static defaultProps: Partial<ICreationModalProps> = {
-        isDarkOverlay: true,
-    };
     private _interval: number;
     private _async: Async;
 
@@ -39,8 +36,7 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
     public render(): JSX.Element {
         return (
             <Modal
-                isOpen={this.props.show}
-                onDismiss={this.props.onDismiss}
+                isOpen={true}
                 isBlocking={this.props.isBlocking}
                 isDarkOverlay={this.props.isDarkOverlay}
                 containerClassName="pp-modal"
@@ -49,14 +45,10 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
                     <div
                         style={{ marginBottom: 25 }}
                         className="ms-font-xl">{this.props.title}</div>
-                    {this.props.error
-                        ? <div><Icon iconName="Error" /> {__("CreationModal_Error")}</div>
-                        :
-                        <ProgressIndicator
-                            label={this.props.progressLabel}
-                            description={this.props.progressDescription}
-                            percentComplete={this.state.percentComplete} />
-                    }
+                    <ProgressIndicator
+                        label={this.props.progressLabel}
+                        description={this.props.progressDescription}
+                        percentComplete={this.state.percentComplete} />
                 </div>
             </Modal>
         );
@@ -83,9 +75,6 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
         this.setState({
             percentComplete: 0,
         });
-        if (this.props.error) {
-            this._async.dispose();
-        }
         this._interval = this._async.setInterval(() => {
             let percentComplete = this.state.percentComplete + INTERVAL_INCREMENT;
             if (percentComplete >= 1.0) {
