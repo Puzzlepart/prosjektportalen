@@ -61,13 +61,13 @@ module.exports = (devtool = "source-map") => {
         },
         devtool: devtool,
         stats: {
-            hash: false,
-            timing: false,
-            assets: false,
-            chunks: false,
-            modules: false,
+            hash: true,
+            timing: true,
+            assets: true,
+            chunks: true,
+            modules: true,
             reasons: true,
-            children: false
+            children: true
         },
         resolve: {
             extensions: ['.jsx', '.js', '.json', '.txt']
