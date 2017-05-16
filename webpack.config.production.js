@@ -3,16 +3,6 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-function isExternal(module) {
-    var userRequest = module.userRequest;
-
-    if (typeof userRequest !== 'string') {
-        return false;
-    }
-
-    return userRequest.indexOf('node_modules') >= 0;
-}
-
 module.exports = () => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
@@ -55,10 +45,10 @@ module.exports = () => {
     let config = {
         cache: true,
         entry: {
-            main: './lib/js/pp.main.js',
+            main: ['babel-polyfill', './lib/js/pp.main.js'],
             loader: './lib/js/pp.loader.js'
         },
-        output: {            
+        output: {
             path: path.join(__dirname, "dist/js"),
             filename: "pp.[name].js",
             libraryTarget: "umd",

@@ -49,7 +49,7 @@ module.exports = (devtool = "source-map") => {
     let config = {
         cache: true,
         entry: {
-            main: './lib/js/pp.main.js',
+            main: ['babel-polyfill', './lib/js/pp.main.js'],
             loader: './lib/js/pp.loader.js'
         },
         output: {
