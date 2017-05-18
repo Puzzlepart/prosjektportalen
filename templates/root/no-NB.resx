@@ -1090,6 +1090,9 @@
   <data name="String_NoGrouping" xml:space="preserve">
     <value>Ingen gruppering</value>
   </data>
+  <data name="String_Project" xml:space="preserve">
+    <value>Prosjekt</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
