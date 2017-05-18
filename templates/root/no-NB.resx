@@ -956,7 +956,7 @@
     <value>Kopierer dokumenter fra biblioteket {0} til {1}.</value>
   </data>
   <data name="ProvisionWeb_CopyItems" xml:space="preserve">
-    <value>Kopierer {0} listeelementer fra listen {1} til {2}'</value>
+    <value>Kopierer {0} listeelementer fra listen {1} til {2}.</value>
   </data>
   <data name="ProvisionWeb_Failed" xml:space="preserve">
     <value>Det skjedde en feil ved opprettelse av nytt prosjektområde</value>

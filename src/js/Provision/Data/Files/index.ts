@@ -1,6 +1,4 @@
 import {
-    Logger,
-    LogLevel,
     Web,
     FileAddResult,
 } from "sp-pnp-js";

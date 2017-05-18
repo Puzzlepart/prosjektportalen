@@ -1,3 +1,5 @@
+import { IListConfig } from "../Config";
+
 export interface CopyContext {
     CamlQuery: SP.CamlQuery;
     Source: {
