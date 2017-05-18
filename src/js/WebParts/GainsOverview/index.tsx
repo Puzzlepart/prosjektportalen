@@ -49,8 +49,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      * Component did mount
      */
     public componentDidMount(): void {
-        let { dataSource } = this.props;
-        Data.retrieveFromSource(dataSource).then(data => this.setState({ data: data, isLoading: false }));
+        Data.retrieveFromSource(this.props.dataSource).then(data => this.setState({ data: data, isLoading: false }));
     }
 
     /**
@@ -106,34 +105,40 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         const items = [];
         const farItems = [];
 
-        const noGrouping = {
-            key: "NoGrouping",
-            name: __("String_NoGrouping"),
-        };
-        items.push({
-            key: "Group",
-            name: groupBy.name,
-            iconProps: { iconName: "GroupedList" },
-            itemType: ContextualMenuItemType.Header,
-            onClick: e => e.preventDefault(),
-            items: [
-                {
-                    ...noGrouping,
-                },
-                ...groupByOptions,
-            ].map(item => ({
-                ...item,
-                onClick: e => {
-                    e.preventDefault();
-                    this.setState({ groupBy: item });
-                },
-            })),
-        });
-
-        return <CommandBar
-            items={items}
-            farItems={farItems}
-        />;
+        if (groupByOptions.length > 0) {
+            const noGrouping = {
+                key: "NoGrouping",
+                name: __("String_NoGrouping"),
+            };
+            items.push({
+                key: "Group",
+                name: groupBy.name,
+                iconProps: { iconName: "GroupedList" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                items: [
+                    {
+                        ...noGrouping,
+                    },
+                    ...groupByOptions,
+                ].map(item => ({
+                    ...item,
+                    onClick: e => {
+                        e.preventDefault();
+                        this.setState({ groupBy: item });
+                    },
+                })),
+            });
+        }
+        if (items.length > 0 || farItems.length > 0) {
+            return (
+                <CommandBar
+                    items={items}
+                    farItems={farItems}
+                />
+            );
+        }
+        return null;
     }
 
     /**
