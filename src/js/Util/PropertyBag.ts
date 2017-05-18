@@ -1,14 +1,14 @@
-const GetAllProperties = (): Promise<any> => {
-    return new Promise<void>((resolve, reject) => {
-        ExecuteOrDelayUntilScriptLoaded(() => {
-            let ctx = SP.ClientContext.get_current(),
-                pb = ctx.get_web().get_allProperties();
-            ctx.load(pb);
-            ctx.executeQueryAsync(() => {
-                resolve(pb.get_fieldValues());
-            }, reject);
-        }, "sp.js");
-    });
-};
+export const GetAllProperties = (url = _spPageContextInfo.siteAbsoluteUrl) => new Promise<SP.PropertyValues>((resolve, reject) => {
+    const ctx = new SP.ClientContext(url);
+    const propertyBag = ctx.get_web().get_allProperties();
+    ctx.load(propertyBag);
+    ctx.executeQueryAsync(() => {
+        resolve(propertyBag);
+    }, reject);
+});
 
-export { GetAllProperties };
+export const GetProperty = (key: string, url = _spPageContextInfo.siteAbsoluteUrl) => new Promise<string>((resolve, reject) => {
+    GetAllProperties(url)
+        .then(properties => resolve(properties.get_item(key)))
+        .catch(reject);
+});

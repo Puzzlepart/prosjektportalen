@@ -1,102 +1,72 @@
-import { default as pnp, Util, Logger, LogLevel } from "sp-pnp-js";
-import * as object_omit from "object.omit";
+import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
+import { sp, Logger, LogLevel } from "sp-pnp-js";
+import { Schema } from "sp-pnp-provisioning/lib/schema";
+import IProgressCallback from "../IProgressCallback";
+
+export interface IExtension {
+    Title: string;
+    LinkFilename: string;
+    FileRef: string;
+    data?: Schema;
+}
+
 
 /**
  * Loads extension JSON
  *
  * @param file The extension file
  */
-const LoadExtension = (file): Promise<any> => new Promise<any>((resolve, reject) => {
-    pnp.sp.web.getFileByServerRelativeUrl(file.FileRef).getText().then(textContent => {
-        let json = null;
-        try {
-            json = JSON.parse(textContent);
-        } catch (e) {
-            Logger.log({ message: `Extensions in file '${file.LinkFilename}' contains invalid JSON.`, data: { Text: textContent }, level: LogLevel.Warning });
-        }
-        resolve(Object.assign(file, { JSON: json }));
-    }, reject);
+const LoadExtension = (extension: IExtension): Promise<IExtension> => new Promise<any>((resolve, reject) => {
+    sp.web
+        .getFileByServerRelativeUrl(extension.FileRef)
+        .getText()
+        .then(fileContents => {
+            let data = null;
+            try {
+                data = JSON.parse(fileContents);
+            } catch (e) {
+                Logger.log({
+                    message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`,
+                    data: { Text: fileContents },
+                    level: LogLevel.Warning,
+                });
+            }
+            resolve({
+                ...extension,
+                data,
+            });
+        }, reject);
 });
 
 /**
- * Merge extensions with the template
- *
- * @param template The template
+ * Get extensions
  */
-export const MergeExtensions = (template) => new Promise<any>((resolve, reject) => {
-    pnp.sp.web.lists.getByTitle(__("Lists_Extensions_Title")).items.select("Title", "LinkFilename", "FileRef").filter("ExtensionEnabled eq 1").get().then(items => {
-        Promise.all(items.map(item => LoadExtension(item))).then((extensions: any[]) => {
-            extensions
-                .filter(({ JSON }) => JSON !== null)
-                .forEach(({ LinkFilename, JSON }) => {
-                    Object.keys(JSON).forEach(name => {
-                        let _ = JSON[name];
-                        Logger.log({ message: `Adding extensions from file '${LinkFilename}'.`, data: _, level: LogLevel.Info });
-                        switch (name) {
-                            /**
-                             * PropertyBagEntries, ComposedLook, WebSettings
-                             */
-                            case "PropertyBagEntries":
-                            case "ComposedLook":
-                            case "WebSettings": {
-                                template[name] = Object.assign(template[name], _);
-                            }
-                                break;
+const GetValidExtensions = (extensionLib = __("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
+    sp.web
+        .lists
+        .getByTitle(extensionLib)
+        .items
+        .select("Title", "LinkFilename", "FileRef")
+        .filter("ExtensionEnabled eq 1")
+        .get()
+        .then(items => {
+            Promise.all(items.map(item => LoadExtension(item)))
+                .then((extensions: any[]) => {
+                    const validExtensions = extensions.filter(ext => ext.data !== null);
+                    resolve(validExtensions);
+                })
+                .catch(_ => resolve([]));
+        })
+        .catch(_ => resolve([]));
+});
 
-                            /**
-                             * Lists
-                             */
-                            case "Lists": {
-                                template[name] = template[name] || [];
-                                _.forEach(extList => {
-                                    let index = template[name].map(list => list.Title).indexOf(extList.Title);
-                                    if (index !== -1) {
-                                        template[name][index] = Object.assign(template[name][index], extList);
-                                    } else {
-                                        template[name].push(extList);
-                                    }
-                                });
-                            }
-                                break;
-
-                            /**
-                             * Files
-                             */
-                            case "Files": {
-                                template[name] = template[name] || [];
-                                _.forEach(extFile => {
-                                    let index = template[name].map(file => file.Url).indexOf(extFile.Url);
-                                    if (index !== -1) {
-                                        template[name][index] = Object.assign(template[name][index], object_omit(extFile, "WebParts"));
-                                        if (Util.isArray(extFile.WebParts)) {
-                                            template[name][index].WebParts = template[name][index].WebParts.concat(extFile.WebParts);
-                                        }
-                                    } else {
-                                        template[name].push(extFile);
-                                    }
-                                });
-                            }
-                                break;
-
-                            /**
-                             * Navigation
-                             */
-                            case "Navigation": {
-                                template[name] = template[name] || {};
-                                template[name].TopNavigationBar = template[name].TopNavigationBar || [];
-                                template[name].QuickLaunch = template[name].QuickLaunch || [];
-                                if (Util.isArray(_.TopNavigationBar)) {
-                                    template[name].TopNavigationBar = _.TopNavigationBar;
-                                }
-                                if (Util.isArray(_.QuickLaunch)) {
-                                    template[name].QuickLaunch = _.QuickLaunch;
-                                }
-                            }
-                                break;
-                        }
-                    });
-                });
-            resolve(template);
-        }).catch(reject);
+export const ApplyExtensions = (web: any, onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    GetValidExtensions().then(extensions => {
+        extensions.reduce((chain, extension) => chain.then(___ => {
+            onProgress(__("ProvisionWeb_ApplyingExtensions"), extension.Title);
+            return new WebProvisioner(web).applyTemplate(extension.data);
+        }), Promise.resolve())
+            .then(resolve)
+            .catch(resolve);
     });
 });

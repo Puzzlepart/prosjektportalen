@@ -6,18 +6,10 @@ import {
 import { IProjectModel } from "../Model/ProjectModel";
 import * as Data from "./Data";
 import * as Template from "./Template";
+import * as Extensions from "./Extensions";
+import * as PropertyBag from "../Util/PropertyBag";
+import IProgressCallback from "./IProgressCallback";
 
-/**
- * Maps the current handler to a text explaining the current handlers action
- */
-const PROGRESS_MAP = {
-    Files: __("ProvisionWeb_Progress_Handler_Files"),
-    Lists: __("ProvisionWeb_Progress_Handler_Lists"),
-    Navigation: __("ProvisionWeb_Progress_Handler_Navigation"),
-    WebSettings: __("ProvisionWeb_Progress_Handler_WebSettings"),
-    ComposedLook: __("ProvisionWeb_Progress_Handler_ComposedLook"),
-    PropertyBagEntries: __("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
-};
 
 /**
  * Provisions a project web
@@ -27,18 +19,24 @@ const PROGRESS_MAP = {
  *
  * @returns Redirect URL
  */
-const ProvisionWeb = (project: IProjectModel, onProgress: (step: string, progress: string) => void) => new Promise<string>((resolve, reject) => {
+const ProvisionWeb = (project: IProjectModel, onProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
     onProgress(__("ProvisionWeb_CreatingWeb"), "");
     CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
         .then((result: ICreateWebResult) => {
-            onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
-            Template.Apply(result.web, true, progress => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[progress]))
-                .then(() => {
-                    Data.CopyListContents(result.url, project.IncludeContent, msg => {
-                        onProgress(__("ProvisionWeb_CopyListContent"), msg);
-                    })
+            PropertyBag.GetProperty("pp_assetssiteurl")
+                .then(assetsUrl => {
+                    onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+                    Template.Apply(result.web, assetsUrl, onProgress)
                         .then(() => {
-                            resolve(result.redirectUrl);
+                            Extensions.ApplyExtensions(result.web, onProgress)
+                                .then(() => {
+                                    Data.CopyListContents(result.url, project.IncludeContent, onProgress)
+                                        .then(() => {
+                                            resolve(result.redirectUrl);
+                                        })
+                                        .catch(reject);
+                                })
+                                .catch(reject);
                         })
                         .catch(reject);
                 })

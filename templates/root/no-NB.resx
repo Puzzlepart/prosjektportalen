@@ -946,6 +946,9 @@
   <data name="ProvisionWeb_ApplyingTemplate" xml:space="preserve">
     <value>Legger på mal</value>
   </data>
+  <data name="ProvisionWeb_ApplyingExtensions" xml:space="preserve">
+    <value>Legger på tilpasninger</value>
+  </data>
   <data name="ProvisionWeb_CopyListContent" xml:space="preserve">
     <value>Kopierer listeinnhold</value>
   </data>

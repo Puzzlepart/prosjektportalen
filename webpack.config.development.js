@@ -1,6 +1,5 @@
 var path = require("path"),
     webpack = require('webpack'),
-    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
@@ -24,9 +23,6 @@ module.exports = (devtool = "source-map") => {
             'process.env': {
                 NODE_ENV: JSON.stringify('development')
             }
-        }),
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'static'
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     let rules = [
