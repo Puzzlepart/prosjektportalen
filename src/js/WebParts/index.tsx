@@ -27,7 +27,7 @@ const wp_map: IWebPartMapping = {
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio />,
     "pp-gainsoverview": <GainsOverview />,
-    "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} groupByOptions={[{ name: "Prosjekt", key: "SiteTitle" }]} />,
+    "pp-gainsoverview-search": <GainsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />,
     "pp-projectstatus": <ProjectStatus />,
     "pp-experiencelog": <ExperienceLog />,
 };
