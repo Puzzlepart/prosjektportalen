@@ -1,5 +1,6 @@
 var path = require("path"),
     webpack = require('webpack'),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
@@ -13,6 +14,9 @@ module.exports = (minify = false) => {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
+        }),
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static'
         })];
     if (minify) {
         plugins.push(
@@ -53,7 +57,7 @@ module.exports = (minify = false) => {
         },
         output: {
             path: path.join(__dirname, "dist/js"),
-            filename: "pp.[name].js",
+            filename: minify ? "pp.[name].min.js" : "pp.[name].js",
             libraryTarget: "umd",
         },
         devtool: "source-map",

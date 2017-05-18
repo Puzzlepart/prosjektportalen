@@ -72,6 +72,7 @@
     "tslint": "^4.5.1",
     "typedoc": "^0.5.10",
     "typescript": "^2.1.6",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-bundle-analyzer": "^2.8.1"
   }
 }
