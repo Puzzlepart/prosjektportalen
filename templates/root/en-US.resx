@@ -953,10 +953,10 @@
     <value>Copies list contents</value>
   </data>
   <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
-    <value>Copying files from {0} to {1}.</value>
+    <value>Copying files from library {0} to {1}.</value>
   </data>
   <data name="ProvisionWeb_CopyItems" xml:space="preserve">
-    <value>Copying {0} items from {1} to {2}</value>
+    <value>Copying {0} items from list {1} to {2}</value>
   </data>
   <data name="ProvisionWeb_Failed" xml:space="preserve">
     <value>There was an error creating new project site</value>

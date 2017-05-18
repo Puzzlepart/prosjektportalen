@@ -14,13 +14,14 @@ import IProgressCallback from "../IProgressCallback";
  */
 const Copy = (destUrl: string, conf: IListConfig, onProgress: IProgressCallback): Promise<any> => new Promise<any>((resolve, reject) => {
     Util.ensureTaxonomy().then(() => {
-        onProgress(__("ProvisionWeb_CopyListContent"), conf.SourceList);
         if (conf.DestinationLibrary) {
-            CopyFiles(conf, destUrl).then(resolve, resolve);
+            CopyFiles(conf, destUrl, onProgress)
+                .then(resolve, resolve);
         } else {
-            CopyItems(conf, destUrl).then(resolve, resolve);
+            CopyItems(conf, destUrl, onProgress)
+                .then(resolve, resolve);
         }
-    }, reject);
+    });
 });
 
 /**
