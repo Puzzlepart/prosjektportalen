@@ -58,8 +58,8 @@ module.exports = (minify = false) => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', './lib/js/pp.main.js'],
-            loader: './lib/js/pp.loader.js'
+            main: ['babel-polyfill', './lib/js/index.js'],
+            loader: './lib/js/Loader.js'
         },
         output: {
             path: path.join(__dirname, "dist/js"),
