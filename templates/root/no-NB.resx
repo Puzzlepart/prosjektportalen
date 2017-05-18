@@ -952,6 +952,12 @@
   <data name="ProvisionWeb_CopyListContent" xml:space="preserve">
     <value>Kopierer listeinnhold</value>
   </data>
+  <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
+    <value>Kopierer dokumenter fra {0} til {1}.</value>
+  </data>
+  <data name="ProvisionWeb_CopyItems" xml:space="preserve">
+    <value>Kopierer {0} listeelementer fra '{1}' til '{2}'</value>
+  </data>
   <data name="ProvisionWeb_Failed" xml:space="preserve">
     <value>Det skjedde en feil ved opprettelse av nytt prosjektområde</value>
   </data>
