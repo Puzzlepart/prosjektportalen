@@ -17,7 +17,8 @@ module.exports = (minify = false) => {
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static'
-        })];
+        }),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     if (minify) {
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({

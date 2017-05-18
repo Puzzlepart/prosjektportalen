@@ -27,7 +27,8 @@ module.exports = (devtool = "source-map") => {
         }),
         new BundleAnalyzerPlugin({
             analyzerMode: 'static'
-        })];
+        }),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     let rules = [
         {
             test: /\.js$/,
