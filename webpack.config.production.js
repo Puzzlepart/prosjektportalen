@@ -3,7 +3,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = () => {
+module.exports = (minify = false) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -13,16 +13,19 @@ module.exports = () => {
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: true
-            },
-            beautify: false,
-            comments: false,
-            mangle: false
         })];
+    if (minify) {
+        plugins.push(
+            new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                    drop_console: true
+                },
+                beautify: false,
+                comments: false,
+                mangle: false
+            }));
+    }
     let rules = [
         {
             test: /\.js$/,
