@@ -21,7 +21,7 @@ import IGainsOverviewState from "./IGainsOverviewState";
  */
 export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
     public static defaultProps: Partial<IGainsOverviewProps> = {
-        groupByOptions: [{ name: "Prosjekt", key: "SiteTitle" }],
+        groupByOptions: [],
         searchProperty: "Title",
         dataSource: DataSource.List,
         showCommandBar: true,
