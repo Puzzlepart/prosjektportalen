@@ -32,7 +32,9 @@ Param(
     [switch]$SkipDefaultConfig,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
     [switch]$SkipTaxonomy,
-    [Parameter(Mandatory = $false, HelpMessage = "Environment")]
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
+    [switch]$HandlePnPLocally,
+    [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If HandlePnPLocally is set, this will be ignored")]
     [ValidateSet('SharePoint2013','SharePointOnline')]
     [string]$Environment = "SharePointOnline",
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
@@ -49,15 +51,16 @@ Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -E
 Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
 Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
 
-switch ($Environment) {
-    "SharePoint2013" {
-        Import-Module "$BundlePath\SharePointPnPPowerShell2013.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-    "SharePointOnline" {
-        Import-Module "$BundlePath\SharePointPnPPowerShellOnline.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+if (-not $HandlePnPLocally.IsPresent) {
+    switch ($Environment) {
+        "SharePoint2013" {
+            Import-Module "$BundlePath\SharePointPnPPowerShell2013.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+        }
+        "SharePointOnline" {
+            Import-Module "$BundlePath\SharePointPnPPowerShellOnline.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+        }
     }
 }
-
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
 Write-Host "Installing Prosjektportalen" -ForegroundColor Green
