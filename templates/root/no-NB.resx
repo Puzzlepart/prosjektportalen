@@ -248,7 +248,7 @@
     <value>Sjekkpunkt</value>
   </data>
   <data name="ContentTypes_Prosjektprodukt_Name" xml:space="preserve">
-    <value>Prosjektprodukt</value>
+    <value>Prosjektleveranse</value>
   </data>
   <data name="ContentTypes_Prosjektloggelement_Name" xml:space="preserve">
     <value>Prosjektloggelement</value>
