@@ -2,7 +2,7 @@ import { IFile } from "sp-pnp-provisioning/lib/schema";
 
 export const GainsOverview: IFile = {
     Folder: "SitePages",
-    Src: "{sitecollection}/Resources/SitePage.txt",
+    Src: "{sitecollection}/Resources/SitePage_OneColumn.txt",
     Url: "GainsOverview.aspx",
     Overwrite: true,
     Properties: {
