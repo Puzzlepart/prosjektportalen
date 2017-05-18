@@ -22,14 +22,19 @@ module.exports = (minify = false) => {
     if (minify) {
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({
+                mangle: true,
                 compress: {
-                    warnings: false,
-                    drop_console: true
+                    warnings: false, 
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                    screw_ie8: true
                 },
-                beautify: false,
-                comments: false,
-                mangle: false
-            }));
+                output: {
+                    comments: false,
+                },
+            }),
+            new webpack.optimize.AggressiveMergingPlugin());
     }
     let rules = [
         {
