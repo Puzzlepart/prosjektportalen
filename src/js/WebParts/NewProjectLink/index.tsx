@@ -1,8 +1,6 @@
 import * as React from "react";
-import {
-    DialogType,
-    Icon,
-} from "office-ui-fabric-react";
+import { DialogType } from "office-ui-fabric-react/lib/Dialog";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";

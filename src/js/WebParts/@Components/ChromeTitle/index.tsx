@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as jQuery from "jquery";
-import { Icon } from "office-ui-fabric-react";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../../Util";
 import IChromeTitleProps from "./IChromeTitleProps";
 import IChromeTitleState from "./IChromeTitleState";

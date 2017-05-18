@@ -4,8 +4,8 @@ import {
     Persona,
     PersonaSize,
     PersonaPresence,
-    Icon,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Persona";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { IColumnConfig } from "../Configuration";
 import { GetStatusProperties } from "../../ProjectStatus/Utils";
 

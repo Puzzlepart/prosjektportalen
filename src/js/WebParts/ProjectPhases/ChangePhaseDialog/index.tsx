@@ -1,6 +1,6 @@
 import * as React from "react";
 import { sp, Logger, LogLevel } from "sp-pnp-js";
-import { Dialog, DialogType } from "office-ui-fabric-react";
+import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { View } from "./Views";
 import { Body } from "./Body";
 import { Footer } from "./Footer";

@@ -7,8 +7,8 @@ import {
     DocumentCardActions,
     DocumentCardLocation,
     DocumentCardType,
-    ImageFit,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/DocumentCard";
+import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import * as Util from "../../../Util";
 import IProjectCardProps from "./IProjectCardProps";
 

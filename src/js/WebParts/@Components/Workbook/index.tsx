@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Button, IColumn } from "office-ui-fabric-react";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { Button } from "office-ui-fabric-react/lib/Button";
 import Workbook from "react-excel-workbook";
 
 export interface IDownloadWorkbookButtonProps {

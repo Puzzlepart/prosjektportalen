@@ -1,6 +1,6 @@
 import * as React from "react";
 import { sp } from "sp-pnp-js";
-import { Toggle } from "office-ui-fabric-react";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { default as RiskList } from "./RiskList";
 import { default as RiskMatrix } from "./RiskMatrix";
 

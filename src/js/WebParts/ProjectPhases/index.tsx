@@ -2,8 +2,8 @@ import * as React from "react";
 import {
     Spinner,
     SpinnerType,
-    Icon,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+import { Icon}  from "office-ui-fabric-react/lib/Icon";
 import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";

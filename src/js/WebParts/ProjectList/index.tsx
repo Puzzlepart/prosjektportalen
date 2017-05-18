@@ -3,8 +3,8 @@ import Masonry from "react-masonry-component";
 import {
     Spinner,
     SpinnerType,
-    SearchBox,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";

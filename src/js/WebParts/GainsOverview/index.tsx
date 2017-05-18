@@ -4,12 +4,15 @@ import {
     DetailsList,
     IGroup,
     SelectionMode,
+} from "office-ui-fabric-react/lib/DetailsList";
+import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import {
     Spinner,
     SpinnerType,
-    SearchBox,
-    ContextualMenuItemType,
-    CommandBar,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+
 import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";

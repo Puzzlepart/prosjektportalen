@@ -1,13 +1,15 @@
 import * as React from "react";
 import {
-    Spinner,
-    SpinnerType,
-    SearchBox,
     DetailsList,
     SelectionMode,
     ConstrainMode,
     DetailsListLayoutMode,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/DetailsList";
+import {
+    Spinner,
+    SpinnerType,
+} from "office-ui-fabric-react/lib/Spinner";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import * as Search from "./Search";
 import IExperienceLogProps from "./IExperienceLogProps";
 import IExperienceLogState, { LogElement } from "./IExperienceLogState";

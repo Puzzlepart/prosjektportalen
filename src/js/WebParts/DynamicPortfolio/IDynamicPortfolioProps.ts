@@ -2,7 +2,7 @@ import {
     SelectionMode,
     ConstrainMode,
     DetailsListLayoutMode,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/DetailsList";
 
 interface IDynamicPortfolioProps {
     searchProperty?: string;

@@ -2,7 +2,7 @@ import * as React from "react";
 import {
     Panel,
     PanelType,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Panel";
 import {
     Filter,
     IFilter,

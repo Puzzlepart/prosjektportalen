@@ -1,5 +1,5 @@
 import { sp } from "sp-pnp-js";
-import { IColumn } from "office-ui-fabric-react";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import * as Util from "../../Util";
 import { Columns, GetColumnByKey, GenerateColumns } from "./Columns";
 import DataSource from "../DataSource";
