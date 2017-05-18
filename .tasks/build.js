@@ -59,7 +59,12 @@ gulp.task("copy:pnp", () => {
 });
 
 gulp.task("copy:dist", () => {
-    return gulp.src([format("{0}/**/*.js", config.paths.dist), format("{0}/**/*.css", config.paths.dist), format("{0}/**/*.png", config.paths.dist), format("{0}/**/*.js", config.paths.build)])
+    return gulp.src([
+        format("{0}/**/*.js", config.paths.dist),
+        format("{0}/**/*.css", config.paths.dist),
+        format("{0}/**/*.png", config.paths.dist),
+        format("{0}/**/*.js", config.paths.build)]
+    )
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 
