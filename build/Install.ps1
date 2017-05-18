@@ -23,6 +23,7 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Which language do you want to install in? (Default is 1044, Norwegian)")]
+    [ValidateSet(1033, 1044)]
     [int]$Language = 1044,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
     [string]$GenericCredential,
