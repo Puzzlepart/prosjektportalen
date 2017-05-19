@@ -248,7 +248,7 @@
     <value>Sjekkpunkt</value>
   </data>
   <data name="ContentTypes_Prosjektprodukt_Name" xml:space="preserve">
-    <value>Prosjektprodukt</value>
+    <value>Prosjektleveranse</value>
   </data>
   <data name="ContentTypes_Prosjektloggelement_Name" xml:space="preserve">
     <value>Prosjektloggelement</value>
@@ -656,7 +656,7 @@
     <value>Status</value>
   </data>
   <data name="SiteFields_GtActionDescription_DisplayName" xml:space="preserve">
-    <value>Description</value>
+    <value>Beskrivelse</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value></value>
