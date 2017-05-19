@@ -112,7 +112,7 @@ try {
     Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
     Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
     Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
-    Apply-PnPProvisioningTemplate ".\templates\display-templates.pnp"
+    #Apply-PnPProvisioningTemplate ".\templates\display-templates.pnp"
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
