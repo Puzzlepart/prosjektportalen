@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import DataSource from "../DataSource";
+import DataSource from "../../DataSource";
 
 const Columns = (dataSource: DataSource): any[] => {
     return [{
