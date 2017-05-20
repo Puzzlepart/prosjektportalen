@@ -77,9 +77,9 @@ if (-not $AssetsUrl) {
 if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
-if (-not $GenericCredential) {
+if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
-} else {
+} elseif (-not $UseWebLogin.IsPresent) {
     $Credential = $GenericCredential
 }
 
