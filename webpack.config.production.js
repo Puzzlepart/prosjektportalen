@@ -1,6 +1,6 @@
 var path = require("path"),
     webpack = require('webpack'),
-    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+    // BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
@@ -15,16 +15,16 @@ module.exports = (minify = false) => {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        new BundleAnalyzerPlugin({
-            analyzerMode: 'static'
-        }),
+        // new BundleAnalyzerPlugin({
+        //     analyzerMode: 'static'
+        // }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     if (minify) {
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({
                 mangle: true,
                 compress: {
-                    warnings: false, 
+                    warnings: false,
                     pure_getters: true,
                     unsafe: true,
                     unsafe_comps: true,
