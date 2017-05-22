@@ -1,10 +1,10 @@
 var path = require("path"),
     webpack = require('webpack'),
-    // BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = false) => {
+module.exports = (minify = false, bundleAnalyzer = false) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -15,9 +15,6 @@ module.exports = (minify = false) => {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        // new BundleAnalyzerPlugin({
-        //     analyzerMode: 'static'
-        // }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     if (minify) {
         plugins.push(
@@ -35,6 +32,13 @@ module.exports = (minify = false) => {
                 },
             }),
             new webpack.optimize.AggressiveMergingPlugin());
+    }
+    if (bundleAnalyzer) {
+        plugins.push(
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static'
+            })
+        )
     }
     let rules = [
         {
