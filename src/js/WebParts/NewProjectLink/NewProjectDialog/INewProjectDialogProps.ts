@@ -1,4 +1,4 @@
-import { IDialogProps } from "office-ui-fabric-react";
+import { IDialogProps } from "office-ui-fabric-react/lib/Dialog";
 
 interface INewProjectDialogProps {
     dialogProps?: IDialogProps;

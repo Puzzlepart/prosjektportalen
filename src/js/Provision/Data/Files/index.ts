@@ -1,21 +1,21 @@
 import {
-    Logger,
-    LogLevel,
     Web,
     FileAddResult,
 } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { IListConfig } from "../Config";
+import IProgressCallback from "../../IProgressCallback";
 
 /**
  * Copy files and folders to a destination web
  *
  * @param conf Configuration
  * @param destUrl Destination web URL
+ * @param onProgress Progress callback to caller
  * @param timeout Timeout (ms)
  */
-export const CopyFiles = (conf: IListConfig, destUrl: string, timeout = 25000) => new Promise<FileAddResult[]>((resolve, reject) => {
-    Logger.write(`Copying files from '${conf.SourceList}' to '${conf.DestinationLibrary}'.`, LogLevel.Info);
+export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgressCallback, timeout = 25000) => new Promise<FileAddResult[]>((resolve, reject) => {
+    onProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyFiles"), conf.SourceList, conf.DestinationLibrary));
     const srcWeb = new Web(conf.SourceUrl);
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
     const destWeb = new Web(destUrl);

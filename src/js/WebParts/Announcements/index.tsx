@@ -4,7 +4,7 @@ import * as React from "react";
 import {
     Spinner,
     SpinnerType,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";

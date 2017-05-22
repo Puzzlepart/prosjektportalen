@@ -25,10 +25,10 @@ gulp.task("copy:assets:dist", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("build:lib", ["lint:ts", "copy:assets:lib"], () => {
+gulp.task("build:lib", ["copy:assets:lib"], () => {
     var project = tsc.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(tsc.reporter.fullReporter()));
+        .pipe(project(tsc.reporter[config.typescript.reporter]()));
     return merge([
         built.dts.pipe(gulp.dest(config.paths.lib)),
         built.js.pipe(gulp.dest(config.paths.lib))
@@ -59,7 +59,12 @@ gulp.task("copy:pnp", () => {
 });
 
 gulp.task("copy:dist", () => {
-    return gulp.src([format("{0}/**/*.js", config.paths.dist), format("{0}/**/*.css", config.paths.dist), format("{0}/**/*.png", config.paths.dist), format("{0}/**/*.js", config.paths.build)])
+    return gulp.src([
+        format("{0}/**/*.js", config.paths.dist),
+        format("{0}/**/*.css", config.paths.dist),
+        format("{0}/**/*.png", config.paths.dist),
+        format("{0}/**/*.js", config.paths.build)]
+    )
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 

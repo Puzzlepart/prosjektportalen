@@ -946,8 +946,17 @@
   <data name="ProvisionWeb_ApplyingTemplate" xml:space="preserve">
     <value>Applying template</value>
   </data>
+  <data name="ProvisionWeb_ApplyingExtensions" xml:space="preserve">
+    <value>Applying extensions</value>
+  </data>
   <data name="ProvisionWeb_CopyListContent" xml:space="preserve">
     <value>Copies list contents</value>
+  </data>
+  <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
+    <value>Copying files from library {0} to {1}.</value>
+  </data>
+  <data name="ProvisionWeb_CopyItems" xml:space="preserve">
+    <value>Copying {0} items from list {1} to {2}</value>
   </data>
   <data name="ProvisionWeb_Failed" xml:space="preserve">
     <value>There was an error creating new project site</value>
@@ -1086,6 +1095,9 @@
   </data>
   <data name="String_NoGrouping" xml:space="preserve">
     <value>No grouping</value>
+  </data>
+  <data name="String_Project" xml:space="preserve">
+    <value>Project</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages / ProjectHome.aspx</value>

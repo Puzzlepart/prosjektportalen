@@ -1,13 +1,26 @@
-import { Schema } from "sp-pnp-provisioning/lib/schema";
-import Files from "./Objects/Files";
-import Lists from "./Objects/Lists";
-import Navigation from "./Objects/Navigation";
-import WebSettings from "./Objects/WebSettings";
-import ComposedLook from "./Objects/ComposedLook";
-import PropertyBagEntries from "./Objects/PropertyBagEntries";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
-import { MergeExtensions } from "../Extensions";
-import * as PropertyBag from "../../Util/PropertyBag";
+import { Schema } from "sp-pnp-provisioning/lib/schema";
+import {
+    Files,
+    Lists,
+    Navigation,
+    WebSettings,
+    ComposedLook,
+    PropertyBagEntries,
+} from "./Objects";
+import IProgressCallback from "../IProgressCallback";
+
+/**
+ * Maps the current handler to a text explaining the current handlers action
+ */
+const PROGRESS_MAP = {
+    Files: __("ProvisionWeb_Progress_Handler_Files"),
+    Lists: __("ProvisionWeb_Progress_Handler_Lists"),
+    Navigation: __("ProvisionWeb_Progress_Handler_Navigation"),
+    WebSettings: __("ProvisionWeb_Progress_Handler_WebSettings"),
+    ComposedLook: __("ProvisionWeb_Progress_Handler_ComposedLook"),
+    PropertyBagEntries: __("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
+};
 
 let Template: Schema = {
     Files: Files,
@@ -27,28 +40,14 @@ let Template: Schema = {
  * Applies the template to the specified web
  *
  * @param web The web
- * @param includeExtensions Include extensions
+ * @param assetsUrl Assets URL
  * @param progressCallback Callback function for progress
  */
-export const Apply = (web, includeExtensions = false, progressCallback?: (progress: string) => void) => new Promise<void>((resolve, reject) => {
-    PropertyBag.GetAllProperties().then(({ pp_assetssiteurl: AssetsUrl }) => {
-        Template.WebSettings.AlternateCssUrl = `${AssetsUrl}/siteassets/pp/css/pp.main.css`;
-        Template.WebSettings.SiteLogoUrl = `${AssetsUrl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
-        if (includeExtensions) {
-            MergeExtensions(Template).then(mergedTemplate => {
-                new WebProvisioner(web).applyTemplate(mergedTemplate, progressCallback)
-                    .then(resolve)
-                    .catch(_ => {
-                        reject(_);
-                    });
-            });
-        } else {
-            new WebProvisioner(web).applyTemplate(Template)
-                .then(resolve)
-                .catch(_ => {
-                    reject("");
-                });
-        }
-    });
+export const Apply = (web, assetsUrl: string, onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    Template.WebSettings.AlternateCssUrl = `${assetsUrl}/siteassets/pp/css/pp.main.css`;
+    Template.WebSettings.SiteLogoUrl = `${assetsUrl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
+    new WebProvisioner(web).applyTemplate(Template, msg => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+        .then(resolve)
+        .catch(reject);
 });
 

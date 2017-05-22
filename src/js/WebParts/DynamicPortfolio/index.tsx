@@ -6,14 +6,16 @@ import {
     IGroup,
     DetailsList,
     SelectionMode,
-    Spinner,
-    SpinnerType,
-    SearchBox,
-    ContextualMenuItemType,
-    CommandBar,
     ConstrainMode,
     DetailsListLayoutMode,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/DetailsList";
+import {
+    Spinner,
+    SpinnerType,
+} from "office-ui-fabric-react/lib/Spinner";
+import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";

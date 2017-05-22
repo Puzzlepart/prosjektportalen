@@ -4,12 +4,15 @@ import {
     DetailsList,
     IGroup,
     SelectionMode,
+} from "office-ui-fabric-react/lib/DetailsList";
+import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import {
     Spinner,
     SpinnerType,
-    SearchBox,
-    ContextualMenuItemType,
-    CommandBar,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+
 import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
@@ -21,7 +24,7 @@ import IGainsOverviewState from "./IGainsOverviewState";
  */
 export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
     public static defaultProps: Partial<IGainsOverviewProps> = {
-        groupByOptions: [{ name: "Prosjekt", key: "SiteTitle" }],
+        groupByOptions: [],
         searchProperty: "Title",
         dataSource: DataSource.List,
         showCommandBar: true,
@@ -46,8 +49,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      * Component did mount
      */
     public componentDidMount(): void {
-        let { dataSource } = this.props;
-        Data.retrieveFromSource(dataSource).then(data => this.setState({ data: data, isLoading: false }));
+        Data.retrieveFromSource(this.props.dataSource).then(data => this.setState({ data: data, isLoading: false }));
     }
 
     /**
@@ -103,34 +105,40 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
         const items = [];
         const farItems = [];
 
-        const noGrouping = {
-            key: "NoGrouping",
-            name: __("String_NoGrouping"),
-        };
-        items.push({
-            key: "Group",
-            name: groupBy.name,
-            iconProps: { iconName: "GroupedList" },
-            itemType: ContextualMenuItemType.Header,
-            onClick: e => e.preventDefault(),
-            items: [
-                {
-                    ...noGrouping,
-                },
-                ...groupByOptions,
-            ].map(item => ({
-                ...item,
-                onClick: e => {
-                    e.preventDefault();
-                    this.setState({ groupBy: item });
-                },
-            })),
-        });
-
-        return <CommandBar
-            items={items}
-            farItems={farItems}
-        />;
+        if (groupByOptions.length > 0) {
+            const noGrouping = {
+                key: "NoGrouping",
+                name: __("String_NoGrouping"),
+            };
+            items.push({
+                key: "Group",
+                name: groupBy.name,
+                iconProps: { iconName: "GroupedList" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                items: [
+                    {
+                        ...noGrouping,
+                    },
+                    ...groupByOptions,
+                ].map(item => ({
+                    ...item,
+                    onClick: e => {
+                        e.preventDefault();
+                        this.setState({ groupBy: item });
+                    },
+                })),
+            });
+        }
+        if (items.length > 0 || farItems.length > 0) {
+            return (
+                <CommandBar
+                    items={items}
+                    farItems={farItems}
+                />
+            );
+        }
+        return null;
     }
 
     /**

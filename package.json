@@ -1,7 +1,7 @@
 {
   "name": "prosjektportalen",
-  "version": "0.9.22",
-  "description": "Prosjektportal for SharePoint er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
+  "version": "0.9.24",
+  "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "index.js",
   "scripts": {},
   "dependencies": {
@@ -72,6 +72,7 @@
     "tslint": "^4.5.1",
     "typedoc": "^0.5.10",
     "typescript": "^2.1.6",
-    "webpack": "^2.2.1"
+    "webpack": "^2.2.1",
+    "webpack-bundle-analyzer": "^2.8.1"
   }
 }

@@ -23,6 +23,7 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Which language do you want to install in? (Default is 1044, Norwegian)")]
+    [ValidateSet(1033, 1044)]
     [int]$Language = 1044,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
     [string]$GenericCredential,
@@ -33,10 +34,12 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
     [switch]$SkipTaxonomy,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
-    [switch]$HandlePnPLocally,
-    [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If HandlePnPLocally is set, this will be ignored")]
-    [ValidateSet('SharePoint2013','SharePointOnline')]
-    [string]$Environment = "SharePointOnline",
+    [switch]$SkipLoadingBundle,
+    [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
+    [switch]$UseWebLogin,
+    [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
+    [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
+    [string]$Environment = "SharePointPnPPowerShellOnline",
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
     [string]$ExtensionFolder
 )
@@ -44,29 +47,21 @@ Param(
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
 
-$BundlePath = "$PSScriptRoot\bundle\$Environment"
-Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Taxonomy.dll" -ErrorAction SilentlyContinue
-Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" -ErrorAction SilentlyContinue
-Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
-Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
-Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
-
-if (-not $HandlePnPLocally.IsPresent) {
-    switch ($Environment) {
-        "SharePoint2013" {
-            Import-Module "$BundlePath\SharePointPnPPowerShell2013.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-        }
-        "SharePointOnline" {
-            Import-Module "$BundlePath\SharePointPnPPowerShellOnline.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-        }
-    }
+if (-not $SkipLoadingBundle.IsPresent) {
+    $BundlePath = "$PSScriptRoot\bundle\$Environment"
+    Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Taxonomy.dll" -ErrorAction SilentlyContinue
+    Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" -ErrorAction SilentlyContinue
+    Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
+    Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
+    Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
+    Import-Module "$BundlePath\$Environment.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
 Write-Host "Installing Prosjektportalen" -ForegroundColor Green
 Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
-Write-Host "Installation url: $Url" -ForegroundColor Green
+Write-Host "Installation URL: $Url" -ForegroundColor Green
 Write-Host "Environment: $Environment" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
 Write-Host "############################################################################" -ForegroundColor Green
@@ -82,13 +77,23 @@ if (-not $AssetsUrl) {
 if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
-if (-not $GenericCredential) {
-    $creds = (Get-Credential -Message "Please enter your username and password")
-} else {
-    $creds = $GenericCredential
+if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
+} elseif (-not $UseWebLogin.IsPresent) {
+    $Credential = $GenericCredential
 }
+
+function Connect-SharePoint ($Url) {
+    if ($UseWebLogin.IsPresent) {
+        Connect-PnPOnline $Url -UseWebLogin
+    } else {
+        Connect-PnPOnline $Url -Credentials $Credential
+    }
+}
+
+
 try {
-    Connect-PnPOnline $AssetsUrl -Credentials $creds
+    Connect-SharePoint $AssetsUrl
     Write-Host "Deploying required resources.. " -ForegroundColor Green -NoNewLine
     Apply-PnPProvisioningTemplate ".\templates\assets.pnp"
     Write-Host "DONE" -ForegroundColor Green
@@ -102,7 +107,7 @@ catch {
 }
 
 try {
-    Connect-PnPOnline $Url -Credentials $creds
+    Connect-SharePoint $Url
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
@@ -111,7 +116,6 @@ try {
     Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
     Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
     Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
-    Apply-PnPProvisioningTemplate ".\templates\display-templates.pnp"
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
@@ -125,7 +129,7 @@ catch {
 
 if (-not $SkipData.IsPresent) {
     try {
-        Connect-PnPOnline $DataSourceSiteUrl -Credentials $creds
+        Connect-SharePoint $DataSourceSiteUrl
         Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\data-$($Language).pnp"
         Write-Host "DONE" -ForegroundColor Green
@@ -141,7 +145,7 @@ if (-not $SkipData.IsPresent) {
 
 if (-not $SkipDefaultConfig.IsPresent) {
     try {
-        Connect-PnPOnline $Url -Credentials $creds
+        Connect-SharePoint $Url
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
         Write-Host "DONE" -ForegroundColor Green
@@ -158,7 +162,7 @@ if($ExtensionFolder) {
     $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
     if($extensionFiles.Length -gt 0) {
         try {
-            Connect-PnPOnline $Url -Credentials $creds
+            Connect-SharePoint $Url
             Write-Host "Deploying extensions.." -ForegroundColor Green -NoNewLine
             foreach($extension in $extensionFiles) {
                 Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}

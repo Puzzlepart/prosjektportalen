@@ -1,8 +1,8 @@
-import { sp } from "sp-pnp-js";
-import { IColumn } from "office-ui-fabric-react";
-import * as Util from "../../Util";
-import { Columns, GetColumnByKey, GenerateColumns } from "./Columns";
-import DataSource from "../DataSource";
+import { sp, Logger, LogLevel } from "sp-pnp-js";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import * as Util from "../../../Util";
+import { Columns, GetColumnByKey, GenerateColumns } from "../Columns";
+import DataSource from "../../DataSource";
 
 export interface IGainsOverviewData {
     items?: any[];
@@ -64,8 +64,8 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
  */
 const GenerateData = (gains: any[], measures: any[], dataSource: DataSource): any[] => {
     return gains.map(data => {
-        let valueShouldIncrease = (data[GetColumnByKey("GtDesiredValue", dataSource).fieldName] > data[GetColumnByKey("GtStartValue", dataSource).fieldName]);
-        let relevantMeasures = GetMeasurements(measures, data, valueShouldIncrease, dataSource);
+        const valueShouldIncrease = (data[GetColumnByKey("GtDesiredValue", dataSource).fieldName] > data[GetColumnByKey("GtStartValue", dataSource).fieldName]);
+        const relevantMeasures = GetMeasurements(measures, data, valueShouldIncrease, dataSource);
         let measureStats = {
             LatestPercentage: 0,
             LatestValue: 0,
@@ -74,14 +74,18 @@ const GenerateData = (gains: any[], measures: any[], dataSource: DataSource): an
             ValueShouldIncrese: valueShouldIncrease,
         };
         if (relevantMeasures.length > 0) {
-            let [latest, previous] = relevantMeasures;
-            let { Percentage: a1, Value: b1 } = latest;
-            measureStats.LatestPercentage = a1;
-            measureStats.LatestValue = b1;
-            if (previous) {
-                let { Percentage: a2, Value: b2 } = previous;
-                measureStats.PreviousPercentage = a2;
-                measureStats.PreviousValue = b2;
+            try {
+                let [latest, previous] = relevantMeasures;
+                let { Percentage: a1, Value: b1 } = latest;
+                measureStats.LatestPercentage = a1;
+                measureStats.LatestValue = b1;
+                if (previous) {
+                    let { Percentage: a2, Value: b2 } = previous;
+                    measureStats.PreviousPercentage = a2;
+                    measureStats.PreviousValue = b2;
+                }
+            } catch (e) {
+                Logger.log({ message: `Unable to calculcate measures.`, level: LogLevel.Warning, data: relevantMeasures });
             }
         }
         return Object.assign(data, measureStats);

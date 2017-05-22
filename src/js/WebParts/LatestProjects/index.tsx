@@ -4,8 +4,8 @@ import { Site } from "sp-pnp-js";
 import {
     Spinner,
     SpinnerType,
-    Icon,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
 import ILatestProjectsProps from "./ILatestProjectsProps";

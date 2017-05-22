@@ -4,7 +4,7 @@ import * as uuid_v1 from "uuid/v1";
 import {
     Spinner,
     SpinnerType,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
 import ChromeTitle from "../@Components/ChromeTitle";
 import IQuickLinksProps from "./IQuickLinksProps";
 import IQuickLinksState from "./IQuickLinksState";

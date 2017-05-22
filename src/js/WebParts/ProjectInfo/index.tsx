@@ -6,9 +6,9 @@ import {
 import {
     Spinner,
     SpinnerType,
-    Icon,
-    DefaultButton,
-} from "office-ui-fabric-react";
+} from "office-ui-fabric-react/lib/Spinner";
+import { DefaultButton } from "office-ui-fabric-react/lib/Button";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import Modal from "office-ui-fabric-react/lib/Modal";
 import {
     ModalLink,

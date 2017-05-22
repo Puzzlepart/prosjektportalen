@@ -1,9 +1,10 @@
 var path = require("path"),
     webpack = require('webpack'),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = () => {
+module.exports = (minify = false, bundleAnalyzer = false) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -14,15 +15,31 @@ module.exports = () => {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false,
-                drop_console: true
-            },
-            beautify: false,
-            comments: false,
-            mangle: false
-        })];
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
+    if (minify) {
+        plugins.push(
+            new webpack.optimize.UglifyJsPlugin({
+                mangle: true,
+                compress: {
+                    warnings: false,
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                    screw_ie8: true
+                },
+                output: {
+                    comments: false,
+                },
+            }),
+            new webpack.optimize.AggressiveMergingPlugin());
+    }
+    if (bundleAnalyzer) {
+        plugins.push(
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static'
+            })
+        )
+    }
     let rules = [
         {
             test: /\.js$/,
@@ -45,12 +62,12 @@ module.exports = () => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', './lib/js/pp.main.js'],
-            loader: './lib/js/pp.loader.js'
+            main: ['babel-polyfill', './lib/js/index.js'],
+            loader: './lib/js/Loader.js'
         },
         output: {
             path: path.join(__dirname, "dist/js"),
-            filename: "pp.[name].js",
+            filename: minify ? "pp.[name].min.js" : "pp.[name].js",
             libraryTarget: "umd",
         },
         devtool: "source-map",

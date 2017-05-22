@@ -43,6 +43,18 @@ gulp.task("package:code::prod", ["build:lib"], (done) => {
     });
 });
 
+gulp.task("package:code::minify", ["build:lib"], (done) => {
+    webpack(webpackConfigProd(true), (err, stats) => {
+        if (err) {
+            throw new gutil.PluginError("package:code::prod", err);
+        }
+        console.log(stats.toString({
+            colors: true
+        }));
+        done();
+    });
+});
+
 gulp.task("package:styles", ["build:theme"], (done) => {
     return gulp.src(config.paths.stylesMain)
         .pipe(stylus(config.stylus))

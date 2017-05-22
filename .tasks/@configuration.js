@@ -33,6 +33,9 @@ module.exports = {
         formatter: "prose",
         emitError: true
     },
+    typescript: {
+        reporter: "fullReporter",
+    },
     resources: {
         glob: "./templates/root/*.resx",
         json: "./src/js/Resources"

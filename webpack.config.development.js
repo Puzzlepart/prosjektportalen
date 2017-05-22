@@ -23,7 +23,8 @@ module.exports = (devtool = "source-map") => {
             'process.env': {
                 NODE_ENV: JSON.stringify('development')
             }
-        })];
+        }),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
     let rules = [
         {
             test: /\.js$/,
@@ -48,9 +49,9 @@ module.exports = (devtool = "source-map") => {
     ]
     let config = {
         cache: true,
-        entry: {
-            main: ['babel-polyfill', './lib/js/pp.main.js'],
-            loader: './lib/js/pp.loader.js'
+           entry: {
+            main: ['babel-polyfill', './lib/js/index.js'],
+            loader: './lib/js/Loader.js'
         },
         output: {
             path: path.join(__dirname, "dist/js"),
