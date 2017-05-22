@@ -25,7 +25,8 @@ export const getQueryParams = (): IQueryParams => {
  * @param fieldName Field name
  */
 export const hideFormField = (fieldName: string): void => {
-    jQuery(`input[id*='${fieldName}'], select[id*='${fieldName}']`).parents("tr").first().hide();
+    const $fieldRow = jQuery(`input[id*='${fieldName}_'], select[id*='${fieldName}_'], div[id*='${fieldName}_']`).parents("tr").first();
+    $fieldRow.hide();
 };
 
 /**
