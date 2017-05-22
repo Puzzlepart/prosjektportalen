@@ -368,7 +368,7 @@
     <value>Sorteringsrekkefølge</value>
   </data>
   <data name="SiteFields_GtProjectTaskProduct_DisplayName" xml:space="preserve">
-    <value>Relevant produkt</value>
+    <value>Relevant leveranse</value>
   </data>
   <data name="SiteFields_GtProjectTaskChange_DisplayName" xml:space="preserve">
     <value>Relevant endring</value>
@@ -581,7 +581,7 @@
     <value>Til prosjektstyre</value>
   </data>
   <data name="SiteFields_GtProjectLogProductLookup_DisplayName" xml:space="preserve">
-    <value>Påvirker produkt</value>
+    <value>Påvirker leveranse</value>
   </data>
   <data name="SiteFields_GtCommunicationTarget_DisplayName" xml:space="preserve">
     <value>Målgruppe</value>
@@ -680,7 +680,7 @@
     <value>Kommentar til status risiko angitt over</value>
   </data>
   <data name="SiteFields_GtProductAcceptanceResponsible_Description" xml:space="preserve">
-    <value>Hvem har ansvaret for å godkjenne produktet?</value>
+    <value>Hvem har ansvaret for å godkjenne leveransen?</value>
   </data>
   <data name="SiteFields_GtArchiveReference_Description" xml:space="preserve">
     <value></value>
@@ -692,7 +692,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtProductAcceptanceMethod_Description" xml:space="preserve">
-    <value>Hvordan blir godkjenningen av produktet bekreftet (test, brukerundersøkelse, demo, muntlig, skriftlig)?</value>
+    <value>Hvordan blir godkjenningen av leveransen bekreftet (test, brukerundersøkelse, demo, muntlig, skriftlig)?</value>
   </data>
   <data name="SiteFields_GtRiskConsequencePostAction_Description" xml:space="preserve">
     <value>Tall 0 til 5</value>
@@ -761,7 +761,7 @@
     <value>Hvilke toleranser (slingringsmonn) gjelder for akseptansekriteriene?</value>
   </data>
   <data name="SiteFields_GtProductQualityResponsible_Description" xml:space="preserve">
-    <value>Hvem er ansvarlig for å levere kvaliteten på produktet?</value>
+    <value>Hvem er ansvarlig for å levere kvaliteten på leveransen?</value>
   </data>
   <data name="SiteFields_GtProjectManager_Description" xml:space="preserve">
     <value></value>
@@ -821,10 +821,10 @@
     <value></value>
   </data>
   <data name="SiteFields_GtProductAcceptanceCriteria_Description" xml:space="preserve">
-    <value>Målbare definisjoner av kravene produktet må møte før det kan aksepteres av interessentene</value>
+    <value>Målbare definisjoner av kravene leveransen må møte før den kan aksepteres av interessentene</value>
   </data>
   <data name="SiteFields_GtProductQualityExpectations_Description" xml:space="preserve">
-    <value>Hvilke forventninger er uttalt til produktkvaliteten?</value>
+    <value>Hvilke forventninger er uttalt til kvaliteten på leveransen?</value>
   </data>
   <data name="SiteFields_GtProjectInfoDescription_Description" xml:space="preserve">
     <value></value>
