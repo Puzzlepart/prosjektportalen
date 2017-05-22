@@ -4,16 +4,22 @@
         <pnp:ContentTypeBinding ContentTypeID="0x0100461A724553D2BC4187101D19A502A9AF" Default="true" />
     </pnp:ContentTypeBindings>
     <pnp:Views>
-        <View Name="{5857065B-2483-48E4-89EC-AB1775A0EFFD}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/Tilbakemeldinger/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+        <View Name="{5857065B-2483-48E4-89EC-AB1775A0EFFD}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Åpne tilbakemeldinger" Url="{site}/Lists/Tilbakemeldinger/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
             <Query>
                 <OrderBy>
                     <FieldRef Name="Created" Ascending="FALSE" />
                 </OrderBy>
                 <Where>
-                    <Eq>
-                        <FieldRef Name="GtFeedbackStatus" />
-                        <Value Type="Text">Åpen</Value>
-                    </Eq>
+                    <Or>
+                        <Eq>
+                            <FieldRef Name="GtFeedbackStatus" />
+                            <Value Type="Text">Åpen</Value>
+                        </Eq>
+                        <Eq>
+                            <FieldRef Name="GtFeedbackStatus" />
+                            <Value Type="Text">Under utvikling</Value>
+                        </Eq>
+                    </Or>
                 </Where>
             </Query>
             <ViewFields>
@@ -22,33 +28,7 @@
                 <FieldRef Name="GtFeedbackDescription" />
                 <FieldRef Name="GtFeedbackCriticality" />
                 <FieldRef Name="GtFeedbackComment" />
-                <FieldRef Name="Modified" />
-                <FieldRef Name="Editor" />
-                <FieldRef Name="Created" />
-                <FieldRef Name="Author" />
-            </ViewFields>
-            <RowLimit Paged="TRUE">30</RowLimit>
-            <Aggregations Value="Off" />
-            <JSLink>clienttemplates.js</JSLink>
-        </View>
-        <View Name="{E7E638FD-B3F9-42F9-9D78-04DA3C29E472}" MobileView="TRUE" Type="HTML" DisplayName="Under utvikling" Url="{site}/Lists/Tilbakemeldinger/Under utvikling.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
-            <Query>
-                <OrderBy>
-                    <FieldRef Name="Created" Ascending="FALSE" />
-                </OrderBy>
-                <Where>
-                    <Eq>
-                        <FieldRef Name="GtFeedbackStatus" />
-                        <Value Type="Text">Under utvikling</Value>
-                    </Eq>
-                </Where>
-            </Query>
-            <ViewFields>
-                <FieldRef Name="Edit" />
-                <FieldRef Name="GtFeedbackScope" />
-                <FieldRef Name="GtFeedbackDescription" />
-                <FieldRef Name="GtFeedbackCriticality" />
-                <FieldRef Name="GtFeedbackComment" />
+                <FieldRef Name="GtFeedbackStatus" />
                 <FieldRef Name="Modified" />
                 <FieldRef Name="Editor" />
                 <FieldRef Name="Created" />
