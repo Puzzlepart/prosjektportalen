@@ -9,6 +9,6 @@ export const RiskOverviewInitialState = {
     items: null,
     columns: null,
     showPostAction: false,
-};;
+};
 
 export default IRiskOverviewState;
