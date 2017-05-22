@@ -36,11 +36,10 @@ const wp_map: IWebPartMapping = {
  * Render the webparts
  */
 export const Render = () => {
-    Object.keys(wp_map).forEach(id => {
-        let container = document.getElementById(id);
-        if (container) {
-            ReactDOM.render(wp_map[id], container);
-        }
-    });
+    Object.keys(wp_map)
+        .filter(id => document.getElementById(id) !== null)
+        .forEach(id => {
+            ReactDOM.render(wp_map[id], document.getElementById(id));
+        });
 };
 

@@ -16,7 +16,7 @@ pnp.setup({
 
 ExecuteOrDelayUntilScriptLoaded(() => {
     ExecuteOrDelayUntilBodyLoaded(() => {
-        Logger.log({ message: `Body loaded. Initializing.`, level: LogLevel.Info });
+        Logger.log({ message: `pp.main.js: Body loaded. Initializing.`, level: LogLevel.Info });
         Forms.Initialize();
         WebParts.Render();
         new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);

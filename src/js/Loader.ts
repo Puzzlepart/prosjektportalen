@@ -5,7 +5,7 @@ interface IScript {
 /**
  * Scripts path
  */
-const SCRIPTS_PATH = "SiteAssets/pp/js";
+const SCRIPTS_PATH = "siteassets/pp/js";
 
 /**
  * Scripts to load
