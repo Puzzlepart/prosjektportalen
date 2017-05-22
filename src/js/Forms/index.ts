@@ -1,4 +1,5 @@
 import * as  jQuery from "jquery";
+import { Logger, LogLevel } from "sp-pnp-js";
 import * as FormUtils from "./Util";
 
 const __forms = {
@@ -13,6 +14,7 @@ const __forms = {
  * Handle query parameters
  */
 const HandleQueryParams = () => {
+    Logger.log({ message: "Forms: HandleQueryParams", level: LogLevel.Info, data: { queryParams: FormUtils.getQueryParams() } });
     let { HideContentTypeChoice, HideFormFields, HideWebPartMaintenancePageLink, HideAddNew, HideViewSelector } = FormUtils.getQueryParams();
     if (HideContentTypeChoice === "1") {
         FormUtils.hideFormField("ContentTypeChoice");
@@ -35,6 +37,7 @@ const HandleQueryParams = () => {
  * Initialize form modifications and web parts
  */
 const Initialize = () => {
+    Logger.log({ message: "Forms: Initialize", level: LogLevel.Info, data: {} });
     let [, , List, Form] = _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
     if (__forms.hasOwnProperty(List)) {
         if (__forms[List].hasOwnProperty(Form)) {

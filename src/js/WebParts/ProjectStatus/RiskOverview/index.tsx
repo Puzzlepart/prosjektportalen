@@ -1,21 +1,11 @@
 import * as React from "react";
 import { sp } from "sp-pnp-js";
-import { Toggle } from "office-ui-fabric-react/lib/Toggle";
-import { default as RiskList } from "./RiskList";
-import { default as RiskMatrix } from "./RiskMatrix";
+import RiskList from "./RiskList";
+import RiskMatrix from "./RiskMatrix";
+import IRiskOverviewProps from "./IRiskOverviewProps";
+import IRiskOverviewState, { RiskOverviewInitialState } from "./IRiskOverviewState";
 
 const RISK_CT: string = "0x010088578E7470CC4AA68D566346483107020101";
-
-export interface IRiskOverviewProps {
-    viewName: string;
-}
-
-export interface IRiskOverviewState {
-    items: any[];
-    itemsAsHtml?: any[];
-    columns: any[];
-    showPostAction: boolean;
-}
 
 export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverviewState> {
     /**
@@ -23,23 +13,18 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
      */
     constructor() {
         super();
-        this.state = {
-            items: null,
-            columns: null,
-            showPostAction: false,
-        };
+        this.state = RiskOverviewInitialState;
     }
 
     /**
      * Component did mount
      */
     public componentDidMount(): void {
-        const { viewName } = this.props;
         let list = sp.web.lists.getByTitle(__("Lists_Uncertainties_Title"));
         Promise.all([
             list.items.filter(`startswith(ContentTypeId,'${RISK_CT}')`).expand("FieldValuesAsHtml").get(),
             list.fields.get(),
-            list.views.getByTitle(viewName).expand("ViewFields").get(),
+            list.views.getByTitle(this.props.viewName).expand("ViewFields").get(),
         ]).then(([items, fields, view]) => {
             let columns: any[] = view.ViewFields.Items.results.map(viewField => {
                 let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
@@ -65,23 +50,27 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
      * Renders the component
      */
     public render(): JSX.Element {
-        let {
+        const {
             items,
             itemsAsHtml,
             columns,
             showPostAction,
         } = this.state;
+
         if (items && columns) {
-            return (<div>
-                <RiskMatrix items={items} postAction={showPostAction} />
-                <Toggle
-                    label="Vis"
-                    onText="Etter tiltak"
-                    offText="Før tiltak"
-                    onChanged={checked => this.setState({ showPostAction: checked })}
-                    defaultChecked={false} />
-                <RiskList items={itemsAsHtml} columns={columns} />
-            </div>);
+            return (
+                <div>
+                    <RiskMatrix items={items} postAction={showPostAction} />
+                    <div>
+                        <input
+                            type="checkbox"
+                            id="pp-showPostAction"
+                            onClick={_ => this.setState({ showPostAction: !showPostAction })} />
+                        <label htmlFor="pp-showPostAction">Vis før/etter tiltak</label>
+                    </div>
+                    <RiskList items={itemsAsHtml} columns={columns} />
+                </div>
+            );
         }
         return null;
     }

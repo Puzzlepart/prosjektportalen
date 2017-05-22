@@ -25,7 +25,6 @@
     <sharepoint:scriptblock runat="server">
 	    var navBarHelpOverrideKey = "WSSEndUser";
 	</sharepoint:scriptblock>
-    <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/4.1.0/css/fabric.min.css">
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderSearchArea" runat="server">
 	<SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />

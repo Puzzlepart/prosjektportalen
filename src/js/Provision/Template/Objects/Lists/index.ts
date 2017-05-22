@@ -91,7 +91,7 @@ const Lists: IList[] = [
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070203",
         }],
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtCommunicationTarget_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" Name="GtCommunicationTarget" StaticName="GtCommunicationTarget" InternalName="GtCommunicationTarget" />`,
+            `<Field Type="LookupMulti" DisplayName="${__("SiteFields_GtCommunicationTarget_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" Name="GtCommunicationTarget" StaticName="GtCommunicationTarget" InternalName="GtCommunicationTarget" Mult="TRUE" />`,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
