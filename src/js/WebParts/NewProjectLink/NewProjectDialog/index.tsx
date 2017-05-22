@@ -23,6 +23,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         advancedSectionClassName: "advanced",
     };
 
+    private doesWebExistTimer;
+
     /**
      * Constructor
      */
@@ -214,37 +216,47 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         switch (input) {
             case "Title": {
                 const url = Util.generateUrl(newValue);
-                DoesWebExist(url).then(doesExist => {
-                    this.setState({
-                        errorMessages: {
-                            ...errorMessages,
-                            Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
-                        },
-                        formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
-                        model: {
-                            ...model,
-                            Title: newValue,
-                            Url: url,
-                        },
-                    });
-                });
-            }
-                break;
-            case "Url": {
-                DoesWebExist(newValue)
-                    .then(doesExist => {
+                if (this.doesWebExistTimer) {
+                    window.clearTimeout(this.doesWebExistTimer);
+                }
+                this.doesWebExistTimer = window.setTimeout(() => {
+                    DoesWebExist(url).then(doesExist => {
                         this.setState({
                             errorMessages: {
                                 ...errorMessages,
                                 Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
                             },
-                            formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
+                            formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
                             model: {
                                 ...model,
-                                Url: newValue,
+                                Title: newValue,
+                                Url: url,
                             },
                         });
                     });
+                }, 1000);
+            }
+                break;
+            case "Url": {
+                if (this.doesWebExistTimer) {
+                    window.clearTimeout(this.doesWebExistTimer);
+                }
+                this.doesWebExistTimer = window.setTimeout(() => {
+                    DoesWebExist(newValue)
+                        .then(doesExist => {
+                            this.setState({
+                                errorMessages: {
+                                    ...errorMessages,
+                                    Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                                },
+                                formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
+                                model: {
+                                    ...model,
+                                    Url: newValue,
+                                },
+                            });
+                        });
+                }, 1000);
             }
                 break;
             case "Description": {
