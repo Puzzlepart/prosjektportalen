@@ -1372,6 +1372,9 @@
   <data name="DynamicPortfolio_NoDefaultView" xml:space="preserve">
     <value>There's no default view configured.</value>
   </data>
+  <data name="DynamicPortfolio_ViewNotFound" xml:space="preserve">
+    <value>The view specified can not be found.</value>
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>

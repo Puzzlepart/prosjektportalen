@@ -65,7 +65,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             .then(initialState => this.setState({
                 ...initialState,
                 isLoading: false,
-            }))
+            }, this.setHash))
             .catch(_ => this.setState({ isLoading: false }));
     }
 
@@ -81,7 +81,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     <SearchBox
                         onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                         labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                    {this.renderItems(this.props)}
+                    {this.renderItems(this.props, this.state)}
                 </div>
                 {this.renderFilterPanel(this.state)}
                 {this.renderProjectInfoModal(this.state)}
@@ -93,35 +93,50 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Fetch initial data
      */
     private fetchInitialData = () => new Promise<Partial<IDynamicPortfolioState>>((resolve, reject) => {
+        let hashState = this.getHash();
         Configuration.getConfig()
             .then(config => {
                 this.configuration = config;
-                const [defaultView] = this.configuration.views.filter(qc => qc.default);
-                if (!defaultView) {
-                    resolve({
-                        errorMessage: {
-                            message: __("DynamicPortfolio_NoDefaultView"),
-                            type: MessageBarType.error,
-                        },
-                    });
+                let initialView;
+                if (hashState.viewId) {
+                    [initialView] = this.configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+                    if (!initialView) {
+                        resolve({
+                            errorMessage: {
+                                message: __("DynamicPortfolio_ViewNotFound"),
+                                type: MessageBarType.error,
+                            },
+                        });
+                    }
                 } else {
+                    [initialView] = this.configuration.views.filter(qc => qc.default);
+                    if (!initialView) {
+                        resolve({
+                            errorMessage: {
+                                message: __("DynamicPortfolio_NoDefaultView"),
+                                type: MessageBarType.error,
+                            },
+                        });
+                    }
+                }
+                if (initialView) {
                     const fieldNames = this.configuration.columns.map(f => f.fieldName);
-                    Search.query(defaultView, this.configuration)
+                    Search.query(initialView, this.configuration)
                         .then(response => {
                             FieldSelector.items = this.configuration.columns.map(col => ({
                                 name: col.name,
                                 value: col.fieldName,
-                                defaultSelected: Array.contains(defaultView.fields, col.name),
+                                defaultSelected: Array.contains(initialView.fields, col.name),
                                 readOnly: col.readOnly,
                             }));
-                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, defaultView));
+                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, initialView));
                             resolve({
-                                selectedColumns: this.configuration.columns.filter(fc => Array.contains(defaultView.fields, fc.name)),
+                                selectedColumns: this.configuration.columns.filter(fc => Array.contains(initialView.fields, fc.name)),
                                 fieldNames: fieldNames,
                                 items: response.primarySearchResults,
                                 filteredItems: response.primarySearchResults,
                                 filters: filters,
-                                currentView: defaultView,
+                                currentView: initialView,
                             });
                         })
                         .catch(reject);
@@ -132,14 +147,14 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Render items
      */
-    private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps) => {
-        if (this.state.isLoading) {
+    private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading, errorMessage }: IDynamicPortfolioState) => {
+        if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
             );
         }
 
-        if (this.state.errorMessage) {
+        if (errorMessage) {
             return (
                 <MessageBar messageBarType={this.state.errorMessage.type}>{this.state.errorMessage.message}</MessageBar>
             );
@@ -254,10 +269,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             },
         });
 
-        return <CommandBar
-            items={items}
-            farItems={farItems}
-        />;
+        return (
+            <CommandBar
+                items={items}
+                farItems={farItems}
+            />
+        );
     }
 
     /**
@@ -470,9 +487,30 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         filters: filters,
                         currentView: viewConfig,
                         selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
-                    });
+                    }, this.setHash);
                 })
                 .catch(_ => this.setState({ isLoading: false }));
         });
+    }
+
+    /**
+     * Set hash
+     */
+    private setHash(): void {
+        document.location.href = `#viewId=${this.state.currentView.id}`;
+    }
+
+
+    /**
+     * Get hash
+     */
+    private getHash(): { [key: string]: string } {
+        const hash = document.location.hash.substring(1);
+        let hashObject: { [key: string]: string } = {};
+        hash.split("&").map(str => {
+            const [key, value] = str.split("=");
+            hashObject[key] = value;
+        });
+        return hashObject;
     }
 };

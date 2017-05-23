@@ -1375,6 +1375,9 @@
   <data name="DynamicPortfolio_NoDefaultView" xml:space="preserve">
     <value>Det er ikke satt noen standardvisning.</value>
   </data>
+  <data name="DynamicPortfolio_ViewNotFound" xml:space="preserve">
+    <value>Finner ikke angitt visning.</value>
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>
