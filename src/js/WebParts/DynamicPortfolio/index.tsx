@@ -16,6 +16,7 @@ import {
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
@@ -70,42 +71,20 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            constrainMode,
-            layoutMode,
-            selectionMode,
-        } = this.props;
-
-        const data = this.getFilteredData(this.state);
-
-        return (<div>
+        return (
             <div>
-                {this.renderCommandBar(this.state)}
-                <div style={{ height: 10 }}></div>
-                <SearchBox
-                    onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                {this.state.isLoading ?
-                    <Spinner type={SpinnerType.large} />
-                    :
-                    <DetailsList
-                        items={data.items}
-                        constrainMode={constrainMode}
-                        layoutMode={layoutMode}
-                        columns={data.columns}
-                        groups={data.groups}
-                        selectionMode={selectionMode}
-                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
-                            evt.preventDefault();
-                            this.setState({ showProjectInfo: item });
-                        })}
-                        onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
-                    />
-                }
+                <div>
+                    {this.renderCommandBar(this.state)}
+                    <div style={{ height: 10 }}></div>
+                    <SearchBox
+                        onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
+                        labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
+                    {this.renderItems(this.props)}
+                </div>
+                {this.renderFilterPanel(this.state)}
+                {this.renderProjectInfoModal(this.state)}
             </div>
-            {this.renderFilterPanel(this.state)}
-            {this.renderProjectInfoModal(this.state)}
-        </div>);
+        );
     }
 
     /**
@@ -117,7 +96,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 this.configuration = config;
                 const [defaultView] = this.configuration.views.filter(qc => qc.default);
                 if (!defaultView) {
-                    Logger.log({ message: "There's no default view configuration set.", level: LogLevel.Error });
+                    reject();
                 } else {
                     const fieldNames = this.configuration.columns.map(f => f.fieldName);
                     Search.query(defaultView, this.configuration)
@@ -142,6 +121,41 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 }
             }).catch(reject);
     })
+
+    /**
+     * Render items
+     */
+    private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps) => {
+        if (this.state.isLoading) {
+            return (
+                <Spinner type={SpinnerType.large} />
+            );
+        }
+
+        const data = this.getFilteredData(this.state);
+
+        if (data.items.length === 0) {
+            return (
+                <MessageBar>{__("DynamicPortfolio_NoResults")}</MessageBar>
+            );
+        }
+
+        return (
+            <DetailsList
+                items={data.items}
+                constrainMode={constrainMode}
+                layoutMode={layoutMode}
+                columns={data.columns}
+                groups={data.groups}
+                selectionMode={selectionMode}
+                onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
+                    evt.preventDefault();
+                    this.setState({ showProjectInfo: item });
+                })}
+                onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
+            />
+        );
+    }
 
     /**
      * Render Filter Panel
