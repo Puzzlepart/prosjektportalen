@@ -25,25 +25,26 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
             list.items.filter(`startswith(ContentTypeId,'${RISK_CT}')`).expand("FieldValuesAsHtml").get(),
             list.fields.get(),
             list.views.getByTitle(this.props.viewName).expand("ViewFields").get(),
-        ]).then(([items, fields, view]) => {
-            let columns: any[] = view.ViewFields.Items.results.map(viewField => {
-                let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
-                if (field) {
-                    return ({
-                        key: viewField,
-                        fieldName: field.InternalName,
-                        name: field.Title,
-                        minWidth: 100,
-                    });
-                }
-                return null;
+        ])
+            .then(([items, fields, view]) => {
+                let columns: any[] = view.ViewFields.Items.results.map(viewField => {
+                    let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
+                    if (field) {
+                        return ({
+                            key: viewField,
+                            fieldName: field.InternalName,
+                            name: field.Title,
+                            minWidth: 100,
+                        });
+                    }
+                    return null;
+                });
+                this.setState({
+                    items: items,
+                    itemsAsHtml: items.map(i => i.FieldValuesAsHtml),
+                    columns: columns.filter(c => c),
+                });
             });
-            this.setState({
-                items: items,
-                itemsAsHtml: items.map(i => i.FieldValuesAsHtml),
-                columns: columns.filter(c => c),
-            });
-        });
     }
 
     /**
@@ -66,7 +67,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
                             type="checkbox"
                             id="pp-showPostAction"
                             onClick={_ => this.setState({ showPostAction: !showPostAction })} />
-                        <label htmlFor="pp-showPostAction">Vis før/etter tiltak</label>
+                        <label htmlFor="pp-showPostAction">{__("StatusPage_RiskshowPostActionLabel")}</label>
                     </div>
                     <RiskList items={itemsAsHtml} columns={columns} />
                 </div>
