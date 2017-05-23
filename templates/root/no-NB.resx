@@ -1426,4 +1426,7 @@
   <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
     <value>Gevinstoppnåelse</value>
   </data>
+  <data name="StatusPage_RiskshowPostActionLabel" xml:space="preserve">
+    <value>Vis før/etter tiltak</value>
+  </data>
 </root>
