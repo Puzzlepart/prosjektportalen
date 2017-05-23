@@ -17,21 +17,6 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
     }
 
     /**
-     * Component did mount
-     */
-    public componentDidMount(): void {
-        let {
-            items,
-            columns,
-         } = this.props;
-
-        this.setState({
-            items: items.map(i => i.FieldValuesAsHtml),
-            columns: columns.filter(c => c),
-        });
-    }
-
-    /**
      * Render the component
      */
     public render(): JSX.Element {
