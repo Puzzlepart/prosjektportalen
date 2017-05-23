@@ -5,6 +5,7 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as Search from "./Search";
 import Style from "./Style";
@@ -66,7 +67,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                     labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st })} />
                 {this.renderCards()}
-                {this.renderProjectInfoModal()}
+                {this.renderProjectInfoModal(this.state)}
                 <Style props={this.props} />
             </div>
         );
@@ -75,11 +76,14 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
     /**
      * Render cards
      */
-    private renderCards = () => {
-        const {
-            projects,
-            searchTerm,
-        } = this.state;
+    private renderCards = (): JSX.Element => {
+        const data = this.getFilteredData(this.state);
+
+        if (data.projects.length === 0) {
+            return (
+                <MessageBar>{__("ProjectList_NoResults")}</MessageBar>
+            );
+        }
 
         return (
             <Masonry
@@ -87,9 +91,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
                 options={this.props.masonryOptions}
                 disableImagesLoaded={false}
                 updateOnEachImageLoad={false}>
-                {projects
-                    .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
-                    .sort((a, b) => a.Title > b.Title ? 1 : -1)
+                {data.projects
                     .map((project, idx) => (
                         <ProjectCard
                             key={idx}
@@ -109,9 +111,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
     /**
    * Renders the Project Info modal
    */
-    private renderProjectInfoModal = () => {
-        const { showProjectInfo } = this.state;
-
+    private renderProjectInfoModal = ({ showProjectInfo }: IProjectListState): JSX.Element => {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
@@ -136,6 +136,17 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             );
         }
         return null;
+    }
+
+    /**
+   * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
+   */
+    private getFilteredData = ({ searchTerm, projects }: IProjectListState) => {
+        return {
+            projects: projects
+                .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
+                .sort((a, b) => a.Title > b.Title ? 1 : -1),
+        };
     }
 
     /**

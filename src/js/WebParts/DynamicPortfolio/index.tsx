@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Logger, LogLevel } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
