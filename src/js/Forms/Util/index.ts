@@ -30,6 +30,14 @@ export const hideFormField = (fieldName: string): void => {
 };
 
 /**
+ * Hides content type choice
+ */
+export const hideContentTypeChoice = (): void => {
+    const $ctcRow = jQuery(`select[id*='ContentTypeChoice']`).parents("tr").first();
+    $ctcRow.hide();
+};
+
+/**
  * Inserts form container with the specified ID
  *
  * @param id ID of form container

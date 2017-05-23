@@ -17,7 +17,7 @@ const HandleQueryParams = () => {
     Logger.log({ message: "Forms: HandleQueryParams", level: LogLevel.Info, data: { queryParams: FormUtils.getQueryParams() } });
     let { HideContentTypeChoice, HideFormFields, HideWebPartMaintenancePageLink, HideAddNew, HideViewSelector } = FormUtils.getQueryParams();
     if (HideContentTypeChoice === "1") {
-        FormUtils.hideFormField("ContentTypeChoice");
+        FormUtils.hideContentTypeChoice();
     }
     if (HideWebPartMaintenancePageLink === "1") {
         jQuery("a[id*='WebPartMaintenancePageLink']").parents("table").first().hide();
