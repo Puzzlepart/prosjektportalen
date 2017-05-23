@@ -3,7 +3,11 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
-import { Icon}  from "office-ui-fabric-react/lib/Icon";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
+import {
+    MessageBar,
+    MessageBarType,
+} from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";
@@ -12,7 +16,9 @@ import * as Data from "./Data";
 import IProjectPhasesProps from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 
-
+/**
+ * Project Phases
+ */
 export default class ProjectPhases extends React.PureComponent<IProjectPhasesProps, IProjectPhasesState> {
     /**
      * Constructor
@@ -20,9 +26,7 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
     constructor() {
         super();
         this.state = {
-            phases: null,
-            currentPhase: null,
-            checkListData: {},
+            isLoading: true,
         };
     }
 
@@ -33,6 +37,7 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
         Data.fetchData().then(initialState => {
             this.setState({
                 ...initialState,
+                isLoading: false,
             });
         });
     }
@@ -41,34 +46,26 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
      * Render
      */
     public render(): JSX.Element {
-        const {
-            phases,
-            currentPhase,
-        } = this.state;
-
-        const isPhaseSet = currentPhase && currentPhase.Name && currentPhase.Name !== "";
-
-        if (phases) {
-            return (
-                <div>
-                    {this.renderPhases(this.state)}
-                    {this.renderDialog(this.state)}
-                    <div
-                        className="set-phase-text ms-metadata"
-                        hidden={isPhaseSet}>
-                        <Icon iconName="Error" /> {__("ProjectPhases_PhaseNotSetText")}
-                    </div>
-                </div>
-            );
-        } else {
+        if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
+        return (
+            <div>
+                {this.renderPhases(this.state)}
+                {this.renderDialog(this.state)}
+                {!this.isPhaseSet() && (
+                    <MessageBar messageBarType={MessageBarType.info}>
+                        {__("ProjectPhases_PhaseNotSetText")}
+                    </MessageBar>
+                )}
+            </div>
+        );
     }
 
     /**
      * Render phases
      */
-    private renderPhases = ({ phases, currentPhase, checkListData, changePhase }: IProjectPhasesState) => {
+    private renderPhases = ({ phases, currentPhase, checkListData, changePhase }: IProjectPhasesState): JSX.Element => {
         return (
             <ul>
                 {phases.map((p, index) => {
@@ -94,7 +91,7 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
     /**
      * Render dialog
      */
-    private renderDialog = ({ checkListData, currentPhase, changePhase }: IProjectPhasesState) => {
+    private renderDialog = ({ checkListData, currentPhase, changePhase }: IProjectPhasesState): JSX.Element => {
         const checkListItems = (currentPhase && checkListData && checkListData[currentPhase.Id]) ? checkListData[currentPhase.Id].items : [];
         if (changePhase) {
             return (
@@ -122,6 +119,13 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
                 .then(Util.reloadPage)
                 .catch(Util.reloadPage);
         }
+    }
+
+    /**
+     * Checks if phase is set
+     */
+    private isPhaseSet(): boolean {
+        return this.state.currentPhase && this.state.currentPhase.Name && this.state.currentPhase.Name !== "";
     }
 
     /**
