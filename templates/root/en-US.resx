@@ -1369,6 +1369,9 @@
   <data name="DynamicPortfolio_NoResults" xml:space="preserve">
     <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
   </data>
+  <data name="DynamicPortfolio_NoDefaultView" xml:space="preserve">
+    <value>There's no default view configured.</value>
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>

@@ -1372,6 +1372,9 @@
   <data name="DynamicPortfolio_NoResults" xml:space="preserve">
     <value>Ingen prosjekter funnet. Visningen bruker søk, så det kan ta noen minutter fra prosjekter er lagt til eller oppdatert til de vises her.</value>
   </data>
+  <data name="DynamicPortfolio_NoDefaultView" xml:space="preserve">
+    <value>Det er ikke satt noen standardvisning.</value>
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>

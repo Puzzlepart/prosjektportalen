@@ -15,7 +15,10 @@ import {
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+import {
+    MessageBar,
+    MessageBarType,
+} from "office-ui-fabric-react/lib/MessageBar";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
@@ -95,7 +98,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 this.configuration = config;
                 const [defaultView] = this.configuration.views.filter(qc => qc.default);
                 if (!defaultView) {
-                    reject();
+                    resolve({
+                        errorMessage: {
+                            message: __("DynamicPortfolio_NoDefaultView"),
+                            type: MessageBarType.error,
+                        },
+                    });
                 } else {
                     const fieldNames = this.configuration.columns.map(f => f.fieldName);
                     Search.query(defaultView, this.configuration)
@@ -128,6 +136,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         if (this.state.isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
+            );
+        }
+
+        if (this.state.errorMessage) {
+            return (
+                <MessageBar messageBarType={this.state.errorMessage.type}>{this.state.errorMessage.message}</MessageBar>
             );
         }
 
