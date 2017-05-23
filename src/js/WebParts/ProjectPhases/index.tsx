@@ -3,7 +3,6 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
 import {
     MessageBar,
     MessageBarType,

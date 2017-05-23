@@ -7,6 +7,9 @@ const Style = ({ props }: { props: IProjectListProps }) => {
                     width: ${props.tileWidth}px;
                     margin-bottom: ${props.masonryOptions.gutter}px;
                 }
+                .${props.tileClassName} .ms-DocumentCardPreview-icon img {
+                    max-width: 32px;    
+                }
             `}
     </style>;
 };
