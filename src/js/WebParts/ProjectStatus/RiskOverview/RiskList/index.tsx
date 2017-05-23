@@ -4,34 +4,36 @@ import {
     DetailsList,
     IColumn,
 } from "office-ui-fabric-react/lib/DetailsList";
-
-export interface IRiskListProps {
-    items: any[];
-    columns: IColumn[];
-}
-
-export interface IRiskListState {
-    items: any[];
-    columns: IColumn[];
-}
+import IRiskListProps from "./IRiskListProps";
+import IRiskListState from "./IRiskListState";
 
 export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
-    constructor(props) {
+    /**
+     * Constructor
+     */
+    constructor(props: IRiskListProps) {
         super(props);
-        this.state = {
-            items: null,
-            columns: null,
-        };
+        this.state = {};
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount(): void {
-        let { items, columns } = this.props;
+        let {
+            items,
+            columns,
+         } = this.props;
+
         this.setState({
             items: items.map(i => i.FieldValuesAsHtml),
             columns: columns.filter(c => c),
         });
     }
 
+    /**
+     * Render the component
+     */
     public render(): JSX.Element {
         let { items, columns } = this.props;
         return (
@@ -39,17 +41,16 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
                 <DetailsList
                     items={items}
                     columns={columns}
-                    onRenderItemColumn={this.renderItemColumn}
-                    onColumnHeaderClick={(ev, col) => {
-                        ev.preventDefault();
-                        this.onColumnClick(col);
-                    }}
+                    onRenderItemColumn={this._onRenderItemColumn}
                     selectionMode={SelectionMode.none} />
             </div>
         );
     }
 
-    private renderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
+    /**
+     * Render item column
+     */
+    private _onRenderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
         const fieldValue = item[column.fieldName];
         switch (column.fieldName) {
             case "GtRiskFactor":
@@ -57,29 +58,6 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
             default:
                 return <span>{fieldValue}</span>;
         }
-    }
-
-    private onColumnClick(column: IColumn): void {
-        let { items, columns } = this.state;
-        let isSortedDescending = column.isSortedDescending;
-        if (column.isSorted) {
-            isSortedDescending = !isSortedDescending;
-        }
-        items = [].concat(items).sort((a, b) => {
-            let firstValue = parseFloat(a[column.fieldName]);
-            let secondValue = parseFloat(b[column.fieldName]);
-            return isSortedDescending ? secondValue - firstValue : firstValue - secondValue;
-        });
-        this.setState({
-            columns: columns.map(col => {
-                col.isSorted = (col.key === column.key);
-                if (col.isSorted) {
-                    col.isSortedDescending = isSortedDescending;
-                }
-                return col;
-            }),
-            items: items,
-        });
     }
 }
 export default RiskList;
