@@ -904,6 +904,9 @@
   <data name="ProjectList_LoadingText" xml:space="preserve">
     <value>Laster prosjekter...</value>
   </data>
+  <data name="ProjectList_NoResults" xml:space="preserve">
+    <value>Ingen prosjekter funnet. Visningen bruker søk, så det kan ta noen minutter fra prosjekter er lagt til eller oppdatert til de vises her.</value>
+  </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
   </data>
@@ -1365,6 +1368,9 @@
   </data>
   <data name="DynamicPortfolio_FieldSelector_EmptyMessage" xml:space="preserve">
     <value>Det er ikke konfigurert opp noen felter. Ta kontakt med en administrator.</value>
+  </data>
+  <data name="DynamicPortfolio_NoResults" xml:space="preserve">
+    <value>Ingen prosjekter funnet. Visningen bruker søk, så det kan ta noen minutter fra prosjekter er lagt til eller oppdatert til de vises her.</value>
   </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>

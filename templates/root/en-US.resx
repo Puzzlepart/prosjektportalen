@@ -904,6 +904,9 @@
   <data name="ProjectList_LoadingText" xml:space="preserve">
     <value>Loading projects...</value>
   </data>
+  <data name="ProjectList_NoResults" xml:space="preserve">
+    <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
+  </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
   </data>
@@ -1362,6 +1365,9 @@
   </data>
   <data name="DynamicPortfolio_FieldSelector_EmptyMessage" xml:space="preserve">
     <value>No fields have been configured. Contact an administrator.</value>
+  </data>
+  <data name="DynamicPortfolio_NoResults" xml:space="preserve">
+    <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
   </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
