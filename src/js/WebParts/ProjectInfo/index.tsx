@@ -8,15 +8,15 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
 import Modal from "office-ui-fabric-react/lib/Modal";
 import {
-    ModalLink,
-    ModalLinkIconPosition,
-} from "../@Components/ModalLink";
+    MessageBar,
+    MessageBarType,
+} from "office-ui-fabric-react/lib/MessageBar";
+import { ModalLink } from "../@Components/ModalLink";
 import ChromeTitle from "../@Components/ChromeTitle";
 import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
-import IProjectInfoProps from "./IProjectInfoProps";
+import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 
@@ -24,68 +24,13 @@ import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
  * Project information
  */
 export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
-    /**
-     * Default properties
-     */
-    public static defaultProps: Partial<IProjectInfoProps> = {
-        hideChrome: false,
-        showActionLinks: true,
-        showMissingPropsWarning: true,
-        webUrl: _spPageContextInfo.webAbsoluteUrl,
-        rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
-        welcomePageId: 3,
-        renderMode: ProjectInfoRenderMode.Normal,
-        containerClassName: "pp-projectInfo",
-        errorIconProps: {
-            iconName: "Error",
-            style: {
-                color: "#000",
-            },
-        },
-        infoIconProps: {
-            iconName: "Info",
-            style: {
-                color: "#000",
-            },
-        },
-        metadataProps: {
-            className: "ms-font-xs",
-            style: {
-                marginTop: 25,
-            },
-        },
-        actionLinks: [{
-            url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
-            label: __("ProjectInfo_EditProperties"),
-            icon: { iconName: "EditMirrored", position: ModalLinkIconPosition.Left },
-            options: {
-                HideContentTypeChoice: true,
-                HideWebPartMaintenancePageLink: true,
-                HideRibbon: true,
-                HideFormFields: "GtProjectPhase",
-            },
-            reloadOnSubmit: true,
-            showLabel: true,
-        },
-        {
-            url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
-            label: __("ProjectInfo_EditLogo"),
-            icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
-            reloadOnSubmit: true,
-            showLabel: true,
-            style: {
-                marginLeft: 8,
-            },
-        }],
-    };
-
+    public static defaultProps = ProjectInfoDefaultProps;
     /**
      * Constructor
      */
-    constructor(props) {
+    constructor(props: IProjectInfoProps) {
         super(props);
         this.state = {
-            error: false,
             isLoading: true,
             properties: [],
         };
@@ -103,7 +48,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         }).catch(_ => {
             this.setState({
                 isLoading: false,
-                error: true,
             });
         });
     }
@@ -112,10 +56,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            isLoading,
-            error,
-         } = this.state;
+        const { isLoading } = this.state;
 
         const {
             renderMode,
@@ -129,11 +70,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                 return (<div className={containerClassName}>
                     {this.renderChrome()}
                     {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
-                    {error && (
-                        <div { ...this.props.metadataProps }>
-                            <Icon { ...this.props.errorIconProps} />  {__("WebPart_FailedMessage")}
-                        </div>
-                    )}
                     {this.renderInner()}
                 </div>);
             }
@@ -174,7 +110,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     /**
      * Render chrome
      */
-    private renderChrome = () => {
+    private renderChrome = (): JSX.Element => {
         return (
             <ChromeTitle
                 title={__("WebPart_ProjectInfo_Title")}
@@ -195,19 +131,16 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     /**
      * Render inner
      */
-    private renderInner = () => {
-        const {
-            properties,
-            isLoading,
-         } = this.state;
-
-        if (isLoading) {
+    private renderInner = (): JSX.Element => {
+        if (this.state.isLoading) {
             return null;
         }
-        return <div className="pp-projectInfoInner">
-            {this.renderProperties(properties)}
-            {this.renderActionLinks()}
-        </div>;
+        return (
+            <div className="pp-projectInfoInner">
+                {this.renderProperties(this.state)}
+                {this.renderActionLinks()}
+            </div>
+        );
     }
 
     /**
@@ -215,21 +148,21 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      *
      * @param properties Properties to render
      */
-    private renderProperties(properties: ProjectPropertyModel[]): JSX.Element {
+    private renderProperties({ properties }: IProjectInfoState): JSX.Element {
         const propertiesToRender = properties.filter(p => !p.empty);
         const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
         if (hasMissingProps && this.props.showMissingPropsWarning) {
             return (
-                <div { ...this.props.metadataProps }>
-                    <Icon { ...this.props.errorIconProps} />  {__("ProjectInfo_MissingProperties")}
-                </div>
+                <MessageBar messageBarType={MessageBarType.error}>
+                    {__("ProjectInfo_MissingProperties")}
+                </MessageBar>
             );
         }
         if (propertiesToRender.length === 0) {
             return (
-                <div { ...this.props.metadataProps }>
-                    <Icon { ...this.props.infoIconProps} />  {__("ProjectInfo_NoProperties")}
-                </div>
+                <MessageBar>
+                    {__("ProjectInfo_NoProperties")}
+                </MessageBar>
             );
         }
         return (
@@ -324,7 +257,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                 .map(({ field, value }) => new ProjectPropertyModel(field, value));
             resolve({
                 properties: properties,
-                error: false,
             });
         }, reject);
     })
