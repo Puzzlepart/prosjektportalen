@@ -24,6 +24,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     };
 
     private doesWebExistTimer;
+    private doesWebExistTimerDelay = 250;
 
     /**
      * Constructor
@@ -234,7 +235,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                             },
                         });
                     });
-                }, 1000);
+                }, this.doesWebExistTimerDelay);
             }
                 break;
             case "Url": {
@@ -256,7 +257,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                                 },
                             });
                         });
-                }, 1000);
+                }, this.doesWebExistTimerDelay);
             }
                 break;
             case "Description": {
