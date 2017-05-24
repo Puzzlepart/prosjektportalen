@@ -2,7 +2,6 @@ export class Project {
     public Title: string;
     public Url: string;
     public Logo: string;
-    public PhaseIcon: string;
     public Phase: string;
     public ServiceArea: string;
     public Type: string;
@@ -20,7 +19,6 @@ export class Project {
         this.Manager = GtProjectManagerOWSUSER;
         this.Owner = GtProjectOwnerOWSUSER;
         this.Views = ViewsLifeTime;
-        this.PhaseIcon = this.getPhaseLetter() ? `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/img/ICO-Global-Phase-${this.getPhaseLetter()}.png` : "";
     }
 
     public getPhaseLetter(): string {

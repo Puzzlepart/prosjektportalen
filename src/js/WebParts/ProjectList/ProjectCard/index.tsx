@@ -3,6 +3,7 @@ import {
     DocumentCard,
     DocumentCardPreview,
     DocumentCardTitle,
+    DocumentCardLocation,
     DocumentCardActivity,
     DocumentCardActions,
     DocumentCardType,
@@ -26,7 +27,6 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
             <DocumentCardPreview previewImages={[
                 {
                     previewImageSrc: project.Logo,
-                    iconSrc: project.PhaseIcon,
                     imageFit: ImageFit.cover,
                     accentColor: Util.stringToColour(project.Phase),
                     width: tileWidth,
@@ -36,6 +36,8 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
             <DocumentCardTitle
                 title={project.Title}
                 shouldTruncate={true} />
+            <DocumentCardLocation
+ -                location={project.Phase || __("String_NotSet")} />
             <DocumentCardActivity
                 activity={__("SiteFields_GtProjectOwner_DisplayName")}
                 people={[
