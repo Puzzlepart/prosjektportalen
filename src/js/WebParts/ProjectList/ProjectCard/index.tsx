@@ -36,8 +36,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
             <DocumentCardTitle
                 title={project.Title}
                 shouldTruncate={true} />
-            <DocumentCardLocation
- -                location={project.Phase || __("String_NotSet")} />
+            <DocumentCardLocation location={project.Phase || __("String_NotSet")} />
             <DocumentCardActivity
                 activity={__("SiteFields_GtProjectOwner_DisplayName")}
                 people={[
