@@ -3,7 +3,7 @@ interface IColumnConfig {
     key: string;
     fieldName: string;
     readOnly: boolean;
-    render: "Date" | "Note" | "Persona" | "Status" | "Default";
+    render: "Date" | "Note" | "Currency" | "Status" | "Default";
     minWidth?: number;
     maxWidth?: number;
     isResizable?: boolean;

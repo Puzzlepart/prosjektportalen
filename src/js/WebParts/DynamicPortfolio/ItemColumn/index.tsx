@@ -1,10 +1,5 @@
 import * as React from "react";
 import * as Util from "../../../Util";
-import {
-    Persona,
-    PersonaSize,
-    PersonaPresence,
-} from "office-ui-fabric-react/lib/Persona";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { IColumnConfig } from "../Configuration";
 import { GetStatusProperties } from "../../ProjectStatus/Utils";
@@ -19,6 +14,14 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  */
 const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
+
+    if (!columnValue) {
+        return (
+            <span>
+            </span>
+        );
+    }
+
     if (column.key === "Title") {
         return (
             <a
@@ -38,23 +41,18 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Note": {
-            return <span title={columnValue}>{columnValue}</span>;
+            return (
+                <span title={columnValue}>{columnValue}</span>
+            );
         }
-        case "Persona": {
-            let [EMail, Name] = columnValue.split(" | ");
-            if (EMail && Name) {
-                const persona = {
-                    imageUrl: Util.userPhoto(EMail),
-                    primaryText: Name,
-                };
-                return (<Persona { ...persona} size={PersonaSize.extraSmall} presence={PersonaPresence.none} />);
-            }
-            return null;
+        case "Currency": {
+            let currValue = Util.toCurrencyFormat(columnValue, "kr");
+            return (
+                <span title={currValue}>{currValue}</span>
+            );
         }
         case "Status": {
-            if (!columnValue) {
-                return null;
-            }
+
             const statusProperties = GetStatusProperties(Util.cleanSearchPropName(column.fieldName), columnValue);
             return (
                 <span>
@@ -63,10 +61,14 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Default": {
-            return <span title={columnValue}>{columnValue}</span>;
+            return (
+                <span title={columnValue}>{columnValue}</span>
+            );
         }
         default: {
-            return <span title={columnValue}>{columnValue}</span>;
+            return (
+                <span title={columnValue}>{columnValue}</span>
+            );
         }
     }
 };

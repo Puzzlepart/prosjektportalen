@@ -317,7 +317,7 @@
         <CHOICES>
             <CHOICE>Default</CHOICE>
             <CHOICE>Date</CHOICE>
-            <CHOICE>Valuta</CHOICE>
+            <CHOICE>Currency</CHOICE>
             <CHOICE>Note</CHOICE>
             <CHOICE>Status</CHOICE>
         </CHOICES>

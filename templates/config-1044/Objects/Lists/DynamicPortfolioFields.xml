@@ -150,21 +150,25 @@
             <pnp:DataValue FieldName="GtDpProperty">GtBudgetTotalOWSCURR</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Totalbudsjett for prosjektet</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">220</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtCostsTotalOWSCURR</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Kostnader påløpt totalt</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">230</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectForecastOWSCURR</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Prognose for prosjektet</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">240</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtBudgetLastReportDateOWSDATE</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Dato for siste rapportering av kostnader</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">250</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
