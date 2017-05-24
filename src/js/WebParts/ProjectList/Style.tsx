@@ -7,8 +7,18 @@ const Style = ({ props }: { props: IProjectListProps }) => {
                     width: ${props.tileWidth}px;
                     margin-bottom: ${props.masonryOptions.gutter}px;
                 }
-                .${props.tileClassName} .ms-DocumentCardPreview-icon img {
-                    max-width: 32px;    
+                .${props.tileClassName} .ms-DocumentCardLocation {
+                    background-color: rgb(51, 51, 51);
+                    color: #fff;
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    opacity: 0.2;
+                }
+                .${props.tileClassName}:hover .ms-DocumentCardLocation {
+                    opacity: 1.0;
+                    -webkit-transition: opacity .35s ease-in-out;
+                    transition: opacity .35s ease-in-out;
                 }
             `}
     </style>;
