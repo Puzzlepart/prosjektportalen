@@ -289,8 +289,8 @@ export const StatusFields: IStatusFields = {
             },
             {
                 Value: "På budsjett",
-                CssClass: "neutral-status",
-                Color: "#e9b359",
+                CssClass: "positive-status",
+                Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
@@ -323,8 +323,8 @@ export const StatusFields: IStatusFields = {
             },
             {
                 Value: "På plan",
-                CssClass: "neutral-status",
-                Color: "#e9b359",
+                CssClass: "positive-status",
+                Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
