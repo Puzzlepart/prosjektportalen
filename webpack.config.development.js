@@ -24,7 +24,8 @@ module.exports = (devtool = "source-map") => {
                 NODE_ENV: JSON.stringify('development')
             }
         }),
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+        new webpack.IgnorePlugin(/xlsx/)];
     let rules = [
         {
             test: /\.js$/,

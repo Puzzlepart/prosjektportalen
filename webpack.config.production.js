@@ -4,7 +4,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = false, bundleAnalyzer = false) => {
+module.exports = (minify = false, bundleAnalyzer = true) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -15,7 +15,9 @@ module.exports = (minify = false, bundleAnalyzer = false) => {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/)];
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+        new webpack.IgnorePlugin(/xlsx/),
+    ];
     if (minify) {
         plugins.push(
             new webpack.optimize.UglifyJsPlugin({
