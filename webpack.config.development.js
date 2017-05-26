@@ -49,7 +49,7 @@ module.exports = (devtool = "source-map") => {
     ]
     let config = {
         cache: true,
-           entry: {
+        entry: {
             main: ['babel-polyfill', './lib/js/index.js'],
             loader: './lib/js/Loader.js'
         },
@@ -73,8 +73,16 @@ module.exports = (devtool = "source-map") => {
         },
         module: {
             rules: rules,
+            noParse: [/jszip.js$/]
         },
-        plugins: plugins
+        plugins: plugins,
+        node: {
+            fs: 'empty',
+            Buffer: false
+        },
+        externals: [
+            { "./cptable": "var cptable", "./jszip": "jszip" }
+        ],
     };
     return config;
 }

@@ -85,8 +85,16 @@ module.exports = (minify = false, bundleAnalyzer = false) => {
         },
         module: {
             rules: rules,
+            noParse: [/jszip.js$/],
         },
-        plugins: plugins
+        plugins: plugins,
+        node: {
+            fs: 'empty',
+            Buffer: false
+        },
+        externals: [
+            { "./cptable": "var cptable", "./jszip": "jszip" }
+        ],
     };
     return config;
 }
