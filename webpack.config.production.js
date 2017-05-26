@@ -4,7 +4,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = false, bundleAnalyzer = true) => {
+module.exports = (minify = false, bundleAnalyzer = false) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -16,7 +16,6 @@ module.exports = (minify = false, bundleAnalyzer = true) => {
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
-        new webpack.IgnorePlugin(/xlsx/),
     ];
     if (minify) {
         plugins.push(
