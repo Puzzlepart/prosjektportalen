@@ -185,7 +185,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         return (
             <Workbook
                 filename={excelExportConfig.fileName}
-                element={<button id={excelExportConfig.triggerId} hidden={true}></button>}>
+                element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
                 {[
                     <Workbook.Sheet
                         data={data.items}
