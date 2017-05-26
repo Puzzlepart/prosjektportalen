@@ -9,6 +9,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010109010058561F86D956412B9DD7957BBCD67AAE01",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
     },
     {
         Title: __("Lists_PhaseChecklist_Title"),
@@ -19,6 +22,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070204",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Views: [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtChecklistStatus", "GtComment"],
@@ -52,6 +58,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070207",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Views: [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectInfoDescription"],
@@ -71,6 +80,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070202",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Views: [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtStakeholderGroup", "GtStakeholderContext", "GtStakeholderStrategy", "GtStakeholderInterest", "GtStakeholderInfluence", "GtStakeholderInfluencePossibilty", "GtStakeholderActions"],
@@ -90,6 +102,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070203",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Fields: [
             `<Field Type="LookupMulti" DisplayName="${__("SiteFields_GtCommunicationTarget_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" Name="GtCommunicationTarget" StaticName="GtCommunicationTarget" InternalName="GtCommunicationTarget" Mult="TRUE" />`,
         ],
@@ -112,6 +127,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070206",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Fields: [
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogEventLookup_DisplayName")}" List="{listid:${__("Lists_MeetingCalendar_Title")}}" ShowField="Title" ID="{20731fb1-e98e-4fdc-b3d6-941b41b8fd6e}" StaticName="GtProjectLogEventLookup" InternalName="GtProjectLogEventLookup" />`,
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogProductLookup_DisplayName")}" List="{listid:${__("Lists_ProjectProducts_Title")}}" ShowField="Title" ID="{022cc93f-13df-4420-bd47-55e4fdae5d18}" StaticName="GtProjectLogProductLookup" InternalName="GtProjectLogProductLookup" />`,
@@ -135,6 +153,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010088578E7470CC4AA68D5663464831070205",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Fields: [
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProductInteressent_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{6d90e0b6-73e6-48fb-aa1e-b897b214f934}" StaticName="GtProductInteressent" InternalName="GtProductInteressent" />`,
         ],
@@ -160,6 +181,9 @@ const Lists: IList[] = [
         {
             ContentTypeID: "0x010088578E7470CC4AA68D566346483107020102",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Views: [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: [
@@ -184,10 +208,8 @@ const Lists: IList[] = [
             ViewFields: [
                 "LinkTitle",
                 "GtRiskProximity",
-                "GtProjectPhase",
                 "GtRiskAction",
                 "GtRiskStrategy",
-                "GtActionResponsible",
                 "GtRiskFactor",
                 "GtRiskFactorPostAction",
             ],
@@ -207,6 +229,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010800233B015F95174C9A8EB505493841DE8D",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Fields: [
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskComElement_DisplayName")}" List="{listid:${__("Lists_CommunicationPlan_Title")}}" ShowField="Title" ID="{087dae25-b007-4e58-91b4-347dde464840}" StaticName="GtProjectTaskComElement" InternalName="GtProjectTaskComElement" />`,
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskRisk_DisplayName")}" List="{listid:${__("Lists_Uncertainties_Title")}}" ShowField="Title" ID="{920b385c-756f-49eb-98e7-4c3ebf15b7f4}" StaticName="GtProjectTaskRisk" InternalName="GtProjectTaskRisk" />`,
@@ -242,6 +267,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010200A2B2AC17A2244B8590398A9D1E7E3E3701",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
     },
     {
         Title: __("Lists_Documents_Title"),
@@ -252,6 +280,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Views: [{
             Title: __("View_AllDocuments_DisplayName"),
             ViewFields: ["DocIcon", "LinkFilename", "GtProjectPhase", "Modified", "Editor"],
@@ -271,6 +302,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x0100B384774BA4EBB842A5E402EBF4707367",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         Fields: [
             `<Field Type="LookupMulti" DisplayName="${__("SiteFields_GtChangeLookup_DisplayName")}" List="{listid:${__("Lists_ChangeAnalysis_Title")}}" ShowField="LinkTitleNoMenu" UnlimitedLengthInDocumentLibrary="FALSE" RelationshipDeleteBehavior="None" ID="{1d5752af-4d26-4aed-b20a-6229ac14ed5d}" StaticName="GtChangeLookup" InternalName="GtChangeLookup" Group="" Description="Foreslått endring fra endringsanalysen" Mult="TRUE" />`,
         ],
@@ -312,6 +346,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x01004D8897A0212F9A40A4C2209D89E5AD4C",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
             Required: true,
@@ -352,6 +389,9 @@ const Lists: IList[] = [
         ContentTypeBindings: [{
             ContentTypeID: "0x01007A831AC68204F04AAA022CFF06C7BAA2",
         }],
+        AdditionalSettings: {
+             EnableVersioning: true,
+        },
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
             Required: false,
