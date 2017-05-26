@@ -120,6 +120,7 @@ export const GenerateColumns = (fields: any[], dataSource: DataSource): any[] =>
 
 interface ITrendIconProps {
     latestVal: number;
+    latestPercentage: number;
     prevVal: number;
     shouldIncrease: boolean;
 }
@@ -127,15 +128,24 @@ interface ITrendIconProps {
 /**
  * TrendIcon
  */
-const TrendIcon = ({ latestVal, prevVal, shouldIncrease }: ITrendIconProps): JSX.Element => {
+const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITrendIconProps): JSX.Element => {
     if (prevVal !== undefined && prevVal !== null) {
         if (prevVal !== latestVal) {
             if (shouldIncrease && (prevVal > latestVal)) {
+                if (latestPercentage >= 100) {
+                    return <span><Icon iconName="StockDown" style={{ color: "red" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                }
                 return <Icon iconName="StockDown" style={{ color: "red" }} />;
             }
             if (!shouldIncrease && (latestVal > prevVal)) {
+                if (latestPercentage >= 100) {
+                    return <span><Icon iconName="StockDown" style={{ color: "red" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                }
                 return <Icon iconName="StockDown" style={{ color: "red" }} />;
             } else {
+                if (latestPercentage >= 100) {
+                    return <span><Icon iconName="StockUp" style={{ color: "green" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                }
                 return <Icon iconName="StockUp" style={{ color: "green" }} />;
             }
         }
@@ -186,6 +196,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
                 return (<div style={{ position: "relative" }}>
                     {LatestPercentage} % <TrendIcon
                         latestVal={LatestValue}
+                        latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
                         shouldIncrease={ValueShouldIncrese} />
                 </div>);
@@ -198,6 +209,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
                 return (<div>
                     {LatestValue} <TrendIcon
                         latestVal={LatestValue}
+                        latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
                         shouldIncrease={ValueShouldIncrese} />
                 </div>);
