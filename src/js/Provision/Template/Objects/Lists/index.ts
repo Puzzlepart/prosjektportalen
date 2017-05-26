@@ -171,6 +171,25 @@ const Lists: IList[] = [
                 "GtRiskProbabilityPostAction",
                 "GtRiskConsequencePostAction",
                 "GtRiskFactorPostAction",
+                "GtRiskStrategy",
+            ],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: "",
+            },
+        },
+        {
+            Title: "Prosjektstatus",
+            ViewFields: [
+                "LinkTitle",
+                "GtRiskProximity",
+                "GtProjectPhase",
+                "GtRiskAction",
+                "GtRiskStrategy",
+                "GtActionResponsible",
+                "GtRiskFactor",
+                "GtRiskFactorPostAction",
             ],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -367,20 +386,6 @@ const Lists: IList[] = [
                                 <FieldRef Name="GtGainLookup" />
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
                             </OrderBy>`,
-            },
-        },
-        {
-            Title: "Pr gevinst",
-            ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
-            AdditionalSettings: {
-                RowLimit: 30,
-                Paged: true,
-                ViewQuery: `<OrderBy>
-                                <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
-                            </OrderBy>
-                            <GroupBy Collapse="TRUE" GroupLimit="30">
-                                <FieldRef Name="GtGainLookup" Ascending="FALSE" />
-                            </GroupBy>`,
             },
         }],
     },

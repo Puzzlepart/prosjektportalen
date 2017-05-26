@@ -80,7 +80,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 comment={project.GtStatusRiskComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Usikkerhet`}
                                 fieldName="GtStatusRisk" />
-                            <RiskOverview viewName="Alle elementer" />
+                            <RiskOverview viewName="Prosjektstatus" />
                         </Element>
                         <Element name="gevinst-section" className="gevinst-section section ms-Grid-row">
                             <SectionHeader
