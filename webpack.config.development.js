@@ -81,7 +81,7 @@ module.exports = (devtool = "source-map") => {
             Buffer: false
         },
         externals: [
-            { "./cptable": "var cptable", "./jszip": "jszip" }
+            { "./cptable": "var cptable", "./jszip": "jszip", '../xlsx.js': 'var _XLSX' }
         ],
     };
     return config;
