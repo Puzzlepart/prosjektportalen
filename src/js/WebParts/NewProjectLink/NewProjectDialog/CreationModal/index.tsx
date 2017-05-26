@@ -84,4 +84,4 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
             });
         }, INTERVAL_DELAY);
     }
-};
+}

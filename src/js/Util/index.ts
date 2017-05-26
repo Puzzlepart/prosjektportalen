@@ -71,7 +71,7 @@ export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx,
         case UserPhotoSource.OWA: {
             return `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${email}&UA=0&size=HR120x120`;
         }
-    };
+    }
 };
 
 /**
@@ -237,7 +237,7 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
             sodKey = "_v_dictSod";
         if (!window[sodKey]["sp.taxonomy.js"]) {
             SP.SOD.registerSod("sp.taxonomy.js", `${scriptbase}/sp.taxonomy.js`);
-        };
+        }
         SP.SOD.executeOrDelayUntilScriptLoaded(() => {
             SP.SOD.executeFunc("sp.taxonomy.js", "SP.Taxonomy", () => {
                 SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("sp.taxonomy.js");

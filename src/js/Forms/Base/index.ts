@@ -3,4 +3,4 @@ export interface IBaseFormModifications {
     EditForm?(): void;
     DispForm?(): void;
     AllItems?(): void;
-};
+}

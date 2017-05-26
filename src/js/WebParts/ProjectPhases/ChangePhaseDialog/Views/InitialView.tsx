@@ -81,4 +81,4 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
             this.commentsField.value = "";
         });
     }
-};
+}

@@ -59,7 +59,7 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
             }
 
         }
-    };
+    }
 
     /**
      * Renders the component

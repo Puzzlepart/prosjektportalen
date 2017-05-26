@@ -12,6 +12,4 @@ export {
     WebSettings,
     ComposedLook,
     PropertyBagEntries,
-}
-
-
+};

@@ -119,4 +119,4 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
             .then(response => resolve({ logItems: response.primarySearchResults.map(r => new LogElement(r)) }))
             .catch(reject);
     })
-};
+}

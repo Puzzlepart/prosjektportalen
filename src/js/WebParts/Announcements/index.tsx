@@ -150,4 +150,4 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
         }
         return null;
     }
-};
+}

@@ -13,4 +13,4 @@ export {
     IColumnConfig,
     IRefinerConfig,
     IViewConfig,
-}
+};

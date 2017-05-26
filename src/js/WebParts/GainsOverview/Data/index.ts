@@ -7,7 +7,7 @@ import DataSource from "../../DataSource";
 export interface IGainsOverviewData {
     items?: any[];
     columns?: IColumn[];
-};
+}
 
 export interface ISpField {
     InternalName: string;

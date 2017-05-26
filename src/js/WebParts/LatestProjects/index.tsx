@@ -154,4 +154,4 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
                 resolve({ webinfos: webinfos });
             }).catch(reject);
     })
-};
+}

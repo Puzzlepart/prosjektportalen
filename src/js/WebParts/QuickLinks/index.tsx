@@ -99,4 +99,4 @@ export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQ
             return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
         }
     }
-};
+}

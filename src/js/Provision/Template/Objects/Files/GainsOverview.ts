@@ -16,7 +16,7 @@ export const GainsOverview: IFile = {
             Order: 0,
             Contents: {
                 Xml: `<webParts>
-    <webPart 
+    <webPart
         xmlns="http://schemas.microsoft.com/WebPart/v3">
         <metaData>
             <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />

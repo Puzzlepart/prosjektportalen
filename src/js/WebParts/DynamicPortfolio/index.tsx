@@ -513,4 +513,4 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         });
         return hashObject;
     }
-};
+}

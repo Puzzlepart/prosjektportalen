@@ -260,6 +260,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             });
         }, reject);
     })
-};
+}
 
 export { ProjectInfoRenderMode };

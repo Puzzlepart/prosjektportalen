@@ -10,7 +10,7 @@ export interface IStatusElementProps {
     comment: string;
     scrollTo?: any;
     fieldName?: string;
-};
+}
 
 /**
  * Status element

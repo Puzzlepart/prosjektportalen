@@ -28,7 +28,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
 
     public componentDidMount(): void {
         this.fetchData();
-    };
+    }
 
     public render(): JSX.Element {
         let { isLoading, project } = this.state;
@@ -100,7 +100,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                     </StickyContainer >
                 </div >
             );
-        };
+        }
     }
 
     /**
@@ -116,4 +116,4 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
             });
         });
     }
-};
+}

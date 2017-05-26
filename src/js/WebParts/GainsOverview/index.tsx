@@ -213,4 +213,4 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
             },
         });
     }
-};
+}

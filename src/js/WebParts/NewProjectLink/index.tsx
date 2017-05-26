@@ -71,4 +71,4 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
                 }} />
         );
     }
-};
+}

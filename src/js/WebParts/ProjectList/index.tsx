@@ -157,4 +157,4 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             .then(({ primarySearchResults }) => resolve({ projects: primarySearchResults.map(result => new Project(result)) }))
             .catch(reject);
     })
-};
+}

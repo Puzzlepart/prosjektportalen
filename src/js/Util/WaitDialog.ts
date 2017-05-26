@@ -61,4 +61,4 @@ export default class WaitDialog {
     public updateMessage(message: string): void {
         document.getElementById(this.ids.message).innerHTML = message;
     }
-};
+}

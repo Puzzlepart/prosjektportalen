@@ -127,7 +127,4 @@ export class Filter extends React.PureComponent<IFilterProps, IFilterState> {
         }
         this.setState({ filter: filter }, () => onFilterChange(filter));
     }
-};
-
-
-
+}

@@ -15,7 +15,7 @@ export default class StampVersion {
                 _container.innerHTML = String.format(this.template, v, additionalClassNames.join(" "));
             }
         }, _ => null);
-    };
+    }
 
     /**
      * Get version from web property bag
@@ -39,4 +39,4 @@ export default class StampVersion {
             }, "sp.js");
         });
     }
-};
+}

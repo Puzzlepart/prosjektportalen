@@ -5,5 +5,5 @@ interface IExperienceLogState {
     logItems?: LogElement[];
     searchTerm?: string;
 }
-export { LogElement }
+export { LogElement };
 export default IExperienceLogState;

@@ -133,4 +133,4 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
     private hideDialog = (event?): void => {
         this.setState({ changePhase: null });
     }
-};
+}
