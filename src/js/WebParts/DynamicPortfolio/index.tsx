@@ -224,7 +224,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the command bar from office-ui-fabric-react
      */
-    private renderCommandBar = ({ excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
+    private renderCommandBar = ({ excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
         if (!currentView) {
             return null;
         }
@@ -260,7 +260,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 ],
             });
         }
-        if (excelExportConfig) {
+        if (excelExportEnabled && excelExportConfig) {
             items.push({
                 key: "ExcelExport",
                 name: excelExportConfig.buttonLabel,
