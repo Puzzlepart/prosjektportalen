@@ -569,7 +569,7 @@
     <value>Risk factor</value>
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_DisplayName" xml:space="preserve">
-    <value>New risk factor</value>
+    <value>Risk factor post action</value>
   </data>
   <data name="SiteFields_GtProjectTaskRisk_DisplayName" xml:space="preserve">
     <value>Relevant uncertainty</value>

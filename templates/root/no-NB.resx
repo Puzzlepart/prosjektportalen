@@ -566,7 +566,7 @@
     <value>Risikofaktor</value>
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_DisplayName" xml:space="preserve">
-    <value>Ny risikofaktor</value>
+    <value>Risikofaktor etter tiltak</value>
   </data>
   <data name="SiteFields_GtProjectTaskRisk_DisplayName" xml:space="preserve">
     <value>Relevant usikkerhet</value>
