@@ -15,6 +15,9 @@ const SCRIPTS: IScript[] = [
         fileName: "fetch.min.js",
     },
     {
+        fileName: "xlsx.full.min.js",
+    },
+    {
         fileName: "pp.main.js",
         appendVersion: true,
     },

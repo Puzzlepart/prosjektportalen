@@ -1,12 +1,11 @@
 import * as React from "react";
+import * as jQuery from "jquery";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
+import Workbook from "react-excel-workbook";
 import {
     IGroup,
     DetailsList,
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
 } from "office-ui-fabric-react/lib/DetailsList";
 import {
     Spinner,
@@ -26,22 +25,14 @@ import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import IDynamicPortfolioProps from "./IDynamicPortfolioProps";
-import IDynamicPortfolioState from "./IDynamicPortfolioState";
+import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
+import IDynamicPortfolioState, { DynamicPortfolioInitialState } from "./IDynamicPortfolioState";
 
 /**
  * Dynamic Portfolio
  */
 export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
-    public static defaultProps: Partial<IDynamicPortfolioProps> = {
-        searchProperty: "Title",
-        showGroupBy: true,
-        modalHeaderClassName: "ms-font-xxl",
-        projectInfoFilterField: "GtPcPortfolioPage",
-        constrainMode: ConstrainMode.horizontalConstrained,
-        layoutMode: DetailsListLayoutMode.fixedColumns,
-        selectionMode: SelectionMode.none,
-    };
+    public static defaultProps = DynamicPortfolioDefaultProps;
     private configuration: Configuration.IConfiguration = null;
 
     /**
@@ -49,12 +40,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      */
     constructor() {
         super();
-        this.state = {
-            isLoading: true,
-            searchTerm: "",
-            currentFilters: {},
-            showFilterPanel: false,
-        };
+        this.state = DynamicPortfolioInitialState;
     }
 
     /**
@@ -76,7 +62,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         return (
             <div>
                 <div>
-                    {this.renderCommandBar(this.state)}
+                    {this.renderCommandBar(this.props, this.state)}
                     <div style={{ height: 10 }}></div>
                     <SearchBox
                         onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
@@ -85,6 +71,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 </div>
                 {this.renderFilterPanel(this.state)}
                 {this.renderProjectInfoModal(this.state)}
+                {this.renderWorkbook(this.props, this.state)}
             </div>
         );
     }
@@ -186,6 +173,36 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     }
 
     /**
+     * Render workbook
+     */
+    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) => {
+        if (isLoading) {
+            return null;
+        }
+
+        const data = this.getFilteredData(this.state);
+
+        return (
+            <Workbook
+                filename={excelExportConfig.fileName}
+                element={<button id={excelExportConfig.triggerId} hidden={true}></button>}>
+                {[
+                    <Workbook.Sheet
+                        data={data.items}
+                        name={excelExportConfig.sheetName}>
+                        {data.columns.map((col, key) => (
+                            <Workbook.Column
+                                key={key}
+                                label={col.name}
+                                value={col.key} />
+                        ))}
+                    </Workbook.Sheet>,
+                ]}
+            </Workbook>
+        )
+    }
+
+    /**
      * Render Filter Panel
      */
     private renderFilterPanel = ({ filters, showFilterPanel }: IDynamicPortfolioState) => {
@@ -205,7 +222,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the command bar from office-ui-fabric-react
      */
-    private renderCommandBar = ({ currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
+    private renderCommandBar = ({ excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
         if (!currentView) {
             return null;
         }
@@ -239,6 +256,17 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     },
                     ...groupByColumns,
                 ],
+            });
+        }
+        if (excelExportConfig) {
+            items.push({
+                key: "ExcelExport",
+                name: excelExportConfig.buttonLabel,
+                iconProps: { iconName: excelExportConfig.buttonIcon },
+                onClick: e => {
+                    e.preventDefault();
+                    jQuery(`#${excelExportConfig.triggerId}`).trigger("click");
+                },
             });
         }
 
