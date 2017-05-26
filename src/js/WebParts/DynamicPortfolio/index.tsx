@@ -201,7 +201,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     </Workbook.Sheet>,
                 ]}
             </Workbook>
-        )
+        );
     }
 
     /**
