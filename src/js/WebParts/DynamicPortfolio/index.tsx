@@ -18,6 +18,7 @@ import {
     MessageBar,
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
+import * as Util from "../../Util";
 import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
@@ -184,10 +185,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
         return (
             <Workbook
-                filename={excelExportConfig.fileName}
+                filename={String.format(excelExportConfig.fileName, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"))}
                 element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
                 {[
                     <Workbook.Sheet
+                        key={0}
                         data={data.items}
                         name={excelExportConfig.sheetName}>
                         {data.columns.map((col, key) => (

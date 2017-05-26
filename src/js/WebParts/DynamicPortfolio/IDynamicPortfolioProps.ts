@@ -32,7 +32,7 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     layoutMode: DetailsListLayoutMode.fixedColumns,
     selectionMode: SelectionMode.none,
     excelExportConfig: {
-        fileName: "Porteføljeoversikt-2017-04-28-14-46.xlsx",
+        fileName: __("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
         triggerId: "export-workbook",
         buttonLabel: "Eksporter til Excel",
