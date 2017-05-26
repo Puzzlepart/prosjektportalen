@@ -24,4 +24,11 @@ interface IDynamicPortfolioState {
     showProjectInfo?: any;
 }
 
+export const DynamicPortfolioInitialState: Partial<IDynamicPortfolioState> = {
+    isLoading: true,
+    searchTerm: "",
+    currentFilters: {},
+    showFilterPanel: false,
+};
+
 export default IDynamicPortfolioState;
