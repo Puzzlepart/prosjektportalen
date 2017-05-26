@@ -133,20 +133,47 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
         if (prevVal !== latestVal) {
             if (shouldIncrease && (prevVal > latestVal)) {
                 if (latestPercentage >= 100) {
-                    return <span><Icon iconName="StockDown" style={{ color: "red" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                    return (
+                        <span>
+                            <Icon iconName="StockDown" style={{ color: "red" }} />
+                            <Icon iconName="Trophy" style={{ color: "gold" }} />
+                        </span>
+                    );
                 }
-                return <Icon iconName="StockDown" style={{ color: "red" }} />;
+                return (
+                    <span>
+                        <Icon iconName="StockDown" style={{ color: "red" }} />
+                    </span>
+                );
             }
             if (!shouldIncrease && (latestVal > prevVal)) {
                 if (latestPercentage >= 100) {
-                    return <span><Icon iconName="StockDown" style={{ color: "red" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                    return (
+                        <span>
+                            <Icon iconName="StockDown" style={{ color: "red" }} />
+                            <Icon iconName="Trophy" style={{ color: "gold" }} />
+                        </span>
+                    );
                 }
-                return <Icon iconName="StockDown" style={{ color: "red" }} />;
+                return (
+                    <span>
+                        <Icon iconName="StockDown" style={{ color: "red" }} />
+                    </span>
+                );
             } else {
                 if (latestPercentage >= 100) {
-                    return <span><Icon iconName="StockUp" style={{ color: "green" }} /> <Icon iconName="Trophy" style={{ color: "gold" }} /></span>;
+                    return (
+                        <span>
+                            <Icon iconName="StockUp" style={{ color: "green" }} />
+                            <Icon iconName="Trophy" style={{ color: "gold" }} />
+                        </span>
+                    );
                 }
-                return <Icon iconName="StockUp" style={{ color: "green" }} />;
+                return (
+                    <span>
+                        <Icon iconName="StockUp" style={{ color: "green" }} />
+                    </span>
+                );
             }
         }
     }

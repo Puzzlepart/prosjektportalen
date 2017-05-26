@@ -49,7 +49,8 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
      * Component did mount
      */
     public componentDidMount(): void {
-        Data.retrieveFromSource(this.props.dataSource).then(data => this.setState({ data: data, isLoading: false }));
+        Data.retrieveFromSource(this.props.dataSource)
+            .then(data => this.setState({ data: data, isLoading: false }));
     }
 
     /**
