@@ -1,5 +1,5 @@
 import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
-import { IFilter } from "./Filter";
+import IFilter from "./FilterPanel/Filter/IFilter";
 import { IViewConfig, IColumnConfig } from "./Configuration";
 
 export interface IDynamicPortfolioErrorMessage {

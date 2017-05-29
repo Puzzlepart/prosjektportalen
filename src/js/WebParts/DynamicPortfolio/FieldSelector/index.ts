@@ -1,4 +1,4 @@
-import { IFilter } from "../Filter";
+import IFilter from "../FilterPanel/Filter/IFilter";
 
 const FieldSelector: IFilter = {
     name: __("DynamicPortfolio_FieldSelector_Name"),

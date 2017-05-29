@@ -19,9 +19,9 @@ import {
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
-import { IFilter } from "./Filter";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
+import IFilter from "./FilterPanel/Filter/IFilter";
 import * as Configuration from "./Configuration";
 import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
@@ -71,7 +71,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     {this.renderItems(this.props, this.state)}
                 </div>
                 {this.renderFilterPanel(this.state)}
-                {this.renderProjectInfoModal(this.state)}
+                {this.renderProjectInfoModal(this.props, this.state)}
                 {this.renderWorkbook(this.props, this.state)}
             </div>
         );
@@ -310,12 +310,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the Project Info modal
      */
-    private renderProjectInfoModal = ({ showProjectInfo }: IDynamicPortfolioState) => {
-        const {
-            modalHeaderClassName,
-            projectInfoFilterField,
-        } = this.props;
-
+    private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) => {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
