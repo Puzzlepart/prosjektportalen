@@ -9,5 +9,5 @@ interface IFilterItemProps {
 }
 
 export default IFilterItemProps;
-export { IFilter }
+export { IFilter };
 
