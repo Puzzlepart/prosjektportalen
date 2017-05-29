@@ -17,11 +17,7 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
             onDismiss={onDismiss}
             headerText={__("String_Filters")}
             type={PanelType.smallFixedFar}>
-            <div
-                className="ms-Grid"
-                style={{
-                    marginTop: 20,
-                }}>
+            <div className="ms-Grid">
                 {filters
                     .filter(filter => filter.items.length > 1)
                     .map((filter, idx) => (

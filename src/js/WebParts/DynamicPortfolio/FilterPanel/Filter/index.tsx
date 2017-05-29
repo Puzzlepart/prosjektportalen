@@ -51,7 +51,7 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
         return (
             <div
                 className="ms-Grid-row"
-                style={{ marginBottom: 20 }}>
+                style={{ marginTop: 20 }}>
                 <div
                     onClick={e => this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }))}
                     style={{
