@@ -85,16 +85,9 @@ module.exports = (minify = false, bundleAnalyzer = false) => {
             extensions: ['.jsx', '.js', '.json', '.txt']
         },
         module: {
-            rules: rules,
-            noParse: [/jszip.js$/],
+            rules: rules
         },
-        plugins: plugins,
-        node: {
-            fs: 'empty'
-        },
-        externals: [
-            { "./cptable": "var cptable", "./jszip": "jszip", '../xlsx.js': 'var _XLSX' }
-        ],
+        plugins: plugins
     };
     return config;
 }

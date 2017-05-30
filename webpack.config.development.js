@@ -3,16 +3,6 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-function isExternal(module) {
-    var userRequest = module.userRequest;
-
-    if (typeof userRequest !== 'string') {
-        return false;
-    }
-
-    return userRequest.indexOf('node_modules') >= 0;
-}
-
 module.exports = (devtool = "source-map") => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
@@ -73,16 +63,9 @@ module.exports = (devtool = "source-map") => {
             extensions: ['.jsx', '.js', '.json', '.txt']
         },
         module: {
-            rules: rules,
-            noParse: [/jszip.js$/]
+            rules: rules
         },
-        plugins: plugins,
-        node: {
-            fs: 'empty'
-        },
-        externals: [
-            { "./cptable": "var cptable", "./jszip": "jszip", '../xlsx.js': 'var _XLSX' }
-        ],
+        plugins: plugins
     };
     return config;
 }

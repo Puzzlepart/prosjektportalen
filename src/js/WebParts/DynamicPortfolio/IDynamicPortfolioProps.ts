@@ -20,8 +20,6 @@ interface IDynamicPortfolioProps {
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
-    excelExportEnabled?: boolean;
-    excelExportConfig?: IDynamicPortfolioExcelExportConfig;
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
@@ -32,14 +30,6 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     constrainMode: ConstrainMode.horizontalConstrained,
     layoutMode: DetailsListLayoutMode.fixedColumns,
     selectionMode: SelectionMode.none,
-    excelExportEnabled: true,
-    excelExportConfig: {
-        fileName: __("DynamicPortfolio_ExcelExportFileName"),
-        sheetName: "Sheet A",
-        triggerId: "export-workbook",
-        buttonLabel: "Eksporter til Excel",
-        buttonIcon: "ExcelDocument",
-    },
 };
 
 export default IDynamicPortfolioProps;

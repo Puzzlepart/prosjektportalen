@@ -2,7 +2,6 @@ import * as React from "react";
 import * as jQuery from "jquery";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import Workbook from "react-excel-workbook";
 import {
     IGroup,
     DetailsList,
@@ -72,7 +71,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 </div>
                 {this.renderFilterPanel(this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
-                {this.renderWorkbook(this.props, this.state)}
             </div>
         );
     }
@@ -170,37 +168,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 })}
                 onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
             />
-        );
-    }
-
-    /**
-     * Render workbook
-     */
-    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) => {
-        if (isLoading) {
-            return null;
-        }
-
-        const data = this.getFilteredData(this.state);
-
-        return (
-            <Workbook
-                filename={String.format(excelExportConfig.fileName, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"))}
-                element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
-                {[
-                    <Workbook.Sheet
-                        key={0}
-                        data={data.items}
-                        name={excelExportConfig.sheetName}>
-                        {data.columns.map((col, key) => (
-                            <Workbook.Column
-                                key={key}
-                                label={col.name}
-                                value={col.key} />
-                        ))}
-                    </Workbook.Sheet>,
-                ]}
-            </Workbook>
         );
     }
 
