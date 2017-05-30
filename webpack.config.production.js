@@ -4,7 +4,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = false, bundleAnalyzer = false) => {
+module.exports = (minify = true, bundleAnalyzer = true) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -90,8 +90,7 @@ module.exports = (minify = false, bundleAnalyzer = false) => {
         },
         plugins: plugins,
         node: {
-            fs: 'empty',
-            Buffer: false
+            fs: 'empty'
         },
         externals: [
             { "./cptable": "var cptable", "./jszip": "jszip", '../xlsx.js': 'var _XLSX' }

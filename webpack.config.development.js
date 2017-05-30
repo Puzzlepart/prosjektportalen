@@ -78,8 +78,7 @@ module.exports = (devtool = "source-map") => {
         },
         plugins: plugins,
         node: {
-            fs: 'empty',
-            Buffer: false
+            fs: 'empty'
         },
         externals: [
             { "./cptable": "var cptable", "./jszip": "jszip", '../xlsx.js': 'var _XLSX' }
