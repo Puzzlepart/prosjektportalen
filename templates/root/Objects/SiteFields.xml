@@ -340,11 +340,11 @@
     <Field Type="Boolean" DisplayName="Default" ID="{19c0c03c-678a-4c2a-ab9b-cb9ffd903012}" StaticName="GtLccDefault" Name="GtLccDefault" Group="{resource:SiteFields_Group}">
         <Default>1</Default>
     </Field>
-    <Field Type="Text" DisplayName="Icon" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="GtDpIcon" Name="GtDpIcon" Group="{resource:SiteFields_Group}" />
-    <Field Type="Boolean" DisplayName="PersonalView" ID="{9f4ee969-ea00-4cc1-a466-a05c7db4156d}" StaticName="GtDpPersonalView" Name="GtDpPersonalView" Group="{resource:SiteFields_Group}">
+    <Field Type="Text" DisplayName="Icon" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="GtDpIcon" Name="GtDpIcon" Group="{resource:SiteFields_Group}" Description="Select an icon name from https://dev.office.com/fabric#/styles"/>
+    <Field Type="Boolean" DisplayName="PersonalView" ID="{9f4ee969-ea00-4cc1-a466-a05c7db4156d}" StaticName="GtDpPersonalView" Name="GtDpPersonalView" Group="{resource:SiteFields_Group}" Description="If checked, this view will only be available for the user that created this item.">
         <Default>0</Default>
     </Field>
-    <Field Type="Boolean" DisplayName="GroupBy" Group="{resource:SiteFields_Group}" ID="{d1269eee-7acf-42ae-be80-cfb010117463}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpGroupBy" Name="GtDpGroupBy">
+    <Field Type="Boolean" DisplayName="GroupBy" Group="{resource:SiteFields_Group}" ID="{d1269eee-7acf-42ae-be80-cfb010117463}" SourceID="{fe9a6550-f4c9-4a7a-97d0-abef48fdfa65}" StaticName="GtDpGroupBy" Name="GtDpGroupBy" Description="If checked, users will be able to group by this field.">
         <Default>0</Default>
     </Field>
     <Field Type="Boolean" DisplayName="ShowOnProjectStatus" ID="{1e99fca0-3e0f-4632-9dd1-901bd09a13bc}" StaticName="GtPcProjectStatus" Name="GtPcProjectStatus" Group="{resource:SiteFields_Group}" />
