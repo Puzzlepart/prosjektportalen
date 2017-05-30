@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as jQuery from "jquery";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -17,7 +16,6 @@ import {
     MessageBar,
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
-import * as Util from "../../Util";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import IFilter from "./FilterPanel/Filter/IFilter";
@@ -191,7 +189,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Renders the command bar from office-ui-fabric-react
      */
-    private renderCommandBar = ({ excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
+    private renderCommandBar = ({ }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
         if (!currentView) {
             return null;
         }
@@ -225,17 +223,6 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     },
                     ...groupByColumns,
                 ],
-            });
-        }
-        if (excelExportEnabled && excelExportConfig) {
-            items.push({
-                key: "ExcelExport",
-                name: excelExportConfig.buttonLabel,
-                iconProps: { iconName: excelExportConfig.buttonIcon },
-                onClick: e => {
-                    e.preventDefault();
-                    jQuery(`#${excelExportConfig.triggerId}`).trigger("click");
-                },
             });
         }
 
