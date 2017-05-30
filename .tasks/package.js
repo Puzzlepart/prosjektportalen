@@ -18,7 +18,6 @@ gulp.task("package:code", ["build:lib"], (done) => {
         done();
     });
 });
-
 gulp.task("package:code::eval", ["build:lib"], (done) => {
     webpack(webpackConfigDev("eval"), (err, stats) => {
         if (err) {
@@ -30,7 +29,6 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
         done();
     });
 });
-
 gulp.task("package:code::prod", ["build:lib"], (done) => {
     webpack(webpackConfigProd(), (err, stats) => {
         if (err) {
@@ -42,7 +40,6 @@ gulp.task("package:code::prod", ["build:lib"], (done) => {
         done();
     });
 });
-
 gulp.task("package:code::minify", ["build:lib"], (done) => {
     webpack(webpackConfigProd(true), (err, stats) => {
         if (err) {
@@ -54,17 +51,17 @@ gulp.task("package:code::minify", ["build:lib"], (done) => {
         done();
     });
 });
-
 gulp.task("package:styles", ["build:theme"], (done) => {
     return gulp.src(config.paths.stylesMain)
         .pipe(stylus(config.stylus))
         .pipe(gulp.dest(config.paths.dist));
 });
-
 gulp.task("package", ["copy:assets:dist", "package:code", "package:styles"], (done) => {
     done();
 });
-
 gulp.task("package::prod", ["copy:assets:dist", "package:code::prod", "package:styles"], (done) => {
+    done();
+});
+gulp.task("package::minify", ["copy:assets:dist", "package:code::minify", "package:styles"], (done) => {
     done();
 });

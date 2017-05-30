@@ -31,3 +31,10 @@ gulp.task("release", (done) => {
     });
 });
 
+gulp.task("release::minify", (done) => {
+    runSequence("default::minify", "copy:build", "copy:manualconf", "zip:dist", () => {
+        done();
+    });
+});
+
+

@@ -8,3 +8,6 @@ gulp.task("default", (done) => {
 gulp.task("default::prod", (done) => {
     runSequence("clean", "build:jsonresources", "lint:ts", "package::prod", "build:pnp", done)
 });
+gulp.task("default::minify", (done) => {
+    runSequence("clean", "build:jsonresources", "lint:ts", "package::minify", "build:pnp", done)
+});
