@@ -4,7 +4,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = true, bundleAnalyzer = true) => {
+module.exports = (minify = false, bundleAnalyzer = false) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
@@ -68,7 +68,7 @@ module.exports = (minify = true, bundleAnalyzer = true) => {
         },
         output: {
             path: path.join(__dirname, "dist/js"),
-            filename: minify ? "pp.[name].min.js" : "pp.[name].js",
+            filename: "pp.[name].js",
             libraryTarget: "umd",
         },
         devtool: "source-map",
