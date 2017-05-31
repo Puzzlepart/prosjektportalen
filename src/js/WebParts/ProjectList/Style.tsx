@@ -13,12 +13,13 @@ const Style = ({ props }: { props: IProjectListProps }) => {
                     text-transform: uppercase;
                     letter-spacing: 2px;
                     text-align: center;
-                    opacity: 0.2;
+                    opacity: 0.5;
                 }
                 .${props.tileClassName}:hover .ms-DocumentCardLocation {
                     opacity: 1.0;
                     -webkit-transition: opacity .35s ease-in-out;
                     transition: opacity .35s ease-in-out;
+                    text-decoration: none;
                 }
             `}
     </style>;
