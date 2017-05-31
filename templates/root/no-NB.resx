@@ -674,7 +674,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
-    <value>Kommentar til status kvalitet angitt over</value>
+    <value>Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål</value>
   </data>
   <data name="SiteFields_GtStatusRiskComment_Description" xml:space="preserve">
     <value>Kommentar til status risiko angitt over</value>
@@ -812,7 +812,7 @@
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_Description" xml:space="preserve">
-    <value>Kommentar til status fremdrift angitt over</value>
+    <value>Kommentar til status fremdrift angitt over. Hva er fremdriften på leveransene i prosjektet?</value>
   </data>
   <data name="SiteFields_GtProjectGoals_Description" xml:space="preserve">
     <value>Beskriv hva prosjektet skal levere</value>
