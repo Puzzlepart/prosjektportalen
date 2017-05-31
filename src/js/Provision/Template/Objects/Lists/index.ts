@@ -167,6 +167,15 @@ const Lists: IList[] = [
                 Paged: true,
                 ViewQuery: "",
             },
+        },
+        {
+            Title: "Prosjektstatus",
+            ViewFields: ["LinkTitle", "GtProductAcceptanceDate", "GtProductStatus", "GtProductStatusComment", "GtProductQualityExpectations"],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: "",
+            },
         }],
     },
     {

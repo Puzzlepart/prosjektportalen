@@ -21,29 +21,27 @@ export class ProductsList extends React.Component<any, any> {
     }
 
     public componentDidMount(): void {
-        const { viewName } = this.props;
         let list = sp.web.lists.getByTitle(__("Lists_ProjectProducts_Title"));
-        let batch = sp.createBatch();
         Promise.all([
-            list.items.expand("FieldValuesAsHtml").inBatch(batch).get(),
-            list.fields.inBatch(batch).get(),
-            list.views.getByTitle(viewName).expand("ViewFields").inBatch(batch).get(),
-        ]).then(([items, fields, view]) => {
-            let columns: IColumn[] = view.ViewFields.Items.results.map(viewField => {
-                let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
-                return ({
-                    key: field ? field.InternalName : "",
-                    fieldName: field ? field.InternalName : "",
-                    name: field ? field.Title : "",
-                    minWidth: 100,
+            list.items.expand("FieldValuesAsHtml").get(),
+            list.fields.get(),
+            list.views.getByTitle(this.props.viewName).expand("ViewFields").get(),
+        ])
+            .then(([items, fields, view]) => {
+                let columns: IColumn[] = view.ViewFields.Items.results.map(viewField => {
+                    let [field] = fields.filter(f => f.InternalName === viewField.replace("Link", ""));
+                    return ({
+                        key: field ? field.InternalName : "",
+                        fieldName: field ? field.InternalName : "",
+                        name: field ? field.Title : "",
+                        minWidth: field && field.TypeAsString === "Note" ? 300 : 100,
+                    });
+                });
+                this.setState({
+                    items: items.map(i => i.FieldValuesAsHtml),
+                    columns: columns,
                 });
             });
-            this.setState({
-                items: items.map(i => i.FieldValuesAsHtml),
-                columns: columns,
-            });
-        });
-        batch.execute();
     }
 
     public render(): JSX.Element {
@@ -71,7 +69,7 @@ export class ProductsList extends React.Component<any, any> {
      */
     private renderItemColumn = (item: any, index: number, column: IColumn): JSX.Element => {
         const fieldValue = item[column.fieldName];
-        return (<span dangerouslySetInnerHTML={{ __html: fieldValue }}></span>);
+        return (<span title={fieldValue} dangerouslySetInnerHTML={{ __html: fieldValue }}></span>);
     }
 
     /**
