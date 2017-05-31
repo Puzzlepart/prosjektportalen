@@ -175,7 +175,6 @@
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
             <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
             <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
@@ -204,7 +203,6 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="Dynamic Portfolio View" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Hidden="true" />
             <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
             <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="GtDpSearchQuery" Required="true" />
             <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
