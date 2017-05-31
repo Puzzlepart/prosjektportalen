@@ -328,7 +328,9 @@
     <Field Type="Number" DisplayName="MaxWidth" ID="{915edd68-78cd-48fb-8648-9ec38bc02d86}" StaticName="GtDpMaxWidth" Name="GtDpMaxWidth" Group="{resource:SiteFields_Group}">
         <Default>100</Default>
     </Field>
-    <Field Type="Note" DisplayName="Query" ID="{31e405e0-2890-439d-9c9f-42354154feda}" StaticName="GtDpSearchQuery" Name="GtDpSearchQuery" Group="{resource:SiteFields_Group}" />
+    <Field Type="Note" DisplayName="Query" ID="{31e405e0-2890-439d-9c9f-42354154feda}" StaticName="GtDpSearchQuery" Name="GtDpSearchQuery" Group="{resource:SiteFields_Group}" Description="For more information about writing search queries, see Keyword Query Language (KQL) syntax reference https://dev.office.com/sharepoint/docs/general-development/keyword-query-language-kql-syntax-reference">
+        <Default>ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL}</Default>
+    </Field>
     <Field Type="Text" DisplayName="SourceUrl" ID="{753af53c-e135-4992-9f12-cffa889be1b8}" StaticName="GtLccSourceUrl" Name="GtLccSourceUrl" Group="{resource:SiteFields_Group}" />
     <Field Type="Text" DisplayName="SourceList" ID="{82c3fe98-7bce-4234-9eea-0ae30984dbd8}" StaticName="GtLccSourceList" Name="GtLccSourceList" Group="{resource:SiteFields_Group}" />
     <Field Type="Text" DisplayName="DestinationList" ID="{008bb566-26c3-4cac-8d16-9bf3b1c5fb4b}" StaticName="GtLccDestinationList" Name="GtLccDestinationList" Group="{resource:SiteFields_Group}" />
