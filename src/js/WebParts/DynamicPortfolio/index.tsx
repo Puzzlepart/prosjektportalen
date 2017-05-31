@@ -113,7 +113,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                                 defaultSelected: Array.contains(initialView.fields, col.name),
                                 readOnly: col.readOnly,
                             }));
-                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, initialView));
+                            let filters = this.getSelectedFiltersWithItems(response.refiners, initialView).concat([FieldSelector]);
                             resolve({
                                 selectedColumns: this.configuration.columns.filter(fc => Array.contains(initialView.fields, fc.name)),
                                 fieldNames: fieldNames,
@@ -326,7 +326,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
-     * the filters are checked against the against refiners retrieved by search.
+     * the filters are checked against refiners retrieved by search.
      *
      * @param refiners Refiners retrieved by search
      * @param viewConfig View configuration
