@@ -9,7 +9,7 @@
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">PhotoCollection</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,4,5,8,9</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,17,16,8,9,3,6,7</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -19,7 +19,7 @@
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">BarChart4</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,11,12,13,14,15</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,11,12,13,14,15,16</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -29,7 +29,7 @@
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,11,12,13,14,15</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,11,12,13,14,15,16</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
