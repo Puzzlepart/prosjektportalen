@@ -9,7 +9,7 @@
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">PhotoCollection</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpFieldsLookup">1,17,16,8,9,3,6,7</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,17,8,9,3,6,7</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
