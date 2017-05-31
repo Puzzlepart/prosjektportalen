@@ -1187,7 +1187,7 @@
     <value>Foran plan</value>
   </data>
   <data name="Choice_GtStatusTime_SmallDelay" xml:space="preserve">
-    <value>Mindre forsinkelse som kan tas igjen</value>
+    <value>Mindre forsinkelser</value>
   </data>
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Forsinket</value>
@@ -1250,7 +1250,7 @@
     <value>Under budsjett</value>
   </data>
   <data name="Choice_GtStatusBudget_SlighlyBehindBudget" xml:space="preserve">
-    <value>Mindre overskridelser som kan tas igjen</value>
+    <value>Mindre overskridelser</value>
   </data>
   <data name="Choice_GtStatusBudget_OverBudget" xml:space="preserve">
     <value>Over budsjett</value>
@@ -1276,14 +1276,17 @@
   <data name="Choice_GtStatusGainAchievement_High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="Choice_GtStatusQuality_Low" xml:space="preserve">
-    <value>Lav</value>
+  <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
+    <value>Større avvik fra spesifikasjon</value>
   </data>
-  <data name="Choice_GtStatusQuality_Medium" xml:space="preserve">
-    <value>Medium</value>
+  <data name="Choice_GtStatusQuality_SmallDeviation" xml:space="preserve">
+    <value>Mindre avvik fra spesifikasjon</value>
   </data>
-  <data name="Choice_GtStatusQuality_High" xml:space="preserve">
-    <value>Høy</value>
+  <data name="Choice_GtStatusQuality_AsExpected" xml:space="preserve">
+    <value>Ihht. spesifikasjon</value>
+  </data>
+  <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
+    <value>Bedre enn spesifikasjon</value>
   </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Åpen</value>
