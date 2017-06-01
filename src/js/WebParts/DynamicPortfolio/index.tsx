@@ -311,16 +311,17 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
  * Render workbook
  */
-    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) => {
+    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) => {
         if (isLoading) {
             return null;
         }
 
+        const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         const data = this.getFilteredData(this.state);
 
         return (
             <Workbook
-                filename={String.format(excelExportConfig.fileName, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"))}
+                filename={fileName}
                 element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
                 {[
                     <Workbook.Sheet
