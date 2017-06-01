@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, animateScroll } from "react-scroll";
 import { Icon } from "../../@Components";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import DoExport from "../PDFExport";
 
 const StatusNavigation = (project) => {
@@ -46,20 +47,17 @@ const StatusNavigation = (project) => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
-                <div className=" ms-Grid-col ms-u-md10 ms-u-lg10">
-                    <h2 style={{
-                        color: "#fff",
-                        paddingTop: 10,
-                        paddingBottom: 10,
-                    }}>Statusrapport</h2>
+                <div className="ms-Grid-col ms-u-md10 ms-u-lg10">
+                    <h2 className="status-page-header">Statusrapport</h2>
                 </div>
                 <div className=" ms-Grid-col ms-u-md2 ms-u-lg2">
-                    <button
+                    <PrimaryButton
+                        className="save-pdf-btn"
                         onClick={e => {
                             e.preventDefault();
                             DoExport(project);
                         }}
-                        >Eksporter til PDF</button>
+                        iconProps={{ iconName: "PDF" }}>Eksporter til PDF</PrimaryButton>
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">

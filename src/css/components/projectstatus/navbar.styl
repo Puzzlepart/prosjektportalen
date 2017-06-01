@@ -48,6 +48,7 @@
             color: white;
             background: $SuiteBarBackground;
             max-height: 50px;
+            padding: 10px;
 
             p {
                 line-height: 48px;
@@ -72,8 +73,15 @@
                 }
             }
 
-            .save-pdf-container {
+            .save-pdf-btn {
                 cursor: pointer;
+                background-color: transparent;
+                color: #fff;
+                border: 0;
+
+                &:hover {
+                    border: 0;
+                }
             }
         }
     }
