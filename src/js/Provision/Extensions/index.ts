@@ -48,6 +48,7 @@ const GetValidExtensions = (extensionLib = __("Lists_Extensions_Title")) => new 
         .items
         .select("Title", "LinkFilename", "FileRef")
         .filter("ExtensionEnabled eq 1")
+        .orderBy("ExtensionOrder")
         .get()
         .then(items => {
             Promise.all(items.map(item => LoadExtension(item)))
