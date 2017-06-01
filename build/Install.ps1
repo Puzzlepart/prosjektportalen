@@ -56,13 +56,23 @@ if (-not $SkipLoadingBundle.IsPresent) {
     Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
     Import-Module "$BundlePath\$Environment.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
+
+if (-not $AssetsUrl) {
+    $AssetsUrl = $Url
+}
+if (-not $DataSourceSiteUrl) {
+    $DataSourceSiteUrl = $Url
+}
+
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
-Write-Host "Installing Prosjektportalen" -ForegroundColor Green
+Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
 Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
-Write-Host "Installation URL: $Url" -ForegroundColor Green
-Write-Host "Environment: $Environment" -ForegroundColor Green
+Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
+Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
+Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
+Write-Host "Environment:`t`t`tr$Environment" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
 Write-Host "############################################################################" -ForegroundColor Green
 
@@ -70,12 +80,6 @@ if ($Debug.IsPresent) {
     Set-PnPTraceLog -On -Level Debug
 } else {
     Set-PnPTraceLog -Off
-}
-if (-not $AssetsUrl) {
-    $AssetsUrl = $Url
-}
-if (-not $DataSourceSiteUrl) {
-    $DataSourceSiteUrl = $Url
 }
 if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
@@ -95,7 +99,7 @@ function Connect-SharePoint ($Url) {
 try {
     Connect-SharePoint $AssetsUrl
     Write-Host "Deploying required resources.. " -ForegroundColor Green -NoNewLine
-    Apply-PnPProvisioningTemplate ".\templates\assets.pnp"
+    Apply-PnPProvisioningTemplate ".`templates\assets.pnp"
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
@@ -110,12 +114,12 @@ try {
     Connect-SharePoint $Url
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
+        Apply-PnPProvisioningTemplate ".`templates`taxonomy.pnp"
         Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-    Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
-    Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
+    Apply-PnPProvisioningTemplate ".`templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
+    Apply-PnPProvisioningTemplate ".`templates\sitesettings-$($Language).pnp"
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
@@ -131,7 +135,7 @@ if (-not $SkipData.IsPresent) {
     try {
         Connect-SharePoint $DataSourceSiteUrl
         Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\data-$($Language).pnp"
+        Apply-PnPProvisioningTemplate ".`templates\data-$($Language).pnp"
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -147,7 +151,7 @@ if (-not $SkipDefaultConfig.IsPresent) {
     try {
         Connect-SharePoint $Url
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
+        Apply-PnPProvisioningTemplate ".`templates\config-$($Language).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
