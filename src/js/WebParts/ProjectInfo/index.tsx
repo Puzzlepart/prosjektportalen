@@ -89,8 +89,12 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                                 hidden={!modalOptions.title}>
                                 <span>{modalOptions.title}</span>
                             </div>
-                            {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
-                            {this.renderInner()}
+                            {isLoading ?
+                                (
+                                    <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />
+                                )
+                                :
+                                this.renderInner()}
                             <DefaultButton
                                 hidden={isLoading}
                                 href={this.props.webUrl}
