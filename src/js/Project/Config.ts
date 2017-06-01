@@ -6,7 +6,7 @@ export const DOCUMENT_LIBRARY = __("Lists_Documents_Title");
 /**
  * Frontpage lists
  */
-export const FRONTPAGE_LISTS = [__("Lists_Tasks_Title"), __("Lists_Uncertainties_Title"), __("Lists_Documents_Title")];
+export const FRONTPAGE_LISTS = [__("Lists_Uncertainties_Title"), __("Lists_Documents_Title")];
 
 /**
  * Frontpage lists view query
