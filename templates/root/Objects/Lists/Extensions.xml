@@ -4,7 +4,7 @@
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Extensions/Forms/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="FileLeafRef" />
+                    <FieldRef Name="ExtensionOrder" />
                 </OrderBy>
             </Query>
             <ViewFields>
@@ -21,7 +21,7 @@
         <View MobileView="TRUE" Type="HTML" DisplayName="Aktivert" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="FileLeafRef" />
+                    <FieldRef Name="ExtensionOrder" />
                 </OrderBy>
                 <Where>
                     <Eq>
