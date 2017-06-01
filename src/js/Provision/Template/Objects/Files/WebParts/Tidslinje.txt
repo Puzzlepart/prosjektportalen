@@ -1,0 +1,19 @@
+<webParts>
+  <webPart xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.SharePoint.WebPartPages.SPTimelineWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>Cannot import this Web Part.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="ListUrl" type="string">{site}/Lists/Oppgaver</property>
+        <property name="TitleUrl" type="string">{site}/Lists/Oppgaver</property>
+        <property name="CurrentTaskListWebAddress" type="string">{site}</property>
+        <property name="PageAddress" type="string">{site}</property>
+        <property name="ViewName" type="string">Tidslinje</property>
+        <property name="Title" type="string">Tidslinje</property>
+        <property name="TimelineType" type="string">TaskListTimeline</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>

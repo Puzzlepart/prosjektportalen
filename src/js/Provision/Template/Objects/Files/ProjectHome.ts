@@ -20,23 +20,11 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Oppgaver (gjeldende fase)",
+            Title: "Tidslinje",
             Zone: "LeftColumn",
             Order: 1,
             Contents: {
-                Xml: require("./WebParts/Oppgaver (gjeldende fase)"),
-            },
-            ListView: {
-                List: "Oppgaver",
-                View: {
-                    Title: "",
-                    ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo"],
-                    AdditionalSettings: {
-                        RowLimit: 10,
-                        Paged: true,
-                        ViewQuery: "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>",
-                    },
-                },
+                Xml: require("./WebParts/Tidslinje"),
             },
         },
         {
