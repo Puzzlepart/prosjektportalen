@@ -5,7 +5,7 @@ import { sp } from "sp-pnp-js";
  */
 export const DEFAULT_SEARCH_SETTINGS = {
     Querytext: "*",
-    QueryTemplate: "ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web *",
+    QueryTemplate: "ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} *",
     RowLimit: 500,
     TrimDuplicates: false,
     SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"],

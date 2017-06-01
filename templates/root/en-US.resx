@@ -1273,14 +1273,17 @@
   <data name="Choice_GtStatusGainAchievement_High" xml:space="preserve">
     <value>High</value>
   </data>
-  <data name="Choice_GtStatusQuality_Low" xml:space="preserve">
-    <value>Low</value>
+    <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
+    <value>Larger deviation(s) from specification</value>
   </data>
-  <data name="Choice_GtStatusQuality_Medium" xml:space="preserve">
-    <value>Medium</value>
+  <data name="Choice_GtStatusQuality_SmallDeviation" xml:space="preserve">
+    <value>Smaller deviation(s) from specification</value>
   </data>
-  <data name="Choice_GtStatusQuality_High" xml:space="preserve">
-    <value>High</value>
+  <data name="Choice_GtStatusQuality_AsExpected" xml:space="preserve">
+    <value>As expected</value>
+  </data>
+  <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
+    <value>Exceeds expectations</value>
   </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Open</value>

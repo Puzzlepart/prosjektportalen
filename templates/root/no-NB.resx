@@ -674,7 +674,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
-    <value>Kommentar til status kvalitet angitt over</value>
+    <value>Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål</value>
   </data>
   <data name="SiteFields_GtStatusRiskComment_Description" xml:space="preserve">
     <value>Kommentar til status risiko angitt over</value>
@@ -812,7 +812,7 @@
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_Description" xml:space="preserve">
-    <value>Kommentar til status fremdrift angitt over</value>
+    <value>Kommentar til status fremdrift angitt over. Hva er fremdriften på leveransene i prosjektet?</value>
   </data>
   <data name="SiteFields_GtProjectGoals_Description" xml:space="preserve">
     <value>Beskriv hva prosjektet skal levere</value>
@@ -1187,7 +1187,7 @@
     <value>Foran plan</value>
   </data>
   <data name="Choice_GtStatusTime_SmallDelay" xml:space="preserve">
-    <value>Mindre forsinkelse som kan tas igjen</value>
+    <value>Mindre forsinkelser</value>
   </data>
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Forsinket</value>
@@ -1250,7 +1250,7 @@
     <value>Under budsjett</value>
   </data>
   <data name="Choice_GtStatusBudget_SlighlyBehindBudget" xml:space="preserve">
-    <value>Mindre overskridelser som kan tas igjen</value>
+    <value>Mindre overskridelser</value>
   </data>
   <data name="Choice_GtStatusBudget_OverBudget" xml:space="preserve">
     <value>Over budsjett</value>
@@ -1276,14 +1276,17 @@
   <data name="Choice_GtStatusGainAchievement_High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="Choice_GtStatusQuality_Low" xml:space="preserve">
-    <value>Lav</value>
+  <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
+    <value>Større avvik fra spesifikasjon</value>
   </data>
-  <data name="Choice_GtStatusQuality_Medium" xml:space="preserve">
-    <value>Medium</value>
+  <data name="Choice_GtStatusQuality_SmallDeviation" xml:space="preserve">
+    <value>Mindre avvik fra spesifikasjon</value>
   </data>
-  <data name="Choice_GtStatusQuality_High" xml:space="preserve">
-    <value>Høy</value>
+  <data name="Choice_GtStatusQuality_AsExpected" xml:space="preserve">
+    <value>Ihht. spesifikasjon</value>
+  </data>
+  <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
+    <value>Bedre enn spesifikasjon</value>
   </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Åpen</value>

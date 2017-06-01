@@ -8,6 +8,10 @@ const Navigation: INavigation = {
             IgnoreExisting: true,
         },
         {
+            Url: "SitePages/ProjectStatus.aspx",
+            Title: __("Navigation_ProjectStatus_Title"),
+        },
+        {
             Url: __("DefaultView_ProjectLog_Url"),
             Title: __("Lists_ProjectLog_Title"),
         },
@@ -66,10 +70,6 @@ const Navigation: INavigation = {
         {
             Url: __("DefaultView_ProjectProducts_Url"),
             Title: __("Lists_ProjectProducts_Title"),
-        },
-        {
-            Url: "SitePages/ProjectStatus.aspx",
-            Title: __("Navigation_ProjectStatus_Title"),
         },
         {
             Url: "SitePages/Nofilter.aspx",

@@ -294,7 +294,7 @@ export const StatusFields: IStatusFields = {
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre overskridelser som kan tas igjen",
+                Value: "Mindre overskridelser",
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
@@ -328,7 +328,7 @@ export const StatusFields: IStatusFields = {
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre forsinkelse som kan tas igjen",
+                Value: "Mindre forsinkelser",
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
@@ -366,19 +366,25 @@ export const StatusFields: IStatusFields = {
     GtStatusQuality: {
         Statuses: [
             {
-                Value: "Lav",
+                Value: "Større avvik fra spesifikasjon",
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
             },
             {
-                Value: "Medium",
+                Value: "Mindre avvik fra spesifikasjon",
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Høy",
+                Value: "Ihht. spesifikasjon",
+                CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
+            },
+            {
+                Value: "Bedre enn spesifikasjon",
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",

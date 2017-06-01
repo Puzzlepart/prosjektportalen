@@ -34,7 +34,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
                             key: viewField,
                             fieldName: field.InternalName,
                             name: field.Title,
-                            minWidth: 100,
+                            minWidth: field && field.TypeAsString === "Note" ? 300 : 100,
                         });
                     }
                     return null;

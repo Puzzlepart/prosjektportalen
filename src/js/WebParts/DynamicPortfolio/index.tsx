@@ -113,9 +113,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                                 defaultSelected: Array.contains(initialView.fields, col.name),
                                 readOnly: col.readOnly,
                             }));
-                            let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, initialView));
+                            // Sort the columns as they are added to the view
+                            let selectedColumnsOrderedAsSelected = initialView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
+                            let filters = this.getSelectedFiltersWithItems(response.refiners, initialView).concat([FieldSelector]);
                             resolve({
-                                selectedColumns: this.configuration.columns.filter(fc => Array.contains(initialView.fields, fc.name)),
+                                selectedColumns: selectedColumnsOrderedAsSelected,
                                 fieldNames: fieldNames,
                                 items: response.primarySearchResults,
                                 filteredItems: response.primarySearchResults,
@@ -326,7 +328,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
-     * the filters are checked against the against refiners retrieved by search.
+     * the filters are checked against refiners retrieved by search.
      *
      * @param refiners Refiners retrieved by search
      * @param viewConfig View configuration
