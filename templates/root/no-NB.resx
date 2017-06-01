@@ -1382,7 +1382,7 @@
     <value>Finner ikke angitt visning.</value>
   </data>
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
-    <value>Porteføljeoversikt-{0}.xlsx</value>
+    <value>{0}-{1}.xlsx</value>
   </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
