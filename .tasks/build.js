@@ -68,8 +68,8 @@ gulp.task("copy:dist", () => {
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 
-gulp.task("stamp:version", () => {
-    return gulp.src(config.version.globs)
+gulp.task("stamp:version::templates", () => {
+    return gulp.src("./_templates/**/*.xml")
         .pipe(flatmap(function (stream, file) {
             return stream
                 .pipe(replace(config.version.token, config.version.v))
@@ -77,8 +77,17 @@ gulp.task("stamp:version", () => {
         }));
 });
 
+gulp.task("stamp:version::dist", () => {
+    return gulp.src("./dist/*.ps1")
+        .pipe(flatmap(function (stream, file) {
+            return stream
+                .pipe(replace(config.version.token, config.version.v))
+                .pipe(gulp.dest(config.paths.dist))
+        }));
+});
+
 gulp.task("build:pnp", (done) => {
-    runSequence("copy:pnp", "copy:dist", "stamp:version", () => {
+    runSequence("copy:pnp", "copy:dist", "stamp:version::templates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });

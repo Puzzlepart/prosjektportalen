@@ -46,7 +46,6 @@ module.exports = {
     },
     version: {
         v: pkg.version,
-        token: "[version]",
-        globs: ["./_templates/**/*.xml"]
+        token: "[version]"
     }
 }

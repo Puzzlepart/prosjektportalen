@@ -26,7 +26,7 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
-    runSequence("default::prod", "copy:build", "copy:manualconf", "zip:dist", () => {
+    runSequence("default::prod", "copy:build", "copy:manualconf", "stamp:version::dist", "zip:dist", () => {
         done();
     });
 });
