@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Link, animateScroll } from "react-scroll";
 import { Icon } from "../../@Components";
+import DoExport from "../PDFExport";
 
-const StatusNavigation = () => {
+const StatusNavigation = (project) => {
     animateScroll.scrollMore(1);
 
     const nodes = [{
@@ -45,8 +46,20 @@ const StatusNavigation = () => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
-                <div className=" ms-Grid-col ms-u-md8 ms-u-lg8">
-                    <h2 style={{ color: "#fff", paddingTop: 10, paddingBottom: 10 }}>Statusrapport</h2>
+                <div className=" ms-Grid-col ms-u-md10 ms-u-lg10">
+                    <h2 style={{
+                        color: "#fff",
+                        paddingTop: 10,
+                        paddingBottom: 10,
+                    }}>Statusrapport</h2>
+                </div>
+                <div className=" ms-Grid-col ms-u-md2 ms-u-lg2">
+                    <button
+                        onClick={e => {
+                            e.preventDefault();
+                            DoExport(project);
+                        }}
+                        >Eksporter til PDF</button>
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
