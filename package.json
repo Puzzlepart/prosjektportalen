@@ -17,7 +17,7 @@
     "querystring": "^0.2.0",
     "react": "15.5.4",
     "react-dom": "15.5.4",
-    "react-excel-workbook": "git+https://github.com/Puzzlepart/react-excel-workbook.git#master",
+    "react-excel-workbook": "0.0.3",
     "react-masonry-component": "^5.0.5",
     "react-scroll": "1.5.2",
     "react-sticky": "6.0.1",
