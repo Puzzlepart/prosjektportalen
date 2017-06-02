@@ -151,7 +151,11 @@ if (-not $SkipDefaultConfig.IsPresent) {
     try {
         Connect-SharePoint $Url
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
+        if ($DataSourceSiteUrl -ne $Url) {
+            Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"DataSourceSiteUrl" = $DataSourceSiteUrl;}
+        } else {
+            Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp"
+        }
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
