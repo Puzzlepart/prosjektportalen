@@ -91,6 +91,7 @@
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02" Name="{resource:ContentTypes_ProjectStatus_Name}" Description="{resource:ContentTypes_ProjectStatus_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010109010058561F86D956412B9DD7957BBCD67AAE" Name="{resource:ContentTypes_Glittertind_nettdelside_Name}" Description="{resource:ContentTypes_Glittertind_nettdelside_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />

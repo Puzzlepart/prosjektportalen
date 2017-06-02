@@ -157,6 +157,9 @@
   <data name="Lists_GainsFollowup_Title" xml:space="preserve">
     <value>Gevinstsoppfølging</value>
   </data>
+  <data name="Lists_ProjectStatus_Title" xml:space="preserve">
+    <value>Prosjektstatusrapporter</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Prosjektlogg/AllItems.aspx</value>
   </data>
@@ -360,6 +363,12 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_ContentTypeId" xml:space="preserve">
     <value>0x01007A831AC68204F04AAA022CFF06C7BAA2</value>
+  </data>
+  <data name="ContentTypes_ProjectStatus_Name" xml:space="preserve">
+    <value>Prosjektrapport</value>
+  </data>
+  <data name="ContentTypes_ProjectStatus_Description" xml:space="preserve">
+    <value>Genererte rapporter som viser status på prosjektet.</value>
   </data>
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalenkolonner</value>
