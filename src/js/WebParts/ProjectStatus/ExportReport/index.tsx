@@ -136,10 +136,10 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     private createReportDoc = (project) => {
         let doc = jsPDF();
-        doc.setFontSize(22);
-        doc.text(_spPageContextInfo.webTitle, 14, 20);
-        doc.setFontSize(8);
-        doc.text(_spPageContextInfo.webAbsoluteUrl, 14, 30);
+
+        doc.fromHTML(document.getElementById("pp-projectstatus"), 15, 15, {
+            "width": 170,
+        });
 
         return doc;
     }
