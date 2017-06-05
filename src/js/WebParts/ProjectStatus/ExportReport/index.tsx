@@ -4,6 +4,8 @@ import * as moment from "moment";
 import { Icon } from "../../@Components";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
+import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
+import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 // requires jspdf and jspdf-autotable, due to issues with extentions it cannont be imported atm
 declare var jsPDF: any;
 
@@ -14,9 +16,21 @@ export interface IExportReportState {
         key: string,
         text: string,
     };
+    exportStatus: IExportReportStatus;
+    showDialog: boolean;
 }
 
-export default class ExportReport extends React.Component<any, IExportReportState> {
+export interface IExportReportProps {
+    project: any;
+}
+
+export enum IExportReportStatus {
+    default,
+    isExporting,
+    hasExported,
+}
+
+export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     constructor() {
         super();
         this.state = {
@@ -26,6 +40,8 @@ export default class ExportReport extends React.Component<any, IExportReportStat
                 key: "",
                 text: "",
             },
+            exportStatus: IExportReportStatus.default,
+            showDialog: false,
         };
     }
 
@@ -33,37 +49,69 @@ export default class ExportReport extends React.Component<any, IExportReportStat
         this.fetchReports();
     }
 
+    public renderExportBtn = (exportStatus) => {
+        if (exportStatus === IExportReportStatus.isExporting) {
+            return <Spinner size={SpinnerSize.medium} />;
+        } else if (exportStatus === IExportReportStatus.hasExported) {
+            return <PrimaryButton
+                    className="save-pdf-btn"
+                    iconProps={{ iconName: "PDF" }}
+                    onClick={e => {
+                        e.preventDefault();
+                        this.DoExport(this.state.project);
+                    }}>
+                    Prosjektrapporten er lagret
+                </PrimaryButton>;
+        } else {
+            return <PrimaryButton
+                    className="save-pdf-btn"
+                    iconProps={{ iconName: "PDF" }}
+                    onClick={e => {
+                        e.preventDefault();
+                        this.DoExport(this.state.project);
+                    }}>
+                    Lagre prosjektrapport
+                </PrimaryButton>;
+        }
+    }
     public render(): JSX.Element {
-        let options = this.getReportOptions(this.state.reports);
+        let { reports, showDialog, selectedReport, exportStatus } = this.state;
+        let options = this.getReportOptions(reports);
+
         return (
             <div className="export-section ms-Grid-row">
-                <div className=" ms-Grid-col ms-u-md4">
-                    <PrimaryButton
-                        className="save-pdf-btn"
-                        onClick={e => {
-                            e.preventDefault();
-                            this.DoExport(this.state.project);
-                        }}
-                        iconProps={{ iconName: "PDF" }}>Eksporter til PDF</PrimaryButton>
+                <div className=" ms-Grid-col ms-u-md5">
+                    {this.renderExportBtn(exportStatus)}
                 </div>
-                <div className=" ms-Grid-col ms-u-md4">
+                <div className="ms-Grid-col ms-u-md7">
                     <Icon name="History" />
-                </div>
-                <div className="ms-Grid-col ms-u-md4">
                     <Dropdown label="" selectedKey="001" options={options} onChanged={(item) => {
                         this.setState({
                             selectedReport: {
                                 key: item.key.toString(),
                                 text: item.text,
                             },
+                            showDialog: true,
                         });
                     }} />
+                    <Dialog isOpen={showDialog} type={DialogType.close} onDismiss={this.closeDialog.bind(this)} isBlocking={false} title={selectedReport.text} containerClassName="ms-dialogMainReport">
+                        <div id="pdf-container">
+                            <embed width="750" height="750" src={selectedReport.key} type="application/pdf"></embed>
+                        </div>
+                    </Dialog>
                 </div>
-        </div>);
+            </div>
+        );
     }
 
-    private saveFileToLibrary (libraryRelativeUrl: string, fileName: string, fileBlob: Blob): Promise<any> {
-        return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true);
+    private saveFileToLibrary (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> {
+        return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
+            return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
+                return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
+                    "Title": title,
+                });
+            });
+        });
     }
 
     private fetchReports(): void {
@@ -72,47 +120,48 @@ export default class ExportReport extends React.Component<any, IExportReportStat
         });
     }
 
-    private getReportOptions = (reports: Array<any>): Array<IDropdownOption> => {
-        if (reports.length < 1) {
-            return [];
-        }
-
+    private getReportOptions = (reports): Array<IDropdownOption> => {
         let options = new Array<IDropdownOption>();
-        options.push({ key: "001", text: `Historikk (${reports.length} tidligere) ` });
-        for (let i = 0; i < reports.length; i++) {
-            if (reports[i].FileLeafRef) {
-                options.push({ text: reports[i].FileLeafRef.split(".")[0], key: reports[i].EncodedAbsUrl });
+
+        if (reports && reports.length > 0) {
+            options.push({ key: "001", text: `Historikk (${reports.length} tidligere) ` });
+            for (let i = 0; i < reports.length; i++) {
+                if (reports[i].FileLeafRef) {
+                    options.push({ text: reports[i].FileLeafRef, key: reports[i].EncodedAbsUrl });
+                }
             }
         }
         return options;
     }
 
+    private createReportDoc = (project) => {
+        let doc = jsPDF();
+        doc.setFontSize(22);
+        doc.text(_spPageContextInfo.webTitle, 14, 20);
+        doc.setFontSize(8);
+        doc.text(_spPageContextInfo.webAbsoluteUrl, 14, 30);
+
+        return doc;
+    }
+
     private DoExport = (project) => {
+        this.setState({ exportStatus: IExportReportStatus.isExporting });
         SP.SOD.registerSod("jspdf", `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/js/jspdf.min.js`);
         SP.SOD.registerSod("jspdf.plugin.autotable", `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/js/jspdf.plugin.autotable.js`);
         SP.SOD.registerSodDep("jspdf.plugin.autotable", "jspdf");
         SP.SOD.executeFunc("jspdf", "jsPDF", () => {
-            let doc = jsPDF("l");
-            doc.setFontSize(22);
-            doc.text(_spPageContextInfo.webTitle, 14, 20);
-            doc.setFontSize(8);
-            doc.text(_spPageContextInfo.webAbsoluteUrl, 14, 30);
+            let doc = this.createReportDoc(project);
             let reportBlob = doc.output("blob");
-
-            this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`, reportBlob).then((data) => {
-                console.log(data);
-                let notification = SP.UI.Status.addStatus(
-                    `Prosjektstatusrapport lagret.`,
-                    `<div id='pdf-save-notification'>
-                        Statusrapport er opprettet og er tilgjengelig under historikk.
-                    <div>`,
-                    false,
-                );
-                window.setTimeout(() => {
-                    SP.UI.Status.removeStatus(notification);
-                }, 8000);
+            let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
+            let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+            this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
+                this.setState({ exportStatus: IExportReportStatus.hasExported });
                 this.fetchReports();
             });
         });
+    }
+
+    private closeDialog = () => {
+        this.setState({ showDialog: false });
     }
 }

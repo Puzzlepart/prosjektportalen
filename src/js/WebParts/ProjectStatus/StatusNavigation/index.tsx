@@ -46,10 +46,10 @@ const StatusNavigation = (project) => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
-                <div className="ms-Grid-col ms-u-md8">
+                <div className="ms-Grid-col ms-u-md7">
                     <h2 className="status-page-header">Statusrapport</h2>
                 </div>
-                <div className=" ms-Grid-col ms-u-md4">
+                <div className=" ms-Grid-col ms-u-md5">
                     <ExportReport project={project} />
                 </div>
             </div>
