@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import { Icon } from "../../@Components";
@@ -7,7 +7,7 @@ import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 // requires jspdf and jspdf-autotable, due to issues with extentions it cannont be imported atm
- declare var jsPDF: any;
+declare var jsPDF: any;
 
 export interface IExportReportState {
     project: any;
