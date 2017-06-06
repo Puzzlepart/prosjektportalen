@@ -14,6 +14,13 @@ const Columns = (dataSource: DataSource): any[] => {
         isMultiline: true,
     },
     {
+        fieldName: "GtGainsResponsible",
+        key: "GtGainsResponsible",
+        searchPostfix: "OWSUSER",
+        minWidth: 50,
+        maxWidth: 180,
+    },
+    {
         fieldName: "GtMeasureIndicator",
         key: "GtMeasureIndicator",
         searchPostfix: "OWSTEXT",
@@ -189,13 +196,13 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
 const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => {
     let colValue = item[column.fieldName];
     let { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrese } = item;
-    switch (column.fieldName) {
+    switch (column.key) {
         case "SiteTitle": {
             let { SPWebUrl, SiteTitle: Title } = item;
             return <a href={SPWebUrl}>{Title}</a>;
         }
-        case "GtStartValueOWSNMBR":
-        case "GtDesiredValueOWSNMBR": {
+        case "GtStartValue":
+        case "GtDesiredValue": {
             let parsedValue = parseInt(colValue, 10);
             return !isNaN(parsedValue) ? parsedValue : "";
         }
@@ -243,6 +250,24 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
             } else {
                 return null;
             }
+        }
+        case "GtGainsResponsible": {
+            if (column.fieldName.indexOf("OWS") !== -1) {
+                const [, Title] = colValue.split(" | ");
+                return (
+                    <div>
+                        {Title}
+                    </div>
+                );
+            }
+            if (colValue.Title) {
+                return (
+                    <div>
+                        {colValue.Title}
+                    </div>
+                );
+            }
+            return null;
         }
         default: {
             return colValue;
