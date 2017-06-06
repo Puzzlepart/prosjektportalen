@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import { Icon } from "../../@Components";
@@ -7,7 +7,7 @@ import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 // requires jspdf and jspdf-autotable, due to issues with extentions it cannont be imported atm
-declare var jsPDF: any;
+ declare var jsPDF: any;
 
 export interface IExportReportState {
     project: any;
@@ -54,23 +54,23 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             return <Spinner size={SpinnerSize.medium} />;
         } else if (exportStatus === IExportReportStatus.hasExported) {
             return <PrimaryButton
-                    className="save-pdf-btn"
-                    iconProps={{ iconName: "PDF" }}
-                    onClick={e => {
-                        e.preventDefault();
-                        this.DoExport(this.state.project);
-                    }}>
-                    Prosjektrapporten er lagret
+                className="save-pdf-btn"
+                iconProps={{ iconName: "PDF" }}
+                onClick={e => {
+                    e.preventDefault();
+                    this.DoExport(this.state.project);
+                }}>
+                Prosjektrapporten er lagret
                 </PrimaryButton>;
         } else {
             return <PrimaryButton
-                    className="save-pdf-btn"
-                    iconProps={{ iconName: "PDF" }}
-                    onClick={e => {
-                        e.preventDefault();
-                        this.DoExport(this.state.project);
-                    }}>
-                    Lagre prosjektrapport
+                className="save-pdf-btn"
+                iconProps={{ iconName: "PDF" }}
+                onClick={e => {
+                    e.preventDefault();
+                    this.DoExport(this.state.project);
+                }}>
+                Lagre prosjektrapport
                 </PrimaryButton>;
         }
     }
@@ -104,7 +104,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         );
     }
 
-    private saveFileToLibrary (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> {
+    private saveFileToLibrary(libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> {
         return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
             return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
                 return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
@@ -135,29 +135,26 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     private createReportDoc = (project) => {
-        let doc = jsPDF();
+        let doc = new jsPDF();
+        doc.setFontSize(22);
+        doc.text(20, 20, "This is a title");
 
-        doc.fromHTML(document.getElementById("pp-projectstatus"), 15, 15, {
-            "width": 170,
-        });
+        doc.setFontSize(16);
+        doc.text(20, 30, "This is some normal sized text underneath.");
 
-        return doc;
+        return doc.output("blob");
     }
 
     private DoExport = (project) => {
         this.setState({ exportStatus: IExportReportStatus.isExporting });
-        SP.SOD.registerSod("jspdf", `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/js/jspdf.min.js`);
-        SP.SOD.registerSod("jspdf.plugin.autotable", `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/js/jspdf.plugin.autotable.js`);
-        SP.SOD.registerSodDep("jspdf.plugin.autotable", "jspdf");
-        SP.SOD.executeFunc("jspdf", "jsPDF", () => {
-            let doc = this.createReportDoc(project);
-            let reportBlob = doc.output("blob");
-            let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
-            let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
-            this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
-                this.setState({ exportStatus: IExportReportStatus.hasExported });
-                this.fetchReports();
-            });
+
+        let reportBlob = this.createReportDoc(project);
+
+        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
+        let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+        this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
+            this.setState({ exportStatus: IExportReportStatus.hasExported });
+            this.fetchReports();
         });
     }
 

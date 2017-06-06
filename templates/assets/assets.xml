@@ -6,7 +6,7 @@
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS" Version="0">
             <pnp:Files>
                 <pnp:Directory Src="libs\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js" />
-                <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js" />
+                <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
                 <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
                 <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
             </pnp:Files>
