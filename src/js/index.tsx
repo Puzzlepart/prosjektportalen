@@ -14,11 +14,11 @@ pnp.setup({
     },
 });
 
-ExecuteOrDelayUntilScriptLoaded(() => {
+SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
     ExecuteOrDelayUntilBodyLoaded(() => {
         Logger.log({ message: `pp.main.js: Body loaded. Initializing.`, level: LogLevel.Info });
         Forms.Initialize();
         WebParts.Render();
         new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
     });
-}, "sp.js");
+});
