@@ -455,7 +455,7 @@
     <value>Probability (P)</value>
   </data>
   <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
-    <value>Risk strategy</value>
+    <value>Uncertainty strategy</value>
   </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Log element</value>

@@ -452,7 +452,7 @@
     <value>Sannsynlighet (S)</value>
   </data>
   <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
-    <value>Risikostrategi</value>
+    <value>Usikkerhetstrategi</value>
   </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Loggelement</value>
