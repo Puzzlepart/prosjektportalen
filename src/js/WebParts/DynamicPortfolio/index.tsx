@@ -12,7 +12,10 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
+import {
+    ContextualMenuItemType,
+    IContextualMenuItem,
+} from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import {
     MessageBar,
@@ -200,8 +203,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             return null;
         }
 
-        const items = [];
-        const farItems = [];
+        const items: IContextualMenuItem[] = [];
+        const farItems: IContextualMenuItem[] = [];
 
         if (this.props.showGroupBy) {
             const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
@@ -309,8 +312,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     }
 
     /**
- * Render workbook
- */
+     * Render workbook
+     */
     private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) => {
         if (isLoading) {
             return null;
