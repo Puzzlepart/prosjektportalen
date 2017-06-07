@@ -182,7 +182,7 @@
     <value>Lists/Meeting Calendar/calendar.aspx</value>
   </data>
   <data name="DefaultView_Documents_Url" xml:space="preserve">
-    <value>Shared documents/Forms/AllItems.aspx</value>
+    <value>Documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
     <value>Lists/Phase Checklist/AllItems.aspx</value>
@@ -464,7 +464,7 @@
     <value>Probability (P)</value>
   </data>
   <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
-    <value>Risk strategy</value>
+    <value>Uncertainty strategy</value>
   </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Log element</value>
@@ -1112,7 +1112,7 @@
     <value>Project</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
-    <value>SitePages / ProjectHome.aspx</value>
+    <value>SitePages/ProjectHome.aspx</value>
   </data>
   <data name="WebPart_Refiner_Title" xml:space="preserve">
     <value>Clarification</value>

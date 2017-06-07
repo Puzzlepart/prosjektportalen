@@ -216,7 +216,6 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
-            .filter(`Group eq '${__("SiteFields_Group")}'`)
             .get();
 
         const itemPromise = new Web(this.props.webUrl)
