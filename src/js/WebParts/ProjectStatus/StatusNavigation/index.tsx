@@ -9,7 +9,7 @@ import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 const saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
     return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
         return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
-            return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
+            return pnp.sp.web.lists.getByTitle("Prosjektstatusrapporter").items.getById(fileAllFields.Id).update({
                 "Title": title,
             });
         });
@@ -60,26 +60,26 @@ const StatusNavigation = () => {
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
                 <div className=" ms-Grid-col ms-u-md8 ms-u-lg8">
-                    <h2 style={{ color: "#fff", paddingTop: 10, paddingBottom: 10 }}>Statusrapport</h2>
+                    <h2 style={{ color: "#fff", paddingTop: 10, paddingBottom: 10 }}>{`Statusrapport: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-u-md4 ms-u-lg4">
                     <PrimaryButton
                         className="save-pdf-btn"
-                        iconProps={{ iconName: "PDF" }}
+                        iconProps={{ iconName: "Image" }}
                         onClick={e => {
                             e.preventDefault();
                             html2canvas(document.getElementById("pp-projectstatus"), {
                                 onrendered: function (canvas) {
                                     canvas.toBlob((reportBlob) => {
-                                        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
+                                        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.png`;
                                         let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
-                                        saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
+                                        saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/Prosjektstatusrapporter`, fileName, fileTitle, reportBlob).then((data) => {
                                             console.log("Saved image");
                                         });
                                     });
                                 },
                             });
-                        }}>Prosjektrapporten er lagret</PrimaryButton>
+                        }}>Lagre øyeblikksbilde</PrimaryButton>
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
