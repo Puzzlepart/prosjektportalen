@@ -153,9 +153,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                         this.SaveReport(reportBlob);
                     });
                 } else if (canvas.msToBlob) {
-                    canvas.msToBlob(reportBlob => {
-                        this.SaveReport(reportBlob);
-                    });
+                    let reportBlob = canvas.msToBlob();
+                    this.SaveReport(reportBlob);
                 }
             },
         });
