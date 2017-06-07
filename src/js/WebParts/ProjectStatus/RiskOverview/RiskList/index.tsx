@@ -13,19 +13,17 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
      */
     constructor(props: IRiskListProps) {
         super(props);
-        this.state = {};
     }
 
     /**
      * Render the component
      */
     public render(): JSX.Element {
-        let { items, columns } = this.props;
         return (
             <div className="risk-list ms-Grid">
                 <DetailsList
-                    items={items}
-                    columns={columns}
+                    items={this.props.items}
+                    columns={this.props.columns}
                     onRenderItemColumn={this._onRenderItemColumn}
                     selectionMode={SelectionMode.none} />
             </div>
@@ -41,7 +39,7 @@ export class RiskList extends React.Component<IRiskListProps, IRiskListState> {
             case "GtRiskFactor":
                 return <span>{Math.round(+ fieldValue)}</span>;
             default:
-                return <span>{fieldValue}</span>;
+                return <span dangerouslySetInnerHTML={{ __html: fieldValue }}></span>;
         }
     }
 }
