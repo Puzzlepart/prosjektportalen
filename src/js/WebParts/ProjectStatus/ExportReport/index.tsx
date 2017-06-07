@@ -93,9 +93,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                             showDialog: true,
                         });
                     }} />
-                    <Dialog isOpen={showDialog} type={DialogType.close} onDismiss={this.closeDialog.bind(this)} isBlocking={false} title={selectedReport.text} containerClassName="ms-dialogMainReport">
+                    <Dialog isOpen={showDialog} type={DialogType.close} onDismiss={this.closeDialog.bind(this)} isBlocking={false} title={selectedReport.text} containerClassName="pp-snapshot-dialog">
                         <div id="snapshot-container">
-                            <img width="950" src={selectedReport.key}></img>
+                            <img src={selectedReport.key}></img>
                         </div>
                     </Dialog>
                 </div>
@@ -114,7 +114,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     private fetchReports(): void {
-        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.select("FileLeafRef", "EncodedAbsUrl").filter("substringof('.png', FileLeafRef)").orderBy("Modified", false).top(5).get().then(reports => {
+        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.select("FileLeafRef", "Title", "EncodedAbsUrl").filter("substringof('.png', FileLeafRef)").orderBy("Modified", false).top(10).get().then(reports => {
             this.setState({ reports: reports });
         });
     }
@@ -126,7 +126,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             options.push({ key: "001", text: `Historikk (${reports.length} tidligere) ` });
             for (let i = 0; i < reports.length; i++) {
                 if (reports[i].FileLeafRef) {
-                    options.push({ text: reports[i].FileLeafRef, key: reports[i].EncodedAbsUrl });
+                    options.push({ text: reports[i].Title, key: reports[i].EncodedAbsUrl });
                 }
             }
         } else {
@@ -148,9 +148,15 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this.setState({ exportStatus: IExportReportStatus.isExporting });
         html2canvas(document.getElementById("pp-projectstatus"), {
             onrendered: canvas => {
-                canvas.toBlob(reportBlob => {
-                    this.SaveReport(reportBlob);
-                });
+                if (canvas.toBlob) {
+                    canvas.toBlob(reportBlob => {
+                        this.SaveReport(reportBlob);
+                    });
+                } else if (canvas.msToBlob) {
+                    canvas.msToBlob(reportBlob => {
+                        this.SaveReport(reportBlob);
+                    });
+                }
             },
         });
     }
