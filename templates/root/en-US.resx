@@ -1103,7 +1103,7 @@
     <value>Project</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
-    <value>SitePages / ProjectHome.aspx</value>
+    <value>SitePages/ProjectHome.aspx</value>
   </data>
   <data name="WebPart_Refiner_Title" xml:space="preserve">
     <value>Clarification</value>
