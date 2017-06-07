@@ -1,6 +1,20 @@
 import * as React from "react";
+import * as html2canvas from "html2canvas";
+import * as pnp from "sp-pnp-js";
+import * as moment from "moment";
 import { Link, animateScroll } from "react-scroll";
 import { Icon } from "../../@Components";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+
+const saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
+    return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
+        return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
+            return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
+                "Title": title,
+            });
+        });
+    });
+};
 
 const StatusNavigation = () => {
     animateScroll.scrollMore(1);
@@ -47,6 +61,25 @@ const StatusNavigation = () => {
             <div className="nav-details ms-Grid-row">
                 <div className=" ms-Grid-col ms-u-md8 ms-u-lg8">
                     <h2 style={{ color: "#fff", paddingTop: 10, paddingBottom: 10 }}>Statusrapport</h2>
+                </div>
+                <div className=" ms-Grid-col ms-u-md4 ms-u-lg4">
+                    <PrimaryButton
+                        className="save-pdf-btn"
+                        iconProps={{ iconName: "PDF" }}
+                        onClick={e => {
+                            e.preventDefault();
+                            html2canvas(document.getElementById("pp-projectstatus"), {
+                                onrendered: function (canvas) {
+                                    canvas.toBlob((reportBlob) => {
+                                        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
+                                        let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+                                        saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
+                                            console.log("Saved image");
+                                        });
+                                    });
+                                },
+                            });
+                        }}>Prosjektrapporten er lagret</PrimaryButton>
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
