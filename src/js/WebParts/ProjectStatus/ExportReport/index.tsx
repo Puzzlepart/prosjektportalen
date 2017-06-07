@@ -1,13 +1,12 @@
 import * as React from "react";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
+import * as html2canvas from "html2canvas";
 import { Icon } from "../../@Components";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-// requires jspdf and jspdf-autotable, due to issues with extentions it cannont be imported atm
-declare var jsPDF: any;
 
 export interface IExportReportState {
     project: any;
@@ -54,23 +53,23 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             return <Spinner size={SpinnerSize.medium} />;
         } else if (exportStatus === IExportReportStatus.hasExported) {
             return <PrimaryButton
-                className="save-pdf-btn"
-                iconProps={{ iconName: "PDF" }}
+                className="save-snapshot-btn"
+                iconProps={{ iconName: "Camera" }}
                 onClick={e => {
                     e.preventDefault();
                     this.DoExport(this.state.project);
                 }}>
-                Prosjektrapporten er lagret
+                Prosjektbildet er lagret
                 </PrimaryButton>;
         } else {
             return <PrimaryButton
-                className="save-pdf-btn"
-                iconProps={{ iconName: "PDF" }}
+                className="save-snapshot-btn"
+                iconProps={{ iconName: "Camera" }}
                 onClick={e => {
                     e.preventDefault();
                     this.DoExport(this.state.project);
                 }}>
-                Lagre prosjektrapport
+                Lagre øyeblikksbilde
                 </PrimaryButton>;
         }
     }
@@ -95,8 +94,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                         });
                     }} />
                     <Dialog isOpen={showDialog} type={DialogType.close} onDismiss={this.closeDialog.bind(this)} isBlocking={false} title={selectedReport.text} containerClassName="ms-dialogMainReport">
-                        <div id="pdf-container">
-                            <embed width="750" height="750" src={selectedReport.key} type="application/pdf"></embed>
+                        <div id="snapshot-container">
+                            <img width="950" src={selectedReport.key}></img>
                         </div>
                     </Dialog>
                 </div>
@@ -104,7 +103,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         );
     }
 
-    private saveFileToLibrary(libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> {
+    private saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
         return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
             return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
                 return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
@@ -115,7 +114,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     private fetchReports(): void {
-        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.select("FileLeafRef", "EncodedAbsUrl").filter("substringof('.pdf', FileLeafRef)").orderBy("Modified", false).top(5).get().then(reports => {
+        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.select("FileLeafRef", "EncodedAbsUrl").filter("substringof('.png', FileLeafRef)").orderBy("Modified", false).top(5).get().then(reports => {
             this.setState({ reports: reports });
         });
     }
@@ -130,31 +129,29 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                     options.push({ text: reports[i].FileLeafRef, key: reports[i].EncodedAbsUrl });
                 }
             }
+        } else {
+            options.push({ key: "001", text: `Ingen historikk tilgjengelig` });
         }
         return options;
     }
 
-    private createReportDoc = (project) => {
-        let doc = new jsPDF();
-        doc.setFontSize(22);
-        doc.text(20, 20, "This is a title");
-
-        doc.setFontSize(16);
-        doc.text(20, 30, "This is some normal sized text underneath.");
-
-        return doc.output("blob");
-    }
-
-    private DoExport = (project) => {
-        this.setState({ exportStatus: IExportReportStatus.isExporting });
-
-        let reportBlob = this.createReportDoc(project);
-
-        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.pdf`;
-        let fileTitle = `${_spPageContextInfo.webTitle} prosjektrapport ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+    private SaveReport = (reportBlob: any) => {
+        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.png`;
+        let fileTitle = `${_spPageContextInfo.webTitle} prosjektbilde ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({ exportStatus: IExportReportStatus.hasExported });
             this.fetchReports();
+        });
+    }
+
+    private DoExport = project => {
+        this.setState({ exportStatus: IExportReportStatus.isExporting });
+        html2canvas(document.getElementById("pp-projectstatus"), {
+            onrendered: canvas => {
+                canvas.toBlob(reportBlob => {
+                    this.SaveReport(reportBlob);
+                });
+            },
         });
     }
 

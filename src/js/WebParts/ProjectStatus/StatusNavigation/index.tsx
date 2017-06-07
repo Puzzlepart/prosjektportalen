@@ -47,7 +47,7 @@ const StatusNavigation = (project) => {
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
                 <div className="ms-Grid-col ms-u-md6">
-                    <h2 className="status-page-header">Statusrapport</h2>
+                    <h2 className="status-page-header">{`Statusrapport: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-u-md6">
                     <ExportReport project={project} />
