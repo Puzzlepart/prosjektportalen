@@ -511,7 +511,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         defaultSelected: Array.contains(viewConfig.fields, col.name),
                         readOnly: col.readOnly,
                     }));
-                    let filters = [FieldSelector].concat(this.getSelectedFiltersWithItems(response.refiners, viewConfig));
+                    let filters = this.getSelectedFiltersWithItems(response.refiners, viewConfig).concat([FieldSelector]);
                     this.setState({
                         isLoading: false,
                         items: response.primarySearchResults,
