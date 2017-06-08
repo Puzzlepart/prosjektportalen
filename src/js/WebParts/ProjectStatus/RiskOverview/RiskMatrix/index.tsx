@@ -38,14 +38,14 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
             let cells = rows.map((cell, j: number) => {
                 const element = Config.RiskMatrix[i][j];
                 const riskElements = items
-                    .filter((risk, idx) => element.Probability === risk.GtRiskProbability && element.Consequence === risk.GtRiskConsequence)
+                    .filter((risk, idx) => element.Probability === parseInt(risk.GtRiskProbability, 10) && element.Consequence === parseInt(risk.GtRiskConsequence, 10))
                     .map((risk, idx) => (
                         <RiskElement
                             key={idx}
                             item={risk}
                             style={{ opacity: postAction ? 0.5 : 1 }} />
                     ));
-                const riskElementsPostAction = (postAction ? items.filter((risk, idx) => postAction && (element.Probability === risk.GtRiskProbabilityPostAction && element.Consequence === risk.GtRiskConsequencePostAction)) : [])
+                const riskElementsPostAction = (postAction ? items.filter((risk, idx) => postAction && (element.Probability ===  parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence ===  parseInt(risk.GtRiskConsequencePostAction, 10))) : [])
                     .map((risk, idx) => (
                         <RiskElement
                             key={idx}

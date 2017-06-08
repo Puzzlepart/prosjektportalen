@@ -1,4 +1,6 @@
 export class RiskElementModel {
+    public ID: string;
+    public Title: string;
     public GtRiskProbability: string;
     public GtRiskConsequence: string;
     public GtRiskProbabilityPostAction: string;
@@ -6,13 +8,14 @@ export class RiskElementModel {
 }
 
 interface IRiskOverviewState {
-    items: RiskElementModel[];
-    itemsAsHtml?: RiskElementModel[];
-    columns: any[];
-    showPostAction: boolean;
+    isLoading: boolean;
+    items?: RiskElementModel[];
+    columns?: any[];
+    showPostAction?: boolean;
 }
 
 export const RiskOverviewInitialState = {
+    isLoading: true,
     items: null,
     columns: null,
     showPostAction: false,

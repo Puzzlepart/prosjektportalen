@@ -1438,7 +1438,7 @@
   <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
     <value>Gains achievement</value>
   </data>
-  <data name="StatusPage_RiskshowPostActionLabel" xml:space="preserve">
+  <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">
     <value>Show before/after measures</value>
   </data>
 </root>

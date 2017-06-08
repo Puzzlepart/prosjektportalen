@@ -6,11 +6,11 @@ export interface IRiskElementProps {
     style?: React.CSSProperties;
 }
 
-const RiskElement = ({ item: { Id, Title }, style }: IRiskElementProps) => {
-    let dispFormUrl = `../${__("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${Id}`;
+const RiskElement = ({ item: { ID, Title }, style }: IRiskElementProps) => {
+    let dispFormUrl = `../${__("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
     return (
         <div className={`risk-matrix-element`} title={Title} style={style}>
-            <ModalLink label={Id} url={dispFormUrl} options={{ HideRibbon: true }} />
+            <ModalLink label={ID} url={dispFormUrl} options={{ HideRibbon: true }} />
         </div>
     );
 };
