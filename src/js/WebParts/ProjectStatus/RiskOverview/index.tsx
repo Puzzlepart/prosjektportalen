@@ -65,10 +65,24 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
         const camlQuery = new SP.CamlQuery();
         camlQuery.set_viewXml(`<View>
             <Query>
-                <BeginsWith>
-                    <FieldRef Name='ContentTypeId' />
-                    <Value Type='ContentTypeId'>0x010088578E7470CC4AA68D566346483107020101</Value>
-                </BeginsWith>
+                <Where>
+                    <And>
+                        <And>
+                            <Eq>
+                                <FieldRef Name="ContentType" />
+                                <Value Type="Computed">Risiko</Value>
+                            </Eq>
+                            <Neq>
+                                <FieldRef Name="GtRiskStatus" />
+                                <Value Type="Text">Tiltak gjennomført</Value>
+                            </Neq>
+                        </And>
+                        <Neq>
+                            <FieldRef Name="GtRiskStatus" />
+                            <Value Type="Text">Ikke lenger aktuell</Value>
+                        </Neq>
+                    </And>
+                </Where>
             </Query>
         </View>`);
         const spItems = spList.getItems(camlQuery);
