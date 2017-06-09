@@ -49,7 +49,7 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
                         type="checkbox"
                         id="pp-showPostAction"
                         onClick={_ => this.setState({ showPostAction: !showPostAction })} />
-                    <label htmlFor="pp-showPostAction">{__("StatusPage_RiskShowPostActionLabel")}</label>
+                    <label id="pp-showPostActionLbl" htmlFor="pp-showPostAction">{__("StatusPage_RiskShowPostActionLabel")}</label>
                 </div>
                 <RiskList items={items} columns={columns} />
             </div>
