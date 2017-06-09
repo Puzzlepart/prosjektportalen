@@ -1187,16 +1187,16 @@
     <value>Other</value>
   </data>
   <data name="Choice_GtStatusTime_OnSchedule" xml:space="preserve">
-    <value>On plan</value>
+    <value>On schedule</value>
   </data>
   <data name="Choice_GtStatusTime_AheadOfSchedule" xml:space="preserve">
     <value>Ahead of schedule</value>
   </data>
   <data name="Choice_GtStatusTime_SmallDelay" xml:space="preserve">
-    <value>Less delay that can be taken back</value>
+    <value>Minor delays</value>
   </data>
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
-    <value>Delayed</value>
+    <value>Behind schedule</value>
   </data>
   <data name="Choice_GtStakeholderInfluencePossibilty_Large" xml:space="preserve">
     <value>Large</value>
@@ -1273,16 +1273,22 @@
   <data name="Choice_GtStatusRisk_High" xml:space="preserve">
     <value>High</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_Low" xml:space="preserve">
-    <value>Low</value>
+  <data name="Choice_GtStatusGainAchievement_NotStarted" xml:space="preserve">
+    <value>Not started</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_Medium" xml:space="preserve">
-    <value>Medium</value>
+  <data name="Choice_GtStatusGainAchievement_AheadOfSchedule" xml:space="preserve">
+    <value>Ahead of schedule</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_High" xml:space="preserve">
-    <value>High</value>
+  <data name="Choice_GtStatusGainAchievement_OnSchedule" xml:space="preserve">
+    <value>On schedule</value>
   </data>
-    <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_MinorDelays" xml:space="preserve">
+    <value>Minor delays</value>
+  </data>
+  <data name="Choice_GtStatusGainAchievement_BehindSchedule" xml:space="preserve">
+    <value>Behind schedule</value>
+  </data>
+  <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
     <value>Larger deviation(s) from specification</value>
   </data>
   <data name="Choice_GtStatusQuality_SmallDeviation" xml:space="preserve">

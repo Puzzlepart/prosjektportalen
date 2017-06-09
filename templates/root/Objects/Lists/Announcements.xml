@@ -1,3 +1,10 @@
 <pnp:ListInstance Title="{resource:Lists_Announcements_Title}" Description="" TemplateType="104" Url="Lists/Announcements" EnableFolderCreation="false" EnableAttachments="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Security>
+        <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
+            <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
+            <pnp:RoleAssignment Principal="{associatedmembergroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+            <pnp:RoleAssignment Principal="{associatedvisitorgroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+        </pnp:BreakRoleInheritance>
+    </pnp:Security>
 </pnp:ListInstance>
