@@ -107,8 +107,8 @@
             <pnp:DataValue FieldName="GtDpOrder">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMinWidth">200</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMaxWidth">400</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectGoalsOWSMTXT</pnp:DataValue>
@@ -116,8 +116,8 @@
             <pnp:DataValue FieldName="GtDpOrder">160</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMinWidth">200</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpMaxWidth">400</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Created</pnp:DataValue>
