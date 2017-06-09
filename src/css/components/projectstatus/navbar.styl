@@ -48,7 +48,11 @@
             color: white;
             background: $SuiteBarBackground;
             max-height: 50px;
+            padding: 10px;
 
+            h2 {
+                color: white;
+            }
             p {
                 line-height: 48px;
                 margin: 0;
@@ -58,28 +62,43 @@
                 }
             }
 
-            .ms-Dropdown {
-                margin-top: 8px;
+            .export-section {
+                .ms-Icon.ms-Icon--History {
+                    vertical-align: top;
+                    margin-top: 9px;
+                }
+                .ms-Dropdown-container {
+                    display: inline-block;
+                    width: 90%;
+                    .ms-Dropdown {
+                        .ms-Dropdown-title {
+                            border: 0;
+                            background: none;
+                            color: white;
+                        }
 
-                .ms-Dropdown-title {
+                        i {
+                            color: white;
+                        }
+                    }
+                }
+
+                .save-snapshot-btn {
+                    cursor: pointer;
+                    background-color: transparent;
+                    color: #fff;
                     border: 0;
-                    background: none;
-                    color: white;
-                }
 
-                i {
-                    color: white;
+                    &:hover {
+                        border: 0;
+                    }
                 }
-            }
-
-            .save-pdf-container {
-                cursor: pointer;
             }
         }
     }
 
-    .ms-dialogMainReport {
+    .pp-snapshot-dialog {
         height: 900px;
-        min-width: 800px !important;
+        min-width: 1000px !important;
     }
 }

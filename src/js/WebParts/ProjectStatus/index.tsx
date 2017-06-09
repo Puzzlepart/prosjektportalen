@@ -40,7 +40,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                     <style id="project-style-placeholder"></style>
                     <StickyContainer className="status-report-container">
                         <div id="status-navigation" className="navigation ms-Grid-row">
-                            <StatusNavigation />
+                            <StatusNavigation project={project}/>
                         </div>
                         <Element name="status-section" className="status-section section ms-Grid-row">
                             <StatusSection project={project} />

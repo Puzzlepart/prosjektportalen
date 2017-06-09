@@ -157,6 +157,9 @@
   <data name="Lists_GainsFollowup_Title" xml:space="preserve">
     <value>Gains Followup</value>
   </data>
+  <data name="Lists_ProjectStatus_Title" xml:space="preserve">
+    <value>Project status reports</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log/AllItems.aspx</value>
   </data>
@@ -360,6 +363,12 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_ContentTypeId" xml:space="preserve">
     <value>0x01007A831AC68204F04AAA022CFF06C7BAA2</value>
+  </data>
+  <data name="ContentTypes_ProjectStatus_Name" xml:space="preserve">
+    <value>Project report</value>
+  </data>
+  <data name="ContentTypes_ProjectStatus_Description" xml:space="preserve">
+    <value>Generated reports showing the status of the project.</value>
   </data>
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalen site columns</value>
