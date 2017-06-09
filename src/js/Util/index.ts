@@ -29,6 +29,21 @@ export const makeRelative = (absUrl: string): string => {
 };
 
 /**
+ * Make URL absolute
+ *
+ * @param relUrl Absolute URL
+ */
+export const makeAbsolute = (relUrl: string): string => {
+    if (relUrl.startsWith("http")) {
+        return relUrl;
+    }
+    let properRelativeUrl = relUrl;
+    if (!relUrl.startsWith("/")) {
+        properRelativeUrl = "/" + relUrl;
+    }
+    return document.location.protocol + "//" + document.location.hostname + properRelativeUrl;
+};
+/**
  * Generates URL. Replaces norwegian characters and spaces.
  *
  * @param str The string

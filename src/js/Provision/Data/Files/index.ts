@@ -16,9 +16,9 @@ import IProgressCallback from "../../IProgressCallback";
  */
 export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgressCallback, timeout = 25000) => new Promise<FileAddResult[]>((resolve, reject) => {
     onProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyFiles"), conf.SourceList, conf.DestinationLibrary));
-    const srcWeb = new Web(conf.SourceUrl);
+    const srcWeb = new Web(Util.makeAbsolute(conf.SourceUrl));
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
-    const destWeb = new Web(destUrl);
+    const destWeb = new Web(Util.makeAbsolute(destUrl));
     const destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
     Promise.all([
         srcList
