@@ -77,9 +77,9 @@ Write-Host "" -ForegroundColor Green
 Write-Host "############################################################################" -ForegroundColor Green
 
 if ($Debug.IsPresent) {
-    Set-PnPTraceLog -On -Level Debug
+    Set-PnPTraceLog -On -Level Debug -LogFile pplog.txt
 } else {
-    Set-PnPTraceLog -Off
+    Set-PnPTraceLog -On -Level Information
 }
 if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
