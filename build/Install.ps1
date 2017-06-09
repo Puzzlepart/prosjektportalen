@@ -79,7 +79,7 @@ Write-Host "####################################################################
 if ($Debug.IsPresent) {
     Set-PnPTraceLog -On -Level Debug -LogFile pplog.txt
 } else {
-    Set-PnPTraceLog -On -Level Information
+    Set-PnPTraceLog -On -Level Information -LogFile pplog.txt
 }
 if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
