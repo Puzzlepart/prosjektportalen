@@ -64,7 +64,6 @@
     <Field ID="{a3462545-ac76-4681-96b4-f883fea4b2ba}" Name="GtProjectLogDescription" DisplayName="{resource:SiteFields_GtProjectLogDescription_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectLogDescription_Description}" AppendOnly="FALSE" StaticName="GtProjectLogDescription"></Field>
     <Field ID="{64d45745-0dd0-4c21-979b-67fb13748bb1}" Name="GtProjectNumber" DisplayName="{resource:SiteFields_GtProjectNumber_DisplayName}" Type="Text" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectNumber_Description}" StaticName="GtProjectNumber"></Field>
     <Field ID="{1447ef51-8e9b-4d16-aa2a-526dc9f1539e}" Name="GtStatusTime" DisplayName="{resource:SiteFields_GtStatusTime_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusTime_Description}" Format="RadioButtons" StaticName="GtStatusTime">
-        <Default>{resource:Choice_GtStatusTime_OnSchedule}</Default>
         <CHOICES>
             <CHOICE>{resource:Choice_GtStatusTime_AheadOfSchedule}</CHOICE>
             <CHOICE>{resource:Choice_GtStatusTime_OnSchedule}</CHOICE>
@@ -161,7 +160,6 @@
     <Field ID="{d46bed8f-0fb6-4684-8221-632fdb12598f}" Name="GtProjectManager" DisplayName="{resource:SiteFields_GtProjectManager_DisplayName}" Type="User" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectManager_Description}" StaticName="GtProjectManager"></Field>
     <Field ID="{6aad1f97-ba6f-4865-b325-9deea7bd0564}" Name="GtProjectLogRecommendation" DisplayName="{resource:SiteFields_GtProjectLogRecommendation_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectLogRecommendation_Description}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtProjectLogRecommendation"></Field>
     <Field ID="{a9902b9d-8aad-40df-9788-ba73c64c3cb5}" Name="GtStatusBudget" DisplayName="{resource:SiteFields_GtStatusBudget_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusBudget_Description}" Format="RadioButtons" StaticName="GtStatusBudget">
-        <Default>{resource:Choice_GtStatusBudget_OnBudget}</Default>
         <CHOICES>
             <CHOICE>{resource:Choice_GtStatusBudget_BelowBudget}</CHOICE>
             <CHOICE>{resource:Choice_GtStatusBudget_OnBudget}</CHOICE>
@@ -171,7 +169,6 @@
         </CHOICES>
     </Field>
     <Field ID="{fc8a879d-83bc-4670-b1f6-c9817e333614}" Name="GtStatusRisk" DisplayName="{resource:SiteFields_GtStatusRisk_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusRisk_Description}" Format="RadioButtons" StaticName="GtStatusRisk">
-        <Default>{resource:Choice_GtStatusRisk_Medium}</Default>
         <CHOICES>
             <CHOICE>{resource:Choice_GtStatusRisk_Low}</CHOICE>
             <CHOICE>{resource:Choice_GtStatusRisk_Medium}</CHOICE>
@@ -179,11 +176,13 @@
         </CHOICES>
     </Field>
     <Field ID="{b1958607-cd56-4ecb-9ad7-65fb7d3c22c7}" Name="GtStatusGainAchievement" DisplayName="{resource:SiteFields_GtStatusGainAchievement_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusGainAchievement_Description}" Format="RadioButtons" StaticName="GtStatusGainAchievement">
-        <Default>{resource:Choice_GtStatusGainAchievement_Medium}</Default>
+        <Default>{resource:Choice_GtStatusGainAchievement_NotStarted}</Default>
         <CHOICES>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_Low}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_Medium}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_High}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusGainAchievement_NotStarted}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusGainAchievement_AheadOfSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusGainAchievement_OnSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusGainAchievement_MinorDelays}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusGainAchievement_BehindSchedule}</CHOICE>
         </CHOICES>
     </Field>
     <Field ID="{cb41572a-78c6-4e33-8505-b97bfd8fd162}" Name="GtStatusGainAchievementComment" DisplayName="{resource:SiteFields_GtStatusGainAchievementComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusGainAchievementComment_Description}" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusGainAchievementComment"></Field>

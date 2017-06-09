@@ -1267,14 +1267,20 @@
   <data name="Choice_GtStatusRisk_High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_Low" xml:space="preserve">
-    <value>Lav</value>
+  <data name="Choice_GtStatusGainAchievement_NotStarted" xml:space="preserve">
+    <value>Ikke påbegynt</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_Medium" xml:space="preserve">
-    <value>Medium</value>
+  <data name="Choice_GtStatusGainAchievement_AheadOfSchedule" xml:space="preserve">
+    <value>Foran plan</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_High" xml:space="preserve">
-    <value>Høy</value>
+  <data name="Choice_GtStatusGainAchievement_OnSchedule" xml:space="preserve">
+    <value>På plan</value>
+  </data>
+  <data name="Choice_GtStatusGainAchievement_MinorDelays" xml:space="preserve">
+    <value>Mindre forsinkelser</value>
+  </data>
+  <data name="Choice_GtStatusGainAchievement_BehindSchedule" xml:space="preserve">
+    <value>Forsinket</value>
   </data>
   <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
     <value>Større avvik fra spesifikasjon</value>

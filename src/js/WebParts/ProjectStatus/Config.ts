@@ -344,21 +344,33 @@ export const StatusFields: IStatusFields = {
     GtStatusGainAchievement: {
         Statuses: [
             {
-                Value: "Lav",
-                CssClass: "negative-status",
-                Color: "#ea5c73",
+                Value: "Foran plan",
+                CssClass: "positive-status",
+                Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Medium",
+                Value: "På plan",
+                CssClass: "positive-status",
+                Color: "#2da748",
+                Icon: "CircleFill",
+            },
+            {
+                Value: "Ikke påbegynt",
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Høy",
-                CssClass: "positive-status",
-                Color: "#2da748",
+                Value: "Mindre forsinkelser",
+                CssClass: "neutral-status",
+                Color: "#e9b359",
+                Icon: "CircleFill",
+            },
+            {
+                Value: "Forsinket",
+                CssClass: "negative-status",
+                Color: "#ea5c73",
                 Icon: "CircleFill",
             },
         ],
