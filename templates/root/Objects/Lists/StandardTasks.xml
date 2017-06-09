@@ -20,6 +20,7 @@
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
             <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
+            <pnp:RoleAssignment Principal="{associatedmembergroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
             <pnp:RoleAssignment Principal="{associatedvisitorgroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
         </pnp:BreakRoleInheritance>
     </pnp:Security>
