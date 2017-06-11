@@ -22,7 +22,7 @@ export interface IEconomySectionProps {
 const EconomySection = ({ project }: IEconomySectionProps) => {
     return (
         <div className="economy-status">
-            <div className="ms-Grid-col ms-u-sm12 economy-elements-container">
+            <div className="ms-Grid-col ms-sm12 economy-elements-container">
                 <div className="status-elements">
                     {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
                         <ProjectProperty

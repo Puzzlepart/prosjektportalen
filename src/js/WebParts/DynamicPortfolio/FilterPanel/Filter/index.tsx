@@ -58,7 +58,7 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
                         cursor: "pointer",
                         position: "relative",
                     }}
-                    className="ms-Grid-col ms-u-sm12 ms-font-m">
+                    className="ms-Grid-col ms-sm12 ms-font-m">
                     {showIcon && (
                         <Icon
                             name={filter.iconName}
@@ -67,7 +67,7 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
                     {filter.name}
                 </div>
                 <div
-                    className="ms-Grid-col ms-u-sm12"
+                    className="ms-Grid-col ms-sm12"
                     hidden={isCollapsed}>
                     <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
                         {this.renderItems()}

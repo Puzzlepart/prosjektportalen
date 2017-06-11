@@ -46,10 +46,10 @@ const StatusNavigation = (project) => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
-                <div className="ms-Grid-col ms-u-md6">
+                <div className="ms-Grid-col ms-md6">
                     <h2 className="status-page-header">{`Statusrapport: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
-                <div className=" ms-Grid-col ms-u-md6">
+                <div className=" ms-Grid-col ms-md6">
                     <ExportReport project={project} />
                 </div>
             </div>
@@ -57,7 +57,7 @@ const StatusNavigation = (project) => {
                 {nodes.map(({ title, to, offset, iconName }, idx) => (
                     <Link
                         key={idx}
-                        className="nav-link ms-Grid-col ms-u-md2"
+                        className="nav-link ms-Grid-col ms-md2"
                         activeClass="active"
                         to={to}
                         offset={offset}
@@ -65,10 +65,10 @@ const StatusNavigation = (project) => {
                         smooth={true}
                         duration={300}>
                         <div className="ms-Grid-row">
-                            <div className="ms-Grid-col ms-u-md4 ms-u-lg4">
+                            <div className="ms-Grid-col ms-md4 ms-lg4">
                                 <Icon name={iconName} />
                             </div>
-                            <p className="ms-u-hiddenLgDown ms-Grid-col ms-u-md8 ms-u-lg8">{title}</p>
+                            <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{title}</p>
                         </div>
                     </Link>
                 ))}

@@ -32,11 +32,13 @@
 <asp:Content ID="Content9" ContentPlaceHolderID="PlaceHolderBodyAreaClass" runat="server">
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="ms-Grid pp-project-page"> 
-        <div class="ms-Grid-row">
-            <div class="ms-Grid-col ms-u-sm12">
-                  <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="MainColumn" ID="MainColumn" Orientation="Vertical" />
+    <div class="ms-Fabric pp-project-page">
+        <div class="ms-Grid"> 
+            <div class="ms-Grid-row">
+                <div class="ms-Grid-col ms-sm12">
+                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="MainColumn" ID="MainColumn" Orientation="Vertical" />
+                </div>
             </div>
         </div>
-    </div>		
+    </div>
 </asp:Content>

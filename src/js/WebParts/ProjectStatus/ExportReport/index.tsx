@@ -79,10 +79,10 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
         return (
             <div className="export-section ms-Grid-row">
-                <div className=" ms-Grid-col ms-u-md5">
+                <div className=" ms-Grid-col ms-md5">
                     {this.renderExportBtn(exportStatus)}
                 </div>
-                <div className="ms-Grid-col ms-u-md7">
+                <div className="ms-Grid-col ms-md7">
                     <Icon name="History" />
                     <Dropdown label="" selectedKey="001" options={options} onChanged={(item) => {
                         this.setState({

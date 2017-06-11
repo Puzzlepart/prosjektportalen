@@ -33,7 +33,7 @@
 <asp:Content ID="Content9" ContentPlaceHolderID="PlaceHolderBodyAreaClass" runat="server">
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div id="pp-projectstatus"></div>
+    <div class="ms-Fabric" id="pp-projectstatus"></div>
     <style type="text/css">
         body {
             margin: 0 !important;

@@ -32,14 +32,16 @@
 <asp:Content ID="Content9" ContentPlaceHolderID="PlaceHolderBodyAreaClass" runat="server">
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="ms-Grid pp-project-page"> 
-        <div class="ms-Grid-row">
-            <div class="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl8 ms-u-xxxl8">
-                  <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Left%>" ID="LeftColumn" Orientation="Vertical" />
-            </div>
-            <div class="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl4 ms-u-xxxl4">
-                <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="RightColumn" Orientation="Vertical" />
+    <div class="ms-Fabric pp-project-page">
+        <div class="ms-Grid">
+            <div class="ms-Grid-row">
+                <div class="ms-Grid-col ms-sm12 ms-md12 ms-lg12 ms-xl12 ms-xxl8 ms-xxxl8">
+                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Left%>" ID="LeftColumn" Orientation="Vertical" />
+                </div>
+                <div class="ms-Grid-col ms-sm12 ms-md12 ms-lg12 ms-xl12 ms-xxl4 ms-xxxl4">
+                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="RightColumn" Orientation="Vertical" />
+                </div>
             </div>
         </div>
-    </div>		
+    </div>
 </asp:Content>

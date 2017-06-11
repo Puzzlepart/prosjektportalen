@@ -31,31 +31,17 @@
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderLeftActions" runat="server" />
 <asp:Content ContentPlaceHolderID="PlaceHolderPageDescription" runat="server" />
-<asp:Content ID="Content9" ContentPlaceHolderID="PlaceHolderBodyAreaClass" runat="server">
-    <sharepoint:styleblock runat="server">
-        .ms-bodyareaframe {
-	        padding: 0px;
-        }
-    </sharepoint:styleblock>
-</asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <style type="text/css">
-        .ms-WPBorder {
-            border: none;
-        }
-    </style>
-    <table cellpadding="0" cellspacing="0">
-	    <tr>
-		    <td valign="top" width="70%">
-			    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Left%>" ID="LeftColumn" Orientation="Vertical" />
-			    &#160;
-		    </td>
-		    <td>&#160;</td>
-		    <td valign="top" width="30%">		       
-			    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="RightColumn" Orientation="Vertical" />
-			    &#160;
-		    </td>
-		    <td>&#160;</td>
-	    </tr>
-    </table>	
+    <div class="ms-Frabric gt-portfolio-page gt-home-page">
+        <div class="ms-Grid">
+            <div class="ms-Grid-row">
+                <div class="ms-Grid-col ms-sm12 ms-xl8 ms-xxl9">
+			        <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Left%>" ID="LeftColumn" Orientation="Vertical" />
+                </div>
+                <div class="ms-Grid-col ms-sm12 ms-xl4 ms-xxl3">
+			        <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="RightColumn" Orientation="Vertical" />
+                </div>
+            </div>
+        </div>
+    </div>
 </asp:Content>

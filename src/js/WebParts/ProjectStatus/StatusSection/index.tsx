@@ -5,7 +5,7 @@ import { default as ProjectInfo } from "../../ProjectInfo";
 const StatusSection = ({ project }) => {
     return (
         <div id="status-section">
-            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-project-data status-elements-container">
+            <div className="ms-Grid-col ms-lg12 ms-xl4 status-project-data status-elements-container">
                 <div className="status-elements">
                     <StatusElement
                         name={__("StatusPage_Heading_OverallStatus")}
@@ -15,10 +15,10 @@ const StatusSection = ({ project }) => {
                         comment={project.GtOverallStatus}
                         fieldName="GtOverallStatus" />
                     <div className="status-element ms-Grid-row">
-                        <div className="status-icons ms-Grid-col ms-u-sm12 ms-u-md2 ms-u-lg2">
+                        <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
                             <i className="ms-Icon ms-Icon--CustomList no-status"></i>
                         </div>
-                        <div className="status-details ms-Grid-col ms-u-sm12 ms-u-md10 ms-u-lg8">
+                        <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
                             <h2>{__("StatusPage_Heading_ProjectMetadata")}</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
@@ -31,7 +31,7 @@ const StatusSection = ({ project }) => {
                     </div>
                 </div>
             </div>
-            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
+            <div className="ms-Grid-col ms-lg12 ms-xl4 status-elements-container">
                 <div className="status-elements">
                     <StatusElement
                         name={__("StatusPage_Heading_ProjectTime")}
@@ -56,7 +56,7 @@ const StatusSection = ({ project }) => {
                         fieldName="GtStatusQuality" />
                 </div>
             </div>
-            <div className="ms-Grid-col ms-u-lg12 ms-u-xl4 status-elements-container">
+            <div className="ms-Grid-col ms-lg12 ms-xl4 status-elements-container">
                 <div className="status-elements">
                     <StatusElement
                         name={__("StatusPage_Heading_ProjectRisk")}

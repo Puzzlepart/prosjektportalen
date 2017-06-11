@@ -16,10 +16,12 @@
     <SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="ms-Grid gt-portfolio-page gt-portfolio-overview">
-        <div class="ms-Grid-row">
-            <div class="ms-Grid-col ms-u-sm12 ms-u-md12 ms-u-lg12 ms-u-xl12 ms-u-xxl12 ms-u-xxxl12">
-                <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="LeftColumn" Orientation="Vertical" />
+    <div class="ms-Fabric gt-portfolio-page gt-portfolio-overview">
+        <div class="ms-Grid">
+            <div class="ms-Grid-row">
+                <div class="ms-Grid-col ms-sm12">
+                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="LeftColumn" Orientation="Vertical" />
+                </div>
             </div>
         </div>
     </div>
