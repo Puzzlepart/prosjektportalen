@@ -196,6 +196,7 @@ const Lists: IList[] = [
         Views: [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: [
+                "ID",
                 "LinkTitle",
                 "GtRiskProximity",
                 "GtRiskProbability",
@@ -215,6 +216,7 @@ const Lists: IList[] = [
         {
             Title: "Prosjektstatus",
             ViewFields: [
+                "ID",
                 "LinkTitle",
                 "GtRiskProximity",
                 "GtRiskAction",
