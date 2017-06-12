@@ -160,6 +160,9 @@
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
     <value>Project status reports</value>
   </data>
+  <data name="Lists_ProjectElements_Title" xml:space="preserve">
+    <value>Projects</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log/AllItems.aspx</value>
   </data>
@@ -270,6 +273,9 @@
   </data>
   <data name="ContentTypes_Prosjektforside_Name" xml:space="preserve">
     <value>Project frontpage</value>
+  </data>
+  <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
+    <value>Project item</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
@@ -669,6 +675,12 @@
   </data>
   <data name="SiteFields_GtActionDescription_DisplayName" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="SiteFields_GtProjectUrl_DisplayName" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
+    <value>Status usikkerhet</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value></value>
