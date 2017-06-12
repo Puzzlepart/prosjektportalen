@@ -22,6 +22,7 @@ interface IDynamicPortfolioProps {
     selectionMode?: SelectionMode;
     excelExportEnabled?: boolean;
     excelExportConfig?: IDynamicPortfolioExcelExportConfig;
+    defaultSortFunction?: (a, b) => 1 | -1;
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
@@ -40,6 +41,7 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
         buttonLabel: "Eksporter til Excel",
         buttonIcon: "ExcelDocument",
     },
+    defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,
 };
 
 export default IDynamicPortfolioProps;

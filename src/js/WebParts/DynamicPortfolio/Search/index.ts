@@ -32,15 +32,18 @@ export const query = (viewConfig: IViewConfig, configuration: IConfiguration) =>
         QueryTemplate: viewConfig.queryTemplate,
     })
         .then((response: any) => {
-            resolve({
-                primarySearchResults: response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
+            let primarySearchResults = response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results
+                .map(({ Cells }) => {
                     let item: any = {};
                     Cells.results.forEach(({ Key, Value }) => {
                         item[Key] = Value ? Value : "";
                     });
                     return item;
-                }),
-                refiners: response.RawSearchResults.PrimaryQueryResult.RefinementResults ? response.RawSearchResults.PrimaryQueryResult.RefinementResults.Refiners.results : [],
+                });
+            let refiners = response.RawSearchResults.PrimaryQueryResult.RefinementResults ? response.RawSearchResults.PrimaryQueryResult.RefinementResults.Refiners.results : [];
+            resolve({
+                primarySearchResults,
+                refiners,
             });
         })
         .catch(reject);
