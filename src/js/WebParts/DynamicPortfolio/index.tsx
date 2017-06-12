@@ -55,7 +55,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             .then(initialState => this.setState({
                 ...initialState,
                 isLoading: false,
-            }, this.setHash))
+            }, () => {
+                Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+            }))
             .catch(_ => this.setState({ isLoading: false }));
     }
 
@@ -84,7 +86,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Fetch initial data
      */
     private fetchInitialData = () => new Promise<Partial<IDynamicPortfolioState>>((resolve, reject) => {
-        let hashState = this.getHash();
+        let hashState = Util.getUrlHash();
         Configuration.getConfig()
             .then(config => {
                 this.configuration = config;
@@ -127,7 +129,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                                 selectedColumns: selectedColumnsOrderedAsSelected,
                                 fieldNames: fieldNames,
                                 items: response.primarySearchResults,
-                                filteredItems: response.primarySearchResults,
+                                filteredItems: response.primarySearchResults.sort(this.props.defaultSortFunction),
                                 filters: filters,
                                 currentView: initialView,
                             });
@@ -519,30 +521,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         filters: filters,
                         currentView: viewConfig,
                         selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
-                    }, this.setHash);
+                    }, () => {
+                        Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+                    });
                 })
                 .catch(_ => this.setState({ isLoading: false }));
         });
-    }
-
-    /**
-     * Set hash
-     */
-    private setHash(): void {
-        document.location.href = `#viewId=${this.state.currentView.id}`;
-    }
-
-
-    /**
-     * Get hash
-     */
-    private getHash(): { [key: string]: string } {
-        const hash = document.location.hash.substring(1);
-        let hashObject: { [key: string]: string } = {};
-        hash.split("&").map(str => {
-            const [key, value] = str.split("=");
-            hashObject[key] = value;
-        });
-        return hashObject;
     }
 }

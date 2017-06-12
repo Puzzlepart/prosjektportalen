@@ -284,6 +284,25 @@ export const toCurrencyFormat = (val: string, prefix = "kr") => {
     return `kr ${str.join(" ")}`;
 };
 
+
+
+export const getUrlHash = (): { [key: string]: string } => {
+    const hash = document.location.hash.substring(1);
+    let hashObject: { [key: string]: string } = {};
+    hash.split("&").map(str => {
+        const [key, value] = str.split("=");
+        hashObject[key] = value;
+    });
+    return hashObject;
+};
+
+export const setUrlHash = (hashObject: { [key: string]: string }): void => {
+    let hash = "#";
+    let hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`);
+    hash += hashParts.join("&");
+    document.location.hash = hash;
+};
+
 import { default as WaitDialog } from "./WaitDialog";
 import StampVersion from "./StampVersion";
 
