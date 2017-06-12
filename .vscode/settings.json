@@ -6,6 +6,7 @@
         "dist": true,
         "lib": true,
         "docs": true,
+        "wiki": true,
         "release": true,
         "_templates": true,
         "src/js/Resources": true,
