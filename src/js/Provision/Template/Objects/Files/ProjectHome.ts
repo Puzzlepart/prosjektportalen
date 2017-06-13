@@ -73,7 +73,7 @@ export const ProjectHome: IFile = {
             Zone: "RightColumn",
             Order: 0,
             Contents: {
-                Xml: require("./WebParts/Om prosjektet"),
+                FileSrc: "{wpgallery}/ProjectInfo.webpart",
             },
         },
         {
