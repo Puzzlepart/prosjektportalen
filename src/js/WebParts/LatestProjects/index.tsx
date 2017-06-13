@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-    Site,
-    Web,
-} from "sp-pnp-js";
+import { Site } from "sp-pnp-js";
 import {
     Spinner,
     SpinnerType,

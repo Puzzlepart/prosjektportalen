@@ -31,8 +31,23 @@ export const ProjectHome: IFile = {
             Title: "Dokumenter (gjeldende fase)",
             Zone: "LeftColumn",
             Order: 2,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Dokumenter (gjeldende fase)",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Delte dokumenter",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Delte dokumenter/Forms/AllItems.aspx",
+            }],
             Contents: {
-                Xml: require("./WebParts/Dokumenter (gjeldende fase)"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Dokumenter",
@@ -52,8 +67,23 @@ export const ProjectHome: IFile = {
             Title: "Gevinstanalyse og gevinstrealiseringsplan",
             Zone: "LeftColumn",
             Order: 3,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Gevinstanalyse og gevinstrealiseringsplan",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Gevinstanalyse og gevinstrealiseringsplan",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Gevinstanalyse og gevinstrealiseringsplan"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Gevinstanalyse og gevinstrealiseringsplan",
@@ -88,8 +118,23 @@ export const ProjectHome: IFile = {
             Title: "Usikkerhet (gjeldende fase)",
             Zone: "RightColumn",
             Order: 2,
+           PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Usikkerhet (gjeldende fase",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Usikkerhet",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Usikkerhet/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Usikkerhet (gjeldende fase)"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Usikkerhet",
