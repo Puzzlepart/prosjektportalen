@@ -1,17 +1,16 @@
 Thank you for reporting an issue, suggesting an enhancement, or asking a question. We appreciate your feedback - to help the team understand your needs please complete the below template to ensure we have the details to help. Thanks!
 
 #### Category
+
 [ ] Enhancement
-
 [ ] Bug
-
 [ ] Question
 
-
 #### Environment
+
 [ ] SharePoint Online
 [ ] SharePoint 2013
-
+[ ] SharePoint 2016
 
 #### Summary
 
@@ -19,7 +18,9 @@ Please summarize the issue.
 
 #### Version
 
-Please specify what version ou are using: [ ]
+Please specify what version you are using: [ ]
+
+You can find the version you are using in the bottom left corner of any page in the Project portal site.
 
 _If you are not using the latest release, please update and see if the issue is resolved before submitting an issue._
 
