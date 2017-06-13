@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as uuid_v1 from "uuid/v1";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -8,20 +7,12 @@ import {
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
-import ILatestProjectsProps from "./ILatestProjectsProps";
+import ILatestProjectsProps, { LatestProjectsDefaultProps} from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
-    public static defaultProps: ILatestProjectsProps = {
-        itemsCount: 5,
-        itemsOrderBy: {
-            orderBy: "Created",
-            ascending: false,
-        },
-        reloadInterval: -1,
-        listClassName: "pp-simpleList spacing-m",
-        listId: uuid_v1(),
-    };
+    public static defaultProps = LatestProjectsDefaultProps;
+
     private reloadInterval: number;
 
     /**
