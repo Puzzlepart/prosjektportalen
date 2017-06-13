@@ -41,13 +41,24 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
 
         return (
             <div>
-                <a
-                    className={linkClassName}
-                    href="#"
-                    onClick={e => this.setState({ showDialog: true })}>
-                    <Icon { ...iconProps } />
-                    <span>{__("NewProjectForm_Header")}</span>
-                </a>
+                <div>
+                    <a
+                        className={linkClassName}
+                        href="#"
+                        onClick={e => this.setState({ showDialog: true })}>
+                        <Icon { ...iconProps } />
+                        <span>{__("NewProjectForm_Header")}</span>
+                    </a>
+                </div>
+                <div hidden={process.env.NODE_ENV === "production"}>
+                    <a
+                        className={linkClassName}
+                        href="#"
+                        onClick={e => this.setState({ showDialog: true, autoGenerate: true })}>
+                        <Icon { ...iconProps } />
+                        <span>Opprett testprosjekt</span>
+                    </a>
+                </div>
                 {this.renderDialog(this.state)}
             </div>
         );
@@ -56,9 +67,10 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     /**
      * Renders the dialog
      */
-    private renderDialog = ({ showDialog }: INewProjectLinkState) => {
+    private renderDialog = ({ showDialog, autoGenerate }: INewProjectLinkState) => {
         return (
             <NewProjectDialog
+                autoGenerate={autoGenerate}
                 dialogProps={{
                     isOpen: showDialog,
                     type: DialogType.largeHeader,

@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as uuid_v1 from "uuid/v1";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
@@ -29,8 +30,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props: INewProjectDialogProps) {
+        super(props);
         this.state = {
             showAdvancedSettings: false,
             formValid: false,
@@ -65,6 +66,34 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 },
             }));
         });
+        if (this.props.autoGenerate) {
+            let title = uuid_v1();
+            this._onSubmit({
+                Title: title,
+                Url: title,
+                Description: "",
+                InheritPermissions: false,
+            });
+        }
+    }
+
+    /**
+     * Component did mount
+     */
+    public componentDidUpdate(prevProps: INewProjectDialogProps): void {
+        if (this.props.autoGenerate !== prevProps.autoGenerate && this.props.autoGenerate) {
+            let title = uuid_v1();
+            this.setState({
+                model: {
+                    Title: title,
+                    Url: title,
+                    Description: "",
+                    InheritPermissions: false,
+                },
+            }, () => {
+                this._onSubmit(this.state.model);
+            });
+        }
     }
 
     /**
@@ -109,25 +138,27 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param urlPlaceholder Placeholder for url field
      */
     private renderForm = ({ model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
-        return <div>
-            <TextField
-                placeholder={titlePlaceHolder}
-                onChanged={newValue => this.onFormChange("Title", newValue)}
-                errorMessage={errorMessages.Title} />
-            <TextField
-                placeholder={descPlaceholder}
-                multiline
-                autoAdjustHeight
-                onChanged={newValue => this.onFormChange("Description", newValue)}
-                errorMessage={errorMessages.Description}
-            />
-            <TextField
-                placeholder={urlPlaceholder}
-                value={model.Url}
-                onChanged={newValue => this.onFormChange("Url", newValue)}
-                errorMessage={errorMessages.Url}
-                disabled={!urlInputEnabled} />
-        </div>;
+        return (
+            <div>
+                <TextField
+                    placeholder={titlePlaceHolder}
+                    onChanged={newValue => this.onFormChange("Title", newValue)}
+                    errorMessage={errorMessages.Title} />
+                <TextField
+                    placeholder={descPlaceholder}
+                    multiline
+                    autoAdjustHeight
+                    onChanged={newValue => this.onFormChange("Description", newValue)}
+                    errorMessage={errorMessages.Description}
+                />
+                <TextField
+                    placeholder={urlPlaceholder}
+                    value={model.Url}
+                    onChanged={newValue => this.onFormChange("Url", newValue)}
+                    errorMessage={errorMessages.Url}
+                    disabled={!urlInputEnabled} />
+            </div>
+        );
     }
 
     /**
@@ -276,15 +307,21 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * Submit handler
      */
-    private onSubmit = (event): void => {
-        event.preventDefault();
+    private onSubmit = (event?): void => {
+        if (event) {
+            event.preventDefault();
+        }
+        this._onSubmit(this.state.model);
+    }
+
+    private _onSubmit = (model): void => {
         this.setState({
             showCreationModal: true,
             provisioning: {
                 isCreating: true,
             },
         }, () => {
-            ProvisionWeb(this.state.model, (step, progress) => {
+            ProvisionWeb(model, (step, progress) => {
                 this.setState({
                     provisioning: {
                         isCreating: true,
