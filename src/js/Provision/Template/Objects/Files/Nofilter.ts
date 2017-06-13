@@ -51,7 +51,7 @@ export const Nofilter: IFile = {
             Zone: "RightColumn",
             Order: 0,
             Contents: {
-                Xml: require("./WebParts/Områdefeed"),
+                FileSrc: "{wpgallery}/SiteFeed.dwp",
             },
         },
         {
