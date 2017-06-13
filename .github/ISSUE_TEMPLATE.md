@@ -3,13 +3,17 @@ Thank you for reporting an issue, suggesting an enhancement, or asking a questio
 #### Category
 
 [ ] Enhancement
+
 [ ] Bug
+
 [ ] Question
 
 #### Environment
 
 [ ] SharePoint Online
+
 [ ] SharePoint 2013
+
 [ ] SharePoint 2016
 
 #### Summary
