@@ -50,7 +50,7 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
                         <span>{__("NewProjectForm_Header")}</span>
                     </a>
                 </div>
-                <div hidden={process.env.NODE_ENV === "production"}>
+                {/*<div hidden={process.env.NODE_ENV === "production"}>
                     <a
                         className={linkClassName}
                         href="#"
@@ -58,7 +58,7 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
                         <Icon { ...iconProps } />
                         <span>Opprett testprosjekt</span>
                     </a>
-                </div>
+                </div>*/}
                 {this.renderDialog(this.state)}
             </div>
         );
