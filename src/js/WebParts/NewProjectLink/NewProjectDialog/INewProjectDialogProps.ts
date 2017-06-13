@@ -5,6 +5,7 @@ interface INewProjectDialogProps {
     advancedSectionClassName?: string;
     titleMinLength?: number;
     titleMaxLength?: number;
+    autoGenerate: boolean;
 }
 
 export default INewProjectDialogProps;

@@ -1,6 +1,6 @@
 {
   "name": "prosjektportalen",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "index.js",
   "scripts": {},
@@ -24,7 +24,7 @@
     "react-scroll": "1.5.2",
     "react-sticky": "6.0.1",
     "sp-pnp-js": "latest",
-    "sp-pnp-provisioning": "0.0.2-beta.0",
+    "sp-pnp-provisioning": "git+https://github.com/Puzzlepart/pnp-js-provisioning.git#dev",
     "uuid": "^3.0.1",
     "whatwg-fetch": "^2.0.3"
   },

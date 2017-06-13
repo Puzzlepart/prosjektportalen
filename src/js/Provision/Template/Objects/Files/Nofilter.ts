@@ -10,8 +10,23 @@ export const Nofilter: IFile = {
             Title: "Oppgaver",
             Zone: "LeftColumn",
             Order: 0,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Oppgaver",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Oppgaver"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Oppgaver",
@@ -30,8 +45,23 @@ export const Nofilter: IFile = {
             Title: "Dokumenter",
             Zone: "LeftColumn",
             Order: 1,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Dokumenter",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Delte dokumenter",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Delte dokumenter/Forms/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Dokumenter"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Dokumenter",
@@ -51,15 +81,30 @@ export const Nofilter: IFile = {
             Zone: "RightColumn",
             Order: 0,
             Contents: {
-                Xml: require("./WebParts/Områdefeed"),
+                FileSrc: "{wpgallery}/SiteFeed.dwp",
             },
         },
         {
             Title: "Usikkerhet",
             Zone: "RightColumn",
             Order: 1,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Usikkerhet",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Usikkerhet",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Usikkerhet/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Usikkerhet"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Usikkerhet",

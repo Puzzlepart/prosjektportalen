@@ -10,8 +10,23 @@ export const MoM: IFile = {
             Title: "Siste oppgaver",
             Zone: "LeftColumn",
             Order: 0,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Siste oppgaver",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Siste oppgaver"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Oppgaver",
@@ -30,8 +45,23 @@ export const MoM: IFile = {
             Title: "Siste informasjonselementer",
             Zone: "RightColumn",
             Order: 1,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Siste informasjonselementer",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Informasjon",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Informasjon/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Siste informasjonselementer"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Informasjon",

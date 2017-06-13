@@ -1,4 +1,4 @@
-let autoprefixer = require('autoprefixer-stylus'),
+var autoprefixer = require('autoprefixer-stylus'),
     pkg = require("../package.json");
 
 module.exports = {

@@ -23,12 +23,12 @@ const PROGRESS_MAP = {
 };
 
 let Template: Schema = {
-    Files: Files,
-    Lists: Lists,
-    Navigation: Navigation,
-    WebSettings: WebSettings,
-    ComposedLook: ComposedLook,
-    PropertyBagEntries: PropertyBagEntries,
+    Files,
+    Lists,
+    Navigation,
+    WebSettings,
+    ComposedLook,
+    PropertyBagEntries,
     Features: [{
         id: "87294c72-f260-42f3-a41b-981a2ffce37a",
         deactivate: true,
