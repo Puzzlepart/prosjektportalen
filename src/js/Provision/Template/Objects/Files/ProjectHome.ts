@@ -23,8 +23,43 @@ export const ProjectHome: IFile = {
             Title: "Tidslinje",
             Zone: "LeftColumn",
             Order: 1,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Tidslinje",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver/AllItems.aspx",
+            },
+            {
+                name: "CurrentTaskListWebAddress",
+                type: "string",
+                value: "{site}",
+            },
+            {
+                name: "PageAddress",
+                type: "string",
+                value: "{site}",
+            },
+            {
+                name: "ViewName",
+                type: "string",
+                value: "Tidslinje",
+            },
+            {
+                name: "TimelineType",
+                type: "string",
+                value: "TaskListTimeline",
+            }],
             Contents: {
-                Xml: require("./WebParts/Tidslinje"),
+                FileSrc: "{wpgallery}/Timeline.webpart",
             },
         },
         {
@@ -118,7 +153,7 @@ export const ProjectHome: IFile = {
             Title: "Usikkerhet (gjeldende fase)",
             Zone: "RightColumn",
             Order: 2,
-           PropertyOverrides: [{
+            PropertyOverrides: [{
                 name: "Title",
                 type: "string",
                 value: "Usikkerhet (gjeldende fase",
