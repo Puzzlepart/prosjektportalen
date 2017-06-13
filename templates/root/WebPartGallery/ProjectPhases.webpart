@@ -17,7 +17,7 @@
         <property name="AllowMinimize" type="bool">False</property>
         <property name="AllowZoneChange" type="bool">True</property>
         <property name="TitleUrl" type="string" null="true" />
-        <property name="ChromeType" type="chrometype">Default</property>
+        <property name="ChromeType" type="chrometype">None</property>
         <property name="AllowEdit" type="bool">False</property>
         <property name="AllowClose" type="bool">False</property>
         <property name="ChromeState" type="chromestate">Normal</property>
