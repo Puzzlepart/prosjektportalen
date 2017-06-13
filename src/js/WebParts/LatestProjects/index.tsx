@@ -1,5 +1,8 @@
 import * as React from "react";
-import { Site } from "sp-pnp-js";
+import {
+    Site,
+    Web,
+} from "sp-pnp-js";
 import {
     Spinner,
     SpinnerType,
@@ -7,7 +10,7 @@ import {
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
-import ILatestProjectsProps, { LatestProjectsDefaultProps} from "./ILatestProjectsProps";
+import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
 
 export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
@@ -63,7 +66,7 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
         return (
             <div>
                 {this.renderChrome()}
-                {this.renderItems()}
+                {this.renderItems(this.props, this.state)}
             </div>
         );
     }
@@ -91,20 +94,15 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
     /**
      * Render items
      */
-    private renderItems = () => {
-        const {
-            isLoading,
-            webinfos,
-         } = this.state;
-
+    private renderItems = ({ listId, listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
         if (isLoading) {
             return (<Spinner type={SpinnerType.large} />);
         } else if (webinfos == null) {
             return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
         } else if (webinfos.length > 0) {
             return (
-                <ul id={this.props.listId}
-                    className={this.props.listClassName}>
+                <ul id={listId}
+                    className={listClassName}>
                     {webinfos.map(webinfo => (
                         <li key={webinfo.Id}>
                             {webinfo.Title ?

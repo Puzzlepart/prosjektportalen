@@ -16,7 +16,7 @@ export const ProjectHome: IFile = {
             Zone: "LeftColumn",
             Order: 0,
             Contents: {
-                Xml: require("./WebParts/Prosjektets faser"),
+                FileSrc: "{wpgallery}/ProjectPhases.webpart",
             },
         },
         {
@@ -81,7 +81,7 @@ export const ProjectHome: IFile = {
             Zone: "RightColumn",
             Order: 1,
             Contents: {
-                Xml: require("./WebParts/Områdefeed"),
+                FileSrc: "{wpgallery}/SiteFeed.dwp",
             },
         },
         {
