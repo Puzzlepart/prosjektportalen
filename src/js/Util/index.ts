@@ -53,10 +53,10 @@ export const generateUrl = (str: string): string => {
         .trim()
         .toLowerCase()
         .replace(/ /g, "-")
-        .replace(/å/g, "aa")
+        .replace(/å/g, "a")
         .replace(/æ/g, "ae")
-        .replace(/ø/g, "oe")
-        .replace(/[^a-z0-9]/gi, "");
+        .replace(/ø/g, "o")
+        .replace(/[^a-z0-9-]/gi, "");
     return str.substring(0, Math.min(80, str.length));
 };
 
