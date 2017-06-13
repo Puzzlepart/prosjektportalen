@@ -10,8 +10,23 @@ export const Assigned: IFile = {
             Title: "Mine oppgaver",
             Zone: "LeftColumn",
             Order: 0,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Mine oppgaver",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Oppgaver/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Mine oppgaver"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Oppgaver",
@@ -30,8 +45,23 @@ export const Assigned: IFile = {
             Title: "Mine kommunikasjonselementer",
             Zone: "RightColumn",
             Order: 0,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Mine kommunikasjonselementer",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Kommunikasjonsplan",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Kommunikasjonsplan/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Mine kommunikasjonselementer"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Kommunikasjonsplan",
@@ -50,8 +80,23 @@ export const Assigned: IFile = {
             Title: "Prosjektleveranser jeg har ansvar for",
             Zone: "RightColumn",
             Order: 0,
+            PropertyOverrides: [{
+                name: "Title",
+                type: "string",
+                value: "Prosjektleveranser jeg har ansvar for",
+            },
+            {
+                name: "ListUrl",
+                type: "string",
+                value: "{site}/Lists/Prosjektleveranser",
+            },
+            {
+                name: "TitleUrl",
+                type: "string",
+                value: "{site}/Lists/Prosjektleveranser/AllItems.asp",
+            }],
             Contents: {
-                Xml: require("./WebParts/Prosjektleveranser jeg har ansvar for"),
+                FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
                 List: "Prosjektleveranser",
