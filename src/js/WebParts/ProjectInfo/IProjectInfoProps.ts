@@ -77,9 +77,6 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
         icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
         reloadOnSubmit: true,
         showLabel: true,
-        style: {
-            marginLeft: 8,
-        },
     }],
 };
 
