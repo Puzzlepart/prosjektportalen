@@ -13,9 +13,11 @@ export interface ICreateWebResult {
  * @param useShared Use shared navigation
  */
 const SetSharedNavigation = (url: string, useShared = true): Promise<void> => new Promise<void>((resolve, reject) => {
-    const ctx = new SP.ClientContext(url);
-    ctx.get_web().get_navigation().set_useShared(true);
-    ctx.executeQueryAsync(resolve, reject);
+    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
+        const ctx = new SP.ClientContext(url);
+        ctx.get_web().get_navigation().set_useShared(true);
+        ctx.executeQueryAsync(resolve, reject);
+    });
 });
 
 /**

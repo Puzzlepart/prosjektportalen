@@ -179,17 +179,15 @@
     <pnp:ContentType ID="0x010200A2B2AC17A2244B8590398A9D1E7E3E37" Name="{resource:ContentTypes_Glittertind_basehendelse_Name}" Description="{resource:ContentTypes_Glittertind_basehendelse_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010200A2B2AC17A2244B8590398A9D1E7E3E3701" Name="{resource:ContentTypes_Prosjekthendelse_Name}" Description="{resource:ContentTypes_Prosjekthendelse_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="288f5f32-8462-4175-8f09-dd7ba29359a9" Name="Location" />
-            <pnp:FieldRef ID="64cd368d-2f95-4bfc-a1f9-8d4324ecb007" Name="EventDate" Required="true" />
-            <pnp:FieldRef ID="2684f9f2-54be-429f-ba06-76754fc056bf" Name="EndDate" Required="true" />
             <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Description" />
+            <pnp:FieldRef ID="288f5f32-8462-4175-8f09-dd7ba29359a9" Name="Location" />
+            <pnp:FieldRef ID="64cd368d-2f95-4bfc-a1f9-8d4324ecb007" Name="StartDate" Required="true" />
+            <pnp:FieldRef ID="2684f9f2-54be-429f-ba06-76754fc056bf" Name="EndDate" Required="true" />
             <pnp:FieldRef ID="6df9bd52-550e-4a30-bc31-a4366832a87d" Name="Category" />
             <pnp:FieldRef ID="7d95d1f4-f5fd-4a70-90cd-b35abc9b5bc8" Name="fAllDayEvent" />
             <pnp:FieldRef ID="f2e63656-135e-4f1c-8fc2-ccbe74071901" Name="fRecurrence" />
             <pnp:FieldRef ID="08fc65f9-48eb-4e99-bd61-5946c439e691" Name="WorkspaceLink" />
-            <pnp:FieldRef ID="5d1d4e76-091a-4e03-ae83-6a59847731c0" Name="EventType" />
             <pnp:FieldRef ID="63055d04-01b5-48f3-9e1e-e564e7c6b23b" Name="UID" />
             <pnp:FieldRef ID="dfcc8fff-7c4c-45d6-94ed-14ce0719efef" Name="RecurrenceID" />
             <pnp:FieldRef ID="b8bbe503-bb22-4237-8d9e-0587756a2176" Name="EventCanceled" />
@@ -199,6 +197,8 @@
             <pnp:FieldRef ID="c4b72ed6-45aa-4422-bff1-2b6750d30819" Name="XMLTZone" />
             <pnp:FieldRef ID="9b2bed84-7769-40e3-9b1d-7954a4053834" Name="MasterSeriesItemID" />
             <pnp:FieldRef ID="881eac4a-55a5-48b6-a28e-8329d7486120" Name="Workspace" />
+            <pnp:FieldRef ID="5d1d4e76-091a-4e03-ae83-6a59847731c0" Name="EventType" />
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010800233B015F95174C9A8EB505493841DE8D" Name="{resource:ContentTypes_Prosjektoppgave_Name}" Description="{resource:ContentTypes_Prosjektoppgave_Description}" Group="{resource:ContentTypes_Group}">

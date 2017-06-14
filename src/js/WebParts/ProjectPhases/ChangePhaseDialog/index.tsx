@@ -4,39 +4,32 @@ import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { View } from "./Views";
 import { Body } from "./Body";
 import { Footer } from "./Footer";
-
-export interface IChangePhaseDialogProps {
-    phase: any;
-    onConfirmPhaseChange: Function;
-    hideHandler: Function;
-    checkListItems: any[];
-}
-export interface IChangePhaseDialogState {
-    currentIdx: number;
-    isLoading: boolean;
-    currentView: View;
-}
+import IChangePhaseDialogProps from "./IChangePhaseDialogProps";
+import IChangePhaseDialogState from "./IChangePhaseDialogState";
 
 export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
     private phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
+    private openCheckListItems;
 
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props: IChangePhaseDialogProps) {
+        super(props);
         this.state = {
             currentIdx: 0,
             isLoading: false,
             currentView: View.Initial,
+            checkListItems: props.checkListItems,
         };
+        this.openCheckListItems = props.checkListItems.filter(item => item.GtChecklistStatus === __("Choice_GtChecklistStatus_Open"));
     }
 
     /**
      * Component did mount
      */
     public componentDidMount(): void {
-        if (this.props.checkListItems.length === 0) {
+        if (this.openCheckListItems.length === 0) {
             this.setState({ currentView: View.Confirm });
         }
     }
@@ -45,7 +38,10 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * Render the component
      */
     public render(): JSX.Element {
-        let [{ onConfirmPhaseChange, checkListItems }, { currentView, isLoading, currentIdx }] = [this.props, this.state];
+        return this._render(this.props, this.state);
+    }
+
+    private _render({ onConfirmPhaseChange }: IChangePhaseDialogProps, { currentView, isLoading, checkListItems, currentIdx }: IChangePhaseDialogState): JSX.Element {
         return (
             <Dialog
                 isOpen={true}
@@ -58,7 +54,9 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 <Body
                     currentView={currentView}
                     isLoading={isLoading}
+                    currentPhase={this.props.phase.Name}
                     checkListItems={checkListItems}
+                    openCheckListItems={this.openCheckListItems}
                     currentIdx={currentIdx}
                     nextCheckPointAction={this.nextCheckPoint} />
                 <Footer
@@ -71,12 +69,21 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
         );
     }
 
+    /**
+     * Get dialog title
+     */
     private _getDialogTitle = () => {
         return `${__("ProjectPhases_ChangePase")} (${this.props.phase.Name})`;
     }
 
+    /**
+     * Get dialog subtext
+     */
     private _getDialogSubText = () => {
-        return (this.state.currentView === View.Confirm) ? String.format(__("ProjectPhases_ConfirmChangePhase"), this.props.phase.Name) : "";
+        if (this.state.currentView === View.Confirm) {
+            return String.format(__("ProjectPhases_ConfirmChangePhase"), this.props.phase.Name);
+        }
+        return "";
     }
 
     /**
@@ -86,18 +93,27 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * @param commentsValue Comments value
      */
     private nextCheckPoint = (statusValue: string, commentsValue: string): void => {
-        let [{ checkListItems }, { currentIdx }] = [this.props, this.state];
-        let item = checkListItems[currentIdx];
+        let {
+            checkListItems,
+            currentIdx,
+         } = this.state;
+
+        let currentItem = this.openCheckListItems[currentIdx];
         this.setState({ isLoading: true }, () => {
             let updatedValues = { GtChecklistStatus: statusValue, GtComment: commentsValue };
-            this.phaseChecklist.items.getById(item.Id).update(updatedValues).then(() => {
-                checkListItems[currentIdx] = Object.assign(item, updatedValues);
-                Logger.log({ message: "Updating checklist item", data: { id: item.Id, statusValue: statusValue, commentsValue: commentsValue }, level: LogLevel.Info });
-                let newState: any = {
+            this.phaseChecklist.items.getById(currentItem.Id).update(updatedValues).then(() => {
+                this.openCheckListItems[currentIdx] = Object.assign(currentItem, updatedValues);
+                Logger.log({ message: "Updating checklist item", data: { id: currentItem.Id, statusValue: statusValue, commentsValue: commentsValue }, level: LogLevel.Info });
+                let newState: Partial<IChangePhaseDialogState> = {
                     isLoading: false,
-                    checkListItems: checkListItems,
+                    checkListItems: checkListItems.map(item => {
+                        if (currentItem.ID === item.ID) {
+                            return currentItem;
+                        }
+                        return item;
+                    }),
                 };
-                if (currentIdx < (checkListItems.length - 1)) {
+                if (currentIdx < (this.openCheckListItems.length - 1)) {
                     newState.currentIdx = (currentIdx + 1);
                 } else {
                     newState.currentView = View.Summary;

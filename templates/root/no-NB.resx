@@ -1060,6 +1060,9 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Rediger egenskaper</value>
   </data>
+  <data name="ProjectInfo_ViewProperties" xml:space="preserve">
+    <value>Vis alle egenskaper</value>
+  </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Tittel, beskrivelse og logo</value>
   </data>
@@ -1112,7 +1115,7 @@
     <value>Kommentar</value>
   </data>
   <data name="String_Skip" xml:space="preserve">
-    <value>Hopp over</value>
+    <value>Hopp over alle</value>
   </data>
   <data name="String_MoveOn" xml:space="preserve">
     <value>Gå videre</value>

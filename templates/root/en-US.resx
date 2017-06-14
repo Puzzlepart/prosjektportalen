@@ -1057,6 +1057,9 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Edit Properties</value>
   </data>
+  <data name="ProjectInfo_ViewProperties" xml:space="preserve">
+    <value>View all properties</value>
+  </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Title, description and logo</value>
   </data>
@@ -1109,7 +1112,7 @@
     <value>Comment</value>
   </data>
   <data name="String_Skip" xml:space="preserve">
-    <value>Skip</value>
+    <value>Skip all</value>
   </data>
   <data name="String_MoveOn" xml:space="preserve">
     <value>Continue</value>
