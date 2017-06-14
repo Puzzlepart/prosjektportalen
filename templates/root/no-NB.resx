@@ -379,6 +379,9 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalenkolonner</value>
   </data>
+  <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
+    <value>Dato og tittel</value>
+  </data>
   <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
     <value>Sorteringsrekkefølge</value>
   </data>

@@ -292,6 +292,9 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
+        Fields: [
+            `<Field Type="Calculated" DisplayName="${__("SiteFields_GtProjectEventDateAndTitle_DisplayName")}" Format="DateOnly" ResultType="Text" ReadOnly="TRUE" ID="{bceebbba-1edd-4482-94c4-9ab24fb28eaf}" StaticName="GtProjectEventDateAndTitle" InternalName="GtProjectEventDateAndTitle"><Formula>=TEXT(EventDate,"yyyy-mm-dd")&amp;" "&amp;Title</Formula><FieldRefs><FieldRef Name="Title" /><FieldRef Name="EventDate" /></FieldRefs></Field>`,
+        ],
     },
     {
         Title: __("Lists_Documents_Title"),
@@ -325,7 +328,7 @@ const Lists: IList[] = [
             ContentTypeID: "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02",
         }],
         AdditionalSettings: {
-             EnableVersioning: true,
+            EnableVersioning: true,
         },
         Views: [{
             Title: __("View_AllDocuments_DisplayName"),
