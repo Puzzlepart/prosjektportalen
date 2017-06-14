@@ -32,43 +32,55 @@ interface IProjectInfoProps {
 }
 
 export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
-        hideChrome: false,
-        showActionLinks: true,
-        showMissingPropsWarning: true,
-        webUrl: _spPageContextInfo.webAbsoluteUrl,
-        rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
-        welcomePageId: 3,
-        renderMode: ProjectInfoRenderMode.Normal,
-        containerClassName: "pp-projectInfo",
-        metadataProps: {
-            className: "ms-font-xs",
-            style: {
-                marginTop: 25,
-            },
+    hideChrome: false,
+    showActionLinks: true,
+    showMissingPropsWarning: true,
+    webUrl: _spPageContextInfo.webAbsoluteUrl,
+    rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
+    welcomePageId: 3,
+    renderMode: ProjectInfoRenderMode.Normal,
+    containerClassName: "pp-projectInfo",
+    metadataProps: {
+        className: "ms-font-xs",
+        style: {
+            marginTop: 25,
         },
-        actionLinks: [{
-            url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
-            label: __("ProjectInfo_EditProperties"),
-            icon: { iconName: "EditMirrored", position: ModalLinkIconPosition.Left },
-            options: {
-                HideContentTypeChoice: true,
-                HideWebPartMaintenancePageLink: true,
-                HideRibbon: true,
-                HideFormFields: "GtProjectPhase",
-            },
-            reloadOnSubmit: true,
-            showLabel: true,
+    },
+    actionLinks: [{
+        url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
+        label: __("ProjectInfo_ViewProperties"),
+        icon: { iconName: "PreviewLink", position: ModalLinkIconPosition.Left },
+        options: {
+            HideContentTypeChoice: true,
+            HideWebPartMaintenancePageLink: true,
+            HideRibbon: true,
         },
-        {
-            url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
-            label: __("ProjectInfo_EditLogo"),
-            icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
-            reloadOnSubmit: true,
-            showLabel: true,
-            style: {
-                marginLeft: 8,
-            },
-        }],
-    };
+        reloadOnSubmit: false,
+        showLabel: true,
+    },
+    {
+        url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
+        label: __("ProjectInfo_EditProperties"),
+        icon: { iconName: "EditMirrored", position: ModalLinkIconPosition.Left },
+        options: {
+            HideContentTypeChoice: true,
+            HideWebPartMaintenancePageLink: true,
+            HideRibbon: true,
+            HideFormFields: "GtProjectPhase",
+        },
+        reloadOnSubmit: true,
+        showLabel: true,
+    },
+    {
+        url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
+        label: __("ProjectInfo_EditLogo"),
+        icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
+        reloadOnSubmit: true,
+        showLabel: true,
+        style: {
+            marginLeft: 8,
+        },
+    }],
+};
 
 export default IProjectInfoProps;

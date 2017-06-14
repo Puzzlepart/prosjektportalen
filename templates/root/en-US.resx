@@ -1054,6 +1054,9 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Edit Properties</value>
   </data>
+  <data name="ProjectInfo_ViewProperties" xml:space="preserve">
+    <value>View Properties</value>
+  </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Title, description and logo</value>
   </data>
