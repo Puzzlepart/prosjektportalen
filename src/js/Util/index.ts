@@ -49,12 +49,15 @@ export const makeAbsolute = (relUrl: string): string => {
  * @param str The string
  */
 export const generateUrl = (str: string): string => {
-    return str
+    str = str
+        .trim()
         .toLowerCase()
         .replace(/ /g, "-")
-        .replace(/å/g, "aa")
+        .replace(/å/g, "a")
         .replace(/æ/g, "ae")
-        .replace(/ø/g, "oe");
+        .replace(/ø/g, "o")
+        .replace(/[^a-z0-9-]/gi, "");
+    return str.substring(0, Math.min(80, str.length));
 };
 
 /**

@@ -73,6 +73,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: title,
                 Description: "",
                 InheritPermissions: false,
+                IncludeContent: [],
             });
         }
     }

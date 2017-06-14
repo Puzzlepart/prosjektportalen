@@ -7,10 +7,9 @@
         </metaData>
         <data>
             <properties>
-                <property name="Title" type="string">Oppgaver</property>
-                <property name="ListUrl" type="string">{site}/Lists/Oppgaver</property>
-                <property name="TitleUrl" type="string">{site}/Lists/Oppgaver/AllItems.aspx</property>
-                <property name="ShowTimelineIfAvailable" type="bool">true</property>
+                <property name="Title" type="string">Tittel</property>
+                <property name="ListUrl" type="string">ListUrl</property>
+                <property name="TitleUrl" type="string">TitleUrl</property>
             </properties>
         </data>
     </webPart>
