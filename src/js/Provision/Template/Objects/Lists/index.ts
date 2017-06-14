@@ -131,7 +131,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogEventLookup_DisplayName")}" List="{listid:${__("Lists_MeetingCalendar_Title")}}" ShowField="Title" ID="{20731fb1-e98e-4fdc-b3d6-941b41b8fd6e}" StaticName="GtProjectLogEventLookup" InternalName="GtProjectLogEventLookup" />`,
+            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogEventLookup_DisplayName")}" List="{listid:${__("Lists_MeetingCalendar_Title")}}" ShowField="GtProjectEventDateAndTitle" ID="{20731fb1-e98e-4fdc-b3d6-941b41b8fd6e}" StaticName="GtProjectLogEventLookup" InternalName="GtProjectLogEventLookup" />`,
             `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogProductLookup_DisplayName")}" List="{listid:${__("Lists_ProjectProducts_Title")}}" ShowField="Title" ID="{022cc93f-13df-4420-bd47-55e4fdae5d18}" StaticName="GtProjectLogProductLookup" InternalName="GtProjectLogProductLookup" />`,
         ],
         Views: [{
@@ -293,7 +293,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="Calculated" DisplayName="${__("SiteFields_GtProjectEventDateAndTitle_DisplayName")}" Format="DateOnly" ResultType="Text" ReadOnly="TRUE" ID="{bceebbba-1edd-4482-94c4-9ab24fb28eaf}" StaticName="GtProjectEventDateAndTitle" InternalName="GtProjectEventDateAndTitle"><Formula>=TEXT(EventDate,"yyyy-mm-dd")&amp;" "&amp;Title</Formula><FieldRefs><FieldRef Name="Title" /><FieldRef Name="EventDate" /></FieldRefs></Field>`,
+            `<Field ID="{7604dadc-d8e3-4f35-bc58-890d33d908b9}" Name="GtProjectEventDateAndTitle" DisplayName="${__("SiteFields_GtProjectEventDateAndTitle_DisplayName")}" Type="Calculated" Required="FALSE" ResultType="Text" ReadOnly="TRUE" EnforceUniqueValues="FALSE" Indexed="FALSE" Percentage="FALSE"><Formula>=TEXT(Starttidspunkt,"yyyy-mm-dd")&amp;" "&amp;Tittel</Formula><FieldRefs><FieldRef Name="Tittel" /><FieldRef Name="Starttidspunkt" /></FieldRefs></Field>`,
         ],
     },
     {
