@@ -45,17 +45,20 @@ export const CheckListItem = ({ item }: IChecklistItemProps) => {
 /**
  * Summary view
  */
-export const SummaryView = ({ checkListItems, listClassName = "pp-simpleList spacing-m" }) => {
+export const SummaryView = ({ currentPhase, checkListItems, listClassName = "pp-simpleList spacing-m" }) => {
+    let listViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${currentPhase}`;
     return (
         <div className="inner">
-            <MessageBar>Gå tl fasesjekklisten</MessageBar>
-            <ul className={listClassName}>
+            <ul
+                style={{ marginBottom: 20 }}
+                className={listClassName}>
                 {checkListItems.map((item, idx) => (
                     <CheckListItem
                         key={idx}
                         item={item} />
                 ))}
             </ul>
+            <MessageBar>Gå til <a href={listViewUrl} target="_blank">fasesjekklisten</a> (åpnes i ny fane)</MessageBar>
         </div>
     );
 };
