@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Button } from "office-ui-fabric-react/lib/Button";
+import { IChecklistItem } from "../../Data";
 
 export interface IInitialViewProps {
     isLoading: boolean;
-    currentChecklistItem: any;
+    currentChecklistItem: IChecklistItem;
     nextCheckPointAction: (statusValue: string, commentsValue: string) => void;
 }
 
@@ -17,6 +18,10 @@ export interface IInitialViewState {
 export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
     private commentsField: HTMLTextAreaElement;
     private commentMinLength = 4;
+
+    /**
+     * Constructor
+     */
     constructor() {
         super();
         this.state = {
@@ -24,13 +29,17 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         };
     }
 
-    public render() {
-        const { currentChecklistItem, nextCheckPointAction } = this.props;
-
-        if (!currentChecklistItem) {
-            return <div className="inner"></div>;
+    /**
+     * Renders the component
+     */
+    public render(): JSX.Element {
+        if (!this.props.currentChecklistItem) {
+            return (
+                <div className="inner">
+                </div>
+            );
         }
-        const { ID, Title } = currentChecklistItem;
+        const { ID, Title } = this.props.currentChecklistItem;
 
         return (
             <div className="inner">
@@ -46,7 +55,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                         <Button
                             disabled={opt.disabled}
                             onClick={e => {
-                                nextCheckPointAction(opt.value, this.state.comment);
+                                this.props.nextCheckPointAction(opt.value, this.state.comment);
                                 this.reset();
                             }}>{opt.value}</Button>
                     </span>)}
