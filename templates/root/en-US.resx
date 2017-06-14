@@ -379,6 +379,15 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalen site columns</value>
   </data>
+  <data name="SiteFields_Title_DisplayName" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
+    <value>Date and title</value>
+  </data>
   <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
     <value>Sort order</value>
   </data>
@@ -1410,7 +1419,7 @@
   </data>
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
-  </data>  
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>
