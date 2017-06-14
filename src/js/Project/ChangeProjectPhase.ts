@@ -29,24 +29,25 @@ const UpdateWelcomePage = (phaseName: string, phaseGuid: string, phaseFieldName:
  * Get current proejct phase
  */
 export const GetCurrentProjectPhase = () => new Promise<{ Id: string, Name: string, WssId: number }>((resolve, reject) => {
-    let ctx = SP.ClientContext.get_current(),
-        welcomePage = ctx.get_web().get_lists().getById(_spPageContextInfo.pageListId).getItemById(_spPageContextInfo.pageItemId);
-    ctx.load(welcomePage);
-    ctx.executeQueryAsync(() => {
-        let phase = welcomePage.get_item(Config.PROJECTPHASE_FIELD);
-        if (phase) {
-            let safe = Util.getSafeTerm(phase);
-            let currentPhase = {
-                Id: safe.get_termGuid(),
-                Name: safe.get_label(),
-                WssId: safe.get_wssId(),
-            };
-            Logger.log({ message: `ChangeProjectPhase: Retrieved current phase`, data: currentPhase, level: LogLevel.Info });
-            resolve(currentPhase);
-        } else {
-            resolve(null);
-        }
-    }, reject);
+    Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
+        let welcomePage = ctx.get_web().get_lists().getById(_spPageContextInfo.pageListId).getItemById(_spPageContextInfo.pageItemId);
+        ctx.load(welcomePage);
+        ctx.executeQueryAsync(() => {
+            let phase = welcomePage.get_item(Config.PROJECTPHASE_FIELD);
+            if (phase) {
+                let safe = Util.getSafeTerm(phase);
+                let currentPhase = {
+                    Id: safe.get_termGuid(),
+                    Name: safe.get_label(),
+                    WssId: safe.get_wssId(),
+                };
+                Logger.log({ message: `ChangeProjectPhase: Retrieved current phase`, data: currentPhase, level: LogLevel.Info });
+                resolve(currentPhase);
+            } else {
+                resolve(null);
+            }
+        }, reject);
+    });
 });
 
 /**
