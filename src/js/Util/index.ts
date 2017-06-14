@@ -302,7 +302,17 @@ export const toCurrencyFormat = (val: string, prefix = "kr") => {
     return `kr ${str.join(" ")}`;
 };
 
-
+/**
+ * Get client context for the specified URL
+ *
+ * @param url The URL
+ */
+export const getClientContext = (url: string) => new Promise<SP.ClientContext>((resolve, reject) => {
+    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
+        const clientContext = new SP.ClientContext(url);
+        resolve(clientContext);
+    });
+});
 
 export const getUrlHash = (): { [key: string]: string } => {
     const hash = document.location.hash.substring(1);
