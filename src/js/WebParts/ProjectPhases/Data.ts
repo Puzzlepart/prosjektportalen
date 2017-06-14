@@ -2,29 +2,39 @@ import { sp } from "sp-pnp-js";
 import * as Util from "../../Util";
 import { GetCurrentProjectPhase } from "../../Project/";
 
+export interface IChecklistItem {
+    ID: string;
+    Title: string;
+    GtProjectPhase: any;
+    GtChecklistStatus: string;
+    GtComment: string;
+}
+
 export interface IChecklistData {
     stats: { [key: string]: number };
-    items: any[];
+    items: IChecklistItem[];
 }
 
 /**
  * Fetch phases
  */
 const fetchPases = () => new Promise<any[]>((resolve, reject) => {
-    Util.ensureTaxonomy().then(() => {
-        let ctx = SP.ClientContext.get_current(),
-            taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
-            termStore = taxSession.getDefaultSiteCollectionTermStore(),
-            termSet = termStore.getTermSet(new SP.Guid(__("TermSetID_ProjectPhase"))),
-            terms = termSet.getAllTerms();
-        ctx.load(terms);
-        ctx.executeQueryAsync(() => {
-            resolve(terms.get_data().filter(t => t.get_localCustomProperties().ShowOnFrontpage !== "false").map(t => ({
-                Id: t.get_id().toString(),
-                Name: t.get_name(),
-                PhaseLevel: t.get_localCustomProperties().PhaseLevel,
-            })));
-        }, reject);
+    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
+        Util.ensureTaxonomy().then(() => {
+            let ctx = SP.ClientContext.get_current(),
+                taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
+                termStore = taxSession.getDefaultSiteCollectionTermStore(),
+                termSet = termStore.getTermSet(new SP.Guid(__("TermSetID_ProjectPhase"))),
+                terms = termSet.getAllTerms();
+            ctx.load(terms);
+            ctx.executeQueryAsync(() => {
+                resolve(terms.get_data().filter(t => t.get_localCustomProperties().ShowOnFrontpage !== "false").map(t => ({
+                    Id: t.get_id().toString(),
+                    Name: t.get_name(),
+                    PhaseLevel: t.get_localCustomProperties().PhaseLevel,
+                })));
+            }, reject);
+        });
     });
 });
 
@@ -35,7 +45,7 @@ const phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"))
  */
 const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }>((resolve, reject) => {
     phaseChecklist.items
-        .select("Id", "Title", "GtProjectPhase", "GtChecklistStatus")
+        .select("Id", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment")
         .get().then(items => {
             let data: { [phase: string]: IChecklistData } = {};
             items
@@ -75,13 +85,15 @@ export const fetchData = () => new Promise<any>((resolve, reject) => {
         GetCurrentProjectPhase(),
         fetchPases(),
         fetchChecklistData(),
-    ]).then(([currentPhase, phases, checkListData]) => {
-        resolve({
-            currentPhase: currentPhase,
-            phases: phases,
-            checkListData: checkListData,
-        });
-    });
+    ])
+        .then(([currentPhase, phases, checkListData]) => {
+            resolve({
+                currentPhase: currentPhase,
+                phases: phases,
+                checkListData: checkListData,
+            });
+        })
+        .catch(reject);
 });
 
 

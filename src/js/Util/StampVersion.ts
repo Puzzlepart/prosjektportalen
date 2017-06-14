@@ -24,7 +24,7 @@ export default class StampVersion {
      */
     public getVersion(versionKey: string): Promise<string> {
         return new Promise<string>((resolve, reject) => {
-            SP.SOD.executeOrDelayUntilScriptLoaded(() => {
+            SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
                 let ctx = SP.ClientContext.get_current(),
                     propBag = ctx.get_web().get_allProperties();
                 ctx.load(propBag);
@@ -36,7 +36,7 @@ export default class StampVersion {
                         reject();
                     }
                 }, reject);
-            }, "sp.js");
+            });
         });
     }
 }
