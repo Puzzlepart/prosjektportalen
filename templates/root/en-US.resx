@@ -379,6 +379,12 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalen site columns</value>
   </data>
+  <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
   </data>
