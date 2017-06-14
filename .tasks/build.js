@@ -15,17 +15,12 @@ var gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
-gulp.task("copy:assets:lib", () => {
-    return gulp.src(config.paths.libFilesGlob)
-        .pipe(gulp.dest(config.paths.lib))
-});
-
 gulp.task("copy:assets:dist", () => {
     return gulp.src(config.paths.assetsFilesGlob)
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("build:lib", ["copy:assets:lib"], () => {
+gulp.task("build:lib", () => {
     var project = tsc.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
         .pipe(project(tsc.reporter[config.typescript.reporter]()));

@@ -15,7 +15,6 @@ module.exports = {
         sourceGlob: "./src/**/*.ts*",
         stylesGlob: "./src/**/*.styl",
         stylesMain: ["./src/*/pp.main.styl", "./src/*/pp.project.styl"],
-        libFilesGlob: ["./src/**/*.txt", "./src/**/*.json"],
         assetsFilesGlob: ["./src/**/*.png"],
         libGlob: ["./lib/**/*.js", "./lib/**/**/*.js"],
         searchDispTemplatesGlob: "./templates/root/DisplayTemplates/Search/*",
