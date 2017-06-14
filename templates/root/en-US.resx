@@ -1109,7 +1109,7 @@
     <value>Comment</value>
   </data>
   <data name="String_Skip" xml:space="preserve">
-    <value>Skip</value>
+    <value>Skip all</value>
   </data>
   <data name="String_MoveOn" xml:space="preserve">
     <value>Continue</value>
