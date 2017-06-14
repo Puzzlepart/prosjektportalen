@@ -3,7 +3,7 @@
     <pnp:File Src="StandardDocuments\Gevinstrealiseringsplan.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Gevinstrealiseringsplan" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Realisere', 'TermGuid':'b7ba84f0-70b9-45c4-8c50-8f73bf15bbec'}" />
+            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Flere faser', 'TermGuid':'777cc6ac-4639-4633-85b9-f1ef61197c4d'}" /> 
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Gevinstverktøy.xlsx" Folder="StandardDocuments" Overwrite="false">
