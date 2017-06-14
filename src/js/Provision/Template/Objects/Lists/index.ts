@@ -1,4 +1,5 @@
 import { IList } from "sp-pnp-provisioning/lib/schema";
+import * as SiteFields from "./SiteFields";
 
 const Lists: IList[] = [
     {
@@ -106,7 +107,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="LookupMulti" DisplayName="${__("SiteFields_GtCommunicationTarget_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" Name="GtCommunicationTarget" StaticName="GtCommunicationTarget" InternalName="GtCommunicationTarget" Mult="TRUE" />`,
+            SiteFields.GtCommunicationTarget,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -131,8 +132,8 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogEventLookup_DisplayName")}" List="{listid:${__("Lists_MeetingCalendar_Title")}}" ShowField="Title" ID="{20731fb1-e98e-4fdc-b3d6-941b41b8fd6e}" StaticName="GtProjectLogEventLookup" InternalName="GtProjectLogEventLookup" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectLogProductLookup_DisplayName")}" List="{listid:${__("Lists_ProjectProducts_Title")}}" ShowField="Title" ID="{022cc93f-13df-4420-bd47-55e4fdae5d18}" StaticName="GtProjectLogProductLookup" InternalName="GtProjectLogProductLookup" />`,
+            SiteFields.GtProjectLogEventLookup,
+            SiteFields.GtProjectLogProductLookup,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -157,7 +158,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProductInteressent_DisplayName")}" List="{listid:${__("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{6d90e0b6-73e6-48fb-aa1e-b897b214f934}" StaticName="GtProductInteressent" InternalName="GtProductInteressent" />`,
+            SiteFields.GtProductInteressent,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -255,11 +256,11 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskComElement_DisplayName")}" List="{listid:${__("Lists_CommunicationPlan_Title")}}" ShowField="Title" ID="{087dae25-b007-4e58-91b4-347dde464840}" StaticName="GtProjectTaskComElement" InternalName="GtProjectTaskComElement" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskRisk_DisplayName")}" List="{listid:${__("Lists_Uncertainties_Title")}}" ShowField="Title" ID="{920b385c-756f-49eb-98e7-4c3ebf15b7f4}" StaticName="GtProjectTaskRisk" InternalName="GtProjectTaskRisk" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskProduct_DisplayName")}" List="{listid:${__("Lists_ProjectProducts_Title")}}" ShowField="Title" ID="{a3ab9d99-78da-436d-a299-5854340a504f}" StaticName="GtProjectTaskProduct" InternalName="GtProjectTaskProduct" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskChange_DisplayName")}" List="{listid:${__("Lists_ChangeAnalysis_Title")}}" ShowField="Title" ID="{2b55bfc2-44c5-4b67-92a7-9b43bffbceb4}" StaticName="GtProjectTaskChange" InternalName="GtProjectTaskChange" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtProjectTaskGain_DisplayName")}" List="{listid:${__("Lists_GainsAnalysis_Title")}}" ShowField="Title" ID="{1149ce1e-bb07-4d3c-afe0-3242708b3c8e}" StaticName="GtProjectTaskGain" InternalName="GtProjectTaskGain" />`,
+            SiteFields.GtProjectTaskComElement,
+            SiteFields.GtProjectTaskRisk,
+            SiteFields.GtProjectTaskProduct,
+            SiteFields.GtProjectTaskChange,
+            SiteFields.GtProjectTaskGain,
         ],
         Views: [{
             Title: __("View_AllTasks_DisplayName"),
@@ -292,6 +293,9 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
+        Fields: [
+            SiteFields.GtProjectEventDateAndTitle,
+        ],
     },
     {
         Title: __("Lists_Documents_Title"),
@@ -325,7 +329,7 @@ const Lists: IList[] = [
             ContentTypeID: "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02",
         }],
         AdditionalSettings: {
-             EnableVersioning: true,
+            EnableVersioning: true,
         },
         Views: [{
             Title: __("View_AllDocuments_DisplayName"),
@@ -352,7 +356,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Fields: [
-            `<Field Type="LookupMulti" DisplayName="${__("SiteFields_GtChangeLookup_DisplayName")}" List="{listid:${__("Lists_ChangeAnalysis_Title")}}" ShowField="LinkTitleNoMenu" UnlimitedLengthInDocumentLibrary="FALSE" RelationshipDeleteBehavior="None" ID="{1d5752af-4d26-4aed-b20a-6229ac14ed5d}" StaticName="GtChangeLookup" InternalName="GtChangeLookup" Group="" Description="Foreslått endring fra endringsanalysen" Mult="TRUE" />`,
+            SiteFields.GtChangeLookup,
         ],
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
@@ -444,9 +448,9 @@ const Lists: IList[] = [
             Hidden: true,
         }],
         Fields: [
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtGainLookup_DisplayName")}" List="{listid:${__("Lists_GainsAnalysis_Title")}}" ShowField="Title" ID="{8d70fa93-b547-46f1-84e7-4982f8c9c675}" StaticName="GtGainLookup" InternalName="GtGainLookup" SourceID="{{listid:Gevinstsoppfølging}}" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtMeasureIndicatorLookup_DisplayName")}" List="{listid:${__("Lists_GainsAnalysis_Title")}}" ShowField="GtMeasureIndicator" FieldRef="8d70fa93-b547-46f1-84e7-4982f8c9c675" ReadOnly="TRUE" UnlimitedLengthInDocumentLibrary="FALSE" ID="{92ae8541-f35e-4c05-8518-b9abce2d0860}" SourceID="{{listid:Gevinstsoppfølging}}" StaticName="GtMeasureIndicatorLookup" InternalName="GtMeasureIndicatorLookup" />`,
-            `<Field Type="Lookup" DisplayName="${__("SiteFields_GtGainLookup_DisplayName")} ID" List="{listid:${__("Lists_GainsAnalysis_Title")}}" ShowField="ID" FieldRef="8d70fa93-b547-46f1-84e7-4982f8c9c675" ReadOnly="TRUE" UnlimitedLengthInDocumentLibrary="FALSE" ID="{c239539c-8672-46cc-be77-fb53322f71ae}" SourceID="{{listid:Gevinstsoppfølging}}" ShowInDisplayForm="FALSE" StaticName="GtGainLookup_ID" InternalName="GtGainLookup_ID" />`,
+            SiteFields.GtGainLookup,
+            SiteFields.GtMeasureIndicatorLookup,
+            SiteFields.GtGainLookup_ID,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),

@@ -189,7 +189,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
         return (
             <div
                 hidden={!this.props.showActionLinks}
-                style={{ marginTop: 20 }}>
+                className="pp-project-actions">
                 {this.props.actionLinks.map((props, idx) => (
                     <ModalLink key={idx} { ...props } />
                 ))}

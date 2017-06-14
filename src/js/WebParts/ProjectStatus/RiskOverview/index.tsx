@@ -60,10 +60,11 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
      * Fetch data using JSOM
      */
     private fetchData = () => new Promise<Partial<IRiskOverviewState>>((resolve, reject) => {
-        const ctx = SP.ClientContext.get_current();
-        const spList = ctx.get_web().get_lists().getByTitle(__("Lists_Uncertainties_Title"));
-        const camlQuery = new SP.CamlQuery();
-        camlQuery.set_viewXml(`<View>
+        SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
+            const ctx = SP.ClientContext.get_current();
+            const spList = ctx.get_web().get_lists().getByTitle(__("Lists_Uncertainties_Title"));
+            const camlQuery = new SP.CamlQuery();
+            camlQuery.set_viewXml(`<View>
             <Query>
                 <Where>
                     <And>
@@ -85,32 +86,33 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
                 </Where>
             </Query>
         </View>`);
-        const spItems = spList.getItems(camlQuery);
-        const spFields = spList.get_fields();
-        const spViewFields = spList.get_views().getByTitle(this.props.viewName).get_viewFields();
-        ctx.load(spItems, "Include(FieldValuesAsHtml)");
-        ctx.load(spFields);
-        ctx.load(spViewFields);
-        ctx.executeQueryAsync(() => {
-            const spItemsData = spItems.get_data();
-            let columns: IColumn[] = spViewFields.get_data().map(viewField => {
-                let [field] = spFields.get_data().filter(f => f.get_internalName() === viewField.replace("Link", ""));
-                if (field) {
-                    return ({
-                        key: viewField,
-                        fieldName: field.get_internalName(),
-                        name: field.get_title(),
-                        minWidth: field && field.get_typeAsString() === "Note" ? 300 : 100,
-                        isResizable: true,
-                    });
-                }
-                return null;
-            });
-            resolve({
-                items: spItemsData.map(i => i.get_fieldValuesAsHtml().get_fieldValues()),
-                columns: columns.filter(c => c),
-            });
-        }, reject);
+            const spItems = spList.getItems(camlQuery);
+            const spFields = spList.get_fields();
+            const spViewFields = spList.get_views().getByTitle(this.props.viewName).get_viewFields();
+            ctx.load(spItems, "Include(FieldValuesAsHtml)");
+            ctx.load(spFields);
+            ctx.load(spViewFields);
+            ctx.executeQueryAsync(() => {
+                const spItemsData = spItems.get_data();
+                let columns: IColumn[] = spViewFields.get_data().map(viewField => {
+                    let [field] = spFields.get_data().filter(f => f.get_internalName() === viewField.replace("Link", ""));
+                    if (field) {
+                        return ({
+                            key: viewField,
+                            fieldName: field.get_internalName(),
+                            name: field.get_title(),
+                            minWidth: field && field.get_typeAsString() === "Note" ? 300 : 100,
+                            isResizable: true,
+                        });
+                    }
+                    return null;
+                });
+                resolve({
+                    items: spItemsData.map(i => i.get_fieldValuesAsHtml().get_fieldValues()),
+                    columns: columns.filter(c => c),
+                });
+            }, reject);
+        });
     })
 }
 

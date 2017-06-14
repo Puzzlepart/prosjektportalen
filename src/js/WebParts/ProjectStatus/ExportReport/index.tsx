@@ -137,7 +137,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     private SaveReport = (reportBlob: any) => {
         let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.png`;
-        let fileTitle = `${_spPageContextInfo.webTitle} prosjektbilde ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+        let fileTitle = `${_spPageContextInfo.webTitle} ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({ exportStatus: IExportReportStatus.hasExported });
             this.fetchReports();

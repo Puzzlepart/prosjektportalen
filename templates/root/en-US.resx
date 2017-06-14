@@ -379,6 +379,15 @@
   <data name="SiteFields_Group" xml:space="preserve">
     <value>Prosjektportalen site columns</value>
   </data>
+  <data name="SiteFields_Title_DisplayName" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
+    <value>Date and title</value>
+  </data>
   <data name="SiteFields_GtSortOrder_DisplayName" xml:space="preserve">
     <value>Sort order</value>
   </data>
@@ -1054,6 +1063,9 @@
   <data name="ProjectInfo_EditProperties" xml:space="preserve">
     <value>Edit Properties</value>
   </data>
+  <data name="ProjectInfo_ViewProperties" xml:space="preserve">
+    <value>View all properties</value>
+  </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Title, description and logo</value>
   </data>
@@ -1106,7 +1118,7 @@
     <value>Comment</value>
   </data>
   <data name="String_Skip" xml:space="preserve">
-    <value>Skip</value>
+    <value>Skip all</value>
   </data>
   <data name="String_MoveOn" xml:space="preserve">
     <value>Continue</value>
@@ -1407,7 +1419,7 @@
   </data>
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
-  </data>  
+  </data>
   <data name="GainsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>

@@ -14,10 +14,12 @@ const _: IBaseFormModifications = {
     },
     DispForm: () => {
         const id = "pp-related-logelements";
-        const lookupField = "Til_x0020_prosjektstyre";
+        const lookupField = "GtProjectLogEventLookup";
         const container = FormUtil.insertFormContainer(id);
-        pnp.sp.web.lists.getByTitle("Prosjektlogg").items.filter(`${lookupField}Id eq ${GetUrlKeyValue("ID")}`).get().then(items => {
-            ReactDOM.render(<RelatedLogElements logElements={items} />, container);
+        pnp.sp.web.lists.getByTitle(__("Lists_ProjectLog_Title")).items.filter(`${lookupField}Id eq ${GetUrlKeyValue("ID")}`).get().then(items => {
+            ReactDOM.render((
+                <RelatedLogElements logElements={items} />
+            ), container);
         });
     },
 };

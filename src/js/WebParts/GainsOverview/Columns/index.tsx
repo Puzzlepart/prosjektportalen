@@ -1,6 +1,7 @@
 import * as React from "react";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import { ModalLink } from "../../../WebParts/@Components";
 import DataSource from "../../DataSource";
 
 const Columns = (dataSource: DataSource): any[] => {
@@ -197,6 +198,18 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
     let colValue = item[column.fieldName];
     let { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrese } = item;
     switch (column.key) {
+        case "Title": {
+            let dispFormUrl = item.Path;
+            if (!dispFormUrl) {
+                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_GainsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
+            }
+            return (
+                <ModalLink
+                    label={colValue}
+                    url={dispFormUrl}
+                    options={{ HideRibbon: true }} />
+            );
+        }
         case "SiteTitle": {
             let { SPWebUrl, SiteTitle: Title } = item;
             return <a href={SPWebUrl}>{Title}</a>;
