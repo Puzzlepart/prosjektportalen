@@ -51,14 +51,16 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                     ref={ele => this.commentsField = ele}
                     onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
                 <div style={{ margin: "20px 0 25px 0" }}>
-                    {this._statusOptions().map((opt, idx) => <span key={idx} title={opt.tooltip}>
+                    {this._statusOptions().map((opt, idx) => (
+                        <span key={idx} title={opt.tooltip}>
                         <Button
                             disabled={opt.disabled}
                             onClick={e => {
                                 this.props.nextCheckPointAction(opt.value, this.state.comment);
                                 this.reset();
                             }}>{opt.value}</Button>
-                    </span>)}
+                    </span>
+                    ))}
                 </div>
             </div>
         );

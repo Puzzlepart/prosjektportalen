@@ -8,7 +8,7 @@ import {
 /**
  * Body
  */
-export const Body = ({ checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }) => {
+export const Body = ({ currentPhase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }) => {
     const DEFAULT = (
         <div className="inner"></div>
     );
@@ -23,7 +23,11 @@ export const Body = ({ checkListItems, openCheckListItems, currentIdx, nextCheck
             );
         }
         case View.Summary: {
-            return (<SummaryView checkListItems={checkListItems} />);
+            return (
+                <SummaryView
+                    currentPhase={currentPhase}
+                    checkListItems={checkListItems} />
+            );
         }
         default: {
             return DEFAULT;

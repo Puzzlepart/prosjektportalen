@@ -54,6 +54,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 <Body
                     currentView={currentView}
                     isLoading={isLoading}
+                    currentPhase={this.props.phase.Name}
                     checkListItems={checkListItems}
                     openCheckListItems={this.openCheckListItems}
                     currentIdx={currentIdx}
