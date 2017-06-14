@@ -65,6 +65,7 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                             showProjectInfo(ev);
                         },
                         label: "Vis prosjektinfo",
+                        title: "Vis prosjektinfo",
                         ariaLabel: "Vis prosjektinfo",
                     },
                     ]}
