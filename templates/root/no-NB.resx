@@ -1049,10 +1049,10 @@
     <value>Sjekkpunktet er ikke relevant</value>
   </data>
   <data name="ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar."</value>
+    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
   </data>
   <data name="ProjectPhases_Stats_" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar."</value>
+    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
   </data>
   <data name="ProjectPhases_Stats_Open" xml:space="preserve">
     <value>åpne</value>
