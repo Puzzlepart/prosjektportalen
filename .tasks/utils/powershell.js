@@ -1,3 +1,4 @@
+'use strict';
 var exec = require('child_process').exec,
     format = require('string-format'),
     config = require("../@configuration.js");
