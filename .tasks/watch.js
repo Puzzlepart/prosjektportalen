@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require("gulp"),
     plumber = require("gulp-plumber"),
     format = require("string-format"),

@@ -1,6 +1,6 @@
 {
   "name": "prosjektportalen",
-  "version": "1.13.3",
+  "version": "1.13.4",
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "index.js",
   "scripts": {},
@@ -64,7 +64,7 @@
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
     "gulp-zip": "^4.0.0",
-    "i18n-webpack-plugin": "^0.3.0",
+    "i18n-webpack-plugin": "^1.0.0",
     "json-loader": "^0.5.4",
     "merge2": "^1.0.3",
     "path": "^0.12.7",

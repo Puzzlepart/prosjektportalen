@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require("gulp"),
     tslint = require("gulp-tslint"),
     config = require('./@configuration.js');

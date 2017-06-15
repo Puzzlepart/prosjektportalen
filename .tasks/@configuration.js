@@ -1,3 +1,4 @@
+'use strict';
 var autoprefixer = require('autoprefixer-stylus'),
     pkg = require("../package.json");
 

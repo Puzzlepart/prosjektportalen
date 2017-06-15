@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require("gulp"),
     tsc = require("gulp-typescript"),
     config = require('./@configuration.js'),
