@@ -24,10 +24,6 @@ interface IProjectInfoProps {
         iconName?: string;
         style?: React.CSSProperties;
     };
-    metadataProps?: {
-        className: string;
-        style?: React.CSSProperties;
-    };
     actionLinks?: IModalLinkProps[];
 }
 
@@ -40,12 +36,6 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     welcomePageId: 3,
     renderMode: ProjectInfoRenderMode.Normal,
     containerClassName: "pp-projectInfo",
-    metadataProps: {
-        className: "ms-font-xs",
-        style: {
-            marginTop: 25,
-        },
-    },
     actionLinks: [{
         url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
         label: __("ProjectInfo_ViewProperties"),
