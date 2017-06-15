@@ -1,7 +1,7 @@
 Param(
     [Parameter(Mandatory = $true)]
     [string]$Url,
-    [Parameter(Mandatory = $true)]
+    [Parameter(Mandatory = $false)]
     [string]$WinCred
 )
 
