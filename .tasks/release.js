@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require("gulp"),
     zip = require("gulp-zip"),
     format = require("string-format"),

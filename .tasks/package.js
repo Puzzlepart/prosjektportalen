@@ -1,3 +1,4 @@
+'use strict';
 var gulp = require("gulp"),
     webpack = require('webpack'),
     webpackConfigDev = require('../webpack.config.development.js'),
