@@ -58,8 +58,8 @@ export const SummaryView = ({ currentPhase, checkListItems, listClassName = "pp-
                         item={item} />
                 ))}
             </ul>
-            <MessageBar>Gå til <a href={listViewUrl} target="_blank">fasesjekklisten</a> (åpnes i ny fane)</MessageBar>
-        </div>
+            <MessageBar dangerouslySetInnerHTML={{ __html: String.format(__("ProjectPhases_GoToChecklist2"), listViewUrl) }}></MessageBar>
+        </div >
     );
 };
 

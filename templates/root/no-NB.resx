@@ -1027,6 +1027,9 @@
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Gå til fasesjekklisten</value>
   </data>
+  <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
+    <value>G&#229; til &lt;a href=&quot;{0}&quot; target=&quot;_blank&quot;&gt;fasesjekklisten&lt;/a&gt; (&#229;pnes i ny fane)</value>
+  </data>
   <data name="ProjectPhases_Checkpoints" xml:space="preserve">
     <value>punkter</value>
   </data>
