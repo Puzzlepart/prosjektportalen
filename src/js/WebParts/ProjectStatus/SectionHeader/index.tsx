@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Icon } from "../../@Components";
+import  * as Util from "../../../Util";
 import { GetStatusCssClass } from "../Utils";
 
 export interface ISectionHeaderProps {
@@ -26,7 +27,7 @@ const SectionHeader = ({ name, statusValue, comment, source, iconName, fieldName
                 <div className="section-details ms-Grid-col ms-sm12 ms-md9 ms-lg9">
                     <h1>{name}</h1>
                     <h3>{statusValue}</h3>
-                    <p>{comment}</p>
+                    <p>{Util.htmlDecode(comment)}</p>
                 </div>
                 <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
                     {(source) ? <a href={source}><i className="ms-Icon ms-Icon--Forward" title="Naviger til listen"></i></a> : null}
