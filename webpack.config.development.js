@@ -3,7 +3,7 @@ var path = require("path"),
     pkg = require("./package.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (devtool = "source-map") => {
+module.exports = (devtool) => {
     const plugins = [
         new I18nPlugin(require("./src/js/Resources/no-NB.json")),
         new webpack.DefinePlugin({
