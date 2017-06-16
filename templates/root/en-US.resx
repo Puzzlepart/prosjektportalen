@@ -1028,8 +1028,7 @@
     <value>Go to the phase checklist</value>
   </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
-    <value>Go to the &lt;a href=&quot;{0}&quot; target=&quot;_blank&quot;&gt;phase checklist&lt;/a&gt; (opens in new tab)
-</value>
+    <value>Go to the &lt;a href=&quot;{0}&quot; target=&quot;_blank&quot;&gt;phase checklist&lt;/a&gt; (opens in new tab)</value>
   </data>
   <data name="ProjectPhases_Checkpoints" xml:space="preserve">
     <value>checkpoint</value>
@@ -1069,6 +1068,9 @@
   </data>
   <data name="ProjectInfo_ViewProperties" xml:space="preserve">
     <value>View all properties</value>
+  </data>
+  <data name="ProjectInfo_ShowVersionHistory" xml:space="preserve">
+    <value>Show version history</value>
   </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Title, description and logo</value>
