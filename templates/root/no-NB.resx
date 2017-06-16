@@ -1072,6 +1072,9 @@
   <data name="ProjectInfo_ViewProperties" xml:space="preserve">
     <value>Vis alle egenskaper</value>
   </data>
+  <data name="ProjectInfo_ShowVersionHistory" xml:space="preserve">
+    <value>Vis versjonshistorikk</value>
+  </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Tittel, beskrivelse og logo</value>
   </data>
