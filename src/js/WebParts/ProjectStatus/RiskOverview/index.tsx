@@ -94,26 +94,44 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
             ctx.load(spViewFields);
             ctx.executeQueryAsync(() => {
                 const spItemsData = spItems.get_data();
-                let columns: IColumn[] = spViewFields.get_data().map(viewField => {
-                    let [field] = spFields.get_data().filter(f => f.get_internalName() === viewField.replace("Link", ""));
-                    if (field) {
-                        return ({
-                            key: viewField,
-                            fieldName: field.get_internalName(),
-                            name: field.get_title(),
-                            minWidth: field && field.get_typeAsString() === "Note" ? 300 : 100,
-                            isResizable: true,
-                        });
-                    }
-                    return null;
-                });
                 resolve({
                     items: spItemsData.map(i => i.get_fieldValuesAsHtml().get_fieldValues()),
-                    columns: columns.filter(c => c),
+                    columns: this.generateColumns(spViewFields, spFields).filter(c => c),
                 });
             }, reject);
         });
     })
+
+    /**
+     * Generate columns
+     */
+    private generateColumns = (viewFields: SP.ViewFieldCollection, spFields: SP.FieldCollection): IColumn[] => {
+        let columns: IColumn[] = [];
+        viewFields.get_data().forEach(viewField => {
+            let [field] = spFields.get_data().filter(f => f.get_internalName() === viewField.replace("Link", ""));
+            if (field) {
+                let col: IColumn = {
+                    key: viewField,
+                    fieldName: field.get_internalName(),
+                    name: field.get_title(),
+                    isResizable: true,
+                    minWidth: 100,
+                };
+                if (field.get_typeAsString() === "Note") {
+                    col.minWidth = 300;
+                }
+                if (field.get_internalName() === "ID") {
+                    col.minWidth = 30;
+                    col.maxWidth = 30;
+                }
+                if (field.get_internalName() === "Title") {
+                    col.minWidth = 250;
+                }
+                columns.push(col);
+            }
+        });
+        return columns;
+    }
 }
 
 export default RiskOverview;
