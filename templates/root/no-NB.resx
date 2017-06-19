@@ -166,6 +166,9 @@
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Prosjektlogg/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_Information_Url" xml:space="preserve">
+    <value>Lists/Informasjon/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_Stakeholders_Url" xml:space="preserve">
     <value>Lists/Interessentregister/AllItems.aspx</value>
   </data>
