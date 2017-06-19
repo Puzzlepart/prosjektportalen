@@ -293,9 +293,6 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
-        Fields: [
-            SiteFields.GtProjectEventDateAndTitle,
-        ],
     },
     {
         Title: __("Lists_Documents_Title"),

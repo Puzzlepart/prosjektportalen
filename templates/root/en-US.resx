@@ -137,7 +137,7 @@
     <value>Project Log</value>
   </data>
   <data name="Lists_ProjectProducts_Title" xml:space="preserve">
-    <value>Project Products</value>
+    <value>Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
     <value>Uncertainties</value>
@@ -163,6 +163,75 @@
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="Lists_SitePages_Url" xml:space="preserve">
+    <value>SitePages</value>
+  </data>
+  <data name="Lists_Announcements_Url" xml:space="preserve">
+    <value>Lists/Announcements</value>
+  </data>
+  <data name="Lists_Extensions_Url" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="Lists_QuickLinks_Url" xml:space="preserve">
+    <value>Lists/QuickLinks</value>
+  </data>
+  <data name="Lists_Resources_Url" xml:space="preserve">
+    <value>Resources</value>
+  </data>
+  <data name="Lists_Tasks_Url" xml:space="preserve">
+    <value>Lists/Tasks</value>
+  </data>
+  <data name="Lists_StandardTasks_Url" xml:space="preserve">
+    <value>Lists/StandardTasks</value>
+  </data>
+  <data name="Lists_PhaseChecklist_Url" xml:space="preserve">
+    <value>Lists/PhaseChecklist</value>
+  </data>
+  <data name="Lists_Stakeholders_Url" xml:space="preserve">
+    <value>Lists/Stakeholders</value>
+  </data>
+  <data name="Lists_Standarddocuments_Url" xml:space="preserve">
+    <value>StandardDocuments</value>
+  </data>
+  <data name="Lists_Information_Url" xml:space="preserve">
+    <value>Lists/Information</value>
+  </data>
+  <data name="Lists_CommunicationPlan_Url" xml:space="preserve">
+    <value>Lists/Communication Plan</value>
+  </data>
+  <data name="Lists_ProjectLog_Url" xml:space="preserve">
+    <value>Lists/Project Log</value>
+  </data>
+  <data name="Lists_ProjectProducts_Url" xml:space="preserve">
+    <value>Lists/Project Deliveries</value>
+  </data>
+  <data name="Lists_Uncertainties_Url" xml:space="preserve">
+    <value>Lists/Uncertainties</value>
+  </data>
+  <data name="Lists_MeetingCalendar_Url" xml:space="preserve">
+    <value>Lists/Meeting Calendar</value>
+  </data>
+  <data name="Lists_Documents_Url" xml:space="preserve">
+    <value>Shared documents</value>
+  </data>
+  <data name="Lists_GainsAnalysis_Url" xml:space="preserve">
+    <value>Lists/Gains Analysis</value>
+  </data>
+  <data name="Lists_ChangeAnalysis_Url" xml:space="preserve">
+    <value>Lists/Change Analysis</value>
+  </data>
+  <data name="Lists_GainsFollowup_Url" xml:space="preserve">
+    <value>Lists/Gains Followup</value>
+  </data>
+  <data name="Lists_ProjectStatus_Url" xml:space="preserve">
+    <value>Project status reports</value>
+  </data>
+  <data name="Lists_ProjectElements_Url" xml:space="preserve">
+    <value>Lists/Project Elements</value>
+  </data>
+  <data name="DefaultView_Information_Url" xml:space="preserve">
+    <value>Lists/Information/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log/AllItems.aspx</value>
   </data>
@@ -173,7 +242,7 @@
     <value>Lists/Communication Plan/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ProjectProducts_Url" xml:space="preserve">
-    <value>Lists/Project Products/AllItems.aspx</value>
+    <value>Lists/Project Deliveries/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
     <value>Lists/Uncertainties/AllItems.aspx</value>
@@ -185,7 +254,7 @@
     <value>Lists/Meeting Calendar/calendar.aspx</value>
   </data>
   <data name="DefaultView_Documents_Url" xml:space="preserve">
-    <value>Documents/Forms/AllItems.aspx</value>
+    <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
     <value>Lists/Phase Checklist/AllItems.aspx</value>
@@ -389,7 +458,7 @@
     <value>Title</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
-    <value></value>
+    <value>End Time</value>
   </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
@@ -1173,6 +1242,51 @@
   </data>
   <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
     <value>Project Info</value>
+  </data>
+  <data name="WebPart_ProjectPhases_Title" xml:space="preserve">
+    <value>Project Phases</value>
+  </data>
+  <data name="WebPart_Timeline_Title" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="WebPart_Timeline_ViewName" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="WebPart_Documents_Title" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="WebPart_DocumentsCurrentPhase_Title" xml:space="preserve">
+    <value>Documents (current phase)</value>
+  </data>
+  <data name="WebPart_SiteFeed_Title" xml:space="preserve">
+    <value>Site Feed</value>
+  </data>
+  <data name="WebPart_Uncertainties_Title" xml:space="preserve">
+    <value>Uncertainties</value>
+  </data>
+  <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
+    <value>Uncertainties (current phase)</value>
+  </data>
+  <data name="WebPart_LatestsTasks_Title" xml:space="preserve">
+    <value>Latest tasks</value>
+  </data>
+  <data name="WebPart_MyTasks_Title" xml:space="preserve">
+    <value>My tasks</value>
+  </data>
+  <data name="WebPart_Tasks_Title" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
+    <value>Project deliveries I am responsible for</value>
+  </data>
+  <data name="WebPart_MyCommunicationElements_Title" xml:space="preserve">
+    <value>My communication elements</value>
+  </data>
+  <data name="WebPart_GainsOverview_Title" xml:space="preserve">
+    <value>Gevinstoversikt</value>
+  </data>
+  <data name="WebPart_LatestInformation_Title" xml:space="preserve">
+    <value>Latest information elements </value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>

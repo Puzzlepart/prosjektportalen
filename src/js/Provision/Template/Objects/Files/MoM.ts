@@ -7,29 +7,29 @@ export const MoM: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: "Siste oppgaver",
+            Title: __("WebPart_LatestsTasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Siste oppgaver",
+                value: __("WebPart_LatestsTasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver",
+                value: `{site}/${__("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver/AllItems.asp",
+                value: `{site}/${__("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Oppgaver",
+                List: __("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo"],
@@ -42,29 +42,29 @@ export const MoM: IFile = {
             },
         },
         {
-            Title: "Siste informasjonselementer",
+            Title: __("WebPart_LatestInformation_Title"),
             Zone: "RightColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Siste informasjonselementer",
+                value: __("WebPart_LatestInformation_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Informasjon",
+                value: `{site}/${__("Lists_Information_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Informasjon/AllItems.asp",
+                value: `{site}/${__("DefaultView_Information_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Informasjon",
+                List: __("Lists_Information_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProjectInfoDescription"],

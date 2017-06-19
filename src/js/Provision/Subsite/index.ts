@@ -42,7 +42,7 @@ export const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reje
  */
 export const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
     let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-    site.rootWeb.webs.add(title, url, description, "STS#0", 1044, inheritPermissions)
+    site.rootWeb.webs.add(title, url, description, "STS#0", process.env.LANGUAGE, inheritPermissions)
         .then(result => {
             url = result.data.Url;
             let redirectUrl = inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));

@@ -14,7 +14,6 @@ pnp.setup({
     },
 });
 
-
 ExecuteOrDelayUntilBodyLoaded(() => {
     Logger.log({ message: `pp.main.js: Body loaded. Initializing.`, level: LogLevel.Info });
     Forms.Initialize();
