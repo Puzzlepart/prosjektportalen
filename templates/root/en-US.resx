@@ -1255,6 +1255,15 @@
   <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
     <value>Uncertainties (current phase)</value>
   </data>
+  <data name="WebPart_MyTasks_Title" xml:space="preserve">
+    <value>My Tasks</value>
+  </data>
+  <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
+    <value>Project deliveries I am responsible for</value>
+  </data>
+  <data name="WebPart_MyCommunicationElements_Title" xml:space="preserve">
+    <value>My communication elements</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
   </data>

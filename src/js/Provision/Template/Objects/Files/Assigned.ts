@@ -7,29 +7,29 @@ export const Assigned: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: "Mine oppgaver",
+            Title: __("WebPart_MyTasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Mine oppgaver",
+                value: __("WebPart_MyTasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver",
+                value: `{site}/${__("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver/AllItems.asp",
+                value: `{site}/${__("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Oppgaver",
+                List: __("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "GtProjectPhase", "StartDate", "DueDate"],
@@ -42,29 +42,29 @@ export const Assigned: IFile = {
             },
         },
         {
-            Title: "Mine kommunikasjonselementer",
+            Title: __("WebPart_MyCommunicationElements_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Mine kommunikasjonselementer",
+                value: __("WebPart_MyCommunicationElements_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Kommunikasjonsplan",
+                value: `{site}/${__("Lists_CommunicationPlan_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Kommunikasjonsplan/AllItems.asp",
+                value: `{site}/${__("DefaultView_CommunicationPlan_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Kommunikasjonsplan",
+                List: __("Lists_CommunicationPlan_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProjectPhase", "GtActionDate", "GtCommunicationTarget"],
@@ -77,29 +77,29 @@ export const Assigned: IFile = {
             },
         },
         {
-            Title: "Prosjektleveranser jeg har ansvar for",
+            Title: __("WebPart_MyProjectDeliveries_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Prosjektleveranser jeg har ansvar for",
+                value: __("WebPart_MyProjectDeliveries_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Prosjektleveranser",
+                value: `{site}/${__("Lists_ProjectProducts_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Prosjektleveranser/AllItems.asp",
+                value: `{site}/${__("DefaultView_ProjectProducts_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Prosjektleveranser",
+                List: __("Lists_ProjectProducts_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProductPhase", "GtProductInteressent", "GtProductAcceptanceMethod", "GtProductAcceptanceDate"],
