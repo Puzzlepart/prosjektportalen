@@ -1180,6 +1180,51 @@
   <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
     <value>Om prosjektet</value>
   </data>
+  <data name="WebPart_ProjectPhases_Title" xml:space="preserve">
+    <value>Prosjektets faser</value>
+  </data>
+  <data name="WebPart_Timeline_Title" xml:space="preserve">
+    <value>Tidslinje</value>
+  </data>
+  <data name="WebPart_Timeline_ViewName" xml:space="preserve">
+    <value>Tidslinje</value>
+  </data>
+  <data name="WebPart_Documents_Title" xml:space="preserve">
+    <value>Dokumenter</value>
+  </data>
+  <data name="WebPart_DocumentsCurrentPhase_Title" xml:space="preserve">
+    <value>Dokumenter (gjeldende fase)</value>
+  </data>
+  <data name="WebPart_SiteFeed_Title" xml:space="preserve">
+    <value>Områdefeed</value>
+  </data>
+  <data name="WebPart_Uncertainties_Title" xml:space="preserve">
+    <value>Usikkerhet</value>
+  </data>
+  <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
+    <value>Usikkerhet (gjeldende fase)</value>
+  </data>
+  <data name="WebPart_LatestsTasks_Title" xml:space="preserve">
+    <value>Siste oppgaver</value>
+  </data>
+  <data name="WebPart_MyTasks_Title" xml:space="preserve">
+    <value>Mine oppgaver</value>
+  </data>
+  <data name="WebPart_Tasks_Title" xml:space="preserve">
+    <value>Oppgaver</value>
+  </data>
+  <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
+    <value>Prosjektleveranser jeg har ansvar for</value>
+  </data>
+  <data name="WebPart_MyCommunicationElements_Title" xml:space="preserve">
+    <value>Mine kommunikasjonselementer</value>
+  </data>
+  <data name="WebPart_GainsOverview_Title" xml:space="preserve">
+    <value>Gevinstoversikt</value>
+  </data>
+  <data name="WebPart_LatestInformation_Title" xml:space="preserve">
+    <value>Siste informasjonselementer</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
