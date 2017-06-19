@@ -212,7 +212,7 @@
     <value>Lists/Meeting Calendar</value>
   </data>
   <data name="Lists_Documents_Url" xml:space="preserve">
-    <value>Documents</value>
+    <value>Shared documents</value>
   </data>
   <data name="Lists_GainsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gains Analysis</value>
@@ -251,7 +251,7 @@
     <value>Lists/Meeting Calendar/calendar.aspx</value>
   </data>
   <data name="DefaultView_Documents_Url" xml:space="preserve">
-    <value>Documents/Forms/AllItems.aspx</value>
+    <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
     <value>Lists/Phase Checklist/AllItems.aspx</value>
