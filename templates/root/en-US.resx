@@ -449,7 +449,7 @@
     <value>Title</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
-    <value></value>
+    <value>End Time</value>
   </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
