@@ -12,9 +12,6 @@ const SCRIPTS_PATH = "siteassets/pp/js";
  */
 const SCRIPTS: IScript[] = [
     {
-        fileName: "fetch.min.js",
-    },
-    {
         fileName: "pp.main.js",
         appendVersion: true,
     },

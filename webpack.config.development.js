@@ -41,7 +41,7 @@ module.exports = (devtool) => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', './lib/js/index.js'],
+            main: ['babel-polyfill', 'whatwg-fetch', './lib/js/index.js'],
             loader: './lib/js/Loader.js'
         },
         output: {
