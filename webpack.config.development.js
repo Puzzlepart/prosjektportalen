@@ -16,11 +16,9 @@ module.exports = (devtool) => {
             __VERSION: JSON.stringify(pkg.version)
         }),
         new webpack.DefinePlugin({
-            __BUILD: build
-        }),
-        new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('development'),
+                LANGUAGE: JSON.stringify(build.language),
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
@@ -50,8 +48,7 @@ module.exports = (devtool) => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', 'whatwg-fetch','./lib/js/index.js'],
-            loader: './lib/js/Loader.js'
+            main: ['babel-polyfill', 'whatwg-fetch','./lib/js/index.js']
         },
         output: {
             path: path.join(__dirname, "dist/js"),

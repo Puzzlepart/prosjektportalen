@@ -14,10 +14,9 @@ pnp.setup({
     },
 });
 
-
-export function __pp_initializeBundle() {
+ExecuteOrDelayUntilBodyLoaded(() => {
     Logger.log({ message: `pp.main.js: Body loaded. Initializing.`, level: LogLevel.Info });
     Forms.Initialize();
     WebParts.Render();
     new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
-}
+});
