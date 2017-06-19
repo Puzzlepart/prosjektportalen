@@ -1318,6 +1318,15 @@
   <data name="PortfolioPage_ExperienceLog_Title" xml:space="preserve">
     <value>Erfaringslogg</value>
   </data>
+  <data name="Choice_GtGainsType_Directly" xml:space="preserve">
+    <value>Direkte</value>
+  </data>
+  <data name="Choice_GtGainsType_Indirectly" xml:space="preserve">
+    <value>Indirekte</value>
+  </data>
+  <data name="Choice_GtGainsType_Qualitative" xml:space="preserve">
+    <value>Kvalitativ</value>
+  </data>
   <data name="Choice_GtProjectLogResponsible_ProjectOwner" xml:space="preserve">
     <value>Prosjekteier</value>
   </data>
