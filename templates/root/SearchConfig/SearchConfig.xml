@@ -1,1 +1,225 @@
-<SearchConfigurationSettings xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Portability"><SearchQueryConfigurationSettings><SearchQueryConfigurationSettings><BestBets xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" /><DefaultSourceId>00000000-0000-0000-0000-000000000000</DefaultSourceId><DefaultSourceIdSet>true</DefaultSourceIdSet><DeployToParent>false</DeployToParent><DisableInheritanceOnImport>false</DisableInheritanceOnImport><QueryRuleGroups xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" /><QueryRules xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" /><ResultTypes xmlns:d4p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" /><Sources xmlns:d4p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration.Query"><d4p1:Source><d4p1:Active>true</d4p1:Active><d4p1:AuthInfo xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" /><d4p1:BuiltIn>false</d4p1:BuiltIn><d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout><d4p1:ConnectionUrlTemplate /><d4p1:CreatedDate>2017-04-07T09:12:18.6</d4p1:CreatedDate><d4p1:Description /><d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo><d4p1:Id>a8f4ed43-c0d1-4b1c-bb51-6ca0ca603b86</d4p1:Id><d4p1:IndexOffset>0</d4p1:IndexOffset><d4p1:LastModifiedDate>2017-05-08T14:46:49.577</d4p1:LastModifiedDate><d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength><d4p1:Name>Gevinstmålinger</d4p1:Name><d4p1:Owner xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId><d6p1:DisableInheritance>false</d6p1:DisableInheritance><d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId><d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId><d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId><d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId></d4p1:Owner><d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId><d4p1:QueryTransform xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08"><d6p1:Id>378274f6-c0ec-47aa-bf67-f6427930d800</d6p1:Id><d6p1:IsSystem>false</d6p1:IsSystem><d6p1:OverridePropertiesForSeralization xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><d7p1:KeyValueOfstringanyType><d7p1:Key>AllowPartialResults</d7p1:Key><d7p1:Value xmlns:d9p1="http://www.w3.org/2001/XMLSchema" i:type="d9p1:boolean">true</d7p1:Value></d7p1:KeyValueOfstringanyType></d6p1:OverridePropertiesForSeralization><d6p1:OwnerId i:nil="true" /><d6p1:ParentId>a8f4ed43-c0d1-4b1c-bb51-6ca0ca603b86</d6p1:ParentId><d6p1:ParentType>Source</d6p1:ParentType><d6p1:QueryPropertyExpressions><d6p1:MaxSize>2147483647</d6p1:MaxSize><d6p1:OrderedItems /></d6p1:QueryPropertyExpressions><d6p1:_IsReadOnly>true</d6p1:_IsReadOnly><d6p1:_QueryTemplate>{searchboxquery} Path:{Site.URL} (ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2*)</d6p1:_QueryTemplate><d6p1:_SourceId i:nil="true" /></d4p1:QueryTransform></d4p1:Source><d4p1:Source><d4p1:Active>true</d4p1:Active><d4p1:AuthInfo xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" /><d4p1:BuiltIn>false</d4p1:BuiltIn><d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout><d4p1:ConnectionUrlTemplate /><d4p1:CreatedDate>2016-06-06T10:18:09.153</d4p1:CreatedDate><d4p1:Description /><d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo><d4p1:Id>cf90f698-57c3-4fac-ba49-d309b73eb71a</d4p1:Id><d4p1:IndexOffset>0</d4p1:IndexOffset><d4p1:LastModifiedDate>2017-05-08T08:08:30.55</d4p1:LastModifiedDate><d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength><d4p1:Name>Erfaringslogg</d4p1:Name><d4p1:Owner xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId><d6p1:DisableInheritance>false</d6p1:DisableInheritance><d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId><d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId><d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId><d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId></d4p1:Owner><d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId><d4p1:QueryTransform xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08"><d6p1:Id>588ebbf8-c71d-43e7-8ef4-4f1eae92c9fc</d6p1:Id><d6p1:IsSystem>false</d6p1:IsSystem><d6p1:OverridePropertiesForSeralization xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><d7p1:KeyValueOfstringanyType><d7p1:Key>SortList</d7p1:Key><d7p1:Value i:type="d6p1:SortCollection"><d6p1:m_elements><d6p1:Sort><d6p1:direction>Descending</d6p1:direction><d6p1:strProperty>LastModifiedTime</d6p1:strProperty></d6p1:Sort></d6p1:m_elements></d7p1:Value></d7p1:KeyValueOfstringanyType></d6p1:OverridePropertiesForSeralization><d6p1:OwnerId>b529f790-e052-4540-9a54-db8cf94ce085</d6p1:OwnerId><d6p1:ParentId>cf90f698-57c3-4fac-ba49-d309b73eb71a</d6p1:ParentId><d6p1:ParentType>Source</d6p1:ParentType><d6p1:QueryPropertyExpressions><d6p1:MaxSize>2147483647</d6p1:MaxSize><d6p1:OrderedItems /></d6p1:QueryPropertyExpressions><d6p1:_IsReadOnly>true</d6p1:_IsReadOnly><d6p1:_QueryTemplate>{searchboxquery} ContentTypeId:0x010088578e7470cc4aa68d5663464831070206* Path:{SiteCollection.URL} GtProjectLogExperienceOWSBOOL=1</d6p1:_QueryTemplate><d6p1:_SourceId i:nil="true" /></d4p1:QueryTransform></d4p1:Source><d4p1:Source><d4p1:Active>true</d4p1:Active><d4p1:AuthInfo xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" /><d4p1:BuiltIn>false</d4p1:BuiltIn><d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout><d4p1:ConnectionUrlTemplate /><d4p1:CreatedDate>2016-06-06T10:08:43.447</d4p1:CreatedDate><d4p1:Description /><d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo><d4p1:Id>f8e7ff67-cb55-4d69-b32c-05f955e9f7b5</d4p1:Id><d4p1:IndexOffset>0</d4p1:IndexOffset><d4p1:LastModifiedDate>2017-05-08T08:08:30.55</d4p1:LastModifiedDate><d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength><d4p1:Name>Prosjektområder</d4p1:Name><d4p1:Owner xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId><d6p1:DisableInheritance>false</d6p1:DisableInheritance><d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId><d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId><d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId><d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId></d4p1:Owner><d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId><d4p1:QueryTransform xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08"><d6p1:Id>a2d3c219-b229-4660-a2f6-d3deb9f82d77</d6p1:Id><d6p1:IsSystem>false</d6p1:IsSystem><d6p1:OverridePropertiesForSeralization xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><d7p1:KeyValueOfstringanyType><d7p1:Key>SortList</d7p1:Key><d7p1:Value i:type="d6p1:SortCollection"><d6p1:m_elements><d6p1:Sort><d6p1:direction>Descending</d6p1:direction><d6p1:strProperty>Rank</d6p1:strProperty></d6p1:Sort><d6p1:Sort><d6p1:direction>Descending</d6p1:direction><d6p1:strProperty>Created</d6p1:strProperty></d6p1:Sort></d6p1:m_elements></d7p1:Value></d7p1:KeyValueOfstringanyType></d6p1:OverridePropertiesForSeralization><d6p1:OwnerId>b529f790-e052-4540-9a54-db8cf94ce085</d6p1:OwnerId><d6p1:ParentId>f8e7ff67-cb55-4d69-b32c-05f955e9f7b5</d6p1:ParentId><d6p1:ParentType>Source</d6p1:ParentType><d6p1:QueryPropertyExpressions><d6p1:MaxSize>2147483647</d6p1:MaxSize><d6p1:OrderedItems /></d6p1:QueryPropertyExpressions><d6p1:_IsReadOnly>true</d6p1:_IsReadOnly><d6p1:_QueryTemplate>{searchboxquery} ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web</d6p1:_QueryTemplate><d6p1:_SourceId i:nil="true" /></d4p1:QueryTransform></d4p1:Source></Sources><UserSegments xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" /></SearchQueryConfigurationSettings></SearchQueryConfigurationSettings><SearchRankingModelConfigurationSettings><RankingModels xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /></SearchRankingModelConfigurationSettings><SearchSchemaConfigurationSettings><Aliases xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d3p1:LastItemName i:nil="true" /><d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /></Aliases><CategoriesAndCrawledProperties xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /><CrawledProperties xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" /><ManagedProperties xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d3p1:LastItemName i:nil="true" /><d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /><d3p1:TotalCount>0</d3p1:TotalCount></ManagedProperties><Mappings xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d3p1:LastItemName i:nil="true" /><d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /></Mappings><Overrides xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration"><d3p1:LastItemName i:nil="true" /><d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" /></Overrides></SearchSchemaConfigurationSettings><SearchSubscriptionSettingsConfigurationSettings i:nil="true" /></SearchConfigurationSettings>
+<SearchConfigurationSettings 
+    xmlns:i="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Portability">
+    <SearchQueryConfigurationSettings>
+        <SearchQueryConfigurationSettings>
+            <BestBets 
+                xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" />
+            <DefaultSourceId>00000000-0000-0000-0000-000000000000</DefaultSourceId>
+            <DefaultSourceIdSet>true</DefaultSourceIdSet>
+            <DeployToParent>false</DeployToParent>
+            <DisableInheritanceOnImport>false</DisableInheritanceOnImport>
+            <QueryRuleGroups 
+                xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" />
+            <QueryRules 
+                xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" />
+            <ResultTypes 
+                xmlns:d4p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" />
+            <Sources 
+                xmlns:d4p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration.Query">
+                <d4p1:Source>
+                    <d4p1:Active>true</d4p1:Active>
+                    <d4p1:AuthInfo 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" />
+                    <d4p1:BuiltIn>false</d4p1:BuiltIn>
+                    <d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout>
+                    <d4p1:ConnectionUrlTemplate />
+                    <d4p1:CreatedDate>2017-04-07T09:12:18.6</d4p1:CreatedDate>
+                    <d4p1:Description />
+                    <d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo>
+                    <d4p1:Id>a8f4ed43-c0d1-4b1c-bb51-6ca0ca603b86</d4p1:Id>
+                    <d4p1:IndexOffset>0</d4p1:IndexOffset>
+                    <d4p1:LastModifiedDate>2017-05-08T14:46:49.577</d4p1:LastModifiedDate>
+                    <d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength>
+                    <d4p1:Name>Gevinstmålinger</d4p1:Name>
+                    <d4p1:Owner 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+                        <d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId>
+                        <d6p1:DisableInheritance>false</d6p1:DisableInheritance>
+                        <d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId>
+                        <d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId>
+                        <d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId>
+                        <d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId>
+                    </d4p1:Owner>
+                    <d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId>
+                    <d4p1:QueryTransform 
+                        xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08">
+                        <d6p1:Id>378274f6-c0ec-47aa-bf67-f6427930d800</d6p1:Id>
+                        <d6p1:IsSystem>false</d6p1:IsSystem>
+                        <d6p1:OverridePropertiesForSeralization 
+                            xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                            <d7p1:KeyValueOfstringanyType>
+                                <d7p1:Key>AllowPartialResults</d7p1:Key>
+                                <d7p1:Value 
+                                    xmlns:d9p1="http://www.w3.org/2001/XMLSchema" i:type="d9p1:boolean">true
+                                </d7p1:Value>
+                            </d7p1:KeyValueOfstringanyType>
+                        </d6p1:OverridePropertiesForSeralization>
+                        <d6p1:OwnerId i:nil="true" />
+                        <d6p1:ParentId>a8f4ed43-c0d1-4b1c-bb51-6ca0ca603b86</d6p1:ParentId>
+                        <d6p1:ParentType>Source</d6p1:ParentType>
+                        <d6p1:QueryPropertyExpressions>
+                            <d6p1:MaxSize>2147483647</d6p1:MaxSize>
+                            <d6p1:OrderedItems />
+                        </d6p1:QueryPropertyExpressions>
+                        <d6p1:_IsReadOnly>true</d6p1:_IsReadOnly>
+                        <d6p1:_QueryTemplate>Path:{Site.URL} (ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2*)</d6p1:_QueryTemplate>
+                        <d6p1:_SourceId i:nil="true" />
+                    </d4p1:QueryTransform>
+                </d4p1:Source>
+                <d4p1:Source>
+                    <d4p1:Active>true</d4p1:Active>
+                    <d4p1:AuthInfo 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" />
+                    <d4p1:BuiltIn>false</d4p1:BuiltIn>
+                    <d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout>
+                    <d4p1:ConnectionUrlTemplate />
+                    <d4p1:CreatedDate>2016-06-06T10:18:09.153</d4p1:CreatedDate>
+                    <d4p1:Description />
+                    <d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo>
+                    <d4p1:Id>cf90f698-57c3-4fac-ba49-d309b73eb71a</d4p1:Id>
+                    <d4p1:IndexOffset>0</d4p1:IndexOffset>
+                    <d4p1:LastModifiedDate>2017-05-08T08:08:30.55</d4p1:LastModifiedDate>
+                    <d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength>
+                    <d4p1:Name>Erfaringslogg</d4p1:Name>
+                    <d4p1:Owner 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+                        <d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId>
+                        <d6p1:DisableInheritance>false</d6p1:DisableInheritance>
+                        <d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId>
+                        <d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId>
+                        <d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId>
+                        <d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId>
+                    </d4p1:Owner>
+                    <d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId>
+                    <d4p1:QueryTransform 
+                        xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08">
+                        <d6p1:Id>588ebbf8-c71d-43e7-8ef4-4f1eae92c9fc</d6p1:Id>
+                        <d6p1:IsSystem>false</d6p1:IsSystem>
+                        <d6p1:OverridePropertiesForSeralization 
+                            xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                            <d7p1:KeyValueOfstringanyType>
+                                <d7p1:Key>SortList</d7p1:Key>
+                                <d7p1:Value i:type="d6p1:SortCollection">
+                                    <d6p1:m_elements>
+                                        <d6p1:Sort>
+                                            <d6p1:direction>Descending</d6p1:direction>
+                                            <d6p1:strProperty>LastModifiedTime</d6p1:strProperty>
+                                        </d6p1:Sort>
+                                    </d6p1:m_elements>
+                                </d7p1:Value>
+                            </d7p1:KeyValueOfstringanyType>
+                        </d6p1:OverridePropertiesForSeralization>
+                        <d6p1:OwnerId>b529f790-e052-4540-9a54-db8cf94ce085</d6p1:OwnerId>
+                        <d6p1:ParentId>cf90f698-57c3-4fac-ba49-d309b73eb71a</d6p1:ParentId>
+                        <d6p1:ParentType>Source</d6p1:ParentType>
+                        <d6p1:QueryPropertyExpressions>
+                            <d6p1:MaxSize>2147483647</d6p1:MaxSize>
+                            <d6p1:OrderedItems />
+                        </d6p1:QueryPropertyExpressions>
+                        <d6p1:_IsReadOnly>true</d6p1:_IsReadOnly>
+                        <d6p1:_QueryTemplate>ContentTypeId:0x010088578e7470cc4aa68d5663464831070206* Path:{SiteCollection.URL} GtProjectLogExperienceOWSBOOL=1</d6p1:_QueryTemplate>
+                        <d6p1:_SourceId i:nil="true" />
+                    </d4p1:QueryTransform>
+                </d4p1:Source>
+                <d4p1:Source>
+                    <d4p1:Active>true</d4p1:Active>
+                    <d4p1:AuthInfo 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" />
+                    <d4p1:BuiltIn>false</d4p1:BuiltIn>
+                    <d4p1:ConnectionTimeout>15000</d4p1:ConnectionTimeout>
+                    <d4p1:ConnectionUrlTemplate />
+                    <d4p1:CreatedDate>2016-06-06T10:08:43.447</d4p1:CreatedDate>
+                    <d4p1:Description />
+                    <d4p1:HasPermissionToReadAuthInfo>true</d4p1:HasPermissionToReadAuthInfo>
+                    <d4p1:Id>f8e7ff67-cb55-4d69-b32c-05f955e9f7b5</d4p1:Id>
+                    <d4p1:IndexOffset>0</d4p1:IndexOffset>
+                    <d4p1:LastModifiedDate>2017-05-08T08:08:30.55</d4p1:LastModifiedDate>
+                    <d4p1:MaximumResponseLength>64</d4p1:MaximumResponseLength>
+                    <d4p1:Name>Prosjektområder</d4p1:Name>
+                    <d4p1:Owner 
+                        xmlns:d6p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+                        <d6p1:DatabaseId>00000000-0000-0000-0000-000000000000</d6p1:DatabaseId>
+                        <d6p1:DisableInheritance>false</d6p1:DisableInheritance>
+                        <d6p1:SPFarmId>baa1b08f-cbca-4af8-95fe-67ba9526f9b6</d6p1:SPFarmId>
+                        <d6p1:SPSiteId>36bd4983-c8bd-4485-be5f-56e37fbc1671</d6p1:SPSiteId>
+                        <d6p1:SPSiteSubscriptionId>4ac53033-31c4-4ed5-b056-0a5cf7cc6a8d</d6p1:SPSiteSubscriptionId>
+                        <d6p1:SPWebId>00000000-0000-0000-0000-000000000000</d6p1:SPWebId>
+                    </d4p1:Owner>
+                    <d4p1:ProviderId>fa947043-6046-4f97-9714-40d4c113963d</d4p1:ProviderId>
+                    <d4p1:QueryTransform 
+                        xmlns:d6p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08">
+                        <d6p1:Id>a2d3c219-b229-4660-a2f6-d3deb9f82d77</d6p1:Id>
+                        <d6p1:IsSystem>false</d6p1:IsSystem>
+                        <d6p1:OverridePropertiesForSeralization 
+                            xmlns:d7p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                            <d7p1:KeyValueOfstringanyType>
+                                <d7p1:Key>SortList</d7p1:Key>
+                                <d7p1:Value i:type="d6p1:SortCollection">
+                                    <d6p1:m_elements>
+                                        <d6p1:Sort>
+                                            <d6p1:direction>Descending</d6p1:direction>
+                                            <d6p1:strProperty>Rank</d6p1:strProperty>
+                                        </d6p1:Sort>
+                                        <d6p1:Sort>
+                                            <d6p1:direction>Descending</d6p1:direction>
+                                            <d6p1:strProperty>Created</d6p1:strProperty>
+                                        </d6p1:Sort>
+                                    </d6p1:m_elements>
+                                </d7p1:Value>
+                            </d7p1:KeyValueOfstringanyType>
+                        </d6p1:OverridePropertiesForSeralization>
+                        <d6p1:OwnerId>b529f790-e052-4540-9a54-db8cf94ce085</d6p1:OwnerId>
+                        <d6p1:ParentId>f8e7ff67-cb55-4d69-b32c-05f955e9f7b5</d6p1:ParentId>
+                        <d6p1:ParentType>Source</d6p1:ParentType>
+                        <d6p1:QueryPropertyExpressions>
+                            <d6p1:MaxSize>2147483647</d6p1:MaxSize>
+                            <d6p1:OrderedItems />
+                        </d6p1:QueryPropertyExpressions>
+                        <d6p1:_IsReadOnly>true</d6p1:_IsReadOnly>
+                        <d6p1:_QueryTemplate>ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} contentclass:STS_Web</d6p1:_QueryTemplate>
+                        <d6p1:_SourceId i:nil="true" />
+                    </d4p1:QueryTransform>
+                </d4p1:Source>
+            </Sources>
+            <UserSegments 
+                xmlns:d4p1="http://www.microsoft.com/sharepoint/search/KnownTypes/2008/08" />
+        </SearchQueryConfigurationSettings>
+    </SearchQueryConfigurationSettings>
+    <SearchRankingModelConfigurationSettings>
+        <RankingModels 
+            xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </SearchRankingModelConfigurationSettings>
+    <SearchSchemaConfigurationSettings>
+        <Aliases 
+            xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+            <d3p1:LastItemName i:nil="true" />
+            <d3p1:dictionary 
+                xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </Aliases>
+        <CategoriesAndCrawledProperties 
+            xmlns:d3p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        <CrawledProperties 
+            xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration" i:nil="true" />
+        <ManagedProperties 
+            xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+            <d3p1:LastItemName i:nil="true" />
+            <d3p1:dictionary 
+                xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+            <d3p1:TotalCount>0</d3p1:TotalCount>
+        </ManagedProperties>
+        <Mappings 
+            xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+            <d3p1:LastItemName i:nil="true" />
+            <d3p1:dictionary 
+                xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </Mappings>
+        <Overrides 
+            xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
+            <d3p1:LastItemName i:nil="true" />
+            <d3p1:dictionary 
+                xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+        </Overrides>
+    </SearchSchemaConfigurationSettings>
+    <SearchSubscriptionSettingsConfigurationSettings i:nil="true" />
+</SearchConfigurationSettings>

@@ -156,7 +156,7 @@ export const ProjectHome: IFile = {
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_UncertaintiesCurrentPhase_Title"),
+                value: "Usikkerhet (gjeldende fase)",
             },
             {
                 name: "ListUrl",
