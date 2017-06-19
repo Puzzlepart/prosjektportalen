@@ -1,43 +1,23 @@
-interface IScript {
-    fileName: string;
-    appendVersion?: boolean;
-}
 /**
  * Scripts path
  */
 const SCRIPTS_PATH = "siteassets/pp/js";
 
-/**
- * Scripts to load
- */
-const SCRIPTS: IScript[] = [
-    {
-        fileName: "fetch.min.js",
-    },
-    {
-        fileName: "pp.main.js",
-        appendVersion: true,
-    },
-];
-
 export namespace PP.Loader {
     /**
-     * Injects scripts into document.head
+     * Load SOD
      *
      * @param siteUrl Site URL
      * @param version Script version
      */
-    function injectScripts(siteUrl: string, version: string): void {
-        const scriptElements: HTMLScriptElement[] = SCRIPTS.map(({ fileName, appendVersion }) => {
-            let element = document.createElement("script");
-            let scriptSrc = `${siteUrl}/${SCRIPTS_PATH}/${fileName}`;
-            if (appendVersion === true) {
-                scriptSrc += `?version=${version}`;
-            }
-            element.setAttribute("src", scriptSrc);
-            return element;
+    function _loadBundle(siteUrl: string, version: string): void {
+        let scriptSrc = `${siteUrl}/${SCRIPTS_PATH}/pp.main.js?version=${version}`;
+        SP.SOD.registerSod("pp.main.js", scriptSrc);
+        SP.SOD.executeFunc("pp.main.js", "__pp_initializeBundle", () => {
+            ExecuteOrDelayUntilBodyLoaded(() => {
+                window["__pp_initializeBundle"]();
+            });
         });
-        scriptElements.forEach(element => document.head.appendChild(element));
     }
 
     /**
@@ -47,6 +27,6 @@ export namespace PP.Loader {
      * @param version Script version
      */
     export function loadBundle(siteUrl: string, version: string): void {
-        injectScripts(siteUrl, version);
+        _loadBundle(siteUrl, version);
     }
 }
