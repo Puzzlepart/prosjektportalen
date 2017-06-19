@@ -229,6 +229,9 @@
   <data name="Lists_ProjectElements_Url" xml:space="preserve">
     <value>Lists/Project Elements</value>
   </data>
+  <data name="DefaultView_Information_Url" xml:space="preserve">
+    <value>Lists/Information/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log/AllItems.aspx</value>
   </data>
@@ -1258,8 +1261,11 @@
   <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
     <value>Uncertainties (current phase)</value>
   </data>
+  <data name="WebPart_LatestsTasks_Title" xml:space="preserve">
+    <value>Latest tasks</value>
+  </data>
   <data name="WebPart_MyTasks_Title" xml:space="preserve">
-    <value>My Tasks</value>
+    <value>My tasks</value>
   </data>
   <data name="WebPart_Tasks_Title" xml:space="preserve">
     <value>Tasks</value>
@@ -1272,6 +1278,9 @@
   </data>
   <data name="WebPart_GainsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
+  </data>
+  <data name="WebPart_LatestInformation_Title" xml:space="preserve">
+    <value>Latest information elements </value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
