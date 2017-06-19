@@ -24,7 +24,7 @@ export const GainsOverview: IFile = {
         </metaData>
         <data>
             <properties>
-                <property name="Title" type="string">Gevinstoversikt</property>
+                <property name="Title" type="string">${__("WebPart_GainsOverview_Title")}</property>
                 <property name="ChromeType" type="chrometype">Default</property>
                 <property name="ChromeState" type="chromestate">Normal</property>
                 <property name="Content" type="string">&lt;div id="pp-gainsoverview"&gt;&lt;/div&gt;</property>
