@@ -1,13 +1,22 @@
 var path = require("path"),
     webpack = require('webpack'),
     pkg = require("./package.json"),
+    build = require("./build.json"),
     I18nPlugin = require("i18n-webpack-plugin");
+
+const I18n = {
+    1033: require("./src/js/Resources/en-US.json"),
+    1044: require("./src/js/Resources/no-NB.json"),
+};
 
 module.exports = (devtool) => {
     const plugins = [
-        new I18nPlugin(require("./src/js/Resources/no-NB.json")),
+          new I18nPlugin(I18n[build.language]),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
+        }),
+        new webpack.DefinePlugin({
+            __BUILD: build
         }),
         new webpack.DefinePlugin({
             'process.env': {
