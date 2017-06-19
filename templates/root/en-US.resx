@@ -137,7 +137,7 @@
     <value>Project Log</value>
   </data>
   <data name="Lists_ProjectProducts_Title" xml:space="preserve">
-    <value>Project Products</value>
+    <value>Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
     <value>Uncertainties</value>
@@ -170,64 +170,64 @@
     <value>Lists/Announcements</value>
   </data>
   <data name="Lists_Extensions_Url" xml:space="preserve">
-    <value>Utvidelser</value>
+    <value>Extensions</value>
   </data>
   <data name="Lists_QuickLinks_Url" xml:space="preserve">
     <value>Lists/QuickLinks</value>
   </data>
   <data name="Lists_Resources_Url" xml:space="preserve">
-    <value>Ressurser</value>
+    <value>Resources</value>
   </data>
   <data name="Lists_Tasks_Url" xml:space="preserve">
-    <value>Lists/Oppgaver</value>
+    <value>Lists/Tasks</value>
   </data>
   <data name="Lists_StandardTasks_Url" xml:space="preserve">
-    <value>Lists/Standardoppgaver</value>
+    <value>Lists/StandardTasks</value>
   </data>
   <data name="Lists_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/Fasesjekkliste</value>
+    <value>Lists/PhaseChecklist</value>
   </data>
   <data name="Lists_Stakeholders_Url" xml:space="preserve">
-    <value>Lists/Interessentregister</value>
+    <value>Lists/Stakeholders</value>
   </data>
   <data name="Lists_Standarddocuments_Url" xml:space="preserve">
-    <value>Standarddokumenter</value>
+    <value>StandardDocuments</value>
   </data>
   <data name="Lists_Information_Url" xml:space="preserve">
-    <value>Lists/Informasjon</value>
+    <value>Lists/Information</value>
   </data>
   <data name="Lists_CommunicationPlan_Url" xml:space="preserve">
-    <value>Lists/Kommunikasjonsplan</value>
+    <value>Lists/Communication Plan</value>
   </data>
   <data name="Lists_ProjectLog_Url" xml:space="preserve">
-    <value>Lists/Prosjektlogg</value>
+    <value>Lists/Project Log</value>
   </data>
   <data name="Lists_ProjectProducts_Url" xml:space="preserve">
-    <value>Lists/Prosjektleveranser</value>
+    <value>Lists/Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Url" xml:space="preserve">
-    <value>Lists/Usikkerhet</value>
+    <value>Lists/Uncertainties</value>
   </data>
   <data name="Lists_MeetingCalendar_Url" xml:space="preserve">
-    <value>Lists/Mtekalender</value>
+    <value>Lists/Meeting Calendar</value>
   </data>
   <data name="Lists_Documents_Url" xml:space="preserve">
-    <value>Delte dokumenter</value>
+    <value>Documents</value>
   </data>
   <data name="Lists_GainsAnalysis_Url" xml:space="preserve">
-    <value>Lists/Gevinstanalyse og gevinstrealiseringsplan</value>
+    <value>Lists/Gains Analysis</value>
   </data>
   <data name="Lists_ChangeAnalysis_Url" xml:space="preserve">
-    <value>Lists/Endringsanalyse</value>
+    <value>Lists/Change Analysis</value>
   </data>
   <data name="Lists_GainsFollowup_Url" xml:space="preserve">
-    <value>Lists/Gevinstsoppflging</value>
+    <value>Lists/Gains Followup</value>
   </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
-    <value>Lists/Prosjektstatusrapporter</value>
+    <value>Project status reports</value>
   </data>
   <data name="Lists_ProjectElements_Url" xml:space="preserve">
-    <value>Lists/Prosjekter</value>
+    <value>Lists/Project Elements</value>
   </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log/AllItems.aspx</value>
@@ -239,7 +239,7 @@
     <value>Lists/Communication Plan/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ProjectProducts_Url" xml:space="preserve">
-    <value>Lists/Project Products/AllItems.aspx</value>
+    <value>Lists/Project Deliveries/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
     <value>Lists/Uncertainties/AllItems.aspx</value>
