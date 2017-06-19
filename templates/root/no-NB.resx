@@ -229,6 +229,12 @@
   <data name="ResultSourceLevel_Gains" xml:space="preserve">
     <value>SPSite</value>
   </data>
+  <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
+    <value>Erfaringslogg</value>
+  </data>
+  <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
+    <value>SPSite</value>
+  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
   </data>

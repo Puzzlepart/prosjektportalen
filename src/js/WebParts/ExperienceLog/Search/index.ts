@@ -5,9 +5,16 @@ import { sp } from "sp-pnp-js";
  */
 export const DEFAULT_SEARCH_SETTINGS = {
     Querytext: "*",
-    QueryTemplate: "ContentTypeId:0x010088578e7470cc4aa68d5663464831070206* Path:{SiteCollection.URL} GtProjectLogExperienceOWSBOOL=1",
     RowLimit: 500,
     TrimDuplicates: false,
+    Properties: [{
+        Name: "SourceName",
+        Value: { StrVal: __("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+    },
+    {
+        Name: "SourceLevel",
+        Value: { StrVal: __("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+    }],
 };
 
 export interface IQueryResult {
