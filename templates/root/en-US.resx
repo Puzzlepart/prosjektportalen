@@ -1234,6 +1234,27 @@
   <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
     <value>Project Info</value>
   </data>
+  <data name="WebPart_ProjectPhases_Title" xml:space="preserve">
+    <value>Project Phases</value>
+  </data>
+  <data name="WebPart_Timeline_Title" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="WebPart_Timeline_ViewName" xml:space="preserve">
+    <value>Timeline</value>
+  </data>
+  <data name="WebPart_Documents_Title" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="WebPart_DocumentsCurrentPhase_Title" xml:space="preserve">
+    <value>Documents (current phase)</value>
+  </data>
+  <data name="WebPart_SiteFeed_Title" xml:space="preserve">
+    <value>Site Feed</value>
+  </data>
+  <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
+    <value>Uncertainties (current phase)</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
   </data>
