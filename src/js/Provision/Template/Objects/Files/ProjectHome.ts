@@ -166,7 +166,7 @@ export const ProjectHome: IFile = {
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Usikkerhet/AllItems.asp",
+                value: "{site}/Lists/Usikkerhet/AllItems.aspx",
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
