@@ -402,4 +402,5 @@
         </CHOICES>
     </Field>
     <Field ID="{7b200383-c491-4e5d-8f83-c66231e7a52c}" Name="GtProjectUrl" DisplayName="{resource:SiteFields_GtProjectUrl_DisplayName}" Type="URL" Group="{resource:SiteFields_Group}" Format="Hyperlink" StaticName="GtProjectUrl" ShowInNewForm="FALSE" ShowInEditForm="FALSE"/>
+    <Field Type="Text" DisplayName="ProjectWebUniqueId" MaxLength="255" Group="{resource:SiteFields_Group}" ID="{83315d18-b8b5-4b60-b1eb-0617e1a1b2d9}" StaticName="ProjectWebUniqueId" Name="ProjectWebUniqueId" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE" ShowInEditForm="FALSE"></Field>
 </pnp:SiteFields>
