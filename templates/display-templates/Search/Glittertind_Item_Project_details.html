@@ -5,7 +5,7 @@
 <!--[if gte mso 9]><xml>
 <mso:CustomDocumentProperties>
 <mso:TemplateHidden msdt:dt="string">0</mso:TemplateHidden>
-<mso:ManagedPropertyMapping msdt:dt="string">'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase','Created','GtProjectGoalsOWSMTXT','GtStatusTimeOWSCHCS','GtStatusRiskOWSCHCS','GtStatusBudgetOWSCHCS','GtStatusBenefitAchievementOWSCHCS','LastModifiedTime'</mso:ManagedPropertyMapping>
+<mso:ManagedPropertyMapping msdt:dt="string">'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase','Created','GtProjectGoalsOWSMTXT','GtStatusTimeOWSCHCS','GtStatusRiskOWSCHCS','GtStatusBudgetOWSCHCS','GtStatusGainAchievementOWSCHCS','LastModifiedTime'</mso:ManagedPropertyMapping>
 <mso:MasterPageDescription msdt:dt="string">Glittertind visningsmal for å vise nye prosjekter</mso:MasterPageDescription>
 <mso:ContentTypeId msdt:dt="string">0x0101002039C03B61C64EC4A04F5361F3851066050064FFDFF454869E46B2A7D2B479BF6334</mso:ContentTypeId>
 <mso:TargetControlType msdt:dt="string">;#SearchResults;#Content Web Parts;#</mso:TargetControlType>
@@ -47,7 +47,7 @@ var projectGoalsTrimmed = Srch.U.getTrimmedString( projectGoals , 20);
 var statusTime = $getItemValue(ctx, "GtStatusTimeOWSCHCS");
 var statusRisk = $getItemValue(ctx, "GtStatusRiskOWSCHCS");
 var statusBudget = $getItemValue(ctx, "GtStatusBudgetOWSCHCS");
-var statusBenefits = $getItemValue(ctx, "GtStatusBenefitAchievementOWSCHCS");
+var statusBenefits = $getItemValue(ctx, "GtStatusGainAchievementOWSCHCS");
 var lastModified = $getItemValue(ctx, "LastModifiedTime");
 var statusTimeCss = window.GT.GetStatusCssClass(statusTime.value);
 var statusRiskCss = window.GT.GetStatusCssClass(statusRisk.value);
