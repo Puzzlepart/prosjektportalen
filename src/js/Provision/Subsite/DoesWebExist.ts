@@ -1,3 +1,5 @@
+import { Web } from "sp-pnp-js";
+
 /**
  * Checks if the web exists
  *
