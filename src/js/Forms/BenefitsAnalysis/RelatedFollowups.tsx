@@ -12,10 +12,12 @@ const FollowupElement = ({ data: { ID, GtMeasurementDate: Date, GtMeasurementCom
 };
 
 export const RelatedFollowups = ({ followups }) => {
-    return (<div>
-        <ChromeTitle title={__("Lists_BenefitsFollowup_Title")} />
-        <ul className="pp-simpleList" style={{ width: "300px" }}>
-            {followups.map((e, idx) => <FollowupElement key={idx} data={e} />)}
-        </ul>
-    </div>);
+    return (
+        <div>
+            <ChromeTitle title={__("Lists_BenefitsFollowup_Title")} />
+            <ul className="pp-simpleList" style={{ width: "300px" }}>
+                {followups.map((e, idx) => <FollowupElement key={idx} data={e} />)}
+            </ul>
+        </div>
+    );
 };
