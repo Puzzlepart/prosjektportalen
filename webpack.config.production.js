@@ -21,7 +21,8 @@ module.exports = (minify = true, bundleAnalyzer = false) => {
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('production')
+                NODE_ENV: JSON.stringify('production'),
+                LANGUAGE: JSON.stringify(build.language),
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
