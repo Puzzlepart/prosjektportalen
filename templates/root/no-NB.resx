@@ -472,7 +472,7 @@
   <data name="SiteFields_GtProjectTaskChange_DisplayName" xml:space="preserve">
     <value>Relevant endring</value>
   </data>
-  <data name="SiteFields_GtProjectTaskBenefit_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtProjectTaskGain_DisplayName" xml:space="preserve">
     <value>Relevant gevinst</value>
   </data>
   <data name="SiteFields_GtChangeLookup_DisplayName" xml:space="preserve">
@@ -592,7 +592,7 @@
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risiko</value>
   </data>
-  <data name="SiteFields_GtStatusBenefitAchievement_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusGainAchievement_DisplayName" xml:space="preserve">
     <value>Status gevinstoppnåelse</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_DisplayName" xml:space="preserve">
@@ -628,7 +628,7 @@
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
     <value>Kommentar, fremdrift</value>
   </data>
-  <data name="SiteFields_GtStatusBenefitAchievementComment_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
     <value>Kommentar, gevinstoppnåelse</value>
   </data>
   <data name="SiteFields_GtProjectGoals_DisplayName" xml:space="preserve">
@@ -880,10 +880,10 @@
   <data name="SiteFields_GtStatusRisk_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusBenefitAchievement_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusGainAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusBenefitAchievementComment_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusGainAchievementComment_Description" xml:space="preserve">
     <value>Kommentar til status gevinstoppnåelse angitt over</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_Description" xml:space="preserve">
@@ -1489,19 +1489,19 @@
   <data name="Choice_GtStatusRisk_High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="Choice_GtStatusBenefitAchievement_NotStarted" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_NotStarted" xml:space="preserve">
     <value>Ikke påbegynt</value>
   </data>
-  <data name="Choice_GtStatusBenefitAchievement_AheadOfSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_AheadOfSchedule" xml:space="preserve">
     <value>Foran plan</value>
   </data>
-  <data name="Choice_GtStatusBenefitAchievement_OnSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_OnSchedule" xml:space="preserve">
     <value>På plan</value>
   </data>
-  <data name="Choice_GtStatusBenefitAchievement_MinorDelays" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_MinorDelays" xml:space="preserve">
     <value>Mindre forsinkelser</value>
   </data>
-  <data name="Choice_GtStatusBenefitAchievement_BehindSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusGainAchievement_BehindSchedule" xml:space="preserve">
     <value>Forsinket</value>
   </data>
   <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">

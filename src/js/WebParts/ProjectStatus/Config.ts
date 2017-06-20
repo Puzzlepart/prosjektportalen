@@ -341,7 +341,7 @@ export const StatusFields: IStatusFields = {
             },
         ],
     },
-    GtStatusBenefitAchievement: {
+    GtStatusGainAchievement: {
         Statuses: [
             {
                 Value: "Foran plan",
