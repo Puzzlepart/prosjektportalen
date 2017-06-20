@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 import { ProjectHome } from "./ProjectHome";
-import { GainsOverview } from "./GainsOverview";
+import { BenefitsOverview } from "./BenefitsOverview";
 import { ProjectStatus } from "./ProjectStatus";
 import { Nofilter } from "./Nofilter";
 import { Assigned } from "./Assigned";
@@ -11,7 +11,7 @@ const Files: IFile[] = [
     Nofilter,
     Assigned,
     MoM,
-    GainsOverview,
+    BenefitsOverview,
     ProjectStatus,
 ];
 

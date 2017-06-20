@@ -4,7 +4,7 @@ import * as Util from "../../../Util";
 import { Columns, GetColumnByKey, GenerateColumns } from "../Columns";
 import DataSource from "../../DataSource";
 
-export interface IGainsOverviewData {
+export interface IBenefitsOverviewData {
     items?: any[];
     columns?: IColumn[];
 }
@@ -24,7 +24,7 @@ export interface IMeasurement {
  * Get measurements for the specified gain entry
  *
  * @param measures Measures
- * @param gain Gain
+ * @param gain Benefit
  * @param shouldIncrease Should the value increase
  * @param dataSource Data source
  */
@@ -32,7 +32,7 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
     const isSearch = (dataSource === DataSource.Search);
     const idFieldName = isSearch ? "ListItemID" : "ID",
         valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
-        lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
+        lookupFieldName = isSearch ? "RefinableString58" : "GtBenefitLookupId",
         desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName;
     return measures
         .filter(m => {
@@ -58,7 +58,7 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
 /**
  * Generate data
  *
- * @param gains Gains
+ * @param gains Benefits
  * @param measures Measure
  * @param dataSource Data source
  */
@@ -114,11 +114,11 @@ const SearchSettings = {
     TrimDuplicates: false,
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_Gains"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: __("ResultSourceName_Benefits"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_Gains"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: __("ResultSourceLevel_Benefits"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 
@@ -138,33 +138,33 @@ const fetchFields = (obj: any, fieldPrefix = "Gt") => new Promise<ISpField[]>((r
 });
 
 
-const gainsList = sp.web.lists.getByTitle(__("Lists_GainsAnalysis_Title"));
-const measuresList = sp.web.lists.getByTitle(__("Lists_GainsFollowup_Title"));
+const gainsList = sp.web.lists.getByTitle(__("Lists_BenefitsAnalysis_Title"));
+const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
 
 /**
  * Fetches data based on selected data source
  *
  * @param dataSource Data source (list/search)
  */
-export const retrieveFromSource = (dataSource: DataSource): Promise<IGainsOverviewData> => new Promise<IGainsOverviewData>((resolve, reject) => {
+export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOverviewData> => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     switch (dataSource) {
         case DataSource.List: {
             fetchFields(gainsList).then(gainsFields => {
-                let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
+                let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtBenefitsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
                 Promise.all([
                     gainsList
                         .items
                         .select(selectFields)
-                        .expand("GtChangeLookup", "GtGainsResponsible")
+                        .expand("GtChangeLookup", "GtBenefitsResponsible")
                         .orderBy("Modified", false)
                         .get(),
                     measuresList
                         .items
-                        .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
+                        .select("GtBenefitLookupId", "GtMeasurementValue", "GtMeasurementDate")
                         .orderBy("GtMeasurementDate", false)
                         .get(),
                 ]).then(([gains, measures]) => {
-                    let data: IGainsOverviewData = ({
+                    let data: IBenefitsOverviewData = ({
                         items: GenerateData(gains, measures, dataSource),
                         columns: GenerateColumns(gainsFields, dataSource),
                     });
@@ -185,7 +185,7 @@ export const retrieveFromSource = (dataSource: DataSource): Promise<IGainsOvervi
                 let measures = response.PrimarySearchResults
                     .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
                     .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1);
-                let data: IGainsOverviewData = ({
+                let data: IBenefitsOverviewData = ({
                     items: GenerateData(gains, measures, dataSource),
                     columns: GenerateColumns(gainsFields, dataSource),
                 });

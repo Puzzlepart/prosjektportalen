@@ -7,7 +7,7 @@ const __forms = {
     "Mtekalender": require("./MeetingCalendar").default,
     "Fasesjekkliste": require("./PhaseChecklist").default,
     "Endringsanalyse": require("./ChangeAnalysis").default,
-    "Gevinstanalyse og gevinstrealiseringsplan": require("./GainsAnalysis").default,
+    "Gevinstanalyse og gevinstrealiseringsplan": require("./BenefitsAnalysis").default,
 };
 
 /**

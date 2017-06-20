@@ -15,8 +15,8 @@ const Columns = (dataSource: DataSource): any[] => {
         isMultiline: true,
     },
     {
-        fieldName: "GtGainsResponsible",
-        key: "GtGainsResponsible",
+        fieldName: "GtBenefitsResponsible",
+        key: "GtBenefitsResponsible",
         searchPostfix: "OWSUSER",
         minWidth: 50,
         maxWidth: 180,
@@ -201,7 +201,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         case "Title": {
             let dispFormUrl = item.Path;
             if (!dispFormUrl) {
-                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_GainsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
+                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_BenefitsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
             }
             return (
                 <ModalLink
@@ -264,7 +264,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
                 return null;
             }
         }
-        case "GtGainsResponsible": {
+        case "GtBenefitsResponsible": {
             if (column.fieldName.indexOf("OWS") !== -1) {
                 const [, Title] = colValue.split(" | ");
                 return (

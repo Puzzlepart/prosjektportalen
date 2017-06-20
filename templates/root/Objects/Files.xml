@@ -63,15 +63,15 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\GainsOverview.aspx" Folder="SitePages" Overwrite="true">
+    <pnp:File Src="SitePages\BenefitsOverview.aspx" Folder="SitePages" Overwrite="true">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="{res:Navigation_GainsOverview_Title}" />
+            <pnp:Property Key="Title" Value="{res:Navigation_BenefitsOverview_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
             <pnp:WebPart Title="Gevinstoversikt" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/GainsOverview.webpart" />
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/BenefitsOverview.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -118,7 +118,7 @@
             <pnp:Property Key="Group" Value="Prosjektportalen" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\GainsOverview.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\BenefitsOverview.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Gevinstoversikt" />
             <pnp:Property Key="WebPartDescription" Value="" />
