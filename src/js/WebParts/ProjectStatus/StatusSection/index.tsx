@@ -69,9 +69,9 @@ const StatusSection = ({ project }) => {
                         name={__("StatusPage_Heading_ProjectBenefitAchievement")}
                         iconName="Trophy"
                         scrollTo="gevinst-section"
-                        statusValue={project.GtStatusBenefitAchievement}
-                        comment={project.GtStatusBenefitAchievementComment}
-                        fieldName="GtStatusBenefitAchievement" />
+                        statusValue={project.GtStatusGainAchievement}
+                        comment={project.GtStatusGainAchievementComment}
+                        fieldName="GtStatusGainAchievement" />
                 </div>
             </div>
         </div>

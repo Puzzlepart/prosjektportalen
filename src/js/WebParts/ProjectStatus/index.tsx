@@ -87,10 +87,10 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                             <SectionHeader
                                 name={__("StatusPage_Heading_ProjectBenefitAchievement")}
                                 iconName="Trophy"
-                                statusValue={project.GtStatusBenefitAchievement}
-                                comment={project.GtStatusBenefitAchievementComment}
+                                statusValue={project.GtStatusGainAchievement}
+                                comment={project.GtStatusGainAchievementComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Gevinstanalyse og gevinstrealiseringsplan`}
-                                fieldName="GtStatusBenefitAchievement" />
+                                fieldName="GtStatusGainAchievement" />
                             <BenefitsOverview
                                 dataSource={DataSource.List}
                                 showSearchBox={false}
