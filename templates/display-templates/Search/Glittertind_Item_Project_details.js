@@ -23,12 +23,12 @@ var projectGoalsTrimmed = Srch.U.getTrimmedString( projectGoals , 20);
 var statusTime = $getItemValue(ctx, "GtStatusTimeOWSCHCS");
 var statusRisk = $getItemValue(ctx, "GtStatusRiskOWSCHCS");
 var statusBudget = $getItemValue(ctx, "GtStatusBudgetOWSCHCS");
-var statusGains = $getItemValue(ctx, "GtStatusGainAchievementOWSCHCS");
+var statusBenefits = $getItemValue(ctx, "GtStatusGainAchievementOWSCHCS");
 var lastModified = $getItemValue(ctx, "LastModifiedTime");
 var statusTimeCss = window.GT.GetStatusCssClass(statusTime.value);
 var statusRiskCss = window.GT.GetStatusCssClass(statusRisk.value);
 var statusBudgetCss = window.GT.GetStatusCssClass(statusBudget.value);
-var statusGainsCss = window.GT.GetStatusCssClass(statusGains.value);
+var statusBenefitsCss = window.GT.GetStatusCssClass(statusBenefits.value);
 ms_outHtml.push(''
 ,'        <td>'
 ,'            <a href="', url ,'">'
@@ -53,8 +53,8 @@ ms_outHtml.push(''
 ,'        <td class="', statusBudgetCss ,'">'
 ,'            ', statusBudget ,''
 ,'        </td>'
-,'        <td class="', statusGainsCss ,'">'
-,'            ', statusGains ,''
+,'        <td class="', statusBenefitsCss ,'">'
+,'            ', statusBenefits ,''
 ,'        </td>'
 ,'        <td>'
 ,'            ', projectPhase ,''

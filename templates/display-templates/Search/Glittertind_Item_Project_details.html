@@ -47,12 +47,12 @@ var projectGoalsTrimmed = Srch.U.getTrimmedString( projectGoals , 20);
 var statusTime = $getItemValue(ctx, "GtStatusTimeOWSCHCS");
 var statusRisk = $getItemValue(ctx, "GtStatusRiskOWSCHCS");
 var statusBudget = $getItemValue(ctx, "GtStatusBudgetOWSCHCS");
-var statusGains = $getItemValue(ctx, "GtStatusGainAchievementOWSCHCS");
+var statusBenefits = $getItemValue(ctx, "GtStatusGainAchievementOWSCHCS");
 var lastModified = $getItemValue(ctx, "LastModifiedTime");
 var statusTimeCss = window.GT.GetStatusCssClass(statusTime.value);
 var statusRiskCss = window.GT.GetStatusCssClass(statusRisk.value);
 var statusBudgetCss = window.GT.GetStatusCssClass(statusBudget.value);
-var statusGainsCss = window.GT.GetStatusCssClass(statusGains.value);
+var statusBenefitsCss = window.GT.GetStatusCssClass(statusBenefits.value);
 _#-->
         <td>
             <a href="_#= url =#_">
@@ -77,8 +77,8 @@ _#-->
         <td class="_#= statusBudgetCss =#_">
             _#= statusBudget =#_
         </td>
-        <td class="_#= statusGainsCss =#_">
-            _#= statusGains =#_
+        <td class="_#= statusBenefitsCss =#_">
+            _#= statusBenefits =#_
         </td>
         <td>
             _#= projectPhase =#_
