@@ -10,7 +10,7 @@ import { default as StatusNavigation } from "./StatusNavigation";
 import { default as EconomySection } from "./EconomySection";
 import SectionHeader from "./SectionHeader";
 import DataSource from "../DataSource";
-import { default as GainsOverview } from "../GainsOverview";
+import { default as BenefitsOverview } from "../BenefitsOverview";
 
 export interface IProjectStatusState {
     project: any;
@@ -91,7 +91,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 comment={project.GtStatusGainAchievementComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Gevinstanalyse og gevinstrealiseringsplan`}
                                 fieldName="GtStatusGainAchievement" />
-                            <GainsOverview
+                            <BenefitsOverview
                                 dataSource={DataSource.List}
                                 showSearchBox={false}
                                 showCommandBar={false}
