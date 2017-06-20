@@ -478,7 +478,7 @@
   <data name="SiteFields_GtChangeLookup_DisplayName" xml:space="preserve">
     <value>Endring</value>
   </data>
-  <data name="SiteFields_GtBenefitLookup_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtGainLookup_DisplayName" xml:space="preserve">
     <value>Gevinst</value>
   </data>
   <data name="SiteFields_GtMeasureIndicatorLookup_DisplayName" xml:space="preserve">
@@ -691,16 +691,16 @@
   <data name="SiteFields_GtChallengeDescription_DisplayName" xml:space="preserve">
     <value>Beskrivelse av utfordring</value>
   </data>
-  <data name="SiteFields_GtBenefitsType_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtGainsType_DisplayName" xml:space="preserve">
     <value>Gevinsttype</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Forutsetninger for gevinstoppnåelse</value>
   </data>
-  <data name="SiteFields_GtBenefitsTurnover_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
     <value>Gevinstomsetting</value>
   </data>
-  <data name="SiteFields_GtBenefitsResponsible_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
@@ -961,16 +961,16 @@
   <data name="SiteFields_GtChallengeDescription_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtBenefitsType_Description" xml:space="preserve">
+  <data name="SiteFields_GtGainsType_Description" xml:space="preserve">
     <value>Direkte (økonomiske - NOK), Indirekte (frigjort tid - årsverk), Kvalitative (f.eks. omdømme)</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtBenefitsTurnover_Description" xml:space="preserve">
+  <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
     <value> Hvordan skal gevinsten realiseres?</value>
   </data>
-  <data name="SiteFields_GtBenefitsResponsible_Description" xml:space="preserve">
+  <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
     <value>Ansvarlig for realisering av gevinst</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_Description" xml:space="preserve">
@@ -1372,13 +1372,13 @@
   <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
     <value>Store avvik</value>
   </data>
-  <data name="Choice_GtBenefitsType_Directly" xml:space="preserve">
+  <data name="Choice_GtGainsType_Directly" xml:space="preserve">
     <value>Direkte</value>
   </data>
-  <data name="Choice_GtBenefitsType_Indirectly" xml:space="preserve">
+  <data name="Choice_GtGainsType_Indirectly" xml:space="preserve">
     <value>Indirekte</value>
   </data>
-  <data name="Choice_GtBenefitsType_Qualitative" xml:space="preserve">
+  <data name="Choice_GtGainsType_Qualitative" xml:space="preserve">
     <value>Kvalitativ</value>
   </data>
   <data name="Choice_GtProjectLogResponsible_ProjectOwner" xml:space="preserve">

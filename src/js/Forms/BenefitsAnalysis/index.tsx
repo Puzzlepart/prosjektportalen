@@ -11,7 +11,7 @@ const _: IBaseFormModifications = {
     DispForm: () => {
         const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
         const id = "pp-related-gains-followup";
-        const lookupField = "GtBenefitLookup";
+        const lookupField = "GtGainLookup";
         const container = FormUtil.insertFormContainer(id);
         measuresList
             .items

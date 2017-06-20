@@ -124,7 +124,7 @@ export const ProjectHome: IFile = {
                 List: __("Lists_BenefitsAnalysis_Title"),
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtChangeLookup", "GtBenefitsType", "GtRealizationTime"],
+                    ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtRealizationTime"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,

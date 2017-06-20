@@ -99,7 +99,7 @@
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
             <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="GtProjectManager" Required="true" />
             <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" Required="true" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtBenefitsResponsible" Required="false" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" Required="false" />
             <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
             <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="false" />
@@ -154,7 +154,7 @@
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
             <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="GtProjectManager" Required="true" />
             <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" Required="true" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtBenefitsResponsible" Required="false" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" Required="false" />
             <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
             <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="false" />
@@ -276,10 +276,10 @@
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="GtBenefitsType" />
+            <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="GtGainsType" />
             <pnp:FieldRef ID="de5cf8b7-6823-4dac-b4a7-916c53bd3376" Name="GtPrereqProfitAchievement" />
-            <pnp:FieldRef ID="d79d8a58-1079-4a3a-9f27-02de9a3eace1" Name="GtBenefitsTurnover" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtBenefitsResponsible" />
+            <pnp:FieldRef ID="d79d8a58-1079-4a3a-9f27-02de9a3eace1" Name="GtGainsTurnover" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" />
             <pnp:FieldRef ID="8d497830-9012-437c-aa65-4b05807f4415" Name="GtMeasureIndicator" />
             <pnp:FieldRef ID="c5fc8781-7fbd-43a2-a215-c8c959bbab69" Name="GtStartValue" />
             <pnp:FieldRef ID="8b399cb6-c53e-432c-8ffa-b48e2bfbbf71" Name="GtDesiredValue" />

@@ -15,8 +15,8 @@ const Columns = (dataSource: DataSource): any[] => {
         isMultiline: true,
     },
     {
-        fieldName: "GtBenefitsResponsible",
-        key: "GtBenefitsResponsible",
+        fieldName: "GtGainsResponsible",
+        key: "GtGainsResponsible",
         searchPostfix: "OWSUSER",
         minWidth: 50,
         maxWidth: 180,
@@ -264,7 +264,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
                 return null;
             }
         }
-        case "GtBenefitsResponsible": {
+        case "GtGainsResponsible": {
             if (column.fieldName.indexOf("OWS") !== -1) {
                 const [, Title] = colValue.split(" | ");
                 return (
