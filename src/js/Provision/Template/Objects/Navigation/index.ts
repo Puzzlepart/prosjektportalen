@@ -64,8 +64,8 @@ const Navigation: INavigation = {
             Title: __("Lists_GainsFollowup_Title"),
         },
         {
-            Url: "SitePages/GainsOverview.aspx",
-            Title: __("Navigation_GainsOverview_Title"),
+            Url: "SitePages/BenefitsOverview.aspx",
+            Title: __("Navigation_BenefitsOverview_Title"),
         },
         {
             Url: __("DefaultView_ProjectProducts_Url"),
