@@ -88,7 +88,7 @@
   <data name="Navigation_Portfolio_Title" xml:space="preserve">
     <value>Porteføljeoversikt</value>
   </data>
-  <data name="Navigation_GainsOverview_Title" xml:space="preserve">
+  <data name="Navigation_BenefitsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
   </data>
   <data name="Navigation_ExperienceLog_Title" xml:space="preserve">
@@ -148,13 +148,13 @@
   <data name="Lists_Documents_Title" xml:space="preserve">
     <value>Dokumenter</value>
   </data>
-  <data name="Lists_GainsAnalysis_Title" xml:space="preserve">
+  <data name="Lists_BenefitsAnalysis_Title" xml:space="preserve">
     <value>Gevinstanalyse og gevinstrealiseringsplan</value>
   </data>
   <data name="Lists_ChangeAnalysis_Title" xml:space="preserve">
     <value>Endringsanalyse</value>
   </data>
-  <data name="Lists_GainsFollowup_Title" xml:space="preserve">
+  <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstsoppfølging</value>
   </data>
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
@@ -214,13 +214,13 @@
   <data name="Lists_Documents_Url" xml:space="preserve">
     <value>Delte dokumenter</value>
   </data>
-  <data name="Lists_GainsAnalysis_Url" xml:space="preserve">
+  <data name="Lists_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gevinstanalyse og gevinstrealiseringsplan</value>
   </data>
   <data name="Lists_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Endringsanalyse</value>
   </data>
-  <data name="Lists_GainsFollowup_Url" xml:space="preserve">
+  <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging</value>
   </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
@@ -262,10 +262,10 @@
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Endringsanalyse/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_GainsAnalysis_Url" xml:space="preserve">
+  <data name="DefaultView_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_GainsFollowup_Url" xml:space="preserve">
+  <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
   </data>
   <data name="View_AllItems_DisplayName" xml:space="preserve">
@@ -292,10 +292,10 @@
   <data name="ResultSourceLevel_Projects" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_Gains" xml:space="preserve">
+  <data name="ResultSourceName_Benefits" xml:space="preserve">
     <value>Gevinstmålinger</value>
   </data>
-  <data name="ResultSourceLevel_Gains" xml:space="preserve">
+  <data name="ResultSourceLevel_Benefits" xml:space="preserve">
     <value>SPSite</value>
   </data>
   <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
@@ -691,16 +691,16 @@
   <data name="SiteFields_GtChallengeDescription_DisplayName" xml:space="preserve">
     <value>Beskrivelse av utfordring</value>
   </data>
-  <data name="SiteFields_GtGainsType_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsType_DisplayName" xml:space="preserve">
     <value>Gevinsttype</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Forutsetninger for gevinstoppnåelse</value>
   </data>
-  <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsTurnover_DisplayName" xml:space="preserve">
     <value>Gevinstomsetting</value>
   </data>
-  <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
@@ -961,16 +961,16 @@
   <data name="SiteFields_GtChallengeDescription_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtGainsType_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsType_Description" xml:space="preserve">
     <value>Direkte (økonomiske - NOK), Indirekte (frigjort tid - årsverk), Kvalitative (f.eks. omdømme)</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsTurnover_Description" xml:space="preserve">
     <value> Hvordan skal gevinsten realiseres?</value>
   </data>
-  <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsResponsible_Description" xml:space="preserve">
     <value>Ansvarlig for realisering av gevinst</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_Description" xml:space="preserve">
@@ -1285,7 +1285,7 @@
   <data name="WebPart_MyCommunicationElements_Title" xml:space="preserve">
     <value>Mine kommunikasjonselementer</value>
   </data>
-  <data name="WebPart_GainsOverview_Title" xml:space="preserve">
+  <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
   </data>
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
@@ -1372,13 +1372,13 @@
   <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
     <value>Store avvik</value>
   </data>
-  <data name="Choice_GtGainsType_Directly" xml:space="preserve">
+  <data name="Choice_GtBenefitsType_Directly" xml:space="preserve">
     <value>Direkte</value>
   </data>
-  <data name="Choice_GtGainsType_Indirectly" xml:space="preserve">
+  <data name="Choice_GtBenefitsType_Indirectly" xml:space="preserve">
     <value>Indirekte</value>
   </data>
-  <data name="Choice_GtGainsType_Qualitative" xml:space="preserve">
+  <data name="Choice_GtBenefitsType_Qualitative" xml:space="preserve">
     <value>Kvalitativ</value>
   </data>
   <data name="Choice_GtProjectLogResponsible_ProjectOwner" xml:space="preserve">
@@ -1612,16 +1612,16 @@
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
   </data>
-  <data name="GainsOverview_AllMeasurements" xml:space="preserve">
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>
-  <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
+  <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
   </data>
-  <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
+  <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
   </data>
-  <data name="GainsOverview_SearchBox_Placeholder" xml:space="preserve">
+  <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
