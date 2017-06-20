@@ -1,7 +1,7 @@
 import DataSource from "../DataSource";
 import IGroupByOption from "./IGroupByOption";
 
-interface IGainsOverviewProps {
+interface IBenefitsOverviewProps {
     dataSource?: DataSource;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
@@ -9,4 +9,4 @@ interface IGainsOverviewProps {
     searchProperty?: string;
 }
 
-export default IGainsOverviewProps;
+export default IBenefitsOverviewProps;

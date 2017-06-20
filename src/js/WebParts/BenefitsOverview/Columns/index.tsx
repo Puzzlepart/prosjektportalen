@@ -201,7 +201,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn): any => 
         case "Title": {
             let dispFormUrl = item.Path;
             if (!dispFormUrl) {
-                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_GainsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
+                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_BenefitsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
             }
             return (
                 <ModalLink

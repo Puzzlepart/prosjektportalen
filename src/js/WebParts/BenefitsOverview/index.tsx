@@ -16,14 +16,14 @@ import {
 import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
-import IGainsOverviewProps from "./IGainsOverviewProps";
-import IGainsOverviewState from "./IGainsOverviewState";
+import IBenefitsOverviewProps from "./IBenefitsOverviewProps";
+import IBenefitsOverviewState from "./IBenefitsOverviewState";
 
 /**
- * Gains Overview
+ * Benefits  Overview
  */
-export default class GainsOverview extends React.PureComponent<IGainsOverviewProps, IGainsOverviewState> {
-    public static defaultProps: Partial<IGainsOverviewProps> = {
+export default class BenefitsOverview extends React.PureComponent<IBenefitsOverviewProps, IBenefitsOverviewState> {
+    public static defaultProps: Partial<IBenefitsOverviewProps> = {
         groupByOptions: [],
         searchProperty: "Title",
         dataSource: DataSource.List,
@@ -78,7 +78,7 @@ export default class GainsOverview extends React.PureComponent<IGainsOverviewPro
                 {showSearchBox !== false &&
                     <SearchBox
                         onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText={__("GainsOverview_SearchBox_Placeholder")} />
+                        labelText={__("BenefitsOverview_SearchBox_Placeholder")} />
                 }
                 <DetailsList
                     items={items}

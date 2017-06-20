@@ -260,7 +260,7 @@ const Lists: IList[] = [
             SiteFields.GtProjectTaskRisk,
             SiteFields.GtProjectTaskProduct,
             SiteFields.GtProjectTaskChange,
-            SiteFields.GtProjectTaskGain,
+            SiteFields.GtProjectTaskBenefit,
         ],
         Views: [{
             Title: __("View_AllTasks_DisplayName"),
@@ -273,7 +273,7 @@ const Lists: IList[] = [
         },
         {
             Title: "Relevante koblinger",
-            ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
+            ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskBenefit", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -341,7 +341,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_GainsAnalysis_Title"),
+        Title: __("Lists_BenefitsAnalysis_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -428,7 +428,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_GainsFollowup_Title"),
+        Title: __("Lists_BenefitsFollowup_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,

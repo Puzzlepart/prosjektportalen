@@ -19,7 +19,7 @@ const _: IBaseFormModifications = {
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render((<div>
            <ChromeTitle title={__("ChangeAnalysis_NextStep_Title")} />
-           <p>​​{__("ChangeAnalysis_NextStep_Text")} <a href={`../../${__("DefaultView_GainsAnalysis_Url")}`}>{__("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
+           <p>​​{__("ChangeAnalysis_NextStep_Text")} <a href={`../../${__("DefaultView_BenefitsAnalysis_Url")}`}>{__("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
         </div>), container);
     },
 };

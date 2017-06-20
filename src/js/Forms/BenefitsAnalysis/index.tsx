@@ -9,7 +9,7 @@ import { ChromeTitle } from "../../WebParts/@Components";
 
 const _: IBaseFormModifications = {
     DispForm: () => {
-        const measuresList = sp.web.lists.getByTitle(__("Lists_GainsFollowup_Title"));
+        const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
         const id = "pp-related-gains-followup";
         const lookupField = "GtGainLookup";
         const container = FormUtil.insertFormContainer(id);
@@ -25,8 +25,8 @@ const _: IBaseFormModifications = {
         const id = "pp-next-step";
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render(<div>
-           <ChromeTitle title={__("GainAnalysis_NextStep_Title")} />
-           <p>​​{__("GainAnalysis_NextStep_Text")} <a href={`../../${__("DefaultView_Tasks_Url")}`}>{__("GainAnalysis_NextStep_LinkText")}</a>​.</p>
+           <ChromeTitle title={__("BenefitAnalysis_NextStep_Title")} />
+           <p>​​{__("BenefitAnalysis_NextStep_Text")} <a href={`../../${__("DefaultView_Tasks_Url")}`}>{__("BenefitAnalysis_NextStep_LinkText")}</a>​.</p>
         </div>, container);
     },
 };

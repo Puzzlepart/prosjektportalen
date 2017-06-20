@@ -99,29 +99,29 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: __("Lists_GainsAnalysis_Title"),
+            Title: __("Lists_BenefitsAnalysis_Title"),
             Zone: "LeftColumn",
             Order: 3,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("Lists_GainsAnalysis_Title"),
+                value: __("Lists_BenefitsAnalysis_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_GainsAnalysis_Url")}`,
+                value: `{site}/${__("Lists_BenefitsAnalysis_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_GainsAnalysis_Url")}`,
+                value: `{site}/${__("DefaultView_BenefitsAnalysis_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_GainsAnalysis_Title"),
+                List: __("Lists_BenefitsAnalysis_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtRealizationTime"],
@@ -156,7 +156,7 @@ export const ProjectHome: IFile = {
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Usikkerhet (gjeldende fase)",
+                value: __("WebPart_UncertaintiesCurrentPhase_Title"),
             },
             {
                 name: "ListUrl",

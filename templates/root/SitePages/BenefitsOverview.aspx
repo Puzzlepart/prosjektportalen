@@ -16,7 +16,7 @@
     <SharePoint:DelegateControl runat="server" ControlId="SmallSearchInputBox" />
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="ms-Frabric gt-portfolio-page gt-gains-page">
+    <div class="ms-Frabric gt-portfolio-page gt-Benefits-page">
         <div class="ms-Grid">
             <div class="ms-Grid-row">
                 <div class="ms-Grid-col ms-sm12">
