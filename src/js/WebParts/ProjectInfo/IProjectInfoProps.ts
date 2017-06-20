@@ -49,6 +49,16 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
         showLabel: true,
     },
     {
+        url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=${_spPageContextInfo.pageListId}&ID=${_spPageContextInfo.pageItemId}&FileName=${_spPageContextInfo.serverRequestPath}`,
+        label: __("ProjectInfo_ShowVersionHistory"),
+        icon: { iconName: "History", position: ModalLinkIconPosition.Left },
+        options: {
+            HideRibbon: true,
+        },
+        reloadOnSubmit: false,
+        showLabel: true,
+    },
+    {
         url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
         label: __("ProjectInfo_EditProperties"),
         icon: { iconName: "EditMirrored", position: ModalLinkIconPosition.Left },

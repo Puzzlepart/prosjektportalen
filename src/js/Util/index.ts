@@ -2,6 +2,15 @@ import * as moment from "moment";
 declare var MSOWebPartPageFormName: string;
 
 /**
+ * HTML decodes the string
+ */
+export const htmlDecode = (input: string): string => {
+    const e = document.createElement("div");
+    e.innerHTML = input;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+};
+
+/**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
  *
  * @param date Date

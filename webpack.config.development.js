@@ -1,17 +1,24 @@
 var path = require("path"),
     webpack = require('webpack'),
     pkg = require("./package.json"),
+    build = require("./build.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (devtool = "source-map") => {
+const I18n = {
+    1033: require("./src/js/Resources/en-US.json"),
+    1044: require("./src/js/Resources/no-NB.json"),
+};
+
+module.exports = (devtool) => {
     const plugins = [
-        new I18nPlugin(require("./src/js/Resources/no-NB.json")),
+          new I18nPlugin(I18n[build.language]),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('development')
+                NODE_ENV: JSON.stringify('development'),
+                LANGUAGE: JSON.stringify(build.language),
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
@@ -41,8 +48,7 @@ module.exports = (devtool = "source-map") => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', './lib/js/index.js'],
-            loader: './lib/js/Loader.js'
+            main: ['babel-polyfill', 'whatwg-fetch', './lib/js/index.js'],
         },
         output: {
             path: path.join(__dirname, "dist/js"),

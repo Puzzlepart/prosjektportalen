@@ -4,6 +4,7 @@ var autoprefixer = require('autoprefixer-stylus'),
 
 module.exports = {
     paths: {
+        license: "license.md",
         dist: "./dist",
         lib: "./lib",
         build: "./build",

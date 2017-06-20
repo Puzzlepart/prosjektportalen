@@ -88,7 +88,7 @@
   <data name="Navigation_Portfolio_Title" xml:space="preserve">
     <value>Porteføljeoversikt</value>
   </data>
-  <data name="Navigation_GainsOverview_Title" xml:space="preserve">
+  <data name="Navigation_BenefitsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
   </data>
   <data name="Navigation_ExperienceLog_Title" xml:space="preserve">
@@ -148,13 +148,13 @@
   <data name="Lists_Documents_Title" xml:space="preserve">
     <value>Dokumenter</value>
   </data>
-  <data name="Lists_GainsAnalysis_Title" xml:space="preserve">
+  <data name="Lists_BenefitsAnalysis_Title" xml:space="preserve">
     <value>Gevinstanalyse og gevinstrealiseringsplan</value>
   </data>
   <data name="Lists_ChangeAnalysis_Title" xml:space="preserve">
     <value>Endringsanalyse</value>
   </data>
-  <data name="Lists_GainsFollowup_Title" xml:space="preserve">
+  <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstsoppfølging</value>
   </data>
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
@@ -163,8 +163,77 @@
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
+  <data name="Lists_SitePages_Url" xml:space="preserve">
+    <value>SitePages</value>
+  </data>
+  <data name="Lists_Announcements_Url" xml:space="preserve">
+    <value>Lists/Announcements</value>
+  </data>
+  <data name="Lists_Extensions_Url" xml:space="preserve">
+    <value>Utvidelser</value>
+  </data>
+  <data name="Lists_QuickLinks_Url" xml:space="preserve">
+    <value>Lists/QuickLinks</value>
+  </data>
+  <data name="Lists_Resources_Url" xml:space="preserve">
+    <value>Ressurser</value>
+  </data>
+  <data name="Lists_Tasks_Url" xml:space="preserve">
+    <value>Lists/Oppgaver</value>
+  </data>
+  <data name="Lists_StandardTasks_Url" xml:space="preserve">
+    <value>Lists/Standardoppgaver</value>
+  </data>
+  <data name="Lists_PhaseChecklist_Url" xml:space="preserve">
+    <value>Lists/Fasesjekkliste</value>
+  </data>
+  <data name="Lists_Stakeholders_Url" xml:space="preserve">
+    <value>Lists/Interessentregister</value>
+  </data>
+  <data name="Lists_Standarddocuments_Url" xml:space="preserve">
+    <value>Standarddokumenter</value>
+  </data>
+  <data name="Lists_Information_Url" xml:space="preserve">
+    <value>Lists/Informasjon</value>
+  </data>
+  <data name="Lists_CommunicationPlan_Url" xml:space="preserve">
+    <value>Lists/Kommunikasjonsplan</value>
+  </data>
+  <data name="Lists_ProjectLog_Url" xml:space="preserve">
+    <value>Lists/Prosjektlogg</value>
+  </data>
+  <data name="Lists_ProjectProducts_Url" xml:space="preserve">
+    <value>Lists/Prosjektleveranser</value>
+  </data>
+  <data name="Lists_Uncertainties_Url" xml:space="preserve">
+    <value>Lists/Usikkerhet</value>
+  </data>
+  <data name="Lists_MeetingCalendar_Url" xml:space="preserve">
+    <value>Lists/Mtekalender</value>
+  </data>
+  <data name="Lists_Documents_Url" xml:space="preserve">
+    <value>Delte dokumenter</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Url" xml:space="preserve">
+    <value>Lists/Gevinstanalyse og gevinstrealiseringsplan</value>
+  </data>
+  <data name="Lists_ChangeAnalysis_Url" xml:space="preserve">
+    <value>Lists/Endringsanalyse</value>
+  </data>
+  <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
+    <value>Lists/Gevinstsoppflging</value>
+  </data>
+  <data name="Lists_ProjectStatus_Url" xml:space="preserve">
+    <value>Lists/Prosjektstatusrapporter</value>
+  </data>
+  <data name="Lists_ProjectElements_Url" xml:space="preserve">
+    <value>Lists/Prosjekter</value>
+  </data>
   <data name="DefaultView_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Prosjektlogg/AllItems.aspx</value>
+  </data>
+  <data name="DefaultView_Information_Url" xml:space="preserve">
+    <value>Lists/Informasjon/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Stakeholders_Url" xml:space="preserve">
     <value>Lists/Interessentregister/AllItems.aspx</value>
@@ -193,10 +262,10 @@
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Endringsanalyse/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_GainsAnalysis_Url" xml:space="preserve">
+  <data name="DefaultView_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_GainsFollowup_Url" xml:space="preserve">
+  <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
   </data>
   <data name="View_AllItems_DisplayName" xml:space="preserve">
@@ -223,10 +292,16 @@
   <data name="ResultSourceLevel_Projects" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_Gains" xml:space="preserve">
+  <data name="ResultSourceName_Benefits" xml:space="preserve">
     <value>Gevinstmålinger</value>
   </data>
-  <data name="ResultSourceLevel_Gains" xml:space="preserve">
+  <data name="ResultSourceLevel_Benefits" xml:space="preserve">
+    <value>SPSite</value>
+  </data>
+  <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
+    <value>Erfaringslogg</value>
+  </data>
+  <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
     <value>SPSite</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
@@ -397,13 +472,13 @@
   <data name="SiteFields_GtProjectTaskChange_DisplayName" xml:space="preserve">
     <value>Relevant endring</value>
   </data>
-  <data name="SiteFields_GtProjectTaskGain_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtProjectTaskBenefit_DisplayName" xml:space="preserve">
     <value>Relevant gevinst</value>
   </data>
   <data name="SiteFields_GtChangeLookup_DisplayName" xml:space="preserve">
     <value>Endring</value>
   </data>
-  <data name="SiteFields_GtGainLookup_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitLookup_DisplayName" xml:space="preserve">
     <value>Gevinst</value>
   </data>
   <data name="SiteFields_GtMeasureIndicatorLookup_DisplayName" xml:space="preserve">
@@ -517,7 +592,7 @@
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risiko</value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievement_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievement_DisplayName" xml:space="preserve">
     <value>Status gevinstoppnåelse</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_DisplayName" xml:space="preserve">
@@ -553,7 +628,7 @@
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
     <value>Kommentar, fremdrift</value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievementComment_DisplayName" xml:space="preserve">
     <value>Kommentar, gevinstoppnåelse</value>
   </data>
   <data name="SiteFields_GtProjectGoals_DisplayName" xml:space="preserve">
@@ -616,16 +691,16 @@
   <data name="SiteFields_GtChallengeDescription_DisplayName" xml:space="preserve">
     <value>Beskrivelse av utfordring</value>
   </data>
-  <data name="SiteFields_GtGainsType_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsType_DisplayName" xml:space="preserve">
     <value>Gevinsttype</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Forutsetninger for gevinstoppnåelse</value>
   </data>
-  <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsTurnover_DisplayName" xml:space="preserve">
     <value>Gevinstomsetting</value>
   </data>
-  <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
@@ -805,10 +880,10 @@
   <data name="SiteFields_GtStatusRisk_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievement_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievementComment_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievementComment_Description" xml:space="preserve">
     <value>Kommentar til status gevinstoppnåelse angitt over</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_Description" xml:space="preserve">
@@ -886,16 +961,16 @@
   <data name="SiteFields_GtChallengeDescription_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtGainsType_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsType_Description" xml:space="preserve">
     <value>Direkte (økonomiske - NOK), Indirekte (frigjort tid - årsverk), Kvalitative (f.eks. omdømme)</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsTurnover_Description" xml:space="preserve">
     <value> Hvordan skal gevinsten realiseres?</value>
   </data>
-  <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
+  <data name="SiteFields_GtBenefitsResponsible_Description" xml:space="preserve">
     <value>Ansvarlig for realisering av gevinst</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_Description" xml:space="preserve">
@@ -1049,10 +1124,10 @@
     <value>Sjekkpunktet er ikke relevant</value>
   </data>
   <data name="ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar."</value>
+    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
   </data>
   <data name="ProjectPhases_Stats_" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar."</value>
+    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
   </data>
   <data name="ProjectPhases_Stats_Open" xml:space="preserve">
     <value>åpne</value>
@@ -1071,6 +1146,9 @@
   </data>
   <data name="ProjectInfo_ViewProperties" xml:space="preserve">
     <value>Vis alle egenskaper</value>
+  </data>
+  <data name="ProjectInfo_ShowVersionHistory" xml:space="preserve">
+    <value>Vis versjonshistorikk</value>
   </data>
   <data name="ProjectInfo_EditLogo" xml:space="preserve">
     <value>Tittel, beskrivelse og logo</value>
@@ -1168,6 +1246,51 @@
   <data name="WebPart_ProjectInfo_Title" xml:space="preserve">
     <value>Om prosjektet</value>
   </data>
+  <data name="WebPart_ProjectPhases_Title" xml:space="preserve">
+    <value>Prosjektets faser</value>
+  </data>
+  <data name="WebPart_Timeline_Title" xml:space="preserve">
+    <value>Tidslinje</value>
+  </data>
+  <data name="WebPart_Timeline_ViewName" xml:space="preserve">
+    <value>Tidslinje</value>
+  </data>
+  <data name="WebPart_Documents_Title" xml:space="preserve">
+    <value>Dokumenter</value>
+  </data>
+  <data name="WebPart_DocumentsCurrentPhase_Title" xml:space="preserve">
+    <value>Dokumenter (gjeldende fase)</value>
+  </data>
+  <data name="WebPart_SiteFeed_Title" xml:space="preserve">
+    <value>Områdefeed</value>
+  </data>
+  <data name="WebPart_Uncertainties_Title" xml:space="preserve">
+    <value>Usikkerhet</value>
+  </data>
+  <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
+    <value>Usikkerhet (gjeldende fase)</value>
+  </data>
+  <data name="WebPart_LatestsTasks_Title" xml:space="preserve">
+    <value>Siste oppgaver</value>
+  </data>
+  <data name="WebPart_MyTasks_Title" xml:space="preserve">
+    <value>Mine oppgaver</value>
+  </data>
+  <data name="WebPart_Tasks_Title" xml:space="preserve">
+    <value>Oppgaver</value>
+  </data>
+  <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
+    <value>Prosjektleveranser jeg har ansvar for</value>
+  </data>
+  <data name="WebPart_MyCommunicationElements_Title" xml:space="preserve">
+    <value>Mine kommunikasjonselementer</value>
+  </data>
+  <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
+    <value>Gevinstoversikt</value>
+  </data>
+  <data name="WebPart_LatestInformation_Title" xml:space="preserve">
+    <value>Siste informasjonselementer</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
@@ -1177,13 +1300,13 @@
   <data name="ChangeAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>Gevinstanalysen</value>
   </data>
-  <data name="GainAnalysis_NextStep_Title" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
-  <data name="GainAnalysis_NextStep_Text" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_Text" xml:space="preserve">
     <value>Etter at gevinstanalysen er utført kan oppgaver legges inn i</value>
   </data>
-  <data name="GainAnalysis_NextStep_LinkText" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>oppgavelisten</value>
   </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
@@ -1194,6 +1317,69 @@
   </data>
   <data name="PortfolioPage_ExperienceLog_Title" xml:space="preserve">
     <value>Erfaringslogg</value>
+  </data>
+  <data name="Choice_GtRiskStatus_Identified" xml:space="preserve">
+    <value>Identifisert</value>
+  </data>
+  <data name="Choice_GtRiskStatus_ActionTaken" xml:space="preserve">
+    <value>Tiltak gjennomført</value>
+  </data>
+  <data name="Choice_GtRiskStatus_NoLongerRelevant" xml:space="preserve">
+    <value>Ikke lenger aktuell</value>
+  </data>
+  <data name="Choice_GtMeasurementUnit_Number" xml:space="preserve">
+    <value>Antall</value>
+  </data>
+  <data name="Choice_GtMeasurementUnit_Currency" xml:space="preserve">
+    <value>Kroner</value>
+  </data>
+  <data name="Choice_GtMeasurementUnit_Percentage" xml:space="preserve">
+    <value>Prosent</value>
+  </data>
+  <data name="Choice_GtMeasurementUnit_Hours" xml:space="preserve">
+    <value>Timer</value>
+  </data>
+  <data name="Choice_GtFeedbackStatus_Open" xml:space="preserve">
+    <value>Åpen</value>
+  </data>
+  <data name="Choice_GtFeedbackStatus_UnderDevelopment" xml:space="preserve">
+    <value>Under utvikling</value>
+  </data>
+  <data name="Choice_GtFeedbackStatus_Done" xml:space="preserve">
+    <value>Fullført</value>
+  </data>
+  <data name="Choice_GtFeedbackStatus_Declined" xml:space="preserve">
+    <value>Avvist</value>
+  </data>
+  <data name="Choice_GtFeedbackCriticality_GeniousIdea" xml:space="preserve">
+    <value>Genial idè</value>
+  </data>
+  <data name="Choice_GtFeedbackCriticality_NiceToHave" xml:space="preserve">
+    <value>Kjekt å ha</value>
+  </data>
+  <data name="Choice_GtFeedbackCriticality_AnnoyingError" xml:space="preserve">
+    <value>Irriterende feil</value>
+  </data>
+  <data name="Choice_GtFeedbackCriticality_SeriousError" xml:space="preserve">
+    <value>Alvorlig feil</value>
+  </data>
+  <data name="Choice_GtProductStatus_AccPlan" xml:space="preserve">
+    <value>Ihht. plan</value>
+  </data>
+  <data name="Choice_GtProductStatus_SmallDeviations" xml:space="preserve">
+    <value>Små avvik</value>
+  </data>
+  <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
+    <value>Store avvik</value>
+  </data>
+  <data name="Choice_GtBenefitsType_Directly" xml:space="preserve">
+    <value>Direkte</value>
+  </data>
+  <data name="Choice_GtBenefitsType_Indirectly" xml:space="preserve">
+    <value>Indirekte</value>
+  </data>
+  <data name="Choice_GtBenefitsType_Qualitative" xml:space="preserve">
+    <value>Kvalitativ</value>
   </data>
   <data name="Choice_GtProjectLogResponsible_ProjectOwner" xml:space="preserve">
     <value>Prosjekteier</value>
@@ -1303,19 +1489,19 @@
   <data name="Choice_GtStatusRisk_High" xml:space="preserve">
     <value>Høy</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_NotStarted" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_NotStarted" xml:space="preserve">
     <value>Ikke påbegynt</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_AheadOfSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_AheadOfSchedule" xml:space="preserve">
     <value>Foran plan</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_OnSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_OnSchedule" xml:space="preserve">
     <value>På plan</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_MinorDelays" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_MinorDelays" xml:space="preserve">
     <value>Mindre forsinkelser</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_BehindSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_BehindSchedule" xml:space="preserve">
     <value>Forsinket</value>
   </data>
   <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
@@ -1426,16 +1612,16 @@
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
   </data>
-  <data name="GainsOverview_AllMeasurements" xml:space="preserve">
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>
-  <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
+  <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
   </data>
-  <data name="GainsOverview_DiffPreviousMeasurement" xml:space="preserve">
+  <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
   </data>
-  <data name="GainsOverview_SearchBox_Placeholder" xml:space="preserve">
+  <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
@@ -1474,7 +1660,7 @@
   <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
     <value>Risiko</value>
   </data>
-  <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
+  <data name="StatusPage_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Gevinstoppnåelse</value>
   </data>
   <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">

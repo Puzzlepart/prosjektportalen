@@ -12,7 +12,7 @@ export const ProjectHome: IFile = {
     RemoveExistingWebParts: true,
     WebParts: [
         {
-            Title: "Prosjektets faser",
+            Title: __("WebPart_ProjectPhases_Title"),
             Zone: "LeftColumn",
             Order: 0,
             Contents: {
@@ -20,23 +20,23 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Tidslinje",
+            Title: __("WebPart_Timeline_Title"),
             Zone: "LeftColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Tidslinje",
+                value: __("WebPart_Timeline_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver",
+                value: `{site}/${__("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver/AllItems.aspx",
+                value: `{site}/${__("DefaultView_Tasks_Url")}`,
             },
             {
                 name: "CurrentTaskListWebAddress",
@@ -51,7 +51,7 @@ export const ProjectHome: IFile = {
             {
                 name: "ViewName",
                 type: "string",
-                value: "Tidslinje",
+                value: __("WebPart_Timeline_ViewName"),
             },
             {
                 name: "TimelineType",
@@ -63,29 +63,29 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Dokumenter (gjeldende fase)",
+            Title: __("WebPart_DocumentsCurrentPhase_Title"),
             Zone: "LeftColumn",
             Order: 2,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Dokumenter (gjeldende fase)",
+                value: __("WebPart_DocumentsCurrentPhase_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Delte dokumenter",
+                value: `{site}/${__("Lists_Documents_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Delte dokumenter/Forms/AllItems.aspx",
+                value: `{site}/${__("DefaultView_Documents_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Dokumenter",
+                List: __("Lists_Documents_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
@@ -99,32 +99,32 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Gevinstanalyse og gevinstrealiseringsplan",
+            Title: __("Lists_BenefitsAnalysis_Title"),
             Zone: "LeftColumn",
             Order: 3,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Gevinstanalyse og gevinstrealiseringsplan",
+                value: __("Lists_BenefitsAnalysis_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Gevinstanalyse og gevinstrealiseringsplan",
+                value: `{site}/${__("Lists_BenefitsAnalysis_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.asp",
+                value: `{site}/${__("DefaultView_BenefitsAnalysis_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Gevinstanalyse og gevinstrealiseringsplan",
+                List: __("Lists_BenefitsAnalysis_Title"),
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtRealizationTime"],
+                    ViewFields: ["LinkTitle", "GtChangeLookup", "GtBenefitsType", "GtRealizationTime"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,
@@ -134,7 +134,7 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Om prosjektet",
+            Title: __("WebPart_ProjectInfo_Title"),
             Zone: "RightColumn",
             Order: 0,
             Contents: {
@@ -142,7 +142,7 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Områdefeed",
+            Title: __("WebPart_SiteFeed_Title"),
             Zone: "RightColumn",
             Order: 1,
             Contents: {
@@ -150,29 +150,29 @@ export const ProjectHome: IFile = {
             },
         },
         {
-            Title: "Usikkerhet (gjeldende fase)",
+            Title: __("WebPart_UncertaintiesCurrentPhase_Title"),
             Zone: "RightColumn",
             Order: 2,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Usikkerhet (gjeldende fase",
+                value: __("WebPart_UncertaintiesCurrentPhase_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Usikkerhet",
+                value: `{site}/${__("Lists_Uncertainties_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Usikkerhet/AllItems.asp",
+                value: `{site}/${__("DefaultView_Uncertainties_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Usikkerhet",
+                List: __("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity"],

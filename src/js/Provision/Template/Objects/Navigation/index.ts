@@ -56,16 +56,16 @@ const Navigation: INavigation = {
             Title: __("Lists_ChangeAnalysis_Title"),
         },
         {
-            Url: __("DefaultView_GainsAnalysis_Url"),
-            Title: __("Lists_GainsAnalysis_Title"),
+            Url: __("DefaultView_BenefitsAnalysis_Url"),
+            Title: __("Lists_BenefitsAnalysis_Title"),
         },
         {
-            Url: __("DefaultView_GainsFollowup_Url"),
-            Title: __("Lists_GainsFollowup_Title"),
+            Url: __("DefaultView_BenefitsFollowup_Url"),
+            Title: __("Lists_BenefitsFollowup_Title"),
         },
         {
-            Url: "SitePages/GainsOverview.aspx",
-            Title: __("Navigation_GainsOverview_Title"),
+            Url: "SitePages/BenefitsOverview.aspx",
+            Title: __("Navigation_BenefitsOverview_Title"),
         },
         {
             Url: __("DefaultView_ProjectProducts_Url"),

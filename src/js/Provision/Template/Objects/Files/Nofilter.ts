@@ -7,29 +7,29 @@ export const Nofilter: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: "Oppgaver",
+            Title: __("WebPart_Tasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Oppgaver",
+                value: __("WebPart_Tasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver",
+                value: `{site}/${__("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Oppgaver/AllItems.asp",
+                value: `{site}/${__("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Oppgaver",
+                List: __("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo"],
@@ -42,29 +42,29 @@ export const Nofilter: IFile = {
             },
         },
         {
-            Title: "Dokumenter",
+            Title: __("WebPart_Documents_Title"),
             Zone: "LeftColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Dokumenter",
+                value: __("WebPart_Documents_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Delte dokumenter",
+                value: `{site}/${__("Lists_Documents_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Delte dokumenter/Forms/AllItems.asp",
+                value: `{site}/${__("DefaultView_Documents_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Dokumenter",
+                List: __("Lists_Documents_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
@@ -77,7 +77,7 @@ export const Nofilter: IFile = {
             },
         },
         {
-            Title: "Områdefeed",
+            Title: __("WebPart_SiteFeed_Title"),
             Zone: "RightColumn",
             Order: 0,
             Contents: {
@@ -85,29 +85,29 @@ export const Nofilter: IFile = {
             },
         },
         {
-            Title: "Usikkerhet",
+            Title: __("WebPart_Uncertainties_Title"),
             Zone: "RightColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: "Usikkerhet",
+                value: __("WebPart_Uncertainties_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: "{site}/Lists/Usikkerhet",
+                value: `{site}/${__("Lists_Uncertainties_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: "{site}/Lists/Usikkerhet/AllItems.asp",
+                value: `{site}/${__("DefaultView_Uncertainties_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: "Usikkerhet",
+                List: __("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity", "GtRiskFactor"],

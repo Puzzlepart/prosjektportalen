@@ -65,7 +65,7 @@
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="GtDpProperty">GtGainsResponsibleOWSUSER</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtBenefitsResponsibleOWSUSER</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Gevinstansvarlig</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">90</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
@@ -96,7 +96,7 @@
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="GtDpProperty">GtStatusGainAchievementOWSCHCS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">GtStatusBenefitAchievementOWSCHCS</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Status gevinstoppnåelse</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">140</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>

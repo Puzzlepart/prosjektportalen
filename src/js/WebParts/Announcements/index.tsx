@@ -1,44 +1,28 @@
 import { Site } from "sp-pnp-js";
-import * as uuid_v1 from "uuid/v1";
 import * as React from "react";
 import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
-import IAnnouncementsProps from "./IAnnouncementsProps";
-import IAnnouncementsState from "./IAnnouncementsState";
+import IAnnouncementsProps, { AnnouncementsDefaultProps } from "./IAnnouncementsProps";
+import IAnnouncementsState, { AnnouncementsInitialState } from "./IAnnouncementsState";
 
 /**
  * Announcements
  */
 export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
-    public static defaultProps: IAnnouncementsProps = {
-        itemsCount: 5,
-        itemsFilter: `Expires ge datetime'${new Date().toISOString()}'`,
-        itemsOrderBy: {
-            orderBy: "Created",
-            ascending: false,
-        },
-        listClassName: "pp-simpleList spacing-s",
-        listId: uuid_v1(),
-        modalContainerClassName: "pp-announcementsModalContainer",
-        modalHeaderClassName: "ms-font-xxl",
-        modalBodyClassName: "ms-font-l",
-    };
+    public static defaultProps = AnnouncementsDefaultProps;
 
     /**
      * Constructor
      */
-    constructor() {
-        super();
-        this.state = {
-            entries: null,
-            isLoading: true,
-            showAnnouncement: null,
-        };
+    constructor(props: IAnnouncementsProps) {
+        super(props);
+        this.state = AnnouncementsInitialState;
     }
 
     /**
@@ -85,7 +69,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
             <ChromeTitle
                 title={__("WebPart_Announcements_Title")}
                 toggleElement={{
-                    selector: `#${this.props.listId}`,
+                    selector: `#${this.props.containerId}`,
                     animationDelay: 100,
                     animation: "slideToggle",
                     storage: {
@@ -102,24 +86,31 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
      */
     private renderItems = ({ isLoading, entries }: IAnnouncementsState) => {
         if (isLoading) {
-            return (<Spinner type={SpinnerType.large} />);
+            return (
+                <Spinner type={SpinnerType.large} />
+            );
         } else if (entries.length > 0) {
             return (
-                <ul
-                    id={this.props.listId}
-                    className={this.props.listClassName}>
-                    {entries.map((entry, idx) => <li key={idx}>
-                        <h5>
-                            <a
-                                style={{ cursor: "pointer" }}
-                                onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
-                        </h5>
-                        <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
-                    </li>)}
-                </ul>
+                <div id={this.props.containerId}>
+                    <ul
+                        className={this.props.listClassName}>
+                        {entries.map((entry, idx) => <li key={idx}>
+                            <h5>
+                                <a
+                                    style={{ cursor: "pointer" }}
+                                    onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                            </h5>
+                            <span className="ms-metadata">{__("String_Published")} {Util.dateFormat(entry.Created)}</span>
+                        </li>)}
+                    </ul>
+                </div>
             );
         } else {
-            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+            return (
+                <div id={this.props.containerId}>
+                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                </div>
+            );
         }
     }
 

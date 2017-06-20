@@ -5,10 +5,17 @@ import { sp } from "sp-pnp-js";
  */
 export const DEFAULT_SEARCH_SETTINGS = {
     Querytext: "*",
-    QueryTemplate: "ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} *",
     RowLimit: 500,
     TrimDuplicates: false,
     SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"],
+    Properties: [{
+        Name: "SourceName",
+        Value: { StrVal: __("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
+    },
+    {
+        Name: "SourceLevel",
+        Value: { StrVal: __("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
+    }],
 };
 
 export interface IQueryResult {

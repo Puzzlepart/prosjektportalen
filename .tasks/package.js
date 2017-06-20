@@ -9,7 +9,7 @@ var gulp = require("gulp"),
     config = require('./@configuration.js');
 
 gulp.task("package:code", ["build:lib"], (done) => {
-    webpack(webpackConfigDev(), (err, stats) => {
+    webpack(webpackConfigDev("source-map"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code", err);
         }

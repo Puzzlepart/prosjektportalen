@@ -7,6 +7,11 @@ var gulp = require("gulp"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
+gulp.task("copy:license", () => {
+    return gulp.src(config.paths.license)
+        .pipe(gulp.dest(config.paths.dist))
+});
+
 gulp.task("copy:build", () => {
     return gulp.src(config.paths.buildGlob)
         .pipe(gulp.dest(config.paths.dist))
@@ -27,7 +32,7 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
-    runSequence("default::prod", "copy:build", "copy:manualconf", "stamp:version::dist", "zip:dist", () => {
+    runSequence("default::prod", "copy:build", "copy:manualconf", "copy:license", "stamp:version::dist", "zip:dist", () => {
         done();
     });
 });
