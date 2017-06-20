@@ -175,17 +175,17 @@
             <CHOICE>{resource:Choice_GtStatusRisk_High}</CHOICE>
         </CHOICES>
     </Field>
-    <Field ID="{b1958607-cd56-4ecb-9ad7-65fb7d3c22c7}" Name="GtStatusGainAchievement" DisplayName="{resource:SiteFields_GtStatusGainAchievement_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusGainAchievement_Description}" Format="RadioButtons" StaticName="GtStatusGainAchievement">
-        <Default>{resource:Choice_GtStatusGainAchievement_NotStarted}</Default>
+    <Field ID="{b1958607-cd56-4ecb-9ad7-65fb7d3c22c7}" Name="GtStatusBenefitAchievement" DisplayName="{resource:SiteFields_GtStatusBenefitAchievement_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusBenefitAchievement_Description}" Format="RadioButtons" StaticName="GtStatusBenefitAchievement">
+        <Default>{resource:Choice_GtStatusBenefitAchievement_NotStarted}</Default>
         <CHOICES>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_NotStarted}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_AheadOfSchedule}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_OnSchedule}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_MinorDelays}</CHOICE>
-            <CHOICE>{resource:Choice_GtStatusGainAchievement_BehindSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusBenefitAchievement_NotStarted}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusBenefitAchievement_AheadOfSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusBenefitAchievement_OnSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusBenefitAchievement_MinorDelays}</CHOICE>
+            <CHOICE>{resource:Choice_GtStatusBenefitAchievement_BehindSchedule}</CHOICE>
         </CHOICES>
     </Field>
-    <Field ID="{cb41572a-78c6-4e33-8505-b97bfd8fd162}" Name="GtStatusGainAchievementComment" DisplayName="{resource:SiteFields_GtStatusGainAchievementComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusGainAchievementComment_Description}" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusGainAchievementComment"></Field>
+    <Field ID="{cb41572a-78c6-4e33-8505-b97bfd8fd162}" Name="GtStatusBenefitAchievementComment" DisplayName="{resource:SiteFields_GtStatusBenefitAchievementComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusBenefitAchievementComment_Description}" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusBenefitAchievementComment"></Field>
     <Field ID="{554d32a0-0148-4b3c-bfc4-f101232ee501}" Name="GtRiskConsequence" DisplayName="{resource:SiteFields_GtRiskConsequence_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtRiskConsequence_Description}" Min="0" Max="5" StaticName="GtRiskConsequence"></Field>
     <Field ID="{475d2ca1-5b8e-4479-96ae-81c0a89354f3}" Name="GtStakeholderInfluence" DisplayName="{resource:SiteFields_GtStakeholderInfluence_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStakeholderInfluence_Description}" StaticName="GtStakeholderInfluence">
         <CHOICES>

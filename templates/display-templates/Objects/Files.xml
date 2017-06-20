@@ -15,7 +15,7 @@
             <pnp:Property Key="ContentTypeId" Value="0x0101002039C03B61C64EC4A04F5361F385106605" />
             <pnp:Property Key="Title" Value="Prosjektportalen prosjektelement med detaljer" />
             <pnp:Property Key="DisplayTemplateLevel" Value="Item" />
-            <pnp:Property Key="ManagedPropertyMapping" Value="'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase','Created','GtProjectGoalsOWSMTXT','GtStatusTimeOWSCHCS','GtStatusRiskOWSCHCS','GtStatusBudgetOWSCHCS','GtStatusGainAchievementOWSCHCS','LastModifiedTime'" />
+            <pnp:Property Key="ManagedPropertyMapping" Value="'Path','Title','GtProjectManagerOWSUSER','GtProjectOwnerOWSUSER','owstaxIdGtProjectPhase','Created','GtProjectGoalsOWSMTXT','GtStatusTimeOWSCHCS','GtStatusRiskOWSCHCS','GtStatusBudgetOWSCHCS','GtStatusBenefitAchievementOWSCHCS','LastModifiedTime'" />
             <pnp:Property Key="TargetControlType" Value='["SearchResults", "Content Web Parts"]' />
             <pnp:Property Key="TemplateHidden" Value="0" />
         </pnp:Properties>

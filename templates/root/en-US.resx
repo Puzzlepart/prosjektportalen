@@ -362,13 +362,13 @@
     <value>Project task</value>
   </data>
   <data name="ContentTypes_Gevinst_Name" xml:space="preserve">
-    <value>Gain</value>
+    <value>Benefit</value>
   </data>
   <data name="ContentTypes_Endring_Name" xml:space="preserve">
     <value>Change</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
-    <value>Gain Followup</value>
+    <value>Benefit Followup</value>
   </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
@@ -472,14 +472,14 @@
   <data name="SiteFields_GtProjectTaskChange_DisplayName" xml:space="preserve">
     <value>Relevant change</value>
   </data>
-  <data name="SiteFields_GtProjectTaskGain_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtProjectTaskBenefit_DisplayName" xml:space="preserve">
     <value>Relevant gain</value>
   </data>
   <data name="SiteFields_GtChangeLookup_DisplayName" xml:space="preserve">
     <value>Change</value>
   </data>
-  <data name="SiteFields_GtGainLookup_DisplayName" xml:space="preserve">
-    <value>Gain</value>
+  <data name="SiteFields_GtBenefitLookup_DisplayName" xml:space="preserve">
+    <value>Benefit</value>
   </data>
   <data name="SiteFields_GtMeasureIndicatorLookup_DisplayName" xml:space="preserve">
     <value>Measure indicator</value>
@@ -595,7 +595,7 @@
   <data name="SiteFields_GtStatusRisk_DisplayName" xml:space="preserve">
     <value>Status risk</value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievement_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievement_DisplayName" xml:space="preserve">
     <value>Status Benefits achievement</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_DisplayName" xml:space="preserve">
@@ -631,7 +631,7 @@
   <data name="SiteFields_GtStatusTimeComment_DisplayName" xml:space="preserve">
     <value>Comment, progress</value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievementComment_DisplayName" xml:space="preserve">
     <value>Comment, gain</value>
   </data>
   <data name="SiteFields_GtProjectGoals_DisplayName" xml:space="preserve">
@@ -883,10 +883,10 @@
   <data name="SiteFields_GtStatusRisk_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievement_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievement_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStatusGainAchievementComment_Description" xml:space="preserve">
+  <data name="SiteFields_GtStatusBenefitAchievementComment_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtRiskConsequence_Description" xml:space="preserve">
@@ -1297,13 +1297,13 @@
   <data name="ChangeAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>Benefits Analysis</value>
   </data>
-  <data name="GainAnalysis_NextStep_Title" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
   </data>
-  <data name="GainAnalysis_NextStep_Text" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_Text" xml:space="preserve">
     <value>After the Benefits analysis is completed, tasks can be added to</value>
   </data>
-  <data name="GainAnalysis_NextStep_LinkText" xml:space="preserve">
+  <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>the task list</value>
   </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
@@ -1486,19 +1486,19 @@
   <data name="Choice_GtStatusRisk_High" xml:space="preserve">
     <value>High</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_NotStarted" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_NotStarted" xml:space="preserve">
     <value>Not started</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_AheadOfSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_AheadOfSchedule" xml:space="preserve">
     <value>Ahead of schedule</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_OnSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_OnSchedule" xml:space="preserve">
     <value>On schedule</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_MinorDelays" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_MinorDelays" xml:space="preserve">
     <value>Minor delays</value>
   </data>
-  <data name="Choice_GtStatusGainAchievement_BehindSchedule" xml:space="preserve">
+  <data name="Choice_GtStatusBenefitAchievement_BehindSchedule" xml:space="preserve">
     <value>Behind schedule</value>
   </data>
   <data name="Choice_GtStatusQuality_LargeDeviation" xml:space="preserve">
@@ -1654,7 +1654,7 @@
   <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
     <value>Risk</value>
   </data>
-  <data name="StatusPage_Heading_ProjectGainAchievement" xml:space="preserve">
+  <data name="StatusPage_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Benefits achievement</value>
   </data>
   <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">

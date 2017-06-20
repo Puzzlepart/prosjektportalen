@@ -260,7 +260,7 @@ const Lists: IList[] = [
             SiteFields.GtProjectTaskRisk,
             SiteFields.GtProjectTaskProduct,
             SiteFields.GtProjectTaskChange,
-            SiteFields.GtProjectTaskGain,
+            SiteFields.GtProjectTaskBenefit,
         ],
         Views: [{
             Title: __("View_AllTasks_DisplayName"),
@@ -273,7 +273,7 @@ const Lists: IList[] = [
         },
         {
             Title: "Relevante koblinger",
-            ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
+            ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskBenefit", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -341,7 +341,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_GainsAnalysis_Title"),
+        Title: __("Lists_BenefitsAnalysis_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -362,7 +362,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtChangeLookup", "Title", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["GtChangeLookup", "Title", "GtBenefitsType", "GtBenefitsTurnover", "GtBenefitsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -371,12 +371,12 @@ const Lists: IList[] = [
         },
         {
             Title: "Pr gevinsttype",
-            ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["GtChangeLookup", "Title", "GtBenefitsTurnover", "GtBenefitsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
-                  <FieldRef Name="GtGainsType" Ascending="FALSE" />
+                  <FieldRef Name="GtBenefitsType" Ascending="FALSE" />
                 </GroupBy>
                 <OrderBy>
                   <FieldRef Name="ID" />
@@ -428,7 +428,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_GainsFollowup_Title"),
+        Title: __("Lists_BenefitsFollowup_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -445,9 +445,9 @@ const Lists: IList[] = [
             Hidden: true,
         }],
         Fields: [
-            SiteFields.GtGainLookup,
+            SiteFields.GtBenefitLookup,
             SiteFields.GtMeasureIndicatorLookup,
-            SiteFields.GtGainLookup_ID,
+            SiteFields.GtBenefitLookup_ID,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -456,7 +456,7 @@ const Lists: IList[] = [
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
-                                <FieldRef Name="GtGainLookup" />
+                                <FieldRef Name="GtBenefitLookup" />
                             </GroupBy>
                             <OrderBy>
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
@@ -465,12 +465,12 @@ const Lists: IList[] = [
         },
         {
             Title: "Flat visning",
-            ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
+            ViewFields: ["GtBenefitLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<OrderBy>
-                                <FieldRef Name="GtGainLookup" />
+                                <FieldRef Name="GtBenefitLookup" />
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
                             </OrderBy>`,
             },
