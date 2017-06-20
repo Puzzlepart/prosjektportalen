@@ -362,7 +362,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtChangeLookup", "Title", "GtBenefitsType", "GtBenefitsTurnover", "GtBenefitsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["GtChangeLookup", "Title", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -371,12 +371,12 @@ const Lists: IList[] = [
         },
         {
             Title: "Pr gevinsttype",
-            ViewFields: ["GtChangeLookup", "Title", "GtBenefitsTurnover", "GtBenefitsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
-                  <FieldRef Name="GtBenefitsType" Ascending="FALSE" />
+                  <FieldRef Name="GtGainsType" Ascending="FALSE" />
                 </GroupBy>
                 <OrderBy>
                   <FieldRef Name="ID" />
@@ -445,9 +445,9 @@ const Lists: IList[] = [
             Hidden: true,
         }],
         Fields: [
-            SiteFields.GtBenefitLookup,
+            SiteFields.GtGainLookup,
             SiteFields.GtMeasureIndicatorLookup,
-            SiteFields.GtBenefitLookup_ID,
+            SiteFields.GtGainLookup_ID,
         ],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -456,7 +456,7 @@ const Lists: IList[] = [
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
-                                <FieldRef Name="GtBenefitLookup" />
+                                <FieldRef Name="GtGainLookup" />
                             </GroupBy>
                             <OrderBy>
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
@@ -465,12 +465,12 @@ const Lists: IList[] = [
         },
         {
             Title: "Flat visning",
-            ViewFields: ["GtBenefitLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
+            ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: `<OrderBy>
-                                <FieldRef Name="GtBenefitLookup" />
+                                <FieldRef Name="GtGainLookup" />
                                 <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
                             </OrderBy>`,
             },

@@ -32,7 +32,7 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
     const isSearch = (dataSource === DataSource.Search);
     const idFieldName = isSearch ? "ListItemID" : "ID",
         valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
-        lookupFieldName = isSearch ? "RefinableString58" : "GtBenefitLookupId",
+        lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
         desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName;
     return measures
         .filter(m => {
@@ -150,17 +150,17 @@ export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOve
     switch (dataSource) {
         case DataSource.List: {
             fetchFields(gainsList).then(gainsFields => {
-                let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtBenefitsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
+                let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
                 Promise.all([
                     gainsList
                         .items
                         .select(selectFields)
-                        .expand("GtChangeLookup", "GtBenefitsResponsible")
+                        .expand("GtChangeLookup", "GtGainsResponsible")
                         .orderBy("Modified", false)
                         .get(),
                     measuresList
                         .items
-                        .select("GtBenefitLookupId", "GtMeasurementValue", "GtMeasurementDate")
+                        .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
                         .orderBy("GtMeasurementDate", false)
                         .get(),
                 ]).then(([gains, measures]) => {
