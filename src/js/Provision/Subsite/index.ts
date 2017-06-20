@@ -1,36 +1,8 @@
-import { Site, Web } from "sp-pnp-js";
+import { Site } from "sp-pnp-js";
 
-export interface ICreateWebResult {
-    web: Web;
-    url: string;
-    redirectUrl: string;
-}
-
-/**
- * Sets shared navigation for the specified web
- *
- * @param url Url
- * @param useShared Use shared navigation
- */
-const SetSharedNavigation = (url: string, useShared = true): Promise<void> => new Promise<void>((resolve, reject) => {
-    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-        const ctx = new SP.ClientContext(url);
-        ctx.get_web().get_navigation().set_useShared(true);
-        ctx.executeQueryAsync(resolve, reject);
-    });
-});
-
-/**
- * Checks if the web exists
- *
- * @param url Url
- */
-export const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reject) => {
-    let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${url}`);
-    web.get()
-        .then(_ => resolve(true))
-        .catch(_ => resolve(false));
-});
+import ICreateWebResult from "./ICreateWebResult";
+import DoesWebExist from "./DoesWebExist";
+import SetSharedNavigation from "./SetSharedNavigation";
 
 /**
  * Creates a new subsite
@@ -40,7 +12,7 @@ export const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reje
  * @param description Description
  * @param inheritPermissions Inherit permissions
  */
-export const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
+const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
     let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
     site.rootWeb.webs.add(title, url, description, "STS#0", process.env.LANGUAGE, inheritPermissions)
         .then(result => {
@@ -59,3 +31,9 @@ export const CreateWeb = (title: string, url: string, description: string, inher
         .catch(reject);
 });
 
+export {
+    ICreateWebResult,
+    DoesWebExist,
+    SetSharedNavigation,
+    CreateWeb,
+};
