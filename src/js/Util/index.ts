@@ -340,6 +340,10 @@ export const setUrlHash = (hashObject: { [key: string]: string }): void => {
     document.location.hash = hash;
 };
 
+export const getUrlParts = (): string[] => {
+    return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
+};
+
 import { default as WaitDialog } from "./WaitDialog";
 import StampVersion from "./StampVersion";
 
