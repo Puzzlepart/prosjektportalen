@@ -174,7 +174,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                 {propertiesToRender.map((d, index) => (
                     <ProjectProperty
                         key={index}
-                        data={d}
+                        model={d}
                         labelSize={this.props.labelSize}
                         valueSize={this.props.valueSize} />
                 ))}

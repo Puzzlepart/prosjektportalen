@@ -26,7 +26,7 @@ const EconomySection = ({ project }: IEconomySectionProps) => {
                         {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
                             <ProjectProperty
                                 key={idx}
-                                data={{ internalName: internalName, displayName: displayName, value: project[internalName] }}
+                                model={{ internalName: internalName, displayName: displayName, value: project[internalName] }}
                                 labelSize="m"
                                 valueSize="l" />
                         ))}
