@@ -10,7 +10,7 @@ $FieldsToSync = Get-PnPField -List "Prosjekter" | ? {$_.InternalName.IndexOf("Gt
 
 Get-PnPSubWebs | % {
     $ProjectWeb = Get-PnPWeb -Identity $_.Id
-    $ProjectPage = Get-PnPListItem -List "Områdesider" -Id 3 -Web $ProjectWeb
+    $ProjectPage = Get-PnPListItem -List "Omrï¿½desider" -Id 3 -Web $ProjectWeb
     $ProjectWebUniqueId = $ProjectWeb.Id
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
     $ProjectTitle = $ProjectWeb.Title
@@ -38,7 +38,7 @@ Get-PnPSubWebs | % {
             $Terms = @{}
             $ProjectPage[$_.InternalName] | % {$Terms.Add($_.TermGuid, $_.Label)}
             Set-PnPTaxonomyFieldValue -ListItem $ProjectItem -InternalFieldName $_.InternalName -Terms $Terms
-        } elseif ($ProjectPage[$_.InternalName] -ne $null -and $ProjectPage[$_.InternalName].Count -eq 0) {
+        } elseif ($ProjectPage[$_.InternalName] -ne $null -and $ProjectPage[$_.InternalName].Count -eq 1) {
             Set-PnPTaxonomyFieldValue -ListItem $ProjectItem -InternalFieldName $_.InternalName -TermId $ProjectPage[$_.InternalName].TermGuid
         }
     }
