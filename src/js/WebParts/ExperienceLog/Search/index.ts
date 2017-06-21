@@ -18,7 +18,6 @@ export const DEFAULT_SEARCH_SETTINGS = {
 };
 
 export interface IQueryResult {
-    Path: string;
     Title: string;
     SiteTitle: string;
     GtProjectLogDescriptionOWSMTXT: string;

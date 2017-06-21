@@ -1,14 +1,9 @@
 import LogElement from "./LogElement";
 
 interface IExperienceLogState {
-    isLoading?: boolean;
+    isLoading: boolean;
     logItems?: LogElement[];
     searchTerm?: string;
 }
-
-export const ExperienceLogInitialState: Partial<IExperienceLogState> = {
-    isLoading: true,
-    searchTerm: "",
-};
-
+export { LogElement };
 export default IExperienceLogState;

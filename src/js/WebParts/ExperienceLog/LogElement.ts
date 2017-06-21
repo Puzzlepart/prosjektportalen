@@ -1,7 +1,6 @@
 import { IQueryResult } from "./Search";
 
 export class LogElement {
-    public Path: string;
     public Title: string;
     public SiteTitle: string;
     public Description: string;
@@ -11,7 +10,6 @@ export class LogElement {
     public Actors: string;
 
     constructor(data: IQueryResult) {
-        this.Path = data.Path;
         this.Title = data.Title;
         this.SiteTitle = data.SiteTitle;
         this.Description = data.GtProjectLogDescriptionOWSMTXT;
