@@ -15,7 +15,7 @@ Get-PnPSubWebs | % {
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
     $ProjectTitle = $ProjectWeb.Title
     
-    $ProjectItem = Get-PnPListItem -List "Prosjekter" -Query "<View><Query><Where><Eq><FieldRef Name='ProjectWebUniqueId'/><Value Type='Guid'>$ProjectWebUniqueId</Value></Eq></Where></Query></View>"
+    $ProjectItem = Get-PnPListItem -List "Prosjekter" -Query "<View><Query><Where><Eq><FieldRef Name='ProjectWebUniqueId'/><Value Type='Text'>$ProjectWebUniqueId</Value></Eq></Where></Query></View>"
 
     if ($ProjectItem -eq $null) {
         $ProjectItem = Add-PnPListItem -List $ProjectList
@@ -34,7 +34,11 @@ Get-PnPSubWebs | % {
     $ProjectItem.Update()
 
     $FieldsToSync | ? {$_.FieldTypeKind -eq "Invalid"} | % {
-        if ($ProjectPage[$_.InternalName] -ne $null -and $ProjectMeta[$_.InternalName].TermGuid -ne $null) {
+        if ($ProjectPage[$_.InternalName] -ne $null -and $ProjectPage[$_.InternalName].Count -gt 1) {
+            $Terms = @{}
+            $ProjectPage[$_.InternalName] | % {$Terms.Add($_.TermGuid, $_.Label)}
+            Set-PnPTaxonomyFieldValue -ListItem $ProjectItem -InternalFieldName $_.InternalName -Terms $Terms
+        } elseif ($ProjectPage[$_.InternalName] -ne $null -and $ProjectPage[$_.InternalName].Count -eq 0) {
             Set-PnPTaxonomyFieldValue -ListItem $ProjectItem -InternalFieldName $_.InternalName -TermId $ProjectPage[$_.InternalName].TermGuid
         }
     }
