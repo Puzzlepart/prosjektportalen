@@ -3,13 +3,15 @@ import * as uuid_v1 from "uuid/v1";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
+    PrimaryButton,
+    DefaultButton,
+} from "office-ui-fabric-react/lib/Button";
+import {
     Dialog,
     DialogFooter,
-    Button,
-    ButtonType,
-    TextField,
-    Toggle,
-} from "office-ui-fabric-react/lib";
+} from "office-ui-fabric-react/lib/Dialog";
+import { TextField } from "office-ui-fabric-react/lib/TextField";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Util from "../../../Util";
 import INewProjectDialogProps from "./INewProjectDialogProps";
 import INewProjectDialogState from "./INewProjectDialogState";
@@ -198,11 +200,10 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     private renderFooter = () => {
         return (
             <DialogFooter>
-                <Button
-                    buttonType={ButtonType.primary}
+                <PrimaryButton
                     onClick={this.onSubmit}
-                    disabled={!this.state.formValid}>{__("String_Create")}</Button>
-                <Button onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</Button>
+                    disabled={!this.state.formValid}>{__("String_Create")}</PrimaryButton>
+                <DefaultButton onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
             </DialogFooter>
         );
     }
