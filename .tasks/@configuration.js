@@ -6,6 +6,7 @@ module.exports = {
     paths: {
         license: "license.md",
         dist: "./dist",
+        distScripts: "./dist/scripts",
         lib: "./lib",
         build: "./build",
         release: "./release",
@@ -14,6 +15,7 @@ module.exports = {
         docs: "./docs",
         buildGlob: "./build/**/*",
         manualConfGlob: "./manual-conf/**/*",
+        scriptsGlob: "./.scripts/**/*",
         sourceGlob: "./src/**/*.ts*",
         stylesGlob: "./src/**/*.styl",
         stylesMain: ["./src/*/pp.main.styl", "./src/*/pp.project.styl"],

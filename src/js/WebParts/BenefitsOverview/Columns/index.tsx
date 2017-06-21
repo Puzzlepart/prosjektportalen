@@ -183,8 +183,11 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
                     </span>
                 );
             }
+        } else {
+            return null;
         }
     }
+    return null;
 };
 
 /**

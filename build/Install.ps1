@@ -22,9 +22,6 @@ Param(
     [string]$AssetsUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
-    [Parameter(Mandatory = $false, HelpMessage = "Which language do you want to install in? (Default is 1044, Norwegian)")]
-    [ValidateSet(1033, 1044)]
-    [int]$Language = 1044,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
     [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip standard documents, tasks and phase checklist?")]
@@ -87,6 +84,13 @@ if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = $GenericCredential
 }
 
+function Get-WebLanguage($ctx) {
+    $web = $ctx.Web
+    $ctx.Load($web)
+    $ctx.ExecuteQuery()
+    return $web.Language
+}
+
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
         Connect-PnPOnline $Url -UseWebLogin
@@ -111,7 +115,7 @@ catch {
 }
 
 try {
-    Connect-SharePoint $Url
+    Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
@@ -130,10 +134,10 @@ catch {
     exit 1 
 }
 
-
 if (-not $SkipData.IsPresent) {
     try {
-        Connect-SharePoint $DataSourceSiteUrl
+        Connect-SharePoint $DataSourceSiteUrl        
+        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\data-$($Language).pnp"
         Write-Host "DONE" -ForegroundColor Green
@@ -150,6 +154,7 @@ if (-not $SkipData.IsPresent) {
 if (-not $SkipDefaultConfig.IsPresent) {
     try {
         Connect-SharePoint $Url
+        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
         if ($DataSourceSiteUrl -ne $Url) {
             Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"DataSourceSiteUrl" = $DataSourceSiteUrl;}
