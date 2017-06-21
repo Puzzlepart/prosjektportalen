@@ -2,7 +2,10 @@ import * as React from "react";
 import * as uuid_v1 from "uuid/v1";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
-import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import {
+    PrimaryButton,
+    DefaultButton,
+} from "office-ui-fabric-react/lib/Button";
 import {
     Dialog,
     DialogFooter,
@@ -200,7 +203,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 <PrimaryButton
                     onClick={this.onSubmit}
                     disabled={!this.state.formValid}>{__("String_Create")}</PrimaryButton>
-                <PrimaryButton onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</PrimaryButton>
+                <DefaultButton onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
             </DialogFooter>
         );
     }
