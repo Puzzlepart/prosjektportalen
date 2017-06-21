@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const ProjectStatus: IFile = {
+const ProjectStatus: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/ProjectStatus.txt",
     Url: "ProjectStatus.aspx",
@@ -9,3 +9,5 @@ export const ProjectStatus: IFile = {
         Title: __("Navigation_ProjectStatus_Title"),
     },
 };
+
+export default ProjectStatus;

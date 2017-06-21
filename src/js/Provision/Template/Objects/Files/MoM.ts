@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const MoM: IFile = {
+const MoM: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/SitePage.txt",
     Url: "Mom.aspx",
@@ -78,3 +78,5 @@ export const MoM: IFile = {
         },
     ],
 };
+
+export default MoM;
