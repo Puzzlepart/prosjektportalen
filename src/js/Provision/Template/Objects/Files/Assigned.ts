@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const Assigned: IFile = {
+const Assigned: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/SitePage.txt",
     Url: "Assigned.aspx",
@@ -113,3 +113,5 @@ export const Assigned: IFile = {
         },
     ],
 };
+
+export default Assigned;

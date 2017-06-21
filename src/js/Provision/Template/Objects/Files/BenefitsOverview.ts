@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const BenefitsOverview: IFile = {
+const BenefitsOverview: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/SitePage_OneColumn.txt",
     Url: "BenefitsOverview.aspx",
@@ -36,3 +36,5 @@ export const BenefitsOverview: IFile = {
         },
     ],
 };
+
+export default BenefitsOverview;

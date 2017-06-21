@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const Nofilter: IFile = {
+const Nofilter: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/SitePage.txt",
     Url: "Nofilter.aspx",
@@ -121,3 +121,5 @@ export const Nofilter: IFile = {
         },
     ],
 };
+
+export default Nofilter;

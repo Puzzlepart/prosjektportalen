@@ -1,6 +1,6 @@
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-export const ProjectHome: IFile = {
+const ProjectHome: IFile = {
     Folder: "SitePages",
     Src: "{sitecollection}/Resources/SitePage.txt",
     Url: "ProjectHome.aspx",
@@ -186,3 +186,5 @@ export const ProjectHome: IFile = {
         },
     ],
 };
+
+export default ProjectHome;
