@@ -5,12 +5,12 @@ var path = require("path"),
     build = require("./build.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-const I18n = {
-    1033: require("./src/js/Resources/en-US.json"),
-    1044: require("./src/js/Resources/no-NB.json"),
-};
-
 module.exports = (minify = true, bundleAnalyzer = false) => {
+    const I18n = {
+        1033: require("./src/js/Resources/en-US.json"),
+        1044: require("./src/js/Resources/no-NB.json"),
+    };
+
     const plugins = [
         new I18nPlugin(I18n[build.language]),
         new webpack.DefinePlugin({
