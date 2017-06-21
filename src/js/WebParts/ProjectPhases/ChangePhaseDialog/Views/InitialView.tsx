@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "office-ui-fabric-react/lib/Button";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { IChecklistItem } from "../../Data";
 
 export interface IInitialViewProps {
@@ -53,12 +53,12 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                 <div style={{ margin: "20px 0 25px 0" }}>
                     {this._statusOptions().map((opt, idx) => (
                         <span key={idx} title={opt.tooltip}>
-                        <Button
+                        <PrimaryButton
                             disabled={opt.disabled}
                             onClick={e => {
                                 this.props.nextCheckPointAction(opt.value, this.state.comment);
                                 this.reset();
-                            }}>{opt.value}</Button>
+                            }}>{opt.value}</PrimaryButton>
                     </span>
                     ))}
                 </div>
