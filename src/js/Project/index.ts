@@ -1,3 +1,7 @@
-import { default as ChangeProjectPhase, GetCurrentProjectPhase } from "./ChangeProjectPhase";
+import GetCurrentProjectPhase from "./GetCurrentProjectPhase";
+import ChangeProjectPhase from "./ChangeProjectPhase";
 
-export { ChangeProjectPhase, GetCurrentProjectPhase };
+export {
+    ChangeProjectPhase,
+    GetCurrentProjectPhase,
+};
