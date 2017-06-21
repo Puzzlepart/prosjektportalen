@@ -17,6 +17,11 @@ gulp.task("copy:build", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
+gulp.task("copy:scripts", () => {
+    return gulp.src(config.paths.scriptsGlob)
+        .pipe(gulp.dest(config.paths.distScripts))
+});
+
 gulp.task("copy:manualconf", () => {
     return gulp.src(config.paths.manualConfGlob)
         .pipe(gulp.dest(config.paths.dist))
@@ -32,7 +37,7 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
-    runSequence("default::prod", "copy:build", "copy:manualconf", "copy:license", "stamp:version::dist", "zip:dist", () => {
+    runSequence("default::prod", "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", "zip:dist", () => {
         done();
     });
 });
