@@ -116,6 +116,7 @@ catch {
 
 try {
     Connect-SharePoint $Url    
+    $Language = Get-WebLanguage -ctx (Get-PnPContext)
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"

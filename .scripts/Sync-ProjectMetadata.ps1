@@ -1,4 +1,4 @@
-Param(
+﻿Param(
     [Parameter(Mandatory = $true)]
     [string]$Url
 )
@@ -10,7 +10,7 @@ $FieldsToSync = Get-PnPField -List "Prosjekter" | ? {$_.InternalName.IndexOf("Gt
 
 Get-PnPSubWebs | % {
     $ProjectWeb = Get-PnPWeb -Identity $_.Id
-    $ProjectPage = Get-PnPListItem -List "Omr�desider" -Id 3 -Web $ProjectWeb
+    $ProjectPage = Get-PnPListItem -List "Områdesider" -Id 3 -Web $ProjectWeb
     $ProjectWebUniqueId = $ProjectWeb.Id
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
     $ProjectTitle = $ProjectWeb.Title
@@ -46,3 +46,4 @@ Get-PnPSubWebs | % {
 
     Execute-PnPQuery
 }
+Disconnect-PnPOnline
