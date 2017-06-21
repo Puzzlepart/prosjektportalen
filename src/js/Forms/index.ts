@@ -1,14 +1,15 @@
 import * as  jQuery from "jquery";
 import { Logger, LogLevel } from "sp-pnp-js";
+import * as Util from "../Util";
 import * as FormUtils from "./Util";
+import { IBaseFormModifications } from "./Base";
 
-const __forms = {
-    "Prosjektlogg": require("./ProjectLog").default,
-    "Mtekalender": require("./MeetingCalendar").default,
-    "Fasesjekkliste": require("./PhaseChecklist").default,
-    "Endringsanalyse": require("./ChangeAnalysis").default,
-    "Gevinstanalyse og gevinstrealiseringsplan": require("./BenefitsAnalysis").default,
-};
+const formModifications: { [key: string]: IBaseFormModifications } = {};
+formModifications[__("Lists_ProjectLog_Url")] = require("./ProjectLog").default;
+formModifications[__("Lists_MeetingCalendar_Url")] = require("./MeetingCalendar").default;
+formModifications[__("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
+formModifications[__("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
+formModifications[__("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
 
 /**
  * Handle query parameters
@@ -38,10 +39,13 @@ const HandleQueryParams = () => {
  */
 const Initialize = () => {
     Logger.log({ message: "Forms: Initialize", level: LogLevel.Info, data: {} });
-    let [, , List, Form] = _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
-    if (__forms.hasOwnProperty(List)) {
-        if (__forms[List].hasOwnProperty(Form)) {
-            __forms[List][Form]();
+    let urlParts = Util.getUrlParts();
+    let [list] = Object.keys(formModifications).filter(key => _spPageContextInfo.serverRequestPath.indexOf(key) !== -1);
+    if (list) {
+        if (urlParts[1] === "Lists") {
+            formModifications[list][urlParts[3]]();
+        } else {
+            formModifications[list][urlParts[3]]();
         }
     }
     HandleQueryParams();
