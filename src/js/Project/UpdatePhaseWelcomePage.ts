@@ -11,7 +11,7 @@ import * as Util from "../Util";
  * @param phaseGuid Phase term GUID
  * @param phaseFieldName Phase field name
  */
-const UpdateWelcomePage = (phaseName: string, phaseGuid: string, phaseFieldName: string): Promise<void> => new Promise<void>((resolve, reject) => {
+const UpdatePhaseWelcomePage = (phaseName: string, phaseGuid: string, phaseFieldName: string): Promise<void> => new Promise<void>((resolve, reject) => {
     SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
         let ctx = SP.ClientContext.get_current(),
             list = ctx.get_web().get_lists().getById(_spPageContextInfo.pageListId),
@@ -27,4 +27,4 @@ const UpdateWelcomePage = (phaseName: string, phaseGuid: string, phaseFieldName:
     });
 });
 
-export default UpdateWelcomePage;
+export default UpdatePhaseWelcomePage;
