@@ -1,5 +1,6 @@
 import * as React from "react";
 import ProjectProperty, { ProjectPropertyModel } from "../../ProjectInfo/ProjectProperty";
+import IEconomySectionProps from "./IEconomySectionProps";
 
 /**
  * Fields to show in the Economy Section
@@ -12,29 +13,30 @@ const FIELDS_TO_SHOW: ProjectPropertyModel[] = [
     { internalName: "GtBudgetLastReportDate", displayName: __("SiteFields_GtBudgetLastReportDate_DisplayName") },
 ];
 
-export interface IEconomySectionProps {
-    project: any;
-}
-
 /**
  * Economy Section
  */
 const EconomySection = ({ project }: IEconomySectionProps) => {
-    return (
-        <div className="economy-status">
-            <div className="ms-Grid-col ms-sm12 economy-elements-container">
-                <div className="status-elements">
-                    {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
-                        <ProjectProperty
-                            key={idx}
-                            data={{ internalName: internalName, displayName: displayName, value: project[internalName] }}
-                            labelSize="m"
-                            valueSize="l" />
-                    ))}
+    let reportDate = project.GtBudgetLastReportDate;
+    if (reportDate) {
+        return (
+            <div className="economy-status">
+                <div className="ms-Grid-col ms-sm12 economy-elements-container">
+                    <div className="status-elements">
+                        {FIELDS_TO_SHOW.map(({ internalName, displayName }, idx) => (
+                            <ProjectProperty
+                                key={idx}
+                                data={{ internalName: internalName, displayName: displayName, value: project[internalName] }}
+                                labelSize="m"
+                                valueSize="l" />
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-    );
+        );
+    } else {
+        return null;
+    }
 };
 
 export default EconomySection;
