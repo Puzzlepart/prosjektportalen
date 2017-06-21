@@ -89,6 +89,7 @@
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070208" Name="{resource:ContentTypes_Prosjektelement_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
+            <pnp:FieldRef ID="83315d18-b8b5-4b60-b1eb-0617e1a1b2d9" Name="ProjectWebUniqueId" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
             <pnp:FieldRef ID="7b200383-c491-4e5d-8f83-c66231e7a52c" Name="GtProjectUrl" Hidden="false" />
             <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" Required="false" />
@@ -119,7 +120,6 @@
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" Required="false" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" Required="false" />
         </pnp:FieldRefs>
-        <pnp:DocumentTemplate TargetName="/_layouts/15/spcf.aspx" />
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Name="{resource:ContentTypes_Prosjektdokument_Name}" Description="{resource:ContentTypes_Prosjektdokument_Description}" Group="{resource:ContentTypes_Group}">
