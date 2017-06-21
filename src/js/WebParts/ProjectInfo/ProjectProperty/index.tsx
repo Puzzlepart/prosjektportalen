@@ -1,15 +1,16 @@
 import * as React from "react";
 import IProjectPropertyProps from "./IProjectPropertyProps";
 import ProjectPropertyModel from "./ProjectPropertyModel";
+import ProjectPropertyDefaultStyle from "./ProjectPropertyDefaultStyle";
 
 /**
  * Project property
  *
- * @param data Property data
+ * @param model Property model
  * @param labelSize Size of label
  * @param valueSize Size of value
  */
-const ProjectProperty = ({ data: { internalName, displayName, description, value, type, required }, labelSize, valueSize }: IProjectPropertyProps): JSX.Element => {
+const ProjectProperty = ({ model, labelSize, valueSize, style = ProjectPropertyDefaultStyle }: IProjectPropertyProps): JSX.Element => {
     let labelClassName = ["_label", "ms-fontWeight-semibold"];
     let valueClassName = ["_value"];
     if (labelSize) {
@@ -18,18 +19,20 @@ const ProjectProperty = ({ data: { internalName, displayName, description, value
     if (valueSize) {
         valueClassName.push(`ms-font-${valueSize}`);
     }
-    return (<div
-        key={internalName}
-        className={`${internalName} prop`}
-        data-type={type}
-        data-required={required}
-        title={description}
-        style={{ margin: "0 0 10px 0" }}>
-        <div className={labelClassName.join(" ")}>{displayName}</div>
+    return (
         <div
-            className={valueClassName.join(" ")}
-            dangerouslySetInnerHTML={{ __html: value }}></div>
-    </div>);
+            key={model.internalName}
+            className={`${model.internalName} prop`}
+            data-type={model.type}
+            data-required={model.required}
+            title={model.description}
+            style={style}>
+            <div className={labelClassName.join(" ")}>{model.displayName}</div>
+            <div
+                className={valueClassName.join(" ")}
+                dangerouslySetInnerHTML={{ __html: model.value }}></div>
+        </div>
+    );
 };
 
 export default ProjectProperty;
