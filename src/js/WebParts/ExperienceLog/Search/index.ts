@@ -36,6 +36,7 @@ export interface IQueryResponse {
  * Query the REST Search API using sp-pnp-js
  */
 export const query = (SelectProperties: string[]) => new Promise<IQueryResponse>((resolve, reject) => {
+    SelectProperties = SelectProperties.concat(["Path"]);
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
         SelectProperties,

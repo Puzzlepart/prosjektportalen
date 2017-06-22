@@ -15,7 +15,7 @@ import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLog
 import IExperienceLogState, { ExperienceLogInitialState } from "./IExperienceLogState";
 
 /**
- *  Experience Log
+ * Experience Log
  */
 export default class ExperienceLog extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
     public static defaultProps = ExperienceLogDefaultProps;
@@ -62,7 +62,6 @@ export default class ExperienceLog extends React.PureComponent<IExperienceLogPro
             </div>
         );
     }
-
 
     /**
      * On render item column
