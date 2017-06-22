@@ -18,6 +18,7 @@ export const DEFAULT_SEARCH_SETTINGS = {
 };
 
 export interface IQueryResult {
+    Path: string;
     Title: string;
     SiteTitle: string;
     GtProjectLogDescriptionOWSMTXT: string;
@@ -35,6 +36,7 @@ export interface IQueryResponse {
  * Query the REST Search API using sp-pnp-js
  */
 export const query = (SelectProperties: string[]) => new Promise<IQueryResponse>((resolve, reject) => {
+    SelectProperties = SelectProperties.concat(["Path"]);
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
         SelectProperties,
