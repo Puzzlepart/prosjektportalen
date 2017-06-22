@@ -1,80 +1,31 @@
 import * as React from "react";
 import {
     DetailsList,
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
+    IColumn,
 } from "office-ui-fabric-react/lib/DetailsList";
 import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { ModalLink } from "../../WebParts/@Components";
 import * as Search from "./Search";
-import IExperienceLogProps from "./IExperienceLogProps";
-import IExperienceLogState, { LogElement } from "./IExperienceLogState";
+import LogElement from "./LogElement";
+import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
+import IExperienceLogState, { ExperienceLogInitialState } from "./IExperienceLogState";
 
 /**
- * Project information
+ * Experience Log
  */
-export default class ProjectList extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
-    /**
-     * Default properties
-     */
-    public static defaultProps: Partial<IExperienceLogProps> = {
-        constrainMode: ConstrainMode.horizontalConstrained,
-        layoutMode: DetailsListLayoutMode.fixedColumns,
-        selectionMode: SelectionMode.none,
-        columns: [{
-            key: "Title",
-            fieldName: "Title",
-            name: "Tittel",
-            minWidth: 220,
-        },
-        {
-            key: "SiteTitle",
-            fieldName: "SiteTitle",
-            name: "Prosjekt",
-        },
-        {
-            key: "GtProjectLogDescriptionOWSMTXT",
-            fieldName: "Description",
-            name: "Beskrivelse",
-        },
-        {
-            key: "GtProjectLogResponsibleOWSCHCS",
-            fieldName: "Responsible",
-            name: "Ansvarlig",
-        },
-        {
-            key: "GtProjectLogConsequenceOWSMTXT",
-            fieldName: "Consequence",
-            name: "Konsekvens",
-        },
-        {
-            key: "GtProjectLogRecommendationOWSMTXT",
-            fieldName: "Recommendation",
-            name: "Anbefaling",
-        },
-        {
-            key: "GtProjectLogActorsOWSCHCM",
-            fieldName: "Actors",
-            name: "Aktører",
-        }].map(col => ({
-            ...col,
-            isResizable: true,
-        })),
-    };
+export default class ExperienceLog extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
+    public static defaultProps = ExperienceLogDefaultProps;
 
     /**
      * Constructor
      */
     constructor() {
         super();
-        this.state = {
-            isLoading: true,
-            searchTerm: "",
-        };
+        this.state = ExperienceLogInitialState;
     }
 
     /**
@@ -104,11 +55,37 @@ export default class ProjectList extends React.PureComponent<IExperienceLogProps
                 <DetailsList
                     items={this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0)}
                     columns={this.props.columns}
+                    onRenderItemColumn={this._onRenderItemColumn}
                     constrainMode={this.props.constrainMode}
                     layoutMode={this.props.layoutMode}
                     selectionMode={this.props.selectionMode} />
             </div>
         );
+    }
+
+    /**
+     * On render item column
+     *
+     * @param item The item
+     * @param index The index
+     * @param column The column
+     */
+    private _onRenderItemColumn = (item: any, index: number, column: IColumn): any => {
+        let colValue = item[column.fieldName];
+        switch (column.key) {
+            case "Title": {
+                let dispFormUrl = item.Path;
+                return (
+                    <ModalLink
+                        label={colValue}
+                        url={dispFormUrl}
+                        options={{ HideRibbon: true }} />
+                );
+            }
+            default: {
+                return colValue;
+            }
+        }
     }
 
     /**
