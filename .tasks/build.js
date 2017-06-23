@@ -10,6 +10,7 @@ var gulp = require("gulp"),
     replace = require('gulp-replace'),
     flatmap = require("gulp-flatmap"),
     fs = require('fs'),
+    es = require('event-stream'),
     path = require("path"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
@@ -54,6 +55,16 @@ gulp.task("copy:pnp", () => {
         .pipe(gulp.dest(config.paths.templates_temp));
 });
 
+gulp.task("copy:pnp::root", cb => {
+    var root = format("{0}/root/**/*", config.paths.templates_temp);
+    es.concat(
+        gulp.src(root)
+            .pipe(gulp.dest(format("{0}/root-1033", config.paths.templates_temp))),
+        gulp.src(root)
+            .pipe(gulp.dest(format("{0}/root-1044", config.paths.templates_temp)))
+    ).on('end', cb);
+});
+
 gulp.task("copy:dist", () => {
     return gulp.src([
         format("{0}/**/*.js", config.paths.dist),
@@ -83,7 +94,7 @@ gulp.task("stamp:version::dist", () => {
 });
 
 gulp.task("build:pnp", (done) => {
-    runSequence("copy:pnp", "copy:dist", "stamp:version::templates", () => {
+    runSequence("copy:pnp", "copy:pnp::root", "copy:dist", "stamp:version::templates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });
