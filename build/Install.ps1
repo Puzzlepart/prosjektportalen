@@ -70,6 +70,7 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
     }
 }
 
+
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
 Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
@@ -106,6 +107,15 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
+function Apply-Template([string]$Template, [switch]$Localized) {    
+    $Language = Get-WebLanguage -ctx (Get-PnPContext)    
+    if ($Localized.IsPresent) {
+        $Template = "$($Template)-$($Language)"
+    }
+    Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+}
+
+
 if ($Debug.IsPresent) {
     Set-PnPTraceLog -On -Level Debug -LogFile pplog.txt
 } else {
@@ -122,7 +132,7 @@ if (-not $SkipAssets.IsPresent) {
     try {
         Connect-SharePoint $AssetsUrl
         Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\assets.pnp"
+        Apply-Template -Template "assets"
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -136,15 +146,14 @@ if (-not $SkipAssets.IsPresent) {
 
 try {
     Connect-SharePoint $Url    
-    $Language = Get-WebLanguage -ctx (Get-PnPContext)
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
+        Apply-Template -Template "sitesettings"
         Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-    Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
-    Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
+    Apply-Template -Template "root" -Localized
+    Apply-Template -Template "sitesettings" -Localized
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
@@ -158,9 +167,8 @@ catch {
 if (-not $SkipData.IsPresent) {
     try {
         Connect-SharePoint $DataSourceSiteUrl        
-        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\data-$($Language).pnp"
+        Apply-Template -Template "data" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -175,9 +183,8 @@ if (-not $SkipData.IsPresent) {
 if (-not $SkipDefaultConfig.IsPresent) {
     try {
         Connect-SharePoint $Url
-        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"DataSourceSiteUrl" = $DataSourceUrlParam;}
+        Apply-Template -Template "config" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
