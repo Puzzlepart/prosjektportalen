@@ -60,8 +60,8 @@ function Connect-SharePoint ($Url) {
 
 # Aim at using relative urls for referencing scripts, images etc.
 function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
-    $RootUri = [Uri]::new($RootUrl)
-    $SecondaryUri = [Uri]::new($SecondaryUrl)
+    $RootUri = New-Object -TypeName System.Uri -ArgumentList $RootUrl
+    $SecondaryUri = New-Object -TypeName System.Uri -ArgumentList $SecondaryUrl
 
     if ($RootUri.Host -eq $SecondaryUri.Host) {
         return $SecondaryUri.LocalPath
@@ -70,6 +70,16 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
     }
 }
 
+if (-not $AssetsUrl) {
+    $AssetsUrl = $Url
+}
+
+if (-not $DataSourceSiteUrl) {
+    $DataSourceSiteUrl = $Url
+}
+
+$AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
+$DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
@@ -95,17 +105,6 @@ if (-not $SkipLoadingBundle.IsPresent) {
     Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
     Import-Module "$BundlePath\$Environment.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
 }
-
-if (-not $AssetsUrl) {
-    $AssetsUrl = $Url
-}
-
-if (-not $DataSourceSiteUrl) {
-    $DataSourceSiteUrl = $Url
-}
-
-$AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
-$DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
 function Apply-Template([string]$Template, [switch]$Localized) {    
     $Language = Get-WebLanguage -ctx (Get-PnPContext)    
