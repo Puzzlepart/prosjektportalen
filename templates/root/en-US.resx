@@ -97,6 +97,9 @@
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Project Status</value>
   </data>
+  <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
+    <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
+  </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
   </data>
@@ -613,6 +616,9 @@
   <data name="SiteFields_GtProjectPhase_DisplayName" xml:space="preserve">
     <value>Phase</value>
   </data>
+  <data name="SiteFields_GtProjectPhaseChoice_DisplayName" xml:space="preserve">
+    <value>Project phase</value>
+  </data>
   <data name="SiteFields_GtStakeholderGroup_DisplayName" xml:space="preserve">
     <value>Stakeholder Group</value>
   </data>
@@ -903,6 +909,9 @@
   </data>
   <data name="SiteFields_GtProjectPhase_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtProjectPhaseChoice_Description" xml:space="preserve">
+    <value>The project's phase as choice field, to allow integration with certain third party tools</value>
   </data>
   <data name="SiteFields_GtStakeholderGroup_Description" xml:space="preserve">
     <value></value>
@@ -1587,6 +1596,27 @@
   </data>
   <data name="Choice_GtActionStatus_Delayed" xml:space="preserve">
     <value>Delayed</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_StartingUp" xml:space="preserve">
+    <value>Starting up</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Initiating" xml:space="preserve">
+    <value>Initiating</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Directing" xml:space="preserve">
+    <value>Directing</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Closing" xml:space="preserve">
+    <value>Closing</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_BenefitsRealization" xml:space="preserve">
+    <value>Benefits realization</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_NoPhase" xml:space="preserve">
+    <value>No phase</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_SeveralPhases" xml:space="preserve">
+    <value>Several phases</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>

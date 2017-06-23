@@ -76,7 +76,7 @@ const Navigation: INavigation = {
             Title: __("Navigation_NoFilterFrontpage_Title"),
         },
         {
-            Url: "_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22Ingen%20fase%22",
+            Url: __("Navigation_NoPhaseProjectItems_Url"),
             Title: __("Navigation_NoPhaseProjectItems_Title"),
         },
         {

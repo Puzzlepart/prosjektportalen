@@ -1,6 +1,6 @@
 {
   "name": "prosjektportalen",
-  "version": "1.15.8",
+  "version": "1.16.0",
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "index.js",
   "scripts": {},
@@ -45,6 +45,7 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-es2015": "6.24.1",
     "babel-preset-react": "^6.24.1",
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-flatmap": "^1.0.0",

@@ -1,25 +1,39 @@
 ﻿Param(
     [Parameter(Mandatory = $true)]
-    [string]$Url
+    [string]$Url,
+    [Parameter(Mandatory = $true)]
+    [int]$IntervalHours,
+    [Parameter(Mandatory = $false, HelpMessage = "Use current credentials?")]
+    [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
+    [string]$GenericCredential
 )
 
 Connect-PnPOnline $Url
 
 $ProjectList = Get-PnPList -Identity "Prosjekter"
 $FieldsToSync = Get-PnPField -List "Prosjekter" | ? {$_.InternalName.IndexOf("Gt") -eq 0}
+$DateTimeFromWhenToUpdateProjects = (Get-Date).AddHours(-$IntervalHours).ToUniversalTime()
+$DateTimeFromWhenToUpdateProjectsFriendly = $DateTimeFromWhenToUpdateProjects.ToLocalTime().ToString()
 
-Get-PnPSubWebs | % {
+Write-Output "Updating webs modified after $DateTimeFromWhenToUpdateProjectsFriendly"
+Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromWhenToUpdateProjects} | % {
     $ProjectWeb = Get-PnPWeb -Identity $_.Id
-    $ProjectPage = Get-PnPListItem -List "Områdesider" -Id 3 -Web $ProjectWeb
     $ProjectWebUniqueId = $ProjectWeb.Id
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
     $ProjectTitle = $ProjectWeb.Title
-    
+
+    Write-Output  "Processing subweb $ProjectTitle"
+
+    $ProjectPage = Get-PnPListItem -List "Områdesider" -Id 3 -Web $ProjectWeb
     $ProjectItem = Get-PnPListItem -List "Prosjekter" -Query "<View><Query><Where><Eq><FieldRef Name='ProjectWebUniqueId'/><Value Type='Text'>$ProjectWebUniqueId</Value></Eq></Where></Query></View>"
 
     if ($ProjectItem -eq $null) {
         $ProjectItem = Add-PnPListItem -List $ProjectList
         $ProjectItem["ProjectWebUniqueId"] = $ProjectWebUniqueId
+    }
+    if ($ProjectPage["GtProjectPhase"] -ne $null -and $ProjectPage["GtProjectPhase"].Count -eq 1) {
+        $ProjectPage["GtProjectPhaseChoice"] = $ProjectPage["GtProjectPhase"].Label
     }
     $ProjectItem["Title"] = $ProjectTitle
     $ProjectItem.Update()
