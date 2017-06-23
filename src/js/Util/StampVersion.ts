@@ -1,3 +1,5 @@
+import * as PropertyBag from "./PropertyBag";
+
 export default class StampVersion {
     private template = "<span class='ms-metadata {1}'>{0}</span>";
 
@@ -9,12 +11,13 @@ export default class StampVersion {
      * @param additionalClassNames Additional class names
      */
     public stamp(container: string, versionKey: string, additionalClassNames = []): void {
-        this.getVersion(versionKey).then(v => {
-            const _container = document.getElementById(container);
-            if (_container) {
-                _container.innerHTML = String.format(this.template, v, additionalClassNames.join(" "));
-            }
-        }, _ => null);
+        this.getVersion(versionKey)
+            .then(v => {
+                const _container = document.getElementById(container);
+                if (_container) {
+                    _container.innerHTML = String.format(this.template, v, additionalClassNames.join(" "));
+                }
+            });
     }
 
     /**
@@ -22,21 +25,16 @@ export default class StampVersion {
      *
      * @param versionKey Prop bag key
      */
-    public getVersion(versionKey: string): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-                let ctx = SP.ClientContext.get_current(),
-                    propBag = ctx.get_web().get_allProperties();
-                ctx.load(propBag);
-                ctx.executeQueryAsync(() => {
-                    let e = Object.keys(propBag.get_fieldValues()).filter(key => key === versionKey);
-                    if (e.length === 1) {
-                        resolve(propBag.get_item(versionKey));
-                    } else {
-                        reject();
-                    }
-                }, reject);
-            });
-        });
-    }
+    public getVersion = (versionKey: string): Promise<string> => new Promise<string>((resolve, reject) => {
+        PropertyBag.GetAllProperties()
+            .then(props => {
+                let e = Object.keys(props.get_fieldValues()).filter(key => key === versionKey);
+                if (e.length === 1) {
+                    resolve(props.get_item(versionKey));
+                } else {
+                    reject();
+                }
+            })
+            .catch(reject);
+    })
 }
