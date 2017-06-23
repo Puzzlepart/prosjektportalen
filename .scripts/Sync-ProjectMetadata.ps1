@@ -33,7 +33,7 @@ Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromW
         $ProjectItem["ProjectWebUniqueId"] = $ProjectWebUniqueId
     }
     if ($ProjectPage["GtProjectPhase"] -ne $null -and $ProjectPage["GtProjectPhase"].Count -eq 1) {
-        $ProjectPage["GtProjectPhaseChoice"] = $ProjectPage["GtProjectPhase"].Label
+        $ProjectItem["GtProjectPhaseChoice"] = $ProjectPage["GtProjectPhase"].Label
     }
     $ProjectItem["Title"] = $ProjectTitle
     $ProjectItem.Update()
