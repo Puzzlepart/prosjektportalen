@@ -26,7 +26,7 @@ export default class StampVersion {
      * @param versionKey Prop bag key
      */
     public getVersion = (versionKey: string): Promise<string> => new Promise<string>((resolve, reject) => {
-        PropertyBag.GetAllProperties()
+        PropertyBag.GetAllProperties(_spPageContextInfo.webAbsoluteUrl)
             .then(props => {
                 let e = Object.keys(props.get_fieldValues()).filter(key => key === versionKey);
                 if (e.length === 1) {
