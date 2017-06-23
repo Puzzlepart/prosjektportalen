@@ -5,6 +5,13 @@ import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
 
 /**
+ * Get redirect URL. Appends permsetup.aspx if the web has unique permissions
+ */
+const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
+    return inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));
+};
+
+/**
  * Creates a new subsite
  *
  * @param title Title
@@ -17,13 +24,12 @@ const CreateWeb = (title: string, url: string, description: string, inheritPermi
     site.rootWeb.webs.add(title, url, description, "STS#0", process.env.LANGUAGE, inheritPermissions)
         .then(result => {
             url = result.data.Url;
-            let redirectUrl = inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));
             SetSharedNavigation(url)
                 .then(() => {
                     resolve({
                         web: result.web,
                         url: url,
-                        redirectUrl: redirectUrl,
+                        redirectUrl: GetRedirectUrl(url, inheritPermissions),
                     });
                 })
                 .catch(reject);
