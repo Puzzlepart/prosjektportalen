@@ -30,6 +30,8 @@ Param(
     [switch]$SkipDefaultConfig,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
     [switch]$SkipTaxonomy,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets prebiously)?")]
+    [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
@@ -40,6 +42,46 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
     [string]$ExtensionFolder
 )
+
+function Get-WebLanguage($ctx) {
+    $web = $ctx.Web
+    $ctx.Load($web)
+    $ctx.ExecuteQuery()
+    return $web.Language
+}
+
+function Connect-SharePoint ($Url) {
+    if ($UseWebLogin.IsPresent) {
+        Connect-PnPOnline $Url -UseWebLogin
+    } else {
+        Connect-PnPOnline $Url -Credentials $Credential
+    }
+}
+
+# Aim at using relative urls for referencing scripts, images etc.
+function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
+    $RootUri = [Uri]::new($RootUrl)
+    $SecondaryUri = [Uri]::new($SecondaryUrl)
+
+    if ($RootUri.Host -eq $SecondaryUri.Host) {
+        return $SecondaryUri.LocalPath
+    } else {
+        return $SecondaryUrl
+    }
+}
+
+
+Write-Host "############################################################################" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
+Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
+Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
+Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "############################################################################" -ForegroundColor Green
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
@@ -57,74 +99,61 @@ if (-not $SkipLoadingBundle.IsPresent) {
 if (-not $AssetsUrl) {
     $AssetsUrl = $Url
 }
+
 if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
-Write-Host "############################################################################" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
-Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
-Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
-Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
-Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "############################################################################" -ForegroundColor Green
+$AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
+$DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
+
+function Apply-Template([string]$Template, [switch]$Localized) {    
+    $Language = Get-WebLanguage -ctx (Get-PnPContext)    
+    if ($Localized.IsPresent) {
+        $Template = "$($Template)-$($Language)"
+    }
+    Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+}
+
 
 if ($Debug.IsPresent) {
     Set-PnPTraceLog -On -Level Debug -LogFile pplog.txt
 } else {
     Set-PnPTraceLog -On -Level Information -LogFile pplog.txt
 }
+
 if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
 } elseif (-not $UseWebLogin.IsPresent) {
     $Credential = $GenericCredential
 }
 
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
-}
-
-function Connect-SharePoint ($Url) {
-    if ($UseWebLogin.IsPresent) {
-        Connect-PnPOnline $Url -UseWebLogin
-    } else {
-        Connect-PnPOnline $Url -Credentials $Credential
+if (-not $SkipAssets.IsPresent) {
+    try {
+        Connect-SharePoint $AssetsUrl
+        Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
+        Apply-Template -Template "assets"
+        Write-Host "DONE" -ForegroundColor Green
+        Disconnect-PnPOnline
     }
-}
-
-
-try {
-    Connect-SharePoint $AssetsUrl
-    Write-Host "Deploying required resources.. " -ForegroundColor Green -NoNewLine
-    Apply-PnPProvisioningTemplate ".\templates\assets.pnp"
-    Write-Host "DONE" -ForegroundColor Green
-    Disconnect-PnPOnline
-}
-catch {
-    Write-Host
-    Write-Host "Error installing assets template to $AssetsUrl"  -ForegroundColor Red 
-    Write-Host $error[0] -ForegroundColor Red
-    exit 1 
+    catch {
+        Write-Host
+        Write-Host "Error installing assets template to $AssetsUrl"  -ForegroundColor Red 
+        Write-Host $error[0] -ForegroundColor Red
+        exit 1 
+    }
 }
 
 try {
     Connect-SharePoint $Url    
-    $Language = Get-WebLanguage -ctx (Get-PnPContext)
     if (-not $SkipTaxonomy.IsPresent) {
-        Write-Host "Installing necessary taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\taxonomy.pnp"
+        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        Apply-Template -Template "sitesettings"
         Write-Host "DONE" -ForegroundColor Green
     }
-    Write-Host "Deploying fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-    Apply-PnPProvisioningTemplate ".\templates\root.pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
-    Apply-PnPProvisioningTemplate ".\templates\sitesettings-$($Language).pnp"
+    Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+    Apply-Template -Template "root" -Localized
+    Apply-Template -Template "sitesettings" -Localized
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
 }
@@ -138,9 +167,8 @@ catch {
 if (-not $SkipData.IsPresent) {
     try {
         Connect-SharePoint $DataSourceSiteUrl        
-        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
-        Apply-PnPProvisioningTemplate ".\templates\data-$($Language).pnp"
+        Apply-Template -Template "data" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -155,13 +183,8 @@ if (-not $SkipData.IsPresent) {
 if (-not $SkipDefaultConfig.IsPresent) {
     try {
         Connect-SharePoint $Url
-        $Language = Get-WebLanguage -ctx (Get-PnPContext)
         Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
-        if ($DataSourceSiteUrl -ne $Url) {
-            Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp" -Parameters @{"DataSourceSiteUrl" = $DataSourceSiteUrl;}
-        } else {
-            Apply-PnPProvisioningTemplate ".\templates\config-$($Language).pnp"
-        }
+        Apply-Template -Template "config" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -172,14 +195,14 @@ if (-not $SkipDefaultConfig.IsPresent) {
     }
 }
 
-if($ExtensionFolder) {
+if ($ExtensionFolder -ne $null) {
     $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
-    if($extensionFiles.Length -gt 0) {
+    if ($extensionFiles.Length -gt 0) {
         try {
             Connect-SharePoint $Url
             Write-Host "Deploying extensions.." -ForegroundColor Green -NoNewLine
             foreach($extension in $extensionFiles) {
-                Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrl; "DataSourceSiteUrl" = $DataSourceSiteUrl;}
+                Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
             }
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline

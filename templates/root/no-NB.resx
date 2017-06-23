@@ -97,6 +97,9 @@
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Prosjektstatus</value>
   </data>
+  <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
+    <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22Ingen%20fase%22</value>
+  </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
   </data>
@@ -610,6 +613,9 @@
   <data name="SiteFields_GtProjectPhase_DisplayName" xml:space="preserve">
     <value>Fase</value>
   </data>
+  <data name="SiteFields_GtProjectPhaseChoice_DisplayName" xml:space="preserve">
+    <value>Prosjektfase</value>
+  </data>
   <data name="SiteFields_GtStakeholderGroup_DisplayName" xml:space="preserve">
     <value>Interessentgruppe</value>
   </data>
@@ -900,6 +906,9 @@
   </data>
   <data name="SiteFields_GtProjectPhase_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtProjectPhaseChoice_Description" xml:space="preserve">
+    <value>Prosjektets fase, som valg-felt for å tillate integrasjon med enkelte tredjepartsverktøy</value>
   </data>
   <data name="SiteFields_GtStakeholderGroup_Description" xml:space="preserve">
     <value></value>
@@ -1590,6 +1599,27 @@
   </data>
   <data name="Choice_GtActionStatus_Delayed" xml:space="preserve">
     <value>Utsatt</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_StartingUp" xml:space="preserve">
+    <value>Konsept</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Initiating" xml:space="preserve">
+    <value>Planlegge</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Directing" xml:space="preserve">
+    <value>Gjennomføre</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_Closing" xml:space="preserve">
+    <value>Avslutte</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_BenefitsRealization" xml:space="preserve">
+    <value>Realisere</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_NoPhase" xml:space="preserve">
+    <value>Ingen fase</value>
+  </data>
+  <data name="Choice_GtProjectPhaseChoice_SeveralPhases" xml:space="preserve">
+    <value>Flere faser</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>
