@@ -9,8 +9,13 @@
     [string]$GenericCredential
 )
 
-Connect-PnPOnline $Url
-
+if ($CurrentCredentials.IsPresent) {
+    Connect-PnPOnline -Url $Url -CurrentCredentials
+} elseif ($GenericCredential -ne $null) {
+    Connect-PnPOnline -Url $Url -Credentials $GenericCredential
+} else {
+    Connect-PnPOnline -Url $Url
+}
 $ProjectList = Get-PnPList -Identity "Prosjekter"
 $FieldsToSync = Get-PnPField -List "Prosjekter" | ? {$_.InternalName.IndexOf("Gt") -eq 0}
 $DateTimeFromWhenToUpdateProjects = (Get-Date).AddHours(-$IntervalHours).ToUniversalTime()
