@@ -9,16 +9,17 @@ var gulp = require("gulp"),
     config = require('./@configuration.js'),
     settings = require('./@settings.js');
 
-gulp.task("watch", (done) => {
-    livereload.listen({
+
+function __startWatch(packageCodeFunc) {
+ livereload.listen({
         start: true,
     });
-    watch(config.paths.sourceGlob).on("change", (done) => {
-        runSequence("clean:lib", "clean:dist", "package:code", () => {
+    watch(config.paths.sourceGlob).on("change", () => {
+        runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
             uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
         })
     });
-    watch(config.paths.stylesGlob).on("change", (done) => {
+    watch(config.paths.stylesGlob).on("change", () => {
         runSequence("package:styles", () => {
             uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
         })
@@ -29,41 +30,21 @@ gulp.task("watch", (done) => {
     watch(config.paths.filtersDispTemplatesGlob).on("change", (file) => {
         uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Filters")
     });
-    watch(config.resources.glob).on("change", (done) => {
+    watch(config.resources.glob).on("change", () => {
         runSequence("build:jsonresources");
     });
+}
+
+gulp.task("watch", () => {
+   __startWatch("package:code");
 });
 
-gulp.task("watch::eval", (done) => {
-    livereload.listen({
-        start: true,
-    });
-    watch(config.paths.sourceGlob).on("change", (done) => {
-        runSequence("clean:lib", "clean:dist", "package:code::eval", () => {
-            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
-        })
-    });
-    watch(config.paths.stylesGlob).on("change", (done) => {
-        runSequence("package:styles", () => {
-            uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
-        })
-    });
+gulp.task("watch::eval", () => {
+   __startWatch("package:code::eval");
 });
 
-gulp.task("watch::prod", (done) => {
-    livereload.listen({
-        start: true,
-    });
-    watch(config.paths.sourceGlob).on("change", (done) => {
-        runSequence("clean:lib", "clean:dist", "package:code::prod", () => {
-            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
-        })
-    });
-    watch(config.paths.stylesGlob).on("change", (done) => {
-        runSequence("package:styles", () => {
-            uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
-        })
-    });
+gulp.task("watch::prod", () => {
+   __startWatch("package:code::prod");
 });
 
 function uploadFile(glob, url, folder) {
