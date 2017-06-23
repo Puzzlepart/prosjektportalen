@@ -137,7 +137,7 @@ if (-not $SkipAssets.IsPresent) {
     }
     catch {
         Write-Host
-        Write-Host "Error installing assets template to $AssetsUrl"  -ForegroundColor Red 
+        Write-Host "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
         Write-Host $error[0] -ForegroundColor Red
         exit 1 
     }
@@ -147,7 +147,7 @@ try {
     Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "sitesettings"
+        Apply-Template -Template "taxonomy"
         Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
@@ -177,7 +177,6 @@ if (-not $SkipData.IsPresent) {
         Write-Host $error[0] -ForegroundColor Red
     }
 }
-
 
 if (-not $SkipDefaultConfig.IsPresent) {
     try {
