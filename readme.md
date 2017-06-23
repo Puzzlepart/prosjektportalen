@@ -5,9 +5,6 @@ Prosjektportalen v2.0 using [pnp-js-provisioning](https://github.com/Puzzlepart/
 ## Installation
 See [Installation](https://github.com/Puzzlepart/prosjektportalen/wiki/Installation)
 
-## Documentation
-See [Documentation](documentation.md)
-
 ## Development
 See [Development](https://github.com/Puzzlepart/prosjektportalen/wiki/Development)
 
