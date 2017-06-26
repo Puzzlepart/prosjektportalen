@@ -7,27 +7,9 @@ import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-
-export interface IExportReportState {
-    project: any;
-    reports: any;
-    selectedReport: {
-        key: string,
-        text: string,
-    };
-    exportStatus: ExportReportStatus;
-    showDialog: boolean;
-}
-
-export interface IExportReportProps {
-    project: any;
-}
-
-export enum ExportReportStatus {
-    default,
-    isExporting,
-    hasExported,
-}
+import IExportReportProps from "./IExportReportProps";
+import IExportReportState from "./IExportReportState";
+import ExportReportStatus from "./ExportReportStatus";
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     constructor() {
@@ -41,6 +23,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             },
             exportStatus: ExportReportStatus.default,
             showDialog: false,
+            isLoading: true,
         };
     }
 
@@ -48,7 +31,65 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this.fetchReports();
     }
 
-    public renderExportBtn = (exportStatus) => {
+    /**
+     * Renders the component
+     */
+    public render(): JSX.Element {
+        const {
+            reports,
+            showDialog,
+            selectedReport,
+            exportStatus,
+            isLoading,
+         } = this.state;
+
+        if (isLoading) {
+            return <Spinner size={SpinnerSize.medium} />;
+        }
+
+        return (
+            <div className="export-section ms-Grid">
+                <div className="ms-Grid-row">
+                    <div className=" ms-Grid-col ms-md5">
+                        {this.renderExportBtn(exportStatus)}
+                    </div>
+                    <div className="ms-Grid-col ms-md7">
+                        <Icon name="History" />
+                        <Dropdown
+                            id="pp-reportDropdown"
+                            label=""
+                            selectedKey="01"
+                            options={this.getReportOptions(reports)}
+                            onChanged={(item) => {
+                                this.setState({
+                                    selectedReport: {
+                                        key: item.key.toString(),
+                                        text: item.text,
+                                    },
+                                    showDialog: true,
+                                });
+                            }} />
+                        <Dialog
+                            isOpen={showDialog}
+                            type={DialogType.close}
+                            onDismiss={this.closeDialog}
+                            isBlocking={false}
+                            title={selectedReport.text}
+                            containerClassName="pp-snapshot-dialog">
+                            <div id="snapshot-container">
+                                <img src={selectedReport.key}></img>
+                            </div>
+                        </Dialog>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    /**
+     * Render export button
+     */
+    private renderExportBtn = exportStatus => {
         if (exportStatus === ExportReportStatus.isExporting) {
             return <Spinner size={SpinnerSize.medium} />;
         }
@@ -58,47 +99,16 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 iconProps={{ iconName: "Camera" }}
                 onClick={e => {
                     e.preventDefault();
-                    this.DoExport(this.state.project);
+                    this.doExport(this.state.project);
                 }}>
                 {exportStatus === ExportReportStatus.hasExported ? "Prosjektbildet er lagret" : " Lagre øyeblikksbilde"}
             </PrimaryButton>
         );
     }
-    public render(): JSX.Element {
-        let {
-            reports,
-            showDialog,
-            selectedReport,
-            exportStatus,
-         } = this.state;
-        let options = this.getReportOptions(reports);
 
-        return (
-            <div className="export-section ms-Grid-row">
-                <div className=" ms-Grid-col ms-md5">
-                    {this.renderExportBtn(exportStatus)}
-                </div>
-                <div className="ms-Grid-col ms-md7">
-                    <Icon name="History" />
-                    <Dropdown label="" selectedKey="001" options={options} onChanged={(item) => {
-                        this.setState({
-                            selectedReport: {
-                                key: item.key.toString(),
-                                text: item.text,
-                            },
-                            showDialog: true,
-                        });
-                    }} />
-                    <Dialog isOpen={showDialog} type={DialogType.close} onDismiss={this.closeDialog.bind(this)} isBlocking={false} title={selectedReport.text} containerClassName="pp-snapshot-dialog">
-                        <div id="snapshot-container">
-                            <img src={selectedReport.key}></img>
-                        </div>
-                    </Dialog>
-                </div>
-            </div>
-        );
-    }
-
+    /**
+     * Save file to library
+     */
     private saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
         return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
             return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
@@ -109,29 +119,53 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         });
     }
 
+
+    /**
+     * Fetch reports
+     */
     private fetchReports(): void {
-        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.select("FileLeafRef", "Title", "EncodedAbsUrl").filter("substringof('.png', FileLeafRef)").orderBy("Modified", false).top(10).get().then(reports => {
-            this.setState({ reports: reports });
-        });
+        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
+            .items
+            .select("FileLeafRef", "Title", "EncodedAbsUrl")
+            .filter("substringof('.png', FileLeafRef)")
+            .orderBy("Modified", false)
+            .top(10)
+            .get()
+            .then(reports => {
+                this.setState({
+                    reports: reports,
+                    isLoading: false,
+                });
+            });
     }
 
+    /**
+     * Get report options
+     */
     private getReportOptions = (reports): Array<IDropdownOption> => {
-        let options = new Array<IDropdownOption>();
-
-        if (reports && reports.length > 0) {
-            options.push({ key: "001", text: `Historikk (${reports.length} tidligere) ` });
-            for (let i = 0; i < reports.length; i++) {
-                if (reports[i].FileLeafRef) {
-                    options.push({ text: reports[i].Title, key: reports[i].EncodedAbsUrl });
-                }
+        let options = reports.filter(r => r.FileLeafRef).map(({ Title: text, EncodedAbsUrl: key }) => ({
+            key,
+            text,
+        }));
+        let firstOption = reports.length > 0
+            ? {
+                key: "01",
+                text: `Historikk (${reports.length} tidligere)`,
             }
-        } else {
-            options.push({ key: "001", text: `Ingen historikk tilgjengelig` });
-        }
-        return options;
+            : {
+                key: "01",
+                text: "Ingen historikk tilgjengelig",
+            };
+        return [
+            firstOption,
+            ...options,
+        ];
     }
 
-    private SaveReport = (reportBlob: any) => {
+    /**
+     * Sae report
+     */
+    private saveReport = reportBlob => {
         let dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
         let fileName = `${_spPageContextInfo.webTitle}-${dateDisplay}.png`;
         let fileTitle = `${_spPageContextInfo.webTitle} ${dateDisplay}`;
@@ -141,22 +175,28 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         });
     }
 
-    private DoExport = project => {
+    /**
+     * Do export
+     */
+    private doExport = project => {
         this.setState({ exportStatus: ExportReportStatus.isExporting });
         html2canvas(document.getElementById("pp-projectstatus"), {
             onrendered: canvas => {
                 if (canvas.toBlob) {
                     canvas.toBlob(reportBlob => {
-                        this.SaveReport(reportBlob);
+                        this.saveReport(reportBlob);
                     });
                 } else if (canvas.msToBlob) {
                     let reportBlob = canvas.msToBlob();
-                    this.SaveReport(reportBlob);
+                    this.saveReport(reportBlob);
                 }
             },
         });
     }
 
+    /**
+     * Close dialog
+     */
     private closeDialog = () => {
         this.setState({ showDialog: false });
     }
