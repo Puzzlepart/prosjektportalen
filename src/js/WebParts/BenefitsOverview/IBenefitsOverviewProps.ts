@@ -6,7 +6,7 @@ interface IBenefitsOverviewProps {
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
     showCommandBar?: boolean;
-    searchProperty?: string;    
+    searchProperty?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
 }
