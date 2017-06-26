@@ -51,30 +51,26 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     public renderExportBtn = (exportStatus) => {
         if (exportStatus === ExportReportStatus.isExporting) {
             return <Spinner size={SpinnerSize.medium} />;
-        } else if (exportStatus === ExportReportStatus.hasExported) {
-            return <PrimaryButton
-                className="save-snapshot-btn"
-                iconProps={{ iconName: "Camera" }}
-                onClick={e => {
-                    e.preventDefault();
-                    this.DoExport(this.state.project);
-                }}>
-                Prosjektbildet er lagret
-                </PrimaryButton>;
-        } else {
-            return <PrimaryButton
-                className="save-snapshot-btn"
-                iconProps={{ iconName: "Camera" }}
-                onClick={e => {
-                    e.preventDefault();
-                    this.DoExport(this.state.project);
-                }}>
-                Lagre øyeblikksbilde
-                </PrimaryButton>;
         }
+        return (
+            <PrimaryButton
+                className="save-snapshot-btn"
+                iconProps={{ iconName: "Camera" }}
+                onClick={e => {
+                    e.preventDefault();
+                    this.DoExport(this.state.project);
+                }}>
+                {exportStatus === ExportReportStatus.hasExported ? "Prosjektbildet er lagret" : " Lagre øyeblikksbilde"}
+            </PrimaryButton>
+        );
     }
     public render(): JSX.Element {
-        let { reports, showDialog, selectedReport, exportStatus } = this.state;
+        let {
+            reports,
+            showDialog,
+            selectedReport,
+            exportStatus,
+         } = this.state;
         let options = this.getReportOptions(reports);
 
         return (
@@ -136,8 +132,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     private SaveReport = (reportBlob: any) => {
-        let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.png`;
-        let fileTitle = `${_spPageContextInfo.webTitle} ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
+        let dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
+        let fileName = `${_spPageContextInfo.webTitle}-${dateDisplay}.png`;
+        let fileTitle = `${_spPageContextInfo.webTitle} ${dateDisplay}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({ exportStatus: ExportReportStatus.hasExported });
             this.fetchReports();
