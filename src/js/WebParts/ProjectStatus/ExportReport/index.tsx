@@ -15,7 +15,7 @@ export interface IExportReportState {
         key: string,
         text: string,
     };
-    exportStatus: IExportReportStatus;
+    exportStatus: ExportReportStatus;
     showDialog: boolean;
 }
 
@@ -23,7 +23,7 @@ export interface IExportReportProps {
     project: any;
 }
 
-export enum IExportReportStatus {
+export enum ExportReportStatus {
     default,
     isExporting,
     hasExported,
@@ -39,7 +39,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 key: "",
                 text: "",
             },
-            exportStatus: IExportReportStatus.default,
+            exportStatus: ExportReportStatus.default,
             showDialog: false,
         };
     }
@@ -49,9 +49,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     public renderExportBtn = (exportStatus) => {
-        if (exportStatus === IExportReportStatus.isExporting) {
+        if (exportStatus === ExportReportStatus.isExporting) {
             return <Spinner size={SpinnerSize.medium} />;
-        } else if (exportStatus === IExportReportStatus.hasExported) {
+        } else if (exportStatus === ExportReportStatus.hasExported) {
             return <PrimaryButton
                 className="save-snapshot-btn"
                 iconProps={{ iconName: "Camera" }}
@@ -139,13 +139,13 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         let fileName = `${_spPageContextInfo.webTitle}-${moment(new Date()).format("YYYY-MM-D-HHmm")}.png`;
         let fileTitle = `${_spPageContextInfo.webTitle} ${moment(new Date()).format("YYYY-MM-D-HHmm")}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
-            this.setState({ exportStatus: IExportReportStatus.hasExported });
+            this.setState({ exportStatus: ExportReportStatus.hasExported });
             this.fetchReports();
         });
     }
 
     private DoExport = project => {
-        this.setState({ exportStatus: IExportReportStatus.isExporting });
+        this.setState({ exportStatus: ExportReportStatus.isExporting });
         html2canvas(document.getElementById("pp-projectstatus"), {
             onrendered: canvas => {
                 if (canvas.toBlob) {
