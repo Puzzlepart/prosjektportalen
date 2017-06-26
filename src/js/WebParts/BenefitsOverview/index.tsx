@@ -13,7 +13,6 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
