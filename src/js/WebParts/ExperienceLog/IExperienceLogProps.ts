@@ -18,38 +18,38 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     columns: [{
         key: "Title",
         fieldName: "Title",
-        name: "Tittel",
+        name: __("SiteFields_Title_DisplayName"),
         minWidth: 220,
     },
     {
         key: "SiteTitle",
         fieldName: "SiteTitle",
-        name: "Prosjekt",
+        name: __("String_Project"),
     },
     {
         key: "GtProjectLogDescriptionOWSMTXT",
         fieldName: "Description",
-        name: "Beskrivelse",
+        name: __("SiteFields_GtProjectLogDescription_DisplayName"),
     },
     {
         key: "GtProjectLogResponsibleOWSCHCS",
         fieldName: "Responsible",
-        name: "Ansvarlig",
+        name: __("SiteFields_GtProjectLogResponsible_DisplayName"),
     },
     {
         key: "GtProjectLogConsequenceOWSMTXT",
         fieldName: "Consequence",
-        name: "Konsekvens",
+        name: __("SiteFields_GtProjectLogConsequence_DisplayName"),
     },
     {
         key: "GtProjectLogRecommendationOWSMTXT",
         fieldName: "Recommendation",
-        name: "Anbefaling",
+        name: __("SiteFields_GtProjectLogRecommendation_DisplayName"),
     },
     {
         key: "GtProjectLogActorsOWSCHCM",
         fieldName: "Actors",
-        name: "Aktører",
+        name: __("SiteFields_GtProjectLogActors_DisplayName"),
     }].map(col => ({
         ...col,
         isResizable: true,

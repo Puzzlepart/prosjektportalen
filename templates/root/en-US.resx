@@ -1648,6 +1648,9 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all Benefits...</value>
   </data>
+  <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
+    <value>Search all log elements...</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full Control</value>
   </data>
