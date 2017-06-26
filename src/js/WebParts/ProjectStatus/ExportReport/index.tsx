@@ -123,6 +123,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         let options = new Array<IDropdownOption>();
 
         if (reports && reports.length > 0) {
+            options.push({ key: "001", text: `Historikk (${reports.length} tidligere) ` });
             for (let i = 0; i < reports.length; i++) {
                 if (reports[i].FileLeafRef) {
                     options.push({ text: reports[i].Title, key: reports[i].EncodedAbsUrl });
