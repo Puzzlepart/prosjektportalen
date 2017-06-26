@@ -12,23 +12,18 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
-
+import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import DataSource from "../DataSource";
 import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
-import IBenefitsOverviewProps from "./IBenefitsOverviewProps";
+import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
 
 /**
  * Benefits  Overview
  */
 export default class BenefitsOverview extends React.PureComponent<IBenefitsOverviewProps, IBenefitsOverviewState> {
-    public static defaultProps: Partial<IBenefitsOverviewProps> = {
-        groupByOptions: [],
-        searchProperty: "Title",
-        dataSource: DataSource.List,
-        showCommandBar: true,
-    };
+    public static defaultProps = BenefitsOverviewDefaultProps;
 
     /**
      * Constructor
@@ -50,7 +45,10 @@ export default class BenefitsOverview extends React.PureComponent<IBenefitsOverv
      */
     public componentDidMount(): void {
         Data.retrieveFromSource(this.props.dataSource)
-            .then(data => this.setState({ data: data, isLoading: false }));
+            .then(data => this.setState({
+                data: data,
+                isLoading: false,
+            }));
     }
 
     /**
@@ -72,7 +70,8 @@ export default class BenefitsOverview extends React.PureComponent<IBenefitsOverv
         }
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
-            return (<div style={{ width: "100%" }}>
+            return (
+            <div style={{ width: "100%" }}>
                 {showCommandBar && this.renderCommandBar()}
                 <div style={{ height: 10 }}></div>
                 {showSearchBox !== false &&
@@ -85,10 +84,15 @@ export default class BenefitsOverview extends React.PureComponent<IBenefitsOverv
                     columns={columns}
                     groups={groups}
                     selectionMode={SelectionMode.none}
-                    onRenderItemColumn={_onRenderItemColumn}
+                    onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
+                        evt.preventDefault();
+                        this.setState({ showProjectInfo: item });
+                    })}
                     onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
                 />
-            </div>);
+                {this.renderProjectInfoModal(this.props, this.state)}
+            </div>
+            );
         }
         return null;
     }
@@ -137,6 +141,35 @@ export default class BenefitsOverview extends React.PureComponent<IBenefitsOverv
                     items={items}
                     farItems={farItems}
                 />
+            );
+        }
+        return null;
+    }
+
+    /**
+     * Renders the Project Info modal
+     */
+    private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IBenefitsOverviewProps, { showProjectInfo }: IBenefitsOverviewState) => {
+        if (showProjectInfo) {
+            return (
+                <ProjectInfo
+                    webUrl={showProjectInfo.SPWebUrl}
+                    hideChrome={true}
+                    showActionLinks={false}
+                    showMissingPropsWarning={false}
+                    filterField={projectInfoFilterField}
+                    labelSize="l"
+                    valueSize="m"
+                    renderMode={ProjectInfoRenderMode.Modal}
+                    modalOptions={{
+                        isOpen: this.state.showProjectInfo,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        headerClassName: modalHeaderClassName,
+                        headerStyle: { marginBottom: 20 },
+                        title: showProjectInfo.SiteTitle,
+                    }} />
             );
         }
         return null;
