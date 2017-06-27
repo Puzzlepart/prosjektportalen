@@ -6,34 +6,34 @@ export const RiskMatrix: any = [
             ClassName: "risk-header",
         },
         {
-            Value: "Ubetydelig",
+            Value: __("RiskMatrix_Header_Insignificant"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: "Liten",
+            Value: __("RiskMatrix_Header_Small"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: "Moderat",
+            Value: __("RiskMatrix_Header_Moderate"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: "Alvorlig",
+            Value: __("RiskMatrix_Header_Serious"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: "Kritisk",
+            Value: __("RiskMatrix_Header_Critical"),
             Type: "Header",
             ClassName: "risk-header",
         },
     ],
     [
         {
-            Value: "Svært høy",
+            Value: __("RiskMatrix_Header_VeryHigh"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -75,7 +75,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: "Høy",
+            Value: __("RiskMatrix_Header_High"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -117,7 +117,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: "Middels",
+            Value: __("RiskMatrix_Header_Medium"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -159,7 +159,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: "Lav",
+            Value: __("RiskMatrix_Header_Low"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -201,7 +201,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: "Svært lav",
+            Value: __("RiskMatrix_Header_VeryLow"),
             Type: "Header",
             ClassName: "risk-header",
         },
