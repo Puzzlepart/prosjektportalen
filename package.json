@@ -25,6 +25,7 @@
     "react-sticky": "6.0.1",
     "sp-pnp-js": "latest",
     "sp-pnp-provisioning": "git+https://github.com/Puzzlepart/pnp-js-provisioning.git#dev",
+    "truncate-html": "^0.1.4",
     "uuid": "^3.1.0",
     "whatwg-fetch": "^2.0.3"
   },
