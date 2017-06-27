@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Link, animateScroll } from "react-scroll";
+import { Link } from "react-scroll";
 import { Icon } from "../../@Components";
 import { default as ExportReport } from "../ExportReport";
 
-const StatusNavigation = (project) => {
-    animateScroll.scrollMore(1);
-
+const StatusNavigation = project => {
     const nodes = [{
         title: "Status",
         to: "status-section",
@@ -54,7 +52,7 @@ const StatusNavigation = (project) => {
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
-                {/*{nodes.map(({ title, to, offset, iconName }, idx) => (
+                {nodes.map(({ title, to, offset, iconName }, idx) => (
                     <Link
                         key={idx}
                         className="nav-link ms-Grid-col ms-md2"
@@ -71,7 +69,7 @@ const StatusNavigation = (project) => {
                             <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{title}</p>
                         </div>
                     </Link>
-                ))}*/}
+                ))}
             </div>
         </div>
     );
