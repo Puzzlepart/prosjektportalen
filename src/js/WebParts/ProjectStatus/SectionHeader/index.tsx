@@ -2,15 +2,7 @@ import * as React from "react";
 import { Icon } from "../../@Components";
 import * as Util from "../../../Util";
 import { GetStatusCssClass } from "../Utils";
-
-export interface ISectionHeaderProps {
-    name: string;
-    statusValue: string;
-    comment: string;
-    source?: string;
-    iconName: string;
-    fieldName: string;
-}
+import ISectionHeaderProps from "./ISectionHeaderProps";
 
 const SectionHeader = ({ name, statusValue, comment, source, iconName, fieldName }: ISectionHeaderProps) => {
     let statusCssClass = GetStatusCssClass(fieldName, statusValue);
