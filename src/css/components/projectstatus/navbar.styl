@@ -2,9 +2,9 @@
 
 .navigation {
     max-height: 100px;
+    z-index: 99;
 
     .nav-status-container {
-        z-index: 99;
         background: #eff6fa;
         margin-bottom: 30px;
         height: 96px;
@@ -20,13 +20,12 @@
                 text-align: center;
 
                 // &.active {
-                //     color: white;
-                //     background: $SuiteBarBackground;
-                //     .ms-Icon {
-                //          color: #fff;
-                //     }
+                // color: white;
+                // background: $SuiteBarBackground;
+                // .ms-Icon {
+                // color: #fff;
                 // }
-
+                // }
                 .ms-Icon {
                     font-size: 25px;
                     color: $SuiteBarBackground;
@@ -53,6 +52,7 @@
             h2 {
                 color: white;
             }
+
             p {
                 line-height: 48px;
                 margin: 0;
@@ -67,9 +67,11 @@
                     vertical-align: top;
                     margin-top: 9px;
                 }
+
                 .ms-Dropdown-container {
                     display: inline-block;
                     width: 90%;
+
                     .ms-Dropdown {
                         .ms-Dropdown-title {
                             border: 0;

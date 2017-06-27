@@ -45,11 +45,11 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                     return (
                                         <div
                                             id="status-navigation"
-                                            className="navigation"
+                                            className="navigation ms-Grid-row"
                                             style={{ ...style, height: 100 }}>
                                             <StatusNavigation project={project} />
                                         </div>
-                                    )
+                                    );
                                 }
                             }
                         </Sticky>
