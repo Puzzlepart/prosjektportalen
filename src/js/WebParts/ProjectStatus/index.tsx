@@ -62,7 +62,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 iconName="DateTime"
                                 statusValue={project.GtStatusTime}
                                 comment={project.GtStatusTimeComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Prosjektleveranser`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_ProjectProducts_Url")}`}
                                 fieldName="GtStatusTime" />
                             <ProductsList viewName="Prosjektstatus" />
                         </Element>
@@ -90,7 +90,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 iconName="Warning"
                                 statusValue={project.GtStatusRisk}
                                 comment={project.GtStatusRiskComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Usikkerhet`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_Uncertainties_Url")}`}
                                 fieldName="GtStatusRisk" />
                             <RiskOverview viewName="Prosjektstatus" />
                         </Element>
@@ -100,7 +100,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 iconName="Trophy"
                                 statusValue={project.GtStatusGainAchievement}
                                 comment={project.GtStatusGainAchievementComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Gevinstanalyse og gevinstrealiseringsplan`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_BenefitsAnalysis_Url")}`}
                                 fieldName="GtStatusGainAchievement" />
                             <BenefitsOverview
                                 dataSource={DataSource.List}
