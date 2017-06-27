@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Link, animateScroll } from "react-scroll";
+import { Link } from "react-scroll";
 import { Icon } from "../../@Components";
 import { default as ExportReport } from "../ExportReport";
 
-const StatusNavigation = (project) => {
-    animateScroll.scrollMore(1);
-
+const StatusNavigation = project => {
     const nodes = [{
         title: "Status",
         to: "status-section",
