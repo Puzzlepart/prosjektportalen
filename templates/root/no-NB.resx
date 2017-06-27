@@ -1783,4 +1783,7 @@
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Naviger til listen</value>
   </data>
+  <data name="String_StatusReport" xml:space="preserve">
+    <value>Statusrapport</value>
+  </data>
 </root>
