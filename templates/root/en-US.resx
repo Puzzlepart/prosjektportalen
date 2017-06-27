@@ -271,6 +271,9 @@
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Benefits Followup/AllItems.aspx</value>
   </data>
+  <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
+    <value>Project Status</value>
+  </data>
   <data name="View_AllItems_DisplayName" xml:space="preserve">
     <value>All items</value>
   </data>
