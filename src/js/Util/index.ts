@@ -182,6 +182,9 @@ export const encodeSpaces = (str: string): string => {
  * @param list SP list
  */
 export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void => {
+    if (fieldValue === null) {
+        return;
+    }
     let fieldValueType = (typeof fieldValue);
     switch (fieldValueType) {
         case "string": {
