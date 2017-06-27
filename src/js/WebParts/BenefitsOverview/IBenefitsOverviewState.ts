@@ -6,6 +6,7 @@ interface IBenefitsOverviewState {
     isLoading: boolean;
     searchTerm: string;
     groupBy: IGroupByOption;
+    showProjectInfo?: any;
 }
 
 export default IBenefitsOverviewState;

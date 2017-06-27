@@ -47,13 +47,14 @@ export default class ExperienceLog extends React.PureComponent<IExperienceLogPro
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
+        const filteredItems = this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0);
         return (
             <div>
                 <SearchBox
-                    labelText="Søk i alle loggelementer"
+                    labelText={__("ExperienceLog_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 <DetailsList
-                    items={this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0)}
+                    items={filteredItems}
                     columns={this.props.columns}
                     onRenderItemColumn={this._onRenderItemColumn}
                     constrainMode={this.props.constrainMode}

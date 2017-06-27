@@ -279,6 +279,15 @@ const Lists: IList[] = [
                 Paged: true,
                 ViewQuery: "",
             },
+        },
+        {
+            Title: "Gevinstoppgaver",
+            ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: `<Where><IsNotNull><FieldRef Name="GtProjectTaskGain" /></IsNotNull></Where>`,
+            },
         }],
     },
     {

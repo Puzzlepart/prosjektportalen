@@ -1654,6 +1654,9 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
+  <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
+    <value>Søk i alle loggelementer....</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>
   </data>
