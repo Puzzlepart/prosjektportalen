@@ -170,7 +170,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Prosjektstatus",
+            Title: __("View_ProjectStatus_DisplayName"),
             ViewFields: ["LinkTitle", "GtProductAcceptanceDate", "GtProductStatus", "GtProductStatusComment", "GtProductQualityExpectations"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -215,7 +215,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Prosjektstatus",
+            Title: __("View_ProjectStatus_DisplayName"),
             ViewFields: [
                 "ID",
                 "LinkTitle",

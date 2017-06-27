@@ -260,19 +260,19 @@ export const StatusFields: IStatusFields = {
     GtStatusRisk: {
         Statuses: [
             {
-                Value: "Lav",
+                Value: __("Choice_GtStatusRisk_Low"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Medium",
+                Value: __("Choice_GtStatusRisk_Medium"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Høy",
+                Value: __("Choice_GtStatusRisk_High"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -282,31 +282,31 @@ export const StatusFields: IStatusFields = {
     GtStatusBudget: {
         Statuses: [
             {
-                Value: "Under budsjett",
+                Value: __("Choice_GtStatusBudget_BelowBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "På budsjett",
+                Value: __("Choice_GtStatusBudget_OnBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre overskridelser",
+                Value: __("Choice_GtStatusBudget_SlighlyBehindBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Vet ikke",
+                Value: __("Choice_GtStatusBudget_UnknownBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Over budsjett",
+                Value: __("Choice_GtStatusBudget_OverBudget"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -316,25 +316,25 @@ export const StatusFields: IStatusFields = {
     GtStatusTime: {
         Statuses: [
             {
-                Value: "Foran plan",
+                Value: __("Choice_GtStatusTime_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "På plan",
+                Value: __("Choice_GtStatusTime_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre forsinkelser",
+                Value: __("Choice_GtStatusTime_SmallDelay"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Forsinket",
+                Value: __("Choice_GtStatusTime_Delayed"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -344,31 +344,31 @@ export const StatusFields: IStatusFields = {
     GtStatusGainAchievement: {
         Statuses: [
             {
-                Value: "Foran plan",
+                Value: __("Choice_GtStatusGainAchievement_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "På plan",
+                Value: __("Choice_GtStatusGainAchievement_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Ikke påbegynt",
+                Value: __("Choice_GtStatusGainAchievement_NotStarted"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre forsinkelser",
+                Value: __("Choice_GtStatusGainAchievement_MinorDelays"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Forsinket",
+                Value: __("Choice_GtStatusGainAchievement_BehindSchedule"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -378,25 +378,25 @@ export const StatusFields: IStatusFields = {
     GtStatusQuality: {
         Statuses: [
             {
-                Value: "Større avvik fra spesifikasjon",
+                Value: __("Choice_GtStatusQuality_LargeDeviation"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
             },
             {
-                Value: "Mindre avvik fra spesifikasjon",
+                Value: __("Choice_GtStatusQuality_SmallDeviation"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: "Ihht. spesifikasjon",
+                Value: __("Choice_GtStatusQuality_AsExpected"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: "Bedre enn spesifikasjon",
+                Value: __("Choice_GtStatusQuality_ExceedsExpectations"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
