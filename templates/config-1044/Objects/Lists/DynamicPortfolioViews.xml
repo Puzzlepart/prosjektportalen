@@ -25,7 +25,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoppfølging</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR LastModifiedTime<{Today-60})]]>
+                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR GtStatusQualityOWSCHCS:"Større avvik fra spesifikasjon" OR GtStatusGainAchievementOWSCHCS:"Forsinket" OR LastModifiedTime<{Today-60})]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
