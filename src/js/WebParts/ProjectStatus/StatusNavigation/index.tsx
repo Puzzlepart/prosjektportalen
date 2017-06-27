@@ -5,37 +5,37 @@ import { default as ExportReport } from "../ExportReport";
 
 const StatusNavigation = project => {
     const nodes = [{
-        title: "Status",
+        title: __("StatusPage_Heading_Status"),
         to: "status-section",
         iconName: "BarChart4",
         offset: 0,
     },
     {
-        title: "Fremdrift",
+        title: __("StatusPage_Heading_ProjectTime"),
         to: "fremdrift-section",
         iconName: "DateTime",
         offset: 0,
     },
     {
-        title: "Økonomi",
+        title: __("StatusPage_Heading_ProjectBudget"),
         to: "budget-section",
         iconName: "Money",
         offset: 0,
     },
     {
-        title: "Kvalitet",
+        title: __("StatusPage_Heading_ProjectQuality"),
         to: "kvalitet-section",
         iconName: "Product",
         offset: 0,
     },
     {
-        title: "Risiko",
+        title: __("StatusPage_Heading_ProjectRisk"),
         to: "risiko-section",
         iconName: "Warning",
         offset: 0,
     },
     {
-        title: "Gevinstoppnåelse",
+        title: __("StatusPage_Heading_ProjectBenefitAchievement"),
         to: "gevinst-section",
         iconName: "Trophy",
         offset: 0,
@@ -45,7 +45,7 @@ const StatusNavigation = project => {
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
                 <div className="ms-Grid-col ms-md6">
-                    <h2 className="status-page-header">{`Statusrapport: ${_spPageContextInfo.webTitle}`}</h2>
+                    <h2 className="status-page-header">{`${__("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-md6">
                     <ExportReport project={project} />

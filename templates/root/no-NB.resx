@@ -1783,4 +1783,10 @@
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Naviger til listen</value>
   </data>
+  <data name="String_StatusReport" xml:space="preserve">
+    <value>Statusrapport</value>
+  </data>
+  <data name="StatusPage_Heading_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
 </root>
