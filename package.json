@@ -22,7 +22,7 @@
     "react-excel-workbook": "0.0.4",
     "react-masonry-component": "^5.0.7",
     "react-scroll": "1.5.2",
-    "react-sticky": "6.0.1",
+    "react-sticky": "^6.0.1",
     "sp-pnp-js": "latest",
     "sp-pnp-provisioning": "git+https://github.com/Puzzlepart/pnp-js-provisioning.git#dev",
     "truncate-html": "^0.1.4",

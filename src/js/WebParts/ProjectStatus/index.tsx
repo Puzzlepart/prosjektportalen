@@ -2,15 +2,15 @@ import * as React from "react";
 import { sp } from "sp-pnp-js";
 import { Element } from "react-scroll";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { StickyContainer } from "react-sticky";
-import { default as ProductsList } from "./ProductsList";
-import { default as RiskOverview } from "./RiskOverview";
-import { default as StatusSection } from "./StatusSection";
-import { default as StatusNavigation } from "./StatusNavigation";
-import { default as EconomySection } from "./EconomySection";
+import { StickyContainer, Sticky } from "react-sticky";
+import ProductsList from "./ProductsList";
+import RiskOverview from "./RiskOverview";
+import StatusSection from "./StatusSection";
+import StatusNavigation from "./StatusNavigation";
+import EconomySection from "./EconomySection";
 import SectionHeader from "./SectionHeader";
 import DataSource from "../DataSource";
-import { default as BenefitsOverview } from "../BenefitsOverview";
+import BenefitsOverview from "../BenefitsOverview";
 
 export interface IProjectStatusState {
     project: any;
@@ -39,8 +39,21 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                 <div className="ms-Grid">
                     <style id="project-style-placeholder"></style>
                     <StickyContainer className="status-report-container">
+                        <Sticky>
+                            {
+                                ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
+                                    return (
+                                        <div
+                                            id="status-navigation"
+                                            className="navigation"
+                                            style={{ ...style, height: 100 }}>
+                                            <StatusNavigation project={project} />
+                                        </div>
+                                    )
+                                }
+                            }
+                        </Sticky>
                         <div id="status-navigation" className="navigation ms-Grid-row">
-                            <StatusNavigation project={project}/>
                         </div>
                         <Element name="status-section" className="status-section section ms-Grid-row">
                             <StatusSection project={project} />

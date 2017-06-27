@@ -54,7 +54,7 @@ const StatusNavigation = (project) => {
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
-                {nodes.map(({ title, to, offset, iconName }, idx) => (
+                {/*{nodes.map(({ title, to, offset, iconName }, idx) => (
                     <Link
                         key={idx}
                         className="nav-link ms-Grid-col ms-md2"
@@ -71,7 +71,7 @@ const StatusNavigation = (project) => {
                             <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{title}</p>
                         </div>
                     </Link>
-                ))}
+                ))}*/}
             </div>
         </div>
     );
