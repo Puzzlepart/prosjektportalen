@@ -1780,4 +1780,7 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Svært lav</value>
   </data>
+  <data name="String_NavigateToList" xml:space="preserve">
+    <value>Naviger til listen</value>
+  </data>
 </root>
