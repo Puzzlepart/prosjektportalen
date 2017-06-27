@@ -92,7 +92,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 comment={project.GtStatusRiskComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_Uncertainties_Url")}`}
                                 fieldName="GtStatusRisk" />
-                            <RiskOverview viewName="Prosjektstatus" />
+                            <RiskOverview viewName={__("View_ProjectStatus_DisplayName")} />
                         </Element>
                         <Element name="gevinst-section" className="gevinst-section section ms-Grid-row">
                             <SectionHeader
