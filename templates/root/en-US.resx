@@ -1776,4 +1776,7 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Very low</value>
   </data>
+  <data name="String_NavigateToList" xml:space="preserve">
+    <value>Navigate to the list</value>
+  </data>
 </root>
