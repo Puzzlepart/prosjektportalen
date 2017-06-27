@@ -43,12 +43,13 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgr
             return destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).folders.add(`${destLibServerRelUrl}/${folderServerRelUrl}`);
         }));
         createFolders.then(_ => {
-            let getFileContents = Promise.all(files.map(({ FileRef, LinkFilename }) => new Promise<{ LinkFilename: string, Blob: Blob }>((_resolve, _reject) => {
-                srcWeb.getFileByServerRelativeUrl(FileRef).getBlob().then(blob => _resolve({ LinkFilename: LinkFilename, Blob: blob }), _reject);
+            let getFileContents = Promise.all(files.map(file => new Promise<{ File: any, Blob: Blob }>((_resolve, _reject) => {
+                srcWeb.getFileByServerRelativeUrl(file.FileRef).getBlob().then(blob => _resolve({ File: file, Blob: blob }), _reject);
             })));
             getFileContents.then(fileContents => {
                 let createFiles = Promise.all(fileContents.map(fc => new Promise<any>((_resolve) => {
-                    destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).files.add(fc.LinkFilename, fc.Blob, true).then(_resolve, reject);
+                    let destFolderUrl = `${destLibServerRelUrl}${fc.File.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
+                    destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fc.File.LinkFilename, fc.Blob, true).then(_resolve, reject);
                 })));
                 createFiles.then(resolve, reject);
             }, reject);
