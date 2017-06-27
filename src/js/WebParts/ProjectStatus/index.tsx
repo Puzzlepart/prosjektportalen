@@ -64,7 +64,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 comment={project.GtStatusTimeComment}
                                 source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_ProjectProducts_Url")}`}
                                 fieldName="GtStatusTime" />
-                            <ProductsList viewName="Prosjektstatus" />
+                            <ProductsList viewName={__("View_ProjectStatus_DisplayName")} />
                         </Element>
                         <Element name="budget-section" className="budget-section section ms-Grid-row">
                             <SectionHeader
