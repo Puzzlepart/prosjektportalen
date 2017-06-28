@@ -691,7 +691,7 @@
     <value>Comment, progress</value>
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_DisplayName" xml:space="preserve">
-    <value>Comment, gain</value>
+    <value>Comment, benefits achievement </value>
   </data>
   <data name="SiteFields_GtProjectGoals_DisplayName" xml:space="preserve">
     <value>Project Goals</value>
