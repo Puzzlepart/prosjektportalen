@@ -95,11 +95,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             <PrimaryButton
                 className="save-snapshot-btn"
                 iconProps={{ iconName: "Camera" }}
-                onClick={e => {
-                    e.preventDefault();
-                    this.doExport();
-                }}>
-                {exportStatus === ExportReportStatus.hasExported ? "Prosjektbildet er lagret" : " Lagre øyeblikksbilde"}
+                onClick={this.doExport}>
+                {exportStatus === ExportReportStatus.hasExported ? __("ProjectStatus_SnapshotIsSaved") : __("ProjectStatus_SaveSnapshot")}
             </PrimaryButton>
         );
     }
@@ -178,7 +175,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * Do export
      */
-    private doExport = () => {
+    private doExport = e => {
+        e.preventDefault();
         this.setState({ exportStatus: ExportReportStatus.isExporting });
         html2canvas(document.getElementById("pp-projectstatus"), {
             onrendered: canvas => {
