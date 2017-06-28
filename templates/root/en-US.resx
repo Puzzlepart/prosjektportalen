@@ -334,10 +334,10 @@
     <value>All Items</value>
   </data>
   <data name="View_AllTasks_DisplayName" xml:space="preserve">
-    <value>All tasks</value>
+    <value>All Tasks</value>
   </data>
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
-    <value>All documents</value>
+    <value>All Documents</value>
   </data>
   <data name="TermSetID_ProjectPhase" xml:space="preserve">
     <value>{abcfc9d9-a263-4abb-8234-be973c46258a}</value>
