@@ -49,6 +49,7 @@
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
+    "gulp-color": "0.0.1",
     "gulp-flatmap": "^1.0.0",
     "gulp-livereload": "^3.8.1",
     "gulp-logger": "0.0.2",
