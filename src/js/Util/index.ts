@@ -18,7 +18,7 @@ export const htmlDecode = (input: string): string => {
  *
  * @param group The group to check
  */
-const isUserInGroup = (group) => new Promise(resolve => {
+const isUserInGroup = (group) => new Promise<boolean>(resolve => {
     group.users.get()
         .then(users => {
             resolve(Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
@@ -44,7 +44,7 @@ export const isUserInOwnersGroup = () => isUserInGroup(sp.web.associatedOwnerGro
 /**
  * Does the current user match the audience target
  */
-export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promise(resolve => {
+export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promise<boolean>(resolve => {
     switch (audience) {
         case AudienceTargeting.None: {
             resolve(true);
