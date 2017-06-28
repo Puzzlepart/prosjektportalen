@@ -1,3 +1,6 @@
 <pnp:WebSettings 
-      xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema" AlternateCSS="{parameter:AssetsSiteUrl}/siteassets/pp/css/pp.main.css?rev=[version]" SiteLogo="{parameter:AssetsSiteUrl}/siteassets/pp/img/ICO-Site-Global-13.png" WelcomePage="SitePages/Home.aspx">
+      xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema" 
+      AlternateCSS="https://publiccdn.sharepointonline.com/{parameter:TenantHostName}/{parameter:PublicCdnOriginId}/css/pp.main.css" 
+      SiteLogo="https://publiccdn.sharepointonline.com/{parameter:TenantHostName}/{parameter:PublicCdnOriginId}/img/ICO-Site-Global-13.png" 
+      WelcomePage="SitePages/Home.aspx">
 </pnp:WebSettings>
