@@ -1,14 +1,14 @@
 import ExportReportStatus from "./ExportReportStatus";
 
 interface IExportReportState {
-    project: any;
-    reports: any;
-    selectedReport: {
+    project?: any;
+    reports?: any;
+    selectedReport?: {
         key: string,
         text: string,
     };
     exportStatus: ExportReportStatus;
-    showDialog: boolean;
+    showDialog?: boolean;
     isLoading: boolean;
 }
 

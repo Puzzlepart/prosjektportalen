@@ -12,21 +12,20 @@ import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
-    constructor() {
-        super();
+    /**
+     * Constructor
+     */
+    constructor(props: IExportReportProps) {
+        super(props);
         this.state = {
-            project: null,
-            reports: null,
-            selectedReport: {
-                key: "",
-                text: "",
-            },
             exportStatus: ExportReportStatus.default,
-            showDialog: false,
             isLoading: true,
         };
     }
 
+    /**
+     * Component did mount
+     */
     public componentDidMount(): void {
         this.fetchReports();
     }
@@ -35,14 +34,10 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            reports,
-            showDialog,
-            selectedReport,
-            exportStatus,
-            isLoading,
-         } = this.state;
+        return this._render(this.props, this.state);
+    }
 
+    private _render({ }: IExportReportProps, { reports, showDialog, selectedReport, exportStatus, isLoading }: IExportReportState): JSX.Element {
         if (isLoading) {
             return <Spinner size={SpinnerSize.medium} />;
         }
@@ -69,17 +64,20 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                                     showDialog: true,
                                 });
                             }} />
-                        <Dialog
-                            isOpen={showDialog}
-                            type={DialogType.close}
-                            onDismiss={this.closeDialog}
-                            isBlocking={false}
-                            title={selectedReport.text}
-                            containerClassName="pp-snapshot-dialog">
-                            <div id="snapshot-container">
-                                <img src={selectedReport.key}></img>
-                            </div>
-                        </Dialog>
+                        {this.state.selectedReport && (
+                            <Dialog
+                                isOpen={showDialog}
+                                type={DialogType.close}
+                                onDismiss={e => this.setState({ showDialog: false })}
+                                isBlocking={false}
+                                title={selectedReport.text}
+                                containerClassName="pp-snapshot-dialog">
+                                <div id="snapshot-container">
+                                    <img src={selectedReport.key}></img>
+                                </div>
+                            </Dialog>
+                        )
+                        }
                     </div>
                 </div>
             </div>
@@ -99,7 +97,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 iconProps={{ iconName: "Camera" }}
                 onClick={e => {
                     e.preventDefault();
-                    this.doExport(this.state.project);
+                    this.doExport();
                 }}>
                 {exportStatus === ExportReportStatus.hasExported ? "Prosjektbildet er lagret" : " Lagre øyeblikksbilde"}
             </PrimaryButton>
@@ -163,7 +161,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     /**
-     * Sae report
+     * Save report
+     * 
+     * @param reportBlob Blob for the report file
      */
     private saveReport = reportBlob => {
         let dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
@@ -178,7 +178,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * Do export
      */
-    private doExport = project => {
+    private doExport = () => {
         this.setState({ exportStatus: ExportReportStatus.isExporting });
         html2canvas(document.getElementById("pp-projectstatus"), {
             onrendered: canvas => {
@@ -192,12 +192,5 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 }
             },
         });
-    }
-
-    /**
-     * Close dialog
-     */
-    private closeDialog = () => {
-        this.setState({ showDialog: false });
     }
 }
