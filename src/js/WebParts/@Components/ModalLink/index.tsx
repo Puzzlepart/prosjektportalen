@@ -67,6 +67,9 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
         );
     }
 
+    /**
+     * On link click
+     */
     private onClick = (e, { label, url, options, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps) => {
         e.preventDefault();
         e.stopPropagation();
@@ -112,6 +115,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
 }
 
 export {
+    ModalLink,
     IModalLinkProps,
     ModalLinkIconPosition,
     IModalLinkIconProps,
