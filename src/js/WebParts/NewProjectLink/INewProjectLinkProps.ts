@@ -6,7 +6,7 @@ interface INewProjectLinkProps {
         iconName: string,
         style: React.CSSProperties,
     };
-    audienceTargeting?: AudienceTargeting,
+    audienceTargeting?: AudienceTargeting;
 }
 
 export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
