@@ -16,11 +16,11 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props: INewProjectLinkProps) {
+        super(props);
         this.state = {
             showDialog: false,
-
+            shouldRender: props.audienceTargeting === AudienceTargeting.None,
         };
     }
 
@@ -32,6 +32,9 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     }
 
     private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
+        if (!shouldRender) {
+            return null;
+        }
         return (
             <div>
                 <div>
