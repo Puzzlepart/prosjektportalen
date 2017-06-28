@@ -371,7 +371,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toString().toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
             items: items,
             columns: selectedColumns,

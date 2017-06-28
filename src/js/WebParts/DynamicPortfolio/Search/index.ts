@@ -37,6 +37,12 @@ export const query = (viewConfig: IViewConfig, configuration: IConfiguration) =>
                     let item: any = {};
                     Cells.results.forEach(({ Key, Value }) => {
                         item[Key] = Value ? Value : "";
+                        /**
+                         * Using parseInt if we have a Currency or Number field
+                         */
+                        if (item[Key] !== "" && (Key.indexOf("OWSNMBR") !== -1 || Key.indexOf("OWSCURR") !== -1)) {
+                            item[Key] = parseInt(item[Key], 10);
+                        }
                     });
                     return item;
                 });
