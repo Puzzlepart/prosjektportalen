@@ -90,9 +90,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     private renderExportBtn = exportStatus => {
         if (exportStatus === ExportReportStatus.isExporting) {
             return (
-                <Spinner
-                    size={SpinnerSize.medium}
-                    label={__("ProjectStatus_SavingSnapshot")} />
+                <Spinner size={SpinnerSize.medium} />
             );
         }
         return (
