@@ -1,4 +1,5 @@
 import { IModalLinkProps, ModalLinkIconPosition } from "../@Components/ModalLink";
+import AudienceTargeting from "../AudienceTargeting";
 
 const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
@@ -21,6 +22,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     },
     reloadOnSubmit: false,
     showLabel: true,
+    audienceTargeting: AudienceTargeting.Owners,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
@@ -34,6 +36,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     },
     reloadOnSubmit: true,
     showLabel: true,
+    audienceTargeting: AudienceTargeting.Owners,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
@@ -41,6 +44,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     icon: { iconName: "AppIconDefault", position: ModalLinkIconPosition.Left },
     reloadOnSubmit: true,
     showLabel: true,
+    audienceTargeting: AudienceTargeting.Owners,
 }];
 
 export default ProjectInfoDefaultActionLinks;
