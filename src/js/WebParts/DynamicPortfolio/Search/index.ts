@@ -40,7 +40,7 @@ export const query = (viewConfig: IViewConfig, configuration: IConfiguration) =>
                         /**
                          * Using parseInt if we have a Currency or Number field
                          */
-                        if (item[Key] !== "" && (Key.indexOf("OWSNMBR") || Key.indexOf("OWSCURR"))) {
+                        if (item[Key] !== "" && (Key.indexOf("OWSNMBR") !== -1 || Key.indexOf("OWSCURR") !== -1)) {
                             item[Key] = parseInt(item[Key], 10);
                         }
                     });
