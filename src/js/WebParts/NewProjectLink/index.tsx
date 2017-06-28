@@ -1,8 +1,8 @@
 import * as React from "react";
 import { DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import * as Util from "../../Util";
 import AudienceTargeting from "../AudienceTargeting";
-
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
@@ -22,6 +22,15 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
             showDialog: false,
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
         };
+    }
+
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
+        Util.doesUserMatchAudience(this.props.audienceTargeting).then(doesMatch => {
+            console.log(doesMatch);
+        });
     }
 
     /**
