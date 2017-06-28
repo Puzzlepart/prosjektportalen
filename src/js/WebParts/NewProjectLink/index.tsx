@@ -1,6 +1,8 @@
 import * as React from "react";
 import { DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import AudienceTargeting from "../AudienceTargeting";
+
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
@@ -18,6 +20,7 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
         super();
         this.state = {
             showDialog: false,
+
         };
     }
 
@@ -25,10 +28,10 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
      * Renders the component
      */
     public render(): JSX.Element {
-        return this._render(this.props);
+        return this._render(this.props, this.state);
     }
 
-    private _render({ linkClassName, iconProps, audienceTargeting }: INewProjectLinkProps): JSX.Element {
+    private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
         return (
             <div>
                 <div>
