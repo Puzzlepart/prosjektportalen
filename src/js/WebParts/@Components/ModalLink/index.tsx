@@ -1,13 +1,73 @@
 import * as React from "react";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import * as Util from "../../../Util";
+import AudienceTargeting from "../../AudienceTargeting";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 import IModalLinkProps from "./IModalLinkProps";
+import IModalLinkState from "./IModalLinkState";
 
+export default class ModalLink extends React.PureComponent<IModalLinkProps, IModalLinkState> {
+    /**
+     * Constructor
+     */
+    constructor(props: IModalLinkProps) {
+        super(props);
+        this.state = {
+            shouldRender: props.audienceTargeting === AudienceTargeting.None,
+        };
+    }
 
-export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSubmit = false, reloadOnCancel = false, width, height, icon, className = "", id, style, hidden }: IModalLinkProps) => {
-    const onClick = (e) => {
+    /**
+     * Component did mount
+     */
+    public componentDidMount(): void {
+        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
+            if (userMatchAudience !== this.state.shouldRender) {
+                this.setState({
+                    shouldRender: userMatchAudience,
+                });
+            }
+        });
+    }
+
+    /**
+     * Renders the component
+     */
+    public render(): JSX.Element {
+        return this._render(this.props, this.state);
+    }
+
+    private _render({ label, showLabel, icon, className = "", id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
+        if (!shouldRender) {
+            return null;
+        }
+        return (
+            < a
+                href="#"
+                hidden={hidden}
+                onClick={e => this.onClick(e, this.props)}
+                id={id}
+                className={className}
+                style={style} >
+                {icon && icon.position === ModalLinkIconPosition.Left && (
+                    <Icon
+                        iconName={icon.iconName}
+                        style={{ marginRight: 5 }} />
+                )}
+                {(label && showLabel) && label}
+                {icon && icon.position === ModalLinkIconPosition.Right && (
+                    <Icon
+                        iconName={icon.iconName}
+                        style={{ marginLeft: 5 }} />
+                )
+                }
+            </a >
+        );
+    }
+
+    private onClick = (e, { label, url, options, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps) => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -48,24 +108,9 @@ export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSubmi
             };
         }
         SP.UI.ModalDialog.showModalDialog(mOptions);
-    };
+    }
+}
 
-    return (
-        <a
-            href="#"
-            hidden={hidden}
-            onClick={onClick}
-            id={id}
-            className={className}
-            style={style}>
-            {icon && icon.position === ModalLinkIconPosition.Left && <Icon iconName={icon.iconName} style={{ marginRight: 5 }} />}
-            {(label && showLabel) && label}
-            {icon && icon.position === ModalLinkIconPosition.Right && <Icon iconName={icon.iconName} style={{ marginLeft: 5 }} />}
-        </a>
-    );
-};
-
-export default ModalLink;
 export {
     IModalLinkProps,
     ModalLinkIconPosition,
