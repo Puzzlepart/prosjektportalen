@@ -162,7 +162,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 <MessageBar>{__("DynamicPortfolio_NoResults")}</MessageBar>
             );
         }
-        console.log(data.items);
+
         return (
             <DetailsList
                 items={data.items}
