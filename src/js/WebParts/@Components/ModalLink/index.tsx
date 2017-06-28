@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import IModalLinkProps, { ModalLinkIconPosition, IModalLinkIconProps, IModalLinkOptions } from "./IModalLinkProps";
+import ModalLinkIconPosition from "./ModalLinkIconPosition";
+import IModalLinkIconProps from "./IModalLinkIconProps";
+import IModalLinkOptions from "./IModalLinkOptions";
+import IModalLinkProps from "./IModalLinkProps";
 
 
 export const ModalLink = ({ label, showLabel = true, url, options, reloadOnSubmit = false, reloadOnCancel = false, width, height, icon, className = "", id, style, hidden }: IModalLinkProps) => {
