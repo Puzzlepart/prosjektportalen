@@ -1798,4 +1798,10 @@
   <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
     <value>Prosjektbildet er lagret</value>
   </data>
+  <data name="SiteFields_GtRiskFactorPostAction_Formula" xml:space="preserve">
+    <value>=[S etter tiltak]*[K etter tiltak]</value>
+  </data>
+  <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
+    <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
+  </data>
 </root>
