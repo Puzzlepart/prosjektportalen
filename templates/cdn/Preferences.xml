@@ -1,0 +1,7 @@
+<pnp:Preferences 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Parameters>
+        <pnp:Parameter Key="TenantHostName"></pnp:Parameter>
+        <pnp:Parameter Key="PublicCdnOriginId"></pnp:Parameter>
+    </pnp:Parameters>
+</pnp:Preferences>
