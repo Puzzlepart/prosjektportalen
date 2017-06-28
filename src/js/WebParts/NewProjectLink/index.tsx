@@ -28,8 +28,12 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
      * Component did mount
      */
     public componentDidMount(): void {
-        Util.doesUserMatchAudience(this.props.audienceTargeting).then(doesMatch => {
-            console.log(doesMatch);
+        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
+            if (userMatchAudience !== this.state.shouldRender) {
+                this.setState({
+                    shouldRender: userMatchAudience,
+                });
+            }
         });
     }
 
