@@ -1,4 +1,4 @@
-import IModalLinkIconProps from "./IModalLinkIconProps";
+import ModalLinkIconPosition from "./ModalLinkIconPosition";
 
 interface IModalLinkIconProps {
     iconName: any;
