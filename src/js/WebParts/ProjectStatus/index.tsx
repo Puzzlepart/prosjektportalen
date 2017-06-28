@@ -58,7 +58,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="fremdrift-section" className="fremdrift-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectTime")}
+                                name={__("ProjectStatus_Heading_ProjectTime")}
                                 iconName="DateTime"
                                 statusValue={project.GtStatusTime}
                                 comment={project.GtStatusTimeComment}
@@ -68,7 +68,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="budget-section" className="budget-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectBudget")}
+                                name={__("ProjectStatus_Heading_ProjectBudget")}
                                 iconName="Money"
                                 statusValue={project.GtStatusBudget}
                                 comment={project.GtStatusBudgetComment}
@@ -78,7 +78,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="kvalitet-section" className="kvalitet-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectQuality")}
+                                name={__("ProjectStatus_Heading_ProjectQuality")}
                                 iconName="Product"
                                 statusValue={project.GtStatusQuality}
                                 comment={project.GtStatusQualityComment}
@@ -86,7 +86,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="risiko-section" className="risiko-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectRisk")}
+                                name={__("ProjectStatus_Heading_ProjectRisk")}
                                 iconName="Warning"
                                 statusValue={project.GtStatusRisk}
                                 comment={project.GtStatusRiskComment}
@@ -96,7 +96,7 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="gevinst-section" className="gevinst-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectBenefitAchievement")}
+                                name={__("ProjectStatus_Heading_ProjectBenefitAchievement")}
                                 iconName="Trophy"
                                 statusValue={project.GtStatusGainAchievement}
                                 comment={project.GtStatusGainAchievementComment}
