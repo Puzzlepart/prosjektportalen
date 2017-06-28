@@ -823,7 +823,7 @@
     <value>URL</value>
   </data>
   <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
-    <value>Status usikkerhet</value>
+    <value>Status uncertainty</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
