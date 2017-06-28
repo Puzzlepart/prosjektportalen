@@ -1,0 +1,155 @@
+<pnp:ListInstance Title="ProjectConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project name in the financial system</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project Number</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Case / Archive Reference</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Service Area</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project Type</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Phase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project Manager</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project Owner</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Start Date</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">End Date</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Status risk</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Comment, risk</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Status progress</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Comment, progress</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Status economy</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Comment, economy</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Status Benefits achievement</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Comment, Benefits achievement</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Status quality</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Comment, quality</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Overall status</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Total budget</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Current costs</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Date of last cost report</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Project Goals</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>
