@@ -161,7 +161,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     /**
      * Save report
-     * 
+     *
      * @param reportBlob Blob for the report file
      */
     private saveReport = reportBlob => {
