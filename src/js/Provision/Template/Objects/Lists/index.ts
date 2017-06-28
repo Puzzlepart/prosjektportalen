@@ -194,7 +194,7 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
-        Views: [{
+        Views: process.env.LANGUAGE === 1044 ? [{
             Title: __("View_AllItems_DisplayName"),
             ViewFields: [
                 "ID",
@@ -241,7 +241,7 @@ const Lists: IList[] = [
                     </And>
                 </Where>`,
             },
-        }],
+        }] : [],
     },
     {
         Title: __("Lists_Tasks_Title"),
