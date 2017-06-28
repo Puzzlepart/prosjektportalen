@@ -3,7 +3,7 @@
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Title</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Tittel</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Title</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpReadOnly">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMinWidth">150</pnp:DataValue>
@@ -20,84 +20,84 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString52</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Fase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Phase</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString53</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Tjenesteområde</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Service Area</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString54</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prosjekttype</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Type</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStartDateOWSDATE</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Startdato</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Start Date</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtEndDateOWSDATE</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Sluttdato</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">End Date</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString51</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prosjektleder</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Manager</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">70</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">RefinableString50</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prosjekteier</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Owner</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">80</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtGainsResponsibleOWSUSER</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Gevinstansvarlig</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Account Manager</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">90</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpMaxWidth">150</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusTimeOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status fremdrift</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status progress</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">100</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusBudgetOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status økonomi</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status economy</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">110</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusQualityOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status kvalitet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status quality</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">120</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusRiskOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status risiko</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status risk</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">130</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtStatusGainAchievementOWSCHCS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Status gevinstoppnåelse</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Status Benefits achievement</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">140</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
         </pnp:DataRow>
@@ -112,7 +112,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectGoalsOWSMTXT</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Målsetning</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project Goals</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">160</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
@@ -121,7 +121,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Created</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Opprettet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Created</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">170</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
@@ -133,40 +133,40 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectNumberOWSTEXT</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prosjektnummer</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project number</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">190</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtArchiveReferenceOWSTEXT</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Sak-/arkivreferanse</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Case / Archive Reference</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">200</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectFinanceNameOWSTEXT</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prosjektnavn i økonomisystemet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project name in the financial system</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">210</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtBudgetTotalOWSCURR</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Totalbudsjett for prosjektet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Total budget</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">220</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtCostsTotalOWSCURR</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Kostnader påløpt totalt</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Current costs</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">230</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectForecastOWSCURR</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Prognose for prosjektet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Project prognosis</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">240</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Currency</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtBudgetLastReportDateOWSDATE</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Dato for siste rapportering av kostnader</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Date of last cost report</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">250</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
