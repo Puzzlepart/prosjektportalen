@@ -1,23 +1,6 @@
-import * as React from "react";
-
-export interface IModalLinkOptions {
-    HideWebPartMaintenancePageLink?: boolean;
-    HideContentTypeChoice?: boolean;
-    HideFormFields?: string;
-    HideAddNew?: boolean;
-    HideViewSelector?: boolean;
-    HideRibbon?: boolean;
-}
-
-export enum ModalLinkIconPosition {
-    Left,
-    Right,
-}
-
-export interface IModalLinkIconProps {
-    iconName: any;
-    position: ModalLinkIconPosition;
-}
+import AudienceTargeting from "../../AudienceTargeting";
+import IModalLinkIconProps from "./IModalLinkIconProps";
+import IModalLinkOptions from "./IModalLinkOptions";
 
 interface IModalLinkProps {
     label?: string;
@@ -33,6 +16,15 @@ interface IModalLinkProps {
     id?: string;
     style?: React.CSSProperties;
     hidden?: boolean;
+    audienceTargeting?: AudienceTargeting;
 }
+
+export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
+    showLabel: true,
+    reloadOnSubmit: false,
+    reloadOnCancel: false,
+    className: "",
+    audienceTargeting: AudienceTargeting.None,
+};
 
 export default IModalLinkProps;
