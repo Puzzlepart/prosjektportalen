@@ -175,7 +175,9 @@ const ProjectHome: IFile = {
                 List: __("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity"],
+                    ViewFields: process.env.LANGUAGE === 1044
+                        ? ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity", "GtRiskFactor"]
+                        : ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,
