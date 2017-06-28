@@ -1726,28 +1726,28 @@
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>Bare vise</value>
   </data>
-  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectMetadata" xml:space="preserve">
     <value>Prosjektegenskaper</value>
   </data>
-  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+  <data name="ProjectStatus_Heading_OverallStatus" xml:space="preserve">
     <value>Overordnet status</value>
   </data>
-  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectTime" xml:space="preserve">
     <value>Fremdrift</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBudget" xml:space="preserve">
     <value>Økonomi</value>
   </data>
-  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectQuality" xml:space="preserve">
     <value>Kvalitet</value>
   </data>
-  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectRisk" xml:space="preserve">
     <value>Risiko</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBenefitAchievement" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Gevinstoppnåelse</value>
   </data>
-  <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">
+  <data name="ProjectStatus_RiskShowPostActionLabel" xml:space="preserve">
     <value>Vis før/etter tiltak</value>
   </data>
   <data name="RiskMatrix_Header_Critical" xml:space="preserve">
@@ -1786,7 +1786,7 @@
   <data name="String_StatusReport" xml:space="preserve">
     <value>Statusrapport</value>
   </data>
-  <data name="StatusPage_Heading_Status" xml:space="preserve">
+  <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
 </root>

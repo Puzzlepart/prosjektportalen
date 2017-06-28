@@ -1722,28 +1722,28 @@
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>View Only</value>
   </data>
-  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectMetadata" xml:space="preserve">
     <value>Project info</value>
   </data>
-  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+  <data name="ProjectStatus_Heading_OverallStatus" xml:space="preserve">
     <value>Overall status</value>
   </data>
-  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectTime" xml:space="preserve">
     <value>Progress</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBudget" xml:space="preserve">
     <value>Economy</value>
   </data>
-  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectQuality" xml:space="preserve">
     <value>Quality</value>
   </data>
-  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectRisk" xml:space="preserve">
     <value>Risk</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBenefitAchievement" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Benefits achievement</value>
   </data>
-  <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">
+  <data name="ProjectStatus_RiskShowPostActionLabel" xml:space="preserve">
     <value>Show before/after measures</value>
   </data>
   <data name="RiskMatrix_Header_Critical" xml:space="preserve">
@@ -1782,7 +1782,7 @@
   <data name="String_StatusReport" xml:space="preserve">
     <value>Status Report</value>
   </data>
-  <data name="StatusPage_Heading_Status" xml:space="preserve">
+  <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
 </root>
