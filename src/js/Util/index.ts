@@ -1,5 +1,7 @@
 import * as moment from "moment";
 import { sp } from "sp-pnp-js";
+import AudienceTargeting from "../WebParts/AudienceTargeting";
+
 declare var MSOWebPartPageFormName: string;
 
 /**
@@ -27,17 +29,44 @@ const isUserInGroup = (group) => new Promise(resolve => {
 /**
  * Is the current user in the visitors group
  */
-export const isUserInVisitorsGroup = () =>  isUserInGroup(sp.web.associatedVisitorGroup);
+export const isUserInVisitorsGroup = () => isUserInGroup(sp.web.associatedVisitorGroup);
 
 /**
  * Is the current user in the members group
  */
-export const isUserInMembersGroup = () =>  isUserInGroup(sp.web.associatedMemberGroup);
+export const isUserInMembersGroup = () => isUserInGroup(sp.web.associatedMemberGroup);
 
 /**
  * Is the current user in the owners group
  */
 export const isUserInOwnersGroup = () => isUserInGroup(sp.web.associatedOwnerGroup);
+
+/**
+ * Does the current user match the audience target
+ */
+export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promise(resolve => {
+    switch (audience) {
+        case AudienceTargeting.None: {
+            resolve(true);
+        }
+            break;
+        case AudienceTargeting.Visitors: {
+            isUserInVisitorsGroup().then(bool => resolve(bool));
+        }
+            break;
+        case AudienceTargeting.Members: {
+            isUserInMembersGroup().then(bool => resolve(bool));
+        }
+            break;
+        case AudienceTargeting.Owners: {
+            isUserInOwnersGroup().then(bool => resolve(bool));
+        }
+            break;
+        default: {
+            resolve(true);
+        }
+    }
+});
 
 /**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
