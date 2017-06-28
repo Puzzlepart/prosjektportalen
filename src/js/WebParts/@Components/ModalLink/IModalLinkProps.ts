@@ -1,4 +1,3 @@
-import * as React from "react";
 import AudienceTargeting from "../../AudienceTargeting";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
@@ -19,5 +18,13 @@ interface IModalLinkProps {
     hidden?: boolean;
     audienceTargeting?: AudienceTargeting;
 }
+
+export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
+    showLabel: true,
+    reloadOnSubmit: false,
+    reloadOnCancel: false,
+    className: "",
+    audienceTargeting: AudienceTargeting.None,
+};
 
 export default IModalLinkProps;
