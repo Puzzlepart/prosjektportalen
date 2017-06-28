@@ -4,6 +4,7 @@ var gulp = require("gulp"),
     format = require("string-format"),
     runSequence = require("run-sequence"),
     git = require("./utils/git.js"),
+    build = require("../build.json"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
@@ -37,7 +38,10 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
+    console.log(`[Building release for ${build.language}]`);
+    console.log("[See build.json to change build settings]");
     runSequence("default::prod", "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", "zip:dist", () => {
+        console.log(`[Build done. Find your .zip in /releases]`);
         done();
     });
 });
