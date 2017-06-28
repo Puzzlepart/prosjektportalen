@@ -1789,4 +1789,10 @@
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="ProjectStatus_SaveSnapshot" xml:space="preserve">
+    <value>Lagre øyeblikksbilde</value>
+  </data>
+  <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
+    <value>Prosjektbildet er lagret</value>
+  </data>
 </root>

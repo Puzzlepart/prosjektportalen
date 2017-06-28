@@ -1785,4 +1785,10 @@
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="ProjectStatus_SaveSnapshot" xml:space="preserve">
+    <value>Save snapshot</value>
+  </data>
+  <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
+    <value>Snapshot saved</value>
+  </data>
 </root>
