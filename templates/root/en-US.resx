@@ -523,7 +523,7 @@
     <value>Relevant change</value>
   </data>
   <data name="SiteFields_GtProjectTaskGain_DisplayName" xml:space="preserve">
-    <value>Relevant gain</value>
+    <value>Relevant benefit</value>
   </data>
   <data name="SiteFields_GtChangeLookup_DisplayName" xml:space="preserve">
     <value>Change</value>
