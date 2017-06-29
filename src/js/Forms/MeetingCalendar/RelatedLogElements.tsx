@@ -10,12 +10,18 @@ const LogElement = ({ data: { ID, Title, GtProjectLogDescription } }) => {
 };
 
 const RelatedLogElements = ({ logElements }) => {
-    return (<div className="container" style={{ marginTop: "25px" }}>
-        <ChromeTitle title="Relaterte loggelementer" />
-        <ul className="pp-simpleList" style={{ width: "300px" }}>
-            {logElements.map(e => <LogElement data={e} />)}
-        </ul>
-    </div>);
+    return (
+        <div
+            className="container"
+            style={{ marginTop: "25px" }}>
+            <ChromeTitle title="Relaterte loggelementer" />
+            <ul
+                className="pp-simpleList"
+                style={{ width: "300px" }}>
+                {logElements.map(e => <LogElement data={e} />)}
+            </ul>
+        </div>
+    );
 };
 
 export default RelatedLogElements;
