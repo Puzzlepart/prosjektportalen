@@ -1824,4 +1824,7 @@
   <data name="ProjectStatus_SnapshotNoHistory" xml:space="preserve">
     <value>Ingen historikk tilgjengelig</value>
   </data>
+  <data name="WebPart_RelatedLogElements_Title" xml:space="preserve">
+    <value>Relaterte loggelementer</value>
+  </data>
 </root>

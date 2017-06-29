@@ -21,7 +21,7 @@ const RelatedLogElements = ({ logElements }) => {
         <div
             className="container"
             style={{ marginTop: "25px" }}>
-            <ChromeTitle title="Relaterte loggelementer" />
+            <ChromeTitle title={__("WebPart_RelatedLogElements_Title")} />
             <ul
                 className="pp-simpleList"
                 style={{ width: "300px" }}>
