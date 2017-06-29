@@ -8,7 +8,7 @@ const Columns = (dataSource: DataSource): any[] => {
     return [{
         fieldName: "Title",
         key: "Title",
-        name: "Gevinst",
+        name: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         searchPostfix: null,
         minWidth: 100,
         maxWidth: 180,
@@ -53,7 +53,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "PreviousValue",
         key: "PreviousValue",
-        name: "Forrige måling",
+        name: __("BenefitsOverview_PreviousValue"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -61,7 +61,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "PreviousPercentage",
         key: "PreviousPercentage",
-        name: "Måloppnåelse, forrige måling",
+        name: __("BenefitsOverview_PreviousPercentage"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -69,7 +69,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "LatestValue",
         key: "LatestValue",
-        name: "Siste måling",
+        name: __("BenefitsOverview_LatestValue"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -77,7 +77,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "LatestPercentage",
         key: "LatestPercentage",
-        name: "Måloppnåelse, siste måling",
+        name: __("BenefitsOverview_LatestPercentage"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -214,7 +214,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleC
             );
         }
         case "SiteTitle": {
-            let {  SiteTitle: Title } = item;
+            let { SiteTitle: Title } = item;
             return (
                 <a href="#" onClick={onTitleClick}>{Title}</a>
             );

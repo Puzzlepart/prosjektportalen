@@ -370,7 +370,7 @@ const Lists: IList[] = [
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
             Required: true,
-            DisplayName: "Gevinst",
+            DisplayName: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),

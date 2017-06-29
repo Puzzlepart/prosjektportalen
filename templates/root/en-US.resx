@@ -1800,4 +1800,19 @@
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Probability (P)]*[Consequence (C)]</value>
   </data>
+  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
+    <value>Goal achievement, last measurement</value>
+  </data>
+  <data name="BenefitsOverview_LatestValue" xml:space="preserve">
+    <value>Last measurement</value>
+  </data>
+  <data name="BenefitsOverview_PreviousPercentage" xml:space="preserve">
+    <value>Goal achievement, previous measurement</value>
+  </data>
+  <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
+    <value>Previous measurement</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
+    <value>Benefit</value>
+  </data>
 </root>
