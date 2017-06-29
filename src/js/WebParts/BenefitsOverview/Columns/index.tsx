@@ -8,7 +8,7 @@ const Columns = (dataSource: DataSource): any[] => {
     return [{
         fieldName: "Title",
         key: "Title",
-        name: "Gevinst",
+        name: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         searchPostfix: null,
         minWidth: 100,
         maxWidth: 180,
