@@ -46,7 +46,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Currency": {
-            let currValue = Util.toCurrencyFormat(columnValue, "kr");
+            let currValue = Util.toCurrencyFormat(columnValue);
             return (
                 <span title={currValue}>{currValue}</span>
             );
