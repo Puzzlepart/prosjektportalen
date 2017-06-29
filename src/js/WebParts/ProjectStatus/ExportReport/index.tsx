@@ -147,11 +147,11 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         let firstOption = reports.length > 0
             ? {
                 key: "01",
-                text: `Historikk (${reports.length} tidligere)`,
+                text: String.format(__("ProjectStatus_SnapshotHistory"), reports.length),
             }
             : {
                 key: "01",
-                text: "Ingen historikk tilgjengelig",
+                text: __("ProjectStatus_SnapshotNoHistory"),
             };
         return [
             firstOption,
