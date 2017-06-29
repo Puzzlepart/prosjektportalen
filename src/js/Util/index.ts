@@ -361,7 +361,7 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
  * @param val The value
  * @param prefix Currency prefix
  */
-export const toCurrencyFormat = (val: string, prefix = "kr") => {
+export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): string => {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
@@ -369,7 +369,7 @@ export const toCurrencyFormat = (val: string, prefix = "kr") => {
     if (str[1] && str[1].length >= 5) {
         str[1] = str[1].replace(/(\d{3})/g, "$1 ");
     }
-    return `kr ${str.join(" ")}`;
+    return prefix  + str.join(" ");
 };
 
 /**
