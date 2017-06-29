@@ -1803,6 +1803,18 @@
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
   </data>
+  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
+    <value>Måloppnåelse, siste måling</value>
+  </data>
+  <data name="BenefitsOverview_LatestValue" xml:space="preserve">
+    <value>Siste måling</value>
+  </data>
+  <data name="BenefitsOverview_PreviousPercentage" xml:space="preserve">
+    <value>Måloppnåelse, forrige måling</value>
+  </data>
+  <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
+    <value>Forrige måling</value>
+  </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Gevinst</value>
   </data>
