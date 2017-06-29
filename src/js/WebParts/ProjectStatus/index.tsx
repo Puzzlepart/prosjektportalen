@@ -72,7 +72,6 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                                 iconName="Money"
                                 statusValue={project.GtStatusBudget}
                                 comment={project.GtStatusBudgetComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`}
                                 fieldName="GtStatusBudget" />
                             <EconomySection project={project} />
                         </Element>
