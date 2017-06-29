@@ -1800,4 +1800,7 @@
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Probability (P)]*[Consequence (C)]</value>
   </data>
+  <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
+    <value>Benefit</value>
+  </data>
 </root>
