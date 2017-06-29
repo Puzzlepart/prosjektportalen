@@ -197,9 +197,14 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
  * @param index The index
  * @param column The column
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleClick: (e) => void): any => {
-    let colValue = item[column.fieldName];
-    let { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrese } = item;
+const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTitleClick: (e) => void): any => {
+    const colValue = item[column.fieldName];
+    const {
+        LatestValue,
+        PreviousValue,
+        LatestPercentage,
+        ValueShouldIncrese,
+     } = item;
     switch (column.key) {
         case "Title": {
             let dispFormUrl = item.Path;
@@ -216,7 +221,9 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleC
         case "SiteTitle": {
             let { SiteTitle: Title } = item;
             return (
-                <a href="#" onClick={onTitleClick}>{Title}</a>
+                <a
+                    href="#"
+                    onClick={onSiteTitleClick}>{Title}</a>
             );
         }
         case "GtStartValue":
