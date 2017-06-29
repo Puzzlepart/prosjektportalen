@@ -117,7 +117,7 @@ export const GenerateColumns = (fields: any[], dataSource: DataSource): any[] =>
             generatedColumns.unshift({
                 fieldName: "SiteTitle",
                 key: "SiteTitle",
-                name: "Prosjekt",
+                name: __("String_Project"),
                 minWidth: 100,
                 maxWidth: 180,
             });
