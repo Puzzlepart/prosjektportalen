@@ -5,10 +5,11 @@ import AudienceTargeting from "../../AudienceTargeting";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
-import IModalLinkProps from "./IModalLinkProps";
+import IModalLinkProps , {  ModalLinkDefaultProps } from "./IModalLinkProps";
 import IModalLinkState from "./IModalLinkState";
 
 export default class ModalLink extends React.PureComponent<IModalLinkProps, IModalLinkState> {
+    public static defaultProps = ModalLinkDefaultProps;
     /**
      * Constructor
      */
@@ -39,7 +40,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
         return this._render(this.props, this.state);
     }
 
-    private _render({ label, showLabel, icon, className = "", id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
+    private _render({ label, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
         if (!shouldRender) {
             return null;
         }
