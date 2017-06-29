@@ -23,11 +23,22 @@ const wp_map: IWebPartMapping = {
     "pp-projectphases": <ProjectPhases />,
     "pp-newprojectlink": <NewProjectLink />,
     "pp-announcements": <Announcements />,
-    "pp-latestprojects": <LatestProjects itemsCount={8} reloadInterval={40} />,
+    "pp-latestprojects": (
+        <LatestProjects
+            itemsCount={8}
+            reloadInterval={40} />
+    ),
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio />,
     "pp-benefitsoverview": <BenefitsOverview />,
-    "pp-benefitsoverview-search": <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />,
+    "pp-benefitsoverview-search": (
+        <BenefitsOverview
+            dataSource={DataSource.Search}
+            groupByOptions={[{
+                name: __("String_Project"),
+                key: "SiteTitle",
+            }]} />
+    ),
     "pp-projectstatus": <ProjectStatus />,
     "pp-experiencelog": <ExperienceLog />,
 };
