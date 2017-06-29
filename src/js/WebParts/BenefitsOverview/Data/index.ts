@@ -1,24 +1,10 @@
 import { sp, Logger, LogLevel } from "sp-pnp-js";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import * as Util from "../../../Util";
 import { Columns, GetColumnByKey, GenerateColumns } from "../Columns";
 import DataSource from "../../DataSource";
-
-export interface IBenefitsOverviewData {
-    items?: any[];
-    columns?: IColumn[];
-}
-
-export interface ISpField {
-    InternalName: string;
-    Title: string;
-}
-
-export interface IMeasurement {
-    Value: number;
-    Percentage: number;
-    SPWebUrl: string;
-}
+import IBenefitsOverviewData from "./IBenefitsOverviewData";
+import IMeasurement from "./IMeasurement";
+import ISpField from "./ISpField";
 
 /**
  * Get measurements for the specified gain entry
