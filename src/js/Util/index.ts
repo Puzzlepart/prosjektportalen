@@ -59,7 +59,11 @@ export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promis
         }
             break;
         case AudienceTargeting.Owners: {
-            isUserInOwnersGroup().then(bool => resolve(bool));
+            if (_spPageContextInfo.hasOwnProperty("isSiteAdmin") && _spPageContextInfo["isSiteAdmin"] === true) {
+                resolve(true);
+            } else {
+                isUserInOwnersGroup().then(bool => resolve(bool));
+            }
         }
             break;
         default: {
@@ -369,7 +373,7 @@ export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): st
     if (str[1] && str[1].length >= 5) {
         str[1] = str[1].replace(/(\d{3})/g, "$1 ");
     }
-    return prefix  + str.join(" ");
+    return prefix + str.join(" ");
 };
 
 /**
