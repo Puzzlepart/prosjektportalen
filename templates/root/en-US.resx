@@ -1830,4 +1830,22 @@
   <data name="CurrencySymbol" xml:space="preserve">
     <value>$</value>
   </data>
+  <data name="View_BenefitTasks_DisplayName" xml:space="preserve">
+    <value>Benefit tasks</value>
+  </data>
+  <data name="View_Flat_DisplayName" xml:space="preserve">
+    <value>Flat</value>
+  </data>
+  <data name="View_GroupedBenefitType_DisplayName" xml:space="preserve">
+    <value>Grouped by Benefit Type</value>
+  </data>
+  <data name="View_GroupedProcess_DisplayName" xml:space="preserve">
+    <value>Grouped by Process</value>
+  </data>
+  <data name="View_GroupedStatus_DisplayName" xml:space="preserve">
+    <value>Grouped by Status</value>
+  </data>
+  <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
+    <value>Relevant links</value>
+  </data>
 </root>

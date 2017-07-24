@@ -1833,4 +1833,22 @@
   <data name="CurrencySymbol" xml:space="preserve">
     <value>kr </value>
   </data>
+  <data name="View_BenefitTasks_DisplayName" xml:space="preserve">
+    <value>Gevinstoppgaver</value>
+  </data>
+  <data name="View_Flat_DisplayName" xml:space="preserve">
+    <value>Flat visning</value>
+  </data>
+  <data name="View_GroupedBenefitType_DisplayName" xml:space="preserve">
+    <value>Pr gevinsttype</value>
+  </data>
+  <data name="View_GroupedProcess_DisplayName" xml:space="preserve">
+    <value>Pr prosess</value>
+  </data>
+  <data name="View_GroupedStatus_DisplayName" xml:space="preserve">
+    <value>Per status</value>
+  </data>
+  <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
+    <value>Relevante koblinger</value>
+  </data>
 </root>
