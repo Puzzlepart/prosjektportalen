@@ -15,22 +15,26 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
 const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
 
-    if (!columnValue) {
-        return (
-            <span>
-            </span>
-        );
-    }
-
-    if (column.key === "Title") {
-        return (
-            <a
-                href="#"
-                onClick={titleOnClick}>{columnValue}</a>
-        );
-    }
-    if (column.key === "Path" || column.key === "URL") {
-        return <a href={item.Path}>{columnValue}</a>;
+    switch (column.key) {
+        case "LinkProjectStatus": {
+            console.log(item.Path);
+            return (
+                <a href={`${item.Path}/SitePages/ProjectStatus.aspx`}>
+                    <Icon iconName="BarChart4" />
+                </a>
+            );
+        }
+        case "Title": {
+            return (
+                <a
+                    href="#"
+                    onClick={titleOnClick}>{columnValue}</a>
+            );
+        }
+        case "Path":
+        case "URL": {
+            return <a href={item.Path}>{columnValue}</a>;
+        }
     }
     switch (column.render) {
         case "Date": {
@@ -71,6 +75,11 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
     }
+
+    return (
+        <span>
+        </span>
+    );
 };
 
 export default _onRenderItemColumn;
