@@ -433,25 +433,33 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                     }
                 }
                 let filterKeys = Object.keys(currentFilters),
-                    temp = [];
+                    tempItems = [];
                 if (filterKeys.length > 0) {
                     items.forEach(item => {
                         let shouldInclude = true;
                         filterKeys.forEach(filterKey => {
-                            if (!Array.contains(currentFilters[filterKey], item[filterKey])) {
-                                shouldInclude = false;
+                            let values = item[filterKey].split(";");
+                            if (values.length > 1) {
+                                let matches = values.filter(value => Array.contains(currentFilters[filterKey], value));
+                                if (matches.length === 0) {
+                                    shouldInclude = false;
+                                }
+                            } else {
+                                if (!Array.contains(currentFilters[filterKey], values[0])) {
+                                    shouldInclude = false;
+                                }
                             }
                         });
                         if (shouldInclude) {
-                            temp.push(item);
+                            tempItems.push(item);
                         }
                     });
                 } else {
-                    temp = items;
+                    tempItems = items;
                 }
                 updatedFilterState = {
                     currentFilters: currentFilters,
-                    filteredItems: temp,
+                    filteredItems: tempItems,
                     filters: filters.map(f => (f.key === filter.key) ? filter : f),
                 };
             }
