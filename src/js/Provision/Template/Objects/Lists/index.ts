@@ -37,7 +37,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Per status",
+            Title: __("View_GroupedStatus_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
             AdditionalSettings: {
                 RowLimit: 50,
@@ -272,7 +272,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Relevante koblinger",
+            Title: __("View_RelevantLinks_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -281,7 +281,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Gevinstoppgaver",
+            Title: __("View_BenefitTasks_DisplayName"),
             ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -382,7 +382,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Pr gevinsttype",
+            Title: __("View_GroupedBenefitType_DisplayName"),
             ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -425,7 +425,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Pr prosess",
+            Title: __("View_GroupedProcess_DisplayName"),
             ViewFields: ["GtChallengeDescription", "LinkTitle"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -476,7 +476,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Flat visning",
+            Title: __("View_Flat_DisplayName"),
             ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,
