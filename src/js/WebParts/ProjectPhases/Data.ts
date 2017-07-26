@@ -19,21 +19,22 @@ export interface IChecklistData {
  * Fetch phases
  */
 const fetchPases = () => new Promise<any[]>((resolve, reject) => {
-    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
+    Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
         Util.ensureTaxonomy().then(() => {
-            let ctx = SP.ClientContext.get_current(),
-                taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
-                termStore = taxSession.getDefaultSiteCollectionTermStore(),
-                termSet = termStore.getTermSet(new SP.Guid(__("TermSetID_ProjectPhase"))),
-                terms = termSet.getAllTerms();
-            ctx.load(terms);
-            ctx.executeQueryAsync(() => {
-                resolve(terms.get_data().filter(t => t.get_localCustomProperties().ShowOnFrontpage !== "false").map(t => ({
-                    Id: t.get_id().toString(),
-                    Name: t.get_name(),
-                    PhaseLevel: t.get_localCustomProperties().PhaseLevel,
-                })));
-            }, reject);
+            sp.site.rootWeb.fields.getByInternalNameOrTitle("GtProjectPhase").select("TermSetId").get().then(({ TermSetId }) => {
+                let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
+                    termStore = taxSession.getDefaultSiteCollectionTermStore(),
+                    termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
+                    terms = termSet.getAllTerms();
+                ctx.load(terms);
+                ctx.executeQueryAsync(() => {
+                    resolve(terms.get_data().filter(t => t.get_localCustomProperties().ShowOnFrontpage !== "false").map(t => ({
+                        Id: t.get_id().toString(),
+                        Name: t.get_name(),
+                        PhaseLevel: t.get_localCustomProperties().PhaseLevel,
+                    })));
+                }, reject);
+            });
         });
     });
 });
