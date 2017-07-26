@@ -36,6 +36,8 @@ Param(
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
     [switch]$UseWebLogin,
+    [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
+    [switch]$CurrentCredentials,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline",
@@ -53,6 +55,8 @@ function Get-WebLanguage($ctx) {
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
         Connect-PnPOnline $Url -UseWebLogin
+    } else if ($CurrentCredentials.IsPresent) {
+        Connect-PnPOnline $Url -CurrentCredentials
     } else {
         Connect-PnPOnline $Url -Credentials $Credential
     }
@@ -115,11 +119,8 @@ function Apply-Template([string]$Template, [switch]$Localized) {
 }
 
 
-if ($Debug.IsPresent) {
-    Set-PnPTraceLog -On -Level Debug -LogFile pplog.txt
-} else {
-    Set-PnPTraceLog -On -Level Information -LogFile pplog.txt
-}
+$execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
+Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
 
 if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
