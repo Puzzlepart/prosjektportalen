@@ -55,7 +55,7 @@ function Get-WebLanguage($ctx) {
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
         Connect-PnPOnline $Url -UseWebLogin
-    } else if ($CurrentCredentials.IsPresent) {
+    } elseif ($CurrentCredentials.IsPresent) {
         Connect-PnPOnline $Url -CurrentCredentials
     } else {
         Connect-PnPOnline $Url -Credentials $Credential
