@@ -123,7 +123,12 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                                 readOnly: col.readOnly,
                             }));
                             // Sort the columns as they are added to the view
-                            let selectedColumnsOrderedAsSelected = initialView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
+                            let selectedColumnsOrderedAsSelected = [{
+                                key: "LinkProjectStatus",
+                                fieldName: "LinkProjectStatus",
+                                name: "",
+                                maxWidth: 30,
+                            }].concat(initialView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]));
                             let filters = this.getSelectedFiltersWithItems(response.refiners, initialView).concat([FieldSelector]);
                             resolve({
                                 selectedColumns: selectedColumnsOrderedAsSelected,
