@@ -118,13 +118,17 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         }
         return (
             <Dialog
-                isOpen={this.props.dialogProps.isOpen}
-                type={this.props.dialogProps.type}
-                isDarkOverlay={this.props.dialogProps.isDarkOverlay}
-                isBlocking={this.props.dialogProps.isBlocking}
+                hidden={!this.props.dialogProps.isOpen}
+                dialogContentProps={{
+                    type: this.props.dialogProps.type,
+                    subText: this.props.dialogProps.subText,
+                }}
+                modalProps={{
+                    className: this.props.dialogProps.className,
+                    isDarkOverlay: this.props.dialogProps.isDarkOverlay,
+                    isBlocking: this.props.dialogProps.isBlocking,
+                }}
                 title={this.props.dialogProps.title}
-                subText={this.props.dialogProps.subText}
-                className={this.props.dialogProps.className}
                 onDismiss={this.props.dialogProps.onDismiss}>
                 {this.renderForm(this.state)}
                 {this.renderAdvancedSection(this.state)}
