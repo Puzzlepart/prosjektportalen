@@ -45,10 +45,10 @@
         <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
     </pnp:FieldRefs>
     <pnp:Fields>
-        <Field Type="Boolean" DisplayName="Aktivert" ID="{75df5bdb-8b7f-4f0a-89a8-9c1a7959add7}" StaticName="ExtensionEnabled" Name="ExtensionEnabled">
+        <Field Type="Boolean" DisplayName="Enabled" ID="{75df5bdb-8b7f-4f0a-89a8-9c1a7959add7}" StaticName="ExtensionEnabled" Name="ExtensionEnabled">
             <Default>0</Default>
         </Field>
-        <Field Type="Number" DisplayName="Rekkefølge" ID="{84e6e3ba-891b-4a49-bb79-3264d1fcef8c}" StaticName="ExtensionOrder" Name="ExtensionOrder" />
+        <Field Type="Number" DisplayName="Order" ID="{84e6e3ba-891b-4a49-bb79-3264d1fcef8c}" StaticName="ExtensionOrder" Name="ExtensionOrder" />
     </pnp:Fields>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
