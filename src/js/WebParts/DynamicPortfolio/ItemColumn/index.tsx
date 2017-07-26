@@ -74,11 +74,6 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
     }
-
-    return (
-        <span>
-        </span>
-    );
 };
 
 export default _onRenderItemColumn;
