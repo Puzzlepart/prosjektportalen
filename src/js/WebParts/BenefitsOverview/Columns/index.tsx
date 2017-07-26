@@ -94,7 +94,7 @@ const Columns = (dataSource: DataSource): any[] => {
  * @param dataSource Data source
  */
 export const GetColumnByKey = (key: string, dataSource: DataSource): IColumn => {
-    let find = Columns(dataSource).filter(col => col.key === key);
+    let find = Columns(dataSource).filter(column => column.key === key);
     let [col] = find;
     return col;
 };
