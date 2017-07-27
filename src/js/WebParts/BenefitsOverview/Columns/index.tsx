@@ -203,7 +203,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
         LatestValue,
         PreviousValue,
         LatestPercentage,
-        ValueShouldIncrese,
+        ValueShouldIncrease,
      } = item;
     switch (column.key) {
         case "Title": {
@@ -242,7 +242,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
             }
         }
         case "PreviousValue": {
-            if (PreviousValue && PreviousValue !== 0) {
+            if (PreviousValue || PreviousValue === 0) {
                 return (<div>
                     {PreviousValue}
                 </div>);
@@ -257,20 +257,20 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
                         latestVal={LatestValue}
                         latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
-                        shouldIncrease={ValueShouldIncrese} />
+                        shouldIncrease={ValueShouldIncrease} />
                 </div>);
             } else {
                 return null;
             }
         }
         case "LatestValue": {
-            if (LatestValue && LatestValue !== 0) {
+            if (LatestValue || LatestValue === 0) {
                 return (<div>
                     {LatestValue} <TrendIcon
                         latestVal={LatestValue}
                         latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
-                        shouldIncrease={ValueShouldIncrese} />
+                        shouldIncrease={ValueShouldIncrease} />
                 </div>);
             } else {
                 return null;
