@@ -19,7 +19,10 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
     const idFieldName = isSearch ? "ListItemID" : "ID",
         valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
         lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
-        desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName;
+        desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName,
+        startValueFieldName = GetColumnByKey("GtStartValue", dataSource).fieldName,
+        desiredValue = parseInt(gain[desiredValueFieldName], 10),
+        startValue = parseInt(gain[startValueFieldName], 10);
     return measures
         .filter(m => {
             let gainId = parseInt(gain[idFieldName], 10),
@@ -31,8 +34,7 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
         })
         .map(measure => {
             let value = parseInt(measure[valueFieldName], 10),
-                desiredValue = parseInt(gain[desiredValueFieldName], 10),
-                percentage = valueShouldIncrease ? Util.percentage(value, desiredValue, false) : Util.percentage(desiredValue, value, false);
+                percentage = Util.percentage(startValue, value, desiredValue, false);
             return ({
                 Value: value,
                 Percentage: percentage,
@@ -44,20 +46,22 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
 /**
  * Generate data
  *
- * @param gains Benefits
+ * @param benefits Benefits
  * @param measures Measure
  * @param dataSource Data source
  */
-const GenerateData = (gains: any[], measures: any[], dataSource: DataSource): any[] => {
-    return gains.map(data => {
-        const valueShouldIncrease = (data[GetColumnByKey("GtDesiredValue", dataSource).fieldName] > data[GetColumnByKey("GtStartValue", dataSource).fieldName]);
+const GenerateData = (benefits: any[], measures: any[], dataSource: DataSource): any[] => {
+    return benefits.map(data => {
+        const startValue = data[GetColumnByKey("GtStartValue", dataSource).fieldName];
+        const desiredValue = data[GetColumnByKey("GtDesiredValue", dataSource).fieldName];
+        const valueShouldIncrease = (desiredValue > startValue);
         const relevantMeasures = GetMeasurements(measures, data, valueShouldIncrease, dataSource);
         let measureStats = {
-            LatestPercentage: 0,
-            LatestValue: 0,
-            PreviousPercentage: 0,
-            PreviousValue: 0,
-            ValueShouldIncrese: valueShouldIncrease,
+            LatestPercentage: null,
+            LatestValue: null,
+            PreviousPercentage: null,
+            PreviousValue: null,
+            ValueShouldIncrease: valueShouldIncrease,
         };
         if (relevantMeasures.length > 0) {
             try {

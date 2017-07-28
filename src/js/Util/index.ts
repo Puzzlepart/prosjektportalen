@@ -207,17 +207,13 @@ export const userMessage = (title: string, message: string, color: string, durat
 /**
  * Calculates percentage
  *
+ * @param startValue The start value, i.e. equal to 0%
  * @param partValue The part of the target value you want to calculate percentage of
  * @param targetValue The target value, i.e. equal to 100%
  * @param addPrefix Add prefix (%)
  */
-export const percentage = (partValue: number, targetValue: number, addPrefix = true): any => {
-    let value = 0;
-    if (partValue === 0 && targetValue === 0) {
-        value = 100;
-    } else if (partValue !== 0 || targetValue !== 0) {
-        value = Math.floor(((partValue / targetValue) * 100));
-    }
+export const percentage = (startValue: number, partValue: number, targetValue: number, addPrefix = true): any => {
+    let value = Math.floor(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
     } else {
