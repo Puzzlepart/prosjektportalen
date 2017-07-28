@@ -16,13 +16,6 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
     const columnValue = item[column.key];
 
     switch (column.key) {
-        case "LinkProjectStatus": {
-            return (
-                <a href={`${item.Path}/SitePages/ProjectStatus.aspx`}>
-                    <Icon iconName="BarChart4" />
-                </a>
-            );
-        }
         case "Title": {
             return (
                 <a
