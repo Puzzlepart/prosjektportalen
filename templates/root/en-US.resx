@@ -1221,6 +1221,9 @@
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Go to project site</value>
   </data>
+  <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
+    <value>Go to project status</value>
+  </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>en</value>
   </data>
