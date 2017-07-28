@@ -1224,6 +1224,9 @@
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Gå til prosjektområde</value>
   </data>
+  <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
+    <value>Gå til prosjektstatus</value>
+  </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>nb</value>
   </data>

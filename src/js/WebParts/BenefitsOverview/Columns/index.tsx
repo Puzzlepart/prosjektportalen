@@ -183,9 +183,13 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
                     </span>
                 );
             }
-        } else {
-            return null;
         }
+    } else if (latestPercentage >= 100) {
+        return (
+            <span>
+                <Icon iconName="Trophy" style={{ color: "gold" }} />
+            </span>
+        );
     }
     return null;
 };
@@ -233,10 +237,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
         }
         case "PreviousPercentage": {
             let { PreviousPercentage } = item;
-            if (PreviousPercentage && PreviousPercentage !== 0) {
+            if (PreviousPercentage && PreviousPercentage >= 100) {
                 return (<div>
                     {PreviousPercentage} %
-                    </div>);
+                    <span><Icon iconName="Trophy" style={{ color: "gold" }} /></span>
+                </div>);
+            } else if (PreviousPercentage || PreviousPercentage === 0) {
+                return (<div>
+                    {PreviousPercentage} %
+                </div>);
             } else {
                 return null;
             }
@@ -251,7 +260,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
             }
         }
         case "LatestPercentage": {
-            if (LatestPercentage && LatestPercentage !== 0) {
+            if (LatestPercentage || LatestPercentage === 0) {
                 return (<div style={{ position: "relative" }}>
                     {LatestPercentage} % <TrendIcon
                         latestVal={LatestValue}

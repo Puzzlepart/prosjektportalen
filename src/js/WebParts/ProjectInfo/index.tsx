@@ -104,6 +104,18 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                                 style={{
                                     marginLeft: 0,
                                     marginTop: 20,
+                                    display: "block",
+                                }} />
+                            <DefaultButton
+                                hidden={isLoading}
+                                href={`${this.props.webUrl}/SitePages/ProjectStatus.aspx`}
+                                iconProps={{ iconName: "BarChart4" }}
+                                description=""
+                                text={__("ProjectInfo_ProjectStatusLinkText")}
+                                style={{
+                                    marginLeft: 0,
+                                    marginTop: 20,
+                                    display: "block",
                                 }} />
                         </div>
                     </Modal>);
