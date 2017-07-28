@@ -3,6 +3,7 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
+import * as Util from "../../../Util";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import RiskList from "./RiskList";
 import RiskMatrix from "./RiskMatrix";
@@ -49,7 +50,9 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
                         type="checkbox"
                         id="pp-showPostAction"
                         onClick={_ => this.setState({ showPostAction: !showPostAction })} />
-                    <label id="pp-showPostActionLbl" htmlFor="pp-showPostAction">{__("StatusPage_RiskShowPostActionLabel")}</label>
+                    <label
+                        id="pp-showPostActionLbl"
+                        htmlFor="pp-showPostAction">{__("ProjectStatus_RiskShowPostActionLabel")}</label>
                 </div>
                 <RiskList items={items} columns={columns} />
             </div>
@@ -60,46 +63,46 @@ export class RiskOverview extends React.Component<IRiskOverviewProps, IRiskOverv
      * Fetch data using JSOM
      */
     private fetchData = () => new Promise<Partial<IRiskOverviewState>>((resolve, reject) => {
-        SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-            const ctx = SP.ClientContext.get_current();
-            const spList = ctx.get_web().get_lists().getByTitle(__("Lists_Uncertainties_Title"));
-            const camlQuery = new SP.CamlQuery();
-            camlQuery.set_viewXml(`<View>
-            <Query>
-                <Where>
-                    <And>
-                        <And>
-                            <Eq>
-                                <FieldRef Name="ContentType" />
-                                <Value Type="Computed">Risiko</Value>
-                            </Eq>
-                            <Neq>
-                                <FieldRef Name="GtRiskStatus" />
-                                <Value Type="Text">Tiltak gjennomført</Value>
-                            </Neq>
-                        </And>
-                        <Neq>
-                            <FieldRef Name="GtRiskStatus" />
-                            <Value Type="Text">Ikke lenger aktuell</Value>
-                        </Neq>
-                    </And>
-                </Where>
-            </Query>
-        </View>`);
-            const spItems = spList.getItems(camlQuery);
-            const spFields = spList.get_fields();
-            const spViewFields = spList.get_views().getByTitle(this.props.viewName).get_viewFields();
-            ctx.load(spItems, "Include(FieldValuesAsHtml)");
-            ctx.load(spFields);
-            ctx.load(spViewFields);
-            ctx.executeQueryAsync(() => {
-                const spItemsData = spItems.get_data();
-                resolve({
-                    items: spItemsData.map(i => i.get_fieldValuesAsHtml().get_fieldValues()),
-                    columns: this.generateColumns(spViewFields, spFields).filter(c => c),
-                });
-            }, reject);
-        });
+        Util.getClientContext(_spPageContextInfo.webAbsoluteUrl)
+            .then(ctx => {
+                const spList = ctx.get_web().get_lists().getByTitle(__("Lists_Uncertainties_Title"));
+                const camlQuery = new SP.CamlQuery();
+                camlQuery.set_viewXml(`<View>
+                    <Query>
+                        <Where>
+                            <And>
+                                <And>
+                                    <Eq>
+                                        <FieldRef Name="ContentType" />
+                                        <Value Type="Computed">${__("ContentTypes_Risiko_Name")}</Value>
+                                    </Eq>
+                                    <Neq>
+                                        <FieldRef Name="GtRiskStatus" />
+                                        <Value Type="Text">${__("Choice_GtRiskStatus_ActionTaken")}</Value>
+                                    </Neq>
+                                </And>
+                                <Neq>
+                                    <FieldRef Name="GtRiskStatus" />
+                                    <Value Type="Text">${__("Choice_GtRiskStatus_NoLongerRelevant")}</Value>
+                                </Neq>
+                            </And>
+                        </Where>
+                    </Query>
+                </View>`);
+                const spItems = spList.getItems(camlQuery);
+                const spFields = spList.get_fields();
+                const spViewFields = spList.get_views().getByTitle(this.props.viewName).get_viewFields();
+                ctx.load(spItems, "Include(FieldValuesAsHtml)");
+                ctx.load(spFields);
+                ctx.load(spViewFields);
+                ctx.executeQueryAsync(() => {
+                    const spItemsData = spItems.get_data();
+                    resolve({
+                        items: spItemsData.map(i => i.get_fieldValuesAsHtml().get_fieldValues()),
+                        columns: this.generateColumns(spViewFields, spFields).filter(c => c),
+                    });
+                }, reject);
+            });
     })
 
     /**

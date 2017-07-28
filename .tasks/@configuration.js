@@ -37,7 +37,7 @@ module.exports = {
         emitError: true
     },
     typescript: {
-        reporter: "fullReporter",
+        reporter: "nullReporter",
     },
     resources: {
         glob: "./templates/root/*.resx",

@@ -45,12 +45,16 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
         return (
             <Dialog
                 isOpen={true}
-                type={DialogType.largeHeader}
+                dialogContentProps={{
+                    type: DialogType.largeHeader,
+                    subText: this._getDialogSubText(),
+                }}
+                modalProps={{
+                    isDarkOverlay: true,
+                    isBlocking: false,
+                }}
                 onDismiss={this._closeDialog}
-                title={this._getDialogTitle()}
-                subText={this._getDialogSubText()}
-                isBlocking={false}
-            >
+                title={this._getDialogTitle()} >
                 <Body
                     currentView={currentView}
                     isLoading={isLoading}

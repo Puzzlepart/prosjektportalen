@@ -175,7 +175,7 @@ const ProjectHome: IFile = {
                 List: __("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
-                    ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity"],
+                    ViewFields: ["LinkTitle", "GtRiskProximity", "GtRiskFactor"],
                     AdditionalSettings: {
                         RowLimit: 10,
                         Paged: true,

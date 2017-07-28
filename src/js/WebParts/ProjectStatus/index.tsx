@@ -2,15 +2,15 @@ import * as React from "react";
 import { sp } from "sp-pnp-js";
 import { Element } from "react-scroll";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { StickyContainer } from "react-sticky";
-import { default as ProductsList } from "./ProductsList";
-import { default as RiskOverview } from "./RiskOverview";
-import { default as StatusSection } from "./StatusSection";
-import { default as StatusNavigation } from "./StatusNavigation";
-import { default as EconomySection } from "./EconomySection";
+import { StickyContainer, Sticky } from "react-sticky";
+import ProductsList from "./ProductsList";
+import RiskOverview from "./RiskOverview";
+import StatusSection from "./StatusSection";
+import StatusNavigation from "./StatusNavigation";
+import EconomySection from "./EconomySection";
 import SectionHeader from "./SectionHeader";
 import DataSource from "../DataSource";
-import { default as BenefitsOverview } from "../BenefitsOverview";
+import BenefitsOverview from "../BenefitsOverview";
 
 export interface IProjectStatusState {
     project: any;
@@ -39,35 +39,45 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                 <div className="ms-Grid">
                     <style id="project-style-placeholder"></style>
                     <StickyContainer className="status-report-container">
-                        <div id="status-navigation" className="navigation ms-Grid-row">
-                            <StatusNavigation project={project}/>
-                        </div>
+                        <Sticky>
+                            {
+                                ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
+                                    return (
+                                        <div
+                                            id="status-navigation"
+                                            className="navigation ms-Grid-row"
+                                            style={{ ...style, height: 100 }}>
+                                            <StatusNavigation project={project} />
+                                        </div>
+                                    );
+                                }
+                            }
+                        </Sticky>
                         <Element name="status-section" className="status-section section ms-Grid-row">
                             <StatusSection project={project} />
                         </Element>
                         <Element name="fremdrift-section" className="fremdrift-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectTime")}
+                                name={__("ProjectStatus_Heading_ProjectTime")}
                                 iconName="DateTime"
                                 statusValue={project.GtStatusTime}
                                 comment={project.GtStatusTimeComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Prosjektleveranser`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_ProjectProducts_Url")}`}
                                 fieldName="GtStatusTime" />
-                            <ProductsList viewName="Prosjektstatus" />
+                            <ProductsList viewName={__("View_ProjectStatus_DisplayName")} />
                         </Element>
                         <Element name="budget-section" className="budget-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectBudget")}
+                                name={__("ProjectStatus_Heading_ProjectBudget")}
                                 iconName="Money"
                                 statusValue={project.GtStatusBudget}
                                 comment={project.GtStatusBudgetComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`}
                                 fieldName="GtStatusBudget" />
                             <EconomySection project={project} />
                         </Element>
                         <Element name="kvalitet-section" className="kvalitet-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectQuality")}
+                                name={__("ProjectStatus_Heading_ProjectQuality")}
                                 iconName="Product"
                                 statusValue={project.GtStatusQuality}
                                 comment={project.GtStatusQualityComment}
@@ -75,21 +85,21 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
                         </Element>
                         <Element name="risiko-section" className="risiko-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectRisk")}
+                                name={__("ProjectStatus_Heading_ProjectRisk")}
                                 iconName="Warning"
                                 statusValue={project.GtStatusRisk}
                                 comment={project.GtStatusRiskComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Usikkerhet`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_Uncertainties_Url")}`}
                                 fieldName="GtStatusRisk" />
-                            <RiskOverview viewName="Prosjektstatus" />
+                            <RiskOverview viewName={__("View_ProjectStatus_DisplayName")} />
                         </Element>
                         <Element name="gevinst-section" className="gevinst-section section ms-Grid-row">
                             <SectionHeader
-                                name={__("StatusPage_Heading_ProjectBenefitAchievement")}
+                                name={__("ProjectStatus_Heading_ProjectBenefitAchievement")}
                                 iconName="Trophy"
                                 statusValue={project.GtStatusGainAchievement}
                                 comment={project.GtStatusGainAchievementComment}
-                                source={`${_spPageContextInfo.webAbsoluteUrl}/Lists/Gevinstanalyse og gevinstrealiseringsplan`}
+                                source={`${_spPageContextInfo.webAbsoluteUrl}/${__("Lists_BenefitsAnalysis_Url")}`}
                                 fieldName="GtStatusGainAchievement" />
                             <BenefitsOverview
                                 dataSource={DataSource.List}

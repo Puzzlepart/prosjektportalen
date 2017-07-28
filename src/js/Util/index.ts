@@ -1,4 +1,7 @@
 import * as moment from "moment";
+import { sp } from "sp-pnp-js";
+import AudienceTargeting from "../WebParts/AudienceTargeting";
+
 declare var MSOWebPartPageFormName: string;
 
 /**
@@ -9,6 +12,65 @@ export const htmlDecode = (input: string): string => {
     e.innerHTML = input;
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 };
+
+/**
+ * Is the current user in the specified group
+ *
+ * @param group The group to check
+ */
+const isUserInGroup = (group) => new Promise<boolean>(resolve => {
+    group.users.get()
+        .then(users => {
+            resolve(Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
+        })
+        .catch(_ => resolve(false));
+});
+
+/**
+ * Is the current user in the visitors group
+ */
+export const isUserInVisitorsGroup = () => isUserInGroup(sp.web.associatedVisitorGroup);
+
+/**
+ * Is the current user in the members group
+ */
+export const isUserInMembersGroup = () => isUserInGroup(sp.web.associatedMemberGroup);
+
+/**
+ * Is the current user in the owners group
+ */
+export const isUserInOwnersGroup = () => isUserInGroup(sp.web.associatedOwnerGroup);
+
+/**
+ * Does the current user match the audience target
+ */
+export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promise<boolean>(resolve => {
+    switch (audience) {
+        case AudienceTargeting.None: {
+            resolve(true);
+        }
+            break;
+        case AudienceTargeting.Visitors: {
+            isUserInVisitorsGroup().then(bool => resolve(bool));
+        }
+            break;
+        case AudienceTargeting.Members: {
+            isUserInMembersGroup().then(bool => resolve(bool));
+        }
+            break;
+        case AudienceTargeting.Owners: {
+            if (_spPageContextInfo.hasOwnProperty("isSiteAdmin") && _spPageContextInfo["isSiteAdmin"] === true) {
+                resolve(true);
+            } else {
+                isUserInOwnersGroup().then(bool => resolve(bool));
+            }
+        }
+            break;
+        default: {
+            resolve(true);
+        }
+    }
+});
 
 /**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
@@ -145,17 +207,13 @@ export const userMessage = (title: string, message: string, color: string, durat
 /**
  * Calculates percentage
  *
+ * @param startValue The start value, i.e. equal to 0%
  * @param partValue The part of the target value you want to calculate percentage of
  * @param targetValue The target value, i.e. equal to 100%
  * @param addPrefix Add prefix (%)
  */
-export const percentage = (partValue: number, targetValue: number, addPrefix = true): any => {
-    let value = 0;
-    if (partValue === 0 && targetValue === 0) {
-        value = 100;
-    } else if (partValue !== 0 || targetValue !== 0) {
-        value = Math.floor(((partValue / targetValue) * 100));
-    }
+export const percentage = (startValue: number, partValue: number, targetValue: number, addPrefix = true): any => {
+    let value = Math.floor(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
     } else {
@@ -303,7 +361,7 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
  * @param val The value
  * @param prefix Currency prefix
  */
-export const toCurrencyFormat = (val: string, prefix = "kr") => {
+export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): string => {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
@@ -311,7 +369,7 @@ export const toCurrencyFormat = (val: string, prefix = "kr") => {
     if (str[1] && str[1].length >= 5) {
         str[1] = str[1].replace(/(\d{3})/g, "$1 ");
     }
-    return `kr ${str.join(" ")}`;
+    return prefix + str.join(" ");
 };
 
 /**

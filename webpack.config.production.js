@@ -73,7 +73,11 @@ module.exports = (minify = true, bundleAnalyzer = false) => {
     let config = {
         cache: true,
         entry: {
-            main: ['babel-polyfill', 'whatwg-fetch', './lib/js/index.js'],
+            main: [
+                'core-js/fn/object/assign',
+                'core-js/es6/promise',
+                'whatwg-fetch',
+                './lib/js/index.js'],
         },
         output: {
             path: path.join(__dirname, "dist/js"),

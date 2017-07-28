@@ -37,7 +37,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Per status",
+            Title: __("View_GroupedStatus_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
             AdditionalSettings: {
                 RowLimit: 50,
@@ -170,7 +170,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Prosjektstatus",
+            Title: __("View_ProjectStatus_DisplayName"),
             ViewFields: ["LinkTitle", "GtProductAcceptanceDate", "GtProductStatus", "GtProductStatusComment", "GtProductQualityExpectations"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -215,7 +215,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Prosjektstatus",
+            Title: __("View_ProjectStatus_DisplayName"),
             ViewFields: [
                 "ID",
                 "LinkTitle",
@@ -272,7 +272,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Relevante koblinger",
+            Title: __("View_RelevantLinks_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -281,7 +281,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Gevinstoppgaver",
+            Title: __("View_BenefitTasks_DisplayName"),
             ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -302,9 +302,9 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
-        Fields: [
+        Fields: process.env.LANGUAGE === 1044 ? [
             SiteFields.GtProjectEventDateAndTitle,
-        ],
+        ] : [],
     },
     {
         Title: __("Lists_Documents_Title"),
@@ -370,7 +370,7 @@ const Lists: IList[] = [
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
             Required: true,
-            DisplayName: "Gevinst",
+            DisplayName: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
@@ -382,7 +382,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Pr gevinsttype",
+            Title: __("View_GroupedBenefitType_DisplayName"),
             ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -425,7 +425,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Pr prosess",
+            Title: __("View_GroupedProcess_DisplayName"),
             ViewFields: ["GtChallengeDescription", "LinkTitle"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -476,7 +476,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: "Flat visning",
+            Title: __("View_Flat_DisplayName"),
             ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,

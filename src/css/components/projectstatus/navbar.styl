@@ -1,10 +1,9 @@
 @import '../../conf/*';
 
 .navigation {
-    max-height: 100px;
+    z-index: 99;
 
     .nav-status-container {
-        z-index: 99;
         background: #eff6fa;
         margin-bottom: 30px;
         height: 96px;
@@ -19,14 +18,6 @@
                 cursor: pointer;
                 text-align: center;
 
-                // &.active {
-                //     color: white;
-                //     background: $SuiteBarBackground;
-                //     .ms-Icon {
-                //          color: #fff;
-                //     }
-                // }
-
                 .ms-Icon {
                     font-size: 25px;
                     color: $SuiteBarBackground;
@@ -36,6 +27,10 @@
                     margin-top: 6px;
                     margin-bottom: 0;
                     text-align: left;
+                    width: 130px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 @media (min-width: 1365px) {
@@ -53,6 +48,7 @@
             h2 {
                 color: white;
             }
+
             p {
                 line-height: 48px;
                 margin: 0;
@@ -67,9 +63,11 @@
                     vertical-align: top;
                     margin-top: 9px;
                 }
+
                 .ms-Dropdown-container {
                     display: inline-block;
                     width: 90%;
+
                     .ms-Dropdown {
                         .ms-Dropdown-title {
                             border: 0;

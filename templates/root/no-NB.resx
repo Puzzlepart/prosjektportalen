@@ -1,9 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <xsd:schema id="root" 
-    xmlns="" 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -271,6 +327,9 @@
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
   </data>
+  <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
+    <value>Prosjektstatus</value>
+  </data>
   <data name="View_AllItems_DisplayName" xml:space="preserve">
     <value>Alle elementer</value>
   </data>
@@ -424,9 +483,6 @@
   <data name="ContentTypes_Prosjektoppgave_Description" xml:space="preserve">
     <value>Spor et arbeidselement som du eller gruppen må fullføre.</value>
   </data>
-  <data name="ContentTypes_Prosjektprodukt_Description" xml:space="preserve">
-    <value>Opprett et nytt listeelement.</value>
-  </data>
   <data name="ContentTypes_Gevinst_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -486,9 +542,6 @@
   </data>
   <data name="SiteFields_GtMeasureIndicatorLookup_DisplayName" xml:space="preserve">
     <value>Måleindikator</value>
-  </data>
-  <data name="SiteFields_Title_DisplayName" xml:space="preserve">
-    <value>Tittel</value>
   </data>
   <data name="SiteFields_Created_DisplayName" xml:space="preserve">
     <value>Opprettet</value>
@@ -770,19 +823,19 @@
     <value>Status usikkerhet</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtCostsTotal_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtBudgetLastReportDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
     <value>Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål</value>
@@ -794,13 +847,13 @@
     <value>Hvem har ansvaret for å godkjenne leveransen?</value>
   </data>
   <data name="SiteFields_GtArchiveReference_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogResponsible_Description" xml:space="preserve">
     <value>Hvem er ansvarlig for dette?</value>
   </data>
   <data name="SiteFields_GtEndDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProductAcceptanceMethod_Description" xml:space="preserve">
     <value>Hvordan blir godkjenningen av leveransen bekreftet (test, brukerundersøkelse, demo, muntlig, skriftlig)?</value>
@@ -809,64 +862,64 @@
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtRiskAction_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusBudgetComment_Description" xml:space="preserve">
     <value>Kommentar til status økonomi angitt over</value>
   </data>
   <data name="SiteFields_GtAverageRisk_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectServiceArea_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectType_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogDescription_Description" xml:space="preserve">
     <value>Hva handler dette om?</value>
   </data>
   <data name="SiteFields_GtProjectNumber_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusTime_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectOwner_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStakeholderInfluencePossibilty_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtRiskProximity_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtRiskProbability_Description" xml:space="preserve">
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtProjectLogType_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogReporter_Description" xml:space="preserve">
     <value>Oppgi den personen som meldte saken. Det er prosjektleders ansvar å opprette en Emnerapport på basis av emnet som er valgt etter prosedyrene valgt for dette prosjektet.</value>
   </data>
   <data name="SiteFields_GtProductPhase_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectTaskUrl_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStakeholderActions_Description" xml:space="preserve">
     <value>Mulige strategier for å oppnå støtte eller redusere hindringer</value>
   </data>
   <data name="SiteFields__ComplianceFlags_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtActionDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogActors_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProductQualityTolerance_Description" xml:space="preserve">
     <value>Hvilke toleranser (slingringsmonn) gjelder for akseptansekriteriene?</value>
@@ -875,19 +928,19 @@
     <value>Hvem er ansvarlig for å levere kvaliteten på leveransen?</value>
   </data>
   <data name="SiteFields_GtProjectManager_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogRecommendation_Description" xml:space="preserve">
     <value>Hva bør gjøres og hvorfor?</value>
   </data>
   <data name="SiteFields_GtStatusBudget_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusRisk_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusGainAchievement_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_Description" xml:space="preserve">
     <value>Kommentar til status gevinstoppnåelse angitt over</value>
@@ -896,31 +949,31 @@
     <value>Tall 0 til 5</value>
   </data>
   <data name="SiteFields_GtStakeholderInfluence_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtChecklistStatus_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtActionResponsible_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectPhase_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectPhaseChoice_Description" xml:space="preserve">
     <value>Prosjektets fase, som valg-felt for å tillate integrasjon med enkelte tredjepartsverktøy</value>
   </data>
   <data name="SiteFields_GtStakeholderGroup_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStakeholderContext_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectFinanceName_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStakeholderInterest_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtRiskProbabilityPostAction_Description" xml:space="preserve">
     <value>Tall 0 til 5</value>
@@ -932,7 +985,7 @@
     <value>Beskriv hva prosjektet skal levere</value>
   </data>
   <data name="SiteFields_GtStakeholderStrategy_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProductAcceptanceCriteria_Description" xml:space="preserve">
     <value>Målbare definisjoner av kravene leveransen må møte før den kan aksepteres av interessentene</value>
@@ -941,13 +994,13 @@
     <value>Hvilke forventninger er uttalt til kvaliteten på leveransen?</value>
   </data>
   <data name="SiteFields_GtProjectInfoDescription_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtStartDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProductAcceptanceDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProjectLogConsequence_Description" xml:space="preserve">
     <value>Beskriv mer utfyllende hva dette kan føre til.</value>
@@ -956,25 +1009,25 @@
     <value>Huk av dersom dette skal vises i prosjektets erfaringslogg.</value>
   </data>
   <data name="SiteFields_GtComment_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtRiskFactor_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtProcess_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtChallengeDescription_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtGainsType_Description" xml:space="preserve">
     <value>Direkte (økonomiske - NOK), Indirekte (frigjort tid - årsverk), Kvalitative (f.eks. omdømme)</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
     <value> Hvordan skal gevinsten realiseres?</value>
@@ -998,13 +1051,13 @@
     <value>Forventet tidspunkt for realisering av gevinsten</value>
   </data>
   <data name="SiteFields_GtMeasurementValue_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtMeasurementDate_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtMeasurementComment_Description" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="SiteFields_GtOverallStatus_Description" xml:space="preserve">
     <value>Overordnet status for prosjektet</value>
@@ -1094,7 +1147,7 @@
     <value>Legger på farge og fonter</value>
   </data>
   <data name="ProvisionWeb_Progress_Handler_PropertyBagEntries" xml:space="preserve">
-    <value></value>
+    <value />
   </data>
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Laster prosjektets faser...</value>
@@ -1112,7 +1165,7 @@
     <value>Gå til fasesjekklisten</value>
   </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
-    <value>G&#229; til &lt;a href=&quot;{0}&quot; target=&quot;_blank&quot;&gt;fasesjekklisten&lt;/a&gt; (&#229;pnes i ny fane)</value>
+    <value>Gå til &lt;a href="{0}" target="_blank"&gt;fasesjekklisten&lt;/a&gt; (åpnes i ny fane)</value>
   </data>
   <data name="ProjectPhases_Checkpoints" xml:space="preserve">
     <value>punkter</value>
@@ -1648,9 +1701,6 @@
   <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
     <value>Differanse fra forrige måling</value>
   </data>
-  <data name="BenefitsOverview_DiffPreviousMeasurement" xml:space="preserve">
-    <value>Differanse fra forrige måling</value>
-  </data>
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
@@ -1675,28 +1725,130 @@
   <data name="RoleDefinition_ViewOnly" xml:space="preserve">
     <value>Bare vise</value>
   </data>
-  <data name="StatusPage_Heading_ProjectMetadata" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectMetadata" xml:space="preserve">
     <value>Prosjektegenskaper</value>
   </data>
-  <data name="StatusPage_Heading_OverallStatus" xml:space="preserve">
+  <data name="ProjectStatus_Heading_OverallStatus" xml:space="preserve">
     <value>Overordnet status</value>
   </data>
-  <data name="StatusPage_Heading_ProjectTime" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectTime" xml:space="preserve">
     <value>Fremdrift</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBudget" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBudget" xml:space="preserve">
     <value>Økonomi</value>
   </data>
-  <data name="StatusPage_Heading_ProjectQuality" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectQuality" xml:space="preserve">
     <value>Kvalitet</value>
   </data>
-  <data name="StatusPage_Heading_ProjectRisk" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectRisk" xml:space="preserve">
     <value>Risiko</value>
   </data>
-  <data name="StatusPage_Heading_ProjectBenefitAchievement" xml:space="preserve">
+  <data name="ProjectStatus_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Gevinstoppnåelse</value>
   </data>
-  <data name="StatusPage_RiskShowPostActionLabel" xml:space="preserve">
+  <data name="ProjectStatus_RiskShowPostActionLabel" xml:space="preserve">
     <value>Vis før/etter tiltak</value>
+  </data>
+  <data name="RiskMatrix_Header_Critical" xml:space="preserve">
+    <value>Kritisk</value>
+  </data>
+  <data name="RiskMatrix_Header_High" xml:space="preserve">
+    <value>Høy</value>
+  </data>
+  <data name="RiskMatrix_Header_Insignificant" xml:space="preserve">
+    <value>Ubetydelig</value>
+  </data>
+  <data name="RiskMatrix_Header_Low" xml:space="preserve">
+    <value>Lav</value>
+  </data>
+  <data name="RiskMatrix_Header_Medium" xml:space="preserve">
+    <value>Middels</value>
+  </data>
+  <data name="RiskMatrix_Header_Moderate" xml:space="preserve">
+    <value>Moderat</value>
+  </data>
+  <data name="RiskMatrix_Header_Serious" xml:space="preserve">
+    <value>Alvorlig</value>
+  </data>
+  <data name="RiskMatrix_Header_Small" xml:space="preserve">
+    <value>Liten</value>
+  </data>
+  <data name="RiskMatrix_Header_VeryHigh" xml:space="preserve">
+    <value>Svært høy</value>
+  </data>
+  <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
+    <value>Svært lav</value>
+  </data>
+  <data name="String_NavigateToList" xml:space="preserve">
+    <value>Naviger til listen</value>
+  </data>
+  <data name="String_StatusReport" xml:space="preserve">
+    <value>Statusrapport</value>
+  </data>
+  <data name="ProjectStatus_Heading_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="ProjectStatus_SaveSnapshot" xml:space="preserve">
+    <value>Lagre øyeblikksbilde</value>
+  </data>
+  <data name="ProjectStatus_SavingSnapshot" xml:space="preserve">
+    <value>Lagrer øyeblikksbilde...</value>
+  </data>
+  <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
+    <value>Prosjektbildet er lagret</value>
+  </data>
+  <data name="SiteFields_GtRiskFactorPostAction_Formula" xml:space="preserve">
+    <value>=[S etter tiltak]*[K etter tiltak]</value>
+  </data>
+  <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
+    <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
+  </data>
+  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
+    <value>Måloppnåelse, siste måling</value>
+  </data>
+  <data name="BenefitsOverview_LatestValue" xml:space="preserve">
+    <value>Siste måling</value>
+  </data>
+  <data name="BenefitsOverview_PreviousPercentage" xml:space="preserve">
+    <value>Måloppnåelse, forrige måling</value>
+  </data>
+  <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
+    <value>Forrige måling</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
+    <value>Gevinst</value>
+  </data>
+  <data name="ProjectStatus_SnapshotHistory" xml:space="preserve">
+    <value>Historikk ({0} tidligere)</value>
+  </data>
+  <data name="ProjectStatus_SnapshotNoHistory" xml:space="preserve">
+    <value>Ingen historikk tilgjengelig</value>
+  </data>
+  <data name="SiteFields_GtChecklistStatus_FormValidation_NotRelevant" xml:space="preserve">
+    <value>Du må angi en kommentar for hvorfor sjekklistepunktet har fått denne statusen.</value>
+  </data>
+  <data name="WebPart_RelatedLogElements_Title" xml:space="preserve">
+    <value>Relaterte loggelementer</value>
+  </data>
+  <data name="CurrencySymbol" xml:space="preserve">
+    <value>kr </value>
+  </data>
+  <data name="View_BenefitTasks_DisplayName" xml:space="preserve">
+    <value>Gevinstoppgaver</value>
+  </data>
+  <data name="View_Flat_DisplayName" xml:space="preserve">
+    <value>Flat visning</value>
+  </data>
+  <data name="View_GroupedBenefitType_DisplayName" xml:space="preserve">
+    <value>Pr gevinsttype</value>
+  </data>
+  <data name="View_GroupedProcess_DisplayName" xml:space="preserve">
+    <value>Pr prosess</value>
+  </data>
+  <data name="View_GroupedStatus_DisplayName" xml:space="preserve">
+    <value>Per status</value>
+  </data>
+  <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
+    <value>Relevante koblinger</value>
   </data>
 </root>

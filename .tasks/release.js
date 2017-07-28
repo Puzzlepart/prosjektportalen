@@ -1,9 +1,11 @@
 'use strict';
 var gulp = require("gulp"),
+    color = require('gulp-color'),
     zip = require("gulp-zip"),
     format = require("string-format"),
     runSequence = require("run-sequence"),
     git = require("./utils/git.js"),
+    build = require("../build.json"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
@@ -37,7 +39,10 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
+    console.log(color(`[Building release for ${build.language}]`, 'GREEN'));
+    console.log(color(`[See build.json to change build settings]`, 'WHITE'));
     runSequence("default::prod", "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", "zip:dist", () => {
+        console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
 });

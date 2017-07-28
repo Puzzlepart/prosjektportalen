@@ -25,14 +25,30 @@
             Url="Lists/ListContentConfig/AllItems.aspx"
             Rights="ManageWeb"
             Sequence="2003" />
-        <!--<pnp:CustomAction
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"            
+            Name="Project Portal - Portfolio Overview (Fields)"
+            Title="Project Portal - Portfolio Overview (Fields)"
+            Url="Lists/DynamicPortfolioFields/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2004" />
+        <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
-            Name="Project Portal - Dynamic Portfolio"
-            Title="Project Portal - Dynamic Portfolio"
-            Url="Lists/DynamicPortfolioConfig/AllItems.aspx"
+            Name="Project Portal - Portfolio Overview (Views)"
+            Title="Project Portal - Portfolio Overview (Views)"
+            Url="Lists/DynamicPortfolioViews/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2004" />-->
+            Sequence="2005" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"            
+            Name="Project Portal - Portfolio Overview (Filters)"
+            Title="Project Portal - Portfolio Overview (Filters)"
+            Url="Lists/DynamicPortfolioRefiners/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2006" />
         <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
@@ -40,14 +56,14 @@
             Title="Project Portal - Project Config"
             Url="Lists/ProjectConfig/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2005" />            
+            Sequence="2007" />
         <pnp:CustomAction
             Group="Customization"
             Location="Microsoft.SharePoint.SiteSettings"
-            Name="Prosjektportalen - Feedback"
-            Title="Prosjektportalen - Feedback"
+            Name="Project Portal - Feedback"
+            Title="Project Portal - Feedback"
             Url="Lists/Feedback/AllItems.aspx"
             Rights="ManageWeb"
-            Sequence="2006" />
+            Sequence="2008" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>

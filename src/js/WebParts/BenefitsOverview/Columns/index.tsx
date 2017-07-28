@@ -8,7 +8,7 @@ const Columns = (dataSource: DataSource): any[] => {
     return [{
         fieldName: "Title",
         key: "Title",
-        name: "Gevinst",
+        name: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         searchPostfix: null,
         minWidth: 100,
         maxWidth: 180,
@@ -53,7 +53,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "PreviousValue",
         key: "PreviousValue",
-        name: "Forrige måling",
+        name: __("BenefitsOverview_PreviousValue"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -61,7 +61,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "PreviousPercentage",
         key: "PreviousPercentage",
-        name: "Måloppnåelse, forrige måling",
+        name: __("BenefitsOverview_PreviousPercentage"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -69,7 +69,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "LatestValue",
         key: "LatestValue",
-        name: "Siste måling",
+        name: __("BenefitsOverview_LatestValue"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -77,7 +77,7 @@ const Columns = (dataSource: DataSource): any[] => {
     {
         fieldName: "LatestPercentage",
         key: "LatestPercentage",
-        name: "Måloppnåelse, siste måling",
+        name: __("BenefitsOverview_LatestPercentage"),
         searchPostfix: null,
         minWidth: 50,
         maxWidth: 80,
@@ -94,7 +94,7 @@ const Columns = (dataSource: DataSource): any[] => {
  * @param dataSource Data source
  */
 export const GetColumnByKey = (key: string, dataSource: DataSource): IColumn => {
-    let find = Columns(dataSource).filter(col => col.key === key);
+    let find = Columns(dataSource).filter(column => column.key === key);
     let [col] = find;
     return col;
 };
@@ -117,7 +117,7 @@ export const GenerateColumns = (fields: any[], dataSource: DataSource): any[] =>
             generatedColumns.unshift({
                 fieldName: "SiteTitle",
                 key: "SiteTitle",
-                name: "Prosjekt",
+                name: __("String_Project"),
                 minWidth: 100,
                 maxWidth: 180,
             });
@@ -197,9 +197,14 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
  * @param index The index
  * @param column The column
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleClick: (e) => void): any => {
-    let colValue = item[column.fieldName];
-    let { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrese } = item;
+const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTitleClick: (e) => void): any => {
+    const colValue = item[column.fieldName];
+    const {
+        LatestValue,
+        PreviousValue,
+        LatestPercentage,
+        ValueShouldIncrease,
+     } = item;
     switch (column.key) {
         case "Title": {
             let dispFormUrl = item.Path;
@@ -214,9 +219,11 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleC
             );
         }
         case "SiteTitle": {
-            let {  SiteTitle: Title } = item;
+            let { SiteTitle: Title } = item;
             return (
-                <a href="#" onClick={onTitleClick}>{Title}</a>
+                <a
+                    href="#"
+                    onClick={onSiteTitleClick}>{Title}</a>
             );
         }
         case "GtStartValue":
@@ -235,7 +242,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleC
             }
         }
         case "PreviousValue": {
-            if (PreviousValue && PreviousValue !== 0) {
+            if (PreviousValue || PreviousValue === 0) {
                 return (<div>
                     {PreviousValue}
                 </div>);
@@ -250,20 +257,20 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onTitleC
                         latestVal={LatestValue}
                         latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
-                        shouldIncrease={ValueShouldIncrese} />
+                        shouldIncrease={ValueShouldIncrease} />
                 </div>);
             } else {
                 return null;
             }
         }
         case "LatestValue": {
-            if (LatestValue && LatestValue !== 0) {
+            if (LatestValue || LatestValue === 0) {
                 return (<div>
                     {LatestValue} <TrendIcon
                         latestVal={LatestValue}
                         latestPercentage={LatestPercentage}
                         prevVal={PreviousValue}
-                        shouldIncrease={ValueShouldIncrese} />
+                        shouldIncrease={ValueShouldIncrease} />
                 </div>);
             } else {
                 return null;
