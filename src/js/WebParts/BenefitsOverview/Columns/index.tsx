@@ -183,9 +183,13 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
                     </span>
                 );
             }
-        } else {
-            return null;
         }
+    } else if (latestPercentage >= 100) {
+        return (
+            <span>
+                <Icon iconName="Trophy" style={{ color: "gold" }} />
+            </span>
+        );
     }
     return null;
 };
