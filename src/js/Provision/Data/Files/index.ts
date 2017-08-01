@@ -38,22 +38,21 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgr
                 files.push(i);
             }
         });
-        let createFolders = Promise.all(folders.map(folder => {
-            let folderServerRelUrl = folder.replace(RootFolder.ServerRelativeUrl, "");
-            return destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).folders.add(`${destLibServerRelUrl}/${folderServerRelUrl}`);
-        }));
-        createFolders.then(_ => {
-            let getFileContents = Promise.all(files.map(file => new Promise<{ File: any, Blob: Blob }>((_resolve, _reject) => {
-                srcWeb.getFileByServerRelativeUrl(file.FileRef).getBlob().then(blob => _resolve({ File: file, Blob: blob }), _reject);
-            })));
-            getFileContents.then(fileContents => {
-                let createFiles = Promise.all(fileContents.map(fc => new Promise<any>((_resolve) => {
-                    let destFolderUrl = `${destLibServerRelUrl}${fc.File.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
-                    destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fc.File.LinkFilename, fc.Blob, true).then(_resolve, reject);
+        folders
+            .sort()
+            .reduce((chain, folder) => chain.then(_ => destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).folders.add(`${destLibServerRelUrl}/${folder.replace(RootFolder.ServerRelativeUrl, "")}`)), Promise.resolve())
+            .then(_ => {
+                let getFileContents = Promise.all(files.map(file => new Promise<{ File: any, Blob: Blob }>((_resolve, _reject) => {
+                    srcWeb.getFileByServerRelativeUrl(file.FileRef).getBlob().then(blob => _resolve({ File: file, Blob: blob }), _reject);
                 })));
-                createFiles.then(resolve, reject);
+                getFileContents.then(fileContents => {
+                    let createFiles = Promise.all(fileContents.map(fc => new Promise<any>((_resolve) => {
+                        let destFolderUrl = `${destLibServerRelUrl}${fc.File.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
+                        destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fc.File.LinkFilename, fc.Blob, true).then(_resolve, reject);
+                    })));
+                    createFiles.then(resolve, reject);
+                }, reject);
             }, reject);
-        }, reject);
     }).catch(reject);
     window.setTimeout(reject, timeout);
 });
