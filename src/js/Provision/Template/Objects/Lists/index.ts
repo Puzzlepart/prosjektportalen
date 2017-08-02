@@ -415,7 +415,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtProcess", "GtChallengeDescription", "LinkTitle"],
+            ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
