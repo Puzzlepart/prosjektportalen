@@ -374,7 +374,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtChangeLookup", "Title", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["LinkTitle", "GtChangeLookup",  "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -415,7 +415,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtProcess", "GtChallengeDescription", "LinkTitle"],
+            ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,

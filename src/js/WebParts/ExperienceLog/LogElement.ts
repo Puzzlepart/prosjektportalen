@@ -4,6 +4,7 @@ export class LogElement {
     public Path: string;
     public Title: string;
     public SiteTitle: string;
+    public SPWebUrl: string;
     public Description: string;
     public Responsible: string;
     public Consequence: string;
@@ -14,6 +15,7 @@ export class LogElement {
         this.Path = data.Path;
         this.Title = data.Title;
         this.SiteTitle = data.SiteTitle;
+        this.SPWebUrl = data.SPWebUrl;
         this.Description = data.GtProjectLogDescriptionOWSMTXT;
         this.Responsible = data.GtProjectLogResponsibleOWSCHCS;
         this.Consequence = data.GtProjectLogConsequenceOWSMTXT;

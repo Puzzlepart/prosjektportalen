@@ -46,7 +46,7 @@ Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromW
     $FieldsToSync | ? {$_.FieldTypeKind -ne "Invalid"} | % {
         if ($_.InternalName -eq "GtProjectUrl") {
             $ProjectItem["GtProjectUrl"] = "$ProjectUrl, $ProjectTitle"
-        } else {
+        } elseif($_.InternalName -ne "GtProjectPhaseChoice") {
             $ProjectItem[$_.InternalName] = $ProjectPage[$_.InternalName]
         }
     }
