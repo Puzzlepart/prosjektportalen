@@ -616,7 +616,7 @@
     <value>Meldt av</value>
   </data>
   <data name="SiteFields_GtProductPhase_DisplayName" xml:space="preserve">
-    <value>Produksjonsfase</value>
+    <value>Leveransefase</value>
   </data>
   <data name="SiteFields_GtProjectTaskUrl_DisplayName" xml:space="preserve">
     <value>Url</value>
