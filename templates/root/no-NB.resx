@@ -1006,7 +1006,7 @@
     <value>Beskriv mer utfyllende hva dette kan føre til.</value>
   </data>
   <data name="SiteFields_GtProjectLogExperience_Description" xml:space="preserve">
-    <value>Huk av dersom dette skal vises i prosjektets erfaringslogg.</value>
+    <value>Huk av dersom dette skal vises i prosjektenes delte erfaringslogg.</value>
   </data>
   <data name="SiteFields_GtComment_Description" xml:space="preserve">
     <value />
