@@ -6,7 +6,20 @@ export const DOCUMENT_LIBRARY = __("Lists_Documents_Title");
 /**
  * Frontpage lists
  */
-export const FRONTPAGE_LISTS = [__("Lists_Uncertainties_Title"), __("Lists_Documents_Title"), __("Lists_Tasks_Title")];
+export const FRONTPAGE_LISTS = [
+    {
+        listTitle: __("Lists_Uncertainties_Title"),
+        wpTitle: __("WebPart_UncertaintiesCurrentPhase_Title"),
+    },
+    {
+        listTitle: __("Lists_Documents_Title"),
+        wpTitle: __("WebPart_DocumentsCurrentPhase_Title"),
+    },
+    {
+        listTitle: __("Lists_Tasks_Title"),
+        wpTitle: __("WebPart_TasksCurrentPhase_Title"),
+    },
+];
 
 /**
  * Frontpage lists view query
