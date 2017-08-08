@@ -8,7 +8,7 @@ import * as Config from "./Config";
  */
 const UpdateFrontpageListViews = (phaseName: string): Promise<any[]> => new Promise<any[]>((resolve, reject) => {
     const viewQuery = String.format(Config.FRONTPAGE_LISTS_VIEQUERY, Config.PROJECTPHASE_FIELD, phaseName);
-    const lists = Config.FRONTPAGE_LISTS.filter(({ wpTitle }) => document.querySelector(`.ms-webpart-chrome-title .js-webpart-titleCell[title='${wpTitle}']`) !== null)
+    const lists = Config.FRONTPAGE_LISTS.filter(({ wpTitle }) => document.querySelector(`.ms-webpart-chrome-title .js-webpart-titleCell[title='${wpTitle}']`) !== null);
     const getViewsPromises = lists.map(({ listTitle }) => sp.web.lists.getByTitle(listTitle).views.get());
     Promise.all(getViewsPromises).then(listViews => {
         let updateViewsPromises = [];
