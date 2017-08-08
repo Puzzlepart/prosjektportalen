@@ -222,6 +222,9 @@
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="Lists_Milestones_Title" xml:space="preserve">
+    <value>Milestones</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
