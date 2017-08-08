@@ -254,7 +254,7 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
         }
             break;
         case "object": {
-            let { Label, TermGuid, get_termGuid } = fieldValue;
+            let { Label, TermGuid, get_termGuid, get_url, get_description } = fieldValue;
             if (TermGuid || get_termGuid) {
                 let field = list.get_fields().getByInternalNameOrTitle(fieldName),
                     taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
@@ -263,6 +263,12 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
                 taxSingle.set_termGuid(TermGuid || fieldValue.get_termGuid());
                 taxSingle.set_wssId(-1);
                 taxField.setFieldValueByValue(item, taxSingle);
+            }
+            if (get_url && get_description) {
+                let urlValue = new SP.FieldUrlValue();
+                urlValue.set_url(fieldValue.get_url());
+                urlValue.set_description(fieldValue.get_description());
+                item.set_item(fieldName, urlValue);
             }
         }
             break;
