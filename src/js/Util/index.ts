@@ -265,10 +265,15 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
                 taxField.setFieldValueByValue(item, taxSingle);
             }
             if (get_url && get_description) {
-                let urlValue = new SP.FieldUrlValue();
-                urlValue.set_url(fieldValue.get_url());
-                urlValue.set_description(fieldValue.get_description());
-                item.set_item(fieldName, urlValue);
+                const webServerUrl = _spPageContextInfo.siteAbsoluteUrl.replace(_spPageContextInfo.siteServerRelativeUrl, "");
+                const ctxRelativeUrl = ctx.get_url().replace(webServerUrl, "");
+                let url = fieldValue.get_url()
+                    .replace("{webRelativeUrl}", ctxRelativeUrl)
+                    .replace(/([^:]\/)\/+/g, "$1");
+                let fieldUrlValue = new SP.FieldUrlValue();
+                fieldUrlValue.set_url(url);
+                fieldUrlValue.set_description(fieldValue.get_description());
+                item.set_item(fieldName, fieldUrlValue);
             }
         }
             break;
