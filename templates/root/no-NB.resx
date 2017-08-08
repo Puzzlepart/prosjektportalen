@@ -616,7 +616,7 @@
     <value>Meldt av</value>
   </data>
   <data name="SiteFields_GtProductPhase_DisplayName" xml:space="preserve">
-    <value>Produksjonsfase</value>
+    <value>Leveransefase</value>
   </data>
   <data name="SiteFields_GtProjectTaskUrl_DisplayName" xml:space="preserve">
     <value>Url</value>
@@ -1006,7 +1006,7 @@
     <value>Beskriv mer utfyllende hva dette kan føre til.</value>
   </data>
   <data name="SiteFields_GtProjectLogExperience_Description" xml:space="preserve">
-    <value>Huk av dersom dette skal vises i prosjektets erfaringslogg.</value>
+    <value>Huk av dersom dette skal vises i prosjektenes delte erfaringslogg.</value>
   </data>
   <data name="SiteFields_GtComment_Description" xml:space="preserve">
     <value />
@@ -1343,6 +1343,9 @@
   </data>
   <data name="WebPart_Tasks_Title" xml:space="preserve">
     <value>Oppgaver</value>
+  </data>
+  <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
+    <value>Oppgaver (gjeldende fase)</value>
   </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Prosjektleveranser jeg har ansvar for</value>

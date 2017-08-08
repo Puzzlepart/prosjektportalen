@@ -83,6 +83,11 @@ export default class ExperienceLog extends React.PureComponent<IExperienceLogPro
                         options={{ HideRibbon: true }} />
                 );
             }
+            case "SiteTitle": {
+                return (
+                    <a href={item.SPWebUrl}>{item.SiteTitle}</a>
+                );
+            }
             default: {
                 return colValue;
             }
