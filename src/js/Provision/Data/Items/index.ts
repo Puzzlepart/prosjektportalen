@@ -3,7 +3,7 @@ import IProgressCallback from "../../IProgressCallback";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
-let __SRC_ITEMS = [];
+let __ITEMS = [];
 
 /**
  * Copy a single list item to the destination web
@@ -18,7 +18,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
     destItm.update();
     dataCtx.Destination._.load(destItm);
     dataCtx.Destination._.executeQueryAsync(() => {
-        __SRC_ITEMS.push({
+        __ITEMS.push({
             SourceId: srcItem.get_fieldValues()["ID"],
             DestId: destItm.get_fieldValues()["ID"],
             DestItem: destItm,
@@ -44,18 +44,26 @@ export const CopyItems = (conf: IListConfig, destUrl: string, onProgress: IProgr
             onProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
             items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
                 .then(() => {
-                    __SRC_ITEMS
-                        .filter(item => item.ParentID)
-                        .forEach(item => {
-                            let [parent] = __SRC_ITEMS.filter(({ SourceId }) => SourceId === item.ParentID);
-                            if (parent) {
-                                item.DestItem.set_item("ParentID", parent.DestId);
-                                item.update();
-                            }
-                        });
-                    dataCtx.Destination._.executeQueryAsync(resolve, resolve);
+                    HandleItemsWithParent(dataCtx).then(resolve);
                 })
                 .catch(resolve);
         }, resolve);
     });
 });
+
+/**
+ * Handle tasks with parent
+ * 
+ * @param dataCtx Data context
+ */
+const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resolve) => {
+    const itemsWithParent = __ITEMS.filter(item => item.ParentID);
+    itemsWithParent.forEach(item => {
+        let [parent] = __ITEMS.filter(({ SourceId }) => SourceId === item.ParentID);
+        if (parent) {
+            item.DestItem.set_item("ParentID", parent.DestId);
+            item.DestItem.update();
+        }
+    });
+    dataCtx.Destination._.executeQueryAsync(resolve, resolve);
+})
