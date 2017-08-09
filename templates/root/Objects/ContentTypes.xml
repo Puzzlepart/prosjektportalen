@@ -1,49 +1,43 @@
 <pnp:ContentTypes 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
-      <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="Status Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
-          <pnp:FieldRefs>
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-          </pnp:FieldRefs>
-        </pnp:ContentType>
-        <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82801" Name="List Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
-          <pnp:FieldRefs>
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" Name="Status Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
             <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="StatusSectionsList" />
-            <pnp:FieldRef ID="4cd5a464-a480-4f5b-b48d-bfa3312f4feb" Name="StatusSectionsView" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-          </pnp:FieldRefs>
-        </pnp:ContentType>
-        <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" Name="Project Status Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
-          <pnp:FieldRefs>
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="StatusSectionsViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="StatusSectionsViewFields" />
+            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="StatusSectionsFieldName" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Economy Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-          </pnp:FieldRefs>
-        </pnp:ContentType>
-        <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Economy Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
-          <pnp:FieldRefs>
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="Risk Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+        <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-          </pnp:FieldRefs>
-        </pnp:ContentType>
-        <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="Risk Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
-          <pnp:FieldRefs>
-            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="892d7b89-f663-448c-a496-ed11f0135a07" Name="StatusSectionsFields" />
             <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="StatusSectionsShowRiskMatrix" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-          </pnp:FieldRefs>
-        </pnp:ContentType>
+        </pnp:FieldRefs>
+    </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D56634648310702" Name="{resource:ContentTypes_Glittertind_element_Name}" Description="{resource:ContentTypes_Glittertind_element_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070201" Name="{resource:ContentTypes_Usikkerhet_Name}" Description="{resource:ContentTypes_Usikkerhet_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
