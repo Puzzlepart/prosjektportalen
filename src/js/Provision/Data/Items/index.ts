@@ -53,7 +53,6 @@ export const CopyItems = (conf: IListConfig, destUrl: string, onProgress: IProgr
 
 /**
  * Handle tasks with parent
- * 
  * @param dataCtx Data context
  */
 const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resolve) => {
@@ -66,4 +65,4 @@ const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resol
         }
     });
     dataCtx.Destination._.executeQueryAsync(resolve, resolve);
-})
+});
