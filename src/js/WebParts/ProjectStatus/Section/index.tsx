@@ -38,6 +38,7 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
             source,
             fieldName,
         } = section;
+
         const props = {
             name,
             iconName,
@@ -46,6 +47,7 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
             source,
             fieldName
         }
+
         return (
             <SectionHeader { ...props } />
         )

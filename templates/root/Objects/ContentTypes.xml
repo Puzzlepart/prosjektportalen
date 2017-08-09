@@ -165,7 +165,15 @@
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Name="{resource:ContentTypes_Prosjektdokument_Name}" Description="{resource:ContentTypes_Prosjektdokument_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
+            <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" />
+            <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" />
+            <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" />
+            <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02" Name="{resource:ContentTypes_ProjectStatus_Name}" Description="{resource:ContentTypes_ProjectStatus_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
@@ -174,8 +182,8 @@
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
-            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
+            <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" />
             <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" />
             <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" />
             <pnp:FieldRef ID="4dd7e525-8d6b-4cb4-9d3e-44ee25f973eb" Name="Created_x0020_By" />
@@ -244,8 +252,18 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x010800233B015F95174C9A8EB505493841DE8D" Name="{resource:ContentTypes_Prosjektoppgave_Name}" Description="{resource:ContentTypes_Prosjektoppgave_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="true" />
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
+        <pnp:FieldRef ID="64cd368d-2f95-4bfc-a1f9-8d4324ecb007" Name="StartDate" />
+        <pnp:FieldRef ID="cd21b4c2-6841-4f9e-a23a-738a65f99889" Name="DueDate" />
+        <pnp:FieldRef ID="53101f38-dd2e-458c-b245-0c236cc13d1a" Name="AssignedTo" />
+        <pnp:FieldRef ID="d2311440-1ed6-46ea-b46d-daa643dc3886" Name="PercentComplete" />
+        <pnp:FieldRef ID="7662cd2c-f069-4dba-9e35-082cf976e170" Name="Body" />
+        <pnp:FieldRef ID="c3a92d97-2b77-4a25-9698-3ab54874bc6f" Name="Predecessors" />
+        <pnp:FieldRef ID="a8eb573e-9e11-481a-a8c9-1104a54b2fbd" Name="Priority" />
+        <pnp:FieldRef ID="c15b34c3-ce7d-490a-b133-3f4de8801b76" Name="Status" />
+        <pnp:FieldRef ID="d2a04afc-9a05-48c8-a7fa-fa98f9496141" Name="RelatedItems" />
+        <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="Dynamic Portfolio Config Base" Description="" Group="{resource:ContentTypes_Group}">
@@ -351,6 +369,16 @@
             <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="GtFeedbackStatus" />
             <pnp:FieldRef ID="db42d9aa-f4ab-47e0-b0d6-8c0af0d70d70" Name="GtFeedbackCriticality" Required="true" />
             <pnp:FieldRef ID="8534f635-0d38-4754-b772-48b0a105357c" Name="GtFeedbackComment" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01006E5BC3A4008144DC8ACEC0107AFC999A" Name="{resource:ContentTypes_Milestone_Name}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
+            <pnp:FieldRef ID="1fa322ec-6b56-4ea9-a1fd-2623e34083e6" Name="GtMilestonePlannedDate" />
+            <pnp:FieldRef ID="cbf2ae22-2c77-4ad0-a639-07fddfb5cd81" Name="GtMilestoneActualDate"/>
+            <pnp:FieldRef ID="17a4b359-5819-4e7c-9894-a154320a661d" Name="GtMilestoneStatus"/>
+            <pnp:FieldRef ID="dabdcbab-7bab-4fb2-8d65-85bd03809a8d" Name="GtMilestoneComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
 </pnp:ContentTypes> 
