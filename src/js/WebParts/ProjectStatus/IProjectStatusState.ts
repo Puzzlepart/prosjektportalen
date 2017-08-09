@@ -1,8 +1,6 @@
-import { ISection } from "./Section";
-
 interface IProjectStatusState {
     project: any;
-    sections: ISection[];
+    sections: any[];
     isLoading: boolean;
 }
 
