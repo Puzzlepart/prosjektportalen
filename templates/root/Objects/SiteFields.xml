@@ -415,7 +415,7 @@
         </CHOICES>
     </Field>
     <Field ID="{dabdcbab-7bab-4fb2-8d65-85bd03809a8d}" Name="GtMilestoneComment" StaticName="GtMilestoneComment" DisplayName="{resource:SiteFields_GtMilestoneComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE"></Field>
-    <Field ID="{17a4b359-5819-4e7c-9894-a154320a661d}" Name="GtMilestoneStatus" StaticName="GtMilestoneStatus" DisplayName="{resource:SiteFields_GtMilestoneStatus_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" FillInChoice="TRUE">
+    <Field ID="{17a4b359-5819-4e7c-9894-a154320a661d}" Name="GtMilestoneStatus" StaticName="GtMilestoneStatus" DisplayName="{resource:SiteFields_GtMilestoneStatus_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" FillInChoice="FALSE">
         <CHOICES>
             <CHOICE>{resource:Choice_GtMilestoneStatus_BehindSchedule}</CHOICE>
             <CHOICE>{resource:Choice_GtMilestoneStatus_OnSchedule}</CHOICE>
