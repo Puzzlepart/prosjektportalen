@@ -20,9 +20,9 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData(this.props).then(({ items }) => {
+        this.fetchData(this.props).then(data => {
             this.setState({
-                items,
+                ...data,
                 isLoading: false,
             });
         });
@@ -37,6 +37,8 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
             items,
             columns,
         } = this.state;
+
+        console.log(columns);
 
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
@@ -54,7 +56,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
     /**
      * Fetches required data
      */
-    private fetchData = ({ listTitle, viewQuery, viewFields }) => new Promise<any>((resolve, reject) => {
+    private fetchData = ({ listTitle, viewQuery, viewFields }: ISectionListProps) => new Promise<any>((resolve, reject) => {
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(listTitle);
         const camlQuery = new SP.CamlQuery();
@@ -64,18 +66,17 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
         ctx.load(items);
         ctx.load(fields);
         ctx.executeQueryAsync(() => {
-            let listFields = fields.get_data();
             let itemFieldValues = items.get_data().map(i => i.get_fieldValues());
-            let validViewFields = viewFields.filter(vf => listFields.filter(lf => lf.get_internalName() === vf).length > 0);
+            let validViewFields = viewFields.filter(vf => fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
             let columns = validViewFields.map(vf => {
-                const [field] = listFields.filter(lf => lf.get_internalName() === vf);
+                const [field] = fields.get_data().filter(lf => lf.get_internalName() === vf);
                 return {
                     key: field.get_internalName(),
                     fieldName: field.get_internalName(),
                     name: field.get_title(),
                     minWidth: 100,
                 }
-            })
+            });
             resolve({
                 items: itemFieldValues,
                 columns: columns,

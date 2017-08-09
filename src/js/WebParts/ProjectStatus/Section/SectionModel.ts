@@ -4,7 +4,7 @@ export default class SectionModel {
     public Icon: string;
     public List: string;
     public ViewQuery: string;
-    public ViewFields: string;
+    public ViewFields: string[];
     public FieldName: string;
     public ShowRiskMatrix: boolean;
 
@@ -14,7 +14,7 @@ export default class SectionModel {
         this.Icon = obj.StatusSectionsIcon;
         this.List = obj.StatusSectionsList;
         this.ViewQuery = obj.StatusSectionsViewQuery;
-        this.ViewFields = obj.StatusSectionsViewFields;
+        this.ViewFields = obj.StatusSectionsViewFields ? obj.StatusSectionsViewFields.split(",") : null;
         this.FieldName = obj.StatusSectionsFieldName;
         this.ShowRiskMatrix = obj.StatusSectionsShowRiskMatrix;
     }

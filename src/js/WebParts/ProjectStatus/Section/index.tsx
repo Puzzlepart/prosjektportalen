@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Element } from "react-scroll";
+import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
 import ISectionProps from "./ISectionProps";
 
@@ -18,6 +19,12 @@ const Section = ({ index, section, project }: ISectionProps) => {
                 comment={comment}
                 source=""
                 fieldName={section.FieldName} />
+            {section.List && (
+                <SectionList 
+                    listTitle={section.List}
+                    viewQuery={section.ViewQuery}
+                    viewFields={section.ViewFields} />
+            )}
         </Element>
     );
 };

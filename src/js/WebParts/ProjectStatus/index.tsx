@@ -44,7 +44,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             project,
             sections,
         } = this.state;
-
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         } else {
