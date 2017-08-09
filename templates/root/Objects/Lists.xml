@@ -30,4 +30,6 @@
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectElements.xml" />
     <xi:include 
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Feedback.xml" />
+    <xi:include 
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatusSections.xml">
 </pnp:Lists>
