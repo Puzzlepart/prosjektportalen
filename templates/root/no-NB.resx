@@ -222,6 +222,9 @@
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
+  <data name="Lists_Milestones_Title" xml:space="preserve">
+    <value>Milepæler</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -432,6 +435,9 @@
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
     <value>Gevinstoppfølging</value>
   </data>
+  <data name="ContentTypes_Milestone_Name" xml:space="preserve">
+    <value>Milepæl</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -616,7 +622,7 @@
     <value>Meldt av</value>
   </data>
   <data name="SiteFields_GtProductPhase_DisplayName" xml:space="preserve">
-    <value>Produksjonsfase</value>
+    <value>Leveransefase</value>
   </data>
   <data name="SiteFields_GtProjectTaskUrl_DisplayName" xml:space="preserve">
     <value>Url</value>
@@ -822,6 +828,18 @@
   <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
     <value>Status usikkerhet</value>
   </data>
+  <data name="SiteFields_GtMilestoneStatus_DisplayName" xml:space="preserve">
+    <value>Status milepæl</value>
+  </data>
+  <data name="SiteFields_GtMilestoneComment_DisplayName" xml:space="preserve">
+    <value>Kommentar milepæl</value>
+  </data>
+  <data name="SiteFields_GtMilestonePlannedDate_DisplayName" xml:space="preserve">
+    <value>Planlagt dato</value>
+  </data>
+  <data name="SiteFields_GtMilestoneActualDate_DisplayName" xml:space="preserve">
+    <value>Faktisk dato</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1006,7 +1024,7 @@
     <value>Beskriv mer utfyllende hva dette kan føre til.</value>
   </data>
   <data name="SiteFields_GtProjectLogExperience_Description" xml:space="preserve">
-    <value>Huk av dersom dette skal vises i prosjektets erfaringslogg.</value>
+    <value>Huk av dersom dette skal vises i prosjektenes delte erfaringslogg.</value>
   </data>
   <data name="SiteFields_GtComment_Description" xml:space="preserve">
     <value />
@@ -1344,6 +1362,9 @@
   <data name="WebPart_Tasks_Title" xml:space="preserve">
     <value>Oppgaver</value>
   </data>
+  <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
+    <value>Oppgaver (gjeldende fase)</value>
+  </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Prosjektleveranser jeg har ansvar for</value>
   </data>
@@ -1676,6 +1697,18 @@
   </data>
   <data name="Choice_GtProjectPhaseChoice_SeveralPhases" xml:space="preserve">
     <value>Flere faser</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_BehindSchedule" xml:space="preserve">
+    <value>Ikke i rute</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_OnSchedule" xml:space="preserve">
+    <value>I rute</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_Achieved" xml:space="preserve">
+    <value>Oppnådd</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_NotAchieved" xml:space="preserve">
+    <value>Ikke oppnådd</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>

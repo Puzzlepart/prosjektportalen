@@ -222,6 +222,9 @@
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Projects</value>
   </data>
+  <data name="Lists_Milestones_Title" xml:space="preserve">
+    <value>Milestones</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -431,6 +434,9 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
     <value>Benefit Followup</value>
+  </data>
+  <data name="ContentTypes_Milestone_Name" xml:space="preserve">
+    <value>Milestone</value>
   </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
@@ -824,6 +830,18 @@
   </data>
   <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
     <value>Status uncertainty</value>
+  </data>
+  <data name="SiteFields_GtMilestoneStatus_DisplayName" xml:space="preserve">
+    <value>Status milestone</value>
+  </data>
+  <data name="SiteFields_GtMilestoneComment_DisplayName" xml:space="preserve">
+    <value>Comment, milestone</value>
+  </data>
+  <data name="SiteFields_GtMilestonePlannedDate_DisplayName" xml:space="preserve">
+    <value>Target date</value>
+  </data>
+  <data name="SiteFields_GtMilestoneActualDate_DisplayName" xml:space="preserve">
+    <value>Actual date</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1340,6 +1358,9 @@
   </data>
   <data name="WebPart_Tasks_Title" xml:space="preserve">
     <value>Tasks</value>
+  </data>  
+  <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
+    <value>Tasks (current phase)</value>
   </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Project deliveries I am responsible for</value>
@@ -1673,6 +1694,18 @@
   </data>
   <data name="Choice_GtProjectPhaseChoice_SeveralPhases" xml:space="preserve">
     <value>Several phases</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_BehindSchedule" xml:space="preserve">
+    <value>Behind schedule</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_OnSchedule" xml:space="preserve">
+    <value>On schedule</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_Achieved" xml:space="preserve">
+    <value>Achieved</value>
+  </data>
+  <data name="Choice_GtMilestoneStatus_NotAchieved" xml:space="preserve">
+    <value>Not achieved</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>

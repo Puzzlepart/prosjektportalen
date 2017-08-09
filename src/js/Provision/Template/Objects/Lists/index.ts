@@ -120,6 +120,30 @@ const Lists: IList[] = [
         }],
     },
     {
+        Title: __("Lists_Milestones_Title"),
+        Description: "",
+        Template: 100,
+        ContentTypesEnabled: true,
+        RemoveExistingContentTypes: true,
+        ContentTypeBindings: [{
+            ContentTypeID: "0x01006E5BC3A4008144DC8ACEC0107AFC999A",
+        }],
+        AdditionalSettings: {
+            EnableVersioning: true,
+        },
+        Views: [{
+            Title: __("View_AllItems_DisplayName"),
+            ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: `<OrderBy>
+                  <FieldRef Name="GtMilestonePlannedDate" Ascending="TRUE" />
+                </OrderBy>`,
+            },
+        }],
+    },
+    {
         Title: __("Lists_ProjectLog_Title"),
         Description: "",
         Template: 100,
@@ -374,7 +398,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtChangeLookup", "Title", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["LinkTitle", "GtChangeLookup",  "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
@@ -415,7 +439,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["GtProcess", "GtChallengeDescription", "LinkTitle"],
+            ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,

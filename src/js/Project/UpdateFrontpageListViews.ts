@@ -8,12 +8,15 @@ import * as Config from "./Config";
  */
 const UpdateFrontpageListViews = (phaseName: string): Promise<any[]> => new Promise<any[]>((resolve, reject) => {
     const viewQuery = String.format(Config.FRONTPAGE_LISTS_VIEQUERY, Config.PROJECTPHASE_FIELD, phaseName);
-    let getViewsPromises = Config.FRONTPAGE_LISTS.map(listTitle => sp.web.lists.getByTitle(listTitle).views.get());
+    const lists = Config.FRONTPAGE_LISTS.filter(({ wpTitle }) => document.querySelector(`.ms-webpart-chrome-title .js-webpart-titleCell[title='${wpTitle}']`) !== null);
+    const getViewsPromises = lists.map(({ listTitle }) => sp.web.lists.getByTitle(listTitle).views.get());
     Promise.all(getViewsPromises).then(listViews => {
         let updateViewsPromises = [];
         listViews.forEach((views, i) => {
+            let { listTitle, wpTitle } = lists[i];
             let fViews = views.filter(v => v.ServerRelativeUrl.indexOf(__("Project_WelcomePage")) !== -1);
-            updateViewsPromises = updateViewsPromises.concat(fViews.map(v => sp.web.lists.getByTitle(Config.FRONTPAGE_LISTS[i]).views.getById(v.Id).update({
+            Logger.log({ message: `ChangeProjectPhase: Updating list view for webpart '${wpTitle}' for list ${listTitle}`, level: LogLevel.Info });
+            updateViewsPromises = updateViewsPromises.concat(fViews.map(v => sp.web.lists.getByTitle(listTitle).views.getById(v.Id).update({
                 ViewQuery: viewQuery,
             })));
         });

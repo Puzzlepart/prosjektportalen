@@ -1,6 +1,5 @@
 import * as Util from "../Util";
 import * as Config from "./Config";
-
 import UpdatePhaseWelcomePage from "./UpdatePhaseWelcomePage";
 import UpdateFrontpageListViews from "./UpdateFrontpageListViews";
 import SetMetadataDefaults from "./SetMetadataDefaults";
