@@ -26,7 +26,7 @@ export default class SectionModel {
         this.source = obj.StatusSectionsSource;
         this.listTitle = obj.StatusSectionsList;
         this.viewQuery = obj.StatusSectionsViewQuery;
-        this.viewFields = obj.StatusSectionsViewFields ? obj.StatusSectionsViewFields.split(",") : null;
+        this.viewFields = obj.StatusSectionsViewFields ? obj.StatusSectionsViewFields.split(",") : [];
         this.fieldName = obj.StatusSectionsFieldName;
         this.showRiskMatrix = obj.StatusSectionsShowRiskMatrix;
         this.contentTypeId = obj.ContentTypeId;
@@ -34,6 +34,10 @@ export default class SectionModel {
         if(this.getType() === SectionType.RiskSection) {
             this.listTitle = "Usikkerhet";
             this.fieldName = "GtStatusRisk";
+        }
+
+        if(this.getType() === SectionType.EconomySection) {
+            this.fieldName = "GtStatusBudget";
         }
     }
     

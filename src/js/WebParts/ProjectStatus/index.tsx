@@ -19,8 +19,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     constructor(props: IProjectStatusProps) {
         super(props);
         this.state = {
-            project: null,
-            sections: [],
             isLoading: true,
         };
     }
@@ -29,10 +27,10 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(({ project, sections }) => {
-            console.log(sections);
+        this.fetchData().then(({ project, fields, sections }) => {
             this.setState({
                 project,
+                fields,
                 sections: sections.map((s, key) => new SectionModel(s)),
                 isLoading: false,
             });
@@ -91,14 +89,15 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      * @param param0 Props
      * @param param1 State
      */
-    private renderSections({ }: IProjectStatusProps, { sections, project }: IProjectStatusState) {
+    private renderSections({ }: IProjectStatusProps, { sections, fields, project }: IProjectStatusState) {
         return (
             sections.map((s, key) => (
                 <Section
                     key={key}
                     index={key}
                     section={s}
-                    project={project} />
+                    project={project}
+                    fields={fields} />
             ))
         );
     }
@@ -109,9 +108,10 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     private fetchData = () => new Promise<any>((resolve, reject) => {
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
+            sp.web.lists.getById(_spPageContextInfo.pageListId).fields.get(),
             sp.site.rootWeb.lists.getByTitle("StatusSections").items.orderBy("StatusSectionsOrder").get(),
         ])
-            .then(([project, sections]) => resolve({ project, sections }))
+            .then(([project, fields, sections]) => resolve({ project, fields, sections }))
             .catch(reject);
     })
 }
