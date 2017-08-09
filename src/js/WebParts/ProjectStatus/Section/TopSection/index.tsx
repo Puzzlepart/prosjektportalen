@@ -36,18 +36,19 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                 </div>
                 <div className="ms-Grid-col ms-lg12 ms-xl8 status-elements-container">
                     <div className="status-elements">
-                        {sections.map(({ Title, Icon, FieldName }, key) => {
-                            let statusValue = project[FieldName];
-                            let comment = project[`${FieldName}Comment`];
+                        {sections.map(({ name, iconName, fieldName }, key) => {
+                            const props = {
+                                key,
+                                name,
+                                iconName,
+                                statusValue: project[fieldName],
+                                comment: project[`${fieldName}Comment`],
+                                fieldName
+                            }
                             return (
                                 <StatusElement
-                                    key={key}
-                                    name={Title}
-                                    iconName={Icon}
-                                    scrollTo={`section-${key}`}
-                                    statusValue={statusValue}
-                                    comment={comment}
-                                    fieldName={FieldName} />
+                                    { ...props }
+                                    scrollTo={`section-${key}`} />
                             );
                         })}
                     </div>

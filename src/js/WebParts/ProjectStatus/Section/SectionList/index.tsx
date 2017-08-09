@@ -39,16 +39,15 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
 
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
-        } else {
-            return (
-                <div>
-                    <DetailsList
-                        items={items}
-                        columns={columns}
-                        onRenderItemColumn={this._onRenderItemColumn} />
-                </div >
-            );
         }
+        return (
+            <div>
+                <DetailsList
+                    items={items}
+                    columns={columns}
+                    onRenderItemColumn={this._onRenderItemColumn} />
+            </div >
+        );
     }
 
     /**

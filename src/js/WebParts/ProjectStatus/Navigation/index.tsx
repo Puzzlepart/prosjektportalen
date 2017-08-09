@@ -2,8 +2,9 @@ import * as React from "react";
 import { Icon} from "office-ui-fabric-react/lib/Icon";
 import { Link } from "react-scroll";
 import ExportReport from "../ExportReport";
+import INavigationProps from "./INavigationProps";
 
-const Navigation = ({ project, sections }) => {
+const Navigation = ({ project, sections }: INavigationProps) => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
@@ -15,7 +16,7 @@ const Navigation = ({ project, sections }) => {
                 </div>
             </div>
             <div className="nav-links ms-Grid-row">
-                {sections.map((s, key) => (
+                {sections.map((section, key) => (
                     <Link
                         key={key}
                         className="nav-link ms-Grid-col ms-md2"
@@ -27,9 +28,9 @@ const Navigation = ({ project, sections }) => {
                         duration={300}>
                         <div className="ms-Grid-row">
                             <div className="ms-Grid-col ms-md4 ms-lg4">
-                                <Icon iconName={s.Icon} />
+                                <Icon iconName={section.iconName} />
                             </div>
-                            <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{s.Title}</p>
+                            <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{section.name}</p>
                         </div>
                     </Link>
                 ))}

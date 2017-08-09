@@ -1,13 +1,11 @@
-import { RiskElementModel } from "../IRiskOverviewState";
-
-interface IRiskMatrixProps {
-    items: RiskElementModel[];
+export default interface IRiskMatrixProps {
+    viewQuery: string;
+    listTitle?: string;
     postAction: boolean;
 }
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
-    items: [],
+    viewQuery: "",
+    listTitle: "Usikkerhet",
     postAction: false,
 };
-
-export default IRiskMatrixProps;

@@ -9,6 +9,9 @@ import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
 
+/**
+ * Project Status
+ */
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
     /**
      * Constructor
@@ -27,6 +30,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      */
     public componentDidMount(): void {
         this.fetchData().then(({ project, sections }) => {
+            console.log(sections);
             this.setState({
                 project,
                 sections: sections.map((s, key) => new SectionModel(s)),
@@ -44,6 +48,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             project,
             sections,
         } = this.state;
+
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         } else {
