@@ -11,17 +11,16 @@ import EconomySection from "./EconomySection";
 import SectionHeader from "./SectionHeader";
 import DataSource from "../DataSource";
 import BenefitsOverview from "../BenefitsOverview";
+import IProjectStatusState from "./IProjectStatusState";
+import IProjectStatusProps from "./IProjectStatusProps";
+import { Section } from "./Section";
 
-export interface IProjectStatusState {
-    project: any;
-    isLoading: boolean;
-}
-
-export default class ProjectStatus extends React.Component<any, IProjectStatusState> {
+export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
     constructor() {
         super();
         this.state = {
             project: null,
+            sections: [],
             isLoading: true,
         };
     }
@@ -113,16 +112,18 @@ export default class ProjectStatus extends React.Component<any, IProjectStatusSt
             );
         }
     }
-
+ 
     /**
      * Fetches required and sets the state
      */
     private fetchData(): void {
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
-        ]).then(([project]) => {
+            sp.site.rootWeb.lists.getByTitle("StatusSections").items.get(),
+        ]).then(([project, sections]) => {
             this.setState({
-                project: project,
+                project,
+                sections: sections.map(s => new Section(s.Title, s.StatusSectionsIcon)),
                 isLoading: false,
             });
         });
