@@ -20,7 +20,7 @@ const Navigation = ({ project, sections }) => {
                         key={key}
                         className="nav-link ms-Grid-col ms-md2"
                         activeClass="active"
-                        to={"to"}
+                        to={`section-${key}`}
                         offset={-100}
                         spy={true}
                         smooth={true}

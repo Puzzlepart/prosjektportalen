@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
-import { default as ProjectInfo } from "../../../ProjectInfo";
+import ProjectInfo from "../../../ProjectInfo";
+import ISectionProps from "./ISectionProps";
 
-const TopSection = ({ project }) => {
+const TopSection = ({ project, sections }: ISectionProps) => {
     return (
         <Element name="status-section" className="status-section section ms-Grid-row">
             <div id="status-section">
@@ -33,47 +34,22 @@ const TopSection = ({ project }) => {
                         </div>
                     </div>
                 </div>
-                <div className="ms-Grid-col ms-lg12 ms-xl4 status-elements-container">
+                <div className="ms-Grid-col ms-lg12 ms-xl8 status-elements-container">
                     <div className="status-elements">
-                        <StatusElement
-                            name={__("ProjectStatus_Heading_ProjectTime")}
-                            iconName="DateTime"
-                            scrollTo="fremdrift-section"
-                            statusValue={project.GtStatusTime}
-                            comment={project.GtStatusTimeComment}
-                            fieldName="GtStatusTime" />
-                        <StatusElement
-                            name={__("ProjectStatus_Heading_ProjectBudget")}
-                            iconName="Money"
-                            scrollTo="budget-section"
-                            statusValue={project.GtStatusBudget}
-                            comment={project.GtStatusBudgetComment}
-                            fieldName="GtStatusBudget" />
-                        <StatusElement
-                            name={__("ProjectStatus_Heading_ProjectQuality")}
-                            iconName="Product"
-                            scrollTo="kvalitet-section"
-                            statusValue={project.GtStatusQuality}
-                            comment={project.GtStatusQualityComment}
-                            fieldName="GtStatusQuality" />
-                    </div>
-                </div>
-                <div className="ms-Grid-col ms-lg12 ms-xl4 status-elements-container">
-                    <div className="status-elements">
-                        <StatusElement
-                            name={__("ProjectStatus_Heading_ProjectRisk")}
-                            iconName="Warning"
-                            scrollTo="risiko-section"
-                            statusValue={project.GtStatusRisk}
-                            comment={project.GtStatusRiskComment}
-                            fieldName="GtStatusRisk" />
-                        <StatusElement
-                            name={__("ProjectStatus_Heading_ProjectBenefitAchievement")}
-                            iconName="Trophy"
-                            scrollTo="gevinst-section"
-                            statusValue={project.GtStatusGainAchievement}
-                            comment={project.GtStatusGainAchievementComment}
-                            fieldName="GtStatusGainAchievement" />
+                        {sections.map(({ Title, Icon, FieldName }, key) => {
+                            let statusValue = project[FieldName];
+                            let comment = project[`${FieldName}Comment`];
+                            return (
+                                <StatusElement
+                                    key={key}
+                                    name={Title}
+                                    iconName={Icon}
+                                    scrollTo={`section-${key}`}
+                                    statusValue={statusValue}
+                                    comment={comment}
+                                    fieldName={FieldName} />
+                            );
+                        })}
                     </div>
                 </div>
             </div>

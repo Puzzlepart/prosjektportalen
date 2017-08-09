@@ -71,7 +71,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                                 }
                             }
                         </Sticky>
-                        <TopSection project={project} />
+                        <TopSection
+                            project={project}
+                            sections={sections} />
                         {this.renderSections(this.props, this.state)}
                     </StickyContainer >
                 </div >

@@ -1,6 +1,8 @@
+import SectionModel from "./Section/SectionModel";
+
 interface IProjectStatusState {
     project: any;
-    sections: any[];
+    sections: SectionModel[];
     isLoading: boolean;
 }
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as Config from "../../Config";
+import * as Config from "../Config";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";

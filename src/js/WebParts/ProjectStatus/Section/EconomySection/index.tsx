@@ -1,5 +1,5 @@
 import * as React from "react";
-import ProjectProperty, { ProjectPropertyModel } from "../../ProjectInfo/ProjectProperty";
+import ProjectProperty, { ProjectPropertyModel } from "../../../ProjectInfo/ProjectProperty";
 import IEconomySectionProps from "./IEconomySectionProps";
 
 /**
