@@ -1,7 +1,6 @@
 import * as React from "react";
-import { sp } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { DetailsList } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import ISectionListProps from "./ISectionListProps";
 import ISectionListState from "./ISectionListState";
 
@@ -38,8 +37,6 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
             columns,
         } = this.state;
 
-        console.log(columns);
-
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         } else {
@@ -47,10 +44,28 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
                 <div>
                     <DetailsList
                         items={items}
-                        columns={columns} />
+                        columns={columns}
+                        onRenderItemColumn={this._onRenderItemColumn} />
                 </div >
             );
         }
+    }
+
+    /**
+     * On render item column
+     */
+    private _onRenderItemColumn = (item: any, index: number, col: IColumn) => {
+        const colValue = item[col.fieldName];
+        if (typeof colValue === "string") {
+            return colValue;
+        } else if (typeof colValue === "number") {
+            return colValue;
+        } else if (typeof colValue === "object") {
+            if (colValue.hasOwnProperty("Label")) {
+                return colValue.Label;
+            }
+        }
+        return null;
     }
 
     /**

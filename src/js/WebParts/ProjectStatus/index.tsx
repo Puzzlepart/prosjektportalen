@@ -104,7 +104,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     private fetchData = () => new Promise<any>((resolve, reject) => {
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
-            sp.site.rootWeb.lists.getByTitle("StatusSections").items.get(),
+            sp.site.rootWeb.lists.getByTitle("StatusSections").items.orderBy("StatusSectionsOrder").get(),
         ])
             .then(([project, sections]) => resolve({ project, sections }))
             .catch(reject);
