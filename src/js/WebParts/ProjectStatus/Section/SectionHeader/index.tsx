@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Icon } from "../../@Components";
-import * as Util from "../../../Util";
-import { GetStatusCssClass } from "../Utils";
+import { Icon } from "../../../@Components";
+import * as Util from "../../../../Util";
+import { GetStatusCssClass } from "../../Utils";
 import ISectionHeaderProps from "./ISectionHeaderProps";
 
 const SectionHeader = ({ name, statusValue, comment, source, iconName, fieldName }: ISectionHeaderProps) => {

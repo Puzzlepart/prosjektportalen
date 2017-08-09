@@ -1,16 +1,8 @@
 import * as React from "react";
 import { Link } from "react-scroll";
-import { Icon } from "../../../@Components";
-import { GetStatusCssClass } from "../../Utils";
-
-export interface IStatusElementProps {
-    name: string;
-    iconName: string;
-    statusValue: string;
-    comment: string;
-    scrollTo?: any;
-    fieldName?: string;
-}
+import { Icon } from "../../../../@Components";
+import { GetStatusCssClass } from "../../../Utils";
+import IStatusElementProps from "./IStatusElementProps";
 
 /**
  * Status element

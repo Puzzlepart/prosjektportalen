@@ -5,7 +5,7 @@ export default class SectionModel {
     public List: string;
     public ViewQuery: string;
     public ViewFields: string;
-    public FieldName: String;
+    public FieldName: string;
     public ShowRiskMatrix: boolean;
 
     constructor(obj: any) {
