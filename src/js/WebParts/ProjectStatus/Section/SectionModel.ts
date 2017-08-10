@@ -17,7 +17,7 @@ export default class SectionModel {
 
     /**
      * Constructor
-     * 
+     *
      * @param obj Object
      */
     constructor(obj: any) {
@@ -31,27 +31,27 @@ export default class SectionModel {
         this.showRiskMatrix = obj.StatusSectionsShowRiskMatrix;
         this.contentTypeId = obj.ContentTypeId;
 
-        if(this.getType() === SectionType.RiskSection) {
+        if (this.getType() === SectionType.RiskSection) {
             this.listTitle = "Usikkerhet";
             this.fieldName = "GtStatusRisk";
         }
 
-        if(this.getType() === SectionType.EconomySection) {
+        if (this.getType() === SectionType.EconomySection) {
             this.fieldName = "GtStatusBudget";
         }
     }
-    
+
     /**
      * Get type
      */
     public getType(): SectionType {
-        if(this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82802") !== -1) {
+        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82802") !== -1) {
             return SectionType.StatusSection;
         }
-        if(this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
+        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
             return SectionType.EconomySection;
         }
-        if(this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
+        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
             return SectionType.RiskSection;
         }
     }
