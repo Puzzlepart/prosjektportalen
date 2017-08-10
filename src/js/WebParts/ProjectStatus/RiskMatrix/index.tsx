@@ -114,7 +114,7 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
         ctx.load(fields);
         ctx.executeQueryAsync(() => {
             let itemFieldValues = items.get_data().map(i => i.get_fieldValues());
-            resolve({ items: itemFieldValues })
+            resolve({ items: itemFieldValues });
         }, reject);
     })
 }

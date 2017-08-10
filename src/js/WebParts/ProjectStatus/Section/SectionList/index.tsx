@@ -89,12 +89,12 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
                     fieldName: field.get_internalName(),
                     name: field.get_title(),
                     minWidth: 100,
-                }
+                };
             });
             resolve({
                 items: itemFieldValues,
                 columns: columns,
-            })
+            });
         }, reject);
     })
 }

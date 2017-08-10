@@ -85,7 +85,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
     /**
      * Render sections
-     * 
+     *
      * @param param0 Props
      * @param param1 State
      */

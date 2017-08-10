@@ -1,19 +1,11 @@
 import * as React from "react";
 import { Element } from "react-scroll";
-import ProjectProperty, { ProjectPropertyModel } from "../../ProjectInfo/ProjectProperty";
+import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "../RiskMatrix";
 import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
 import ISectionProps from "./ISectionProps";
 import { SectionType } from "./SectionModel";
-
-const FIELDS_TO_SHOW: ProjectPropertyModel[] = [
-    { internalName: "GtProjectFinanceName", displayName: __("SiteFields_GtProjectFinanceName_DisplayName") },
-    { internalName: "GtBudgetTotal", displayName: __("SiteFields_GtBudgetTotal_DisplayName") },
-    { internalName: "GtCostsTotal", displayName: __("SiteFields_GtCostsTotal_DisplayName") },
-    { internalName: "GtProjectForecast", displayName: __("SiteFields_GtProjectForecast_DisplayName") },
-    { internalName: "GtBudgetLastReportDate", displayName: __("SiteFields_GtBudgetLastReportDate_DisplayName") },
-];
 
 export default class Section extends React.PureComponent<ISectionProps, any> {
     /**
@@ -55,12 +47,12 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
             statusValue: project[fieldName],
             comment: project[`${fieldName}Comment`],
             source,
-            fieldName
-        }
+            fieldName,
+        };
 
         return (
             <SectionHeader { ...sectionHeaderProps } />
-        )
+        );
     }
 
     /**
@@ -87,7 +79,6 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
                         <div className="ms-Grid-row">
                             {section.viewFields.map((vf, key) => {
                                 let [field] = fields.filter(f => f.InternalName === vf);
-                                console.log(field);
                                 if (!field) {
                                     return null;
                                 }
@@ -112,5 +103,5 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
             </div>
         );
     }
-};
+}
 

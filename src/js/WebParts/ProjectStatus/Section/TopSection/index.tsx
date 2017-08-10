@@ -43,8 +43,8 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                                 iconName,
                                 statusValue: project[fieldName],
                                 comment: project[`${fieldName}Comment`],
-                                fieldName
-                            }
+                                fieldName,
+                            };
                             return (
                                 <StatusElement
                                     { ...props }
