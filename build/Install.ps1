@@ -148,7 +148,12 @@ try {
     Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "taxonomy"
+
+        $session = Get-PnPTaxonomySession 
+        $ts = $session.GetDefaultSiteCollectionTermStore() 
+        $lcid = Get-PnPProperty -ClientObject $ts -Property DefaultLanguage
+
+        Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
