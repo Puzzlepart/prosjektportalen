@@ -45,6 +45,12 @@ Param(
     [string]$ExtensionFolder
 )
 
+function Get-TermStoreDefaultLanguage() {
+    $session = Get-PnPTaxonomySession 
+    $ts = $session.GetDefaultSiteCollectionTermStore() 
+    return (Get-PnPProperty -ClientObject $ts -Property DefaultLanguage)
+}
+
 function Get-WebLanguage($ctx) {
     $web = $ctx.Web
     $ctx.Load($web)
@@ -148,11 +154,7 @@ try {
     Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-
-        $session = Get-PnPTaxonomySession 
-        $ts = $session.GetDefaultSiteCollectionTermStore() 
-        $lcid = Get-PnPProperty -ClientObject $ts -Property DefaultLanguage
-
+        $lcid = GetDefaultSiteCollectionTermStore
         Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
     }
