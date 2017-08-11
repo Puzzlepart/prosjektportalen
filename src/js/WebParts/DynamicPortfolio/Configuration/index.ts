@@ -22,9 +22,9 @@ export const getConfig = () => new Promise<IConfiguration>((resolve, reject) => 
                 .get(),
             lists.getByTitle("DynamicPortfolioViews")
                 .items
-                .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and AuthorId eq ${_spPageContextInfo.userId}))`)
-                .expand("GtDpFieldsLookup", "GtDpRefinersLookup")
-                .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName")
+                .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
+                .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "Author")
+                .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "Author/Id")
                 .orderBy("GtDpOrder")
                 .get(),
         ]).then(([fields, refiners, views]) => {
