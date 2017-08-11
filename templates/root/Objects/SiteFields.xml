@@ -414,4 +414,15 @@
             <CHOICE>{resource:Choice_GtProjectPhaseChoice_SeveralPhases}</CHOICE>
         </CHOICES>
     </Field>
+    <Field ID="{dabdcbab-7bab-4fb2-8d65-85bd03809a8d}" Name="GtMilestoneComment" StaticName="GtMilestoneComment" DisplayName="{resource:SiteFields_GtMilestoneComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE"></Field>
+    <Field ID="{17a4b359-5819-4e7c-9894-a154320a661d}" Name="GtMilestoneStatus" StaticName="GtMilestoneStatus" DisplayName="{resource:SiteFields_GtMilestoneStatus_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" FillInChoice="FALSE">
+        <CHOICES>
+            <CHOICE>{resource:Choice_GtMilestoneStatus_BehindSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtMilestoneStatus_OnSchedule}</CHOICE>
+            <CHOICE>{resource:Choice_GtMilestoneStatus_Achieved}</CHOICE>
+            <CHOICE>{resource:Choice_GtMilestoneStatus_NotAchieved}</CHOICE>
+        </CHOICES>
+    </Field>
+    <Field ID="{1fa322ec-6b56-4ea9-a1fd-2623e34083e6}" Name="GtMilestonePlannedDate" StaticName="GtMilestonePlannedDate" DisplayName="{resource:SiteFields_GtMilestonePlannedDate_DisplayName}" Type="DateTime" Format="DateOnly" FriendlyDisplayFormat="Disabled"  Group="{resource:SiteFields_Group}" />
+    <Field ID="{cbf2ae22-2c77-4ad0-a639-07fddfb5cd81}" Name="GtMilestoneActualDate" StaticName="GtMilestoneActualDate" DisplayName="{resource:SiteFields_GtMilestoneActualDate_DisplayName}" Type="DateTime" Format="DateOnly" FriendlyDisplayFormat="Disabled" Group="{resource:SiteFields_Group}" />
 </pnp:SiteFields>
