@@ -1,0 +1,45 @@
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Fremdrift</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsIcon">DateTime</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsViewFields">Title,GtProductPhase,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsList">Prosjektleveranser</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsFieldName">GtStatusTime</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82803</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Økonomi</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsIcon">Money</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsViewFields">GtProjectFinanceName,GtBudgetTotal,GtCostsTotal,GtProjectForecast,GtBudgetLastReportDate</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Kvalitet</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsOrder">30</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsIcon">Product</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsFieldName">GtStatusQuality</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82804</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Risiko</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsOrder">40</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsIcon">Warning</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsViewFields">Title</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsShowRiskMatrix">true</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Gevinstoppnåelse</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsOrder">50</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsIcon">Trophy</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsViewFields">Title</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsList">Gevinstanalyse og gevinstrealiseringsplan</pnp:DataValue>
+            <pnp:DataValue FieldName="StatusSectionsFieldName">GtStatusGainAchievement</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>
