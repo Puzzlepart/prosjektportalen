@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="GtStSec" TemplateType="100" Url="Lists/GtStSec" 
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
