@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Config from "../Config";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
@@ -24,6 +25,7 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
             selectedRisk: null,
             showDialog: false,
             isLoading: true,
+            postAction: false,
         };
     }
 
@@ -55,9 +57,9 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
                         <RiskElement
                             key={idx}
                             item={risk}
-                            style={{ opacity: this.props.postAction ? 0.5 : 1 }} />
+                            style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
                     ));
-                const riskElementsPostAction = (this.props.postAction ? this.state.items.filter((risk, idx) => this.props.postAction && (element.Probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence === parseInt(risk.GtRiskConsequencePostAction, 10))) : [])
+                const riskElementsPostAction = (this.state.postAction ? this.state.items.filter((risk, idx) => this.state.postAction && (element.Probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence === parseInt(risk.GtRiskConsequencePostAction, 10))) : [])
                     .map((risk, idx) => (
                         <RiskElement
                             key={idx}
@@ -96,6 +98,12 @@ export class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixSta
                         {riskMatrix}
                     </tbody>
                 </table>
+                <Toggle
+                    defaultChecked={false}
+                    onChanged={isChecked => this.setState({ postAction: isChecked })}
+                    label={__("ProjectStatus_RiskShowPostActionLabel")}
+                    onText={__("String_Yes")}
+                    offText={__("String_No")} />
             </div>
         );
     }
