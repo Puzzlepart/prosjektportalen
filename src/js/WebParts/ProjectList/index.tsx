@@ -65,7 +65,7 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
             <div style={{ paddingRight: 40 }}>
                 <SearchBox
                     labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
-                    onChanged={st => this.setState({ searchTerm: st })} />
+                    onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 {this.renderCards()}
                 {this.renderProjectInfoModal(this.state)}
                 <Style props={this.props} />
