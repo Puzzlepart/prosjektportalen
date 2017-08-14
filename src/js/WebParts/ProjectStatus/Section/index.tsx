@@ -75,7 +75,9 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
                     </div>
                 )}
                 {section.getType() === SectionType.EconomySection && (
-                    <div className="ms-Grid">
+                    <div
+                        className="ms-Grid"
+                        style={{ marginTop: 20 }}>
                         <div className="ms-Grid-row">
                             {section.viewFields.map((vf, key) => {
                                 let [field] = fields.filter(f => f.InternalName === vf);
