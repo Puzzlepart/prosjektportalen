@@ -103,7 +103,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     }
 
     /**
-     * Fetches required and sets the state
+     * Fetches required data
      */
     private fetchData = () => new Promise<any>((resolve, reject) => {
         Promise.all([
