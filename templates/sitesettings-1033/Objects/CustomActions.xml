@@ -65,5 +65,13 @@
             Url="Lists/Feedback/AllItems.aspx"
             Rights="ManageWeb"
             Sequence="2008" />
+        <pnp:CustomAction
+            Group="Customization"
+            Location="Microsoft.SharePoint.SiteSettings"
+            Name="Project Porta - Status Sections"
+            Title="Project Porta - Status Sections"
+            Url="Lists/StatusSections/AllItems.aspx"
+            Rights="ManageWeb"
+            Sequence="2009" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>
