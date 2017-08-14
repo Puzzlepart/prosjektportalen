@@ -38,7 +38,7 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
         fileName: __("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
         triggerId: "export-workbook",
-        buttonLabel: "Eksporter til Excel",
+        buttonLabel: __("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
     defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,

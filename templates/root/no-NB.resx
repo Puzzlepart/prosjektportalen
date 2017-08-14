@@ -1731,6 +1731,9 @@
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
   </data>
+  <data name="DynamicPortfolio_ExcelExportButtonLabel" xml:space="preserve">
+    <value>Eksporter til Excel</value>
+  </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>
