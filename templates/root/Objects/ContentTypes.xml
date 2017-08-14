@@ -1,44 +1,44 @@
 <pnp:ContentTypes 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
-    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="Section" Description="" Group="GtStSec" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="StatusSectionsSource" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" Name="Status Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" Name="Status Section" Description="" Group="GtStSec" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="StatusSectionsList" />
-            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="StatusSectionsViewQuery" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="StatusSectionsViewFields" />
-            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="StatusSectionsFieldName" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" />
+            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" />
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
+            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Economy Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Economy Section" Description="" Group="GtStSec" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="StatusSectionsViewFields" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="Risk Section" Description="" Group="StatusSections" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="Risk Section" Description="" Group="GtStSec" NewFormUrl="" EditFormUrl="" DisplayFormUrl="">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="StatusSectionsOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="StatusSectionsIcon" />
-            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="StatusSectionsViewQuery" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="StatusSectionsViewFields" />
-            <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="StatusSectionsShowRiskMatrix" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" />
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
+            <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="GtStSecShowRiskMatrix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D56634648310702" Name="{resource:ContentTypes_Glittertind_element_Name}" Description="{resource:ContentTypes_Glittertind_element_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>

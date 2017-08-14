@@ -414,16 +414,16 @@
             <CHOICE>{resource:Choice_GtProjectPhaseChoice_SeveralPhases}</CHOICE>
         </CHOICES>
     </Field>
-    <Field Type="Text" DisplayName="ViewFields" Group="StatusSections" ID="{2d165a4d-a3e9-4756-acd2-abb537041fd4}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsViewFields" Name="StatusSectionsViewFields"></Field>
-    <Field Type="Text" DisplayName="Ikon" Group="StatusSections" ID="{b2af224f-5e07-4f9f-9a3a-9f5345bb3153}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsIcon" Name="StatusSectionsIcon"></Field>
-    <Field Type="Text" DisplayName="Feltnavn" Group="StatusSections" ID="{fe762779-f5d6-475d-ad1d-68e7d9ae0034}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsFieldName" Name="StatusSectionsFieldName"></Field>
-    <Field Type="Note" DisplayName="ViewQuery" NumLines="6" RichText="FALSE"  Group="StatusSections" ID="{dd9a8b72-c646-4ec2-b834-614fa27fb79a}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsViewQuery" Name="StatusSectionsViewQuery" CustomFormatter="" RestrictedMode="TRUE" AppendOnly="FALSE" UnlimitedLengthInDocumentLibrary="FALSE"></Field>
-    <Field Type="Number" DisplayName="Rekkefølge" Decimals="0" Group="StatusSections" ID="{06889695-8107-4ca8-9813-256df32654c6}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsOrder" Name="StatusSectionsOrder"></Field>
-    <Field Type="Boolean" DisplayName="Vis risikomatrise" Group="StatusSections" ID="{f93b92b8-1a69-445f-b13f-0fc3ef924101}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="StatusSectionsShowRiskMatrix" Name="StatusSectionsShowRiskMatrix">
+    <Field Type="Text" DisplayName="ViewFields" Group="GtStSec" ID="{2d165a4d-a3e9-4756-acd2-abb537041fd4}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecViewFields" Name="GtStSecViewFields"></Field>
+    <Field Type="Text" DisplayName="Ikon" Group="GtStSec" ID="{b2af224f-5e07-4f9f-9a3a-9f5345bb3153}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecIcon" Name="GtStSecIcon"></Field>
+    <Field Type="Text" DisplayName="Feltnavn" Group="GtStSec" ID="{fe762779-f5d6-475d-ad1d-68e7d9ae0034}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecFieldName" Name="GtStSecFieldName"></Field>
+    <Field Type="Note" DisplayName="ViewQuery" NumLines="6" RichText="FALSE"  Group="GtStSec" ID="{dd9a8b72-c646-4ec2-b834-614fa27fb79a}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecViewQuery" Name="GtStSecViewQuery" CustomFormatter="" RestrictedMode="TRUE" AppendOnly="FALSE" UnlimitedLengthInDocumentLibrary="FALSE"></Field>
+    <Field Type="Number" DisplayName="Rekkefølge" Decimals="0" Group="GtStSec" ID="{06889695-8107-4ca8-9813-256df32654c6}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecOrder" Name="GtStSecOrder"></Field>
+    <Field Type="Boolean" DisplayName="Vis risikomatrise" Group="GtStSec" ID="{f93b92b8-1a69-445f-b13f-0fc3ef924101}" SourceID="{b081100e-6fa9-4b75-bda6-ad85283297a9}" StaticName="GtStSecShowRiskMatrix" Name="GtStSecShowRiskMatrix">
         <Default>1</Default>
     </Field>
-    <Field Type="Text" DisplayName="Listenavn" Group="StatusSections" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}"  StaticName="StatusSectionsList" Name="StatusSectionsList" ></Field>
-    <Field Type="Text" DisplayName="URL" Group="StatusSections" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="StatusSectionsSource" Name="StatusSectionsSource" ></Field>
+    <Field Type="Text" DisplayName="Listenavn" Group="GtStSec" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}"  StaticName="GtStSecList" Name="GtStSecList" ></Field>
+    <Field Type="Text" DisplayName="URL" Group="GtStSec" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource" ></Field>
     <Field ID="{dabdcbab-7bab-4fb2-8d65-85bd03809a8d}" Name="GtMilestoneComment" StaticName="GtMilestoneComment" DisplayName="{resource:SiteFields_GtMilestoneComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE"></Field>
     <Field ID="{17a4b359-5819-4e7c-9894-a154320a661d}" Name="GtMilestoneStatus" StaticName="GtMilestoneStatus" DisplayName="{resource:SiteFields_GtMilestoneStatus_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" FillInChoice="FALSE">
         <CHOICES>

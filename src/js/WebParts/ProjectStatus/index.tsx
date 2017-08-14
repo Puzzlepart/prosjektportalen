@@ -109,7 +109,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
             sp.web.lists.getById(_spPageContextInfo.pageListId).fields.get(),
-            sp.site.rootWeb.lists.getByTitle("StatusSections").items.orderBy("StatusSectionsOrder").get(),
+            sp.site.rootWeb.lists.getByTitle("GtStSec").items.orderBy("GtStSecOrder").get(),
         ])
             .then(([project, fields, sections]) => resolve({ project, fields, sections }))
             .catch(reject);

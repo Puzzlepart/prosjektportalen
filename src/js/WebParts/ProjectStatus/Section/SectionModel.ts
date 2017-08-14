@@ -22,13 +22,13 @@ export default class SectionModel {
      */
     constructor(obj: any) {
         this.name = obj.Title;
-        this.iconName = obj.StatusSectionsIcon;
-        this.source = obj.StatusSectionsSource;
-        this.listTitle = obj.StatusSectionsList;
-        this.viewQuery = obj.StatusSectionsViewQuery;
-        this.viewFields = obj.StatusSectionsViewFields ? obj.StatusSectionsViewFields.split(",") : [];
-        this.fieldName = obj.StatusSectionsFieldName;
-        this.showRiskMatrix = obj.StatusSectionsShowRiskMatrix;
+        this.iconName = obj.GtStSecIcon;
+        this.source = obj.GtStSecSource;
+        this.listTitle = obj.GtStSecList;
+        this.viewQuery = obj.GtStSecViewQuery;
+        this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
+        this.fieldName = obj.GtStSecFieldName;
+        this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
         this.contentTypeId = obj.ContentTypeId;
 
         if (this.getType() === SectionType.RiskSection) {
