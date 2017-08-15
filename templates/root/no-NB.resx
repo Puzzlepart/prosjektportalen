@@ -1203,8 +1203,15 @@
   <data name="ProjectPhases_CheckpointNotRelevantTooltip" xml:space="preserve">
     <value>Sjekkpunktet er ikke relevant</value>
   </data>
+  <data name="ProjectPhases_CheckpointStillOpenTooltip" xml:space="preserve">
+    <value>Sjekkpunktet er forsatt åpent</value>
+  </data>
   <data name="ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty" xml:space="preserve">
     <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
+  </data>
+  
+  <data name="ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty" xml:space="preserve">
+    <value>Du kan ikke sette sjekkpunktet som 'Fortsatt åpen' uten å legge inn enn kommentar.</value>
   </data>
   <data name="ProjectPhases_Stats_" xml:space="preserve">
     <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
@@ -1610,6 +1617,9 @@
   </data>
   <data name="Choice_GtChecklistStatus_NotRelevant" xml:space="preserve">
     <value>Ikke relevant</value>
+  </data>
+  <data name="Choice_GtChecklistStatus_StillOpen" xml:space="preserve">
+    <value>Forsatt åpen</value>
   </data>
   <data name="Choice_GtStakeholderGroup_Colleagues" xml:space="preserve">
     <value>Medarbeidere</value>
