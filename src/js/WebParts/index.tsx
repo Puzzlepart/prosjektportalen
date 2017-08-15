@@ -26,7 +26,7 @@ const wp_map: IWebPartMapping = {
     "pp-latestprojects": (
         <LatestProjects
             itemsCount={8}
-            reloadInterval={40} />
+            reloadInterval={360} />
     ),
     "pp-quicklinks": <QuickLinks />,
     "pp-dynamicportfolio": <DynamicPortfolio />,
