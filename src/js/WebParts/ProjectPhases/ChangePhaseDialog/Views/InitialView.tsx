@@ -5,7 +5,7 @@ import { IChecklistItem } from "../../Data";
 export interface IInitialViewProps {
     isLoading: boolean;
     currentChecklistItem: IChecklistItem;
-    nextCheckPointAction: (statusValue: string, commentsValue: string) => void;
+    nextCheckPointAction: (statusValue: string, commentsValue: string, updateStatus: boolean) => void;
 }
 
 export interface IInitialViewState {
@@ -34,12 +34,12 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      */
     public render(): JSX.Element {
         if (!this.props.currentChecklistItem) {
-            return (
-                <div className="inner">
-                </div>
-            );
+            return null;
         }
-        const { ID, Title } = this.props.currentChecklistItem;
+        const {
+            ID,
+            Title,
+         } = this.props.currentChecklistItem;
 
         return (
             <div className="inner">
@@ -47,21 +47,14 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                 <textarea
                     placeholder={__("String_Comment")}
                     className="ms-TextField-field"
-                    style={{ marginTop: 10, width: "90%", padding: 10 }}
+                    style={{
+                        marginTop: 15,
+                        width: "90%",
+                        padding: 10,
+                    }}
                     ref={ele => this.commentsField = ele}
-                    onKeyUp={e => this.setState({ comment: e.currentTarget.value })} />
-                <div style={{ margin: "20px 0 25px 0" }}>
-                    {this._statusOptions().map((opt, idx) => (
-                        <span key={idx} title={opt.tooltip}>
-                        <PrimaryButton
-                            disabled={opt.disabled}
-                            onClick={e => {
-                                this.props.nextCheckPointAction(opt.value, this.state.comment);
-                                this.reset();
-                            }}>{opt.value}</PrimaryButton>
-                    </span>
-                    ))}
-                </div>
+                    onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })} />
+                {this.renderStatusOptions(this.props, this.state)}
             </div>
         );
     }
@@ -69,19 +62,45 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     /**
      * Status options
      */
-    private _statusOptions = () => {
-        let [{ isLoading }, { comment }] = [this.props, this.state];
-        return [
+    private renderStatusOptions = ({ isLoading }: IInitialViewProps, { comment }: IInitialViewState) => {
+        const options = [
             {
                 value: __("Choice_GtChecklistStatus_Closed"),
                 disabled: isLoading,
                 tooltip: __("ProjectPhases_CheckpointDoneTooltip"),
+                updateStatus: true,
+            },
+            {
+                value: __("Choice_GtChecklistStatus_StillOpen"),
+                disabled: (isLoading || comment.length < this.commentMinLength),
+                tooltip: comment.length < this.commentMinLength ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
+                updateStatus: false,
             },
             {
                 value: __("Choice_GtChecklistStatus_NotRelevant"),
                 disabled: (isLoading || comment.length < this.commentMinLength),
                 tooltip: comment.length < this.commentMinLength ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
+                updateStatus: true,
             }];
+        return (
+            <div style={{
+                marginTop: 20,
+                marginBottom: 25,
+            }}>
+                {options.map((opt, key) => (
+                    <span
+                        key={key}
+                        title={opt.tooltip}>
+                        <PrimaryButton
+                            disabled={opt.disabled}
+                            onClick={() => {
+                                this.props.nextCheckPointAction(opt.value, comment, opt.updateStatus);
+                                this.reset();
+                            }}>{opt.value}</PrimaryButton>
+                    </span>
+                ))}
+            </div>
+        );
     }
 
     /**

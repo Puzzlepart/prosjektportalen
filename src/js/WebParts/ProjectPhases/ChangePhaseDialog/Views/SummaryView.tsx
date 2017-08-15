@@ -58,7 +58,9 @@ export const SummaryView = ({ currentPhase, checkListItems, listClassName = "pp-
                         item={item} />
                 ))}
             </ul>
-            <MessageBar dangerouslySetInnerHTML={{ __html: String.format(__("ProjectPhases_GoToChecklist2"), listViewUrl) }}></MessageBar>
+            <MessageBar >
+                <div dangerouslySetInnerHTML={{ __html: String.format(__("ProjectPhases_GoToChecklist2"), listViewUrl) }}></div>
+            </MessageBar>
         </div >
     );
 };
