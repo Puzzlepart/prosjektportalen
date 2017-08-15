@@ -253,7 +253,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
         switch (input) {
             case "Title": {
-                const url = Util.generateUrl(newValue);
+                const url = Util.generateUrl(newValue, 10);
                 if (this.doesWebExistTimer) {
                     window.clearTimeout(this.doesWebExistTimer);
                 }
