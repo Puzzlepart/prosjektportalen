@@ -18,7 +18,12 @@ export interface IStatusElementProps {
 const StatusElement = ({ name, iconName, statusValue, comment, scrollTo, fieldName }: IStatusElementProps) => {
     let statusCssClass = fieldName ? GetStatusCssClass(fieldName, statusValue) : "";
     return (
-        <Link className="status-element ms-Grid-row" to={scrollTo} offset={-100} smooth={true} duration={300}>
+        <Link
+            className="status-element ms-Grid-row"
+            to={scrollTo}
+            offset={-100}
+            smooth={true}
+            duration={300}>
             <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
                 <Icon name={iconName} className={statusCssClass} />
             </div>
