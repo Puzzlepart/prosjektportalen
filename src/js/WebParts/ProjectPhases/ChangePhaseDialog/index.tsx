@@ -52,6 +52,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 modalProps={{
                     isDarkOverlay: true,
                     isBlocking: false,
+                    className: "pp-changePhaseDialog",
                 }}
                 onDismiss={this._closeDialog}
                 title={this._getDialogTitle()} >
