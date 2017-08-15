@@ -19,19 +19,15 @@ const StatusNavigation = project => {
                 {Nodes.map(({ title, to, offset, iconName }, idx) => (
                     <Link
                         key={idx}
-                        className="nav-link ms-Grid-col ms-md2"
+                        className="nav-link ms-Grid-col ms-xl2 ms-lg12 ms-md12 ms-sm12"
                         activeClass="active"
                         to={to}
                         offset={offset}
                         spy={true}
                         smooth={true}
                         duration={300}>
-                        <div className="ms-Grid-row">
-                            <div className="ms-Grid-col ms-md4 ms-lg4">
-                                <Icon name={iconName} />
-                            </div>
-                            <p className="ms-hiddenLgDown ms-Grid-col ms-md8 ms-lg8">{title}</p>
-                        </div>
+                        <Icon name={iconName} />
+                        <span>{title}</span>
                     </Link>
                 ))}
             </div>
