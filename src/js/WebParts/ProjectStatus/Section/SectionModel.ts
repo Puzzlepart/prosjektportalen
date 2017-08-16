@@ -13,6 +13,7 @@ export default class SectionModel {
     public viewFields: string[];
     public fieldName: string;
     public showRiskMatrix: boolean;
+    public showInNavbar: boolean;
     public statusValue: string;
     public statusComment?: string;
     private contentTypeId: string;
@@ -32,6 +33,7 @@ export default class SectionModel {
         this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
         this.fieldName = obj.GtStSecFieldName;
         this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
+        this.showInNavbar = obj.GtStSecShowInNavbar;
         this.contentTypeId = obj.ContentTypeId;
 
         if (this.getType() === SectionType.RiskSection) {
@@ -43,8 +45,8 @@ export default class SectionModel {
             this.fieldName = "GtStatusBudget";
         }
 
-        this.statusValue = project[this.fieldName];
-        this.statusComment = project[`${this.fieldName}Comment`];
+        this.statusValue = project.hasOwnProperty(this.fieldName) ? project[this.fieldName] : "";
+        this.statusComment = project.hasOwnProperty(`${this.fieldName}Comment`) ? project[`${this.fieldName}Comment`] : "";
     }
 
     /**
