@@ -7,7 +7,7 @@ import IStatusElementProps from "./IStatusElementProps";
 /**
  * Status element
  */
-const StatusElement = ({ name, iconName, statusValue, comment, scrollTo, fieldName }: IStatusElementProps) => {
+const StatusElement = ({ name, iconName, statusValue = "", comment, scrollTo, fieldName }: IStatusElementProps) => {
     let statusCssClass = fieldName ? GetStatusCssClass(fieldName, statusValue) : "";
     return (
         <Link
@@ -21,7 +21,7 @@ const StatusElement = ({ name, iconName, statusValue, comment, scrollTo, fieldNa
             </div>
             <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
                 <h3>{name}</h3>
-                <h2>{statusValue ? statusValue : ""}</h2>
+                <h2>{statusValue}</h2>
                 <p>{comment}</p>
             </div>
         </Link>

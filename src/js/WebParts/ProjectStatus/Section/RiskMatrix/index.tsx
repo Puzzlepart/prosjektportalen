@@ -18,8 +18,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props: IRiskMatrixProps) {
+        super(props);
         this.state = {};
     }
 

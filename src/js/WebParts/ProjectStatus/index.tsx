@@ -6,13 +6,15 @@ import Navigation from "./Navigation";
 import Section from "./Section";
 import TopSection from "./Section/TopSection";
 import IProjectStatusState from "./IProjectStatusState";
-import IProjectStatusProps from "./IProjectStatusProps";
+import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
 
 /**
  * Project Status
  */
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
+    public static defaultProps = ProjectStatusDefaultProps;
+
     /**
      * Constructor
      */
@@ -109,7 +111,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         Promise.all([
             sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
             sp.web.lists.getById(_spPageContextInfo.pageListId).fields.get(),
-            sp.site.rootWeb.lists.getByTitle("StatusSections").items.orderBy("GtStSecOrder").get(),
+            sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle).items.orderBy(this.props.sectionConfig.orderBy).get(),
         ])
             .then(([project, fields, sections]) => resolve({ project, fields, sections }))
             .catch(reject);

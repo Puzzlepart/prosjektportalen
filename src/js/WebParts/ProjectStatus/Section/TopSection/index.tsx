@@ -34,7 +34,6 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                         name={__("ProjectStatus_Heading_OverallStatus")}
                         iconName="BarChart4"
                         scrollTo="status-section"
-                        statusValue=""
                         comment={project.GtOverallStatus}
                         fieldName="GtOverallStatus" />
                     {sections.map(({ name, iconName, fieldName }, key) => {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "./RiskMatrix";
@@ -14,19 +15,20 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     constructor(props: ISectionProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            isLoading: this.shouldFechData(props),
+        };
     }
 
     /**
     * Component did mount
     */
     public componentDidMount(): void {
-        const { listTitle, showRiskMatrix } = this.props.section;
-
-        if (listTitle || showRiskMatrix) {
+        if (this.shouldFechData(this.props)) {
             this.fetchListData(this.props).then(listData => {
                 this.setState({
                     listData,
+                    isLoading: false,
                 });
             });
         }
@@ -36,6 +38,9 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      * Renders the component
      */
     public render() {
+        if (this.state.isLoading) {
+            return <Spinner />;
+        }
         return (
             <Element
                 name={`section-${this.props.index}`}
@@ -115,6 +120,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                 )}
             </div>
         );
+    }
+
+    private shouldFechData = ({ section }: ISectionProps): boolean => {
+        return (section.showRiskMatrix === true || section.listTitle != null);
     }
 
     /**
