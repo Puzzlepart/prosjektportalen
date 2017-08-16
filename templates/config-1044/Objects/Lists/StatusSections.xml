@@ -7,7 +7,6 @@
             <pnp:DataValue FieldName="GtStSecOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">DateTime</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductPhase,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecList">Prosjektleveranser</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusTime</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -23,13 +22,17 @@
             <pnp:DataValue FieldName="GtStSecOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Product</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusQuality</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecList">Prosjektleveranser</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82804</pnp:DataValue>
             <pnp:DataValue FieldName="Title">Risiko</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Warning</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecViewQuery"><![CDATA[<OrderBy><FieldRef Name="GtRiskFactor" Ascending="FALSE" /></OrderBy>]]></pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewQuery">
+                <![CDATA[<OrderBy><FieldRef Name="GtRiskFactor" Ascending="FALSE" /></OrderBy>]]>
+            </pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecViewFields">ID,Title,GtRiskProximity,GtRiskAction,GtRiskStrategy,GtRiskFactor,GtRiskFactorPostAction</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecShowRiskMatrix">true</pnp:DataValue>
         </pnp:DataRow>
