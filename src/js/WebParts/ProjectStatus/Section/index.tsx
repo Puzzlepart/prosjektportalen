@@ -62,9 +62,7 @@ export default class Section extends React.PureComponent<ISectionProps, any> {
         return (
             <div>
                 {section.showRiskMatrix && (
-                    <RiskMatrix
-                        postAction={false}
-                        viewQuery={section.viewQuery} />
+                    <RiskMatrix viewQuery={section.viewQuery} />
                 )}
                 {section.listTitle && (
                     <div>
