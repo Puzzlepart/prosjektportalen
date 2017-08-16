@@ -1798,6 +1798,9 @@
   <data name="ProjectStatus_RiskShowPostActionLabel" xml:space="preserve">
     <value>Vis før/etter tiltak</value>
   </data>
+  <data name="ProjectStatus_NoData" xml:space="preserve">
+    <value>Det er ikke fyllt ut verdier for noen av statusfeltene.</value>
+  </data>
   <data name="RiskMatrix_Header_Critical" xml:space="preserve">
     <value>Kritisk</value>
   </data>
