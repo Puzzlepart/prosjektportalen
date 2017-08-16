@@ -33,15 +33,6 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      */
     private _onRenderItemColumn = (item: any, index: number, col: IColumn) => {
         const colValue = item[col.fieldName];
-        if (typeof colValue === "string") {
-            return colValue;
-        } else if (typeof colValue === "number") {
-            return colValue;
-        } else if (typeof colValue === "object") {
-            if (colValue.hasOwnProperty("Label")) {
-                return colValue.Label;
-            }
-        }
-        return null;
+        return <span dangerouslySetInnerHTML={{ __html: colValue }}></span>;
     }
 }

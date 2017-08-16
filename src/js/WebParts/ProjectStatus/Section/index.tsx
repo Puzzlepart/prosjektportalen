@@ -129,26 +129,24 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         } else {
             camlQuery.set_viewXml(`<View></View>`);
         }
-        const items = list.getItems(camlQuery);
-        const fields = list.get_fields();
-        ctx.load(items);
-        ctx.load(fields);
+        const _items = list.getItems(camlQuery);
+        const _fields = list.get_fields();
+        ctx.load(_items, "Include(FieldValuesAsHtml)");
+        ctx.load(_fields);
         ctx.executeQueryAsync(() => {
-            let itemFieldValues = items.get_data().map(i => i.get_fieldValues());
-            let validViewFields = section.viewFields.filter(vf => fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
+            let items = _items.get_data().map(i => i.get_fieldValuesAsHtml().get_fieldValues());
+            let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
             let columns = validViewFields.map(vf => {
-                const [field] = fields.get_data().filter(lf => lf.get_internalName() === vf);
+                const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
                 return {
                     key: field.get_internalName(),
                     fieldName: field.get_internalName(),
                     name: field.get_title(),
                     minWidth: 100,
+                    isResizable: true,
                 };
             });
-            resolve({
-                items: itemFieldValues,
-                columns: columns,
-            });
+            resolve({ items, columns });
         }, reject);
     })
 }

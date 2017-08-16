@@ -31,7 +31,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             return null;
         }
 
-        const items = this.props.listData.items.filter(i => i.ContentTypeId.get_stringValue().indexOf(this.props.contentTypeId) !== -1);
+        const items = this.props.listData.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
 
         const riskMatrix = Config.RiskMatrix.map((rows, i) => {
             let cells = rows.map((c, j) => {
