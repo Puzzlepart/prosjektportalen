@@ -74,6 +74,9 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
     $SecondaryUri = New-Object -TypeName System.Uri -ArgumentList $SecondaryUrl
 
     if ($RootUri.Host -eq $SecondaryUri.Host) {
+        if ($SecondaryUri.LocalPath -eq "/") {
+            return ""
+        }
         return $SecondaryUri.LocalPath
     } else {
         return $SecondaryUrl
