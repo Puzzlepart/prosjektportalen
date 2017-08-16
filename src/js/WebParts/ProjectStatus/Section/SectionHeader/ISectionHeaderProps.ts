@@ -1,10 +1,6 @@
-interface ISectionHeaderProps {
-    name: string;
-    statusValue: string;
-    comment: string;
-    source?: string;
-    iconName: string;
-    fieldName: string;
+import SectionModel from "../SectionModel";
+
+export default interface ISectionHeaderProps {
+    section: SectionModel;
 }
 
-export default ISectionHeaderProps;

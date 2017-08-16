@@ -4,7 +4,7 @@ import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "./RiskMatrix";
 import SectionList from "./SectionList";
-import SectionHeader from "./SectionHeader";
+import SectionHeader, { ISectionHeaderProps } from "./SectionHeader";
 import ISectionProps from "./ISectionProps";
 import ISectionState from "./ISectionState";
 import { SectionType } from "./SectionModel";
@@ -55,24 +55,8 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      * Render header
      */
     private renderHeader({ project, section }: ISectionProps, { }: ISectionState) {
-        const {
-            name,
-            iconName,
-            source,
-            fieldName,
-        } = section;
-
-        const sectionHeaderProps = {
-            name,
-            iconName,
-            statusValue: project[fieldName],
-            comment: project[`${fieldName}Comment`],
-            source,
-            fieldName,
-        };
-
         return (
-            <SectionHeader { ...sectionHeaderProps } />
+            <SectionHeader section={section} />
         );
     }
 
@@ -86,9 +70,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                     <RiskMatrix listData={listData} />
                 )}
                 {section.listTitle && (
-                    <div>
-                        <SectionList listData={listData} />
-                    </div>
+                    <SectionList listData={listData} />
                 )}
                 {section.getType() === SectionType.EconomySection && (
                     <div

@@ -13,14 +13,17 @@ export default class SectionModel {
     public viewFields: string[];
     public fieldName: string;
     public showRiskMatrix: boolean;
+    public statusValue: string;
+    public statusComment?: string;
     private contentTypeId: string;
 
     /**
      * Constructor
      *
-     * @param obj Object
+     * @param obj Section object
+     * @param projet Project properties
      */
-    constructor(obj: any) {
+    constructor(obj: any, project: any) {
         this.name = obj.Title;
         this.iconName = obj.GtStSecIcon;
         this.source = obj.GtStSecSource;
@@ -39,6 +42,9 @@ export default class SectionModel {
         if (this.getType() === SectionType.EconomySection) {
             this.fieldName = "GtStatusBudget";
         }
+
+        this.statusValue = project[this.fieldName];
+        this.statusComment = project[`${this.fieldName}Comment`];
     }
 
     /**

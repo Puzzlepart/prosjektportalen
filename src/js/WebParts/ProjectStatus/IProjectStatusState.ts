@@ -1,9 +1,7 @@
-import SectionModel from "./Section/SectionModel";
+import ProjectStatusData from "./ProjectStatusData";
 
 interface IProjectStatusState {
-    project?: any;
-    sections?: SectionModel[];
-    fields?: any[];
+    data?: ProjectStatusData;
     isLoading: boolean;
 }
 

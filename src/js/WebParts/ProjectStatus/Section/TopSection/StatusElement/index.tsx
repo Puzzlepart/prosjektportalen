@@ -7,8 +7,8 @@ import IStatusElementProps from "./IStatusElementProps";
 /**
  * Status element
  */
-const StatusElement = ({ name, iconName, statusValue = "", comment, scrollTo, fieldName }: IStatusElementProps) => {
-    let statusCssClass = fieldName ? GetStatusCssClass(fieldName, statusValue) : "";
+const StatusElement = ({ section, scrollTo }: IStatusElementProps) => {
+    let statusCssClass = section.fieldName ? GetStatusCssClass(section.fieldName, section.statusValue) : "";
     return (
         <Link
             className="status-element ms-Grid-row"
@@ -17,12 +17,12 @@ const StatusElement = ({ name, iconName, statusValue = "", comment, scrollTo, fi
             smooth={true}
             duration={300}>
             <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
-                <Icon name={iconName} className={statusCssClass} />
+                <Icon name={section.iconName} className={statusCssClass} />
             </div>
             <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
-                <h3>{name}</h3>
-                <h2>{statusValue}</h2>
-                <p>{comment}</p>
+                <h3>{section.name}</h3>
+                <h2>{section.statusValue}</h2>
+                <p>{section.statusComment}</p>
             </div>
         </Link>
     );

@@ -5,6 +5,7 @@ import { StickyContainer, Sticky } from "react-sticky";
 import Navigation from "./Navigation";
 import Section from "./Section";
 import TopSection from "./Section/TopSection";
+import ProjectStatusData from "./ProjectStatusData";
 import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
@@ -29,11 +30,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(({ project, fields, sections }) => {
+        this.fetchData().then(data => {
             this.setState({
-                project,
-                fields,
-                sections: sections.map((s, key) => new SectionModel(s)),
+                data,
                 isLoading: false,
             });
         });
@@ -45,8 +44,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     public render(): JSX.Element {
         const {
             isLoading,
-            project,
-            sections,
+            data,
         } = this.state;
 
         if (isLoading) {
@@ -68,16 +66,16 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                                                 height: 100,
                                             }}>
                                             <Navigation
-                                                project={project}
-                                                sections={sections} />
+                                                project={data.project}
+                                                sections={data.sections} />
                                         </div>
                                     );
                                 }
                             }
                         </Sticky>
                         <TopSection
-                            project={project}
-                            sections={sections} />
+                            project={data.project}
+                            sections={data.sections} />
                         {this.renderSections(this.props, this.state)}
                     </StickyContainer >
                 </div >
@@ -91,15 +89,15 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      * @param param0 Props
      * @param param1 State
      */
-    private renderSections({ }: IProjectStatusProps, { sections, fields, project }: IProjectStatusState) {
+    private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
         return (
-            sections.map((s, key) => (
+            data.sections.map((s, key) => (
                 <Section
                     key={key}
                     index={key}
                     section={s}
-                    project={project}
-                    fields={fields} />
+                    project={data.project}
+                    fields={data.fields} />
             ))
         );
     }
@@ -107,13 +105,19 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     /**
      * Fetches required data
      */
-    private fetchData = () => new Promise<any>((resolve, reject) => {
+    private fetchData = () => new Promise<ProjectStatusData>((resolve, reject) => {
+        const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
+        const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
         Promise.all([
-            sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(3).fieldValuesAsHTML.get(),
-            sp.web.lists.getById(_spPageContextInfo.pageListId).fields.get(),
-            sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle).items.orderBy(this.props.sectionConfig.orderBy).get(),
+            sitePagesLib.items.getById(3).fieldValuesAsHTML.get(),
+            sitePagesLib.fields.get(),
+            configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
         ])
-            .then(([project, fields, sections]) => resolve({ project, fields, sections }))
+            .then(([project, fields, sections]) => resolve({
+                project,
+                fields,
+                sections: sections.map(s => new SectionModel(s, project)),
+            }))
             .catch(reject);
     })
 }
