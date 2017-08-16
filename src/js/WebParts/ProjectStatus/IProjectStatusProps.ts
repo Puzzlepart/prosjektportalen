@@ -1,7 +1,7 @@
 import IProjectStatusSectionConfig from "./IProjectStatusSectionConfig";
 
 export default interface IProjectStatusProps {
-    sectionConfig: IProjectStatusSectionConfig;
+    sectionConfig?: IProjectStatusSectionConfig;
 }
 
 export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {
