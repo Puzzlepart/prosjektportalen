@@ -74,7 +74,11 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(listTitle);
         const camlQuery = new SP.CamlQuery();
-        camlQuery.set_viewXml(`<View>${viewQuery}</View>`);
+        if (viewQuery) {
+            camlQuery.set_viewXml(`<View><Query>${viewQuery}</Query></View>`);
+        } else {
+            camlQuery.set_viewXml(`<View></View>`);
+        }
         const items = list.getItems(camlQuery);
         const fields = list.get_fields();
         ctx.load(items);
