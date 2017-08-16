@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
-import RiskMatrix from "../RiskMatrix";
+import RiskMatrix from "./RiskMatrix";
 import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
 import ISectionProps from "./ISectionProps";

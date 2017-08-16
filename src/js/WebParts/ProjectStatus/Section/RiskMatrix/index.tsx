@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
-import * as Config from "../Config";
+import * as Config from "../../Config";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -27,7 +27,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Renders the component
      */
     public render(): JSX.Element {
-        if (!this.props.listData) {
+        if (!this.props.listData || this.props.listData.items.length === 0) {
             return null;
         }
 

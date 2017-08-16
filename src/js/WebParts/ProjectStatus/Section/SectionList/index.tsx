@@ -17,7 +17,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
     public render(): JSX.Element {
         const { listData } = this.props;
 
-        if (!listData) {
+        if (!listData || listData.items.length === 0) {
             return null;
         }
 

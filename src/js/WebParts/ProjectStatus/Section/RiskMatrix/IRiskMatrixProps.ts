@@ -1,5 +1,4 @@
-import ISectionListData from "../Section/ISectionListData";
-
+import ISectionListData from "../ISectionListData";
 
 export default interface IRiskMatrixProps {
     listData: ISectionListData;

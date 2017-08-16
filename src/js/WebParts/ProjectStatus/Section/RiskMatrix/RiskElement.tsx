@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ModalLink } from "../../@Components";
+import { ModalLink } from "../../../@Components";
 
 export interface IRiskElementProps {
     item: any;
