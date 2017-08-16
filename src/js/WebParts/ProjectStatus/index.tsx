@@ -67,7 +67,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                                             }}>
                                             <Navigation
                                                 project={data.project}
-                                                sections={data.sections} />
+                                                sections={data.sections.filter(s => s.showInNavbar)} />
                                         </div>
                                     );
                                 }
