@@ -63,4 +63,11 @@ export default class SectionModel {
             return SectionType.RiskSection;
         }
     }
+
+    /**
+     * Checks if section is valid
+     */
+    public isValid(): boolean {
+        return this.statusValue !== "" && this.statusValue !== null;
+    }
 }

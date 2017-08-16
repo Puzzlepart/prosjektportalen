@@ -115,7 +115,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             .then(([project, fields, sections]) => resolve({
                 project,
                 fields,
-                sections: sections.map(s => new SectionModel(s, project)),
+                sections: sections.map(s => new SectionModel(s, project)).filter(s => s.isValid()),
             }))
             .catch(reject);
     })

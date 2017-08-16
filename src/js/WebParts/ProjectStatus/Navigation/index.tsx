@@ -15,7 +15,9 @@ const Navigation = ({ project, sections }: INavigationProps) => {
                     <ExportReport project={project} />
                 </div>
             </div>
-            <div className="nav-links ms-Grid-row">
+            <div
+                className="nav-links ms-Grid-row"
+                hidden={sections.length === 0}>
                 {sections.map((section, key) => (
                     <Link
                         key={key}

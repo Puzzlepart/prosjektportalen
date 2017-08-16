@@ -1,4 +1,8 @@
 import * as React from "react";
+import {
+    MessageBar,
+    MessageBarType,
+} from "office-ui-fabric-react/lib/MessageBar";
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
@@ -29,6 +33,9 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                 </div>
             </div>
             <div className="ms-Grid-col ms-lg12 ms-xl8 status-elements-container">
+                <div style={{ padding: 20 }}>
+                    <MessageBar messageBarType={MessageBarType.warning}>{__("ProjectStatus_NoData")}</MessageBar>
+                </div>
                 <div className="status-elements">
                     {sections.map((section, key) => (
                         <StatusElement
