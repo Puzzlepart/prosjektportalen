@@ -52,7 +52,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         } else {
             return (
                 <div className="ms-Grid">
-                    <style id="project-style-placeholder"></style>
                     <StickyContainer className="status-report-container">
                         <Sticky>
                             {
