@@ -292,6 +292,13 @@
             <pnp:FieldRef ID="7441ace5-d9e4-4c1d-85fc-ce1614b056ca" Name="GtPcPortfolioPage" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A302" Name="Project Key Value" Description="" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="e122c57e-2d2e-4852-9096-70cc1a30a2ff" Name="GtKey" Required="true" />
+            <pnp:FieldRef ID="60f1e1e1-4cff-4c1f-bb44-5b017393d17c" Name="GtValue" Required="true" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
