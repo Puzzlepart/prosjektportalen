@@ -33,7 +33,9 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                 </div>
             </div>
             <div className="ms-Grid-col ms-lg12 ms-xl8 status-elements-container">
-                <div style={{ padding: 20 }}>
+                <div
+                    hidden={sections.length > 0}
+                    style={{ padding: 20 }}>
                     <MessageBar messageBarType={MessageBarType.warning}>{__("ProjectStatus_NoData")}</MessageBar>
                 </div>
                 <div className="status-elements">
