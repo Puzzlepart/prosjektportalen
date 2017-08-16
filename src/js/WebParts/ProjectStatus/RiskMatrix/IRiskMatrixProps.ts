@@ -1,9 +1,15 @@
+import ISectionListData from "../Section/ISectionListData";
+
+
 export default interface IRiskMatrixProps {
-    viewQuery: string;
-    listTitle?: string;
+    listData: ISectionListData;
+    contentTypeId?: string;
+    containerClassName?: string;
+    tableId?: string;
 }
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
-    viewQuery: "",
-    listTitle: "Usikkerhet",
+    contentTypeId: "0x010088578E7470CC4AA68D566346483107020101",
+    containerClassName: "risk-matrix-container",
+    tableId: "risk-matrix",
 };

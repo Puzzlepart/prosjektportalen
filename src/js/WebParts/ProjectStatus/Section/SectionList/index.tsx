@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import ISectionListProps from "./ISectionListProps";
 import ISectionListState from "./ISectionListState";
@@ -10,42 +9,21 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      */
     constructor(props: ISectionListProps) {
         super(props);
-        this.state = {
-            isLoading: true,
-        };
+        this.state = {};
     }
-
-    /**
-     * Component did mount
-     */
-    public componentDidMount(): void {
-        this.fetchData(this.props).then(data => {
-            this.setState({
-                ...data,
-                isLoading: false,
-            });
-        });
-    }
-
     /**
      * Renders the component
      */
     public render(): JSX.Element {
-        const {
-            isLoading,
-            items,
-            columns,
-        } = this.state;
+        const { listData } = this.props;
 
-        if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+        if (!listData) {
+            return null;
         }
+
         return (
             <div>
-                <DetailsList
-                    items={items}
-                    columns={columns}
-                    onRenderItemColumn={this._onRenderItemColumn} />
+                <DetailsList { ...listData } onRenderItemColumn={this._onRenderItemColumn} />
             </div >
         );
     }
@@ -66,39 +44,4 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
         }
         return null;
     }
-
-    /**
-     * Fetches required data
-     */
-    private fetchData = ({ listTitle, viewQuery, viewFields }: ISectionListProps) => new Promise<any>((resolve, reject) => {
-        const ctx = SP.ClientContext.get_current();
-        const list = ctx.get_web().get_lists().getByTitle(listTitle);
-        const camlQuery = new SP.CamlQuery();
-        if (viewQuery) {
-            camlQuery.set_viewXml(`<View><Query>${viewQuery}</Query></View>`);
-        } else {
-            camlQuery.set_viewXml(`<View></View>`);
-        }
-        const items = list.getItems(camlQuery);
-        const fields = list.get_fields();
-        ctx.load(items);
-        ctx.load(fields);
-        ctx.executeQueryAsync(() => {
-            let itemFieldValues = items.get_data().map(i => i.get_fieldValues());
-            let validViewFields = viewFields.filter(vf => fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
-            let columns = validViewFields.map(vf => {
-                const [field] = fields.get_data().filter(lf => lf.get_internalName() === vf);
-                return {
-                    key: field.get_internalName(),
-                    fieldName: field.get_internalName(),
-                    name: field.get_title(),
-                    minWidth: 100,
-                };
-            });
-            resolve({
-                items: itemFieldValues,
-                columns: columns,
-            });
-        }, reject);
-    })
 }
