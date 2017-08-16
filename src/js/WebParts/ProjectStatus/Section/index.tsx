@@ -122,8 +122,11 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         );
     }
 
+    /**
+     * Should the component fetch data (if listTitle is specified)
+     */
     private shouldFechData = ({ section }: ISectionProps): boolean => {
-        return (section.showRiskMatrix === true || section.listTitle != null);
+        return (section.listTitle != null);
     }
 
     /**
