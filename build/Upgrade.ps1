@@ -44,7 +44,6 @@ function Get-WebLanguage($ctx) {
     return $web.Language
 }
 
-
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
         Connect-PnPOnline $Url -UseWebLogin
@@ -71,13 +70,13 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy
+    .\Install.ps1 -Url $Url -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $GenericCredential
 
     
     Connect-SharePoint $Url        
     Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
     $Language = Get-WebLanguage -ctx (Get-PnPContext)   
-    $upgradePkgs = Get-ChildItem "./upgrade/$($InstallVersion)/$($Language)/*.pnp" 
+    $upgradePkgs = Get-ChildItem "./upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp" 
     foreach($pkg in $upgradePkgs) {
         Apply-PnPProvisioningTemplate $pkg.FullName
     }
