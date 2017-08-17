@@ -12,6 +12,7 @@ export default class SectionModel {
     public listTitle: string;
     public viewQuery: string;
     public viewFields: string[];
+    public rowLimit: number;
     public fieldName: string;
     public showRiskMatrix: boolean;
     public showInNavbar: boolean;
@@ -34,6 +35,7 @@ export default class SectionModel {
         this.listTitle = obj.GtStSecList;
         this.viewQuery = obj.GtStSecViewQuery;
         this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
+        this.rowLimit = obj.GtStSecRowLimit;
         this.fieldName = obj.GtStSecFieldName;
         this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
         this.showInNavbar = obj.GtStSecShowInNavbar;

@@ -118,11 +118,15 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
         const camlQuery = new SP.CamlQuery();
+        let viewXml = ["<View>"];
         if (section.viewQuery) {
-            camlQuery.set_viewXml(`<View><Query>${section.viewQuery}</Query></View>`);
-        } else {
-            camlQuery.set_viewXml(`<View></View>`);
+            viewXml.push(`<Query>${section.viewQuery}</Query>`);
         }
+        if (section.rowLimit) {
+            viewXml.push(`<RowLimit>${section.rowLimit}</RowLimit>`);
+        }
+        viewXml.push("</View>");
+        camlQuery.set_viewXml(viewXml.join(""));
         const _items = list.getItems(camlQuery);
         const _fields = list.get_fields();
         ctx.load(_items, "Include(FieldValuesAsHtml)");

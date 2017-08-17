@@ -50,7 +50,6 @@ function Connect-SharePoint ($Url) {
 
 Connect-SharePoint -Url $Url
 $CurrentVersion = (Get-PnPPropertyBag -Key pp_version)
-Write-Host "Current version installed is $CurrentVersion"
 
 Write-Host "############################################################################" -ForegroundColor Green
 Write-Host "" -ForegroundColor Green
