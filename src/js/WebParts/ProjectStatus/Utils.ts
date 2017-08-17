@@ -9,7 +9,7 @@ import {
  * @param fieldName Field name
  * @param statusValue Status value
  */
-const GetStatusProperties = (fieldName: string, statusValue: string): IStatusProperties => {
+export const GetStatusProperties = (fieldName: string, statusValue: string): IStatusProperties => {
     if (StatusFields.hasOwnProperty(fieldName)) {
         let find = StatusFields[fieldName].Statuses.filter(({ Value }) => (Value === statusValue));
         if (find.length > 0) {
@@ -26,12 +26,10 @@ const GetStatusProperties = (fieldName: string, statusValue: string): IStatusPro
  * @param fieldName Field name
  * @param statusValue Status value
  */
-const GetStatusCssClass = (fieldName: string, statusValue: string) => {
+export const GetStatusCssClass = (fieldName: string, statusValue: string) => {
     const properties = GetStatusProperties(fieldName, statusValue);
     if (properties) {
         return properties.CssClass || "no-status";
     }
     return "no-status";
 };
-
-export { GetStatusProperties, GetStatusCssClass };
