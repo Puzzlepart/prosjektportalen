@@ -32,7 +32,7 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                     </div>
                 </div>
             </div>
-            <div className="ms-Grid-col ms-lg12 ms-xl8 status-elements-container">
+            <div className="ms-Grid-col ms-lg12 ms-xl8 status-columns-container">
                 <div
                     hidden={sections.length > 0}
                     style={{ padding: 20 }}>
