@@ -18,6 +18,10 @@ https://github.com/Puzzlepart/prosjektportalen
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Where do you want to install the Project Portal?")]
     [string]$Url,
+    [Parameter(Mandatory = $false, HelpMessage = "Where do you want to install the required resources?")]
+    [string]$AssetsUrl,
+    [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
+    [string]$DataSourceSiteUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
     [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
@@ -35,6 +39,14 @@ if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
 } elseif (-not $UseWebLogin.IsPresent) {
     $Credential = $GenericCredential
+}
+
+if (-not $AssetsUrl) {
+    $AssetsUrl = $Url
+}
+
+if (-not $DataSourceSiteUrl) {
+    $DataSourceSiteUrl = $Url
 }
 
 function Get-WebLanguage($ctx) {
@@ -70,7 +82,7 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $GenericCredential
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $GenericCredential
 
     
     Connect-SharePoint $Url        

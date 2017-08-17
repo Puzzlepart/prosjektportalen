@@ -173,7 +173,7 @@ try {
 }
 catch {
     Write-Host
-    Write-Host "Error installing main template to $Url" -ForegroundColor Red
+    Write-Host "Error installing root-package to $Url" -ForegroundColor Red
     Write-Host $error[0] -ForegroundColor Red
     exit 1 
 }
@@ -229,4 +229,6 @@ if ($ExtensionFolder -ne $null) {
 }
 
 $sw.Stop()
-Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+if (-not $Upgrade.IsPresent) {
+    Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+}
