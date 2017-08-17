@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" 
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
