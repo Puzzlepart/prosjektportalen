@@ -49,13 +49,20 @@ function Connect-SharePoint ($Url) {
 }
 
 Connect-SharePoint -Url $Url
-$CurrentVersion = (Get-PnPPropertyBag -Key pp_version)
+$CurrentVersion = [Version](Get-PnPPropertyBag -Key pp_version)
+$InstallVersion = [Version]("[version]")
 
-Write-Host "############################################################################" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to [version]" -ForegroundColor Green
-Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "############################################################################" -ForegroundColor Green
+if($InstallVersion -gt $CurrentVersion) {
+    Write-Host "############################################################################" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
+    Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "############################################################################" -ForegroundColor Green
+
+    .\Install.ps1 -Url $Url -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy
+} else {    
+    Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
+}
