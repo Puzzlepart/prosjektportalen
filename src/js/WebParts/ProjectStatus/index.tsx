@@ -74,7 +74,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                         </Sticky>
                         <TopSection
                             project={data.project}
-                            sections={data.sections} />
+                            sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections(this.props, this.state)}
                     </StickyContainer >
                 </div >
@@ -90,14 +90,16 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
      */
     private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
         return (
-            data.sections.map((s, key) => (
-                <Section
-                    key={key}
-                    index={key}
-                    section={s}
-                    project={data.project}
-                    fields={data.fields} />
-            ))
+            data.sections
+                .filter(s => s.showAsSection)
+                .map((s, key) => (
+                    <Section
+                        key={key}
+                        index={key}
+                        section={s}
+                        project={data.project}
+                        fields={data.fields} />
+                ))
         );
     }
 

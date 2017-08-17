@@ -15,6 +15,8 @@ export default class SectionModel {
     public fieldName: string;
     public showRiskMatrix: boolean;
     public showInNavbar: boolean;
+    public showInStatusSection: boolean;
+    public showAsSection: boolean;
     public statusValue: string;
     public statusComment?: string;
     private contentTypeId: string;
@@ -35,6 +37,8 @@ export default class SectionModel {
         this.fieldName = obj.GtStSecFieldName;
         this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
         this.showInNavbar = obj.GtStSecShowInNavbar;
+        this.showInStatusSection = obj.GtStSecShowInStatusSection;
+        this.showAsSection = obj.GtStSecShowAsSection;
         this.contentTypeId = obj.ContentTypeId;
 
         if (this.getType() === SectionType.RiskSection) {
@@ -72,6 +76,6 @@ export default class SectionModel {
      * Checks if section is valid
      */
     public isValid(): boolean {
-        return this.statusValue !== "" && this.statusValue !== null;
+        return (this.statusValue !== "" && this.statusValue !== null) || this.getType() === SectionType.ListSection;
     }
 }

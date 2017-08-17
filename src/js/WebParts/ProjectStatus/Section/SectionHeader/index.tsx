@@ -18,8 +18,10 @@ const SectionHeader = ({ section }: ISectionHeaderProps) => {
                 </div>
                 <div className="section-details ms-Grid-col ms-sm12 ms-md9 ms-lg9">
                     <h1>{section.name}</h1>
-                    <h3>{section.statusValue}</h3>
-                    <p>{Util.htmlDecode(section.statusComment)}</p>
+                    <div hidden={!section.fieldName}>
+                        <h3>{section.statusValue}</h3>
+                        <p>{Util.htmlDecode(section.statusComment)}</p>
+                    </div>
                 </div>
                 <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
                     {(section.source) ? <a href={section.source}><i className="ms-Icon ms-Icon--Forward" title={__("String_NavigateToList")}></i></a> : null}
