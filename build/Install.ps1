@@ -229,4 +229,6 @@ if ($ExtensionFolder -ne $null) {
 }
 
 $sw.Stop()
-Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+if (-not $Upgrade.IsPresent) {
+    Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+}
