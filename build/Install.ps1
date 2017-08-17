@@ -42,7 +42,9 @@ Param(
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline",
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
-    [string]$ExtensionFolder
+    [string]$ExtensionFolder,
+    [Parameter(Mandatory = $false)]
+    [switch]$Upgrade
 )
 
 function Get-TermStoreDefaultLanguage() {
@@ -94,17 +96,19 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
-Write-Host "############################################################################" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
-Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
-Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
-Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
-Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "############################################################################" -ForegroundColor Green
+if (-not $Upgrade.IsPresent) {
+    Write-Host "############################################################################" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+    Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
+    Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
+    Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
+    Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "############################################################################" -ForegroundColor Green
+}
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
