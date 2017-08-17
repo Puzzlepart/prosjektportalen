@@ -2,15 +2,21 @@
 
 .navigation {
     z-index: 99;
+    width: 100%;
 
     .nav-status-container {
-        background: #eff6fa;
+        background: #fefefe;
         margin-bottom: 30px;
         height: 96px;
+        background-color: #939393;
 
         .nav-links {
+            width: 100%;
             list-style: none;
             padding: 0;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
 
             .nav-link {
                 padding: 9px 10px;
@@ -19,21 +25,22 @@
                 text-align: center;
 
                 &.active {
-                    background-color: #939393;
-
                     .ms-Icon, span {
-                        color: #fff;
+                        color: #1C4269;
+                    }
+                    span {
+                        font-weight: 600;
                     }
                 }
 
                 .ms-Icon {
                     font-size: 25px;
-                    color: #939393;
+                    color: #575757
                     vertical-align: middle;
                 }
 
                 span {
-                    color: #939393;                    
+                    color: #575757;                    
                     padding-left: 5px;
                     max-width: 130px;
                     white-space: nowrap;
@@ -41,8 +48,10 @@
                     text-overflow: ellipsis;
                 }
 
-                @media (min-width: 1365px) {
-                    min-width: 110px;
+                @media (max-width: 1280px) {
+                    .ms-Icon {
+                        display: none;
+                    }
                 }
             }
         }

@@ -16,12 +16,12 @@ const Navigation = ({ project, sections }: INavigationProps) => {
                 </div>
             </div>
             <div
-                className="nav-links ms-Grid-row"
+                className="nav-links"
                 hidden={sections.length === 0}>
                 {sections.map((section, key) => (
                     <Link
                         key={key}
-                        className="nav-link ms-Grid-col ms-md2"
+                        className="nav-link"
                         activeClass="active"
                         to={`section-${key}`}
                         offset={-100}
