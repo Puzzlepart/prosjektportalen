@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true"
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Default="true" />
@@ -16,10 +16,16 @@
             <ViewFields>
                 <FieldRef Name="GtStSecOrder" />
                 <FieldRef Name="LinkTitle" />
+                <FieldRef Name="GtStSecShowInNavbar" />
+                <FieldRef Name="GtStSecShowInStatusSection" />
+                <FieldRef Name="GtStSecShowAsSection" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />
             <JSLink>clienttemplates.js</JSLink>
         </View>
     </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" DisplayName="Name" />
+    </pnp:FieldRefs>
 </pnp:ListInstance>

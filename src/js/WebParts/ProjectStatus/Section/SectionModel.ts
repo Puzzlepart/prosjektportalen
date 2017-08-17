@@ -2,6 +2,7 @@ export enum SectionType {
     StatusSection,
     RiskSection,
     EconomySection,
+    ListSection,
 }
 
 export default class SectionModel {
@@ -61,6 +62,9 @@ export default class SectionModel {
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
             return SectionType.RiskSection;
+        }
+        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82805") !== -1) {
+            return SectionType.ListSection;
         }
     }
 
