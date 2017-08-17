@@ -56,18 +56,6 @@ function Connect-SharePoint ($Url) {
 }
 
 Connect-SharePoint -Url $Url
-<<<<<<< HEAD
-$CurrentVersion = (Get-PnPPropertyBag -Key pp_version)
-
-Write-Host "############################################################################" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to [version]" -ForegroundColor Green
-Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "############################################################################" -ForegroundColor Green
-=======
 $CurrentVersion = [Version](Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
@@ -98,4 +86,3 @@ if($InstallVersion -gt $CurrentVersion) {
 } else {    
     Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
 }
->>>>>>> dev
