@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<pnp:Provisioning 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Preferences ></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-TEST" Version="0">
+            <pnp:PropertyBagEntries >
+                <pnp:PropertyBagEntry Key="pp_test" Value="pp_test_value" Overwrite="true" />
+            </pnp:PropertyBagEntries>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>
