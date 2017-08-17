@@ -21,8 +21,8 @@ const StatusElement = ({ section, scrollTo }: IStatusElementProps) => {
             </div>
             <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
                 <h3>{section.name}</h3>
-                <h2>{section.statusValue}</h2>
-                <p>{section.statusComment}</p>
+                <h2>{section.fieldName !== "GtOverallStatus" ? section.statusValue : ""}</h2>
+                <p>{section.fieldName !== "GtOverallStatus" ? section.statusComment : section.statusValue}</p>
             </div>
         </Link>
     );
