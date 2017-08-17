@@ -13,7 +13,7 @@ const TopSection = ({ project, sections }: ISectionProps) => {
         <Element
             name="status-section"
             className="status-section section ms-Grid-row">
-            <div className="ms-Grid-col ms-lg12 ms-xl4 status-project-data status-elements-container">
+            <div className="ms-Grid-col ms-lg12 ms-xl4 status-project-data">
                 <div className="status-elements">
                     <div className="status-element">
                         <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
