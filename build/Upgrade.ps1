@@ -59,7 +59,7 @@ Connect-SharePoint -Url $Url
 $CurrentVersion = [Version](Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
-$InstallVersion = [Version]("2.1.0")
+$InstallVersion = [Version]("[version]")
 
 if($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -75,11 +75,11 @@ if($InstallVersion -gt $CurrentVersion) {
 
     
     Connect-SharePoint $Url        
-    Write-Host "Deploying upgrade packages" -ForegroundColor Green -NoNewLine
+    Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
     $Language = Get-WebLanguage -ctx (Get-PnPContext)   
     $upgradePkgs = Get-ChildItem "./upgrade/$($InstallVersion)/$($Language)/*.pnp" 
     foreach($pkg in $upgradePkgs) {
-        Apply-PnPProvisioningTemplate $extension.FullName
+        Apply-PnPProvisioningTemplate $pkg.FullName
     }
     Write-Host "DONE" -ForegroundColor Green
     Disconnect-PnPOnline
