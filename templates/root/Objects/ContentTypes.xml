@@ -21,6 +21,7 @@
             <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
             <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
@@ -41,6 +42,7 @@
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
             <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="GtStSecShowRiskMatrix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
@@ -53,6 +55,7 @@
             <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" Required="true" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D56634648310702" Name="{resource:ContentTypes_Glittertind_element_Name}" Description="{resource:ContentTypes_Glittertind_element_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
