@@ -8,6 +8,7 @@
             <pnp:DataValue FieldName="GtStSecIcon">BarChart4</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtOverallStatus</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecShowInNavbar">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecShowAsSection">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
