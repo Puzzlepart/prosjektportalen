@@ -51,3 +51,12 @@ function Connect-SharePoint ($Url) {
 Connect-SharePoint -Url $Url
 $CurrentVersion = (Get-PnPPropertyBag -Key pp_version)
 Write-Host "Current version installed is $CurrentVersion"
+
+Write-Host "############################################################################" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to [version]" -ForegroundColor Green
+Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
+Write-Host "" -ForegroundColor Green
+Write-Host "############################################################################" -ForegroundColor Green
