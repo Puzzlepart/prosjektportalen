@@ -425,6 +425,12 @@
     <Field Type="Boolean" DisplayName="ShowInNavbar" Description="Should the section be visible in the navigation bar" Group="{resource:SiteFields_Group}" ID="{1c6ac96b-0f62-4396-8e87-d7db512d96b9}" StaticName="GtStSecShowInNavbar" Name="GtStSecShowInNavbar">
         <Default>1</Default>
     </Field>
+    <Field Type="Boolean" DisplayName="ShowInStatusSection" Description="Should the section be visible in the status section" Group="{resource:SiteFields_Group}" ID="{9985ae83-9e19-48dc-b33d-2fbf84f7202b}" StaticName="GtStSecShowInStatusSection" Name="GtStSecShowInStatusSection">
+        <Default>1</Default>
+    </Field>
+    <Field Type="Boolean" DisplayName="ShowAsSection" Description="Should the section be shown as a separate section" Group="{resource:SiteFields_Group}" ID="{3aad67a9-d8bb-41ce-9324-17a757e6b14b}" StaticName="GtStSecShowAsSection" Name="GtStSecShowAsSection">
+        <Default>1</Default>
+    </Field>
     <Field Type="Text" DisplayName="List" Description="If you want to show items from a list, enter the title of the list here" Group="{resource:SiteFields_Group}" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}" StaticName="GtStSecList" Name="GtStSecList"></Field>
     <Field Type="Text" DisplayName="URL" Description="If the section should link to a page/document, enter the URL relative to the project site here" Group="{resource:SiteFields_Group}" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource"></Field>
     <Field ID="{dabdcbab-7bab-4fb2-8d65-85bd03809a8d}" Name="GtMilestoneComment" StaticName="GtMilestoneComment" DisplayName="{resource:SiteFields_GtMilestoneComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE"></Field>
