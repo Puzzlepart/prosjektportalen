@@ -426,7 +426,7 @@
         <Default>1</Default>
     </Field>
     <Field Type="Text" DisplayName="List" Description="If you want to show items from a list, enter the title of the list here" Group="{resource:SiteFields_Group}" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}" StaticName="GtStSecList" Name="GtStSecList"></Field>
-    <Field Type="Text" DisplayName="URL" Description="If the section should link to a page/document, enter the URL here" Group="{resource:SiteFields_Group}" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource"></Field>
+    <Field Type="Text" DisplayName="URL" Description="If the section should link to a page/document, enter the URL relative to the project site here" Group="{resource:SiteFields_Group}" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource"></Field>
     <Field ID="{dabdcbab-7bab-4fb2-8d65-85bd03809a8d}" Name="GtMilestoneComment" StaticName="GtMilestoneComment" DisplayName="{resource:SiteFields_GtMilestoneComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE"></Field>
     <Field ID="{17a4b359-5819-4e7c-9894-a154320a661d}" Name="GtMilestoneStatus" StaticName="GtMilestoneStatus" DisplayName="{resource:SiteFields_GtMilestoneStatus_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" FillInChoice="FALSE">
         <CHOICES>
