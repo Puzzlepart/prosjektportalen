@@ -37,6 +37,13 @@ if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
     $Credential = $GenericCredential
 }
 
+function Get-WebLanguage($ctx) {
+    $web = $ctx.Web
+    $ctx.Load($web)
+    $ctx.ExecuteQuery()
+    return $web.Language
+}
+
 
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
@@ -50,6 +57,8 @@ function Connect-SharePoint ($Url) {
 
 Connect-SharePoint -Url $Url
 $CurrentVersion = [Version](Get-PnPPropertyBag -Key pp_version)
+
+# [version] will be replaced with the actual version by 'gulp release'
 $InstallVersion = [Version]("[version]")
 
 if($InstallVersion -gt $CurrentVersion) {
@@ -63,6 +72,17 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
 
     .\Install.ps1 -Url $Url -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy
+
+    
+    Connect-SharePoint $Url        
+    Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
+    $Language = Get-WebLanguage -ctx (Get-PnPContext)   
+    $upgradePkgs = Get-ChildItem "./upgrade/$($InstallVersion)/$($Language)/*.pnp" 
+    foreach($pkg in $upgradePkgs) {
+        Apply-PnPProvisioningTemplate $pkg.FullName
+    }
+    Write-Host "DONE" -ForegroundColor Green
+    Disconnect-PnPOnline
 } else {    
     Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
 }
