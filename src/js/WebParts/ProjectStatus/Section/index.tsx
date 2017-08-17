@@ -1,4 +1,5 @@
 import * as React from "react";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
@@ -136,16 +137,38 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
             let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
             let columns = validViewFields.map(vf => {
                 const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
-                return {
-                    key: field.get_internalName(),
-                    fieldName: field.get_internalName(),
-                    name: field.get_title(),
-                    minWidth: 100,
-                    isResizable: true,
-                };
+                return this.createColumnFromSpField(field);
             });
             resolve({ items, columns });
         }, reject);
     })
+
+    /**
+     * Create column from sp field
+     *
+     * @param field The field
+     */
+    private createColumnFromSpField(field: SP.Field): IColumn {
+        const baseProps = {
+            key: field.get_internalName(),
+            fieldName: field.get_internalName(),
+            name: field.get_title(),
+        };
+
+        let col: IColumn = {
+            ...baseProps,
+            minWidth: 80,
+            isResizable: true,
+        };
+
+        switch (field.get_typeAsString().toLowerCase()) {
+            case "number": case "calculated": case "counter": {
+                col.maxWidth = 80;
+            }
+                break;
+        }
+
+        return col;
+    }
 }
 
