@@ -4,6 +4,29 @@ import * as Util from "../../../../Util";
 import { GetStatusCssClass } from "../../Utils";
 import ISectionHeaderProps from "./ISectionHeaderProps";
 
+const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: any) => {
+    return (
+        <div className="section-details ms-Grid-col ms-sm12 ms-md9 ms-lg9">
+            <h1>{name}</h1>
+            <div hidden={!fieldName}>
+                <h3>{statusValue}</h3>
+                <p>{Util.htmlDecode(statusComment)}</p>
+            </div>
+        </div>
+    );
+};
+
+const SectionHeaderNavigate = ({ source }: any) => {
+    if (source) {
+        return (
+            <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
+                <a href={`${_spPageContextInfo.webAbsoluteUrl}/${source}`}><i className="ms-Icon ms-Icon--Forward" title={__("String_NavigateToList")}></i></a>
+            </div>
+        );
+    }
+    return null;
+};
+
 const SectionHeader = ({ section }: ISectionHeaderProps) => {
     let statusCssClass = GetStatusCssClass(section.fieldName, section.statusValue);
     return (
@@ -16,16 +39,8 @@ const SectionHeader = ({ section }: ISectionHeaderProps) => {
                         </div>
                     </div>
                 </div>
-                <div className="section-details ms-Grid-col ms-sm12 ms-md9 ms-lg9">
-                    <h1>{section.name}</h1>
-                    <div hidden={!section.fieldName}>
-                        <h3>{section.statusValue}</h3>
-                        <p>{Util.htmlDecode(section.statusComment)}</p>
-                    </div>
-                </div>
-                <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
-                    {(section.source) ? <a href={section.source}><i className="ms-Icon ms-Icon--Forward" title={__("String_NavigateToList")}></i></a> : null}
-                </div>
+                <SectionHeaderDetails { ...section } />
+                <SectionHeaderNavigate { ...section } />
             </div >
         </div >
     );
