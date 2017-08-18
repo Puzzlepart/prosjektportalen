@@ -161,7 +161,7 @@ try {
     Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        $lcid = GetDefaultSiteCollectionTermStore
+        $lcid = Get-TermStoreDefaultLanguage
         Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
     }
