@@ -27,6 +27,7 @@
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
             <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
             <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" Required="true" />
+            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="GtStSecCustomComponent" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Project Properties Section" Description="" Group="{resource:ContentTypes_Group}">
@@ -73,6 +74,7 @@
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
             <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
+            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="GtStSecCustomComponent" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D56634648310702" Name="{resource:ContentTypes_Glittertind_element_Name}" Description="{resource:ContentTypes_Glittertind_element_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
