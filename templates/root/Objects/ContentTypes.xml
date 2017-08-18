@@ -32,6 +32,7 @@
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
+            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="Risk Section" Description="" Group="{resource:ContentTypes_Group}">
