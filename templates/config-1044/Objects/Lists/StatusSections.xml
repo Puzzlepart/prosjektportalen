@@ -23,6 +23,7 @@
             <pnp:DataValue FieldName="Title">Økonomi</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Money</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusBudget</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecViewFields">GtProjectFinanceName,GtBudgetTotal,GtCostsTotal,GtProjectForecast,GtBudgetLastReportDate</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
