@@ -18,6 +18,10 @@
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
             <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
@@ -31,6 +35,10 @@
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
             <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" />
         </pnp:FieldRefs>
@@ -41,6 +49,10 @@
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
             <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
@@ -53,6 +65,10 @@
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
             <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
             <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" Required="true" />
             <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
             <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />

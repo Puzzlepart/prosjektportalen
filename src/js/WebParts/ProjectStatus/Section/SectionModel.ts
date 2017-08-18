@@ -1,7 +1,7 @@
 export enum SectionType {
     StatusSection,
     RiskSection,
-    MetadataSection,
+    ProjectPropertiesSection,
     ListSection,
 }
 
@@ -62,7 +62,7 @@ export default class SectionModel {
             return SectionType.StatusSection;
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
-            return SectionType.MetadataSection;
+            return SectionType.ProjectPropertiesSection;
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
             return SectionType.RiskSection;

@@ -73,7 +73,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                 {section.listTitle && (
                     <SectionList listData={listData} />
                 )}
-                {section.getType() === SectionType.MetadataSection && (
+                {section.getType() === SectionType.ProjectPropertiesSection && (
                     <div
                         className="field-section"
                         style={{ marginTop: 20 }}>
