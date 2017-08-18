@@ -73,7 +73,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                 {section.listTitle && (
                     <SectionList listData={listData} />
                 )}
-                {section.getType() === SectionType.EconomySection && (
+                {section.getType() === SectionType.MetadataSection && (
                     <div
                         className="ms-Grid"
                         style={{ marginTop: 20 }}>
