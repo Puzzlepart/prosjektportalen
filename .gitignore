@@ -9,4 +9,3 @@ src/css/conf/Default.spcolor.styl
 src/css/conf/Project.spcolor.styl
 npm-debug.log
 src/js/Resources/
-build.json
