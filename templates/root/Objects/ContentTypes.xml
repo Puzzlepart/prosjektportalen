@@ -25,7 +25,7 @@
             <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Metadata Section" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="Project Properties Section" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
