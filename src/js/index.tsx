@@ -1,3 +1,7 @@
+import Localization from "./Localization";
+let l = new Localization(_spPageContextInfo.webLanguage, "__");
+l.registerGlobal();
+
 import pnp, { Logger, LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
