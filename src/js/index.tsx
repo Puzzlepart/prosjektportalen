@@ -1,6 +1,6 @@
 import Localization from "./Localization";
-let l = new Localization(_spPageContextInfo.webLanguage, "__");
-l.registerGlobal();
+let localization = new Localization(_spPageContextInfo.webLanguage);
+localization.registerGlobalScope("__");
 
 import pnp, { Logger, LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";

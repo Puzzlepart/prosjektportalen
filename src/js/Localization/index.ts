@@ -5,24 +5,21 @@ const _ = {
 
 export default class Localization {
     private webLanguage: number;
-    private globalFunction: string;
 
     /**
      * Constructor
      *
      * @param webLanguage Web language
-     * @param globalFunction Global function to register
      */
-    constructor(webLanguage: number, globalFunction: string) {
+    constructor(webLanguage: number) {
         this.webLanguage = webLanguage;
-        this.globalFunction = globalFunction;
     }
 
     /**
      * Register global function
      */
-    public registerGlobal() {
-        window[this.globalFunction] = (key: string) => {
+    public registerGlobalScope(globalFunction: string) {
+        window[globalFunction] = (key: string) => {
             return _[this.webLanguage.toString()][key];
         };
     }
