@@ -1,7 +1,7 @@
 export enum SectionType {
     StatusSection,
     RiskSection,
-    EconomySection,
+    MetadataSection,
     ListSection,
 }
 
@@ -47,13 +47,11 @@ export default class SectionModel {
             this.listTitle = "Usikkerhet";
             this.fieldName = "GtStatusRisk";
         }
-
-        if (this.getType() === SectionType.EconomySection) {
-            this.fieldName = "GtStatusBudget";
+        if (this.fieldName) {
+            const commentFieldName = `${this.fieldName}Comment`;
+            this.statusValue = project.hasOwnProperty(this.fieldName) ? project[this.fieldName] : "";
+            this.statusComment = project.hasOwnProperty(commentFieldName) ? project[commentFieldName] : "";
         }
-
-        this.statusValue = project.hasOwnProperty(this.fieldName) ? project[this.fieldName] : "";
-        this.statusComment = project.hasOwnProperty(`${this.fieldName}Comment`) ? project[`${this.fieldName}Comment`] : "";
     }
 
     /**
@@ -64,7 +62,7 @@ export default class SectionModel {
             return SectionType.StatusSection;
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
-            return SectionType.EconomySection;
+            return SectionType.MetadataSection;
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
             return SectionType.RiskSection;
