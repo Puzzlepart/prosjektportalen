@@ -20,7 +20,7 @@ function __startWatch(packageCodeFunc) {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean:lib", "clean:dist", "copy:assets:lib", packageCodeFunc, () => {
+            runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
                 uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
             })
         }, 100);
