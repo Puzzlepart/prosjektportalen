@@ -52,6 +52,8 @@
             <pnp:DataValue FieldName="GtStSecOrder">60</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Trophy</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecCustomComponent">BenefitsOverview</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusGainAchievement</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecSource">SitePages/BenefitsOverview.aspx</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
