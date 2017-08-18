@@ -52,6 +52,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 modalProps={{
                     isDarkOverlay: true,
                     isBlocking: false,
+                    className: "pp-changePhaseDialog",
                 }}
                 onDismiss={this._closeDialog}
                 title={this._getDialogTitle()} >
@@ -96,7 +97,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * @param statusValue Status value
      * @param commentsValue Comments value
      */
-    private nextCheckPoint = (statusValue: string, commentsValue: string): void => {
+    private nextCheckPoint = (statusValue: string, commentsValue: string, updateStatus = true): void => {
         let {
             checkListItems,
             currentIdx,
@@ -104,26 +105,32 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
 
         let currentItem = this.openCheckListItems[currentIdx];
         this.setState({ isLoading: true }, () => {
-            let updatedValues = { GtChecklistStatus: statusValue, GtComment: commentsValue };
-            this.phaseChecklist.items.getById(currentItem.Id).update(updatedValues).then(() => {
-                this.openCheckListItems[currentIdx] = Object.assign(currentItem, updatedValues);
-                Logger.log({ message: "Updating checklist item", data: { id: currentItem.Id, statusValue: statusValue, commentsValue: commentsValue }, level: LogLevel.Info });
-                let newState: Partial<IChangePhaseDialogState> = {
-                    isLoading: false,
-                    checkListItems: checkListItems.map(item => {
-                        if (currentItem.ID === item.ID) {
-                            return currentItem;
-                        }
-                        return item;
-                    }),
-                };
-                if (currentIdx < (this.openCheckListItems.length - 1)) {
-                    newState.currentIdx = (currentIdx + 1);
-                } else {
-                    newState.currentView = View.Summary;
-                }
-                this.setState(newState);
-            });
+            let updatedValues: { [key: string]: string } = {
+                GtComment: commentsValue,
+            };
+            if (updateStatus) {
+                updatedValues.GtChecklistStatus = statusValue;
+            }
+            this.phaseChecklist.items.getById(currentItem.Id).update(updatedValues)
+                .then(() => {
+                    this.openCheckListItems[currentIdx] = Object.assign(currentItem, updatedValues);
+                    Logger.log({ message: "Updating checklist item", data: { id: currentItem.Id, statusValue: statusValue, commentsValue: commentsValue }, level: LogLevel.Info });
+                    let newState: Partial<IChangePhaseDialogState> = {
+                        isLoading: false,
+                        checkListItems: checkListItems.map(item => {
+                            if (currentItem.ID === item.ID) {
+                                return currentItem;
+                            }
+                            return item;
+                        }),
+                    };
+                    if (currentIdx < (this.openCheckListItems.length - 1)) {
+                        newState.currentIdx = (currentIdx + 1);
+                    } else {
+                        newState.currentView = View.Summary;
+                    }
+                    this.setState(newState);
+                });
         });
     }
 

@@ -2,15 +2,20 @@
 
 .navigation {
     z-index: 99;
+    width: 100%;
 
     .nav-status-container {
-        background: #eff6fa;
         margin-bottom: 30px;
         height: 96px;
+        background-color: #efefef;
 
         .nav-links {
+            width: 100%;
             list-style: none;
             padding: 0;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-around;
 
             .nav-link {
                 padding: 9px 10px;
@@ -18,30 +23,41 @@
                 cursor: pointer;
                 text-align: center;
 
-                .ms-Icon {
-                    font-size: 25px;
-                    color: $SuiteBarBackground;
+                &.active {
+                    .ms-Icon, span {
+                        color: #000;
+                    }
+                    span {
+                        font-weight: 600;
+                    }
                 }
 
-                p {
-                    margin-top: 6px;
-                    margin-bottom: 0;
-                    text-align: left;
-                    width: 130px;
+                .ms-Icon {
+                    font-size: 25px;
+                    color: #575757
+                    vertical-align: middle;
+                }
+
+                span {
+                    color: #575757;                    
+                    padding-left: 5px;
+                    max-width: 130px;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
 
-                @media (min-width: 1365px) {
-                    min-width: 110px;
+                @media (max-width: 1280px) {
+                    .ms-Icon {
+                        display: none;
+                    }
                 }
             }
         }
 
         .nav-details {
             color: white;
-            background: $SuiteBarBackground;
+            background: #939393;
             max-height: 50px;
             padding: 10px;
 

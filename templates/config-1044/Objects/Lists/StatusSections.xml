@@ -1,0 +1,60 @@
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Overordnet status</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">BarChart4</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtOverallStatus</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecShowInNavbar">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecShowAsSection">0</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Fremdrift</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">20</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">DateTime</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductPhase,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusTime</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82803</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Økonomi</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">30</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">Money</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusBudget</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">GtProjectFinanceName,GtBudgetTotal,GtCostsTotal,GtProjectForecast,GtBudgetLastReportDate</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Kvalitet</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">40</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">Product</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusQuality</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecList">Prosjektleveranser</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82804</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Risiko</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">Warning</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewQuery">
+                <![CDATA[<OrderBy><FieldRef Name="GtRiskFactor" Ascending="FALSE" /></OrderBy>]]>
+            </pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">ID,Title,GtRiskProximity,GtRiskAction,GtRiskStrategy,GtRiskFactor,GtRiskFactorPostAction</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecShowRiskMatrix">true</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Gevinstoppnåelse</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecOrder">60</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecIcon">Trophy</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtChangeLookup,GtGainsType,GtGainsTurnover,GtGainsResponsible,GtMeasureIndicator,GtStartValue,GtDesiredValue,GtMeasurementUnit,GtRealizationTime</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecList">Gevinstanalyse og gevinstrealiseringsplan</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecFieldName">GtStatusGainAchievement</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecSource">SitePages/BenefitsOverview.aspx</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>

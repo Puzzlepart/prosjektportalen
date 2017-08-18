@@ -13,19 +13,7 @@
     Example:
     
     ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
+    <resheader name="resmimetype">text/microsoft-resx</resheader><resheader name="version">2.0</resheader><resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader><resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader><data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data><data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data><data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64"><value>[base64 mime encoded serialized .NET Framework object]</value></data><data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64"><value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value><comment>This is a comment</comment></data>
                 
     There are any number of "resheader" rows that contain simple 
     name/value pairs.
@@ -59,7 +47,10 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" 
+    xmlns="" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -1203,8 +1194,14 @@
   <data name="ProjectPhases_CheckpointNotRelevantTooltip" xml:space="preserve">
     <value>Checkpoint is not relevant</value>
   </data>
+  <data name="ProjectPhases_CheckpointStillOpenTooltip" xml:space="preserve">
+    <value>Checkpoint is still open</value>
+  </data>
   <data name="ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty" xml:space="preserve">
     <value>You can not set the checkpoint as 'Not relevant' without entering a comment.</value>
+  </data>
+  <data name="ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty" xml:space="preserve">
+    <value>You can not set the checkpoint as 'Still open' without entering a comment.</value>
   </data>
   <data name="ProjectPhases_Stats_Open" xml:space="preserve">
     <value>open</value>
@@ -1358,7 +1355,7 @@
   </data>
   <data name="WebPart_Tasks_Title" xml:space="preserve">
     <value>Tasks</value>
-  </data>  
+  </data>
   <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
     <value>Tasks (current phase)</value>
   </data>
@@ -1608,6 +1605,9 @@
   <data name="Choice_GtChecklistStatus_NotRelevant" xml:space="preserve">
     <value>Not relevant</value>
   </data>
+  <data name="Choice_GtChecklistStatus_StillOpen" xml:space="preserve">
+    <value>Still open</value>
+  </data>
   <data name="Choice_GtStakeholderGroup_Colleagues" xml:space="preserve">
     <value>Employees</value>
   </data>
@@ -1727,6 +1727,9 @@
   </data>
   <data name="DynamicPortfolio_ExcelExportFileName" xml:space="preserve">
     <value>{0}-{1}.xlsx</value>
+  </data>
+  <data name="DynamicPortfolio_ExcelExportButtonLabel" xml:space="preserve">
+    <value>Export to Excel</value>
   </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
@@ -1856,6 +1859,9 @@
   </data>
   <data name="ProjectStatus_SnapshotNoHistory" xml:space="preserve">
     <value>No history available</value>
+  </data>
+  <data name="ProjectStatus_NoData" xml:space="preserve">
+    <value>There are no values for any of the status fields.</value>
   </data>
   <data name="SiteFields_GtChecklistStatus_FormValidation_NotRelevant" xml:space="preserve">
     <value>You must enter a comment for why the checklist item has this status.</value>

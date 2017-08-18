@@ -192,15 +192,6 @@ const Lists: IList[] = [
                 Paged: true,
                 ViewQuery: "",
             },
-        },
-        {
-            Title: __("View_ProjectStatus_DisplayName"),
-            ViewFields: ["LinkTitle", "GtProductAcceptanceDate", "GtProductStatus", "GtProductStatusComment", "GtProductQualityExpectations"],
-            AdditionalSettings: {
-                RowLimit: 30,
-                Paged: true,
-                ViewQuery: "",
-            },
         }],
     },
     {
@@ -236,34 +227,6 @@ const Lists: IList[] = [
                 RowLimit: 30,
                 Paged: true,
                 ViewQuery: "",
-            },
-        },
-        {
-            Title: __("View_ProjectStatus_DisplayName"),
-            ViewFields: [
-                "ID",
-                "LinkTitle",
-                "GtRiskProximity",
-                "GtRiskAction",
-                "GtRiskStrategy",
-                "GtRiskFactor",
-                "GtRiskFactorPostAction",
-            ],
-            AdditionalSettings: {
-                RowLimit: 30,
-                Paged: true,
-                ViewQuery: `<Where>
-                    <And>
-                        <Neq>
-                            <FieldRef Name="GtRiskStatus" />
-                            <Value Type="Text">Tiltak gjennomført</Value>
-                        </Neq>
-                        <Neq>
-                            <FieldRef Name="GtRiskStatus" />
-                            <Value Type="Text">Ikke lenger aktuell</Value>
-                        </Neq>
-                    </And>
-                </Where>`,
             },
         }],
     },
@@ -398,7 +361,7 @@ const Lists: IList[] = [
         }],
         Views: [{
             Title: __("View_AllItems_DisplayName"),
-            ViewFields: ["LinkTitle", "GtChangeLookup",  "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+            ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,

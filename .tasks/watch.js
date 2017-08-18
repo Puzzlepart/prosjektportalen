@@ -9,15 +9,21 @@ var gulp = require("gulp"),
     config = require('./@configuration.js'),
     settings = require('./@settings.js');
 
+let buildTimeout;
 
 function __startWatch(packageCodeFunc) {
- livereload.listen({
+    livereload.listen({
         start: true,
     });
     watch(config.paths.sourceGlob).on("change", () => {
-        runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
-            uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
-        })
+        if (buildTimeout) {
+            clearTimeout(buildTimeout);
+        }
+        buildTimeout = setTimeout(() => {
+            runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
+                uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
+            })
+        }, 100);
     });
     watch(config.paths.stylesGlob).on("change", () => {
         runSequence("package:styles", () => {
@@ -36,15 +42,15 @@ function __startWatch(packageCodeFunc) {
 }
 
 gulp.task("watch", () => {
-   __startWatch("package:code");
+    __startWatch("package:code");
 });
 
 gulp.task("watch::eval", () => {
-   __startWatch("package:code::eval");
+    __startWatch("package:code::eval");
 });
 
 gulp.task("watch::prod", () => {
-   __startWatch("package:code::prod");
+    __startWatch("package:code::prod");
 });
 
 function uploadFile(glob, url, folder) {

@@ -119,7 +119,7 @@ export const makeAbsolute = (relUrl: string): string => {
  *
  * @param str The string
  */
-export const generateUrl = (str: string): string => {
+export const generateUrl = (str: string, length?: number): string => {
     str = str
         .trim()
         .toLowerCase()
@@ -128,7 +128,7 @@ export const generateUrl = (str: string): string => {
         .replace(/æ/g, "ae")
         .replace(/ø/g, "o")
         .replace(/[^a-z0-9-]/gi, "");
-    return str.substring(0, Math.min(80, str.length));
+    return str.substring(0, length ? length : Math.min(80, str.length));
 };
 
 /**

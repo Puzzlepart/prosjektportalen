@@ -1,0 +1,31 @@
+<pnp:ListInstance Title="StatusSections" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" />
+        <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" />
+        <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82805" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/StatusSections/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="GtStSecOrder" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="GtStSecOrder" />
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="GtStSecShowInNavbar" />
+                <FieldRef Name="GtStSecShowInStatusSection" />
+                <FieldRef Name="GtStSecShowAsSection" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" DisplayName="Name" Required="true" />
+    </pnp:FieldRefs>
+</pnp:ListInstance>

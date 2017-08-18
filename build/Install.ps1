@@ -42,8 +42,16 @@ Param(
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline",
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
-    [string]$ExtensionFolder
+    [string]$ExtensionFolder,
+    [Parameter(Mandatory = $false)]
+    [switch]$Upgrade
 )
+
+function Get-TermStoreDefaultLanguage() {
+    $session = Get-PnPTaxonomySession 
+    $ts = $session.GetDefaultSiteCollectionTermStore() 
+    return (Get-PnPProperty -ClientObject $ts -Property DefaultLanguage)
+}
 
 function Get-WebLanguage($ctx) {
     $web = $ctx.Web
@@ -68,6 +76,9 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
     $SecondaryUri = New-Object -TypeName System.Uri -ArgumentList $SecondaryUrl
 
     if ($RootUri.Host -eq $SecondaryUri.Host) {
+        if ($SecondaryUri.LocalPath -eq "/") {
+            return ""
+        }
         return $SecondaryUri.LocalPath
     } else {
         return $SecondaryUrl
@@ -85,17 +96,19 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
-Write-Host "############################################################################" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
-Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
-Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
-Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
-Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
-Write-Host "" -ForegroundColor Green
-Write-Host "############################################################################" -ForegroundColor Green
+if (-not $Upgrade.IsPresent) {
+    Write-Host "############################################################################" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+    Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
+    Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
+    Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
+    Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
+    Write-Host "############################################################################" -ForegroundColor Green
+}
 
 $sw = [Diagnostics.Stopwatch]::StartNew()
 $ErrorActionPreference = "Stop"
@@ -148,7 +161,8 @@ try {
     Connect-SharePoint $Url    
     if (-not $SkipTaxonomy.IsPresent) {
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "taxonomy"
+        $lcid = GetDefaultSiteCollectionTermStore
+        Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
     }
     Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
@@ -159,7 +173,7 @@ try {
 }
 catch {
     Write-Host
-    Write-Host "Error installing main template to $Url" -ForegroundColor Red
+    Write-Host "Error installing root-package to $Url" -ForegroundColor Red
     Write-Host $error[0] -ForegroundColor Red
     exit 1 
 }
@@ -215,4 +229,6 @@ if ($ExtensionFolder -ne $null) {
 }
 
 $sw.Stop()
-Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+if (-not $Upgrade.IsPresent) {
+    Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+}
