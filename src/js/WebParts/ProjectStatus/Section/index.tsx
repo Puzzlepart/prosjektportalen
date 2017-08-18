@@ -5,10 +5,11 @@ import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "./RiskMatrix";
 import SectionList from "./SectionList";
-import SectionHeader, { ISectionHeaderProps } from "./SectionHeader";
+import SectionHeader from "./SectionHeader";
 import ISectionProps from "./ISectionProps";
 import ISectionState from "./ISectionState";
 import { SectionType } from "./SectionModel";
+import { GetWebPartComponentByName } from "../../";
 
 export default class Section extends React.PureComponent<ISectionProps, ISectionState> {
     /**
@@ -101,8 +102,21 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         </div>
                     </div>
                 )}
+                {section.customComponent && (
+                    this.renderCustomComponent(this.props, this.state)
+                )}
             </div>
         );
+    }
+
+    /**
+     * Renders custom component
+     *
+     * @param param0 Props
+     * @param param1 State
+     */
+    private renderCustomComponent({ section }: ISectionProps, { }: ISectionState): JSX.Element {
+        return GetWebPartComponentByName(section.customComponent).component;
     }
 
     /**
