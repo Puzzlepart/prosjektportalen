@@ -51,8 +51,7 @@
             <pnp:DataValue FieldName="Title">Benefit Realization</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecOrder">60</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Trophy</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtChangeLookup,GtGainsType,GtGainsTurnover,GtGainsResponsible,GtMeasureIndicator,GtStartValue,GtDesiredValue,GtMeasurementUnit,GtRealizationTime</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecList">Benefits Analysis</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecCustomComponent">BenefitsOverview</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusGainAchievement</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecSource">SitePages/BenefitsOverview.aspx</pnp:DataValue>
         </pnp:DataRow>

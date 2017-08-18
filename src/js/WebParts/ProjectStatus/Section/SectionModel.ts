@@ -18,6 +18,7 @@ export default class SectionModel {
     public showInNavbar: boolean;
     public showInStatusSection: boolean;
     public showAsSection: boolean;
+    public customComponent: string;
     public statusValue: string;
     public statusComment?: string;
     private contentTypeId: string;
@@ -41,6 +42,7 @@ export default class SectionModel {
         this.showInNavbar = obj.GtStSecShowInNavbar;
         this.showInStatusSection = obj.GtStSecShowInStatusSection;
         this.showAsSection = obj.GtStSecShowAsSection;
+        this.customComponent = obj.GtStSecCustomComponent;
         this.contentTypeId = obj.ContentTypeId;
 
         if (this.getType() === SectionType.RiskSection) {
