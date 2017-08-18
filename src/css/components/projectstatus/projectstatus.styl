@@ -2,32 +2,52 @@
     max-width: 1280px;
     background-color: white;
 
-    .section {
-        margin-top: 30px !important;
-    }
+    .status-report-container {
+        width: 100%;
 
-    h1 {
-        color: #1C4269;
-    }
-    #Dropdown1-list0 {
-        display: none;
-    }
-
-    .ms-Dialog.ms-Dialog--closenot(.ms-Dialog--lgHeader) .ms-Dialog-button.ms-Dialog-button--close {
-        text-align: right;
-    }
-
-    .ms-dlgContent {
-        position: fixed !important;
-    }
-
-    .ms-Callout {
-        button {
-            margin-left: 0 !important;
+        .section {
+            margin-top: 30px;
+            width: 100%;
         }
-    }
-    #pp-showPostActionLbl {
-        color: #444444;
+
+        h1 {
+            color: #1C4269;
+            font-size: 2em;
+        }
+        #Dropdown1-list0 {
+            display: none;
+        }
+
+        .ms-Dialog.ms-Dialog--closenot(.ms-Dialog--lgHeader) .ms-Dialog-button.ms-Dialog-button--close {
+            text-align: right;
+        }
+
+        .ms-dlgContent {
+            position: fixed !important;
+        }
+
+        .ms-Callout {
+            button {
+                margin-left: 0 !important;
+            }
+        }
+        #pp-showPostActionLbl {
+            color: #444444;
+        }
+
+        .field-section {
+            .field-section-row {
+                width: 100%;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+
+                .field-keyvalue {
+                    max-width: 250px;
+                    text-align: center;
+                }
+            }
+        }
     }
 }
 .pp-snapshot-dialog {

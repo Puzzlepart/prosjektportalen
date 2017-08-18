@@ -75,9 +75,9 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                 )}
                 {section.getType() === SectionType.MetadataSection && (
                     <div
-                        className="ms-Grid"
+                        className="field-section"
                         style={{ marginTop: 20 }}>
-                        <div className="ms-Grid-row">
+                        <div className="field-section-row">
                             {section.viewFields.map((vf, key) => {
                                 let [field] = fields.filter(f => f.InternalName === vf);
                                 if (!field) {
@@ -86,7 +86,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                                 return (
                                     <div
                                         key={key}
-                                        className="ms-Grid-col ms-sm2">
+                                        className="field-keyvalue">
                                         <ProjectProperty
                                             model={{
                                                 internalName: vf,
