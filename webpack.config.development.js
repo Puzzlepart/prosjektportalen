@@ -1,7 +1,6 @@
 var path = require("path"),
     webpack = require('webpack'),
-    pkg = require("./package.json"),
-    build = require("./build.json");
+    pkg = require("./package.json");
 
 module.exports = (devtool) => {
     const plugins = [

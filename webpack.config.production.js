@@ -1,8 +1,7 @@
 var path = require("path"),
     webpack = require('webpack'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
-    pkg = require("./package.json"),
-    build = require("./build.json");
+    pkg = require("./package.json");
 
 module.exports = (minify = true, bundleAnalyzer = false) => {
     const plugins = [
