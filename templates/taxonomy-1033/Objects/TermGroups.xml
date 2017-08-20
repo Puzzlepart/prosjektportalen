@@ -6,7 +6,6 @@
                 <pnp:Terms>
                     <pnp:Term Name="No phase" ID="6edb42ac-9aaf-4f07-9cf5-5dfdf9ab0c32" CustomSortOrder="1" SourceTermId="6edb42ac-9aaf-4f07-9cf5-5dfdf9ab0c32">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="No phase" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Ingen fase" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -15,7 +14,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Several phases" ID="777cc6ac-4639-4633-85b9-f1ef61197c4d" CustomSortOrder="2" SourceTermId="777cc6ac-4639-4633-85b9-f1ef61197c4d">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Several phases" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Flere faser" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -24,7 +22,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Starting up" ID="99e85650-33de-4af4-b8db-edffbc8a310b" CustomSortOrder="3" SourceTermId="99e85650-33de-4af4-b8db-edffbc8a310b">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Starting up" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Konsept" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -34,7 +31,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Initiating" ID="cda4f1e1-3488-4e57-8a04-6973df239689" CustomSortOrder="4" SourceTermId="cda4f1e1-3488-4e57-8a04-6973df239689">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Initiating" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Planlegge" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -44,7 +40,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Directing" ID="99d7765a-c786-4792-a1a1-866ef0f982b9" CustomSortOrder="5" SourceTermId="99d7765a-c786-4792-a1a1-866ef0f982b9">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Directing" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Gjennomføre" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -54,7 +49,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Closing" ID="30e03c52-8c3e-4cfe-9b18-ca71593ce130" CustomSortOrder="6" SourceTermId="30e03c52-8c3e-4cfe-9b18-ca71593ce130">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Closing" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Avslutte" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -64,7 +58,6 @@
                     </pnp:Term>
                     <pnp:Term Name="Benefits realization" ID="b7ba84f0-70b9-45c4-8c50-8f73bf15bbec" CustomSortOrder="7" SourceTermId="b7ba84f0-70b9-45c4-8c50-8f73bf15bbec">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Benefits realization" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Realisere" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                         <pnp:LocalCustomProperties>
@@ -78,31 +71,26 @@
                 <pnp:Terms>
                     <pnp:Term Name="Infrastructure" ID="26a1b6a7-9a4b-4a26-be46-7f6bb0e07475" SourceTermId="26a1b6a7-9a4b-4a26-be46-7f6bb0e07475">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Infrastructure" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Anlegg" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Other" ID="088eeab9-8ebd-4a53-976c-e7b9a5e7eed9" SourceTermId="088eeab9-8ebd-4a53-976c-e7b9a5e7eed9">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Other" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Annet" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Construction" ID="81d51eff-4dd8-4d9f-8373-327ce4cfebb9" SourceTermId="81d51eff-4dd8-4d9f-8373-327ce4cfebb9">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Construction" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Bygg" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="ICT" ID="f43d2dcf-27c8-432d-8b9b-dae09d9b0d7a" SourceTermId="f43d2dcf-27c8-432d-8b9b-dae09d9b0d7a">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="ICT" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="IKT" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Organization development" ID="682706ae-a2d7-47ed-81d7-f8b6f30e0340" SourceTermId="682706ae-a2d7-47ed-81d7-f8b6f30e0340">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Organization development" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Organisasjonsutvikling" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
@@ -112,61 +100,51 @@
                 <pnp:Terms>
                     <pnp:Term Name="Administration and ICT" ID="b81d2835-beae-41ae-a810-89cf1bea480f" SourceTermId="b81d2835-beae-41ae-a810-89cf1bea480f">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Administration and ICT" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Administrasjon og IKT" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Work and business" ID="27805ae3-5749-44d9-94a7-146eedb06cfb" SourceTermId="27805ae3-5749-44d9-94a7-146eedb06cfb">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Work and business" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Arbeid og næringsliv" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Healthcare" ID="88058353-ac05-4652-a4fc-690b649ab03a" SourceTermId="88058353-ac05-4652-a4fc-690b649ab03a">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Healthcare" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Helse og velferd" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Culture, sports and leisure" ID="8b3870f8-59a2-4cef-a281-19228b286bbf" SourceTermId="8b3870f8-59a2-4cef-a281-19228b286bbf">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Culture, sports and leisure" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Kultur, idrett og fritid" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Nature and environment" ID="e302dff1-4fb3-4d86-894a-f3bd769f4764" SourceTermId="e302dff1-4fb3-4d86-894a-f3bd769f4764">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Nature and environment" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Natur og miljø" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Plan, build and geodata" ID="ab3dd407-a44b-4783-aa45-481fb9f564ba" SourceTermId="ab3dd407-a44b-4783-aa45-481fb9f564ba">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Plan, build and geodata" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Plan, bygg og geodata" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Taxes and fees" ID="40191080-4a2a-4b8f-9c76-c31be95ae5d4" SourceTermId="40191080-4a2a-4b8f-9c76-c31be95ae5d4">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Taxes and fees" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Skatt og avgift" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Education" ID="46475d37-c854-439e-b04b-2433f2dc2566" SourceTermId="46475d37-c854-439e-b04b-2433f2dc2566">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Education" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Skole og oppvekst" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Transportation" ID="6479faf1-3141-46ef-94d6-fc65e8f51448" SourceTermId="6479faf1-3141-46ef-94d6-fc65e8f51448">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Transportation" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Trafikk og samferdsel" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Water and drain" ID="8d1082d0-a44d-452d-baef-212b938c5102" SourceTermId="8d1082d0-a44d-452d-baef-212b938c5102">
                         <pnp:Labels>
-                            <pnp:Label Language="1033" Value="Water and drain" IsDefaultForLanguage="true" />
                             <pnp:Label Language="1044" Value="Vann og avløp" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
