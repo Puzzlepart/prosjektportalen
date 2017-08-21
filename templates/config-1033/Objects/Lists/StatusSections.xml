@@ -11,7 +11,7 @@
             <pnp:DataValue FieldName="GtStSecShowAsSection">0</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82805</pnp:DataValue>
+            <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>
             <pnp:DataValue FieldName="Title">Progress</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">DateTime</pnp:DataValue>
