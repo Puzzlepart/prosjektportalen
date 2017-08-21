@@ -116,7 +116,11 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      * @param param1 State
      */
     private renderCustomComponent({ section }: ISectionProps, { }: ISectionState): JSX.Element {
-        return GetWebPartComponentByName(section.customComponent).component;
+        let customWpComp = GetWebPartComponentByName(section.customComponent);
+        if (customWpComp) {
+            return customWpComp.component;
+        }
+        return null;
     }
 
     /**
@@ -178,6 +182,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         switch (field.get_typeAsString().toLowerCase()) {
             case "number": case "calculated": case "counter": {
                 col.maxWidth = 80;
+            }
+                break;
+            case "text": case "note": {
+                col.maxWidth = 300;
             }
                 break;
         }
