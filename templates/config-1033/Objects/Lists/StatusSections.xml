@@ -15,7 +15,8 @@
             <pnp:DataValue FieldName="Title">Progress</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">DateTime</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductPhase,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecList">Project Deliveries</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusTime</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
@@ -32,8 +33,6 @@
             <pnp:DataValue FieldName="GtStSecOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Product</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusQuality</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecList">Project Deliveries</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82804</pnp:DataValue>
