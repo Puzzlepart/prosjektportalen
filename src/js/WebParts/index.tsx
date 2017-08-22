@@ -37,18 +37,6 @@ export const GetWebPartComponentByName = (name: string): WebPartComponent => {
 };
 
 /**
- * Fix require.js css injection (https://github.com/Puzzlepart/prosjektportalen/issues/333)
- */
-export const FixRequireJsCssInjection = () => {
-    let css = "";
-    let styleElements = document.querySelectorAll("style");
-    styleElements.forEach(style => css += style.innerText);
-    let styleSheet = document.createElement("style");
-    styleSheet.innerHTML = css;
-    document.body.appendChild(styleSheet);
-};
-
-/**
  * Render the webparts
  */
 export const Render = () => {
