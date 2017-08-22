@@ -23,26 +23,20 @@ const ProvisionWeb = (project: IProjectModel, onProgress: IProgressCallback) => 
     onProgress(__("ProvisionWeb_CreatingWeb"), "");
     CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
         .then((result: ICreateWebResult) => {
-            PropertyBag.GetProperty("pp_assetssiteurl")
-                .then(assetsUrl => {
-                    onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
-                    Template.Apply(result.web, assetsUrl, onProgress)
-                        .then(() => {
-                            Extensions.ApplyExtensions(result.web, onProgress)
-                                .then(() => {
-                                    Data.CopyListContents(result.url, project.IncludeContent, onProgress)
-                                        .then(() => {
-                                            resolve(result.redirectUrl);
-                                        })
-                                        .catch(reject);
-                                })
-                                .catch(reject);
-                        })
-                        .catch(reject);
-                })
-                .catch(reject);
-        })
-        .catch(reject);
+            PropertyBag.GetAllProperties().then(propBagAllProps => {
+                onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+                Template.Apply(result.web, propBagAllProps.get_fieldValues(), onProgress)
+                    .then(() => {
+                        Extensions.ApplyExtensions(result.web, onProgress)
+                            .then(() => {
+                                Data.CopyListContents(result.url, project.IncludeContent, onProgress)
+                                    .then(() => {
+                                        resolve(result.redirectUrl);
+                                    }).catch(reject);
+                            }).catch(reject);
+                    }).catch(reject);
+            }).catch(reject);
+        }).catch(reject);
 });
 
 export { DoesWebExist };

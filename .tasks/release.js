@@ -39,7 +39,7 @@ gulp.task("zip:dist", (done) => {
 });
 
 gulp.task("release", (done) => {
-    console.log(color(`[Building release for ${build.language}]`, 'GREEN'));
+    console.log(color(`[Building release ${pkg.version} for ${build.language}]`, 'GREEN'));
     console.log(color(`[See build.json to change build settings]`, 'WHITE'));
     runSequence("default::prod", "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", "zip:dist", () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));

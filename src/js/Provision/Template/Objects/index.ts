@@ -3,7 +3,6 @@ import Lists from "./Lists";
 import Navigation from "./Navigation";
 import WebSettings from "./WebSettings";
 import ComposedLook from "./ComposedLook";
-import PropertyBagEntries from "./PropertyBagEntries";
 
 export {
     Files,
@@ -11,5 +10,4 @@ export {
     Navigation,
     WebSettings,
     ComposedLook,
-    PropertyBagEntries,
 };
