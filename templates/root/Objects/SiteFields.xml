@@ -390,6 +390,7 @@
             <CHOICE>{resource:Choice_GtProductStatus_AccPlan}</CHOICE>
             <CHOICE>{resource:Choice_GtProductStatus_SmallDeviations}</CHOICE>
             <CHOICE>{resource:Choice_GtProductStatus_MajorDeviations}</CHOICE>
+            <CHOICE>{resource:Choice_GtProductStatus_Approved}</CHOICE>
         </CHOICES>
     </Field>
     <Field ID="{4393ed3c-1599-4ab3-8444-444ab35754bb}" Name="GtProductStatusComment" DisplayName="Kommentar, leveransestatus" Type="Note" Group="{resource:SiteFields_Group}" Description="Kommentar til leveransestatus angitt over" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtProductStatusComment" />

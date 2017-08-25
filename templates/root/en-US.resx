@@ -1452,6 +1452,9 @@
   <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
     <value>Major deviations</value>
   </data>
+  <data name="Choice_GtProductStatus_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
   <data name="Choice_GtGainsType_Directly" xml:space="preserve">
     <value>Directly</value>
   </data>

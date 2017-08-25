@@ -1465,6 +1465,9 @@
   <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
     <value>Store avvik</value>
   </data>
+  <data name="Choice_GtProductStatus_Approved" xml:space="preserve">
+    <value>Godkjent</value>
+  </data>
   <data name="Choice_GtGainsType_Directly" xml:space="preserve">
     <value>Direkte</value>
   </data>
