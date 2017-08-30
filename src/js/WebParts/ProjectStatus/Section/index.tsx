@@ -6,6 +6,7 @@ import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "./RiskMatrix";
 import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
+import ISectionListData from "./ISectionListData";
 import ISectionProps from "./ISectionProps";
 import ISectionState from "./ISectionState";
 import { SectionType } from "./SectionModel";
@@ -133,7 +134,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     /**
     * Fetches required data
     */
-    private fetchListData = ({ section }: ISectionProps) => new Promise<any>((resolve, reject) => {
+    private fetchListData = ({ section }: ISectionProps) => new Promise<ISectionListData>((resolve, reject) => {
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
         const camlQuery = new SP.CamlQuery();
@@ -148,6 +149,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         camlQuery.set_viewXml(viewXml.join(""));
         const _items = list.getItems(camlQuery);
         const _fields = list.get_fields();
+        ctx.load(list, "DefaultViewUrl");
+        ctx.load(list, "DefaultDisplayFormUrl");
+        ctx.load(list, "DefaultEditFormUrl");
+        ctx.load(list, "DefaultNewFormUrl");
         ctx.load(_items, "Include(FieldValuesAsHtml)");
         ctx.load(_fields);
         ctx.executeQueryAsync(() => {
@@ -157,7 +162,14 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                 const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
                 return this.createColumnFromSpField(field);
             });
-            resolve({ items, columns });
+            resolve({
+                items,
+                columns,
+                defaultViewUrl: list.get_defaultViewUrl(),
+                defaultDisplayFormUrl: list.get_defaultDisplayFormUrl(),
+                defaultEditFormUrl: list.get_defaultEditFormUrl(),
+                defaultNewFormUrl: list.get_defaultNewFormUrl(),
+            });
         }, reject);
     })
 
