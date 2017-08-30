@@ -1306,7 +1306,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtLccLabel_Description" xml:space="preserve">
-    <value>Tekst som vises i "Nytt prosjekt"-dialogen</value>
+    <value>Tekst som vises i Nytt prosjekt-dialogen</value>
   </data>
   <data name="SiteFields_GtPcProjectStatus_Description" xml:space="preserve">
     <value></value>
