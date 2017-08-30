@@ -95,7 +95,6 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements post action
      */
     private getRiskElementsPostActionForCell = (items, element) => {
-        console.log(items, element);
         if (this.state.postAction) {
             return items.filter(risk => element.Probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
         }
