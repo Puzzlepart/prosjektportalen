@@ -1,8 +1,8 @@
 Param(
     [Parameter(Mandatory = $true)]
     [string]$Key,
-    [Parameter(Mandatory = $true)]
-    [string]$Value,    
+    [Parameter(Mandatory = $false)]
+    [string]$Value = "",    
     [Parameter(Mandatory = $true)]
     [string]$Prefix,    
     [Parameter(Mandatory = $true)]

@@ -28,14 +28,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectServiceArea}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectServiceArea}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -48,14 +48,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectType}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectType}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -129,14 +129,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -210,14 +210,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                        
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                            
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectPhase}                                                                                                                                                                                                        
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{resource:TermSetID_ProjectPhase}                                                                                                                                                                                                                            
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -341,7 +341,7 @@
     <Field Type="Boolean" DisplayName="Default" ID="{19c0c03c-678a-4c2a-ab9b-cb9ffd903012}" StaticName="GtLccDefault" Name="GtLccDefault" Group="{resource:SiteFields_Group}">
         <Default>1</Default>
     </Field>
-    <Field Type="Text" DisplayName="Icon" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="GtDpIcon" Name="GtDpIcon" Group="{resource:SiteFields_Group}" Description="Select an icon name from https://dev.office.com/fabric#/styles"/>
+    <Field Type="Text" DisplayName="Icon" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="GtDpIcon" Name="GtDpIcon" Group="{resource:SiteFields_Group}" Description="Select an icon name from https://dev.office.com/fabric#/styles" />
     <Field Type="Boolean" DisplayName="PersonalView" ID="{9f4ee969-ea00-4cc1-a466-a05c7db4156d}" StaticName="GtDpPersonalView" Name="GtDpPersonalView" Group="{resource:SiteFields_Group}" Description="If checked, this view will only be available for the user that created this item.">
         <Default>0</Default>
     </Field>
@@ -402,7 +402,7 @@
             <CHOICE>{resource:Choice_GtRiskStatus_NoLongerRelevant}</CHOICE>
         </CHOICES>
     </Field>
-    <Field ID="{7b200383-c491-4e5d-8f83-c66231e7a52c}" Name="GtProjectUrl" DisplayName="{resource:SiteFields_GtProjectUrl_DisplayName}" Type="URL" Group="{resource:SiteFields_Group}" Format="Hyperlink" StaticName="GtProjectUrl" ShowInNewForm="FALSE" ShowInEditForm="FALSE"/>
+    <Field ID="{7b200383-c491-4e5d-8f83-c66231e7a52c}" Name="GtProjectUrl" DisplayName="{resource:SiteFields_GtProjectUrl_DisplayName}" Type="URL" Group="{resource:SiteFields_Group}" Format="Hyperlink" StaticName="GtProjectUrl" ShowInNewForm="FALSE" ShowInEditForm="FALSE" />
     <Field Type="Text" DisplayName="ProjectWebUniqueId" MaxLength="255" Group="{resource:SiteFields_Group}" ID="{83315d18-b8b5-4b60-b1eb-0617e1a1b2d9}" StaticName="ProjectWebUniqueId" Name="ProjectWebUniqueId" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE" ShowInEditForm="FALSE"></Field>
     <Field ID="{aa889e95-d364-4a65-9d18-5c62715f5e3b}" Name="GtProjectPhaseChoice" DisplayName="{resource:SiteFields_GtProjectPhaseChoice_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectPhaseChoice_Description}" ShowInNewForm="FALSE" ShowInEditForm="FALSE" FillInChoice="TRUE" StaticName="GtProjectPhaseChoice">
         <CHOICES>
@@ -415,27 +415,27 @@
             <CHOICE>{resource:Choice_GtProjectPhaseChoice_SeveralPhases}</CHOICE>
         </CHOICES>
     </Field>
-    <Field Type="Text" DisplayName="ViewFields" Description="Comma-separated list of fields to show (needs to be internal names) if List is specifed" Group="{resource:SiteFields_Group}" ID="{2d165a4d-a3e9-4756-acd2-abb537041fd4}" StaticName="GtStSecViewFields" Name="GtStSecViewFields"></Field>
-    <Field Type="Text" DisplayName="Icon" Description="Select an icon from https://dev.office.com/fabric#/styles" Group="{resource:SiteFields_Group}" ID="{b2af224f-5e07-4f9f-9a3a-9f5345bb3153}" StaticName="GtStSecIcon" Name="GtStSecIcon"></Field>
-    <Field Type="Text" DisplayName="FieldName" Description="Internal name of the status field you want to show in the section" Group="{resource:SiteFields_Group}" ID="{fe762779-f5d6-475d-ad1d-68e7d9ae0034}" StaticName="GtStSecFieldName" Name="GtStSecFieldName"></Field>
-    <Field Type="Note" DisplayName="ViewQuery" Description="If you want to filter which items shows up in the section, enter a view query here (List needs to be specified)" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{dd9a8b72-c646-4ec2-b834-614fa27fb79a}" StaticName="GtStSecViewQuery" Name="GtStSecViewQuery" CustomFormatter="" RestrictedMode="TRUE" AppendOnly="FALSE" UnlimitedLengthInDocumentLibrary="FALSE"></Field>
-    <Field Type="Number" DisplayName="RowLimit" Description="Number of list items to show" Decimals="0" Group="{resource:SiteFields_Group}" ID="{adf89685-f464-4ef5-8f7b-53b600aac14a}" StaticName="GtStSecRowLimit" Name="GtStSecRowLimit"></Field>
-    <Field Type="Number" DisplayName="Order" Description="Order of the section" Decimals="0" Group="{resource:SiteFields_Group}" ID="{06889695-8107-4ca8-9813-256df32654c6}" StaticName="GtStSecOrder" Name="GtStSecOrder"></Field>
-    <Field Type="Boolean" DisplayName="ShowRiskMatrix" Description="Should a risk matrix be shown" Group="{resource:SiteFields_Group}" ID="{f93b92b8-1a69-445f-b13f-0fc3ef924101}" StaticName="GtStSecShowRiskMatrix" Name="GtStSecShowRiskMatrix">
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtStSecViewFields_DisplayName}" Description="{resource:SiteFields_GtStSecViewFields_Description}" Group="{resource:SiteFields_Group}" ID="{2d165a4d-a3e9-4756-acd2-abb537041fd4}" StaticName="GtStSecViewFields" Name="GtStSecViewFields"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtStSecIcon_DisplayName}" Description="{resource:SiteFields_GtStSecIcon_Description}" Group="{resource:SiteFields_Group}" ID="{b2af224f-5e07-4f9f-9a3a-9f5345bb3153}" StaticName="GtStSecIcon" Name="GtStSecIcon"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtStSecFieldName_DisplayName}" Description="{resource:SiteFields_GtStSecFieldName_Description}" Group="{resource:SiteFields_Group}" ID="{fe762779-f5d6-475d-ad1d-68e7d9ae0034}" StaticName="GtStSecFieldName" Name="GtStSecFieldName"></Field>
+    <Field Type="Note" DisplayName="{resource:SiteFields_GtStSecViewQuery_DisplayName}" Description="{resource:SiteFields_GtStSecViewQuery_Description}" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{dd9a8b72-c646-4ec2-b834-614fa27fb79a}" StaticName="GtStSecViewQuery" Name="GtStSecViewQuery" CustomFormatter="" RestrictedMode="TRUE" AppendOnly="FALSE" UnlimitedLengthInDocumentLibrary="FALSE"></Field>
+    <Field Type="Number" DisplayName="{resource:SiteFields_GtStSecRowLimit_DisplayName}" Description="{resource:SiteFields_GtStSecRowLimit_Description}" Decimals="0" Group="{resource:SiteFields_Group}" ID="{adf89685-f464-4ef5-8f7b-53b600aac14a}" StaticName="GtStSecRowLimit" Name="GtStSecRowLimit"></Field>
+    <Field Type="Number" DisplayName="{resource:SiteFields_GtStSecOrder_DisplayName}" Description="{resource:SiteFields_GtStSecOrder_Description}" Decimals="0" Group="{resource:SiteFields_Group}" ID="{06889695-8107-4ca8-9813-256df32654c6}" StaticName="GtStSecOrder" Name="GtStSecOrder"></Field>
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtStSecShowRiskMatrix_DisplayName}" Description="{resource:SiteFields_GtStSecShowRiskMatrix_Description}" Group="{resource:SiteFields_Group}" ID="{f93b92b8-1a69-445f-b13f-0fc3ef924101}" StaticName="GtStSecShowRiskMatrix" Name="GtStSecShowRiskMatrix">
         <Default>1</Default>
     </Field>
-    <Field Type="Boolean" DisplayName="ShowInNavbar" Description="Should the section be visible in the navigation bar" Group="{resource:SiteFields_Group}" ID="{1c6ac96b-0f62-4396-8e87-d7db512d96b9}" StaticName="GtStSecShowInNavbar" Name="GtStSecShowInNavbar">
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtStSecShowInNavbar_DisplayName}" Description="{resource:SiteFields_GtStSecShowInNavbar_Description}" Group="{resource:SiteFields_Group}" ID="{1c6ac96b-0f62-4396-8e87-d7db512d96b9}" StaticName="GtStSecShowInNavbar" Name="GtStSecShowInNavbar">
         <Default>1</Default>
     </Field>
-    <Field Type="Boolean" DisplayName="ShowInStatusSection" Description="Should the section be visible in the status section" Group="{resource:SiteFields_Group}" ID="{9985ae83-9e19-48dc-b33d-2fbf84f7202b}" StaticName="GtStSecShowInStatusSection" Name="GtStSecShowInStatusSection">
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtStSecShowInStatusSection_DisplayName}" Description="{resource:SiteFields_GtStSecShowInStatusSection_Description}" Group="{resource:SiteFields_Group}" ID="{9985ae83-9e19-48dc-b33d-2fbf84f7202b}" StaticName="GtStSecShowInStatusSection" Name="GtStSecShowInStatusSection">
         <Default>1</Default>
     </Field>
-    <Field Type="Boolean" DisplayName="ShowAsSection" Description="Should the section be shown as a separate section" Group="{resource:SiteFields_Group}" ID="{3aad67a9-d8bb-41ce-9324-17a757e6b14b}" StaticName="GtStSecShowAsSection" Name="GtStSecShowAsSection">
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtStSecShowAsSection_DisplayName}" Description="{resource:SiteFields_GtStSecShowAsSection_Description}" Group="{resource:SiteFields_Group}" ID="{3aad67a9-d8bb-41ce-9324-17a757e6b14b}" StaticName="GtStSecShowAsSection" Name="GtStSecShowAsSection">
         <Default>1</Default>
     </Field>
-    <Field Type="Text" DisplayName="List" Description="If you want to show items from a list, enter the title of the list here" Group="{resource:SiteFields_Group}" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}" StaticName="GtStSecList" Name="GtStSecList"></Field>
-    <Field Type="Text" DisplayName="URL" Description="If the section should link to a page/document, enter the URL relative to the project site here" Group="{resource:SiteFields_Group}" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource"></Field>
-    <Field Type="Choice" DisplayName="CustomComponent" Format="Dropdown" FillInChoice="FALSE" Group="{resource:SiteFields_Group}" ID="{03773961-9514-419b-b77b-1137036107b3}" StaticName="GtStSecCustomComponent" Name="GtStSecCustomComponent">
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtStSecList_DisplayName}" Description="{resource:SiteFields_GtStSecList_Description}" Group="{resource:SiteFields_Group}" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}" StaticName="GtStSecList" Name="GtStSecList"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtStSecSource_DisplayName}" Description="{resource:SiteFields_GtStSecSource_Description}" Group="{resource:SiteFields_Group}" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtStSecSource" Name="GtStSecSource"></Field>
+    <Field Type="Choice" DisplayName="{resource:SiteFields_GtStSecCustomComponent_DisplayName}" Description="{resource:SiteFields_GtStSecCustomComponent_Description}" Format="Dropdown" FillInChoice="FALSE" Group="{resource:SiteFields_Group}" ID="{03773961-9514-419b-b77b-1137036107b3}" StaticName="GtStSecCustomComponent" Name="GtStSecCustomComponent">
         <CHOICES>
             <CHOICE>BenefitsOverview</CHOICE>
         </CHOICES>
@@ -451,6 +451,6 @@
     </Field>
     <Field ID="{1fa322ec-6b56-4ea9-a1fd-2623e34083e6}" Name="GtMilestonePlannedDate" StaticName="GtMilestonePlannedDate" DisplayName="{resource:SiteFields_GtMilestonePlannedDate_DisplayName}" Type="DateTime" Format="DateOnly" FriendlyDisplayFormat="Disabled" Group="{resource:SiteFields_Group}" />
     <Field ID="{cbf2ae22-2c77-4ad0-a639-07fddfb5cd81}" Name="GtMilestoneActualDate" StaticName="GtMilestoneActualDate" DisplayName="{resource:SiteFields_GtMilestoneActualDate_DisplayName}" Type="DateTime" Format="DateOnly" FriendlyDisplayFormat="Disabled" Group="{resource:SiteFields_Group}" />
-    <Field Type="Text" DisplayName="Key" Group="{resource:SiteFields_Group}" ID="{e122c57e-2d2e-4852-9096-70cc1a30a2ff}" StaticName="GtKey" Name="GtKey"></Field>
-    <Field Type="Text" DisplayName="Value" Group="{resource:SiteFields_Group}" ID="{60f1e1e1-4cff-4c1f-bb44-5b017393d17c}" StaticName="GtValue" Name="GtValue"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtKey_DisplayName}" Description="{resource:SiteFields_GtKey_Description}" Group="{resource:SiteFields_Group}" ID="{e122c57e-2d2e-4852-9096-70cc1a30a2ff}" StaticName="GtKey" Name="GtKey"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtValue_DisplayName}" Description="{resource:SiteFields_GtValue_Description}" Group="{resource:SiteFields_Group}" ID="{60f1e1e1-4cff-4c1f-bb44-5b017393d17c}" StaticName="GtValue" Name="GtValue"></Field>
 </pnp:SiteFields>
