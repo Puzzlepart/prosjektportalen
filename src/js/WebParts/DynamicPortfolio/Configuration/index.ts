@@ -12,15 +12,15 @@ export const getConfig = () => new Promise<IConfiguration>((resolve, reject) => 
     } else {
         const lists = pnp.sp.web.lists;
         Promise.all([
-            lists.getByTitle("DynamicPortfolioFields")
+            lists.getByTitle(__("Lists_DynamicPortfolioFields_Title"))
                 .items
                 .orderBy("GtDpOrder")
                 .get(),
-            lists.getByTitle("DynamicPortfolioRefiners")
+            lists.getByTitle(__("Lists_DynamicPortfolioRefiners_Title"))
                 .items
                 .orderBy("GtDpOrder")
                 .get(),
-            lists.getByTitle("DynamicPortfolioViews")
+            lists.getByTitle(__("Lists_DynamicPortfolioViews_Title"))
                 .items
                 .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
                 .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "Author")
