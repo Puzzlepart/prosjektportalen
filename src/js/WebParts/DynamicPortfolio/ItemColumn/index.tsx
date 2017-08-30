@@ -19,7 +19,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
         case "Title": {
             return (
                 <a
-                    href="#"
+                    href={item.Path}
                     onClick={titleOnClick}>{columnValue}</a>
             );
         }

@@ -5,7 +5,7 @@ import AudienceTargeting from "../../AudienceTargeting";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
-import IModalLinkProps , {  ModalLinkDefaultProps } from "./IModalLinkProps";
+import IModalLinkProps, { ModalLinkDefaultProps } from "./IModalLinkProps";
 import IModalLinkState from "./IModalLinkState";
 
 export default class ModalLink extends React.PureComponent<IModalLinkProps, IModalLinkState> {
@@ -40,15 +40,15 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
         return this._render(this.props, this.state);
     }
 
-    private _render({ label, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
+    private _render({ label, url, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
         if (!shouldRender) {
             return null;
         }
         return (
-            < a
-                href="#"
+            <a
+                href={url}
                 hidden={hidden}
-                onClick={e => this.onClick(e, this.props)}
+                onClick={e => this.showModalDialog(e, this.props)}
                 id={id}
                 className={className}
                 style={style} >
@@ -69,9 +69,9 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
     }
 
     /**
-     * On link click
+     * Show Modal Dialog
      */
-    private onClick = (e, { label, url, options, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps) => {
+    private showModalDialog = (e, { label, url, options, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps): void => {
         e.preventDefault();
         e.stopPropagation();
 

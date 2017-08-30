@@ -209,12 +209,15 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
         LatestPercentage,
         ValueShouldIncrease,
      } = item;
+
+
+    let dispFormUrl = item.Path;
+    if (!dispFormUrl) {
+        dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_BenefitsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
+    }
+
     switch (column.key) {
         case "Title": {
-            let dispFormUrl = item.Path;
-            if (!dispFormUrl) {
-                dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__("DefaultView_BenefitsAnalysis_Url")}?ID=${item.ID}`.replace("AllItems", "DispForm");
-            }
             return (
                 <ModalLink
                     label={colValue}
@@ -226,7 +229,7 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumn, onSiteTi
             let { SiteTitle: Title } = item;
             return (
                 <a
-                    href="#"
+                    href={dispFormUrl}
                     onClick={onSiteTitleClick}>{Title}</a>
             );
         }
