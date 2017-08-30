@@ -28,6 +28,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
     private doesWebExistTimer;
     private doesWebExistTimerDelay = 250;
+    private suggestedWebUrlCutOffLength = 16;
 
     /**
      * Constructor
@@ -253,7 +254,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
         switch (input) {
             case "Title": {
-                const url = Util.generateUrl(newValue, 10);
+                const url = Util.generateUrl(newValue, this.suggestedWebUrlCutOffLength);
                 if (this.doesWebExistTimer) {
                     window.clearTimeout(this.doesWebExistTimer);
                 }
