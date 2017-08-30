@@ -38,13 +38,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 const cell = Config.RiskMatrix[i][j],
                     riskElements = this.getRiskElementsForCell(items, cell).map((risk, key) => (
                         <RiskElement
-                            key={key}
+                            key={`${key}`}
                             item={risk}
                             style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
                     )),
                     riskElementsPostAction = this.getRiskElementsPostActionForCell(items, cell).map((risk, key) => (
                         <RiskElement
-                            key={key}
+                            key={`${key}_PostAction`}
                             item={risk} />
                     )),
                     isCell = (i > 0 && j > 0);
@@ -95,6 +95,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements post action
      */
     private getRiskElementsPostActionForCell = (items, element) => {
+        console.log(items, element);
         if (this.state.postAction) {
             return items.filter(risk => element.Probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
         }

@@ -1,4 +1,4 @@
-import pnp, { Logger, LogLevel, ConsoleListener } from "sp-pnp-js";
+import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
@@ -15,7 +15,6 @@ pnp.setup({
 });
 
 ExecuteOrDelayUntilBodyLoaded(() => {
-    Logger.log({ message: `pp.main.js: Body loaded. Initializing.`, level: LogLevel.Info });
     Forms.Initialize();
     WebParts.Render();
     new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);

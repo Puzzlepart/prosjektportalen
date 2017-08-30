@@ -31,6 +31,11 @@ const WebPartComponents: WebPartComponent[] = [
     new WebPartComponent("ExperienceLog", "pp-experiencelog", <ExperienceLog />),
 ];
 
+/**
+ * Get webpart component by name
+ *
+ * @param {string} name Name of the component
+ */
 export const GetWebPartComponentByName = (name: string): WebPartComponent => {
     let [component] = WebPartComponents.filter(wpc => wpc.name === name);
     return component;
