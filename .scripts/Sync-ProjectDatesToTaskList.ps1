@@ -62,12 +62,14 @@ Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromW
         $ProjectItem = Add-PnPListItem -List $ProjectList
         $ProjectItem["ProjectWebUniqueId"] = $ProjectWebUniqueId
     }
-    if ($ProjectPage["GtProjectPhase"] -ne $null -and $ProjectPage["GtProjectPhase"].Count -eq 1) {
-        $ProjectItem["GtProjectPhaseChoice"] = $ProjectPage["GtProjectPhase"].Label
-    }
     $ProjectItem["Title"] = $ProjectTitle
     $ProjectItem["StartDate"] = $ProjectPage["GtStartDate"]
     $ProjectItem["DueDate"] = $ProjectPage["GtEndDate"]
+    if ($ProjectPage["GtProjectPhase"] -ne $null -and $ProjectPage["GtProjectPhase"].Count -eq 1) {
+        $PhaseLabel = $ProjectPage["GtProjectPhase"].Label
+        $ProjectItem["GtProjectPhaseChoice"] = $PhaseLabel
+        $ProjectItem["Title"] = "$ProjectTitle ($PhaseLabel)"
+    }
     $ProjectItem.Update()
 
     Execute-PnPQuery
