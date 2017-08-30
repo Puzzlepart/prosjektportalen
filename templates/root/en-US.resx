@@ -216,6 +216,24 @@
   <data name="Lists_Milestones_Title" xml:space="preserve">
     <value>Milestones</value>
   </data>
+  <data name="Lists_DynamicPortfolioFields_Title" xml:space="preserve">
+    <value>DynamicPortfolioFields</value>
+  </data>
+  <data name="Lists_DynamicPortfolioRefiners_Title" xml:space="preserve">
+    <value>DynamicPortfolioRefiners</value>
+  </data>
+  <data name="Lists_DynamicPortfolioViews_Title" xml:space="preserve">
+    <value>DynamicPortfolioViews</value>
+  </data>
+  <data name="Lists_ListContentConfig_Title" xml:space="preserve">
+    <value>ListContentConfig</value>
+  </data>
+  <data name="Lists_ProjectConfig_Title" xml:space="preserve">
+    <value>ProjectConfig</value>
+  </data>
+  <data name="Lists_StatusSections_Title" xml:space="preserve">
+    <value>StatusSections</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>

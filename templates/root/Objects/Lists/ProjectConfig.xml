@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="ProjectConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_ProjectConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x0100FBC1CA649E569B48B3C9984EE6BA04A301" Default="true" />
