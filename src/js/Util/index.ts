@@ -213,7 +213,7 @@ export const userMessage = (title: string, message: string, color: string, durat
  * @param addPrefix Add prefix (%)
  */
 export const percentage = (startValue: number, partValue: number, targetValue: number, addPrefix = true): any => {
-    let value = Math.floor(((partValue - startValue) / (targetValue - startValue)) * 100);
+    let value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
     } else {

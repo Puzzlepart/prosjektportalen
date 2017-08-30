@@ -49,6 +49,11 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
+function ParseVersion($versionString) {
+    $vs = $versionString.Split("#")[0]
+    return [Version]($vs)
+}
+
 function Get-WebLanguage($ctx) {
     $web = $ctx.Web
     $ctx.Load($web)
@@ -67,10 +72,10 @@ function Connect-SharePoint ($Url) {
 }
 
 Connect-SharePoint -Url $Url
-$CurrentVersion = [Version](Get-PnPPropertyBag -Key pp_version)
+$CurrentVersion = ParseVersion -versionString (Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
-$InstallVersion = [Version]("[version]")
+$InstallVersion = ParseVersion -versionString "[version]"
 
 if($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
