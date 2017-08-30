@@ -850,43 +850,43 @@
     <value>Faktisk dato</value>
   </data>
   <data name="SiteFields_GtStSecViewFields_DisplayName" xml:space="preserve">
-    <value>ViewFields</value>
+    <value>Felter</value>
   </data>
   <data name="SiteFields_GtStSecIcon_DisplayName" xml:space="preserve">
-    <value>Icon</value>
+    <value>Ikon</value>
   </data>
   <data name="SiteFields_GtStSecCustomComponent_DisplayName" xml:space="preserve">
-    <value>CustomComponent</value>
+    <value>Komponent</value>
   </data>
   <data name="SiteFields_GtStSecShowInNavbar_DisplayName" xml:space="preserve">
-    <value>ShowInNavbar</value>
+    <value>Vis i navigasjonslinjen</value>
   </data>
   <data name="SiteFields_GtStSecViewQuery_DisplayName" xml:space="preserve">
-    <value>ViewQuery</value>
+    <value>Spørring</value>
   </data>
   <data name="SiteFields_GtStSecFieldName_DisplayName" xml:space="preserve">
-    <value>FieldName</value>
+    <value>Feltnavn</value>
   </data>
   <data name="SiteFields_GtStSecShowInStatusSection_DisplayName" xml:space="preserve">
-    <value>ShowInStatusSection</value>
+    <value>Vis i statusseksjonen</value>
   </data>
   <data name="SiteFields_GtStSecRowLimit_DisplayName" xml:space="preserve">
-    <value>RowLimit</value>
+    <value>Antal elementer</value>
   </data>
   <data name="SiteFields_GtStSecOrder_DisplayName" xml:space="preserve">
-    <value>Order</value>
+    <value>Rekkefølge	</value>
   </data>
   <data name="SiteFields_GtStSecShowAsSection_DisplayName" xml:space="preserve">
-    <value>ShowAsSection</value>
+    <value>Vis som egen seksjon</value>
   </data>
   <data name="SiteFields_GtStSecSource_DisplayName" xml:space="preserve">
-    <value>URL</value>
+    <value>Lenke</value>
   </data>
   <data name="SiteFields_GtStSecShowRiskMatrix_DisplayName" xml:space="preserve">
-    <value>ShowRiskMatrix</value>
+    <value>Vis risikomatrise</value>
   </data>
   <data name="SiteFields_GtStSecList_DisplayName" xml:space="preserve">
-    <value>List</value>
+    <value>Listenavn</value>
   </data>
   <data name="SiteFields_GtDpIcon_DisplayName" xml:space="preserve">
     <value>Ikon</value>
@@ -1216,40 +1216,40 @@
     <value>Overordnet status for prosjektet</value>
   </data>
   <data name="SiteFields_GtStSecViewFields_Description" xml:space="preserve">
-    <value>Comma-separated list of fields to show (needs to be internal names) if List is specifed</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecIcon_Description" xml:space="preserve">
-    <value>Select an icon from https://dev.office.com/fabric#/styles</value>
+    <value>Ikon fra https://dev.office.com/fabric#/styles/icons</value>
   </data>
   <data name="SiteFields_GtStSecShowInNavbar_Description" xml:space="preserve">
-    <value>Should the section be visible in the navigation bar</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecViewQuery_Description" xml:space="preserve">
-    <value>If you want to filter which items shows up in the section, enter a view query here (List needs to be specified)</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecFieldName_Description" xml:space="preserve">
-    <value>Internal name of the status field you want to show in the section</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecShowInStatusSection_Description" xml:space="preserve">
-    <value>Should the section be visible in the status section</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecRowLimit_Description" xml:space="preserve">
-    <value>Number of list items to show</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecOrder_Description" xml:space="preserve">
-    <value>Order of the section</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecShowAsSection_Description" xml:space="preserve">
-    <value>Should the section be shown as a separate section</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecSource_Description" xml:space="preserve">
-    <value>If the section should link to a page/document, enter the URL relative to the project site here</value>
+    <value>Om seksjonen skal lenke til en annen side eller ett dokument</value>
   </data>
   <data name="SiteFields_GtStSecShowRiskMatrix_Description" xml:space="preserve">
-    <value>Should a risk matrix be shown</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecList_Description" xml:space="preserve">
-    <value>If you want to show items from a list, enter the title of the list here</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStSecCustomComponent_Description" xml:space="preserve">
     <value></value>
