@@ -871,55 +871,55 @@
     <value>List</value>
   </data>
   <data name="SiteFields_GtDpIcon_DisplayName" xml:space="preserve">
-    <value>Icon</value>
+    <value>Ikon</value>
   </data>
   <data name="SiteFields_GtDpRender_DisplayName" xml:space="preserve">
-    <value>Render</value>
+    <value>Visning</value>
   </data>
   <data name="SiteFields_GtDpFieldsLookup_DisplayName" xml:space="preserve">
-    <value>Fields</value>
+    <value>Felter</value>
   </data>
   <data name="SiteFields_GtDpDefault_DisplayName" xml:space="preserve">
-    <value>Default</value>
+    <value>Valgt som standard</value>
   </data>
   <data name="SiteFields_GtDpDefaultHidden_DisplayName" xml:space="preserve">
-    <value>DefaultHidden</value>
+    <value>Gjemt som standard</value>
   </data>
   <data name="SiteFields_GtDpReadOnly_DisplayName" xml:space="preserve">
-    <value>ReadOnly</value>
+    <value>Skrivebeskyttet</value>
   </data>
   <data name="SiteFields_GtDpMultiple_DisplayName" xml:space="preserve">
-    <value>Multiple</value>
+    <value>Flervalg</value>
   </data>
   <data name="SiteFields_GtDpMaxWidth_DisplayName" xml:space="preserve">
-    <value>MaxWidth</value>
+    <value>Maksimum bredde</value>
   </data>
   <data name="SiteFields_GtDpPersonalView_DisplayName" xml:space="preserve">
-    <value>PersonalView</value>
+    <value>Personlig visning</value>
   </data>
   <data name="SiteFields_GtDpIsResizable_DisplayName" xml:space="preserve">
-    <value>IsResizable</value>
+    <value>Justerbar</value>
   </data>
   <data name="SiteFields_GtDpMinWidth_DisplayName" xml:space="preserve">
-    <value>MinWidth</value>
+    <value>Minimum bredde</value>
   </data>
   <data name="SiteFields_GtDpProperty_DisplayName" xml:space="preserve">
-    <value>Property</value>
+    <value>Forvaltet egenskap</value>
   </data>
   <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
-    <value>Order</value>
+    <value>Rekkefølge</value>
   </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
-    <value>Query</value>
+    <value>Søkespørring</value>
   </data>
   <data name="SiteFields_GtDpDisplayName_DisplayName" xml:space="preserve">
-    <value>DisplayName</value>
+    <value>Visningsnavn</value>
   </data>
   <data name="SiteFields_GtDpGroupBy_DisplayName" xml:space="preserve">
-    <value>GroupBy</value>
+    <value>Grupperbar</value>
   </data>
   <data name="SiteFields_GtDpRefinersLookup_DisplayName" xml:space="preserve">
-    <value>Refiners</value>
+    <value>Filter</value>
   </data>
   <data name="SiteFields_GtLccDefault_DisplayName" xml:space="preserve">
     <value>Standard</value>
