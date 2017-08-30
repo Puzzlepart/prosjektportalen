@@ -943,19 +943,19 @@
     <value>Tekst</value>
   </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
-    <value>ShowOnProjectStatus</value>
+    <value>Vis på prosjektstatus-siden</value>
   </data>
   <data name="SiteFields_GtPcFrontpage_DisplayName" xml:space="preserve">
-    <value>ShowOnFrontpage</value>
+    <value>Vis på forsiden</value>
   </data>
   <data name="SiteFields_GtPcPortfolioPage_DisplayName" xml:space="preserve">
-    <value>ShowOnPortfolioPage</value>
+    <value>Vis i porteføljeoversikt</value>
   </data>
   <data name="SiteFields_GtKey_DisplayName" xml:space="preserve">
-    <value>Key</value>
+    <value>Nøkkel</value>
   </data>
   <data name="SiteFields_GtValue_DisplayName" xml:space="preserve">
-    <value>Value</value>
+    <value>Verdi</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
