@@ -447,6 +447,21 @@
   <data name="ContentTypes_Milestone_Name" xml:space="preserve">
     <value>Milepæl</value>
   </data>
+  <data name="ContentTypes_Section_Name" xml:space="preserve">
+    <value>Seksjon</value>
+  </data>
+  <data name="ContentTypes_StatusSection_Name" xml:space="preserve">
+    <value>Seksjon for statusfelt</value>
+  </data>
+  <data name="ContentTypes_ProjectPropertiesSection_Name" xml:space="preserve">
+    <value>Seksjon for prosjektegenskaper</value>
+  </data>
+  <data name="ContentTypes_ListSection_Name" xml:space="preserve">
+    <value>Listeseksjon</value>
+  </data>
+  <data name="ContentTypes_RiskSection_Name" xml:space="preserve">
+    <value>Risikoseksjon</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -506,6 +521,21 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
+  </data>
+  <data name="ContentTypes_Section_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_StatusSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_ProjectPropertiesSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_ListSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
