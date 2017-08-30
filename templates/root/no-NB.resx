@@ -951,6 +951,12 @@
   <data name="SiteFields_GtPcPortfolioPage_DisplayName" xml:space="preserve">
     <value>ShowOnPortfolioPage</value>
   </data>
+  <data name="SiteFields_GtKey_DisplayName" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="SiteFields_GtValue_DisplayName" xml:space="preserve">
+    <value>Value</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
