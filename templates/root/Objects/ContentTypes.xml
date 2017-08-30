@@ -347,6 +347,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="List Content Config" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
             <pnp:FieldRef ID="753af53c-e135-4992-9f12-cffa889be1b8" Name="GtLccSourceUrl"/>
             <pnp:FieldRef ID="82c3fe98-7bce-4234-9eea-0ae30984dbd8" Name="GtLccSourceList"/>
             <pnp:FieldRef ID="008bb566-26c3-4cac-8d16-9bf3b1c5fb4b" Name="GtLccDestinationList"/>

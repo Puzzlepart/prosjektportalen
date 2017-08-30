@@ -1,16 +1,7 @@
 import { default as pnp } from "sp-pnp-js";
+import IListConfig from "./IListConfig";
 
 const FIELD_PREFIX = "GtLcc";
-
-export interface IListConfig {
-    SourceUrl?: string;
-    SourceList: string;
-    DestinationList?: string;
-    DestinationLibrary?: string;
-    Fields: string[];
-    Label: string;
-    Default: boolean;
-}
 
 let __CONFIG: { [key: string]: IListConfig } = null;
 
@@ -26,7 +17,7 @@ export const RetrieveConfig = (configList = __("Lists_ListContentConfig_Title"))
         pnp.sp.web.lists.getByTitle(configList).items.get().then(configItems => {
             let config: { [key: string]: IListConfig } = {};
             configItems.forEach(item => {
-                config[item.Title] = {
+                config[`${item.ID}`] = {
                     SourceUrl: item[`${FIELD_PREFIX}SourceUrl`],
                     SourceList: item[`${FIELD_PREFIX}SourceList`],
                     DestinationList: item[`${FIELD_PREFIX}DestinationList`],
