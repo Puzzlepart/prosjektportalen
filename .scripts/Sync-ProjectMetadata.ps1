@@ -17,6 +17,10 @@ if ($CurrentCredentials.IsPresent) {
     Connect-PnPOnline -Url $Url
 }
 $ProjectList = Get-PnPList -Identity "Prosjekter"
+$ProjectList.Hidden = $false
+$ProjectList.Update()
+Execute-PnPQuery
+
 $FieldsToSync = Get-PnPField -List "Prosjekter" | ? {$_.InternalName.IndexOf("Gt") -eq 0}
 $DateTimeFromWhenToUpdateProjects = (Get-Date).AddHours(-$IntervalHours).ToUniversalTime()
 $DateTimeFromWhenToUpdateProjectsFriendly = $DateTimeFromWhenToUpdateProjects.ToLocalTime().ToString()
