@@ -19,7 +19,7 @@ let __CONFIG: { [key: string]: IListConfig } = null;
  *
  * @param configList Configuration list
  */
-export const RetrieveConfig = (configList = "ListContentConfig"): Promise<{ [key: string]: IListConfig }> => new Promise((resolve, reject) => {
+export const RetrieveConfig = (configList = __("Lists_ListContentConfig_Title")): Promise<{ [key: string]: IListConfig }> => new Promise((resolve, reject) => {
     if (__CONFIG) {
         resolve(__CONFIG);
     } else {

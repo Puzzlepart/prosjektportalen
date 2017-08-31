@@ -6,7 +6,7 @@ export default interface IProjectStatusProps {
 
 export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {
     sectionConfig: {
-        listTitle: "StatusSections",
+        listTitle: __("Lists_StatusSections_Title"),
         orderBy: "GtStSecOrder",
     },
 };
