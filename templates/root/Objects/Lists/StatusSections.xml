@@ -25,7 +25,4 @@
             <JSLink>clienttemplates.js</JSLink>
         </View>
     </pnp:Views>
-    <pnp:FieldRefs>
-        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" DisplayName="Name" Required="true" />
-    </pnp:FieldRefs>
 </pnp:ListInstance>
