@@ -216,6 +216,24 @@
   <data name="Lists_Milestones_Title" xml:space="preserve">
     <value>Milepæler</value>
   </data>
+  <data name="Lists_DynamicPortfolioFields_Title" xml:space="preserve">
+    <value>Feltkonfigurasjon for portefølje</value>
+  </data>
+  <data name="Lists_DynamicPortfolioRefiners_Title" xml:space="preserve">
+    <value>Filterkonfigurasjon for portefølje</value>
+  </data>
+  <data name="Lists_DynamicPortfolioViews_Title" xml:space="preserve">
+    <value>Visninger for portefølje</value>
+  </data>
+  <data name="Lists_ListContentConfig_Title" xml:space="preserve">
+    <value>Konfigurasjon for listeinnhold</value>
+  </data>
+  <data name="Lists_ProjectConfig_Title" xml:space="preserve">
+    <value>Prosjektkonfigurasjon</value>
+  </data>
+  <data name="Lists_StatusSections_Title" xml:space="preserve">
+    <value>Statusseksjoner</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>

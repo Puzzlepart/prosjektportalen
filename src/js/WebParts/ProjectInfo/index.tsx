@@ -214,7 +214,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
      *
      * @param configList Configuration list
      */
-    private fetchData = (configList = "ProjectConfig") => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
+    private fetchData = (configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
         const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
         const configPromise = rootWeb
             .lists
