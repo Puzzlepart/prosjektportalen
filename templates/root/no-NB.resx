@@ -1432,7 +1432,7 @@
     <value>Kopierer listeinnhold</value>
   </data>
   <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
-    <value>Kopierer dokumenter fra biblioteket {0} til {1}.</value>
+    <value>Kopierer {0} dokumenter og {1} mapper fra biblioteket {2} til {3}.</value>
   </data>
   <data name="ProvisionWeb_CopyItems" xml:space="preserve">
     <value>Kopierer {0} listeelementer fra listen {1} til {2}.</value>
