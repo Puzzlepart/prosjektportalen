@@ -1,4 +1,4 @@
-import { IListConfig } from "../Config";
+import IListConfig from "../Config/IListConfig";
 import IProgressCallback from "../../IProgressCallback";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
