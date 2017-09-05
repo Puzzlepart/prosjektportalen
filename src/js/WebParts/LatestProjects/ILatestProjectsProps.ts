@@ -5,7 +5,7 @@ interface ILatestProjectsProps {
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;
     listClassName?: string;
-    listId?: string;
+    containerId?: string;
     deleteEnabled?: boolean;
 }
 
@@ -17,7 +17,7 @@ export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
     },
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
-    listId: uuid_v1(),
+    containerId: uuid_v1(),
     deleteEnabled: process.env.NODE_ENV === "development",
 };
 

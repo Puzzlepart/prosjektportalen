@@ -92,8 +92,7 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
         } else if (entries.length > 0) {
             return (
                 <div id={this.props.containerId}>
-                    <ul
-                        className={this.props.listClassName}>
+                    <ul className={this.props.listClassName}>
                         {entries.map((entry, idx) => <li key={idx}>
                             <h5>
                                 <a
