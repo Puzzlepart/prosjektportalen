@@ -14,22 +14,22 @@ import IProgressCallback from "./IProgressCallback";
 /**
  * Provisions a project web
  *
- * @param model The project model
- * @param onProgress Progress callback function
+ * @param {IProjectModel} model The project model
+ * @param {IProgressCallback} onUpdateProgress Progress callback function
  *
  * @returns Redirect URL
  */
-const ProvisionWeb = (project: IProjectModel, onProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
-    onProgress(__("ProvisionWeb_CreatingWeb"), "");
+const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
+    onUpdateProgress(__("ProvisionWeb_CreatingWeb"), "");
     CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
         .then((result: ICreateWebResult) => {
             PropertyBag.GetAllProperties().then(propBagAllProps => {
-                onProgress(__("ProvisionWeb_ApplyingTemplate"), "");
-                Template.Apply(result.web, propBagAllProps.get_fieldValues(), onProgress)
+                onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+                Template.Apply(result.web, propBagAllProps.get_fieldValues(), onUpdateProgress)
                     .then(() => {
-                        Extensions.ApplyExtensions(result.web, onProgress)
+                        Extensions.ApplyExtensions(result.web, onUpdateProgress)
                             .then(() => {
-                                Data.CopyListContents(result.url, project.IncludeContent, onProgress)
+                                Data.CopyListContents(result.url, project.IncludeContent, onUpdateProgress)
                                     .then(() => {
                                         resolve(result.redirectUrl);
                                     }).catch(reject);

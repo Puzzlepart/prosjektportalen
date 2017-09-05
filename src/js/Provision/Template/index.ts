@@ -37,11 +37,11 @@ let Template: Schema = {
 /**
  * Applies the template to the specified web
  *
- * @param web The web
- * @param propBag Property bag values
- * @param progressCallback Callback function for progress
+ * @param {any} web The web
+ * @param {Object} propBag Property bag values
+ * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const Apply = (web, propBag: { [key: string]: string }, onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+export const Apply = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
     Template.WebSettings.AlternateCssUrl = `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
     Template.WebSettings.SiteLogoUrl = `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
     Template.PropertyBagEntries = [{
@@ -50,7 +50,7 @@ export const Apply = (web, propBag: { [key: string]: string }, onProgress: IProg
         Overwrite: true,
         Indexed: true,
     }];
-    new WebProvisioner(web).applyTemplate(Template, msg => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+    new WebProvisioner(web).applyTemplate(Template, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
         .then(resolve)
         .catch(reject);
 });

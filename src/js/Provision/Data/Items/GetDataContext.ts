@@ -1,4 +1,4 @@
-import { IListConfig } from "../Config";
+import ListConfig from "../Config/ListConfig";
 
 export interface CopyContext {
     CamlQuery: SP.CamlQuery;
@@ -18,7 +18,7 @@ export interface CopyContext {
  * @param conf Configuration
  * @param destUrl Destination web URL
  */
-const GetDataContext = (conf: IListConfig, destUrl: string): CopyContext => {
+const GetDataContext = (conf: ListConfig, destUrl: string): CopyContext => {
     let camlQuery = new SP.CamlQuery();
     camlQuery.set_viewXml("<View></View>");
     let ctx: CopyContext = {
