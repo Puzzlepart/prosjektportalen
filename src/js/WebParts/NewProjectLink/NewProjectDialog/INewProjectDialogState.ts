@@ -1,4 +1,4 @@
-import * as ListDataConfig from "../../../Provision/Data/Config";
+import ListConfig from "../../../Provision/Data/Config/ListConfig";
 import { IProjectModel } from "../../../Model";
 
 interface INewProjectDialogState {
@@ -7,7 +7,7 @@ interface INewProjectDialogState {
     showAdvancedSettings: boolean;
     urlInputEnabled: boolean;
     formValid: boolean;
-    listDataConfig?: { [key: string]: ListDataConfig.IListConfig };
+    listDataConfig?: { [key: string]: ListConfig };
     showCreationModal: boolean;
     provisioning: {
         isCreating: boolean;

@@ -1432,7 +1432,7 @@
     <value>Copies list contents</value>
   </data>
   <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
-    <value>Copying files from library {0} to {1}.</value>
+    <value>Copying {0} files and {1} folders from library {2} to {3}.</value>
   </data>
   <data name="ProvisionWeb_CopyItems" xml:space="preserve">
     <value>Copying {0} items from list {1} to {2}</value>

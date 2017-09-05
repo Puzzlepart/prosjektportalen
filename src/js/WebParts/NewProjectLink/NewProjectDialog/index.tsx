@@ -313,6 +313,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
     /**
      * Submit handler
+     *
+     * @param {any} Event Click event
      */
     private onSubmit = (event?): void => {
         if (event) {
