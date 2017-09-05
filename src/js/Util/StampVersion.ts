@@ -1,6 +1,6 @@
 import * as PropertyBag from "./PropertyBag";
 
-export default class StampVersion {
+class StampVersion {
     private template = "<span class='ms-metadata {1}'>{0}</span>";
 
     /**
@@ -38,3 +38,5 @@ export default class StampVersion {
             .catch(reject);
     })
 }
+
+export default new StampVersion();

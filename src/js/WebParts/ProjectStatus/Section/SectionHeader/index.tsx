@@ -16,18 +16,29 @@ const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: a
     );
 };
 
-const SectionHeaderNavigate = ({ source }: any) => {
+const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
+    let navUrl = null;
     if (source) {
+        navUrl = `${_spPageContextInfo.webServerRelativeUrl}/${source}`;
+    }
+    if (fallbackNavigateUrl) {
+        navUrl = fallbackNavigateUrl;
+    }
+    if (navUrl) {
         return (
             <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
-                <a href={`${_spPageContextInfo.webAbsoluteUrl}/${source}`}><i className="ms-Icon ms-Icon--Forward" title={__("String_NavigateToList")}></i></a>
+                <a href={navUrl}>
+                    <i
+                        className="ms-Icon ms-Icon--Forward"
+                        title={__("String_NavigateToList")}></i>
+                </a>
             </div>
         );
     }
     return null;
 };
 
-const SectionHeader = ({ section }: ISectionHeaderProps) => {
+const SectionHeader = ({ section, fallbackNavigateUrl }: ISectionHeaderProps) => {
     let statusCssClass = GetStatusCssClass(section.fieldName, section.statusValue);
     return (
         <div className="ms-Grid">
@@ -40,7 +51,7 @@ const SectionHeader = ({ section }: ISectionHeaderProps) => {
                     </div>
                 </div>
                 <SectionHeaderDetails { ...section } />
-                <SectionHeaderNavigate { ...section } />
+                <SectionHeaderNavigate source={section.source} fallbackNavigateUrl={fallbackNavigateUrl} />
             </div >
         </div >
     );

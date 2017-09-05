@@ -7,7 +7,7 @@ import StampVersion from "./Util/StampVersion";
 pnp.log.activeLogLevel = process.env.NODE_ENV === "production" ? LogLevel.Error : LogLevel.Info;
 pnp.log.subscribe(new ConsoleListener());
 
-/** Pnp setup */
+/** PnP setup */
 pnp.setup({
     headers: {
         "Accept": "application/json; odata=verbose",
@@ -17,5 +17,5 @@ pnp.setup({
 ExecuteOrDelayUntilBodyLoaded(() => {
     Forms.Initialize();
     WebParts.Render();
-    new StampVersion().stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
+    StampVersion.stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
 });

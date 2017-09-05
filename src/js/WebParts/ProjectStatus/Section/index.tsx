@@ -20,6 +20,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         super(props);
         this.state = {
             isLoading: this.shouldFechData(props),
+            listData: null,
         };
     }
 
@@ -57,9 +58,13 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     /**
      * Render header
      */
-    private renderHeader({ project, section }: ISectionProps, { }: ISectionState) {
+    private renderHeader({ project, section }: ISectionProps, { listData }: ISectionState) {
+        const fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
+
         return (
-            <SectionHeader section={section} />
+            <SectionHeader
+                section={section}
+                fallbackNavigateUrl={fallbackNavigateUrl} />
         );
     }
 
