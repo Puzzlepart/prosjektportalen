@@ -1,4 +1,4 @@
-import { default as pnp } from "sp-pnp-js";
+import pnp from "sp-pnp-js";
 import IListConfig from "./IListConfig";
 
 const FIELD_PREFIX = "GtLcc";
