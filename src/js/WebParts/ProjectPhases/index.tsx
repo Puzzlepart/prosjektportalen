@@ -14,16 +14,19 @@ import * as Util from "../../Util";
 import * as Data from "./Data";
 import IProjectPhasesProps from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project Phases
  */
-export default class ProjectPhases extends React.PureComponent<IProjectPhasesProps, IProjectPhasesState> {
+export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IProjectPhasesState> {
     /**
      * Constructor
+     *
+     * @param {IProjectPhasesProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IProjectPhasesProps) {
+        super(props);
         this.state = {
             isLoading: true,
         };

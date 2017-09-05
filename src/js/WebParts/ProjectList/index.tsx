@@ -13,11 +13,12 @@ import ProjectCard from "./ProjectCard";
 import Project from "./Project";
 import IProjectListProps from "./IProjectListProps";
 import IProjectListState from "./IProjectListState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project information
  */
-export default class ProjectList extends React.PureComponent<IProjectListProps, IProjectListState> {
+export default class ProjectList extends BaseWebPart<IProjectListProps, IProjectListState> {
     public static defaultProps: Partial<IProjectListProps> = {
         tileWidth: 206,
         tileImageHeight: 140,
@@ -32,9 +33,11 @@ export default class ProjectList extends React.PureComponent<IProjectListProps, 
 
     /**
      * Constructor
+     *
+     * @param {IProjectListProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IProjectListProps) {
+        super(props);
         this.state = {
             isLoading: true,
             searchTerm: "",

@@ -6,15 +6,18 @@ import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends React.PureComponent<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, INewProjectLinkState> {
     public static defaultProps = NewProjectLinkDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
         super(props);

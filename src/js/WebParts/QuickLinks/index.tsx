@@ -8,16 +8,18 @@ import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ChromeTitle from "../@Components/ChromeTitle";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
 import IQuickLinksState, { QuickLinksInitialState } from "./IQuickLinksState";
+import BaseWebPart from "../@BaseWebPart";
 
-
-export default class QuickLinks extends React.PureComponent<IQuickLinksProps, IQuickLinksState> {
+export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLinksState> {
     public static defaultProps = QuickLinksDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IQuickLinksProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IQuickLinksProps) {
+        super(props);
         this.state = QuickLinksInitialState;
     }
 

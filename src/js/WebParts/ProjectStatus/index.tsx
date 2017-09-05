@@ -9,15 +9,18 @@ import ProjectStatusData from "./ProjectStatusData";
 import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project Status
  */
-export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
+export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IProjectStatusState> {
     public static defaultProps = ProjectStatusDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IProjectStatusProps} props Props
      */
     constructor(props: IProjectStatusProps) {
         super(props);

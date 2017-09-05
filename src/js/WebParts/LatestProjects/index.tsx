@@ -10,17 +10,20 @@ import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
 import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
+import BaseWebPart from "../@BaseWebPart";
 
-export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
+export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, ILatestProjectsState> {
     public static defaultProps = LatestProjectsDefaultProps;
 
     private reloadInterval: number;
 
     /**
      * Constructor
+     *
+     * @param {ILatestProjectsProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: ILatestProjectsProps) {
+        super(props);
         this.state = {
             webinfos: null,
             isLoading: true,

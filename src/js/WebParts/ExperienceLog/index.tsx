@@ -13,18 +13,21 @@ import * as Search from "./Search";
 import LogElement from "./LogElement";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
 import IExperienceLogState, { ExperienceLogInitialState } from "./IExperienceLogState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Experience Log
  */
-export default class ExperienceLog extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
+export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExperienceLogState> {
     public static defaultProps = ExperienceLogDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IExperienceLogProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IExperienceLogProps) {
+        super(props);
         this.state = ExperienceLogInitialState;
     }
 

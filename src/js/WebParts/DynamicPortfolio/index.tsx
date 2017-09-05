@@ -31,19 +31,22 @@ import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState, { DynamicPortfolioInitialState } from "./IDynamicPortfolioState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Dynamic Portfolio
  */
-export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
+export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps, IDynamicPortfolioState> {
     public static defaultProps = DynamicPortfolioDefaultProps;
     private configuration: Configuration.IConfiguration = null;
 
     /**
      * Constructor
+     *
+     * @param {IDynamicPortfolioProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IDynamicPortfolioProps) {
+        super(props);
         this.state = DynamicPortfolioInitialState;
     }
 

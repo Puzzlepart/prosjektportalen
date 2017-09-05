@@ -17,18 +17,21 @@ import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
- * Benefits  Overview
+ * Benefits Overview
  */
-export default class BenefitsOverview extends React.PureComponent<IBenefitsOverviewProps, IBenefitsOverviewState> {
+export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps, IBenefitsOverviewState> {
     public static defaultProps = BenefitsOverviewDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IBenefitsOverviewProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IBenefitsOverviewProps) {
+        super(props);
         this.state = {
             isLoading: true,
             searchTerm: "",

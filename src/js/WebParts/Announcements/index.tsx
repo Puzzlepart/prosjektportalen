@@ -10,15 +10,18 @@ import * as Util from "../../Util";
 import ChromeTitle from "../@Components/ChromeTitle";
 import IAnnouncementsProps, { AnnouncementsDefaultProps } from "./IAnnouncementsProps";
 import IAnnouncementsState, { AnnouncementsInitialState } from "./IAnnouncementsState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Announcements
  */
-export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
+export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnnouncementsState> {
     public static defaultProps = AnnouncementsDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IAnnouncementsProps} props Props
      */
     constructor(props: IAnnouncementsProps) {
         super(props);

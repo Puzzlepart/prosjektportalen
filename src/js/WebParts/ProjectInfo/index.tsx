@@ -19,14 +19,18 @@ import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
 import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project information
  */
-export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
+export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProjectInfoState> {
     public static defaultProps = ProjectInfoDefaultProps;
+
     /**
      * Constructor
+     *
+     * @param {IProjectInfoProps} props Props
      */
     constructor(props: IProjectInfoProps) {
         super(props);
