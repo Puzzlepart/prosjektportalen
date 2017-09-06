@@ -40,12 +40,18 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
+    /**
+     * Renders the component
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
+     */
     private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
         if (!shouldRender) {
             return null;

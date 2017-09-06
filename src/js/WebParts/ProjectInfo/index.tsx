@@ -14,7 +14,6 @@ import {
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
 import { ModalLink } from "../@Components/ModalLink";
-import ChromeTitle from "../@Components/ChromeTitle";
 import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
 import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
@@ -25,6 +24,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Project information
  */
 export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProjectInfoState> {
+    public static displayName = "ProjectInfo";
     public static defaultProps = ProjectInfoDefaultProps;
 
     /**
@@ -56,25 +56,28 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
-        const { isLoading } = this.state;
+        return this._render(this.props, this.state);
+    }
 
-        const {
-            renderMode,
-            modalOptions,
-            containerClassName,
-         } = this.props;
-
-
+    /**
+     * Renders the component
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
+     */
+    public _render({ renderMode, modalOptions, containerClassName, innerClassName, hideChrome }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element {
         switch (renderMode) {
             case ProjectInfoRenderMode.Normal: {
-                return (<div className={containerClassName}>
-                    {this.renderChrome()}
-                    {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
-                    {this.renderInner()}
-                </div>);
+                return (
+                    <div className={containerClassName}>
+                        {this.__renderChrome(__("WebPart_ProjectInfo_Title"), `.${innerClassName}`, ProjectInfo.displayName, hideChrome)}
+                        {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
+                        {this.renderInner(this.props, this.state)}
+                    </div>
+                );
             }
             case ProjectInfoRenderMode.Modal: {
                 return (
@@ -97,7 +100,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                     <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />
                                 )
                                 :
-                                this.renderInner()}
+                                this.renderInner(this.props, this.state)}
                             <DefaultButton
                                 hidden={isLoading}
                                 href={this.props.webUrl}
@@ -127,37 +130,19 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     }
 
     /**
-     * Render chrome
-     */
-    private renderChrome = (): JSX.Element => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_ProjectInfo_Title")}
-                toggleElement={{
-                    selector: ".pp-projectInfoInner",
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "ProjectInfo",
-                        type: "localStorage",
-                    },
-                }}
-                hidden={this.props.hideChrome}
-            />
-        );
-    }
-
-    /**
      * Render inner
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderInner = (): JSX.Element => {
-        if (this.state.isLoading) {
+    private renderInner = ({ innerClassName }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element => {
+        if (isLoading) {
             return null;
         }
         return (
-            <div className="pp-projectInfoInner">
-                {this.renderProperties(this.state)}
-                {this.renderActionLinks()}
+            <div className={innerClassName}>
+                {this.renderProperties(this.props, this.state)}
+                {this.renderActionLinks(this.props, this.state)}
             </div>
         );
     }
@@ -165,9 +150,10 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     /**
      * Render properties
      *
-     * @param properties Properties to render
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderProperties({ properties }: IProjectInfoState): JSX.Element {
+    private renderProperties({ }: IProjectInfoProps, { properties }: IProjectInfoState): JSX.Element {
         const propertiesToRender = properties.filter(p => !p.empty);
         const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
         if (hasMissingProps && this.props.showMissingPropsWarning) {
@@ -199,11 +185,14 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
     /**
      * Render action links
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderActionLinks = () => {
+    private renderActionLinks = ({ showActionLinks }: IProjectInfoProps, { }: IProjectInfoState) => {
         return (
             <div
-                hidden={!this.props.showActionLinks}
+                hidden={showActionLinks}
                 className="pp-project-actions">
                 {this.props.actionLinks.map((props, idx) => (
                     <ModalLink key={idx} { ...props } />

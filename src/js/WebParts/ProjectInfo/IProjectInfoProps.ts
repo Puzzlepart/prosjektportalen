@@ -18,6 +18,7 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;
     containerClassName?: string;
+    innerClassName: string;
     errorIconProps?: {
         iconName?: string;
         style?: React.CSSProperties;
@@ -38,5 +39,6 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     welcomePageId: 3,
     renderMode: ProjectInfoRenderMode.Normal,
     containerClassName: "pp-projectInfo",
+    innerClassName: "pp-projectInfoInner",
     actionLinks: ProjectInfoDefaultActionLinks,
 };

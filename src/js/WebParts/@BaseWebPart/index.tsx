@@ -21,9 +21,9 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
      * @param {string} title Title
      * @param {string} selector Selector for toggle
      * @param {string} key Storage key
+     * @param {boolean} hideChrome Hide chrome
      */
-    public __renderChrome = (title: string, selector: string, key: string) => {
-        console.log(title, selector, key);
+    public __renderChrome = (title: string, selector: string, key: string, hideChrome = false) => {
         return (
             <ChromeTitle
                 title={title}
@@ -36,6 +36,7 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
                         type: "localStorage",
                     },
                 }}
+                hidden={hideChrome}
             />
         );
     }
