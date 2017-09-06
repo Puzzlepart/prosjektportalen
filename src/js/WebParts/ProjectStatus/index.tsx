@@ -18,6 +18,8 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
     /**
      * Constructor
+     *
+     * @param {IProjectStatusProps} props Props
      */
     constructor(props: IProjectStatusProps) {
         super(props);
@@ -48,7 +50,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         } = this.state;
 
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner type={SpinnerType.large} />
+            );
         } else {
             return (
                 <div className="ms-Grid">
@@ -76,8 +80,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                             project={data.project}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections(this.props, this.state)}
-                    </StickyContainer >
-                </div >
+                        <div id="styles"></div>
+                    </StickyContainer>
+                </div>
             );
         }
     }
@@ -85,8 +90,8 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     /**
      * Render sections
      *
-     * @param param0 Props
-     * @param param1 State
+     * @param {IProjectStatusProps} param0 Props
+     * @param {IProjectStatusState} param1 State
      */
     private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
         return (
