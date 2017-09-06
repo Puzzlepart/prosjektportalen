@@ -94,7 +94,9 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListState} param3 State
      */
     private _onColumnSort = (event, column: IColumn, { }: ISectionListProps, { listData }: ISectionListState): void => {
-        console.log(column.data);
+        if (column.data.type === "datetime") {
+            return;
+        }
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
