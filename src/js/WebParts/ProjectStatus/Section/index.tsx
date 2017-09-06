@@ -187,6 +187,9 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         const baseProps = {
             key: field.get_internalName(),
             fieldName: field.get_internalName(),
+            data: {
+                type: field.get_typeAsString().toLowerCase(),
+            },
             name: field.get_title(),
         };
 
@@ -196,7 +199,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
             isResizable: true,
         };
 
-        switch (field.get_typeAsString().toLowerCase()) {
+        switch (col.data.type) {
             case "number": case "calculated": case "counter": {
                 col.maxWidth = 80;
             }

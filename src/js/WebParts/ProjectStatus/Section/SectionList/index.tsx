@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
     DetailsList,
@@ -95,6 +94,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListState} param3 State
      */
     private _onColumnSort = (event, column: IColumn, { }: ISectionListProps, { listData }: ISectionListState): void => {
+        console.log(column.data);
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
