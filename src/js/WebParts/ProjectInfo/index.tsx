@@ -189,12 +189,12 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * @param {IProjectInfoProps} param0 Props
      * @param {IProjectInfoState} param1 State
      */
-    private renderActionLinks = ({ showActionLinks }: IProjectInfoProps, { }: IProjectInfoState) => {
+    private renderActionLinks = ({ actionLinks, showActionLinks, actionsClassName }: IProjectInfoProps, { }: IProjectInfoState) => {
         return (
             <div
                 hidden={!showActionLinks}
-                className="pp-project-actions">
-                {this.props.actionLinks.map((props, idx) => (
+                className={actionsClassName}>
+                {actionLinks.map((props, idx) => (
                     <ModalLink key={idx} { ...props } />
                 ))}
             </div>
@@ -269,4 +269,8 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     })
 }
 
-export { ProjectInfoRenderMode };
+export {
+    ProjectInfoRenderMode,
+    IProjectInfoProps,
+    IProjectInfoState,
+};
