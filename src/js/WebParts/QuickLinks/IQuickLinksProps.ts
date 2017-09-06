@@ -1,6 +1,7 @@
 import * as uuid_v1 from "uuid/v1";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-export interface IQuickLinksProps {
+export default interface IQuickLinksProps extends IBaseWebPartProps {
     itemsCount?: number;
     listClassName?: string;
     containerId?: string;
@@ -12,4 +13,3 @@ export const QuickLinksDefaultProps: Partial<IQuickLinksProps> = {
     containerId: uuid_v1(),
 };
 
-export default IQuickLinksProps;

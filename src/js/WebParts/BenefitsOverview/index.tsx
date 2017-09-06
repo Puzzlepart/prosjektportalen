@@ -17,26 +17,28 @@ import { _onRenderItemColumn } from "./Columns";
 import * as Data from "./Data";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
- * Benefits  Overview
+ * Benefits Overview
  */
-export default class BenefitsOverview extends React.PureComponent<IBenefitsOverviewProps, IBenefitsOverviewState> {
+export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps, IBenefitsOverviewState> {
     public static defaultProps = BenefitsOverviewDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IBenefitsOverviewProps} props Props
      */
-    constructor() {
-        super();
-        this.state = {
+    constructor(props: IBenefitsOverviewProps) {
+        super(props, {
             isLoading: true,
             searchTerm: "",
             groupBy: {
                 key: "NoGrouping",
                 name: __("String_NoGrouping"),
             },
-        };
+        });
     }
 
     /**
@@ -70,27 +72,27 @@ export default class BenefitsOverview extends React.PureComponent<IBenefitsOverv
         if (data) {
             let { items, columns, groups } = this.getFilteredData();
             return (
-            <div style={{ width: "100%" }}>
-                {showCommandBar && this.renderCommandBar()}
-                <div style={{ height: 10 }}></div>
-                {showSearchBox !== false &&
-                    <SearchBox
-                        onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText={__("BenefitsOverview_SearchBox_Placeholder")} />
-                }
-                <DetailsList
-                    items={items}
-                    columns={columns}
-                    groups={groups}
-                    selectionMode={SelectionMode.none}
-                    onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
-                        evt.preventDefault();
-                        this.setState({ showProjectInfo: item });
-                    })}
-                    onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
-                />
-                {this.renderProjectInfoModal(this.props, this.state)}
-            </div>
+                <div style={{ width: "100%" }}>
+                    {showCommandBar && this.renderCommandBar()}
+                    <div style={{ height: 10 }}></div>
+                    {showSearchBox !== false &&
+                        <SearchBox
+                            onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
+                            labelText={__("BenefitsOverview_SearchBox_Placeholder")} />
+                    }
+                    <DetailsList
+                        items={items}
+                        columns={columns}
+                        groups={groups}
+                        selectionMode={SelectionMode.none}
+                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
+                            evt.preventDefault();
+                            this.setState({ showProjectInfo: item });
+                        })}
+                        onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
+                    />
+                    {this.renderProjectInfoModal(this.props, this.state)}
+                </div>
             );
         }
         return null;

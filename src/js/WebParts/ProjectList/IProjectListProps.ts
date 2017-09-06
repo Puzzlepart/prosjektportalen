@@ -1,4 +1,6 @@
-interface IProjectListProps {
+import { IBaseWebPartProps } from "../@BaseWebPart";
+
+export default interface IProjectListProps extends IBaseWebPartProps {
     tileWidth?: number;
     tileImageHeight?: number;
     tileClassName?: string;
@@ -7,4 +9,3 @@ interface IProjectListProps {
     masonryOptions?: any;
 }
 
-export default IProjectListProps;

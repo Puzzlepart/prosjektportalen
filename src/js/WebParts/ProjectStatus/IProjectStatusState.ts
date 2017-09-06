@@ -1,8 +1,8 @@
+import { IBaseWebPartState } from "../@BaseWebPart";
 import ProjectStatusData from "./ProjectStatusData";
 
-interface IProjectStatusState {
+export default interface IProjectStatusState extends IBaseWebPartState {
     data?: ProjectStatusData;
     isLoading: boolean;
 }
 
-export default IProjectStatusState;

@@ -1,13 +1,6 @@
-interface IAnnouncementsState {
-    entries: any[];
-    isLoading: boolean;
-    showAnnouncement: any;
+import { IBaseWebPartState } from "../@BaseWebPart";
+
+export default interface IAnnouncementsState extends IBaseWebPartState {
+    entries?: any[];
+    showAnnouncement?: any;
 }
-
-export const AnnouncementsInitialState = {
-    entries: null,
-    isLoading: true,
-    showAnnouncement: null,
-};
-
-export default IAnnouncementsState;

@@ -1,10 +1,11 @@
 import * as React from "react";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
 import { IModalLinkProps } from "../@Components/ModalLink";
 import ProjectInfoDefaultActionLinks from "./ProjectInfoDefaultActionLinks";
 
-interface IProjectInfoProps {
+export default interface IProjectInfoProps extends IBaseWebPartProps {
     showActionLinks?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
@@ -17,6 +18,7 @@ interface IProjectInfoProps {
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;
     containerClassName?: string;
+    innerClassName?: string;
     errorIconProps?: {
         iconName?: string;
         style?: React.CSSProperties;
@@ -37,7 +39,6 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     welcomePageId: 3,
     renderMode: ProjectInfoRenderMode.Normal,
     containerClassName: "pp-projectInfo",
+    innerClassName: "pp-projectInfoInner",
     actionLinks: ProjectInfoDefaultActionLinks,
 };
-
-export default IProjectInfoProps;

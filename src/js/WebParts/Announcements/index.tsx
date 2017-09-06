@@ -7,22 +7,26 @@ import {
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
-import ChromeTitle from "../@Components/ChromeTitle";
 import IAnnouncementsProps, { AnnouncementsDefaultProps } from "./IAnnouncementsProps";
-import IAnnouncementsState, { AnnouncementsInitialState } from "./IAnnouncementsState";
+import IAnnouncementsState from "./IAnnouncementsState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Announcements
  */
-export default class Announcements extends React.PureComponent<IAnnouncementsProps, IAnnouncementsState> {
+export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnnouncementsState> {
+    public static displayName = "Announcements";
     public static defaultProps = AnnouncementsDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IAnnouncementsProps} props Props
      */
     constructor(props: IAnnouncementsProps) {
-        super(props);
-        this.state = AnnouncementsInitialState;
+        super(props, {
+            isLoading: true,
+        });
     }
 
     /**
@@ -54,37 +58,20 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
     public render(): JSX.Element {
         return (
             <div>
-                {this.renderChrome()}
-                {this.renderItems(this.state)}
+                {this.__renderChrome(__("WebPart_Announcements_Title"), `#${this.props.containerId}`, Announcements.displayName)}
+                {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
         );
     }
 
     /**
-    * Render chrome
-    */
-    private renderChrome = () => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_Announcements_Title")}
-                toggleElement={{
-                    selector: `#${this.props.containerId}`,
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "Announcements",
-                        type: "localStorage",
-                    },
-                }}
-            />
-        );
-    }
-
-    /**
      * Render items
+     *
+     * @param {IAnnouncementsProps} param0 Props
+     * @param {IAnnouncementsState} param1 State
      */
-    private renderItems = ({ isLoading, entries }: IAnnouncementsState) => {
+    private renderItems = ({ }: IAnnouncementsProps, { isLoading, entries }: IAnnouncementsState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
@@ -115,7 +102,10 @@ export default class Announcements extends React.PureComponent<IAnnouncementsPro
 
     /**
      * Render modal
-     */
+     *
+     * @param {IAnnouncementsProps} param0 Props
+     * @param {IAnnouncementsState} param1 State
+    */
     private renderModal = ({ modalContainerClassName, modalHeaderClassName, modalBodyClassName }: IAnnouncementsProps, { showAnnouncement }: IAnnouncementsState) => {
         if (showAnnouncement) {
             return (

@@ -2,10 +2,11 @@ import * as React from "react";
 import * as jQuery from "jquery";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../../Util";
+import IToggleElement from "./IToggleElement";
 import IChromeTitleProps from "./IChromeTitleProps";
 import IChromeTitleState from "./IChromeTitleState";
 
-class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
+export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleState> {
     public static defaultProps: Partial<IChromeTitleProps> = {
         hidden: false,
         width: "100%",
@@ -35,9 +36,11 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
 
     /**
      * Constructor
+     *
+     * @param {IChromeTitleProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IChromeTitleProps) {
+        super(props);
         this.state = {
             isCollapsed: false,
         };
@@ -129,4 +132,8 @@ class ChromeTitle extends React.PureComponent<IChromeTitleProps, IChromeTitleSta
     }
 }
 
-export default ChromeTitle;
+export {
+    IToggleElement,
+    IChromeTitleProps,
+    IChromeTitleState,
+};

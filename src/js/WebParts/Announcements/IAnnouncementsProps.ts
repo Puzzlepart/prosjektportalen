@@ -1,6 +1,7 @@
 import * as uuid_v1 from "uuid/v1";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-interface IAnnouncementsProps {
+export default interface IAnnouncementsProps extends IBaseWebPartProps {
     itemsCount?: number;
     itemsFilter?: string;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
@@ -25,4 +26,3 @@ export const AnnouncementsDefaultProps: IAnnouncementsProps = {
     modalBodyClassName: "ms-font-l",
 };
 
-export default IAnnouncementsProps;

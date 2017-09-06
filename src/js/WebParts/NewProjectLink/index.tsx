@@ -6,22 +6,24 @@ import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends React.PureComponent<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, INewProjectLinkState> {
     public static defaultProps = NewProjectLinkDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props);
-        this.state = {
+        super(props, {
             showDialog: false,
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
-        };
+        });
     }
 
     /**
@@ -38,12 +40,18 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
+    /**
+     * Renders the component
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
+     */
     private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
         if (!shouldRender) {
             return null;

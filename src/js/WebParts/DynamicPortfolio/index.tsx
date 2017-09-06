@@ -30,21 +30,28 @@ import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
-import IDynamicPortfolioState, { DynamicPortfolioInitialState } from "./IDynamicPortfolioState";
+import IDynamicPortfolioState from "./IDynamicPortfolioState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Dynamic Portfolio
  */
-export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
+export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps, IDynamicPortfolioState> {
     public static defaultProps = DynamicPortfolioDefaultProps;
     private configuration: Configuration.IConfiguration = null;
 
     /**
      * Constructor
+     *
+     * @param {IDynamicPortfolioProps} props Props
      */
-    constructor() {
-        super();
-        this.state = DynamicPortfolioInitialState;
+    constructor(props: IDynamicPortfolioProps) {
+        super(props, {
+            isLoading: true,
+            searchTerm: "",
+            currentFilters: {},
+            showFilterPanel: false,
+        });
     }
 
     /**
