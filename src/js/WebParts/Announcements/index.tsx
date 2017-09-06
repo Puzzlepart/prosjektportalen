@@ -7,15 +7,15 @@ import {
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
-import ChromeTitle from "../@Components/ChromeTitle";
 import IAnnouncementsProps, { AnnouncementsDefaultProps } from "./IAnnouncementsProps";
-import IAnnouncementsState, { AnnouncementsInitialState } from "./IAnnouncementsState";
+import IAnnouncementsState from "./IAnnouncementsState";
 import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Announcements
  */
 export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnnouncementsState> {
+    public static displayName = "Announcements";
     public static defaultProps = AnnouncementsDefaultProps;
 
     /**
@@ -24,8 +24,11 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
      * @param {IAnnouncementsProps} props Props
      */
     constructor(props: IAnnouncementsProps) {
-        super(props);
-        this.state = AnnouncementsInitialState;
+        super(props, {
+            entries: null,
+            isLoading: true,
+            showAnnouncement: null,
+        });
     }
 
     /**
@@ -57,37 +60,17 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
     public render(): JSX.Element {
         return (
             <div>
-                {this.renderChrome()}
-                {this.renderItems(this.state)}
+                {this.__renderChrome(__("WebPart_Announcements_Title"), `#${this.props.containerId}`, Announcements.displayName)}
+                {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
         );
     }
 
     /**
-    * Render chrome
-    */
-    private renderChrome = () => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_Announcements_Title")}
-                toggleElement={{
-                    selector: `#${this.props.containerId}`,
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "Announcements",
-                        type: "localStorage",
-                    },
-                }}
-            />
-        );
-    }
-
-    /**
      * Render items
      */
-    private renderItems = ({ isLoading, entries }: IAnnouncementsState) => {
+    private renderItems = ({ }: IAnnouncementsProps, { isLoading, entries }: IAnnouncementsState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />

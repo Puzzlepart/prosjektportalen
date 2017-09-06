@@ -30,7 +30,7 @@ import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
-import IDynamicPortfolioState, { DynamicPortfolioInitialState } from "./IDynamicPortfolioState";
+import IDynamicPortfolioState from "./IDynamicPortfolioState";
 import BaseWebPart from "../@BaseWebPart";
 
 /**
@@ -46,8 +46,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} props Props
      */
     constructor(props: IDynamicPortfolioProps) {
-        super(props);
-        this.state = DynamicPortfolioInitialState;
+        super(props, {
+            isLoading: true,
+            searchTerm: "",
+            currentFilters: {},
+            showFilterPanel: false,
+        });
     }
 
     /**

@@ -37,11 +37,10 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} props Props
      */
     constructor(props: IProjectListProps) {
-        super(props);
-        this.state = {
+        super(props, {
             isLoading: true,
             searchTerm: "",
-        };
+        });
     }
 
     /**

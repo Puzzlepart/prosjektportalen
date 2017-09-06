@@ -1,21 +1,8 @@
-export interface IToggleElementStorage {
-    key: string;
-    type: "localStorage" | "sessionStorage";
-}
+import IToggleElement from "./IToggleElement";
 
-export interface IToggleElement {
-    selector: string;
-    animationDelay: number;
-    animation: "fadeToggle" | "slideToggle";
-    storage?: IToggleElementStorage;
-    defaultCollapsed?: boolean;
-}
-
-interface IChromeTitleProps {
+export default interface IChromeTitleProps {
     title: string;
     toggleElement?: IToggleElement;
     hidden?: boolean;
     width?: string | number;
 }
-
-export default IChromeTitleProps;

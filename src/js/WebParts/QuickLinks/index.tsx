@@ -7,10 +7,11 @@ import {
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ChromeTitle from "../@Components/ChromeTitle";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
-import IQuickLinksState, { QuickLinksInitialState } from "./IQuickLinksState";
+import IQuickLinksState from "./IQuickLinksState";
 import BaseWebPart from "../@BaseWebPart";
 
 export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLinksState> {
+    public static displayName = "QuickLinks";
     public static defaultProps = QuickLinksDefaultProps;
 
     /**
@@ -19,8 +20,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
      * @param {IQuickLinksProps} props Props
      */
     constructor(props: IQuickLinksProps) {
-        super(props);
-        this.state = QuickLinksInitialState;
+        super(props, { isLoading: true });
     }
 
     /**
@@ -43,29 +43,9 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.renderChrome(this.props, this.state)}
+                {this.__renderChrome(__("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
-        );
-    }
-
-    /**
-    * Render chrome
-    */
-    private renderChrome = ({ containerId }: IQuickLinksProps, { }: IQuickLinksState) => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_Links_Title")}
-                toggleElement={{
-                    selector: `#${containerId}`,
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "QuickLinks",
-                        type: "localStorage",
-                    },
-                }}
-            />
         );
     }
 

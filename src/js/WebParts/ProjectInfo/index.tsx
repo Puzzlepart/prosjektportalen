@@ -33,11 +33,10 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * @param {IProjectInfoProps} props Props
      */
     constructor(props: IProjectInfoProps) {
-        super(props);
-        this.state = {
+        super(props, {
             isLoading: true,
             properties: [],
-        };
+        });
     }
 
     /**

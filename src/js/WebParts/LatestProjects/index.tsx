@@ -23,11 +23,10 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
      * @param {ILatestProjectsProps} props Props
      */
     constructor(props: ILatestProjectsProps) {
-        super(props);
-        this.state = {
+        super(props, {
             webinfos: null,
             isLoading: true,
-        };
+        });
     }
 
     /**

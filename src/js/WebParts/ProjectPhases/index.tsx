@@ -26,10 +26,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {IProjectPhasesProps} props Props
      */
     constructor(props: IProjectPhasesProps) {
-        super(props);
-        this.state = {
-            isLoading: true,
-        };
+        super(props, { isLoading: true });
     }
 
     /**

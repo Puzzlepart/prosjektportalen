@@ -5,10 +5,3 @@ export default interface IAnnouncementsState extends IBaseWebPartState {
     isLoading: boolean;
     showAnnouncement: any;
 }
-
-export const AnnouncementsInitialState = {
-    entries: null,
-    isLoading: true,
-    showAnnouncement: null,
-};
-

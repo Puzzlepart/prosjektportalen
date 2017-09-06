@@ -12,7 +12,7 @@ import { ModalLink } from "../../WebParts/@Components";
 import * as Search from "./Search";
 import LogElement from "./LogElement";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
-import IExperienceLogState, { ExperienceLogInitialState } from "./IExperienceLogState";
+import IExperienceLogState from "./IExperienceLogState";
 import BaseWebPart from "../@BaseWebPart";
 
 /**
@@ -27,8 +27,10 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * @param {IExperienceLogProps} props Props
      */
     constructor(props: IExperienceLogProps) {
-        super(props);
-        this.state = ExperienceLogInitialState;
+        super(props, {
+            isLoading: true,
+            searchTerm: "",
+        });
     }
 
     /**

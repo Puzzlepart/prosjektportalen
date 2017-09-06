@@ -20,11 +20,10 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props);
-        this.state = {
+        super(props, {
             showDialog: false,
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
-        };
+        });
     }
 
     /**

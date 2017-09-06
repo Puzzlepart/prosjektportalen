@@ -23,10 +23,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * @param {IProjectStatusProps} props Props
      */
     constructor(props: IProjectStatusProps) {
-        super(props);
-        this.state = {
-            isLoading: true,
-        };
+        super(props, { isLoading: true });
     }
 
     /**

@@ -9,7 +9,6 @@ export interface IDynamicPortfolioErrorMessage {
 }
 
 export default interface IDynamicPortfolioState extends IBaseWebPartState {
-    isLoading?: boolean;
     items?: any[];
     filteredItems?: any[];
     selectedColumns?: any[];
@@ -24,11 +23,3 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
 }
-
-export const DynamicPortfolioInitialState: Partial<IDynamicPortfolioState> = {
-    isLoading: true,
-    searchTerm: "",
-    currentFilters: {},
-    showFilterPanel: false,
-};
-
