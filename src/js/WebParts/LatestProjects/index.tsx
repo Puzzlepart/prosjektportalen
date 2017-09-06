@@ -7,12 +7,12 @@ import {
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
-import ChromeTitle from "../@Components/ChromeTitle";
 import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
 import BaseWebPart from "../@BaseWebPart";
 
 export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, ILatestProjectsState> {
+    public static displayName = "LatestProjects";
     public static defaultProps = LatestProjectsDefaultProps;
 
     private reloadInterval: number;
@@ -65,32 +65,9 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.renderChrome(this.props, this.state)}
+                {this.__renderChrome(__("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
-        );
-    }
-
-    /**
-    * Render chrome
-    *
-    * @param {ILatestProjectsProps} param0 Props
-    * @param {ILatestProjectsState} param1 State
-    */
-    private renderChrome = ({ containerId }: ILatestProjectsProps, { }: ILatestProjectsState) => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_RecentProjects_Title")}
-                toggleElement={{
-                    selector: `#${containerId}`,
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "LatestProjects",
-                        type: "localStorage",
-                    },
-                }}
-            />
         );
     }
 

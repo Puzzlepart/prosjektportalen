@@ -5,7 +5,6 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import ChromeTitle from "../@Components/ChromeTitle";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
 import IQuickLinksState from "./IQuickLinksState";
 import BaseWebPart from "../@BaseWebPart";
@@ -50,8 +49,11 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     }
 
     /**
-     * Render items
-     */
+    * Render items
+    *
+    * @param {IQuickLinksProps} param0 Props
+    * @param {IQuickLinksState} param1 State
+    */
     private renderItems = ({ containerId, listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
         if (isLoading) {
             return (

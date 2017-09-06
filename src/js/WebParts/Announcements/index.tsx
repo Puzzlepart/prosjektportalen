@@ -69,6 +69,9 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
 
     /**
      * Render items
+     *
+     * @param {IAnnouncementsProps} param0 Props
+     * @param {IAnnouncementsState} param1 State
      */
     private renderItems = ({ }: IAnnouncementsProps, { isLoading, entries }: IAnnouncementsState) => {
         if (isLoading) {
@@ -101,7 +104,10 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
 
     /**
      * Render modal
-     */
+     *
+     * @param {IAnnouncementsProps} param0 Props
+     * @param {IAnnouncementsState} param1 State
+    */
     private renderModal = ({ modalContainerClassName, modalHeaderClassName, modalBodyClassName }: IAnnouncementsProps, { showAnnouncement }: IAnnouncementsState) => {
         if (showAnnouncement) {
             return (
