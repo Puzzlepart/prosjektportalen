@@ -2,7 +2,7 @@ import AudienceTargeting from "../../AudienceTargeting";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 
-interface IModalLinkProps {
+interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
     label?: string;
     showLabel?: boolean;
     url: string;
@@ -12,10 +12,7 @@ interface IModalLinkProps {
     width?: number;
     height?: number;
     icon?: IModalLinkIconProps;
-    className?: string;
     id?: string;
-    style?: React.CSSProperties;
-    hidden?: boolean;
     audienceTargeting?: AudienceTargeting;
 }
 

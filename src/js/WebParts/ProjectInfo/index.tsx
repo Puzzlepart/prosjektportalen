@@ -192,7 +192,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     private renderActionLinks = ({ showActionLinks }: IProjectInfoProps, { }: IProjectInfoState) => {
         return (
             <div
-                hidden={showActionLinks}
+                hidden={!showActionLinks}
                 className="pp-project-actions">
                 {this.props.actionLinks.map((props, idx) => (
                     <ModalLink key={idx} { ...props } />

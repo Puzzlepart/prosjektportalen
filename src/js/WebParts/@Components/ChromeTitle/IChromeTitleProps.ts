@@ -1,8 +1,7 @@
 import IToggleElement from "./IToggleElement";
 
-export default interface IChromeTitleProps {
+export default interface IChromeTitleProps extends React.HTMLAttributes<HTMLElement> {
     title: string;
     toggleElement?: IToggleElement;
-    hidden?: boolean;
     width?: string | number;
 }

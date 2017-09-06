@@ -25,9 +25,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
      */
     constructor(props: IAnnouncementsProps) {
         super(props, {
-            entries: null,
             isLoading: true,
-            showAnnouncement: null,
         });
     }
 

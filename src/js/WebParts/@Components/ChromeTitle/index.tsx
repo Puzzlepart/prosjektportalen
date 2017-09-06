@@ -44,7 +44,6 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
         this.state = {
             isCollapsed: false,
         };
-        console.log(props);
     }
 
     /**
