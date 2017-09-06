@@ -1,6 +1,7 @@
+import { IBaseWebPartState } from "../@BaseWebPart";
 import * as Data from "./Data";
 
-interface IProjectPhasesState {
+export default interface IProjectPhasesState extends IBaseWebPartState {
     isLoading: boolean;
     phases?: any[];
     currentPhase?: any;
@@ -8,4 +9,3 @@ interface IProjectPhasesState {
     changePhase?: { Id: string, Name: string };
 }
 
-export default IProjectPhasesState;

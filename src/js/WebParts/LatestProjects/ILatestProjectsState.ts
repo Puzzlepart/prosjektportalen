@@ -1,3 +1,5 @@
+import { IBaseWebPartState } from "../@BaseWebPart";
+
 export interface IWebInfo {
     Id: number;
     ServerRelativeUrl: string;
@@ -5,9 +7,7 @@ export interface IWebInfo {
     Created: string;
 }
 
-interface ILatestProjectsState {
+export default interface ILatestProjectsState extends IBaseWebPartState {
     webinfos?: IWebInfo[];
     isLoading?: boolean;
 }
-
-export default ILatestProjectsState;

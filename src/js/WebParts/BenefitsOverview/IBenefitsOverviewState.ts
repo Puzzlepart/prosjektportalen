@@ -1,7 +1,8 @@
+import { IBaseWebPartState } from "../@BaseWebPart";
 import IGroupByOption from "./IGroupByOption";
 import { IBenefitsOverviewData } from "./Data";
 
-interface IBenefitsOverviewState {
+export default interface IBenefitsOverviewState extends IBaseWebPartState {
     data?: IBenefitsOverviewData;
     isLoading: boolean;
     searchTerm: string;
@@ -9,4 +10,3 @@ interface IBenefitsOverviewState {
     showProjectInfo?: any;
 }
 
-export default IBenefitsOverviewState;

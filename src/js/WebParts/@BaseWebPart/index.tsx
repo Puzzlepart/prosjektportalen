@@ -12,3 +12,9 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
         super(props);
     }
 }
+
+export {
+    IBaseWebPartProps,
+    IBaseWebPartState,
+};
+

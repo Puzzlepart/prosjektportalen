@@ -1,3 +1,4 @@
-interface IProjectPhasesProps { }
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-export default IProjectPhasesProps;
+export default interface IProjectPhasesProps extends IBaseWebPartProps { }
+

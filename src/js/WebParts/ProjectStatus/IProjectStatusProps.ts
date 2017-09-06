@@ -1,6 +1,7 @@
+import { IBaseWebPartProps } from "../@BaseWebPart";
 import IProjectStatusSectionConfig from "./IProjectStatusSectionConfig";
 
-export default interface IProjectStatusProps {
+export default interface IProjectStatusProps extends IBaseWebPartProps {
     sectionConfig?: IProjectStatusSectionConfig;
 }
 

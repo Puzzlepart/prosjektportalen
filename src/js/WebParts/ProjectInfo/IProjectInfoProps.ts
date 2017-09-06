@@ -1,10 +1,11 @@
 import * as React from "react";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
 import { IModalLinkProps } from "../@Components/ModalLink";
 import ProjectInfoDefaultActionLinks from "./ProjectInfoDefaultActionLinks";
 
-interface IProjectInfoProps {
+export default interface IProjectInfoProps extends IBaseWebPartProps {
     showActionLinks?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
@@ -39,5 +40,3 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     containerClassName: "pp-projectInfo",
     actionLinks: ProjectInfoDefaultActionLinks,
 };
-
-export default IProjectInfoProps;

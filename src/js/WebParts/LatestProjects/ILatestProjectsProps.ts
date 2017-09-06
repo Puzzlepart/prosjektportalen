@@ -1,6 +1,7 @@
 import * as uuid_v1 from "uuid/v1";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-interface ILatestProjectsProps {
+export default interface ILatestProjectsProps extends IBaseWebPartProps {
     itemsCount?: number;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;
@@ -20,5 +21,3 @@ export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
     containerId: uuid_v1(),
     deleteEnabled: process.env.NODE_ENV === "development",
 };
-
-export default ILatestProjectsProps;

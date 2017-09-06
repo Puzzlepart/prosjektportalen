@@ -1,6 +1,7 @@
+import { IBaseWebPartProps } from "../@BaseWebPart";
 import AudienceTargeting from "../AudienceTargeting";
 
-interface INewProjectLinkProps {
+export default interface INewProjectLinkProps extends IBaseWebPartProps {
     linkClassName?: string;
     iconProps?: {
         iconName: string,
@@ -20,6 +21,3 @@ export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
     },
     audienceTargeting: AudienceTargeting.Owners,
 };
-
-export default INewProjectLinkProps;
-

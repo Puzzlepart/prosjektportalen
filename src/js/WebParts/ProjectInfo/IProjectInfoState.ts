@@ -1,8 +1,7 @@
+import { IBaseWebPartState } from "../@BaseWebPart";
 import { ProjectPropertyModel } from "./ProjectProperty";
 
-interface IProjectInfoState {
+export default interface IProjectInfoState extends IBaseWebPartState {
     properties?: ProjectPropertyModel[];
     isLoading: boolean;
 }
-
-export default IProjectInfoState;
