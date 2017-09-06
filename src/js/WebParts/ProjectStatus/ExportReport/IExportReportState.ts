@@ -1,6 +1,6 @@
 import ExportReportStatus from "./ExportReportStatus";
 
-interface IExportReportState {
+export default interface IExportReportState {
     project?: any;
     reports?: any;
     selectedReport?: {
@@ -11,6 +11,4 @@ interface IExportReportState {
     showDialog?: boolean;
     isLoading: boolean;
 }
-
-export default IExportReportState;
 

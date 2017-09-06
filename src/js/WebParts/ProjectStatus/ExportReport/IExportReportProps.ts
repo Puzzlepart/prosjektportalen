@@ -1,5 +1,4 @@
-interface IExportReportProps {
+export default interface IExportReportProps {
     project: any;
 }
 
-export default IExportReportProps;

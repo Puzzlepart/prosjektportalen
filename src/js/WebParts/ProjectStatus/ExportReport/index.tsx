@@ -14,6 +14,8 @@ import ExportReportStatus from "./ExportReportStatus";
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     /**
      * Constructor
+     *
+     * @param {IExportReportProps} props Props
      */
     constructor(props: IExportReportProps) {
         super(props);
@@ -27,16 +29,25 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchReports();
+        this.fetchReports().then(reports => this.setState({
+            isLoading: false,
+            reports,
+        }));
     }
 
     /**
-     * Renders the component
+     * Calls private method _render with props and state
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
+    /**
+     * Renders the component
+     *
+     * @param {IExportReportProps} param0 Props
+     * @param {IExportReportState} param1 State
+     */
     private _render({ }: IExportReportProps, { reports, showDialog, selectedReport, exportStatus, isLoading }: IExportReportState): JSX.Element {
         if (isLoading) {
             return <Spinner size={SpinnerSize.medium} />;
@@ -86,6 +97,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     /**
      * Render export button
+     *
+     * @param {ExportReportStatus} exportStatus Export status
      */
     private renderExportBtn = exportStatus => {
         if (exportStatus === ExportReportStatus.isExporting) {
@@ -105,6 +118,11 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     /**
      * Save file to library
+     *
+     * @param {string} libraryRelativeUrl Library relative URL
+     * @param {string} fileName Filename
+     * @param {string} title Title
+     * @param {Blob} fileBlob File blob
      */
     private saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
         return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
@@ -120,7 +138,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * Fetch reports
      */
-    private fetchReports(): void {
+    private fetchReports = () => new Promise<any[]>((resolve, reject) => {
         pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
@@ -129,15 +147,15 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             .top(10)
             .get()
             .then(reports => {
-                this.setState({
-                    reports: reports,
-                    isLoading: false,
-                });
-            });
-    }
+                resolve(reports);
+            })
+            .catch(reject);
+    })
 
     /**
      * Get report options
+     *
+     * @param {any} reports Reports
      */
     private getReportOptions = (reports): Array<IDropdownOption> => {
         let options = reports.filter(r => r.FileLeafRef).map(({ Title: text, EncodedAbsUrl: key }) => ({
@@ -162,12 +180,12 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * Save report
      *
-     * @param reportBlob Blob for the report file
+     * @param {any} reportBlob Blob for the report file
      */
     private saveReport = reportBlob => {
-        let dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
-        let fileName = `${dateDisplay}-${_spPageContextInfo.webTitle}.png`;
-        let fileTitle = `${dateDisplay} ${_spPageContextInfo.webTitle}`;
+        const dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
+        const fileName = `${dateDisplay}-${_spPageContextInfo.webTitle}.png`;
+        const fileTitle = `${dateDisplay} ${_spPageContextInfo.webTitle}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({ exportStatus: ExportReportStatus.hasExported });
             this.fetchReports();
@@ -176,21 +194,25 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     /**
      * Do export
+     *
+     * @param {any} e Event
      */
     private doExport = e => {
         e.preventDefault();
-        this.setState({ exportStatus: ExportReportStatus.isExporting });
-        html2canvas(document.getElementById("pp-projectstatus"), {
-            onrendered: canvas => {
-                if (canvas.toBlob) {
-                    canvas.toBlob(reportBlob => {
+        const element = document.getElementById("pp-projectstatus");
+        this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
+            html2canvas(element, {
+                onrendered: canvas => {
+                    if (canvas.toBlob) {
+                        canvas.toBlob(reportBlob => {
+                            this.saveReport(reportBlob);
+                        });
+                    } else if (canvas.msToBlob) {
+                        let reportBlob = canvas.msToBlob();
                         this.saveReport(reportBlob);
-                    });
-                } else if (canvas.msToBlob) {
-                    let reportBlob = canvas.msToBlob();
-                    this.saveReport(reportBlob);
-                }
-            },
+                    }
+                },
+            });
         });
     }
 }

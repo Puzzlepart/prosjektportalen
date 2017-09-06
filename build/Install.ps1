@@ -48,7 +48,8 @@ Param(
 )
 
 # Get has assocated groups
-function Get-HasAssociatedGroups() {
+function Get-HasAssociatedGroups() {    
+    Connect-SharePoint $Url  
     $ascMemberGroup = Get-PnPGroup -AssociatedMemberGroup -ErrorAction SilentlyContinue
     $ascVisitorGroup = Get-PnPGroup -AssociatedVisitorGroup -ErrorAction SilentlyContinue
     $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue
@@ -118,13 +119,21 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
+  
+# Handling credentials
+if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
+} elseif (-not $UseWebLogin.IsPresent) {
+    $Credential = $GenericCredential
+}
+
 # Start installation
 function Start-Install() {
     # Prints header
     if (-not $Upgrade.IsPresent) {
         Write-Host "############################################################################" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
-        Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+        Write-Host "Installing Prosjektportalen (2.1.0#94c6b03f)" -ForegroundColor Green
         Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
@@ -153,14 +162,7 @@ function Start-Install() {
     # Sets up PnP trace log
     $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
     Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
-
-    
-    # Handling credentials
-    if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
-        $Credential = (Get-Credential -Message "Please enter your username and password")
-    } elseif (-not $UseWebLogin.IsPresent) {
-        $Credential = $GenericCredential
-    }
+  
 
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
