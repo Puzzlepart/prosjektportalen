@@ -17,5 +17,5 @@ pnp.setup({
 ExecuteOrDelayUntilBodyLoaded(() => {
     Forms.Initialize();
     WebParts.Render();
-    StampVersion.stamp("startNavigation", "pp_version", ["pp-version-stamp"]);
+    StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
 });

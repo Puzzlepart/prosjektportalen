@@ -434,4 +434,7 @@ export const getUrlParts = (): string[] => {
     return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
 };
 
-export { WaitDialog, StampVersion };
+export {
+    WaitDialog,
+    StampVersion,
+};
