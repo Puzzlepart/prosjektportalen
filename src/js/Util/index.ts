@@ -1,8 +1,5 @@
 import * as moment from "moment";
-import {
-    sp,
-    Group,
-} from "sp-pnp-js";
+import { sp } from "sp-pnp-js";
 import AudienceTargeting from "../WebParts/AudienceTargeting";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -23,9 +20,9 @@ export const htmlDecode = (input: string): string => {
 /**
  * Is the current user in the specified group
  *
- * @param {Group} group The group to check
+ * @param {any} group The group to check
  */
-const isUserInGroup = (group: Group) => new Promise<boolean>(resolve => {
+const isUserInGroup = (group) => new Promise<boolean>(resolve => {
     group
         .users.get()
         .then(users => {
