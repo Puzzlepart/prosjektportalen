@@ -17,10 +17,10 @@ import ISpField from "./ISpField";
 /**
  * Get measurements for the specified benefit entry
  *
- * @param measures Measures
- * @param benefit Benefit
- * @param shouldIncrease Should the value increase
- * @param dataSource Data source
+ * @param {any[]} measures Measures
+ * @param {any} benefit Benefit
+ * @param {boolean} shouldIncrease Should the value increase
+ * @param {DataSource} dataSource Data source
  */
 const GetBenefitMeasurements = (measures: any[], benefit, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
     const isSearch = (dataSource === DataSource.Search);
@@ -54,9 +54,9 @@ const GetBenefitMeasurements = (measures: any[], benefit, valueShouldIncrease: b
 /**
  * Generate data
  *
- * @param benefits Benefits
- * @param measures Measure
- * @param dataSource Data source
+ * @param {any[]} benefits Benefits
+ * @param {any[]} measures Measure
+ * @param {DataSource} dataSource Data source
  */
 const GenerateData = (benefits: any[], measures: any[], dataSource: DataSource): any[] => {
     return benefits.map(data => {
@@ -123,8 +123,8 @@ const SearchSettings = {
 /**
  * Fetches fields for a web, list or content type
  *
- * @param obj List or content type
- * @param fieldPrefix Field prefix
+ * @param {any} obj List or content type
+ * @param {string} fieldPrefix Field prefix
  */
 const fetchFields = (obj: any, fieldPrefix = "Gt") => new Promise<ISpField[]>((resolve, reject) => {
     obj
@@ -142,7 +142,7 @@ const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"))
 /**
  * Fetches data based on selected data source
  *
- * @param dataSource Data source (list/search)
+ * @param {DataSource} dataSource Data source (list/search)
  */
 export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOverviewData> => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     switch (dataSource) {

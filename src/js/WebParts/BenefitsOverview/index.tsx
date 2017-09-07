@@ -4,6 +4,7 @@ import {
     DetailsList,
     IGroup,
     SelectionMode,
+    IColumn,
 } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
@@ -54,19 +55,19 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     }
 
     /**
-     * Render the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
-        const {
-            showSearchBox,
-            showCommandBar,
-         } = this.props;
+        return this._render(this.props, this.state);
+    }
 
-        const {
-            isLoading,
-            data,
-        } = this.state;
-
+    /**
+     * Render the component
+     *
+     * @param {IBenefitsOverviewProps} param0 Props
+     * @param {IBenefitsOverviewState} param1 State
+     */
+    public _render({ showSearchBox }: IBenefitsOverviewProps, { isLoading, data }: IBenefitsOverviewState): JSX.Element {
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
@@ -74,7 +75,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             let { items, columns, groups } = this.getFilteredData();
             return (
                 <div style={{ width: "100%" }}>
-                    {showCommandBar && this.renderCommandBar()}
+                    {this.renderCommandBar(this.props, this.state)}
                     <div style={{ height: 10 }}></div>
                     {showSearchBox !== false &&
                         <SearchBox
@@ -101,14 +102,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     /**
      * Renders the command bar from office-ui-fabric-react
+     *
+     * @param {IBenefitsOverviewProps} param0 Props
+     * @param {IBenefitsOverviewState} param1 State
      */
-    private renderCommandBar = () => {
-        const {
-            groupBy,
-         } = this.state;
-
-        const { groupByOptions } = this.props;
-
+    private renderCommandBar = ({ groupByOptions, showCommandBar }: IBenefitsOverviewProps, { groupBy }: IBenefitsOverviewState) => {
         const items = [];
         const farItems = [];
 
@@ -140,6 +138,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (items.length > 0 || farItems.length > 0) {
             return (
                 <CommandBar
+                    hidden={!showCommandBar}
                     items={items}
                     farItems={farItems}
                 />
@@ -150,6 +149,9 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     /**
      * Renders the Project Info modal
+     *
+     * @param {IBenefitsOverviewProps} param0 Props
+     * @param {IBenefitsOverviewState} param1 State
      */
     private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IBenefitsOverviewProps, { showProjectInfo }: IBenefitsOverviewState) => {
         if (showProjectInfo) {
@@ -218,8 +220,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     /**
      * Sorting on column click
+     *
+     * @param {any} event Event
+     * @param {IColumn} column Column
      */
-    private _onColumnClick = (event, column): any => {
+    private _onColumnClick = (event, column: IColumn): any => {
         const { data } = this.state;
 
         let isSortedDescending = column.isSortedDescending;
