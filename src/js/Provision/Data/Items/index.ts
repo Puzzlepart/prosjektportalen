@@ -7,7 +7,14 @@ import IProgressCallback from "../../IProgressCallback";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
-let __RECORDS = [];
+interface IRecord {
+    SourceId: number;
+    DestId: number;
+    DestItem: SP.ListItem<any>;
+    ParentID: number;
+}
+
+let __RECORDS: IRecord[] = [];
 
 /**
  * Copy a single list item to the destination web
@@ -28,7 +35,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
     destItem.update();
     dataCtx.Destination._.load(destItem);
     dataCtx.Destination._.executeQueryAsync(() => {
-        const record = {
+        const record: IRecord = {
             SourceId: sourceItemId,
             DestId: destItem.get_fieldValues()["ID"],
             DestItem: destItem,
