@@ -1,10 +1,10 @@
 import * as Util from "../Util";
-import * as Config from "./Config";
 import {
     UpdatePhaseWelcomePage,
     UpdateFrontpageListViews,
     SetMetadataDefaults,
     EnsureLocationBasedMetadataDefaultsReceiver,
+    PROJECTPHASE_FIELD,
 } from "./";
 
 /**
@@ -21,7 +21,7 @@ const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<
         waitDlg = new Util.WaitDialog(Title, String.format(Message, newPhase.Name), 120, 600);
         waitDlg.start(300);
     }
-    UpdatePhaseWelcomePage(newPhase.Name, newPhase.Id, Config.PROJECTPHASE_FIELD)
+    UpdatePhaseWelcomePage(newPhase.Name, newPhase.Id, PROJECTPHASE_FIELD)
         .then(() => {
             Promise.all([
                 UpdateFrontpageListViews(newPhase.Name),
@@ -29,7 +29,9 @@ const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<
                 EnsureLocationBasedMetadataDefaultsReceiver(),
             ])
                 .then(() => {
-                    waitDlg.close(null);
+                    if (waitDlg) {
+                        waitDlg.close(null);
+                    }
                     resolve();
                 })
                 .catch(reject);
