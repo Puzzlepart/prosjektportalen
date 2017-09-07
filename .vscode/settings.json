@@ -10,7 +10,13 @@
         "release": true,
         "_templates": true,
         "src/js/Resources": true,
-        "build/bundle": true
+        "build/bundle": true,
+        "gulpfile.babel.js": true,
+        ".npmignore": true,
+        ".gitignore": true,
+        "manual-conf": true,
+        ".github": true,
+        "package-lock.json": true
     },
     "files.associations": {
         "**/webparts/**/*.txt": "xml",
