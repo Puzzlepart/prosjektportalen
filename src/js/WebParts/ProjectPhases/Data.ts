@@ -1,51 +1,37 @@
 import { sp } from "sp-pnp-js";
 import * as Util from "../../Util";
 import { GetCurrentProjectPhase } from "../../Project/";
-
-export interface IChecklistItem {
-    ID: string;
-    Title: string;
-    GtProjectPhase: any;
-    GtChecklistStatus: string;
-    GtComment: string;
-}
-
-export interface IChecklistData {
-    stats: { [key: string]: number };
-    items: IChecklistItem[];
-}
+import PhaseModel from "./PhaseModel";
+import IChecklistData from "./IChecklistData";
 
 /**
- * Fetch phases
+ * Fetch phase
+ *
+ * @param {string} phaseFieldInternalName Internal name of phase field
  */
-const fetchPases = () => new Promise<any[]>((resolve, reject) => {
+const fetchPases = (phaseFieldInternalName = "GtProjectPhase") => new Promise<PhaseModel[]>((resolve, reject) => {
     Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
-        Util.ensureTaxonomy().then(() => {
-            sp.site.rootWeb.fields.getByInternalNameOrTitle("GtProjectPhase").select("TermSetId").get().then(({ TermSetId }) => {
-                let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
-                    termStore = taxSession.getDefaultSiteCollectionTermStore(),
-                    termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
-                    terms = termSet.getAllTerms();
-                ctx.load(terms);
-                ctx.executeQueryAsync(() => {
-                    resolve(terms.get_data().filter(t => t.get_localCustomProperties().ShowOnFrontpage !== "false").map(t => ({
-                        Id: t.get_id().toString(),
-                        Name: t.get_name(),
-                        PhaseLevel: t.get_localCustomProperties().PhaseLevel,
-                    })));
-                }, reject);
-            });
+        const rootWeb = sp.site.rootWeb;
+        const phaseField = rootWeb.fields.getByInternalNameOrTitle(phaseFieldInternalName);
+        phaseField.select("TermSetId").get().then(({ TermSetId }) => {
+            let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
+                termStore = taxSession.getDefaultSiteCollectionTermStore(),
+                termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
+                terms = termSet.getAllTerms();
+            ctx.load(terms);
+            ctx.executeQueryAsync(() => {
+                const phases = terms.get_data().map(term => new PhaseModel(term));
+                resolve(phases);
+            }, reject);
         });
     });
 });
-
-const phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
 
 /**
  * Fetch phase checklist data items with stats per status
  */
 const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }>((resolve, reject) => {
-    phaseChecklist.items
+    sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title")).items
         .select("Id", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment")
         .get().then(items => {
             let data: { [phase: string]: IChecklistData } = {};
@@ -82,19 +68,21 @@ const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }
  * Fetch data using sp-pnp-js and sp.taxonomy.js
  */
 export const fetchData = () => new Promise<any>((resolve, reject) => {
-    Promise.all([
-        GetCurrentProjectPhase(),
-        fetchPases(),
-        fetchChecklistData(),
-    ])
-        .then(([currentPhase, phases, checkListData]) => {
-            resolve({
-                currentPhase: currentPhase,
-                phases: phases,
-                checkListData: checkListData,
-            });
-        })
-        .catch(reject);
+    Util.ensureTaxonomy().then(() => {
+        Promise.all([
+            GetCurrentProjectPhase(),
+            fetchPases(),
+            fetchChecklistData(),
+        ])
+            .then(([activePhase, phases, checkListData]) => {
+                resolve({
+                    activePhase,
+                    phases,
+                    checkListData,
+                });
+            })
+            .catch(reject);
+    });
 });
 
 

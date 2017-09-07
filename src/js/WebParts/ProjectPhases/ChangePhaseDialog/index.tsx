@@ -7,6 +7,9 @@ import { Footer } from "./Footer";
 import IChangePhaseDialogProps from "./IChangePhaseDialogProps";
 import IChangePhaseDialogState from "./IChangePhaseDialogState";
 
+/**
+ * Change phase dialog
+ */
 export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
     private phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
     private openCheckListItems;
@@ -41,7 +44,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
         return this._render(this.props, this.state);
     }
 
-    private _render({ onConfirmPhaseChange }: IChangePhaseDialogProps, { currentView, isLoading, checkListItems, currentIdx }: IChangePhaseDialogState): JSX.Element {
+    private _render({ onConfirmPhaseChange, phase }: IChangePhaseDialogProps, { currentView, isLoading, checkListItems, currentIdx }: IChangePhaseDialogState): JSX.Element {
         return (
             <Dialog
                 isOpen={true}
@@ -54,12 +57,12 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                     isBlocking: false,
                     className: "pp-changePhaseDialog",
                 }}
-                onDismiss={this._closeDialog}
+                onDismiss={this._onDismissDialog}
                 title={this._getDialogTitle()} >
                 <Body
                     currentView={currentView}
                     isLoading={isLoading}
-                    currentPhase={this.props.phase.Name}
+                    phase={phase}
                     checkListItems={checkListItems}
                     openCheckListItems={this.openCheckListItems}
                     currentIdx={currentIdx}
@@ -67,8 +70,8 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 <Footer
                     currentView={currentView}
                     isLoading={isLoading}
-                    confirmHandler={onConfirmPhaseChange}
-                    closeDialog={this._closeDialog}
+                    onConfirmPhaseChange={onConfirmPhaseChange}
+                    onCloseDialog={this._onDismissDialog}
                     changeView={this.changeView} />
             </Dialog>
         );
@@ -94,8 +97,9 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     /**
      * Go to next checkpoint
      *
-     * @param statusValue Status value
-     * @param commentsValue Comments value
+     * @param {string} statusValue Status value
+     * @param {string} commentsValue Comments value
+     * @param {boolean} updateStatus Should status be updated
      */
     private nextCheckPoint = (statusValue: string, commentsValue: string, updateStatus = true): void => {
         let {
@@ -137,7 +141,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     /**
      * Change view
      *
-     * @param view New view
+     * @param {View} view New view
      */
     private changeView = (view: View): void => {
         this.setState({ currentView: view });
@@ -145,8 +149,14 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
 
     /**
      * Close dialog handler
+     *
+     * @param {any} e Event
+     * @param {boolean} reload Should the page be reloaded
      */
-    private _closeDialog = (event) => {
-        this.props.hideHandler(event);
+    private _onDismissDialog = (e, reload = false) => {
+        this.props.hideHandler(e);
+        if (reload) {
+            document.location.href = document.location.href;
+        }
     }
 }

@@ -8,12 +8,17 @@ import EnsureLocationBasedMetadataDefaultsReceiver from "./EnsureLocationBasedMe
 /**
  * Change project phase
  *
- * @param newPhase New phase
+ * @param {any} newPhase New phase
+ * @param {boolean} useWaitDialog Should a wait dialog be used
  */
-const ChangeProjectPhase = (newPhase: { Name: string, Id: string }): Promise<any[]> => {
+const ChangeProjectPhase = (newPhase: any, useWaitDialog = true): Promise<any[]> => {
     let [Title, Message] = __("ProjectPhases_ChangingPhase").split(",");
-    const waitDlg = new Util.WaitDialog(Title, String.format(Message, newPhase.Name), 120, 600);
-    waitDlg.start(300);
+
+    let waitDlg = null;
+    if (useWaitDialog) {
+        waitDlg = new Util.WaitDialog(Title, String.format(Message, newPhase.Name), 120, 600);
+        waitDlg.start(300);
+    }
     return new Promise<any[]>((resolve, reject) => {
         UpdatePhaseWelcomePage(newPhase.Name, newPhase.Id, Config.PROJECTPHASE_FIELD).then(() => {
             Promise.all([

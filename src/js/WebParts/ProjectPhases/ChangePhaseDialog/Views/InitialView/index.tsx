@@ -1,16 +1,7 @@
 import * as React from "react";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import { IChecklistItem } from "../../Data";
-
-export interface IInitialViewProps {
-    isLoading: boolean;
-    currentChecklistItem: IChecklistItem;
-    nextCheckPointAction: (statusValue: string, commentsValue: string, updateStatus: boolean) => void;
-}
-
-export interface IInitialViewState {
-    comment: string;
-}
+import IInitialViewProps from "./IInitialViewProps";
+import IInitialViewState from "./IInitialViewState";
 
 /**
  * Initial view
@@ -21,25 +12,36 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
 
     /**
      * Constructor
+     *
+     * @param {IInitialViewProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: IInitialViewProps) {
+        super(props);
         this.state = {
             comment: "",
         };
     }
+    /**
+   * Calls _render with props and state
+   */
+    public render(): JSX.Element {
+        return this._render(this.props, this.state);
+    }
 
     /**
      * Renders the component
+     *
+     * @param {IInitialViewProps} param0 Props
+     * @param {IInitialViewState} param1 State
      */
-    public render(): JSX.Element {
-        if (!this.props.currentChecklistItem) {
+    public _render({ currentChecklistItem }: IInitialViewProps, { }: IInitialViewState): JSX.Element {
+        if (!currentChecklistItem) {
             return null;
         }
         const {
             ID,
             Title,
-         } = this.props.currentChecklistItem;
+         } = currentChecklistItem;
 
         return (
             <div className="inner">
@@ -61,8 +63,11 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
 
     /**
      * Status options
+     *
+     * @param {IInitialViewProps} param0 Props
+     * @param {IInitialViewState} param1 State
      */
-    private renderStatusOptions = ({ isLoading }: IInitialViewProps, { comment }: IInitialViewState) => {
+    private renderStatusOptions = ({ isLoading, nextCheckPointAction }: IInitialViewProps, { comment }: IInitialViewState) => {
         const options = [
             {
                 value: __("Choice_GtChecklistStatus_Closed"),
@@ -94,7 +99,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                         <PrimaryButton
                             disabled={opt.disabled}
                             onClick={() => {
-                                this.props.nextCheckPointAction(opt.value, comment, opt.updateStatus);
+                                nextCheckPointAction(opt.value, comment, opt.updateStatus);
                                 this.reset();
                             }}>{opt.value}</PrimaryButton>
                     </span>

@@ -1,10 +1,11 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
-import * as Data from "./Data";
+import IChecklistData from "./IChecklistData";
+import PhaseModel from "./PhaseModel";
 
 export default interface IProjectPhasesState extends IBaseWebPartState {
-    phases?: any[];
-    currentPhase?: any;
-    checkListData?: { [phase: string]: Data.IChecklistData };
-    changePhase?: { Id: string, Name: string };
+    phases?: PhaseModel[];
+    activePhase?: PhaseModel;
+    checkListData?: { [phase: string]: IChecklistData };
+    changePhase?: PhaseModel;
 }
 

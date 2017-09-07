@@ -3,12 +3,14 @@ import {
     View,
     InitialView,
     SummaryView,
+    ChangingPhaseView,
 } from "../Views";
+import IBodyProps from "./IBodyProps";
 
 /**
  * Body
  */
-export const Body = ({ currentPhase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }) => {
+export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }: IBodyProps) => {
     const DEFAULT = (
         <div className="inner"></div>
     );
@@ -25,8 +27,13 @@ export const Body = ({ currentPhase, checkListItems, openCheckListItems, current
         case View.Summary: {
             return (
                 <SummaryView
-                    currentPhase={currentPhase}
+                    phase={phase}
                     checkListItems={checkListItems} />
+            );
+        }
+        case View.ChangingPhase: {
+            return (
+                <ChangingPhaseView phase={phase} />
             );
         }
         default: {
