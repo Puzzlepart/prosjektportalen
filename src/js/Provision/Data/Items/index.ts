@@ -42,7 +42,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
             ParentID: srcItem.get_fieldValues()["ParentID"] ? parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10) : null,
         };
         __RECORDS.push(record);
-        Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: { record }, level: LogLevel.Info });
+        Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         resolve();
     }, (sender, args) => {
         reject({ sender, args });
