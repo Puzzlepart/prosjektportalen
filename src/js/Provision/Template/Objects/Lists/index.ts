@@ -195,7 +195,7 @@ const Lists: IList[] = [
         },
         {
             Title: __("View_ProductionPhase_DisplayName"),
-            ViewFields: ["LinkTitle", "", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
+            ViewFields: ["LinkTitle", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
             AdditionalSettings: {
                 RowLimit: 30,
                 Paged: true,
