@@ -29,7 +29,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
     const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
     fields.forEach(fieldName => {
         const fieldValue = srcItem.get_item(fieldName);
-        Logger.log({ message: `Setting value for field ${fieldName} to ${fieldValue}`, data: {}, level: LogLevel.Info });
+        Logger.log({ message: `Setting value for field ${fieldName}`, data: {}, level: LogLevel.Info });
         Util.setItemFieldValue(fieldName, destItem, fieldValue, dataCtx.Destination._, dataCtx.Destination.list);
     });
     destItem.update();
