@@ -2205,4 +2205,7 @@
   <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
     <value>Relevant links</value>
   </data>
+  <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
+    <value>Production Phase</value>
+  </data>
 </root>

@@ -2208,4 +2208,7 @@
   <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
     <value>Relevante koblinger</value>
   </data>
+  <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
+    <value>Leveransefase</value>
+  </data>
 </root>
