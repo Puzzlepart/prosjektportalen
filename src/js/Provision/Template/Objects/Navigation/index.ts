@@ -68,8 +68,8 @@ const Navigation: INavigation = {
             Title: __("Navigation_BenefitsOverview_Title"),
         },
         {
-            Url: __("DefaultView_ProjectProducts_Url"),
-            Title: __("Lists_ProjectProducts_Title"),
+            Url: __("DefaultView_ProjectDeliveries_Url"),
+            Title: __("Lists_ProjectDeliveries_Title"),
         },
         {
             Url: "SitePages/Nofilter.aspx",

@@ -170,7 +170,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_ProjectProducts_Title"),
+        Title: __("Lists_ProjectDeliveries_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,

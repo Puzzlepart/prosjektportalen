@@ -186,7 +186,7 @@
   <data name="Lists_ProjectLog_Title" xml:space="preserve">
     <value>Project Log</value>
   </data>
-  <data name="Lists_ProjectProducts_Title" xml:space="preserve">
+  <data name="Lists_ProjectDeliveries_Title" xml:space="preserve">
     <value>Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
@@ -273,7 +273,7 @@
   <data name="Lists_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log</value>
   </data>
-  <data name="Lists_ProjectProducts_Url" xml:space="preserve">
+  <data name="Lists_ProjectDeliveries_Url" xml:space="preserve">
     <value>Lists/Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Url" xml:space="preserve">
@@ -312,7 +312,7 @@
   <data name="DefaultView_CommunicationPlan_Url" xml:space="preserve">
     <value>Lists/Communication Plan/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_ProjectProducts_Url" xml:space="preserve">
+  <data name="DefaultView_ProjectDeliveries_Url" xml:space="preserve">
     <value>Lists/Project Deliveries/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
