@@ -23,7 +23,9 @@ const fetchPases = () => new Promise<PhaseModel[]>((resolve, reject) => {
             ctx.executeQueryAsync(() => {
                 const phases = terms.get_data().map(term => new PhaseModel(term));
                 resolve(phases);
-            }, reject);
+            }, (sender, args) => {
+                reject({ sender, args });
+            });
         });
     });
 });
