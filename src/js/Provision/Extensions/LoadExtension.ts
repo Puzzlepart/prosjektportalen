@@ -1,23 +1,27 @@
-import { sp, Logger, LogLevel } from "sp-pnp-js";
+import {
+    Site,
+    Logger,
+    LogLevel,
+} from "sp-pnp-js";
 import IExtension from "./IExtension";
 
 /**
  * Loads extension JSON
  *
- * @param file The extension file
+ * @param {IExtension} file The extension file
  */
-const LoadExtension = (extension: IExtension): Promise<IExtension> => new Promise<any>((resolve, reject) => {
-    sp.web
-        .getFileByServerRelativeUrl(extension.FileRef)
-        .getText()
-        .then(fileContents => {
+const LoadExtension = (extension: IExtension) => new Promise<IExtension>((resolve, reject) => {
+    const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+    const file = rootWeb.getFileByServerRelativeUrl(extension.FileRef);
+    file.getText()
+        .then(fileText => {
             let data = null;
             try {
-                data = JSON.parse(fileContents);
+                data = JSON.parse(fileText);
             } catch (e) {
                 Logger.log({
                     message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`,
-                    data: { Text: fileContents },
+                    data: { fileText },
                     level: LogLevel.Warning,
                 });
             }

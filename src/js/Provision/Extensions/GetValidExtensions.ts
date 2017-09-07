@@ -1,14 +1,16 @@
-import { sp } from "sp-pnp-js";
+import { Site } from "sp-pnp-js";
 import IExtension from "./IExtension";
 import LoadExtension from "./LoadExtension";
+
 /**
  * Get extensions
+ *
+ * @param {string} extensionLibTitle Extension library title
  */
-const GetValidExtensions = (extensionLib = __("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
-    sp.web
-        .lists
-        .getByTitle(extensionLib)
-        .items
+const GetValidExtensions = (extensionLibTitle = __("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
+    const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+    const extensionLib = rootWeb.lists.getByTitle(extensionLibTitle);
+    extensionLib.items
         .select("Title", "LinkFilename", "FileRef")
         .filter("ExtensionEnabled eq 1")
         .orderBy("ExtensionOrder")
@@ -19,9 +21,9 @@ const GetValidExtensions = (extensionLib = __("Lists_Extensions_Title")) => new 
                     const validExtensions = extensions.filter(ext => ext.data !== null);
                     resolve(validExtensions);
                 })
-                .catch(_ => resolve([]));
+                .catch(reject);
         })
-        .catch(_ => resolve([]));
+        .catch(reject);
 });
 
 export default GetValidExtensions;
