@@ -1005,6 +1005,12 @@
   <data name="SiteFields_GtValue_DisplayName" xml:space="preserve">
     <value>Verdi</value>
   </data>
+  <data name="SiteFields_GtProductStatus_DisplayName" xml:space="preserve">
+    <value>Leveransestatus</value>
+  </data>
+  <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
+    <value>Kommentar, leveransestatus</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1370,6 +1376,12 @@
   </data>
   <data name="SiteFields_GtValue_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtProductStatus_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStatusComment_Description" xml:space="preserve">
+    <value>Kommentar til leveransestatus angitt over</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
