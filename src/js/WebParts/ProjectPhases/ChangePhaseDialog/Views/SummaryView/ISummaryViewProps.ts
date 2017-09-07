@@ -1,4 +1,5 @@
-import PhaseModel from "../../../PhaseModel";
+
+import { PhaseModel } from "../../../../../Model";
 import IChecklistItem from "../../../IChecklistItem";
 
 export default interface ISummaryViewProps {

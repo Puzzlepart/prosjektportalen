@@ -11,7 +11,7 @@ import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import * as Data from "./Data";
-import PhaseModel from "./PhaseModel";
+import { PhaseModel } from "../../Model";
 import IProjectPhasesProps from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 import BaseWebPart from "../@BaseWebPart";

@@ -1,5 +1,5 @@
 import IChecklistItem from "../IChecklistItem";
-import PhaseModel from "../PhaseModel";
+import { PhaseModel } from "../../../Model";
 
 export default interface IChangePhaseDialogProps {
     phase: PhaseModel;

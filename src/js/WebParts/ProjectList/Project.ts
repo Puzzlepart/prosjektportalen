@@ -1,4 +1,12 @@
-export class Project {
+import * as Util from "../../Util";
+
+interface IUserDetails {
+    Name: string;
+    EMail: string;
+    Photo: string;
+}
+
+export default class Project {
     public Title: string;
     public Url: string;
     public Logo: string;
@@ -9,6 +17,9 @@ export class Project {
     public Owner: string;
     public Views: number;
 
+    /**
+     * Constructor
+     */
     constructor({ Title, Path, SiteLogo, RefinableString52, RefinableString53, RefinableString54, GtProjectManagerOWSUSER, GtProjectOwnerOWSUSER, ViewsLifeTime }) {
         this.Title = Title;
         this.Url = Path;
@@ -21,6 +32,27 @@ export class Project {
         this.Views = ViewsLifeTime;
     }
 
+    /**
+    * Get manager (GtProjectManagerOWSUSER) details
+    */
+    public getManagerDetails(): IUserDetails {
+        const [EMail = "", Name = __("String_NotSet")] = this.Manager.split(" | ");
+        const Photo = Util.userPhoto(EMail);
+        return { Name, EMail, Photo };
+    }
+
+    /**
+     * Get owner (GtProjectOwnerOWSUSER) details
+     */
+    public getOwnerDetails(): IUserDetails {
+        const [EMail = "", Name = __("String_NotSet")] = this.Owner.split(" | ");
+        const Photo = Util.userPhoto(EMail);
+        return { Name, EMail, Photo };
+    }
+
+    /**
+     * Get phase letter
+     */
     public getPhaseLetter(): string {
         if (this.Phase) {
             return this.Phase.substring(0, 1).toUpperCase();
@@ -28,6 +60,3 @@ export class Project {
         return null;
     }
 }
-
-
-export default Project;

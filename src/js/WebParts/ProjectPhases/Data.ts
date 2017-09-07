@@ -4,7 +4,7 @@ import {
     GetCurrentProjectPhase,
     PROJECTPHASE_FIELD,
 } from "../../Project/";
-import PhaseModel from "./PhaseModel";
+import { PhaseModel } from "../../Model";
 import IChecklistData from "./IChecklistData";
 
 /**

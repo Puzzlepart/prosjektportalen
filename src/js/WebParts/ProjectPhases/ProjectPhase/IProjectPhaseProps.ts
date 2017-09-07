@@ -1,4 +1,4 @@
-import PhaseModel from "../PhaseModel";
+import { PhaseModel } from "../../../Model";
 import IChecklistData from "../IChecklistData";
 
 export default interface IProjectPhaseProps {
