@@ -41,7 +41,7 @@ let Template: Schema = {
  * @param {Object} propBag Property bag values
  * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const Apply = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+export const ApplyJsTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
     Template.WebSettings.AlternateCssUrl = `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
     Template.WebSettings.SiteLogoUrl = `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
     Template.PropertyBagEntries = [{
