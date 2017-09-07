@@ -12,14 +12,30 @@ import IProgressCallback from "../IProgressCallback";
  * @param {ListConfig} conf List configuration
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback): Promise<any> => new Promise<any>((resolve, reject) => {
+const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback) => new Promise<any>((resolve, reject) => {
     Util.ensureTaxonomy().then(() => {
         if (conf.DestinationLibrary) {
+            Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
             CopyFiles(conf, destUrl, onUpdateProgress)
-                .then(resolve, resolve);
+                .then(() => {
+                    Logger.log({ message: "Copy of files done.", data: { conf }, level: LogLevel.Info });
+                    resolve();
+                })
+                .catch(reason => {
+                    Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+                    reject();
+                });
         } else {
+            Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
             CopyItems(conf, destUrl, onUpdateProgress)
-                .then(resolve, resolve);
+                .then(() => {
+                    Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+                    resolve();
+                })
+                .catch(reason => {
+                    Logger.log({ message: "Copy of list items failed.", data: { conf, reason }, level: LogLevel.Info });
+                    reject();
+                });
         }
     });
 });
@@ -32,15 +48,18 @@ const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCall
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
 export const CopyListContents = (destUrl: string, contentToInclude: string[], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
-    Logger.write(`Starting copy of list contents and documents.`, LogLevel.Info);
-    RetrieveConfig().then(config => {
+    Logger.log({ message: "Starting copy of list contents and documents.", data: { contentToInclude }, level: LogLevel.Info });
+    RetrieveConfig().then(listContentConfig => {
+        Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
         contentToInclude
-            .filter(key => Array.contains(contentToInclude, key) && config.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(destUrl, config[key], onUpdateProgress)), Promise.resolve()).then(() => {
-                Logger.write(`Copy of list contents and documents done.`, LogLevel.Info);
+            .filter(key => Array.contains(contentToInclude, key) && listContentConfig.hasOwnProperty(key))
+            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve())
+            .then(() => {
+                Logger.write("Copy of list contents and documents done.", LogLevel.Info);
                 resolve();
-            }, reason => {
-                Logger.write(`Copy of list contents and documents done with errors.`, LogLevel.Info);
+            })
+            .catch(reason => {
+                Logger.log({ message: "Copy of list contents and documents done with errors.", data: reason, level: LogLevel.Info });
                 resolve();
             });
     });

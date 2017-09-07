@@ -18,7 +18,7 @@ export default class ListConfig {
         this.SourceList = item[`${fieldPrefix}SourceList`];
         this.DestinationList = item[`${fieldPrefix}DestinationList`];
         this.DestinationLibrary = item[`${fieldPrefix}DestinationLibrary`];
-        this.Fields = item[`${fieldPrefix}Fields`].split(";");
+        this.Fields = item[`${fieldPrefix}Fields`].split(",");
         this.Label = item[`${fieldPrefix}Label`];
         this.Default = item[`${fieldPrefix}Default`];
     }

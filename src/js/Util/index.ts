@@ -233,11 +233,11 @@ export const encodeSpaces = (str: string): string => {
 /**
  * Sets item field value (supports text/choice, number and taxonomy)
  *
- * @param fieldName Field name
- * @param item SP list item
- * @param fieldValue Field value
- * @param ctx Client context
- * @param list SP list
+ * @param {string} fieldName Field name
+ * @param {SP.ListItem} item SP list item
+ * @param {any} fieldValue Field value
+ * @param {SP.ClientContext} ctx Client context
+ * @param {SP.List} list SP list
  */
 export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void => {
     if (fieldValue === null) {
