@@ -15,6 +15,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Project Status
  */
 export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IProjectStatusState> {
+    public static displayName = "ProjectStatus";
     public static defaultProps = ProjectStatusDefaultProps;
 
     /**

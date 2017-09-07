@@ -14,21 +14,21 @@ import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
 /**
- * Maps container ids to JSX.Elements (WebParts)
+ * An array containing WebPartComponents
  */
 const WebPartComponents: WebPartComponent[] = [
-    new WebPartComponent("ProjectList", "pp-projectlist", <ProjectList />),
-    new WebPartComponent("ProjectInfo", "pp-projectinfo", <ProjectInfo filterField="GtPcFrontpage" />),
-    new WebPartComponent("ProjectPhases", "pp-projectphases", <ProjectPhases />),
-    new WebPartComponent("NewProjectLink", "pp-newprojectlink", <NewProjectLink />),
-    new WebPartComponent("Announcements", "pp-announcements", <Announcements />),
-    new WebPartComponent("LatestProjects", "pp-latestprojects", <LatestProjects itemsCount={8} reloadInterval={360} />),
-    new WebPartComponent("QuickLinks", "pp-quicklinks", <QuickLinks />),
-    new WebPartComponent("DynamicPortfolio", "pp-dynamicportfolio", <DynamicPortfolio />),
-    new WebPartComponent("BenefitsOverview", "pp-benefitsoverview", <BenefitsOverview />),
-    new WebPartComponent("BenefitsOverview", "pp-benefitsoverview-search", <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />),
-    new WebPartComponent("ProjectStatus", "pp-projectstatus", <ProjectStatus />),
-    new WebPartComponent("ExperienceLog", "pp-experiencelog", <ExperienceLog />),
+    new WebPartComponent(ProjectList.displayName, "pp-projectlist", <ProjectList />),
+    new WebPartComponent(ProjectInfo.displayName, "pp-projectinfo", <ProjectInfo filterField="GtPcFrontpage" />),
+    new WebPartComponent(ProjectPhases.displayName, "pp-projectphases", <ProjectPhases />),
+    new WebPartComponent(NewProjectLink.displayName, "pp-newprojectlink", <NewProjectLink />),
+    new WebPartComponent(Announcements.displayName, "pp-announcements", <Announcements />),
+    new WebPartComponent(LatestProjects.displayName, "pp-latestprojects", <LatestProjects itemsCount={8} reloadInterval={360} />),
+    new WebPartComponent(QuickLinks.displayName, "pp-quicklinks", <QuickLinks />),
+    new WebPartComponent(DynamicPortfolio.displayName, "pp-dynamicportfolio", <DynamicPortfolio />),
+    new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview", <BenefitsOverview />),
+    new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview-search", <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />),
+    new WebPartComponent(ProjectStatus.displayName, "pp-projectstatus", <ProjectStatus />),
+    new WebPartComponent(ExperienceLog.displayName, "pp-experiencelog", <ExperienceLog />),
 ];
 
 /**

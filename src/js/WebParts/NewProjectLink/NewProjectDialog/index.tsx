@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as uuid_v1 from "uuid/v1";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
@@ -13,7 +12,8 @@ import {
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Util from "../../../Util";
-import INewProjectDialogProps from "./INewProjectDialogProps";
+import { IProjectModel } from "../../../Model";
+import INewProjectDialogProps, { NewProjectDialogDefaultProps } from "./INewProjectDialogProps";
 import INewProjectDialogState from "./INewProjectDialogState";
 import CreationModal from "./CreationModal";
 
@@ -21,24 +21,20 @@ import CreationModal from "./CreationModal";
  * New Project dialog
  */
 export default class NewProjectDialog extends React.Component<INewProjectDialogProps, INewProjectDialogState> {
-    public static defaultProps: Partial<INewProjectDialogProps> = {
-        titleMinLength: 4,
-        advancedSectionClassName: "advanced",
-    };
-
+    public static displayName = "NewProjectDialog";
+    public static defaultProps = NewProjectDialogDefaultProps;
     private doesWebExistTimer;
     private doesWebExistTimerDelay = 250;
-    private suggestedWebUrlCutOffLength = 16;
 
     /**
      * Constructor
+     *
+     * @param {INewProjectDialogProps} props Props
      */
     constructor(props: INewProjectDialogProps) {
         super(props);
         this.state = {
-            showAdvancedSettings: false,
-            formValid: false,
-            listDataConfig: null,
+            errorMessages: {},
             urlInputEnabled: true,
             model: {
                 Title: "",
@@ -46,8 +42,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Url: "",
                 InheritPermissions: false,
             },
-            errorMessages: {},
-            showCreationModal: false,
             provisioning: {
                 isCreating: false,
                 step: "",
@@ -69,71 +63,52 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 },
             }));
         });
-        if (this.props.autoGenerate) {
-            let title = uuid_v1();
-            this._onSubmit({
-                Title: title,
-                Url: title,
-                Description: "",
-                InheritPermissions: false,
-                IncludeContent: [],
-            });
-        }
     }
 
     /**
-     * Component did mount
+     * Calls _render with props and state
      */
-    public componentDidUpdate(prevProps: INewProjectDialogProps): void {
-        if (this.props.autoGenerate !== prevProps.autoGenerate && this.props.autoGenerate) {
-            let title = uuid_v1();
-            this.setState({
-                model: {
-                    Title: title,
-                    Url: title,
-                    Description: "",
-                    InheritPermissions: false,
-                },
-            }, () => {
-                this._onSubmit(this.state.model);
-            });
-        }
+    public render(): JSX.Element {
+        return this._render(this.props, this.state);
     }
 
     /**
      * Renders the component
+     *
+     * @param {INewProjectDialogProps} param0 Props
+     * @param {INewProjectDialogState} param1 State
      */
-    public render(): JSX.Element {
-        if (this.state.showCreationModal) {
-            if (this.state.provisioning.error) {
+    public _render({ dialogProps }: INewProjectDialogProps, { showCreationModal, model, provisioning }: INewProjectDialogState): JSX.Element {
+        if (showCreationModal) {
+            if (provisioning.error) {
                 return null;
             }
             return (
                 <CreationModal
-                    title={String.format(__("CreationModal_Title"), this.state.model.Title)}
+                    title={String.format(__("CreationModal_Title"), model.Title)}
                     isBlocking={true}
                     isDarkOverlay={true}
-                    progressLabel={this.state.provisioning.step}
-                    progressDescription={this.state.provisioning.progress} />
+                    progressLabel={provisioning.step}
+                    progressDescription={provisioning.progress} />
             );
         }
         return (
             <Dialog
-                hidden={!this.props.dialogProps.isOpen}
+                hidden={!dialogProps.isOpen}
                 dialogContentProps={{
-                    type: this.props.dialogProps.type,
-                    subText: this.props.dialogProps.subText,
+                    type: dialogProps.type,
+                    subText: dialogProps.subText,
                 }}
                 modalProps={{
-                    className: this.props.dialogProps.className,
-                    isDarkOverlay: this.props.dialogProps.isDarkOverlay,
-                    isBlocking: this.props.dialogProps.isBlocking,
+                    className: dialogProps.className,
+                    isDarkOverlay: dialogProps.isDarkOverlay,
+                    isBlocking: dialogProps.isBlocking,
                 }}
-                title={this.props.dialogProps.title}
-                onDismiss={this.props.dialogProps.onDismiss}>
-                {this.renderForm(this.state)}
-                {this.renderAdvancedSection(this.state)}
-                {this.renderFooter()}
+                title={dialogProps.title}
+                onDismiss={dialogProps.onDismiss}>
+                {this.renderForm(this.props, this.state)}
+                {this.renderAdvancedSection(this.props, this.state)}
+                {this.renderFooter(this.props, this.state)}
             </Dialog >
         );
     }
@@ -141,11 +116,13 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * Render form
      *
+     * @param {INewProjectDialogProps} param0 Props
+     * @param {INewProjectDialogState} param1 State
      * @param titlePlaceHolder Placeholder for title field
      * @param descPlaceholder Placeholder for description field
      * @param urlPlaceholder Placeholder for url field
      */
-    private renderForm = ({ model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
+    private renderForm = ({ }: INewProjectDialogProps, { model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
         return (
             <div>
                 <TextField
@@ -171,19 +148,22 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
     /**
      * Render advanced section
+     *
+     * @param {INewProjectDialogProps} param0 Props
+     * @param {INewProjectDialogState} param1 State
      */
-    private renderAdvancedSection = ({ showAdvancedSettings, listDataConfig }: INewProjectDialogState) => {
+    private renderAdvancedSection = ({ advancedSectionClassName }: INewProjectDialogProps, { showAdvancedSettings, listDataConfig }: INewProjectDialogState) => {
         return (
             <div>
                 <Toggle
-                    defaultChecked={this.state.showAdvancedSettings}
+                    defaultChecked={showAdvancedSettings}
                     label={__("NewProjectForm_ShowAdvancedSettings")}
                     onText={__("String_Yes")}
                     offText={__("String_No")}
                     onChanged={this.toggleAdvancedSettings} />
                 {(showAdvancedSettings && listDataConfig) && (
                     <section
-                        className={this.props.advancedSectionClassName}>
+                        className={advancedSectionClassName}>
                         {Object.keys(listDataConfig).map(key => (
                             <Toggle
                                 key={key}
@@ -201,14 +181,17 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
     /**
      * Render footer
+     *
+     * @param {INewProjectDialogProps} param0 Props
+     * @param {INewProjectDialogState} param1 State
      */
-    private renderFooter = () => {
+    private renderFooter = ({ dialogProps }: INewProjectDialogProps, { }: INewProjectDialogState) => {
         return (
             <DialogFooter>
                 <PrimaryButton
                     onClick={this.onSubmit}
                     disabled={!this.state.formValid}>{__("String_Create")}</PrimaryButton>
-                <DefaultButton onClick={() => this.props.dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
+                <DefaultButton onClick={() => dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
             </DialogFooter>
         );
     }
@@ -222,6 +205,9 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
     /**
      * Toggle content
+     *
+     * @param {string} key Key
+     * @param {boolean} checked Is checked
      */
     private toggleContent = (key: string, checked: boolean): void => {
         this.setState(prevState => {
@@ -243,8 +229,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     /**
      * On form change
      *
-     * @param input Input (key) that was changed
-     * @param newTitleValue New Title value
+     * @param {string} input Input (key) that was changed
+     * @param {string} newTitleValue New Title value
      */
     private onFormChange = (input: string, newValue: string): void => {
         const {
@@ -254,7 +240,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
         switch (input) {
             case "Title": {
-                const url = Util.generateUrl(newValue, this.suggestedWebUrlCutOffLength);
+                const url = Util.generateUrl(newValue, this.props.maxUrlLength);
                 if (this.doesWebExistTimer) {
                     window.clearTimeout(this.doesWebExistTimer);
                 }
@@ -323,7 +309,12 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         this._onSubmit(this.state.model);
     }
 
-    private _onSubmit = (model): void => {
+    /**
+     * Submits a project model
+     *
+     * @param {IProjectModel} model Project model
+     */
+    private _onSubmit = (model: IProjectModel): void => {
         this.setState({
             showCreationModal: true,
             provisioning: {

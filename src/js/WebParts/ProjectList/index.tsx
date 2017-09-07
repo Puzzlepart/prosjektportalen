@@ -19,6 +19,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Project information
  */
 export default class ProjectList extends BaseWebPart<IProjectListProps, IProjectListState> {
+    public static displayName = "ProjectList";
     public static defaultProps: Partial<IProjectListProps> = {
         tileWidth: 206,
         tileImageHeight: 140,

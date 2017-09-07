@@ -12,6 +12,7 @@ import BaseWebPart from "../@BaseWebPart";
  * New Project link
  */
 export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, INewProjectLinkState> {
+    public static displayName = "NewProjectLink";
     public static defaultProps = NewProjectLinkDefaultProps;
 
     /**
@@ -67,18 +68,20 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
                         <span>{__("NewProjectForm_Header")}</span>
                     </a>
                 </div>
-                {this.renderDialog(this.state)}
+                {this.renderDialog(this.props, this.state)}
             </div>
         );
     }
 
     /**
      * Renders the dialog
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ showDialog, autoGenerate }: INewProjectLinkState) => {
+    private renderDialog = ({ }: INewProjectLinkProps, { showDialog, autoGenerate }: INewProjectLinkState) => {
         return (
             <NewProjectDialog
-                autoGenerate={autoGenerate}
                 dialogProps={{
                     isOpen: showDialog,
                     type: DialogType.largeHeader,

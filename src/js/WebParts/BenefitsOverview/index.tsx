@@ -23,6 +23,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Benefits Overview
  */
 export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps, IBenefitsOverviewState> {
+    public static displayName = "BenefitsOverview";
     public static defaultProps = BenefitsOverviewDefaultProps;
 
     /**

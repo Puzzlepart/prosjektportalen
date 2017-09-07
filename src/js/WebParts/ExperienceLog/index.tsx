@@ -19,6 +19,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Experience Log
  */
 export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExperienceLogState> {
+    public static displayName = "ExperienceLog";
     public static defaultProps = ExperienceLogDefaultProps;
 
     /**

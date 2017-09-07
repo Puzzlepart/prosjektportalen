@@ -37,6 +37,7 @@ import BaseWebPart from "../@BaseWebPart";
  * Dynamic Portfolio
  */
 export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps, IDynamicPortfolioState> {
+    public static displayName = "DynamicPortfolio";
     public static defaultProps = DynamicPortfolioDefaultProps;
     private configuration: Configuration.IConfiguration = null;
 
