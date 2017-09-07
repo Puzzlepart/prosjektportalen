@@ -43,14 +43,15 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(updatedState => {
+        this.fetchData().then(data => {
             this.setState({
-                ...updatedState,
+                ...data,
                 isLoading: false,
             });
-        }).catch(_ => {
+        }).catch(error => {
             this.setState({
                 isLoading: false,
+                error,
             });
         });
     }
@@ -204,10 +205,11 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     /**
      * Fetch data. Config, fields and project frontpage data.
      *
-     * @param configList Configuration list
+     * @param {string} configList Configuration list
      */
     private fetchData = (configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
         const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
+
         const configPromise = rootWeb
             .lists
             .getByTitle(configList)
@@ -230,42 +232,44 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .fieldValuesAsHTML
             .get();
 
-        Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
-            let itemFieldNames = Object.keys(item);
-            const properties = itemFieldNames
-                .filter(fieldName => {
-                    /**
-                     * Checking if the field exist
-                     */
-                    const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
-                    if (!field) {
-                        return false;
-                    }
+        Promise.all([configPromise, fieldsPromise, itemPromise])
+            .then(([config, fields, item]) => {
+                let itemFieldNames = Object.keys(item);
+                const properties = itemFieldNames
+                    .filter(fieldName => {
+                        /**
+                         * Checking if the field exist
+                         */
+                        const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                        if (!field) {
+                            return false;
+                        }
 
-                    /**
-                     * Checking configuration
-                     */
-                    const [configItem] = config.filter(c => c.Title === field.Title);
-                    if (!configItem) {
-                        return false;
-                    }
-                    const shouldBeShown = configItem[this.props.filterField] === true;
+                        /**
+                         * Checking configuration
+                         */
+                        const [configItem] = config.filter(c => c.Title === field.Title);
+                        if (!configItem) {
+                            return false;
+                        }
+                        const shouldBeShown = configItem[this.props.filterField] === true;
 
-                    /**
-                     * Checking if the value is a string
-                     */
-                    const valueIsString = typeof item[fieldName] === "string";
-                    return (valueIsString && shouldBeShown);
-                })
-                .map(fieldName => ({
-                    field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
-                    value: item[fieldName],
-                }))
-                .map(({ field, value }) => new ProjectPropertyModel(field, value));
-            resolve({
-                properties: properties,
-            });
-        }, reject);
+                        /**
+                         * Checking if the value is a string
+                         */
+                        const valueIsString = typeof item[fieldName] === "string";
+                        return (valueIsString && shouldBeShown);
+                    })
+                    .map(fieldName => ({
+                        field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                        value: item[fieldName],
+                    }))
+                    .map(({ field, value }) => new ProjectPropertyModel(field, value));
+                resolve({
+                    properties: properties,
+                });
+            })
+            .catch(reject);
     })
 }
 
