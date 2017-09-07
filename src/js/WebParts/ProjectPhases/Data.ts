@@ -1,18 +1,19 @@
 import { sp } from "sp-pnp-js";
 import * as Util from "../../Util";
-import { GetCurrentProjectPhase } from "../../Project/";
+import {
+    GetCurrentProjectPhase,
+    PROJECTPHASE_FIELD,
+} from "../../Project/";
 import PhaseModel from "./PhaseModel";
 import IChecklistData from "./IChecklistData";
 
 /**
- * Fetch phase
- *
- * @param {string} phaseFieldInternalName Internal name of phase field
+ * Fetch phases from the term set associated with PROJECTPHASE_FIELD
  */
-const fetchPases = (phaseFieldInternalName = "GtProjectPhase") => new Promise<PhaseModel[]>((resolve, reject) => {
+const fetchPases = () => new Promise<PhaseModel[]>((resolve, reject) => {
     Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
         const rootWeb = sp.site.rootWeb;
-        const phaseField = rootWeb.fields.getByInternalNameOrTitle(phaseFieldInternalName);
+        const phaseField = rootWeb.fields.getByInternalNameOrTitle(PROJECTPHASE_FIELD);
         phaseField.select("TermSetId").get().then(({ TermSetId }) => {
             let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(ctx),
                 termStore = taxSession.getDefaultSiteCollectionTermStore(),
