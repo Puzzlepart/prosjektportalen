@@ -1608,6 +1608,9 @@
   <data name="String_Project" xml:space="preserve">
     <value>Project</value>
   </data>
+  <data name="String_AchievementOfObjectives" xml:space="preserve">
+    <value>Achievement of objectives</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2165,6 +2168,9 @@
   </data>
   <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
     <value>Previous measurement</value>
+  </data>
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
+    <value>Show all measurements</value>
   </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
