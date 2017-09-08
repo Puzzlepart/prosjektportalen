@@ -44,6 +44,9 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
         if (!shouldRender) {
             return null;
         }
+        if (!icon.hasOwnProperty("position")) {
+            icon.position = ModalLinkIconPosition.Left;
+        }
         return (
             <a
                 href={url}

@@ -1,4 +1,4 @@
-interface IModalLinkOptions {
+export default interface IModalLinkOptions {
     HideWebPartMaintenancePageLink?: boolean;
     HideContentTypeChoice?: boolean;
     HideFormFields?: string;
@@ -7,4 +7,3 @@ interface IModalLinkOptions {
     HideRibbon?: boolean;
 }
 
-export default IModalLinkOptions;
