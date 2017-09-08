@@ -1611,6 +1611,9 @@
   <data name="String_Project" xml:space="preserve">
     <value>Prosjekt</value>
   </data>
+  <data name="String_AchievementOfObjectives" xml:space="preserve">
+    <value>Måloppnåelse</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2171,6 +2174,9 @@
   </data>
   <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
     <value>Forrige måling</value>
+  </data>
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
+    <value>Vis alle målinger</value>
   </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Gevinst</value>
