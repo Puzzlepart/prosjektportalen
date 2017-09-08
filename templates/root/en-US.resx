@@ -2169,6 +2169,9 @@
   <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
     <value>Previous measurement</value>
   </data>
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
+    <value>Show all measurements</value>
+  </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
   </data>
