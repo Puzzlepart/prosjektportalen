@@ -9,7 +9,7 @@ export default interface IBenefitsOverviewState extends IBaseWebPartState {
     data?: IBenefitsOverviewData;
     searchTerm: string;
     groupBy: IGroupByOption;
-    showProjectInfo?: any;
+    showProjectInfo?: BenefitEntry;
     showMeasurements?: BenefitEntry;
 }
 

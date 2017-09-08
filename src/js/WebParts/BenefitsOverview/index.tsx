@@ -159,7 +159,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.SPWebUrl}
+                    webUrl={showProjectInfo.WebUrl}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -168,7 +168,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     valueSize="m"
                     renderMode={ProjectInfoRenderMode.Modal}
                     modalOptions={{
-                        isOpen: this.state.showProjectInfo,
+                        isOpen: true,
                         isDarkOverlay: true,
                         isBlocking: false,
                         onDismiss: e => this.setState({ showProjectInfo: null }),

@@ -221,7 +221,11 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
             return (
                 <a
                     href={item.DisplayFormUrl}
-                    onClick={onSiteTitleClick}>{Title}</a>
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onSiteTitleClick(e);
+                    }}>{Title}</a>
             );
         }
         case "PreviousPercentage": {
@@ -286,7 +290,13 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
         case "AllMeasurements": {
             if (item.Measurements.length > 0) {
                 return (
-                    <a href="#" onClick={e => showAllMeasurements(item)}>{__("BenefitsOverview_AllMeasurements")}</a>
+                    <a
+                        href="#"
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showAllMeasurements(item);
+                        }}>{__("BenefitsOverview_AllMeasurements")}</a>
                 );
             }
             return null;
