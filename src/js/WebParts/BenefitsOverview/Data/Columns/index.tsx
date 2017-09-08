@@ -1,9 +1,9 @@
 import * as React from "react";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { ModalLink } from "../../../WebParts/@Components";
-import DataSource from "../../DataSource";
-import BenefitEntry from "../Data/BenefitEntry";
+import { ModalLink } from "../../../@Components";
+import DataSource from "../../../DataSource";
+import BenefitEntry from "../BenefitEntry";
 
 const Columns = (): any[] => {
     return [{

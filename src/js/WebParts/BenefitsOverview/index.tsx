@@ -15,7 +15,7 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import { _onRenderItemColumn } from "./Columns";
+import { _onRenderItemColumn } from "./Data/Columns";
 import * as Data from "./Data";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";

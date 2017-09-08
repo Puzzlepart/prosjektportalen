@@ -1,6 +1,6 @@
 import { sp } from "sp-pnp-js";
 import * as Util from "../../../Util";
-import { GenerateColumns } from "../Columns";
+import { GenerateColumns } from "./Columns";
 import DataSource from "../../DataSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
 import MeasurementEntry from "./MeasurementEntry";
@@ -73,11 +73,11 @@ const SearchSettings = {
 /**
  * Fetches fields for a web, list or content type
  *
- * @param {any} obj List or content type
+ * @param {any} spObject List or content type
  * @param {string} fieldPrefix Field prefix
  */
-const fetchFieldsAsMap = (obj: any, fieldPrefix = "Gt") => new Promise<{ [key: string]: string }>((resolve, reject) => {
-    obj
+const fetchFieldsAsMap = (spObject: any, fieldPrefix = "Gt") => new Promise<{ [key: string]: string }>((resolve, reject) => {
+    spObject
         .fields
         .filter(`substringof('${fieldPrefix}', InternalName) eq true`)
         .get()
