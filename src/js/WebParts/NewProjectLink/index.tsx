@@ -22,7 +22,6 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      */
     constructor(props: INewProjectLinkProps) {
         super(props, {
-            showDialog: false,
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
         });
     }
@@ -53,22 +52,34 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
+    private _render({ }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
         if (!shouldRender) {
             return null;
         }
         return (
             <div>
-                <div>
-                    <a
-                        className={linkClassName}
-                        href="#"
-                        onClick={e => this.setState({ showDialog: true })}>
-                        <Icon { ...iconProps } />
-                        <span>{__("NewProjectForm_Header")}</span>
-                    </a>
-                </div>
+                {this.renderLink(this.props, this.state)}
                 {this.renderDialog(this.props, this.state)}
+            </div>
+        );
+    }
+
+    /**
+     * Renders the link
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
+     */
+    private renderLink = ({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) => {
+        return (
+            <div>
+                <a
+                    className={linkClassName}
+                    href="#"
+                    onClick={e => this.setState({ showDialog: true })}>
+                    <Icon { ...iconProps } />
+                    <span>{__("NewProjectForm_Header")}</span>
+                </a>
             </div>
         );
     }
@@ -79,7 +90,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ }: INewProjectLinkProps, { showDialog, autoGenerate }: INewProjectLinkState) => {
+    private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
         return (
             <NewProjectDialog
                 dialogProps={{
