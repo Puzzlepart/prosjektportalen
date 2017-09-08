@@ -6,7 +6,6 @@ import {
     Navigation,
     WebSettings,
     ComposedLook,
-    PropertyBagEntries,
 } from "./Objects";
 import IProgressCallback from "../IProgressCallback";
 
@@ -28,7 +27,6 @@ let Template: Schema = {
     Navigation,
     WebSettings,
     ComposedLook,
-    PropertyBagEntries,
     Features: [{
         id: "87294c72-f260-42f3-a41b-981a2ffce37a",
         deactivate: true,
@@ -39,14 +37,20 @@ let Template: Schema = {
 /**
  * Applies the template to the specified web
  *
- * @param web The web
- * @param assetsUrl Assets URL
- * @param progressCallback Callback function for progress
+ * @param {any} web The web
+ * @param {Object} propBag Property bag values
+ * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const Apply = (web, assetsUrl: string, onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
-    Template.WebSettings.AlternateCssUrl = `${assetsUrl}/siteassets/pp/css/pp.main.css`;
-    Template.WebSettings.SiteLogoUrl = `${assetsUrl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
-    new WebProvisioner(web).applyTemplate(Template, msg => onProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+export const ApplyJsTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    Template.WebSettings.AlternateCssUrl = `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
+    Template.WebSettings.SiteLogoUrl = `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
+    Template.PropertyBagEntries = [{
+        Key: "pp_version",
+        Value: propBag.pp_version,
+        Overwrite: true,
+        Indexed: true,
+    }];
+    new WebProvisioner(web).applyTemplate(Template, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
         .then(resolve)
         .catch(reject);
 });

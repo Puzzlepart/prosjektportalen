@@ -3,8 +3,10 @@ import * as Config from "./Config";
 
 /**
  * Ensures LocationBasedMetadataDefaultsReceiver
+ *
+ * @param {string} type Type (default to ItemAdded)
  */
-const EnsureLocationBasedMetadataDefaultsReceiver = (type: string): Promise<any> => new Promise<any>((resolve, reject) => {
+const EnsureLocationBasedMetadataDefaultsReceiver = (type = "ItemAdded"): Promise<any> => new Promise<any>((resolve, reject) => {
     const recName = `LocationBasedMetadataDefaultsReceiver ${type}`,
         ctx = SP.ClientContext.get_current(),
         eventReceivers = ctx.get_web().get_lists().getByTitle(Config.DOCUMENT_LIBRARY).get_eventReceivers();
@@ -22,10 +24,10 @@ const EnsureLocationBasedMetadataDefaultsReceiver = (type: string): Promise<any>
             eventReceivers.add(eventRecCreationInfo);
         }
         if (ctx.get_hasPendingRequest()) {
-            Logger.log({ message: `ChangeProjectPhase: Event receiver ensured`, data: recName, level: LogLevel.Info });
+            Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
             ctx.executeQueryAsync(resolve, reject);
         } else {
-            Logger.log({ message: `ChangeProjectPhase: Event receiver already ensured`, data: recName, level: LogLevel.Info });
+            Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} already ensured`, data: {}, level: LogLevel.Info });
             resolve();
         }
     }, reject);

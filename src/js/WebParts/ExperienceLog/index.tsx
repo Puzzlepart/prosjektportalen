@@ -12,20 +12,26 @@ import { ModalLink } from "../../WebParts/@Components";
 import * as Search from "./Search";
 import LogElement from "./LogElement";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
-import IExperienceLogState, { ExperienceLogInitialState } from "./IExperienceLogState";
+import IExperienceLogState from "./IExperienceLogState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Experience Log
  */
-export default class ExperienceLog extends React.PureComponent<IExperienceLogProps, IExperienceLogState> {
+export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExperienceLogState> {
+    public static displayName = "ExperienceLog";
     public static defaultProps = ExperienceLogDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IExperienceLogProps} props Props
      */
-    constructor() {
-        super();
-        this.state = ExperienceLogInitialState;
+    constructor(props: IExperienceLogProps) {
+        super(props, {
+            isLoading: true,
+            searchTerm: "",
+        });
     }
 
     /**

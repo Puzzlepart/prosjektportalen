@@ -1,4 +1,5 @@
 import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import { IBaseWebPartState } from "../@BaseWebPart";
 import IFilter from "./FilterPanel/Filter/IFilter";
 import { IViewConfig, IColumnConfig } from "./Configuration";
 
@@ -7,8 +8,7 @@ export interface IDynamicPortfolioErrorMessage {
     type: MessageBarType;
 }
 
-interface IDynamicPortfolioState {
-    isLoading?: boolean;
+export default interface IDynamicPortfolioState extends IBaseWebPartState {
     items?: any[];
     filteredItems?: any[];
     selectedColumns?: any[];
@@ -23,12 +23,3 @@ interface IDynamicPortfolioState {
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
 }
-
-export const DynamicPortfolioInitialState: Partial<IDynamicPortfolioState> = {
-    isLoading: true,
-    searchTerm: "",
-    currentFilters: {},
-    showFilterPanel: false,
-};
-
-export default IDynamicPortfolioState;

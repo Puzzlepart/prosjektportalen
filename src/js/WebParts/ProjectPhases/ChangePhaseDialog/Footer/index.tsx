@@ -5,11 +5,12 @@ import {
     DefaultButton,
 } from "office-ui-fabric-react/lib/Button";
 import { View } from "../Views";
+import IFooterProps from "./IFooterProps";
 
 /**
  * Footer
  */
-export const Footer = ({ currentView, isLoading, confirmHandler, closeDialog, changeView }) => {
+export const Footer = ({ currentView, isLoading, onConfirmPhaseChange, onCloseDialog, changeView }: IFooterProps) => {
     return (
         <DialogFooter>
             {currentView === View.Initial && (
@@ -20,7 +21,10 @@ export const Footer = ({ currentView, isLoading, confirmHandler, closeDialog, ch
             {currentView === View.Confirm && (
                 <PrimaryButton
                     disabled={isLoading}
-                    onClick={e => confirmHandler()}>{__("String_Yes")}</PrimaryButton>
+                    onClick={e => {
+                        changeView(View.ChangingPhase);
+                        onConfirmPhaseChange().then(() => onCloseDialog(null, true));
+                    }}>{__("String_Yes")}</PrimaryButton>
             )}
             {currentView === View.Summary && (
                 <PrimaryButton
@@ -29,7 +33,7 @@ export const Footer = ({ currentView, isLoading, confirmHandler, closeDialog, ch
             )}
             <DefaultButton
                 disabled={isLoading}
-                onClick={closeDialog}>{__("String_Close")}</DefaultButton>
+                onClick={onCloseDialog}>{__("String_Close")}</DefaultButton>
         </DialogFooter>
     );
 };

@@ -3,8 +3,9 @@ import {
     ConstrainMode,
     DetailsListLayoutMode,
 } from "office-ui-fabric-react/lib/DetailsList";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-interface IExperienceLogProps {
+export default interface IExperienceLogProps extends IBaseWebPartProps {
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
@@ -55,5 +56,3 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         isResizable: true,
     })),
 };
-
-export default IExperienceLogProps;

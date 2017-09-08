@@ -1,35 +1,43 @@
-import { sp, Logger, LogLevel } from "sp-pnp-js";
+import {
+    sp,
+    Logger,
+    LogLevel,
+} from "sp-pnp-js";
 import * as Util from "../../../Util";
-import { Columns, GetColumnByKey, GenerateColumns } from "../Columns";
+import {
+    Columns,
+    GetColumnByKey,
+    GenerateColumns,
+} from "../Columns";
 import DataSource from "../../DataSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
 import IMeasurement from "./IMeasurement";
 import ISpField from "./ISpField";
 
 /**
- * Get measurements for the specified gain entry
+ * Get measurements for the specified benefit entry
  *
- * @param measures Measures
- * @param gain Benefit
- * @param shouldIncrease Should the value increase
- * @param dataSource Data source
+ * @param {any[]} measures Measures
+ * @param {any} benefit Benefit
+ * @param {boolean} shouldIncrease Should the value increase
+ * @param {DataSource} dataSource Data source
  */
-const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
+const GetBenefitMeasurements = (measures: any[], benefit, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
     const isSearch = (dataSource === DataSource.Search);
     const idFieldName = isSearch ? "ListItemID" : "ID",
         valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
         lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
         desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName,
         startValueFieldName = GetColumnByKey("GtStartValue", dataSource).fieldName,
-        desiredValue = parseInt(gain[desiredValueFieldName], 10),
-        startValue = parseInt(gain[startValueFieldName], 10);
+        desiredValue = parseInt(benefit[desiredValueFieldName], 10),
+        startValue = parseInt(benefit[startValueFieldName], 10);
     return measures
         .filter(m => {
-            let gainId = parseInt(gain[idFieldName], 10),
-                gainLookupId = parseInt(m[lookupFieldName], 10);
+            let benefitId = parseInt(benefit[idFieldName], 10),
+                benefitLookupId = parseInt(m[lookupFieldName], 10);
             switch (dataSource) {
-                case DataSource.List: return (gainLookupId === gainId);
-                case DataSource.Search: return (gainLookupId === gainId) && (gain.SPWebUrl === m.SPWebUrl);
+                case DataSource.List: return (benefitLookupId === benefitId);
+                case DataSource.Search: return (benefitLookupId === benefitId) && (benefit.SPWebUrl === m.SPWebUrl);
             }
         })
         .map(measure => {
@@ -46,16 +54,16 @@ const GetMeasurements = (measures: any[], gain: any, valueShouldIncrease: boolea
 /**
  * Generate data
  *
- * @param benefits Benefits
- * @param measures Measure
- * @param dataSource Data source
+ * @param {any[]} benefits Benefits
+ * @param {any[]} measures Measure
+ * @param {DataSource} dataSource Data source
  */
 const GenerateData = (benefits: any[], measures: any[], dataSource: DataSource): any[] => {
     return benefits.map(data => {
-        const startValue = data[GetColumnByKey("GtStartValue", dataSource).fieldName];
-        const desiredValue = data[GetColumnByKey("GtDesiredValue", dataSource).fieldName];
+        const startValue = parseInt(data[GetColumnByKey("GtStartValue", dataSource).fieldName], 10);
+        const desiredValue = parseInt(data[GetColumnByKey("GtDesiredValue", dataSource).fieldName], 10);
         const valueShouldIncrease = (desiredValue > startValue);
-        const relevantMeasures = GetMeasurements(measures, data, valueShouldIncrease, dataSource);
+        const relevantMeasures = GetBenefitMeasurements(measures, data, valueShouldIncrease, dataSource);
         let measureStats = {
             LatestPercentage: null,
             LatestValue: null,
@@ -115,8 +123,8 @@ const SearchSettings = {
 /**
  * Fetches fields for a web, list or content type
  *
- * @param obj List or content type
- * @param fieldPrefix Field prefix
+ * @param {any} obj List or content type
+ * @param {string} fieldPrefix Field prefix
  */
 const fetchFields = (obj: any, fieldPrefix = "Gt") => new Promise<ISpField[]>((resolve, reject) => {
     obj
@@ -134,7 +142,7 @@ const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"))
 /**
  * Fetches data based on selected data source
  *
- * @param dataSource Data source (list/search)
+ * @param {DataSource} dataSource Data source (list/search)
  */
 export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOverviewData> => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     switch (dataSource) {

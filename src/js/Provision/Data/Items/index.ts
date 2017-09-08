@@ -1,68 +1,98 @@
-import { IListConfig } from "../Config";
+import {
+    Logger,
+    LogLevel,
+} from "sp-pnp-js";
+import ListConfig from "../Config/ListConfig";
 import IProgressCallback from "../../IProgressCallback";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
-let __ITEMS = [];
+interface IRecord {
+    SourceId: number;
+    DestId: number;
+    DestItem: SP.ListItem<any>;
+    ParentID: number;
+}
+
+let __RECORDS: IRecord[] = [];
 
 /**
  * Copy a single list item to the destination web
  *
- * @param srcItem The source item
- * @param fields Fields to copy
- * @param dataCtx Copy context
+ * @param {SP.ListItem} srcItem The source item
+ * @param {string[]} fields Fields to copy
+ * @param {CopyContext} dataCtx Copy context
  */
 export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyContext) => new Promise<void>((resolve, reject) => {
-    const destItm = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
-    fields.forEach(fieldName => Util.setItemFieldValue(fieldName, destItm, srcItem.get_item(fieldName), dataCtx.Destination._, dataCtx.Destination.list));
-    destItm.update();
-    dataCtx.Destination._.load(destItm);
+    const sourceItemId = srcItem.get_fieldValues()["ID"];
+    Logger.log({ message: `Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
+    const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
+    fields.forEach(fieldName => {
+        const fieldValue = srcItem.get_item(fieldName);
+        Logger.log({ message: `Setting value for field ${fieldName}`, data: {}, level: LogLevel.Info });
+        Util.setItemFieldValue(fieldName, destItem, fieldValue, dataCtx.Destination._, dataCtx.Destination.list);
+    });
+    destItem.update();
+    dataCtx.Destination._.load(destItem);
     dataCtx.Destination._.executeQueryAsync(() => {
-        __ITEMS.push({
-            SourceId: srcItem.get_fieldValues()["ID"],
-            DestId: destItm.get_fieldValues()["ID"],
-            DestItem: destItm,
+        const record: IRecord = {
+            SourceId: sourceItemId,
+            DestId: destItem.get_fieldValues()["ID"],
+            DestItem: destItem,
             ParentID: srcItem.get_fieldValues()["ParentID"] ? parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10) : null,
-        });
+        };
+        __RECORDS.push(record);
+        Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         resolve();
-    }, resolve);
+    }, (sender, args) => {
+        reject({ sender, args });
+    });
 });
 
 /**
  * Copies list items to the destination web
  *
- * @param conf Configuration
- * @param destUrl Destination web URL
- * @param onProgress Progress callback to caller
+ * @param {ListConfig} conf Configuration
+ * @param {string} destUrl Destination web URL
+ * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyItems = (conf: IListConfig, destUrl: string, onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
-    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-        const dataCtx = GetDataContext(conf, destUrl);
-        const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
-        dataCtx.Source._.load(items);
-        dataCtx.Source._.executeQueryAsync(() => {
-            onProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
-            items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
-                .then(() => {
-                    HandleItemsWithParent(dataCtx).then(resolve);
-                })
-                .catch(resolve);
-        }, resolve);
-    });
+export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    GetDataContext(conf, destUrl)
+        .then(dataCtx => {
+            const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
+            dataCtx.Source._.load(items);
+            dataCtx.Source._.executeQueryAsync(() => {
+                onUpdateProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
+                items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
+                    .then(() => {
+                        HandleItemsWithParent(dataCtx)
+                            .then(resolve)
+                            .catch(reason => {
+                                reject(reason);
+                            });
+                    })
+                    .catch(reason => {
+                        reject(reason);
+                    });
+            }, (sender, args) => {
+                reject({ sender, args });
+            });
+        });
 });
 
 /**
- * Handle tasks with parent
- * @param dataCtx Data context
+ * Handle list items with parent
+ *
+ * @param {CopyContext} dataCtx Data context
  */
-const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resolve) => {
-    const itemsWithParent = __ITEMS.filter(item => item.ParentID);
+const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resolve, reject) => {
+    const itemsWithParent = __RECORDS.filter(item => item.ParentID);
     itemsWithParent.forEach(item => {
-        let [parent] = __ITEMS.filter(({ SourceId }) => SourceId === item.ParentID);
+        let [parent] = __RECORDS.filter(({ SourceId }) => SourceId === item.ParentID);
         if (parent) {
             item.DestItem.set_item("ParentID", parent.DestId);
             item.DestItem.update();
         }
     });
-    dataCtx.Destination._.executeQueryAsync(resolve, resolve);
+    dataCtx.Destination._.executeQueryAsync(resolve, reject);
 });

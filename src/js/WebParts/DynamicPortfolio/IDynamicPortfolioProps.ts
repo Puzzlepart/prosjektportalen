@@ -3,6 +3,7 @@ import {
     ConstrainMode,
     DetailsListLayoutMode,
 } from "office-ui-fabric-react/lib/DetailsList";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export interface IDynamicPortfolioExcelExportConfig {
     fileName: string;
@@ -12,7 +13,7 @@ export interface IDynamicPortfolioExcelExportConfig {
     buttonIcon: string;
 }
 
-interface IDynamicPortfolioProps {
+export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     searchProperty?: string;
     showGroupBy?: boolean;
     modalHeaderClassName?: string;
@@ -43,5 +44,3 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     },
     defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,
 };
-
-export default IDynamicPortfolioProps;

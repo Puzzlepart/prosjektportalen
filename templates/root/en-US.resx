@@ -186,7 +186,7 @@
   <data name="Lists_ProjectLog_Title" xml:space="preserve">
     <value>Project Log</value>
   </data>
-  <data name="Lists_ProjectProducts_Title" xml:space="preserve">
+  <data name="Lists_ProjectDeliveries_Title" xml:space="preserve">
     <value>Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
@@ -215,6 +215,24 @@
   </data>
   <data name="Lists_Milestones_Title" xml:space="preserve">
     <value>Milestones</value>
+  </data>
+  <data name="Lists_DynamicPortfolioFields_Title" xml:space="preserve">
+    <value>DynamicPortfolioFields</value>
+  </data>
+  <data name="Lists_DynamicPortfolioRefiners_Title" xml:space="preserve">
+    <value>DynamicPortfolioRefiners</value>
+  </data>
+  <data name="Lists_DynamicPortfolioViews_Title" xml:space="preserve">
+    <value>DynamicPortfolioViews</value>
+  </data>
+  <data name="Lists_ListContentConfig_Title" xml:space="preserve">
+    <value>ListContentConfig</value>
+  </data>
+  <data name="Lists_ProjectConfig_Title" xml:space="preserve">
+    <value>ProjectConfig</value>
+  </data>
+  <data name="Lists_StatusSections_Title" xml:space="preserve">
+    <value>StatusSections</value>
   </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
@@ -255,7 +273,7 @@
   <data name="Lists_ProjectLog_Url" xml:space="preserve">
     <value>Lists/Project Log</value>
   </data>
-  <data name="Lists_ProjectProducts_Url" xml:space="preserve">
+  <data name="Lists_ProjectDeliveries_Url" xml:space="preserve">
     <value>Lists/Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Url" xml:space="preserve">
@@ -294,7 +312,7 @@
   <data name="DefaultView_CommunicationPlan_Url" xml:space="preserve">
     <value>Lists/Communication Plan/AllItems.aspx</value>
   </data>
-  <data name="DefaultView_ProjectProducts_Url" xml:space="preserve">
+  <data name="DefaultView_ProjectDeliveries_Url" xml:space="preserve">
     <value>Lists/Project Deliveries/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
@@ -429,6 +447,21 @@
   <data name="ContentTypes_Milestone_Name" xml:space="preserve">
     <value>Milestone</value>
   </data>
+  <data name="ContentTypes_Section_Name" xml:space="preserve">
+    <value>Section</value>
+  </data>
+  <data name="ContentTypes_StatusSection_Name" xml:space="preserve">
+    <value>Status Section</value>
+  </data>
+  <data name="ContentTypes_ProjectPropertiesSection_Name" xml:space="preserve">
+    <value>Project Properties Section</value>
+  </data>
+  <data name="ContentTypes_ListSection_Name" xml:space="preserve">
+    <value>List Section</value>
+  </data>
+  <data name="ContentTypes_RiskSection_Name" xml:space="preserve">
+    <value>Risk Section</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
@@ -488,6 +521,21 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Create a new list item.</value>
+  </data>
+  <data name="ContentTypes_Section_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_StatusSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_ProjectPropertiesSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_ListSection_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
@@ -834,6 +882,138 @@
   <data name="SiteFields_GtMilestoneActualDate_DisplayName" xml:space="preserve">
     <value>Actual date</value>
   </data>
+  <data name="SiteFields_GtStSecViewFields_DisplayName" xml:space="preserve">
+    <value>ViewFields</value>
+  </data>
+  <data name="SiteFields_GtStSecIcon_DisplayName" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="SiteFields_GtStSecCustomComponent_DisplayName" xml:space="preserve">
+    <value>CustomComponent</value>
+  </data>
+  <data name="SiteFields_GtStSecShowInNavbar_DisplayName" xml:space="preserve">
+    <value>ShowInNavbar</value>
+  </data>
+  <data name="SiteFields_GtStSecViewQuery_DisplayName" xml:space="preserve">
+    <value>ViewQuery</value>
+  </data>
+  <data name="SiteFields_GtStSecFieldName_DisplayName" xml:space="preserve">
+    <value>FieldName</value>
+  </data>
+  <data name="SiteFields_GtStSecShowInStatusSection_DisplayName" xml:space="preserve">
+    <value>ShowInStatusSection</value>
+  </data>
+  <data name="SiteFields_GtStSecRowLimit_DisplayName" xml:space="preserve">
+    <value>RowLimit</value>
+  </data>
+  <data name="SiteFields_GtStSecOrder_DisplayName" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="SiteFields_GtStSecShowAsSection_DisplayName" xml:space="preserve">
+    <value>ShowAsSection</value>
+  </data>
+  <data name="SiteFields_GtStSecSource_DisplayName" xml:space="preserve">
+    <value>URL</value>
+  </data>
+  <data name="SiteFields_GtStSecShowRiskMatrix_DisplayName" xml:space="preserve">
+    <value>ShowRiskMatrix</value>
+  </data>
+  <data name="SiteFields_GtStSecList_DisplayName" xml:space="preserve">
+    <value>List</value>
+  </data>
+  <data name="SiteFields_GtDpIcon_DisplayName" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="SiteFields_GtDpRender_DisplayName" xml:space="preserve">
+    <value>Render</value>
+  </data>
+  <data name="SiteFields_GtDpFieldsLookup_DisplayName" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="SiteFields_GtDpDefault_DisplayName" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="SiteFields_GtDpDefaultHidden_DisplayName" xml:space="preserve">
+    <value>DefaultHidden</value>
+  </data>
+  <data name="SiteFields_GtDpReadOnly_DisplayName" xml:space="preserve">
+    <value>ReadOnly</value>
+  </data>
+  <data name="SiteFields_GtDpMultiple_DisplayName" xml:space="preserve">
+    <value>Multiple</value>
+  </data>
+  <data name="SiteFields_GtDpMaxWidth_DisplayName" xml:space="preserve">
+    <value>MaxWidth</value>
+  </data>
+  <data name="SiteFields_GtDpPersonalView_DisplayName" xml:space="preserve">
+    <value>PersonalView</value>
+  </data>
+  <data name="SiteFields_GtDpIsResizable_DisplayName" xml:space="preserve">
+    <value>IsResizable</value>
+  </data>
+  <data name="SiteFields_GtDpMinWidth_DisplayName" xml:space="preserve">
+    <value>MinWidth</value>
+  </data>
+  <data name="SiteFields_GtDpProperty_DisplayName" xml:space="preserve">
+    <value>Property</value>
+  </data>
+  <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
+    <value>Query</value>
+  </data>
+  <data name="SiteFields_GtDpDisplayName_DisplayName" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="SiteFields_GtDpGroupBy_DisplayName" xml:space="preserve">
+    <value>GroupBy</value>
+  </data>
+  <data name="SiteFields_GtDpRefinersLookup_DisplayName" xml:space="preserve">
+    <value>Refiners</value>
+  </data>
+  <data name="SiteFields_GtLccDefault_DisplayName" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="SiteFields_GtLccSourceUrl_DisplayName" xml:space="preserve">
+    <value>SourceUrl</value>
+  </data>
+  <data name="SiteFields_GtLccDestinationList_DisplayName" xml:space="preserve">
+    <value>DestinationList</value>
+  </data>
+  <data name="SiteFields_GtLccFields_DisplayName" xml:space="preserve">
+    <value>Fields</value>
+  </data>
+  <data name="SiteFields_GtLccSourceList_DisplayName" xml:space="preserve">
+    <value>SourceList</value>
+  </data>
+  <data name="SiteFields_GtLccDestinationLibrary_DisplayName" xml:space="preserve">
+    <value>DestinationLibrary</value>
+  </data>
+  <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
+    <value>Label</value>
+  </data>
+  <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
+    <value>ShowOnProjectStatus</value>
+  </data>
+  <data name="SiteFields_GtPcFrontpage_DisplayName" xml:space="preserve">
+    <value>ShowOnFrontpage</value>
+  </data>
+  <data name="SiteFields_GtPcPortfolioPage_DisplayName" xml:space="preserve">
+    <value>ShowOnPortfolioPage</value>
+  </data>
+  <data name="SiteFields_GtKey_DisplayName" xml:space="preserve">
+    <value>Key</value>
+  </data>
+  <data name="SiteFields_GtValue_DisplayName" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="SiteFields_GtProductStatus_DisplayName" xml:space="preserve">
+    <value>Delivery status</value>
+  </data>
+  <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
+    <value>Comment, delivery status</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1071,6 +1251,138 @@
   <data name="SiteFields_GtMeasurementComment_Description" xml:space="preserve">
     <value />
   </data>
+  <data name="SiteFields_GtStSecViewFields_Description" xml:space="preserve">
+    <value>Comma-separated list of fields to show (needs to be internal names) if List is specifed</value>
+  </data>
+  <data name="SiteFields_GtStSecIcon_Description" xml:space="preserve">
+    <value>Select an icon from https://dev.office.com/fabric#/styles</value>
+  </data>
+  <data name="SiteFields_GtStSecShowInNavbar_Description" xml:space="preserve">
+    <value>Should the section be visible in the navigation bar</value>
+  </data>
+  <data name="SiteFields_GtStSecViewQuery_Description" xml:space="preserve">
+    <value>If you want to filter which items shows up in the section, enter a view query here (List needs to be specified)</value>
+  </data>
+  <data name="SiteFields_GtStSecFieldName_Description" xml:space="preserve">
+    <value>Internal name of the status field you want to show in the section</value>
+  </data>
+  <data name="SiteFields_GtStSecShowInStatusSection_Description" xml:space="preserve">
+    <value>Should the section be visible in the status section</value>
+  </data>
+  <data name="SiteFields_GtStSecRowLimit_Description" xml:space="preserve">
+    <value>Number of list items to show</value>
+  </data>
+  <data name="SiteFields_GtStSecOrder_Description" xml:space="preserve">
+    <value>Order of the section</value>
+  </data>
+  <data name="SiteFields_GtStSecShowAsSection_Description" xml:space="preserve">
+    <value>Should the section be shown as a separate section</value>
+  </data>
+  <data name="SiteFields_GtStSecSource_Description" xml:space="preserve">
+    <value>If the section should link to a page/document, enter the URL relative to the project site here</value>
+  </data>
+  <data name="SiteFields_GtStSecShowRiskMatrix_Description" xml:space="preserve">
+    <value>Should a risk matrix be shown</value>
+  </data>
+  <data name="SiteFields_GtStSecList_Description" xml:space="preserve">
+    <value>If you want to show items from a list, enter the title of the list here</value>
+  </data>
+  <data name="SiteFields_GtStSecCustomComponent_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpIcon_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpRender_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpFieldsLookup_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpDefault_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpDefaultHidden_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpReadOnly_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpMultiple_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpMaxWidth_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpPersonalView_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpIsResizable_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpMinWidth_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpProperty_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpDisplayName_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpGroupBy_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpRefinersLookup_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccDefault_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccSourceUrl_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccDestinationList_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccFields_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccSourceList_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccDestinationLibrary_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtLccLabel_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtPcProjectStatus_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtPcFrontpage_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtPcPortfolioPage_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtKey_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtValue_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStatus_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStatusComment_Description" xml:space="preserve">
+    <value>Comment on status delivery specified above</value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -1132,7 +1444,7 @@
     <value>Copies list contents</value>
   </data>
   <data name="ProvisionWeb_CopyFiles" xml:space="preserve">
-    <value>Copying files from library {0} to {1}.</value>
+    <value>Copying {0} files and {1} folders from library {2} to {3}.</value>
   </data>
   <data name="ProvisionWeb_CopyItems" xml:space="preserve">
     <value>Copying {0} items from list {1} to {2}</value>
@@ -1451,6 +1763,9 @@
   </data>
   <data name="Choice_GtProductStatus_MajorDeviations" xml:space="preserve">
     <value>Major deviations</value>
+  </data>
+  <data name="Choice_GtProductStatus_Approved" xml:space="preserve">
+    <value>Approved</value>
   </data>
   <data name="Choice_GtGainsType_Directly" xml:space="preserve">
     <value>Directly</value>
@@ -1889,5 +2204,8 @@
   </data>
   <data name="View_RelevantLinks_DisplayName" xml:space="preserve">
     <value>Relevant links</value>
+  </data>
+  <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
+    <value>Production Phase</value>
   </data>
 </root>

@@ -170,7 +170,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: __("Lists_ProjectProducts_Title"),
+        Title: __("Lists_ProjectDeliveries_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -188,9 +188,20 @@ const Lists: IList[] = [
             Title: __("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProductPhase", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
             AdditionalSettings: {
-                RowLimit: 0,
+                RowLimit: 30,
                 Paged: true,
                 ViewQuery: "",
+            },
+        },
+        {
+            Title: __("View_ProductionPhase_DisplayName"),
+            ViewFields: ["LinkTitle", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
+            AdditionalSettings: {
+                RowLimit: 30,
+                Paged: true,
+                ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
+                <FieldRef Name="GtProductPhase" />
+              </GroupBy>`,
             },
         }],
     },

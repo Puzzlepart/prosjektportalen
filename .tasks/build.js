@@ -14,6 +14,7 @@ var gulp = require("gulp"),
     path = require("path"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
+    git = require("./utils/git.js"),
     format = require("string-format"),
     pkg = require("../package.json");
 
@@ -75,22 +76,32 @@ gulp.task("copy:dist", () => {
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 
-gulp.task("stamp:version::templates", () => {
-    return gulp.src("./_templates/**/*.xml")
-        .pipe(flatmap(function (stream, file) {
-            return stream
-                .pipe(replace(config.version.token, config.version.v))
-                .pipe(gulp.dest(config.paths.templates_temp))
-        }));
+gulp.task("stamp:version::templates", cb => {
+    git.hash(hash => {
+        es.concat(
+            gulp.src("./_templates/**/*.xml")
+                .pipe(flatmap((stream, file) => {
+                    return stream
+                        .pipe(replace(config.version.token, format("{0}#{1}", config.version.v, hash)))
+                        .pipe(gulp.dest(config.paths.templates_temp))
+                }))
+        )
+            .on('end', cb);
+    });
 });
 
-gulp.task("stamp:version::dist", () => {
-    return gulp.src("./dist/*.ps1")
-        .pipe(flatmap(function (stream, file) {
-            return stream
-                .pipe(replace(config.version.token, config.version.v))
-                .pipe(gulp.dest(config.paths.dist))
-        }));
+gulp.task("stamp:version::dist", cb => {
+    git.hash(hash => {
+        es.concat(
+            gulp.src("./dist/*.ps1")
+                .pipe(flatmap((stream, file) => {
+                    return stream
+                        .pipe(replace(config.version.token, format("{0}#{1}", config.version.v, hash)))
+                        .pipe(gulp.dest(config.paths.dist))
+                }))
+        )
+            .on('end', cb);
+    });
 });
 
 gulp.task("build:pnp", (done) => {

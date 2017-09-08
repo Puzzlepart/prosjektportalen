@@ -8,13 +8,13 @@ export default class WebPartComponent {
     /**
      * Constructor
      *
-     * @param name Component name
-     * @param container Component container
-     * @param component Component instance
+     * @param {string} name Component name
+     * @param {string} container Component container
+     * @param {JSX.Element} component Component instance
      */
     constructor(name: string, container: string, component: JSX.Element) {
-        this.name = name,
-            this.container = container;
+        this.name = name;
+        this.container = container;
         this.component = component;
     }
 

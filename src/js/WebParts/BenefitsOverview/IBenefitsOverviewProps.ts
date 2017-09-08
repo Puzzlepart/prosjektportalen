@@ -1,7 +1,8 @@
 import DataSource from "../DataSource";
 import IGroupByOption from "./IGroupByOption";
+import { IBaseWebPartProps } from "../@BaseWebPart";
 
-interface IBenefitsOverviewProps {
+export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     dataSource?: DataSource;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
@@ -19,5 +20,3 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
 };
-
-export default IBenefitsOverviewProps;

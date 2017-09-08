@@ -30,21 +30,29 @@ import * as Search from "./Search";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
-import IDynamicPortfolioState, { DynamicPortfolioInitialState } from "./IDynamicPortfolioState";
+import IDynamicPortfolioState from "./IDynamicPortfolioState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Dynamic Portfolio
  */
-export default class DynamicPortfolio extends React.Component<IDynamicPortfolioProps, IDynamicPortfolioState> {
+export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps, IDynamicPortfolioState> {
+    public static displayName = "DynamicPortfolio";
     public static defaultProps = DynamicPortfolioDefaultProps;
     private configuration: Configuration.IConfiguration = null;
 
     /**
      * Constructor
+     *
+     * @param {IDynamicPortfolioProps} props Props
      */
-    constructor() {
-        super();
-        this.state = DynamicPortfolioInitialState;
+    constructor(props: IDynamicPortfolioProps) {
+        super(props, {
+            isLoading: true,
+            searchTerm: "",
+            currentFilters: {},
+            showFilterPanel: false,
+        });
     }
 
     /**
@@ -75,7 +83,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                         labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
                     {this.renderItems(this.props, this.state)}
                 </div>
-                {this.renderFilterPanel(this.state)}
+                {this.renderFilterPanel(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
                 {this.renderWorkbook(this.props, this.state)}
             </div>
@@ -141,6 +149,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Render items
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
     private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading, errorMessage }: IDynamicPortfolioState) => {
         if (isLoading) {
@@ -155,7 +166,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
             );
         }
 
-        const data = this.getFilteredData(this.state);
+        const data = this.getFilteredData(this.props, this.state);
 
         if (data.items.length === 0) {
             return (
@@ -182,8 +193,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Render Filter Panel
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
-    private renderFilterPanel = ({ filters, showFilterPanel }: IDynamicPortfolioState) => {
+    private renderFilterPanel = ({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) => {
         if (filters) {
             return (
                 <FilterPanel
@@ -199,6 +213,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Renders the command bar from office-ui-fabric-react
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
     private renderCommandBar = ({ excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
         if (!currentView) {
@@ -286,6 +303,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Renders the Project Info modal
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
     private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) => {
         if (showProjectInfo) {
@@ -315,6 +335,9 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Render workbook
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
     private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) => {
         if (isLoading) {
@@ -322,7 +345,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
         }
 
         const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
-        const data = this.getFilteredData(this.state);
+        const data = this.getFilteredData(this.props, this.state);
 
         return (
             <Workbook
@@ -347,8 +370,11 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
 
     /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
      */
-    private getFilteredData = ({ selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) => {
+    private getFilteredData = ({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) => {
         let groups: IGroup[] = null;
         if (groupBy) {
             const itemsSort: any = {
@@ -371,7 +397,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
                 isDropEnabled: false,
             }));
         }
-        let items = filteredItems ? filteredItems.filter(item => item[this.props.searchProperty].toString().toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = filteredItems ? filteredItems.filter(item => item[searchProperty].toString().toLowerCase().indexOf(searchTerm) !== -1) : [];
         return {
             items: items,
             columns: selectedColumns,
@@ -383,10 +409,10 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
      * the filters are checked against refiners retrieved by search.
      *
-     * @param refiners Refiners retrieved by search
-     * @param viewConfig View configuration
+     * @param {any[]} refiners Refiners retrieved by search
+     * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refiners: Array<{ Name: string, Entries: { results: any[] } }>, viewConfig: Configuration.IViewConfig): any => {
+    private getSelectedFiltersWithItems = (refiners: any[], viewConfig: Configuration.IViewConfig): any => {
         return this.configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
@@ -404,7 +430,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Acts on filter change.
      *
-     * @param filter The filter that was changed
+     * @param {IFilter} filter The filter that was changed
      */
     private _onFilterChange = (filter: IFilter): void => {
         const {
@@ -471,8 +497,8 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * On column sort
      *
-     * @param event Event
-     * @param column The column config
+     * @param {any} event Event
+     * @param {any} column The column config
      */
     private _onColumnSort = (event, column): void => {
         const {
@@ -501,7 +527,7 @@ export default class DynamicPortfolio extends React.Component<IDynamicPortfolioP
     /**
      * Does a new search using Search.query
      *
-     * @param viewConfig View configuration
+     * @param {Configuration.IViewConfig} viewConfig View configuration
      */
     private _doSearch(viewConfig: Configuration.IViewConfig): void {
         const { currentView } = this.state;

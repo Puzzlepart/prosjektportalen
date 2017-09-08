@@ -1,25 +1,67 @@
 import {
     Web,
+    Folder,
     FileAddResult,
+    Logger,
+    LogLevel,
 } from "sp-pnp-js";
 import * as Util from "../../../Util";
-import { IListConfig } from "../Config";
+import IFile from "./IFile";
+import ListConfig from "../Config/ListConfig";
 import IProgressCallback from "../../IProgressCallback";
+
+/**
+ * Get file contents
+ *
+ * @param {Web} srcWeb Source web
+ * @param {IFile[]} files Files to get content for
+ */
+const GetFileContents = (srcWeb: Web, files: IFile[]) => new Promise<IFile[]>((resolve, reject) => {
+    Promise.all(files.map(file => new Promise<IFile>((res, rej) => {
+        srcWeb.getFileByServerRelativeUrl(file.FileRef).getBlob()
+            .then(blob => {
+                file.Blob = blob;
+                res(file);
+            })
+            .catch(rej);
+    })))
+        .then(res => resolve(res))
+        .catch(reject);
+});
+
+/**
+ * Create folder hierarchy
+ *
+ * @param {string} destLibServerRelUrl Destination library server relative URL
+ * @param {string} rootFolderServerRelUrl Root folder server relative URL
+ * @param {Folder} destLibRootFolder Destination library root foler
+ * @param {string[]} folders Folders
+ */
+const CreateFolderHierarchy = (destLibServerRelUrl: string, rootFolderServerRelUrl: string, destLibRootFolder: Folder, folders: string[]) => new Promise<void>((resolve, reject) => {
+    Logger.log({ message: "Creating folder hierarchy", data: { folders }, level: LogLevel.Info });
+    folders
+        .sort()
+        .reduce((chain: Promise<any>, folder) => {
+            const folderServerRelUrl = `${destLibServerRelUrl}/${folder.replace(rootFolderServerRelUrl, "")}`;
+            return chain.then(_ => destLibRootFolder.folders.add(folderServerRelUrl));
+        }, Promise.resolve())
+        .then(resolve)
+        .catch(reject);
+});
 
 /**
  * Copy files and folders to a destination web
  *
- * @param conf Configuration
- * @param destUrl Destination web URL
- * @param onProgress Progress callback to caller
- * @param timeout Timeout (ms)
+ * @param {ListConfig} conf Configuration
+ * @param {string} destUrl Destination web URL
+ * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgressCallback, timeout = 25000) => new Promise<FileAddResult[]>((resolve, reject) => {
-    onProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyFiles"), conf.SourceList, conf.DestinationLibrary));
+export const CopyFiles = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<FileAddResult[]>((resolve, reject) => {
     const srcWeb = new Web(Util.makeAbsolute(conf.SourceUrl));
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
     const destWeb = new Web(Util.makeAbsolute(destUrl));
     const destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
+    const destLibRootFolder = destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl);
     Promise.all([
         srcList
             .expand("RootFolder")
@@ -30,7 +72,8 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgr
             .select("Title", "LinkFilename", "FileRef", "FileDirRef", "Folder/ServerRelativeUrl")
             .get(),
     ]).then(([{ RootFolder }, items]) => {
-        let folders = [], files = [];
+        let folders: string[] = [];
+        let files: IFile[] = [];
         items.forEach(i => {
             if (i.Folder && i.Folder.hasOwnProperty("ServerRelativeUrl")) {
                 folders.push(i.Folder.ServerRelativeUrl);
@@ -38,21 +81,19 @@ export const CopyFiles = (conf: IListConfig, destUrl: string, onProgress: IProgr
                 files.push(i);
             }
         });
-        folders
-            .sort()
-            .reduce((chain, folder) => chain.then(_ => destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl).folders.add(`${destLibServerRelUrl}/${folder.replace(RootFolder.ServerRelativeUrl, "")}`)), Promise.resolve())
+        onUpdateProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
+        CreateFolderHierarchy(destLibServerRelUrl, RootFolder.ServerRelativeUrl, destLibRootFolder, folders)
             .then(_ => {
-                let getFileContents = Promise.all(files.map(file => new Promise<{ File: any, Blob: Blob }>((_resolve, _reject) => {
-                    srcWeb.getFileByServerRelativeUrl(file.FileRef).getBlob().then(blob => _resolve({ File: file, Blob: blob }), _reject);
-                })));
-                getFileContents.then(fileContents => {
-                    let createFiles = Promise.all(fileContents.map(fc => new Promise<any>((_resolve) => {
-                        let destFolderUrl = `${destLibServerRelUrl}${fc.File.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
-                        destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fc.File.LinkFilename, fc.Blob, true).then(_resolve, reject);
-                    })));
-                    createFiles.then(resolve, reject);
+                /**
+                 * Copying files
+                 */
+                Logger.log({ message: "Copying files", data: { files }, level: LogLevel.Info });
+                GetFileContents(srcWeb, files).then(filesWithContents => {
+                    Promise.all(filesWithContents.map(fwc => new Promise<any>((res, rej) => {
+                        let destFolderUrl = `${destLibServerRelUrl}${fwc.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
+                        destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fwc.LinkFilename, fwc.Blob, true).then(res, rej);
+                    }))).then(resolve, reject);
                 }, reject);
             }, reject);
     }).catch(reject);
-    window.setTimeout(reject, timeout);
 });

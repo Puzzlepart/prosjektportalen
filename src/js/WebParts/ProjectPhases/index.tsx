@@ -10,32 +10,34 @@ import {
 import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";
-import * as Util from "../../Util";
 import * as Data from "./Data";
+import { PhaseModel } from "../../Model";
 import IProjectPhasesProps from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project Phases
  */
-export default class ProjectPhases extends React.PureComponent<IProjectPhasesProps, IProjectPhasesState> {
+export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IProjectPhasesState> {
+    public static displayName = "ProjectPhases";
+
     /**
      * Constructor
+     *
+     * @param {IProjectPhasesProps} props Props
      */
-    constructor() {
-        super();
-        this.state = {
-            isLoading: true,
-        };
+    constructor(props: IProjectPhasesProps) {
+        super(props, { isLoading: true });
     }
 
     /**
      * Component did mount
      */
     public componentDidMount(): void {
-        Data.fetchData().then(initialState => {
+        Data.fetchData().then(data => {
             this.setState({
-                ...initialState,
+                ...data,
                 isLoading: false,
             });
         });
@@ -50,36 +52,40 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
         }
         return (
             <div>
-                {this.renderPhases(this.state)}
-                {this.renderDialog(this.state)}
-                {!this.isPhaseSet() && (
+                {this.renderPhases(this.props, this.state)}
+                {this.renderDialog(this.props, this.state)}
+                <div hidden={this.isPhaseSet(this.state)}>
                     <MessageBar messageBarType={MessageBarType.info}>
                         {__("ProjectPhases_PhaseNotSetText")}
                     </MessageBar>
-                )}
+                </div>
             </div>
         );
     }
 
     /**
      * Render phases
+     *
+     * @param {IProjectPhasesProps} param0 Props
+     * @param {IProjectPhasesState} param1 State
      */
-    private renderPhases = ({ phases, currentPhase, checkListData, changePhase }: IProjectPhasesState): JSX.Element => {
+    private renderPhases = ({ }: IProjectPhasesProps, { phases, activePhase, checkListData, changePhase }: IProjectPhasesState): JSX.Element => {
+        const visiblePhases = phases.filter(phase => phase.ShowOnFrontpage);
         return (
             <ul>
-                {phases.map((p, index) => {
+                {visiblePhases.map((phase, index) => {
                     let classList = [
                         index === 0 ? "first-phase" : "",
                         index === (phases.length - 1) ? "last-phase" : "",
-                        currentPhase && (p.Name === currentPhase.Name) ? "selected" : "",
-                        p.PhaseLevel ? p.PhaseLevel.trim().toLowerCase() : "unknown-phaselevel",
+                        activePhase && (phase.Name === activePhase.Name) ? "selected" : "",
+                        phase.getPhasLevelClassName(),
                     ];
                     return (
                         <ProjectPhase
                             key={index}
-                            phase={p}
+                            phase={phase}
                             classList={classList}
-                            checkListData={checkListData[p.Id]}
+                            checkListData={checkListData[phase.Id]}
                             onChangePhase={this.onChangePhase} />
                     );
                 })}
@@ -89,16 +95,19 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
 
     /**
      * Render dialog
+     *
+     * @param {IProjectPhasesProps} param0 Props
+     * @param {IProjectPhasesState} param1 State
      */
-    private renderDialog = ({ checkListData, currentPhase, changePhase }: IProjectPhasesState): JSX.Element => {
-        const checkListItems = (currentPhase && checkListData && checkListData[currentPhase.Id]) ? checkListData[currentPhase.Id].items : [];
+    private renderDialog = ({ }: IProjectPhasesProps, { checkListData, activePhase, changePhase }: IProjectPhasesState): JSX.Element => {
+        const checkListItems = (activePhase && checkListData && checkListData[activePhase.Id]) ? checkListData[activePhase.Id].items : [];
         if (changePhase) {
             return (
                 <ChangePhaseDialog
                     phase={changePhase}
                     checkListItems={checkListItems}
                     onConfirmPhaseChange={this.onChangePhase}
-                    hideHandler={this.hideDialog} />
+                    hideHandler={e => this.setState({ changePhase: null })} />
             );
         }
         return null;
@@ -107,30 +116,28 @@ export default class ProjectPhases extends React.PureComponent<IProjectPhasesPro
     /**
      * On change phase
      *
-     * @param phase New phase
+     * @param {PhaseModel} phase New phase
      */
-    private onChangePhase = (phase): void => {
+    private onChangePhase = (phase?: PhaseModel) => new Promise<void>((resolve, reject) => {
         if (phase) {
-            this.setState({ changePhase: phase });
+            this.setState({ changePhase: phase }, resolve);
         } else {
-            this.hideDialog();
-            Project.ChangeProjectPhase(this.state.changePhase)
-                .then(Util.reloadPage)
-                .catch(Util.reloadPage);
+            Project.ChangeProjectPhase(this.state.changePhase, false)
+                .then(() => {
+                    resolve();
+                })
+                .catch(() => {
+                    resolve();
+                });
         }
-    }
+    })
 
     /**
      * Checks if phase is set
+     *
+     * @param {IProjectPhasesState} param1 State
      */
-    private isPhaseSet(): boolean {
-        return this.state.currentPhase && this.state.currentPhase.Name && this.state.currentPhase.Name !== "";
-    }
-
-    /**
-     * Hide dialog
-     */
-    private hideDialog = (event?): void => {
-        this.setState({ changePhase: null });
+    private isPhaseSet({ activePhase }: IProjectPhasesState): boolean {
+        return activePhase && activePhase.Name && activePhase.Name !== "";
     }
 }

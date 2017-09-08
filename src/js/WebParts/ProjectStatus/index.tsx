@@ -9,21 +9,22 @@ import ProjectStatusData from "./ProjectStatusData";
 import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project Status
  */
-export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
+export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IProjectStatusState> {
+    public static displayName = "ProjectStatus";
     public static defaultProps = ProjectStatusDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {IProjectStatusProps} props Props
      */
     constructor(props: IProjectStatusProps) {
-        super(props);
-        this.state = {
-            isLoading: true,
-        };
+        super(props, { isLoading: true });
     }
 
     /**
@@ -39,16 +40,23 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
-        const {
-            isLoading,
-            data,
-        } = this.state;
+        return this._render(this.props, this.state);
+    }
 
+    /**
+     * Renders the component
+     *
+     * @param {IProjectStatusProps} param0 Props
+     * @param {IProjectStatusState} param1 State
+     */
+    public _render({ }: IProjectStatusProps, { isLoading, data }: IProjectStatusState): JSX.Element {
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner type={SpinnerType.large} />
+            );
         } else {
             return (
                 <div className="ms-Grid">
@@ -76,8 +84,8 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                             project={data.project}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections(this.props, this.state)}
-                    </StickyContainer >
-                </div >
+                    </StickyContainer>
+                </div>
             );
         }
     }
@@ -85,8 +93,8 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     /**
      * Render sections
      *
-     * @param param0 Props
-     * @param param1 State
+     * @param {IProjectStatusProps} param0 Props
+     * @param {IProjectStatusState} param1 State
      */
     private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
         return (
@@ -110,7 +118,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
         Promise.all([
-            sitePagesLib.items.getById(3).fieldValuesAsHTML.get(),
+            sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.get(),
             sitePagesLib.fields.get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
         ])

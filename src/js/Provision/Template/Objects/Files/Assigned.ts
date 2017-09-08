@@ -88,18 +88,18 @@ const Assigned: IFile = {
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_ProjectProducts_Url")}`,
+                value: `{site}/${__("Lists_ProjectDeliveries_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_ProjectProducts_Url")}`,
+                value: `{site}/${__("DefaultView_ProjectDeliveries_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_ProjectProducts_Title"),
+                List: __("Lists_ProjectDeliveries_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProductPhase", "GtProductInteressent", "GtProductAcceptanceMethod", "GtProductAcceptanceDate"],

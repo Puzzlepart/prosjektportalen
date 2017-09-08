@@ -6,22 +6,24 @@ import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends React.PureComponent<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, INewProjectLinkState> {
+    public static displayName = "NewProjectLink";
     public static defaultProps = NewProjectLinkDefaultProps;
 
     /**
      * Constructor
+     *
+     * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props);
-        this.state = {
-            showDialog: false,
+        super(props, {
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
-        };
+        });
     }
 
     /**
@@ -38,39 +40,59 @@ export default class NewProjectLink extends React.PureComponent<INewProjectLinkP
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
-    private _render({ linkClassName, iconProps }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
+    /**
+     * Renders the component
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
+     */
+    private _render({ }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
         if (!shouldRender) {
             return null;
         }
         return (
             <div>
-                <div>
-                    <a
-                        className={linkClassName}
-                        href="#"
-                        onClick={e => this.setState({ showDialog: true })}>
-                        <Icon { ...iconProps } />
-                        <span>{__("NewProjectForm_Header")}</span>
-                    </a>
-                </div>
-                {this.renderDialog(this.state)}
+                {this.renderLink(this.props, this.state)}
+                {this.renderDialog(this.props, this.state)}
+            </div>
+        );
+    }
+
+    /**
+     * Renders the link
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
+     */
+    private renderLink = ({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) => {
+        return (
+            <div>
+                <a
+                    className={linkClassName}
+                    href="#"
+                    onClick={e => this.setState({ showDialog: true })}>
+                    <Icon { ...iconProps } />
+                    <span>{__("NewProjectForm_Header")}</span>
+                </a>
             </div>
         );
     }
 
     /**
      * Renders the dialog
+     *
+     * @param {INewProjectLinkProps} param0 Props
+     * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ showDialog, autoGenerate }: INewProjectLinkState) => {
+    private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
         return (
             <NewProjectDialog
-                autoGenerate={autoGenerate}
                 dialogProps={{
                     isOpen: showDialog,
                     type: DialogType.largeHeader,

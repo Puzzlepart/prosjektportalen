@@ -6,6 +6,9 @@ import SetSharedNavigation from "./SetSharedNavigation";
 
 /**
  * Get redirect URL. Appends permsetup.aspx if the web has unique permissions
+ *
+ * @param {string} url Url
+ * @param {boolean} inheritPermissions Inherit permissions
  */
 const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
     return inheritPermissions ? url : String.format("{0}/_layouts/15/permsetup.aspx?next={1}", url, encodeURIComponent(url));
@@ -14,10 +17,10 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
 /**
  * Creates a new subsite
  *
- * @param title Title
- * @param url Url
- * @param description Description
- * @param inheritPermissions Inherit permissions
+ * @param {string} title Title
+ * @param {string} url Url
+ * @param {string} description Description
+ * @param {boolean} inheritPermissions Inherit permissions
  */
 const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
     let site = new Site(_spPageContextInfo.siteAbsoluteUrl);

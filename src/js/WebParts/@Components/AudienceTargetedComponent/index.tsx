@@ -7,6 +7,8 @@ import IAudienceTargetedComponentState from "./IAudienceTargetedComponentState";
 export default class AudienceTargetedComponent<P extends IAudienceTargetedComponentProps, S extends IAudienceTargetedComponentState> extends React.PureComponent<P, S> {
     /**
      * Constructor
+     *
+     * @param {P} props Props
      */
     constructor(props: P) {
         super(props);

@@ -2,24 +2,40 @@ import { Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "../../Util";
 import { CopyFiles } from "./Files";
 import { CopyItems } from "./Items";
-import { RetrieveConfig, IListConfig } from "./Config";
+import { RetrieveConfig, ListConfig } from "./Config";
 import IProgressCallback from "../IProgressCallback";
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
  *
- * @param destUrl Destination URL
- * @param conf List configuration
- * @param onProgress Progress callback to caller
+ * @param {string} destUrl Destination URL
+ * @param {ListConfig} conf List configuration
+ * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-const Copy = (destUrl: string, conf: IListConfig, onProgress: IProgressCallback): Promise<any> => new Promise<any>((resolve, reject) => {
+const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback) => new Promise<any>((resolve, reject) => {
     Util.ensureTaxonomy().then(() => {
         if (conf.DestinationLibrary) {
-            CopyFiles(conf, destUrl, onProgress)
-                .then(resolve, resolve);
+            Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
+            CopyFiles(conf, destUrl, onUpdateProgress)
+                .then(() => {
+                    Logger.log({ message: "Copy of files done.", data: { conf }, level: LogLevel.Info });
+                    resolve();
+                })
+                .catch(reason => {
+                    Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+                    reject();
+                });
         } else {
-            CopyItems(conf, destUrl, onProgress)
-                .then(resolve, resolve);
+            Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
+            CopyItems(conf, destUrl, onUpdateProgress)
+                .then(() => {
+                    Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+                    resolve();
+                })
+                .catch(reason => {
+                    Logger.log({ message: "Copy of list items failed.", data: { conf, reason }, level: LogLevel.Info });
+                    reject();
+                });
         }
     });
 });
@@ -27,20 +43,23 @@ const Copy = (destUrl: string, conf: IListConfig, onProgress: IProgressCallback)
 /**
  * Copies list content from source to destination
  *
- * @param destUrl Destination URL
- * @param contentToInclude Content to copy
- * @param onProgress Progress callback to caller
+ * @param {string} destUrl Destination URL
+ * @param {string[]} contentToInclude Content to copy
+ * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyListContents = (destUrl: string, contentToInclude: string[], onProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
-    Logger.write(`Starting copy of list contents and documents.`, LogLevel.Info);
-    RetrieveConfig().then(config => {
+export const CopyListContents = (destUrl: string, contentToInclude: string[], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    Logger.log({ message: "Starting copy of list contents and documents.", data: { contentToInclude }, level: LogLevel.Info });
+    RetrieveConfig().then(listContentConfig => {
+        Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
         contentToInclude
-            .filter(key => Array.contains(contentToInclude, key) && config.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(destUrl, config[key], onProgress)), Promise.resolve()).then(() => {
-                Logger.write(`Copy of list contents and documents done.`, LogLevel.Info);
+            .filter(key => Array.contains(contentToInclude, key) && listContentConfig.hasOwnProperty(key))
+            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve())
+            .then(() => {
+                Logger.write("Copy of list contents and documents done.", LogLevel.Info);
                 resolve();
-            }, reason => {
-                Logger.write(`Copy of list contents and documents done with errors.`, LogLevel.Info);
+            })
+            .catch(reason => {
+                Logger.log({ message: "Copy of list contents and documents done with errors.", data: reason, level: LogLevel.Info });
                 resolve();
             });
     });

@@ -14,64 +14,71 @@ import {
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
 import { ModalLink } from "../@Components/ModalLink";
-import ChromeTitle from "../@Components/ChromeTitle";
 import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
 import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
+import BaseWebPart from "../@BaseWebPart";
 
 /**
  * Project information
  */
-export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, IProjectInfoState> {
+export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProjectInfoState> {
+    public static displayName = "ProjectInfo";
     public static defaultProps = ProjectInfoDefaultProps;
+
     /**
      * Constructor
+     *
+     * @param {IProjectInfoProps} props Props
      */
     constructor(props: IProjectInfoProps) {
-        super(props);
-        this.state = {
+        super(props, {
             isLoading: true,
             properties: [],
-        };
+        });
     }
 
     /**
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchData().then(updatedState => {
+        this.fetchData().then(data => {
             this.setState({
-                ...updatedState,
+                ...data,
                 isLoading: false,
             });
-        }).catch(_ => {
+        }).catch(error => {
             this.setState({
                 isLoading: false,
+                error,
             });
         });
     }
 
     /**
-     * Renders the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
-        const { isLoading } = this.state;
+        return this._render(this.props, this.state);
+    }
 
-        const {
-            renderMode,
-            modalOptions,
-            containerClassName,
-         } = this.props;
-
-
+    /**
+     * Renders the component
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
+     */
+    public _render({ renderMode, modalOptions, containerClassName, innerClassName, hideChrome }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element {
         switch (renderMode) {
             case ProjectInfoRenderMode.Normal: {
-                return (<div className={containerClassName}>
-                    {this.renderChrome()}
-                    {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
-                    {this.renderInner()}
-                </div>);
+                return (
+                    <div className={containerClassName}>
+                        {this.__renderChrome(__("WebPart_ProjectInfo_Title"), `.${innerClassName}`, ProjectInfo.displayName, hideChrome)}
+                        {isLoading && <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />}
+                        {this.renderInner(this.props, this.state)}
+                    </div>
+                );
             }
             case ProjectInfoRenderMode.Modal: {
                 return (
@@ -94,7 +101,7 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
                                     <Spinner type={SpinnerType.large} label={__("ProjectInfo_LoadingText")} />
                                 )
                                 :
-                                this.renderInner()}
+                                this.renderInner(this.props, this.state)}
                             <DefaultButton
                                 hidden={isLoading}
                                 href={this.props.webUrl}
@@ -124,37 +131,19 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     }
 
     /**
-     * Render chrome
-     */
-    private renderChrome = (): JSX.Element => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_ProjectInfo_Title")}
-                toggleElement={{
-                    selector: ".pp-projectInfoInner",
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "ProjectInfo",
-                        type: "localStorage",
-                    },
-                }}
-                hidden={this.props.hideChrome}
-            />
-        );
-    }
-
-    /**
      * Render inner
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderInner = (): JSX.Element => {
-        if (this.state.isLoading) {
+    private renderInner = ({ innerClassName }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element => {
+        if (isLoading) {
             return null;
         }
         return (
-            <div className="pp-projectInfoInner">
-                {this.renderProperties(this.state)}
-                {this.renderActionLinks()}
+            <div className={innerClassName}>
+                {this.renderProperties(this.props, this.state)}
+                {this.renderActionLinks(this.props, this.state)}
             </div>
         );
     }
@@ -162,9 +151,10 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     /**
      * Render properties
      *
-     * @param properties Properties to render
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderProperties({ properties }: IProjectInfoState): JSX.Element {
+    private renderProperties({ }: IProjectInfoProps, { properties }: IProjectInfoState): JSX.Element {
         const propertiesToRender = properties.filter(p => !p.empty);
         const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
         if (hasMissingProps && this.props.showMissingPropsWarning) {
@@ -196,13 +186,16 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
 
     /**
      * Render action links
+     *
+     * @param {IProjectInfoProps} param0 Props
+     * @param {IProjectInfoState} param1 State
      */
-    private renderActionLinks = () => {
+    private renderActionLinks = ({ actionLinks, showActionLinks, actionsClassName }: IProjectInfoProps, { }: IProjectInfoState) => {
         return (
             <div
-                hidden={!this.props.showActionLinks}
-                className="pp-project-actions">
-                {this.props.actionLinks.map((props, idx) => (
+                hidden={!showActionLinks}
+                className={actionsClassName}>
+                {actionLinks.map((props, idx) => (
                     <ModalLink key={idx} { ...props } />
                 ))}
             </div>
@@ -212,10 +205,11 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
     /**
      * Fetch data. Config, fields and project frontpage data.
      *
-     * @param configList Configuration list
+     * @param {string} configList Configuration list
      */
-    private fetchData = (configList = "ProjectConfig") => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
+    private fetchData = (configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
         const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
+
         const configPromise = rootWeb
             .lists
             .getByTitle(configList)
@@ -238,43 +232,49 @@ export default class ProjectInfo extends React.PureComponent<IProjectInfoProps, 
             .fieldValuesAsHTML
             .get();
 
-        Promise.all([configPromise, fieldsPromise, itemPromise]).then(([config, fields, item]) => {
-            let itemFieldNames = Object.keys(item);
-            const properties = itemFieldNames
-                .filter(fieldName => {
-                    /**
-                     * Checking if the field exist
-                     */
-                    const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
-                    if (!field) {
-                        return false;
-                    }
+        Promise.all([configPromise, fieldsPromise, itemPromise])
+            .then(([config, fields, item]) => {
+                let itemFieldNames = Object.keys(item);
+                const properties = itemFieldNames
+                    .filter(fieldName => {
+                        /**
+                         * Checking if the field exist
+                         */
+                        const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                        if (!field) {
+                            return false;
+                        }
 
-                    /**
-                     * Checking configuration
-                     */
-                    const [configItem] = config.filter(c => c.Title === field.Title);
-                    if (!configItem) {
-                        return false;
-                    }
-                    const shouldBeShown = configItem[this.props.filterField] === true;
+                        /**
+                         * Checking configuration
+                         */
+                        const [configItem] = config.filter(c => c.Title === field.Title);
+                        if (!configItem) {
+                            return false;
+                        }
+                        const shouldBeShown = configItem[this.props.filterField] === true;
 
-                    /**
-                     * Checking if the value is a string
-                     */
-                    const valueIsString = typeof item[fieldName] === "string";
-                    return (valueIsString && shouldBeShown);
-                })
-                .map(fieldName => ({
-                    field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
-                    value: item[fieldName],
-                }))
-                .map(({ field, value }) => new ProjectPropertyModel(field, value));
-            resolve({
-                properties: properties,
-            });
-        }, reject);
+                        /**
+                         * Checking if the value is a string
+                         */
+                        const valueIsString = typeof item[fieldName] === "string";
+                        return (valueIsString && shouldBeShown);
+                    })
+                    .map(fieldName => ({
+                        field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                        value: item[fieldName],
+                    }))
+                    .map(({ field, value }) => new ProjectPropertyModel(field, value));
+                resolve({
+                    properties: properties,
+                });
+            })
+            .catch(reject);
     })
 }
 
-export { ProjectInfoRenderMode };
+export {
+    ProjectInfoRenderMode,
+    IProjectInfoProps,
+    IProjectInfoState,
+};

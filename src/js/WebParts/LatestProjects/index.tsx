@@ -4,26 +4,29 @@ import {
     Spinner,
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
-import ChromeTitle from "../@Components/ChromeTitle";
 import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
+import BaseWebPart from "../@BaseWebPart";
 
-export default class LatestProjects extends React.PureComponent<ILatestProjectsProps, ILatestProjectsState> {
+export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, ILatestProjectsState> {
+    public static displayName = "LatestProjects";
     public static defaultProps = LatestProjectsDefaultProps;
 
     private reloadInterval: number;
 
     /**
      * Constructor
+     *
+     * @param {ILatestProjectsProps} props Props
      */
-    constructor() {
-        super();
-        this.state = {
+    constructor(props: ILatestProjectsProps) {
+        super(props, {
             webinfos: null,
             isLoading: true,
-        };
+        });
     }
 
     /**
@@ -62,62 +65,56 @@ export default class LatestProjects extends React.PureComponent<ILatestProjectsP
     public render(): JSX.Element {
         return (
             <div>
-                {this.renderChrome()}
+                {this.__renderChrome(__("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
     }
 
     /**
-    * Render chrome
-    */
-    private renderChrome = () => {
-        return (
-            <ChromeTitle
-                title={__("WebPart_RecentProjects_Title")}
-                toggleElement={{
-                    selector: `#${this.props.listId}`,
-                    animationDelay: 100,
-                    animation: "slideToggle",
-                    storage: {
-                        key: "LatestProjects",
-                        type: "localStorage",
-                    },
-                }}
-            />
-        );
-    }
-
-    /**
      * Render items
+    *
+    * @param {ILatestProjectsProps} param0 Props
+    * @param {ILatestProjectsState} param1 State
      */
-    private renderItems = ({ listId, listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
+    private renderItems = ({ containerId, listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
         if (isLoading) {
-            return (<Spinner type={SpinnerType.large} />);
+            return (
+                <Spinner type={SpinnerType.large} />
+            );
         } else if (webinfos == null) {
-            return (<div className="ms-metadata"><Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}</div>);
+            return (
+                <div className="ms-metadata">
+                    <Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}
+                </div>
+            );
         } else if (webinfos.length > 0) {
             return (
-                <ul id={listId}
-                    className={listClassName}>
-                    {webinfos.map(webinfo => (
-                        <li key={webinfo.Id}>
-                            {webinfo.Title ?
-                                <div>
-                                    <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                    <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
-                                </div>
-                                : (
-                                    <div style={{ width: 100 }}>
-                                        <Spinner type={SpinnerType.normal} />
+                <div id={containerId}>
+                    <ul className={listClassName}>
+                        {webinfos.map(webinfo => (
+                            <li key={webinfo.Id}>
+                                {webinfo.Title ?
+                                    <div>
+                                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
+                                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
                                     </div>
-                                )}
-                        </li>
-                    ))}
-                </ul>
+                                    : (
+                                        <div style={{ width: 100 }}>
+                                            <Spinner type={SpinnerType.normal} />
+                                        </div>
+                                    )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             );
         } else {
-            return (<div className="ms-metadata">{__("WebPart_EmptyMessage")}</div>);
+            return (
+                <div id={this.props.containerId}>
+                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                </div>
+            );
         }
     }
 

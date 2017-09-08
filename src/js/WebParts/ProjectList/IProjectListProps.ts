@@ -1,4 +1,6 @@
-interface IProjectListProps {
+import { IBaseWebPartProps } from "../@BaseWebPart";
+
+export default interface IProjectListProps extends IBaseWebPartProps {
     tileWidth?: number;
     tileImageHeight?: number;
     tileClassName?: string;
@@ -7,4 +9,15 @@ interface IProjectListProps {
     masonryOptions?: any;
 }
 
-export default IProjectListProps;
+export const ProjectListDefaultProps: Partial<IProjectListProps> = {
+    tileWidth: 206,
+    tileImageHeight: 140,
+    tileClassName: "pp-projectCard",
+    modalHeaderClassName: "ms-font-xxl",
+    projectInfoFilterField: "GtPcPortfolioPage",
+    masonryOptions: {
+        transitionDuration: "slow",
+        gutter: 10,
+    },
+};
+

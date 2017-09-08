@@ -1,8 +1,7 @@
-<pnp:ListInstance Title="ListContentConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" EnableFolderCreation="false" ContentTypesEnabled="true" Hidden="true" 
+<pnp:ListInstance Title="Konfigurasjon for listeinnhold" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" EnableFolderCreation="false" ContentTypesEnabled="true" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Tasks</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Standardoppgaver</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Oppgaver</pnp:DataValue>
@@ -10,7 +9,6 @@
             <pnp:DataValue FieldName="GtLccLabel">Inkluder standardoppgaver</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Documents</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Standarddokumenter</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationLibrary">Delte dokumenter</pnp:DataValue>
@@ -18,7 +16,6 @@
             <pnp:DataValue FieldName="GtLccLabel">Inkluder standarddokumenter</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Stakeholders</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Interessentregister</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Interessentregister</pnp:DataValue>
@@ -26,7 +23,6 @@
             <pnp:DataValue FieldName="GtLccLabel">Inkluder standard interessenter</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Checklist</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Fasesjekkliste</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Fasesjekkliste</pnp:DataValue>

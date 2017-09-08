@@ -12,12 +12,12 @@ import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import * as Util from "../../../Util";
 import IProjectCardProps from "./IProjectCardProps";
 
-
-const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
-    const [ManagerEmail = "", ManagerName = __("String_NotSet")] = project.Manager.split(" | ");
-    const [OwnerEmail = "", OwnerName = __("String_NotSet")] = project.Owner.split(" | ");
-    const ManagerUserPhoto = Util.userPhoto(ManagerEmail);
-    const OwnerUserPhoto = Util.userPhoto(OwnerEmail);
+/**
+ * Project Card
+ *
+ * @param {IProjectCardProps} param0 Props
+ */
+const ProjectCard = ({ project, fields, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
     return (
         <DocumentCard
             className={className}
@@ -38,20 +38,20 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                 shouldTruncate={true} />
             <DocumentCardLocation location={project.Phase || __("String_NotSet")} />
             <DocumentCardActivity
-                activity={__("SiteFields_GtProjectOwner_DisplayName")}
+                activity={fields["GtProjectOwner"]}
                 people={[
                     {
-                        name: OwnerName,
-                        profileImageSrc: OwnerUserPhoto,
+                        name: project.getOwnerDetails().Name,
+                        profileImageSrc: project.getOwnerDetails().Photo,
                     },
                 ]}
             />
             <DocumentCardActivity
-                activity={__("SiteFields_GtProjectManager_DisplayName")}
+                activity={fields["GtProjectManager"]}
                 people={[
                     {
-                        name: ManagerName,
-                        profileImageSrc: ManagerUserPhoto,
+                        name: project.getManagerDetails().Name,
+                        profileImageSrc: project.getManagerDetails().Photo,
                     },
                 ]}
             />
@@ -59,14 +59,11 @@ const ProjectCard = ({ project, className, tileWidth, tileImageHeight, onClickHr
                 actions={
                     [{
                         iconProps: { iconName: "AlignCenter" },
-                        onClick: (ev: any) => {
-                            ev.preventDefault();
-                            ev.stopPropagation();
-                            showProjectInfo(ev);
+                        onClick: e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            showProjectInfo(e);
                         },
-                        label: "Vis prosjektinfo",
-                        title: "Vis prosjektinfo",
-                        ariaLabel: "Vis prosjektinfo",
                     },
                     ]}
                 views={project.Views}

@@ -1,10 +1,8 @@
 import * as React from "react";
 
-export interface IIconProps {
+export interface IIconProps extends React.HTMLAttributes<HTMLElement> {
     name: string;
     color?: string;
-    className?: string;
-    style?: React.CSSProperties;
 }
 
 /**

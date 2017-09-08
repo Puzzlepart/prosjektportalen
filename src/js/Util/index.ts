@@ -1,11 +1,15 @@
 import * as moment from "moment";
 import { sp } from "sp-pnp-js";
 import AudienceTargeting from "../WebParts/AudienceTargeting";
+import WaitDialog from "./WaitDialog";
+import StampVersion from "./StampVersion";
 
 declare var MSOWebPartPageFormName: string;
 
 /**
  * HTML decodes the string
+ *
+ * @param {string} input Input
  */
 export const htmlDecode = (input: string): string => {
     const e = document.createElement("div");
@@ -16,10 +20,11 @@ export const htmlDecode = (input: string): string => {
 /**
  * Is the current user in the specified group
  *
- * @param group The group to check
+ * @param {any} group The group to check
  */
-const isUserInGroup = (group) => new Promise<boolean>(resolve => {
-    group.users.get()
+const isCurrentUserInGroup = (group) => new Promise<boolean>(resolve => {
+    group
+        .users.get()
         .then(users => {
             resolve(Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
         })
@@ -29,40 +34,42 @@ const isUserInGroup = (group) => new Promise<boolean>(resolve => {
 /**
  * Is the current user in the visitors group
  */
-export const isUserInVisitorsGroup = () => isUserInGroup(sp.web.associatedVisitorGroup);
+export const isCurrentUserInVisitorsGroup = () => isCurrentUserInGroup(sp.web.associatedVisitorGroup);
 
 /**
  * Is the current user in the members group
  */
-export const isUserInMembersGroup = () => isUserInGroup(sp.web.associatedMemberGroup);
+export const isCurrentUserInMembersGroup = () => isCurrentUserInGroup(sp.web.associatedMemberGroup);
 
 /**
  * Is the current user in the owners group
  */
-export const isUserInOwnersGroup = () => isUserInGroup(sp.web.associatedOwnerGroup);
+export const isCurrentUserInOwnersGroup = () => isCurrentUserInGroup(sp.web.associatedOwnerGroup);
 
 /**
  * Does the current user match the audience target
+ *
+ * @param {AudienceTargeting} audienceTarget Audience target
  */
-export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promise<boolean>(resolve => {
-    switch (audience) {
+export const doesUserMatchAudience = (audienceTarget: AudienceTargeting) => new Promise<boolean>(resolve => {
+    switch (audienceTarget) {
         case AudienceTargeting.None: {
             resolve(true);
         }
             break;
         case AudienceTargeting.Visitors: {
-            isUserInVisitorsGroup().then(bool => resolve(bool));
+            isCurrentUserInVisitorsGroup().then(bool => resolve(bool));
         }
             break;
         case AudienceTargeting.Members: {
-            isUserInMembersGroup().then(bool => resolve(bool));
+            isCurrentUserInMembersGroup().then(bool => resolve(bool));
         }
             break;
         case AudienceTargeting.Owners: {
             if (_spPageContextInfo.hasOwnProperty("isSiteAdmin") && _spPageContextInfo["isSiteAdmin"] === true) {
                 resolve(true);
             } else {
-                isUserInOwnersGroup().then(bool => resolve(bool));
+                isCurrentUserInOwnersGroup().then(bool => resolve(bool));
             }
         }
             break;
@@ -75,9 +82,9 @@ export const doesUserMatchAudience = (audience: AudienceTargeting) => new Promis
 /**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
  *
- * @param date Date
- * @param dFormat Date format
- * @param locale Date locale
+ * @param {string} date Date
+ * @param {string} dFormat Date format
+ * @param {string} locale Date locale
  */
 export const dateFormat = (date: string, dFormat = __("MomentDate_DefaultFormat"), locale = __("MomentDate_Locale")): string => {
     return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
@@ -93,7 +100,7 @@ export const inEditMode = (): boolean => {
 /**
  * Make URL relative
  *
- * @param absUrl Absolute URL
+ * @param {string} absUrl Absolute URL
  */
 export const makeRelative = (absUrl: string): string => {
     return absUrl.replace(document.location.protocol + "//" + document.location.hostname, "");
@@ -102,7 +109,7 @@ export const makeRelative = (absUrl: string): string => {
 /**
  * Make URL absolute
  *
- * @param relUrl Absolute URL
+ * @param {string} relUrl Absolute URL
  */
 export const makeAbsolute = (relUrl: string): string => {
     if (relUrl.startsWith("http")) {
@@ -117,7 +124,7 @@ export const makeAbsolute = (relUrl: string): string => {
 /**
  * Generates URL. Replaces norwegian characters and spaces.
  *
- * @param str The string
+ * @param {string} str The string
  */
 export const generateUrl = (str: string, length?: number): string => {
     str = str
@@ -134,7 +141,7 @@ export const generateUrl = (str: string, length?: number): string => {
 /**
  * Cleans search property name
  *
- * @param searchProp Search property name
+ * @param {string} searchProp Search property name
  */
 export const cleanSearchPropName = (searchProp: string): string => {
     return searchProp.match(/(.*?)OWS*/)[1];
@@ -148,9 +155,9 @@ export enum UserPhotoSource {
 /**
  * Get user photo URL from userphoto.aspx
  *
- * @param email Email adress
- * @param source User photo source (OWA is not supported on premise)
- * @param size Size S/M/L
+ * @param {string} email Email adress
+ * @param {string} source User photo source (OWA is not supported on premise)
+ * @param {string} size Size S/M/L
  */
 export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx, size = "L"): string => {
     switch (source) {
@@ -166,7 +173,7 @@ export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx,
 /**
  * Converts a string to a hex color
  *
- * @param str The string
+ * @param {string} str The string
  */
 export const stringToColour = (str: string): string => {
     let hash = 0;
@@ -184,12 +191,12 @@ export const stringToColour = (str: string): string => {
 /**
  * Shows a user message using SP.UI
  *
- * @param title Title
- * @param message Message
- * @param color Color
- * @param duration Duration (ms)
- * @param reloadWhenDone Reload page when done
- * @param removeUrlParams Remove url params
+ * @param {string} title Title
+ * @param {string} message Message
+ * @param {string} color Color
+ * @param {number} duration Duration (ms)
+ * @param {boolean} reloadWhenDone Reload page when done
+ * @param {boolean} removeUrlParams Remove url params
  */
 export const userMessage = (title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void => {
     const status = SP.UI.Status.addStatus(title, message);
@@ -207,13 +214,13 @@ export const userMessage = (title: string, message: string, color: string, durat
 /**
  * Calculates percentage
  *
- * @param startValue The start value, i.e. equal to 0%
- * @param partValue The part of the target value you want to calculate percentage of
- * @param targetValue The target value, i.e. equal to 100%
- * @param addPrefix Add prefix (%)
+ * @param {number} startValue The start value, i.e. equal to 0%
+ * @param {number} partValue The part of the target value you want to calculate percentage of
+ * @param {number} targetValue The target value, i.e. equal to 100%
+ * @param {boolean} addPrefix Add prefix (%)
  */
 export const percentage = (startValue: number, partValue: number, targetValue: number, addPrefix = true): any => {
-    let value = Math.floor(((partValue - startValue) / (targetValue - startValue)) * 100);
+    let value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
     } else {
@@ -224,7 +231,7 @@ export const percentage = (startValue: number, partValue: number, targetValue: n
 /**
  * Encodes spaces
  *
- * @param str The string
+ * @param {string} str The string
  */
 export const encodeSpaces = (str: string): string => {
     return str.replace(/ /g, "%20");
@@ -233,11 +240,11 @@ export const encodeSpaces = (str: string): string => {
 /**
  * Sets item field value (supports text/choice, number and taxonomy)
  *
- * @param fieldName Field name
- * @param item SP list item
- * @param fieldValue Field value
- * @param ctx Client context
- * @param list SP list
+ * @param {string} fieldName Field name
+ * @param {SP.ListItem} item SP list item
+ * @param {any} fieldValue Field value
+ * @param {SP.ClientContext} ctx Client context
+ * @param {SP.List} list SP list
  */
 export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void => {
     if (fieldValue === null) {
@@ -290,7 +297,7 @@ export const reloadPage = (): void => {
 /**
  * Get safe term. The term object is different depending on if SP.Taxonomy is loaded on the page
  *
- * @param term Term
+ * @param {any} term Term
  */
 export const getSafeTerm = (term) => {
     let obj = term;
@@ -311,15 +318,15 @@ export const getSafeTerm = (term) => {
 /**
  * Sets Taxonomy single value
  *
- * @param ctx Client context
- * @param list SP List
- * @param item SP list item
- * @param fieldName Field name
- * @param label Term label
- * @param termGuid Term GUID
- * @param wssId Term WSS ID
+ * @param {SP.ClientContext} ctx Client context
+ * @param {SP.List} list SP List
+ * @param {SP.ListItem} item SP list item
+ * @param {string} fieldName Field name
+ * @param {string} label Term label
+ * @param {any} termGuid Term GUID
+ * @param {number} wssId Term WSS ID
  */
-export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGuid, wssId = -1) => {
+export const setTaxonomySingleValue = (ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid, wssId = -1) => {
     let field = list.get_fields().getByInternalNameOrTitle(fieldName),
         taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
         taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
@@ -333,7 +340,7 @@ export const setTaxonomySingleValue = (ctx, list, item, fieldName, label, termGu
 /**
  * Ensure taxonomy
  *
- * @param loadTimeout Loading timeout (ms)
+ * @param {number} loadTimeout Loading timeout (ms)
  */
 export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
@@ -355,8 +362,8 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
 /**
  * Generate storage key with or without web prefix (_spPageContextInfo.webServerRelativeUrl)
  *
- * @param parts Parts to include in the key
- * @param addWebPrefix Should web prefix be added
+ * @param {string[]} parts Parts to include in the key
+ * @param {boolean} addWebPrefix Should web prefix be added
  */
 export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
     const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
@@ -369,8 +376,8 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
 /**
  * Formats a string (containing a currency value) to currency
  *
- * @param val The value
- * @param prefix Currency prefix
+ * @param {string} val The value
+ * @param {string} prefix Currency prefix
  */
 export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): string => {
     let str = parseInt(val, 10).toString().split(".");
@@ -386,7 +393,7 @@ export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): st
 /**
  * Get client context for the specified URL
  *
- * @param url The URL
+ * @param {string} url The URL
  */
 export const getClientContext = (url: string) => new Promise<SP.ClientContext>((resolve, reject) => {
     SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
@@ -395,6 +402,9 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
     });
 });
 
+/**
+ * Get URL hash object
+ */
 export const getUrlHash = (): { [key: string]: string } => {
     const hash = document.location.hash.substring(1);
     let hashObject: { [key: string]: string } = {};
@@ -405,6 +415,11 @@ export const getUrlHash = (): { [key: string]: string } => {
     return hashObject;
 };
 
+/**
+ * Set URL hash
+ *
+ * @param {Object} hashObject Hash object
+ */
 export const setUrlHash = (hashObject: { [key: string]: string }): void => {
     let hash = "#";
     let hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`);
@@ -412,11 +427,14 @@ export const setUrlHash = (hashObject: { [key: string]: string }): void => {
     document.location.hash = hash;
 };
 
+/**
+ * Get URL parts
+ */
 export const getUrlParts = (): string[] => {
     return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
 };
 
-import { default as WaitDialog } from "./WaitDialog";
-import StampVersion from "./StampVersion";
-
-export { WaitDialog, StampVersion };
+export {
+    WaitDialog,
+    StampVersion,
+};
