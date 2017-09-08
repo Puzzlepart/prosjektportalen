@@ -5,7 +5,6 @@ import DataSource from "../../DataSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
 import MeasurementEntry from "./MeasurementEntry";
 import BenefitEntry from "./BenefitEntry";
-import ISpField from "./ISpField";
 
 /**
  * Get measurements for the specified benefit entry
@@ -77,12 +76,16 @@ const SearchSettings = {
  * @param {any} obj List or content type
  * @param {string} fieldPrefix Field prefix
  */
-const fetchFields = (obj: any, fieldPrefix = "Gt") => new Promise<ISpField[]>((resolve, reject) => {
+const fetchFieldsAsMap = (obj: any, fieldPrefix = "Gt") => new Promise<{ [key: string]: string }>((resolve, reject) => {
     obj
         .fields
         .filter(`substringof('${fieldPrefix}', InternalName) eq true`)
         .get()
-        .then(resolve)
+        .then(fields => {
+            let fieldNamesMap: { [key: string]: string } = {};
+            fields.forEach(({ InternalName, Title }) => fieldNamesMap[InternalName] = Title);
+            resolve(fieldNamesMap);
+        })
         .catch(reject);
 });
 
@@ -118,9 +121,9 @@ const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reje
     const gainsList = sp.web.lists.getByTitle(__("Lists_BenefitsAnalysis_Title"));
     const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
 
-    fetchFields(gainsList)
-        .then(gainsFields => {
-            let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
+    fetchFieldsAsMap(gainsList)
+        .then(fieldsMap => {
+            let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...Object.keys(fieldsMap)].join(",");
             Promise.all([
                 gainsList
                     .items
@@ -138,7 +141,7 @@ const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reje
                 measures = measures.map(m => new MeasurementEntry().init(DataSource.List, m));
                 const data: IBenefitsOverviewData = ({
                     items: GenerateData(gains, measures),
-                    columns: GenerateColumns(gainsFields, DataSource.List),
+                    columns: GenerateColumns(fieldsMap, DataSource.List),
                 });
                 resolve(data);
             }).catch(reject);
@@ -151,12 +154,12 @@ const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reje
  */
 const retrieveDataSearch = () => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     Promise.all([
-        fetchFields(sp.web.contentTypes.getById(__("ContentTypes_Gevinst_ContentTypeId"))),
+        fetchFieldsAsMap(sp.web.contentTypes.getById(__("ContentTypes_Gevinst_ContentTypeId"))),
         sp.search({
             ...SearchSettings,
         }),
     ])
-        .then(([gainsFields, response]: [ISpField[], any]) => {
+        .then(([fieldsMap, response]: [any, any]) => {
             const gains = response.PrimarySearchResults
                 .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinst_ContentTypeId")) !== -1)
                 .map(m => new BenefitEntry().init(DataSource.Search, m));
@@ -166,7 +169,7 @@ const retrieveDataSearch = () => new Promise<IBenefitsOverviewData>((resolve, re
                 .map(m => new MeasurementEntry().init(DataSource.Search, m));
             const data: IBenefitsOverviewData = ({
                 items: GenerateData(gains, measures),
-                columns: GenerateColumns(gainsFields, DataSource.Search),
+                columns: GenerateColumns(fieldsMap, DataSource.Search),
             });
             resolve(data);
         })

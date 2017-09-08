@@ -99,12 +99,10 @@ export const GetColumnByKey = (key: string): IColumn => {
 /**
  * Generate columns based on data source and fields
  *
- * @param {any[]} fields Fields
+ * @param {Object} fieldNamesMap Field names map, maps InternalName => Title
  * @param {DataSource} dataSource Data source
  */
-export const GenerateColumns = (fields: any[], dataSource: DataSource): any[] => {
-    let fieldNamesMap: { [key: string]: string } = {};
-    fields.forEach(({ InternalName, Title }) => fieldNamesMap[InternalName] = Title);
+export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSource: DataSource): any[] => {
     let generatedColumns = Columns().map(col => (Object.assign(col, {
         name: col.hasOwnProperty("name") ? col.name : (fieldNamesMap[col.key] || col.key),
     })));
