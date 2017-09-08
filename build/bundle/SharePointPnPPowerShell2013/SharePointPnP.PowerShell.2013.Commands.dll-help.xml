@@ -10687,6 +10687,84 @@ PS:&gt; Get-PnPContentType
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Get-PnPDefaultColumnValues</command:name>
+      <maml:description>
+        <maml:para>Gets the default column values for all folders in document library</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPDefaultColumnValues</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>Gets the default column values for a document library, per folder. Supports both text, people and taxonomy fields.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPDefaultColumnValues</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Name or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID, Name or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples />
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/officedevpnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Get-PnPDocumentSetTemplate</command:name>
       <maml:description>
         <maml:para>Retrieves a document set template</maml:para>
@@ -11204,6 +11282,13 @@ PS:&gt; Get-PnPContentType
           <command:parameterValue required="true">ListPipeBind</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>Group</maml:name>
+          <maml:description>
+            <maml:para>Filter to the specified group</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -11227,6 +11312,17 @@ PS:&gt; Get-PnPContentType
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Group</maml:name>
+        <maml:description>
+          <maml:para>Filter to the specified group</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Identity</maml:name>
         <maml:description>
@@ -12816,6 +12912,20 @@ PS:&gt; Get-PnPContentType
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>PageSize</maml:name>
+          <maml:description>
+            <maml:para>The number of items to retrieve per page request.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ScriptBlock</maml:name>
+          <maml:description>
+            <maml:para>The script block to run after every page request.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ScriptBlock</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -13065,7 +13175,7 @@ PS:&gt; Get-PnPContentType
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPListItem -List Tasks -PageSize 1000 -ScriptBlock { $args.Context.ExecuteQuery() } | % { $_.BreakRoleInheritance($true, $true) }</dev:code>
+        <dev:code>PS:&gt; Get-PnPListItem -List Tasks -PageSize 1000 -ScriptBlock { Param($items) $items.Context.ExecuteQuery() } | % { $_.BreakRoleInheritance($true, $true) }</dev:code>
         <maml:remarks>
           <maml:para>Retrieves all list items from the Tasks list in pages of 1000 items and breaks permission inheritance on each item.</maml:para>
           <maml:para></maml:para>
@@ -13525,6 +13635,13 @@ PS:&gt; Get-PnPContentType
           <command:parameterValue required="true">ITemplateProviderExtension[]</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>ContentTypeGroups</maml:name>
+          <maml:description>
+            <maml:para>Allows you to specify from which content type group(s) the content types should be included into the template.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Force</maml:name>
           <maml:description>
             <maml:para>Overwrites the output file if it exists.</maml:para>
@@ -13590,6 +13707,17 @@ PS:&gt; Get-PnPContentType
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>ContentTypeGroups</maml:name>
+        <maml:description>
+          <maml:para>Allows you to specify from which content type group(s) the content types should be included into the template.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Encoding</maml:name>
         <maml:description>
@@ -13984,6 +14112,22 @@ PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers 
         <dev:code>PS:&gt; $template = Get-PnPProvisioningTemplate -OutputInstance</dev:code>
         <maml:remarks>
           <maml:para>Extracts an instance of a provisioning template object from the current web. This syntax cannot be used together with the -Out parameter, but it can be used together with any other supported parameters.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 10---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPProvisioningTemplate -Out template.pnp -ContentTypeGroups "Group A","Group B"</dev:code>
+        <maml:remarks>
+          <maml:para>Extracts a provisioning template in Office Open XML from the current web, but only processes content types from the to given content type groups.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -14562,6 +14706,13 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
       <command:syntaxItem>
         <maml:name>Get-PnPSearchConfiguration</maml:name>
         <command:parameter required="false" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Local path where the search configuration will be saved</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Scope</maml:name>
           <maml:description>
             <maml:para>Scope to use. Either Web, Site, or Subscription. Defaults to Web</maml:para>
@@ -14569,11 +14720,28 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
           <command:parameterValue required="true">SearchConfigurationScope</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
-          <maml:name>Path</maml:name>
+          <maml:name>Web</maml:name>
           <maml:description>
-            <maml:para>Local path where the search configuration will be saved</maml:para>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
           </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Get-PnPSearchConfiguration</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>OutputFormat</maml:name>
+          <maml:description>
+            <maml:para>Output format for of the configuration. Defaults to complete XML</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">OutputFormat</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Scope</maml:name>
+          <maml:description>
+            <maml:para>Scope to use. Either Web, Site, or Subscription. Defaults to Web</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SearchConfigurationScope</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
@@ -14585,6 +14753,17 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>OutputFormat</maml:name>
+        <maml:description>
+          <maml:para>Output format for of the configuration. Defaults to complete XML</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">OutputFormat</command:parameterValue>
+        <dev:type>
+          <maml:name>OutputFormat</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Path</maml:name>
         <maml:description>
@@ -14687,6 +14866,22 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
         <dev:code>PS:&gt; Get-PnPSearchConfiguration -Path searchconfig.xml -Scope Subscription</dev:code>
         <maml:remarks>
           <maml:para>Returns the search configuration for the current tenant and saves it to the specified file</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchConfiguration -Scope Site -OutputFormat ManagedPropertyMappings</dev:code>
+        <maml:remarks>
+          <maml:para>Returns all custom managed properties and crawled property mapping at the current site collection</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -16286,9 +16481,27 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
           </maml:description>
           <command:parameterValue required="true">UnifiedGroupPipeBind</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ExcludeSiteUrl</maml:name>
+          <maml:description>
+            <maml:para>Exclude fetching the site URL for Office 365 Groups. This speeds up large listings.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>ExcludeSiteUrl</maml:name>
+        <maml:description>
+          <maml:para>Exclude fetching the site URL for Office 365 Groups. This speeds up large listings.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Identity</maml:name>
         <maml:description>
@@ -16366,9 +16579,9 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPUnifiedGroup -Identity $groupSiteUrl</dev:code>
+        <dev:code>PS:&gt; Get-PnPUnifiedGroup -Identity $groupSiteMailNickName</dev:code>
         <maml:remarks>
-          <maml:para>Retrieves a specific Office 365 Group based on the URL of its Modern SharePoint site</maml:para>
+          <maml:para>Retrieves a specific Office 365 Group based on the mail nickname</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -16394,6 +16607,81 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
         </command:commandLines>
       </command:example>
     </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/officedevpnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PnPUser</command:name>
+      <maml:description>
+        <maml:para>Returns site users of current web</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPUser</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPUser</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>User ID or login name</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">UserPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>User ID or login name</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">UserPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>UserPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples />
     <maml:relatedLinks>
       <maml:navigationLink>
         <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
@@ -18946,6 +19234,134 @@ The import file also supports an expanded syntax for the Term Set Name and term 
         <dev:code>PS:&gt;Move-PnPFile -ServerRelativeUrl /sites/project/Documents/company.docx -TargetUrl /sites/otherproject/Documents/company.docx -OverwriteIfAlreadyExists</dev:code>
         <maml:remarks>
           <maml:para>Moves a file named company.docx located in the document library called Documents located in the projects sitecollection under the managed path sites to the site collection otherproject located in the managed path sites. If a file named company.aspx already exists, it will still perform the move and replace the original company.aspx file.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/officedevpnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Move-PnPListItemToRecycleBin</command:name>
+      <maml:description>
+        <maml:para>Moves an item from a list to the Recycle Bin</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Move</command:verb>
+      <command:noun>PnPListItemToRecycleBin</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Move-PnPListItemToRecycleBin</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Title or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListItemPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID, Title or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Move-PnPListItemToRecycleBin -List "Demo List" -Identity "1" -Force</dev:code>
+        <maml:remarks>
+          <maml:para>Moves the listitem with id "1" from the "Demo List" list to the Recycle Bin.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -23237,7 +23653,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Remove-PnPList -Title Announcements</dev:code>
+        <dev:code>PS:&gt; Remove-PnPList -Identity Announcements</dev:code>
         <maml:remarks>
           <maml:para>Removes the list named 'Announcements'. Asks for confirmation.</maml:para>
           <maml:para></maml:para>
@@ -23253,7 +23669,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Remove-PnPList -Title Announcements -Force</dev:code>
+        <dev:code>PS:&gt; Remove-PnPList -Identity Announcements -Force</dev:code>
         <maml:remarks>
           <maml:para>Removes the list named 'Announcements' without asking for confirmation.</maml:para>
           <maml:para></maml:para>
@@ -28469,9 +28885,9 @@ Managed Metadata (single value with path to term): -Values @{"MetadataField" = "
 
 Managed Metadata (single value with id of term): -Values @{"MetadataField" = "fe40a95b-2144-4fa2-b82a-0b3d0299d818"} with Id of term
 
-Managed Metadata (multiple values with paths to terms): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE","CORPORATE|DEPARTMENTS|HR"}
+Managed Metadata (multiple values with paths to terms): -Values @{"MetadataField" = ("CORPORATE|DEPARTMENTS|FINANCE","CORPORATE|DEPARTMENTS|HR")}
 
-Managed Metadata (multiple values with ids of terms): -Values @{"MetadataField" = "fe40a95b-2144-4fa2-b82a-0b3d0299d818","52d88107-c2a8-4bf0-adfa-04bc2305b593"}
+Managed Metadata (multiple values with ids of terms): -Values @{"MetadataField" = ("fe40a95b-2144-4fa2-b82a-0b3d0299d818","52d88107-c2a8-4bf0-adfa-04bc2305b593")}
 
 Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev/, OfficePnp"}</maml:para>
           </maml:description>
@@ -28557,9 +28973,9 @@ Managed Metadata (single value with path to term): -Values @{"MetadataField" = "
 
 Managed Metadata (single value with id of term): -Values @{"MetadataField" = "fe40a95b-2144-4fa2-b82a-0b3d0299d818"} with Id of term
 
-Managed Metadata (multiple values with paths to terms): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE","CORPORATE|DEPARTMENTS|HR"}
+Managed Metadata (multiple values with paths to terms): -Values @{"MetadataField" = ("CORPORATE|DEPARTMENTS|FINANCE","CORPORATE|DEPARTMENTS|HR")}
 
-Managed Metadata (multiple values with ids of terms): -Values @{"MetadataField" = "fe40a95b-2144-4fa2-b82a-0b3d0299d818","52d88107-c2a8-4bf0-adfa-04bc2305b593"}
+Managed Metadata (multiple values with ids of terms): -Values @{"MetadataField" = ("fe40a95b-2144-4fa2-b82a-0b3d0299d818","52d88107-c2a8-4bf0-adfa-04bc2305b593")}
 
 Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev/, OfficePnp"}</maml:para>
         </maml:description>
@@ -28633,6 +29049,341 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <dev:code>Set-PnPListItem -List "Demo List" -Identity $item -Values @{"Title" = "Test Title"; "Category"="Test Category"}</dev:code>
         <maml:remarks>
           <maml:para>Sets fields value in the list item which has been retrieved by for instance Get-PnPListItem. It sets the content type of the item to "Company" and it sets both the Title and Category fields with the specified values. Notice, use the internal names of fields.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/officedevpnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Set-PnPListItemPermission</command:name>
+      <maml:description>
+        <maml:para>Sets list item permissions</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>PnPListItemPermission</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-PnPListItemPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Title or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>InheritPermissions</maml:name>
+          <maml:description>
+            <maml:para>Inherit permissions from the list, removing unique permissions</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPListItemPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Group</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Title or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ClearExisting</maml:name>
+          <maml:description>
+            <maml:para>Clear all existing permissions</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPListItemPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Title or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ClearExisting</maml:name>
+          <maml:description>
+            <maml:para>Clear all existing permissions</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>AddRole</maml:name>
+        <maml:description>
+          <maml:para>The role that must be assigned to the group or user</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ClearExisting</maml:name>
+        <maml:description>
+          <maml:para>Clear all existing permissions</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Group</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>GroupPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>The ID of the listitem, or actual ListItem object</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListItemPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListItemPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>InheritPermissions</maml:name>
+        <maml:description>
+          <maml:para>Inherit permissions from the list, removing unique permissions</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID, Title or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>RemoveRole</maml:name>
+        <maml:description>
+          <maml:para>The role that must be removed from the group or user</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListPermission -List 'Documents' -Identity 1 -User 'user@contoso.com' -AddRole 'Contribute'</dev:code>
+        <maml:remarks>
+          <maml:para>Adds the 'Contribute' permission to the user 'user@contoso.com' for item with id 1 in the list 'Documents'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListPermission -List 'Documents' -Identity 1 -User 'user@contoso.com' -RemoveRole 'Contribute'</dev:code>
+        <maml:remarks>
+          <maml:para>Removes the 'Contribute' permission to the user 'user@contoso.com' for item with id 1 in the list 'Documents'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListPermission -List 'Documents' -Identity 1 -User 'user@contoso.com' -AddRole 'Contribute' -ClearExisting</dev:code>
+        <maml:remarks>
+          <maml:para>Adds the 'Contribute' permission to the user 'user@contoso.com' for item with id 1 in the list 'Documents' and removes all other permissions</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListPermission -List 'Documents' -Identity 1 -InheritPermissions</dev:code>
+        <maml:remarks>
+          <maml:para>Resets permissions for item with id 1 to inherit permissions from the list 'Documents'</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -31192,6 +31943,366 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Set-PnPWebPermission</command:name>
+      <maml:description>
+        <maml:para>Sets web permissions</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>PnPWebPermission</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Group</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>Identity/Id/Web object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>Group</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Identity</maml:name>
+          <maml:description>
+            <maml:para>Identity/Id/Web object</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Url</maml:name>
+          <maml:description>
+            <maml:para>The site relative url of the web, e.g. 'Subweb1'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>Group</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Set-PnPWebPermission</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Url</maml:name>
+          <maml:description>
+            <maml:para>The site relative url of the web, e.g. 'Subweb1'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>User</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AddRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be assigned to the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RemoveRole</maml:name>
+          <maml:description>
+            <maml:para>The role that must be removed from the group or user</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>AddRole</maml:name>
+        <maml:description>
+          <maml:para>The role that must be assigned to the group or user</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Group</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="true">GroupPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>GroupPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Identity</maml:name>
+        <maml:description>
+          <maml:para>Identity/Id/Web object</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>RemoveRole</maml:name>
+        <maml:description>
+          <maml:para>The role that must be removed from the group or user</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Url</maml:name>
+        <maml:description>
+          <maml:para>The site relative url of the web, e.g. 'Subweb1'</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>User</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPWebPermission -Url projectA -User 'user@contoso.com' -AddRole 'Contribute'</dev:code>
+        <maml:remarks>
+          <maml:para>Adds the 'Contribute' permission to the user 'user@contoso.com' for a web, specified by its site relative url</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPWebPermission -Identity 5fecaf67-6b9e-4691-a0ff-518fc9839aa0 -User 'user@contoso.com' -RemoveRole 'Contribute'</dev:code>
+        <maml:remarks>
+          <maml:para>Removes the 'Contribute' permission to the user 'user@contoso.com' for a web, specified by its ID</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Office 365 Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/officedevpnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Set-PnPWikiPageContent</command:name>
       <maml:description>
         <maml:para>Sets the contents of a wikipage</maml:para>
@@ -32080,7 +33191,7 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchQuery -Query "finance"</dev:code>
+        <dev:code>PS:&gt; Submit-PnPSearchQuery -Query "finance"</dev:code>
         <maml:remarks>
           <maml:para>Returns the top 500 items with the term finance</maml:para>
           <maml:para></maml:para>
@@ -32096,7 +33207,7 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchQuery -Query "Title:Intranet*" -MaxResults 10</dev:code>
+        <dev:code>PS:&gt; Submit-PnPSearchQuery -Query "Title:Intranet*" -MaxResults 10</dev:code>
         <maml:remarks>
           <maml:para>Returns the top 10 items indexed by SharePoint Search of which the title starts with the word Intranet</maml:para>
           <maml:para></maml:para>
@@ -32112,7 +33223,7 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchQuery -Query "Title:Intranet*" -All</dev:code>
+        <dev:code>PS:&gt; Submit-PnPSearchQuery -Query "Title:Intranet*" -All</dev:code>
         <maml:remarks>
           <maml:para>Returns absolutely all items indexed by SharePoint Search of which the title starts with the word Intranet</maml:para>
           <maml:para></maml:para>
@@ -32128,7 +33239,7 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchQuery -Query "Title:Intranet*" -Refiners "contentclass,FileType(filter=6/0/*)"</dev:code>
+        <dev:code>PS:&gt; Submit-PnPSearchQuery -Query "Title:Intranet*" -Refiners "contentclass,FileType(filter=6/0/*)"</dev:code>
         <maml:remarks>
           <maml:para>Returns absolutely all items indexed by SharePoint Search of which the title starts with the word Intranet, and return refiners for contentclass and FileType managed properties</maml:para>
           <maml:para></maml:para>
