@@ -1,92 +1,39 @@
-import {
-    sp,
-    Logger,
-    LogLevel,
-} from "sp-pnp-js";
+import { sp } from "sp-pnp-js";
 import * as Util from "../../../Util";
-import {
-    Columns,
-    GetColumnByKey,
-    GenerateColumns,
-} from "../Columns";
+import { GenerateColumns } from "../Columns";
 import DataSource from "../../DataSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
-import IMeasurement from "./IMeasurement";
+import MeasurementEntry from "./MeasurementEntry";
+import BenefitEntry from "./BenefitEntry";
 import ISpField from "./ISpField";
 
 /**
  * Get measurements for the specified benefit entry
  *
- * @param {any[]} measures Measures
- * @param {any} benefit Benefit
- * @param {boolean} shouldIncrease Should the value increase
- * @param {DataSource} dataSource Data source
+ * @param {MeasurementEntry[]} measures Measures
+ * @param {BenefitEntry} benefit Benefit
  */
-const GetBenefitMeasurements = (measures: any[], benefit, valueShouldIncrease: boolean, dataSource: DataSource): IMeasurement[] => {
-    const isSearch = (dataSource === DataSource.Search);
-    const idFieldName = isSearch ? "ListItemID" : "ID",
-        valueFieldName = isSearch ? "GtMeasurementValueOWSNMBR" : "GtMeasurementValue",
-        lookupFieldName = isSearch ? "RefinableString58" : "GtGainLookupId",
-        desiredValueFieldName = GetColumnByKey("GtDesiredValue", dataSource).fieldName,
-        startValueFieldName = GetColumnByKey("GtStartValue", dataSource).fieldName,
-        desiredValue = parseInt(benefit[desiredValueFieldName], 10),
-        startValue = parseInt(benefit[startValueFieldName], 10);
+const GetBenefitMeasurements = (measures: MeasurementEntry[], benefit: BenefitEntry): MeasurementEntry[] => {
     return measures
-        .filter(m => {
-            let benefitId = parseInt(benefit[idFieldName], 10),
-                benefitLookupId = parseInt(m[lookupFieldName], 10);
-            switch (dataSource) {
-                case DataSource.List: return (benefitLookupId === benefitId);
-                case DataSource.Search: return (benefitLookupId === benefitId) && (benefit.SPWebUrl === m.SPWebUrl);
-            }
+        .filter(measure => {
+            return (benefit.ID === measure.LookupId && benefit.WebUrl === measure.WebUrl);
         })
         .map(measure => {
-            let value = parseInt(measure[valueFieldName], 10),
-                percentage = Util.percentage(startValue, value, desiredValue, false);
-            return ({
-                Value: value,
-                Percentage: percentage,
-                SPWebUrl: measure.SPWebUrl,
-            });
+            measure.Percentage = Util.percentage(benefit.StartValue, measure.MeasurementValue, benefit.DesiredValue, true);
+            return measure;
         });
 };
 
 /**
- * Generate data
+ * Generate benefit entries based on base data and relevant measures
  *
- * @param {any[]} benefits Benefits
- * @param {any[]} measures Measure
- * @param {DataSource} dataSource Data source
+ * @param {BenefitEntry[]} benefits Benefits
+ * @param {Measurement[]} measures Measure
  */
-const GenerateData = (benefits: any[], measures: any[], dataSource: DataSource): any[] => {
-    return benefits.map(data => {
-        const startValue = parseInt(data[GetColumnByKey("GtStartValue", dataSource).fieldName], 10);
-        const desiredValue = parseInt(data[GetColumnByKey("GtDesiredValue", dataSource).fieldName], 10);
-        const valueShouldIncrease = (desiredValue > startValue);
-        const relevantMeasures = GetBenefitMeasurements(measures, data, valueShouldIncrease, dataSource);
-        let measureStats = {
-            LatestPercentage: null,
-            LatestValue: null,
-            PreviousPercentage: null,
-            PreviousValue: null,
-            ValueShouldIncrease: valueShouldIncrease,
-        };
-        if (relevantMeasures.length > 0) {
-            try {
-                let [latest, previous] = relevantMeasures;
-                let { Percentage: a1, Value: b1 } = latest;
-                measureStats.LatestPercentage = a1;
-                measureStats.LatestValue = b1;
-                if (previous) {
-                    let { Percentage: a2, Value: b2 } = previous;
-                    measureStats.PreviousPercentage = a2;
-                    measureStats.PreviousValue = b2;
-                }
-            } catch (e) {
-                Logger.log({ message: `Unable to calculcate measures.`, level: LogLevel.Warning, data: relevantMeasures });
-            }
-        }
-        return Object.assign(data, measureStats);
+const GenerateData = (benefits: BenefitEntry[], measures: MeasurementEntry[]): any[] => {
+    return benefits.map(bf => {
+        const relevantMeasures = GetBenefitMeasurements(measures, bf);
+        return bf.initStats(relevantMeasures);
     });
 };
 
@@ -107,7 +54,11 @@ const SearchSettings = {
         "GtMeasurementValueOWSNMBR",
         "GtMeasurementDateOWSDATE",
         "RefinableString58",
-        ...Columns(DataSource.Search).filter(col => col.searchPostfix).map(col => col.fieldName),
+        "GtGainsResponsibleOWSUSER",
+        "GtMeasureIndicatorOWSTEXT",
+        "GtMeasurementUnitOWSCHCS",
+        "GtStartValueOWSNMBR",
+        "GtDesiredValueOWSNMBR",
     ],
     TrimDuplicates: false,
     Properties: [{
@@ -135,60 +86,23 @@ const fetchFields = (obj: any, fieldPrefix = "Gt") => new Promise<ISpField[]>((r
         .catch(reject);
 });
 
-
-const gainsList = sp.web.lists.getByTitle(__("Lists_BenefitsAnalysis_Title"));
-const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
-
 /**
- * Fetches data based on selected data source
+ * Fetches data based on selected data source (List or Search)
  *
  * @param {DataSource} dataSource Data source (list/search)
  */
-export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOverviewData> => new Promise<IBenefitsOverviewData>((resolve, reject) => {
+export const retrieveFromSource = (dataSource: DataSource) => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     switch (dataSource) {
         case DataSource.List: {
-            fetchFields(gainsList).then(gainsFields => {
-                let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
-                Promise.all([
-                    gainsList
-                        .items
-                        .select(selectFields)
-                        .expand("GtChangeLookup", "GtGainsResponsible")
-                        .orderBy("Modified", false)
-                        .get(),
-                    measuresList
-                        .items
-                        .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
-                        .orderBy("GtMeasurementDate", false)
-                        .get(),
-                ]).then(([gains, measures]) => {
-                    let data: IBenefitsOverviewData = ({
-                        items: GenerateData(gains, measures, dataSource),
-                        columns: GenerateColumns(gainsFields, dataSource),
-                    });
-                    resolve(data);
-                }).catch(reject);
-            }).catch(reject);
+            retrieveDataList()
+                .then(resolve)
+                .catch(reject);
         }
             break;
         case DataSource.Search: {
-            Promise.all([
-                fetchFields(sp.web.contentTypes.getById(__("ContentTypes_Gevinst_ContentTypeId"))),
-                sp.search({
-                    ...SearchSettings,
-                }),
-            ]).then(([gainsFields, response]: [ISpField[], any]) => {
-                let gains = response.PrimarySearchResults
-                    .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinst_ContentTypeId")) !== -1);
-                let measures = response.PrimarySearchResults
-                    .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
-                    .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1);
-                let data: IBenefitsOverviewData = ({
-                    items: GenerateData(gains, measures, dataSource),
-                    columns: GenerateColumns(gainsFields, dataSource),
-                });
-                resolve(data);
-            }).catch(reject);
+            retrieveDataSearch()
+                .then(resolve)
+                .catch(reject);
         }
             break;
         default: {
@@ -197,8 +111,71 @@ export const retrieveFromSource = (dataSource: DataSource): Promise<IBenefitsOve
     }
 });
 
+/**
+ * Fetches data from list(s)
+ */
+const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reject) => {
+    const gainsList = sp.web.lists.getByTitle(__("Lists_BenefitsAnalysis_Title"));
+    const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
+
+    fetchFields(gainsList)
+        .then(gainsFields => {
+            let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...gainsFields.map(f => f.InternalName)].join(",");
+            Promise.all([
+                gainsList
+                    .items
+                    .select(selectFields)
+                    .expand("GtChangeLookup", "GtGainsResponsible")
+                    .orderBy("Modified", false)
+                    .get(),
+                measuresList
+                    .items
+                    .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
+                    .orderBy("GtMeasurementDate", false)
+                    .get(),
+            ]).then(([gains, measures]) => {
+                gains = gains.map(m => new BenefitEntry().init(DataSource.List, m));
+                measures = measures.map(m => new MeasurementEntry().init(DataSource.List, m));
+                const data: IBenefitsOverviewData = ({
+                    items: GenerateData(gains, measures),
+                    columns: GenerateColumns(gainsFields, DataSource.List),
+                });
+                resolve(data);
+            }).catch(reject);
+        })
+        .catch(reject);
+});
+
+/**
+ * Fetches data using search
+ */
+const retrieveDataSearch = () => new Promise<IBenefitsOverviewData>((resolve, reject) => {
+    Promise.all([
+        fetchFields(sp.web.contentTypes.getById(__("ContentTypes_Gevinst_ContentTypeId"))),
+        sp.search({
+            ...SearchSettings,
+        }),
+    ])
+        .then(([gainsFields, response]: [ISpField[], any]) => {
+            const gains = response.PrimarySearchResults
+                .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinst_ContentTypeId")) !== -1)
+                .map(m => new BenefitEntry().init(DataSource.Search, m));
+            const measures = response.PrimarySearchResults
+                .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
+                .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1)
+                .map(m => new MeasurementEntry().init(DataSource.Search, m));
+            const data: IBenefitsOverviewData = ({
+                items: GenerateData(gains, measures),
+                columns: GenerateColumns(gainsFields, DataSource.Search),
+            });
+            resolve(data);
+        })
+        .catch(reject);
+});
+
 
 export {
     IBenefitsOverviewData,
-    IMeasurement,
+    MeasurementEntry,
+    BenefitEntry,
 };

@@ -6,6 +6,7 @@ import {
     SelectionMode,
     IColumn,
 } from "office-ui-fabric-react/lib/DetailsList";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
@@ -72,7 +73,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             return <Spinner type={SpinnerType.large} />;
         }
         if (data) {
-            let { items, columns, groups } = this.getFilteredData();
+            let { items, columns, groups } = this.getFilteredData(this.props, this.state);
             return (
                 <div style={{ width: "100%" }}>
                     {this.renderCommandBar(this.props, this.state)}
@@ -87,18 +88,19 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                         columns={columns}
                         groups={groups}
                         selectionMode={SelectionMode.none}
-                        onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, (evt) => {
-                            evt.preventDefault();
-                            this.setState({ showProjectInfo: item });
-                        })}
+                        onRenderItemColumn={(item, index, column: any) => {
+                            return _onRenderItemColumn(item, index, column, () => this.setState({ showProjectInfo: item }), entry => this.setState({ showMeasurements: entry }));
+                        }}
                         onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
                     />
                     {this.renderProjectInfoModal(this.props, this.state)}
+                    {this.renderMeasurementsModal(this.props, this.state)}
                 </div>
             );
         }
         return null;
     }
+
 
     /**
      * Renders the command bar from office-ui-fabric-react
@@ -178,23 +180,60 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         }
         return null;
     }
+    /**
+   * Renders the Project Info modal
+   *
+   * @param {IBenefitsOverviewProps} param0 Props
+   * @param {IBenefitsOverviewState} param1 State
+   */
+    private renderMeasurementsModal = ({ }: IBenefitsOverviewProps, { showMeasurements }: IBenefitsOverviewState) => {
+        if (showMeasurements) {
+            return (
+                <Modal
+                    isOpen={true}
+                    isDarkOverlay={true}
+                    onDismiss={e => this.setState({ showMeasurements: null })}
+                    containerClassName={"pp-modal"}
+                    isBlocking={false}>
+                    <div style={{ padding: 50 }}>
+                        <h2 style={{ marginBottom: 20 }}>{showMeasurements.Title}</h2>
+                        <DetailsList
+                            items={showMeasurements.Measurements}
+                            columns={[
+                                {
+                                    key: "MeasurementValue",
+                                    fieldName: "MeasurementValue",
+                                    name: __("SiteFields_GtMeasurementValue_DisplayName"),
+                                    minWidth: 100,
+                                },
+                                {
+                                    key: "Percentage",
+                                    fieldName: "Percentage",
+                                    name: __("String_AchievementOfObjectives"),
+                                    minWidth: 100,
+                                },
+                                {
+                                    key: "MeasurementDate",
+                                    fieldName: "MeasurementDate",
+                                    name: __("SiteFields_GtMeasurementDate_DisplayName"),
+                                    minWidth: 150,
+                                },
+                            ]}
+                        />
+                    </div>
+                </Modal>
+            );
+        }
+        return null;
+    }
 
     /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      *
-     * @param items Item collection
-     * @param columns Column collection
-     * @param groups Group collection
+     * @param {IBenefitsOverviewProps} param0 Props
+     * @param {IBenefitsOverviewState} param1 State
      */
-    private getFilteredData = (): { items: any[], columns: any[], groups: IGroup[] } => {
-        const {
-            groupBy,
-            data,
-            searchTerm,
-        } = this.state;
-
-        const { searchProperty } = this.props;
-
+    private getFilteredData = ({ searchProperty }: IBenefitsOverviewProps, { groupBy, data, searchTerm }: IBenefitsOverviewState): { items: any[], columns: any[], groups: IGroup[] } => {
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
         if (groupBy.key !== "NoGrouping") {
