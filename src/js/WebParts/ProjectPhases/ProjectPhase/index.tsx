@@ -3,6 +3,11 @@ import ProjectPhaseIcon from "./ProjectPhaseIcon";
 import ProjectPhaseCallout from "./ProjectPhaseCallout";
 import IProjectPhaseProps from "./IProjectPhaseProps";
 
+/**
+ * Project Phase
+ *
+ * @param {IProjectPhaseProps} param0 Props
+ */
 const ProjectPhase = ({ phase, classList, checkListData, onChangePhase }: IProjectPhaseProps) => {
     const isSelected = Array.contains(classList, "selected");
 
