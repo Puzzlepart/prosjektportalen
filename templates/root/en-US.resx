@@ -2212,6 +2212,34 @@
     <value>Relevant links</value>
   </data>
   <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
-    <value>Production Phase</value>
+    <value>Production Phase
+    </value>
+  </data>
+  <data name="SiteSettings_Link_Resources" xml:space="preserve">
+    <value>Project Portal - Resources</value>
+  </data>
+  <data name="SiteSettings_Link_Extensions" xml:space="preserve">
+    <value>Project Portal - Extensions</value>
+  </data>
+  <data name="SiteSettings_Link_ListContent" xml:space="preserve">
+    <value>Project Portal - List Content</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Fields)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewViews" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Views)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFilters" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Filters)</value>
+  </data>
+  <data name="SiteSettings_Link_ProjectConfig" xml:space="preserve">
+    <value>Project Portal - Project Config</value>
+  </data>
+  <data name="SiteSettings_Link_Feedback" xml:space="preserve">
+    <value>Project Portal - Feedback</value>
+  </data>
+  <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
+    <value>Project Portal - Status Sections</value>
   </data>
 </root>
