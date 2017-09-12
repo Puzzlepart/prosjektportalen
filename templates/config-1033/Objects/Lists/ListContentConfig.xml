@@ -26,7 +26,7 @@
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Phase Checklist</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Phase Checklist</pnp:DataValue>
-            <pnp:DataValue FieldName="GtLccFields">Title,GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtLccFields">Title,GtProjectPhase,GtSortOrder</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccLabel">Include default phase checklist items</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
