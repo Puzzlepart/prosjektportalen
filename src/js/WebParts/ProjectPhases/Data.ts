@@ -5,6 +5,7 @@ import {
     PROJECTPHASE_FIELD,
 } from "../../Project/";
 import { PhaseModel } from "../../Model";
+import IProjectPhasesData from "./IProjectPhasesData";
 import IChecklistData from "./IChecklistData";
 
 /**
@@ -70,7 +71,7 @@ const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }
 /**
  * Fetch data using sp-pnp-js and sp.taxonomy.js
  */
-export const fetchData = () => new Promise<any>((resolve, reject) => {
+export const fetchData = () => new Promise<IProjectPhasesData>((resolve, reject) => {
     Util.ensureTaxonomy().then(() => {
         Promise.all([
             GetCurrentProjectPhase(),

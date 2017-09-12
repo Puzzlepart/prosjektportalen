@@ -3,6 +3,8 @@ import IProjectPhaseIconProps from "./IProjectPhaseIconProps";
 
 /**
  * Project Phase Icon
+ *
+ * @param {IProjectPhaseIconProps} param0 Props
  */
 const ProjectPhaseIcon = ({ phase, classList, className = "phaseIcon", phaseLetterClassName = "phaseLetter", phaseClassName = "projectPhase", subTextClassName = "phaseSubText" }: IProjectPhaseIconProps) => {
     return (

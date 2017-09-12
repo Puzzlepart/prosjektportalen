@@ -192,7 +192,6 @@ function Start-Install() {
         }
         Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized
-        Apply-Template -Template "sitesettings" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }

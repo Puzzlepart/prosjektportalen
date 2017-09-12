@@ -36,14 +36,19 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             this.setState({ currentView: View.Confirm });
         }
     }
-
     /**
-     * Render the component
+     * Calls _render with props and state
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
+    /**
+     * Renders the component
+     *
+     * @param {IChangePhaseDialogProps} param0 Props
+     * @param {IChangePhaseDialogState} param1 State
+     */
     private _render({ onConfirmPhaseChange, phase }: IChangePhaseDialogProps, { currentView, isLoading, checkListItems, currentIdx }: IChangePhaseDialogState): JSX.Element {
         return (
             <Dialog

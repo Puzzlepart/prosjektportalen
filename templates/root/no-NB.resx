@@ -2217,4 +2217,31 @@
   <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
     <value>Leveransefase</value>
   </data>
+  <data name="SiteSettings_Link_Resources" xml:space="preserve">
+    <value>Prosjektportalen - Ressurser</value>
+  </data>
+  <data name="SiteSettings_Link_Extensions" xml:space="preserve">
+    <value>Prosjektportalen - Utvidelser</value>
+  </data>
+  <data name="SiteSettings_Link_ListContent" xml:space="preserve">
+    <value>Prosjektportalen - Listeinnhold</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
+    <value>Prosjektportalen - Porteføljeoversikt (Felter)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewViews" xml:space="preserve">
+    <value>Prosjektportalen - Porteføljeoversikt (Visninger)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFilters" xml:space="preserve">
+    <value>Prosjektportalen - Porteføljeoversikt (Filtre)</value>
+  </data>
+  <data name="SiteSettings_Link_ProjectConfig" xml:space="preserve">
+    <value>Prosjektportalen - Prosjektkonfigurasjon</value>
+  </data>
+  <data name="SiteSettings_Link_Feedback" xml:space="preserve">
+    <value>Prosjektportalen - Tilbakemeldinger</value>
+  </data>
+  <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
+    <value>Prosjektportalen - Statusseksjoner</value>
+  </data>
 </root>
