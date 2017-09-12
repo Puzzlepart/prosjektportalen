@@ -33,6 +33,7 @@ const Lists: IList[] = [
                 RowLimit: 50,
                 ViewQuery: `<OrderBy>
                   <FieldRef Name="GtSortOrder" />
+                  <FieldRef Name="ID" />
                 </OrderBy>`,
             },
         },
@@ -45,7 +46,8 @@ const Lists: IList[] = [
                   <FieldRef Name="GtChecklistStatus" Ascending="FALSE" />
                 </GroupBy>
                 <OrderBy>
-                  <FieldRef Name="ID" />
+                    <FieldRef Name="GtSortOrder" />
+                    <FieldRef Name="ID" />
                 </OrderBy>`,
             },
         }],
