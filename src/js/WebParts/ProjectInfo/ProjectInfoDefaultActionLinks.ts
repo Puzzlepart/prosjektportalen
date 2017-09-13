@@ -1,5 +1,9 @@
 import { IModalLinkProps } from "../@Components/ModalLink";
 import AudienceTargeting from "../AudienceTargeting";
+import {
+    SetMetadataDefaultsForLibrary,
+    EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
+} from "../../Project";
 
 const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
@@ -34,7 +38,41 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
         HideRibbon: true,
         HideFormFields: "GtProjectPhase",
     },
-    reloadOnSubmit: true,
+    onDialogReturnValueCallback: result => {
+        Promise.all([
+            SetMetadataDefaultsForLibrary([{
+                fieldName: "GtProjectPhase",
+                fieldType: "Taxonomy",
+            },
+            {
+                fieldName: "GtProjectType",
+                fieldType: "TaxonomyMulti",
+            },
+            {
+                fieldName: "GtProjectServiceArea",
+                fieldType: "TaxonomyMulti",
+            },
+            {
+                fieldName: "GtProjectFinanceName",
+                fieldType: "Text",
+            },
+            {
+                fieldName: "GtProjectNumber",
+                fieldType: "Text",
+            },
+            {
+                fieldName: "GtArchiveReference",
+                fieldType: "Text",
+            }]),
+            EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
+        ])
+            .then(() => {
+                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+            })
+            .catch(() => {
+                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+            });
+    },
     showLabel: true,
     audienceTargeting: AudienceTargeting.Owners,
 },
@@ -42,7 +80,6 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
     label: __("ProjectInfo_EditLogo"),
     icon: { iconName: "AppIconDefault" },
-    reloadOnSubmit: true,
     showLabel: true,
     audienceTargeting: AudienceTargeting.Owners,
 }];

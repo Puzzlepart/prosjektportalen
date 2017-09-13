@@ -1,9 +1,14 @@
-import GetCurrentProjectPhase from "./GetCurrentProjectPhase";
+import {
+    GetWelcomePageFieldValues,
+    UpdatePhaseWelcomePage,
+    GetCurrentProjectPhase,
+} from "./WelcomePage";
 import ChangeProjectPhase from "./ChangeProjectPhase";
-import EnsureLocationBasedMetadataDefaultsReceiver from "./EnsureLocationBasedMetadataDefaultsReceiver";
-import SetMetadataDefaults from "./SetMetadataDefaults";
+import {
+    EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
+    SetMetadataDefaultsForLibrary,
+} from "./MetadataDefaults";
 import UpdateFrontpageListViews from "./UpdateFrontpageListViews";
-import UpdatePhaseWelcomePage from "./UpdatePhaseWelcomePage";
 import {
     DOCUMENT_LIBRARY,
     FRONTPAGE_LISTS,
@@ -14,8 +19,9 @@ import {
 export {
     ChangeProjectPhase,
     GetCurrentProjectPhase,
-    EnsureLocationBasedMetadataDefaultsReceiver,
-    SetMetadataDefaults,
+    GetWelcomePageFieldValues,
+    EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
+    SetMetadataDefaultsForLibrary,
     UpdateFrontpageListViews,
     UpdatePhaseWelcomePage,
     DOCUMENT_LIBRARY,
