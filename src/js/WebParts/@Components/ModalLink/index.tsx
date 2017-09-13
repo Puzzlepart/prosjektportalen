@@ -91,7 +91,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
      * @param {IModalLinkProps} param1 Props
      * @param {IModalLinkState} param2 State
      */
-    private showModalDialog = (e, { label, url, options, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps, { }: IModalLinkState): void => {
+    private showModalDialog = (e, { label, url, options, onDialogReturnValueCallback, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps, { }: IModalLinkState): void => {
         e.preventDefault();
         e.stopPropagation();
 
@@ -121,10 +121,13 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
                 mOptions.url = `${mOptions.url}${u}${urlParams.join("&")}`;
             }
         }
-        if (reloadOnSubmit || reloadOnCancel) {
-            mOptions.dialogReturnValueCallback = (result) => {
+        if (onDialogReturnValueCallback) {
+            mOptions.dialogReturnValueCallback = onDialogReturnValueCallback;
+        } else if (reloadOnSubmit || reloadOnCancel) {
+            mOptions.dialogReturnValueCallback = result => {
                 if (result === 1 && reloadOnSubmit) {
                     SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+
                 }
                 if (result === 0 && reloadOnCancel) {
                     SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
