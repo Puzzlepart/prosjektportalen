@@ -1,4 +1,5 @@
 import GetCurrentProjectPhase from "./GetCurrentProjectPhase";
+import GetWelcomePage from "./GetWelcomePage";
 import ChangeProjectPhase from "./ChangeProjectPhase";
 import EnsureLocationBasedMetadataDefaultsReceiver from "./EnsureLocationBasedMetadataDefaultsReceiver";
 import SetMetadataDefaults from "./SetMetadataDefaults";
@@ -14,6 +15,7 @@ import {
 export {
     ChangeProjectPhase,
     GetCurrentProjectPhase,
+    GetWelcomePage,
     EnsureLocationBasedMetadataDefaultsReceiver,
     SetMetadataDefaults,
     UpdateFrontpageListViews,
