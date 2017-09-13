@@ -1,7 +1,7 @@
 import { sp, Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "../Util";
 import * as CONFIGURATION from "./Config";
-import GetWelcomePage from "./GetWelcomePage";
+import { GetWelcomePageFieldValues } from "./WelcomePage";
 
 interface IIMetadataDefaultsField {
     fieldName: string;
@@ -54,7 +54,7 @@ const SetMetadataDefaults = (fields: IIMetadataDefaultsField[]): Promise<any> =>
     const docLib = sp.web.lists.getByTitle(CONFIGURATION.DOCUMENT_LIBRARY);
 
     Promise.all([
-        GetWelcomePage(),
+        GetWelcomePageFieldValues(),
         docLib.expand("RootFolder").get(),
         docLib.fields.select("InternalName").get(),
     ])
@@ -76,8 +76,10 @@ const SetMetadataDefaults = (fields: IIMetadataDefaultsField[]): Promise<any> =>
                         }
                             break;
                         case "Taxonomy": {
-                            const safeTermValue = Util.getSafeTerm(wpFieldValues[fieldName]);
-                            fieldValue = `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
+                            if (wpFieldValues[fieldName]) {
+                                const safeTermValue = Util.getSafeTerm(wpFieldValues[fieldName]);
+                                fieldValue = `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
+                            }
                         }
                             break;
                         case "TaxonomyMulti": {

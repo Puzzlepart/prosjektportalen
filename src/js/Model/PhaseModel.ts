@@ -23,7 +23,7 @@ export default class PhaseModel {
     }
 
     /**
-    * Initialize safe
+    * Initialize safe using utility function getSafeTerm
     *
     * @param {any} termValue Term value
     */

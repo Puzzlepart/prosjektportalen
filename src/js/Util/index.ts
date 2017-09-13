@@ -298,9 +298,9 @@ interface ISafeTerm {
     Label: string;
     TermGuid: any;
     WssId: number;
-    get_label(): void;
-    get_termGuid(): void;
-    get_wssId(): void;
+    get_label(): any;
+    get_termGuid(): any;
+    get_wssId(): any;
 }
 
 /**
@@ -309,19 +309,21 @@ interface ISafeTerm {
  * @param {any} term Term
  */
 export const getSafeTerm = (term): ISafeTerm => {
-    let obj = term;
-    if (obj !== undefined) {
-        if (obj.Label === undefined && obj.TermGuid === undefined && obj.WssId === undefined && obj.get_label !== undefined) {
-            obj.Label = obj.get_label();
-            obj.TermGuid = obj.get_termGuid();
-            obj.WssId = obj.get_wssId();
-        } else if (obj.get_label === undefined && obj.get_termGuid === undefined && obj.get_wssId === undefined) {
-            obj.get_label = () => obj.Label;
-            obj.get_termGuid = () => obj.TermGuid;
-            obj.get_wssId = () => obj.WssId;
+    if (term === null) {
+        return null;
+    }
+    if (term !== undefined) {
+        if (term.Label === undefined && term.TermGuid === undefined && term.WssId === undefined && term.get_label !== undefined) {
+            term.Label = term.get_label();
+            term.TermGuid = term.get_termGuid();
+            term.WssId = term.get_wssId();
+        } else if (term.get_label === undefined && term.get_termGuid === undefined && term.get_wssId === undefined) {
+            term.get_label = () => term.Label;
+            term.get_termGuid = () => term.TermGuid;
+            term.get_wssId = () => term.WssId;
         }
     }
-    return obj;
+    return term;
 };
 
 /**
