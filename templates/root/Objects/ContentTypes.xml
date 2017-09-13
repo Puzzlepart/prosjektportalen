@@ -207,6 +207,11 @@
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
             <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
+            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" Hidden="true" />
+            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" Hidden="true" />
+            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" Hidden="true" />
+            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="GtProjectServiceArea" Hidden="true" />
+            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="GtProjectType" Hidden="true" />
             <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" />
             <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" />
             <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" />
