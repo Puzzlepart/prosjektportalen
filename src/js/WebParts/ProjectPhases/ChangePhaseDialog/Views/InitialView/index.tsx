@@ -18,7 +18,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     constructor(props: IInitialViewProps) {
         super(props);
         this.state = {
-            comment: props.currentChecklistItem.GtComment || "",
+            comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || "") : "",
         };
     }
     /**
