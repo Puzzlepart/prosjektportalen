@@ -1,14 +1,14 @@
 import * as React from "react";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import IInitialViewProps from "./IInitialViewProps";
+import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
 import IInitialViewState from "./IInitialViewState";
 
 /**
  * Initial view
  */
 export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
+    public static defaultProps = InitialViewDefaultProps;
     private commentsField: HTMLTextAreaElement;
-    private commentMinLength = 4;
 
     /**
      * Constructor
@@ -52,8 +52,10 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                     className="ms-TextField-field"
                     style={{
                         marginTop: 15,
-                        width: "90%",
+                        height: 200,
                         padding: 10,
+                        resize: "none",
+                        width: "90%",
                     }}
                     ref={ele => this.commentsField = ele}
                     onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })}>
@@ -70,24 +72,25 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewProps} param0 Props
      * @param {IInitialViewState} param1 State
      */
-    private renderStatusOptions = ({ isLoading, nextCheckPointAction }: IInitialViewProps, { comment }: IInitialViewState) => {
+    private renderStatusOptions = ({ isLoading, nextCheckPointAction, commentMinLength }: IInitialViewProps, { comment }: IInitialViewState) => {
+        const isCommentLongEnough = comment.length >= commentMinLength;
         const options = [
             {
-                value: __("Choice_GtChecklistStatus_Closed"),
-                disabled: isLoading,
-                tooltip: __("ProjectPhases_CheckpointDoneTooltip"),
+                value: __("Choice_GtChecklistStatus_NotRelevant"),
+                disabled: (isLoading || !isCommentLongEnough),
+                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
                 updateStatus: true,
             },
             {
                 value: __("Choice_GtChecklistStatus_StillOpen"),
-                disabled: (isLoading || comment.length < this.commentMinLength),
-                tooltip: comment.length < this.commentMinLength ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
+                disabled: (isLoading || !isCommentLongEnough),
+                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
                 updateStatus: false,
             },
             {
-                value: __("Choice_GtChecklistStatus_NotRelevant"),
-                disabled: (isLoading || comment.length < this.commentMinLength),
-                tooltip: comment.length < this.commentMinLength ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
+                value: __("Choice_GtChecklistStatus_Closed"),
+                disabled: isLoading,
+                tooltip: __("ProjectPhases_CheckpointDoneTooltip"),
                 updateStatus: true,
             }];
         return (
