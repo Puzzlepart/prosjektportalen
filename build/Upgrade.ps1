@@ -14,7 +14,6 @@ https://github.com/Puzzlepart/prosjektportalen
 
 #>
 
-
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Where do you want to install the Project Portal?")]
     [string]$Url,
@@ -35,31 +34,7 @@ Param(
     [string]$Environment = "SharePointPnPPowerShellOnline"
 )
 
-if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
-    $Credential = (Get-Credential -Message "Please enter your username and password")
-} elseif (-not $UseWebLogin.IsPresent) {
-    $Credential = $GenericCredential
-}
-
-if (-not $AssetsUrl) {
-    $AssetsUrl = $Url
-}
-
-if (-not $DataSourceSiteUrl) {
-    $DataSourceSiteUrl = $Url
-}
-
-function ParseVersion($versionString) {
-    $vs = $versionString.Split("#")[0]
-    return [Version]($vs)
-}
-
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
-}
+. ./SharedFunctions.ps1
 
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
@@ -71,11 +46,31 @@ function Connect-SharePoint ($Url) {
     }
 }
 
+# Loads bundle if switch SkipLoadingBundle is not present
+if (-not $SkipLoadingBundle.IsPresent) {
+    LoadBundle -Environment $Environment
+}
+
+# Handling credentials
+if (-not $GenericCredential -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
+} elseif ($GenericCredential -ne $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+    $Credential = $GenericCredential
+}
+
+if (-not $AssetsUrl) {
+    $AssetsUrl = $Url
+}
+
+if (-not $DataSourceSiteUrl) {
+    $DataSourceSiteUrl = $Url
+}
+
 Connect-SharePoint -Url $Url
-$CurrentVersion = ParseVersion -versionString (Get-PnPPropertyBag -Key pp_version)
+$CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
-$InstallVersion = ParseVersion -versionString "[version]"
+$InstallVersion = ParseVersion -VersionString "[version]"
 
 if($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -87,9 +82,8 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $GenericCredential
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
 
-    
     Connect-SharePoint $Url        
     Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
     $Language = Get-WebLanguage -ctx (Get-PnPContext)   
