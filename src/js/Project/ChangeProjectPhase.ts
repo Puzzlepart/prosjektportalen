@@ -7,6 +7,7 @@ import {
     PROJECTPHASE_FIELD,
 } from "./";
 
+
 /**
  * Change project phase
  *
@@ -25,7 +26,30 @@ const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<
         .then(() => {
             Promise.all([
                 UpdateFrontpageListViews(newPhase.Name),
-                SetMetadataDefaults(newPhase.Name),
+                SetMetadataDefaults([{
+                    fieldName: "GtProjectPhase",
+                    fieldType: "Taxonomy",
+                },
+                {
+                    fieldName: "GtProjectType",
+                    fieldType: "TaxonomyMulti",
+                },
+                {
+                    fieldName: "GtProjectServiceArea",
+                    fieldType: "TaxonomyMulti",
+                },
+                {
+                    fieldName: "GtProjectFinanceName",
+                    fieldType: "Text",
+                },
+                {
+                    fieldName: "GtProjectNumber",
+                    fieldType: "Text",
+                },
+                {
+                    fieldName: "GtArchiveReference",
+                    fieldType: "Text",
+                }]),
                 EnsureLocationBasedMetadataDefaultsReceiver(),
             ])
                 .then(() => {
