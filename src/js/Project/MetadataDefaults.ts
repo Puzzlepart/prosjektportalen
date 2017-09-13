@@ -107,10 +107,10 @@ export const SetMetadataDefaultsForLibrary = (fields: IIMetadataDefaultsField[],
 /**
  * Ensures LocationBasedMetadataDefaultsReceiver
  *
- * @param {string} libTitle Library title
  * @param {string} type Type (default to ItemAdded)
+ * @param {string} libTitle Library title
  */
-export const EnsureLocationBasedMetadataDefaultsReceiverForLibrary = (libTitle = CONFIGURATION.DOCUMENT_LIBRARY, type = "ItemAdded"): Promise<any> => new Promise<any>((resolve, reject) => {
+export const EnsureLocationBasedMetadataDefaultsReceiverForLibrary = (type = "ItemAdded", libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<any> => new Promise<any>((resolve, reject) => {
     const recName = `LocationBasedMetadataDefaultsReceiver ${type}`;
     const ctx = SP.ClientContext.get_current();
     const docLib = ctx.get_web().get_lists().getByTitle(libTitle);
