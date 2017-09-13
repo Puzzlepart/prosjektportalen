@@ -3,7 +3,7 @@ import * as Config from "./Config";
 import { PhaseModel } from "../Model";
 
 /**
- * Get current proejct phase
+ * Get current project phase
  */
 const GetCurrentProjectPhase = () => new Promise<PhaseModel>((resolve, reject) => {
     Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
