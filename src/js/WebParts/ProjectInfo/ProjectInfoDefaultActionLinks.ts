@@ -1,8 +1,8 @@
 import { IModalLinkProps } from "../@Components/ModalLink";
 import AudienceTargeting from "../AudienceTargeting";
 import {
-    SetMetadataDefaults,
-    EnsureLocationBasedMetadataDefaultsReceiver,
+    SetMetadataDefaultsForLibrary,
+    EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
 } from "../../Project";
 
 const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
@@ -40,7 +40,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     },
     onDialogReturnValueCallback: result => {
         Promise.all([
-            SetMetadataDefaults([{
+            SetMetadataDefaultsForLibrary([{
                 fieldName: "GtProjectPhase",
                 fieldType: "Taxonomy",
             },
@@ -64,7 +64,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
                 fieldName: "GtArchiveReference",
                 fieldType: "Text",
             }]),
-            EnsureLocationBasedMetadataDefaultsReceiver(),
+            EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
         ])
             .then(() => {
                 SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);

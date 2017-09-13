@@ -2,8 +2,8 @@ import * as Util from "../Util";
 import {
     UpdatePhaseWelcomePage,
     UpdateFrontpageListViews,
-    SetMetadataDefaults,
-    EnsureLocationBasedMetadataDefaultsReceiver,
+    SetMetadataDefaultsForLibrary,
+    EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
     PROJECTPHASE_FIELD,
 } from "./";
 
@@ -26,7 +26,7 @@ const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<
         .then(() => {
             Promise.all([
                 UpdateFrontpageListViews(newPhase.Name),
-                SetMetadataDefaults([{
+                SetMetadataDefaultsForLibrary([{
                     fieldName: "GtProjectPhase",
                     fieldType: "Taxonomy",
                 },
@@ -50,7 +50,7 @@ const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<
                     fieldName: "GtArchiveReference",
                     fieldType: "Text",
                 }]),
-                EnsureLocationBasedMetadataDefaultsReceiver(),
+                EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
             ])
                 .then(() => {
                     if (waitDlg) {
