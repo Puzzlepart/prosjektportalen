@@ -18,7 +18,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     constructor(props: IInitialViewProps) {
         super(props);
         this.state = {
-            comment: "",
+            comment: props.currentChecklistItem.GtComment || "",
         };
     }
     /**
@@ -41,6 +41,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         const {
             ID,
             Title,
+            GtComment,
          } = currentChecklistItem;
 
         return (
@@ -55,7 +56,9 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                         padding: 10,
                     }}
                     ref={ele => this.commentsField = ele}
-                    onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })} />
+                    onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })}>
+                    {GtComment}
+                </textarea>
                 {this.renderStatusOptions(this.props, this.state)}
             </div>
         );
