@@ -294,12 +294,21 @@ export const reloadPage = (): void => {
     document.location.href = _spPageContextInfo.serverRequestPath;
 };
 
+interface ISafeTerm {
+    Label: string;
+    TermGuid: any;
+    WssId: number;
+    get_label(): void;
+    get_termGuid(): void;
+    get_wssId(): void;
+}
+
 /**
  * Get safe term. The term object is different depending on if SP.Taxonomy is loaded on the page
  *
  * @param {any} term Term
  */
-export const getSafeTerm = (term) => {
+export const getSafeTerm = (term): ISafeTerm => {
     let obj = term;
     if (obj !== undefined) {
         if (obj.Label === undefined && obj.TermGuid === undefined && obj.WssId === undefined && obj.get_label !== undefined) {
