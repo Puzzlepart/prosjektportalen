@@ -39,7 +39,6 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
         HideFormFields: "GtProjectPhase",
     },
     onDialogReturnValueCallback: result => {
-        console.log(result);
         Promise.all([
             SetMetadataDefaults([{
                 fieldName: "GtProjectPhase",

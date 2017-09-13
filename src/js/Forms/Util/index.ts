@@ -60,30 +60,3 @@ export const overridePreSaveAction = (func): void => {
     let f = "PreSaveAction";
     window[f] = func;
 };
-
-
-/**
-* Creates a custom save button which awaits a number of promises before it triggers
-* the original click event.
-*
-* @param {any} promise Promise we want to wait for before saving
-* @param {string} saveBtnSelector jQuery selector for save button
-*/
-export const CreateCallbackEnabledSaveButton = (promise: () => Promise<boolean>, saveBtnSelector = "input[id$='SaveItem']"): void => {
-    const originalSaveBtn = jQuery(saveBtnSelector),
-        customSaveBtn = jQuery("<input />")
-            .attr("type", "button")
-            .val(originalSaveBtn.val())
-            .click(() => {
-                promise()
-                    .then(shouldSave => {
-                        if (shouldSave) {
-                            window.setTimeout(() => {
-                                originalSaveBtn.trigger("click");
-                            }, 1);
-                        }
-                    });
-            });
-    customSaveBtn.insertBefore(originalSaveBtn);
-    originalSaveBtn.hide();
-};
