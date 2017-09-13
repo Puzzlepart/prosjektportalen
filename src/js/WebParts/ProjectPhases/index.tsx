@@ -74,12 +74,16 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         return (
             <ul>
                 {visiblePhases.map((phase, index) => {
-                    let classList = [
-                        index === 0 ? "first-phase" : "",
-                        index === (data.phases.length - 1) ? "last-phase" : "",
-                        data.activePhase && (phase.Name === data.activePhase.Name) ? "selected" : "",
-                        phase.getPhasLevelClassName(),
-                    ];
+                    let classList = [phase.getPhasLevelClassName()];
+                    if (index === 0) {
+                        classList.push("first-phase");
+                    }
+                    if (index === (data.phases.length - 1)) {
+                        classList.push("last-phase");
+                    }
+                    if (data.activePhase && (phase.Name === data.activePhase.Name)) {
+                        classList.push("selected");
+                    }
                     return (
                         <ProjectPhase
                             key={index}

@@ -46,9 +46,9 @@ const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase, cl
                 <li>
                     <a className="se-all" href={PHASE_CHECKLIST_URL}>{__("ProjectPhases_GoToChecklist")}</a>
                 </li>
-                <li hidden={selected}>
+                {!selected && <li>
                     <span style={{ cursor: "pointer" }} onClick={() => onChangePhase(phase)}>{__("ProjectPhases_ChangePase")}</span>
-                </li>
+                </li>}
             </ul>
         </div>
     );
