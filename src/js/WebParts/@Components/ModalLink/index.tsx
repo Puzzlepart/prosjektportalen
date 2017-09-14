@@ -41,7 +41,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
     }
 
     /**
-     * Calls _render with props and state
+     * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
