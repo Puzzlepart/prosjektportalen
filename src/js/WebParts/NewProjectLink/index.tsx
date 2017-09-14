@@ -27,7 +27,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     }
 
     /**
-     * Component did mount
+     * Component did mount. Handling audience.
      */
     public componentDidMount(): void {
         Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
@@ -91,18 +91,20 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkState} param1 State
      */
     private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
-        return (
-            <NewProjectDialog
-                dialogProps={{
-                    isOpen: showDialog,
-                    type: DialogType.largeHeader,
-                    isDarkOverlay: true,
-                    isBlocking: false,
-                    title: __("NewProjectForm_DialogTitle"),
-                    subText: __("NewProjectForm_SubText"),
-                    className: "pp-newprojectdialog",
-                    onDismiss: () => this.setState({ showDialog: false }),
-                }} />
-        );
+        if (showDialog) {
+            return (
+                <NewProjectDialog
+                    dialogProps={{
+                        type: DialogType.largeHeader,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        title: __("NewProjectForm_DialogTitle"),
+                        subText: __("NewProjectForm_SubText"),
+                        className: "pp-newprojectdialog",
+                        onDismiss: () => this.setState({ showDialog: false }),
+                    }} />
+            );
+        }
+        return null;
     }
 }

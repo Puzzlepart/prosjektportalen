@@ -18,7 +18,7 @@ const GetValidExtensions = (extensionLibTitle = __("Lists_Extensions_Title")) =>
         .then(items => {
             Promise.all(items.map(item => LoadExtension(item)))
                 .then((extensions: any[]) => {
-                    const validExtensions = extensions.filter(ext => ext.data !== null);
+                    const validExtensions = (extensions as IExtension[]).filter(ext => ext.isValid);
                     resolve(validExtensions);
                 })
                 .catch(reject);

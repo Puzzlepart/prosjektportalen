@@ -57,6 +57,7 @@ const CreateFolderHierarchy = (destLibServerRelUrl: string, rootFolderServerRelU
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
 export const CopyFiles = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<FileAddResult[]>((resolve, reject) => {
+    Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
     const srcWeb = new Web(Util.makeAbsolute(conf.SourceUrl));
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
     const destWeb = new Web(Util.makeAbsolute(destUrl));
@@ -88,12 +89,32 @@ export const CopyFiles = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                  * Copying files
                  */
                 Logger.log({ message: "Copying files", data: { files }, level: LogLevel.Info });
-                GetFileContents(srcWeb, files).then(filesWithContents => {
-                    Promise.all(filesWithContents.map(fwc => new Promise<any>((res, rej) => {
-                        let destFolderUrl = `${destLibServerRelUrl}${fwc.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
-                        destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fwc.LinkFilename, fwc.Blob, true).then(res, rej);
-                    }))).then(resolve, reject);
-                }, reject);
-            }, reject);
-    }).catch(reject);
+                GetFileContents(srcWeb, files)
+                    .then(filesWithContents => {
+                        Promise.all(filesWithContents.map(fwc => new Promise<any>((res, rej) => {
+                            let destFolderUrl = `${destLibServerRelUrl}${fwc.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
+                            destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fwc.LinkFilename, fwc.Blob, true).then(res, rej);
+                        })))
+                            .then(() => {
+                                Logger.log({ message: "Copy of files done.", data: { conf }, level: LogLevel.Info });
+                                resolve();
+                            })
+                            .catch(reason => {
+                                Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+                                reject();
+                            });
+                    })
+                    .catch(reason => {
+                        Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+                        reject();
+                    });
+            })
+            .catch(reason => {
+                Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+                reject();
+            });
+    }).catch(reason => {
+        Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
+        reject();
+    });
 });

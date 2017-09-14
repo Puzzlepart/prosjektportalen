@@ -1,0 +1,37 @@
+<pnp:ListInstance Title="{resource:Lists_Log_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Log" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/Log/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <GroupBy Collapse="TRUE" GroupLimit="30">
+                    <FieldRef Name="LogLevel" />
+                </GroupBy>
+                <OrderBy>
+                    <FieldRef Name="ID" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Message" />
+                <FieldRef Name="Source" />
+                <FieldRef Name="ErrorTraceCorrelationId" />
+                <FieldRef Name="ErrorTypeName" />
+                <FieldRef Name="LogURL" />
+                <FieldRef Name="Created" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+    </pnp:FieldRefs>
+    <pnp:Fields>
+        <Field DisplayName="{resource:Lists_Log_Fields_Message_DisplayName}" IsolateStyles="FALSE" NumLines="12" RichText="FALSE" RichTextMode="Compatible" Type="Note" ID="{239facbf-b892-4b09-9bea-6b818a61c5a4}" StaticName="Message" Name="Message" ColName="ntext2" RowOrdinal="0" Version="1" />
+        <Field DisplayName="{resource:Lists_Log_Fields_LogLevel_DisplayName}" MaxLength="255" Type="Text" ID="{63c22006-8a54-4b26-9b46-812f39a106ef}" StaticName="LogLevel" Name="LogLevel" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+        <Field DisplayName="{resource:Lists_Log_Fields_Source_DisplayName}" MaxLength="255" Type="Text" ID="{6f9ebe4c-b31d-4137-8c39-9a20cf764532}" StaticName="Source" Name="Source" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+        <Field DisplayName="ErrorTraceCorrelationId" MaxLength="255" Type="Text" ID="{b33b7fe5-5752-4d22-8230-d1057ba032ab}" StaticName="ErrorTraceCorrelationId" Name="ErrorTraceCorrelationId" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+        <Field DisplayName="ErrorTypeName" MaxLength="255" Type="Text" ID="{e47fada2-14de-4223-bce0-5f463914aae8}" StaticName="ErrorTypeName" Name="ErrorTypeName" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+        <Field DisplayName="URL" MaxLength="255" Type="Text" ID="{539413e2-5e94-4924-8f9e-831d81f557c2}" StaticName="LogURL" Name="LogURL" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+    </pnp:Fields>
+</pnp:ListInstance>

@@ -4,6 +4,7 @@ export default interface IExtension {
     Title: string;
     LinkFilename: string;
     FileRef: string;
+    isValid?: boolean;
     data?: Schema;
 }
 
