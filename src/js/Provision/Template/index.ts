@@ -41,16 +41,23 @@ let Template: Schema = {
  * @param {Object} propBag Property bag values
  * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const ApplyJsTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
-    Template.WebSettings.AlternateCssUrl = `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`;
-    Template.WebSettings.SiteLogoUrl = `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`;
-    Template.PropertyBagEntries = [{
-        Key: "pp_version",
-        Value: propBag.pp_version,
-        Overwrite: true,
-        Indexed: true,
-    }];
-    new WebProvisioner(web).applyTemplate(Template, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    const webProvisioner = new WebProvisioner(web);
+    webProvisioner
+        .applyTemplate({
+            ...Template,
+            WebSettings: {
+                ...Template.WebSettings,
+                AlternateCssUrl: `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`,
+                SiteLogoUrl: `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
+            },
+            PropertyBagEntries: [{
+                Key: "pp_version",
+                Value: propBag.pp_version,
+                Overwrite: true,
+                Indexed: true,
+            }],
+        }, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
         .then(resolve)
         .catch(reject);
 });

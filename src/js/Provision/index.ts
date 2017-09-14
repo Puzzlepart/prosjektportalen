@@ -5,7 +5,7 @@ import {
 } from "./Subsite";
 import { IProjectModel } from "../Model/ProjectModel";
 import { CopyDefaultData } from "./Data";
-import { ApplyJsTemplate } from "./Template";
+import { ApplyProvisioningTemplate } from "./Template";
 import { ApplyExtensions } from "./Extensions";
 import { GetAllProperties } from "../Util/PropertyBag";
 import SpListLogger, { LogLevel } from "../Util/SpListLogger";
@@ -29,7 +29,7 @@ const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallbac
             GetAllProperties()
                 .then(propBagAllProps => {
                     onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), "");
-                    ApplyJsTemplate(result.web, propBagAllProps.get_fieldValues(), onUpdateProgress)
+                    ApplyProvisioningTemplate(result.web, propBagAllProps.get_fieldValues(), onUpdateProgress)
                         .then(() => {
                             ApplyExtensions(result.web, onUpdateProgress)
                                 .then(() => {
@@ -41,7 +41,7 @@ const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallbac
                                 })
                                 .catch(err => OnProvisionWebFail("ApplyExtensions", err, reject, resolve, result.url));
                         })
-                        .catch(err => OnProvisionWebFail("ApplyJsTemplate", err, reject, resolve, result.url));
+                        .catch(err => OnProvisionWebFail("ApplyProvisioningTemplate", err, reject, resolve, result.url));
                 })
                 .catch(err => OnProvisionWebFail("GetAllProperties", err, reject, resolve, result.url));
         })
