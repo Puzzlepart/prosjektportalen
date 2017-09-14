@@ -60,6 +60,20 @@ function Connect-SharePoint ($Url) {
     }
 }
 
+# Loads bundle if switch SkipLoadingBundle is not present
+if (-not $SkipLoadingBundle.IsPresent) {
+    LoadBundle -Environment $Environment
+}
+
+# Handling credentials
+if ($PSCredential -ne $null) {
+    $Credential = $PSCredential
+} elseif ($GenericCredential -ne $null -and $GenericCredential -ne "") {
+    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
+} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
+}
+
 if (-not $AssetsUrl) {
     $AssetsUrl = $Url
 }
@@ -70,15 +84,6 @@ if (-not $DataSourceSiteUrl) {
 
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
-
-# Handling credentials
-if ($PSCredential -ne $null) {
-    $Credential = $PSCredential
-} elseif ($GenericCredential -ne $null -and $GenericCredential -ne "") {
-    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
-} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
-    $Credential = (Get-Credential -Message "Please enter your username and password")
-}
 
 # Start installation
 function Start-Install() {
@@ -100,11 +105,6 @@ function Start-Install() {
     # Starts stop watch
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $ErrorActionPreference = "Stop"
-
-    # Loads bundle if switch SkipLoadingBundle is not present
-    if (-not $SkipLoadingBundle.IsPresent) {
-        LoadBundle -Environment $Environment
-    }
 
     # Sets up PnP trace log
     $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
