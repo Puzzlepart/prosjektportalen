@@ -2268,4 +2268,7 @@
   <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
     <value>Prosjektportalen - Statusseksjoner</value>
   </data>
+  <data name="SiteSettings_Link_Log" xml:space="preserve">
+    <value>Prosjektportalen - Logg</value>
+  </data>
 </root>

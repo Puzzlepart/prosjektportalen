@@ -2266,4 +2266,7 @@
   <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
     <value>Project Portal - Status Sections</value>
   </data>
+  <data name="SiteSettings_Link_Log" xml:space="preserve">
+    <value>Project Portal - Logs</value>
+  </data>
 </root>
