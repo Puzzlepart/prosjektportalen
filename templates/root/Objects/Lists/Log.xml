@@ -16,7 +16,7 @@
                 <FieldRef Name="LogLevel" />
                 <FieldRef Name="ErrorTraceCorrelationId" />
                 <FieldRef Name="ErrorTypeName" />
-                <FieldRef Name="URL" />
+                <FieldRef Name="LogURL" />
                 <FieldRef Name="Created" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
