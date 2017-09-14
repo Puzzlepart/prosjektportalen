@@ -18,11 +18,13 @@ const LoadExtension = (extension: IExtension) => new Promise<IExtension>((resolv
     const file = rootWeb.getFileByServerRelativeUrl(extension.FileRef);
     file.getText()
         .then(fileText => {
+            let isValid = true;
             let data = null;
             try {
                 data = JSON.parse(fileText);
             } catch (e) {
-                listLogger.log({ Message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`, Source: "LoadExtension", LogLevel: LogLevel.Error });
+                isValid = false;
+                listLogger.log({ Message: `Extension ${extension.LinkFilename} is invalid.`, Source: "LoadExtension", LogLevel: LogLevel.Warning });
                 Logger.log({
                     message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`,
                     data: { fileText },
@@ -32,6 +34,7 @@ const LoadExtension = (extension: IExtension) => new Promise<IExtension>((resolv
             resolve({
                 ...extension,
                 data,
+                isValid,
             });
         }, reject);
 });
