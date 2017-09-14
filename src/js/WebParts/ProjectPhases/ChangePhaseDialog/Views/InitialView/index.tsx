@@ -1,5 +1,6 @@
 import * as React from "react";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
 import IInitialViewState from "./IInitialViewState";
 
@@ -8,7 +9,6 @@ import IInitialViewState from "./IInitialViewState";
  */
 export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
     public static defaultProps = InitialViewDefaultProps;
-    private commentsField: HTMLTextAreaElement;
 
     /**
      * Constructor
@@ -21,9 +21,10 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
             comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || "") : "",
         };
     }
+
     /**
-   * Calls _render with props and state
-   */
+     * Calls _render with props and state to allow for ES6 destruction to allow for ES6 destruction
+     */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
@@ -34,33 +35,24 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewProps} param0 Props
      * @param {IInitialViewState} param1 State
      */
-    public _render({ currentChecklistItem }: IInitialViewProps, { }: IInitialViewState): JSX.Element {
+    public _render({ currentChecklistItem, className, commentLabel }: IInitialViewProps, { comment }: IInitialViewState): JSX.Element {
         if (!currentChecklistItem) {
             return null;
         }
         const {
             ID,
             Title,
-            GtComment,
          } = currentChecklistItem;
 
         return (
-            <div className="inner">
+            <div className={className}>
                 <h3>#{ID} {Title}</h3>
-                <textarea
-                    placeholder={__("String_Comment")}
-                    className="ms-TextField-field"
-                    style={{
-                        marginTop: 15,
-                        height: 200,
-                        padding: 10,
-                        resize: "none",
-                        width: "90%",
-                    }}
-                    ref={ele => this.commentsField = ele}
-                    onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })}>
-                    {GtComment}
-                </textarea>
+                <TextField
+                    onChanged={newValue => this.setState({ comment: newValue })}
+                    label={commentLabel}
+                    multiline
+                    value={comment}
+                    resizable={false} />
                 {this.renderStatusOptions(this.props, this.state)}
             </div>
         );
@@ -73,18 +65,18 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewState} param1 State
      */
     private renderStatusOptions = ({ isLoading, nextCheckPointAction, commentMinLength }: IInitialViewProps, { comment }: IInitialViewState) => {
-        const isCommentLongEnough = comment.length >= commentMinLength;
+        const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
         const options = [
             {
                 value: __("Choice_GtChecklistStatus_NotRelevant"),
-                disabled: (isLoading || !isCommentLongEnough),
-                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
+                disabled: (isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
                 updateStatus: true,
             },
             {
                 value: __("Choice_GtChecklistStatus_StillOpen"),
-                disabled: (isLoading || !isCommentLongEnough),
-                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
+                disabled: (isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
                 updateStatus: false,
             },
             {
@@ -104,22 +96,13 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                         title={opt.tooltip}>
                         <PrimaryButton
                             disabled={opt.disabled}
-                            onClick={() => {
+                            onClick={e => {
                                 nextCheckPointAction(opt.value, comment, opt.updateStatus);
-                                this.reset();
+                                this.setState({ comment: "" });
                             }}>{opt.value}</PrimaryButton>
                     </span>
                 ))}
             </div>
         );
-    }
-
-    /**
-     * Resets comments field
-     */
-    private reset = () => {
-        this.setState({ comment: "" }, () => {
-            this.commentsField.value = "";
-        });
     }
 }
