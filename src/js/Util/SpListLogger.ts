@@ -7,6 +7,8 @@ interface ILogEntry {
     Message: string;
     Source: string;
     LogLevel: LogLevel;
+    ErrorTraceCorrelationId?: string;
+    ErrorTypeName?: string;
 }
 
 /**
