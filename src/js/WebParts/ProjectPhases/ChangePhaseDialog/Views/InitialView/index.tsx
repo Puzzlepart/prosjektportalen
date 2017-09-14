@@ -1,5 +1,6 @@
 import * as React from "react";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
 import IInitialViewState from "./IInitialViewState";
 
@@ -8,7 +9,6 @@ import IInitialViewState from "./IInitialViewState";
  */
 export default class InitialView extends React.Component<IInitialViewProps, IInitialViewState> {
     public static defaultProps = InitialViewDefaultProps;
-    private commentsField: HTMLTextAreaElement;
 
     /**
      * Constructor
@@ -35,27 +35,24 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewProps} param0 Props
      * @param {IInitialViewState} param1 State
      */
-    public _render({ currentChecklistItem, className, commentPlaceholder, commentClassName, commentStyle }: IInitialViewProps, { }: IInitialViewState): JSX.Element {
+    public _render({ currentChecklistItem, className, commentLabel }: IInitialViewProps, { comment }: IInitialViewState): JSX.Element {
         if (!currentChecklistItem) {
             return null;
         }
         const {
             ID,
             Title,
-            GtComment,
          } = currentChecklistItem;
 
         return (
             <div className={className}>
                 <h3>#{ID} {Title}</h3>
-                <textarea
-                    placeholder={commentPlaceholder}
-                    className={commentClassName}
-                    style={commentStyle}
-                    ref={ele => this.commentsField = ele}
-                    onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })}>
-                    {GtComment}
-                </textarea>
+                <TextField
+                    onChanged={newValue => this.setState({ comment: newValue })}
+                    label={commentLabel}
+                    multiline
+                    value={comment}
+                    resizable={false} />
                 {this.renderStatusOptions(this.props, this.state)}
             </div>
         );
@@ -101,20 +98,11 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                             disabled={opt.disabled}
                             onClick={e => {
                                 nextCheckPointAction(opt.value, comment, opt.updateStatus);
-                                this.resetCommentField();
+                                this.setState({ comment: "" });
                             }}>{opt.value}</PrimaryButton>
                     </span>
                 ))}
             </div>
         );
-    }
-
-    /**
-     * Resets comments field
-     */
-    private resetCommentField = () => {
-        this.setState({ comment: "" }, () => {
-            this.commentsField.value = "";
-        });
     }
 }
