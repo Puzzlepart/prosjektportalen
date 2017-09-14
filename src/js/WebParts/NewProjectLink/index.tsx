@@ -1,12 +1,12 @@
 import * as React from "react";
 import { DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as Util from "../../Util";
 import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
 import BaseWebPart from "../@BaseWebPart";
+import * as Util from "../../Util";
 
 /**
  * New Project link
@@ -30,6 +30,9 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * Component did mount. Handling audience.
      */
     public componentDidMount(): void {
+        /**
+         * Checks if the web part should be rendered for the current user
+        */
         Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
             if (userMatchAudience !== this.state.shouldRender) {
                 this.setState({

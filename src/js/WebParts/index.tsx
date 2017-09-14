@@ -10,6 +10,7 @@ import DynamicPortfolio from "./DynamicPortfolio";
 import BenefitsOverview from "./BenefitsOverview";
 import ProjectStatus from "./ProjectStatus";
 import ExperienceLog from "./ExperienceLog";
+import LatestLogEntries from "./LatestLogEntries";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -29,6 +30,7 @@ const WebPartComponents: WebPartComponent[] = [
     new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview-search", <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />),
     new WebPartComponent(ProjectStatus.displayName, "pp-projectstatus", <ProjectStatus />),
     new WebPartComponent(ExperienceLog.displayName, "pp-experiencelog", <ExperienceLog />),
+    new WebPartComponent(LatestLogEntries.displayName, "pp-latestlogentries", <LatestLogEntries />),
 ];
 
 /**

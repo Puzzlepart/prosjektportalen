@@ -1704,6 +1704,9 @@
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Siste informasjonselementer</value>
   </data>
+  <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
+    <value>Siste loggelementer</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>

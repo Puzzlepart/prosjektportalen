@@ -4,12 +4,14 @@ import {
 } from "sp-pnp-js";
 
 interface ILogEntry {
+    ID?: string;
     Message: string;
     Source: string;
     LogLevel: LogLevel;
     ErrorTraceCorrelationId?: string;
     ErrorTypeName?: string;
     LogURL?: string;
+    Created?: string;
 }
 
 /**
@@ -65,4 +67,7 @@ export default class SpListLogger {
     }
 }
 
-export { LogLevel };
+export {
+    LogLevel,
+    ILogEntry,
+};
