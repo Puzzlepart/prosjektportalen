@@ -21,14 +21,16 @@ Param(
     [string]$AssetsUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
-    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
-    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
+    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
+    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
     [switch]$UseWebLogin,
     [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
     [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "PowerShell credential to authenticate with")]
+    [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline"
@@ -52,7 +54,9 @@ if (-not $SkipLoadingBundle.IsPresent) {
 }
 
 # Handling credentials
-if (-not $GenericCredential -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+if ($PSCredential -ne $null) {
+    $Credential = $PSCredential
+} elseif (-not $GenericCredential -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
 } elseif ($GenericCredential -ne $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
     $Credential = $GenericCredential
