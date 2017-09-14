@@ -1,0 +1,26 @@
+  
+
+<pnp:ListInstance Title="{resource:Lists_Log_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Log" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" EnableFolderCreation="false" EnableAttachments="false" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/Log/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="ID" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Message" />
+                <FieldRef Name="LogLevel" />
+                <FieldRef Name="Created" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:Fields>
+        <Field DisplayName="Message" IsolateStyles="FALSE" NumLines="12" RichText="FALSE" RichTextMode="Compatible" Title="Message" Type="Note" ID="{239facbf-b892-4b09-9bea-6b818a61c5a4}" StaticName="Message" Name="Message" ColName="ntext2" RowOrdinal="0" Version="1" />
+        <Field DisplayName="LogLevel" MaxLength="255" Title="LogLevel" Type="Text" ID="{63c22006-8a54-4b26-9b46-812f39a106ef}" StaticName="LogLevel" Name="LogLevel" ColName="nvarchar3" RowOrdinal="0" Version="1" />
+    </pnp:Fields>
+</pnp:ListInstance>
