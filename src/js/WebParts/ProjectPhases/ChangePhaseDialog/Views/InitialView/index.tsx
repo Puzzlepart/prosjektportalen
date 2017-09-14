@@ -35,7 +35,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewProps} param0 Props
      * @param {IInitialViewState} param1 State
      */
-    public _render({ currentChecklistItem }: IInitialViewProps, { }: IInitialViewState): JSX.Element {
+    public _render({ currentChecklistItem, className, commentPlaceholder, commentClassName, commentStyle }: IInitialViewProps, { }: IInitialViewState): JSX.Element {
         if (!currentChecklistItem) {
             return null;
         }
@@ -46,18 +46,12 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
          } = currentChecklistItem;
 
         return (
-            <div className="inner">
+            <div className={className}>
                 <h3>#{ID} {Title}</h3>
                 <textarea
-                    placeholder={__("String_Comment")}
-                    className="ms-TextField-field"
-                    style={{
-                        marginTop: 15,
-                        height: 200,
-                        padding: 10,
-                        resize: "none",
-                        width: "90%",
-                    }}
+                    placeholder={commentPlaceholder}
+                    className={commentClassName}
+                    style={commentStyle}
                     ref={ele => this.commentsField = ele}
                     onKeyUp={({ currentTarget }) => this.setState({ comment: currentTarget.value })}>
                     {GtComment}
@@ -74,18 +68,18 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewState} param1 State
      */
     private renderStatusOptions = ({ isLoading, nextCheckPointAction, commentMinLength }: IInitialViewProps, { comment }: IInitialViewState) => {
-        const isCommentLongEnough = comment.length >= commentMinLength;
+        const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
         const options = [
             {
                 value: __("Choice_GtChecklistStatus_NotRelevant"),
-                disabled: (isLoading || !isCommentLongEnough),
-                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
+                disabled: (isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
                 updateStatus: true,
             },
             {
                 value: __("Choice_GtChecklistStatus_StillOpen"),
-                disabled: (isLoading || !isCommentLongEnough),
-                tooltip: !isCommentLongEnough ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
+                disabled: (isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
                 updateStatus: false,
             },
             {
@@ -105,9 +99,9 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                         title={opt.tooltip}>
                         <PrimaryButton
                             disabled={opt.disabled}
-                            onClick={() => {
+                            onClick={e => {
                                 nextCheckPointAction(opt.value, comment, opt.updateStatus);
-                                this.reset();
+                                this.resetCommentField();
                             }}>{opt.value}</PrimaryButton>
                     </span>
                 ))}
@@ -118,7 +112,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     /**
      * Resets comments field
      */
-    private reset = () => {
+    private resetCommentField = () => {
         this.setState({ comment: "" }, () => {
             this.commentsField.value = "";
         });
