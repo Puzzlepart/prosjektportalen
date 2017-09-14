@@ -16,7 +16,7 @@ interface ILogEntry {
  * SharePoint List logger
  */
 export default class SpListLogger {
-    public List: string;
+    private List: string;
     private SiteUrl: string;
 
     /**
