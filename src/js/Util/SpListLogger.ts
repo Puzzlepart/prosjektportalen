@@ -5,6 +5,7 @@ import {
 
 interface ILogEntry {
     Message: string;
+    Source: string;
     LogLevel: LogLevel;
 }
 
