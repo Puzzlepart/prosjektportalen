@@ -16,9 +16,6 @@ module.exports = (language = 1044, minify = true, bundleAnalyzer = false) => {
             __VERSION: JSON.stringify(pkg.version)
         }),
         new webpack.DefinePlugin({
-            __BUILD: build
-        }),
-        new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
                 LANGUAGE: JSON.stringify(language),
