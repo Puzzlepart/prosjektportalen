@@ -104,7 +104,9 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
                                 <div>
                                     <h5>
                                         <ModalLink
-                                            label={`${entry.Created} (${entry.LogLevel})`}
+                                            icon={{ iconName: this.getEntryIcon(entry.LogLevel) }}
+                                            style={{ color: this.getEntryColor(entry.LogLevel) }}
+                                            label={entry.Created}
                                             url={this.getDisplayFormUrl(entry.ID)}
                                             options={{ HideRibbon: true }} />
                                     </h5>
@@ -116,10 +118,54 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
             );
         } else {
             return (
-                <div id={this.props.containerId}>
+                <div id={containerId}>
                     <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
+        }
+    }
+
+    /**
+     * Get icon for log entry
+     *
+     * @param {any} logLevel Log level
+     */
+    private getEntryIcon(logLevel): string {
+        switch (logLevel) {
+            case __("String_LogLevel_Error"): {
+                return "Error";
+            }
+            case __("String_LogLevel_Info"): {
+                return "Info";
+            }
+            case __("String_LogLevel_Warning"): {
+                return "Warning";
+            }
+            default: {
+                return "";
+            }
+        }
+    }
+
+    /**
+     * Get color for log entry
+     *
+     * @param {any} logLevel Log level
+     */
+    private getEntryColor(logLevel): string {
+        switch (logLevel) {
+            case __("String_LogLevel_Error"): {
+                return "#ea5c73";
+            }
+            case __("String_LogLevel_Info"): {
+                return "#035484";
+            }
+            case __("String_LogLevel_Warning"): {
+                return "#e9b359";
+            }
+            default: {
+                return "";
+            }
         }
     }
 
