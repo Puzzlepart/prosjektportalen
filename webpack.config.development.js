@@ -1,23 +1,22 @@
 var path = require("path"),
     webpack = require('webpack'),
     pkg = require("./package.json"),
-    build = require("./build.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (devtool) => {
+module.exports = (language = 1044, devtool) => {
     const I18n = {
         1033: require("./src/js/Resources/en-US.json"),
         1044: require("./src/js/Resources/no-NB.json"),
     };
     const plugins = [
-        new I18nPlugin(I18n[build.language]),
+        new I18nPlugin(I18n[language]),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
         }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('development'),
-                LANGUAGE: JSON.stringify(build.language),
+                LANGUAGE: JSON.stringify(language),
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
