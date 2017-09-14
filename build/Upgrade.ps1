@@ -56,7 +56,7 @@ if (-not $SkipLoadingBundle.IsPresent) {
 # Handling credentials
 if ($PSCredential -ne $null) {
     $Credential = $PSCredential
-} elseif ($GenericCredential -ne $null) {
+} elseif ($GenericCredential -ne $null -and $GenericCredential -ne "") {
     $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
 } elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
