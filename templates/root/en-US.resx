@@ -2193,6 +2193,9 @@
   <data name="Lists_Log_Fields_Message_DisplayName" xml:space="preserve">
     <value>Message</value>
   </data>
+  <data name="Lists_Log_Fields_Source_DisplayName" xml:space="preserve">
+    <value>Source</value>
+  </data>
   <data name="ProjectStatus_SnapshotHistory" xml:space="preserve">
     <value>History ({0} entries)</value>
   </data>
