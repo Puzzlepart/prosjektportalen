@@ -74,10 +74,10 @@ $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataS
 # Handling credentials
 if ($PSCredential -ne $null) {
     $Credential = $PSCredential
-} elseif (-not $GenericCredential -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+} elseif ($GenericCredential -ne $null) {
+    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
+} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
-} elseif ($GenericCredential -ne $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
-    $Credential = $GenericCredential
 }
 
 # Start installation

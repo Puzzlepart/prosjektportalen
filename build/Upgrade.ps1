@@ -56,10 +56,10 @@ if (-not $SkipLoadingBundle.IsPresent) {
 # Handling credentials
 if ($PSCredential -ne $null) {
     $Credential = $PSCredential
-} elseif (-not $GenericCredential -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+} elseif ($GenericCredential -ne $null) {
+    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
+} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
     $Credential = (Get-Credential -Message "Please enter your username and password")
-} elseif ($GenericCredential -ne $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
-    $Credential = $GenericCredential
 }
 
 if (-not $AssetsUrl) {
@@ -86,7 +86,7 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
 
     Connect-SharePoint $Url        
     Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
