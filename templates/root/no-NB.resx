@@ -1626,6 +1626,9 @@
   <data name="String_LogLevel_Warning" xml:space="preserve">
     <value>Advarsel</value>
   </data>
+  <data name="String_ContactAdmin" xml:space="preserve">
+    <value>Vennlig ta kontakt med en administrator</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
