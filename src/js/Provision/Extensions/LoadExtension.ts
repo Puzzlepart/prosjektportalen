@@ -4,6 +4,9 @@ import {
     LogLevel,
 } from "sp-pnp-js";
 import IExtension from "./IExtension";
+import SpListLogger from "../../Util/SpListLogger";
+
+const listLogger = new SpListLogger();
 
 /**
  * Loads extension JSON
@@ -19,6 +22,7 @@ const LoadExtension = (extension: IExtension) => new Promise<IExtension>((resolv
             try {
                 data = JSON.parse(fileText);
             } catch (e) {
+                listLogger.log({ Message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`, Source: "LoadExtension", LogLevel: LogLevel.Error });
                 Logger.log({
                     message: `Extensions in file '${extension.LinkFilename}' contains invalid JSON.`,
                     data: { fileText },

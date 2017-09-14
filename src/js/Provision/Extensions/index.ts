@@ -15,7 +15,7 @@ const ApplyExtensions = (web: any, onUpdateProgress: IProgressCallback) => new P
             return new WebProvisioner(web).applyTemplate(extension.data);
         }), Promise.resolve())
             .then(resolve)
-            .catch(resolve);
+            .catch(reject);
     });
 });
 
