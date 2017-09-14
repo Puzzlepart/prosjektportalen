@@ -234,6 +234,9 @@
   <data name="Lists_StatusSections_Title" xml:space="preserve">
     <value>StatusSections</value>
   </data>
+  <data name="Lists_Log_Title" xml:space="preserve">
+    <value>Log</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
