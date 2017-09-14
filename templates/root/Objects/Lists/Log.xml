@@ -13,7 +13,6 @@
             <ViewFields>
                 <FieldRef Name="Message" />
                 <FieldRef Name="Source" />
-                <FieldRef Name="LogLevel" />
                 <FieldRef Name="ErrorTraceCorrelationId" />
                 <FieldRef Name="ErrorTypeName" />
                 <FieldRef Name="LogURL" />
