@@ -1611,6 +1611,15 @@
   <data name="String_AchievementOfObjectives" xml:space="preserve">
     <value>Achievement of objectives</value>
   </data>
+  <data name="String_LogLevel_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="String_LogLevel_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="String_LogLevel_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
