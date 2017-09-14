@@ -57,6 +57,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
 export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
     GetDataContext(conf, destUrl)
         .then(dataCtx => {
             const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
@@ -66,15 +67,23 @@ export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                 items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
                     .then(() => {
                         HandleItemsWithParent(dataCtx)
-                            .then(resolve)
+                            .then(() => {
+                                Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+                                resolve();
+                            })
                             .catch(reason => {
+                                console.log(reason);
+                                Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
                                 reject(reason);
                             });
                     })
                     .catch(reason => {
+                        console.log(reason);
+                        Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
                         reject(reason);
                     });
             }, (sender, args) => {
+                Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
                 reject({ sender, args });
             });
         });

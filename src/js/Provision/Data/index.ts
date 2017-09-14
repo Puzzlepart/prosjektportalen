@@ -15,27 +15,13 @@ import IProgressCallback from "../IProgressCallback";
 const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback) => new Promise<any>((resolve, reject) => {
     Util.ensureTaxonomy().then(() => {
         if (conf.DestinationLibrary) {
-            Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
             CopyFiles(conf, destUrl, onUpdateProgress)
-                .then(() => {
-                    Logger.log({ message: "Copy of files done.", data: { conf }, level: LogLevel.Info });
-                    resolve();
-                })
-                .catch(reason => {
-                    Logger.log({ message: "Copy of files failed.", data: { conf, reason }, level: LogLevel.Info });
-                    reject();
-                });
+                .then(resolve)
+                .catch(reject);
         } else {
-            Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
             CopyItems(conf, destUrl, onUpdateProgress)
-                .then(() => {
-                    Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
-                    resolve();
-                })
-                .catch(reason => {
-                    Logger.log({ message: "Copy of list items failed.", data: { conf, reason }, level: LogLevel.Info });
-                    reject();
-                });
+                .then(resolve)
+                .catch(reject);
         }
     });
 });
