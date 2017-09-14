@@ -9,6 +9,7 @@ interface ILogEntry {
     LogLevel: LogLevel;
     ErrorTraceCorrelationId?: string;
     ErrorTypeName?: string;
+    LogURL?: string;
 }
 
 /**

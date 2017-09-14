@@ -37,13 +37,13 @@ const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallbac
                                         .then(() => {
                                             resolve(result.redirectUrl);
                                         })
-                                        .catch(err => OnProvisionWebFail("CopyDefaultData", err, reject, resolve, result.redirectUrl));
+                                        .catch(err => OnProvisionWebFail("CopyDefaultData", err, reject, resolve, result.url, result.redirectUrl));
                                 })
-                                .catch(err => OnProvisionWebFail("ApplyExtensions", err, reject, resolve));
+                                .catch(err => OnProvisionWebFail("ApplyExtensions", err, reject, resolve, result.url));
                         })
-                        .catch(err => OnProvisionWebFail("ApplyJsTemplate", err, reject, resolve));
+                        .catch(err => OnProvisionWebFail("ApplyJsTemplate", err, reject, resolve, result.url));
                 })
-                .catch(err => OnProvisionWebFail("GetAllProperties", err, reject, resolve));
+                .catch(err => OnProvisionWebFail("GetAllProperties", err, reject, resolve, result.url));
         })
         .catch(err => OnProvisionWebFail("CreateWeb", err, reject, resolve));
 });
@@ -55,20 +55,33 @@ const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallbac
  * @param {any} err Error details
  * @param {Function} rejectFunc Reject callback
  * @param {Function} resolveFunc Resolve callback
+ * @param {string} url URL
  * @param {any} resolveData Resolve data
  */
-const OnProvisionWebFail = (func: string, err: any, rejectFunc: (reason) => void, resolveFunc: (resolveData?: any) => void, resolveData?: any): void => {
-    switch (func) {
-        case "CopyDefaultData":
-        case "ApplyExtensions": {
-            listLogger.log({ Message: err, Source: func, LogLevel: LogLevel.Warning });
-            resolveFunc(resolveData);
-        }
-            break;
-        default: {
-            listLogger.log({ Message: err, Source: func, LogLevel: LogLevel.Error });
-            rejectFunc(err);
-        }
+const OnProvisionWebFail = (func: string, err: any, rejectFunc: (reason) => void, resolveFunc: (resolveData?: any) => void, url?: string, resolveData?: any): void => {
+    let Message, ErrorTraceCorrelationId, ErrorTypeName, LogURL;
+
+    if (err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
+        const { args } = err;
+        ErrorTraceCorrelationId = args.get_errorTraceCorrelationId();
+        ErrorTypeName = args.get_errorTypeName();
+        Message = args.get_message();
+    } else {
+        Message = err;
+    }
+
+    if (url) {
+        LogURL = url;
+    }
+
+    const isWarning = Array.contains(["CopyDefaultData", "ApplyExtensions"], func);
+
+    listLogger.log({ Message, Source: func, LogLevel: isWarning ? LogLevel.Warning : LogLevel.Error, ErrorTraceCorrelationId, ErrorTypeName, LogURL });
+
+    if (isWarning) {
+        resolveFunc(resolveData);
+    } else {
+        rejectFunc(err);
     }
 };
 

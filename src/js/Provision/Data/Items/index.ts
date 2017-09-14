@@ -82,7 +82,7 @@ export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                     });
             }, (sender, args) => {
                 Logger.log({ message: "Failed to retrieve source items, copy of list items failed.", data: { conf, message: args.get_message() }, level: LogLevel.Info });
-                reject(args.get_message());
+                reject({ sender, args });
             });
         });
 });
@@ -102,6 +102,6 @@ const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resol
         }
     });
     dataCtx.Destination._.executeQueryAsync(resolve, (sender, args) => {
-        reject(args.get_message());
+        reject({ sender, args });
     });
 });
