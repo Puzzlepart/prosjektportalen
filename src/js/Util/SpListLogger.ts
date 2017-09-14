@@ -20,7 +20,7 @@ export default class SpListLogger {
      *
      * @param {string} list SP list title
      */
-    constructor(list = "Logg", siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
+    constructor(list = __("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
         this.List = list;
         this.SiteUrl = siteUrl;
     }
