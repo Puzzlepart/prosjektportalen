@@ -45,7 +45,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
         Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         resolve();
     }, (sender, args) => {
-        reject({ sender, args });
+        reject(args.get_message());
     });
 });
 
@@ -71,20 +71,18 @@ export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                                 Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
                                 resolve();
                             })
-                            .catch(reason => {
-                                console.log(reason);
-                                Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
-                                reject(reason);
+                            .catch(err => {
+                                Logger.log({ message: "Failed to handle items with parent, copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
+                                reject(err);
                             });
                     })
-                    .catch(reason => {
-                        console.log(reason);
-                        Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
-                        reject(reason);
+                    .catch(err => {
+                        Logger.log({ message: "Copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
+                        reject(err);
                     });
             }, (sender, args) => {
-                Logger.log({ message: "Copy of list items failed.", data: { conf }, level: LogLevel.Info });
-                reject({ sender, args });
+                Logger.log({ message: "Failed to retrieve source items, copy of list items failed.", data: { conf, message: args.get_message() }, level: LogLevel.Info });
+                reject(args.get_message());
             });
         });
 });
@@ -103,5 +101,7 @@ const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resol
             item.DestItem.update();
         }
     });
-    dataCtx.Destination._.executeQueryAsync(resolve, reject);
+    dataCtx.Destination._.executeQueryAsync(resolve, (sender, args) => {
+        reject(args.get_message());
+    });
 });
