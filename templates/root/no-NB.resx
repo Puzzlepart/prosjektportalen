@@ -1632,6 +1632,9 @@
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
+  <data name="WebPart_Group" xml:space="preserve">
+    <value>Prosjektportalen</value>
+  </data>
   <data name="WebPart_Refiner_Title" xml:space="preserve">
     <value>Presisering</value>
   </data>
@@ -1706,6 +1709,24 @@
   </data>
   <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
     <value>Siste loggelementer</value>
+  </data>
+  <data name="WebPart_ProjectList_Title" xml:space="preserve">
+    <value>Prosjektliste</value>
+  </data>
+  <data name="WebPart_LatestProjects_Title" xml:space="preserve">
+    <value>Siste prosjekter</value>
+  </data>
+  <data name="WebPart_NewProjectLink_Title" xml:space="preserve">
+    <value>Nytt prosjekt-lenke</value>
+  </data>
+  <data name="WebPart_QuickLinks_Title" xml:space="preserve">
+    <value>Snarveier</value>
+  </data>
+  <data name="WebPart_DynamicPortfolio_Title" xml:space="preserve">
+    <value>Porteføljeoversikt</value>
+  </data>
+  <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
+    <value>Erfaringslogg</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
