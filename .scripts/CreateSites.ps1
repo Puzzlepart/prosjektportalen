@@ -9,9 +9,11 @@ Param(
     [int]$Lcid = 1044
 )
 
-Connect-PnPOnline $Url.Replace(".sharepoint", "-admin.sharepoint")
+[System.Management.Automation.PSCredential]$Credentials = Get-Credential -Message "Login to the admin tenant"
+
+Connect-PnPOnline $Url.Replace(".sharepoint", "-admin.sharepoint") -Credentials $Credentials
 
 for ($i = 1; $i -le $Count; $i++) {
     $index = ("{0:D2}" -f $i)
-    New-PnPTenantSite -Title Prosjektportalen -Url "$($Url)/sites/$($Prefix)-$($index)" -Owner olemp@olemp.onmicrosoft.com -Lcid $Lcid -Template "STS#0" -TimeZone 13 -StorageQuota 10
+    New-PnPTenantSite -Title Prosjektportalen -Url "$($Url)/sites/$($Prefix)-$($index)" -Owner $Credentials.UserName -Lcid $Lcid -Template "STS#0" -TimeZone 13 -StorageQuota 10
 }
