@@ -7,7 +7,6 @@ var gulp = require("gulp"),
     runSequence = require("run-sequence"),
     livereload = require('gulp-livereload'),
     config = require('./@configuration.js'),
-    build = require('../build.json'),
     settings = require('./@settings.js');
 
 let buildTimeout;
@@ -52,7 +51,7 @@ gulp.task("watch::eval", () => {
 });
 
 gulp.task("watch::prod", () => {
-    __startWatch(`package:code::prod::${build.language}`);
+    __startWatch(`package:code::prod::${settings.language}`);
 });
 
 function uploadFile(glob, url, folder) {
