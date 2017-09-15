@@ -1629,6 +1629,9 @@
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
+  <data name="WebPart_Group" xml:space="preserve">
+    <value>Project Portal</value>
+  </data>
   <data name="WebPart_Refiner_Title" xml:space="preserve">
     <value>Clarification</value>
   </data>
@@ -1703,6 +1706,24 @@
   </data>
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Latest information elements </value>
+  </data>
+  <data name="WebPart_ProjectList_Title" xml:space="preserve">
+    <value>Project List</value>
+  </data>
+  <data name="WebPart_LatestProjects_Title" xml:space="preserve">
+    <value>Latest projects</value>
+  </data>
+  <data name="WebPart_NewProjectLink_Title" xml:space="preserve">
+    <value>New project link</value>
+  </data>
+  <data name="WebPart_QuickLinks_Title" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="WebPart_DynamicPortfolio_Title" xml:space="preserve">
+    <value>Portfolio Overview</value>
+  </data>
+  <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
+    <value>Experience Log</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
