@@ -157,8 +157,10 @@ const Lists: IList[] = [
         AdditionalSettings: {
             EnableVersioning: true,
         },
-        Fields: [
+        Fields: process.env.LANGUAGE === 1044 ? [
             SiteFields.GtProjectLogEventLookup,
+            SiteFields.GtProjectLogProductLookup,
+        ] : [
             SiteFields.GtProjectLogProductLookup,
         ],
         Views: [{
