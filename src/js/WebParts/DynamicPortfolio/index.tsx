@@ -226,7 +226,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const farItems: IContextualMenuItem[] = [];
 
         if (this.props.showGroupBy) {
-            const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
+            const groupByColumns = this.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
                 onClick: e => {
