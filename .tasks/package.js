@@ -6,7 +6,7 @@ var gulp = require("gulp"),
     stylus = require('gulp-stylus'),
     gutil = require('gulp-util'),
     autoprefixer = require('autoprefixer-stylus'),
-    settings = require('./@settings.js');
+    settings = require('./@settings.js'),
     config = require('./@configuration.js');
 
 gulp.task("package:code", ["build:lib"], (done) => {
