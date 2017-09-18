@@ -8,6 +8,8 @@ import IFilterPanelProps from "./IFilterPanelProps";
 
 /**
  * Filter Panel
+ *
+ * @param {IFilterPanelProps} props Props
  */
 const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: IFilterPanelProps) => {
     return (
@@ -24,7 +26,6 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
                         <Filter
                             key={idx}
                             filter={filter}
-                            showIcon={showIcons}
                             onFilterChange={onFilterChange} />
                     ))}
             </div>

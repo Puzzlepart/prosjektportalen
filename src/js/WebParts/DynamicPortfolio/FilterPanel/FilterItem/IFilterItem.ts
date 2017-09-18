@@ -1,4 +1,4 @@
-interface IFilterItem {
+export default interface IFilterItem {
     name: string;
     value: string;
     defaultSelected?: boolean;
@@ -6,4 +6,3 @@ interface IFilterItem {
     selected?: boolean;
 }
 
-export default IFilterItem;
