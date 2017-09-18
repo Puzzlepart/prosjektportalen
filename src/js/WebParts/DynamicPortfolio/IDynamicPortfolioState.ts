@@ -11,7 +11,7 @@ export interface IDynamicPortfolioErrorMessage {
 export default interface IDynamicPortfolioState extends IBaseWebPartState {
     items?: any[];
     filteredItems?: any[];
-    selectedColumns?: any[];
+    selectedColumns?: IColumnConfig[];
     fieldNames?: string[];
     searchTerm?: string;
     filters?: IFilter[];

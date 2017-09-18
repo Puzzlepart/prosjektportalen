@@ -1,13 +1,7 @@
-interface IColumnConfig {
-    name: string;
-    key: string;
-    fieldName: string;
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+
+export default interface IColumnConfig extends IColumn {
     readOnly: boolean;
     render: "Date" | "Note" | "Currency" | "Status" | "Default";
-    minWidth?: number;
-    maxWidth?: number;
-    isResizable?: boolean;
     groupBy?: boolean;
 }
-
-export default IColumnConfig;

@@ -60,13 +60,17 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     public componentDidMount(): void {
         this.fetchInitialData()
-            .then(initialState => this.setState({
-                ...initialState,
-                isLoading: false,
-            }, () => {
-                Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
-            }))
-            .catch(_ => this.setState({ isLoading: false }));
+            .then(data => {
+                this.setState({
+                    ...data,
+                    isLoading: false,
+                }, () => {
+                    Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+                });
+            })
+            .catch(_ => {
+                this.setState({ isLoading: false });
+            });
     }
 
     /**
@@ -278,7 +282,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: qc.iconName },
                 onClick: e => {
                     e.preventDefault();
-                    this._doSearch(qc);
+                    this.executeSearch(qc);
                 },
             })),
         });
@@ -525,11 +529,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Does a new search using Search.query
+     * Does a new search using Search.query, then updates component's state
      *
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private _doSearch(viewConfig: Configuration.IViewConfig): void {
+    private executeSearch(viewConfig: Configuration.IViewConfig): void {
         const { currentView } = this.state;
 
         if (currentView.id === viewConfig.id) {
@@ -559,7 +563,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
                     });
                 })
-                .catch(_ => this.setState({ isLoading: false }));
+                .catch(_ => {
+                    this.setState({ isLoading: false });
+                });
         });
     }
 }

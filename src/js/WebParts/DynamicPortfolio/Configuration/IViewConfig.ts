@@ -1,4 +1,4 @@
-interface IViewConfig {
+export default interface IViewConfig {
     id: number;
     name: string;
     queryTemplate: string;
@@ -7,5 +7,3 @@ interface IViewConfig {
     fields?: any[];
     refiners?: any[];
 }
-
-export default IViewConfig;
