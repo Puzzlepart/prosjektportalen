@@ -19,5 +19,6 @@ gulp.task("doc", () => {
             version: true,
             excludeExternals: true,
             readme: "./readme.md",
+            mode: "file",
         }));
 });
