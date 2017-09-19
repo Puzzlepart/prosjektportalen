@@ -72,6 +72,7 @@
     "json-loader": "^0.5.7",
     "merge2": "^1.1.0",
     "minimatch": "^3.0.4",
+    "object-assign": "^4.1.1",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
     "run-sequence": "^2.1.0",

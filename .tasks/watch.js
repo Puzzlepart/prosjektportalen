@@ -51,7 +51,7 @@ gulp.task("watch::eval", () => {
 });
 
 gulp.task("watch::prod", () => {
-    __startWatch(`package:code::prod::${settings.language}`);
+    __startWatch(`package:code::prod`);
 });
 
 function uploadFile(glob, url, folder) {
