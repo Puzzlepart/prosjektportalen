@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
 import {

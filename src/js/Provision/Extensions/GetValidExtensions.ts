@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { Site } from "sp-pnp-js";
 import IExtension from "./IExtension";
 import LoadExtension from "./LoadExtension";

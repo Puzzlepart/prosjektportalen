@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
 const Nofilter: IFile = {
@@ -7,29 +8,29 @@ const Nofilter: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: __("WebPart_Tasks_Title"),
+            Title: Localization.getResource("WebPart_Tasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_Tasks_Title"),
+                value: Localization.getResource("WebPart_Tasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_Tasks_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_Tasks_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_Tasks_Title"),
+                List: Localization.getResource("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo"],
@@ -42,29 +43,29 @@ const Nofilter: IFile = {
             },
         },
         {
-            Title: __("WebPart_Documents_Title"),
+            Title: Localization.getResource("WebPart_Documents_Title"),
             Zone: "LeftColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_Documents_Title"),
+                value: Localization.getResource("WebPart_Documents_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_Documents_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_Documents_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_Documents_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_Documents_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_Documents_Title"),
+                List: Localization.getResource("Lists_Documents_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
@@ -77,7 +78,7 @@ const Nofilter: IFile = {
             },
         },
         {
-            Title: __("WebPart_SiteFeed_Title"),
+            Title: Localization.getResource("WebPart_SiteFeed_Title"),
             Zone: "RightColumn",
             Order: 0,
             Contents: {
@@ -85,29 +86,29 @@ const Nofilter: IFile = {
             },
         },
         {
-            Title: __("WebPart_Uncertainties_Title"),
+            Title: Localization.getResource("WebPart_Uncertainties_Title"),
             Zone: "RightColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_Uncertainties_Title"),
+                value: Localization.getResource("WebPart_Uncertainties_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_Uncertainties_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_Uncertainties_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_Uncertainties_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_Uncertainties_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_Uncertainties_Title"),
+                List: Localization.getResource("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtRiskProbability", "GtRiskConsequence", "GtRiskProximity", "GtRiskFactor"],

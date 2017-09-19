@@ -1,3 +1,4 @@
+import Localization from "localization";
 import {
     CreateWeb,
     DoesWebExist,

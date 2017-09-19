@@ -6,7 +6,7 @@ const ProjectStatus: IFile = {
     Url: "ProjectStatus.aspx",
     Overwrite: true,
     Properties: {
-        Title: __("Navigation_ProjectStatus_Title"),
+        Title: Localization.getResource("Navigation_ProjectStatus_Title"),
     },
 };
 

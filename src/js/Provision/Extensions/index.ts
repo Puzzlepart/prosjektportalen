@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import IProgressCallback from "../IProgressCallback";
 import GetValidExtensions from "./GetValidExtensions";
