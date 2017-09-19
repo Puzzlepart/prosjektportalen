@@ -1,6 +1,5 @@
 import * as React from "react";
 import Localization from "localization";
-import { DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
@@ -99,12 +98,6 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
             return (
                 <NewProjectDialog
                     dialogProps={{
-                        type: DialogType.largeHeader,
-                        isDarkOverlay: true,
-                        isBlocking: false,
-                        title: Localization.getResource("NewProjectForm_DialogTitle"),
-                        subText: Localization.getResource("NewProjectForm_SubText"),
-                        className: "pp-newprojectdialog",
                         onDismiss: () => this.setState({ showDialog: false }),
                     }} />
             );

@@ -9,6 +9,7 @@ import {
 import {
     Dialog,
     DialogFooter,
+    DialogType,
 } from "office-ui-fabric-react/lib/Dialog";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
@@ -124,15 +125,15 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             <Dialog
                 hidden={false}
                 dialogContentProps={{
-                    type: dialogProps.type,
-                    subText: dialogProps.subText,
+                    type: DialogType.largeHeader,
+                    subText: Localization.getResource("NewProjectForm_SubText"),
                 }}
                 modalProps={{
-                    className: dialogProps.className,
-                    isDarkOverlay: dialogProps.isDarkOverlay,
-                    isBlocking: dialogProps.isBlocking,
+                    className: "pp-newprojectdialog",
+                    isDarkOverlay: true,
+                    isBlocking: true,
                 }}
-                title={dialogProps.title}
+                title={Localization.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
                 {this.renderForm(this.props, this.state)}
                 {this.renderAdvancedSection(this.props, this.state)}
