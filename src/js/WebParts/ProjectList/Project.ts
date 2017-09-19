@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "localization";
 import * as Util from "../../Util";
 
-interface IUserDetails {
+export interface IUserDetails {
     Name: string;
     EMail: string;
     Photo: string;

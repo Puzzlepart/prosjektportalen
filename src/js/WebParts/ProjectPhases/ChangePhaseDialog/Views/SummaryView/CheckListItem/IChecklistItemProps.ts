@@ -1,4 +1,4 @@
-import IChecklistItem from "../../../IChecklistItem";
+import IChecklistItem from "../../../../IChecklistItem";
 
 export default interface IChecklistItemProps {
     checkListItem: IChecklistItem;

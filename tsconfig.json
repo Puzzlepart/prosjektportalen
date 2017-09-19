@@ -9,7 +9,7 @@
         "baseUrl": ".",
         "paths": {
             "localization": ["src/js/@localization"],
-            "model": ["src/js/model"]
+            "model": ["src/js/Model"]
         },
         "typeRoots": [
             "./node_modules/@types",
