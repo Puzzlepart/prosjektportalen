@@ -23,7 +23,12 @@ gulp.task("copy:assets:dist", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("build:lib", () => {
+gulp.task("copy:resources:lib", () => {
+    return gulp.src("./src/**/*.json")
+        .pipe(gulp.dest(config.paths.lib))
+});
+
+gulp.task("build:lib", ["copy:resources:lib"], () => {
     var project = tsc.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
         .pipe(project(tsc.reporter[config.typescript.reporter]()));
