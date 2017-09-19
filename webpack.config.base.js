@@ -26,7 +26,9 @@ module.exports = (exclude) => ({
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
         alias: {
-            "localization": path.resolve(__dirname, 'lib/js/@localization/index.js')
+            "localization": path.resolve(__dirname, 'lib/js/@localization/index.js'),
+            "model": path.resolve(__dirname, 'lib/js/model/index.js'),
+            "util": path.resolve(__dirname, 'lib/js/util/index.js'),
         }
     },
     module: {

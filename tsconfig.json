@@ -9,6 +9,7 @@
         "baseUrl": ".",
         "paths": {
             "localization": ["src/js/@localization"],
+            "util": ["src/js/util"],
             "model": ["src/js/model"]
         },
         "typeRoots": [
