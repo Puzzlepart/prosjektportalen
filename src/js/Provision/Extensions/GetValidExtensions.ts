@@ -7,7 +7,7 @@ import LoadExtension from "./LoadExtension";
  *
  * @param {string} extensionLibTitle Extension library title
  */
-const GetValidExtensions = (extensionLibTitle = __("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
+const GetValidExtensions = (extensionLibTitle = Localization.getResource("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     const extensionLib = rootWeb.lists.getByTitle(extensionLibTitle);
     extensionLib.items

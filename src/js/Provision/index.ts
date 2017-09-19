@@ -23,12 +23,12 @@ const listLogger = new SpListLogger();
  * @returns {string} Redirect URL
  */
 const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
-    onUpdateProgress(__("ProvisionWeb_CreatingWeb"), "");
+    onUpdateProgress(Localization.getResource("ProvisionWeb_CreatingWeb"), "");
     CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
         .then((result: ICreateWebResult) => {
             GetAllProperties()
                 .then(propBagAllProps => {
-                    onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), "");
+                    onUpdateProgress(Localization.getResource("ProvisionWeb_ApplyingTemplate"), "");
                     ApplyProvisioningTemplate(result.web, propBagAllProps.get_fieldValues(), onUpdateProgress)
                         .then(() => {
                             ApplyExtensions(result.web, onUpdateProgress)

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import * as Util from "../../Util";
 import { ChromeTitle, ModalLink } from "../../WebParts/@Components";
 

@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import Localization from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../Util";
 import { ChromeTitle } from "../../WebParts/@Components";

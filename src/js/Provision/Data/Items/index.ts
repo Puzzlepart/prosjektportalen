@@ -63,7 +63,7 @@ export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: I
             const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
             dataCtx.Source._.load(items);
             dataCtx.Source._.executeQueryAsync(() => {
-                onUpdateProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
+                onUpdateProgress(Localization.getResource("ProvisionWeb_CopyListContent"), String.format(Localization.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
                 items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
                     .then(() => {
                         HandleItemsWithParent(dataCtx)

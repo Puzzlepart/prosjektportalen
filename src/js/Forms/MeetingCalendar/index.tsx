@@ -1,6 +1,7 @@
 import * as pnp from "sp-pnp-js";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import Localization from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../Util";
 import { default as RelatedLogElements } from "./RelatedLogElements";

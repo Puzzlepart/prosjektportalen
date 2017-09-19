@@ -7,29 +7,29 @@ const Assigned: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: __("WebPart_MyTasks_Title"),
+            Title: Localization.getResource("WebPart_MyTasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_MyTasks_Title"),
+                value: Localization.getResource("WebPart_MyTasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_Tasks_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_Tasks_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_Tasks_Title"),
+                List: Localization.getResource("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "GtProjectPhase", "StartDate", "DueDate"],
@@ -42,29 +42,29 @@ const Assigned: IFile = {
             },
         },
         {
-            Title: __("WebPart_MyCommunicationElements_Title"),
+            Title: Localization.getResource("WebPart_MyCommunicationElements_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_MyCommunicationElements_Title"),
+                value: Localization.getResource("WebPart_MyCommunicationElements_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_CommunicationPlan_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_CommunicationPlan_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_CommunicationPlan_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_CommunicationPlan_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_CommunicationPlan_Title"),
+                List: Localization.getResource("Lists_CommunicationPlan_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProjectPhase", "GtActionDate", "GtCommunicationTarget"],
@@ -77,29 +77,29 @@ const Assigned: IFile = {
             },
         },
         {
-            Title: __("WebPart_MyProjectDeliveries_Title"),
+            Title: Localization.getResource("WebPart_MyProjectDeliveries_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: __("WebPart_MyProjectDeliveries_Title"),
+                value: Localization.getResource("WebPart_MyProjectDeliveries_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${__("Lists_ProjectDeliveries_Url")}`,
+                value: `{site}/${Localization.getResource("Lists_ProjectDeliveries_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${__("DefaultView_ProjectDeliveries_Url")}`,
+                value: `{site}/${Localization.getResource("DefaultView_ProjectDeliveries_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: __("Lists_ProjectDeliveries_Title"),
+                List: Localization.getResource("Lists_ProjectDeliveries_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProductPhase", "GtProductInteressent", "GtProductAcceptanceMethod", "GtProductAcceptanceDate"],

@@ -13,12 +13,12 @@ import IProgressCallback from "../IProgressCallback";
  * Maps the current handler to a text explaining the current handlers action
  */
 const PROGRESS_MAP = {
-    Files: __("ProvisionWeb_Progress_Handler_Files"),
-    Lists: __("ProvisionWeb_Progress_Handler_Lists"),
-    Navigation: __("ProvisionWeb_Progress_Handler_Navigation"),
-    WebSettings: __("ProvisionWeb_Progress_Handler_WebSettings"),
-    ComposedLook: __("ProvisionWeb_Progress_Handler_ComposedLook"),
-    PropertyBagEntries: __("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
+    Files: Localization.getResource("ProvisionWeb_Progress_Handler_Files"),
+    Lists: Localization.getResource("ProvisionWeb_Progress_Handler_Lists"),
+    Navigation: Localization.getResource("ProvisionWeb_Progress_Handler_Navigation"),
+    WebSettings: Localization.getResource("ProvisionWeb_Progress_Handler_WebSettings"),
+    ComposedLook: Localization.getResource("ProvisionWeb_Progress_Handler_ComposedLook"),
+    PropertyBagEntries: Localization.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
 let Template: Schema = {
@@ -57,7 +57,7 @@ export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string 
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+        }, msg => onUpdateProgress(Localization.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
         .then(resolve)
         .catch(reject);
 });

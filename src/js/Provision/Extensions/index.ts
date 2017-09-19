@@ -11,7 +11,7 @@ import GetValidExtensions from "./GetValidExtensions";
 const ApplyExtensions = (web: any, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
     GetValidExtensions().then(extensions => {
         extensions.reduce((chain, extension) => chain.then(___ => {
-            onUpdateProgress(__("ProvisionWeb_ApplyingExtensions"), extension.Title);
+            onUpdateProgress(Localization.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
             return new WebProvisioner(web).applyTemplate(extension.data);
         }), Promise.resolve())
             .then(resolve)

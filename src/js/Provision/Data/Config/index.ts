@@ -8,7 +8,7 @@ let __CONFIG: { [key: string]: ListConfig } = null;
  *
  * @param  {string} configList Configuration list
  */
-export const RetrieveConfig = (configList = __("Lists_ListContentConfig_Title")): Promise<{ [key: string]: ListConfig }> => new Promise((resolve, reject) => {
+export const RetrieveConfig = (configList = Localization.getResource("Lists_ListContentConfig_Title")): Promise<{ [key: string]: ListConfig }> => new Promise((resolve, reject) => {
     if (__CONFIG) {
         resolve(__CONFIG);
     } else {

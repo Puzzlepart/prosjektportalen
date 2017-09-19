@@ -1,4 +1,5 @@
 import * as  jQuery from "jquery";
+import Localization from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../Util";
 

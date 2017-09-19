@@ -1,4 +1,5 @@
 import * as Util from "../Util";
+import Localization from "localization";
 import {
     UpdatePhaseWelcomePage,
     UpdateFrontpageListViews,

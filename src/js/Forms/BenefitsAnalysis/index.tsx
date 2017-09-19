@@ -1,7 +1,7 @@
 import { sp } from "sp-pnp-js";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Localization from "../../@localization";
+import Localization from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../Util";
 import { RelatedFollowups } from "./RelatedFollowups";

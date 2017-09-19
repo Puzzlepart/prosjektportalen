@@ -82,7 +82,7 @@ export const CopyFiles = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                 files.push(i);
             }
         });
-        onUpdateProgress(__("ProvisionWeb_CopyListContent"), String.format(__("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
+        onUpdateProgress(Localization.getResource("ProvisionWeb_CopyListContent"), String.format(Localization.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
         CreateFolderHierarchy(destLibServerRelUrl, RootFolder.ServerRelativeUrl, destLibRootFolder, folders)
             .then(_ => {
                 /**
