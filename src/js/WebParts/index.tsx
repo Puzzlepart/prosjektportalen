@@ -50,3 +50,17 @@ export const Render = () => {
     WebPartComponents.forEach(wpc => wpc.renderOnPage());
 };
 
+export {
+    ProjectList,
+    ProjectInfo,
+    ProjectPhases,
+    NewProjectLink,
+    Announcements,
+    LatestProjects,
+    QuickLinks,
+    DynamicPortfolio,
+    BenefitsOverview,
+    ProjectStatus,
+    ExperienceLog,
+    LatestLogEntries,
+};
