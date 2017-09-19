@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     Web,
     Folder,
@@ -83,7 +83,7 @@ export const CopyFiles = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                 files.push(i);
             }
         });
-        onUpdateProgress(Localization.getResource("ProvisionWeb_CopyListContent"), String.format(Localization.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
+        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
         CreateFolderHierarchy(destLibServerRelUrl, RootFolder.ServerRelativeUrl, destLibRootFolder, folders)
             .then(_ => {
                 /**

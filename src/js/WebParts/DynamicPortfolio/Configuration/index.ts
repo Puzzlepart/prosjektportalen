@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import * as pnp from "sp-pnp-js";
 import IConfiguration, { IViewConfig, IColumnConfig, IRefinerConfig } from "./IConfiguration";
 
@@ -13,15 +13,15 @@ export const getConfig = () => new Promise<IConfiguration>((resolve, reject) => 
     } else {
         const lists = pnp.sp.web.lists;
         Promise.all([
-            lists.getByTitle(Localization.getResource("Lists_DynamicPortfolioFields_Title"))
+            lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
                 .items
                 .orderBy("GtDpOrder")
                 .get(),
-            lists.getByTitle(Localization.getResource("Lists_DynamicPortfolioRefiners_Title"))
+            lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
                 .items
                 .orderBy("GtDpOrder")
                 .get(),
-            lists.getByTitle(Localization.getResource("Lists_DynamicPortfolioViews_Title"))
+            lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
                 .items
                 .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
                 .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "Author")

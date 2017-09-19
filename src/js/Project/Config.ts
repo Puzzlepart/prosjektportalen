@@ -1,25 +1,25 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 
 /**
  * Document library
  */
-export const DOCUMENT_LIBRARY = Localization.getResource("Lists_Documents_Title");
+export const DOCUMENT_LIBRARY = RESOURCE_MANAGER.getResource("Lists_Documents_Title");
 
 /**
  * Frontpage lists
  */
 export const FRONTPAGE_LISTS = [
     {
-        listTitle: Localization.getResource("Lists_Uncertainties_Title"),
-        wpTitle: Localization.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
     },
     {
-        listTitle: Localization.getResource("Lists_Documents_Title"),
-        wpTitle: Localization.getResource("WebPart_DocumentsCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
     },
     {
-        listTitle: Localization.getResource("Lists_Tasks_Title"),
-        wpTitle: Localization.getResource("WebPart_TasksCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_TasksCurrentPhase_Title"),
     },
 ];
 

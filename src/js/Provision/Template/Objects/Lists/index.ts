@@ -1,10 +1,10 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { IList } from "sp-pnp-provisioning/lib/schema";
 import * as SiteFields from "./SiteFields";
 
 const Lists: IList[] = [
     {
-        Title: Localization.getResource("Lists_SitePages_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_SitePages_Title"),
         Description: "",
         Template: 119,
         ContentTypesEnabled: true,
@@ -16,7 +16,7 @@ const Lists: IList[] = [
         },
     },
     {
-        Title: Localization.getResource("Lists_PhaseChecklist_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -28,7 +28,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtChecklistStatus", "GtComment"],
             AdditionalSettings: {
                 RowLimit: 50,
@@ -39,7 +39,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_GroupedStatus_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_GroupedStatus_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
             AdditionalSettings: {
                 RowLimit: 50,
@@ -54,7 +54,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_Information_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Information_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -66,7 +66,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectInfoDescription"],
             AdditionalSettings: {
                 RowLimit: 0,
@@ -76,7 +76,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_Stakeholders_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Stakeholders_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -88,7 +88,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtStakeholderGroup", "GtStakeholderContext", "GtStakeholderStrategy", "GtStakeholderInterest", "GtStakeholderInfluence", "GtStakeholderInfluencePossibilty", "GtStakeholderActions"],
             AdditionalSettings: {
                 RowLimit: 0,
@@ -98,7 +98,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_CommunicationPlan_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -113,7 +113,7 @@ const Lists: IList[] = [
             SiteFields.GtCommunicationTarget,
         ],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectPhase", "GtActionDate", "GtActionResponsible"],
             AdditionalSettings: {
                 RowLimit: 10,
@@ -123,7 +123,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_Milestones_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Milestones_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -135,7 +135,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -147,7 +147,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_ProjectLog_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_ProjectLog_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -165,7 +165,7 @@ const Lists: IList[] = [
             SiteFields.GtProjectLogProductLookup,
         ],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectLogType", "GtProjectLogReporter", "GtProjectLogResponsible", "GtProjectLogConsequence", "GtProjectLogRecommendation", "GtProjectLogExperience"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -175,7 +175,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_ProjectDeliveries_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_ProjectDeliveries_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -190,7 +190,7 @@ const Lists: IList[] = [
             SiteFields.GtProductInteressent,
         ],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProductPhase", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -199,7 +199,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_ProductionPhase_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_ProductionPhase_DisplayName"),
             ViewFields: ["LinkTitle", "GtProductQualityResponsible", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -211,7 +211,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_Uncertainties_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -226,7 +226,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: [
                 "ID",
                 "LinkTitle",
@@ -247,7 +247,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_Tasks_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
         Description: "",
         Template: 171,
         ContentTypesEnabled: true,
@@ -266,7 +266,7 @@ const Lists: IList[] = [
             SiteFields.GtProjectTaskGain,
         ],
         Views: [{
-            Title: Localization.getResource("View_AllTasks_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllTasks_DisplayName"),
             ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -275,7 +275,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_RelevantLinks_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_RelevantLinks_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -284,7 +284,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_BenefitTasks_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_BenefitTasks_DisplayName"),
             ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -294,7 +294,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_MeetingCalendar_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_MeetingCalendar_Title"),
         Description: "",
         Template: 106,
         ContentTypesEnabled: true,
@@ -310,7 +310,7 @@ const Lists: IList[] = [
         ] : [],
     },
     {
-        Title: Localization.getResource("Lists_Documents_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
         Description: "",
         Template: 101,
         ContentTypesEnabled: true,
@@ -322,7 +322,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllDocuments_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllDocuments_DisplayName"),
             ViewFields: ["DocIcon", "LinkFilename", "GtProjectPhase", "Modified", "Editor"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -332,7 +332,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_ProjectStatus_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title"),
         Description: "",
         Template: 101,
         ContentTypesEnabled: true,
@@ -344,7 +344,7 @@ const Lists: IList[] = [
             EnableVersioning: true,
         },
         Views: [{
-            Title: Localization.getResource("View_AllDocuments_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllDocuments_DisplayName"),
             ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -356,7 +356,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_BenefitsAnalysis_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -373,10 +373,10 @@ const Lists: IList[] = [
         FieldRefs: [{
             ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
             Required: true,
-            DisplayName: Localization.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
+            DisplayName: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         }],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -385,7 +385,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_GroupedBenefitType_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_GroupedBenefitType_DisplayName"),
             ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -400,7 +400,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_ChangeAnalysis_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_ChangeAnalysis_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -417,7 +417,7 @@ const Lists: IList[] = [
             DisplayName: "Endring",
         }],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -428,7 +428,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_GroupedProcess_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_GroupedProcess_DisplayName"),
             ViewFields: ["GtChallengeDescription", "LinkTitle"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -443,7 +443,7 @@ const Lists: IList[] = [
         }],
     },
     {
-        Title: Localization.getResource("Lists_BenefitsFollowup_Title"),
+        Title: RESOURCE_MANAGER.getResource("Lists_BenefitsFollowup_Title"),
         Description: "",
         Template: 100,
         ContentTypesEnabled: true,
@@ -465,7 +465,7 @@ const Lists: IList[] = [
             SiteFields.GtGainLookup_ID,
         ],
         Views: [{
-            Title: Localization.getResource("View_AllItems_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,
@@ -479,7 +479,7 @@ const Lists: IList[] = [
             },
         },
         {
-            Title: Localization.getResource("View_Flat_DisplayName"),
+            Title: RESOURCE_MANAGER.getResource("View_Flat_DisplayName"),
             ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
             AdditionalSettings: {
                 RowLimit: 30,

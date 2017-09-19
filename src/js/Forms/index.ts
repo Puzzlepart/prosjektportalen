@@ -1,14 +1,14 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import * as Util from "../Util";
 import { IBaseFormModifications } from "./Base";
 import HandleQueryParams from "./HandleQueryParams";
 
 const formModifications: { [key: string]: IBaseFormModifications } = {};
-formModifications[Localization.getResource("Lists_ProjectLog_Url")] = require("./ProjectLog").default;
-formModifications[Localization.getResource("Lists_MeetingCalendar_Url")] = require("./MeetingCalendar").default;
-formModifications[Localization.getResource("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
-formModifications[Localization.getResource("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
-formModifications[Localization.getResource("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
+formModifications[RESOURCE_MANAGER.getResource("Lists_ProjectLog_Url")] = require("./ProjectLog").default;
+formModifications[RESOURCE_MANAGER.getResource("Lists_MeetingCalendar_Url")] = require("./MeetingCalendar").default;
+formModifications[RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
+formModifications[RESOURCE_MANAGER.getResource("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
+formModifications[RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
 
 
 /**

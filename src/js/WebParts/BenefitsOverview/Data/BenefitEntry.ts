@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import DataSource from "../../DataSource";
 import MeasurementEntry from "./MeasurementEntry";
 
@@ -47,7 +47,7 @@ export default class BenefitEntry {
                 this.MeasurementUnit = data.GtMeasurementUnit;
                 this.StartValue = data.GtStartValue;
                 this.DesiredValue = data.GtDesiredValue;
-                this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${Localization.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
+                this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
             }
                 break;
             case DataSource.Search: {

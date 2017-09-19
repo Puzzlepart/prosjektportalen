@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import IChecklistItem from "../../../IChecklistItem";
 
 export default interface IInitialViewProps {
@@ -14,5 +14,5 @@ export default interface IInitialViewProps {
 export const InitialViewDefaultProps: Partial<IInitialViewProps> = {
     className: "inner",
     commentMinLength: 4,
-    commentLabel: Localization.getResource("String_Comment"),
+    commentLabel: RESOURCE_MANAGER.getResource("String_Comment"),
 };

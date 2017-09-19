@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -66,7 +66,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(Localization.getResource("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -86,7 +86,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } else if (webinfos == null) {
             return (
                 <div className="ms-metadata">
-                    <Icon iconName="Error" style={{ color: "#000" }} />  {Localization.getResource("WebPart_FailedMessage")}
+                    <Icon iconName="Error" style={{ color: "#000" }} />  {RESOURCE_MANAGER.getResource("WebPart_FailedMessage")}
                 </div>
             );
         } else if (webinfos.length > 0) {
@@ -98,7 +98,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                                 {webinfo.Title ?
                                     <div>
                                         <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                        <div className="ms-metadata">{Localization.getResource("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                        <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
                                     </div>
                                     : (
                                         <div style={{ width: 100 }}>
@@ -113,7 +113,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } else {
             return (
                 <div id={this.props.containerId}>
-                    <MessageBar>{Localization.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

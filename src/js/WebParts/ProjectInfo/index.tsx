@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     Site,
     Web,
@@ -75,8 +75,8 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             case ProjectInfoRenderMode.Normal: {
                 return (
                     <div className={containerClassName}>
-                        {this.__renderChrome(Localization.getResource("WebPart_ProjectInfo_Title"), `.${innerClassName}`, ProjectInfo.displayName, hideChrome)}
-                        {isLoading && <Spinner type={SpinnerType.large} label={Localization.getResource("ProjectInfo_LoadingText")} />}
+                        {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"), `.${innerClassName}`, ProjectInfo.displayName, hideChrome)}
+                        {isLoading && <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText")} />}
                         {this.renderInner(this.props, this.state)}
                     </div>
                 );
@@ -99,7 +99,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                             </div>
                             {isLoading ?
                                 (
-                                    <Spinner type={SpinnerType.large} label={Localization.getResource("ProjectInfo_LoadingText")} />
+                                    <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText")} />
                                 )
                                 :
                                 this.renderInner(this.props, this.state)}
@@ -108,7 +108,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 href={this.props.webUrl}
                                 iconProps={{ iconName: "Home" }}
                                 description=""
-                                text={Localization.getResource("ProjectInfo_ProjectLinkText")}
+                                text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectLinkText")}
                                 style={{
                                     marginLeft: 0,
                                     marginTop: 20,
@@ -119,7 +119,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 href={`${this.props.webUrl}/SitePages/ProjectStatus.aspx`}
                                 iconProps={{ iconName: "BarChart4" }}
                                 description=""
-                                text={Localization.getResource("ProjectInfo_ProjectStatusLinkText")}
+                                text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectStatusLinkText")}
                                 style={{
                                     marginLeft: 0,
                                     marginTop: 20,
@@ -161,14 +161,14 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         if (hasMissingProps && this.props.showMissingPropsWarning) {
             return (
                 <MessageBar messageBarType={MessageBarType.error}>
-                    {Localization.getResource("ProjectInfo_MissingProperties")}
+                    {RESOURCE_MANAGER.getResource("ProjectInfo_MissingProperties")}
                 </MessageBar>
             );
         }
         if (propertiesToRender.length === 0) {
             return (
                 <MessageBar>
-                    {Localization.getResource("ProjectInfo_NoProperties")}
+                    {RESOURCE_MANAGER.getResource("ProjectInfo_NoProperties")}
                 </MessageBar>
             );
         }
@@ -208,7 +208,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      *
      * @param {string} configList Configuration list
      */
-    private fetchData = (configList = Localization.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
+    private fetchData = (configList = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
         const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
 
         const configPromise = rootWeb
@@ -220,14 +220,14 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
         const fieldsPromise = rootWeb
             .contentTypes
-            .getById(Localization.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .get();
 
         const itemPromise = new Web(this.props.webUrl)
             .lists
-            .getByTitle(Localization.getResource("Lists_SitePages_Title"))
+            .getByTitle(RESOURCE_MANAGER.getResource("Lists_SitePages_Title"))
             .items
             .getById(this.props.welcomePageId)
             .fieldValuesAsHTML

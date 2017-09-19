@@ -1,5 +1,5 @@
 
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
 const ProjectStatus: IFile = {
@@ -8,7 +8,7 @@ const ProjectStatus: IFile = {
     Url: "ProjectStatus.aspx",
     Overwrite: true,
     Properties: {
-        Title: Localization.getResource("Navigation_ProjectStatus_Title"),
+        Title: RESOURCE_MANAGER.getResource("Navigation_ProjectStatus_Title"),
     },
 };
 

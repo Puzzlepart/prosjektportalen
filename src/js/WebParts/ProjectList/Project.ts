@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import * as Util from "../../Util";
 
 interface IUserDetails {
@@ -37,7 +37,7 @@ export default class Project {
     * Get manager (GtProjectManagerOWSUSER) details
     */
     public getManagerDetails(): IUserDetails {
-        const [EMail = "", Name = Localization.getResource("String_NotSet")] = this.Manager.split(" | ");
+        const [EMail = "", Name = RESOURCE_MANAGER.getResource("String_NotSet")] = this.Manager.split(" | ");
         const Photo = Util.userPhoto(EMail);
         return { Name, EMail, Photo };
     }
@@ -46,7 +46,7 @@ export default class Project {
      * Get owner (GtProjectOwnerOWSUSER) details
      */
     public getOwnerDetails(): IUserDetails {
-        const [EMail = "", Name = Localization.getResource("String_NotSet")] = this.Owner.split(" | ");
+        const [EMail = "", Name = RESOURCE_MANAGER.getResource("String_NotSet")] = this.Owner.split(" | ");
         const Photo = Util.userPhoto(EMail);
         return { Name, EMail, Photo };
     }

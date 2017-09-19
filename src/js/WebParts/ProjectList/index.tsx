@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import Masonry from "react-masonry-component";
 import {
@@ -69,7 +69,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         return (
             <div style={{ paddingRight: 40 }}>
                 <SearchBox
-                    labelText={Localization.getResource("DynamicPortfolio_SearchBox_Placeholder")}
+                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 {this.renderCards(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
@@ -92,7 +92,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
 
         if (projects.length === 0) {
             return (
-                <MessageBar>{Localization.getResource("ProjectList_NoResults")}</MessageBar>
+                <MessageBar>{RESOURCE_MANAGER.getResource("ProjectList_NoResults")}</MessageBar>
             );
         }
 
@@ -174,7 +174,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
 
         const ctFieldsPromise = rootWeb
             .contentTypes
-            .getById(Localization.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .get();

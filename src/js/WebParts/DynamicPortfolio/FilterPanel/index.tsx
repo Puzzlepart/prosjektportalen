@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     Panel,
     PanelType,
@@ -18,7 +18,7 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
             isOpen={isOpen}
             isBlocking={true}
             onDismiss={onDismiss}
-            headerText={Localization.getResource("String_Filters")}
+            headerText={RESOURCE_MANAGER.getResource("String_Filters")}
             type={PanelType.smallFixedFar}>
             <div className="ms-Grid">
                 {filters

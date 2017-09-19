@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     DetailsList,
     IColumn,
@@ -58,7 +58,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         return (
             <div>
                 <SearchBox
-                    labelText={Localization.getResource("ExperienceLog_SearchBox_Placeholder")}
+                    labelText={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 <DetailsList
                     items={filteredItems}

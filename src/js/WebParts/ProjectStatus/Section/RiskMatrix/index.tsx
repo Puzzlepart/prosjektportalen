@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Config from "../../Config";
 import MatrixRow from "./MatrixRow";
@@ -85,9 +85,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 <Toggle
                     defaultChecked={false}
                     onChanged={isChecked => this.setState({ postAction: isChecked })}
-                    label={Localization.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                    onText={Localization.getResource("String_Yes")}
-                    offText={Localization.getResource("String_No")} />
+                    label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                    offText={RESOURCE_MANAGER.getResource("String_No")} />
             </div>
         );
     }

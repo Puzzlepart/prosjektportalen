@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { sp, Logger, LogLevel } from "sp-pnp-js";
 import * as Config from "./Config";
 
@@ -15,7 +15,7 @@ const UpdateFrontpageListViews = (phaseName: string) => new Promise<void>((resol
         let updateViewsPromises = [];
         listViews.forEach((views, i) => {
             let { listTitle, wpTitle } = lists[i];
-            let fViews = views.filter(v => v.ServerRelativeUrl.indexOf(Localization.getResource("Project_WelcomePage")) !== -1);
+            let fViews = views.filter(v => v.ServerRelativeUrl.indexOf(RESOURCE_MANAGER.getResource("Project_WelcomePage")) !== -1);
             Logger.log({ message: `ChangeProjectPhase: Updating list view for webpart '${wpTitle}' for list ${listTitle}`, level: LogLevel.Info });
             updateViewsPromises = updateViewsPromises.concat(fViews.map(v => sp.web.lists.getByTitle(listTitle).views.getById(v.Id).update({
                 ViewQuery: viewQuery,

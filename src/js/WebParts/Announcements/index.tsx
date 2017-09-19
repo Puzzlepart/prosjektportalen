@@ -1,6 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     Spinner,
     SpinnerType,
@@ -43,7 +43,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(Localization.getResource("Lists_Announcements_Title"))
+            .getByTitle(RESOURCE_MANAGER.getResource("Lists_Announcements_Title"))
             .items
             .filter(itemsFilter)
             .top(itemsCount)
@@ -59,7 +59,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(Localization.getResource("WebPart_Announcements_Title"), `#${this.props.containerId}`, Announcements.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), `#${this.props.containerId}`, Announcements.displayName)}
                 {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
@@ -87,7 +87,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                                     style={{ cursor: "pointer" }}
                                     onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                             </h5>
-                            <span className="ms-metadata">{Localization.getResource("String_Published")} {Util.dateFormat(entry.Created)}</span>
+                            <span className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Published")} {Util.dateFormat(entry.Created)}</span>
                         </li>)}
                     </ul>
                 </div>
@@ -95,7 +95,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
         } else {
             return (
                 <div id={this.props.containerId}>
-                    <MessageBar>{Localization.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

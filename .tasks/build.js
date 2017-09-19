@@ -1,6 +1,6 @@
 'use strict';
 var gulp = require("gulp"),
-    tsc = require("gulp-typescript"),
+    typescript = require("gulp-typescript"),
     config = require('./@configuration.js'),
     merge = require("merge2"),
     rename = require("gulp-rename"),
@@ -29,9 +29,9 @@ gulp.task("copy:resources:lib", () => {
 });
 
 gulp.task("build:lib", ["copy:resources:lib"], () => {
-    var project = tsc.createProject("tsconfig.json", { declaration: true });
+    var project = typescript.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(tsc.reporter[config.typescript.reporter]()));
+            .pipe(project(typescript.reporter.fullReporter()));
     return merge([
         built.dts.pipe(gulp.dest(config.paths.lib)),
         built.js.pipe(gulp.dest(config.paths.lib))

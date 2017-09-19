@@ -1,9 +1,9 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { ChromeTitle, ModalLink } from "../../WebParts/@Components";
 
 const LogElement = ({ data }) => {
-    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${Localization.getResource("DefaultView_ProjectLog_Url")}?ID=${data.ID}`.replace("AllItems", "DispForm");
+    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_ProjectLog_Url")}?ID=${data.ID}`.replace("AllItems", "DispForm");
     return (
         <li>
             <h3>
@@ -22,7 +22,7 @@ const RelatedLogElements = ({ logElements }) => {
         <div
             className="container"
             style={{ marginTop: "25px" }}>
-            <ChromeTitle title={Localization.getResource("WebPart_RelatedLogElements_Title")} />
+            <ChromeTitle title={RESOURCE_MANAGER.getResource("WebPart_RelatedLogElements_Title")} />
             <ul
                 className="pp-simpleList"
                 style={{ width: "300px" }}>

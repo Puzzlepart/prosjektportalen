@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
 import {
@@ -14,12 +14,12 @@ import IProgressCallback from "../IProgressCallback";
  * Maps the current handler to a text explaining the current handlers action
  */
 const PROGRESS_MAP = {
-    Files: Localization.getResource("ProvisionWeb_Progress_Handler_Files"),
-    Lists: Localization.getResource("ProvisionWeb_Progress_Handler_Lists"),
-    Navigation: Localization.getResource("ProvisionWeb_Progress_Handler_Navigation"),
-    WebSettings: Localization.getResource("ProvisionWeb_Progress_Handler_WebSettings"),
-    ComposedLook: Localization.getResource("ProvisionWeb_Progress_Handler_ComposedLook"),
-    PropertyBagEntries: Localization.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
+    Files: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Files"),
+    Lists: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Lists"),
+    Navigation: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Navigation"),
+    WebSettings: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_WebSettings"),
+    ComposedLook: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_ComposedLook"),
+    PropertyBagEntries: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
 let Template: Schema = {
@@ -58,7 +58,7 @@ export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string 
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, msg => onUpdateProgress(Localization.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
+        }, msg => onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
         .then(resolve)
         .catch(reject);
 });

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../FormUtils";
 import { ChromeTitle } from "../../WebParts/@Components";
@@ -19,8 +19,8 @@ const _: IBaseFormModifications = {
         const id = "pp-next-step";
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render((<div>
-           <ChromeTitle title={Localization.getResource("ChangeAnalysis_NextStep_Title")} />
-           <p>​​{Localization.getResource("ChangeAnalysis_NextStep_Text")} <a href={`../../${Localization.getResource("DefaultView_BenefitsAnalysis_Url")}`}>{Localization.getResource("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
+           <ChromeTitle title={RESOURCE_MANAGER.getResource("ChangeAnalysis_NextStep_Title")} />
+           <p>​​{RESOURCE_MANAGER.getResource("ChangeAnalysis_NextStep_Text")} <a href={`../../${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}`}>{RESOURCE_MANAGER.getResource("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
         </div>), container);
     },
 };

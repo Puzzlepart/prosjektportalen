@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { sp } from "sp-pnp-js";
 
 /**
@@ -10,11 +10,11 @@ export const DEFAULT_SEARCH_SETTINGS = {
     TrimDuplicates: false,
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: Localization.getResource("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: Localization.getResource("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 

@@ -1,4 +1,4 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import ListConfig from "./ListConfig";
 
@@ -9,7 +9,7 @@ let __CONFIG: { [key: string]: ListConfig } = null;
  *
  * @param  {string} configList Configuration list
  */
-export const RetrieveConfig = (configList = Localization.getResource("Lists_ListContentConfig_Title")): Promise<{ [key: string]: ListConfig }> => new Promise((resolve, reject) => {
+export const RetrieveConfig = (configList = RESOURCE_MANAGER.getResource("Lists_ListContentConfig_Title")): Promise<{ [key: string]: ListConfig }> => new Promise((resolve, reject) => {
     if (__CONFIG) {
         resolve(__CONFIG);
     } else {

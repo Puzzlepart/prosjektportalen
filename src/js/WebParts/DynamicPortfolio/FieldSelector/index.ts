@@ -1,10 +1,10 @@
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import IFilter from "../FilterPanel/Filter/IFilter";
 
 const FieldSelector: IFilter = {
-    name: Localization.getResource("DynamicPortfolio_FieldSelector_Name"),
+    name: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_Name"),
     key: "Fields",
-    emptyMessage: Localization.getResource("DynamicPortfolio_FieldSelector_EmptyMessage"),
+    emptyMessage: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_EmptyMessage"),
     multi: true,
     defaultHidden: false,
     iconName: "ShowResults",

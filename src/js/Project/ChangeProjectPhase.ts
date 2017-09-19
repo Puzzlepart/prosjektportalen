@@ -1,5 +1,5 @@
 import * as Util from "../Util";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     UpdatePhaseWelcomePage,
     UpdateFrontpageListViews,
@@ -16,7 +16,7 @@ import {
  * @param {boolean} useWaitDialog Should a wait dialog be used
  */
 const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<void>((resolve, reject) => {
-    let [Title, Message] = Localization.getResource("ProjectPhases_ChangingPhase").split(",");
+    let [Title, Message] = RESOURCE_MANAGER.getResource("ProjectPhases_ChangingPhase").split(",");
 
     let waitDlg = null;
     if (useWaitDialog) {

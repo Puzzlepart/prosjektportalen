@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
@@ -81,7 +81,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
                     href="#"
                     onClick={e => this.setState({ showDialog: true })}>
                     <Icon { ...iconProps } />
-                    <span>{Localization.getResource("NewProjectForm_Header")}</span>
+                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_Header")}</span>
                 </a>
             </div>
         );

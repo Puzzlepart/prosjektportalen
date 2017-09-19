@@ -1,6 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import {
     Spinner,
     SpinnerType,
@@ -30,7 +30,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(Localization.getResource("Lists_QuickLinks_Title"))
+            .getByTitle(RESOURCE_MANAGER.getResource("Lists_QuickLinks_Title"))
             .items
             .top(this.props.itemsCount)
             .select("URL", "Comments")
@@ -43,7 +43,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(Localization.getResource("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -76,7 +76,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         } else {
             return (
                 <div id={containerId}>
-                    <MessageBar>{Localization.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

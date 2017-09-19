@@ -1,5 +1,5 @@
 import * as React from "react";
-import Localization from "localization";
+import RESOURCE_MANAGER from "localization";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { ModalLink } from "../../../@Components";
@@ -10,7 +10,7 @@ const Columns = (): any[] => {
     return [{
         fieldName: "Title",
         key: "Title",
-        name: Localization.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         minWidth: 100,
         maxWidth: 180,
         isMultiline: true,
@@ -49,28 +49,28 @@ const Columns = (): any[] => {
     {
         fieldName: "PreviousValue",
         key: "PreviousValue",
-        name: Localization.getResource("BenefitsOverview_PreviousValue"),
+        name: RESOURCE_MANAGER.getResource("BenefitsOverview_PreviousValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "PreviousPercentage",
         key: "PreviousPercentage",
-        name: Localization.getResource("BenefitsOverview_PreviousPercentage"),
+        name: RESOURCE_MANAGER.getResource("BenefitsOverview_PreviousPercentage"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "LatestValue",
         key: "LatestValue",
-        name: Localization.getResource("BenefitsOverview_LatestValue"),
+        name: RESOURCE_MANAGER.getResource("BenefitsOverview_LatestValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "LatestPercentage",
         key: "LatestPercentage",
-        name: Localization.getResource("BenefitsOverview_LatestPercentage"),
+        name: RESOURCE_MANAGER.getResource("BenefitsOverview_LatestPercentage"),
         minWidth: 50,
         maxWidth: 80,
     },
@@ -113,7 +113,7 @@ export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSo
             generatedColumns.unshift({
                 fieldName: "SiteTitle",
                 key: "SiteTitle",
-                name: Localization.getResource("String_Project"),
+                name: RESOURCE_MANAGER.getResource("String_Project"),
                 minWidth: 100,
                 maxWidth: 180,
             });
@@ -297,7 +297,7 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
                             e.preventDefault();
                             e.stopPropagation();
                             showAllMeasurements(item);
-                        }}>{Localization.getResource("BenefitsOverview_AllMeasurements")}</a>
+                        }}>{RESOURCE_MANAGER.getResource("BenefitsOverview_AllMeasurements")}</a>
                 );
             }
             return null;
