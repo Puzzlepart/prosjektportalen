@@ -3,7 +3,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Localization from "localization";
 import { IBaseFormModifications } from "../Base";
-import * as FormUtil from "../Util";
+import * as FormUtil from "../FormUtils";
 import { RelatedFollowups } from "./RelatedFollowups";
 import { ChromeTitle } from "../../WebParts/@Components";
 
