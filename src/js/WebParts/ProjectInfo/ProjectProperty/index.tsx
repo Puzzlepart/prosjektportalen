@@ -4,10 +4,19 @@ import IProjectPropertyProps, { ProjectPropertyDefaultProps } from "./IProjectPr
 import IProjectPropertyState from "./IProjectPropertyState";
 import ProjectPropertyModel from "./ProjectPropertyModel";
 
+/**
+ * Project Property
+ */
 export default class ProjectProperty extends React.Component<IProjectPropertyProps, IProjectPropertyState> {
+    public static displayName = "ProjectProperty";
     public static defaultProps = ProjectPropertyDefaultProps;
     private shouldTruncate = false;
 
+    /**
+     * Constructor
+     *
+     * @param {IProjectPropertyProps} props Props
+     */
     constructor(props: IProjectPropertyProps) {
         super(props);
         this.state = {
@@ -15,10 +24,19 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
         };
     }
 
+    /**
+     * Calls _render with props and state to allow for ES6 destruction
+     */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
     }
 
+    /**
+     * Renders the component
+     *
+     * @param {IProjectPropertyProps} param0 Props
+     * @param {IProjectPropertyState} param1 State
+     */
     private _render({ model, style, labelSize, valueSize, truncateLength }: IProjectPropertyProps, { truncate }: IProjectPropertyState): JSX.Element {
         let value = model.value;
         let labelClassName = ["_label", "ms-fontWeight-semibold"];
