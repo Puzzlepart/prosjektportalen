@@ -25,7 +25,7 @@ const listLogger = new SpListLogger();
  */
 const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
     onUpdateProgress(Localization.getResource("ProvisionWeb_CreatingWeb"), "");
-    CreateWeb(project.Title, project.Url, project.Description, project.InheritPermissions)
+    CreateWeb(project.Title, project.Url, project.Description, _spPageContextInfo.webLanguage, project.InheritPermissions)
         .then((result: ICreateWebResult) => {
             GetAllProperties()
                 .then(propBagAllProps => {

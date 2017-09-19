@@ -22,9 +22,9 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
  * @param {string} description Description
  * @param {boolean} inheritPermissions Inherit permissions
  */
-const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
+const CreateWeb = (title: string, url: string, description: string, webLanguage = _spPageContextInfo.webLanguage, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
     let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-    site.rootWeb.webs.add(title, url, description, "STS#0", process.env.LANGUAGE, inheritPermissions)
+    site.rootWeb.webs.add(title, url, description, "STS#0", webLanguage, inheritPermissions)
         .then(result => {
             url = result.data.Url;
             SetSharedNavigation(url)
