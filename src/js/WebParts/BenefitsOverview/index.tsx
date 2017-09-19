@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import * as unique from "array-unique";
 import {
     DetailsList,

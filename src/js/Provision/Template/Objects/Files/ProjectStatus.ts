@@ -1,3 +1,5 @@
+
+import Localization from "localization";
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
 const ProjectStatus: IFile = {

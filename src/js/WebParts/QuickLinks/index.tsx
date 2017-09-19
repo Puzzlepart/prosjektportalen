@@ -1,5 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
+import Localization from "localization";
 import {
     Spinner,
     SpinnerType,

@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { ModalLink } from "../../../@Components";
