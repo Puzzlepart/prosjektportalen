@@ -39,7 +39,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             searchTerm: "",
             groupBy: {
                 key: "NoGrouping",
-                name: __("String_NoGrouping"),
+                name: Localization.getResource("String_NoGrouping"),
             },
         });
     }
@@ -81,7 +81,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     {showSearchBox !== false &&
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                            labelText={__("BenefitsOverview_SearchBox_Placeholder")} />
+                            labelText={Localization.getResource("BenefitsOverview_SearchBox_Placeholder")} />
                     }
                     <DetailsList
                         items={items}
@@ -115,7 +115,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
-                name: __("String_NoGrouping"),
+                name: Localization.getResource("String_NoGrouping"),
             };
             items.push({
                 key: "Group",
@@ -203,19 +203,19 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                                 {
                                     key: "MeasurementValue",
                                     fieldName: "MeasurementValue",
-                                    name: __("SiteFields_GtMeasurementValue_DisplayName"),
+                                    name: Localization.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "Percentage",
                                     fieldName: "Percentage",
-                                    name: __("String_AchievementOfObjectives"),
+                                    name: Localization.getResource("String_AchievementOfObjectives"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "MeasurementDate",
                                     fieldName: "MeasurementDate",
-                                    name: __("SiteFields_GtMeasurementDate_DisplayName"),
+                                    name: Localization.getResource("SiteFields_GtMeasurementDate_DisplayName"),
                                     minWidth: 150,
                                 },
                             ]}

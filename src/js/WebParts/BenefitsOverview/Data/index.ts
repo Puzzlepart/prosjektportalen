@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { sp } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./Columns";
@@ -62,11 +63,11 @@ const SearchSettings = {
     TrimDuplicates: false,
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_Benefits"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: Localization.getResource("ResultSourceName_Benefits"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_Benefits"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: Localization.getResource("ResultSourceLevel_Benefits"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 
@@ -118,8 +119,8 @@ export const retrieveFromSource = (dataSource: DataSource) => new Promise<IBenef
  * Fetches data from list(s)
  */
 const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reject) => {
-    const gainsList = sp.web.lists.getByTitle(__("Lists_BenefitsAnalysis_Title"));
-    const measuresList = sp.web.lists.getByTitle(__("Lists_BenefitsFollowup_Title"));
+    const gainsList = sp.web.lists.getByTitle(Localization.getResource("Lists_BenefitsAnalysis_Title"));
+    const measuresList = sp.web.lists.getByTitle(Localization.getResource("Lists_BenefitsFollowup_Title"));
 
     fetchFieldsAsMap(gainsList)
         .then(fieldsMap => {
@@ -154,17 +155,17 @@ const retrieveDataList = () => new Promise<IBenefitsOverviewData>((resolve, reje
  */
 const retrieveDataSearch = () => new Promise<IBenefitsOverviewData>((resolve, reject) => {
     Promise.all([
-        fetchFieldsAsMap(sp.web.contentTypes.getById(__("ContentTypes_Gevinst_ContentTypeId"))),
+        fetchFieldsAsMap(sp.web.contentTypes.getById(Localization.getResource("ContentTypes_Gevinst_ContentTypeId"))),
         sp.search({
             ...SearchSettings,
         }),
     ])
         .then(([fieldsMap, response]: [any, any]) => {
             const gains = response.PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinst_ContentTypeId")) !== -1)
+                .filter(s => s.ContentTypeID.indexOf(Localization.getResource("ContentTypes_Gevinst_ContentTypeId")) !== -1)
                 .map(m => new BenefitEntry().init(DataSource.Search, m));
             const measures = response.PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(__("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
+                .filter(s => s.ContentTypeID.indexOf(Localization.getResource("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
                 .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1)
                 .map(m => new MeasurementEntry().init(DataSource.Search, m));
             const data: IBenefitsOverviewData = ({

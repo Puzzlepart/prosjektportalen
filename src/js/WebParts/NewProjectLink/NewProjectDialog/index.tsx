@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
@@ -95,8 +96,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     <div style={{ padding: 50 }}>
                         <div
                             style={{ marginBottom: 25 }}
-                            className="ms-font-xl">{__("ProvisionWeb_Failed")}</div>
-                        <div className="ms-font-m">{__("String_ContactAdmin")}</div>
+                            className="ms-font-xl">{Localization.getResource("ProvisionWeb_Failed")}</div>
+                        <div className="ms-font-m">{Localization.getResource("String_ContactAdmin")}</div>
                     </div>
                 </Modal>
             );
@@ -108,7 +109,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         if (provisioning.isCreating) {
             return (
                 <CreationModal
-                    title={String.format(__("CreationModal_Title"), model.Title)}
+                    title={String.format(Localization.getResource("CreationModal_Title"), model.Title)}
                     isBlocking={true}
                     isDarkOverlay={true}
                     progressLabel={provisioning.step}
@@ -150,18 +151,18 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         return (
             <div>
                 <TextField
-                    placeholder={__("NewProjectForm_Title")}
+                    placeholder={Localization.getResource("NewProjectForm_Title")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
                     errorMessage={errorMessages.Title} />
                 <TextField
-                    placeholder={__("NewProjectForm_Description")}
+                    placeholder={Localization.getResource("NewProjectForm_Description")}
                     multiline
                     autoAdjustHeight
                     onChanged={newValue => this.onFormChange("Description", newValue)}
                     errorMessage={errorMessages.Description}
                 />
                 <TextField
-                    placeholder={__("NewProjectForm_Url")}
+                    placeholder={Localization.getResource("NewProjectForm_Url")}
                     value={model.Url}
                     onChanged={newValue => this.onFormChange("Url", newValue)}
                     errorMessage={errorMessages.Url}
@@ -181,9 +182,9 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             <div>
                 <Toggle
                     defaultChecked={showAdvancedSettings}
-                    label={__("NewProjectForm_ShowAdvancedSettings")}
-                    onText={__("String_Yes")}
-                    offText={__("String_No")}
+                    label={Localization.getResource("NewProjectForm_ShowAdvancedSettings")}
+                    onText={Localization.getResource("String_Yes")}
+                    offText={Localization.getResource("String_No")}
                     onChanged={this.toggleAdvancedSettings} />
                 {(showAdvancedSettings && listDataConfig) && (
                     <section
@@ -194,8 +195,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                                 defaultChecked={listDataConfig[key].Default}
                                 label={listDataConfig[key].Label}
                                 onChanged={checked => this.toggleContent(key, checked)}
-                                onText={__("String_Yes")}
-                                offText={__("String_No")} />
+                                onText={Localization.getResource("String_Yes")}
+                                offText={Localization.getResource("String_No")} />
                         ))}
                     </section>
                 )}
@@ -214,8 +215,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             <DialogFooter>
                 <PrimaryButton
                     onClick={this.onSubmit}
-                    disabled={!formValid}>{__("String_Create")}</PrimaryButton>
-                <DefaultButton onClick={() => dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
+                    disabled={!formValid}>{Localization.getResource("String_Create")}</PrimaryButton>
+                <DefaultButton onClick={() => dialogProps.onDismiss()}>{Localization.getResource("String_Close")}</DefaultButton>
             </DialogFooter>
         );
     }
@@ -273,7 +274,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                         this.setState({
                             errorMessages: {
                                 ...errorMessages,
-                                Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                                Url: doesExist ? Localization.getResource("NewProjectForm_UrlAlreadyInUse") : null,
                             },
                             formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
                             model: {
@@ -296,7 +297,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                             this.setState({
                                 errorMessages: {
                                     ...errorMessages,
-                                    Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                                    Url: doesExist ? Localization.getResource("NewProjectForm_UrlAlreadyInUse") : null,
                                 },
                                 formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
                                 model: {

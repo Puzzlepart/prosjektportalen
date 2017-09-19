@@ -9,7 +9,7 @@ const Columns = (): any[] => {
     return [{
         fieldName: "Title",
         key: "Title",
-        name: __("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
+        name: Localization.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         minWidth: 100,
         maxWidth: 180,
         isMultiline: true,
@@ -48,28 +48,28 @@ const Columns = (): any[] => {
     {
         fieldName: "PreviousValue",
         key: "PreviousValue",
-        name: __("BenefitsOverview_PreviousValue"),
+        name: Localization.getResource("BenefitsOverview_PreviousValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "PreviousPercentage",
         key: "PreviousPercentage",
-        name: __("BenefitsOverview_PreviousPercentage"),
+        name: Localization.getResource("BenefitsOverview_PreviousPercentage"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "LatestValue",
         key: "LatestValue",
-        name: __("BenefitsOverview_LatestValue"),
+        name: Localization.getResource("BenefitsOverview_LatestValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
         fieldName: "LatestPercentage",
         key: "LatestPercentage",
-        name: __("BenefitsOverview_LatestPercentage"),
+        name: Localization.getResource("BenefitsOverview_LatestPercentage"),
         minWidth: 50,
         maxWidth: 80,
     },
@@ -112,7 +112,7 @@ export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSo
             generatedColumns.unshift({
                 fieldName: "SiteTitle",
                 key: "SiteTitle",
-                name: __("String_Project"),
+                name: Localization.getResource("String_Project"),
                 minWidth: 100,
                 maxWidth: 180,
             });
@@ -296,7 +296,7 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
                             e.preventDefault();
                             e.stopPropagation();
                             showAllMeasurements(item);
-                        }}>{__("BenefitsOverview_AllMeasurements")}</a>
+                        }}>{Localization.getResource("BenefitsOverview_AllMeasurements")}</a>
                 );
             }
             return null;

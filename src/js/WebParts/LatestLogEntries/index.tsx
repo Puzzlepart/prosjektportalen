@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -78,7 +79,7 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
         }
         return (
             <div>
-                {this.__renderChrome(__("WebPart_LatestLogEntries_Title"), `#${this.props.containerId}`, LatestLogEntries.displayName)}
+                {this.__renderChrome(Localization.getResource("WebPart_LatestLogEntries_Title"), `#${this.props.containerId}`, LatestLogEntries.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -119,7 +120,7 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
         } else {
             return (
                 <div id={containerId}>
-                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{Localization.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }
@@ -132,13 +133,13 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
      */
     private getEntryIcon(logLevel): string {
         switch (logLevel) {
-            case __("String_LogLevel_Error"): {
+            case Localization.getResource("String_LogLevel_Error"): {
                 return "Error";
             }
-            case __("String_LogLevel_Info"): {
+            case Localization.getResource("String_LogLevel_Info"): {
                 return "Info";
             }
-            case __("String_LogLevel_Warning"): {
+            case Localization.getResource("String_LogLevel_Warning"): {
                 return "Warning";
             }
             default: {
@@ -154,13 +155,13 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
      */
     private getEntryColor(logLevel): string {
         switch (logLevel) {
-            case __("String_LogLevel_Error"): {
+            case Localization.getResource("String_LogLevel_Error"): {
                 return "#ea5c73";
             }
-            case __("String_LogLevel_Info"): {
+            case Localization.getResource("String_LogLevel_Info"): {
                 return "#035484";
             }
-            case __("String_LogLevel_Warning"): {
+            case Localization.getResource("String_LogLevel_Warning"): {
                 return "#e9b359";
             }
             default: {
@@ -189,7 +190,7 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
         const logList = new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(__("Lists_Log_Title"));
+            .getByTitle(Localization.getResource("Lists_Log_Title"));
         Promise.all([
             logList
                 .items
