@@ -3,7 +3,7 @@ import { Web } from "sp-pnp-js";
 /**
  * Checks if the web exists
  *
- * @param url Url
+ * @param {string} url Url
  */
 const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reject) => {
     let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${url}`);
