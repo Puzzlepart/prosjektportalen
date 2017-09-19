@@ -28,7 +28,7 @@ gulp.task("copy:manualconf", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("zip", (done) => {
+gulp.task("zip:dist", (done) => {
     git.hash(hash => {
         gulp.src(format("{0}/**/*", config.paths.dist))
             .pipe(zip(format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash)))
@@ -39,7 +39,7 @@ gulp.task("zip", (done) => {
 
 gulp.task("release", (done) => {
     console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
-    runSequence(`default::prod`, "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", `zip:dist::${language}`, () => {
+    runSequence(`default::prod`, "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", `zip:dist`, () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
