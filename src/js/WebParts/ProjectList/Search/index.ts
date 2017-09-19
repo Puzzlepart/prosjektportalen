@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { sp } from "sp-pnp-js";
 
 /**
@@ -10,11 +11,11 @@ export const DEFAULT_SEARCH_SETTINGS = {
     SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"],
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: Localization.getResource("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: Localization.getResource("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 

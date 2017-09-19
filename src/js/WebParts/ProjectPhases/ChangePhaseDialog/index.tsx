@@ -1,3 +1,4 @@
+import Localization from "localization";
 import * as React from "react";
 import { sp, Logger, LogLevel } from "sp-pnp-js";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
@@ -11,7 +12,7 @@ import IChangePhaseDialogState from "./IChangePhaseDialogState";
  * Change phase dialog
  */
 export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
-    private phaseChecklist = sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title"));
+    private phaseChecklist = sp.web.lists.getByTitle(Localization.getResource("Lists_PhaseChecklist_Title"));
     private openCheckListItems;
 
     /**
@@ -25,7 +26,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             currentView: View.Initial,
             checkListItems: props.checkListItems,
         };
-        this.openCheckListItems = props.checkListItems.filter(item => item.GtChecklistStatus === __("Choice_GtChecklistStatus_Open"));
+        this.openCheckListItems = props.checkListItems.filter(item => item.GtChecklistStatus === Localization.getResource("Choice_GtChecklistStatus_Open"));
     }
 
     /**
@@ -86,7 +87,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * Get dialog title
      */
     private _getDialogTitle = () => {
-        return `${__("ProjectPhases_ChangePase")} (${this.props.phase.Name})`;
+        return `${Localization.getResource("ProjectPhases_ChangePase")} (${this.props.phase.Name})`;
     }
 
     /**
@@ -94,7 +95,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      */
     private _getDialogSubText = () => {
         if (this.state.currentView === View.Confirm) {
-            return String.format(__("ProjectPhases_ConfirmChangePhase"), this.props.phase.Name);
+            return String.format(Localization.getResource("ProjectPhases_ConfirmChangePhase"), this.props.phase.Name);
         }
         return "";
     }

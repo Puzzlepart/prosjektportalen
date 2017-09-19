@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { IModalLinkProps } from "../@Components/ModalLink";
 import AudienceTargeting from "../AudienceTargeting";
 import {
@@ -7,7 +8,7 @@ import {
 
 const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
-    label: __("ProjectInfo_ViewProperties"),
+    label: Localization.getResource("ProjectInfo_ViewProperties"),
     icon: { iconName: "PreviewLink" },
     options: {
         HideContentTypeChoice: true,
@@ -19,7 +20,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=${_spPageContextInfo.pageListId}&ID=${_spPageContextInfo.pageItemId}&FileName=${_spPageContextInfo.serverRequestPath}`,
-    label: __("ProjectInfo_ShowVersionHistory"),
+    label: Localization.getResource("ProjectInfo_ShowVersionHistory"),
     icon: { iconName: "History" },
     options: {
         HideRibbon: true,
@@ -30,7 +31,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
-    label: __("ProjectInfo_EditProperties"),
+    label: Localization.getResource("ProjectInfo_EditProperties"),
     icon: { iconName: "EditMirrored" },
     options: {
         HideContentTypeChoice: true,
@@ -78,7 +79,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
-    label: __("ProjectInfo_EditLogo"),
+    label: Localization.getResource("ProjectInfo_EditLogo"),
     icon: { iconName: "AppIconDefault" },
     showLabel: true,
     audienceTargeting: AudienceTargeting.Owners,

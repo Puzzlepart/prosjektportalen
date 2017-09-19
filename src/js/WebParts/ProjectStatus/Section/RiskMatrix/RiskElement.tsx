@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import { ModalLink } from "../../../@Components";
 
 export interface IRiskElementProps {
@@ -7,7 +8,7 @@ export interface IRiskElementProps {
 }
 
 const RiskElement = ({ item: { ID, Title }, style }: IRiskElementProps) => {
-    let dispFormUrl = `../${__("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
+    let dispFormUrl = `../${Localization.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
     return (
         <div
             className={`risk-matrix-element`}

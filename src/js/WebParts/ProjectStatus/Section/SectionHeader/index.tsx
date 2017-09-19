@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import { Icon } from "../../../@Components";
 import * as Util from "../../../../Util";
 import { GetStatusCssClass } from "../../Utils";
@@ -30,7 +31,7 @@ const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
                 <a href={navUrl}>
                     <i
                         className="ms-Icon ms-Icon--Forward"
-                        title={__("String_NavigateToList")}></i>
+                        title={Localization.getResource("String_NavigateToList")}></i>
                 </a>
             </div>
         );

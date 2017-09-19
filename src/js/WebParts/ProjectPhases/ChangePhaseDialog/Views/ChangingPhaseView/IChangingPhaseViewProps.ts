@@ -1,3 +1,4 @@
+import Localization from "localization";
 import { PhaseModel } from "../../../../../Model";
 
 export default interface IChangingPhaseViewProps {
@@ -7,7 +8,7 @@ export default interface IChangingPhaseViewProps {
 }
 
 
-let [label, description] = __("ProjectPhases_ChangingPhase").split(",");
+let [label, description] = Localization.getResource("ProjectPhases_ChangingPhase").split(",");
 
 export const ChangingPhaseViewDefaultProps: Partial<IChangingPhaseViewProps> = {
     progressLabel: label,

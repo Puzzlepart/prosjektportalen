@@ -1,3 +1,5 @@
+import Localization from "localization";
+
 export const RiskMatrix: any = [
     [
         {
@@ -6,34 +8,34 @@ export const RiskMatrix: any = [
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Insignificant"),
+            Value: Localization.getResource("RiskMatrix_Header_Insignificant"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Small"),
+            Value: Localization.getResource("RiskMatrix_Header_Small"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Moderate"),
+            Value: Localization.getResource("RiskMatrix_Header_Moderate"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Serious"),
+            Value: Localization.getResource("RiskMatrix_Header_Serious"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Critical"),
+            Value: Localization.getResource("RiskMatrix_Header_Critical"),
             Type: "Header",
             ClassName: "risk-header",
         },
     ],
     [
         {
-            Value: __("RiskMatrix_Header_VeryHigh"),
+            Value: Localization.getResource("RiskMatrix_Header_VeryHigh"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -75,7 +77,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_High"),
+            Value: Localization.getResource("RiskMatrix_Header_High"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -117,7 +119,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_Medium"),
+            Value: Localization.getResource("RiskMatrix_Header_Medium"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -159,7 +161,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_Low"),
+            Value: Localization.getResource("RiskMatrix_Header_Low"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -201,7 +203,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_VeryLow"),
+            Value: Localization.getResource("RiskMatrix_Header_VeryLow"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -260,19 +262,19 @@ export const StatusFields: IStatusFields = {
     GtStatusRisk: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusRisk_Low"),
+                Value: Localization.getResource("Choice_GtStatusRisk_Low"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusRisk_Medium"),
+                Value: Localization.getResource("Choice_GtStatusRisk_Medium"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusRisk_High"),
+                Value: Localization.getResource("Choice_GtStatusRisk_High"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -282,31 +284,31 @@ export const StatusFields: IStatusFields = {
     GtStatusBudget: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusBudget_BelowBudget"),
+                Value: Localization.getResource("Choice_GtStatusBudget_BelowBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_OnBudget"),
+                Value: Localization.getResource("Choice_GtStatusBudget_OnBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_SlighlyBehindBudget"),
+                Value: Localization.getResource("Choice_GtStatusBudget_SlighlyBehindBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_UnknownBudget"),
+                Value: Localization.getResource("Choice_GtStatusBudget_UnknownBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_OverBudget"),
+                Value: Localization.getResource("Choice_GtStatusBudget_OverBudget"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -316,25 +318,25 @@ export const StatusFields: IStatusFields = {
     GtStatusTime: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusTime_AheadOfSchedule"),
+                Value: Localization.getResource("Choice_GtStatusTime_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_OnSchedule"),
+                Value: Localization.getResource("Choice_GtStatusTime_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_SmallDelay"),
+                Value: Localization.getResource("Choice_GtStatusTime_SmallDelay"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_Delayed"),
+                Value: Localization.getResource("Choice_GtStatusTime_Delayed"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -344,31 +346,31 @@ export const StatusFields: IStatusFields = {
     GtStatusGainAchievement: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusGainAchievement_AheadOfSchedule"),
+                Value: Localization.getResource("Choice_GtStatusGainAchievement_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_OnSchedule"),
+                Value: Localization.getResource("Choice_GtStatusGainAchievement_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_NotStarted"),
+                Value: Localization.getResource("Choice_GtStatusGainAchievement_NotStarted"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_MinorDelays"),
+                Value: Localization.getResource("Choice_GtStatusGainAchievement_MinorDelays"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_BehindSchedule"),
+                Value: Localization.getResource("Choice_GtStatusGainAchievement_BehindSchedule"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -378,25 +380,25 @@ export const StatusFields: IStatusFields = {
     GtStatusQuality: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusQuality_LargeDeviation"),
+                Value: Localization.getResource("Choice_GtStatusQuality_LargeDeviation"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_SmallDeviation"),
+                Value: Localization.getResource("Choice_GtStatusQuality_SmallDeviation"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_AsExpected"),
+                Value: Localization.getResource("Choice_GtStatusQuality_AsExpected"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_ExceedsExpectations"),
+                Value: Localization.getResource("Choice_GtStatusQuality_ExceedsExpectations"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",

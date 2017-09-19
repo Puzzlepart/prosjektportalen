@@ -20,12 +20,12 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                             <i className="ms-Icon ms-Icon--CustomList no-status"></i>
                         </div>
                         <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
-                            <h2>{__("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
+                            <h2>{Localization.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
                                 actionLinks={[{
                                     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
-                                    label: __("ProjectInfo_ViewProperties"),
+                                    label: Localization.getResource("ProjectInfo_ViewProperties"),
                                     icon: { iconName: "PreviewLink" },
                                     options: {
                                         HideContentTypeChoice: true,
@@ -48,7 +48,7 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                 <div
                     hidden={sections.length > 0}
                     style={{ padding: 20 }}>
-                    <MessageBar messageBarType={MessageBarType.warning}>{__("ProjectStatus_NoData")}</MessageBar>
+                    <MessageBar messageBarType={MessageBarType.warning}>{Localization.getResource("ProjectStatus_NoData")}</MessageBar>
                 </div>
                 <div className="status-elements">
                     {sections.map((section, key) => (

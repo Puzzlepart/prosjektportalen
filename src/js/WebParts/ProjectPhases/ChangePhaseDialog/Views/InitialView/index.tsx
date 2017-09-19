@@ -1,4 +1,5 @@
 import * as React from "react";
+import Localization from "localization";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
@@ -68,21 +69,21 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
         const options = [
             {
-                value: __("Choice_GtChecklistStatus_NotRelevant"),
+                value: Localization.getResource("Choice_GtChecklistStatus_NotRelevant"),
                 disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : __("ProjectPhases_CheckpointNotRelevantTooltip"),
+                tooltip: !isCommentValid ? Localization.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : Localization.getResource("ProjectPhases_CheckpointNotRelevantTooltip"),
                 updateStatus: true,
             },
             {
-                value: __("Choice_GtChecklistStatus_StillOpen"),
+                value: Localization.getResource("Choice_GtChecklistStatus_StillOpen"),
                 disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? __("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : __("ProjectPhases_CheckpointStillOpenTooltip"),
+                tooltip: !isCommentValid ? Localization.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : Localization.getResource("ProjectPhases_CheckpointStillOpenTooltip"),
                 updateStatus: false,
             },
             {
-                value: __("Choice_GtChecklistStatus_Closed"),
+                value: Localization.getResource("Choice_GtChecklistStatus_Closed"),
                 disabled: isLoading,
-                tooltip: __("ProjectPhases_CheckpointDoneTooltip"),
+                tooltip: Localization.getResource("ProjectPhases_CheckpointDoneTooltip"),
                 updateStatus: true,
             }];
         return (

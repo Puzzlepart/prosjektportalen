@@ -1,17 +1,18 @@
 import * as React from "react";
+import Localization from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import IChecklistItemProps from "./IChecklistItemProps";
 import IChecklistItemState from "./IChecklistItemState";
 
 const GetStatusColor = (status: string): string => {
     switch (status) {
-        case __("Choice_GtChecklistStatus_Open"): {
+        case Localization.getResource("Choice_GtChecklistStatus_Open"): {
             return "inherit";
         }
-        case __("Choice_GtChecklistStatus_Closed"): {
+        case Localization.getResource("Choice_GtChecklistStatus_Closed"): {
             return "#107c10";
         }
-        case __("Choice_GtChecklistStatus_NotRelevant"): {
+        case Localization.getResource("Choice_GtChecklistStatus_NotRelevant"): {
             return "#e81123";
         }
         default: {

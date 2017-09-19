@@ -29,7 +29,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(__("Lists_QuickLinks_Title"))
+            .getByTitle(Localization.getResource("Lists_QuickLinks_Title"))
             .items
             .top(this.props.itemsCount)
             .select("URL", "Comments")
@@ -42,7 +42,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(__("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
+                {this.__renderChrome(Localization.getResource("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -75,7 +75,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         } else {
             return (
                 <div id={containerId}>
-                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{Localization.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }
