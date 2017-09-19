@@ -15,7 +15,7 @@ import {
  * @param {boolean} useWaitDialog Should a wait dialog be used
  */
 const ChangeProjectPhase = (newPhase: any, useWaitDialog = true) => new Promise<void>((resolve, reject) => {
-    let [Title, Message] = __("ProjectPhases_ChangingPhase").split(",");
+    let [Title, Message] = Localization.getResource("ProjectPhases_ChangingPhase").split(",");
 
     let waitDlg = null;
     if (useWaitDialog) {

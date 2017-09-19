@@ -68,7 +68,10 @@ module.exports = (language = 1044, devtool) => {
             children: true
         },
         resolve: {
-            extensions: ['.jsx', '.js', '.json', '.txt']
+            extensions: ['.jsx', '.js', '.json', '.txt'],
+            alias: {
+                "localization": path.resolve(__dirname, 'lib/js/@localization/index.js')
+            }
         },
         module: {
             rules: rules

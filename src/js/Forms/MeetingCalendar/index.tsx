@@ -16,7 +16,7 @@ const _: IBaseFormModifications = {
         const id = "pp-related-logelements";
         const lookupField = "GtProjectLogEventLookup";
         const container = FormUtil.insertFormContainer(id);
-        pnp.sp.web.lists.getByTitle(__("Lists_ProjectLog_Title")).items.filter(`${lookupField}Id eq ${GetUrlKeyValue("ID")}`).get().then(items => {
+        pnp.sp.web.lists.getByTitle(Localization.getResource("Lists_ProjectLog_Title")).items.filter(`${lookupField}Id eq ${GetUrlKeyValue("ID")}`).get().then(items => {
             ReactDOM.render((
                 <RelatedLogElements logElements={items} />
             ), container);

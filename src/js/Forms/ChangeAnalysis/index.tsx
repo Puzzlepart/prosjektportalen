@@ -18,8 +18,8 @@ const _: IBaseFormModifications = {
         const id = "pp-next-step";
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render((<div>
-           <ChromeTitle title={__("ChangeAnalysis_NextStep_Title")} />
-           <p>​​{__("ChangeAnalysis_NextStep_Text")} <a href={`../../${__("DefaultView_BenefitsAnalysis_Url")}`}>{__("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
+           <ChromeTitle title={Localization.getResource("ChangeAnalysis_NextStep_Title")} />
+           <p>​​{Localization.getResource("ChangeAnalysis_NextStep_Text")} <a href={`../../${Localization.getResource("DefaultView_BenefitsAnalysis_Url")}`}>{Localization.getResource("ChangeAnalysis_NextStep_LinkText")}</a>​.</p>
         </div>), container);
     },
 };

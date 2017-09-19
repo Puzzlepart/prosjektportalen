@@ -10,10 +10,10 @@ const _: IBaseFormModifications = {
         FormUtil.overridePreSaveAction(() => {
             jQuery(".ms-formvalidation").remove();
             let status = jQuery("select[id*='GtChecklistStatus'] option:selected").text();
-            if (status === __("Choice_GtChecklistStatus_NotRelevant")) {
+            if (status === Localization.getResource("Choice_GtChecklistStatus_NotRelevant")) {
                 let comment = jQuery("textarea[id*='GtComment']");
                 if (comment.val() === "") {
-                    comment.after(`<div class="ms-formvalidation">${__("SiteFields_GtChecklistStatus_FormValidation_NotRelevant")}</div>`);
+                    comment.after(`<div class="ms-formvalidation">${Localization.getResource("SiteFields_GtChecklistStatus_FormValidation_NotRelevant")}</div>`);
                     return false;
                 }
             }

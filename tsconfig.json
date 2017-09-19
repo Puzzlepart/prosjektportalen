@@ -7,6 +7,10 @@
         "sourceMap": true,
         "removeComments": false,
         "baseUrl": ".",
+        "paths": {
+            "localization": ["src/js/@localization"],
+            "model": ["src/js/model"]
+        },
         "typeRoots": [
             "./node_modules/@types",
             "./types"

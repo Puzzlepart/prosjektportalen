@@ -1,13 +1,14 @@
+import Localization from "localization";
 import * as Util from "../Util";
 import { IBaseFormModifications } from "./Base";
 import HandleQueryParams from "./HandleQueryParams";
 
 const formModifications: { [key: string]: IBaseFormModifications } = {};
-formModifications[__("Lists_ProjectLog_Url")] = require("./ProjectLog").default;
-formModifications[__("Lists_MeetingCalendar_Url")] = require("./MeetingCalendar").default;
-formModifications[__("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
-formModifications[__("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
-formModifications[__("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
+formModifications[Localization.getResource("Lists_ProjectLog_Url")] = require("./ProjectLog").default;
+formModifications[Localization.getResource("Lists_MeetingCalendar_Url")] = require("./MeetingCalendar").default;
+formModifications[Localization.getResource("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
+formModifications[Localization.getResource("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
+formModifications[Localization.getResource("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
 
 
 /**
