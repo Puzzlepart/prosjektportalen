@@ -15,7 +15,6 @@
             "sharepoint",
             "node",
             "react",
-            "i18n-webpack-plugin",
             "webpack-variables"
         ],
         "noImplicitAny": false,
