@@ -3,6 +3,10 @@ import RESOURCE_MANAGER from "localization";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
+    Spinner,
+    SpinnerType,
+} from "office-ui-fabric-react/lib/Spinner";
+import {
     PrimaryButton,
     DefaultButton,
 } from "office-ui-fabric-react/lib/Button";
@@ -37,6 +41,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     constructor(props: INewProjectDialogProps) {
         super(props);
         this.state = {
+            isLoading: true,
             errorMessages: {},
             urlInputEnabled: true,
             model: {
@@ -57,15 +62,17 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * Component did mount
      */
     public componentDidMount(): void {
-        ListDataConfig.RetrieveConfig().then(listDataConfig => {
-            this.setState(prevState => ({
-                listDataConfig,
-                model: {
-                    ...prevState.model,
-                    IncludeContent: Object.keys(listDataConfig).filter(key => listDataConfig[key].Default),
-                },
-            }));
-        });
+        ListDataConfig.RetrieveConfig()
+            .then(listDataConfig => {
+                this.setState(prevState => ({
+                    isLoading: false,
+                    listDataConfig,
+                    model: {
+                        ...prevState.model,
+                        IncludeContent: Object.keys(listDataConfig).filter(key => listDataConfig[key].Default),
+                    },
+                }));
+            });
     }
 
     /**
@@ -81,7 +88,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    public _render({ dialogProps }: INewProjectDialogProps, { model, provisioning }: INewProjectDialogState): JSX.Element {
+    public _render({ dialogProps }: INewProjectDialogProps, { isLoading, model, provisioning }: INewProjectDialogState): JSX.Element {
         /**
          * If we have a error in provisioning we show a message in a modal
          */
@@ -135,9 +142,14 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 }}
                 title={RESOURCE_MANAGER.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
-                {this.renderForm(this.props, this.state)}
-                {this.renderAdvancedSection(this.props, this.state)}
-                {this.renderFooter(this.props, this.state)}
+                {isLoading ?
+                    <Spinner type={SpinnerType.large} />
+                    :
+                    <div>
+                        {this.renderForm(this.props, this.state)}
+                        {this.renderAdvancedSection(this.props, this.state)}
+                        {this.renderFooter(this.props, this.state)}
+                    </div>}
             </Dialog >
         );
     }
@@ -260,7 +272,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      */
     private onFormChange = (input: string, newValue: string): void => {
         const {
-                        model,
+            model,
             errorMessages,
          } = this.state;
 
