@@ -295,7 +295,7 @@ export const reloadPage = (): void => {
     document.location.href = _spPageContextInfo.serverRequestPath;
 };
 
-interface ISafeTerm {
+export interface ISafeTerm {
     Label: string;
     TermGuid: any;
     WssId: number;
