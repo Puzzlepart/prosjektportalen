@@ -147,7 +147,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
-            .filter("substringof('.png', FileLeafRef)")
+            .filter("substringof('.pdf', FileLeafRef)")
             .orderBy("Modified", false)
             .top(10)
             .get()

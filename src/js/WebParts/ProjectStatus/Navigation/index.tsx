@@ -12,7 +12,7 @@ const Navigation = ({ project, sections }: INavigationProps) => {
                     <h2 className="status-page-header">{`${__("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-md6">
-                    <ExportReport project={project} />
+                    <ExportReport project={project} sections={sections} />
                 </div>
             </div>
             <div

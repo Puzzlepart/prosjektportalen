@@ -1,3 +1,4 @@
+import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 let jsPDF = require("jspdf");
 require("jspdf-autotable");
@@ -5,18 +6,9 @@ require("jspdf-autotable");
 interface IColumn {
     title: string;
     dataKey: string;
-    type: string;
+    widthStyle?: number;
+    type?: string;
 }
-
-const TABLE_SETTINGS = {
-    startY: 30,
-    styles: {
-        columnWidth: "auto",
-        fontSize: 8,
-        overflow: "linebreak",
-        tableWidth: "auto",
-    },
-};
 
 const FONT_SIZE = {
     large: 24,
@@ -28,6 +20,7 @@ export class PDFBuilder {
     private doc: any;
     private marginLeft: number;
     private marginTop: number;
+    private tableSettings: any;
 
     /**
      *
@@ -39,6 +32,18 @@ export class PDFBuilder {
         this.marginLeft = marginLeft;
         this.marginTop = marginTop;
         this.doc = jsPDF(layout);
+        this.tableSettings = {
+            startY: 30,
+            styles: {
+                columnWidth: "auto",
+                fontSize: 8,
+                overflow: "linebreak",
+                tableWidth: "auto",
+            },
+            createdCell:  (cell, data) => {
+                data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
+            },
+        };
     }
     public getBlob(): Blob {
         return this.doc.output("blob");
@@ -54,7 +59,7 @@ export class PDFBuilder {
             this.doc.setTextColor(0, 0, 0);
             this.doc.setFontSize(20);
             this.doc.text(section.listTitle, this.marginLeft, 20);
-            this.doc.autoTable(data.columns, data.items, TABLE_SETTINGS);
+            this.doc.autoTable(data.columns, data.items, this.tableSettings);
             resolve();
         });
     })
@@ -121,18 +126,57 @@ export class PDFBuilder {
             let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
             let columns: Array<IColumn> = validViewFields.map(vf => {
                 const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
-                return {title: field.get_title(), dataKey: field.get_internalName(), type: field.get_typeAsString().toLowerCase()} ;
+                return this.createColumn(field);
             });
             let items = _items.get_data().map(i => this.parseFieldValues(i, columns));
             resolve({items, columns});
         }, reject);
     })
 
+    /**
+    * Create new autotable column
+    * @param field SP.Field
+    */
+    private createColumn(field: SP.Field): IColumn {
+        let column: IColumn = {
+            title: field.get_title(),
+            dataKey: field.get_internalName(),
+            type: field.get_typeAsString().toLowerCase(),
+        };
+        return column;
+    }
+
+    /**
+    * Parse field values such as taxonomyfieldtype and datetime
+    * @param item SP.ListItem
+    * @param columns Array<IColumn>
+    */
     private parseFieldValues(item: SP.ListItem, columns:  Array<IColumn>): SP.Field {
-        columns.forEach(column => {
-            console.log(column);
+        columns.forEach((column: IColumn) => {
+            const value = item.get_fieldValues()[column.dataKey];
+            switch (column.type) {
+                case "taxonomyfieldtype": {
+                    item.get_fieldValues()[column.dataKey] = (value) ? value.Label : "";
+                }
+                    break;
+                case "datetime": {
+                    item.get_fieldValues()[column.dataKey] = (value) ? moment(new Date(value)).format("DD. MMM YYYY") : "";
+                }
+                    break;
+                default:
+                    item.get_fieldValues()[column.dataKey] = (value) ? value : "";
+
+            }
         });
         return item.get_fieldValues();
+    }
+
+    private getColumnWidth(type: string): number {
+        switch (type) {
+            case "text": case "note": {
+                return 40;
+            }
+        }
     }
 }
 
