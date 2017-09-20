@@ -76,7 +76,7 @@ $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_versio
 # [version] will be replaced with the actual version by 'gulp release'
 $InstallVersion = ParseVersion -VersionString "[version]"
 
-if($InstallVersion -gt $CurrentVersion) {
+if ($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
@@ -88,15 +88,18 @@ if($InstallVersion -gt $CurrentVersion) {
 
     .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
 
-    Connect-SharePoint $Url        
-    Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
-    $Language = Get-WebLanguage -ctx (Get-PnPContext)   
-    $upgradePkgs = Get-ChildItem "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp" 
-    foreach($pkg in $upgradePkgs) {
-        Apply-PnPProvisioningTemplate $pkg.FullName
-    }
-    Write-Host "DONE" -ForegroundColor Green
-    Disconnect-PnPOnline
+    if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
+        Connect-SharePoint $Url
+        Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
+        $Language = Get-WebLanguage -ctx (Get-PnPContext)
+        $upgradePkgs = Get-ChildItem "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp"
+        foreach ($pkg in $upgradePkgs) {
+            Apply-PnPProvisioningTemplate $pkg.FullName
+        }
+        Write-Host "DONE" -ForegroundColor Green
+        Disconnect-PnPOnline
+    } 
+    Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    
     Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
 }
