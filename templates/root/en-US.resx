@@ -331,7 +331,7 @@
     <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/Phase Checklist/AllItems.aspx</value>
+    <value>Lists/PhaseChecklist/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Change Analysis/AllItems.aspx</value>
