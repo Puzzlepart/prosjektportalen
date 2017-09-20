@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
 import { sp } from "sp-pnp-js";
 import AudienceTargeting from "../WebParts/AudienceTargeting";
