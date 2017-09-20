@@ -170,8 +170,12 @@ export class PDFBuilder {
         });
         return item.get_fieldValues();
     }
-
+    /**
+    * Returns column width based on field type
+    * @param type Field type
+    */
     private getColumnWidth(type: string): number {
+        // might have some calculations based on number of columns
         switch (type) {
             case "text": case "note": {
                 return 40;
