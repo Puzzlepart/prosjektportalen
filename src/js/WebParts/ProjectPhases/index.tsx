@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import * as React from "react";
 import {
     Spinner,
@@ -56,7 +57,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 {this.renderDialog(this.props, this.state)}
                 <div hidden={this.isPhaseSet(this.state)}>
                     <MessageBar messageBarType={MessageBarType.info}>
-                        {__("ProjectPhases_PhaseNotSetText")}
+                        {RESOURCE_MANAGER.getResource("ProjectPhases_PhaseNotSetText")}
                     </MessageBar>
                 </div>
             </div>

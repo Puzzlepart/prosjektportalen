@@ -1,7 +1,8 @@
 import ListConfig from "../../../Provision/Data/Config/ListConfig";
 import { IProjectModel } from "../../../Model";
 
-interface INewProjectDialogState {
+export default interface INewProjectDialogState {
+    isLoading: boolean;
     model: IProjectModel;
     errorMessages?: any;
     showAdvancedSettings?: boolean;
@@ -16,4 +17,3 @@ interface INewProjectDialogState {
     };
 }
 
-export default INewProjectDialogState;

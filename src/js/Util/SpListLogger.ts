@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import {
     Site,
     LogLevel,
@@ -26,7 +27,7 @@ export default class SpListLogger {
      *
      * @param {string} list SP list title
      */
-    constructor(list = __("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
+    constructor(list = RESOURCE_MANAGER.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
         this.List = list;
         this.SiteUrl = siteUrl;
     }
@@ -52,13 +53,13 @@ export default class SpListLogger {
     private getLogLevelString(entry: ILogEntry): string {
         switch (entry.LogLevel) {
             case LogLevel.Error: {
-                return __("String_LogLevel_Error");
+                return RESOURCE_MANAGER.getResource("String_LogLevel_Error");
             }
             case LogLevel.Info: {
-                return __("String_LogLevel_Info");
+                return RESOURCE_MANAGER.getResource("String_LogLevel_Info");
             }
             case LogLevel.Warning: {
-                return __("String_LogLevel_Warning");
+                return RESOURCE_MANAGER.getResource("String_LogLevel_Warning");
             }
             default: {
                 return "";

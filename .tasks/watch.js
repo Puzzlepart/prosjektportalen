@@ -21,7 +21,7 @@ function __startWatch(packageCodeFunc) {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
+            runSequence("clean", packageCodeFunc, () => {
                 uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
             })
         }, 100);
@@ -51,7 +51,7 @@ gulp.task("watch::eval", () => {
 });
 
 gulp.task("watch::prod", () => {
-    __startWatch(`package:code::prod::${settings.language}`);
+    __startWatch(`package:code::prod`);
 });
 
 function uploadFile(glob, url, folder) {

@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import {
     DocumentCard,
     DocumentCardPreview,
@@ -36,7 +37,7 @@ const ProjectCard = ({ project, fields, className, tileWidth, tileImageHeight, o
             <DocumentCardTitle
                 title={project.Title}
                 shouldTruncate={true} />
-            <DocumentCardLocation location={project.Phase || __("String_NotSet")} />
+            <DocumentCardLocation location={project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
             <DocumentCardActivity
                 activity={fields["GtProjectOwner"]}
                 people={[

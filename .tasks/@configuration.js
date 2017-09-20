@@ -36,9 +36,6 @@ module.exports = {
         formatter: "prose",
         emitError: true
     },
-    typescript: {
-        reporter: "nullReporter",
-    },
     resources: {
         glob: "./templates/root/*.resx",
         json: "./src/js/Resources"
@@ -51,5 +48,4 @@ module.exports = {
         v: pkg.version,
         token: "[version]"
     },
-    languages: [1033, 1044],
 }
