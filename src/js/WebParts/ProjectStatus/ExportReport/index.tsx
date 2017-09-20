@@ -10,6 +10,9 @@ import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 import IExportReportProps from "./IExportReportProps";
 import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
+import { PDFBuilder } from "./PDFBuilder";
+
+const AS_PDF: boolean = true;
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     /**
@@ -84,7 +87,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                                 title={selectedReport.text}
                                 containerClassName="pp-snapshot-dialog">
                                 <div id="snapshot-container">
-                                    <img src={selectedReport.key}></img>
+                                    {(AS_PDF) ? (
+                                        <embed width="850" height="750" src={selectedReport.key} type="application/pdf"></embed>
+                                        ) : (<img src={selectedReport.key}></img>)}
                                 </div>
                             </Dialog>
                         )
@@ -182,9 +187,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      *
      * @param {any} reportBlob Blob for the report file
      */
-    private saveReport = reportBlob => {
+    private saveReport = (reportBlob: Blob, fileExtension: string) => {
         const dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
-        const fileName = `${dateDisplay}-${_spPageContextInfo.webTitle}.png`;
+        const fileName = `${dateDisplay}-${_spPageContextInfo.webTitle}.${fileExtension}`;
         const fileTitle = `${dateDisplay} ${_spPageContextInfo.webTitle}`;
         this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({
@@ -206,20 +211,47 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private doExport = e => {
         e.preventDefault();
-        const element = document.getElementById("pp-projectstatus");
         this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
-            html2canvas(element, {
-                onrendered: canvas => {
-                    if (canvas.toBlob) {
-                        canvas.toBlob(reportBlob => {
-                            this.saveReport(reportBlob);
-                        });
-                    } else if (canvas.msToBlob) {
-                        let reportBlob = canvas.msToBlob();
-                        this.saveReport(reportBlob);
-                    }
-                },
-            });
+            (AS_PDF) ? this.saveAsPDF() : this.saveAsPng();
+        });
+    }
+
+    /**
+     * Save file as PDF
+     */
+    private saveAsPDF(): void {
+        let { sections } = this.props;
+        let builder = new PDFBuilder(15, 20, "l");
+        const promises = [];
+        sections.forEach((section) => {
+            if (section.showRiskMatrix) {
+                promises.push(builder.addPageWithImage("risk-matrix", "Risiko - Matrise"));
+            }
+            if (section.listTitle) {
+                promises.push(builder.addPageWithList(section));
+            }
+        });
+        Promise.all(promises).then(() => {
+            this.saveReport(builder.getBlob(), "pdf");
+        });
+    }
+
+     /**
+     * Save file as PNG
+     */
+    private saveAsPng(): void {
+        const element = document.getElementById("pp-projectstatus");
+        html2canvas(element, {
+            onrendered: canvas => {
+                if (canvas.toBlob) {
+                    canvas.toBlob(reportBlob => {
+                        this.saveReport(reportBlob, "png");
+                    });
+                } else if (canvas.msToBlob) {
+                    let reportBlob = canvas.msToBlob();
+                    this.saveReport(reportBlob, "png");
+                }
+            },
         });
     }
 }
