@@ -9,6 +9,7 @@ import {
     Dialog,
     DialogFooter,
 } from "office-ui-fabric-react/lib/Dialog";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Util from "../../../Util";
@@ -56,7 +57,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     public componentDidMount(): void {
         ListDataConfig.RetrieveConfig().then(listDataConfig => {
             this.setState(prevState => ({
-                listDataConfig: listDataConfig,
+                listDataConfig,
                 model: {
                     ...prevState.model,
                     IncludeContent: Object.keys(listDataConfig).filter(key => listDataConfig[key].Default),
@@ -66,7 +67,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
     }
 
     /**
-     * Calls _render with props and state
+     * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
@@ -78,11 +79,33 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    public _render({ dialogProps }: INewProjectDialogProps, { showCreationModal, model, provisioning }: INewProjectDialogState): JSX.Element {
-        if (showCreationModal) {
-            if (provisioning.error) {
-                return null;
-            }
+    public _render({ dialogProps }: INewProjectDialogProps, { model, provisioning }: INewProjectDialogState): JSX.Element {
+        /**
+         * If we have a error in provisioning we show a message in a modal
+         */
+        if (provisioning.error) {
+            return (
+                <Modal
+                    isOpen={true}
+                    isBlocking={false}
+                    isDarkOverlay={true}
+                    onDismiss={dialogProps.onDismiss}
+                    containerClassName="pp-modal"
+                >
+                    <div style={{ padding: 50 }}>
+                        <div
+                            style={{ marginBottom: 25 }}
+                            className="ms-font-xl">{__("ProvisionWeb_Failed")}</div>
+                        <div className="ms-font-m">{__("String_ContactAdmin")}</div>
+                    </div>
+                </Modal>
+            );
+        }
+
+        /**
+        * During creation we show CreationModal
+        */
+        if (provisioning.isCreating) {
             return (
                 <CreationModal
                     title={String.format(__("CreationModal_Title"), model.Title)}
@@ -92,9 +115,13 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     progressDescription={provisioning.progress} />
             );
         }
+
+        /**
+         * Otherwise we show the new project dialog
+         */
         return (
             <Dialog
-                hidden={!dialogProps.isOpen}
+                hidden={false}
                 dialogContentProps={{
                     type: dialogProps.type,
                     subText: dialogProps.subText,
@@ -118,26 +145,23 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      *
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
-     * @param titlePlaceHolder Placeholder for title field
-     * @param descPlaceholder Placeholder for description field
-     * @param urlPlaceholder Placeholder for url field
      */
-    private renderForm = ({ }: INewProjectDialogProps, { model, errorMessages, urlInputEnabled }: INewProjectDialogState, titlePlaceHolder = __("NewProjectForm_Title"), descPlaceholder = __("NewProjectForm_Description"), urlPlaceholder = __("NewProjectForm_Url")) => {
+    private renderForm = ({ }: INewProjectDialogProps, { model, errorMessages, urlInputEnabled }: INewProjectDialogState) => {
         return (
             <div>
                 <TextField
-                    placeholder={titlePlaceHolder}
+                    placeholder={__("NewProjectForm_Title")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
                     errorMessage={errorMessages.Title} />
                 <TextField
-                    placeholder={descPlaceholder}
+                    placeholder={__("NewProjectForm_Description")}
                     multiline
                     autoAdjustHeight
                     onChanged={newValue => this.onFormChange("Description", newValue)}
                     errorMessage={errorMessages.Description}
                 />
                 <TextField
-                    placeholder={urlPlaceholder}
+                    placeholder={__("NewProjectForm_Url")}
                     value={model.Url}
                     onChanged={newValue => this.onFormChange("Url", newValue)}
                     errorMessage={errorMessages.Url}
@@ -185,12 +209,12 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    private renderFooter = ({ dialogProps }: INewProjectDialogProps, { }: INewProjectDialogState) => {
+    private renderFooter = ({ dialogProps }: INewProjectDialogProps, { formValid }: INewProjectDialogState) => {
         return (
             <DialogFooter>
                 <PrimaryButton
                     onClick={this.onSubmit}
-                    disabled={!this.state.formValid}>{__("String_Create")}</PrimaryButton>
+                    disabled={!formValid}>{__("String_Create")}</PrimaryButton>
                 <DefaultButton onClick={() => dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
             </DialogFooter>
         );
@@ -234,7 +258,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      */
     private onFormChange = (input: string, newValue: string): void => {
         const {
-            model,
+                        model,
             errorMessages,
          } = this.state;
 
@@ -316,7 +340,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      */
     private _onSubmit = (model: IProjectModel): void => {
         this.setState({
-            showCreationModal: true,
             provisioning: {
                 isCreating: true,
             },
@@ -335,10 +358,9 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 })
                 .catch(error => {
                     this.setState({
-                        showCreationModal: false,
                         provisioning: {
                             isCreating: false,
-                            error: error,
+                            error,
                         },
                     });
                 });

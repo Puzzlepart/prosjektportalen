@@ -15,6 +15,8 @@ const GetStatusIcon = (index: number) => {
 
 /**
  * Project Phase Callout
+ *
+ * @param {IProjectPhaseCalloutProps} param0 Props
  */
 const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
     const PHASE_CHECKLIST_URL = `../${__("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
@@ -44,9 +46,9 @@ const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase, cl
                 <li>
                     <a className="se-all" href={PHASE_CHECKLIST_URL}>{__("ProjectPhases_GoToChecklist")}</a>
                 </li>
-                <li hidden={selected}>
+                {!selected && <li>
                     <span style={{ cursor: "pointer" }} onClick={() => onChangePhase(phase)}>{__("ProjectPhases_ChangePase")}</span>
-                </li>
+                </li>}
             </ul>
         </div>
     );

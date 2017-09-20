@@ -14,7 +14,6 @@ https://github.com/Puzzlepart/prosjektportalen
 
 #>
 
-
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Where do you want to install the Project Portal?")]
     [string]$Url,
@@ -22,44 +21,22 @@ Param(
     [string]$AssetsUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
-    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
-    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
+    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
+    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
     [switch]$UseWebLogin,
     [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
     [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "PowerShell credential to authenticate with")]
+    [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline"
 )
 
-if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
-    $Credential = (Get-Credential -Message "Please enter your username and password")
-} elseif (-not $UseWebLogin.IsPresent) {
-    $Credential = $GenericCredential
-}
-
-if (-not $AssetsUrl) {
-    $AssetsUrl = $Url
-}
-
-if (-not $DataSourceSiteUrl) {
-    $DataSourceSiteUrl = $Url
-}
-
-function ParseVersion($versionString) {
-    $vs = $versionString.Split("#")[0]
-    return [Version]($vs)
-}
-
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
-}
+. ./SharedFunctions.ps1
 
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
@@ -71,11 +48,33 @@ function Connect-SharePoint ($Url) {
     }
 }
 
+# Loads bundle if switch SkipLoadingBundle is not present
+if (-not $SkipLoadingBundle.IsPresent) {
+    LoadBundle -Environment $Environment
+}
+
+# Handling credentials
+if ($PSCredential -ne $null) {
+    $Credential = $PSCredential
+} elseif ($GenericCredential -ne $null -and $GenericCredential -ne "") {
+    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
+} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
+}
+
+if (-not $AssetsUrl) {
+    $AssetsUrl = $Url
+}
+
+if (-not $DataSourceSiteUrl) {
+    $DataSourceSiteUrl = $Url
+}
+
 Connect-SharePoint -Url $Url
-$CurrentVersion = ParseVersion -versionString (Get-PnPPropertyBag -Key pp_version)
+$CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
-$InstallVersion = ParseVersion -versionString "[version]"
+$InstallVersion = ParseVersion -VersionString "[version]"
 
 if($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -87,9 +86,8 @@ if($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -GenericCredential $GenericCredential
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
 
-    
     Connect-SharePoint $Url        
     Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
     $Language = Get-WebLanguage -ctx (Get-PnPContext)   

@@ -1,4 +1,4 @@
-interface IRefinerConfig {
+export default interface IRefinerConfig {
     name: string;
     key: string;
     fieldName: string;
@@ -6,5 +6,3 @@ interface IRefinerConfig {
     defaultHidden: boolean;
     iconName: string;
 }
-
-export default IRefinerConfig;

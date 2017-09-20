@@ -5,7 +5,6 @@ var gulp = require("gulp"),
     format = require("string-format"),
     runSequence = require("run-sequence"),
     git = require("./utils/git.js"),
-    build = require("../build.json"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
@@ -29,20 +28,36 @@ gulp.task("copy:manualconf", () => {
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("zip:dist", (done) => {
+
+function __zip(language, done) {
     git.hash(hash => {
         gulp.src(format("{0}/**/*", config.paths.dist))
-            .pipe(zip(format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash)))
+            .pipe(zip(format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, hash, language)))
             .pipe(gulp.dest(config.paths.release))
             .on('end', () => done());
     });
-});
+}
 
-gulp.task("release", (done) => {
-    console.log(color(`[Building release ${pkg.version} for ${build.language}]`, 'GREEN'));
-    console.log(color(`[See build.json to change build settings]`, 'WHITE'));
-    runSequence("default::prod", "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", "zip:dist", () => {
+function __release(language, done) {
+    console.log(color(`[Building release ${pkg.version} for ${language}]`, 'GREEN'));
+    runSequence(`default::prod::${language}`, "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", `zip:dist::${language}`, () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
+}
+
+/**
+ * Set up gulp tasks for zip and release for each language in config.languages
+ */
+config.languages.forEach(lang => {
+    gulp.task(`zip:dist::${lang}`, (done) => {
+        __zip(lang, done);
+    });
+    gulp.task(`release::${lang}`, (done) => {
+        __release(lang, done);
+    });
+})
+
+gulp.task("release", (done) => {
+    runSequence("release::1033", "release::1044", done)
 });

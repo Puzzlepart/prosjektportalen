@@ -2,7 +2,7 @@
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren | En felles prosjektmodell for offentlig sektor - Difi</pnp:DataValue>
+            <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren | En felles prosjektmodell for offentlig sektor</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>

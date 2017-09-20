@@ -8,7 +8,6 @@ interface INewProjectDialogState {
     urlInputEnabled?: boolean;
     formValid?: boolean;
     listDataConfig?: { [key: string]: ListConfig };
-    showCreationModal?: boolean;
     provisioning: {
         isCreating: boolean;
         step?: string;

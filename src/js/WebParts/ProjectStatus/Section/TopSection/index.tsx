@@ -23,7 +23,19 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                             <h2>{__("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
-                                showActionLinks={false}
+                                actionLinks={[{
+                                    url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
+                                    label: __("ProjectInfo_ViewProperties"),
+                                    icon: { iconName: "PreviewLink" },
+                                    options: {
+                                        HideContentTypeChoice: true,
+                                        HideWebPartMaintenancePageLink: true,
+                                        HideRibbon: true,
+                                    },
+                                    reloadOnSubmit: false,
+                                    showLabel: true,
+                                }]}
+                                showActionLinks={true}
                                 showMissingPropsWarning={false}
                                 filterField="GtPcProjectStatus"
                                 labelSize="m"

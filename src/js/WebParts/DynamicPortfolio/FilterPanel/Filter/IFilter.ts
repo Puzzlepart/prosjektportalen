@@ -1,6 +1,6 @@
 import IFilterItem from "../FilterItem/IFilterItem";
 
-interface IFilter {
+export default  interface IFilter {
     name: string;
     key?: string;
     emptyMessage: string;
@@ -10,5 +10,3 @@ interface IFilter {
     defaultHidden?: boolean;
     iconName?: string;
 }
-
-export default IFilter;

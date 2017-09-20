@@ -18,34 +18,47 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
 
     /**
      * Constructor
+     *
+     * @param {ICreationModalProps} props Props
      */
-    constructor() {
-        super();
+    constructor(props: ICreationModalProps) {
+        super(props);
         this.state = {
             percentComplete: 0,
         };
         this._async = new Async(this);
     }
 
+
     /**
-     * Renders the component
+     * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
+        return this._render(this.props, this.state);
+    }
+
+    /**
+     * Renders the component
+     *
+     * @param {ICreationModalProps} param0 Props
+     * @param {ICreationModalState} param1 State
+     */
+    public _render({ isBlocking, isDarkOverlay, title, progressLabel, progressDescription }: ICreationModalProps, { percentComplete }: ICreationModalState): JSX.Element {
         return (
             <Modal
                 isOpen={true}
-                isBlocking={this.props.isBlocking}
-                isDarkOverlay={this.props.isDarkOverlay}
+                isBlocking={isBlocking}
+                isDarkOverlay={isDarkOverlay}
                 containerClassName="pp-modal"
             >
                 <div style={{ padding: 50 }}>
                     <div
                         style={{ marginBottom: 25 }}
-                        className="ms-font-xl">{this.props.title}</div>
+                        className="ms-font-xl">{title}</div>
                     <ProgressIndicator
-                        label={this.props.progressLabel}
-                        description={this.props.progressDescription}
-                        percentComplete={this.state.percentComplete} />
+                        label={progressLabel}
+                        description={progressDescription}
+                        percentComplete={percentComplete} />
                 </div>
             </Modal>
         );

@@ -5,9 +5,9 @@ import * as PropertyBag from "./PropertyBag";
  *
  * @param {string} containerId DOM container
  * @param {string} versionKey Prop bag key
- * @param {string} additionalClassNames Additional class names
+ * @param {string[]} additionalClassNames Additional class names
  */
-const StampVersion = (containerId: string, versionKey: string, additionalClassNames = []): void => {
+const StampVersion = (containerId: string, versionKey: string, additionalClassNames: string[] = []): void => {
     getVersion(versionKey)
         .then(version => {
             const container = document.getElementById(containerId);

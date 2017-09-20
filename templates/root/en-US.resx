@@ -234,6 +234,9 @@
   <data name="Lists_StatusSections_Title" xml:space="preserve">
     <value>StatusSections</value>
   </data>
+  <data name="Lists_Log_Title" xml:space="preserve">
+    <value>Log</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -328,7 +331,7 @@
     <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/Phase Checklist/AllItems.aspx</value>
+    <value>Lists/PhaseChecklist/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Change Analysis/AllItems.aspx</value>
@@ -1608,8 +1611,26 @@
   <data name="String_Project" xml:space="preserve">
     <value>Project</value>
   </data>
+  <data name="String_AchievementOfObjectives" xml:space="preserve">
+    <value>Achievement of objectives</value>
+  </data>
+  <data name="String_LogLevel_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="String_LogLevel_Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="String_LogLevel_Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="String_ContactAdmin" xml:space="preserve">
+    <value>Please contact an administrator</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
+  </data>
+  <data name="WebPart_Group" xml:space="preserve">
+    <value>Project Portal</value>
   </data>
   <data name="WebPart_Refiner_Title" xml:space="preserve">
     <value>Clarification</value>
@@ -1680,8 +1701,29 @@
   <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
     <value>Gevinstoversikt</value>
   </data>
+  <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
+    <value>Latest log entries</value>
+  </data>
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Latest information elements </value>
+  </data>
+  <data name="WebPart_ProjectList_Title" xml:space="preserve">
+    <value>Project List</value>
+  </data>
+  <data name="WebPart_LatestProjects_Title" xml:space="preserve">
+    <value>Latest projects</value>
+  </data>
+  <data name="WebPart_NewProjectLink_Title" xml:space="preserve">
+    <value>New project link</value>
+  </data>
+  <data name="WebPart_QuickLinks_Title" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="WebPart_DynamicPortfolio_Title" xml:space="preserve">
+    <value>Portfolio Overview</value>
+  </data>
+  <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
+    <value>Experience Log</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -2166,8 +2208,20 @@
   <data name="BenefitsOverview_PreviousValue" xml:space="preserve">
     <value>Previous measurement</value>
   </data>
+  <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
+    <value>Show all measurements</value>
+  </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
+  </data>
+  <data name="Lists_Log_Fields_LogLevel_DisplayName" xml:space="preserve">
+    <value>Log Level</value>
+  </data>
+  <data name="Lists_Log_Fields_Message_DisplayName" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Lists_Log_Fields_Source_DisplayName" xml:space="preserve">
+    <value>Source</value>
   </data>
   <data name="ProjectStatus_SnapshotHistory" xml:space="preserve">
     <value>History ({0} entries)</value>
@@ -2206,6 +2260,37 @@
     <value>Relevant links</value>
   </data>
   <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
-    <value>Production Phase</value>
+    <value>Production Phase
+    </value>
+  </data>
+  <data name="SiteSettings_Link_Resources" xml:space="preserve">
+    <value>Project Portal - Resources</value>
+  </data>
+  <data name="SiteSettings_Link_Extensions" xml:space="preserve">
+    <value>Project Portal - Extensions</value>
+  </data>
+  <data name="SiteSettings_Link_ListContent" xml:space="preserve">
+    <value>Project Portal - List Content</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Fields)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewViews" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Views)</value>
+  </data>
+  <data name="SiteSettings_Link_PortfolioOverviewFilters" xml:space="preserve">
+    <value>Project Portal - Portfolio Overview (Filters)</value>
+  </data>
+  <data name="SiteSettings_Link_ProjectConfig" xml:space="preserve">
+    <value>Project Portal - Project Config</value>
+  </data>
+  <data name="SiteSettings_Link_Feedback" xml:space="preserve">
+    <value>Project Portal - Feedback</value>
+  </data>
+  <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
+    <value>Project Portal - Status Sections</value>
+  </data>
+  <data name="SiteSettings_Link_Log" xml:space="preserve">
+    <value>Project Portal - Logs</value>
   </data>
 </root>

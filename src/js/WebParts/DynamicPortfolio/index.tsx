@@ -60,13 +60,17 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     public componentDidMount(): void {
         this.fetchInitialData()
-            .then(initialState => this.setState({
-                ...initialState,
-                isLoading: false,
-            }, () => {
-                Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
-            }))
-            .catch(_ => this.setState({ isLoading: false }));
+            .then(data => {
+                this.setState({
+                    ...data,
+                    isLoading: false,
+                }, () => {
+                    Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+                });
+            })
+            .catch(_ => {
+                this.setState({ isLoading: false });
+            });
     }
 
     /**
@@ -98,10 +102,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         Configuration.getConfig()
             .then(config => {
                 this.configuration = config;
-                let initialView;
+                let currentView;
+
+                /**
+                 * If we have a viewId present in the URL hash, we'll attempt use that
+                 */
                 if (hashState.viewId) {
-                    [initialView] = this.configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
-                    if (!initialView) {
+                    [currentView] = this.configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+                    if (!currentView) {
                         resolve({
                             errorMessage: {
                                 message: __("DynamicPortfolio_ViewNotFound"),
@@ -110,8 +118,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         });
                     }
                 } else {
-                    [initialView] = this.configuration.views.filter(qc => qc.default);
-                    if (!initialView) {
+                    /**
+                     * Otherwise we'll use the default view from the configuration list
+                     */
+                    [currentView] = this.configuration.views.filter(qc => qc.default);
+                    if (!currentView) {
                         resolve({
                             errorMessage: {
                                 message: __("DynamicPortfolio_NoDefaultView"),
@@ -120,26 +131,33 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         });
                     }
                 }
-                if (initialView) {
+                if (currentView) {
                     const fieldNames = this.configuration.columns.map(f => f.fieldName);
-                    Search.query(initialView, this.configuration)
+                    Search.query(currentView, this.configuration)
                         .then(response => {
+                            // Populates FieldSelector with items from this.configuration.columns
                             FieldSelector.items = this.configuration.columns.map(col => ({
                                 name: col.name,
                                 value: col.fieldName,
-                                defaultSelected: Array.contains(initialView.fields, col.name),
+                                defaultSelected: Array.contains(currentView.fields, col.name),
                                 readOnly: col.readOnly,
                             }));
                             // Sort the columns as they are added to the view
-                            let selectedColumnsOrderedAsSelected = initialView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
-                            let filters = this.getSelectedFiltersWithItems(response.refiners, initialView).concat([FieldSelector]);
+                            let selectedColumns = currentView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
+
+                            // Get selected filters
+                            let filters = this.getSelectedFiltersWithItems(response.refiners, currentView).concat([FieldSelector]);
+
+                            // Sorts items from response.primarySearchResults
+                            let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
+
                             resolve({
-                                selectedColumns: selectedColumnsOrderedAsSelected,
-                                fieldNames: fieldNames,
-                                items: response.primarySearchResults,
-                                filteredItems: response.primarySearchResults.sort(this.props.defaultSortFunction),
-                                filters: filters,
-                                currentView: initialView,
+                                selectedColumns,
+                                fieldNames,
+                                items,
+                                filters,
+                                currentView,
+                                filteredItems: items,
                             });
                         })
                         .catch(reject);
@@ -226,7 +244,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const farItems: IContextualMenuItem[] = [];
 
         if (this.props.showGroupBy) {
-            const groupByColumns = selectedColumns.filter(col => col.groupBy).map((col, idx) => ({
+            const groupByColumns = this.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
                 onClick: e => {
@@ -278,7 +296,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: qc.iconName },
                 onClick: e => {
                     e.preventDefault();
-                    this._doSearch(qc);
+                    this.executeSearch(qc);
                 },
             })),
         });
@@ -525,11 +543,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Does a new search using Search.query
+     * Does a new search using Search.query, then updates component's state
      *
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private _doSearch(viewConfig: Configuration.IViewConfig): void {
+    private executeSearch(viewConfig: Configuration.IViewConfig): void {
         const { currentView } = this.state;
 
         if (currentView.id === viewConfig.id) {
@@ -559,7 +577,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
                     });
                 })
-                .catch(_ => this.setState({ isLoading: false }));
+                .catch(_ => {
+                    this.setState({ isLoading: false });
+                });
         });
     }
 }

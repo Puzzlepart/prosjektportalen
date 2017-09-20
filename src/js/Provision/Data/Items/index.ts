@@ -45,7 +45,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
         Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         resolve();
     }, (sender, args) => {
-        reject({ sender, args });
+        reject(args.get_message());
     });
 });
 
@@ -57,6 +57,7 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
 export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+    Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
     GetDataContext(conf, destUrl)
         .then(dataCtx => {
             const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
@@ -66,15 +67,21 @@ export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: I
                 items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
                     .then(() => {
                         HandleItemsWithParent(dataCtx)
-                            .then(resolve)
-                            .catch(reason => {
-                                reject(reason);
+                            .then(() => {
+                                Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+                                resolve();
+                            })
+                            .catch(err => {
+                                Logger.log({ message: "Failed to handle items with parent, copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
+                                reject(err);
                             });
                     })
-                    .catch(reason => {
-                        reject(reason);
+                    .catch(err => {
+                        Logger.log({ message: "Copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
+                        reject(err);
                     });
             }, (sender, args) => {
+                Logger.log({ message: "Failed to retrieve source items, copy of list items failed.", data: { conf, message: args.get_message() }, level: LogLevel.Info });
                 reject({ sender, args });
             });
         });
@@ -94,5 +101,7 @@ const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resol
             item.DestItem.update();
         }
     });
-    dataCtx.Destination._.executeQueryAsync(resolve, reject);
+    dataCtx.Destination._.executeQueryAsync(resolve, (sender, args) => {
+        reject({ sender, args });
+    });
 });

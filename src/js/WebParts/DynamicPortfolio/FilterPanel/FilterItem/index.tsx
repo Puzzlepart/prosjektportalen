@@ -4,11 +4,18 @@ import IFilterItemProps from "./IFilterItemProps";
 
 /**
  * Filter Item
+ *
+ * @param {IFilterItemProps} param0 Props
  */
-const FilterItem = ({ filter, item, className, onChange }: IFilterItemProps) => {
+const FilterItem = ({ filter, item, className, marginBottom, padding, onChange }: IFilterItemProps) => {
     return (
         <li>
-            <div className={className}>
+            <div
+                className={className}
+                style={{
+                    padding,
+                    marginBottom,
+                }}>
                 <Checkbox
                     label={item.name}
                     disabled={item.readOnly}

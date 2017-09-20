@@ -1,5 +1,3 @@
-interface IModalLinkState {
+export default interface IModalLinkState {
     shouldRender: boolean;
 }
-
-export default IModalLinkState;

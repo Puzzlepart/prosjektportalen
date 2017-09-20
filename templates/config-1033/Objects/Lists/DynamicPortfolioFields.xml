@@ -127,7 +127,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">LastModifiedTime</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Sist endret</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Last modified</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">180</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>

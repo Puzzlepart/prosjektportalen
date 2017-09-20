@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Util } from "sp-pnp-js";
-import { Icon } from "../../../@Components";
 import FilterItem from "../FilterItem";
 import IFilterItem from "../FilterItem/IFilterItem";
 import IFilterProps from "./IFilterProps";
@@ -10,15 +9,16 @@ import IFilterState from "./IFilterState";
  * Filter
  */
 export default class Filter extends React.PureComponent<IFilterProps, IFilterState> {
-    public static defaultProps: Partial<IFilterProps> = {
-        showIcon: true,
-    };
+    public static displayName = "Filter";
+    public static defaultProps: Partial<IFilterProps> = {};
 
     /**
      * Constructor
+     *
+     * @param {IFilterProps} props Pros
      */
-    constructor() {
-        super();
+    constructor(props: IFilterProps) {
+        super(props);
         this.state = {
             isCollapsed: false,
         };
@@ -38,16 +38,18 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
     }
 
     /**
-     * Renders the component
-     */
+  * Calls _render with props and state to allow for ES6 destruction
+  */
     public render(): JSX.Element {
-        const {
-            filter,
-            showIcon,
-         } = this.props;
-
-        const { isCollapsed } = this.state;
-
+        return this._render(this.props, this.state);
+    }
+    /**
+     * Renders the component
+     *
+     * @param {IFilterProps} param0 Props
+     * @param {IFilterState} param1 State
+     */
+    public _render({ filter }: IFilterProps, { isCollapsed }: IFilterState): JSX.Element {
         return (
             <div
                 className="ms-Grid-row"
@@ -59,18 +61,17 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
                         position: "relative",
                     }}
                     className="ms-Grid-col ms-sm12 ms-font-m">
-                    {showIcon && (
-                        <Icon
-                            name={filter.iconName}
-                            style={{ marginRight: 5 }} />
-                    )}
                     {filter.name}
                 </div>
                 <div
                     className="ms-Grid-col ms-sm12"
                     hidden={isCollapsed}>
-                    <ul style={{ margin: "10px 0 0 0", padding: 0, listStyleType: "none" }}>
-                        {this.renderItems()}
+                    <ul style={{
+                        margin: "10px 0 0 0",
+                        padding: 0,
+                        listStyleType: "none",
+                    }}>
+                        {this.renderItems(this.props, this.state)}
                     </ul>
                 </div>
             </div>
@@ -79,9 +80,11 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
 
     /**
      * Render filter items
+     *
+     * @param {IFilterProps} param0 Props
+     * @param {IFilterState} param1 State
      */
-    private renderItems = () => {
-        const { filter } = this.state;
+    private renderItems = ({ }: IFilterProps, { filter }: IFilterState) => {
         if (filter) {
             return filter.items.map((item, idx) => {
                 item.selected = item.defaultSelected || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.value));
@@ -91,6 +94,8 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
                         filter={filter}
                         item={item}
                         className="ms-font-m"
+                        padding={2}
+                        marginBottom={2}
                         onChange={this.onChange} />
                 );
             });

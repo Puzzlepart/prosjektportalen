@@ -6,10 +6,11 @@ var gulp = require("gulp"),
     stylus = require('gulp-stylus'),
     gutil = require('gulp-util'),
     autoprefixer = require('autoprefixer-stylus'),
+    settings = require('./@settings.js'),
     config = require('./@configuration.js');
 
 gulp.task("package:code", ["build:lib"], (done) => {
-    webpack(webpackConfigDev("source-map"), (err, stats) => {
+    webpack(webpackConfigDev(settings.language, "source-map"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code", err);
         }
@@ -20,20 +21,9 @@ gulp.task("package:code", ["build:lib"], (done) => {
     });
 });
 gulp.task("package:code::eval", ["build:lib"], (done) => {
-    webpack(webpackConfigDev("eval"), (err, stats) => {
+    webpack(webpackConfigDev(settings.language, "eval"), (err, stats) => {
         if (err) {
             throw new gutil.PluginError("package:code", err);
-        }
-        console.log(stats.toString({
-            colors: true
-        }));
-        done();
-    });
-});
-gulp.task("package:code::prod", ["build:lib"], (done) => {
-    webpack(webpackConfigProd(), (err, stats) => {
-        if (err) {
-            throw new gutil.PluginError("package:code::prod", err);
         }
         console.log(stats.toString({
             colors: true
@@ -49,6 +39,23 @@ gulp.task("package:styles", ["build:theme"], (done) => {
 gulp.task("package", ["copy:assets:dist", "package:code", "package:styles"], (done) => {
     done();
 });
-gulp.task("package::prod", ["copy:assets:dist", "package:code::prod", "package:styles"], (done) => {
-    done();
-});
+
+/**
+ * Set up gulp tasks for package::prod and package:code::prod for each language in config.languages
+ */
+config.languages.forEach(lang => {
+    gulp.task(`package:code::prod::${lang}`, ["build:lib"], (done) => {
+        webpack(webpackConfigProd(lang), (err, stats) => {
+            if (err) {
+                throw new gutil.PluginError("package:code::prod", err);
+            }
+            console.log(stats.toString({
+                colors: true
+            }));
+            done();
+        });
+    });
+    gulp.task(`package::prod::${lang}`, ["copy:assets:dist", `package:code::prod::${lang}`, "package:styles"], (done) => {
+        done();
+    });
+})

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as Util from "../../Util";
 import AudienceTargeting from "../AudienceTargeting";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
 import BaseWebPart from "../@BaseWebPart";
+import * as Util from "../../Util";
 
 /**
  * New Project link
@@ -27,9 +27,12 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     }
 
     /**
-     * Component did mount
+     * Component did mount. Handling audience.
      */
     public componentDidMount(): void {
+        /**
+         * Checks if the web part should be rendered for the current user
+        */
         Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
             if (userMatchAudience !== this.state.shouldRender) {
                 this.setState({
@@ -40,7 +43,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     }
 
     /**
-     * Calls _render with props and state
+     * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
         return this._render(this.props, this.state);
@@ -91,18 +94,20 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkState} param1 State
      */
     private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
-        return (
-            <NewProjectDialog
-                dialogProps={{
-                    isOpen: showDialog,
-                    type: DialogType.largeHeader,
-                    isDarkOverlay: true,
-                    isBlocking: false,
-                    title: __("NewProjectForm_DialogTitle"),
-                    subText: __("NewProjectForm_SubText"),
-                    className: "pp-newprojectdialog",
-                    onDismiss: () => this.setState({ showDialog: false }),
-                }} />
-        );
+        if (showDialog) {
+            return (
+                <NewProjectDialog
+                    dialogProps={{
+                        type: DialogType.largeHeader,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        title: __("NewProjectForm_DialogTitle"),
+                        subText: __("NewProjectForm_SubText"),
+                        className: "pp-newprojectdialog",
+                        onDismiss: () => this.setState({ showDialog: false }),
+                    }} />
+            );
+        }
+        return null;
     }
 }

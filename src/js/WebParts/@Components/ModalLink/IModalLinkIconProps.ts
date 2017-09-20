@@ -1,9 +1,8 @@
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 
-interface IModalLinkIconProps {
+export default interface IModalLinkIconProps {
     iconName: any;
-    position: ModalLinkIconPosition;
+    position?: ModalLinkIconPosition;
 }
 
-export default IModalLinkIconProps;
 

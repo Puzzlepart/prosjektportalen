@@ -14,7 +14,6 @@ https://github.com/Puzzlepart/prosjektportalen
 
 #>
 
-
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "Where do you want to install the Project Portal?")]
     [string]$Url,
@@ -22,8 +21,6 @@ Param(
     [string]$AssetsUrl,
     [Parameter(Mandatory = $false, HelpMessage = "Where do you want to copy standard data from?")]
     [string]$DataSourceSiteUrl,
-    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
-    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip standard documents, tasks and phase checklist?")]
     [switch]$SkipData,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip default config?")]
@@ -34,10 +31,14 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
+    [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
+    [string]$GenericCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Use Web Login to connect to SharePoint. Useful for e.g. ADFS environments.")]
     [switch]$UseWebLogin,
     [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
     [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "PowerShell credential to authenticate with")]
+    [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
     [string]$Environment = "SharePointPnPPowerShellOnline",
@@ -47,32 +48,8 @@ Param(
     [switch]$Upgrade
 )
 
-# Get has assocated groups
-function Get-HasAssociatedGroups() {    
-    Connect-SharePoint $Url  
-    $ascMemberGroup = Get-PnPGroup -AssociatedMemberGroup -ErrorAction SilentlyContinue
-    $ascVisitorGroup = Get-PnPGroup -AssociatedVisitorGroup -ErrorAction SilentlyContinue
-    $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue
-    return (($ascMemberGroup -ne $null) -and ($ascVisitorGroup -ne $null) -and ($ascOwnerGroup -ne $null))
-}
+. ./SharedFunctions.ps1
 
-# Get termstore default language
-function Get-TermStoreDefaultLanguage() {
-    $session = Get-PnPTaxonomySession 
-    $ts = $session.GetDefaultSiteCollectionTermStore() 
-    return (Get-PnPProperty -ClientObject $ts -Property DefaultLanguage)
-}
-
-# Get web language
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
-}
-
-
-# Connect to SharePoint
 function Connect-SharePoint ($Url) {
     if ($UseWebLogin.IsPresent) {
         Connect-PnPOnline $Url -UseWebLogin
@@ -83,29 +60,18 @@ function Connect-SharePoint ($Url) {
     }
 }
 
-
-# Apply tepmplate
-function Apply-Template([string]$Template, [switch]$Localized) {    
-    $Language = Get-WebLanguage -ctx (Get-PnPContext)    
-    if ($Localized.IsPresent) {
-        $Template = "$($Template)-$($Language)"
-    }
-    Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+# Loads bundle if switch SkipLoadingBundle is not present
+if (-not $SkipLoadingBundle.IsPresent) {
+    LoadBundle -Environment $Environment
 }
 
-# Aim at using relative urls for referencing scripts, images etc.
-function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
-    $RootUri = New-Object -TypeName System.Uri -ArgumentList $RootUrl
-    $SecondaryUri = New-Object -TypeName System.Uri -ArgumentList $SecondaryUrl
-
-    if ($RootUri.Host -eq $SecondaryUri.Host) {
-        if ($SecondaryUri.LocalPath -eq "/") {
-            return ""
-        }
-        return $SecondaryUri.LocalPath
-    } else {
-        return $SecondaryUrl
-    }
+# Handling credentials
+if ($PSCredential -ne $null) {
+    $Credential = $PSCredential
+} elseif ($GenericCredential -ne $null -and $GenericCredential -ne "") {
+    $Credential = Get-PnPStoredCredential -Name $GenericCredential -Type PSCredential 
+} elseif ($Credential -eq $null -and -not $UseWebLogin.IsPresent -and -not $CurrentCredentials.IsPresent) {
+    $Credential = (Get-Credential -Message "Please enter your username and password")
 }
 
 if (-not $AssetsUrl) {
@@ -119,21 +85,13 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
-  
-# Handling credentials
-if (-not $GenericCredential -and -not $UseWebLogin.IsPresent) {
-    $Credential = (Get-Credential -Message "Please enter your username and password")
-} elseif (-not $UseWebLogin.IsPresent) {
-    $Credential = $GenericCredential
-}
-
 # Start installation
 function Start-Install() {
     # Prints header
     if (-not $Upgrade.IsPresent) {
         Write-Host "############################################################################" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
-        Write-Host "Installing Prosjektportalen (2.1.0#94c6b03f)" -ForegroundColor Green
+        Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
         Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
@@ -148,17 +106,6 @@ function Start-Install() {
     $sw = [Diagnostics.Stopwatch]::StartNew()
     $ErrorActionPreference = "Stop"
 
-    # Loads bundle if switch SkipLoadingBundle is not present
-    if (-not $SkipLoadingBundle.IsPresent) {
-        $BundlePath = "$PSScriptRoot\bundle\$Environment"
-        Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Taxonomy.dll" -ErrorAction SilentlyContinue
-        Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" -ErrorAction SilentlyContinue
-        Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
-        Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Search.dll" -ErrorAction SilentlyContinue
-        Add-Type -Path "$BundlePath\Newtonsoft.Json.dll" -ErrorAction SilentlyContinue
-        Import-Module "$BundlePath\$Environment.psd1" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
-    }
-
     # Sets up PnP trace log
     $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
     Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
@@ -167,7 +114,7 @@ function Start-Install() {
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
         try {
-            Connect-SharePoint $AssetsUrl
+            Connect-SharePoint $AssetsUrl -UseWeb
             Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "assets"
             Write-Host "DONE" -ForegroundColor Green
@@ -192,7 +139,6 @@ function Start-Install() {
         }
         Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized
-        Apply-Template -Template "sitesettings" -Localized
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
@@ -261,8 +207,6 @@ function Start-Install() {
         Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
     }
 }
-
-
 
 if (Get-HasAssociatedGroups -eq $true) {
     Start-Install

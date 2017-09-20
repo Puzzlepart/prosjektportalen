@@ -15,6 +15,7 @@ function __startWatch(packageCodeFunc) {
     livereload.listen({
         start: true,
     });
+    console.log("Started watching...", settings.siteUrl)
     watch(config.paths.sourceGlob).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
@@ -50,7 +51,7 @@ gulp.task("watch::eval", () => {
 });
 
 gulp.task("watch::prod", () => {
-    __startWatch("package:code::prod");
+    __startWatch(`package:code::prod::${settings.language}`);
 });
 
 function uploadFile(glob, url, folder) {

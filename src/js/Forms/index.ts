@@ -13,17 +13,13 @@ formModifications[__("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysi
 /**
  * Initialize form modifications and web parts
  */
-const Initialize = () => {
+export const Initialize = () => {
     let urlParts = Util.getUrlParts();
     let [list] = Object.keys(formModifications).filter(key => _spPageContextInfo.serverRequestPath.indexOf(key) !== -1);
     if (list) {
         if (formModifications[list].hasOwnProperty(urlParts[3])) {
-            if (urlParts[1] === "Lists") {
-                formModifications[list][urlParts[3]]();
-            }
+            formModifications[list][urlParts[3]]();
         }
     }
     HandleQueryParams();
 };
-
-export { Initialize };

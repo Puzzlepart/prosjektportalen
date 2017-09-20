@@ -2,27 +2,23 @@ var path = require("path"),
     webpack = require('webpack'),
     BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
-    build = require("./build.json"),
     I18nPlugin = require("i18n-webpack-plugin");
 
-module.exports = (minify = true, bundleAnalyzer = false) => {
+module.exports = (language = 1044, minify = true, bundleAnalyzer = false) => {
     const I18n = {
         1033: require("./src/js/Resources/en-US.json"),
         1044: require("./src/js/Resources/no-NB.json"),
     };
 
     const plugins = [
-        new I18nPlugin(I18n[build.language]),
+        new I18nPlugin(I18n[language]),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version)
         }),
         new webpack.DefinePlugin({
-            __BUILD: build
-        }),
-        new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production'),
-                LANGUAGE: JSON.stringify(build.language),
+                LANGUAGE: JSON.stringify(language),
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),

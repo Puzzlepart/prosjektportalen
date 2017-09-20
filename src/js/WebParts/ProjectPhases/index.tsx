@@ -37,7 +37,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public componentDidMount(): void {
         Data.fetchData().then(data => {
             this.setState({
-                ...data,
+                data,
                 isLoading: false,
             });
         });
@@ -69,23 +69,27 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {IProjectPhasesProps} param0 Props
      * @param {IProjectPhasesState} param1 State
      */
-    private renderPhases = ({ }: IProjectPhasesProps, { phases, activePhase, checkListData, changePhase }: IProjectPhasesState): JSX.Element => {
-        const visiblePhases = phases.filter(phase => phase.ShowOnFrontpage);
+    private renderPhases = ({ }: IProjectPhasesProps, { data, changePhase }: IProjectPhasesState): JSX.Element => {
+        const visiblePhases = data.phases.filter(phase => phase.ShowOnFrontpage);
         return (
             <ul>
                 {visiblePhases.map((phase, index) => {
-                    let classList = [
-                        index === 0 ? "first-phase" : "",
-                        index === (phases.length - 1) ? "last-phase" : "",
-                        activePhase && (phase.Name === activePhase.Name) ? "selected" : "",
-                        phase.getPhasLevelClassName(),
-                    ];
+                    let classList = [phase.getPhasLevelClassName()];
+                    if (index === 0) {
+                        classList.push("first-phase");
+                    }
+                    if (index === (data.phases.length - 1)) {
+                        classList.push("last-phase");
+                    }
+                    if (data.activePhase && (phase.Name === data.activePhase.Name)) {
+                        classList.push("selected");
+                    }
                     return (
                         <ProjectPhase
                             key={index}
                             phase={phase}
                             classList={classList}
-                            checkListData={checkListData[phase.Id]}
+                            checkListData={data.checkListData[phase.Id]}
                             onChangePhase={this.onChangePhase} />
                     );
                 })}
@@ -99,8 +103,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {IProjectPhasesProps} param0 Props
      * @param {IProjectPhasesState} param1 State
      */
-    private renderDialog = ({ }: IProjectPhasesProps, { checkListData, activePhase, changePhase }: IProjectPhasesState): JSX.Element => {
-        const checkListItems = (activePhase && checkListData && checkListData[activePhase.Id]) ? checkListData[activePhase.Id].items : [];
+    private renderDialog = ({ }: IProjectPhasesProps, { data, changePhase }: IProjectPhasesState): JSX.Element => {
+        const checkListItems = (data.activePhase && data.checkListData && data.checkListData[data.activePhase.Id]) ? data.checkListData[data.activePhase.Id].items : [];
         if (changePhase) {
             return (
                 <ChangePhaseDialog
@@ -137,7 +141,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      *
      * @param {IProjectPhasesState} param1 State
      */
-    private isPhaseSet({ activePhase }: IProjectPhasesState): boolean {
-        return activePhase && activePhase.Name && activePhase.Name !== "";
+    private isPhaseSet({ data }: IProjectPhasesState): boolean {
+        return data.activePhase && data.activePhase.Name && data.activePhase.Name !== "";
     }
 }
