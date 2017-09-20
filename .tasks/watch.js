@@ -42,6 +42,10 @@ function __startWatch(packageCodeFunc) {
     });
 }
 
+gulp.task("watch::tests", () => {
+    __startWatch("test");
+});
+
 gulp.task("watch", () => {
     __startWatch("package:code");
 });

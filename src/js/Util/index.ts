@@ -415,9 +415,10 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
 
 /**
  * Get URL hash object
+ *
+ * @param {string} hash URL hash
  */
-export const getUrlHash = (): { [key: string]: string } => {
-    const hash = document.location.hash.substring(1);
+export const getUrlHash = (hash = document.location.hash.substring(1)): { [key: string]: string } => {
     let hashObject: { [key: string]: string } = {};
     hash.split("&").map(str => {
         const [key, value] = str.split("=");
@@ -440,9 +441,12 @@ export const setUrlHash = (hashObject: { [key: string]: string }): void => {
 
 /**
  * Get URL parts
+ *
+ * @param {string} serverRequestPath Server request path
+ * @param {string} webServerRelativeUrl Web server relative url
  */
-export const getUrlParts = (): string[] => {
-    return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
+export const getUrlParts = (serverRequestPath = _spPageContextInfo.serverRequestPath, webServerRelativeUrl = _spPageContextInfo.webServerRelativeUrl): string[] => {
+    return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 };
 
 export {
