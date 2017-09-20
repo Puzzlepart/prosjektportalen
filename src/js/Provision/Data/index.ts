@@ -39,7 +39,7 @@ const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCall
  * @param {string[]} contentToInclude Content to copy
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyDefaultData = (destUrl: string, contentToInclude: string[], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+export const CopyDefaultData = (destUrl: string, contentToInclude: string[] = [], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
     Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
     RetrieveConfig().then(listContentConfig => {
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });

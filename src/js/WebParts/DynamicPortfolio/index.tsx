@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import * as jQuery from "jquery";
 import Workbook from "react-excel-workbook";
 import * as array_unique from "array-unique";
@@ -84,7 +85,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     <div style={{ height: 10 }}></div>
                     <SearchBox
                         onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
+                        labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")} />
                     {this.renderItems(this.props, this.state)}
                 </div>
                 {this.renderFilterPanel(this.props, this.state)}
@@ -112,7 +113,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     if (!currentView) {
                         resolve({
                             errorMessage: {
-                                message: __("DynamicPortfolio_ViewNotFound"),
+                                message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
                                 type: MessageBarType.error,
                             },
                         });
@@ -125,7 +126,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     if (!currentView) {
                         resolve({
                             errorMessage: {
-                                message: __("DynamicPortfolio_NoDefaultView"),
+                                message: RESOURCE_MANAGER.getResource("DynamicPortfolio_NoDefaultView"),
                                 type: MessageBarType.error,
                             },
                         });
@@ -188,7 +189,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         if (data.items.length === 0) {
             return (
-                <MessageBar>{__("DynamicPortfolio_NoResults")}</MessageBar>
+                <MessageBar>{RESOURCE_MANAGER.getResource("DynamicPortfolio_NoResults")}</MessageBar>
             );
         }
 
@@ -254,14 +255,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }));
             items.push({
                 key: "Group",
-                name: groupBy ? groupBy.name : __("String_NoGrouping"),
+                name: groupBy ? groupBy.name : RESOURCE_MANAGER.getResource("String_NoGrouping"),
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
                 items: [
                     {
                         key: "NoGrouping",
-                        name: __("String_NoGrouping"),
+                        name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
                         onClick: e => {
                             e.preventDefault();
                             this.setState({ groupBy: null });
@@ -404,7 +405,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 itemsSort.opts.reverse = !currentSort.isSortedDescending;
             }
             const groupItems = array_sort(filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : __("String_NotSet"));
+            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : RESOURCE_MANAGER.getResource("String_NotSet"));
             groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
                 name: `${groupBy.name}: ${name}`,

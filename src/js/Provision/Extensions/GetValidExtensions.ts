@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import IExtension from "./IExtension";
 import LoadExtension from "./LoadExtension";
@@ -7,7 +8,7 @@ import LoadExtension from "./LoadExtension";
  *
  * @param {string} extensionLibTitle Extension library title
  */
-const GetValidExtensions = (extensionLibTitle = __("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
+const GetValidExtensions = (extensionLibTitle = RESOURCE_MANAGER.getResource("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     const extensionLib = rootWeb.lists.getByTitle(extensionLibTitle);
     extensionLib.items

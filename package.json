@@ -81,6 +81,7 @@
     "minimatch": "^3.0.4",
     "mocha": "3.5.3",
     "mocha-jsdom": "^1.1.0",
+    "object-assign": "^4.1.1",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "15.6.0",

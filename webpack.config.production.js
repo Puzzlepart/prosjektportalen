@@ -1,30 +1,22 @@
 var path = require("path"),
     webpack = require('webpack'),
-    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin,
     pkg = require("./package.json"),
-    I18nPlugin = require("i18n-webpack-plugin");
+    base = require("./webpack.config.base.js"),
+    objectAssign = require('object-assign');
 
-module.exports = (language = 1044, minify = true, bundleAnalyzer = false) => {
-    const I18n = {
-        1033: require("./src/js/Resources/en-US.json"),
-        1044: require("./src/js/Resources/no-NB.json"),
-    };
-
-    const plugins = [
-        new I18nPlugin(I18n[language]),
-        new webpack.DefinePlugin({
-            __VERSION: JSON.stringify(pkg.version)
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production'),
-                LANGUAGE: JSON.stringify(language),
-            }
-        }),
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
-    ];
-    if (minify) {
-        plugins.push(
+module.exports = (devtool = "source-map") => {
+    let config = objectAssign(base([]), {
+        devtool: devtool,
+        plugins: [
+            new webpack.DefinePlugin({
+                __VERSION: JSON.stringify(pkg.version)
+            }),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    NODE_ENV: JSON.stringify('production'),
+                }
+            }),
+            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
             new webpack.optimize.UglifyJsPlugin({
                 mangle: true,
                 compress: {
@@ -38,65 +30,8 @@ module.exports = (language = 1044, minify = true, bundleAnalyzer = false) => {
                     comments: false,
                 },
             }),
-            new webpack.optimize.AggressiveMergingPlugin());
-    }
-    if (bundleAnalyzer) {
-        plugins.push(
-            new BundleAnalyzerPlugin({
-                analyzerMode: 'static'
-            })
-        )
-    }
-    let rules = [
-        {
-            test: /\.js$/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: [
-                        require("babel-preset-es2015"),
-                        require("babel-preset-react")
-                    ],
-                    plugins: [
-                        require("babel-plugin-transform-class-properties")
-                    ]
-                }
-            }
-        },
-        { test: /\.txt$/, use: 'raw-loader' },
-        { test: /\.json$/, loader: "json-loader" }
-    ]
-    let config = {
-        cache: true,
-        entry: {
-            main: [
-                'core-js/fn/object/assign',
-                'core-js/es6/promise',
-                'whatwg-fetch',
-                './lib/js/index.js'],
-        },
-        output: {
-            path: path.join(__dirname, "dist/js"),
-            filename: "pp.[name].js",
-            libraryTarget: "umd",
-        },
-        devtool: "source-map",
-        stats: {
-            hash: true,
-            timing: true,
-            assets: true,
-            chunks: true,
-            modules: true,
-            reasons: true,
-            children: true
-        },
-        resolve: {
-            extensions: ['.jsx', '.js', '.json', '.txt']
-        },
-        module: {
-            rules: rules
-        },
-        plugins: plugins
-    };
+            new webpack.optimize.AggressiveMergingPlugin(),
+        ]
+    });
     return config;
 }
