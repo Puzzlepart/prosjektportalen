@@ -378,8 +378,8 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
  * @param {boolean} addWebPrefix Should web prefix be added
  */
 export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
-    const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
     if (addWebPrefix) {
+        const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
         parts.unshift(webPrefix);
     }
     return parts.join("_");
