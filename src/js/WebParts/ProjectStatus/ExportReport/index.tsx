@@ -10,7 +10,8 @@ import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 import IExportReportProps from "./IExportReportProps";
 import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
-import { PDFBuilder } from "./PDFBuilder";
+import SectionModel from "../Section/SectionModel";
+import { PDF } from "./PDF";
 
 const AS_PDF: boolean = true;
 
@@ -220,19 +221,21 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Save file as PDF
      */
     private saveAsPDF(): void {
-        let { sections } = this.props;
-        let builder = new PDFBuilder(15, 20, "l");
-        const promises = [];
-        sections.forEach((section) => {
+        let { sections, project } = this.props;
+        let pdf = new PDF(15, 20, "l");
+        pdf.addProjectMetadataSection(project);
+        pdf.addStatusSectionPage(sections);
+        const promises = new Array<Promise<any>>();
+        sections.forEach((section: SectionModel) => {
             if (section.showRiskMatrix) {
-                promises.push(builder.addPageWithImage("risk-matrix", "Risiko - Matrise"));
+                promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
             }
             if (section.listTitle) {
-                promises.push(builder.addPageWithList(section));
+                promises.push(pdf.addPageWithList(section));
             }
         });
         Promise.all(promises).then(() => {
-            this.saveReport(builder.getBlob(), "pdf");
+            this.saveReport(pdf.getBlob(), "pdf");
         });
     }
 

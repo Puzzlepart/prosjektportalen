@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
+import SectionModel from "../../Section/SectionModel";
 let jsPDF = require("jspdf");
 require("jspdf-autotable");
 
@@ -11,16 +12,15 @@ interface IColumn {
 }
 
 const FONT_SIZE = {
-    large: 24,
-    medium: 18,
-    small: 12,
+    large: 20,
+    medium: 14,
+    small: 10,
 };
 
-export class PDFBuilder {
+export class PDF {
     private doc: any;
     private marginLeft: number;
     private marginTop: number;
-    private tableSettings: any;
 
     /**
      *
@@ -32,40 +32,69 @@ export class PDFBuilder {
         this.marginLeft = marginLeft;
         this.marginTop = marginTop;
         this.doc = jsPDF(layout);
-        this.tableSettings = {
-            startY: 30,
-            styles: {
-                columnWidth: "auto",
-                fontSize: 8,
-                overflow: "linebreak",
-                tableWidth: "auto",
-            },
-            createdCell:  (cell, data) => {
-                data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
-            },
-        };
     }
+    /**
+     * Return PDF Blob
+     */
     public getBlob(): Blob {
         return this.doc.output("blob");
     }
 
     /**
      *
-     * @param section List section used for generating pdf autotable
+     * @param sections List of sections
      */
-    public addPageWithList = (section): Promise<void> => new Promise<void>((resolve, reject) => {
+    public addProjectMetadataSection = (project: any): void =>  {
+        this.doc.setTextColor(153, 168, 173);
+        this.doc.setFontSize(FONT_SIZE.medium);
+        this.doc.text(project.Title.toUpperCase(), this.marginLeft, 100, "center");
+    }
+
+    /**
+     *
+     * @param project Project object
+     */
+    public addStatusSectionPage = (sections: Array<SectionModel>): void =>  {
+        this.doc.addPage();
+        let yPosition = 30;
+        sections.forEach((section, index) => {
+            if (section.statusValue) {
+                ( index % 2) ? this.addSectionElement(section, yPosition - 20, 150) : this.addSectionElement(section, yPosition, 14);
+                yPosition += 20;
+            }
+        });
+    }
+
+    /**
+     * Returns a promise
+     * @param section Status report section
+     */
+    public addPageWithList = (section: SectionModel): Promise<void> => new Promise<void>((resolve, reject) => {
         this.fetchData(section).then((data) => {
             this.doc.addPage();
             this.doc.setTextColor(0, 0, 0);
-            this.doc.setFontSize(20);
+            this.doc.setFontSize(FONT_SIZE.large);
             this.doc.text(section.listTitle, this.marginLeft, 20);
-            this.doc.autoTable(data.columns, data.items, this.tableSettings);
+            const settings  = {
+                startY: 30,
+                styles: {
+                    columnWidth: "auto",
+                    fontSize: 8,
+                    overflow: "linebreak",
+                    tableWidth: "auto",
+                },
+                // tslint:disable-next-line:no-shadowed-variable
+                createdCell:  (cell, data) => {
+                    data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
+                },
+            };
+            this.doc.autoTable(data.columns, data.items, settings);
             resolve();
         });
     })
 
      /**
-     *
+     * Returns a promise
      * @param imageId ID of DOM element to be added
      * @param pageTitle The title of the page
      */
@@ -104,7 +133,7 @@ export class PDFBuilder {
     * Fetches required list data
     * @param section Section used for fetching list data
     */
-    private fetchData = (section) => new Promise<any>((resolve, reject) => {
+    private fetchData = (section: SectionModel) => new Promise<any>((resolve, reject) => {
         console.log("fetch!");
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
@@ -180,6 +209,20 @@ export class PDFBuilder {
             case "text": case "note": {
                 return 40;
             }
+        }
+    }
+
+    private addSectionElement(section: SectionModel, positionY: number, positionX: number) {
+        this.doc.setTextColor(153, 168, 173);
+        this.doc.setFontSize(FONT_SIZE.medium);
+        this.doc.text(section.name.toUpperCase(), positionX, positionY);
+        this.doc.setTextColor(0, 0, 0);
+        this.doc.setFontSize(FONT_SIZE.medium);
+        this.doc.text(section.statusValue, positionX, positionY + 8);
+        if (section.statusComment) {
+            this.doc.setFontSize(FONT_SIZE.small);
+            let splitComment = this.doc.splitTextToSize(section.statusComment, 100);
+            this.doc.text(splitComment, positionX, positionY + 14);
         }
     }
 }

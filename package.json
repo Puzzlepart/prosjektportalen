@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {},
   "dependencies": {
+    "@types/jspdf": "^1.1.31",
     "array-sort": "^0.1.4",
     "array-unique": "^0.3.2",
     "core-js": "^2.5.1",
