@@ -11,10 +11,8 @@ import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
 import SectionModel from "../Section/SectionModel";
 import { PDF } from "./PDF";
-import {FileType} from "./FileType";
 
 const AS_PDF: boolean = true;
-
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     /**
@@ -27,7 +25,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this.state = {
             exportStatus: ExportReportStatus.default,
             isLoading: true,
-            saveType: null,
         };
     }
 
@@ -116,7 +113,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         }
         return (
             <Dropdown
-                placeHolder="Lagre rapport som..."
+                placeHolder="Lagre som..."
                 id="pp-saveReportDropdown"
                 ariaLabel="Custom dropdown example"
                 onRenderOption={ this.onRenderSaveOptions }
@@ -153,7 +150,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 name={ "Save" }
                 aria-hidden="true"
                 />
-                <span>Lagre rapport som...</span>
+                <span>Lagre som...</span>
             </div>
         );
     }
@@ -183,7 +180,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
-            .filter("substringof('.pdf', FileLeafRef)")
+            .filter("substringof('.pdf', FileLeafRef) and substringof('.pdf', FileLeafRef)")
             .orderBy("Modified", false)
             .top(10)
             .get()
@@ -239,13 +236,14 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             });
         });
     }
+
     /**
      * Save file as PDF
      * @param {any} e Event
      */
     private saveAsPDF = e => {
         e.preventDefault();
-        this.setState({ exportStatus: ExportReportStatus.isExporting, saveType: FileType.pdf  }, () => {
+        this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
             let { sections, project } = this.props;
             let pdf = new PDF();
             pdf.addProjectMetadataSection(project);
@@ -255,7 +253,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 if (section.showRiskMatrix) {
                     promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
                 }
-                if (section.listTitle) {
+                if (section.listTitle && section.showAsSection) {
                     promises.push(pdf.addPageWithList(section));
                 }
             });
@@ -271,7 +269,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private saveAsPng = e => {
         e.preventDefault();
-        this.setState({ exportStatus: ExportReportStatus.isExporting, saveType: FileType.png }, () => {
+        this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
             const element = document.getElementById("pp-projectstatus");
             html2canvas(element, {
                 onrendered: canvas => {

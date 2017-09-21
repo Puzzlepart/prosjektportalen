@@ -77,22 +77,24 @@ export class PDF {
      */
     public addPageWithList = (section: SectionModel): Promise<void> => new Promise<void>((resolve, reject) => {
         this.fetchData(section).then((data) => {
-            this.doc.addPage();
-            this.addPageTitle(section.listTitle, 15, MARGIN_LEFT);
-            const settings  = {
-                startY: 30,
-                styles: {
-                    columnWidth: "auto",
-                    fontSize: 8,
-                    overflow: "linebreak",
-                    tableWidth: "auto",
-                },
-                // tslint:disable-next-line:no-shadowed-variable
-                createdCell:  (cell, data) => {
-                    data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
-                },
-            };
-            this.doc.autoTable(data.columns, data.items, settings);
+            if (data.items.length) {
+                this.doc.addPage();
+                this.addPageTitle(section.listTitle, 15, MARGIN_LEFT);
+                const settings  = {
+                    startY: 30,
+                    styles: {
+                        columnWidth: "auto",
+                        fontSize: 8,
+                        overflow: "linebreak",
+                        tableWidth: "auto",
+                    },
+                    // tslint:disable-next-line:no-shadowed-variable
+                    createdCell:  (cell, data) => {
+                        data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
+                    },
+                };
+                this.doc.autoTable(data.columns, data.items, settings);
+            }
             resolve();
         });
     })
@@ -223,11 +225,13 @@ export class PDF {
     private addTitle(value: string, yPosition: number, xPosition: number) {
         this.doc.setTextColor(153, 168, 173);
         this.doc.setFontSize(FONT_SIZE.xlarge);
-        this.doc.text(`${__("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, xPosition, yPosition);
+
+        let splitValue = this.doc.splitTextToSize(value, 270);
+        this.doc.text(splitValue, xPosition, yPosition);
         this.doc.setFontSize(FONT_SIZE.medium);
-        this.doc.text(`${moment(new Date()).format("DD. MMM YYYY - HH:mm")}`, MARGIN_LEFT, yPosition + 10);
+        this.doc.text(`${moment(new Date()).format("DD. MMM YYYY - HH:mm")}`, MARGIN_LEFT, yPosition + 15);
         this.doc.setDrawColor(153, 168, 173);
-        this.doc.line(MARGIN_LEFT, yPosition + 15, 270, yPosition + 15);
+        this.doc.line(MARGIN_LEFT, yPosition + 20, 270, yPosition + 20);
     }
     /**
      *
