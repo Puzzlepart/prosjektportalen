@@ -114,4 +114,42 @@ describe("Util", () => {
             expect(currencyFormat).to.eq("kr 500 000");
         });
     });
+    describe("percentage", () => {
+        it("should return 50%", () => {
+            let percentage = Util.percentage(0, 50, 100);
+            expect(percentage).to.eq("50%");
+        });
+        it("should return 60%", () => {
+            let percentage = Util.percentage(0, 60, 100);
+            expect(percentage).to.eq("60%");
+        });
+        it("should return 70%", () => {
+            let percentage = Util.percentage(0, 70, 100);
+            expect(percentage).to.eq("70%");
+        });
+        it("should return 50", () => {
+            let percentage = Util.percentage(0, 50, 100, false);
+            expect(percentage).to.eq(50);
+        });
+        it("should return 60", () => {
+            let percentage = Util.percentage(0, 60, 100, false);
+            expect(percentage).to.eq(60);
+        });
+        it("should return 70", () => {
+            let percentage = Util.percentage(0, 70, 100, false);
+            expect(percentage).to.eq(70);
+        });
+        it("should return 44" , () => {
+            let percentage = Util.percentage(10, 50, 100, false);
+            expect(percentage).to.eq(44);
+        });
+        it("should return 43", () => {
+            let percentage = Util.percentage(20, 50, 90, false);
+            expect(percentage).to.eq(43);
+        });
+        it("should return 40", () => {
+            let percentage = Util.percentage(30, 50, 80, false);
+            expect(percentage).to.eq(40);
+        });
+    });
 });
