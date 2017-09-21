@@ -222,7 +222,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private saveAsPDF(): void {
         let { sections, project } = this.props;
-        let pdf = new PDF(15, 20, "l");
+        let pdf = new PDF();
         pdf.addProjectMetadataSection(project);
         pdf.addStatusSectionPage(sections);
         const promises = new Array<Promise<any>>();
