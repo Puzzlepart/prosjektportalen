@@ -1,4 +1,5 @@
 import ExportReportStatus from "./ExportReportStatus";
+import {FileType} from "./FileType";
 
 export default interface IExportReportState {
     project?: any;
@@ -10,5 +11,6 @@ export default interface IExportReportState {
     exportStatus: ExportReportStatus;
     showDialog?: boolean;
     isLoading: boolean;
+    saveType: FileType;
 }
 

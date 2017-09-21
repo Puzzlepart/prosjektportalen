@@ -2187,11 +2187,20 @@
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+   <data name="ProjectStatus_SaveAs" xml:space="preserve">
+    <value>Lagre som...</value>
+  </data>
   <data name="ProjectStatus_SaveSnapshot" xml:space="preserve">
-    <value>Lagre øyeblikksbilde</value>
+    <value>Lagre som PNG</value>
   </data>
   <data name="ProjectStatus_SavingSnapshot" xml:space="preserve">
-    <value>Lagrer øyeblikksbilde...</value>
+    <value>Lagrer som PNG...</value>
+  </data>
+  <data name="ProjectStatus_SaveAsPDF" xml:space="preserve">
+    <value>Lagre som PDF</value>
+  </data>
+  <data name="ProjectStatus_SavingAsPDF" xml:space="preserve">
+    <value>Lagrer som PDF...</value>
   </data>
   <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
     <value>Prosjektbildet er lagret</value>
