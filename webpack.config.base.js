@@ -10,7 +10,7 @@ module.exports = (exclude) => ({
             'core-js/fn/object/assign',
             'core-js/es6/promise',
             'whatwg-fetch',
-            'regenerator-runtime',
+            'regenerator-runtime/runtime',
             './lib/js/index.js',
         ],
     },
