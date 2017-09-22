@@ -9,6 +9,7 @@ import {
     ComposedLook,
 } from "./Objects";
 import IProgressCallback from "../IProgressCallback";
+import ProvisionError from "../ProvisionError";
 
 /**
  * Maps the current handler to a text explaining the current handlers action
@@ -42,10 +43,11 @@ let Template: Schema = {
  * @param {Object} propBag Property bag values
  * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+async function ApplyProvisioningTemplate(web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback): Promise<void> {
     const webProvisioner = new WebProvisioner(web);
-    webProvisioner
-        .applyTemplate({
+    const callbackFunc = objHandler => onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
+    try {
+        await webProvisioner.applyTemplate({
             ...Template,
             WebSettings: {
                 ...Template.WebSettings,
@@ -58,8 +60,13 @@ export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string 
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, msg => onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
-        .then(resolve)
-        .catch(reject);
-});
+        }, callbackFunc);
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "ApplyProvisioningTemplate");
+    }
+}
+
+export { ApplyProvisioningTemplate };
+
 
