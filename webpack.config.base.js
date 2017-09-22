@@ -1,5 +1,8 @@
 var path = require("path");
 
+const libBasePath = path.join(__dirname, "lib/js/");
+const distBasePath = path.join(__dirname, "dist/js");
+
 module.exports = (exclude) => ({
     cache: true,
     entry: {
@@ -7,10 +10,12 @@ module.exports = (exclude) => ({
             'core-js/fn/object/assign',
             'core-js/es6/promise',
             'whatwg-fetch',
-            './lib/js/index.js'],
+            'regenerator-runtime',
+            './lib/js/index.js',
+        ],
     },
     output: {
-        path: path.join(__dirname, "dist/js"),
+        path: distBasePath,
         filename: "pp.[name].js",
         libraryTarget: "umd",
     },
@@ -26,8 +31,8 @@ module.exports = (exclude) => ({
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
         alias: {
-            "localization": path.resolve(__dirname, 'lib/js/@localization/index.js'),
-            "model": path.resolve(__dirname, 'lib/js/Model/index.js')
+            "localization": path.resolve(libBasePath, '@localization/index.js'),
+            "model": path.resolve(libBasePath, 'Model/index.js')
         }
     },
     module: {
@@ -46,7 +51,7 @@ module.exports = (exclude) => ({
                         ]
                     }
                 },
-                exclude: exclude
+                exclude
             },
             { test: /\.txt$/, use: 'raw-loader' },
             { test: /\.json$/, loader: "json-loader" }
