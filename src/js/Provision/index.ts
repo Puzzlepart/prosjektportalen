@@ -2,7 +2,6 @@ import RESOURCE_MANAGER from "localization";
 import {
     CreateWeb,
     DoesWebExist,
-    ICreateWebResult,
 } from "./Subsite";
 import { IProjectModel } from "../Model/ProjectModel";
 import { CopyDefaultData } from "./Data";
@@ -12,7 +11,7 @@ import { GetAllProperties } from "../Util/PropertyBag";
 import SpListLogger, { LogLevel } from "../Util/SpListLogger";
 import IProgressCallback from "./IProgressCallback";
 
-const listLogger = new SpListLogger();
+const __listLogger = new SpListLogger();
 
 
 /**
@@ -23,68 +22,29 @@ const listLogger = new SpListLogger();
  *
  * @returns {string} Redirect URL
  */
-const ProvisionWeb = (project: IProjectModel, onUpdateProgress: IProgressCallback) => new Promise<string>((resolve, reject) => {
-    onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
-    CreateWeb(project.Title, project.Url, project.Description, _spPageContextInfo.webLanguage, project.InheritPermissions)
-        .then((result: ICreateWebResult) => {
-            GetAllProperties()
-                .then(propBagAllProps => {
-                    onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
-                    ApplyProvisioningTemplate(result.web, propBagAllProps.get_fieldValues(), onUpdateProgress)
-                        .then(() => {
-                            ApplyExtensions(result.web, onUpdateProgress)
-                                .then(() => {
-                                    CopyDefaultData(result.url, project.IncludeContent, onUpdateProgress)
-                                        .then(() => {
-                                            resolve(result.redirectUrl);
-                                        })
-                                        .catch(err => OnProvisionWebFail("CopyDefaultData", err, reject, resolve, result.url, result.redirectUrl));
-                                })
-                                .catch(err => OnProvisionWebFail("ApplyExtensions", err, reject, resolve, result.url));
-                        })
-                        .catch(err => OnProvisionWebFail("ApplyProvisioningTemplate", err, reject, resolve, result.url));
-                })
-                .catch(err => OnProvisionWebFail("GetAllProperties", err, reject, resolve, result.url));
-        })
-        .catch(err => OnProvisionWebFail("CreateWeb", err, reject, resolve));
-});
-
-/**
- * On provision web fail function
- *
- * @param {string} func Function the error occured in
- * @param {any} err Error details
- * @param {Function} rejectFunc Reject callback
- * @param {Function} resolveFunc Resolve callback
- * @param {string} url URL
- * @param {any} resolveData Resolve data
- */
-const OnProvisionWebFail = (func: string, err: any, rejectFunc: (reason) => void, resolveFunc: (resolveData?: any) => void, url?: string, resolveData?: any): void => {
-    let Message, ErrorTraceCorrelationId, ErrorTypeName, LogURL;
-
-    if (err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
-        const { args } = err;
-        ErrorTraceCorrelationId = args.get_errorTraceCorrelationId();
-        ErrorTypeName = args.get_errorTypeName();
-        Message = args.get_message();
-    } else {
-        Message = err;
+async function ProvisionWeb(project: IProjectModel, onUpdateProgress: IProgressCallback): Promise<string> {
+    try {
+        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
+        const createWebResult = await CreateWeb(project.Title, project.Url, project.Description, _spPageContextInfo.webLanguage, project.InheritPermissions);
+        const webProperties = await GetAllProperties();
+        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
+        await ApplyProvisioningTemplate(createWebResult.web, webProperties.get_fieldValues(), onUpdateProgress);
+        await ApplyExtensions(createWebResult.web, onUpdateProgress);
+        await CopyDefaultData(createWebResult.url, project.IncludeContent, onUpdateProgress);
+        return createWebResult.redirectUrl;
+    } catch (err) {
+        let Message, ErrorTraceCorrelationId, ErrorTypeName;
+        if (err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
+            const { args } = err;
+            ErrorTraceCorrelationId = args.get_errorTraceCorrelationId();
+            ErrorTypeName = args.get_errorTypeName();
+            Message = args.get_message();
+        } else {
+            Message = err;
+        }
+        __listLogger.log({ Message, LogLevel: LogLevel.Error, ErrorTraceCorrelationId, ErrorTypeName, LogURL: project.Url });
     }
-
-    if (url) {
-        LogURL = url;
-    }
-
-    const isWarning = Array.contains(["CopyDefaultData", "ApplyExtensions"], func);
-
-    listLogger.log({ Message, Source: func, LogLevel: isWarning ? LogLevel.Warning : LogLevel.Error, ErrorTraceCorrelationId, ErrorTypeName, LogURL });
-
-    if (isWarning) {
-        resolveFunc(resolveData);
-    } else {
-        rejectFunc(err);
-    }
-};
+}
 
 export { DoesWebExist };
 
