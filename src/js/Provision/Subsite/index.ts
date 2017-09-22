@@ -1,8 +1,8 @@
 import { Site } from "sp-pnp-js";
-
 import ICreateWebResult from "./ICreateWebResult";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
+import ProvisionError from "../ProvisionError";
 
 /**
  * Get redirect URL. Appends permsetup.aspx if the web has unique permissions
@@ -22,23 +22,20 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
  * @param {string} description Description
  * @param {boolean} inheritPermissions Inherit permissions
  */
-const CreateWeb = (title: string, url: string, description: string, webLanguage = _spPageContextInfo.webLanguage, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
-    let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-    site.rootWeb.webs.add(title, url, description, "STS#0", webLanguage, inheritPermissions)
-        .then(result => {
-            url = result.data.Url;
-            SetSharedNavigation(url)
-                .then(() => {
-                    resolve({
-                        web: result.web,
-                        url: url,
-                        redirectUrl: GetRedirectUrl(url, inheritPermissions),
-                    });
-                })
-                .catch(reject);
-        })
-        .catch(reject);
-});
+async function CreateWeb(title: string, url: string, description: string, webLanguage = _spPageContextInfo.webLanguage, inheritPermissions: boolean): Promise<ICreateWebResult> {
+    const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+    try {
+        const createWebResult = await rootWeb.webs.add(title, url, description, "STS#0", webLanguage, inheritPermissions);
+        await SetSharedNavigation(createWebResult.data.Url);
+        return {
+            web: createWebResult.web,
+            url: createWebResult.data.Url,
+            redirectUrl: GetRedirectUrl(createWebResult.data.Url, inheritPermissions),
+        };
+    } catch (err) {
+        throw new ProvisionError(err, "CreateWeb");
+    }
+}
 
 export {
     ICreateWebResult,
