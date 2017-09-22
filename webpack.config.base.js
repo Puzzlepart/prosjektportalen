@@ -42,10 +42,7 @@ module.exports = (exclude) => ({
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [
-                            require("babel-preset-es2015"),
-                            require("babel-preset-react")
-                        ],
+                        presets: ["react", "env"],
                         plugins: [
                             require("babel-plugin-transform-class-properties")
                         ]
@@ -53,8 +50,14 @@ module.exports = (exclude) => ({
                 },
                 exclude
             },
-            { test: /\.txt$/, use: 'raw-loader' },
-            { test: /\.json$/, loader: "json-loader" }
+            {
+                test: /\.txt$/,
+                use: 'raw-loader'
+            },
+            {
+                test: /\.json$/,
+                loader: "json-loader"
+            }
         ]
     }
 });
