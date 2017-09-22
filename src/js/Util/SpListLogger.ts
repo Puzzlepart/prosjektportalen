@@ -7,7 +7,7 @@ import {
 interface ILogEntry {
     ID?: string;
     Message: string;
-    Source: string;
+    Source?: string;
     LogLevel: LogLevel;
     ErrorTraceCorrelationId?: string;
     ErrorTypeName?: string;
