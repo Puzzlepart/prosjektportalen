@@ -2187,8 +2187,11 @@
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>
   </data>
-   <data name="ProjectStatus_SaveAs" xml:space="preserve">
-    <value>Lagre som...</value>
+  <data name="ProjectStatus_SaveAs" xml:space="preserve">
+    <value>Lagre rapport</value>
+  </data>
+  <data name="ProjectStatus_SavingAs" xml:space="preserve">
+    <value>Lagrer rapport</value>
   </data>
   <data name="ProjectStatus_SaveSnapshot" xml:space="preserve">
     <value>Lagre som PNG</value>

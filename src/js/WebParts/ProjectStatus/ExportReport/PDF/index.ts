@@ -1,85 +1,80 @@
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
+import { Site, Web } from "sp-pnp-js";
 import SectionModel from "../../Section/SectionModel";
-let jsPDF = require("jspdf");
+import * as jsPDF from "jspdf";
 require("jspdf-autotable");
 
-interface IColumn {
+interface ITableColumn {
     title: string;
     dataKey: string;
     widthStyle?: number;
     type?: string;
 }
-const FONT_SIZE = {
-    xlarge: 24,
-    large: 20,
-    medium: 14,
-    small: 10,
-};
-const MARGIN_LEFT = 14;
-const IMAGE_WIDTH = 270;
 
-export class PDF {
-    private doc: any;
-    public constructor() {
-        this.doc = jsPDF("l");
-        this.doc.setFont("Segoe UI");
+enum FONT_SIZE {
+    xlarge =  24,
+    large = 20,
+    medium = 14,
+    small = 10,
+    xsmall =  8,
+}
+
+export class PDF extends jsPDF {
+    private autoTable: any;
+    private pageHeight: any;
+    private readonly MARGIN_LEFT = 14;
+    private readonly IMAGE_WIDTH = 270;
+    public constructor(layout: string = "l") {
+        super(layout);
+        // this = new jsPDF("l");
+        this.setFont("Segoe UI");
+        console.log(this);
     }
     /**
      * Return PDF Blob
      */
-    public getBlob(): Blob {
-        return this.doc.output("blob");
+    public getBlob = (): Blob  => {
+        return this.output("blob");
     }
-
     /**
      *
-     * @param sections List of sections
+     * Add project metadata to first page
      */
-    public addProjectMetadataSection = (project: any): void =>  {
-        const startPosition = 90;
-        this.addTitle(`${__("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, 60, MARGIN_LEFT);
-        this.addMetaData(project.GtProjectNumber, __("SiteFields_GtProjectNumber_DisplayName") , startPosition, MARGIN_LEFT);
-        this.addMetaData(project.GtProjectPhase, __("SiteFields_GtProjectPhase_DisplayName") , startPosition + 15, MARGIN_LEFT);
-        this.addMetaData(project.GtStartDate, __("SiteFields_GtStartDate_DisplayName") , startPosition + 30, MARGIN_LEFT);
-        this.addMetaData(project.GtEndDate, __("SiteFields_GtEndDate_DisplayName") , startPosition + 45, MARGIN_LEFT);
-        this.addMetaData(project.GtEndDate, __("SiteFields_GtEndDate_DisplayName") , startPosition + 60, MARGIN_LEFT);
-        this.addMetaData(project.GtOverallStatus, __("SiteFields_GtOverallStatus_DisplayName"), startPosition, 120);
-    }
-
+    public addProjectPropertiesPage = (project: any): Promise<void> => new Promise<void>((resolve, reject) => {
+        this.addDocumentTitle(`${__("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
+        this.addProperty(this.createColumn(__("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.GtOverallStatus, null, 45);
+        this.fetchProjectData().then((data) => {
+            let index = 0;
+            data.properties.forEach(property => {
+                if (property.value) {
+                    this.addProperty(property.field, property.value, null, this.autoTable.previous.finalY);
+                    index++;
+                }
+            });
+            resolve();
+        });
+    })
     /**
      *
-     * @param project Project object
+     * @param sections Status report section collection: Array<SectionModel>
      */
-    public addStatusSectionPage = (sections: Array<SectionModel>): void =>  {
-        this.doc.addPage();
-        this.addPageTitle(__("String_StatusReport"), 15, MARGIN_LEFT);
-        let yPosition = 30;
+    public addStatusSection = (sections: Array<SectionModel>): void =>  {
+        this.addPage();
         sections.forEach((section, index) => {
-            if (section.statusValue) {
-                ( index % 2) ? this.addSectionElement(
-                    section.statusValue,
-                    section.statusComment,
-                    section.name,
-                    yPosition - 25, 150) : this.addSectionElement(
-                        section.statusValue,
-                        section.statusComment,
-                        section.name,
-                        yPosition, 14);
-                yPosition += 25;
-            }
+            const yPosition = (index > 0) ?  this.autoTable.previous.finalY : 20;
+            this.addProperty(this.createColumn(section.name, section.fieldName), section.statusValue, section.statusComment, yPosition);
         });
     }
-
     /**
      * Returns a promise
-     * @param section Status report section
+     * @param section Status report section: SectionModel
      */
     public addPageWithList = (section: SectionModel): Promise<void> => new Promise<void>((resolve, reject) => {
         this.fetchData(section).then((data) => {
             if (data.items.length) {
-                this.doc.addPage();
-                this.addPageTitle(section.listTitle, 15, MARGIN_LEFT);
+                this.addPage();
+                this.addPageTitle(section.listTitle, 15, this.MARGIN_LEFT);
                 const settings  = {
                     startY: 30,
                     styles: {
@@ -88,12 +83,11 @@ export class PDF {
                         overflow: "linebreak",
                         tableWidth: "auto",
                     },
-                    // tslint:disable-next-line:no-shadowed-variable
-                    createdCell:  (cell, data) => {
-                        data.column.widthStyle = this.getColumnWidth(data.column.raw.type);
+                    createdCell:  (cell, element) => {
+                        element.column.widthStyle = this.getColumnWidth(element.column.raw.type);
                     },
                 };
-                this.doc.autoTable(data.columns, data.items, settings);
+                this.autoTable(data.columns, data.items, settings);
             }
             resolve();
         });
@@ -111,30 +105,98 @@ export class PDF {
         }
         html2canvas(document.getElementById(imageId), {
             onrendered: canvas => {
-                const imgData = canvas.toDataURL("image/jpeg");
-                const imgWidth = IMAGE_WIDTH;
-                const pageHeight = this.doc.pageHeight;
-                const imgHeight = canvas.height * imgWidth / canvas.width;
-
-                let heightLeft = imgHeight;
-                let position = 30;
-
-                this.doc.addPage();
-                this.addPageTitle(pageTitle, 15, MARGIN_LEFT);
-                this.doc.addImage(imgData, "PNG", MARGIN_LEFT, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-
-                while (heightLeft >= 0) {
-                    position = heightLeft - imgHeight;
-                    this.doc.addPage();
-                    this.doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                }
+                this.addPage();
+                this.addPageTitle(pageTitle, 15, this.MARGIN_LEFT);
+                this.addImageToCanvas(canvas);
                 resolve();
             },
         });
     })
-     /**
+    /**
+    * Returns column width based on field type
+    * @param type Field type
+    */
+    private getColumnWidth = (type: string): number => {
+        // might have some calculations based on number of columns
+        switch (type) {
+            case "text": case "note": {
+                return 40;
+            }
+        }
+    }
+    /**
+     *
+     * @param value Title value
+     * @param yPosition x-axis position
+     * @param xPosition y-axis position
+     */
+    private addDocumentTitle = (value: string, yPosition: number, xPosition: number) => {
+        this.setTextColor(51);
+        this.setFontSize(FONT_SIZE.xlarge);
+
+        let splitValue = this.splitTextToSize(value, 270);
+        this.text(splitValue, xPosition, yPosition);
+        this.setFontSize(FONT_SIZE.medium);
+        this.text(`${moment(new Date()).format("DD. MMM YYYY - HH:mm")}`, this.MARGIN_LEFT, yPosition + 15);
+        this.setDrawColor(153, 168, 173);
+        this.line(this.MARGIN_LEFT, yPosition + 20, 280, yPosition + 20);
+    }
+    /**
+     *
+     * @param value Title value
+     * @param label Section element name/label
+     * @param yPosition x-axis position
+     */
+    private addProperty = (column: ITableColumn, value: string, comment?: string, yPosition?: number) => {
+        const settings  = {
+            theme: "plain",
+            startY: yPosition,
+            styles: {
+                columnWidth: "auto",
+                fontSize: 8,
+                overflow: "linebreak",
+                tableWidth: 150,
+            },
+            columnStyles: {
+                Comment: {columnWidth: 150},
+            },
+        };
+        let item = {};
+        item[column.dataKey] = value;
+        this.autoTable([column], [item], settings);
+        if (comment) {
+            settings.startY = this.autoTable.previous.finalY;
+            let commentColumn = this.createColumn("Comment", "Comment");
+            item["Comment"] = comment;
+            this.autoTable([commentColumn], [item], settings);
+        }
+    }
+    /**
+     *
+     * @param value Title value
+     * @param yPosition x-axis position
+     * @param xPosition y-axis position
+     */
+    private addPageTitle = (value: string, yPosition: number, xPosition: number) => {
+        this.setTextColor(51);
+        this.setFontSize(FONT_SIZE.large);
+        this.text(value, xPosition, 20);
+    }
+    /**
+    * Create new autotable column
+    * @param title string
+    * @param key string
+    * @param type string
+    */
+    private createColumn = (title: string, key: string, type?: string): ITableColumn => {
+        let column: ITableColumn = {
+            title: title,
+            dataKey: key,
+            type: type,
+        };
+        return column;
+    }
+    /**
     * Fetches required list section data
     * @param section Section used for fetching list data
     */
@@ -158,109 +220,102 @@ export class PDF {
         ctx.load(_fields);
         ctx.executeQueryAsync(() => {
             let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
-            let columns: Array<IColumn> = validViewFields.map(vf => {
+            let columns: Array<ITableColumn> = validViewFields.map(vf => {
                 const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
-                return this.createColumn(field);
+                return this.createColumn(field.get_title(), field.get_internalName(), field.get_typeAsString().toLowerCase());
             });
             let items = _items.get_data().map(i => i.get_fieldValuesAsText().get_fieldValues());
             resolve({items, columns});
         }, reject);
     })
-
     /**
-    * Create new autotable column
-    * @param field SP.Field
-    */
-    private createColumn(field: SP.Field): IColumn {
-        let column: IColumn = {
-            title: field.get_title(),
-            dataKey: field.get_internalName(),
-            type: field.get_typeAsString().toLowerCase(),
-        };
-        return column;
-    }
-
-    /**
-    * Returns column width based on field type
-    * @param type Field type
-    */
-    private getColumnWidth(type: string): number {
-        // might have some calculations based on number of columns
-        switch (type) {
-            case "text": case "note": {
-                return 40;
-            }
-        }
-    }
-    /**
+     * Fetch data. Config, fields and project frontpage data.
      *
-     * @param value Section element value
-     * @param comment Section element comment
-     * @param name Section element name/label
-     * @param yPosition y-axis position
-     * @param xPosition x-axis position
+     * @param {string} configList Configuration list
      */
-    private addSectionElement(value: string, comment: string, name: string, yPosition: number, xPosition: number) {
-        this.doc.setTextColor(153, 168, 173);
-        this.doc.setFontSize(FONT_SIZE.medium);
-        this.doc.text(name.toUpperCase(), xPosition, yPosition);
-        if (value) {
-            this.doc.setTextColor(51, 51, 51);
-            let splitValue = this.doc.splitTextToSize(value, 120);
-            this.doc.text(splitValue, xPosition, yPosition + 8);
-        }
-        if (comment) {
-            this.doc.setFontSize(FONT_SIZE.small);
-            let splitComment = this.doc.splitTextToSize(comment, 120);
-            this.doc.text(splitComment, xPosition, yPosition + 16);
-        }
-    }
+    private fetchProjectData = (configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
 
-    /**
-     *
-     * @param value Title value
-     * @param yPosition x-axis position
-     * @param xPosition y-axis position
-     */
-    private addTitle(value: string, yPosition: number, xPosition: number) {
-        this.doc.setTextColor(153, 168, 173);
-        this.doc.setFontSize(FONT_SIZE.xlarge);
+        const configPromise = rootWeb
+            .lists
+            .getByTitle(configList)
+            .items
+            .select("Title", "GtPcProjectStatus")
+            .get();
 
-        let splitValue = this.doc.splitTextToSize(value, 270);
-        this.doc.text(splitValue, xPosition, yPosition);
-        this.doc.setFontSize(FONT_SIZE.medium);
-        this.doc.text(`${moment(new Date()).format("DD. MMM YYYY - HH:mm")}`, MARGIN_LEFT, yPosition + 15);
-        this.doc.setDrawColor(153, 168, 173);
-        this.doc.line(MARGIN_LEFT, yPosition + 20, 270, yPosition + 20);
-    }
-    /**
-     *
-     * @param value Title value
-     * @param label Section element name/label
-     * @param yPosition x-axis position
-     * @param xPosition y-axis position
-     */
-    private addMetaData(value: string, label: string, yPosition: number, xPosition: number) {
-        this.doc.setTextColor(51, 51, 51);
-        this.doc.setFontSize(FONT_SIZE.medium);
-        this.doc.setFontType("bold");
-        this.doc.text(label, xPosition, yPosition);
-        this.doc.setFontType("normal");
-        if (value) {
-            let splitValue = this.doc.splitTextToSize(value, 150);
-            this.doc.text(splitValue, xPosition, yPosition + 8);
+        const fieldsPromise = rootWeb
+            .contentTypes
+            .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
+            .fields
+            .select("Title", "Description", "InternalName", "Required", "TypeAsString")
+            .get();
+
+        const itemPromise = new Web(_spPageContextInfo.webAbsoluteUrl)
+            .lists
+            .getByTitle(__("Lists_SitePages_Title"))
+            .items
+            .getById(3)
+            .fieldValuesAsText
+            .get();
+
+        Promise.all([configPromise, fieldsPromise, itemPromise])
+            .then(([config, fields, item]) => {
+                let itemFieldNames = Object.keys(item);
+                const properties = itemFieldNames
+                    .filter(fieldName => {
+                        /**
+                         * Checking if the field exist
+                         */
+                        const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                        if (!field) {
+                            return false;
+                        }
+
+                        /**
+                         * Checking configuration
+                         */
+                        const [configItem] = config.filter(c => c.Title === field.Title);
+                        if (!configItem) {
+                            return false;
+                        }
+                        const shouldBeShown = configItem["GtPcProjectStatus"] === true;
+
+                        /**
+                         * Checking if the value is a string
+                         */
+                        const valueIsString = typeof item[fieldName] === "string";
+                        return (valueIsString && shouldBeShown);
+                    })
+                    .map(fieldName => ({
+                        field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                        value: item[fieldName],
+                    }))
+                    .map(({ field, value }) => {
+                        return { value: value, field: this.createColumn(field.Title, field.InternalName, field.TypeAsString.toLowerCase()) };
+                    });
+                resolve({
+                    properties: properties,
+                });
+            })
+            .catch(reject);
+    })
+
+    private addImageToCanvas = (canvas: any) => {
+        const imgData = canvas.toDataURL("image/jpeg");
+        const imgWidth = this.IMAGE_WIDTH;
+        const pageHeight = this.pageHeight;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 30;
+        this.addImage(imgData, "PNG", this.MARGIN_LEFT, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+        while (heightLeft >= 0) {
+            position = heightLeft - imgHeight;
+            this.addPage();
+            this.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
         }
-    }
-    /**
-     *
-     * @param value Title value
-     * @param yPosition x-axis position
-     * @param xPosition y-axis position
-     */
-    private addPageTitle(value: string, yPosition: number, xPosition: number) {
-        this.doc.setTextColor(51, 51, 51);
-        this.doc.setFontSize(FONT_SIZE.large);
-        this.doc.text(value, xPosition, 20);
     }
 }
+
 

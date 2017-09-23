@@ -3,6 +3,7 @@ import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Icon } from "../../@Components";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
@@ -112,46 +113,12 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             );
         }
         return (
-            <Dropdown
-                placeHolder="Lagre som..."
-                id="pp-saveReportDropdown"
-                ariaLabel="Custom dropdown example"
-                onRenderOption={ this.onRenderSaveOptions }
-                onRenderPlaceHolder={ this.onRenderPlaceholder }
-                options={
-                    [
-                        { key: "png", text: __("ProjectStatus_SaveSnapshot"), data: { icon: "Camera" } },
-                        { key: "pdf", text: __("ProjectStatus_SaveAsPDF"), data: { icon: "Print" } },
-                    ]
-                }
-          />
-        );
-    }
-    private onRenderSaveOptions = (option: IDropdownOption): JSX.Element => {
-        return (
-          <div className="save-option" onClick={(option.key === "png") ? this.saveAsPng : this.saveAsPDF } >
-                { option.data && option.data.icon &&
-                    <Icon
-                        style={ { marginRight: "8px" } }
-                        aria-hidden="true"
-                        title={ option.data.icon }
-                        name ={ option.data.icon }
-                    />
-                }
-                <span>{ option.text }</span>
-            </div>
-        );
-    }
-    private onRenderPlaceholder = (): JSX.Element => {
-        return (
-            <div className="dropdownExample-placeholder">
-                <Icon
-                style={ { marginRight: "8px" } }
-                name={ "Save" }
-                aria-hidden="true"
-                />
-                <span>Lagre som...</span>
-            </div>
+            <PrimaryButton
+                className="save-snapshot-btn"
+                iconProps={{ iconName: "Camera" }}
+                onClick={this.doExport}>
+                {exportStatus === ExportReportStatus.hasExported ? __("ProjectStatus_SaveAsPng") : __("ProjectStatus_SaveAsPng")}
+            </PrimaryButton>
         );
     }
     /**
@@ -180,7 +147,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
-            .filter("substringof('.pdf', FileLeafRef) and substringof('.pdf', FileLeafRef)")
+            .filter("substringof('.pdf', FileLeafRef) or substringof('.png', FileLeafRef)")
             .orderBy("Modified", false)
             .top(10)
             .get()
@@ -216,6 +183,21 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     }
 
     /**
+     * Do export
+     *
+     * @param {any} e Event
+     */
+    private doExport = e => {
+        e.preventDefault();
+        this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
+            if (AS_PDF) {
+                this.saveAsPDF();
+            } else {
+                this.saveAsPng();
+            }
+        });
+    }
+    /**
      * Save report
      *
      * @param {any} reportBlob Blob for the report file
@@ -239,36 +221,35 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     /**
      * Save file as PDF
-     * @param {any} e Event
      */
-    private saveAsPDF = e => {
-        e.preventDefault();
+    private saveAsPDF = () => {
         this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
             let { sections, project } = this.props;
             let pdf = new PDF();
-            pdf.addProjectMetadataSection(project);
-            pdf.addStatusSectionPage(sections);
-            const promises = new Array<Promise<any>>();
-            sections.forEach((section: SectionModel) => {
-                if (section.showRiskMatrix) {
-                    promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
-                }
-                if (section.listTitle && section.showAsSection) {
-                    promises.push(pdf.addPageWithList(section));
-                }
-            });
-            Promise.all(promises).then(() => {
-                this.saveReport(pdf.getBlob(), "pdf");
+            pdf.addProjectPropertiesPage(project).then(() =>  {
+                pdf.addStatusSection(sections);
+                let promises = new Array<Promise<any>>();
+                sections.forEach((section: SectionModel) => {
+                    if (section.showRiskMatrix) {
+                        promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
+                    }
+                    if (section.listTitle && section.showAsSection) {
+                        promises.push(pdf.addPageWithList(section));
+                    }
+                });
+                promises.reduce((promise: Promise<any>, item) => {
+                    return promise.then(() => item.then());
+                }).then(() => {
+                    this.saveReport(pdf.getBlob(), "pdf");
+                });
             });
         });
     }
 
      /**
      * Save file as PNG
-     * @param {any} e Event
      */
-    private saveAsPng = e => {
-        e.preventDefault();
+    private saveAsPng = () => {
         this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
             const element = document.getElementById("pp-projectstatus");
             html2canvas(element, {
