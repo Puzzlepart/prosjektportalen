@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as pnp from "sp-pnp-js";
+
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Icon } from "../../@Components";
@@ -11,6 +12,7 @@ import IExportReportProps from "./IExportReportProps";
 import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
 import SectionModel from "../Section/SectionModel";
+import { SectionType } from "../Section/SectionModel";
 import { PDF } from "./PDF";
 
 const AS_PDF: boolean = true;
@@ -223,27 +225,31 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Save file as PDF
      */
     private saveAsPDF = () => {
-        this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
-            let { sections, project } = this.props;
+        this.setState({ exportStatus: ExportReportStatus.isExporting }, () =>  {
+            let { sections } = this.props;
             let pdf = new PDF();
-            pdf.addProjectPropertiesPage(project).then(() =>  {
-                pdf.addStatusSection(sections);
-                let promises = new Array<Promise<any>>();
-                sections.forEach((section: SectionModel) => {
-                    if (section.showRiskMatrix) {
-                        promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
-                    }
-                    if (section.listTitle && section.showAsSection) {
-                        promises.push(pdf.addPageWithList(section));
-                    }
-                });
-                promises.reduce((promise: Promise<any>, item) => {
-                    return promise.then(() => item.then());
-                }).then(() => {
-                    this.saveReport(pdf.getBlob(), "pdf");
+                pdf.addProjectPropertiesPage().then(() =>  {
+                    pdf.addStatusSection(sections);
+                    let promises = new Array<Promise<any>>();
+                    sections.forEach((section: SectionModel) => {
+                        if (section.showRiskMatrix && section.showAsSection) {
+                            promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
+                        }
+                        if (section.listTitle && section.showAsSection) {
+                            promises.push(pdf.addPageWithList(section));
+                        }
+                        if ((section.getType() === SectionType.ProjectPropertiesSection) && section.showAsSection) {
+                            promises.push(pdf.addProjectPropertiesSection(section));
+                        }
+                    });
+                    promises.reduce((promise: Promise<any>, func) => {
+                        return promise.then(_ => func);
+                    }, Promise.resolve())
+                    .then(() => {
+                        this.saveReport(pdf.getBlob(), "pdf");
+                    });
                 });
             });
-        });
     }
 
      /**

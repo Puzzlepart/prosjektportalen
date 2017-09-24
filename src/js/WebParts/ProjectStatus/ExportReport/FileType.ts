@@ -1,4 +1,4 @@
 export enum FileType {
-    png = 0,
-    pdf = 1,
+    png,
+    pdf,
 }

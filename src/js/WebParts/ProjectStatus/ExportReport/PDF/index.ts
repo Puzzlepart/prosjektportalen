@@ -11,6 +11,11 @@ interface ITableColumn {
     widthStyle?: number;
     type?: string;
 }
+interface IProject {
+    item: any;
+    fields: any;
+}
+
 
 enum FONT_SIZE {
     xlarge =  24,
@@ -27,9 +32,7 @@ export class PDF extends jsPDF {
     private readonly IMAGE_WIDTH = 270;
     public constructor(layout: string = "l") {
         super(layout);
-        // this = new jsPDF("l");
         this.setFont("Segoe UI");
-        console.log(this);
     }
     /**
      * Return PDF Blob
@@ -41,40 +44,36 @@ export class PDF extends jsPDF {
      *
      * Add project metadata to first page
      */
-    public addProjectPropertiesPage = (project: any): Promise<void> => new Promise<void>((resolve, reject) => {
+    public addProjectPropertiesPage = (): Promise<void> => new Promise<void>((resolve, reject) => {
         this.addDocumentTitle(`${__("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
-        this.addProperty(this.createColumn(__("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.GtOverallStatus, null, 45);
-        this.fetchProjectData().then((data) => {
-            let index = 0;
-            data.properties.forEach(property => {
-                if (property.value) {
-                    this.addProperty(property.field, property.value, null, this.autoTable.previous.finalY);
-                    index++;
-                }
+        this.fetchProject().then((project: IProject) => {
+            this.addProperty(this.createColumn(__("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
+            this.fetchProjectData(project).then((data) => {
+                data.properties.filter((property) => property.value).map((property) => {
+                        this.addProperty(property.field, property.value, null, this.autoTable.previous.finalY);
+                });
+                resolve();
             });
-            resolve();
         });
     })
     /**
-     *
      * @param sections Status report section collection: Array<SectionModel>
      */
     public addStatusSection = (sections: Array<SectionModel>): void =>  {
         this.addPage();
-        sections.forEach((section, index) => {
+        sections.filter((section: SectionModel) => section.showInStatusSection).map((section, index) => {
             const yPosition = (index > 0) ?  this.autoTable.previous.finalY : 20;
             this.addProperty(this.createColumn(section.name, section.fieldName), section.statusValue, section.statusComment, yPosition);
         });
     }
     /**
-     * Returns a promise
      * @param section Status report section: SectionModel
      */
     public addPageWithList = (section: SectionModel): Promise<void> => new Promise<void>((resolve, reject) => {
         this.fetchData(section).then((data) => {
             if (data.items.length) {
                 this.addPage();
-                this.addPageTitle(section.listTitle, 15, this.MARGIN_LEFT);
+                this.addPageTitle(section.name, 15, this.MARGIN_LEFT);
                 const settings  = {
                     startY: 30,
                     styles: {
@@ -94,11 +93,9 @@ export class PDF extends jsPDF {
     })
 
      /**
-     * Returns a promise
      * @param imageId ID of DOM element to be added
      * @param pageTitle The title of the page
      */
-
     public addPageWithImage = (imageId: string, pageTitle: string): Promise<void> => new Promise<void>((resolve, reject) => {
         if (!document.getElementById(imageId)) {
             resolve();
@@ -113,11 +110,27 @@ export class PDF extends jsPDF {
         });
     })
     /**
+     * Returns a promise
+     * @param section Status report section: SectionModel
+     */
+    public addProjectPropertiesSection = (section: SectionModel) => new Promise<void>((resolve, reject) => {
+        this.fetchProject().then((project: IProject) => {
+            this.addPage();
+            this.addPageTitle(section.name, 15, this.MARGIN_LEFT);
+            section.viewFields.filter((field) => project.item.hasOwnProperty(field)).map((viewField, index) => {
+                const yPosition = (index > 0) ?  this.autoTable.previous.finalY : 30;
+                let field = project.fields.filter((_) => _.InternalName === viewField)[0];
+                let value = project.item[field.InternalName];
+                this.addProperty(this.createColumn(field.Title, field.InternalName), value, null, yPosition);
+            });
+            resolve();
+        });
+    })
+    /**
     * Returns column width based on field type
     * @param type Field type
     */
     private getColumnWidth = (type: string): number => {
-        // might have some calculations based on number of columns
         switch (type) {
             case "text": case "note": {
                 return 40;
@@ -133,7 +146,6 @@ export class PDF extends jsPDF {
     private addDocumentTitle = (value: string, yPosition: number, xPosition: number) => {
         this.setTextColor(51);
         this.setFontSize(FONT_SIZE.xlarge);
-
         let splitValue = this.splitTextToSize(value, 270);
         this.text(splitValue, xPosition, yPosition);
         this.setFontSize(FONT_SIZE.medium);
@@ -153,12 +165,12 @@ export class PDF extends jsPDF {
             startY: yPosition,
             styles: {
                 columnWidth: "auto",
-                fontSize: 8,
+                fontSize: 10,
                 overflow: "linebreak",
-                tableWidth: 150,
+                tableWidth: 200,
             },
             columnStyles: {
-                Comment: {columnWidth: 150},
+                Comment: {columnWidth: 200},
             },
         };
         let item = {};
@@ -230,10 +242,9 @@ export class PDF extends jsPDF {
     })
     /**
      * Fetch data. Config, fields and project frontpage data.
-     *
      * @param {string} configList Configuration list
      */
-    private fetchProjectData = (configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
+    private fetchProjectData = (project: IProject, configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
 
         const configPromise = rootWeb
@@ -243,6 +254,41 @@ export class PDF extends jsPDF {
             .select("Title", "GtPcProjectStatus")
             .get();
 
+        Promise.all([configPromise])
+            .then(([config]) => {
+                let itemFieldNames = Object.keys(project.item);
+                const properties = itemFieldNames
+                    .filter(fieldName => {
+                        const [field] = project.fields.filter(({ InternalName }) => InternalName === fieldName);
+                        if (!field) {
+                            return false;
+                        }
+                        const [configItem] = config.filter(c => c.Title === field.Title);
+                        if (!configItem) {
+                            return false;
+                        }
+                        const shouldBeShown = configItem["GtPcProjectStatus"] === true;
+                        const valueIsString = typeof project.item[fieldName] === "string";
+                        return (valueIsString && shouldBeShown);
+                    })
+                    .map(fieldName => ({
+                        field: project.fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                        value: project.item[fieldName],
+                    }))
+                    .map(({ field, value }) => {
+                        return { value: value, field: this.createColumn(field.Title, field.InternalName, field.TypeAsString.toLowerCase()) };
+                    });
+                resolve({
+                    properties: properties,
+                });
+            })
+            .catch(reject);
+    })
+    /**
+     * Get project item and fields
+     */
+    private fetchProject = () => new Promise<any>((resolve, reject) => {
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const fieldsPromise = rootWeb
             .contentTypes
             .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
@@ -257,49 +303,11 @@ export class PDF extends jsPDF {
             .getById(3)
             .fieldValuesAsText
             .get();
-
-        Promise.all([configPromise, fieldsPromise, itemPromise])
-            .then(([config, fields, item]) => {
-                let itemFieldNames = Object.keys(item);
-                const properties = itemFieldNames
-                    .filter(fieldName => {
-                        /**
-                         * Checking if the field exist
-                         */
-                        const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
-                        if (!field) {
-                            return false;
-                        }
-
-                        /**
-                         * Checking configuration
-                         */
-                        const [configItem] = config.filter(c => c.Title === field.Title);
-                        if (!configItem) {
-                            return false;
-                        }
-                        const shouldBeShown = configItem["GtPcProjectStatus"] === true;
-
-                        /**
-                         * Checking if the value is a string
-                         */
-                        const valueIsString = typeof item[fieldName] === "string";
-                        return (valueIsString && shouldBeShown);
-                    })
-                    .map(fieldName => ({
-                        field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
-                        value: item[fieldName],
-                    }))
-                    .map(({ field, value }) => {
-                        return { value: value, field: this.createColumn(field.Title, field.InternalName, field.TypeAsString.toLowerCase()) };
-                    });
-                resolve({
-                    properties: properties,
-                });
-            })
-            .catch(reject);
+         Promise.all([itemPromise, fieldsPromise]).then(([item, fields]) => resolve({item, fields}));
     })
-
+    /**
+     * @param {any} canvas
+     */
     private addImageToCanvas = (canvas: any) => {
         const imgData = canvas.toDataURL("image/jpeg");
         const imgWidth = this.IMAGE_WIDTH;
