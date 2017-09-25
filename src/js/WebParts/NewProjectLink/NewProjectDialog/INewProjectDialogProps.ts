@@ -1,3 +1,4 @@
+import ListConfig from "../../../Provision/Data/Config/ListConfig";
 import { IDialogProps } from "office-ui-fabric-react/lib/Dialog";
 
 export default interface INewProjectDialogProps {
@@ -6,6 +7,7 @@ export default interface INewProjectDialogProps {
     titleMinLength?: number;
     titleMaxLength?: number;
     maxUrlLength?: number;
+    listDataConfig: { [key: string]: ListConfig };
 }
 
 export const NewProjectDialogDefaultProps: Partial<INewProjectDialogProps> = {

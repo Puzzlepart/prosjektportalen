@@ -2,6 +2,7 @@ import * as React from "react";
 import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import AudienceTargeting from "../AudienceTargeting";
+import * as ListDataConfig from "../../Provision/Data/Config";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
@@ -23,23 +24,27 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     constructor(props: INewProjectLinkProps) {
         super(props, {
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
+            listDataConfig: {},
         });
     }
 
     /**
      * Component did mount. Handling audience.
      */
-    public componentDidMount(): void {
+    public async componentDidMount(): Promise<void> {
         /**
          * Checks if the web part should be rendered for the current user
         */
-        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
-            if (userMatchAudience !== this.state.shouldRender) {
-                this.setState({
-                    shouldRender: userMatchAudience,
-                });
+        const userMatchAudience = await Util.doesUserMatchAudience(this.props.audienceTargeting);
+        if (userMatchAudience !== this.state.shouldRender) {
+            this.setState({
+                shouldRender: userMatchAudience,
+            });
+            if (userMatchAudience) {
+                const listDataConfig = await ListDataConfig.RetrieveConfig();
+                this.setState({ listDataConfig });
             }
-        });
+        }
     }
 
     /**
@@ -93,10 +98,11 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
+    private renderDialog = ({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) => {
         if (showDialog) {
             return (
                 <NewProjectDialog
+                    listDataConfig={listDataConfig}
                     dialogProps={{
                         onDismiss: () => this.setState({ showDialog: false }),
                     }} />
