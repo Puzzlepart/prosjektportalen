@@ -1,6 +1,6 @@
+// @ts-check
 import * as React from "react";
 import * as pnp from "sp-pnp-js";
-
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Icon } from "../../@Components";
@@ -14,8 +14,7 @@ import ExportReportStatus from "./ExportReportStatus";
 import SectionModel from "../Section/SectionModel";
 import { SectionType } from "../Section/SectionModel";
 import { PDF } from "./PDF";
-
-const AS_PDF: boolean = true;
+import { FileType } from "./FileType";
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     /**
@@ -28,6 +27,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this.state = {
             exportStatus: ExportReportStatus.default,
             isLoading: true,
+            fileType: FileType.pdf,
         };
     }
 
@@ -54,7 +54,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * @param {IExportReportProps} param0 Props
      * @param {IExportReportState} param1 State
      */
-    private _render({ }: IExportReportProps, { reports, showDialog, selectedReport, exportStatus, isLoading }: IExportReportState): JSX.Element {
+    private _render({ }: IExportReportProps, { reports, showDialog, selectedReport, exportStatus, isLoading, fileType }: IExportReportState): JSX.Element {
         if (isLoading) {
             return <Spinner size={SpinnerSize.medium} />;
         }
@@ -63,7 +63,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             <div className="export-section ms-Grid">
                 <div className="ms-Grid-row">
                     <div className=" ms-Grid-col ms-md5">
-                        {this.renderExportBtn(exportStatus)}
+                        {this.renderExportBtn(exportStatus, fileType)}
                     </div>
                     <div className="ms-Grid-col ms-md7">
                         <Icon name="History" />
@@ -90,7 +90,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                                 title={selectedReport.text}
                                 containerClassName="pp-snapshot-dialog">
                                 <div id="snapshot-container">
-                                    {(AS_PDF) ? (
+                                    {(fileType === FileType.pdf) ? (
                                         <embed width="850" height="750" src={selectedReport.key} type="application/pdf"></embed>
                                         ) : (<img src={selectedReport.key}></img>)}
                                 </div>
@@ -108,7 +108,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      *
      * @param {ExportReportStatus} exportStatus Export status
      */
-    private renderExportBtn = exportStatus => {
+    private renderExportBtn = (exportStatus, fileType) => {
         if (exportStatus === ExportReportStatus.isExporting) {
             return (
                 <Spinner size={SpinnerSize.medium} />
@@ -117,9 +117,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         return (
             <PrimaryButton
                 className="save-snapshot-btn"
-                iconProps={{ iconName: "Camera" }}
+                iconProps={(fileType === FileType.pdf) ? {  iconName: "Save" } : {  iconName: "Camera" }}
                 onClick={this.doExport}>
-                {exportStatus === ExportReportStatus.hasExported ? __("ProjectStatus_SaveAsPng") : __("ProjectStatus_SaveAsPng")}
+                {exportStatus === ExportReportStatus.hasExported ? __("ProjectStatus_SaveSnapshot") : __("ProjectStatus_SavingSnapshot")}
             </PrimaryButton>
         );
     }
@@ -192,10 +192,13 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     private doExport = e => {
         e.preventDefault();
         this.setState({ exportStatus: ExportReportStatus.isExporting }, () => {
-            if (AS_PDF) {
-                this.saveAsPDF();
-            } else {
-                this.saveAsPng();
+            switch (this.state.fileType) {
+                case FileType.pdf:
+                    this.saveAsPDF();
+                break;
+                case FileType.png:
+                    this.saveAsPng();
+                break;
             }
         });
     }
@@ -233,7 +236,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                     let promises = new Array<Promise<any>>();
                     sections.forEach((section: SectionModel) => {
                         if (section.showRiskMatrix && section.showAsSection) {
-                            promises.push(pdf.addPageWithImage("risk-matrix", "Risiko - Matrise"));
+                            promises.push(pdf.addPageWithImage("risk-matrix", __("ProjectStatus_PDFRiskMatrix")));
                         }
                         if (section.listTitle && section.showAsSection) {
                             promises.push(pdf.addPageWithList(section));

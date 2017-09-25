@@ -53,7 +53,8 @@ export class PDF extends jsPDF {
                         this.addProperty(property.field, property.value, null, this.autoTable.previous.finalY);
                 });
                 resolve();
-            });
+            })
+            .catch(reject);
         });
     })
     /**
@@ -89,7 +90,8 @@ export class PDF extends jsPDF {
                 this.autoTable(data.columns, data.items, settings);
             }
             resolve();
-        });
+        })
+        .catch(reject);
     })
 
      /**
@@ -124,7 +126,8 @@ export class PDF extends jsPDF {
                 this.addProperty(this.createColumn(field.Title, field.InternalName), value, null, yPosition);
             });
             resolve();
-        });
+        })
+        .catch(reject);
     })
     /**
     * Returns column width based on field type
@@ -155,8 +158,9 @@ export class PDF extends jsPDF {
     }
     /**
      *
+     * @param column ITableColumn
      * @param value Title value
-     * @param label Section element name/label
+     * @param comment Optional comment
      * @param yPosition x-axis position
      */
     private addProperty = (column: ITableColumn, value: string, comment?: string, yPosition?: number) => {
@@ -177,10 +181,25 @@ export class PDF extends jsPDF {
         item[column.dataKey] = value;
         this.autoTable([column], [item], settings);
         if (comment) {
-            settings.startY = this.autoTable.previous.finalY;
+            const commentSettings  = {
+                theme: "plain",
+                startY: this.autoTable.previous.finalY - 8,
+                styles: {
+                    columnWidth: "auto",
+                    fontSize: 10,
+                    overflow: "linebreak",
+                    tableWidth: 200,
+                },
+                columnStyles: {
+                    Comment: {columnWidth: 200},
+                },
+                drawHeaderCell : (cell, data) => {
+                    return false;
+                },
+            };
             let commentColumn = this.createColumn("Comment", "Comment");
             item["Comment"] = comment;
-            this.autoTable([commentColumn], [item], settings);
+            this.autoTable([commentColumn], [item], commentSettings);
         }
     }
     /**
@@ -303,7 +322,9 @@ export class PDF extends jsPDF {
             .getById(3)
             .fieldValuesAsText
             .get();
-         Promise.all([itemPromise, fieldsPromise]).then(([item, fields]) => resolve({item, fields}));
+         Promise.all([itemPromise, fieldsPromise])
+         .then(([item, fields]) => resolve({item, fields}))
+         .catch(reject);
     })
     /**
      * @param {any} canvas
