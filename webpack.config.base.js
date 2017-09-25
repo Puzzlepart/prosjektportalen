@@ -1,6 +1,6 @@
 var path = require("path");
 
-const libBasePath = path.join(__dirname, "lib/js/");
+const libBasePath = path.join(__dirname, "lib/");
 const distBasePath = path.join(__dirname, "dist/js");
 
 module.exports = (exclude) => ({
@@ -11,7 +11,7 @@ module.exports = (exclude) => ({
             'core-js/es6/promise',
             'whatwg-fetch',
             'regenerator-runtime/runtime',
-            './lib/js/index.js',
+            './lib/index.js',
         ],
     },
     output: {

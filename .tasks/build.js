@@ -18,27 +18,24 @@ var gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
-gulp.task("copy:assets:dist", () => {
+gulp.task("copyAssetsToDist", () => {
     return gulp.src(config.paths.assetsFilesGlob)
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("copy:resources:lib", () => {
-    return gulp.src("./src/**/*.json")
+gulp.task("copyResourcesToLib", () => {
+    return gulp.src("./src/js/**/*.json")
         .pipe(gulp.dest(config.paths.lib))
 });
 
-gulp.task("build:lib", ["copy:resources:lib"], () => {
+gulp.task("buildLib", ["copyResourcesToLib"], () => {
     var project = typescript.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-            .pipe(project(typescript.reporter.fullReporter()));
-    return merge([
-        built.dts.pipe(gulp.dest(config.paths.lib)),
-        built.js.pipe(gulp.dest(config.paths.lib))
-    ]);
+        .pipe(project(typescript.reporter.fullReporter()));
+    return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
-gulp.task("build:jsonresources", () => {
+gulp.task("buildJsonResources", () => {
     return gulp.src(config.resources.glob)
         .pipe(resx2())
         .pipe(rename(path => {
@@ -47,7 +44,7 @@ gulp.task("build:jsonresources", () => {
         .pipe(gulp.dest(config.resources.json));
 });
 
-gulp.task("build:theme", () => {
+gulp.task("buildTheme", () => {
     return gulp.src(config.theme.glob)
         .pipe(spcs())
         .pipe(rename(path => {
@@ -56,12 +53,12 @@ gulp.task("build:theme", () => {
         .pipe(gulp.dest(config.theme.styl));
 });
 
-gulp.task("copy:pnp", () => {
+gulp.task("copyPnp", () => {
     return gulp.src(config.paths.templatesGlob)
         .pipe(gulp.dest(config.paths.templates_temp));
 });
 
-gulp.task("copy:pnp::root", cb => {
+gulp.task("copyPnpRootTemplate", cb => {
     var root = format("{0}/root/**/*", config.paths.templates_temp);
     es.concat(
         gulp.src(root)
@@ -71,7 +68,7 @@ gulp.task("copy:pnp::root", cb => {
     ).on('end', cb);
 });
 
-gulp.task("copy:dist", () => {
+gulp.task("copyToDist", () => {
     return gulp.src([
         format("{0}/**/*.js", config.paths.dist),
         format("{0}/**/*.css", config.paths.dist),
@@ -81,7 +78,7 @@ gulp.task("copy:dist", () => {
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 
-gulp.task("stamp:version::templates", cb => {
+gulp.task("stampVersionToTemplates", cb => {
     git.hash(hash => {
         es.concat(
             gulp.src("./_templates/**/*.xml")
@@ -95,7 +92,7 @@ gulp.task("stamp:version::templates", cb => {
     });
 });
 
-gulp.task("stamp:version::dist", cb => {
+gulp.task("stampVersionToDist", cb => {
     git.hash(hash => {
         es.concat(
             gulp.src("./dist/*.ps1")
@@ -109,8 +106,8 @@ gulp.task("stamp:version::dist", cb => {
     });
 });
 
-gulp.task("build:pnp", (done) => {
-    runSequence("copy:pnp", "copy:pnp::root", "copy:dist", "stamp:version::templates", () => {
+gulp.task("buildPnp", (done) => {
+    runSequence("copyPnp", "copyPnpRootTemplate", "copyToDist", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });

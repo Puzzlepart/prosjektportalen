@@ -4,10 +4,10 @@ var gulp = require("gulp"),
 
 
 gulp.task("default", (done) => {
-    runSequence("clean", "build:jsonresources", "lint:ts", "package", "build:pnp", done)
+    runSequence("clean", "buildJsonResources", "tslint", "package", "buildPnp", done)
 });
 
 
-gulp.task(`default::prod`, (done) => {
-    runSequence("clean", "build:jsonresources", "lint:ts", "package::prod", "build:pnp", done)
+gulp.task(`defaultProd`, (done) => {
+    runSequence("clean", "buildJsonResources", "tslint", "package::prod", "buildPnp", done)
 });

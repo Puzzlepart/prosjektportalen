@@ -9,10 +9,10 @@ var gulp = require("gulp"),
     settings = require('./@settings.js'),
     config = require('./@configuration.js');
 
-gulp.task("package:code", ["build:lib"], (done) => {
+gulp.task("packageCode", ["buildLib"], (done) => {
     webpack(wpDev("source-map"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("package:code", err);
+            throw new gutil.PluginError("packageCode", err);
         }
         console.log(stats.toString({
             colors: true
@@ -20,10 +20,11 @@ gulp.task("package:code", ["build:lib"], (done) => {
         done();
     });
 });
-gulp.task("package:code::eval", ["build:lib"], (done) => {
+
+gulp.task("packageCodeEval", ["buildLib"], (done) => {
     webpack(wpDev("eval"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("package:code", err);
+            throw new gutil.PluginError("packageCodeEval", err);
         }
         console.log(stats.toString({
             colors: true
@@ -31,19 +32,21 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
         done();
     });
 });
-gulp.task("package:styles", ["build:theme"], (done) => {
+
+gulp.task("packageStyles", ["buildTheme"], (done) => {
     return gulp.src(config.paths.stylesMain)
         .pipe(stylus(config.stylus))
         .pipe(gulp.dest(config.paths.dist));
 });
-gulp.task("package", ["copy:assets:dist", "package:code", "package:styles"], (done) => {
+
+gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], (done) => {
     done();
 });
 
-gulp.task("package:code::prod", ["build:lib"], (done) => {
+gulp.task("packageCodeProd", ["buildLib"], (done) => {
     webpack(wpProd(), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("package:code::prod", err);
+            throw new gutil.PluginError("packageCodeProd", err);
         }
         console.log(stats.toString({
             colors: true
@@ -52,6 +55,6 @@ gulp.task("package:code::prod", ["build:lib"], (done) => {
     });
 });
 
-gulp.task("package::prod", ["copy:assets:dist", "package:code::prod", "package:styles"], (done) => {
+gulp.task("package::prod", ["copyAssetsToDist", "packageCodeProd", "packageStyles"], (done) => {
     done();
 });

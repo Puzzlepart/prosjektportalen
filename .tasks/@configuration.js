@@ -16,7 +16,7 @@ module.exports = {
         buildGlob: "./build/**/*",
         manualConfGlob: "./manual-conf/**/*",
         scriptsGlob: "./.scripts/**/*",
-        sourceGlob: "./src/**/*.ts*",
+        sourceGlob: "./src/js/**/*.ts*",
         stylesGlob: "./src/**/*.styl",
         stylesMain: ["./src/*/pp.main.styl", "./src/*/pp.project.styl"],
         assetsFilesGlob: ["./src/**/*.png"],
