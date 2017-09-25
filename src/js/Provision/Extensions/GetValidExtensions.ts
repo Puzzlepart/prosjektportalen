@@ -8,23 +8,21 @@ import LoadExtension from "./LoadExtension";
  *
  * @param {string} extensionLibTitle Extension library title
  */
-const GetValidExtensions = (extensionLibTitle = RESOURCE_MANAGER.getResource("Lists_Extensions_Title")) => new Promise<IExtension[]>((resolve, reject) => {
+async function GetValidExtensions(extensionLibTitle = RESOURCE_MANAGER.getResource("Lists_Extensions_Title")): Promise<IExtension[]> {
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     const extensionLib = rootWeb.lists.getByTitle(extensionLibTitle);
-    extensionLib.items
-        .select("Title", "LinkFilename", "FileRef")
-        .filter("ExtensionEnabled eq 1")
-        .orderBy("ExtensionOrder")
-        .get()
-        .then(items => {
-            Promise.all(items.map(item => LoadExtension(item)))
-                .then((extensions: any[]) => {
-                    const validExtensions = (extensions as IExtension[]).filter(ext => ext.isValid);
-                    resolve(validExtensions);
-                })
-                .catch(reject);
-        })
-        .catch(reject);
-});
+    try {
+        const extensionFiles = await extensionLib.items
+            .select("Title", "LinkFilename", "FileRef")
+            .filter("ExtensionEnabled eq 1")
+            .orderBy("ExtensionOrder")
+            .get();
+        const extensions: any[] = await Promise.all(extensionFiles.map(file => LoadExtension(file)));
+        const validExtensions = extensions.filter(ext => ext.isValid);
+        return validExtensions;
+    } catch (err) {
+        return [];
+    }
+}
 
 export default GetValidExtensions;

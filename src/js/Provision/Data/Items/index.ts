@@ -5,6 +5,7 @@ import {
 } from "sp-pnp-js";
 import ListConfig from "../Config/ListConfig";
 import IProgressCallback from "../../IProgressCallback";
+import ProvisionError from "../../ProvisionError";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
@@ -12,7 +13,7 @@ interface IRecord {
     SourceId: number;
     DestId: number;
     DestItem: SP.ListItem<any>;
-    ParentID: number;
+    ParentID?: number;
 }
 
 let __RECORDS: IRecord[] = [];
@@ -24,7 +25,7 @@ let __RECORDS: IRecord[] = [];
  * @param {string[]} fields Fields to copy
  * @param {CopyContext} dataCtx Copy context
  */
-export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyContext) => new Promise<void>((resolve, reject) => {
+export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: CopyContext): Promise<void> {
     const sourceItemId = srcItem.get_fieldValues()["ID"];
     Logger.log({ message: `Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
     const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
@@ -33,22 +34,24 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
         Logger.log({ message: `Setting value for field ${fieldName}`, data: {}, level: LogLevel.Info });
         Util.setItemFieldValue(fieldName, destItem, fieldValue, dataCtx.Destination._, dataCtx.Destination.list);
     });
-    destItem.update();
-    dataCtx.Destination._.load(destItem);
-    dataCtx.Destination._.executeQueryAsync(() => {
+    try {
+        destItem.update();
+        await dataCtx.loadAndExecuteQuery(dataCtx.Destination._, [destItem]);
         const record: IRecord = {
             SourceId: sourceItemId,
             DestId: destItem.get_fieldValues()["ID"],
             DestItem: destItem,
-            ParentID: srcItem.get_fieldValues()["ParentID"] ? parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10) : null,
         };
+        if (srcItem.get_fieldValues()["ParentID"]) {
+            record.ParentID = parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10);
+        }
         __RECORDS.push(record);
         Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
-        resolve();
-    }, (sender, args) => {
-        reject(args.get_message());
-    });
-});
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "CopyItem");
+    }
+}
 
 /**
  * Copies list items to the destination web
@@ -57,44 +60,29 @@ export const CopyItem = (srcItem: SP.ListItem, fields: string[], dataCtx: CopyCo
  * @param {string} destUrl Destination web URL
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyItems = (conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+export async function CopyItems(conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback): Promise<void> {
     Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
-    GetDataContext(conf, destUrl)
-        .then(dataCtx => {
-            const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
-            dataCtx.Source._.load(items);
-            dataCtx.Source._.executeQueryAsync(() => {
-                onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
-                items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
-                    .then(() => {
-                        HandleItemsWithParent(dataCtx)
-                            .then(() => {
-                                Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
-                                resolve();
-                            })
-                            .catch(err => {
-                                Logger.log({ message: "Failed to handle items with parent, copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
-                                reject(err);
-                            });
-                    })
-                    .catch(err => {
-                        Logger.log({ message: "Copy of list items failed.", data: { conf, message: err }, level: LogLevel.Info });
-                        reject(err);
-                    });
-            }, (sender, args) => {
-                Logger.log({ message: "Failed to retrieve source items, copy of list items failed.", data: { conf, message: args.get_message() }, level: LogLevel.Info });
-                reject({ sender, args });
-            });
-        });
-});
+    try {
+        const dataCtx = await GetDataContext(conf, destUrl);
+        const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
+        await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [items]);
+        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
+        await items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
+        await HandleItemsWithParent(dataCtx);
+        Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "CopyItems");
+    }
+}
 
 /**
  * Handle list items with parent
  *
  * @param {CopyContext} dataCtx Data context
  */
-const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resolve, reject) => {
-    const itemsWithParent = __RECORDS.filter(item => item.ParentID);
+async function HandleItemsWithParent(dataCtx: CopyContext): Promise<void> {
+    const itemsWithParent = __RECORDS.filter(item => item.hasOwnProperty("ParentID"));
     itemsWithParent.forEach(item => {
         let [parent] = __RECORDS.filter(({ SourceId }) => SourceId === item.ParentID);
         if (parent) {
@@ -102,7 +90,10 @@ const HandleItemsWithParent = (dataCtx: CopyContext) => new Promise<void>((resol
             item.DestItem.update();
         }
     });
-    dataCtx.Destination._.executeQueryAsync(resolve, (sender, args) => {
-        reject({ sender, args });
-    });
-});
+    try {
+        await dataCtx.loadAndExecuteQuery(dataCtx.Destination._);
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "HandleItemsWithParent");
+    }
+}
