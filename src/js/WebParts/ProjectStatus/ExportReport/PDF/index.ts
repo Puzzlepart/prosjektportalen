@@ -232,7 +232,6 @@ export class PDF extends jsPDF {
     * @param section Section used for fetching list data
     */
     private fetchData = (section: SectionModel) => new Promise<any>((resolve, reject) => {
-        console.log("Go fetch!");
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
         const camlQuery = new SP.CamlQuery();
