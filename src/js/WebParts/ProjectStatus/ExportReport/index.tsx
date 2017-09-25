@@ -119,7 +119,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 className="save-snapshot-btn"
                 iconProps={(fileType === FileType.pdf) ? {  iconName: "Save" } : {  iconName: "Camera" }}
                 onClick={this.doExport}>
-                {exportStatus === ExportReportStatus.hasExported ? __("ProjectStatus_SaveSnapshot") : __("ProjectStatus_SavingSnapshot")}
+                {fileType === FileType.pdf ? __("ProjectStatus_SaveAsPdf") : __("ProjectStatus_SaveSnapshot")}
             </PrimaryButton>
         );
     }
