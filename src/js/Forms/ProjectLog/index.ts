@@ -1,6 +1,6 @@
 import * as  jQuery from "jquery";
 import { IBaseFormModifications } from "../Base";
-import * as FormUtils from "../Util";
+import * as FormUtils from "../FormUtils";
 
 const _: IBaseFormModifications = {
     NewForm: () => {

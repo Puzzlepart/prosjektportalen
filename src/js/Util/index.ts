@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
 import { sp } from "sp-pnp-js";
 import AudienceTargeting from "../WebParts/AudienceTargeting";
@@ -86,7 +87,7 @@ export const doesUserMatchAudience = (audienceTarget: AudienceTargeting) => new 
  * @param {string} dFormat Date format
  * @param {string} locale Date locale
  */
-export const dateFormat = (date: string, dFormat = __("MomentDate_DefaultFormat"), locale = __("MomentDate_Locale")): string => {
+export const dateFormat = (date: string, dFormat = RESOURCE_MANAGER.getResource("MomentDate_DefaultFormat"), locale = RESOURCE_MANAGER.getResource("MomentDate_Locale")): string => {
     return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
 };
 
@@ -294,7 +295,7 @@ export const reloadPage = (): void => {
     document.location.href = _spPageContextInfo.serverRequestPath;
 };
 
-interface ISafeTerm {
+export interface ISafeTerm {
     Label: string;
     TermGuid: any;
     WssId: number;
@@ -377,8 +378,8 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
  * @param {boolean} addWebPrefix Should web prefix be added
  */
 export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
-    const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
     if (addWebPrefix) {
+        const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
         parts.unshift(webPrefix);
     }
     return parts.join("_");
@@ -390,7 +391,7 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
  * @param {string} val The value
  * @param {string} prefix Currency prefix
  */
-export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): string => {
+export const toCurrencyFormat = (val: string, prefix = RESOURCE_MANAGER.getResource("CurrencySymbol")): string => {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
@@ -415,9 +416,10 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
 
 /**
  * Get URL hash object
+ *
+ * @param {string} hash URL hash
  */
-export const getUrlHash = (): { [key: string]: string } => {
-    const hash = document.location.hash.substring(1);
+export const getUrlHash = (hash = document.location.hash.substring(1)): { [key: string]: string } => {
     let hashObject: { [key: string]: string } = {};
     hash.split("&").map(str => {
         const [key, value] = str.split("=");
@@ -440,9 +442,12 @@ export const setUrlHash = (hashObject: { [key: string]: string }): void => {
 
 /**
  * Get URL parts
+ *
+ * @param {string} serverRequestPath Server request path
+ * @param {string} webServerRelativeUrl Web server relative url
  */
-export const getUrlParts = (): string[] => {
-    return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
+export const getUrlParts = (serverRequestPath = _spPageContextInfo.serverRequestPath, webServerRelativeUrl = _spPageContextInfo.webServerRelativeUrl): string[] => {
+    return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 };
 
 export {

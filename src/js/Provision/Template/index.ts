@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
 import {
@@ -8,17 +9,18 @@ import {
     ComposedLook,
 } from "./Objects";
 import IProgressCallback from "../IProgressCallback";
+import ProvisionError from "../ProvisionError";
 
 /**
  * Maps the current handler to a text explaining the current handlers action
  */
 const PROGRESS_MAP = {
-    Files: __("ProvisionWeb_Progress_Handler_Files"),
-    Lists: __("ProvisionWeb_Progress_Handler_Lists"),
-    Navigation: __("ProvisionWeb_Progress_Handler_Navigation"),
-    WebSettings: __("ProvisionWeb_Progress_Handler_WebSettings"),
-    ComposedLook: __("ProvisionWeb_Progress_Handler_ComposedLook"),
-    PropertyBagEntries: __("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
+    Files: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Files"),
+    Lists: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Lists"),
+    Navigation: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Navigation"),
+    WebSettings: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_WebSettings"),
+    ComposedLook: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_ComposedLook"),
+    PropertyBagEntries: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
 let Template: Schema = {
@@ -41,10 +43,11 @@ let Template: Schema = {
  * @param {Object} propBag Property bag values
  * @param {IProgressCallback} onUpdateProgress Callback function for progress
  */
-export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+async function ApplyProvisioningTemplate(web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback): Promise<void> {
     const webProvisioner = new WebProvisioner(web);
-    webProvisioner
-        .applyTemplate({
+    const callbackFunc = objHandler => onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
+    try {
+        await webProvisioner.applyTemplate({
             ...Template,
             WebSettings: {
                 ...Template.WebSettings,
@@ -57,8 +60,13 @@ export const ApplyProvisioningTemplate = (web, propBag: { [key: string]: string 
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, msg => onUpdateProgress(__("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[msg]))
-        .then(resolve)
-        .catch(reject);
-});
+        }, callbackFunc);
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "ApplyProvisioningTemplate");
+    }
+}
+
+export { ApplyProvisioningTemplate };
+
 

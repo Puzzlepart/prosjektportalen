@@ -1,5 +1,6 @@
 // @ts-check
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
@@ -134,7 +135,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     private saveFileToLibrary = (libraryRelativeUrl: string, fileName: string, title: string, fileBlob: Blob): Promise<any> => {
         return pnp.sp.web.getFolderByServerRelativeUrl(libraryRelativeUrl).files.add(fileName, fileBlob, true).then((fileAddResult) => {
             return fileAddResult.file.listItemAllFields.get().then((fileAllFields) => {
-                return pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
+                return pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title")).items.getById(fileAllFields.Id).update({
                     "Title": title,
                 });
             });
@@ -146,7 +147,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Fetch reports
      */
     private fetchReports = () => new Promise<any[]>((resolve, reject) => {
-        pnp.sp.web.lists.getByTitle(__("Lists_ProjectStatus_Title"))
+        pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
             .filter("substringof('.pdf', FileLeafRef) or substringof('.png', FileLeafRef)")
@@ -172,11 +173,11 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         let firstOption = reports.length > 0
             ? {
                 key: "01",
-                text: String.format(__("ProjectStatus_SnapshotHistory"), reports.length),
+                text: String.format(RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotHistory"), reports.length),
             }
             : {
                 key: "01",
-                text: __("ProjectStatus_SnapshotNoHistory"),
+                text: RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotNoHistory"),
             };
         return [
             firstOption,
@@ -211,7 +212,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         const dateDisplay = moment(new Date()).format("YYYY-MM-D-HHmm");
         const fileName = `${dateDisplay}-${_spPageContextInfo.webTitle}.${fileExtension}`;
         const fileTitle = `${dateDisplay} ${_spPageContextInfo.webTitle}`;
-        this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${__("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
+        this.saveFileToLibrary(`${_spPageContextInfo.webServerRelativeUrl}/${RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title")}`, fileName, fileTitle, reportBlob).then((data) => {
             this.setState({
                 exportStatus: ExportReportStatus.hasExported,
                 isLoading: true,

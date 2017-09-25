@@ -16,11 +16,12 @@ module.exports = {
         buildGlob: "./build/**/*",
         manualConfGlob: "./manual-conf/**/*",
         scriptsGlob: "./.scripts/**/*",
-        sourceGlob: "./src/**/*.ts*",
+        sourceGlob: "./src/js/**/*.ts*",
         stylesGlob: "./src/**/*.styl",
         stylesMain: ["./src/*/pp.main.styl", "./src/*/pp.project.styl"],
         assetsFilesGlob: ["./src/**/*.png"],
         libGlob: ["./lib/**/*.js", "./lib/**/**/*.js"],
+        testGlob: ["./lib/js/_tests/**/*.js"],
         searchDispTemplatesGlob: "./templates/root/DisplayTemplates/Search/*",
         filtersDispTemplatesGlob: "./templates/root/DisplayTemplates/Filters/*",
         templates: "./templates",
@@ -36,9 +37,6 @@ module.exports = {
         formatter: "prose",
         emitError: true
     },
-    typescript: {
-        reporter: "nullReporter",
-    },
     resources: {
         glob: "./templates/root/*.resx",
         json: "./src/js/Resources"
@@ -51,5 +49,4 @@ module.exports = {
         v: pkg.version,
         token: "[version]"
     },
-    languages: [1033, 1044],
 }

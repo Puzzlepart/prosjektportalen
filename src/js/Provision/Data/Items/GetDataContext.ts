@@ -1,3 +1,4 @@
+import * as Util from "../../../Util";
 import ListConfig from "../Config/ListConfig";
 
 export interface CopyContext {
@@ -10,27 +11,32 @@ export interface CopyContext {
         _: SP.ClientContext,
         list?: SP.List,
     };
+    loadAndExecuteQuery: (clCtx: SP.ClientContext, clObj?: SP.ClientObject[]) => Promise<void>;
 }
 
 /**
  * Get context for source and destination
  *
  * @param {ListConfig} conf Configuration
- * @param {destUrl} destUrl Destination web URL
+ * @param {string} destUrl Destination web URL
+ * @param {string} viewXml View XML
  */
-const GetDataContext = (conf: ListConfig, destUrl: string) => new Promise<CopyContext>((resolve, reject) => {
-    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-        let camlQuery = new SP.CamlQuery();
-        camlQuery.set_viewXml("<View></View>");
-        let ctx: CopyContext = {
-            CamlQuery: camlQuery,
-            Source: { _: new SP.ClientContext(conf.SourceUrl) },
-            Destination: { _: new SP.ClientContext(destUrl) },
-        };
-        ctx.Source.list = ctx.Source._.get_web().get_lists().getByTitle(conf.SourceList);
-        ctx.Destination.list = ctx.Destination._.get_web().get_lists().getByTitle(conf.DestinationList);
-        resolve(ctx);
-    });
-});
+async function GetDataContext(conf: ListConfig, destUrl: string, viewXml = "<View></View>"): Promise<CopyContext> {
+    await Util.getClientContext(_spPageContextInfo.siteAbsoluteUrl);
+    let camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml(viewXml);
+    let ctx: CopyContext = {
+        CamlQuery: camlQuery,
+        Source: { _: new SP.ClientContext(conf.SourceUrl) },
+        Destination: { _: new SP.ClientContext(destUrl) },
+        loadAndExecuteQuery: (clCtx, clObj = []) => new Promise<void>((res, rej) => {
+            clObj.forEach(obj => clCtx.load(obj));
+            clCtx.executeQueryAsync(res, rej);
+        }),
+    };
+    ctx.Source.list = ctx.Source._.get_web().get_lists().getByTitle(conf.SourceList);
+    ctx.Destination.list = ctx.Destination._.get_web().get_lists().getByTitle(conf.DestinationList);
+    return ctx;
+}
 
 export default GetDataContext;

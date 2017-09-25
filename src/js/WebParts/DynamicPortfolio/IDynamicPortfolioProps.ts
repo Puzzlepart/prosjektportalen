@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import {
     SelectionMode,
     ConstrainMode,
@@ -36,10 +37,10 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     selectionMode: SelectionMode.none,
     excelExportEnabled: true,
     excelExportConfig: {
-        fileName: __("DynamicPortfolio_ExcelExportFileName"),
+        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
         triggerId: "export-workbook",
-        buttonLabel: __("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
     defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,

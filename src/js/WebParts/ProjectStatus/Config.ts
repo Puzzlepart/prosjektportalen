@@ -1,3 +1,5 @@
+import RESOURCE_MANAGER from "localization";
+
 export const RiskMatrix: any = [
     [
         {
@@ -6,34 +8,34 @@ export const RiskMatrix: any = [
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Insignificant"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Insignificant"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Small"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Small"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Moderate"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Moderate"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Serious"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Serious"),
             Type: "Header",
             ClassName: "risk-header",
         },
         {
-            Value: __("RiskMatrix_Header_Critical"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Critical"),
             Type: "Header",
             ClassName: "risk-header",
         },
     ],
     [
         {
-            Value: __("RiskMatrix_Header_VeryHigh"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryHigh"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -75,7 +77,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_High"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_High"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -117,7 +119,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_Medium"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Medium"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -159,7 +161,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_Low"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Low"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -201,7 +203,7 @@ export const RiskMatrix: any = [
     ],
     [
         {
-            Value: __("RiskMatrix_Header_VeryLow"),
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryLow"),
             Type: "Header",
             ClassName: "risk-header",
         },
@@ -260,19 +262,19 @@ export const StatusFields: IStatusFields = {
     GtStatusRisk: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusRisk_Low"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusRisk_Low"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusRisk_Medium"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusRisk_Medium"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusRisk_High"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusRisk_High"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -282,31 +284,31 @@ export const StatusFields: IStatusFields = {
     GtStatusBudget: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusBudget_BelowBudget"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusBudget_BelowBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_OnBudget"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusBudget_OnBudget"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_SlighlyBehindBudget"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusBudget_SlighlyBehindBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_UnknownBudget"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusBudget_UnknownBudget"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusBudget_OverBudget"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusBudget_OverBudget"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -316,25 +318,25 @@ export const StatusFields: IStatusFields = {
     GtStatusTime: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusTime_AheadOfSchedule"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusTime_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_OnSchedule"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusTime_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_SmallDelay"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusTime_SmallDelay"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusTime_Delayed"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusTime_Delayed"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -344,31 +346,31 @@ export const StatusFields: IStatusFields = {
     GtStatusGainAchievement: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusGainAchievement_AheadOfSchedule"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusGainAchievement_AheadOfSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_OnSchedule"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusGainAchievement_OnSchedule"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_NotStarted"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusGainAchievement_NotStarted"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_MinorDelays"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusGainAchievement_MinorDelays"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusGainAchievement_BehindSchedule"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusGainAchievement_BehindSchedule"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
@@ -378,25 +380,25 @@ export const StatusFields: IStatusFields = {
     GtStatusQuality: {
         Statuses: [
             {
-                Value: __("Choice_GtStatusQuality_LargeDeviation"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusQuality_LargeDeviation"),
                 CssClass: "negative-status",
                 Color: "#ea5c73",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_SmallDeviation"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusQuality_SmallDeviation"),
                 CssClass: "neutral-status",
                 Color: "#e9b359",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_AsExpected"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusQuality_AsExpected"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",
             },
             {
-                Value: __("Choice_GtStatusQuality_ExceedsExpectations"),
+                Value: RESOURCE_MANAGER.getResource("Choice_GtStatusQuality_ExceedsExpectations"),
                 CssClass: "positive-status",
                 Color: "#2da748",
                 Icon: "CircleFill",

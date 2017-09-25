@@ -1,6 +1,6 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
-import * as ListDataConfig from "../../../Provision/Data/Config";
 import {
     PrimaryButton,
     DefaultButton,
@@ -8,6 +8,7 @@ import {
 import {
     Dialog,
     DialogFooter,
+    DialogType,
 } from "office-ui-fabric-react/lib/Dialog";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
@@ -42,6 +43,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 Description: "",
                 Url: "",
                 InheritPermissions: false,
+                IncludeContent: Object.keys(this.props.listDataConfig).filter(key => this.props.listDataConfig[key].Default),
             },
             provisioning: {
                 isCreating: false,
@@ -49,21 +51,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 progress: "",
             },
         };
-    }
-
-    /**
-     * Component did mount
-     */
-    public componentDidMount(): void {
-        ListDataConfig.RetrieveConfig().then(listDataConfig => {
-            this.setState(prevState => ({
-                listDataConfig,
-                model: {
-                    ...prevState.model,
-                    IncludeContent: Object.keys(listDataConfig).filter(key => listDataConfig[key].Default),
-                },
-            }));
-        });
     }
 
     /**
@@ -95,8 +82,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     <div style={{ padding: 50 }}>
                         <div
                             style={{ marginBottom: 25 }}
-                            className="ms-font-xl">{__("ProvisionWeb_Failed")}</div>
-                        <div className="ms-font-m">{__("String_ContactAdmin")}</div>
+                            className="ms-font-xl">{RESOURCE_MANAGER.getResource("ProvisionWeb_Failed")}</div>
+                        <div className="ms-font-m">{RESOURCE_MANAGER.getResource("String_ContactAdmin")}</div>
                     </div>
                 </Modal>
             );
@@ -108,7 +95,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         if (provisioning.isCreating) {
             return (
                 <CreationModal
-                    title={String.format(__("CreationModal_Title"), model.Title)}
+                    title={String.format(RESOURCE_MANAGER.getResource("CreationModal_Title"), model.Title)}
                     isBlocking={true}
                     isDarkOverlay={true}
                     progressLabel={provisioning.step}
@@ -123,19 +110,22 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             <Dialog
                 hidden={false}
                 dialogContentProps={{
-                    type: dialogProps.type,
-                    subText: dialogProps.subText,
+                    type: DialogType.largeHeader,
+                    subText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),
                 }}
                 modalProps={{
-                    className: dialogProps.className,
-                    isDarkOverlay: dialogProps.isDarkOverlay,
-                    isBlocking: dialogProps.isBlocking,
+                    className: "pp-newprojectdialog",
+                    isDarkOverlay: true,
+                    isBlocking: true,
                 }}
-                title={dialogProps.title}
+                title={RESOURCE_MANAGER.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
-                {this.renderForm(this.props, this.state)}
-                {this.renderAdvancedSection(this.props, this.state)}
-                {this.renderFooter(this.props, this.state)}
+
+                <div>
+                    {this.renderForm(this.props, this.state)}
+                    {this.renderAdvancedSection(this.props, this.state)}
+                    {this.renderFooter(this.props, this.state)}
+                </div>
             </Dialog >
         );
     }
@@ -150,18 +140,18 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         return (
             <div>
                 <TextField
-                    placeholder={__("NewProjectForm_Title")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Title")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
                     errorMessage={errorMessages.Title} />
                 <TextField
-                    placeholder={__("NewProjectForm_Description")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Description")}
                     multiline
                     autoAdjustHeight
                     onChanged={newValue => this.onFormChange("Description", newValue)}
                     errorMessage={errorMessages.Description}
                 />
                 <TextField
-                    placeholder={__("NewProjectForm_Url")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Url")}
                     value={model.Url}
                     onChanged={newValue => this.onFormChange("Url", newValue)}
                     errorMessage={errorMessages.Url}
@@ -176,14 +166,14 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    private renderAdvancedSection = ({ advancedSectionClassName }: INewProjectDialogProps, { showAdvancedSettings, listDataConfig }: INewProjectDialogState) => {
+    private renderAdvancedSection = ({ advancedSectionClassName, listDataConfig }: INewProjectDialogProps, { showAdvancedSettings }: INewProjectDialogState) => {
         return (
             <div>
                 <Toggle
                     defaultChecked={showAdvancedSettings}
-                    label={__("NewProjectForm_ShowAdvancedSettings")}
-                    onText={__("String_Yes")}
-                    offText={__("String_No")}
+                    label={RESOURCE_MANAGER.getResource("NewProjectForm_ShowAdvancedSettings")}
+                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                    offText={RESOURCE_MANAGER.getResource("String_No")}
                     onChanged={this.toggleAdvancedSettings} />
                 {(showAdvancedSettings && listDataConfig) && (
                     <section
@@ -194,8 +184,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                                 defaultChecked={listDataConfig[key].Default}
                                 label={listDataConfig[key].Label}
                                 onChanged={checked => this.toggleContent(key, checked)}
-                                onText={__("String_Yes")}
-                                offText={__("String_No")} />
+                                onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                                offText={RESOURCE_MANAGER.getResource("String_No")} />
                         ))}
                     </section>
                 )}
@@ -214,8 +204,8 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
             <DialogFooter>
                 <PrimaryButton
                     onClick={this.onSubmit}
-                    disabled={!formValid}>{__("String_Create")}</PrimaryButton>
-                <DefaultButton onClick={() => dialogProps.onDismiss()}>{__("String_Close")}</DefaultButton>
+                    disabled={!formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
+                <DefaultButton onClick={() => dialogProps.onDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
             </DialogFooter>
         );
     }
@@ -258,7 +248,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      */
     private onFormChange = (input: string, newValue: string): void => {
         const {
-                        model,
+            model,
             errorMessages,
          } = this.state;
 
@@ -273,7 +263,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                         this.setState({
                             errorMessages: {
                                 ...errorMessages,
-                                Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
                             },
                             formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
                             model: {
@@ -296,7 +286,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                             this.setState({
                                 errorMessages: {
                                     ...errorMessages,
-                                    Url: doesExist ? __("NewProjectForm_UrlAlreadyInUse") : null,
+                                    Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
                                 },
                                 formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
                                 model: {

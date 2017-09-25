@@ -259,7 +259,7 @@
     <value>Lists/StandardTasks</value>
   </data>
   <data name="Lists_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/PhaseChecklist</value>
+    <value>Lists/Phase Checklist</value>
   </data>
   <data name="Lists_Stakeholders_Url" xml:space="preserve">
     <value>Lists/Stakeholders</value>
@@ -331,7 +331,7 @@
     <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/PhaseChecklist/AllItems.aspx</value>
+    <value>Lists/Phase Checklist/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Change Analysis/AllItems.aspx</value>
