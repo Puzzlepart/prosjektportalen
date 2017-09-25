@@ -3,12 +3,12 @@ import * as Util from "../Util";
 import * as CONFIGURATION from "./Config";
 import { GetWelcomePageFieldValues } from "./WelcomePage";
 
-interface IIMetadataDefaultsField {
+export interface IIMetadataDefaultsField {
     fieldName: string;
     fieldType: "Text" | "Taxonomy" | "TaxonomyMulti";
 }
 
-interface IMetadataDefaultsDefaultValue {
+export interface IMetadataDefaultsDefaultValue {
     fieldName: string;
     fieldValue: string;
 }

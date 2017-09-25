@@ -10,6 +10,7 @@ import {
     ListConfig,
 } from "./Config";
 import IProgressCallback from "../IProgressCallback";
+import ProvisionError from "../ProvisionError";
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
@@ -39,21 +40,18 @@ const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCall
  * @param {string[]} contentToInclude Content to copy
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-export const CopyDefaultData = (destUrl: string, contentToInclude: string[], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+async function CopyDefaultData(destUrl: string, contentToInclude: string[] = [], onUpdateProgress: IProgressCallback): Promise<void> {
     Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
-    RetrieveConfig().then(listContentConfig => {
+    try {
+        const listContentConfig = await RetrieveConfig();
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
-        contentToInclude
+        await contentToInclude
             .filter(key => Array.contains(contentToInclude, key) && listContentConfig.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve())
-            .then(() => {
-                Logger.write("Copy of default data done.", LogLevel.Info);
-                resolve();
-            })
-            .catch(reason => {
-                Logger.log({ message: "Copy of default data done with errors.", level: LogLevel.Warning });
-                reject(reason);
-            });
-    });
-});
+            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve());
+        return;
+    } catch (err) {
+        throw new ProvisionError(err, "CopyDefaultData");
+    }
+}
 
+export { CopyDefaultData };

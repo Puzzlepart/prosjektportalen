@@ -1,18 +1,18 @@
 'use strict';
 var gulp = require("gulp"),
     webpack = require('webpack'),
-    webpackConfigDev = require('../webpack.config.development.js'),
-    webpackConfigProd = require('../webpack.config.production.js'),
+    wpDev = require('../webpack.config.development.js'),
+    wpProd = require('../webpack.config.production.js'),
     stylus = require('gulp-stylus'),
     gutil = require('gulp-util'),
     autoprefixer = require('autoprefixer-stylus'),
     settings = require('./@settings.js'),
     config = require('./@configuration.js');
 
-gulp.task("package:code", ["build:lib"], (done) => {
-    webpack(webpackConfigDev(settings.language, "source-map"), (err, stats) => {
+gulp.task("packageCode", ["buildLib"], (done) => {
+    webpack(wpDev("source-map"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("package:code", err);
+            throw new gutil.PluginError("packageCode", err);
         }
         console.log(stats.toString({
             colors: true
@@ -20,10 +20,11 @@ gulp.task("package:code", ["build:lib"], (done) => {
         done();
     });
 });
-gulp.task("package:code::eval", ["build:lib"], (done) => {
-    webpack(webpackConfigDev(settings.language, "eval"), (err, stats) => {
+
+gulp.task("packageCodeEval", ["buildLib"], (done) => {
+    webpack(wpDev("eval"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("package:code", err);
+            throw new gutil.PluginError("packageCodeEval", err);
         }
         console.log(stats.toString({
             colors: true
@@ -31,31 +32,29 @@ gulp.task("package:code::eval", ["build:lib"], (done) => {
         done();
     });
 });
-gulp.task("package:styles", ["build:theme"], (done) => {
+
+gulp.task("packageStyles", ["buildTheme"], (done) => {
     return gulp.src(config.paths.stylesMain)
         .pipe(stylus(config.stylus))
         .pipe(gulp.dest(config.paths.dist));
 });
-gulp.task("package", ["copy:assets:dist", "package:code", "package:styles"], (done) => {
+
+gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], (done) => {
     done();
 });
 
-/**
- * Set up gulp tasks for package::prod and package:code::prod for each language in config.languages
- */
-config.languages.forEach(lang => {
-    gulp.task(`package:code::prod::${lang}`, ["build:lib"], (done) => {
-        webpack(webpackConfigProd(lang), (err, stats) => {
-            if (err) {
-                throw new gutil.PluginError("package:code::prod", err);
-            }
-            console.log(stats.toString({
-                colors: true
-            }));
-            done();
-        });
-    });
-    gulp.task(`package::prod::${lang}`, ["copy:assets:dist", `package:code::prod::${lang}`, "package:styles"], (done) => {
+gulp.task("packageCodeProd", ["buildLib"], (done) => {
+    webpack(wpProd(), (err, stats) => {
+        if (err) {
+            throw new gutil.PluginError("packageCodeProd", err);
+        }
+        console.log(stats.toString({
+            colors: true
+        }));
         done();
     });
-})
+});
+
+gulp.task("package::prod", ["copyAssetsToDist", "packageCodeProd", "packageStyles"], (done) => {
+    done();
+});

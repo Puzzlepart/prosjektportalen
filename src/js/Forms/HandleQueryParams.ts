@@ -3,7 +3,7 @@ import {
     Logger,
     LogLevel,
 } from "sp-pnp-js";
-import * as FormUtils from "./Util";
+import * as FormUtils from "./FormUtils";
 
 /**
  * Handle query parameters

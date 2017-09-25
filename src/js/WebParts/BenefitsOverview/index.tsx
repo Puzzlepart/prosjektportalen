@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import * as unique from "array-unique";
 import {
     DetailsList,
@@ -39,7 +40,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             searchTerm: "",
             groupBy: {
                 key: "NoGrouping",
-                name: __("String_NoGrouping"),
+                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             },
         });
     }
@@ -81,7 +82,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     {showSearchBox !== false &&
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                            labelText={__("BenefitsOverview_SearchBox_Placeholder")} />
+                            labelText={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />
                     }
                     <DetailsList
                         items={items}
@@ -115,7 +116,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
-                name: __("String_NoGrouping"),
+                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             };
             items.push({
                 key: "Group",
@@ -203,19 +204,19 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                                 {
                                     key: "MeasurementValue",
                                     fieldName: "MeasurementValue",
-                                    name: __("SiteFields_GtMeasurementValue_DisplayName"),
+                                    name: RESOURCE_MANAGER.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "Percentage",
                                     fieldName: "Percentage",
-                                    name: __("String_AchievementOfObjectives"),
+                                    name: RESOURCE_MANAGER.getResource("String_AchievementOfObjectives"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "MeasurementDate",
                                     fieldName: "MeasurementDate",
-                                    name: __("SiteFields_GtMeasurementDate_DisplayName"),
+                                    name: RESOURCE_MANAGER.getResource("SiteFields_GtMeasurementDate_DisplayName"),
                                     minWidth: 150,
                                 },
                             ]}

@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import { sp } from "sp-pnp-js";
 import * as Util from "../../Util";
 import {
@@ -35,7 +36,7 @@ const fetchPases = () => new Promise<PhaseModel[]>((resolve, reject) => {
  * Fetch phase checklist data items with stats per status
  */
 const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }>((resolve, reject) => {
-    sp.web.lists.getByTitle(__("Lists_PhaseChecklist_Title")).items
+    sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title")).items
         .select("Id", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment")
         .get().then(items => {
             let data: { [phase: string]: IChecklistData } = {};
@@ -48,19 +49,19 @@ const fetchChecklistData = () => new Promise<{ [phase: string]: IChecklistData }
                             stats: {},
                             items: [],
                         };
-                        data[phase].stats[__("ProjectPhases_Stats_Closed")] = 0;
-                        data[phase].stats[__("ProjectPhases_Stats_NotRelevant")] = 0;
-                        data[phase].stats[__("ProjectPhases_Stats_Open")] = 0;
+                        data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] = 0;
+                        data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
+                        data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] = 0;
                     }
                     switch (item.GtChecklistStatus) {
-                        case __("Choice_GtChecklistStatus_Closed"):
-                            data[phase].stats[__("ProjectPhases_Stats_Closed")] += 1;
+                        case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"):
+                            data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] += 1;
                             break;
-                        case __("Choice_GtChecklistStatus_NotRelevant"):
-                            data[phase].stats[__("ProjectPhases_Stats_NotRelevant")] += 1;
+                        case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"):
+                            data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] += 1;
                             break;
                         default:
-                            data[phase].stats[__("ProjectPhases_Stats_Open")] += 1;
+                            data[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] += 1;
                     }
                     data[phase].items.push(item);
                 });

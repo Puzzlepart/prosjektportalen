@@ -40,6 +40,12 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
             />
         );
     }
+
+    public async updateState(updatedState: S): Promise<void> {
+        this.setState(updatedState, () => {
+            return;
+        });
+    }
 }
 
 export {

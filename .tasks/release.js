@@ -8,56 +8,39 @@ var gulp = require("gulp"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
-gulp.task("copy:license", () => {
+gulp.task("copyLicense", () => {
     return gulp.src(config.paths.license)
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("copy:build", () => {
+gulp.task("copyBuild", () => {
     return gulp.src(config.paths.buildGlob)
         .pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("copy:scripts", () => {
+gulp.task("copyScripts", () => {
     return gulp.src(config.paths.scriptsGlob)
         .pipe(gulp.dest(config.paths.distScripts))
 });
 
-gulp.task("copy:manualconf", () => {
+gulp.task("copyManualConfig", () => {
     return gulp.src(config.paths.manualConfGlob)
         .pipe(gulp.dest(config.paths.dist))
 });
 
-
-function __zip(language, done) {
+gulp.task("zipDist", (done) => {
     git.hash(hash => {
         gulp.src(format("{0}/**/*", config.paths.dist))
-            .pipe(zip(format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, hash, language)))
+            .pipe(zip(format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash)))
             .pipe(gulp.dest(config.paths.release))
             .on('end', () => done());
     });
-}
+});
 
-function __release(language, done) {
-    console.log(color(`[Building release ${pkg.version} for ${language}]`, 'GREEN'));
-    runSequence(`default::prod::${language}`, "copy:build", "copy:manualconf", "copy:scripts", "copy:license", "stamp:version::dist", `zip:dist::${language}`, () => {
+gulp.task("release", (done) => {
+    console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
+    runSequence(`defaultProd`, "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", `zipDist`, () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
-}
-
-/**
- * Set up gulp tasks for zip and release for each language in config.languages
- */
-config.languages.forEach(lang => {
-    gulp.task(`zip:dist::${lang}`, (done) => {
-        __zip(lang, done);
-    });
-    gulp.task(`release::${lang}`, (done) => {
-        __release(lang, done);
-    });
-})
-
-gulp.task("release", (done) => {
-    runSequence("release::1033", "release::1044", done)
 });
