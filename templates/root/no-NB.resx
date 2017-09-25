@@ -2193,8 +2193,20 @@
   <data name="ProjectStatus_SavingSnapshot" xml:space="preserve">
     <value>Lagrer øyeblikksbilde...</value>
   </data>
+   <data name="ProjectStatus_SaveAsPdf" xml:space="preserve">
+    <value>Lagre som PDF</value>
+  </data>
+  <data name="ProjectStatus_SavingAsPdf" xml:space="preserve">
+    <value>Lagrer som PDF...</value>
+  </data>
   <data name="ProjectStatus_SnapshotIsSaved" xml:space="preserve">
     <value>Prosjektbildet er lagret</value>
+  </data>
+  <data name="ProjectStatus_PDFSaved" xml:space="preserve">
+    <value>PDF er lagret</value>
+  </data>
+   <data name="ProjectStatus_PDFRiskMatrix" xml:space="preserve">
+    <value>Risiko - Matrise</value>
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_Formula" xml:space="preserve">
     <value>=[S etter tiltak]*[K etter tiltak]</value>
