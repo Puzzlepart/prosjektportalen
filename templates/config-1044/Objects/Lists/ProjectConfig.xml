@@ -151,5 +151,11 @@
             <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
         </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Endret</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
+        </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
