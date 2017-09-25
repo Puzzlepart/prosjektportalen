@@ -42,7 +42,7 @@ module.exports = (exclude) => ({
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ["react", "env"],
+                        presets: ["react", "env", "es2015"],
                         plugins: [
                             require("babel-plugin-transform-class-properties")
                         ]
