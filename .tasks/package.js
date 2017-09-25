@@ -55,6 +55,6 @@ gulp.task("packageCodeProd", ["buildLib"], (done) => {
     });
 });
 
-gulp.task("package::prod", ["copyAssetsToDist", "packageCodeProd", "packageStyles"], (done) => {
+gulp.task("packageProd", ["copyAssetsToDist", "packageCodeProd", "packageStyles"], (done) => {
     done();
 });

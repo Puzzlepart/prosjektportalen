@@ -9,5 +9,5 @@ gulp.task("default", (done) => {
 
 
 gulp.task(`defaultProd`, (done) => {
-    runSequence("clean", "buildJsonResources", "tslint", "package::prod", "buildPnp", done)
+    runSequence("clean", "buildJsonResources", "tslint", "packageProd", "buildPnp", done)
 });
