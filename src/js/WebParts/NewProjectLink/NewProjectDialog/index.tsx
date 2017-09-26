@@ -77,8 +77,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     isBlocking={false}
                     isDarkOverlay={true}
                     onDismiss={dialogProps.onDismiss}
-                    containerClassName="pp-modal"
-                >
+                    containerClassName="pp-modal" >
                     <div style={{ padding: 50 }}>
                         <div
                             style={{ marginBottom: 25 }}
@@ -120,7 +119,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 }}
                 title={RESOURCE_MANAGER.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
-
                 <div>
                     {this.renderForm(this.props, this.state)}
                     {this.renderAdvancedSection(this.props, this.state)}
