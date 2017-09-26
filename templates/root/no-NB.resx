@@ -1695,6 +1695,9 @@
   <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
     <value>Oppgaver (gjeldende fase)</value>
   </data>
+  <data name="WebPart_PhaseChecklistCurrentPhase_Title" xml:space="preserve">
+    <value>Fasesjekkliste (gjeldende fase)</value>
+  </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Prosjektleveranser jeg har ansvar for</value>
   </data>

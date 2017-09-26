@@ -51,58 +51,58 @@ const GenerateMetadataDefaults = (folderServerRelativeUrl: string, defaultValues
  * @param {IIMetadataDefaultsField[]} fields Fields to configure default values for
  * @param {string} libTitle Library title
  */
-export const SetMetadataDefaultsForLibrary = (fields: IIMetadataDefaultsField[], libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<any> => new Promise<any>((resolve, reject) => {
+export async function SetMetadataDefaultsForLibrary(fields: IIMetadataDefaultsField[], libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<void> {
     const docLib = sp.web.lists.getByTitle(libTitle);
-
-    Promise.all([
-        GetWelcomePageFieldValues(),
-        docLib.expand("RootFolder").get(),
-        docLib.fields.select("InternalName").get(),
-    ])
-        .then(([wpFieldValues, { RootFolder }, docLibFields]) => {
-            docLibFields = docLibFields.map(f => f.InternalName);
-            let folderServerRelativeUrl = Util.encodeSpaces(RootFolder.ServerRelativeUrl);
-            let defaultValues: IMetadataDefaultsDefaultValue[] = fields
-                .filter(({ fieldName, fieldType }) => {
-                    const docLibHasField = Array.contains(docLibFields, fieldName);
-                    return docLibHasField;
-                })
-                .map(({ fieldName, fieldType }) => {
-                    let fieldValue = "";
-                    switch (fieldType) {
-                        case "Text": {
-                            if (wpFieldValues[fieldName]) {
-                                fieldValue = wpFieldValues[fieldName];
-                            }
-                        }
-                            break;
-                        case "Taxonomy": {
-                            if (wpFieldValues[fieldName]) {
-                                const safeTermValue = Util.getSafeTerm(wpFieldValues[fieldName]);
-                                fieldValue = `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
-                            }
-                        }
-                            break;
-                        case "TaxonomyMulti": {
-                            let termValues = [];
-                            const termEnumerator = wpFieldValues[fieldName].getEnumerator();
-                            while (termEnumerator.moveNext()) {
-                                let currentTerm = Util.getSafeTerm(termEnumerator.get_current());
-                                termValues.push(`${currentTerm.WssId};#${currentTerm.Label}|${currentTerm.TermGuid}`);
-                            }
-                            fieldValue = termValues.join(";#");
-                        }
-                            break;
+    const [wpFieldValues, { RootFolder }, docLibFields] = await Promise.all([GetWelcomePageFieldValues(), docLib.expand("RootFolder").get(), docLib.fields.select("InternalName").get()]);
+    const docLibFieldsInternalNames = docLibFields.map(f => f.InternalName);
+    const folderServerRelativeUrl = Util.encodeSpaces(RootFolder.ServerRelativeUrl);
+    const defaultValues: IMetadataDefaultsDefaultValue[] = fields
+        .filter(({ fieldName, fieldType }) => {
+            const docLibHasField = Array.contains(docLibFieldsInternalNames, fieldName);
+            return docLibHasField;
+        })
+        .map(({ fieldName, fieldType }) => {
+            let fieldValue = "";
+            switch (fieldType) {
+                case "Text": {
+                    if (wpFieldValues[fieldName]) {
+                        fieldValue = wpFieldValues[fieldName];
                     }
-                    return { fieldName, fieldValue };
-                });
-
-            let metadataDefaults = GenerateMetadataDefaults(folderServerRelativeUrl, defaultValues);
-            UpdateClientLocationBasedDefaults(folderServerRelativeUrl, metadataDefaults)
-                .then(resolve)
-                .catch(reject);
+                }
+                    break;
+                case "Taxonomy": {
+                    if (wpFieldValues[fieldName]) {
+                        const safeTermValue = Util.getSafeTerm(wpFieldValues[fieldName]);
+                        fieldValue = `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
+                    }
+                }
+                    break;
+                case "TaxonomyMulti": {
+                    let termValues = [];
+                    if (wpFieldValues[fieldName].getEnumerator) {
+                        const termEnumerator = wpFieldValues[fieldName].getEnumerator();
+                        while (termEnumerator.moveNext()) {
+                            let currentTerm = Util.getSafeTerm(termEnumerator.get_current());
+                            termValues.push(`${currentTerm.WssId};#${currentTerm.Label}|${currentTerm.TermGuid}`);
+                        }
+                    }
+                    if (wpFieldValues[fieldName]._Child_Items_) {
+                        wpFieldValues[fieldName]._Child_Items_.forEach(term => {
+                            let safeTerm = Util.getSafeTerm(term);
+                            termValues.push(`${safeTerm.WssId};#${safeTerm.Label}|${safeTerm.TermGuid}`);
+                        });
+                    }
+                    fieldValue = termValues.join(";#");
+                }
+                    break;
+            }
+            return { fieldName, fieldValue };
         });
-});
+
+    let metadataDefaults = GenerateMetadataDefaults(folderServerRelativeUrl, defaultValues);
+    await UpdateClientLocationBasedDefaults(folderServerRelativeUrl, metadataDefaults);
+    return;
+}
 
 /**
  * Ensures LocationBasedMetadataDefaultsReceiver
