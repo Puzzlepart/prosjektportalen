@@ -1,6 +1,5 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
-import * as jQuery from "jquery";
 import Workbook from "react-excel-workbook";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
@@ -266,7 +265,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: excelExportConfig.buttonIcon },
                 onClick: e => {
                     e.preventDefault();
-                    jQuery(`#${excelExportConfig.triggerId}`).trigger("click");
+                    document.getElementById(excelExportConfig.triggerId).click();
                 },
             });
         }
