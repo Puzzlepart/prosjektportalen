@@ -75,7 +75,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             case ProjectInfoRenderMode.Normal: {
                 return (
                     <div className={containerClassName}>
-                        {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"), `.${innerClassName}`, ProjectInfo.displayName, hideChrome)}
+                        {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"), this.state.elementToToggle, ProjectInfo.displayName, hideChrome)}
                         {isLoading && <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText")} />}
                         {this.renderInner(this.props, this.state)}
                     </div>
@@ -142,7 +142,9 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             return null;
         }
         return (
-            <div className={innerClassName}>
+            <div
+                className={innerClassName}
+                ref={elementToToggle => this.setState({ elementToToggle })}>
                 {this.renderProperties(this.props, this.state)}
                 {this.renderActionLinks(this.props, this.state)}
             </div>

@@ -8,5 +8,6 @@ export interface IWebInfo {
 }
 
 export default interface ILatestProjectsState extends IBaseWebPartState {
-    webinfos?: IWebInfo[];
+    webinfos?: IWebInfo[];    
+    elementToToggle?: HTMLDivElement;
 }

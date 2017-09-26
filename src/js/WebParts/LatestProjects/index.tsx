@@ -66,7 +66,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"), this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -78,7 +78,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     * @param {ILatestProjectsProps} param0 Props
     * @param {ILatestProjectsState} param1 State
      */
-    private renderItems = ({ containerId, listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
+    private renderItems = ({ listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
@@ -91,7 +91,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
             );
         } else if (webinfos.length > 0) {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
                         {webinfos.map(webinfo => (
                             <li key={webinfo.Id}>
@@ -112,7 +112,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
             );
         } else {
             return (
-                <div id={this.props.containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );

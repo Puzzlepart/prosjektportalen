@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as jQuery from "jquery";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../../Util";
 import IToggleElement from "./IToggleElement";
@@ -58,7 +57,7 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
             };
             this.setState(newState);
             if (newState.isCollapsed) {
-                jQuery(this.props.toggleElement.selector).hide();
+                this.props.toggleElement.element.style.display = "none";
             }
 
         }
@@ -104,13 +103,12 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
             return;
         }
         const { isCollapsed } = this.state;
-        jQuery(toggleElement.selector)[toggleElement.animation](toggleElement.animationDelay, () => {
-            let newState = { isCollapsed: !isCollapsed };
-            this.setState(newState);
-            if (toggleElement.storage) {
-                window[toggleElement.storage.type].setItem(this.toggleStorageKey, JSON.stringify(newState.isCollapsed));
-            }
-        });
+        let newState = { isCollapsed: !isCollapsed };
+        this.setState(newState);
+        toggleElement.element.style.display = newState.isCollapsed ? "none" : "block";
+        if (toggleElement.storage) {
+            window[toggleElement.storage.type].setItem(this.toggleStorageKey, JSON.stringify(newState.isCollapsed));
+        }
     }
 
     /**

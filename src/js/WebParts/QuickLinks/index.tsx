@@ -43,7 +43,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -55,14 +55,14 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     * @param {IQuickLinksProps} param0 Props
     * @param {IQuickLinksState} param1 State
     */
-    private renderItems = ({ containerId, listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
+    private renderItems = ({ listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
             );
         } else if (links.length > 0) {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
                         {links.map(({ URL: { Url, Description }, Comments }, idx) => (
                             <li key={idx}>
@@ -75,7 +75,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
             );
         } else {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
