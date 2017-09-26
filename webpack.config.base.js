@@ -4,7 +4,6 @@ const libBasePath = path.join(__dirname, "lib/");
 const distBasePath = path.join(__dirname, "dist/js");
 
 module.exports = (exclude) => ({
-    cache: true,
     entry: {
         main: [
             'core-js/fn/object/assign',
