@@ -11,9 +11,6 @@ import SpListLogger, { LogLevel, ILogEntry } from "../Util/SpListLogger";
 import IProgressCallback from "./IProgressCallback";
 import IProvisionContext from "./IProvisionContext";
 
-const __listLogger = new SpListLogger();
-
-
 /**
  * Provisions a project web
  *
@@ -22,7 +19,7 @@ const __listLogger = new SpListLogger();
  *
  * @returns {string} Redirect URL
  */
-async function ProvisionWeb(project: IProjectModel, progressCallbackFunc: IProgressCallback): Promise<string> {
+export default async function ProvisionWeb(project: IProjectModel, progressCallbackFunc: IProgressCallback): Promise<string> {
     try {
         let context: IProvisionContext = {
             model: project,
@@ -40,11 +37,12 @@ async function ProvisionWeb(project: IProjectModel, progressCallbackFunc: IProgr
             LogURL: project.Url,
             LogLevel: LogLevel.Error,
         };
-        __listLogger.log(logEntry);
+        new SpListLogger().log(logEntry);
         throw err;
     }
 }
 
-export { DoesWebExist };
-
-export default ProvisionWeb;
+export {
+    DoesWebExist,
+    IProvisionContext,
+};
