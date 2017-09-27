@@ -1,6 +1,7 @@
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Site, Web } from "sp-pnp-js";
+import RESOURCE_MANAGER from "localization";
 import SectionModel from "../../Section/SectionModel";
 import * as jsPDF from "jspdf";
 require("jspdf-autotable");
@@ -30,9 +31,9 @@ export class PDF extends jsPDF {
     private pageHeight: any;
     private readonly MARGIN_LEFT = 14;
     private readonly IMAGE_WIDTH = 270;
-    public constructor(layout: string = "l") {
+    public constructor(layout: string = "l", font: string = "Segoe UI") {
         super(layout);
-        this.setFont("Segoe UI");
+        this.setFont(font);
     }
     /**
      * Return PDF Blob
@@ -45,9 +46,9 @@ export class PDF extends jsPDF {
      * Add project metadata to first page
      */
     public addProjectPropertiesPage = (): Promise<void> => new Promise<void>((resolve, reject) => {
-        this.addDocumentTitle(`${__("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
+        this.addDocumentTitle(`${RESOURCE_MANAGER.getResource("String_StatusReport") }: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
         this.fetchProject().then((project: IProject) => {
-            this.addProperty(this.createColumn(__("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
+            this.addProperty(this.createColumn(RESOURCE_MANAGER.getResource("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
             this.fetchProjectData(project).then((data) => {
                 data.properties.filter((property) => property.value).map((property) => {
                         this.addProperty(property.field, property.value, null, this.autoTable.previous.finalY);
@@ -58,7 +59,7 @@ export class PDF extends jsPDF {
         });
     })
     /**
-     * @param sections Status report section collection: Array<SectionModel>
+     * @param {Array<SectionModel>} sections Status report section collection: Array<SectionModel>
      */
     public addStatusSection = (sections: Array<SectionModel>): void =>  {
         this.addPage();
@@ -68,7 +69,7 @@ export class PDF extends jsPDF {
         });
     }
     /**
-     * @param section Status report section: SectionModel
+     * @param {SectionModel} section Status report section: SectionModel
      */
     public addPageWithList = (section: SectionModel): Promise<void> => new Promise<void>((resolve, reject) => {
         this.fetchData(section).then((data) => {
@@ -79,7 +80,7 @@ export class PDF extends jsPDF {
                     startY: 30,
                     styles: {
                         columnWidth: "auto",
-                        fontSize: 8,
+                        fontSize: FONT_SIZE.xsmall,
                         overflow: "linebreak",
                         tableWidth: "auto",
                     },
@@ -95,8 +96,8 @@ export class PDF extends jsPDF {
     })
 
      /**
-     * @param imageId ID of DOM element to be added
-     * @param pageTitle The title of the page
+     * @param {string} imageId ID of DOM element to be added
+     * @param {string} pageTitle The title of the page
      */
     public addPageWithImage = (imageId: string, pageTitle: string): Promise<void> => new Promise<void>((resolve, reject) => {
         if (!document.getElementById(imageId)) {
@@ -113,7 +114,7 @@ export class PDF extends jsPDF {
     })
     /**
      * Returns a promise
-     * @param section Status report section: SectionModel
+     * @param {SectionModel} section Status report section: SectionModel
      */
     public addProjectPropertiesSection = (section: SectionModel) => new Promise<void>((resolve, reject) => {
         this.fetchProject().then((project: IProject) => {
@@ -131,7 +132,7 @@ export class PDF extends jsPDF {
     })
     /**
     * Returns column width based on field type
-    * @param type Field type
+    * @param {string} type Field type
     */
     private getColumnWidth = (type: string): number => {
         switch (type) {
@@ -142,9 +143,9 @@ export class PDF extends jsPDF {
     }
     /**
      *
-     * @param value Title value
-     * @param yPosition x-axis position
-     * @param xPosition y-axis position
+     * @param {string} value Title value
+     * @param {number} yPosition x-axis position
+     * @param {number} xPosition y-axis position
      */
     private addDocumentTitle = (value: string, yPosition: number, xPosition: number) => {
         this.setTextColor(51);
@@ -158,23 +159,24 @@ export class PDF extends jsPDF {
     }
     /**
      *
-     * @param column ITableColumn
-     * @param value Title value
-     * @param comment Optional comment
-     * @param yPosition x-axis position
+     * @param {string} column ITableColumn
+     * @param {string} value Title value
+     * @param {string} comment Optional comment
+     * @param {number} yPosition x-axis position
      */
     private addProperty = (column: ITableColumn, value: string, comment?: string, yPosition?: number) => {
+        const tableWidth = 200;
         const settings  = {
             theme: "plain",
             startY: yPosition,
             styles: {
                 columnWidth: "auto",
-                fontSize: 10,
+                fontSize: FONT_SIZE.small,
                 overflow: "linebreak",
-                tableWidth: 200,
+                tableWidth: tableWidth,
             },
             columnStyles: {
-                Comment: {columnWidth: 200},
+                Comment: {columnWidth: tableWidth},
             },
         };
         let item = {};
@@ -186,12 +188,12 @@ export class PDF extends jsPDF {
                 startY: this.autoTable.previous.finalY - 8,
                 styles: {
                     columnWidth: "auto",
-                    fontSize: 10,
+                    fontSize: FONT_SIZE.small,
                     overflow: "linebreak",
-                    tableWidth: 200,
+                    tableWidth: tableWidth,
                 },
                 columnStyles: {
-                    Comment: {columnWidth: 200},
+                    Comment: {columnWidth: tableWidth},
                 },
                 drawHeaderCell : (cell, data) => {
                     return false;
@@ -204,9 +206,9 @@ export class PDF extends jsPDF {
     }
     /**
      *
-     * @param value Title value
-     * @param yPosition x-axis position
-     * @param xPosition y-axis position
+     * @param {string} value Title value
+     * @param {number} yPosition x-axis position
+     * @param {number} xPosition y-axis position
      */
     private addPageTitle = (value: string, yPosition: number, xPosition: number) => {
         this.setTextColor(51);
@@ -215,9 +217,9 @@ export class PDF extends jsPDF {
     }
     /**
     * Create new autotable column
-    * @param title string
-    * @param key string
-    * @param type string
+    * @param {string} title string
+    * @param {string} key string
+    * @param {string} type string
     */
     private createColumn = (title: string, key: string, type?: string): ITableColumn => {
         let column: ITableColumn = {
@@ -229,10 +231,9 @@ export class PDF extends jsPDF {
     }
     /**
     * Fetches required list section data
-    * @param section Section used for fetching list data
+    * @param {SectionModel} section Section used for fetching list data
     */
     private fetchData = (section: SectionModel) => new Promise<any>((resolve, reject) => {
-        console.log("Go fetch!");
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
         const camlQuery = new SP.CamlQuery();
@@ -262,8 +263,9 @@ export class PDF extends jsPDF {
     /**
      * Fetch data. Config, fields and project frontpage data.
      * @param {string} configList Configuration list
+     * @param {IProject} project Configuration list
      */
-    private fetchProjectData = (project: IProject, configList = __("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
+    private fetchProjectData = (project: IProject, configList = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
 
         const configPromise = rootWeb
@@ -310,14 +312,14 @@ export class PDF extends jsPDF {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const fieldsPromise = rootWeb
             .contentTypes
-            .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .get();
 
         const itemPromise = new Web(_spPageContextInfo.webAbsoluteUrl)
             .lists
-            .getByTitle(__("Lists_SitePages_Title"))
+            .getByTitle(RESOURCE_MANAGER.getResource("Lists_SitePages_Title"))
             .items
             .getById(3)
             .fieldValuesAsText

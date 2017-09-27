@@ -15,7 +15,7 @@ import ExportReportStatus from "./ExportReportStatus";
 import SectionModel from "../Section/SectionModel";
 import { SectionType } from "../Section/SectionModel";
 import { PDF } from "./PDF";
-import { FileType } from "./FileType";
+import { FileType, IFileTypeButton } from "./FileType";
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     /**
@@ -36,7 +36,9 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * Component did mount
      */
     public componentDidMount(): void {
-        this.fetchReports().then(reports => this.setState({
+        let {fileType} = this.state;
+        let type = ( fileType === FileType.pdf ) ? "pdf" : "png";
+        this.fetchReports(type).then(reports => this.setState({
             isLoading: false,
             reports,
         }));
@@ -72,7 +74,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                             id="pp-reportDropdown"
                             label=""
                             selectedKey="01"
-                            options={this.getReportOptions(reports)}
+                            options={this.getReportOptions(reports, fileType)}
                             onChanged={(item) => {
                                 this.setState({
                                     selectedReport: {
@@ -103,13 +105,13 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             </div>
         );
     }
-
     /**
      * Render export button
      *
      * @param {ExportReportStatus} exportStatus Export status
      */
     private renderExportBtn = (exportStatus, fileType) => {
+        let button: IFileTypeButton = this.getButtonLabel(fileType);
         if (exportStatus === ExportReportStatus.isExporting) {
             return (
                 <Spinner size={SpinnerSize.medium} />
@@ -118,12 +120,37 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         return (
             <PrimaryButton
                 className="save-snapshot-btn"
-                iconProps={(fileType === FileType.pdf) ? {  iconName: "Save" } : {  iconName: "Camera" }}
+                iconProps={{  iconName: button.icon}}
                 onClick={this.doExport}>
-                {fileType === FileType.pdf ? __("ProjectStatus_SaveAsPdf") : __("ProjectStatus_SaveSnapshot")}
+                {exportStatus === ExportReportStatus.hasExported ? button.isSaved : button.save}
             </PrimaryButton>
         );
     }
+
+    /**
+     * @param {number} fileType
+     */
+    private getButtonLabel = (fileType): IFileTypeButton => {
+        switch (fileType) {
+            case FileType.pdf:  {
+                return {
+                    save:  RESOURCE_MANAGER.getResource("ProjectStatus_SaveAsPdf"),
+                    saving: RESOURCE_MANAGER.getResource("ProjectStatus_SavingAsPdf"),
+                    isSaved: RESOURCE_MANAGER.getResource("ProjectStatus_PDFSaved"),
+                    icon: "Save",
+                };
+            }
+            case FileType.png:  {
+                return {
+                    save:  RESOURCE_MANAGER.getResource("ProjectStatus_SaveSnapshot"),
+                    saving: RESOURCE_MANAGER.getResource("ProjectStatus_SavingSnapshot"),
+                    isSaved: RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotIsSaved"),
+                    icon: "Camera",
+                };
+            }
+        }
+    }
+
     /**
      * Save file to library
      *
@@ -144,13 +171,13 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
 
     /**
-     * Fetch reports
+     * @param {number} fileType
      */
-    private fetchReports = () => new Promise<any[]>((resolve, reject) => {
+    private fetchReports = (fileType) => new Promise<any[]>((resolve, reject) => {
         pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title"))
             .items
             .select("FileLeafRef", "Title", "EncodedAbsUrl")
-            .filter("substringof('.pdf', FileLeafRef) or substringof('.png', FileLeafRef)")
+            .filter(`substringof('.${ fileType }', FileLeafRef)`)
             .orderBy("Modified", false)
             .top(10)
             .get()
@@ -165,7 +192,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      *
      * @param {any} reports Reports
      */
-    private getReportOptions = (reports): Array<IDropdownOption> => {
+    private getReportOptions = (reports, fileType): Array<IDropdownOption> => {
         let options = reports.filter(r => r.FileLeafRef).map(({ Title: text, EncodedAbsUrl: key }) => ({
             key,
             text,
@@ -217,7 +244,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                 exportStatus: ExportReportStatus.hasExported,
                 isLoading: true,
             }, () => {
-                this.fetchReports().then(reports => this.setState({
+                this.fetchReports(fileExtension).then(reports => this.setState({
                     isLoading: false,
                     reports,
                 }));
@@ -237,7 +264,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                     let promises = new Array<Promise<any>>();
                     sections.forEach((section: SectionModel) => {
                         if (section.showRiskMatrix && section.showAsSection) {
-                            promises.push(pdf.addPageWithImage("risk-matrix", __("ProjectStatus_PDFRiskMatrix")));
+                            promises.push(pdf.addPageWithImage("risk-matrix", RESOURCE_MANAGER.getResource("ProjectStatus_PDFRiskMatrix")));
                         }
                         if (section.listTitle && section.showAsSection) {
                             promises.push(pdf.addPageWithList(section));
