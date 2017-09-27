@@ -10,6 +10,7 @@ import {
     ListConfig,
 } from "./Config";
 import IProgressCallback from "../IProgressCallback";
+import IProvisionContext from "../IProvisionContext";
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
@@ -36,18 +37,16 @@ async function Copy(destUrl: string, conf: ListConfig, onUpdateProgress: IProgre
 /**
  * Copies default data from source to destination
  *
- * @param {string} destUrl Destination URL
- * @param {string[]} contentToInclude Content to copy
- * @param {IProgressCallback} onUpdateProgress Progress callback to caller
+ * @param {IProvisionContext} context Provisioning context
  */
-async function CopyDefaultData(destUrl: string, contentToInclude: string[] = [], onUpdateProgress: IProgressCallback): Promise<void> {
-    Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
+async function CopyDefaultData(context: IProvisionContext): Promise<void> {
+    Logger.log({ message: "Starting copy of default data.", data: { contentToInclude: context.model.IncludeContent }, level: LogLevel.Info });
     try {
         const listContentConfig = await RetrieveConfig();
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
-        await contentToInclude
-            .filter(key => Array.contains(contentToInclude, key) && listContentConfig.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve());
+        await context.model.IncludeContent
+            .filter(key => Array.contains(context.model.IncludeContent, key) && listContentConfig.hasOwnProperty(key))
+            .reduce((chain, key) => chain.then(_ => Copy(context.webCreationResult.url, listContentConfig[key], context.progressCallbackFunc)), Promise.resolve());
         return;
     } catch (err) {
         throw err;

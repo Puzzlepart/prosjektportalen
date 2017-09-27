@@ -1,22 +1,22 @@
 import RESOURCE_MANAGER from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
-import IProgressCallback from "../IProgressCallback";
 import GetValidExtensions from "./GetValidExtensions";
+import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 
 /**
  * Apply extensions
  *
- * @param {any} web The web
- * @param {IProgressCallback} onUpdateProgress
+ * @param {IProvisionContext} context Provisioning context
  */
-async function ApplyExtensions(web: any, onUpdateProgress: IProgressCallback): Promise<void> {
+async function ApplyExtensions(context: IProvisionContext): Promise<void> {
     try {
         const extensions = await GetValidExtensions();
-        await extensions.reduce((chain, extension) => chain.then(___ => {
-            onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
-            return new WebProvisioner(web).applyTemplate(extension.data);
-        }), Promise.resolve());
+        const webProvisioner = new WebProvisioner(context.webCreationResult.web);
+        for (let i = 0; i < extensions.length; i++) {
+            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extensions[i].Title);
+            await webProvisioner.applyTemplate(extensions[i].data);
+        }
         return;
     } catch (err) {
         throw new ProvisionError(err, "ApplyExtensions");

@@ -1,7 +1,9 @@
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import ICreateWebResult from "./ICreateWebResult";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
+import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 
 /**
@@ -17,20 +19,18 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
 /**
  * Creates a new subsite
  *
- * @param {string} title Title
- * @param {string} url Url
- * @param {string} description Description
- * @param {boolean} inheritPermissions Inherit permissions
+ * @param {IProvisionContext} context Provisioning context
  */
-async function CreateWeb(title: string, url: string, description: string, webLanguage = _spPageContextInfo.webLanguage, inheritPermissions: boolean): Promise<ICreateWebResult> {
+async function CreateWeb(context: IProvisionContext): Promise<ICreateWebResult> {
+    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     try {
-        const createWebResult = await rootWeb.webs.add(title, url, description, "STS#0", webLanguage, inheritPermissions);
+        const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url, context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);
         await SetSharedNavigation(createWebResult.data.Url);
         return {
             web: createWebResult.web,
             url: createWebResult.data.Url,
-            redirectUrl: GetRedirectUrl(createWebResult.data.Url, inheritPermissions),
+            redirectUrl: GetRedirectUrl(createWebResult.data.Url, context.model.InheritPermissions),
         };
     } catch (err) {
         throw new ProvisionError(err, "CreateWeb");

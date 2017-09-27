@@ -10,6 +10,7 @@ import { ApplyExtensions } from "./Extensions";
 import { GetAllProperties } from "../Util/PropertyBag";
 import SpListLogger, { LogLevel, ILogEntry } from "../Util/SpListLogger";
 import IProgressCallback from "./IProgressCallback";
+import IProvisionContext from "./IProvisionContext";
 
 const __listLogger = new SpListLogger();
 
@@ -24,14 +25,16 @@ const __listLogger = new SpListLogger();
  */
 async function ProvisionWeb(project: IProjectModel, progressCallbackFunc: IProgressCallback): Promise<string> {
     try {
-        progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
-        const createWebResult = await CreateWeb(project.Title, project.Url, project.Description, _spPageContextInfo.webLanguage, project.InheritPermissions);
-        const webProperties = await GetAllProperties();
-        progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
-        await ApplyProvisioningTemplate(createWebResult.web, webProperties.get_fieldValues(), progressCallbackFunc);
-        await ApplyExtensions(createWebResult.web, progressCallbackFunc);
-        await CopyDefaultData(createWebResult.url, project.IncludeContent, progressCallbackFunc);
-        return createWebResult.redirectUrl;
+        let context: IProvisionContext = {
+            model: project,
+            progressCallbackFunc,
+        };
+        context.webCreationResult = await CreateWeb(context);
+        context.webProperties = await GetAllProperties();
+        await ApplyProvisioningTemplate(context);
+        await ApplyExtensions(context);
+        await CopyDefaultData(context);
+        return context.webCreationResult.redirectUrl;
     } catch (err) {
         const logEntry: ILogEntry = {
             ...err,
