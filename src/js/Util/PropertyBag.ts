@@ -1,28 +1,85 @@
-import { getClientContext } from "../Util";
+import {
+    getClientContext,
+    getJsomContext,
+    executeJsom,
+} from "../Util";
 
 /**
  * Get property values from the web property bag
  *
- * @param url URL for the web
+ * @param {string} url URL for the webb
  */
-export const GetAllProperties = (url = _spPageContextInfo.siteAbsoluteUrl) => new Promise<SP.PropertyValues>((resolve, reject) => {
-    getClientContext(url).then(ctx => {
-        const propertyBag = ctx.get_web().get_allProperties();
-        ctx.load(propertyBag);
-        ctx.executeQueryAsync(() => {
-            resolve(propertyBag.get_fieldValues());
-        }, reject);
-    });
-});
+export async function GetAllProperties(url = _spPageContextInfo.siteAbsoluteUrl): Promise<any> {
+    const ctx = await getClientContext(url);
+    const propertyBag = ctx.get_web().get_allProperties();
+    await executeJsom(ctx, [propertyBag]);
+    return propertyBag.get_fieldValues();
+}
 
 /**
  * Get property value for the provided key from the web property bag
  *
- * @param key Property key
- * @param url URL for the web
+ * @param {string} key Property key
+ * @param {string} url URL for the web
  */
-export const GetProperty = (key: string, url = _spPageContextInfo.siteAbsoluteUrl) => new Promise<string>((resolve, reject) => {
-    GetAllProperties(url)
-        .then(properties => resolve(properties[key]))
-        .catch(reject);
-});
+export async function GetProperty(key: string, url = _spPageContextInfo.siteAbsoluteUrl): Promise<string> {
+    try {
+        const properties = await GetAllProperties(url);
+        return properties[key];
+    } catch (err) {
+        return "";
+    }
+}
+
+/**
+ * Get property value for the provided key from the web property bag
+ *
+ * @param {string} key Property key
+ * @param {string} delimiter Delimiter
+ * @param {string} url URL for the web
+ */
+export async function GetPropertyAsArray(key: string, delimiter = ",", url = _spPageContextInfo.siteAbsoluteUrl): Promise<any[]> {
+    try {
+        const property = await GetProperty(key, url);
+        const array = property.split(delimiter);
+        return array;
+    } catch (err) {
+        return [];
+    }
+}
+
+/**
+ * Get property value for the provided key from the web property bag
+ *
+ * @param {string} key Property key
+ * @param {string} valueToAdd Value to add to the array
+ * @param {string} delimiter Delimiter
+ * @param {string} url URL for the web
+ */
+export async function UpdatePropertyArray(key: string, valueToAdd: string, delimiter = ",", url = _spPageContextInfo.siteAbsoluteUrl): Promise<boolean> {
+    try {
+        let array = await GetPropertyAsArray(key, delimiter, url);
+        array.push(valueToAdd);
+        await SetProperty(key, array.join(delimiter), url);
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+
+
+/**
+ * Get property value for the provided key from the web property bag
+ *
+ * @param {string} key Property key
+ * @param {string} value Property value
+ * @param {string} url URL for the web
+ */
+export async function SetProperty(key: string, value: string, url = _spPageContextInfo.siteAbsoluteUrl): Promise<void> {
+    const { ctx, web } = await getJsomContext(url);
+    web.get_allProperties().set_item(key, value);
+    web.update();
+    await executeJsom(ctx);
+    return;
+}

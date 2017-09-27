@@ -415,6 +415,33 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
 });
 
 /**
+ * Executes a JSOM jquery using SP.ClientContext.executeQueryAsync. Allows for async-await
+ *
+ * @param {SP.ClientContext} ctx Client context
+ * @param {SP.ClientObject[]} clientObjects Client objects to load
+ */
+export function executeJsom(ctx: SP.ClientContext, clientObjects: SP.ClientObject[] = []) {
+    return new Promise<{ sender, args, url }>((resolve, reject) => {
+        clientObjects.forEach(clientObj => ctx.load(clientObj));
+        ctx.executeQueryAsync((sender, args) => {
+            resolve({ sender, args, url: ctx.get_url() });
+        }, (sender, args) => {
+            reject({ sender, args, url: ctx.get_url() });
+        });
+    });
+}
+
+/**
+ * Executes a JSOM jquery using SP.ClientContext.executeQueryAsync. Allows for async-await
+ *
+ * @param {string} url The URL
+ */
+export async function getJsomContext(url: string): Promise<{ ctx: SP.ClientContext, web: SP.Web }> {
+    const ctx = await getClientContext(url);
+    return { ctx, web: ctx.get_web() };
+}
+
+/**
  * Get URL hash object
  *
  * @param {string} hash URL hash
