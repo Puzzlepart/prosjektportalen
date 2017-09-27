@@ -40,13 +40,17 @@ async function Copy(destUrl: string, conf: ListConfig, onUpdateProgress: IProgre
  * @param {IProvisionContext} context Provisioning context
  */
 async function CopyDefaultData(context: IProvisionContext): Promise<void> {
-    Logger.log({ message: "Starting copy of default data.", data: { contentToInclude: context.model.IncludeContent }, level: LogLevel.Info });
+    const contentToInclude = context.model.IncludeContent;
+    Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
     try {
         const listContentConfig = await RetrieveConfig();
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
-        await context.model.IncludeContent
-            .filter(key => Array.contains(context.model.IncludeContent, key) && listContentConfig.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(context.webCreationResult.url, listContentConfig[key], context.progressCallbackFunc)), Promise.resolve());
+        for (let i = 0; i < contentToInclude.length; i++) {
+            const contentKey = contentToInclude[i];
+            if (listContentConfig.hasOwnProperty(contentKey)) {
+                await Copy(context.webCreationResult.url, listContentConfig[contentKey], context.progressCallbackFunc);
+            }
+        }
         return;
     } catch (err) {
         throw err;

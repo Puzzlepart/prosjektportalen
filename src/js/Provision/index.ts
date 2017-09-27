@@ -1,4 +1,3 @@
-import RESOURCE_MANAGER from "localization";
 import {
     CreateWeb,
     DoesWebExist,
