@@ -49,15 +49,18 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
      * Component did mount
      */
     public componentDidMount(): void {
-        const { toggleElement } = this.props;
-        if (toggleElement && toggleElement.storage) {
-            this.toggleStorageKey = Util.generateStorageKey([toggleElement.storage.key, "CollapsedState"]);
+        if (!this.props.toggleElement) {
+            return;
+        }
+        const { storage, element } = this.props.toggleElement;
+        if (storage && element) {
+            this.toggleStorageKey = Util.generateStorageKey([storage.key, "CollapsedState"]);
             let newState = {
                 isCollapsed: this.getCollapsedStateFromStorage(),
             };
             this.setState(newState);
             if (newState.isCollapsed) {
-                this.props.toggleElement.element.style.display = "none";
+                element.style.display = "none";
             }
 
         }
@@ -76,8 +79,7 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
                 hidden={this.props.hidden}
                 className="ms-webpart-chrome-title"
                 onClick={this.onClick}
-                style={{ width: this.props.width }}
-            >
+                style={{ width: this.props.width }}>
                 <span
                     title={this.props.title}
                     className="js-webpart-titleCell">
@@ -98,16 +100,16 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
      * On chrome click
      */
     private onClick = () => {
-        const { toggleElement } = this.props;
-        if (!toggleElement) {
+        if (!this.props.toggleElement) {
             return;
         }
+        const { storage, element } = this.props.toggleElement;
         const { isCollapsed } = this.state;
         let newState = { isCollapsed: !isCollapsed };
         this.setState(newState);
-        toggleElement.element.style.display = newState.isCollapsed ? "none" : "block";
-        if (toggleElement.storage) {
-            window[toggleElement.storage.type].setItem(this.toggleStorageKey, JSON.stringify(newState.isCollapsed));
+        element.style.display = newState.isCollapsed ? "none" : "block";
+        if (storage) {
+            window[storage.type].setItem(this.toggleStorageKey, JSON.stringify(newState.isCollapsed));
         }
     }
 
@@ -115,17 +117,17 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
      * Get collapsed state from storage (localStorage or sessionStorage)
      */
     private getCollapsedStateFromStorage(): boolean {
-        const { toggleElement } = this.props;
-        const value = window[toggleElement.storage.type].getItem(this.toggleStorageKey);
+        const { storage } = this.props.toggleElement;
+        const value = window[storage.type].getItem(this.toggleStorageKey);
         if (value) {
             try {
                 const parsedValue = JSON.parse(value);
                 return parsedValue;
             } catch (e) {
-                return toggleElement.defaultCollapsed === true;
+                return true;
             }
         } else {
-            return toggleElement.defaultCollapsed === true;
+            return true;
         }
     }
 }
