@@ -3,7 +3,15 @@
     <pnp:SiteCustomActions>
         <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
             SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?rev=[version]');
-            EnsureScriptFunc('pp.main.js', null, function() {});" />
+            EnsureScriptFunc('pp.main.js', null, function () {
+                window.setTimeout(() => {
+                    var isLoaded = window['_v_dictSod']['pp.main.js'].loaded;
+                    if(!isLoaded) {
+                        console.error('pp.maïn.js was not loaded properly due to an unknown issue. Refreshing the page.');
+                        document.location.href = document.location.href;
+                    }
+                }, {parameter:ScriptLoadTimeout});
+            });" />
     </pnp:SiteCustomActions>
     <pnp:WebCustomActions>
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Resources}" Title="{resource:SiteSettings_Link_Resources}" Url="Resources/Forms/AllItems.aspx" Rights="ManageWeb" Sequence="2001" />
