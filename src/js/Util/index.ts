@@ -431,14 +431,24 @@ export function executeJsom(ctx: SP.ClientContext, clientObjects: SP.ClientObjec
     });
 }
 
+export interface IJsomContext {
+    ctx: SP.ClientContext;
+    web: SP.Web;
+    propertyBag: SP.PropertyValues;
+    lists: SP.ListCollection;
+}
+
 /**
  * Executes a JSOM jquery using SP.ClientContext.executeQueryAsync. Allows for async-await
  *
  * @param {string} url The URL
  */
-export async function getJsomContext(url: string): Promise<{ ctx: SP.ClientContext, web: SP.Web }> {
+export async function getJsomContext(url: string): Promise<IJsomContext> {
     const ctx = await getClientContext(url);
-    return { ctx, web: ctx.get_web() };
+    const web = ctx.get_web();
+    const propertyBag = web.get_allProperties();
+    const lists = web.get_lists();
+    return { ctx, web, propertyBag, lists };
 }
 
 /**
