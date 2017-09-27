@@ -5,6 +5,6 @@ var gulp = require("gulp"),
     config = require('./@configuration.js');
 
 gulp.task("clean", done => {
-    return gulp.src([config.paths.lib, config.paths.dist, config.paths.release, config.paths.templates_temp], { read: false })
+    return gulp.src([config.paths.lib, config.paths.dist, config.paths.templates_temp], { read: false })
         .pipe(clean());
 });
