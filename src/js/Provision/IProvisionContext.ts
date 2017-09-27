@@ -6,5 +6,5 @@ export default interface IProvisionContext {
     model: IProjectModel;
     progressCallbackFunc: IProgressCallback;
     webCreationResult?: ICreateWebResult;
-    webProperties?: { pp_assetssiteurl: string, pp_version: string };
+    webProperties?: { pp_assetssiteurl: string, pp_datasourcesiteurl: string, pp_version: string };
 }
