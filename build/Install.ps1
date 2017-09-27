@@ -187,11 +187,12 @@ function Start-Install() {
         if ($extensionFiles.Length -gt 0) {
             try {
                 Connect-SharePoint $Url
-                Write-Host "Deploying extensions.." -ForegroundColor Green -NoNewLine
+                Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
+                    Write-Host "`tDeploying extension $($extension.Name).. " -ForegroundColor White -NoNewLine
                     Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+                    Write-Host "DONE" -ForegroundColor White
                 }
-                Write-Host "DONE" -ForegroundColor Green
                 Disconnect-PnPOnline
             }
             catch {
