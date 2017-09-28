@@ -1416,8 +1416,8 @@
   <data name="NewProjectForm_InheritPermissions" xml:space="preserve">
     <value>Use same permissions as parent site </value>
   </data>
-  <data name="NewProjectForm_ShowAdvancedSettings" xml:space="preserve">
-    <value>Show advanced settings</value>
+  <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
+    <value>Default list content</value>
   </data>
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>New project</value>

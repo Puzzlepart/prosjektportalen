@@ -1416,8 +1416,8 @@
   <data name="NewProjectForm_InheritPermissions" xml:space="preserve">
     <value>Bruk samme tillatelser som overordnet område</value>
   </data>
-  <data name="NewProjectForm_ShowAdvancedSettings" xml:space="preserve">
-    <value>Vis avanserte innstillinger</value>
+  <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
+    <value>Standard listeinnhold</value>
   </data>
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>Nytt prosjekt</value>

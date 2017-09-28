@@ -1,5 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
+import * as delay from "delay";
 import ProvisionWeb, { DoesWebExist } from "../../../Provision";
 import {
     PrimaryButton,
@@ -11,6 +12,7 @@ import {
     DialogType,
 } from "office-ui-fabric-react/lib/Dialog";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import * as Util from "../../../Util";
@@ -25,8 +27,7 @@ import CreationModal from "./CreationModal";
 export default class NewProjectDialog extends React.Component<INewProjectDialogProps, INewProjectDialogState> {
     public static displayName = "NewProjectDialog";
     public static defaultProps = NewProjectDialogDefaultProps;
-    private doesWebExistTimer;
-    private doesWebExistTimerDelay = 250;
+    private doesWebExistDelay;
 
     /**
      * Constructor
@@ -66,7 +67,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    public _render({ dialogProps }: INewProjectDialogProps, { model, provisioning }: INewProjectDialogState): JSX.Element {
+    public _render({ dialogProps, className }: INewProjectDialogProps, { model, provisioning }: INewProjectDialogState): JSX.Element {
         /**
          * If we have a error in provisioning we show a message in a modal
          */
@@ -113,13 +114,12 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     subText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),
                 }}
                 modalProps={{
-                    className: "pp-newprojectdialog",
                     isDarkOverlay: true,
                     isBlocking: true,
                 }}
                 title={RESOURCE_MANAGER.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
-                <div>
+                <div className={className}>
                     {this.renderForm(this.props, this.state)}
                     {this.renderAdvancedSection(this.props, this.state)}
                     {this.renderFooter(this.props, this.state)}
@@ -134,9 +134,9 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    private renderForm = ({ }: INewProjectDialogProps, { model, errorMessages, urlInputEnabled }: INewProjectDialogState) => {
+    private renderForm({ }: INewProjectDialogProps, { model, errorMessages, urlInputEnabled }: INewProjectDialogState): JSX.Element {
         return (
-            <div>
+            <section>
                 <TextField
                     placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Title")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
@@ -154,7 +154,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     onChanged={newValue => this.onFormChange("Url", newValue)}
                     errorMessage={errorMessages.Url}
                     disabled={!urlInputEnabled} />
-            </div>
+            </section>
         );
     }
 
@@ -164,29 +164,31 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    private renderAdvancedSection = ({ advancedSectionClassName, listDataConfig }: INewProjectDialogProps, { showAdvancedSettings }: INewProjectDialogState) => {
+    private renderAdvancedSection({ listDataConfig, advancedSettingsClassName }: INewProjectDialogProps, { showListContentSettings }: INewProjectDialogState) {
         return (
-            <div>
-                <Toggle
-                    defaultChecked={showAdvancedSettings}
-                    label={RESOURCE_MANAGER.getResource("NewProjectForm_ShowAdvancedSettings")}
-                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                    offText={RESOURCE_MANAGER.getResource("String_No")}
-                    onChanged={this.toggleAdvancedSettings} />
-                {(showAdvancedSettings && listDataConfig) && (
-                    <section
-                        className={advancedSectionClassName}>
-                        {Object.keys(listDataConfig).map(key => (
+            <div className={advancedSettingsClassName}>
+                <div
+                    onClick={e => this.setState({ showListContentSettings: !showListContentSettings })}
+                    className="ms-font-l toggle-section">
+                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
+                    <span className="chevron">
+                        <Icon iconName={showListContentSettings ? "ChevronUp" : "ChevronDown"} />
+                    </span>
+                </div>
+                <section hidden={!showListContentSettings}>
+                    {Object.keys(listDataConfig).map(key => {
+                        const { Default, Label } = listDataConfig[key];
+                        return (
                             <Toggle
                                 key={key}
-                                defaultChecked={listDataConfig[key].Default}
-                                label={listDataConfig[key].Label}
+                                defaultChecked={Default}
+                                label={Label}
                                 onChanged={checked => this.toggleContent(key, checked)}
                                 onText={RESOURCE_MANAGER.getResource("String_Yes")}
                                 offText={RESOURCE_MANAGER.getResource("String_No")} />
-                        ))}
-                    </section>
-                )}
+                        );
+                    })}
+                </section>
             </div>
         );
     }
@@ -197,7 +199,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {INewProjectDialogProps} param0 Props
      * @param {INewProjectDialogState} param1 State
      */
-    private renderFooter = ({ dialogProps }: INewProjectDialogProps, { formValid }: INewProjectDialogState) => {
+    private renderFooter({ dialogProps }: INewProjectDialogProps, { formValid }: INewProjectDialogState) {
         return (
             <DialogFooter>
                 <PrimaryButton
@@ -206,13 +208,6 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 <DefaultButton onClick={() => dialogProps.onDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
             </DialogFooter>
         );
-    }
-
-    /**
-     * Toggle advanced settings section
-     */
-    private toggleAdvancedSettings = (): void => {
-        this.setState(prevState => ({ showAdvancedSettings: !prevState.showAdvancedSettings }));
     }
 
     /**
@@ -244,7 +239,9 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      * @param {string} input Input (key) that was changed
      * @param {string} newTitleValue New Title value
      */
-    private onFormChange = (input: string, newValue: string): void => {
+    private async onFormChange(input: string, newValue: string) {
+        const self = this;
+
         const {
             model,
             errorMessages,
@@ -253,47 +250,54 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
         switch (input) {
             case "Title": {
                 const url = Util.generateUrl(newValue, this.props.maxUrlLength);
-                if (this.doesWebExistTimer) {
-                    window.clearTimeout(this.doesWebExistTimer);
+                if (this.doesWebExistDelay) {
+                    this.doesWebExistDelay.cancel();
+                    this.doesWebExistDelay = null;
                 }
-                this.doesWebExistTimer = window.setTimeout(() => {
-                    DoesWebExist(url).then(doesExist => {
-                        this.setState({
-                            errorMessages: {
-                                ...errorMessages,
-                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
-                            },
-                            formValid: (newValue.length >= this.props.titleMinLength) && !doesExist,
-                            model: {
-                                ...model,
-                                Title: newValue,
-                                Url: url,
-                            },
-                        });
+                this.doesWebExistDelay = delay(250);
+                try {
+                    await this.doesWebExistDelay;
+                    const doesExist = await DoesWebExist(url);
+                    self.setState({
+                        errorMessages: {
+                            ...errorMessages,
+                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
+                        },
+                        formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
+                        model: {
+                            ...model,
+                            Title: newValue,
+                            Url: url,
+                        },
                     });
-                }, this.doesWebExistTimerDelay);
+                } catch (err) {
+                    // Timeout cancelled
+                }
             }
                 break;
             case "Url": {
-                if (this.doesWebExistTimer) {
-                    window.clearTimeout(this.doesWebExistTimer);
+                if (this.doesWebExistDelay) {
+                    this.doesWebExistDelay.cancel();
+                    this.doesWebExistDelay = null;
                 }
-                this.doesWebExistTimer = window.setTimeout(() => {
-                    DoesWebExist(newValue)
-                        .then(doesExist => {
-                            this.setState({
-                                errorMessages: {
-                                    ...errorMessages,
-                                    Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
-                                },
-                                formValid: (model.Title.length >= this.props.titleMinLength) && !doesExist,
-                                model: {
-                                    ...model,
-                                    Url: newValue,
-                                },
-                            });
-                        });
-                }, this.doesWebExistTimerDelay);
+                this.doesWebExistDelay = delay(250);
+                try {
+                    await this.doesWebExistDelay;
+                    const doesExist = await DoesWebExist(newValue);
+                    self.setState({
+                        errorMessages: {
+                            ...errorMessages,
+                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
+                        },
+                        formValid: (model.Title.length >= self.props.titleMinLength) && !doesExist,
+                        model: {
+                            ...model,
+                            Url: newValue,
+                        },
+                    });
+                } catch (err) {
+                    // Timeout cancelled
+                }
             }
                 break;
             case "Description": {
@@ -326,13 +330,10 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
      *
      * @param {IProjectModel} model Project model
      */
-    private _onSubmit = (model: IProjectModel): void => {
-        this.setState({
-            provisioning: {
-                isCreating: true,
-            },
-        }, () => {
-            ProvisionWeb(model, (step, progress) => {
+    private async _onSubmit(model: IProjectModel): Promise<void> {
+        this.setState({ provisioning: { isCreating: true } });
+        try {
+            const redirectUrl = await ProvisionWeb(model, (step, progress) => {
                 this.setState({
                     provisioning: {
                         isCreating: true,
@@ -340,18 +341,15 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                         progress: progress,
                     },
                 });
-            })
-                .then(redirectUrl => {
-                    document.location.href = redirectUrl;
-                })
-                .catch(error => {
-                    this.setState({
-                        provisioning: {
-                            isCreating: false,
-                            error,
-                        },
-                    });
-                });
-        });
+            });
+            document.location.href = redirectUrl;
+        } catch (error) {
+            this.setState({
+                provisioning: {
+                    isCreating: false,
+                    error,
+                },
+            });
+        }
     }
 }
