@@ -354,15 +354,6 @@
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>All Documents</value>
   </data>
-  <data name="TermSetID_ProjectPhase" xml:space="preserve">
-    <value>{abcfc9d9-a263-4abb-8234-be973c46258a}</value>
-  </data>
-  <data name="TermSetID_ProjectType" xml:space="preserve">
-    <value>{3930cddb-fa4d-496f-b314-03ecabb91de1}</value>
-  </data>
-  <data name="TermSetID_ProjectServiceArea" xml:space="preserve">
-    <value>{99af1a25-88c1-4781-a05c-8446928d3fdd}</value>
-  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
