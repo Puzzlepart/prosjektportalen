@@ -439,7 +439,7 @@ export interface IJsomContext {
 }
 
 /**
- * Executes a JSOM jquery using SP.ClientContext.executeQueryAsync. Allows for async-await
+ * Gets JSOM context (IJsomContext) for the specified URL
  *
  * @param {string} url The URL
  */

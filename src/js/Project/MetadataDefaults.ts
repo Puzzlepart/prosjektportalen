@@ -110,30 +110,30 @@ export async function SetMetadataDefaultsForLibrary(fields: IIMetadataDefaultsFi
  * @param {string} type Type (default to ItemAdded)
  * @param {string} libTitle Library title
  */
-export const EnsureLocationBasedMetadataDefaultsReceiverForLibrary = (type = "ItemAdded", libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<any> => new Promise<any>((resolve, reject) => {
+export async function EnsureLocationBasedMetadataDefaultsReceiverForLibrary(type = "ItemAdded", libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<void> {
     const recName = `LocationBasedMetadataDefaultsReceiver ${type}`;
-    const ctx = SP.ClientContext.get_current();
-    const docLib = ctx.get_web().get_lists().getByTitle(libTitle);
+    const { ctx, lists } = await Util.getJsomContext(_spPageContextInfo.webAbsoluteUrl);
+    const docLib = lists.getByTitle(libTitle);
     const eventReceivers = docLib.get_eventReceivers();
-    ctx.load(eventReceivers);
-    ctx.executeQueryAsync(() => {
-        let eventReceiverExists = eventReceivers.get_data().filter(er => er.get_receiverName() === recName).length > 0;
-        if (!eventReceiverExists) {
-            let eventRecCreationInfo = new SP.EventReceiverDefinitionCreationInformation();
-            eventRecCreationInfo.set_receiverName(recName);
-            eventRecCreationInfo.set_synchronization(1);
-            eventRecCreationInfo.set_sequenceNumber(1000);
-            eventRecCreationInfo.set_receiverAssembly("Microsoft.Office.DocumentManagement, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c");
-            eventRecCreationInfo.set_receiverClass("Microsoft.Office.DocumentManagement.LocationBasedMetadataDefaultsReceiver");
-            eventRecCreationInfo.set_eventType(SP.EventReceiverType.itemAdded);
-            eventReceivers.add(eventRecCreationInfo);
-        }
-        if (ctx.get_hasPendingRequest()) {
-            Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
-            ctx.executeQueryAsync(resolve, reject);
-        } else {
-            Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} already ensured`, data: {}, level: LogLevel.Info });
-            resolve();
-        }
-    }, reject);
-});
+    await Util.executeJsom(ctx, [eventReceivers]);
+    let eventReceiverExists = eventReceivers.get_data().filter(er => er.get_receiverName() === recName).length > 0;
+    if (!eventReceiverExists) {
+        let eventRecCreationInfo = new SP.EventReceiverDefinitionCreationInformation();
+        eventRecCreationInfo.set_receiverName(recName);
+        eventRecCreationInfo.set_synchronization(1);
+        eventRecCreationInfo.set_sequenceNumber(1000);
+        eventRecCreationInfo.set_receiverAssembly("Microsoft.Office.DocumentManagement, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c");
+        eventRecCreationInfo.set_receiverClass("Microsoft.Office.DocumentManagement.LocationBasedMetadataDefaultsReceiver");
+        eventRecCreationInfo.set_eventType(SP.EventReceiverType.itemAdded);
+        eventReceivers.add(eventRecCreationInfo);
+    }
+    if (ctx.get_hasPendingRequest()) {
+        await Util.executeJsom(ctx, [eventReceivers]);
+        Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
+        return;
+    } else {
+        Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} already ensured`, data: {}, level: LogLevel.Info });
+        return;
+    }
+}
+

@@ -1,5 +1,4 @@
 import {
-    getClientContext,
     getJsomContext,
     executeJsom,
 } from "../Util";
@@ -10,8 +9,7 @@ import {
  * @param {string} url URL for the webb
  */
 export async function GetAllProperties(url = _spPageContextInfo.siteAbsoluteUrl): Promise<any> {
-    const ctx = await getClientContext(url);
-    const propertyBag = ctx.get_web().get_allProperties();
+    const { ctx, propertyBag } = await getJsomContext(url);
     await executeJsom(ctx, [propertyBag]);
     return propertyBag.get_fieldValues();
 }
