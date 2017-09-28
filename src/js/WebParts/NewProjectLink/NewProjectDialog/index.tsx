@@ -116,10 +116,11 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                 modalProps={{
                     isDarkOverlay: true,
                     isBlocking: true,
+                    className,
                 }}
                 title={RESOURCE_MANAGER.getResource("NewProjectForm_DialogTitle")}
                 onDismiss={dialogProps.onDismiss}>
-                <div className={className}>
+                <div>
                     {this.renderForm(this.props, this.state)}
                     {this.renderAdvancedSection(this.props, this.state)}
                     {this.renderFooter(this.props, this.state)}
