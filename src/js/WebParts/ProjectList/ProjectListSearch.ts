@@ -38,7 +38,7 @@ export interface IQueryResponse {
 /**
  * Query the REST Search API using sp-pnp-js
  */
-export const query = () => new Promise<IQueryResponse>((resolve, reject) => {
+export const queryProjects = () => new Promise<IQueryResponse>((resolve, reject) => {
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
     })

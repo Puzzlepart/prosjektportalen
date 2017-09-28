@@ -26,7 +26,7 @@ import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import IFilter from "./FilterPanel/Filter/IFilter";
 import * as Configuration from "./Configuration";
-import * as Search from "./Search";
+import { queryProjects } from "./DynamicPortfolioSearch";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
@@ -130,7 +130,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }
         }
         const fieldNames = this.configuration.columns.map(f => f.fieldName);
-        const response = await Search.query(currentView, this.configuration);
+        const response = await queryProjects(currentView, this.configuration);
         // Populates FieldSelector with items from this.configuration.columns
         FieldSelector.items = this.configuration.columns.map(col => ({
             name: col.name,
@@ -545,7 +545,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Does a new search using Search.query, then updates component's state
+     * Does a new search using queryProjects, then updates component's state
      *
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
@@ -557,7 +557,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState({ isLoading: true });
-        const response = await Search.query(viewConfig, this.configuration);
+        const response = await queryProjects(viewConfig, this.configuration);
         FieldSelector.items = this.configuration.columns.map(col => ({
             name: col.name,
             value: col.fieldName,

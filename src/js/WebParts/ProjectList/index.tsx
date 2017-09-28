@@ -9,7 +9,7 @@ import {
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import * as Search from "./Search";
+import { queryProjects } from "./ProjectListSearch";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
 import Project from "./Project";
@@ -169,26 +169,25 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     /**
      * Fetch data using sp-pnp-js search
      */
-    private fetchData = () => new Promise<IProjectListData>((resolve, reject) => {
+    private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
 
-        const ctFieldsPromise = rootWeb
-            .contentTypes
-            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
-            .fields
-            .select("Title", "Description", "InternalName", "Required", "TypeAsString")
-            .get();
-
-        const projectsPromise = Search.query();
-
-        Promise.all([projectsPromise, ctFieldsPromise])
-            .then(([projectsSearchResult, fieldsArray]) => {
-                const projects = projectsSearchResult.primarySearchResults.map(result => new Project(result));
-                let fields: { [key: string]: string } = {};
-                fieldsArray.forEach(({ InternalName, Title }) => {
-                    fields[InternalName] = Title;
-                });
-                resolve({ projects, fields });
+        try {
+            const ctFieldsPromise = rootWeb
+                .contentTypes
+                .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+                .fields
+                .select("Title", "Description", "InternalName", "Required", "TypeAsString")
+                .get();
+            const [projectsSearchResult, fieldsArray] = await Promise.all([queryProjects(), ctFieldsPromise]);
+            const projects = projectsSearchResult.primarySearchResults.map(result => new Project(result));
+            let fields: { [key: string]: string } = {};
+            fieldsArray.forEach(({ InternalName, Title }) => {
+                fields[InternalName] = Title;
             });
-    })
+            return ({ projects, fields });
+        } catch (err) {
+            throw err;
+        }
+    }
 }
