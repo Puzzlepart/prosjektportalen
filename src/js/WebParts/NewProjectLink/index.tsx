@@ -101,7 +101,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState){
+    private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
                 <NewProjectDialog
