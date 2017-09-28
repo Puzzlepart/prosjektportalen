@@ -55,7 +55,7 @@ gulp.task("watchEval", () => {
 });
 
 gulp.task("watchProd", () => {
-    __startWatch(`packageCodeProd`);
+    __startWatch(`packageCodeMinify`);
 });
 
 function uploadFile(glob, url, folder) {
