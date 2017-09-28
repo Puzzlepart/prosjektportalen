@@ -1,6 +1,5 @@
 import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
-import ICreateWebResult from "./ICreateWebResult";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
 import IProvisionContext from "../IProvisionContext";
@@ -21,13 +20,14 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
  *
  * @param {IProvisionContext} context Provisioning context
  */
-async function CreateWeb(context: IProvisionContext): Promise<ICreateWebResult> {
+async function CreateWeb(context: IProvisionContext): Promise<IProvisionContext> {
     context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     try {
-        const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url, context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);
+        const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url.toLowerCase(), context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);
         await SetSharedNavigation(createWebResult.data.Url);
         return {
+            ...context,
             web: createWebResult.web,
             url: createWebResult.data.Url,
             redirectUrl: GetRedirectUrl(createWebResult.data.Url, context.model.InheritPermissions),
@@ -38,7 +38,6 @@ async function CreateWeb(context: IProvisionContext): Promise<ICreateWebResult> 
 }
 
 export {
-    ICreateWebResult,
     DoesWebExist,
     SetSharedNavigation,
     CreateWeb,

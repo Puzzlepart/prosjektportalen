@@ -12,7 +12,6 @@ import {
 export default async function SetSharedNavigation(url: string, useShared = true): Promise<void> {
     try {
         let jsomCtx = await CreateJsomContext(url);
-        console.log(jsomCtx);
         jsomCtx.web.get_navigation().set_useShared(true);
         await ExecuteJsomQuery(jsomCtx);
         return;

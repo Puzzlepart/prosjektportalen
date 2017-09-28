@@ -14,12 +14,12 @@ async function ApplyExtensions(context: IProvisionContext): Promise<void> {
     context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), "");
     try {
         const extensions = await GetValidExtensions();
-        const webProvisioner = new WebProvisioner(context.webCreationResult.web);
+        const webProvisioner = new WebProvisioner(context.web);
         for (let i = 0; i < extensions.length; i++) {
             const extensionToApply = extensions[i];
             context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extensionToApply.Title);
             await webProvisioner.applyTemplate(extensionToApply.data);
-            await UpdatePropertyArray("pp_installed_extensions", extensionToApply.LinkFilename, ",", context.webCreationResult.url);
+            await UpdatePropertyArray("pp_installed_extensions", extensionToApply.LinkFilename, ",", context.url);
         }
         return;
     } catch (err) {

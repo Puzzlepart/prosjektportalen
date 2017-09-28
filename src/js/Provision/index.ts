@@ -25,12 +25,12 @@ export default async function ProvisionWeb(project: IProjectModel, progressCallb
             model: project,
             progressCallbackFunc,
         };
-        context.webCreationResult = await CreateWeb(context);
+        context = await CreateWeb(context);
         context.webProperties = await GetAllProperties();
         await ApplyProvisioningTemplate(context);
         await ApplyExtensions(context);
         await CopyDefaultData(context);
-        return context.webCreationResult.redirectUrl;
+        return context.redirectUrl;
     } catch (err) {
         const logEntry: ILogEntry = {
             ...err,

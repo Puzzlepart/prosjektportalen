@@ -48,7 +48,7 @@ async function CopyDefaultData(context: IProvisionContext): Promise<void> {
         for (let i = 0; i < contentToInclude.length; i++) {
             const contentKey = contentToInclude[i];
             if (listContentConfig.hasOwnProperty(contentKey)) {
-                await Copy(context.webCreationResult.url, listContentConfig[contentKey], context.progressCallbackFunc);
+                await Copy(context.url, listContentConfig[contentKey], context.progressCallbackFunc);
             }
         }
         return;

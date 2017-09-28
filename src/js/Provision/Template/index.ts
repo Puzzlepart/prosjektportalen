@@ -23,7 +23,7 @@ const PROGRESS_MAP = {
     PropertyBagEntries: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
-let Template: Schema = {
+let baseTemplate: Schema = {
     Files,
     Lists,
     Navigation,
@@ -43,13 +43,13 @@ let Template: Schema = {
  */
 async function ApplyProvisioningTemplate(context: IProvisionContext): Promise<void> {
     context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
-    const webProvisioner = new WebProvisioner(context.webCreationResult.web);
+    const webProvisioner = new WebProvisioner(context.web);
     const callbackFunc = objHandler => context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
     try {
-        await webProvisioner.applyTemplate({
-            ...Template,
+        const template = {
+            ...baseTemplate,
             WebSettings: {
-                ...Template.WebSettings,
+                ...baseTemplate.WebSettings,
                 AlternateCssUrl: `${context.webProperties.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`,
                 SiteLogoUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
             },
@@ -59,7 +59,8 @@ async function ApplyProvisioningTemplate(context: IProvisionContext): Promise<vo
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, callbackFunc);
+        }
+        await webProvisioner.applyTemplate(template, callbackFunc);
         return;
     } catch (err) {
         throw new ProvisionError(err, "ApplyProvisioningTemplate");
