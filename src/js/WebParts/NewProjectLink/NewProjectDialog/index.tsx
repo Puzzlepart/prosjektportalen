@@ -171,7 +171,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
                     onClick={e => this.setState({ showListContentSettings: !showListContentSettings })}
                     className="ms-font-l toggle-section">
                     <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
-                    <span className="chevron">
+                    <span className={showListContentSettings ? "ChevronUp" : "ChevronDown"}>
                         <Icon iconName={showListContentSettings ? "ChevronUp" : "ChevronDown"} />
                     </span>
                 </div>
