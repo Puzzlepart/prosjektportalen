@@ -45,6 +45,8 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
     [string]$ExtensionFolder,
     [Parameter(Mandatory = $false)]
+    [switch]$ConfirmExtensions,
+    [Parameter(Mandatory = $false)]
     [switch]$Upgrade
 )
 
@@ -189,9 +191,15 @@ function Start-Install() {
                 Connect-SharePoint $Url
                 Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
-                    Write-Host "`tDeploying extension $($extension.Name).. " -ForegroundColor White -NoNewLine
-                    Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
-                    Write-Host "DONE" -ForegroundColor White
+                    $confirmation = "y"
+                    if ($ConfirmExtensions.IsPresent) {
+                        $confirmation = Read-Host "`tDeploy extension $($extension.BaseName) (y/n)?"
+                    }
+                    if($confirmation.toLower() -eq "y") {
+                        Write-Host "`tDeploying extension $($extension.BaseName).. " -ForegroundColor White -NoNewLine
+                        Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+                        Write-Host "DONE" -ForegroundColor White
+                    }
                 }
                 Disconnect-PnPOnline
             }
