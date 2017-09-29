@@ -46,6 +46,47 @@ const GenerateMetadataDefaults = (folderServerRelativeUrl: string, defaultValues
 };
 
 /**
+ * Get field value for type
+ *
+ * @param {any} value The raw value
+ * @param {string} fieldType Text, Taxonomy or TaxonomyMulti
+ */
+function getFieldValueForType(value, fieldType): string {
+    switch (fieldType) {
+        case "Text": {
+            if (value) {
+                return value;
+            }
+            return "";
+        }
+        case "Taxonomy": {
+            if (value) {
+                const safeTermValue = Util.getSafeTerm(value);
+                return `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
+            }
+            return "";
+        }
+        case "TaxonomyMulti": {
+            let termValues = [];
+            if (value.getEnumerator) {
+                const termEnumerator = value.getEnumerator();
+                while (termEnumerator.moveNext()) {
+                    let currentTerm = Util.getSafeTerm(termEnumerator.get_current());
+                    termValues.push(`${currentTerm.WssId};#${currentTerm.Label}|${currentTerm.TermGuid}`);
+                }
+            }
+            if (value._Child_Items_) {
+                value._Child_Items_.forEach(term => {
+                    let safeTerm = Util.getSafeTerm(term);
+                    termValues.push(`${safeTerm.WssId};#${safeTerm.Label}|${safeTerm.TermGuid}`);
+                });
+            }
+            return termValues.join(";#");
+        }
+    }
+}
+
+/**
  * Set metadata defaults
  *
  * @param {IIMetadataDefaultsField[]} fields Fields to configure default values for
@@ -62,40 +103,7 @@ export async function SetMetadataDefaultsForLibrary(fields: IIMetadataDefaultsFi
             return docLibHasField;
         })
         .map(({ fieldName, fieldType }) => {
-            let fieldValue = "";
-            switch (fieldType) {
-                case "Text": {
-                    if (wpFieldValues[fieldName]) {
-                        fieldValue = wpFieldValues[fieldName];
-                    }
-                }
-                    break;
-                case "Taxonomy": {
-                    if (wpFieldValues[fieldName]) {
-                        const safeTermValue = Util.getSafeTerm(wpFieldValues[fieldName]);
-                        fieldValue = `${safeTermValue.WssId};#${safeTermValue.Label}|${safeTermValue.TermGuid}`;
-                    }
-                }
-                    break;
-                case "TaxonomyMulti": {
-                    let termValues = [];
-                    if (wpFieldValues[fieldName].getEnumerator) {
-                        const termEnumerator = wpFieldValues[fieldName].getEnumerator();
-                        while (termEnumerator.moveNext()) {
-                            let currentTerm = Util.getSafeTerm(termEnumerator.get_current());
-                            termValues.push(`${currentTerm.WssId};#${currentTerm.Label}|${currentTerm.TermGuid}`);
-                        }
-                    }
-                    if (wpFieldValues[fieldName]._Child_Items_) {
-                        wpFieldValues[fieldName]._Child_Items_.forEach(term => {
-                            let safeTerm = Util.getSafeTerm(term);
-                            termValues.push(`${safeTerm.WssId};#${safeTerm.Label}|${safeTerm.TermGuid}`);
-                        });
-                    }
-                    fieldValue = termValues.join(";#");
-                }
-                    break;
-            }
+            let fieldValue = getFieldValueForType(wpFieldValues[fieldName], fieldType);
             return { fieldName, fieldValue };
         });
 
@@ -130,10 +138,7 @@ export async function EnsureLocationBasedMetadataDefaultsReceiverForLibrary(type
     if (ctx.get_hasPendingRequest()) {
         await Util.executeJsom(ctx, [eventReceivers]);
         Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
-        return;
-    } else {
-        Logger.log({ message: `ChangeProjectPhase: Event receiver ${type} already ensured`, data: {}, level: LogLevel.Info });
-        return;
     }
+    return;
 }
 
