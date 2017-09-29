@@ -50,6 +50,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         super(props, {
             isLoading: true,
             searchTerm: "",
+            filters: [],
             currentFilters: {},
             showFilterPanel: false,
         });
@@ -163,10 +164,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) => {
+    private renderItems({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) {
         if (isLoading) {
             return (
-                <Spinner type={SpinnerType.large} />
+                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
             );
         }
 
@@ -201,18 +202,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderFilterPanel = ({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) => {
-        if (filters) {
-            return (
-                <FilterPanel
-                    isOpen={showFilterPanel}
-                    onDismiss={() => this.setState({ showFilterPanel: false })}
-                    filters={filters}
-                    showIcons={false}
-                    onFilterChange={this._onFilterChange} />
-            );
-        }
-        return null;
+    private renderFilterPanel({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) {
+
+        return (
+            <FilterPanel
+                isOpen={showFilterPanel}
+                onDismiss={() => this.setState({ showFilterPanel: false })}
+                filters={filters}
+                showIcons={false}
+                onFilterChange={this._onFilterChange} />
+        );
     }
 
     /**
@@ -221,7 +220,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderCommandBar = ({ excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
+    private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) {
         if (!currentView) {
             return null;
         }
@@ -229,7 +228,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
-        if (this.props.showGroupBy) {
+        if (showGroupBy) {
             const groupByColumns = this.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
@@ -270,32 +269,33 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             });
         }
 
-        farItems.push({
-            key: "View",
-            name: currentView.name,
-            iconProps: { iconName: "List" },
-            itemType: ContextualMenuItemType.Header,
-            onClick: e => e.preventDefault(),
-            items: this.configuration.views.map((qc, idx) => ({
-                key: idx.toString(),
-                name: qc.name,
-                iconProps: { iconName: qc.iconName },
+        farItems.push(
+            {
+                key: "View",
+                name: currentView.name,
+                iconProps: { iconName: "List" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                items: this.configuration.views.map((qc, idx) => ({
+                    key: idx.toString(),
+                    name: qc.name,
+                    iconProps: { iconName: qc.iconName },
+                    onClick: e => {
+                        e.preventDefault();
+                        this.executeSearch(qc);
+                    },
+                })),
+            },
+            {
+                key: "Filters",
+                name: "",
+                iconProps: { iconName: "Filter" },
+                itemType: ContextualMenuItemType.Normal,
                 onClick: e => {
                     e.preventDefault();
-                    this.executeSearch(qc);
+                    this.setState({ showFilterPanel: true });
                 },
-            })),
-        });
-        farItems.push({
-            key: "Filters",
-            name: "",
-            iconProps: { iconName: "Filter" },
-            itemType: ContextualMenuItemType.Normal,
-            onClick: e => {
-                e.preventDefault();
-                this.setState({ showFilterPanel: true });
-            },
-        });
+            });
 
         return (
             <CommandBar
@@ -310,7 +310,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderSearchBox = ({ }: IDynamicPortfolioProps, { }: IDynamicPortfolioState) => {
+    private renderSearchBox({ }: IDynamicPortfolioProps, { }: IDynamicPortfolioState) {
         return (
             <div style={{ marginTop: 10 }}>
                 <SearchBox
@@ -329,7 +329,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) => {
+    private renderProjectInfoModal({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
@@ -361,31 +361,31 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) => {
-        if (currentView) {
-            const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
-            const data = this.getFilteredData(this.props, this.state);
-            return (
-                <Workbook
-                    filename={fileName}
-                    element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
-                    {[
-                        <Workbook.Sheet
-                            key={0}
-                            data={data.items}
-                            name={excelExportConfig.sheetName}>
-                            {data.columns.map((col, key) => (
-                                <Workbook.Column
-                                    key={key}
-                                    label={col.name}
-                                    value={col.key} />
-                            ))}
-                        </Workbook.Sheet>,
-                    ]}
-                </Workbook>
-            );
+    private renderWorkbook({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) {
+        if (!currentView) {
+            return null;
         }
-        return null;
+        const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const data = this.getFilteredData(this.props, this.state);
+        return (
+            <Workbook
+                filename={fileName}
+                element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
+                {[
+                    <Workbook.Sheet
+                        key={0}
+                        data={data.items}
+                        name={excelExportConfig.sheetName}>
+                        {data.columns.map((col, key) => (
+                            <Workbook.Column
+                                key={key}
+                                label={col.name}
+                                value={col.key} />
+                        ))}
+                    </Workbook.Sheet>,
+                ]}
+            </Workbook>
+        );
     }
 
     /**
@@ -394,7 +394,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private getFilteredData = ({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) => {
+    private getFilteredData({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) {
         let groups: IGroup[] = null;
         if (groupBy) {
             const itemsSort: any = {
@@ -432,7 +432,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {any[]} refiners Refiners retrieved by search
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refiners: any[], viewConfig: Configuration.IViewConfig): any => {
+    private getSelectedFiltersWithItems(refiners: any[], viewConfig: Configuration.IViewConfig): any {
         return this.configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {

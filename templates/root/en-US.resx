@@ -2082,6 +2082,9 @@
   <data name="DynamicPortfolio_ExcelExportButtonLabel" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
+  <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
+    <value>Laster project portfolio...</value>
+  </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>

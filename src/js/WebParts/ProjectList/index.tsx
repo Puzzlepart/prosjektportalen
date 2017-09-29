@@ -63,7 +63,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      */
     public _render({ }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return <Spinner label={RESOURCE_MANAGER.getResource("ProjectList_LoadingText")} type={SpinnerType.large} />;
         }
 
         return (
@@ -84,11 +84,8 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private renderCards = ({ masonryOptions, tileClassName, tileWidth, tileImageHeight }: IProjectListProps, { }: IProjectListState): JSX.Element => {
-        const {
-            projects,
-            fields,
-        } = this.getFilteredData(this.props, this.state);
+    private renderCards({ masonryOptions, tileClassName, tileWidth, tileImageHeight }: IProjectListProps, { }: IProjectListState): JSX.Element {
+        const { projects, fields } = this.getFilteredData(this.props, this.state);
 
         if (projects.length === 0) {
             return (
@@ -124,7 +121,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private renderProjectInfoModal = ({ projectInfoFilterField, modalHeaderClassName }: IProjectListProps, { showProjectInfo }: IProjectListState): JSX.Element => {
+    private renderProjectInfoModal({ projectInfoFilterField, modalHeaderClassName }: IProjectListProps, { showProjectInfo }: IProjectListState): JSX.Element {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
@@ -157,7 +154,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private getFilteredData = ({ }: IProjectListProps, { searchTerm, data }: IProjectListState): IProjectListData => {
+    private getFilteredData({ }: IProjectListProps, { searchTerm, data }: IProjectListState): IProjectListData {
         return {
             ...data,
             projects: data.projects
