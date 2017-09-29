@@ -24,7 +24,7 @@
         <View MobileView="TRUE" Type="HTML" DisplayName="Aktivert" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="ExtensionOrder" />
+                    <FieldRef Name="GtOrder" />
                 </OrderBy>
                 <Where>
                     <Eq>
