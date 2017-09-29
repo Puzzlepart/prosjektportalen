@@ -456,6 +456,9 @@
   <data name="ContentTypes_RiskSection_Name" xml:space="preserve">
     <value>Risikoseksjon</value>
   </data>
+  <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
+    <value>Utvidelse</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -515,6 +518,9 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
+  </data>
+  <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">
     <value></value>
@@ -951,6 +957,9 @@
   <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
     <value>Rekkefølge</value>
   </data>
+  <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
+    <value>Rekkefølge</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Søkespørring</value>
   </data>
@@ -1004,6 +1013,9 @@
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
     <value>Kommentar, leveransestatus</value>
+  </data>
+  <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
+    <value>Aktivert</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1323,6 +1335,9 @@
   <data name="SiteFields_GtDpOrder_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1376,6 +1391,9 @@
   </data>
   <data name="SiteFields_GtProductStatusComment_Description" xml:space="preserve">
     <value>Kommentar til leveransestatus angitt over</value>
+  </data>
+  <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
