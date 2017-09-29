@@ -5,9 +5,8 @@
             SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?rev=[version]');
             EnsureScriptFunc('pp.main.js', null, function () {
                 window.setTimeout(function () {
-                    var loaded = window._v_dictSod['pp.main.js'].loaded;
-                    var shouldRenderWps = document.querySelectorAll('[id*=\'pp-\']').length > 0;
-                    if(loaded) {
+                    var shouldRenderWps = document.querySelectorAll('div[id*=\'pp-\']').length > 0;
+                    if(window._v_dictSod['pp.main.js'].loaded) {
                         return;
                     }
                     if(!shouldRenderWps) {
