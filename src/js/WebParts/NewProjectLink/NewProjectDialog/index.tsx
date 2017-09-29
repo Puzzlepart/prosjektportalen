@@ -250,7 +250,7 @@ export default class NewProjectDialog extends React.Component<INewProjectDialogP
 
         switch (input) {
             case "Title": {
-                const url = Util.generateUrl(newValue, this.props.maxUrlLength);
+                const url = Util.generateSpFriendlyUrl(newValue, this.props.maxUrlLength);
                 if (this.doesWebExistDelay) {
                     this.doesWebExistDelay.cancel();
                     this.doesWebExistDelay = null;

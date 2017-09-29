@@ -72,17 +72,17 @@ describe("Util", () => {
             expect(dateFormatted).to.eq("21. september 2017 kl. 09:26");
         });
     });
-    describe("makeRelative", () => {
+    describe("makeUrlRelativeToSite", () => {
         it("should make URL relative", () => {
             global["document"] = { location: { protocol: "https:", hostname: "prosjektportalen.sharepoint.com" } };
-            let relativeUrl = Util.makeRelative("https://prosjektportalen.sharepoint.com/sites/cdn");
+            let relativeUrl = Util.makeUrlRelativeToSite("https://prosjektportalen.sharepoint.com/sites/cdn");
             expect(relativeUrl).to.eq("/sites/cdn");
         });
     });
-    describe("makeAbsolute", () => {
+    describe("makeUrlAbsolute", () => {
         it("should make URL absolute", () => {
             global["document"] = { location: { protocol: "https:", hostname: "prosjektportalen.sharepoint.com" } };
-            let absUrl = Util.makeAbsolute("/sites/cdn");
+            let absUrl = Util.makeUrlAbsolute("/sites/cdn");
             expect(absUrl).to.eq("https://prosjektportalen.sharepoint.com/sites/cdn");
         });
     });
