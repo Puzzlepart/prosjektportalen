@@ -15,9 +15,9 @@ pnp.setup({
 });
 
 ExecuteOrDelayUntilBodyLoaded(() => {
-    Forms.Initialize();
+    // Forms.Initialize();
     WebParts.Render();
-    StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
+    // StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
 });
 
 /** If the script was loaded using SP.SOD, we'll set the SOD to loaded */
