@@ -404,7 +404,7 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
 });
 
 /**
- * Executes a JSOM jquery using SP.ClientContext.executeQueryAsync. Allows for async-await
+ * Executes a JSOM query using SP.ClientContext.executeQueryAsync. Allows for async-await
  *
  * @param {SP.ClientContext} ctx Client context
  * @param {SP.ClientObject[]} clientObjects Client objects to load
