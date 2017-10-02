@@ -1,4 +1,5 @@
-import * as React from "react";
+import { WebPropertyBagEditorDefaultProps } from './WebPropertyBagEditor/IWebPropertyBagEditorProps';
+import * as React from 'react';
 import RESOURCE_MANAGER from "localization";
 import ProjectList from "./ProjectList";
 import ProjectInfo from "./ProjectInfo";
@@ -33,7 +34,13 @@ const WebPartComponents: WebPartComponent[] = [
     new WebPartComponent(ProjectStatus.displayName, "pp-projectstatus", <ProjectStatus />),
     new WebPartComponent(ExperienceLog.displayName, "pp-experiencelog", <ExperienceLog />),
     new WebPartComponent(LatestLogEntries.displayName, "pp-latestlogentries", <LatestLogEntries />),
-    new WebPartComponent(WebPropertyBagEditor.displayName, "pp-webPropertyBagEditor", <WebPropertyBagEditor />),
+    new WebPartComponent(WebPropertyBagEditor.displayName, "pp-webPropertyBagEditor", <WebPropertyBagEditor readOnlySettings={["pp_version", "pp_datasourcesiteurl", "pp_assetssiteurl"]} settingsOptions={{
+        pp_loglevel: [
+            { key: "3", text: "Error" },
+            { key: "2", text: "Warning" },
+            { key: "1", text: "Info" },
+        ],
+    }} />),
 ];
 
 /**
@@ -66,4 +73,5 @@ export {
     ProjectStatus,
     ExperienceLog,
     LatestLogEntries,
+    WebPropertyBagEditor,
 };

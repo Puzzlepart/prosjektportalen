@@ -7,30 +7,18 @@ import {
 } from "office-ui-fabric-react/lib/DetailsList";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import {
-    Dropdown,
-    IDropdownOption,
-} from "office-ui-fabric-react/lib/Dropdown";
+import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import {
     GetAllProperties,
     SetProperty,
 } from "../../Util/PropertyBag";
-import IWebPropertyBagEditorProps, { WebPropertyBagEditorDefaultProps } from "./IWebPropertyBagEditorProps";
+import IWebPropertyBagEditorProps from "./IWebPropertyBagEditorProps";
 import IWebPropertyBagEditorState from "./IWebPropertyBagEditorState";
 import ISetting from "./ISetting";
 import BaseWebPart from "../@BaseWebPart";
 
 export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEditorProps, IWebPropertyBagEditorState> {
     public static displayName = "WebPropertyBagEditor";
-    public static defaultProps = WebPropertyBagEditorDefaultProps;
-    private readOnlySettings = ["pp_version", "pp_datasourcesiteurl", "pp_assetssiteurl"];
-    private settingsOptions: { [key: string]: IDropdownOption[] } = {
-        pp_loglevel: [
-            { key: "3", text: "Error" },
-            { key: "2", text: "Warning" },
-            { key: "1", text: "Info" },
-        ],
-    };
 
     /**
      * Constructor
@@ -41,11 +29,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         super(props, {
             isLoading: true,
             settings: [],
-            userInput: {},
         });
         this._onRenderItemColumn = this._onRenderItemColumn.bind(this);
         this._onSaveSetting = this._onSaveSetting.bind(this);
         this._onSettingChanged = this._onSettingChanged.bind(this);
+    }
+
+    public shouldComponentUpdate(nextProps: IWebPropertyBagEditorProps, nextState: IWebPropertyBagEditorState) {
+        return this.state.settings.length !== nextState.settings.length;
     }
 
     /**
@@ -61,14 +52,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                 let setting: ISetting = {
                     settingKey: key,
                     settingValue: properties[key],
-                    readOnly: this.readOnlySettings.indexOf(key) !== -1,
+                    readOnly: this.props.readOnlySettings.indexOf(key) !== -1,
                 };
-                if (this.settingsOptions[key]) {
-                    setting.options = this.settingsOptions[key];
+                if (this.props.settingsOptions[key]) {
+                    setting.options = this.props.settingsOptions[key];
                 }
                 return setting;
             });
-        return this.setState({ settings });
+        return this.setState({ settings, isLoading: false });
     }
 
     public render() {
@@ -107,8 +98,6 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
 
     private _onRenderItemColumn(item: ISetting, index, column) {
         const colValue = item[column.fieldName];
-        console.log("_onRenderItemColumn", column.fieldName);
-
         if (column.fieldName === "settingValue") {
             if (item.options) {
                 return (
@@ -134,37 +123,28 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
             );
         }
         if (column.fieldName === "saveButton") {
-            const userValue = this.state.userInput[item.settingKey];
-            const showButton = userValue && userValue !== item.settingValue;
             return (
-                <div
-                    hidden={!showButton}
-                    style={{ width: 200 }}>
-                    <PrimaryButton onClick={e => this._onSaveSetting(item, userValue)}>Lagre</PrimaryButton>
+                <div style={{ width: 200 }}>
+                    <PrimaryButton key={`${item.settingKey}_SaveBtn`} onClick={e => this._onSaveSetting(item)}>Lagre</PrimaryButton>
                 </div>
             );
         }
         return colValue;
     }
 
-    private _onSettingChanged(setting: ISetting, newValue: string) {
-        console.log("_onSettingChanged");
-        let userInput = this.state.userInput;
-        userInput[setting.settingKey] = newValue;
-        console.log(userInput);
-        this.setState({ userInput });
-    }
-
-    private async _onSaveSetting(setting: ISetting, newValue: string) {
-        console.log("_onSaveSetting");
-        await SetProperty(setting.settingKey, newValue);
+    private _onSettingChanged({ settingKey }: ISetting, newValue: string) {
         this.setState({
-            settings: this.state.settings.map(s => {
-                if (s.settingKey = setting.settingKey) {
-                    s.settingValue = newValue;
+            settings: this.state.settings.map(setting => {
+                if (setting.settingKey === settingKey) {
+                    setting.settingValue = newValue;
                 }
-                return s;
+                return setting;
             }),
         });
+    }
+
+    private async _onSaveSetting(setting: ISetting) {
+        await SetProperty(setting.settingKey, setting.settingValue);
+        return;
     }
 }
