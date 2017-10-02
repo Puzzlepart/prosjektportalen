@@ -1,5 +1,4 @@
-import { WebPropertyBagEditorDefaultProps } from './WebPropertyBagEditor/IWebPropertyBagEditorProps';
-import * as React from 'react';
+import * as React from "react";
 import RESOURCE_MANAGER from "localization";
 import ProjectList from "./ProjectList";
 import ProjectInfo from "./ProjectInfo";
