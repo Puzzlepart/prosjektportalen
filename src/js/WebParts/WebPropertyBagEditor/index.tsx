@@ -12,13 +12,14 @@ import {
     GetAllProperties,
     SetProperty,
 } from "../../Util/PropertyBag";
-import IWebPropertyBagEditorProps from "./IWebPropertyBagEditorProps";
+import IWebPropertyBagEditorProps, { WebPropertyBagEditorDefaultProps } from "./IWebPropertyBagEditorProps";
 import IWebPropertyBagEditorState from "./IWebPropertyBagEditorState";
 import ISetting from "./ISetting";
 import BaseWebPart from "../@BaseWebPart";
 
 export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEditorProps, IWebPropertyBagEditorState> {
     public static displayName = "WebPropertyBagEditor";
+    public static defaultProps = WebPropertyBagEditorDefaultProps;
 
     /**
      * Constructor
