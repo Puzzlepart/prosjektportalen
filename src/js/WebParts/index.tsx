@@ -12,6 +12,7 @@ import BenefitsOverview from "./BenefitsOverview";
 import ProjectStatus from "./ProjectStatus";
 import ExperienceLog from "./ExperienceLog";
 import LatestLogEntries from "./LatestLogEntries";
+import WebPropertyBagEditor from "./WebPropertyBagEditor";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -32,6 +33,7 @@ const WebPartComponents: WebPartComponent[] = [
     new WebPartComponent(ProjectStatus.displayName, "pp-projectstatus", <ProjectStatus />),
     new WebPartComponent(ExperienceLog.displayName, "pp-experiencelog", <ExperienceLog />),
     new WebPartComponent(LatestLogEntries.displayName, "pp-latestlogentries", <LatestLogEntries />),
+    new WebPartComponent(WebPropertyBagEditor.displayName, "pp-webPropertyBagEditor", <WebPropertyBagEditor />),
 ];
 
 /**
@@ -64,4 +66,5 @@ export {
     ProjectStatus,
     ExperienceLog,
     LatestLogEntries,
+    WebPropertyBagEditor,
 };

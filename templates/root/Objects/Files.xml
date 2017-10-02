@@ -76,6 +76,19 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
+    <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Prosjektportalen - Innstillinger" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="WebPropertyBagEditor" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/WebPropertyBagEditor.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
+    </pnp:File>
     <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectList_Title}" />
@@ -149,6 +162,13 @@
     <pnp:File Src="WebPartGallery\LatestLogEntries.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_LatestLogEntries_Title}" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="{resource}" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\WebPropertyBagEditor.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="WebPropertyBagEditor" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource}" />
         </pnp:Properties>
