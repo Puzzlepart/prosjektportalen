@@ -66,9 +66,7 @@ module.exports = (devtool, exclude, env) => ({
     },
     plugins: [
         new webpack.DefinePlugin({
-            __VERSION: JSON.stringify(pkg.version)
-        }),
-        new webpack.DefinePlugin({
+            __VERSION: JSON.stringify(pkg.version),
             'process.env': {
                 NODE_ENV: JSON.stringify(env)
             }
