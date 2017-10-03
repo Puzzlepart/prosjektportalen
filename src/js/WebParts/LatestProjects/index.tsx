@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -65,7 +66,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(__("WebPart_RecentProjects_Title"), `#${this.props.containerId}`, LatestProjects.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"), this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -77,7 +78,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     * @param {ILatestProjectsProps} param0 Props
     * @param {ILatestProjectsState} param1 State
      */
-    private renderItems = ({ containerId, listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
+    private renderItems = ({ listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
@@ -85,19 +86,19 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } else if (webinfos == null) {
             return (
                 <div className="ms-metadata">
-                    <Icon iconName="Error" style={{ color: "#000" }} />  {__("WebPart_FailedMessage")}
+                    <Icon iconName="Error" style={{ color: "#000" }} />  {RESOURCE_MANAGER.getResource("WebPart_FailedMessage")}
                 </div>
             );
         } else if (webinfos.length > 0) {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
                         {webinfos.map(webinfo => (
                             <li key={webinfo.Id}>
                                 {webinfo.Title ?
                                     <div>
                                         <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                        <div className="ms-metadata">{__("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                        <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
                                     </div>
                                     : (
                                         <div style={{ width: 100 }}>
@@ -111,8 +112,8 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
             );
         } else {
             return (
-                <div id={this.props.containerId}>
-                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
+                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

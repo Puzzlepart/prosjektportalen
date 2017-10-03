@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
 import Masonry from "react-masonry-component";
 import {
@@ -8,7 +9,7 @@ import {
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import * as Search from "./Search";
+import { queryProjects } from "./ProjectListSearch";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
 import Project from "./Project";
@@ -62,13 +63,13 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      */
     public _render({ }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return <Spinner label={RESOURCE_MANAGER.getResource("ProjectList_LoadingText")} type={SpinnerType.large} />;
         }
 
         return (
             <div style={{ paddingRight: 40 }}>
                 <SearchBox
-                    labelText={__("DynamicPortfolio_SearchBox_Placeholder")}
+                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 {this.renderCards(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
@@ -83,15 +84,12 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private renderCards = ({ masonryOptions, tileClassName, tileWidth, tileImageHeight }: IProjectListProps, { }: IProjectListState): JSX.Element => {
-        const {
-            projects,
-            fields,
-        } = this.getFilteredData(this.props, this.state);
+    private renderCards({ masonryOptions, tileClassName, tileWidth, tileImageHeight }: IProjectListProps, { }: IProjectListState): JSX.Element {
+        const { projects, fields } = this.getFilteredData(this.props, this.state);
 
         if (projects.length === 0) {
             return (
-                <MessageBar>{__("ProjectList_NoResults")}</MessageBar>
+                <MessageBar>{RESOURCE_MANAGER.getResource("ProjectList_NoResults")}</MessageBar>
             );
         }
 
@@ -123,7 +121,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private renderProjectInfoModal = ({ projectInfoFilterField, modalHeaderClassName }: IProjectListProps, { showProjectInfo }: IProjectListState): JSX.Element => {
+    private renderProjectInfoModal({ projectInfoFilterField, modalHeaderClassName }: IProjectListProps, { showProjectInfo }: IProjectListState): JSX.Element {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
@@ -156,7 +154,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private getFilteredData = ({ }: IProjectListProps, { searchTerm, data }: IProjectListState): IProjectListData => {
+    private getFilteredData({ }: IProjectListProps, { searchTerm, data }: IProjectListState): IProjectListData {
         return {
             ...data,
             projects: data.projects
@@ -168,26 +166,25 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     /**
      * Fetch data using sp-pnp-js search
      */
-    private fetchData = () => new Promise<IProjectListData>((resolve, reject) => {
+    private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
 
-        const ctFieldsPromise = rootWeb
-            .contentTypes
-            .getById(__("ContentTypes_Prosjektforside_ContentTypeId"))
-            .fields
-            .select("Title", "Description", "InternalName", "Required", "TypeAsString")
-            .get();
-
-        const projectsPromise = Search.query();
-
-        Promise.all([projectsPromise, ctFieldsPromise])
-            .then(([projectsSearchResult, fieldsArray]) => {
-                const projects = projectsSearchResult.primarySearchResults.map(result => new Project(result));
-                let fields: { [key: string]: string } = {};
-                fieldsArray.forEach(({ InternalName, Title }) => {
-                    fields[InternalName] = Title;
-                });
-                resolve({ projects, fields });
+        try {
+            const ctFieldsPromise = rootWeb
+                .contentTypes
+                .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+                .fields
+                .select("Title", "Description", "InternalName", "Required", "TypeAsString")
+                .get();
+            const [projectsSearchResult, fieldsArray] = await Promise.all([queryProjects(), ctFieldsPromise]);
+            const projects = projectsSearchResult.primarySearchResults.map(result => new Project(result));
+            let fields: { [key: string]: string } = {};
+            fieldsArray.forEach(({ InternalName, Title }) => {
+                fields[InternalName] = Title;
             });
-    })
+            return ({ projects, fields });
+        } catch (err) {
+            throw err;
+        }
+    }
 }

@@ -1,4 +1,3 @@
-import * as uuid_v1 from "uuid/v1";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface IAnnouncementsProps extends IBaseWebPartProps {
@@ -6,7 +5,6 @@ export default interface IAnnouncementsProps extends IBaseWebPartProps {
     itemsFilter?: string;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     listClassName?: string;
-    containerId?: string;
     modalHeaderClassName?: string;
     modalBodyClassName?: string;
     modalContainerClassName?: string;
@@ -20,7 +18,6 @@ export const AnnouncementsDefaultProps: IAnnouncementsProps = {
         ascending: false,
     },
     listClassName: "pp-simpleList spacing-s",
-    containerId: uuid_v1(),
     modalContainerClassName: "pp-announcementsModalContainer",
     modalHeaderClassName: "ms-font-xxl",
     modalBodyClassName: "ms-font-l",

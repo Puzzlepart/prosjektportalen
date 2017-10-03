@@ -1,19 +1,25 @@
-import * as  jQuery from "jquery";
+import RESOURCE_MANAGER from "localization";
 import { IBaseFormModifications } from "../Base";
-import * as FormUtil from "../Util";
+import * as FormUtil from "../FormUtils";
 
 const _: IBaseFormModifications = {
     NewForm: () => {
-        //
+        // NewForm
     },
     EditForm: () => {
         FormUtil.overridePreSaveAction(() => {
-            jQuery(".ms-formvalidation").remove();
-            let status = jQuery("select[id*='GtChecklistStatus'] option:selected").text();
-            if (status === __("Choice_GtChecklistStatus_NotRelevant")) {
-                let comment = jQuery("textarea[id*='GtComment']");
-                if (comment.val() === "") {
-                    comment.after(`<div class="ms-formvalidation">${__("SiteFields_GtChecklistStatus_FormValidation_NotRelevant")}</div>`);
+            let formValidation: any = document.querySelector(".ms-formvalidation");
+            if (formValidation) {
+                formValidation.style.display = "none";
+            }
+            let status = (document.querySelector("select[id*='GtChecklistStatus']") as any).value;
+            if (status === RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant")) {
+                let comment: any = document.querySelector("textarea[id*='GtComment']");
+                if (comment.value === "") {
+                    formValidation = document.createElement("div");
+                    formValidation.classList.add("ms-formvalidation");
+                    formValidation.innerText = RESOURCE_MANAGER.getResource("SiteFields_GtChecklistStatus_FormValidation_NotRelevant");
+                    comment.parentNode.insertBefore(formValidation, comment.nextSibling);
                     return false;
                 }
             }
@@ -21,7 +27,7 @@ const _: IBaseFormModifications = {
         });
     },
     DispForm: () => {
-        //
+        // DispForm
     },
 };
 

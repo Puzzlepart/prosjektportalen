@@ -25,9 +25,9 @@ const StampVersion = (containerId: string, versionKey: string, additionalClassNa
 const getVersion = (versionKey: string) => new Promise<string>((resolve, reject) => {
     PropertyBag.GetAllProperties(_spPageContextInfo.webAbsoluteUrl)
         .then(props => {
-            let e = Object.keys(props.get_fieldValues()).filter(key => key === versionKey);
+            let e = Object.keys(props).filter(key => key === versionKey);
             if (e.length === 1) {
-                resolve(props.get_item(versionKey));
+                resolve(props[versionKey]);
             } else {
                 reject();
             }

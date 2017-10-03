@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as jQuery from "jquery";
+import RESOURCE_MANAGER from "localization";
 import Workbook from "react-excel-workbook";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
@@ -26,7 +26,7 @@ import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import IFilter from "./FilterPanel/Filter/IFilter";
 import * as Configuration from "./Configuration";
-import * as Search from "./Search";
+import { queryProjects } from "./DynamicPortfolioSearch";
 import _onRenderItemColumn from "./ItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
@@ -50,6 +50,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         super(props, {
             isLoading: true,
             searchTerm: "",
+            filters: [],
             currentFilters: {},
             showFilterPanel: false,
         });
@@ -58,35 +59,38 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchInitialData()
-            .then(data => {
-                this.setState({
-                    ...data,
-                    isLoading: false,
-                }, () => {
-                    Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
-                });
-            })
-            .catch(_ => {
-                this.setState({ isLoading: false });
+    public async componentDidMount(): Promise<void> {
+        try {
+            const data = await this.fetchInitialData();
+            await this.updateState({
+                ...data,
+                isLoading: false,
             });
+            Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+        } catch (errorMessage) {
+            this.setState({
+                errorMessage,
+                isLoading: false,
+            });
+        }
     }
 
     /**
      * Renders the component
      */
     public render(): JSX.Element {
+        if (this.state.errorMessage) {
+            return (
+                <div>
+                    <MessageBar messageBarType={this.state.errorMessage.type}>{this.state.errorMessage.message}</MessageBar>
+                </div>
+            );
+        }
         return (
             <div>
-                <div>
-                    {this.renderCommandBar(this.props, this.state)}
-                    <div style={{ height: 10 }}></div>
-                    <SearchBox
-                        onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                        labelText={__("DynamicPortfolio_SearchBox_Placeholder")} />
-                    {this.renderItems(this.props, this.state)}
-                </div>
+                {this.renderCommandBar(this.props, this.state)}
+                {this.renderSearchBox(this.props, this.state)}
+                {this.renderItems(this.props, this.state)}
                 {this.renderFilterPanel(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
                 {this.renderWorkbook(this.props, this.state)}
@@ -97,73 +101,62 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     /**
      * Fetch initial data
      */
-    private fetchInitialData = () => new Promise<Partial<IDynamicPortfolioState>>((resolve, reject) => {
+    private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
-        Configuration.getConfig()
-            .then(config => {
-                this.configuration = config;
-                let currentView;
+        const config = await Configuration.getConfig();
+        this.configuration = config;
+        let currentView;
 
-                /**
-                 * If we have a viewId present in the URL hash, we'll attempt use that
-                 */
-                if (hashState.viewId) {
-                    [currentView] = this.configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
-                    if (!currentView) {
-                        resolve({
-                            errorMessage: {
-                                message: __("DynamicPortfolio_ViewNotFound"),
-                                type: MessageBarType.error,
-                            },
-                        });
-                    }
-                } else {
-                    /**
-                     * Otherwise we'll use the default view from the configuration list
-                     */
-                    [currentView] = this.configuration.views.filter(qc => qc.default);
-                    if (!currentView) {
-                        resolve({
-                            errorMessage: {
-                                message: __("DynamicPortfolio_NoDefaultView"),
-                                type: MessageBarType.error,
-                            },
-                        });
-                    }
-                }
-                if (currentView) {
-                    const fieldNames = this.configuration.columns.map(f => f.fieldName);
-                    Search.query(currentView, this.configuration)
-                        .then(response => {
-                            // Populates FieldSelector with items from this.configuration.columns
-                            FieldSelector.items = this.configuration.columns.map(col => ({
-                                name: col.name,
-                                value: col.fieldName,
-                                defaultSelected: Array.contains(currentView.fields, col.name),
-                                readOnly: col.readOnly,
-                            }));
-                            // Sort the columns as they are added to the view
-                            let selectedColumns = currentView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
+        /**
+         * If we have a viewId present in the URL hash, we'll attempt use that
+         */
+        if (hashState.viewId) {
+            [currentView] = this.configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+            if (!currentView) {
+                throw {
+                    message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
+                    type: MessageBarType.error,
+                };
+            }
+        } else {
+            /**
+             * Otherwise we'll use the default view from the configuration list
+             */
+            [currentView] = this.configuration.views.filter(qc => qc.default);
+            if (!currentView) {
+                throw {
+                    message: RESOURCE_MANAGER.getResource("DynamicPortfolio_NoDefaultView"),
+                    type: MessageBarType.error,
+                };
+            }
+        }
+        const fieldNames = this.configuration.columns.map(f => f.fieldName);
+        const response = await queryProjects(currentView, this.configuration);
+        // Populates FieldSelector with items from this.configuration.columns
+        FieldSelector.items = this.configuration.columns.map(col => ({
+            name: col.name,
+            value: col.fieldName,
+            defaultSelected: Array.contains(currentView.fields, col.name),
+            readOnly: col.readOnly,
+        }));
+        // Sort the columns as they are added to the view
+        let selectedColumns = currentView.fields.map(f => this.configuration.columns.filter(fc => fc.name === f)[0]);
 
-                            // Get selected filters
-                            let filters = this.getSelectedFiltersWithItems(response.refiners, currentView).concat([FieldSelector]);
+        // Get selected filters
+        let filters = this.getSelectedFiltersWithItems(response.refiners, currentView).concat([FieldSelector]);
 
-                            // Sorts items from response.primarySearchResults
-                            let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
+        // Sorts items from response.primarySearchResults
+        let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
 
-                            resolve({
-                                selectedColumns,
-                                fieldNames,
-                                items,
-                                filters,
-                                currentView,
-                                filteredItems: items,
-                            });
-                        })
-                        .catch(reject);
-                }
-            }).catch(reject);
-    })
+        return ({
+            selectedColumns,
+            fieldNames,
+            items,
+            filters,
+            currentView,
+            filteredItems: items,
+        });
+    }
 
     /**
      * Render items
@@ -171,16 +164,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderItems = ({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading, errorMessage }: IDynamicPortfolioState) => {
+    private renderItems({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) {
         if (isLoading) {
             return (
-                <Spinner type={SpinnerType.large} />
-            );
-        }
-
-        if (errorMessage) {
-            return (
-                <MessageBar messageBarType={this.state.errorMessage.type}>{this.state.errorMessage.message}</MessageBar>
+                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
             );
         }
 
@@ -188,7 +175,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         if (data.items.length === 0) {
             return (
-                <MessageBar>{__("DynamicPortfolio_NoResults")}</MessageBar>
+                <MessageBar>{RESOURCE_MANAGER.getResource("DynamicPortfolio_NoResults")}</MessageBar>
             );
         }
 
@@ -215,18 +202,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderFilterPanel = ({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) => {
-        if (filters) {
-            return (
-                <FilterPanel
-                    isOpen={showFilterPanel}
-                    onDismiss={() => this.setState({ showFilterPanel: false })}
-                    filters={filters}
-                    showIcons={false}
-                    onFilterChange={this._onFilterChange} />
-            );
-        }
-        return null;
+    private renderFilterPanel({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) {
+
+        return (
+            <FilterPanel
+                isOpen={showFilterPanel}
+                onDismiss={() => this.setState({ showFilterPanel: false })}
+                filters={filters}
+                showIcons={false}
+                onFilterChange={this._onFilterChange} />
+        );
     }
 
     /**
@@ -235,7 +220,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderCommandBar = ({ excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) => {
+    private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) {
         if (!currentView) {
             return null;
         }
@@ -243,7 +228,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
-        if (this.props.showGroupBy) {
+        if (showGroupBy) {
             const groupByColumns = this.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
@@ -254,14 +239,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }));
             items.push({
                 key: "Group",
-                name: groupBy ? groupBy.name : __("String_NoGrouping"),
+                name: groupBy ? groupBy.name : RESOURCE_MANAGER.getResource("String_NoGrouping"),
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
                 items: [
                     {
                         key: "NoGrouping",
-                        name: __("String_NoGrouping"),
+                        name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
                         onClick: e => {
                             e.preventDefault();
                             this.setState({ groupBy: null });
@@ -279,43 +264,62 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: excelExportConfig.buttonIcon },
                 onClick: e => {
                     e.preventDefault();
-                    jQuery(`#${excelExportConfig.triggerId}`).trigger("click");
+                    document.getElementById(excelExportConfig.triggerId).click();
                 },
             });
         }
 
-        farItems.push({
-            key: "View",
-            name: currentView.name,
-            iconProps: { iconName: "List" },
-            itemType: ContextualMenuItemType.Header,
-            onClick: e => e.preventDefault(),
-            items: this.configuration.views.map((qc, idx) => ({
-                key: idx.toString(),
-                name: qc.name,
-                iconProps: { iconName: qc.iconName },
+        farItems.push(
+            {
+                key: "View",
+                name: currentView.name,
+                iconProps: { iconName: "List" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                items: this.configuration.views.map((qc, idx) => ({
+                    key: idx.toString(),
+                    name: qc.name,
+                    iconProps: { iconName: qc.iconName },
+                    onClick: e => {
+                        e.preventDefault();
+                        this.executeSearch(qc);
+                    },
+                })),
+            },
+            {
+                key: "Filters",
+                name: "",
+                iconProps: { iconName: "Filter" },
+                itemType: ContextualMenuItemType.Normal,
                 onClick: e => {
                     e.preventDefault();
-                    this.executeSearch(qc);
+                    this.setState({ showFilterPanel: true });
                 },
-            })),
-        });
-        farItems.push({
-            key: "Filters",
-            name: "",
-            iconProps: { iconName: "Filter" },
-            itemType: ContextualMenuItemType.Normal,
-            onClick: e => {
-                e.preventDefault();
-                this.setState({ showFilterPanel: true });
-            },
-        });
+            });
 
         return (
             <CommandBar
                 items={items}
                 farItems={farItems}
             />
+        );
+    }
+    /**
+     * Renders search box
+     *
+     * @param {IDynamicPortfolioProps} param0 Props
+     * @param {IDynamicPortfolioState} param1 State
+     */
+    private renderSearchBox({ }: IDynamicPortfolioProps, { }: IDynamicPortfolioState) {
+        return (
+            <div style={{ marginTop: 10 }}>
+                <SearchBox
+                    onChange={newValue => {
+                        let searchTerm = newValue.toLowerCase();
+                        this.setState({ searchTerm });
+                    }}
+                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")} />
+            </div>
         );
     }
 
@@ -325,7 +329,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) => {
+    private renderProjectInfoModal({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
@@ -357,14 +361,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderWorkbook = ({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) => {
-        if (isLoading) {
+    private renderWorkbook({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) {
+        if (!currentView) {
             return null;
         }
-
         const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         const data = this.getFilteredData(this.props, this.state);
-
         return (
             <Workbook
                 filename={fileName}
@@ -392,7 +394,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private getFilteredData = ({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) => {
+    private getFilteredData({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) {
         let groups: IGroup[] = null;
         if (groupBy) {
             const itemsSort: any = {
@@ -404,7 +406,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 itemsSort.opts.reverse = !currentSort.isSortedDescending;
             }
             const groupItems = array_sort(filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : __("String_NotSet"));
+            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : RESOURCE_MANAGER.getResource("String_NotSet"));
             groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
                 name: `${groupBy.name}: ${name}`,
@@ -430,7 +432,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {any[]} refiners Refiners retrieved by search
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private getSelectedFiltersWithItems = (refiners: any[], viewConfig: Configuration.IViewConfig): any => {
+    private getSelectedFiltersWithItems(refiners: any[], viewConfig: Configuration.IViewConfig): any {
         return this.configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
@@ -543,43 +545,34 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Does a new search using Search.query, then updates component's state
+     * Does a new search using queryProjects, then updates component's state
      *
      * @param {Configuration.IViewConfig} viewConfig View configuration
      */
-    private executeSearch(viewConfig: Configuration.IViewConfig): void {
+    private async executeSearch(viewConfig: Configuration.IViewConfig): Promise<void> {
         const { currentView } = this.state;
 
         if (currentView.id === viewConfig.id) {
             return;
         }
 
-        this.setState({
-            isLoading: true,
-        }, () => {
-            Search.query(viewConfig, this.configuration)
-                .then(response => {
-                    FieldSelector.items = this.configuration.columns.map(col => ({
-                        name: col.name,
-                        value: col.fieldName,
-                        defaultSelected: Array.contains(viewConfig.fields, col.name),
-                        readOnly: col.readOnly,
-                    }));
-                    let filters = this.getSelectedFiltersWithItems(response.refiners, viewConfig).concat([FieldSelector]);
-                    this.setState({
-                        isLoading: false,
-                        items: response.primarySearchResults,
-                        filteredItems: response.primarySearchResults,
-                        filters: filters,
-                        currentView: viewConfig,
-                        selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
-                    }, () => {
-                        Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
-                    });
-                })
-                .catch(_ => {
-                    this.setState({ isLoading: false });
-                });
+        await this.updateState({ isLoading: true });
+        const response = await queryProjects(viewConfig, this.configuration);
+        FieldSelector.items = this.configuration.columns.map(col => ({
+            name: col.name,
+            value: col.fieldName,
+            defaultSelected: Array.contains(viewConfig.fields, col.name),
+            readOnly: col.readOnly,
+        }));
+        let filters = this.getSelectedFiltersWithItems(response.refiners, viewConfig).concat([FieldSelector]);
+        await this.updateState({
+            isLoading: false,
+            items: response.primarySearchResults,
+            filteredItems: response.primarySearchResults,
+            filters: filters,
+            currentView: viewConfig,
+            selectedColumns: this.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
         });
+        Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
     }
 }

@@ -15,19 +15,19 @@
             "showOutput": "always"
         },
         {
-            "taskName": "watch::eval",
+            "taskName": "watchEval",
             "args": [],
             "isBackground": true,
             "showOutput": "always"
         },
         {
-            "taskName": "watch::prod",
+            "taskName": "watchProd",
             "args": [],
             "isBackground": true,
             "showOutput": "always"
         },
         {
-            "taskName": "build:pnp",
+            "taskName": "buildPnpTemplateFiles",
             "args": [],
             "isBackground": true
         }

@@ -5,8 +5,9 @@ var exec = require('child_process').exec,
 
 var exports = module.exports = {};
 
-exports.execute = function (filePath, args, done) {
-    exec(format("Powershell.exe  -executionpolicy remotesigned -File {0}\\{1} {2}", config.paths.scripts, filePath, args), () => {
-        done();
+exports.execute = (filePath, args, done) => {
+    const cmd = format("Powershell.exe  -executionpolicy remotesigned -File {0}/{1} {2}", config.paths.scripts, filePath, args);
+    exec(cmd, (err, stdout, stderr) => {
+        done(err, stdout, stderr);
     });
 }

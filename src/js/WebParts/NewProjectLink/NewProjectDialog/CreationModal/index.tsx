@@ -51,7 +51,11 @@ export default class CreationModal extends React.Component<ICreationModalProps, 
                 isDarkOverlay={isDarkOverlay}
                 containerClassName="pp-modal"
             >
-                <div style={{ padding: 50 }}>
+                <div style={{
+                    height: 225,
+                    padding: 50,
+                    boxSizing: "border-box",
+                }}>
                     <div
                         style={{ marginBottom: 25 }}
                         className="ms-font-xl">{title}</div>

@@ -3,14 +3,14 @@ import { Web } from "sp-pnp-js";
 /**
  * Checks if the web exists
  *
- * @param url Url
+ * @param {string} siteServerRelativeUrl Url
  */
-const DoesWebExist = (url: string) => new Promise<boolean>((resolve, reject) => {
-    let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${url}`);
-    web.get()
-        .then(_ => resolve(true))
-        .catch(_ => resolve(false));
-});
-
-export default DoesWebExist;
-
+export default async function DoesWebExist(siteServerRelativeUrl: string): Promise<boolean> {
+    let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${siteServerRelativeUrl}`);
+    try {
+        await web.get();
+        return true;
+    } catch (err) {
+        return false;
+    }
+}

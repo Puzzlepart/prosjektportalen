@@ -1,7 +1,8 @@
 import * as React from "react";
-import { DialogType } from "office-ui-fabric-react/lib/Dialog";
+import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import AudienceTargeting from "../AudienceTargeting";
+import * as ListDataConfig from "../../Provision/Data/Config";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
@@ -23,23 +24,27 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
     constructor(props: INewProjectLinkProps) {
         super(props, {
             shouldRender: props.audienceTargeting === AudienceTargeting.None,
+            listDataConfig: {},
         });
     }
 
     /**
      * Component did mount. Handling audience.
      */
-    public componentDidMount(): void {
+    public async componentDidMount(): Promise<void> {
         /**
          * Checks if the web part should be rendered for the current user
         */
-        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
-            if (userMatchAudience !== this.state.shouldRender) {
-                this.setState({
-                    shouldRender: userMatchAudience,
-                });
+        const userMatchAudience = await Util.doesUserMatchAudience(this.props.audienceTargeting);
+        if (userMatchAudience !== this.state.shouldRender) {
+            this.setState({
+                shouldRender: userMatchAudience,
+            });
+            if (userMatchAudience) {
+                const listDataConfig = await ListDataConfig.RetrieveConfig();
+                this.setState({ listDataConfig });
             }
-        });
+        }
     }
 
     /**
@@ -73,15 +78,18 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderLink = ({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) => {
+    private renderLink({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) {
         return (
             <div>
                 <a
                     className={linkClassName}
-                    href="#"
-                    onClick={e => this.setState({ showDialog: true })}>
+                    href={_spPageContextInfo.webAbsoluteUrl}
+                    onClick={e => {
+                        e.preventDefault();
+                        this.setState({ showDialog: true });
+                    }}>
                     <Icon { ...iconProps } />
-                    <span>{__("NewProjectForm_Header")}</span>
+                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_Header")}</span>
                 </a>
             </div>
         );
@@ -93,17 +101,12 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ }: INewProjectLinkProps, { showDialog }: INewProjectLinkState) => {
+    private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
                 <NewProjectDialog
+                    listDataConfig={listDataConfig}
                     dialogProps={{
-                        type: DialogType.largeHeader,
-                        isDarkOverlay: true,
-                        isBlocking: false,
-                        title: __("NewProjectForm_DialogTitle"),
-                        subText: __("NewProjectForm_SubText"),
-                        className: "pp-newprojectdialog",
                         onDismiss: () => this.setState({ showDialog: false }),
                     }} />
             );

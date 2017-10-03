@@ -1,8 +1,9 @@
+import RESOURCE_MANAGER from "localization";
 import { Site } from "sp-pnp-js";
-
-import ICreateWebResult from "./ICreateWebResult";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
+import IProvisionContext from "../IProvisionContext";
+import ProvisionError from "../ProvisionError";
 
 /**
  * Get redirect URL. Appends permsetup.aspx if the web has unique permissions
@@ -17,31 +18,26 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
 /**
  * Creates a new subsite
  *
- * @param {string} title Title
- * @param {string} url Url
- * @param {string} description Description
- * @param {boolean} inheritPermissions Inherit permissions
+ * @param {IProvisionContext} context Provisioning context
  */
-const CreateWeb = (title: string, url: string, description: string, inheritPermissions: boolean) => new Promise<ICreateWebResult>((resolve, reject) => {
-    let site = new Site(_spPageContextInfo.siteAbsoluteUrl);
-    site.rootWeb.webs.add(title, url, description, "STS#0", process.env.LANGUAGE, inheritPermissions)
-        .then(result => {
-            url = result.data.Url;
-            SetSharedNavigation(url)
-                .then(() => {
-                    resolve({
-                        web: result.web,
-                        url: url,
-                        redirectUrl: GetRedirectUrl(url, inheritPermissions),
-                    });
-                })
-                .catch(reject);
-        })
-        .catch(reject);
-});
+async function CreateWeb(context: IProvisionContext): Promise<IProvisionContext> {
+    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
+    const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+    try {
+        const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url.toLowerCase(), context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);
+        await SetSharedNavigation(createWebResult.data.Url);
+        return {
+            ...context,
+            web: createWebResult.web,
+            url: createWebResult.data.Url,
+            redirectUrl: GetRedirectUrl(createWebResult.data.Url, context.model.InheritPermissions),
+        };
+    } catch (err) {
+        throw new ProvisionError(err, "CreateWeb");
+    }
+}
 
 export {
-    ICreateWebResult,
     DoesWebExist,
     SetSharedNavigation,
     CreateWeb,

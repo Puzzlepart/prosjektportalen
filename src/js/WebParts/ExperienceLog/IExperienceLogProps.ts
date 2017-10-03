@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import {
     SelectionMode,
     ConstrainMode,
@@ -19,38 +20,38 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     columns: [{
         key: "Title",
         fieldName: "Title",
-        name: __("SiteFields_Title_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_Title_DisplayName"),
         minWidth: 220,
     },
     {
         key: "SiteTitle",
         fieldName: "SiteTitle",
-        name: __("String_Project"),
+        name: RESOURCE_MANAGER.getResource("String_Project"),
     },
     {
         key: "GtProjectLogDescriptionOWSMTXT",
         fieldName: "Description",
-        name: __("SiteFields_GtProjectLogDescription_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogDescription_DisplayName"),
     },
     {
         key: "GtProjectLogResponsibleOWSCHCS",
         fieldName: "Responsible",
-        name: __("SiteFields_GtProjectLogResponsible_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogResponsible_DisplayName"),
     },
     {
         key: "GtProjectLogConsequenceOWSMTXT",
         fieldName: "Consequence",
-        name: __("SiteFields_GtProjectLogConsequence_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogConsequence_DisplayName"),
     },
     {
         key: "GtProjectLogRecommendationOWSMTXT",
         fieldName: "Recommendation",
-        name: __("SiteFields_GtProjectLogRecommendation_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogRecommendation_DisplayName"),
     },
     {
         key: "GtProjectLogActorsOWSCHCM",
         fieldName: "Actors",
-        name: __("SiteFields_GtProjectLogActors_DisplayName"),
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogActors_DisplayName"),
     }].map(col => ({
         ...col,
         isResizable: true,
