@@ -16,30 +16,10 @@ function Ensure-AssociatedGroups() {
     $ascVisitorGroup = Get-PnPGroup -AssociatedVisitorGroup -ErrorAction SilentlyContinue
     $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue
 
-    if($ascMemberGroup -eq $null -or $ascVisitorGroup -eq $null -or $ascOwnerGroup -eq $null) {
+    if($ascOwnerGroup -eq $null -or $ascMemberGroup -eq $null -or $ascVisitorGroup -eq $null) {
         Write-Host "We're missing some associated groups." -ForegroundColor Yellow
     }
 
-    if($ascMemberGroup -eq $null) {
-        $ascMemberGroupName = Read-Host "Couldn't find a associated members group. Enter name"
-        $ascMemberGroup = Get-PnPGroup -Identity $ascMemberGroupName -ErrorAction SilentlyContinue
-        if($ascMemberGroup -eq $null) {
-            Write-Host "Group '$($ascMemberGroupName)' doesn't exist. Creating..."
-            $ascMemberGroup = New-PnPGroup -Title $ascMemberGroupName
-        }
-        Write-Host "Setting group $($ascMemberGroupName) as associated members group..."
-        Set-PnPGroup -Identity $ascMemberGroup.Id -SetAssociatedGroup Members
-    }
-    if($ascVisitorGroup -eq $null) {
-        $ascVisitorGroupName = Read-Host "Couldn't find a associated visitors group. Enter name"     
-        $ascVisitorGroup = Get-PnPGroup -Identity $ascVisitorGroupName -ErrorAction SilentlyContinue   
-        if($ascVisitorGroup -eq $null) {
-            Write-Host "Group '$($ascVisitorGroupName)' doesn't exist. Creating..."
-            $ascVisitorGroup = New-PnPGroup -Title $ascVisitorGroupName
-        }
-        Write-Host "Setting group $($ascVisitorGroupName) as associated visitors group..."
-        Set-PnPGroup -Identity $ascVisitorGroup.Id -SetAssociatedGroup Visitors
-    }
     if($ascOwnerGroup -eq $null) {
         $ascOwnerGroupName = Read-Host "Couldn't find a associated owner group. Enter name"    
         $ascOwnerGroup = Get-PnPGroup -Identity $ascOwnerGroupName -ErrorAction SilentlyContinue    
@@ -49,6 +29,32 @@ function Ensure-AssociatedGroups() {
         }
         Write-Host "Setting group $($ascOwnerGroupName) as associated owner group..."
         Set-PnPGroup -Identity $ascOwnerGroup.Id -SetAssociatedGroup Owners
+        Set-PnPWebPermission -Group $ascOwnerGroup -AddRole "Full control" -ErrorAction SilentlyContinue
+        Set-PnPWebPermission -Group $ascOwnerGroup -AddRole "Full kontroll" -ErrorAction SilentlyContinue
+    }
+    if($ascMemberGroup -eq $null) {
+        $ascMemberGroupName = Read-Host "Couldn't find a associated members group. Enter name"
+        $ascMemberGroup = Get-PnPGroup -Identity $ascMemberGroupName -ErrorAction SilentlyContinue
+        if($ascMemberGroup -eq $null) {
+            Write-Host "Group '$($ascMemberGroupName)' doesn't exist. Creating..."
+            $ascMemberGroup = New-PnPGroup -Title $ascMemberGroupName -Owner $ascOwnerGroup
+        }
+        Write-Host "Setting group $($ascMemberGroupName) as associated members group..."
+        Set-PnPGroup -Identity $ascMemberGroup.Id -SetAssociatedGroup Members
+        Set-PnPWebPermission -Group $ascMemberGroup -AddRole "Contribute" -ErrorAction SilentlyContinue
+        Set-PnPWebPermission -Group $ascMemberGroup -AddRole "Bidra" -ErrorAction SilentlyContinue
+    }
+    if($ascVisitorGroup -eq $null) {
+        $ascVisitorGroupName = Read-Host "Couldn't find a associated visitors group. Enter name"     
+        $ascVisitorGroup = Get-PnPGroup -Identity $ascVisitorGroupName -ErrorAction SilentlyContinue   
+        if($ascVisitorGroup -eq $null) {
+            Write-Host "Group '$($ascVisitorGroupName)' doesn't exist. Creating..."
+            $ascVisitorGroup = New-PnPGroup -Title $ascVisitorGroupName -Owner $ascOwnerGroup
+        }
+        Write-Host "Setting group $($ascVisitorGroupName) as associated visitors group..."
+        Set-PnPGroup -Identity $ascVisitorGroup.Id -SetAssociatedGroup Visitors
+        Set-PnPWebPermission -Group $ascVisitorGroup -AddRole "Read" -ErrorAction SilentlyContinue
+        Set-PnPWebPermission -Group $ascVisitorGroup -AddRole "Lese" -ErrorAction SilentlyContinue
     }
 }
 
