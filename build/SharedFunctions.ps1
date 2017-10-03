@@ -17,7 +17,7 @@ function Ensure-AssociatedGroups() {
     $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue
 
     if($ascMemberGroup -eq $null -or $ascVisitorGroup -eq $null -or $ascOwnerGroup -eq $null) {
-        Write-Host "We're missing some AssociatedOwnerGroup groups." -ForegroundColor Yellow
+        Write-Host "We're missing some associated groups." -ForegroundColor Yellow
     }
 
     if($ascMemberGroup -eq $null) {
