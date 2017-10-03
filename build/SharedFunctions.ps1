@@ -23,7 +23,7 @@ function Ensure-AssociatedGroups() {
     if($ascMemberGroup -eq $null) {
         $ascMemberGroupName = Read-Host "Couldn't find a AssociatedMemberGroup. Enter name"
         $ascMemberGroup = Get-PnPGroup -Identity $ascMemberGroupName -ErrorAction SilentlyContinue
-        if($ascVisitorGroup -eq $null) {
+        if($ascMemberGroup -eq $null) {
             Write-Host "Group doesn't exist. Creating..."
             $ascMemberGroup = New-PnPGroup -Title $ascMemberGroupName
         }
