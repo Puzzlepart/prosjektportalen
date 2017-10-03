@@ -1,10 +1,55 @@
-# Get has assocated groups
-function Get-HasAssociatedGroups() {    
+# Connect to SharePoint
+function Connect-SharePoint ($Url) {
+    if ($UseWebLogin.IsPresent) {
+        Connect-PnPOnline $Url -UseWebLogin
+    } elseif ($CurrentCredentials.IsPresent) {
+        Connect-PnPOnline $Url -CurrentCredentials
+    } else {
+        Connect-PnPOnline $Url -Credentials $Credential
+    }
+}
+
+# Ensure assocated groups
+function Ensure-AssociatedGroups() {    
     Connect-SharePoint $Url  
     $ascMemberGroup = Get-PnPGroup -AssociatedMemberGroup -ErrorAction SilentlyContinue
     $ascVisitorGroup = Get-PnPGroup -AssociatedVisitorGroup -ErrorAction SilentlyContinue
     $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue
-    return (($ascMemberGroup -ne $null) -and ($ascVisitorGroup -ne $null) -and ($ascOwnerGroup -ne $null))
+
+    if($ascMemberGroup -eq $null -or $ascVisitorGroup -eq $null -or $ascOwnerGroup -eq $null) {
+        Write-Host "We're missing some AssociatedOwnerGroup groups." -ForegroundColor Yellow
+    }
+
+    if($ascMemberGroup -eq $null) {
+        $ascMemberGroupName = Read-Host "Couldn't find a AssociatedMemberGroup. Enter name"
+        $ascMemberGroup = Get-PnPGroup -Identity $ascMemberGroupName -ErrorAction SilentlyContinue
+        if($ascVisitorGroup -eq $null) {
+            Write-Host "Group doesn't exist. Creating..."
+            $ascMemberGroup = New-PnPGroup -Title $ascMemberGroupName
+        }
+        Write-Host "Setting group $($ascMemberGroupName) as AssociatedMemberGroup..."
+        Set-PnPGroup -Identity $ascMemberGroup.Id -SetAssociatedGroup Members
+    }
+    if($ascVisitorGroup -eq $null) {
+        $ascVisitorGroupName = Read-Host "Couldn't find a AssociatedVisitorGroup. Enter name"     
+        $ascVisitorGroup = Get-PnPGroup -Identity $ascVisitorGroupName -ErrorAction SilentlyContinue   
+        if($ascVisitorGroup -eq $null) {
+            Write-Host "Group doesn't exist. Creating..."
+            $ascVisitorGroup = New-PnPGroup -Title $ascVisitorGroupName
+        }
+        Write-Host "Setting group $($ascVisitorGroupName) as AssociatedVisitorGroup..."
+        Set-PnPGroup -Identity $ascVisitorGroup.Id -SetAssociatedGroup Visitors
+    }
+    if($ascOwnerGroup -eq $null) {
+        $ascOwnerGroupName = Read-Host "Couldn't find a AssociatedOwnerGroup. Enter name"    
+        $ascOwnerGroup = Get-PnPGroup -Identity $ascOwnerGroupName -ErrorAction SilentlyContinue    
+        if($ascOwnerGroup -eq $null) {
+            Write-Host "Group doesn't exist. Creating..."
+            $ascOwnerGroup = New-PnPGroup -Title $ascOwnerGroupName
+        }
+        Write-Host "Setting group $($ascOwnerGroupName) as AssociatedOwnerGroup..."
+        Set-PnPGroup -Identity $ascOwnerGroup.Id -SetAssociatedGroup Owners
+    }
 }
 
 # Get termstore default language

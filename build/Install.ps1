@@ -52,16 +52,6 @@ Param(
 
 . ./SharedFunctions.ps1
 
-function Connect-SharePoint ($Url) {
-    if ($UseWebLogin.IsPresent) {
-        Connect-PnPOnline $Url -UseWebLogin
-    } elseif ($CurrentCredentials.IsPresent) {
-        Connect-PnPOnline $Url -CurrentCredentials
-    } else {
-        Connect-PnPOnline $Url -Credentials $Credential
-    }
-}
-
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
@@ -217,8 +207,5 @@ function Start-Install() {
     }
 }
 
-if (Get-HasAssociatedGroups -eq $true) {
-    Start-Install
-} else {
-    Write-Host "Can't install to $($Url). Missing associated groups. Please go to /_layouts/15/permsetup.aspx to set up groups for the site." -ForegroundColor Red
-}
+Ensure-AssociatedGroups
+Start-Install
