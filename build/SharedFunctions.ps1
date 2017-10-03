@@ -21,33 +21,33 @@ function Ensure-AssociatedGroups() {
     }
 
     if($ascMemberGroup -eq $null) {
-        $ascMemberGroupName = Read-Host "Couldn't find a AssociatedMemberGroup. Enter name"
+        $ascMemberGroupName = Read-Host "Couldn't find a associated members group. Enter name"
         $ascMemberGroup = Get-PnPGroup -Identity $ascMemberGroupName -ErrorAction SilentlyContinue
         if($ascMemberGroup -eq $null) {
-            Write-Host "Group doesn't exist. Creating..."
+            Write-Host "Group '$($ascMemberGroupName)' doesn't exist. Creating..."
             $ascMemberGroup = New-PnPGroup -Title $ascMemberGroupName
         }
-        Write-Host "Setting group $($ascMemberGroupName) as AssociatedMemberGroup..."
+        Write-Host "Setting group $($ascMemberGroupName) as associated members group..."
         Set-PnPGroup -Identity $ascMemberGroup.Id -SetAssociatedGroup Members
     }
     if($ascVisitorGroup -eq $null) {
-        $ascVisitorGroupName = Read-Host "Couldn't find a AssociatedVisitorGroup. Enter name"     
+        $ascVisitorGroupName = Read-Host "Couldn't find a associated visitors group. Enter name"     
         $ascVisitorGroup = Get-PnPGroup -Identity $ascVisitorGroupName -ErrorAction SilentlyContinue   
         if($ascVisitorGroup -eq $null) {
-            Write-Host "Group doesn't exist. Creating..."
+            Write-Host "Group '$($ascVisitorGroupName)' doesn't exist. Creating..."
             $ascVisitorGroup = New-PnPGroup -Title $ascVisitorGroupName
         }
-        Write-Host "Setting group $($ascVisitorGroupName) as AssociatedVisitorGroup..."
+        Write-Host "Setting group $($ascVisitorGroupName) as associated visitors group..."
         Set-PnPGroup -Identity $ascVisitorGroup.Id -SetAssociatedGroup Visitors
     }
     if($ascOwnerGroup -eq $null) {
-        $ascOwnerGroupName = Read-Host "Couldn't find a AssociatedOwnerGroup. Enter name"    
+        $ascOwnerGroupName = Read-Host "Couldn't find a associated owner group. Enter name"    
         $ascOwnerGroup = Get-PnPGroup -Identity $ascOwnerGroupName -ErrorAction SilentlyContinue    
         if($ascOwnerGroup -eq $null) {
-            Write-Host "Group doesn't exist. Creating..."
+            Write-Host "Group '$($ascOwnerGroupName)' doesn't exist. Creating..."
             $ascOwnerGroup = New-PnPGroup -Title $ascOwnerGroupName
         }
-        Write-Host "Setting group $($ascOwnerGroupName) as AssociatedOwnerGroup..."
+        Write-Host "Setting group $($ascOwnerGroupName) as associated owner group..."
         Set-PnPGroup -Identity $ascOwnerGroup.Id -SetAssociatedGroup Owners
     }
 }
