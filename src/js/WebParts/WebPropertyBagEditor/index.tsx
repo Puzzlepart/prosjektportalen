@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import {
     DetailsList,
     ConstrainMode,
@@ -12,6 +13,10 @@ import {
     Spinner,
     SpinnerSize,
 } from "office-ui-fabric-react/lib/Spinner";
+import {
+    MessageBar,
+    MessageBarType,
+} from "office-ui-fabric-react/lib/MessageBar";
 import {
     GetProperty,
     SetProperty,
@@ -31,17 +36,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
      * @param {IWebPropertyBagEditorProps} props Props
      */
     constructor(props: IWebPropertyBagEditorProps) {
-        super(props, {
-            isLoading: true,
-            settings: [],
-        });
+        super(props, { isLoading: true });
         this._onRenderItemColumn = this._onRenderItemColumn.bind(this);
         this._onSaveChanges = this._onSaveChanges.bind(this);
         this._onSettingChanged = this._onSettingChanged.bind(this);
     }
 
     public shouldComponentUpdate(nextProps: IWebPropertyBagEditorProps, nextState: IWebPropertyBagEditorState) {
-        return this.state.settings.length !== nextState.settings.length;
+        return (this.state.isLoading !== nextState.isLoading);
     }
 
     public async componentDidMount(): Promise<void> {
@@ -65,6 +67,9 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         if (this.state.isLoading) {
             return <Spinner size={SpinnerSize.large} />;
         }
+        if (this.state.settings.length === 0) {
+            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("WebPropertyBagEditor_NoSettings")}</MessageBar>;
+        }
         return (
             <div>
                 <DetailsList
@@ -74,14 +79,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                         {
                             key: "settingKey",
                             fieldName: "settingKey",
-                            name: "Nøkkel",
+                            name: RESOURCE_MANAGER.getResource("SiteFields_GtKey_DisplayName"),
                             minWidth: 100,
                             maxWidth: 150,
                         },
                         {
                             key: "settingValue",
                             fieldName: "settingValue",
-                            name: "Verdi",
+                            name: RESOURCE_MANAGER.getResource("SiteFields_GtValue_DisplayName"),
                             minWidth: 100,
                             maxWidth: 300,
                         },
@@ -95,7 +100,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                     :
                     <PrimaryButton
                         style={{ marginTop: 20, marginLeft: 0 }}
-                        onClick={this._onSaveChanges}>Lagre endringer</PrimaryButton>}
+                        onClick={this._onSaveChanges}>{RESOURCE_MANAGER.getResource("String_SaveChanges")}</PrimaryButton>}
             </div>
         );
     }

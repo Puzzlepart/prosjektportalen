@@ -1635,6 +1635,9 @@
   <data name="String_ContactAdmin" xml:space="preserve">
     <value>Please contact an administrator</value>
   </data>
+  <data name="String_SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2310,5 +2313,8 @@
   </data>
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Project Portal - Settings</value>
+  </data>
+  <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
+    <value>There's no settings to change.</value>
   </data>
 </root>
