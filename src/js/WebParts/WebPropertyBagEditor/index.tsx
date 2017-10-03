@@ -9,7 +9,11 @@ import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import {
-    GetAllProperties,
+    Spinner,
+    SpinnerSize,
+} from "office-ui-fabric-react/lib/Spinner";
+import {
+    GetProperty,
     SetProperty,
 } from "../../Util/PropertyBag";
 import IWebPropertyBagEditorProps, { WebPropertyBagEditorDefaultProps } from "./IWebPropertyBagEditorProps";
@@ -32,7 +36,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
             settings: [],
         });
         this._onRenderItemColumn = this._onRenderItemColumn.bind(this);
-        this._onSaveSetting = this._onSaveSetting.bind(this);
+        this._onSaveChanges = this._onSaveChanges.bind(this);
         this._onSettingChanged = this._onSettingChanged.bind(this);
     }
 
@@ -40,20 +44,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         return this.state.settings.length !== nextState.settings.length;
     }
 
-    /**
-     * Component did mount
-     */
     public async componentDidMount(): Promise<void> {
-        const properties = await GetAllProperties();
-        let settings: ISetting[] = Object.keys(properties)
-            .filter(key => {
-                return key.match(/pp_.*/g) != null;
-            })
+        const settingsString = await GetProperty(this.props.propKey);
+        const settingsJson = JSON.parse(settingsString);
+        let settings: ISetting[] = Object.keys(settingsJson)
             .map(key => {
                 let setting: ISetting = {
                     settingKey: key,
-                    settingValue: properties[key],
-                    readOnly: this.props.readOnlySettings.indexOf(key) !== -1,
+                    settingValue: settingsJson[key],
                 };
                 if (this.props.settingsOptions[key]) {
                     setting.options = this.props.settingsOptions[key];
@@ -64,36 +62,41 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
     }
 
     public render() {
+        if (this.state.isLoading) {
+            return <Spinner size={SpinnerSize.large} />;
+        }
         return (
-            <DetailsList
-                key={new Date().getTime()}
-                items={this.state.settings}
-                columns={[
-                    {
-                        key: "settingKey",
-                        fieldName: "settingKey",
-                        name: "Nøkkel",
-                        minWidth: 100,
-                        maxWidth: 150,
-                    },
-                    {
-                        key: "settingValue",
-                        fieldName: "settingValue",
-                        name: "Verdi",
-                        minWidth: 100,
-                        maxWidth: 300,
-                    },
-                    {
-                        key: "saveButton",
-                        fieldName: "saveButton",
-                        name: "",
-                        minWidth: 100,
-                    },
-                ]}
-                onRenderItemColumn={(item, index, column) => this._onRenderItemColumn(item, index, column)}
-                constrainMode={ConstrainMode.horizontalConstrained}
-                layoutMode={DetailsListLayoutMode.justified}
-                selectionMode={SelectionMode.none} />
+            <div>
+                <DetailsList
+                    key={new Date().getTime()}
+                    items={this.state.settings}
+                    columns={[
+                        {
+                            key: "settingKey",
+                            fieldName: "settingKey",
+                            name: "Nøkkel",
+                            minWidth: 100,
+                            maxWidth: 150,
+                        },
+                        {
+                            key: "settingValue",
+                            fieldName: "settingValue",
+                            name: "Verdi",
+                            minWidth: 100,
+                            maxWidth: 300,
+                        },
+                    ]}
+                    onRenderItemColumn={(item, index, column) => this._onRenderItemColumn(item, index, column)}
+                    constrainMode={ConstrainMode.horizontalConstrained}
+                    layoutMode={DetailsListLayoutMode.justified}
+                    selectionMode={SelectionMode.none} />
+                {this.state.isSaving ?
+                    <Spinner size={SpinnerSize.large} />
+                    :
+                    <PrimaryButton
+                        style={{ marginTop: 20, marginLeft: 0 }}
+                        onClick={this._onSaveChanges}>Lagre endringer</PrimaryButton>}
+            </div>
         );
     }
 
@@ -118,15 +121,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                         onChanged={newValue => {
                             this._onSettingChanged(item, newValue);
                         }}
-                        defaultValue={colValue}
-                        disabled={item.readOnly} />
-                </div>
-            );
-        }
-        if (column.fieldName === "saveButton") {
-            return (
-                <div style={{ width: 200 }}>
-                    <PrimaryButton key={`${item.settingKey}_SaveBtn`} onClick={e => this._onSaveSetting(item)}>Lagre</PrimaryButton>
+                        defaultValue={colValue} />
                 </div>
             );
         }
@@ -144,8 +139,13 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         });
     }
 
-    private async _onSaveSetting(setting: ISetting) {
-        await SetProperty(setting.settingKey, setting.settingValue);
-        return;
+    private async _onSaveChanges() {
+        this.setState({ isSaving: true });
+        let settingsObject = this.state.settings.reduce((obj, { settingKey, settingValue }) => {
+            obj[settingKey] = settingValue;
+            return obj;
+        }, {});
+        await SetProperty(this.props.propKey, JSON.stringify(settingsObject));
+        this.setState({ isSaving: false });
     }
 }

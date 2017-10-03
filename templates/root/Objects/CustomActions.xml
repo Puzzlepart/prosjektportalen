@@ -1,6 +1,6 @@
 <pnp:CustomActions 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
-    <!-- <pnp:SiteCustomActions>
+    <pnp:SiteCustomActions>
         <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
             SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?rev=[version]');
             EnsureScriptFunc('pp.main.js', null, function () {
@@ -17,7 +17,7 @@
                 }, {parameter:ScriptLoadTimeout})
             });
 " />
-    </pnp:SiteCustomActions> -->
+    </pnp:SiteCustomActions>
     <pnp:WebCustomActions>
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Resources}" Title="{resource:SiteSettings_Link_Resources}" Url="Resources/Forms/AllItems.aspx" Rights="ManageWeb" Sequence="2001" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Extensions}" Title="{resource:SiteSettings_Link_Extensions}" Url="Extensions/Forms/AllItems.aspx" Rights="ManageWeb" Sequence="2002" />
