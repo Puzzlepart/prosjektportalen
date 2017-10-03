@@ -15,7 +15,7 @@ Prosjektportalen installeres med Powershell. Se [Installation](https://github.co
 
 ## Siste versjon av Prosjektportalen ##
 
-Siste versjon av Prosjektportalen kan lastes ned [herfra](https://github.com/Puzzlepart/prosjektportalen/releases/tag/v2.1.3).
+Siste versjon av Prosjektportalen kan lastes ned [herfra](https://github.com/Puzzlepart/prosjektportalen/releases/latest).
 
 ## Kontakt ##
 
