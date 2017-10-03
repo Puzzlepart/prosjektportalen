@@ -7,5 +7,6 @@
         <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="ScriptLoadTimeout">10000</pnp:Parameter>
+        <pnp:Parameter Key="DefaultSettings">{}</pnp:Parameter>
     </pnp:Parameters>
 </pnp:Preferences>

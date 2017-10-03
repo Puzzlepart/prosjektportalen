@@ -3,4 +3,5 @@
   <pnp:PropertyBagEntry Key="pp_version" Value="[version]" Overwrite="true" />
   <pnp:PropertyBagEntry Key="pp_assetssiteurl" Value="{parameter:AssetsSiteUrl}" Overwrite="true" />
   <pnp:PropertyBagEntry Key="pp_datasourcesiteurl" Value="{parameter:DataSourceSiteUrl}" Overwrite="true" />
+  <pnp:PropertyBagEntry Key="pp_settings" Value="{parameter:DefaultSettings}" Overwrite="true" />
 </pnp:PropertyBagEntries>
