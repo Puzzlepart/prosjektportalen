@@ -421,7 +421,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100461A724553D2BC4187101D19A502A9AF" Name="Tilbakemelding" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
             <pnp:FieldRef ID="4deb5071-24b5-4709-be74-39361ab14adb" Name="GtFeedbackScope" Required="true" />
             <pnp:FieldRef ID="fd69746d-b3c5-4676-8659-e6e3fc09e09f" Name="GtFeedbackDescription" Required="true" />
             <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="GtFeedbackStatus" />
