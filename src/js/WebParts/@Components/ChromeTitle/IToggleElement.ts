@@ -1,9 +1,7 @@
 import IToggleElementStorage from "./IToggleElementStorage";
 
 export default interface IToggleElement {
-    selector: string;
-    animationDelay: number;
-    animation: "fadeToggle" | "slideToggle";
+    element: HTMLElement;
     storage?: IToggleElementStorage;
     defaultCollapsed?: boolean;
 }

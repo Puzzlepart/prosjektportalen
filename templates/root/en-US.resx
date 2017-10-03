@@ -259,7 +259,7 @@
     <value>Lists/StandardTasks</value>
   </data>
   <data name="Lists_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/PhaseChecklist</value>
+    <value>Lists/Phase Checklist</value>
   </data>
   <data name="Lists_Stakeholders_Url" xml:space="preserve">
     <value>Lists/Stakeholders</value>
@@ -331,7 +331,7 @@
     <value>Shared documents/Forms/AllItems.aspx</value>
   </data>
   <data name="DefaultView_PhaseChecklist_Url" xml:space="preserve">
-    <value>Lists/PhaseChecklist/AllItems.aspx</value>
+    <value>Lists/Phase Checklist/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ChangeAnalysis_Url" xml:space="preserve">
     <value>Lists/Change Analysis/AllItems.aspx</value>
@@ -353,15 +353,6 @@
   </data>
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>All Documents</value>
-  </data>
-  <data name="TermSetID_ProjectPhase" xml:space="preserve">
-    <value>{abcfc9d9-a263-4abb-8234-be973c46258a}</value>
-  </data>
-  <data name="TermSetID_ProjectType" xml:space="preserve">
-    <value>{3930cddb-fa4d-496f-b314-03ecabb91de1}</value>
-  </data>
-  <data name="TermSetID_ProjectServiceArea" xml:space="preserve">
-    <value>{99af1a25-88c1-4781-a05c-8446928d3fdd}</value>
   </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
@@ -465,6 +456,9 @@
   <data name="ContentTypes_RiskSection_Name" xml:space="preserve">
     <value>Risk Section</value>
   </data>
+  <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
+    <value>Extension</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
@@ -524,6 +518,9 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Create a new list item.</value>
+  </data>
+  <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">
     <value></value>
@@ -963,6 +960,9 @@
   <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
+    <value>Order</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Query</value>
   </data>
@@ -1016,6 +1016,9 @@
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
     <value>Comment, delivery status</value>
+  </data>
+  <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
+    <value>Enabled</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1332,6 +1335,9 @@
   <data name="SiteFields_GtDpOrder_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1386,6 +1392,9 @@
   <data name="SiteFields_GtProductStatusComment_Description" xml:space="preserve">
     <value>Comment on status delivery specified above</value>
   </data>
+  <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -1416,8 +1425,8 @@
   <data name="NewProjectForm_InheritPermissions" xml:space="preserve">
     <value>Use same permissions as parent site </value>
   </data>
-  <data name="NewProjectForm_ShowAdvancedSettings" xml:space="preserve">
-    <value>Show advanced settings</value>
+  <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
+    <value>Default list content</value>
   </data>
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>New project</value>
@@ -1626,6 +1635,9 @@
   <data name="String_ContactAdmin" xml:space="preserve">
     <value>Please contact an administrator</value>
   </data>
+  <data name="String_SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -1691,6 +1703,9 @@
   </data>
   <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
     <value>Tasks (current phase)</value>
+  </data>
+  <data name="WebPart_PhaseChecklistCurrentPhase_Title" xml:space="preserve">
+    <value>Phase Checklist (current phase)</value>
   </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Project deliveries I am responsible for</value>
@@ -2088,6 +2103,9 @@
   <data name="DynamicPortfolio_ExcelExportButtonLabel" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
+  <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
+    <value>Laster project portfolio...</value>
+  </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
   </data>
@@ -2292,5 +2310,11 @@
   </data>
   <data name="SiteSettings_Link_Log" xml:space="preserve">
     <value>Project Portal - Logs</value>
+  </data>
+  <data name="SiteSettings_Link_Settings" xml:space="preserve">
+    <value>Project Portal - Settings</value>
+  </data>
+  <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
+    <value>There's no settings to change.</value>
   </data>
 </root>

@@ -7,6 +7,10 @@
         "sourceMap": true,
         "removeComments": false,
         "baseUrl": ".",
+        "paths": {
+            "localization": ["src/js/@localization"],
+            "model": ["src/js/Model"]
+        },
         "typeRoots": [
             "./node_modules/@types",
             "./types"
@@ -15,7 +19,6 @@
             "sharepoint",
             "node",
             "react",
-            "i18n-webpack-plugin",
             "webpack-variables"
         ],
         "noImplicitAny": false,

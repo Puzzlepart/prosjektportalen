@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import {
     DetailsList,
     IColumn,
@@ -9,7 +10,7 @@ import {
 } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { ModalLink } from "../../WebParts/@Components";
-import * as Search from "./Search";
+import { queryLogElements } from "./ExperienceLogSearch";
 import LogElement from "./LogElement";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
 import IExperienceLogState from "./IExperienceLogState";
@@ -57,7 +58,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         return (
             <div>
                 <SearchBox
-                    labelText={__("ExperienceLog_SearchBox_Placeholder")}
+                    labelText={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 <DetailsList
                     items={filteredItems}
@@ -103,9 +104,12 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
     /**
      * Fetch data using sp-pnp-js search
      */
-    private fetchData = () => new Promise<Partial<IExperienceLogState>>((resolve, reject) => {
-        Search.query(this.props.columns.map(col => col.key))
-            .then(response => resolve({ logItems: response.primarySearchResults.map(r => new LogElement(r)) }))
-            .catch(reject);
-    })
+    private async fetchData(): Promise<Partial<IExperienceLogState>> {
+        try {
+            const response = await queryLogElements(this.props.columns.map(col => col.key));
+            return ({ logItems: response.primarySearchResults.map(r => new LogElement(r)) });
+        } catch (err) {
+            throw err;
+        }
+    }
 }

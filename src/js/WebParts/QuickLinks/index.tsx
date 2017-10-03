@@ -1,5 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import {
     Spinner,
     SpinnerType,
@@ -29,7 +30,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(__("Lists_QuickLinks_Title"))
+            .getByTitle(RESOURCE_MANAGER.getResource("Lists_QuickLinks_Title"))
             .items
             .top(this.props.itemsCount)
             .select("URL", "Comments")
@@ -42,7 +43,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(__("WebPart_Links_Title"), `#${this.props.containerId}`, QuickLinks.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -54,14 +55,14 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     * @param {IQuickLinksProps} param0 Props
     * @param {IQuickLinksState} param1 State
     */
-    private renderItems = ({ containerId, listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
+    private renderItems = ({ listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
             );
         } else if (links.length > 0) {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
                         {links.map(({ URL: { Url, Description }, Comments }, idx) => (
                             <li key={idx}>
@@ -74,8 +75,8 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
             );
         } else {
             return (
-                <div id={containerId}>
-                    <MessageBar>{__("WebPart_EmptyMessage")}</MessageBar>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
+                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

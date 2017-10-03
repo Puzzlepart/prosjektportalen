@@ -354,15 +354,6 @@
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>Alle dokumenter</value>
   </data>
-  <data name="TermSetID_ProjectPhase" xml:space="preserve">
-    <value>{abcfc9d9-a263-4abb-8234-be973c46258a}</value>
-  </data>
-  <data name="TermSetID_ProjectType" xml:space="preserve">
-    <value>{3930cddb-fa4d-496f-b314-03ecabb91de1}</value>
-  </data>
-  <data name="TermSetID_ProjectServiceArea" xml:space="preserve">
-    <value>{99af1a25-88c1-4781-a05c-8446928d3fdd}</value>
-  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
@@ -465,6 +456,9 @@
   <data name="ContentTypes_RiskSection_Name" xml:space="preserve">
     <value>Risikoseksjon</value>
   </data>
+  <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
+    <value>Utvidelse</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -524,6 +518,9 @@
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
+  </data>
+  <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">
     <value></value>
@@ -960,6 +957,9 @@
   <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
     <value>Rekkefølge</value>
   </data>
+  <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
+    <value>Rekkefølge</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Søkespørring</value>
   </data>
@@ -1013,6 +1013,9 @@
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
     <value>Kommentar, leveransestatus</value>
+  </data>
+  <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
+    <value>Aktivert</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1332,6 +1335,9 @@
   <data name="SiteFields_GtDpOrder_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1386,6 +1392,9 @@
   <data name="SiteFields_GtProductStatusComment_Description" xml:space="preserve">
     <value>Kommentar til leveransestatus angitt over</value>
   </data>
+  <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
@@ -1416,8 +1425,8 @@
   <data name="NewProjectForm_InheritPermissions" xml:space="preserve">
     <value>Bruk samme tillatelser som overordnet område</value>
   </data>
-  <data name="NewProjectForm_ShowAdvancedSettings" xml:space="preserve">
-    <value>Vis avanserte innstillinger</value>
+  <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
+    <value>Standard listeinnhold</value>
   </data>
   <data name="NewProjectForm_DialogTitle" xml:space="preserve">
     <value>Nytt prosjekt</value>
@@ -1629,6 +1638,9 @@
   <data name="String_ContactAdmin" xml:space="preserve">
     <value>Vennlig ta kontakt med en administrator</value>
   </data>
+  <data name="String_SaveChanges" xml:space="preserve">
+    <value>Lagre endringer</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -1694,6 +1706,9 @@
   </data>
   <data name="WebPart_TasksCurrentPhase_Title" xml:space="preserve">
     <value>Oppgaver (gjeldende fase)</value>
+  </data>
+  <data name="WebPart_PhaseChecklistCurrentPhase_Title" xml:space="preserve">
+    <value>Fasesjekkliste (gjeldende fase)</value>
   </data>
   <data name="WebPart_MyProjectDeliveries_Title" xml:space="preserve">
     <value>Prosjektleveranser jeg har ansvar for</value>
@@ -2091,6 +2106,9 @@
   <data name="DynamicPortfolio_ExcelExportButtonLabel" xml:space="preserve">
     <value>Eksporter til Excel</value>
   </data>
+  <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
+    <value>Laster prosjektportefølje...</value>
+  </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
   </data>
@@ -2294,5 +2312,11 @@
   </data>
   <data name="SiteSettings_Link_Log" xml:space="preserve">
     <value>Prosjektportalen - Logg</value>
+  </data>
+  <data name="SiteSettings_Link_Settings" xml:space="preserve">
+    <value>Prosjektportalen - Innstillinger</value>
+  </data>
+  <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
+    <value>Det finnes ingen instillinger å endre.</value>
   </data>
 </root>

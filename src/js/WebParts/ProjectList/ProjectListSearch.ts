@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import { sp } from "sp-pnp-js";
 
 /**
@@ -10,11 +11,11 @@ export const DEFAULT_SEARCH_SETTINGS = {
     SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"],
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 
@@ -37,7 +38,7 @@ export interface IQueryResponse {
 /**
  * Query the REST Search API using sp-pnp-js
  */
-export const query = () => new Promise<IQueryResponse>((resolve, reject) => {
+export const queryProjects = () => new Promise<IQueryResponse>((resolve, reject) => {
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,
     })

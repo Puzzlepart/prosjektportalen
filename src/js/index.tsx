@@ -4,7 +4,7 @@ import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
 
 /** Set up pnp logging */
-pnp.log.activeLogLevel = process.env.NODE_ENV === "production" ? LogLevel.Error : LogLevel.Info;
+pnp.log.activeLogLevel = LogLevel.Info;
 pnp.log.subscribe(new ConsoleListener());
 
 /** PnP setup */
@@ -19,3 +19,8 @@ ExecuteOrDelayUntilBodyLoaded(() => {
     WebParts.Render();
     StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
 });
+
+/** If the script was loaded using SP.SOD, we'll set the SOD to loaded */
+if (window["_v_dictSod"]) {
+    window["_v_dictSod"]["pp.main.js"].loaded = true;
+}

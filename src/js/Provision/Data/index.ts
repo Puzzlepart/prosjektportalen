@@ -10,6 +10,7 @@ import {
     ListConfig,
 } from "./Config";
 import IProgressCallback from "../IProgressCallback";
+import IProvisionContext from "../IProvisionContext";
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
@@ -18,42 +19,42 @@ import IProgressCallback from "../IProgressCallback";
  * @param {ListConfig} conf List configuration
  * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-const Copy = (destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback) => new Promise<any>((resolve, reject) => {
-    Util.ensureTaxonomy().then(() => {
+async function Copy(destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback): Promise<void> {
+    await Util.ensureTaxonomy();
+    try {
         if (conf.DestinationLibrary) {
-            CopyFiles(conf, destUrl, onUpdateProgress)
-                .then(resolve)
-                .catch(reject);
+            CopyFiles(conf, destUrl, onUpdateProgress);
+            return;
         } else {
-            CopyItems(conf, destUrl, onUpdateProgress)
-                .then(resolve)
-                .catch(reject);
+            await CopyItems(conf, destUrl, onUpdateProgress);
+            return;
         }
-    });
-});
+    } catch (err) {
+        throw err;
+    }
+}
 
 /**
  * Copies default data from source to destination
  *
- * @param {string} destUrl Destination URL
- * @param {string[]} contentToInclude Content to copy
- * @param {IProgressCallback} onUpdateProgress Progress callback to caller
+ * @param {IProvisionContext} context Provisioning context
  */
-export const CopyDefaultData = (destUrl: string, contentToInclude: string[], onUpdateProgress: IProgressCallback) => new Promise<void>((resolve, reject) => {
+async function CopyDefaultData(context: IProvisionContext): Promise<void> {
+    const contentToInclude = context.model.IncludeContent;
     Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
-    RetrieveConfig().then(listContentConfig => {
+    try {
+        const listContentConfig = await RetrieveConfig();
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
-        contentToInclude
-            .filter(key => Array.contains(contentToInclude, key) && listContentConfig.hasOwnProperty(key))
-            .reduce((chain, key) => chain.then(_ => Copy(destUrl, listContentConfig[key], onUpdateProgress)), Promise.resolve())
-            .then(() => {
-                Logger.write("Copy of default data done.", LogLevel.Info);
-                resolve();
-            })
-            .catch(reason => {
-                Logger.log({ message: "Copy of default data done with errors.", level: LogLevel.Warning });
-                reject(reason);
-            });
-    });
-});
+        for (let i = 0; i < contentToInclude.length; i++) {
+            const contentKey = contentToInclude[i];
+            if (listContentConfig.hasOwnProperty(contentKey)) {
+                await Copy(context.url, listContentConfig[contentKey], context.progressCallbackFunc);
+            }
+        }
+        return;
+    } catch (err) {
+        throw err;
+    }
+}
 
+export { CopyDefaultData };

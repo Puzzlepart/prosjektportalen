@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "localization";
 import { sp } from "sp-pnp-js";
 
 /**
@@ -9,11 +10,11 @@ export const DEFAULT_SEARCH_SETTINGS = {
     TrimDuplicates: false,
     Properties: [{
         Name: "SourceName",
-        Value: { StrVal: __("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
     },
     {
         Name: "SourceLevel",
-        Value: { StrVal: __("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
+        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
     }],
 };
 
@@ -36,7 +37,7 @@ export interface IQueryResponse {
 /**
  * Query the REST Search API using sp-pnp-js
  */
-export const query = (SelectProperties: string[]) => new Promise<IQueryResponse>((resolve, reject) => {
+export const queryLogElements = (SelectProperties: string[]) => new Promise<IQueryResponse>((resolve, reject) => {
     SelectProperties = SelectProperties.concat(["Path", "SPWebUrl"]);
     sp.search({
         ...DEFAULT_SEARCH_SETTINGS,

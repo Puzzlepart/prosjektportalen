@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "localization";
 import ProjectList from "./ProjectList";
 import ProjectInfo from "./ProjectInfo";
 import ProjectPhases from "./ProjectPhases";
@@ -11,6 +12,7 @@ import BenefitsOverview from "./BenefitsOverview";
 import ProjectStatus from "./ProjectStatus";
 import ExperienceLog from "./ExperienceLog";
 import LatestLogEntries from "./LatestLogEntries";
+import WebPropertyBagEditor from "./WebPropertyBagEditor";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -27,10 +29,11 @@ const WebPartComponents: WebPartComponent[] = [
     new WebPartComponent(QuickLinks.displayName, "pp-quicklinks", <QuickLinks />),
     new WebPartComponent(DynamicPortfolio.displayName, "pp-dynamicportfolio", <DynamicPortfolio />),
     new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview", <BenefitsOverview />),
-    new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview-search", <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: __("String_Project"), key: "SiteTitle" }]} />),
+    new WebPartComponent(BenefitsOverview.displayName, "pp-benefitsoverview-search", <BenefitsOverview dataSource={DataSource.Search} groupByOptions={[{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }]} />),
     new WebPartComponent(ProjectStatus.displayName, "pp-projectstatus", <ProjectStatus />),
     new WebPartComponent(ExperienceLog.displayName, "pp-experiencelog", <ExperienceLog />),
     new WebPartComponent(LatestLogEntries.displayName, "pp-latestlogentries", <LatestLogEntries />),
+    new WebPartComponent(WebPropertyBagEditor.displayName, "pp-webPropertyBagEditor", <WebPropertyBagEditor />),
 ];
 
 /**
@@ -63,4 +66,5 @@ export {
     ProjectStatus,
     ExperienceLog,
     LatestLogEntries,
+    WebPropertyBagEditor,
 };

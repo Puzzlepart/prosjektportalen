@@ -1,23 +1,29 @@
+import RESOURCE_MANAGER from "../@localization";
+
 /**
  * Document library
  */
-export const DOCUMENT_LIBRARY = __("Lists_Documents_Title");
+export const DOCUMENT_LIBRARY = RESOURCE_MANAGER.getResource("Lists_Documents_Title");
 
 /**
  * Frontpage lists
  */
 export const FRONTPAGE_LISTS = [
     {
-        listTitle: __("Lists_Uncertainties_Title"),
-        wpTitle: __("WebPart_UncertaintiesCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
     },
     {
-        listTitle: __("Lists_Documents_Title"),
-        wpTitle: __("WebPart_DocumentsCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
     },
     {
-        listTitle: __("Lists_Tasks_Title"),
-        wpTitle: __("WebPart_TasksCurrentPhase_Title"),
+        listTitle: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_TasksCurrentPhase_Title"),
+    },
+    {
+        listTitle: RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_PhaseChecklistCurrentPhase_Title"),
     },
 ];
 

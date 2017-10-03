@@ -1,5 +1,4 @@
 import * as  querystring from "querystring";
-import * as  jQuery from "jquery";
 
 /**
  * Query Params
@@ -8,7 +7,6 @@ export interface IQueryParams {
     HideWebPartMaintenancePageLink: string;
     HideContentTypeChoice: string;
     HideFormFields: string;
-    HideAddNew: string;
     HideViewSelector: string;
 }
 
@@ -25,16 +23,14 @@ export const getQueryParams = (): IQueryParams => {
  * @param {string} fieldName Field name
  */
 export const hideFormField = (fieldName: string): void => {
-    const $fieldRow = jQuery(`input[id*='${fieldName}_'], select[id*='${fieldName}_'], div[id*='${fieldName}_']`).parents("tr").first();
-    $fieldRow.hide();
+    (document.querySelector(`input[id*='${fieldName}_'], select[id*='${fieldName}_'], div[id*='${fieldName}_']`) as any).parentNode.parentNode.style.display = "none";
 };
 
 /**
  * Hides content type choice
  */
 export const hideContentTypeChoice = (): void => {
-    const $ctcRow = jQuery(`select[id*='ContentTypeChoice']`).parents("tr").first();
-    $ctcRow.hide();
+    (document.querySelector(`select[id*='ContentTypeChoice']`) as any).parentNode.parentNode.style.display = "none";
 };
 
 /**

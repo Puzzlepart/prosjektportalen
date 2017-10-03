@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
 import { sp } from "sp-pnp-js";
 import AudienceTargeting from "../WebParts/AudienceTargeting";
@@ -11,25 +12,25 @@ declare var MSOWebPartPageFormName: string;
  *
  * @param {string} input Input
  */
-export const htmlDecode = (input: string): string => {
+export function htmlDecode(input: string): string {
     const e = document.createElement("div");
     e.innerHTML = input;
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-};
+}
 
 /**
  * Is the current user in the specified group
  *
  * @param {any} group The group to check
  */
-const isCurrentUserInGroup = (group) => new Promise<boolean>(resolve => {
-    group
-        .users.get()
-        .then(users => {
-            resolve(Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
-        })
-        .catch(_ => resolve(false));
-});
+async function isCurrentUserInGroup(group): Promise<boolean> {
+    try {
+        const users = await group.users.get();
+        return (Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
+    } catch (err) {
+        return false;
+    }
+}
 
 /**
  * Is the current user in the visitors group
@@ -86,32 +87,32 @@ export const doesUserMatchAudience = (audienceTarget: AudienceTargeting) => new 
  * @param {string} dFormat Date format
  * @param {string} locale Date locale
  */
-export const dateFormat = (date: string, dFormat = __("MomentDate_DefaultFormat"), locale = __("MomentDate_Locale")): string => {
+export function dateFormat(date: string, dFormat = RESOURCE_MANAGER.getResource("MomentDate_DefaultFormat"), locale = RESOURCE_MANAGER.getResource("MomentDate_Locale")): string {
     return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
-};
+}
 
 /**
  * Is the page in edit mode
  */
-export const inEditMode = (): boolean => {
+export function inEditMode(): boolean {
     return document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value === "1";
-};
+}
 
 /**
  * Make URL relative
  *
  * @param {string} absUrl Absolute URL
  */
-export const makeRelative = (absUrl: string): string => {
+export function makeUrlRelativeToSite(absUrl: string): string {
     return absUrl.replace(document.location.protocol + "//" + document.location.hostname, "");
-};
+}
 
 /**
  * Make URL absolute
  *
  * @param {string} relUrl Absolute URL
  */
-export const makeAbsolute = (relUrl: string): string => {
+export function makeUrlAbsolute(relUrl: string): string {
     if (relUrl.startsWith("http")) {
         return relUrl;
     }
@@ -120,13 +121,14 @@ export const makeAbsolute = (relUrl: string): string => {
         properRelativeUrl = "/" + relUrl;
     }
     return document.location.protocol + "//" + document.location.hostname + properRelativeUrl;
-};
+}
+
 /**
  * Generates URL. Replaces norwegian characters and spaces.
  *
  * @param {string} str The string
  */
-export const generateUrl = (str: string, length?: number): string => {
+export function generateSpFriendlyUrl(str: string, length?: number): string {
     str = str
         .trim()
         .toLowerCase()
@@ -136,46 +138,34 @@ export const generateUrl = (str: string, length?: number): string => {
         .replace(/ø/g, "o")
         .replace(/[^a-z0-9-]/gi, "");
     return str.substring(0, length ? length : Math.min(80, str.length));
-};
+}
 
 /**
  * Cleans search property name
  *
  * @param {string} searchProp Search property name
  */
-export const cleanSearchPropName = (searchProp: string): string => {
+export function cleanSearchPropName(searchProp: string): string {
     return searchProp.match(/(.*?)OWS*/)[1];
-};
-
-export enum UserPhotoSource {
-    UserPhotoAspx,
-    OWA,
 }
+
 
 /**
  * Get user photo URL from userphoto.aspx
  *
  * @param {string} email Email adress
- * @param {string} source User photo source (OWA is not supported on premise)
  * @param {string} size Size S/M/L
  */
-export const userPhoto = (email: string, source = UserPhotoSource.UserPhotoAspx, size = "L"): string => {
-    switch (source) {
-        case UserPhotoSource.UserPhotoAspx: {
-            return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
-        }
-        case UserPhotoSource.OWA: {
-            return `https://outlook.office.com/owa/service.svc/s/GetPersonaPhoto?email=${email}&UA=0&size=HR120x120`;
-        }
-    }
-};
+export function userPhoto(email: string, size = "L"): string {
+    return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
+}
 
 /**
  * Converts a string to a hex color
  *
  * @param {string} str The string
  */
-export const stringToColour = (str: string): string => {
+export function stringToColour(str: string): string {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
         hash = str.charCodeAt(i) + ((hash << 5) - hash);
@@ -186,7 +176,7 @@ export const stringToColour = (str: string): string => {
         colour += ("00" + value.toString(16)).substr(-2);
     }
     return colour;
-};
+}
 
 /**
  * Shows a user message using SP.UI
@@ -198,7 +188,7 @@ export const stringToColour = (str: string): string => {
  * @param {boolean} reloadWhenDone Reload page when done
  * @param {boolean} removeUrlParams Remove url params
  */
-export const userMessage = (title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void => {
+export function userMessage(title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void {
     const status = SP.UI.Status.addStatus(title, message);
     SP.UI.Status.setStatusPriColor(status, color);
     if (duration !== -1) {
@@ -209,7 +199,7 @@ export const userMessage = (title: string, message: string, color: string, durat
             }
         }, duration);
     }
-};
+}
 
 /**
  * Calculates percentage
@@ -219,23 +209,23 @@ export const userMessage = (title: string, message: string, color: string, durat
  * @param {number} targetValue The target value, i.e. equal to 100%
  * @param {boolean} addPrefix Add prefix (%)
  */
-export const percentage = (startValue: number, partValue: number, targetValue: number, addPrefix = true): any => {
+export function percentage(startValue: number, partValue: number, targetValue: number, addPrefix = true): any {
     let value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
     } else {
         return value;
     }
-};
+}
 
 /**
  * Encodes spaces
  *
  * @param {string} str The string
  */
-export const encodeSpaces = (str: string): string => {
+export function encodeSpaces(str: string): string {
     return str.replace(/ /g, "%20");
-};
+}
 
 /**
  * Sets item field value (supports text/choice, number and taxonomy)
@@ -246,7 +236,7 @@ export const encodeSpaces = (str: string): string => {
  * @param {SP.ClientContext} ctx Client context
  * @param {SP.List} list SP list
  */
-export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void => {
+export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void {
     if (fieldValue === null) {
         return;
     }
@@ -285,16 +275,16 @@ export const setItemFieldValue = (fieldName: string, item: SP.ListItem, fieldVal
         }
             break;
     }
-};
+}
 
 /**
  * Relods the page
  */
-export const reloadPage = (): void => {
+export function reloadPage(): void {
     document.location.href = _spPageContextInfo.serverRequestPath;
-};
+}
 
-interface ISafeTerm {
+export interface ISafeTerm {
     Label: string;
     TermGuid: any;
     WssId: number;
@@ -308,7 +298,7 @@ interface ISafeTerm {
  *
  * @param {any} term Term
  */
-export const getSafeTerm = (term): ISafeTerm => {
+export function getSafeTerm(term): ISafeTerm {
     if (term === null) {
         return null;
     }
@@ -324,7 +314,7 @@ export const getSafeTerm = (term): ISafeTerm => {
         }
     }
     return term;
-};
+}
 
 /**
  * Sets Taxonomy single value
@@ -337,7 +327,7 @@ export const getSafeTerm = (term): ISafeTerm => {
  * @param {any} termGuid Term GUID
  * @param {number} wssId Term WSS ID
  */
-export const setTaxonomySingleValue = (ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid, wssId = -1) => {
+export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid, wssId = -1) {
     let field = list.get_fields().getByInternalNameOrTitle(fieldName),
         taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
         taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
@@ -346,7 +336,7 @@ export const setTaxonomySingleValue = (ctx: SP.ClientContext, list: SP.List, ite
     taxSingle.set_wssId(wssId);
     taxField.setFieldValueByValue(item, taxSingle);
     item.update();
-};
+}
 
 /**
  * Ensure taxonomy
@@ -376,13 +366,13 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
  * @param {string[]} parts Parts to include in the key
  * @param {boolean} addWebPrefix Should web prefix be added
  */
-export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
-    const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
+export function generateStorageKey(parts: string[], addWebPrefix = true) {
     if (addWebPrefix) {
+        const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
         parts.unshift(webPrefix);
     }
     return parts.join("_");
-};
+}
 
 /**
  * Formats a string (containing a currency value) to currency
@@ -390,7 +380,7 @@ export const generateStorageKey = (parts: string[], addWebPrefix = true) => {
  * @param {string} val The value
  * @param {string} prefix Currency prefix
  */
-export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): string => {
+export function toCurrencyFormat(val: string, prefix = RESOURCE_MANAGER.getResource("CurrencySymbol")): string {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
@@ -399,7 +389,7 @@ export const toCurrencyFormat = (val: string, prefix = __("CurrencySymbol")): st
         str[1] = str[1].replace(/(\d{3})/g, "$1 ");
     }
     return prefix + str.join(" ");
-};
+}
 
 /**
  * Get client context for the specified URL
@@ -414,36 +404,77 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
 });
 
 /**
- * Get URL hash object
+ * Executes a JSOM query using SP.ClientContext.executeQueryAsync. Allows for async-await
+ *
+ * @param {SP.ClientContext} ctx Client context
+ * @param {SP.ClientObject[]} clientObjects Client objects to load
  */
-export const getUrlHash = (): { [key: string]: string } => {
-    const hash = document.location.hash.substring(1);
+export function executeJsom(ctx: SP.ClientContext, clientObjects: SP.ClientObject[] = []) {
+    return new Promise<{ sender, args, url }>((resolve, reject) => {
+        clientObjects.forEach(clientObj => ctx.load(clientObj));
+        ctx.executeQueryAsync((sender, args) => {
+            resolve({ sender, args, url: ctx.get_url() });
+        }, (sender, args) => {
+            reject({ sender, args, url: ctx.get_url() });
+        });
+    });
+}
+
+export interface IJsomContext {
+    ctx: SP.ClientContext;
+    web: SP.Web;
+    propertyBag: SP.PropertyValues;
+    lists: SP.ListCollection;
+}
+
+/**
+ * Gets JSOM context (IJsomContext) for the specified URL
+ *
+ * @param {string} url The URL
+ */
+export async function getJsomContext(url: string): Promise<IJsomContext> {
+    const ctx = await getClientContext(url);
+    const web = ctx.get_web();
+    const propertyBag = web.get_allProperties();
+    const lists = web.get_lists();
+    return { ctx, web, propertyBag, lists };
+}
+
+/**
+ * Get URL hash object
+ *
+ * @param {string} hash URL hash
+ */
+export function getUrlHash(hash = document.location.hash.substring(1)): { [key: string]: string } {
     let hashObject: { [key: string]: string } = {};
     hash.split("&").map(str => {
         const [key, value] = str.split("=");
         hashObject[key] = value;
     });
     return hashObject;
-};
+}
 
 /**
  * Set URL hash
  *
  * @param {Object} hashObject Hash object
  */
-export const setUrlHash = (hashObject: { [key: string]: string }): void => {
+export function setUrlHash(hashObject: { [key: string]: string }): void {
     let hash = "#";
     let hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`);
     hash += hashParts.join("&");
     document.location.hash = hash;
-};
+}
 
 /**
  * Get URL parts
+ *
+ * @param {string} serverRequestPath Server request path
+ * @param {string} webServerRelativeUrl Web server relative url
  */
-export const getUrlParts = (): string[] => {
-    return _spPageContextInfo.serverRequestPath.replace(".aspx", "").replace(_spPageContextInfo.webServerRelativeUrl, "").split("/");
-};
+export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequestPath, webServerRelativeUrl = _spPageContextInfo.webServerRelativeUrl): string[] {
+    return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
+}
 
 export {
     WaitDialog,

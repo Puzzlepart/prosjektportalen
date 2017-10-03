@@ -21,37 +21,35 @@ function __startWatch(packageCodeFunc) {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean:lib", "clean:dist", packageCodeFunc, () => {
+            runSequence("clean", packageCodeFunc, () => {
                 uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
             })
         }, 100);
     });
     watch(config.paths.stylesGlob).on("change", () => {
-        runSequence("package:styles", () => {
+        runSequence("packageStyles", () => {
             uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
         })
     });
-    watch(config.paths.searchDispTemplatesGlob).on("change", (file) => {
-        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Search")
-    });
-    watch(config.paths.filtersDispTemplatesGlob).on("change", (file) => {
-        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Filters")
-    });
     watch(config.resources.glob).on("change", () => {
-        runSequence("build:jsonresources");
+        runSequence("buildJsonResources");
     });
 }
 
+gulp.task("watchTests", () => {
+    __startWatch("test");
+});
+
 gulp.task("watch", () => {
-    __startWatch("package:code");
+    __startWatch("packageCode");
 });
 
-gulp.task("watch::eval", () => {
-    __startWatch("package:code::eval");
+gulp.task("watchEval", () => {
+    __startWatch("packageCodeEval");
 });
 
-gulp.task("watch::prod", () => {
-    __startWatch(`package:code::prod::${settings.language}`);
+gulp.task("watchProd", () => {
+    __startWatch(`packageCodeMinify`);
 });
 
 function uploadFile(glob, url, folder) {
