@@ -29,6 +29,6 @@
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Feedback}" Title="{resource:SiteSettings_Link_Feedback}" Url="Lists/Feedback/AllItems.aspx" Rights="ManageWeb" Sequence="2008" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_StatusSections}" Title="{resource:SiteSettings_Link_StatusSections}" Url="Lists/StatusSections/AllItems.aspx" Rights="ManageWeb" Sequence="2009" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Log}" Title="{resource:SiteSettings_Link_Log}" Url="Lists/Log/AllItems.aspx" Rights="ManageWeb" Sequence="2010" />
-        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="Prosjektportalen - Innstillinger" Title="Prosjektportalen - Innstillinger" Url="SitePages/EditWebPropertyBag.aspx" Rights="ManageWeb" Sequence="2011" />
+        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Settings}" Title="{resource:SiteSettings_Link_Settings}" Url="SitePages/EditWebPropertyBag.aspx" Rights="ManageWeb" Sequence="2011" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>

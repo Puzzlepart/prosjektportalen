@@ -2310,4 +2310,7 @@
   <data name="SiteSettings_Link_Log" xml:space="preserve">
     <value>Prosjektportalen - Logg</value>
   </data>
+  <data name="SiteSettings_Link_Settings" xml:space="preserve">
+    <value>Prosjektportalen - Innstillinger</value>
+  </data>
 </root>
