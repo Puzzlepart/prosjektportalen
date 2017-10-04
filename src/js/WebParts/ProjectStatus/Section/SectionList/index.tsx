@@ -37,13 +37,13 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListProps} param0 Props
      * @param {ISectionListState} param1 State
      */
-    public _render({ }: ISectionListProps, { listData }: ISectionListState): JSX.Element {
+    public _render({ id }: ISectionListProps, { listData }: ISectionListState): JSX.Element {
         if (!listData || listData.items.length === 0) {
             return null;
         }
 
         return (
-            <div>
+            <div id={id}>
                 <DetailsList { ...listData }
                     selectionMode={SelectionMode.none}
                     onRenderItemColumn={(item, index, col) => this._onRenderItemColumn(item, index, col, this.props, this.state)}
