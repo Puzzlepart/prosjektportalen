@@ -1,9 +1,4 @@
-export enum FileType {
-    png,
-    pdf,
-}
-
-export interface IFileTypeButton {
+export default interface IFileTypeButton {
     save: string;
     isSaved: string;
     saving: string;

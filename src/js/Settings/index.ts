@@ -44,7 +44,7 @@ export async function GetSettings(): Promise<{ [key: string]: string }> {
     return settingsJson;
 }
 
-export async function GetSetting(settingKey: string): Promise<string> {
+export async function GetSetting(settingKey: string, toLowerCase = false): Promise<string> {
     const webProperties = await GetAllProperties();
     let settingsJson;
     try {
@@ -52,7 +52,11 @@ export async function GetSetting(settingKey: string): Promise<string> {
     } catch (err) {
         settingsJson = {};
     }
-    return settingsJson[settingKey];
+    if (toLowerCase) {
+        return settingsJson[settingKey].toLowerCase();
+    } else {
+        return settingsJson[settingKey];
+    }
 }
 
 
