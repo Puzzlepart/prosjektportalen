@@ -31,12 +31,11 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchData().then(data => {
-            this.setState({
-                data,
-                isLoading: false,
-            });
+    public async componentDidMount(): Promise<void> {
+        const data = await this.fetchData();
+        this.setState({
+            data,
+            isLoading: false,
         });
     }
 
