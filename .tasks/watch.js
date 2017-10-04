@@ -31,12 +31,6 @@ function __startWatch(packageCodeFunc) {
             uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
         })
     });
-    watch(config.paths.searchDispTemplatesGlob).on("change", (file) => {
-        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Search")
-    });
-    watch(config.paths.filtersDispTemplatesGlob).on("change", (file) => {
-        uploadFile(file, settings.siteUrl, "_catalogs/masterpage/Display Templates/Filters")
-    });
     watch(config.resources.glob).on("change", () => {
         runSequence("buildJsonResources");
     });
@@ -55,7 +49,7 @@ gulp.task("watchEval", () => {
 });
 
 gulp.task("watchProd", () => {
-    __startWatch(`packageCodeProd`);
+    __startWatch(`packageCodeMinify`);
 });
 
 function uploadFile(glob, url, folder) {

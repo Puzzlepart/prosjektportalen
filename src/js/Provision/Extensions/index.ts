@@ -1,22 +1,26 @@
 import RESOURCE_MANAGER from "localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
-import IProgressCallback from "../IProgressCallback";
+import { UpdatePropertyArray } from "../../Util/PropertyBag";
 import GetValidExtensions from "./GetValidExtensions";
+import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 
 /**
  * Apply extensions
  *
- * @param {any} web The web
- * @param {IProgressCallback} onUpdateProgress
+ * @param {IProvisionContext} context Provisioning context
  */
-async function ApplyExtensions(web: any, onUpdateProgress: IProgressCallback): Promise<void> {
+async function ApplyExtensions(context: IProvisionContext): Promise<void> {
+    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), "");
     try {
         const extensions = await GetValidExtensions();
-        await extensions.reduce((chain, extension) => chain.then(___ => {
-            onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
-            return new WebProvisioner(web).applyTemplate(extension.data);
-        }), Promise.resolve());
+        const webProvisioner = new WebProvisioner(context.web);
+        for (let i = 0; i < extensions.length; i++) {
+            const extensionToApply = extensions[i];
+            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extensionToApply.Title);
+            await webProvisioner.applyTemplate(extensionToApply.data);
+            await UpdatePropertyArray("pp_installed_extensions", extensionToApply.LinkFilename, ",", context.url);
+        }
         return;
     } catch (err) {
         throw new ProvisionError(err, "ApplyExtensions");

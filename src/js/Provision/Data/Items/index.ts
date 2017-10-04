@@ -72,7 +72,7 @@ export async function CopyItems(conf: ListConfig, destUrl: string, onUpdateProgr
         Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
         return;
     } catch (err) {
-        throw new ProvisionError(err, "CopyItems");
+        throw err;
     }
 }
 

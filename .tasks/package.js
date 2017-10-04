@@ -43,10 +43,10 @@ gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], (done
     done();
 });
 
-gulp.task("packageCodeProd", ["buildLib"], (done) => {
+gulp.task("packageCodeMinify", ["buildLib"], (done) => {
     webpack(wpProd(), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("packageCodeProd", err);
+            throw new gutil.PluginError("packageCodeMinify", err);
         }
         console.log(stats.toString({
             colors: true
@@ -55,6 +55,6 @@ gulp.task("packageCodeProd", ["buildLib"], (done) => {
     });
 });
 
-gulp.task("package::prod", ["copyAssetsToDist", "packageCodeProd", "packageStyles"], (done) => {
+gulp.task("packageProd", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], (done) => {
     done();
 });

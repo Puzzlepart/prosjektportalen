@@ -1,4 +1,3 @@
-import * as uuid_v1 from "uuid/v1";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import AudienceTargeting from "../AudienceTargeting";
 
@@ -7,7 +6,6 @@ export default interface ILatestLogEntriesProps extends IBaseWebPartProps {
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;
     listClassName?: string;
-    containerId?: string;
     audienceTargeting?: AudienceTargeting;
 }
 
@@ -19,6 +17,5 @@ export const LatestLogEntriesDefaultProps: Partial<ILatestLogEntriesProps> = {
     },
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
-    containerId: uuid_v1(),
     audienceTargeting: AudienceTargeting.Owners,
 };

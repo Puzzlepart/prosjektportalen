@@ -59,7 +59,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), `#${this.props.containerId}`, Announcements.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), this.state.elementToToggle, Announcements.displayName)}
                 {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
@@ -79,7 +79,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
             );
         } else if (entries.length > 0) {
             return (
-                <div id={this.props.containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={this.props.listClassName}>
                         {entries.map((entry, idx) => <li key={idx}>
                             <h5>
@@ -94,7 +94,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
             );
         } else {
             return (
-                <div id={this.props.containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );

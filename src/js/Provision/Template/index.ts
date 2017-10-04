@@ -8,7 +8,7 @@ import {
     WebSettings,
     ComposedLook,
 } from "./Objects";
-import IProgressCallback from "../IProgressCallback";
+import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 
 /**
@@ -23,7 +23,7 @@ const PROGRESS_MAP = {
     PropertyBagEntries: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
-let Template: Schema = {
+let baseTemplate: Schema = {
     Files,
     Lists,
     Navigation,
@@ -39,34 +39,32 @@ let Template: Schema = {
 /**
  * Applies the template to the specified web
  *
- * @param {any} web The web
- * @param {Object} propBag Property bag values
- * @param {IProgressCallback} onUpdateProgress Callback function for progress
+ * @param {IProvisionContext} context Provisioning context
  */
-async function ApplyProvisioningTemplate(web, propBag: { [key: string]: string }, onUpdateProgress: IProgressCallback): Promise<void> {
-    const webProvisioner = new WebProvisioner(web);
-    const callbackFunc = objHandler => onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
+export async function ApplyProvisioningTemplate(context: IProvisionContext): Promise<void> {
+    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
+    const webProvisioner = new WebProvisioner(context.web);
+    const callbackFunc = objHandler => context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
     try {
-        await webProvisioner.applyTemplate({
-            ...Template,
+        const template = {
+            ...baseTemplate,
             WebSettings: {
-                ...Template.WebSettings,
-                AlternateCssUrl: `${propBag.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`,
-                SiteLogoUrl: `${propBag.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
+                ...baseTemplate.WebSettings,
+                AlternateCssUrl: `${context.webProperties.pp_assetssiteurl}/siteassets/pp/css/pp.main.css`,
+                SiteLogoUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
             },
             PropertyBagEntries: [{
                 Key: "pp_version",
-                Value: propBag.pp_version,
+                Value: context.webProperties.pp_version,
                 Overwrite: true,
                 Indexed: true,
             }],
-        }, callbackFunc);
+        };
+        await webProvisioner.applyTemplate(template, callbackFunc);
         return;
     } catch (err) {
         throw new ProvisionError(err, "ApplyProvisioningTemplate");
     }
 }
-
-export { ApplyProvisioningTemplate };
 
 

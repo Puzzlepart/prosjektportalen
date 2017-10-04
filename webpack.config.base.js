@@ -1,10 +1,14 @@
-var path = require("path");
+var path = require("path"),
+    webpack = require('webpack'),
+    pkg = require("./package.json"),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const libBasePath = path.join(__dirname, "lib/");
+const libBasePath = path.join(__dirname, "lib");
 const distBasePath = path.join(__dirname, "dist/js");
+const useBundleAnalyzer = false;
 
-module.exports = (exclude) => ({
-    cache: true,
+module.exports = (devtool, exclude, env) => ({
+    devtool: devtool,
     entry: {
         main: [
             'core-js/fn/object/assign',
@@ -48,7 +52,7 @@ module.exports = (exclude) => ({
                         ]
                     }
                 },
-                exclude
+                exclude: exclude
             },
             {
                 test: /\.txt$/,
@@ -59,5 +63,35 @@ module.exports = (exclude) => ({
                 loader: "json-loader"
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            __VERSION: JSON.stringify(pkg.version),
+            'process.env': {
+                NODE_ENV: JSON.stringify(env)
+            }
+        }),
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+    ]
+        .concat(env === "production" ? [
+            new webpack.optimize.UglifyJsPlugin({
+                mangle: true,
+                compress: {
+                    warnings: false,
+                    pure_getters: true,
+                    unsafe: true,
+                    unsafe_comps: true,
+                    screw_ie8: true
+                },
+                output: {
+                    comments: false,
+                },
+            }),
+            new webpack.optimize.AggressiveMergingPlugin()
+        ] : [])
+        .concat(useBundleAnalyzer ? [
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static'
+            })
+        ] : [])
 });

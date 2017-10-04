@@ -53,7 +53,7 @@ gulp.task("buildTheme", () => {
         .pipe(gulp.dest(config.theme.styl));
 });
 
-gulp.task("copyPnp", () => {
+gulp.task("copyPnpTemplates", () => {
     return gulp.src(config.paths.templatesGlob)
         .pipe(gulp.dest(config.paths.templates_temp));
 });
@@ -68,7 +68,7 @@ gulp.task("copyPnpRootTemplate", cb => {
     ).on('end', cb);
 });
 
-gulp.task("copyToDist", () => {
+gulp.task("copyResourcesToAssetsTemplate", () => {
     return gulp.src([
         format("{0}/**/*.js", config.paths.dist),
         format("{0}/**/*.css", config.paths.dist),
@@ -106,8 +106,8 @@ gulp.task("stampVersionToDist", cb => {
     });
 });
 
-gulp.task("buildPnp", (done) => {
-    runSequence("copyPnp", "copyPnpRootTemplate", "copyToDist", "stampVersionToTemplates", () => {
+gulp.task("buildPnpTemplateFiles", (done) => {
+    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });

@@ -1,19 +1,26 @@
-# Prosjektportalen v2.0
+Prosjektportalen for SharePoint
+=================
 
-Prosjektportalen v2.0 using [pnp-js-provisioning](https://github.com/Puzzlepart/pnp-js-provisioning/) and [PnP-Sites-Core](github.com/SharePoint/pnp-sites-core).
+Prosjektportalen for SharePoint er et prosjektstyringsverktøy for SharePoint basert på <a href="http://prosjektveiviseren.no">Prosjektveiviseren</a>. 
 
-## Installation
-See [Installation](https://github.com/Puzzlepart/prosjektportalen/wiki/Installation)
+## Hva er prosjektportal for SharePoint? ##
 
-## Development
-See [Development](https://github.com/Puzzlepart/prosjektportalen/wiki/Development)
+Prosjektportal for SharePoint er bygget av <a href="http://www.puzzlepart.com">Puzzlepart AS</a> på bestilling for Asker kommune og <a href="http://www.ks.no/kommit">KommIT</a> i 2014. Løsningen inneholder SharePoint-tilpasninger som til sammen utgjør et prosjektstyringsverktøy. Det blir satt opp en portefølgeside der en får en oversikt over prosjekter og kan opprette nye prosjektrom. Hvert prosjektområde inneholder en del lister, en del standardelementer og logikk for å gjennomføre et prosjekt etter prosjektveiviserens modell. Prosjektveiviseren er Difis anbefalte prosjektmodell for gjennomføring av digitaliseringsprosjekter i offentlige virksomheter.
 
-## License
-See [License](license.md)
+Prosjektportalen gjennomgikk omfattende endringer og forbedringer våren 2017.
 
-<!--## Contact
-For questions and suggestions, contact Geir Graff at Asker Kommune. For assistance with installation of the solution or opportunities for further development and customization, please contact Puzzlepart or Tormod Guldvog. 
-For technical questions, contact [Tarjei Ormestøyl] or [Ole Martin Pettersen]. We note that any assistance will be a billable service.-->
+## Installering ##
 
-## Maintainers
+Prosjektportalen installeres med Powershell. Se [Installation](https://github.com/Puzzlepart/prosjektportalen/wiki/Installation) (dokumentert på engelsk)
+
+## Siste versjon av Prosjektportalen ##
+
+Siste versjon av Prosjektportalen kan lastes ned [herfra](https://github.com/Puzzlepart/prosjektportalen/releases/latest).
+
+## Kontakt ##
+
+Har du spørsmål om Prosjektportlaen, behov for bistand til installasjon av løsningen eller muligheter for videreutvikling og spesialtilpasninger, ta kontakt med <a href="mailto:prosjektportalen@puzzlepart.com">Prosjektportalen @ Puzzlepart</a>. For tekniske spørsmål, ta kontakt med [<a href="mailto:tarjeieo@puzzlepart.com">Tarjei Ormestøyl</a>] eller [<a href="mailto:olemp@puzzlepart.com">Ole Martin Pettersen</a>]. Vi gjør oppmerksom på at eventuell bistand vil være en fakturerbar tjeneste. 
+
+## Maintainers ##
+
 Tarjei Ormestøyl [tarjeieo@puzzlepart.com], Ole Martin Pettersen [olemp@puzzlepart.com]
