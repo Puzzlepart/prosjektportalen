@@ -76,8 +76,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         });
 
         return (
-            <div className={this.props.containerClassName}>
-                <table id={this.props.tableId}>
+            <div className={this.props.className}>
+                <table id={this.props.id}>
                     <tbody>
                         {riskMatrix}
                     </tbody>

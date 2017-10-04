@@ -1,29 +1,37 @@
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 export default class WebPartComponent {
+    public component: any;
     public name: string;
     public container: string;
-    public component: JSX.Element;
+    public defaultProps: { [key: string]: any };
 
     /**
      * Constructor
      *
-     * @param {string} name Component name
+     * @param {any} webPart Web part
      * @param {string} container Component container
-     * @param {JSX.Element} component Component instance
+     * @param {any} defaultProps Default props
      */
-    constructor(name: string, container: string, component: JSX.Element) {
-        this.name = name;
-        this.container = container;
+    constructor(component, container: string, defaultProps: { [key: string]: any } = {}) {
         this.component = component;
+        this.name = this.component.displayName;
+        this.container = container;
+        this.defaultProps = defaultProps;
     }
 
-    /**
-     * Renders the component if the specified container element exists
-     */
-    public renderOnPage(): boolean {
+    public getComponent(withDefaultProps = true) {
+        if (withDefaultProps) {
+            return React.createElement(this.component, this.defaultProps);
+        } else {
+            return React.createElement(this.component, {});
+        }
+    }
+
+    public renderOnPage(withDefaultProps = true): boolean {
         if (document.getElementById(this.container) !== null) {
-            ReactDOM.render(this.component, document.getElementById(this.container));
+            ReactDOM.render(this.getComponent(withDefaultProps), document.getElementById(this.container));
             return true;
         }
         return false;

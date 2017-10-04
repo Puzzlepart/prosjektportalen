@@ -19,7 +19,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     constructor(props: ISectionProps) {
         super(props);
         this.state = {
-            isLoading: this.shouldFechData(props),
+            isLoading: this.shouldFetchListData(props),
             listData: null,
         };
     }
@@ -28,7 +28,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     * Component did mount
     */
     public componentDidMount(): void {
-        if (this.shouldFechData(this.props)) {
+        if (this.shouldFetchListData(this.props)) {
             this.fetchListData(this.props).then(listData => {
                 this.setState({
                     listData,
@@ -47,6 +47,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         }
         return (
             <Element
+                id={this.props.section.getHtmlElementId()}
                 name={`section-${this.props.index}`}
                 className="section ms-Grid-row">
                 {this.renderHeader(this.props, this.state)}
@@ -60,13 +61,12 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     private renderHeader({ project, section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
-
         if (section.getType() === SectionType.ProjectPropertiesSection) {
             fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3`;
         }
-
         return (
             <SectionHeader
+                id={section.getHtmlElementId("header")}
                 section={section}
                 fallbackNavigateUrl={fallbackNavigateUrl} />
         );
@@ -77,12 +77,12 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     private renderInner({ project, fields, section }: ISectionProps, { listData }: ISectionState) {
         return (
-            <div>
+            <div id={section.getHtmlElementId("inner")}>
                 {section.showRiskMatrix && (
                     <RiskMatrix listData={listData} />
                 )}
                 {section.listTitle && (
-                    <SectionList listData={listData} />
+                    <SectionList id={section.getHtmlElementId("listview")} listData={listData} />
                 )}
                 {section.getType() === SectionType.ProjectPropertiesSection && (
                     <div
@@ -113,7 +113,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                     </div>
                 )}
                 {section.customComponent && (
-                    this.renderCustomComponent(this.props, this.state)
+                    this.renderCustomComponent(section.customComponent)
                 )}
             </div>
         );
@@ -122,13 +122,12 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     /**
      * Renders custom component
      *
-     * @param param0 Props
-     * @param param1 State
+     * @param {string} customComponentName Custom component name
      */
-    private renderCustomComponent({ section }: ISectionProps, { }: ISectionState): JSX.Element {
-        let customWpComp = GetWebPartComponentByName(section.customComponent);
-        if (customWpComp) {
-            return customWpComp.component;
+    private renderCustomComponent(customComponentName: string): JSX.Element {
+        let customComponent = GetWebPartComponentByName(customComponentName);
+        if (customComponent) {
+            return customComponent.getComponent(false);
         }
         return null;
     }
@@ -136,7 +135,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     /**
      * Should the component fetch data (if listTitle is specified)
      */
-    private shouldFechData = ({ section }: ISectionProps): boolean => {
+    private shouldFetchListData = ({ section }: ISectionProps): boolean => {
         return (section.listTitle != null);
     }
 
