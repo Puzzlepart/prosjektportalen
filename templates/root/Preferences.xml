@@ -7,6 +7,7 @@
         <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="ScriptLoadTimeout">10000</pnp:Parameter>
-        <pnp:Parameter Key="DefaultSettings">{}</pnp:Parameter>
+        <pnp:Parameter Key="DefaultSettings">{"PROJECTSTATUS_EXPORT_TYPE":"PNG"}</pnp:Parameter>
+        <pnp:Parameter Key="SettingsOptions">{"PROJECTSTATUS_EXPORT_TYPE":["PNG","PDF"]}</pnp:Parameter>
     </pnp:Parameters>
 </pnp:Preferences>
