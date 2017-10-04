@@ -18,7 +18,7 @@ import {
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
 import {
-    GetProperty,
+    GetAllProperties,
     SetProperty,
 } from "../../Util/PropertyBag";
 import IWebPropertyBagEditorProps, { WebPropertyBagEditorDefaultProps } from "./IWebPropertyBagEditorProps";
@@ -43,20 +43,30 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
     }
 
     public shouldComponentUpdate(nextProps: IWebPropertyBagEditorProps, nextState: IWebPropertyBagEditorState) {
-        return (this.state.isLoading !== nextState.isLoading);
+        return (this.state.isLoading !== nextState.isLoading || this.state.isSaving !== nextState.isSaving);
     }
 
     public async componentDidMount(): Promise<void> {
-        const settingsString = await GetProperty(this.props.propKey);
-        const settingsJson = JSON.parse(settingsString);
+        const webProperties = await GetAllProperties();
+        let settingsJson, settingsOptionsJson;
+        try {
+            settingsJson = JSON.parse(webProperties[this.props.settingsPropKey]);
+        } catch (err) {
+            settingsJson = {};
+        }
+        try {
+            settingsOptionsJson = JSON.parse(webProperties[this.props.settingsOptionsPropKey]);
+        } catch (err) {
+            settingsOptionsJson = {};
+        }
         let settings: ISetting[] = Object.keys(settingsJson)
             .map(key => {
                 let setting: ISetting = {
                     settingKey: key,
                     settingValue: settingsJson[key],
                 };
-                if (this.props.settingsOptions[key]) {
-                    setting.options = this.props.settingsOptions[key];
+                if (settingsOptionsJson[key]) {
+                    setting.options = settingsOptionsJson[key];
                 }
                 return setting;
             });
@@ -80,8 +90,8 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                             key: "settingKey",
                             fieldName: "settingKey",
                             name: RESOURCE_MANAGER.getResource("SiteFields_GtKey_DisplayName"),
-                            minWidth: 100,
-                            maxWidth: 150,
+                            minWidth: 150,
+                            maxWidth: 200,
                         },
                         {
                             key: "settingValue",
@@ -95,12 +105,14 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
                     selectionMode={SelectionMode.none} />
-                {this.state.isSaving ?
-                    <Spinner size={SpinnerSize.large} />
-                    :
-                    <PrimaryButton
-                        style={{ marginTop: 20, marginLeft: 0 }}
-                        onClick={this._onSaveChanges}>{RESOURCE_MANAGER.getResource("String_SaveChanges")}</PrimaryButton>}
+                <div style={{ width: 200 }}>
+                    {this.state.isSaving ?
+                        <Spinner size={SpinnerSize.large} />
+                        :
+                        <PrimaryButton
+                            style={{ marginTop: 20, marginLeft: 0 }}
+                            onClick={this._onSaveChanges}>{RESOURCE_MANAGER.getResource("String_SaveChanges")}</PrimaryButton>}
+                </div>
             </div>
         );
     }
@@ -112,17 +124,19 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                 return (
                     <div style={{ width: 200 }}>
                         <Dropdown
+                            disabled={this.state.isSaving}
                             onChanged={option => {
                                 this._onSettingChanged(item, `${option.key}`);
                             }}
                             defaultSelectedKey={item.settingValue}
-                            options={item.options} />
+                            options={item.options.map(text => ({ key: text, text }))} />
                     </div>
                 );
             }
             return (
                 <div style={{ width: 200 }}>
                     <TextField
+                        disabled={this.state.isSaving}
                         onChanged={newValue => {
                             this._onSettingChanged(item, newValue);
                         }}
@@ -150,7 +164,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
             obj[settingKey] = settingValue;
             return obj;
         }, {});
-        await SetProperty(this.props.propKey, JSON.stringify(settingsObject));
+        await SetProperty(this.props.settingsPropKey, JSON.stringify(settingsObject));
         this.setState({ isSaving: false });
     }
 }
