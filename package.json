@@ -7,7 +7,6 @@
     "release": "gulp release"
   },
   "dependencies": {
-    "@types/jspdf": "^1.1.31",
     "array-sort": "^0.1.4",
     "array-unique": "^0.3.2",
     "core-js": "^2.5.1",
@@ -44,6 +43,7 @@
   "license": "ISC",
   "homepage": "https://github.com/Puzzlepart/prosjektportalen",
   "devDependencies": {
+    "@types/jspdf": "^1.1.31",
     "@types/chai": "4.0.4",
     "@types/mocha": "2.2.43",
     "@types/react": "^16.0.5",
