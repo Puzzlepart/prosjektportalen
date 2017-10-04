@@ -5,7 +5,7 @@ import { Link } from "react-scroll";
 import ExportReport from "../ExportReport";
 import INavigationProps from "./INavigationProps";
 
-const Navigation = ({ project, sections }: INavigationProps) => {
+const Navigation = ({ project, sections, exportType }: INavigationProps) => {
     return (
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
@@ -13,7 +13,10 @@ const Navigation = ({ project, sections }: INavigationProps) => {
                     <h2 className="status-page-header">{`${RESOURCE_MANAGER.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-md6">
-                    <ExportReport project={project} />
+                    <ExportReport
+                        exportType={exportType}
+                        project={project}
+                        sections={sections} />
                 </div>
             </div>
             <div
