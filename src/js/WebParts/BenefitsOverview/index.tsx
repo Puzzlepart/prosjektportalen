@@ -16,8 +16,8 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import { _onRenderItemColumn } from "./Data/Columns";
-import * as Data from "./Data";
+import { _onRenderItemColumn } from "./BenefitsOverviewData/BenefitsOverviewDataColumns";
+import * as Data from "./BenefitsOverviewData";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
 import BaseWebPart from "../@BaseWebPart";
@@ -48,12 +48,12 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        Data.retrieveFromSource(this.props.dataSource)
-            .then(data => this.setState({
-                data: data,
-                isLoading: false,
-            }));
+    public async componentDidMount(): Promise<void> {
+        const data = await Data.retrieveFromSource(this.props.dataSource);
+        this.setState({
+            data: data,
+            isLoading: false,
+        });
     }
 
     /**
@@ -78,12 +78,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             return (
                 <div style={{ width: "100%" }}>
                     {this.renderCommandBar(this.props, this.state)}
-                    <div style={{ height: 10 }}></div>
-                    {showSearchBox !== false &&
+                    <div hidden={!showSearchBox}>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                             labelText={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />
-                    }
+                    </div>
                     <DetailsList
                         items={items}
                         columns={columns}

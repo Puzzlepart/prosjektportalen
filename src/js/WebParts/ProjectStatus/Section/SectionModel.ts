@@ -1,3 +1,6 @@
+
+import * as Util from "../../../Util";
+
 export enum SectionType {
     StatusSection,
     RiskSection,
@@ -71,6 +74,14 @@ export default class SectionModel {
         }
         if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82805") !== -1) {
             return SectionType.ListSection;
+        }
+    }
+
+    public getHtmlElementId(element?: string): string {
+        if (element) {
+            return `section-${Util.cleanString(this.name)}-${element}`;
+        } else {
+            return `section-${Util.cleanString(this.name)}`;
         }
     }
 

@@ -16,7 +16,8 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     groupByOptions: [],
     searchProperty: "Title",
     dataSource: DataSource.List,
-    showCommandBar: true,
+    showCommandBar: false,
+    showSearchBox: false,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
 };
