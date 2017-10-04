@@ -64,10 +64,10 @@ async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServ
  */
 export async function CopyFiles(conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback): Promise<FileAddResult[]> {
     Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
-    const srcWeb = new Web(Util.makeAbsolute(conf.SourceUrl));
+    const srcWeb = new Web(Util.makeUrlAbsolute(conf.SourceUrl));
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
-    const destWeb = new Web(Util.makeAbsolute(destUrl));
-    const destLibServerRelUrl = Util.makeRelative(`${destUrl}/${conf.DestinationLibrary}`);
+    const destWeb = new Web(Util.makeUrlAbsolute(destUrl));
+    const destLibServerRelUrl = Util.makeUrlRelativeToSite(`${destUrl}/${conf.DestinationLibrary}`);
     const destLibRootFolder = destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl);
     try {
         const [{ RootFolder }, items] = await Promise.all([

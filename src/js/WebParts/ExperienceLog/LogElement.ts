@@ -1,4 +1,4 @@
-import { IQueryResult } from "./Search";
+import { IQueryResult } from "./ExperienceLogSearch";
 
 export class LogElement {
     public Path: string;

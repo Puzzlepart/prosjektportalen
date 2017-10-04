@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../@localization";
 
 /**
  * Document library
@@ -20,6 +20,10 @@ export const FRONTPAGE_LISTS = [
     {
         listTitle: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
         wpTitle: RESOURCE_MANAGER.getResource("WebPart_TasksCurrentPhase_Title"),
+    },
+    {
+        listTitle: RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"),
+        wpTitle: RESOURCE_MANAGER.getResource("WebPart_PhaseChecklistCurrentPhase_Title"),
     },
 ];
 

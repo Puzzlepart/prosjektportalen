@@ -1,0 +1,13 @@
+{
+    "target": "es2015",
+    "module": "commonjs",
+    "jsx": "react",
+    "includeDeclarations": true,
+    "hideGenerator": true,
+    "out": "./docs",
+    "ignoreCompilerErrors": true,
+    "version": true,
+    "excludeExternals": true,
+    "readme": "./readme.md",
+    "mode": "file"
+}

@@ -162,7 +162,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     private _onDismissDialog = (e, reload = false) => {
         this.props.hideHandler(e);
         if (reload) {
-            document.location.href = document.location.href;
+            document.location.href = _spPageContextInfo.serverRequestPath;
         }
     }
 }

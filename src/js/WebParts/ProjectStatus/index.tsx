@@ -10,6 +10,7 @@ import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
 import SectionModel from "./Section/SectionModel";
 import BaseWebPart from "../@BaseWebPart";
+import { GetSetting } from "../../Settings";
 
 /**
  * Project Status
@@ -30,12 +31,11 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchData().then(data => {
-            this.setState({
-                data,
-                isLoading: false,
-            });
+    public async componentDidMount(): Promise<void> {
+        const data = await this.fetchData();
+        this.setState({
+            data,
+            isLoading: false,
         });
     }
 
@@ -74,7 +74,8 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                                             }}>
                                             <Navigation
                                                 project={data.project}
-                                                sections={data.sections.filter(s => s.showInNavbar)} />
+                                                sections={data.sections.filter(s => s.showInNavbar)}
+                                                exportType={data.exportType} />
                                         </div>
                                     );
                                 }
@@ -114,19 +115,20 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
     /**
      * Fetches required data
      */
-    private fetchData = () => new Promise<ProjectStatusData>((resolve, reject) => {
+    private async fetchData(): Promise<ProjectStatusData> {
         const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
-        Promise.all([
+        const [project, fields, sections, exportType] = await Promise.all([
             sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.get(),
             sitePagesLib.fields.get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
-        ])
-            .then(([project, fields, sections]) => resolve({
-                project,
-                fields,
-                sections: sections.map(s => new SectionModel(s, project)).filter(s => s.isValid()),
-            }))
-            .catch(reject);
-    })
+            GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
+        ]);
+        return {
+            project,
+            fields,
+            sections: sections.map(s => new SectionModel(s, project)).filter(s => s.isValid()),
+            exportType,
+        };
+    }
 }

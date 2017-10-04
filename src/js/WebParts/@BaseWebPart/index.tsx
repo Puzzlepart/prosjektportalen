@@ -19,18 +19,16 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
      * Render chrome
      *
      * @param {string} title Title
-     * @param {string} selector Selector for toggle
+     * @param {HTMLElement} element Element to toggle
      * @param {string} key Storage key
      * @param {boolean} hideChrome Hide chrome
      */
-    public __renderChrome = (title: string, selector: string, key: string, hideChrome = false) => {
+    public __renderChrome = (title: string, element: HTMLElement, key: string, hideChrome = false) => {
         return (
             <ChromeTitle
                 title={title}
                 toggleElement={{
-                    selector: selector,
-                    animationDelay: 100,
-                    animation: "slideToggle",
+                    element,
                     storage: {
                         key: key,
                         type: "localStorage",
@@ -41,6 +39,11 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
         );
     }
 
+    /**
+     * Update state
+     *
+     * @param {S} updatedState Updated state
+     */
     public async updateState(updatedState: S): Promise<void> {
         this.setState(updatedState, () => {
             return;

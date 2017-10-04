@@ -31,7 +31,9 @@ async function GetDataContext(conf: ListConfig, destUrl: string, viewXml = "<Vie
         Destination: { _: new SP.ClientContext(destUrl) },
         loadAndExecuteQuery: (clCtx, clObj = []) => new Promise<void>((res, rej) => {
             clObj.forEach(obj => clCtx.load(obj));
-            clCtx.executeQueryAsync(res, rej);
+            clCtx.executeQueryAsync(res, (sender, args) => {
+                rej({ sender, args });
+            });
         }),
     };
     ctx.Source.list = ctx.Source._.get_web().get_lists().getByTitle(conf.SourceList);

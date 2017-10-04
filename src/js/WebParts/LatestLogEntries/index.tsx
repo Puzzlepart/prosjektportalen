@@ -79,7 +79,7 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
         }
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), `#${this.props.containerId}`, LatestLogEntries.displayName)}
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), this.state.elementToToggle, LatestLogEntries.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );
@@ -91,14 +91,14 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
     * @param {ILatestLogEntriesProps} param0 Props
     * @param {ILatestLogEntriesState} param1 State
      */
-    private renderItems = ({ containerId, listClassName }: ILatestLogEntriesProps, { isLoading, entries, forms }: ILatestLogEntriesState) => {
+    private renderItems = ({ listClassName }: ILatestLogEntriesProps, { isLoading, entries, forms }: ILatestLogEntriesState) => {
         if (isLoading) {
             return (
                 <Spinner type={SpinnerType.large} />
             );
         } else if (entries.length > 0) {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
                         {entries.map((entry, key) => (
                             <li key={key}>
@@ -119,7 +119,7 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
             );
         } else {
             return (
-                <div id={containerId}>
+                <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );

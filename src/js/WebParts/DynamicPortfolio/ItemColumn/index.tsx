@@ -4,13 +4,15 @@ import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { IColumnConfig } from "../Configuration";
 import { GetStatusProperties } from "../../ProjectStatus/Utils";
 
+
+
 /**
- * Rennder item column
+ * Render item column
  *
- * @param item The item
- * @param index Index
- * @param column Column
- * @param titleOnClick Tile column on click
+ * @param {any} item The item
+ * @param {number} index Index
+ * @param {IColumnConfig} column Column
+ * @param {Function} titleOnClick Tile column on click
  */
 const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
@@ -48,7 +50,6 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Status": {
-
             const statusProperties = GetStatusProperties(Util.cleanSearchPropName(column.fieldName), columnValue);
             return (
                 <span>

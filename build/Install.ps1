@@ -45,20 +45,12 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Folder for extensions (.pnp files)")]
     [string]$ExtensionFolder,
     [Parameter(Mandatory = $false)]
+    [switch]$ConfirmExtensions,
+    [Parameter(Mandatory = $false)]
     [switch]$Upgrade
 )
 
 . ./SharedFunctions.ps1
-
-function Connect-SharePoint ($Url) {
-    if ($UseWebLogin.IsPresent) {
-        Connect-PnPOnline $Url -UseWebLogin
-    } elseif ($CurrentCredentials.IsPresent) {
-        Connect-PnPOnline $Url -CurrentCredentials
-    } else {
-        Connect-PnPOnline $Url -Credentials $Credential
-    }
-}
 
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
@@ -187,11 +179,18 @@ function Start-Install() {
         if ($extensionFiles.Length -gt 0) {
             try {
                 Connect-SharePoint $Url
-                Write-Host "Deploying extensions.." -ForegroundColor Green -NoNewLine
+                Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
-                    Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+                    $confirmation = "y"
+                    if ($ConfirmExtensions.IsPresent) {
+                        $confirmation = Read-Host "`tDeploy extension $($extension.BaseName) (y/n)?"
+                    }
+                    if($confirmation.toLower() -eq "y") {
+                        Write-Host "`tDeploying extension $($extension.BaseName).. " -ForegroundColor White -NoNewLine
+                        Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+                        Write-Host "DONE" -ForegroundColor White
+                    }
                 }
-                Write-Host "DONE" -ForegroundColor Green
                 Disconnect-PnPOnline
             }
             catch {
@@ -208,8 +207,5 @@ function Start-Install() {
     }
 }
 
-if (Get-HasAssociatedGroups -eq $true) {
-    Start-Install
-} else {
-    Write-Host "Can't install to $($Url). Missing associated groups. Please go to /_layouts/15/permsetup.aspx to set up groups for the site." -ForegroundColor Red
-}
+Ensure-AssociatedGroups
+Start-Install

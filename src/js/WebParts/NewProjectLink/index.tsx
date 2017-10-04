@@ -78,13 +78,16 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderLink = ({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) => {
+    private renderLink({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) {
         return (
             <div>
                 <a
                     className={linkClassName}
-                    href="#"
-                    onClick={e => this.setState({ showDialog: true })}>
+                    href={_spPageContextInfo.webAbsoluteUrl}
+                    onClick={e => {
+                        e.preventDefault();
+                        this.setState({ showDialog: true });
+                    }}>
                     <Icon { ...iconProps } />
                     <span>{RESOURCE_MANAGER.getResource("NewProjectForm_Header")}</span>
                 </a>
@@ -98,7 +101,7 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog = ({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) => {
+    private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
                 <NewProjectDialog

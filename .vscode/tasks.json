@@ -27,7 +27,7 @@
             "showOutput": "always"
         },
         {
-            "taskName": "buildPnp",
+            "taskName": "buildPnpTemplateFiles",
             "args": [],
             "isBackground": true
         }
