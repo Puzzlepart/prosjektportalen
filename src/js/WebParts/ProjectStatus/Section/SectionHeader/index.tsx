@@ -39,10 +39,12 @@ const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
     return null;
 };
 
-const SectionHeader = ({ section, fallbackNavigateUrl }: ISectionHeaderProps) => {
+const SectionHeader = ({ id, section, fallbackNavigateUrl }: ISectionHeaderProps) => {
     let statusCssClass = GetStatusCssClass(section.fieldName, section.statusValue);
     return (
-        <div className="ms-Grid">
+        <div
+            id={id}
+            className="ms-Grid">
             <div className="section-header ms-Grid-row">
                 <div className="section-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
                     <div className="ms-Grid-row">
@@ -53,8 +55,8 @@ const SectionHeader = ({ section, fallbackNavigateUrl }: ISectionHeaderProps) =>
                 </div>
                 <SectionHeaderDetails { ...section } />
                 <SectionHeaderNavigate source={section.source} fallbackNavigateUrl={fallbackNavigateUrl} />
-            </div >
-        </div >
+            </div>
+        </div>
     );
 };
 
