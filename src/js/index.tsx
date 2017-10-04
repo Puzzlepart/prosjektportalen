@@ -15,8 +15,8 @@ pnp.setup({
 });
 
 ExecuteOrDelayUntilBodyLoaded(() => {
-    Forms.Initialize();
-    WebParts.Render();
+    Forms.InitializeModifications();
+    WebParts.RenderWebPartsOnPage();
     StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
 });
 

@@ -14,7 +14,7 @@ formModifications[RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Url")] = 
 /**
  * Initialize form modifications and web parts
  */
-export const Initialize = () => {
+export const InitializeModifications = () => {
     let urlParts = Util.getUrlParts();
     let [list] = Object.keys(formModifications).filter(key => _spPageContextInfo.serverRequestPath.indexOf(key) !== -1);
     if (list) {
