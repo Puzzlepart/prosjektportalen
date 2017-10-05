@@ -8,11 +8,13 @@ import {
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ILatestLogEntriesProps, { LatestLogEntriesDefaultProps } from "./ILatestLogEntriesProps";
 import ILatestLogEntriesState from "./ILatestLogEntriesState";
-import BaseWebPart from "../@BaseWebPart";
-import { ModalLink } from "../@Components";
-import * as Util from "../../Util";
+import ModalLink from "../@Components/ModalLink";
+import SecuredWebPart from "../@SecuredWebPart";
 
-export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps, ILatestLogEntriesState> {
+/**
+ * Latest Log Entries
+ */
+export default class LatestLogEntries extends SecuredWebPart<ILatestLogEntriesProps, ILatestLogEntriesState> {
     public static displayName = "LatestLogEntries";
     public static defaultProps = LatestLogEntriesDefaultProps;
 
@@ -24,43 +26,33 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
      * @param {ILatestLogEntriesProps} props Props
      */
     constructor(props: ILatestLogEntriesProps) {
-        super(props, {
-            isLoading: true,
-        });
+        super(props, { isLoading: true });
     }
 
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchData(this.props)
-            .then(data => {
-                this.setState({
-                    ...data,
-                    isLoading: false,
-                });
-            })
-            .catch(_ => this.setState({ isLoading: false }));
-
-        if (this.props.reloadInterval !== -1) {
-            this.reloadInterval = window.setInterval(() => {
-                this.fetchData(this.props)
-                    .then(data => {
-                        this.setState(data);
+    public async componentDidMount(): Promise<void> {
+        await this.onInit();
+        if (this.state.shouldRender) {
+            this.fetchData(this.props)
+                .then(data => {
+                    this.setState({
+                        ...data,
+                        isLoading: false,
                     });
-            }, (this.props.reloadInterval * 1000));
-        }
+                })
+                .catch(_ => this.setState({ isLoading: false }));
 
-        /**
-         * Checks if the web part should be rendered for the current user
-         */
-        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
-            if (userMatchAudience !== this.state.shouldRender) {
-                this.setState({
-                    shouldRender: userMatchAudience,
-                });
+            if (this.props.reloadInterval !== -1) {
+                this.reloadInterval = window.setInterval(() => {
+                    this.fetchData(this.props)
+                        .then(data => {
+                            this.setState(data);
+                        });
+                }, (this.props.reloadInterval * 1000));
             }
-        });
+        }
     }
 
     /**
@@ -74,9 +66,10 @@ export default class LatestLogEntries extends BaseWebPart<ILatestLogEntriesProps
      * Renders the component
      */
     public render(): JSX.Element {
-        if (!this.state.shouldRender) {
-            return null;
-        }
+        return this.state.shouldRender ? this._render() : null;
+    }
+
+    public _render() {
         return (
             <div>
                 {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), this.state.elementToToggle, LatestLogEntries.displayName)}
