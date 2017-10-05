@@ -1,4 +1,4 @@
-import AudienceTargeting from "../../AudienceTargeting";
+import { PermissionKind } from "sp-pnp-js";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 
@@ -14,7 +14,7 @@ export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElemen
     height?: number;
     icon?: IModalLinkIconProps;
     id?: string;
-    audienceTargeting?: AudienceTargeting;
+    permissionKind?: PermissionKind;
 }
 
 export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
@@ -22,6 +22,5 @@ export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
     reloadOnSubmit: false,
     reloadOnCancel: false,
     className: "",
-    audienceTargeting: AudienceTargeting.None,
 };
 

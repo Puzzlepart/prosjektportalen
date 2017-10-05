@@ -1,12 +1,11 @@
-import { IBaseWebPartProps } from "../@BaseWebPart";
-import AudienceTargeting from "../AudienceTargeting";
+import { ISecuredWebPartProps } from "../@SecuredWebPart";
+import { PermissionKind } from "sp-pnp-js";
 
-export default interface ILatestLogEntriesProps extends IBaseWebPartProps {
+export default interface ILatestLogEntriesProps extends ISecuredWebPartProps {
     itemsCount?: number;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;
     listClassName?: string;
-    audienceTargeting?: AudienceTargeting;
 }
 
 export const LatestLogEntriesDefaultProps: Partial<ILatestLogEntriesProps> = {
@@ -17,5 +16,5 @@ export const LatestLogEntriesDefaultProps: Partial<ILatestLogEntriesProps> = {
     },
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
-    audienceTargeting: AudienceTargeting.Owners,
+    permissionKind: PermissionKind.ManageWeb,
 };
