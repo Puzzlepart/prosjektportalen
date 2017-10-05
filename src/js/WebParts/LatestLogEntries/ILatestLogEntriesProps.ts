@@ -1,7 +1,7 @@
-import { IAudienceTargetedComponentProps } from "../@Components/AudienceTargetedComponent";
+import { ISecuredWebPartProps } from "../@SecuredWebPart";
 import { PermissionKind } from "sp-pnp-js";
 
-export default interface ILatestLogEntriesProps extends IAudienceTargetedComponentProps {
+export default interface ILatestLogEntriesProps extends ISecuredWebPartProps {
     itemsCount?: number;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;

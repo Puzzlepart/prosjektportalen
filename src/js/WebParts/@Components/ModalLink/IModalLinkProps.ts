@@ -1,8 +1,8 @@
-import { IAudienceTargetedComponentProps } from "../AudienceTargetedComponent";
+import { PermissionKind } from "sp-pnp-js";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 
-export default interface IModalLinkProps extends IAudienceTargetedComponentProps {
+export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
     label?: string;
     showLabel?: boolean;
     url: string;
@@ -14,6 +14,7 @@ export default interface IModalLinkProps extends IAudienceTargetedComponentProps
     height?: number;
     icon?: IModalLinkIconProps;
     id?: string;
+    permissionKind?: PermissionKind;
 }
 
 export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {

@@ -8,11 +8,13 @@ import {
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ILatestLogEntriesProps, { LatestLogEntriesDefaultProps } from "./ILatestLogEntriesProps";
 import ILatestLogEntriesState from "./ILatestLogEntriesState";
-import AudienceTargetedComponent from "../@Components/AudienceTargetedComponent";
-import ChromeTitle from "../@Components/ChromeTitle";
-import { ModalLink } from "../@Components";
+import ModalLink from "../@Components/ModalLink";
+import SecuredWebPart from "../@SecuredWebPart";
 
-export default class LatestLogEntries extends AudienceTargetedComponent<ILatestLogEntriesProps, ILatestLogEntriesState> {
+/**
+ * Latest Log Entries
+ */
+export default class LatestLogEntries extends SecuredWebPart<ILatestLogEntriesProps, ILatestLogEntriesState> {
     public static displayName = "LatestLogEntries";
     public static defaultProps = LatestLogEntriesDefaultProps;
 
@@ -24,8 +26,7 @@ export default class LatestLogEntries extends AudienceTargetedComponent<ILatestL
      * @param {ILatestLogEntriesProps} props Props
      */
     constructor(props: ILatestLogEntriesProps) {
-        super(props);
-        this.state = { isLoading: true };
+        super(props, { isLoading: true });
     }
 
     /**
@@ -71,17 +72,7 @@ export default class LatestLogEntries extends AudienceTargetedComponent<ILatestL
     public _render() {
         return (
             <div>
-                <ChromeTitle
-                    title={RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title")}
-                    toggleElement={{
-                        element: this.state.elementToToggle,
-                        storage: {
-                            key: LatestLogEntries.displayName,
-                            type: "localStorage",
-                        },
-                    }}
-                    hidden={false}
-                />
+                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), this.state.elementToToggle, LatestLogEntries.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );

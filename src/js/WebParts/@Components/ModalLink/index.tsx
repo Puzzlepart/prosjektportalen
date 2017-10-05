@@ -1,16 +1,16 @@
 import * as React from "react";
+import pnp from "sp-pnp-js";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 import IModalLinkProps, { ModalLinkDefaultProps } from "./IModalLinkProps";
 import IModalLinkState from "./IModalLinkState";
-import AudienceTargetedComponent from "../AudienceTargetedComponent";
 
 /**
  * Modal Link
  */
-export default class ModalLink extends AudienceTargetedComponent<IModalLinkProps, IModalLinkState> {
+export default class ModalLink extends React.PureComponent<IModalLinkProps, IModalLinkState> {
     public static displayName = "ModalLink";
     public static defaultProps = ModalLinkDefaultProps;
 
@@ -21,14 +21,20 @@ export default class ModalLink extends AudienceTargetedComponent<IModalLinkProps
      */
     constructor(props: IModalLinkProps) {
         super(props);
+        this.state = {};
     }
 
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.onInit();
-    }
+    public async componentDidMount(): Promise<void> {
+        if (this.props.permissionKind) {
+            const userHasPermission = await pnp.sp.web.currentUserHasPermissions(this.props.permissionKind);
+            this.setState({ shouldRender: userHasPermission });
+        } else {
+            this.setState({ shouldRender: true });
+        }
+        return;    }
 
     /**
      * Calls _render with props and state to allow for ES6 destruction

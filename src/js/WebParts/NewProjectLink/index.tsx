@@ -5,12 +5,12 @@ import * as ListDataConfig from "../../Provision/Data/Config";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
-import AudienceTargetedComponent from "../@Components/AudienceTargetedComponent";
+import SecuredWebPart from "../@SecuredWebPart";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends AudienceTargetedComponent<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps, INewProjectLinkState> {
     public static displayName = "NewProjectLink";
     public static defaultProps = NewProjectLinkDefaultProps;
 
@@ -20,8 +20,7 @@ export default class NewProjectLink extends AudienceTargetedComponent<INewProjec
      * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props);
-        this.state = { listDataConfig: {} };
+        super(props, { listDataConfig: {} });
     }
 
     /**

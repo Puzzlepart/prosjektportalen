@@ -1,3 +1,3 @@
-import { IAudienceTargetedComponentState } from "../AudienceTargetedComponent";
-
-export default interface IModalLinkState extends IAudienceTargetedComponentState {}
+export default interface IModalLinkState {
+    shouldRender?: boolean;
+}

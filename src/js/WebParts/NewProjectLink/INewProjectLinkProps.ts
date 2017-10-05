@@ -1,7 +1,7 @@
-import { IAudienceTargetedComponentProps } from "../@Components/AudienceTargetedComponent";
+import { ISecuredWebPartProps } from "../@SecuredWebPart";
 import { PermissionKind } from "sp-pnp-js";
 
-export default interface INewProjectLinkProps extends IAudienceTargetedComponentProps {
+export default interface INewProjectLinkProps extends ISecuredWebPartProps {
     linkClassName?: string;
     iconProps?: {
         iconName: string,
