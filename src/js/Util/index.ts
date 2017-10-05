@@ -124,11 +124,11 @@ export function makeUrlAbsolute(relUrl: string): string {
 }
 
 /**
- * Generates URL. Replaces norwegian characters and spaces.
+ * Clean string
  *
  * @param {string} str The string
  */
-export function generateSpFriendlyUrl(str: string, length?: number): string {
+export function cleanString(str: string, length?: number): string {
     str = str
         .trim()
         .toLowerCase()

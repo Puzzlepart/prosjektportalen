@@ -3,7 +3,7 @@ import IGroupByOption from "./IGroupByOption";
 import {
     IBenefitsOverviewData,
     BenefitEntry,
-} from "./Data";
+} from "./BenefitsOverviewData";
 
 export default interface IBenefitsOverviewState extends IBaseWebPartState {
     data?: IBenefitsOverviewData;
