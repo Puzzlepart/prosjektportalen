@@ -1,13 +1,12 @@
-import { IBaseWebPartProps } from "../@BaseWebPart";
-import AudienceTargeting from "../AudienceTargeting";
+import { ISecuredWebPartProps } from "../@SecuredWebPart";
+import { PermissionKind } from "sp-pnp-js";
 
-export default interface INewProjectLinkProps extends IBaseWebPartProps {
+export default interface INewProjectLinkProps extends ISecuredWebPartProps {
     linkClassName?: string;
     iconProps?: {
         iconName: string,
         style: React.CSSProperties,
     };
-    audienceTargeting?: AudienceTargeting;
 }
 
 export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
@@ -19,5 +18,5 @@ export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
             marginRight: 5,
         },
     },
-    audienceTargeting: AudienceTargeting.Owners,
+    permissionKind: PermissionKind.ManageWeb,
 };

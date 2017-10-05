@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "localization";
 import { IModalLinkProps } from "../@Components/ModalLink";
-import AudienceTargeting from "../AudienceTargeting";
+import {PermissionKind} from "sp-pnp-js";
 import {
     SetMetadataDefaultsForLibrary,
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
@@ -27,7 +27,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     },
     reloadOnSubmit: false,
     showLabel: true,
-    audienceTargeting: AudienceTargeting.Owners,
+    permissionKind: PermissionKind.ManageWeb,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
@@ -75,14 +75,14 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
             });
     },
     showLabel: true,
-    audienceTargeting: AudienceTargeting.Owners,
+    permissionKind: PermissionKind.ManageWeb,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
     label: RESOURCE_MANAGER.getResource("ProjectInfo_EditLogo"),
     icon: { iconName: "AppIconDefault" },
     showLabel: true,
-    audienceTargeting: AudienceTargeting.Owners,
+    permissionKind: PermissionKind.ManageWeb,
 }];
 
 export default ProjectInfoDefaultActionLinks;

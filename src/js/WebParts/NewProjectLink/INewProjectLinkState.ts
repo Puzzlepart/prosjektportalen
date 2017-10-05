@@ -1,9 +1,8 @@
+import { ISecuredWebPartState } from "../@SecuredWebPart";
 import ListConfig from "../../Provision/Data/Config/ListConfig";
-import { IBaseWebPartState } from "../@BaseWebPart";
 
-export default interface INewProjectLinkState extends IBaseWebPartState {
+export default interface INewProjectLinkState extends ISecuredWebPartState {
     showDialog?: boolean;
     percentComplete?: number;
-    shouldRender?: boolean;
     listDataConfig: { [key: string]: ListConfig };
 }
