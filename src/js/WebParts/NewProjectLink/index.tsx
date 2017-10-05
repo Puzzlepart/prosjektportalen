@@ -1,18 +1,16 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import AudienceTargeting from "../AudienceTargeting";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
-import BaseWebPart from "../@BaseWebPart";
-import * as Util from "../../Util";
+import SecurityComponent from "../@Components/SecurityComponent";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends SecurityComponent<INewProjectLinkProps, INewProjectLinkState> {
     public static displayName = "NewProjectLink";
     public static defaultProps = NewProjectLinkDefaultProps;
 
@@ -22,28 +20,15 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props, {
-            shouldRender: props.audienceTargeting === AudienceTargeting.None,
-            listDataConfig: {},
-        });
+        super(props);
+        this.state = { listDataConfig: {} };
     }
 
-    /**
-     * Component did mount. Handling audience.
-     */
     public async componentDidMount(): Promise<void> {
-        /**
-         * Checks if the web part should be rendered for the current user
-        */
-        const userMatchAudience = await Util.doesUserMatchAudience(this.props.audienceTargeting);
-        if (userMatchAudience !== this.state.shouldRender) {
-            this.setState({
-                shouldRender: userMatchAudience,
-            });
-            if (userMatchAudience) {
-                const listDataConfig = await ListDataConfig.RetrieveConfig();
-                this.setState({ listDataConfig });
-            }
+        await this.onInit();
+        if (this.state.shouldRender) {
+            const listDataConfig = await ListDataConfig.RetrieveConfig();
+            this.setState({ listDataConfig });
         }
     }
 
@@ -51,19 +36,13 @@ export default class NewProjectLink extends BaseWebPart<INewProjectLinkProps, IN
      * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
+        return this.state.shouldRender ? this._render() : null;
     }
 
     /**
      * Renders the component
-     *
-     * @param {INewProjectLinkProps} param0 Props
-     * @param {INewProjectLinkState} param1 State
      */
-    private _render({ }: INewProjectLinkProps, { shouldRender }: INewProjectLinkState): JSX.Element {
-        if (!shouldRender) {
-            return null;
-        }
+    private _render() {
         return (
             <div>
                 {this.renderLink(this.props, this.state)}
