@@ -1,8 +1,8 @@
-import AudienceTargeting from "../../AudienceTargeting";
+import { IAudienceTargetedComponentProps } from "../AudienceTargetedComponent";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 
-export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
+export default interface IModalLinkProps extends IAudienceTargetedComponentProps {
     label?: string;
     showLabel?: boolean;
     url: string;
@@ -14,7 +14,6 @@ export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElemen
     height?: number;
     icon?: IModalLinkIconProps;
     id?: string;
-    audienceTargeting?: AudienceTargeting;
 }
 
 export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
@@ -22,6 +21,5 @@ export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
     reloadOnSubmit: false,
     reloadOnCancel: false,
     className: "",
-    audienceTargeting: AudienceTargeting.None,
 };
 

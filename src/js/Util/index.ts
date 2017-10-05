@@ -19,68 +19,6 @@ export function htmlDecode(input: string): string {
 }
 
 /**
- * Is the current user in the specified group
- *
- * @param {any} group The group to check
- */
-async function isCurrentUserInGroup(group): Promise<boolean> {
-    try {
-        const users = await group.users.get();
-        return (Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
-    } catch (err) {
-        return false;
-    }
-}
-
-/**
- * Is the current user in the visitors group
- */
-export const isCurrentUserInVisitorsGroup = () => isCurrentUserInGroup(sp.web.associatedVisitorGroup);
-
-/**
- * Is the current user in the members group
- */
-export const isCurrentUserInMembersGroup = () => isCurrentUserInGroup(sp.web.associatedMemberGroup);
-
-/**
- * Is the current user in the owners group
- */
-export const isCurrentUserInOwnersGroup = () => isCurrentUserInGroup(sp.web.associatedOwnerGroup);
-
-/**
- * Does the current user match the audience target
- *
- * @param {AudienceTargeting} audienceTarget Audience target
- */
-export const doesUserMatchAudience = (audienceTarget: AudienceTargeting) => new Promise<boolean>(resolve => {
-    switch (audienceTarget) {
-        case AudienceTargeting.None: {
-            resolve(true);
-        }
-            break;
-        case AudienceTargeting.Visitors: {
-            isCurrentUserInVisitorsGroup().then(bool => resolve(bool));
-        }
-            break;
-        case AudienceTargeting.Members: {
-            isCurrentUserInMembersGroup().then(bool => resolve(bool));
-        }
-            break;
-        case AudienceTargeting.Owners: {
-            if (_spPageContextInfo.hasOwnProperty("isSiteAdmin") && _spPageContextInfo["isSiteAdmin"] === true) {
-                resolve(true);
-            } else {
-                isCurrentUserInOwnersGroup().then(bool => resolve(bool));
-            }
-        }
-            break;
-        default: {
-            resolve(true);
-        }
-    }
-});
-
-/**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
  *
  * @param {string} date Date

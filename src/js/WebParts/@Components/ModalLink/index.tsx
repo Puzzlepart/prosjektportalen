@@ -1,17 +1,16 @@
 import * as React from "react";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as Util from "../../../Util";
-import AudienceTargeting from "../../AudienceTargeting";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 import IModalLinkProps, { ModalLinkDefaultProps } from "./IModalLinkProps";
 import IModalLinkState from "./IModalLinkState";
+import AudienceTargetedComponent from "../AudienceTargetedComponent";
 
 /**
  * Modal Link
  */
-export default class ModalLink extends React.PureComponent<IModalLinkProps, IModalLinkState> {
+export default class ModalLink extends AudienceTargetedComponent<IModalLinkProps, IModalLinkState> {
     public static displayName = "ModalLink";
     public static defaultProps = ModalLinkDefaultProps;
 
@@ -22,29 +21,20 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
      */
     constructor(props: IModalLinkProps) {
         super(props);
-        this.state = {
-            shouldRender: props.audienceTargeting === AudienceTargeting.None,
-        };
     }
 
     /**
      * Component did mount
      */
     public componentDidMount(): void {
-        Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
-            if (userMatchAudience !== this.state.shouldRender) {
-                this.setState({
-                    shouldRender: userMatchAudience,
-                });
-            }
-        });
+        this.onInit();
     }
 
     /**
      * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
+        return this.state.shouldRender ? this._render(this.props, this.state) : null;
     }
 
     /**
@@ -53,10 +43,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
      * @param {IModalLinkProps} param0 Props
      * @param {IModalLinkState} param1 State
      */
-    private _render({ label, url, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { shouldRender }: IModalLinkState): JSX.Element {
-        if (!shouldRender) {
-            return null;
-        }
+    private _render({ label, url, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { }: IModalLinkState): JSX.Element {
         if (icon && !icon.hasOwnProperty("position")) {
             icon.position = ModalLinkIconPosition.Left;
         }

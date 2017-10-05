@@ -1,11 +1,5 @@
-import AudienceTargeting from "../../AudienceTargeting";
+import { PermissionKind } from "sp-pnp-js";
 
-interface IAudienceTargetedComponentProps {
-    audienceTargeting?: AudienceTargeting;
+export default interface IAudienceTargetedComponentProps extends React.HTMLAttributes<HTMLElement> {
+    permissionKind?: PermissionKind;
 }
-
-export const AudienceTargetedComponentDefaultProps: Partial<IAudienceTargetedComponentProps> = {
-    audienceTargeting: AudienceTargeting.None,
-};
-
-export default IAudienceTargetedComponentProps;

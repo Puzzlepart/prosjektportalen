@@ -1,6 +1,5 @@
 import * as React from "react";
-import * as Util from "../../../Util";
-import AudienceTargeting from "../../AudienceTargeting";
+import pnp from "sp-pnp-js";
 import IAudienceTargetedComponentProps from "./IAudienceTargetedComponentProps";
 import IAudienceTargetedComponentState from "./IAudienceTargetedComponentState";
 
@@ -15,21 +14,21 @@ export default class AudienceTargetedComponent<P extends IAudienceTargetedCompon
     }
 
     /**
-     * Component did mount
+     * On init
      */
-    public componentDidMount(): void {
-        if (this.props.audienceTargeting === AudienceTargeting.None) {
-            this.setState({
-                shouldRender: true,
-            });
+    public async onInit(): Promise<void> {
+        if (this.props.permissionKind) {
+            const userHasPermission = await pnp.sp.web.currentUserHasPermissions(this.props.permissionKind);
+            this.setState({ shouldRender: userHasPermission });
         } else {
-            Util.doesUserMatchAudience(this.props.audienceTargeting).then(userMatchAudience => {
-                if (userMatchAudience !== this.state.shouldRender) {
-                    this.setState({
-                        shouldRender: userMatchAudience,
-                    });
-                }
-            });
+            this.setState({ shouldRender: true });
         }
+        return;
     }
 }
+
+export {
+    IAudienceTargetedComponentProps,
+    IAudienceTargetedComponentState,
+};
+

@@ -5,12 +5,12 @@ import * as ListDataConfig from "../../Provision/Data/Config";
 import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
-import SecurityComponent from "../@Components/SecurityComponent";
+import AudienceTargetedComponent from "../@Components/AudienceTargetedComponent";
 
 /**
  * New Project link
  */
-export default class NewProjectLink extends SecurityComponent<INewProjectLinkProps, INewProjectLinkState> {
+export default class NewProjectLink extends AudienceTargetedComponent<INewProjectLinkProps, INewProjectLinkState> {
     public static displayName = "NewProjectLink";
     public static defaultProps = NewProjectLinkDefaultProps;
 
@@ -24,6 +24,9 @@ export default class NewProjectLink extends SecurityComponent<INewProjectLinkPro
         this.state = { listDataConfig: {} };
     }
 
+    /**
+     * Component did mount. Handling audience.
+     */
     public async componentDidMount(): Promise<void> {
         await this.onInit();
         if (this.state.shouldRender) {
@@ -42,7 +45,7 @@ export default class NewProjectLink extends SecurityComponent<INewProjectLinkPro
     /**
      * Renders the component
      */
-    private _render() {
+    private _render(): JSX.Element {
         return (
             <div>
                 {this.renderLink(this.props, this.state)}
