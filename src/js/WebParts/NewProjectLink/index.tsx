@@ -1,11 +1,10 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as ListDataConfig from "../../Provision/Data/Config";
-import NewProjectDialog from "./NewProjectDialog";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
 import SecuredWebPart from "../@SecuredWebPart";
+import NewProjectForm, { NewProjectFormRenderMode } from "../NewProjectForm";
 
 /**
  * New Project link
@@ -24,14 +23,10 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
     }
 
     /**
-     * Component did mount. Handling audience.
+     * Component did mount
      */
     public async componentDidMount(): Promise<void> {
         await this.onInit();
-        if (this.state.shouldRender) {
-            const listDataConfig = await ListDataConfig.RetrieveConfig();
-            this.setState({ listDataConfig });
-        }
     }
 
     /**
@@ -85,11 +80,9 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
     private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
-                <NewProjectDialog
-                    listDataConfig={listDataConfig}
-                    dialogProps={{
-                        onDismiss: () => this.setState({ showDialog: false }),
-                    }} />
+                <NewProjectForm
+                    renderMode={NewProjectFormRenderMode.Dialog}
+                    onDialogDismiss={() => this.setState({ showDialog: false })} />
             );
         }
         return null;

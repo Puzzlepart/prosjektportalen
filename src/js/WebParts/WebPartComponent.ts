@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-export default class WebPartComponent {
+export default class WebPartComponent<T> {
     public component: any;
     public name: string;
     public container: string;
-    public defaultProps: { [key: string]: any };
+    public defaultProps: T;
 
     /**
      * Constructor
@@ -14,7 +14,7 @@ export default class WebPartComponent {
      * @param {string} container Component container
      * @param {any} defaultProps Default props
      */
-    constructor(component, container: string, defaultProps: { [key: string]: any } = {}) {
+    constructor(component, container: string, defaultProps?: T) {
         this.component = component;
         this.name = this.component.displayName;
         this.container = container;
