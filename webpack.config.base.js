@@ -5,7 +5,7 @@ var path = require("path"),
 
 const libBasePath = path.join(__dirname, "lib");
 const distBasePath = path.join(__dirname, "dist/js");
-const useBundleAnalyzer = true;
+const useBundleAnalyzer = false;
 
 module.exports = (devtool, exclude, env) => ({
     devtool: devtool,
