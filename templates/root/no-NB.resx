@@ -1428,7 +1428,7 @@
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
   </data>
-  <data name="NewProjectForm_DialogTitle" xml:space="preserve">
+  <data name="NewProjectForm_Title" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
   <data name="NewProjectForm_SubText" xml:space="preserve">

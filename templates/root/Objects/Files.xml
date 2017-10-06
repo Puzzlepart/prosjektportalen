@@ -91,7 +91,7 @@
     </pnp:File>
         <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="true">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="" />
+            <pnp:Property Key="Title" Value="{resource:NewProjectForm_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
             <pnp:WebPart Title="NewProjectForm" Order="0" Zone="LeftColumn">
