@@ -84,7 +84,7 @@ gulp.task("stampVersionToTemplates", cb => {
             gulp.src("./_templates/**/*.xml")
                 .pipe(flatmap((stream, file) => {
                     return stream
-                        .pipe(replace(config.version.token, format("{0}#{1}", config.version.v, hash)))
+                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
                         .pipe(gulp.dest(config.paths.templates_temp))
                 }))
         )
@@ -98,7 +98,7 @@ gulp.task("stampVersionToDist", cb => {
             gulp.src("./dist/*.ps1")
                 .pipe(flatmap((stream, file) => {
                     return stream
-                        .pipe(replace(config.version.token, format("{0}#{1}", config.version.v, hash)))
+                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
                         .pipe(gulp.dest(config.paths.dist))
                 }))
         )
