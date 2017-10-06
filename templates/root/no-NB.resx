@@ -1410,13 +1410,13 @@
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
   </data>
-  <data name="NewProjectForm_Title" xml:space="preserve">
+  <data name="NewProjectForm_TitlePlaceholder" xml:space="preserve">
     <value>Tittel</value>
   </data>
-  <data name="NewProjectForm_Description" xml:space="preserve">
+  <data name="NewProjectForm_DescriptionPlaceholder" xml:space="preserve">
     <value>Beskrivelse</value>
   </data>
-  <data name="NewProjectForm_Url" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholder" xml:space="preserve">
     <value>Url</value>
   </data>
   <data name="NewProjectForm_Create" xml:space="preserve">
@@ -1434,7 +1434,7 @@
   <data name="NewProjectForm_SubText" xml:space="preserve">
     <value>Opprett ett nytt prosjekt basert på Prosjektveiviseren</value>
   </data>
-  <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholderAlreadyInUse" xml:space="preserve">
     <value>Webområdeadressen er allerede i bruk.</value>
   </data>
   <data name="CreationModal_Title" xml:space="preserve">

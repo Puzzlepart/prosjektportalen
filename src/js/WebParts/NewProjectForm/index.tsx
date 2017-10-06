@@ -77,9 +77,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                             <div
                                 className={this.props.className}
                                 style={this.props.style}>
-                                <div
-                                    className="ms-font-l"
-                                    style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
+                                <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
                                 {this.renderFormInput(this.props, this.state)}
                                 {this.renderSettingsSection(this.props, this.state)}
                                 {this.renderFooter(this.props, this.state)}
@@ -128,11 +126,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         isOpen={true}
                         isBlocking={false}
                         isDarkOverlay={true}
+                        onDismiss={this.props.onDialogDismiss}
                         containerClassName="pp-modal" >
                         <div style={{ padding: 50 }}>
-                            <div
-                                style={{ marginBottom: 25 }}
-                                className="ms-font-xl">{RESOURCE_MANAGER.getResource("ProvisionWeb_Failed")}</div>
+                            <div style={{ marginBottom: 25 }} className="ms-font-xl">{RESOURCE_MANAGER.getResource("ProvisionWeb_Failed")}</div>
                             <div className="ms-font-m">{RESOURCE_MANAGER.getResource("String_ContactAdmin")}</div>
                         </div>
                     </Modal>
@@ -151,18 +148,18 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         return (
             <section>
                 <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Title")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
                     errorMessage={errorMessages.Title} />
                 <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Description")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
                     multiline
                     autoAdjustHeight
                     onChanged={newValue => this.onFormChange("Description", newValue)}
                     errorMessage={errorMessages.Description}
                 />
                 <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_Url")}
+                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
                     value={model.Url}
                     onChanged={newValue => this.onFormChange("Url", newValue)}
                     errorMessage={errorMessages.Url}
@@ -289,7 +286,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     self.setState({
                         errorMessages: {
                             ...errorMessages,
-                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
+                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
                         formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
                         model: {
@@ -315,7 +312,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     self.setState({
                         errorMessages: {
                             ...errorMessages,
-                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlAlreadyInUse") : null,
+                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
                         formValid: (model.Title.length >= self.props.titleMinLength) && !doesExist,
                         model: {
