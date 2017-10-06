@@ -69,7 +69,7 @@ const Lists: IList[] = [
             Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtProjectInfoDescription"],
             AdditionalSettings: {
-                RowLimit: 0,
+                RowLimit: 30,
                 Paged: true,
                 ViewQuery: "",
             },
@@ -91,7 +91,7 @@ const Lists: IList[] = [
             Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
             ViewFields: ["LinkTitle", "GtStakeholderGroup", "GtStakeholderContext", "GtStakeholderStrategy", "GtStakeholderInterest", "GtStakeholderInfluence", "GtStakeholderInfluencePossibilty", "GtStakeholderActions"],
             AdditionalSettings: {
-                RowLimit: 0,
+                RowLimit: 30,
                 Paged: true,
                 ViewQuery: "",
             },
