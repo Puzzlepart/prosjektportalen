@@ -12,27 +12,29 @@ import ProjectStatus from "./ProjectStatus";
 import ExperienceLog from "./ExperienceLog";
 import LatestLogEntries from "./LatestLogEntries";
 import WebPropertyBagEditor from "./WebPropertyBagEditor";
+import NewProjectForm from "./NewProjectForm";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
 /**
  * An array containing WebPartComponents
  */
-const WebPartComponents: WebPartComponent[] = [
-    new WebPartComponent(ProjectList, "pp-projectlist"),
-    new WebPartComponent(ProjectInfo, "pp-projectinfo", { filterField: "GtPcFrontpage" }),
-    new WebPartComponent(ProjectPhases, "pp-projectphases"),
-    new WebPartComponent(NewProjectLink, "pp-newprojectlink"),
-    new WebPartComponent(Announcements, "pp-announcements"),
-    new WebPartComponent(LatestProjects, "pp-latestprojects", { itemsCount: 8, reloadInterval: 360 }),
-    new WebPartComponent(QuickLinks, "pp-quicklinks"),
-    new WebPartComponent(DynamicPortfolio, "pp-dynamicportfolio"),
-    new WebPartComponent(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
-    new WebPartComponent(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
-    new WebPartComponent(ProjectStatus, "pp-projectstatus"),
-    new WebPartComponent(ExperienceLog, "pp-experiencelog"),
-    new WebPartComponent(LatestLogEntries, "pp-latestlogentries"),
-    new WebPartComponent(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
+const WebPartComponents: WebPartComponent<any>[] = [
+    new WebPartComponent<any>(ProjectList, "pp-projectlist"),
+    new WebPartComponent<any>(ProjectInfo, "pp-projectinfo", { filterField: "GtPcFrontpage" }),
+    new WebPartComponent<any>(ProjectPhases, "pp-projectphases"),
+    new WebPartComponent<any>(NewProjectLink, "pp-newprojectlink"),
+    new WebPartComponent<any>(Announcements, "pp-announcements"),
+    new WebPartComponent<any>(LatestProjects, "pp-latestprojects", { itemsCount: 8, reloadInterval: 360 }),
+    new WebPartComponent<any>(QuickLinks, "pp-quicklinks"),
+    new WebPartComponent<any>(DynamicPortfolio, "pp-dynamicportfolio"),
+    new WebPartComponent<any>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
+    new WebPartComponent<any>(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
+    new WebPartComponent<any>(ProjectStatus, "pp-projectstatus"),
+    new WebPartComponent<any>(ExperienceLog, "pp-experiencelog"),
+    new WebPartComponent<any>(LatestLogEntries, "pp-latestlogentries"),
+    new WebPartComponent<any>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
+    new WebPartComponent<any>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
 ];
 
 /**
@@ -40,7 +42,7 @@ const WebPartComponents: WebPartComponent[] = [
  *
  * @param {string} name Name of the component
  */
-export const GetWebPartComponentByName = (name: string): WebPartComponent => {
+export const GetWebPartComponentByName = (name: string): WebPartComponent<any> => {
     let [component] = WebPartComponents.filter(wpc => wpc.name === name);
     return component;
 };
