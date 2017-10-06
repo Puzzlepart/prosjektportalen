@@ -158,7 +158,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         return {
             ...data,
             projects: data.projects
-                .filter(project => Object.keys(project).filter(key => project[key].indexOf(searchTerm) !== -1).length > 0)
+                .filter(project => Object.keys(project).filter(key => project[key].toLowerCase().indexOf(searchTerm) !== -1).length > 0)
                 .sort((a, b) => a.Title > b.Title ? 1 : -1),
         };
     }
