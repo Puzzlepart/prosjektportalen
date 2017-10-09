@@ -84,7 +84,7 @@
             <pnp:WebPart Title="WebPropertyBagEditor" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/WebPropertyBagEditor.webpart" />
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/WebPropertyBagEditor.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -97,7 +97,7 @@
             <pnp:WebPart Title="NewProjectForm" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/NewProjectForm.webpart" />
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/NewProjectForm.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -179,27 +179,13 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\WebPropertyBagEditor.webpart" Folder="_catalogs/wp" Overwrite="true">
-        <pnp:Properties>
-            <pnp:Property Key="Title" Value="WebPropertyBagEditor" />
-            <pnp:Property Key="WebPartDescription" Value="" />
-            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
-        </pnp:Properties>
-    </pnp:File>
-    <pnp:File Src="WebPartGallery\NewProjectForm.webpart" Folder="_catalogs/wp" Overwrite="true">
-        <pnp:Properties>
-            <pnp:Property Key="Title" Value="NewProjectForm" />
-            <pnp:Property Key="WebPartDescription" Value="" />
-            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
-        </pnp:Properties>
-    </pnp:File>
       <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="RiskMatrix" />
+            <pnp:Property Key="Title" Value="{resource:WebPart_RiskMatrix_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
     <pnp:Directory Src="Theme" Folder="_catalogs/theme/15" Overwrite="true" Recursive="false" IncludedExtensions="*.spcolor,*.spfont" />
-    <pnp:Directory Src="Resources" Folder="Resources" Overwrite="true" Recursive="false" IncludedExtensions="*.txt" />
+    <pnp:Directory Src="Resources" Folder="Resources" Overwrite="true" Recursive="false" IncludedExtensions="*.txt,*.webpart" />
 </pnp:Files>

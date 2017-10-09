@@ -1743,6 +1743,9 @@
   <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
     <value>Erfaringslogg</value>
   </data>
+  <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
+    <value>Risikomatrise</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
