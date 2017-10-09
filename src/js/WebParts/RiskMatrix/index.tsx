@@ -3,7 +3,7 @@ import pnp from "sp-pnp-js";
 import RESOURCE_MANAGER from "localization";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import RiskMatrixConfig from "./RiskMatrixConfig";
+import RiskMatrixCells, { IRiskMatrixCell, RiskMatrixCellType } from "./RiskMatrixCells";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -56,9 +56,9 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
             return null;
         }
 
-        const riskMatrixRows = RiskMatrixConfig.map((rows, i) => {
+        const riskMatrixRows = RiskMatrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = RiskMatrixConfig[i][j],
+                const cell = RiskMatrixCells[i][j],
                     riskElements = this.getRiskElementsForCell(items, cell).map((risk, key) => (
                         <RiskElement
                             key={`${key}`}
@@ -69,25 +69,27 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                         <RiskElement
                             key={`${key}_PostAction`}
                             item={risk} />
-                    )),
-                    isCell = (i > 0 && j > 0);
-
-                if (isCell) {
-                    return (
-                        <MatrixCell
-                            key={j}
-                            contents={[
-                                ...riskElements,
-                                ...riskElementsPostAction,
-                            ]}
-                            className={cell.ClassName} />
-                    );
-                } else {
-                    return (
-                        <MatrixHeaderCell
-                            key={j}
-                            label={c.Value} />
-                    );
+                    ));
+                switch (cell.cellType) {
+                    case RiskMatrixCellType.Cell: {
+                        return (
+                            <MatrixCell
+                                key={j}
+                                contents={[
+                                    ...riskElements,
+                                    ...riskElementsPostAction,
+                                ]}
+                                className={cell.className} />
+                        );
+                    }
+                    case RiskMatrixCellType.Header: {
+                        return (
+                            <MatrixHeaderCell
+                                key={j}
+                                label={c.cellValue}
+                                className={cell.className} />
+                        );
+                    }
                 }
             });
             return (
@@ -115,20 +117,26 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
     }
 
     /**
-     * Helper function to get risk elements post action
+     * Helper function to get risk elements for cell post action
+     *
+     * @param {Array<any>} items Items
+     * @param {IRiskMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell = (items, element) => {
+    private getRiskElementsPostActionForCell = (items: any[], cell: IRiskMatrixCell) => {
         if (this.state.postAction) {
-            return items.filter(risk => element.Probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && element.Consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
+            return items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
         }
         return [];
     }
 
     /**
      * Helper function to get risk elements
+     *
+     * @param {Array<any>} items Items
+     * @param {IRiskMatrixCell} cell The cell
      */
-    private getRiskElementsForCell = (items, element) => {
-        return items.filter(risk => element.Probability === parseInt(risk.GtRiskProbability, 10) && element.Consequence === parseInt(risk.GtRiskConsequence, 10));
+    private getRiskElementsForCell = (items: any[], cell: IRiskMatrixCell) => {
+        return items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
     }
 }
 

@@ -1,9 +1,8 @@
 import * as React from "react";
 
-const MatrixHeaderCell = ({ label }) => {
+const MatrixHeaderCell = ({ label, className }) => {
     return (
-        <td
-            className="headers">
+        <td className={className}>
             <span>{label}</span>
         </td>
     );
