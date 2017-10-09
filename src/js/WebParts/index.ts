@@ -12,8 +12,8 @@ import ProjectStatus from "./ProjectStatus";
 import ExperienceLog from "./ExperienceLog";
 import LatestLogEntries from "./LatestLogEntries";
 import WebPropertyBagEditor from "./WebPropertyBagEditor";
-import NewProjectForm from "./NewProjectForm";
-import RiskMatrix from "./RiskMatrix";
+import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
+import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -35,8 +35,8 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<any>(ExperienceLog, "pp-experiencelog"),
     new WebPartComponent<any>(LatestLogEntries, "pp-latestlogentries"),
     new WebPartComponent<any>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
-    new WebPartComponent<any>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
-    new WebPartComponent<any>(RiskMatrix, "pp-riskMatrix"),
+    new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
+    new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
 ];
 
 /**
@@ -70,4 +70,6 @@ export {
     ExperienceLog,
     LatestLogEntries,
     WebPropertyBagEditor,
+    NewProjectForm,
+    RiskMatrix,
 };
