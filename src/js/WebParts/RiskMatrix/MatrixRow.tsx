@@ -2,8 +2,7 @@ import * as React from "react";
 
 const MatrixRow = ({ cells }) => {
     return (
-        <tr
-            className="risk-matrix-row">
+        <tr className="risk-matrix-row">
             {cells}
         </tr>
     );
