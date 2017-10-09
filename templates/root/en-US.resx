@@ -2190,6 +2190,9 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Very low</value>
   </data>
+  <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
+    <value>There's no risk items in the Uncertainties list.</value>
+  </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>
   </data>
