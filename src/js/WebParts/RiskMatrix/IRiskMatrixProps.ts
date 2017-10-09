@@ -1,7 +1,5 @@
-import ISectionListData from "../ISectionListData";
-
 export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLElement> {
-    listData: ISectionListData;
+    data?: any[];
     contentTypeId?: string;
 }
 

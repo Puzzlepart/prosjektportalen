@@ -1,0 +1,248 @@
+import RESOURCE_MANAGER from "../../@localization";
+
+const RiskMatrixConfig: any = [
+    [
+        {
+            Value: "",
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Insignificant"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Small"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Moderate"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Serious"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Critical"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+    ],
+    [
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryHigh"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 1,
+            Probability: 5,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 2,
+            Probability: 5,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 3,
+            Probability: 5,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 4,
+            Probability: 5,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 5,
+            Probability: 5,
+        },
+    ],
+    [
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_High"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 1,
+            Probability: 4,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 2,
+            Probability: 4,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 3,
+            Probability: 4,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 4,
+            Probability: 4,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 5,
+            Probability: 4,
+        },
+    ],
+    [
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Medium"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 1,
+            Probability: 3,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 2,
+            Probability: 3,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 3,
+            Probability: 3,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 4,
+            Probability: 3,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "negative-cell",
+            Consequence: 5,
+            Probability: 3,
+        },
+    ],
+    [
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Low"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 1,
+            Probability: 2,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 2,
+            Probability: 2,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 3,
+            Probability: 2,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 4,
+            Probability: 2,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 5,
+            Probability: 2,
+        },
+    ],
+    [
+        {
+            Value: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryLow"),
+            Type: "Header",
+            ClassName: "risk-header",
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 1,
+            Probability: 1,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 2,
+            Probability: 1,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 3,
+            Probability: 1,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "positive-cell",
+            Consequence: 4,
+            Probability: 1,
+        },
+        {
+            Value: "",
+            Type: "Cell",
+            ClassName: "neutral-cell",
+            Consequence: 5,
+            Probability: 1,
+        },
+    ],
+];
+
+export default RiskMatrixConfig;

@@ -13,6 +13,7 @@ import ExperienceLog from "./ExperienceLog";
 import LatestLogEntries from "./LatestLogEntries";
 import WebPropertyBagEditor from "./WebPropertyBagEditor";
 import NewProjectForm from "./NewProjectForm";
+import RiskMatrix from "./RiskMatrix";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -35,6 +36,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<any>(LatestLogEntries, "pp-latestlogentries"),
     new WebPartComponent<any>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<any>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
+    new WebPartComponent<any>(RiskMatrix, "pp-riskMatrix"),
 ];
 
 /**

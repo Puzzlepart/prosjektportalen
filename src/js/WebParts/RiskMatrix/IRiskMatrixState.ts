@@ -1,7 +1,6 @@
-interface IRiskMatrixState {
+export default interface IRiskMatrixState {
+    data?: any[];
     selectedRisk?: any;
     showDialog?: boolean;
     postAction?: boolean;
 }
-
-export default IRiskMatrixState;

@@ -1,7 +1,7 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
-import * as Config from "../../Config";
+import RiskMatrixConfig from "./RiskMatrixConfig";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -21,22 +21,26 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      */
     constructor(props: IRiskMatrixProps) {
         super(props);
-        this.state = {};
+        this.state = { data: props.data };
+    }
+
+    public componentDidMount() {
+        console.log(this.state);
     }
 
     /**
      * Renders the component
      */
     public render(): JSX.Element {
-        if (!this.props.listData || this.props.listData.items.length === 0) {
+        if (!this.state.data || this.state.data.length === 0) {
             return null;
         }
 
-        const items = this.props.listData.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
+        const items = this.state.data.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
 
-        const riskMatrix = Config.RiskMatrix.map((rows, i) => {
+        const riskMatrix = RiskMatrixConfig.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = Config.RiskMatrix[i][j],
+                const cell = RiskMatrixConfig[i][j],
                     riskElements = this.getRiskElementsForCell(items, cell).map((risk, key) => (
                         <RiskElement
                             key={`${key}`}
