@@ -56,6 +56,22 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
             return null;
         }
 
+        return (
+            <div className={this.props.className}>
+                <div id={this.props.id} className="ms-Grid">
+                    {this._renderRows(items)}
+                </div>
+                <Toggle
+                    defaultChecked={false}
+                    onChanged={isChecked => this.setState({ postAction: isChecked })}
+                    label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                    offText={RESOURCE_MANAGER.getResource("String_No")} />
+            </div>
+        );
+    }
+
+    private _renderRows(items) {
         const riskMatrixRows = RiskMatrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
                 const cell = RiskMatrixCells[i][j],
@@ -98,22 +114,7 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                     cells={cells} />
             );
         });
-
-        return (
-            <div className={this.props.className}>
-                <table id={this.props.id}>
-                    <tbody>
-                        {riskMatrixRows}
-                    </tbody>
-                </table>
-                <Toggle
-                    defaultChecked={false}
-                    onChanged={isChecked => this.setState({ postAction: isChecked })}
-                    label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                    offText={RESOURCE_MANAGER.getResource("String_No")} />
-            </div>
-        );
+        return riskMatrixRows;
     }
 
     /**
