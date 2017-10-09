@@ -2,9 +2,9 @@ import * as React from "react";
 
 const MatrixRow = ({ cells }) => {
     return (
-        <div className="risk-matrix-row ms-Grid-row">
+        <tr className="risk-matrix-row">
             {cells}
-        </div>
+        </tr>
     );
 };
 

@@ -58,9 +58,11 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
 
         return (
             <div className={this.props.className}>
-                <div id={this.props.id} className="ms-Grid">
-                    {this._renderRows(items)}
-                </div>
+                <table id={this.props.id}>
+                    <tbody>
+                        {this._renderRows(items)}
+                    </tbody>
+                </table>
                 <Toggle
                     defaultChecked={false}
                     onChanged={isChecked => this.setState({ postAction: isChecked })}
@@ -99,12 +101,15 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                         );
                     }
                     case RiskMatrixCellType.Header: {
-                        return (
-                            <MatrixHeaderCell
-                                key={j}
-                                label={c.cellValue}
-                                className={cell.className} />
-                        );
+                        if (this.props.showHeaders) {
+                            return (
+                                <MatrixHeaderCell
+                                    key={j}
+                                    label={c.cellValue}
+                                    className={cell.className} />
+                            );
+                        }
+                        return null;
                     }
                 }
             });

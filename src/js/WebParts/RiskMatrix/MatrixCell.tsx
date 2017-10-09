@@ -2,10 +2,9 @@ import * as React from "react";
 
 const MatrixCell = ({ className, contents }) => {
     return (
-        <div
-            className={className}>
+        <td className={className}>
             {contents}
-        </div>
+        </td>
     );
 };
 
