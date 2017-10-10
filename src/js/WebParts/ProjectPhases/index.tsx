@@ -146,3 +146,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         return data.activePhase && data.activePhase.Name && data.activePhase.Name !== "";
     }
 }
+
+export {
+    IProjectPhasesProps,
+    IProjectPhasesState,
+};

@@ -139,3 +139,8 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
             }).catch(reject);
     })
 }
+
+export {
+    ILatestProjectsProps,
+    ILatestProjectsState,
+};

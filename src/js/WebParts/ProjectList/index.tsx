@@ -188,3 +188,8 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         }
     }
 }
+
+export {
+    IProjectListProps,
+    IProjectListState,
+};

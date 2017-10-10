@@ -132,3 +132,8 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
         };
     }
 }
+
+export {
+    IProjectStatusProps,
+    IProjectStatusState,
+};

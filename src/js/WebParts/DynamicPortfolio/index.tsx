@@ -576,3 +576,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
     }
 }
+
+export {
+    IDynamicPortfolioProps,
+    IDynamicPortfolioState,
+};
