@@ -39,9 +39,6 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
         return nextState.data !== null;
     }
 
-    /**
-     * Renders the component
-     */
     public render(): JSX.Element {
         if (!this.state.data) {
             return null;
@@ -63,12 +60,14 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                         {this._renderRows(items)}
                     </tbody>
                 </table>
-                <Toggle
-                    defaultChecked={false}
-                    onChanged={isChecked => this.setState({ postAction: isChecked })}
-                    label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                    offText={RESOURCE_MANAGER.getResource("String_No")} />
+                <div>
+                    <Toggle
+                        defaultChecked={false}
+                        onChanged={isChecked => this.setState({ postAction: isChecked })}
+                        label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                        onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                        offText={RESOURCE_MANAGER.getResource("String_No")} />
+                </div>
             </div>
         );
     }
@@ -77,17 +76,8 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
         const riskMatrixRows = RiskMatrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
                 const cell = RiskMatrixCells[i][j],
-                    riskElements = this.getRiskElementsForCell(items, cell).map((risk, key) => (
-                        <RiskElement
-                            key={`${key}`}
-                            item={risk}
-                            style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
-                    )),
-                    riskElementsPostAction = this.getRiskElementsPostActionForCell(items, cell).map((risk, key) => (
-                        <RiskElement
-                            key={`${key}_PostAction`}
-                            item={risk} />
-                    ));
+                    riskElements = this.getRiskElementsForCell(items, cell),
+                    riskElementsPostAction = this.getRiskElementsPostActionForCell(items, cell);
                 switch (cell.cellType) {
                     case RiskMatrixCellType.Cell: {
                         return (
@@ -101,15 +91,12 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                         );
                     }
                     case RiskMatrixCellType.Header: {
-                        if (this.props.showHeaders) {
-                            return (
-                                <MatrixHeaderCell
-                                    key={j}
-                                    label={c.cellValue}
-                                    className={cell.className} />
-                            );
-                        }
-                        return null;
+                        return (
+                            <MatrixHeaderCell
+                                key={j}
+                                label={c.cellValue}
+                                className={cell.className} />
+                        );
                     }
                 }
             });
@@ -128,9 +115,15 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
      * @param {Array<any>} items Items
      * @param {IRiskMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell = (items: any[], cell: IRiskMatrixCell) => {
+    private getRiskElementsPostActionForCell(items: any[], cell: IRiskMatrixCell) {
         if (this.state.postAction) {
-            return items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
+            const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
+            return itemsForCell.map((risk, key) => (
+                <RiskElement
+                    key={`${key}`}
+                    item={risk}
+                    style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
+            ));
         }
         return [];
     }
@@ -141,8 +134,13 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
      * @param {Array<any>} items Items
      * @param {IRiskMatrixCell} cell The cell
      */
-    private getRiskElementsForCell = (items: any[], cell: IRiskMatrixCell) => {
-        return items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
+    private getRiskElementsForCell(items: any[], cell: IRiskMatrixCell) {
+        const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
+        return itemsForCell.map((risk, key) => (
+            <RiskElement
+                key={`${key}`}
+                item={risk} />
+        ));
     }
 }
 
