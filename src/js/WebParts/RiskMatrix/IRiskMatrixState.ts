@@ -3,4 +3,5 @@ export default interface IRiskMatrixState {
     selectedRisk?: any;
     showDialog?: boolean;
     postAction?: boolean;
+    hideLabels?: boolean;
 }

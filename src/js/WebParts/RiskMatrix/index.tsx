@@ -53,9 +53,15 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
             return null;
         }
 
+        let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
+
+        if (this.state.hideLabels) {
+            tableProps.className = "hide-labels";
+        }
+
         return (
             <div className={this.props.className}>
-                <table id={this.props.id}>
+                <table { ...tableProps }>
                     <tbody>
                         {this._renderRows(items)}
                     </tbody>

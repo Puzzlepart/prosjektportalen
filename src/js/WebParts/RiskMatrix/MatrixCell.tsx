@@ -3,7 +3,9 @@ import * as React from "react";
 const MatrixCell = ({ className, contents }) => {
     return (
         <td className={className}>
-            {contents}
+            <div className="cell-container">
+                {contents}
+            </div>
         </td>
     );
 };
