@@ -18,6 +18,7 @@ import IRiskMatrixState from "./IRiskMatrixState";
 export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IRiskMatrixState> {
     public static displayName = "RiskMatrix";
     public static defaultProps = RiskMatrixDefaultProps;
+    private tableElement: HTMLTableElement;
 
     /**
      * Constructor
@@ -29,19 +30,29 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
 
     public async componentDidMount() {
         if (!this.state.data) {
-            const list = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
-            const items = await list.items.get();
-            this.setState({ data: items });
+            let updatedState: Partial<IRiskMatrixState> = {};
+            updatedState.data = await this.fetchData();
+            updatedState.hideLabels = this.tableElement.offsetWidth < 900;
+            this.setState(updatedState);
         }
     }
 
     public shouldComponentUpdate(nextProps: IRiskMatrixProps, nextState: IRiskMatrixState) {
-        return nextState.data !== null;
+        return true;
     }
 
     public render(): JSX.Element {
+        let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
+
+        if (this.state.hideLabels) {
+            tableProps.className = "hide-labels";
+        }
         if (!this.state.data) {
-            return null;
+            return (
+                <div className={this.props.className}>
+                    <table { ...tableProps } ref={ele => this.tableElement = ele}></table>
+                </div>
+            );
         }
 
         const items = this.state.data.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
@@ -53,15 +64,10 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
             return null;
         }
 
-        let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
-
-        if (this.state.hideLabels) {
-            tableProps.className = "hide-labels";
-        }
 
         return (
             <div className={this.props.className}>
-                <table { ...tableProps }>
+                <table { ...tableProps } ref={ele => this.tableElement = ele}>
                     <tbody>
                         {this._renderRows(items)}
                     </tbody>
@@ -147,6 +153,12 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
                 key={`${key}`}
                 item={risk} />
         ));
+    }
+
+    private async fetchData(): Promise<any[]> {
+        const list = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
+        const items = await list.items.get();
+        return items;
     }
 }
 
