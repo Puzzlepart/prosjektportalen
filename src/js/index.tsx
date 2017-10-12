@@ -35,7 +35,7 @@ namespace PP {
         initPnp();
         Forms.InitializeModifications();
         WebParts.RenderWebPartsOnPage();
-        StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
+        StampVersion("startNavigation", "pp_version");
     }
 }
 
