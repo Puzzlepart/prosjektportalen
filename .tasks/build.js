@@ -78,6 +78,14 @@ gulp.task("copyResourcesToAssetsTemplate", () => {
         .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
 });
 
+gulp.task("copyThirdPartyLibsToAssetsTemplate", () => {
+    return gulp.src([
+        format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
+        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)]
+    )
+        .pipe(gulp.dest(format("{0}/assets/libs", config.paths.templates_temp)));
+});
+
 gulp.task("stampVersionToTemplates", cb => {
     git.hash(hash => {
         es.concat(
@@ -107,7 +115,7 @@ gulp.task("stampVersionToDist", cb => {
 });
 
 gulp.task("buildPnpTemplateFiles", (done) => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "stampVersionToTemplates", () => {
+    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToAssetsTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });

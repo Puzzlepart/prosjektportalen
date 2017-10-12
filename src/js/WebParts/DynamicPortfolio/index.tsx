@@ -321,7 +321,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             sheets: [sheet],
             fileName,
         });
-        console.log(sheet.data);
         this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }
 

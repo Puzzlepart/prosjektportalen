@@ -11,6 +11,7 @@ module.exports = {
         build: "./build",
         release: "./release",
         source: "./src",
+        nodeModules: "./node_modules",
         temp: "./temp",
         docs: "./docs",
         buildGlob: "./build/**/*",
