@@ -1,8 +1,10 @@
 import * as React from "react";
 import * as Util from "../../../Util";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { IColumnConfig } from "../Configuration";
-import { GetStatusProperties } from "../../ProjectStatus/Utils";
+import {
+    IColumnConfig,
+    IConfiguration,
+} from "../Configuration";
 
 
 
@@ -12,9 +14,10 @@ import { GetStatusProperties } from "../../ProjectStatus/Utils";
  * @param {any} item The item
  * @param {number} index Index
  * @param {IColumnConfig} column Column
+ * @param {IConfiguration} configuration Configuration
  * @param {Function} titleOnClick Tile column on click
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, titleOnClick: (evt: any) => void): JSX.Element => {
+const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, configuration: IConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
 
     switch (column.key) {
@@ -50,12 +53,21 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, ti
             );
         }
         case "Status": {
-            const statusProperties = GetStatusProperties(Util.cleanSearchPropName(column.fieldName), columnValue);
+            let fieldName = Util.cleanSearchPropName(column.fieldName);
+            if (configuration.statusFields.hasOwnProperty(fieldName)) {
+                const [statusProperties] = configuration.statusFields[fieldName].statuses.filter(({ statusValue }) => columnValue === statusValue);
+                if (statusProperties) {
+                    return (
+                        <span>
+                            <Icon iconName={statusProperties.statusIconName} style={{ color: statusProperties.statusColor }} />  {columnValue}
+                        </span>
+                    );
+                }
+            }
             return (
-                <span>
-                    <Icon iconName={statusProperties.Icon} style={{ color: statusProperties.Color }} />  {columnValue}
-                </span>
+                <span>{columnValue}</span>
             );
+
         }
         case "Default": {
             return (
