@@ -1,23 +1,24 @@
 import * as React from "react";
 import { Util } from "sp-pnp-js";
-import FilterItem from "../FilterItem";
-import IFilterItem from "../FilterItem/IFilterItem";
-import IFilterProps from "./IFilterProps";
-import IFilterState from "./IFilterState";
+import IDynamicPortfolioFilter from "./IDynamicPortfolioFilter";
+import DynamicPortfolioFilterItem from "../DynamicPortfolioFilterItem";
+import IDynamicPortfolioFilterItem from "../DynamicPortfolioFilterItem/IDynamicPortfolioFilterItem";
+import IDynamicPortfolioFilterProps from "./IDynamicPortfolioFilterProps";
+import IDynamicPortfolioFilterState from "./IDynamicPortfolioFilterState";
 
 /**
- * Filter
+ * DynamicPortfolioFilter
  */
-export default class Filter extends React.PureComponent<IFilterProps, IFilterState> {
-    public static displayName = "Filter";
-    public static defaultProps: Partial<IFilterProps> = {};
+export default class DynamicPortfolioFilter extends React.PureComponent<IDynamicPortfolioFilterProps, IDynamicPortfolioFilterState> {
+    public static displayName = "DynamicPortfolioFilter";
+    public static defaultProps: Partial<IDynamicPortfolioFilterProps> = {};
 
     /**
      * Constructor
      *
-     * @param {IFilterProps} props Pros
+     * @param {IDynamicPortfolioFilterProps} props Pros
      */
-    constructor(props: IFilterProps) {
+    constructor(props: IDynamicPortfolioFilterProps) {
         super(props);
         this.state = {
             isCollapsed: false,
@@ -46,10 +47,10 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
     /**
      * Renders the component
      *
-     * @param {IFilterProps} param0 Props
-     * @param {IFilterState} param1 State
+     * @param {IDynamicPortfolioFilterProps} param0 Props
+     * @param {IDynamicPortfolioFilterState} param1 State
      */
-    public _render({ filter }: IFilterProps, { isCollapsed }: IFilterState): JSX.Element {
+    public _render({ filter }: IDynamicPortfolioFilterProps, { isCollapsed }: IDynamicPortfolioFilterState): JSX.Element {
         return (
             <div
                 className="ms-Grid-row"
@@ -81,15 +82,15 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
     /**
      * Render filter items
      *
-     * @param {IFilterProps} param0 Props
-     * @param {IFilterState} param1 State
+     * @param {IDynamicPortfolioFilterProps} param0 Props
+     * @param {IDynamicPortfolioFilterState} param1 State
      */
-    private renderItems = ({ }: IFilterProps, { filter }: IFilterState) => {
+    private renderItems = ({ }: IDynamicPortfolioFilterProps, { filter }: IDynamicPortfolioFilterState) => {
         if (filter) {
             return filter.items.map((item, idx) => {
                 item.selected = item.defaultSelected || (Util.isArray(filter.selected) && Array.contains(filter.selected, item.value));
                 return (
-                    <FilterItem
+                    <DynamicPortfolioFilterItem
                         key={idx}
                         filter={filter}
                         item={item}
@@ -107,7 +108,7 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
     /**
      * On filter change
      */
-    private onChange = (item: IFilterItem, checked: boolean): void => {
+    private onChange = (item: IDynamicPortfolioFilterItem, checked: boolean): void => {
         const { onFilterChange } = this.props;
         const { filter } = this.state;
 
@@ -121,3 +122,6 @@ export default class Filter extends React.PureComponent<IFilterProps, IFilterSta
         this.setState({ filter: filter }, () => onFilterChange(filter));
     }
 }
+
+export { IDynamicPortfolioFilter };
+

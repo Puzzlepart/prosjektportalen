@@ -1,4 +1,4 @@
-export default interface IViewConfig {
+export default interface IDynamicPortfolioViewConfig {
     id: number;
     name: string;
     queryTemplate: string;

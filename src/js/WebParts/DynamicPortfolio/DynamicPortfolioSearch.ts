@@ -1,8 +1,8 @@
 import { sp } from "sp-pnp-js";
 import {
-    IConfiguration,
-    IViewConfig,
-} from "./Configuration";
+    IDynamicPortfolioConfiguration,
+    IDynamicPortfolioViewConfig,
+} from "./DynamicPortfolioConfiguration";
 
 /**
  * Default Search Settings used for sp-pnp-js
@@ -21,10 +21,10 @@ export interface IQueryResponse {
 /**
  * Query the REST Search API using sp-pnp-js
  *
- * @param viewConfig View configuration
- * @param configuration Configuration
+ * @param {IDynamicPortfolioViewConfig} viewConfig View configuration
+ * @param {IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration
  */
-export async function queryProjects(viewConfig: IViewConfig, configuration: IConfiguration): Promise<IQueryResponse> {
+export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, configuration: IDynamicPortfolioConfiguration): Promise<IQueryResponse> {
     try {
         const response: any = await sp.search({
             ...DEFAULT_SEARCH_SETTINGS,

@@ -1,13 +1,13 @@
 import RESOURCE_MANAGER from "localization";
 import * as pnp from "sp-pnp-js";
-import IConfiguration, { IViewConfig, IColumnConfig, IRefinerConfig, IStatusFieldsConfig } from "./IConfiguration";
+import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
 /**
  * Get config from lists
  *
  * @param {string} orderBy Order by property
  */
-export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> {
+export async function getConfig(orderBy = "GtDpOrder"): Promise<IDynamicPortfolioConfiguration> {
     const lists = pnp.sp.web.lists;
     const [fields, refiners, views, statusFields] = await Promise.all([
         lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
@@ -64,10 +64,10 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> 
 }
 
 export {
-    IConfiguration,
-    IViewConfig,
-    IColumnConfig,
-    IRefinerConfig,
+    IDynamicPortfolioConfiguration,
+    IDynamicPortfolioViewConfig,
+    IDynamicPortfolioColumnConfig,
+    IDynamicPortfolioRefinerConfig,
     IStatusFieldsConfig,
 };
 

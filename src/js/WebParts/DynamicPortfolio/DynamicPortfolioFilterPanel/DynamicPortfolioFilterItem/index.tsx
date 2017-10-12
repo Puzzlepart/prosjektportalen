@@ -1,13 +1,13 @@
 import * as React from "react";
 import { Checkbox } from "office-ui-fabric-react/lib/Checkbox";
-import IFilterItemProps from "./IFilterItemProps";
+import IDynamicPortfolioFilterItemProps from "./IDynamicPortfolioFilterItemProps";
 
 /**
- * Filter Item
+ * DynamicPortfolioFilter Item
  *
- * @param {IFilterItemProps} param0 Props
+ * @param {IDynamicPortfolioFilterItemProps} param0 Props
  */
-const FilterItem = ({ filter, item, className, marginBottom, padding, onChange }: IFilterItemProps) => {
+const DynamicPortfolioFilterItem = ({ filter, item, className, marginBottom, padding, onChange }: IDynamicPortfolioFilterItemProps) => {
     return (
         <li>
             <div
@@ -26,4 +26,4 @@ const FilterItem = ({ filter, item, className, marginBottom, padding, onChange }
     );
 };
 
-export default FilterItem;
+export default DynamicPortfolioFilterItem;

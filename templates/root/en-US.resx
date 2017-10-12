@@ -2085,6 +2085,9 @@
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>
   </data>
+  <data name="DynamicPortfolio_ShowCounts" xml:space="preserve">
+    <value>Showing {0} of a total of {1} projects.</value>
+  </data>
   <data name="DynamicPortfolio_FieldSelector_Name" xml:space="preserve">
     <value>Fields</value>
   </data>

@@ -4,15 +4,15 @@ import {
     Panel,
     PanelType,
 } from "office-ui-fabric-react/lib/Panel";
-import Filter from "./Filter";
-import IFilterPanelProps from "./IFilterPanelProps";
+import DynamicPortfolioFilter, { IDynamicPortfolioFilter } from "./DynamicPortfolioFilter";
+import DynamicPortfolioFilterPanelProps from "./DynamicPortfolioFilterPanelProps";
 
 /**
- * Filter Panel
+ * DynamicPortfolioFilter Panel
  *
- * @param {IFilterPanelProps} props Props
+ * @param {DynamicPortfolioFilterPanelProps} props Props
  */
-const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: IFilterPanelProps) => {
+const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: DynamicPortfolioFilterPanelProps) => {
     return (
         <Panel
             isOpen={isOpen}
@@ -24,7 +24,7 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
                 {filters
                     .filter(filter => filter.items.length > 1)
                     .map((filter, idx) => (
-                        <Filter
+                        <DynamicPortfolioFilter
                             key={idx}
                             filter={filter}
                             onFilterChange={onFilterChange} />
@@ -33,5 +33,6 @@ const FilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: 
         </Panel>);
 };
 
-export default FilterPanel;
+export default DynamicPortfolioFilterPanel;
+export { IDynamicPortfolioFilter };
 

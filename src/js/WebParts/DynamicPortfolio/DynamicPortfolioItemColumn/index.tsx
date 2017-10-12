@@ -2,22 +2,20 @@ import * as React from "react";
 import * as Util from "../../../Util";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import {
-    IColumnConfig,
-    IConfiguration,
-} from "../Configuration";
-
-
+    IDynamicPortfolioColumnConfig,
+    IDynamicPortfolioConfiguration,
+} from "../DynamicPortfolioConfiguration";
 
 /**
  * Render item column
  *
  * @param {any} item The item
  * @param {number} index Index
- * @param {IColumnConfig} column Column
- * @param {IConfiguration} configuration Configuration
+ * @param {IDynamicPortfolioColumnConfig} column Column
+ * @param {IDynamicPortfolioConfiguration} configuration Configuration
  * @param {Function} titleOnClick Tile column on click
  */
-const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, configuration: IConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
+const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
     const columnValue = item[column.key];
 
     switch (column.key) {
@@ -82,4 +80,4 @@ const _onRenderItemColumn = (item: any, index: number, column: IColumnConfig, co
     }
 };
 
-export default _onRenderItemColumn;
+export default DynamicPortfolioItemColumn;

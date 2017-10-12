@@ -22,12 +22,11 @@ import {
 } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
 import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
-import FieldSelector from "./FieldSelector";
-import FilterPanel from "./FilterPanel";
-import IFilter from "./FilterPanel/Filter/IFilter";
-import * as Configuration from "./Configuration";
+import DynamicPortfolioFieldSelector from "./DynamicPortfolioFieldSelector";
+import DynamicPortfolioFilterPanel, { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
+import * as DynamicPortfolioConfiguration from "./DynamicPortfolioConfiguration";
 import { queryProjects } from "./DynamicPortfolioSearch";
-import _onRenderItemColumn from "./ItemColumn";
+import DynamicPortfolioItemColumn from "./DynamicPortfolioItemColumn";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
@@ -108,7 +107,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
 
-        const configuration = await Configuration.getConfig();
+        const configuration = await DynamicPortfolioConfiguration.getConfig();
 
         let currentView;
 
@@ -138,8 +137,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const fieldNames = configuration.columns.map(f => f.fieldName);
         const response = await queryProjects(currentView, configuration);
 
-        // Populates FieldSelector with items from this.configuration.columns
-        FieldSelector.items = configuration.columns.map(col => ({
+        // Populates DynamicPortfolioFieldSelector with items from this.configuration.columns
+        DynamicPortfolioFieldSelector.items = configuration.columns.map(col => ({
             name: col.name,
             value: col.fieldName,
             defaultSelected: Array.contains(currentView.fields, col.name),
@@ -150,7 +149,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         let selectedColumns = currentView.fields.map(f => configuration.columns.filter(fc => fc.name === f)[0]);
 
         // Get selected filters
-        let filters = this.getSelectedFiltersWithItems(response.refiners, configuration, currentView).concat([FieldSelector]);
+        let filters = this.getSelectedFiltersWithItems(response.refiners, configuration, currentView).concat([DynamicPortfolioFieldSelector]);
 
         // Sorts items from response.primarySearchResults
         let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
@@ -180,7 +179,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         return (
-            <MessageBar>{`Viser ${data.items.length} av totalt ${items.length} prosjekter.`}</MessageBar>
+            <MessageBar>{String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, items.length)}</MessageBar>
         );
     }
 
@@ -207,7 +206,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 columns={data.columns}
                 groups={data.groups}
                 selectionMode={selectionMode}
-                onRenderItemColumn={(item, index, column: any) => _onRenderItemColumn(item, index, column, configuration, evt => this._onOpenProjectModal(evt, item))}
+                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, configuration, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
             />
         );
@@ -221,7 +220,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     private renderFilterPanel({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) {
         return (
-            <FilterPanel
+            <DynamicPortfolioFilterPanel
                 isOpen={showFilterPanel}
                 onDismiss={() => this.setState({ showFilterPanel: false })}
                 filters={filters}
@@ -432,10 +431,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * the filters are checked against refiners retrieved by search.
      *
      * @param {any[]} refiners Refiners retrieved by search
-     * @param {Configuration.IConfiguration} configuration Configuration
-     * @param {Configuration.IViewConfig} viewConfig View configuration
+     * @param {DynamicPortfolioConfiguration.IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration
+     * @param {DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig} viewConfig View configuration
      */
-    private getSelectedFiltersWithItems(refiners: any[], configuration: Configuration.IConfiguration, viewConfig: Configuration.IViewConfig): any {
+    private getSelectedFiltersWithItems(refiners: any[], configuration: DynamicPortfolioConfiguration.IDynamicPortfolioConfiguration, viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): any {
         return configuration.refiners
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
@@ -453,9 +452,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     /**
      * Acts on filter change.
      *
-     * @param {IFilter} filter The filter that was changed
+     * @param {IDynamicPortfolioFilter} filter The filter that was changed
      */
-    private _onFilterChange = (filter: IFilter): void => {
+    private _onFilterChange = (filter: IDynamicPortfolioFilter): void => {
         const {
             items,
             currentFilters,
@@ -555,22 +554,22 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     /**
      * Does a new search using queryProjects, then updates component"s state
      *
-     * @param {Configuration.IViewConfig} viewConfig View configuration
+     * @param {DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig} viewConfig View configuration
      */
-    private async executeSearch(viewConfig: Configuration.IViewConfig): Promise<void> {
+    private async executeSearch(viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): Promise<void> {
         if (this.state.currentView.id === viewConfig.id) {
             return;
         }
 
         await this.updateState({ isLoading: true });
         const response = await queryProjects(viewConfig, this.state.configuration);
-        FieldSelector.items = this.state.configuration.columns.map(col => ({
+        DynamicPortfolioFieldSelector.items = this.state.configuration.columns.map(col => ({
             name: col.name,
             value: col.fieldName,
             defaultSelected: Array.contains(viewConfig.fields, col.name),
             readOnly: col.readOnly,
         }));
-        let filters = this.getSelectedFiltersWithItems(response.refiners, this.state.configuration, viewConfig).concat([FieldSelector]);
+        let filters = this.getSelectedFiltersWithItems(response.refiners, this.state.configuration, viewConfig).concat([DynamicPortfolioFieldSelector]);
         await this.updateState({
             isLoading: false,
             items: response.primarySearchResults,

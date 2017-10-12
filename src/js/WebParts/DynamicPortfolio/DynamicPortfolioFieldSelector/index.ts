@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "localization";
-import IFilter from "../FilterPanel/Filter/IFilter";
+import { IDynamicPortfolioFilter } from "../DynamicPortfolioFilterPanel";
 
-const FieldSelector: IFilter = {
+const DynamicPortfolioFieldSelector: IDynamicPortfolioFilter = {
     name: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_Name"),
     key: "Fields",
     emptyMessage: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_EmptyMessage"),
@@ -11,5 +11,5 @@ const FieldSelector: IFilter = {
     items: [],
 };
 
-export default FieldSelector;
+export default DynamicPortfolioFieldSelector;
 

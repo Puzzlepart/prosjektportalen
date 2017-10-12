@@ -1,4 +1,4 @@
-export default interface IRefinerConfig {
+export default interface IDynamicPortfolioRefinerConfig {
     name: string;
     key: string;
     fieldName: string;
