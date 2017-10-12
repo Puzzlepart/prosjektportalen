@@ -218,6 +218,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .getByTitle(configList)
             .items
             .select("Title", this.props.filterField)
+            .usingCaching()
             .get();
 
         const fieldsPromise = rootWeb
@@ -225,6 +226,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
+            .usingCaching()
             .get();
 
         const itemPromise = new Web(this.props.webUrl)
@@ -233,6 +235,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .items
             .getById(this.props.welcomePageId)
             .fieldValuesAsHTML
+            .usingCaching()
             .get();
 
         Promise.all([configPromise, fieldsPromise, itemPromise])
