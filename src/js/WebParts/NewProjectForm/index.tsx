@@ -266,12 +266,6 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     private async onFormChange(input: string, newValue: string) {
         const self = this;
-
-        const {
-            model,
-            errorMessages,
-         } = this.state;
-
         switch (input) {
             case "Title": {
                 const url = Util.cleanString(newValue, this.props.maxUrlLength);
@@ -283,18 +277,18 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 try {
                     await this.doesWebExistDelay;
                     const doesExist = await DoesWebExist(url);
-                    self.setState({
+                    self.setState(prevState => ({
                         errorMessages: {
-                            ...errorMessages,
+                            ...prevState.errorMessages,
                             Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
                         formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
                         model: {
-                            ...model,
+                            ...prevState.model,
                             Title: newValue,
                             Url: url,
                         },
-                    });
+                    }));
                 } catch (err) {
                     // Timeout cancelled
                 }
@@ -309,30 +303,30 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 try {
                     await this.doesWebExistDelay;
                     const doesExist = await DoesWebExist(newValue);
-                    self.setState({
+                    self.setState(prevState => ({
                         errorMessages: {
-                            ...errorMessages,
+                            ...prevState.errorMessages,
                             Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
-                        formValid: (model.Title.length >= self.props.titleMinLength) && !doesExist,
+                        formValid: (prevState.model.Title.length >= self.props.titleMinLength) && !doesExist,
                         model: {
-                            ...model,
+                            ...prevState.model,
                             Url: newValue,
                         },
-                    });
+                    }));
                 } catch (err) {
                     // Timeout cancelled
                 }
             }
                 break;
             case "Description": {
-                this.setState({
-                    formValid: (model.Title.length >= this.props.titleMinLength),
+                this.setState(prevState => ({
+                    formValid: (prevState.model.Title.length >= this.props.titleMinLength),
                     model: {
-                        ...model,
+                        ...prevState.model,
                         Description: newValue,
                     },
-                });
+                }));
             }
                 break;
         }
@@ -360,15 +354,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         try {
             const redirectUrl = await ProvisionWeb(model, (step, progress) => {
                 this.setState({
-                    provisioning: {
-                        status: ProvisionStatus.Creating,
-                        step: step,
-                        progress: progress,
-                    },
+                    provisioning: { status: ProvisionStatus.Creating, step, progress },
                 });
             });
             document.location.href = redirectUrl;
-        } catch (error) {
+        } catch {
             this.setState({
                 provisioning: { status: ProvisionStatus.Error },
             });
