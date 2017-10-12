@@ -1,6 +1,5 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
-import Workbook from "react-excel-workbook";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -22,6 +21,7 @@ import {
     MessageBarType,
 } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
+import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
 import FieldSelector from "./FieldSelector";
 import FilterPanel from "./FilterPanel";
 import IFilter from "./FilterPanel/Filter/IFilter";
@@ -86,6 +86,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 </div>
             );
         }
+        if (this.state.isLoading) {
+            return (
+                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
+            );
+        }
         return (
             <div>
                 {this.renderCommandBar(this.props, this.state)}
@@ -93,7 +98,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 {this.renderItems(this.props, this.state)}
                 {this.renderFilterPanel(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
-                {this.renderWorkbook(this.props, this.state)}
             </div>
         );
     }
@@ -164,13 +168,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderItems({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { isLoading }: IDynamicPortfolioState) {
-        if (isLoading) {
-            return (
-                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
-            );
-        }
-
+    private renderItems({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { }: IDynamicPortfolioState) {
         const data = this.getFilteredData(this.props, this.state);
 
         if (data.items.length === 0) {
@@ -224,7 +222,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (!currentView) {
             return null;
         }
-
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
@@ -262,9 +259,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 key: "ExcelExport",
                 name: excelExportConfig.buttonLabel,
                 iconProps: { iconName: excelExportConfig.buttonIcon },
+                disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
                 onClick: e => {
                     e.preventDefault();
-                    document.getElementById(excelExportConfig.triggerId).click();
+                    this.exportToExcel();
                 },
             });
         }
@@ -304,6 +302,28 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             />
         );
     }
+
+    /**
+     * Export current view to Excel (xlsx)
+     */
+    private async exportToExcel() {
+        this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
+        const data = this.getFilteredData(this.props, this.state);
+        const sheet = {
+            name: this.props.excelExportConfig.sheetName,
+            data: [
+                data.columns.map(col => col.name),
+                ...data.items.map(item => data.columns.map(col => item[col.fieldName])),
+            ],
+        };
+        const fileName = String.format(this.props.excelExportConfig.fileName, this.state.currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        await ExportToExcel({
+            sheets: [sheet],
+            fileName,
+        });
+        this.setState({ excelExportStatus: ExcelExportStatus.Idle });
+    }
+
     /**
      * Renders search box
      *
@@ -353,39 +373,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             );
         }
         return null;
-    }
-
-    /**
-     * Render workbook
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
-     */
-    private renderWorkbook({ excelExportConfig }: IDynamicPortfolioProps, { isLoading, currentView }: IDynamicPortfolioState) {
-        if (!currentView) {
-            return null;
-        }
-        const fileName = String.format(excelExportConfig.fileName, currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
-        const data = this.getFilteredData(this.props, this.state);
-        return (
-            <Workbook
-                filename={fileName}
-                element={<input id={excelExportConfig.triggerId} hidden={true}></input>}>
-                {[
-                    <Workbook.Sheet
-                        key={0}
-                        data={data.items}
-                        name={excelExportConfig.sheetName}>
-                        {data.columns.map((col, key) => (
-                            <Workbook.Column
-                                key={key}
-                                label={col.name}
-                                value={col.key} />
-                        ))}
-                    </Workbook.Sheet>,
-                ]}
-            </Workbook>
-        );
     }
 
     /**
