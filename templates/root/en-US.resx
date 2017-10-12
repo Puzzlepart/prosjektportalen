@@ -2110,7 +2110,13 @@
     <value>Export to Excel</value>
   </data>
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
-    <value>Laster project portfolio...</value>
+    <value>Loading project portfolio...</value>
+  </data>
+  <data name="LatestProjects_LoadingText" xml:space="preserve">
+    <value>Loading latest projects...</value>
+  </data>
+  <data name="LatestProjects_ProjectUnderCreation" xml:space="preserve">
+    <value>Project under creation...</value>
   </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>

@@ -33,22 +33,22 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchData()
-            .then(updatedState => {
-                this.setState({
-                    ...updatedState,
-                    isLoading: false,
-                });
-            })
-            .catch(_ => this.setState({ isLoading: false }));
+    public async componentDidMount() {
+        const self = this;
+        try {
+            const webinfos = await this.fetchData();
+            this.setState({
+                webinfos,
+                isLoading: false,
+            });
+        } catch (err) {
+            this.setState({ isLoading: false });
+        }
 
         if (this.props.reloadInterval !== -1) {
-            this.reloadInterval = window.setInterval(() => {
-                this.fetchData()
-                    .then(updatedState => {
-                        this.setState(updatedState);
-                    });
+            this.reloadInterval = window.setInterval(async function () {
+                const webinfos = await self.fetchData();
+                self.setState({ webinfos });
             }, (this.props.reloadInterval * 1000));
         }
     }
@@ -81,7 +81,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     private renderItems = ({ listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
         if (isLoading) {
             return (
-                <Spinner type={SpinnerType.large} />
+                <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("LatestProjects_LoadingText")} />
             );
         } else if (webinfos == null) {
             return (
@@ -93,16 +93,16 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={listClassName}>
-                        {webinfos.map(webinfo => (
-                            <li key={webinfo.Id}>
-                                {webinfo.Title ?
+                        {webinfos.map(({ Id, Title, ServerRelativeUrl, Created }) => (
+                            <li key={Id}>
+                                {Title ?
                                     <div>
-                                        <h5><a href={webinfo.ServerRelativeUrl}>{webinfo.Title}</a></h5>
-                                        <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(webinfo.Created)}</div>
+                                        <h5><a href={ServerRelativeUrl}>{Title}</a></h5>
+                                        <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(Created)}</div>
                                     </div>
                                     : (
                                         <div style={{ width: 100 }}>
-                                            <Spinner type={SpinnerType.normal} />
+                                            <Spinner type={SpinnerType.normal} label={RESOURCE_MANAGER.getResource("LatestProjects_ProjectUnderCreation")} />
                                         </div>
                                     )}
                             </li>
@@ -122,22 +122,16 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     /**
      * Fetch data (webinfos)
      */
-    private fetchData = () => new Promise<Partial<ILatestProjectsState>>((resolve, reject) => {
-        const {
-            itemsCount,
-            itemsOrderBy,
-        } = this.props;
-
-        new Site(_spPageContextInfo.siteAbsoluteUrl)
+    private async fetchData(): Promise<any> {
+        const webinfos = await new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .webinfos
-            .top(itemsCount)
+            .top(this.props.itemsCount)
             .select("Id", "ServerRelativeUrl", "Title", "Created")
-            .orderBy(itemsOrderBy.orderBy, itemsOrderBy.ascending)
-            .get().then(webinfos => {
-                resolve({ webinfos: webinfos });
-            }).catch(reject);
-    })
+            .orderBy(this.props.itemsOrderBy.orderBy, this.props.itemsOrderBy.ascending)
+            .get();
+        return webinfos;
+    }
 }
 
 export {
