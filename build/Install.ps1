@@ -120,7 +120,7 @@ function Start-Install() {
     if (-not $SkipAssets.IsPresent) {
         try {
             Connect-SharePoint $AssetsUrl -UseWeb
-            Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "assets" -Localized
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
@@ -147,7 +147,7 @@ function Start-Install() {
         try {
             Connect-SharePoint $Url    
             Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "root" -Localized
+            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
@@ -217,6 +217,20 @@ function Start-Install() {
                 Write-Host $error[0] -ForegroundColor Red
             }
         }
+    }
+
+    try {
+        Connect-SharePoint $Url    
+        Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
+        Apply-Template -Template "root" -Localized -Handlers PropertyBagEntries
+        Write-Host "DONE" -ForegroundColor Green
+        Disconnect-PnPOnline
+    }
+    catch {
+        Write-Host
+        Write-Host "Error updating web property bag for $Url" -ForegroundColor Red
+        Write-Host $error[0] -ForegroundColor Red
+        exit 1 
     }
 
     $sw.Stop()
