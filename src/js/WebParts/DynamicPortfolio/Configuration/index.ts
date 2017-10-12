@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "localization";
 import * as pnp from "sp-pnp-js";
 import IConfiguration, { IViewConfig, IColumnConfig, IRefinerConfig, IStatusFieldsConfig } from "./IConfiguration";
-import { loadLocalizedJsonConfig } from "../../../Util";
+import { loadJsonConfiguration } from "../../../Util";
 
 let STORED_CONFIGURATION: IConfiguration = null;
 
@@ -31,7 +31,7 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> 
                 .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "Author/Id")
                 .orderBy(orderBy)
                 .get(),
-            loadLocalizedJsonConfig<IStatusFieldsConfig>("status-fields"),
+            loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
         STORED_CONFIGURATION = {
             columns: fields.map(col => ({

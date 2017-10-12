@@ -11,7 +11,7 @@ import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatus
 import SectionModel from "./Section/SectionModel";
 import BaseWebPart from "../@BaseWebPart";
 import { GetSetting } from "../../Settings";
-import { loadLocalizedJsonConfig } from "../../Util";
+import { loadJsonConfiguration } from "../../Util";
 import IStatusFieldsConfig from "../../Model/Config/IStatusFieldsConfig";
 
 /**
@@ -125,7 +125,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
             sitePagesLib.fields.get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
-            loadLocalizedJsonConfig<IStatusFieldsConfig>("status-fields"),
+            loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
         return {
             project,

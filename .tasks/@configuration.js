@@ -48,4 +48,5 @@ module.exports = {
         v: pkg.version,
         token: "[version]"
     },
+    availableLanguages: ["1033", "1044"]
 }

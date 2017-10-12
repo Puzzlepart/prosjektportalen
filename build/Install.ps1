@@ -27,8 +27,10 @@ Param(
     [switch]$SkipDefaultConfig,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
     [switch]$SkipTaxonomy,
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets prebiously)?")]
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets previously)?")]
     [switch]$SkipAssets,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package?")]
+    [switch]$SkipRootPackage,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
@@ -108,7 +110,7 @@ function Start-Install() {
         try {
             Connect-SharePoint $AssetsUrl -UseWeb
             Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "assets"
+            Apply-Template -Template "assets" -Localized
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
@@ -119,26 +121,31 @@ function Start-Install() {
             exit 1 
         }
     }
-
-    # Installing root package
-    try {
-        Connect-SharePoint $Url    
-        if (-not $SkipTaxonomy.IsPresent) {
-            Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-            $lcid = Get-TermStoreDefaultLanguage
-            Apply-Template -Template "taxonomy-$($lcid)"
-            Write-Host "DONE" -ForegroundColor Green
-        }
-        Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized
+  
+    # Installing taxonomy if switch SkipTaxonomy is not present
+    if (-not $SkipTaxonomy.IsPresent) {
+        Connect-SharePoint $Url  
+        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        $lcid = Get-TermStoreDefaultLanguage
+        Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     }
-    catch {
-        Write-Host
-        Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+
+    # Installing root package if switch SkipRootPackage is not present
+    if (-not $SkipRootPackage.IsPresent) {
+        try {
+            Connect-SharePoint $Url    
+            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+            Apply-Template -Template "root" -Localized
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
     }
 
     # Installing data package

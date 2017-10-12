@@ -58,33 +58,27 @@ gulp.task("copyPnpTemplates", () => {
         .pipe(gulp.dest(config.paths.templates_temp));
 });
 
-gulp.task("copyPnpRootTemplate", cb => {
-    var root = format("{0}/root/**/*", config.paths.templates_temp);
-    es.concat(
-        gulp.src(root)
-            .pipe(gulp.dest(format("{0}/root-1033", config.paths.templates_temp))),
-        gulp.src(root)
-            .pipe(gulp.dest(format("{0}/root-1044", config.paths.templates_temp)))
-    ).on('end', cb);
+gulp.task("copyPnpRootTemplate", () => {
+    var src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
+    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
-    return gulp.src([
+    var src = gulp.src([
         format("{0}/**/*.js", config.paths.dist),
         format("{0}/**/*.css", config.paths.dist),
         format("{0}/**/*.png", config.paths.dist),
         format("{0}/**/*.txt", config.paths.dist),
-        format("{0}/**/*.js", config.paths.build)]
-    )
-        .pipe(gulp.dest(format("{0}/assets", config.paths.templates_temp)));
+        format("{0}/**/*.js", config.paths.build)])
+    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("copyThirdPartyLibsToAssetsTemplate", () => {
-    return gulp.src([
+    var src = gulp.src([
         format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
-        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)]
-    )
-        .pipe(gulp.dest(format("{0}/assets/libs", config.paths.templates_temp)));
+        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
+    ]);
+    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}/libs", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("stampVersionToTemplates", cb => {
