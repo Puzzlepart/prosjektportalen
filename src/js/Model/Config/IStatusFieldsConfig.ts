@@ -1,8 +1,8 @@
 export interface IStatusProperties {
-    statusValue: string;
-    statusClassName: string;
-    statusColor: string;
-    statusIconName: string;
+    statusValue?: string;
+    statusClassName?: string;
+    statusColor?: string;
+    statusIconName?: string;
 }
 
 export default interface IStatusFieldsConfig {
