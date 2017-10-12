@@ -8,9 +8,14 @@
     "showOutput": "always",
     "tasks": [
         {
-            "taskName": "watch",
+            "taskName": "default",
             "args": [],
             "isBuildCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "watch",
+            "args": [],
             "isBackground": true,
             "showOutput": "always"
         },
@@ -25,11 +30,6 @@
             "args": [],
             "isBackground": true,
             "showOutput": "always"
-        },
-        {
-            "taskName": "buildPnpTemplateFiles",
-            "args": [],
-            "isBackground": true
         }
     ]
 }
