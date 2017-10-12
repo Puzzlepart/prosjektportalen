@@ -7,6 +7,7 @@ export default interface IProjectListProps extends IBaseWebPartProps {
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
     masonryOptions?: any;
+    rowLimit?: number;
 }
 
 export const ProjectListDefaultProps: Partial<IProjectListProps> = {
@@ -19,5 +20,6 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
         transitionDuration: "slow",
         gutter: 10,
     },
+    rowLimit: 500,
 };
 
