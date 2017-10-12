@@ -39,7 +39,7 @@ gulp.task("zipDist", (done) => {
 
 gulp.task("release", (done) => {
     console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
-    runSequence("default", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", `zipDist`, () => {
+    runSequence("clean", "buildJsonResources", "tsLint", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", `zipDist`, () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
