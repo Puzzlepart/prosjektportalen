@@ -9,6 +9,7 @@
                 <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
                 <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
                 <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
+                <pnp:Directory Src="config\" Folder="siteassets/pp/config" Overwrite="true" Recursive="false" IncludedExtensions="*.txt" />
             </pnp:Files>
         </pnp:ProvisioningTemplate>
     </pnp:Templates>

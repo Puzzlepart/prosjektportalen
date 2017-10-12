@@ -1,18 +1,21 @@
 import RESOURCE_MANAGER from "localization";
 import * as pnp from "sp-pnp-js";
-import IConfiguration, { IViewConfig, IColumnConfig, IRefinerConfig } from "./IConfiguration";
+import IConfiguration, { IViewConfig, IColumnConfig, IRefinerConfig, IStatusFieldsConfig } from "./IConfiguration";
+import { loadLocalizedJsonConfig } from "../../../Util";
 
 let STORED_CONFIGURATION: IConfiguration = null;
 
 /**
  * Get config from lists
+ *
+ * @param {string} orderBy Order by property
  */
 export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> {
     if (STORED_CONFIGURATION) {
         return STORED_CONFIGURATION;
     } else {
         const lists = pnp.sp.web.lists;
-        const [fields, refiners, views] = await Promise.all([
+        const [fields, refiners, views, statusFields] = await Promise.all([
             lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
                 .items
                 .orderBy(orderBy)
@@ -28,6 +31,7 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> 
                 .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "Author/Id")
                 .orderBy(orderBy)
                 .get(),
+            loadLocalizedJsonConfig<IStatusFieldsConfig>("status-fields"),
         ]);
         STORED_CONFIGURATION = {
             columns: fields.map(col => ({
@@ -58,10 +62,17 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IConfiguration> 
                 fields: GtDpFieldsLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
                 refiners: GtDpRefinersLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
             })),
+            statusFields,
         };
         return STORED_CONFIGURATION;
     }
 }
 
-export { IConfiguration, IViewConfig, IColumnConfig, IRefinerConfig };
+export {
+    IConfiguration,
+    IViewConfig,
+    IColumnConfig,
+    IRefinerConfig,
+    IStatusFieldsConfig,
+};
 
