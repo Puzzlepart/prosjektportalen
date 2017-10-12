@@ -95,6 +95,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             <div>
                 {this.renderCommandBar(this.props, this.state)}
                 {this.renderSearchBox(this.props, this.state)}
+                {this.renderStatusBar(this.props, this.state)}
                 {this.renderItems(this.props, this.state)}
                 {this.renderFilterPanel(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
@@ -163,6 +164,24 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
+    * Render status bar
+    *
+    * @param {IDynamicPortfolioProps} param0 Props
+    * @param {IDynamicPortfolioState} param1 State
+    */
+    private renderStatusBar({ }: IDynamicPortfolioProps, { items }: IDynamicPortfolioState) {
+        const data = this.getFilteredData(this.props, this.state);
+
+        if (data.items.length === 0) {
+            return null;
+        }
+
+        return (
+            <MessageBar>{`Viser ${data.items.length} av totalt ${items.length} prosjekter.`}</MessageBar>
+        );
+    }
+
+    /**
      * Render items
      *
      * @param {IDynamicPortfolioProps} param0 Props
@@ -201,7 +220,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioState} param1 State
      */
     private renderFilterPanel({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) {
-
         return (
             <FilterPanel
                 isOpen={showFilterPanel}
@@ -219,9 +237,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioState} param1 State
      */
     private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { currentView, selectedColumns, groupBy }: IDynamicPortfolioState) {
-        if (!currentView) {
-            return null;
-        }
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
