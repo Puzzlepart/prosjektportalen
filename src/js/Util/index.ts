@@ -1,5 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
+import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 
@@ -412,7 +413,21 @@ export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequest
     return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 }
 
+export function loadLibrary(filename: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        SP.SOD.registerSod(filename, `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/libs/${filename}`);
+        SP.SOD.executeFunc(filename, null, resolve);
+    });
+}
+
+export async function loadLibraries(filenames: string[]): Promise<void> {
+    for (let i = 0; i < filenames.length; i++) {
+        await loadLibrary(filenames[i]);
+    }
+}
+
 export {
+    ExportToExcel,
     WaitDialog,
     StampVersion,
 };

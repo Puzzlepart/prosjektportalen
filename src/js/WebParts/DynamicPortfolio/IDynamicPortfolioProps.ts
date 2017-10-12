@@ -9,7 +9,6 @@ import { IBaseWebPartProps } from "../@BaseWebPart";
 export interface IDynamicPortfolioExcelExportConfig {
     fileName: string;
     sheetName: string;
-    triggerId: string;
     buttonLabel: string;
     buttonIcon: string;
 }
@@ -39,7 +38,6 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     excelExportConfig: {
         fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
-        triggerId: "export-workbook",
         buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },

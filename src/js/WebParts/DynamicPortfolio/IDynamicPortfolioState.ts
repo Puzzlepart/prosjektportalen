@@ -2,6 +2,7 @@ import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { IBaseWebPartState } from "../@BaseWebPart";
 import IFilter from "./FilterPanel/Filter/IFilter";
 import { IViewConfig, IColumnConfig } from "./Configuration";
+import { ExcelExportStatus } from "../../Util/ExportToExcel";
 
 export interface IDynamicPortfolioErrorMessage {
     message: string;
@@ -22,4 +23,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     groupBy?: IColumnConfig;
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
+    excelExportStatus?: ExcelExportStatus;
 }
