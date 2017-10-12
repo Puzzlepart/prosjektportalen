@@ -49,7 +49,10 @@ Param(
     [Parameter(Mandatory = $false)]
     [switch]$ConfirmExtensions,
     [Parameter(Mandatory = $false)]
-    [switch]$Upgrade
+    [switch]$Upgrade,
+    [Parameter(Mandatory = $false)]
+    [ValidateSet('None','File','Host')]
+    [string]$Logging = "File"
 )
 
 . ./SharedFunctions.ps1
@@ -101,8 +104,16 @@ function Start-Install() {
     $ErrorActionPreference = "Stop"
 
     # Sets up PnP trace log
-    $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
-    Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
+    if($Logging -eq "File") {
+        $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
+        Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
+    }
+    elseif($Logging -eq "Host") {
+        Set-PnPTraceLog -On -Level Debug
+    }
+    else {
+        Set-PnPTraceLog -Off
+    }
   
 
     # Applies assets template if switch SkipAssets is not present
