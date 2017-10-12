@@ -27,6 +27,8 @@ namespace PP {
             headers: {
                 "Accept": "application/json; odata=verbose",
             },
+            defaultCachingStore: "session",
+            defaultCachingTimeoutSeconds: 30,
         });
     }
 

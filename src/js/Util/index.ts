@@ -445,7 +445,7 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     const fileServerRelativeUrl = `${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
-        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).getJSON();
+        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
         return json;
     } catch (err) {
         Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);
