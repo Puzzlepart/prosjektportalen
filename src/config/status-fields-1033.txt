@@ -1,0 +1,148 @@
+{
+    "GtStatusRisk": {
+        "statuses": [
+            {
+                "statusValue": "Low",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Medium",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "High",
+                "statusClassName": "negative-status",
+                "statusColor": "#ea5c73",
+                "statusIconName": "CircleFill"
+            }
+        ]
+    },
+    "GtStatusBudget": {
+        "statuses": [
+            {
+                "statusValue": "Below budget",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "On budget",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Minor overrides that can be taken back",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Do not know",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Over budget",
+                "statusClassName": "negative-status",
+                "statusColor": "#ea5c73",
+                "statusIconName": "CircleFill"
+            }
+        ]
+    },
+    "GtStatusTime": {
+        "statuses": [
+            {
+                "statusValue": "Ahead of schedule",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "On schedule",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Minor delays",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Behind schedule",
+                "statusClassName": "negative-status",
+                "statusColor": "#ea5c73",
+                "statusIconName": "CircleFill"
+            }
+        ]
+    },
+    "GtStatusGainAchievement": {
+        "statuses": [
+            {
+                "statusValue": "Ahead of schedule",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "On schedule",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Not started",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Minor delays",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Behind schedule",
+                "statusClassName": "negative-status",
+                "statusColor": "#ea5c73",
+                "statusIconName": "CircleFill"
+            }
+        ]
+    },
+    "GtStatusQuality": {
+        "statuses": [
+            {
+                "statusValue": "Larger deviation(s) from specification",
+                "statusClassName": "negative-status",
+                "statusColor": "#ea5c73",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Smaller deviation(s) from specification",
+                "statusClassName": "neutral-status",
+                "statusColor": "#e9b359",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "As expected",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            },
+            {
+                "statusValue": "Exceeds expectations",
+                "statusClassName": "positive-status",
+                "statusColor": "#2da748",
+                "statusIconName": "CircleFill"
+            }
+        ]
+    }
+}

@@ -1,8 +1,7 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
-import { Icon } from "../../../@Components";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../../../Util";
-import { GetStatusCssClass } from "../../Utils";
 import ISectionHeaderProps from "./ISectionHeaderProps";
 
 const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: any) => {
@@ -40,7 +39,6 @@ const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
 };
 
 const SectionHeader = ({ id, section, fallbackNavigateUrl }: ISectionHeaderProps) => {
-    let statusCssClass = GetStatusCssClass(section.fieldName, section.statusValue);
     return (
         <div
             id={id}
@@ -49,7 +47,7 @@ const SectionHeader = ({ id, section, fallbackNavigateUrl }: ISectionHeaderProps
                 <div className="section-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
                     <div className="ms-Grid-row">
                         <div className="section-icons ms-Grid-col ms-sm12 ms-md6 ms-lg6">
-                            <Icon name={section.iconName} className={statusCssClass} />
+                            <Icon iconName={section.iconName} className={section.statusProperties.statusClassName} />
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
+import pnp from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -424,6 +425,11 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
     for (let i = 0; i < filenames.length; i++) {
         await loadLibrary(filenames[i]);
     }
+}
+
+export async function loadLocalizedJsonConfig<T>(name: string, language = _spPageContextInfo.webLanguage): Promise<T> {
+    const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(`${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}-${language}.txt`).getJSON();
+    return json;
 }
 
 export {

@@ -1,5 +1,5 @@
-
 import * as Util from "../../../Util";
+import IStatusFieldsConfig, { IStatusProperties } from "../../../Model/Config/IStatusFieldsConfig";
 
 export enum SectionType {
     StatusSection,
@@ -17,6 +17,8 @@ export default class SectionModel {
     public viewFields: string[];
     public rowLimit: number;
     public fieldName: string;
+    public commentFieldName: string;
+    public statusClassName: string;
     public showRiskMatrix: boolean;
     public showInNavbar: boolean;
     public showInStatusSection: boolean;
@@ -24,15 +26,17 @@ export default class SectionModel {
     public customComponent: string;
     public statusValue: string;
     public statusComment?: string;
+    public statusProperties?: IStatusProperties;
     private contentTypeId: string;
 
     /**
      * Constructor
      *
-     * @param obj Section object
-     * @param projet Project properties
+     * @param {any} obj Section object
+     * @param {any} project Project properties
+     * @param {IStatusFieldsConfig} statusFieldsConfig Status fields config
      */
-    constructor(obj: any, project: any) {
+    constructor(obj: any, project: any, statusFieldsConfig: IStatusFieldsConfig) {
         this.name = obj.Title;
         this.iconName = obj.GtStSecIcon;
         this.source = obj.GtStSecSource;
@@ -41,21 +45,30 @@ export default class SectionModel {
         this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
         this.rowLimit = obj.GtStSecRowLimit;
         this.fieldName = obj.GtStSecFieldName;
+        this.commentFieldName = `${this.fieldName}Comment`;
         this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
         this.showInNavbar = obj.GtStSecShowInNavbar;
         this.showInStatusSection = obj.GtStSecShowInStatusSection;
         this.showAsSection = obj.GtStSecShowAsSection;
         this.customComponent = obj.GtStSecCustomComponent;
         this.contentTypeId = obj.ContentTypeId;
+        this.statusProperties = {};
 
         if (this.getType() === SectionType.RiskSection) {
             this.listTitle = "Usikkerhet";
             this.fieldName = "GtStatusRisk";
         }
         if (this.fieldName) {
-            const commentFieldName = `${this.fieldName}Comment`;
-            this.statusValue = project.hasOwnProperty(this.fieldName) ? project[this.fieldName] : "";
-            this.statusComment = project.hasOwnProperty(commentFieldName) ? project[commentFieldName] : "";
+            if (project.hasOwnProperty(this.fieldName)) {
+                this.statusValue = project[this.fieldName];
+            }
+            if (project.hasOwnProperty(this.commentFieldName)) {
+                this.statusComment = project[this.commentFieldName];
+            }
+            if (statusFieldsConfig.hasOwnProperty(this.fieldName)) {
+                const [statusProperties] = statusFieldsConfig[this.fieldName].statuses.filter(({ statusValue }) => this.statusValue === statusValue);
+                this.statusProperties = statusProperties;
+            }
         }
     }
 
