@@ -19,7 +19,7 @@ export default class SecuredWebPart<P extends ISecuredWebPartProps, S extends IS
      */
     public async onInit(): Promise<void> {
         if (this.props.permissionKind) {
-            const userHasPermission = await pnp.sp.web.currentUserHasPermissions(this.props.permissionKind);
+            const userHasPermission = await pnp.sp.web.usingCaching().currentUserHasPermissions(this.props.permissionKind);
             this.setState({ shouldRender: userHasPermission });
         } else {
             this.setState({ shouldRender: true });
