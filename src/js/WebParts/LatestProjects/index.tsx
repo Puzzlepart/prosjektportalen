@@ -101,7 +101,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                                         <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(Created)}</div>
                                     </div>
                                     : (
-                                        <div style={{ width: 100 }}>
+                                        <div style={{ width: 200 }}>
                                             <Spinner type={SpinnerType.normal} label={RESOURCE_MANAGER.getResource("LatestProjects_ProjectUnderCreation")} />
                                         </div>
                                     )}
