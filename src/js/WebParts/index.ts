@@ -1,38 +1,42 @@
 import RESOURCE_MANAGER from "localization";
-import ProjectList from "./ProjectList";
-import ProjectInfo from "./ProjectInfo";
-import ProjectPhases from "./ProjectPhases";
-import NewProjectLink from "./NewProjectLink";
-import Announcements from "./Announcements";
-import LatestProjects from "./LatestProjects";
-import QuickLinks from "./QuickLinks";
-import DynamicPortfolio from "./DynamicPortfolio";
-import BenefitsOverview from "./BenefitsOverview";
-import ProjectStatus from "./ProjectStatus";
-import ExperienceLog from "./ExperienceLog";
-import LatestLogEntries from "./LatestLogEntries";
-import WebPropertyBagEditor from "./WebPropertyBagEditor";
+import ProjectList, { IProjectListProps } from "./ProjectList";
+import ProjectInfo, { IProjectInfoProps } from "./ProjectInfo";
+import ProjectPhases, { IProjectPhasesProps } from "./ProjectPhases";
+import NewProjectLink, { INewProjectLinkProps } from "./NewProjectLink";
+import Announcements, { IAnnouncementsProps } from "./Announcements";
+import LatestProjects, { ILatestProjectsProps } from "./LatestProjects";
+import QuickLinks, { IQuickLinksProps } from "./QuickLinks";
+import DynamicPortfolio, { IDynamicPortfolioProps } from "./DynamicPortfolio";
+import BenefitsOverview, { IBenefitsOverviewProps } from "./BenefitsOverview";
+import ProjectStatus, { IProjectStatusProps } from "./ProjectStatus";
+import ExperienceLog, { IExperienceLogProps } from "./ExperienceLog";
+import LatestLogEntries, { ILatestLogEntriesProps } from "./LatestLogEntries";
+import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyBagEditor";
+import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
+import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
 /**
  * An array containing WebPartComponents
  */
-const WebPartComponents: WebPartComponent[] = [
-    new WebPartComponent(ProjectList, "pp-projectlist"),
-    new WebPartComponent(ProjectInfo, "pp-projectinfo", { filterField: "GtPcFrontpage" }),
-    new WebPartComponent(ProjectPhases, "pp-projectphases"),
-    new WebPartComponent(NewProjectLink, "pp-newprojectlink"),
-    new WebPartComponent(Announcements, "pp-announcements"),
-    new WebPartComponent(LatestProjects, "pp-latestprojects", { itemsCount: 8, reloadInterval: 360 }),
-    new WebPartComponent(QuickLinks, "pp-quicklinks"),
-    new WebPartComponent(DynamicPortfolio, "pp-dynamicportfolio"),
-    new WebPartComponent(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
-    new WebPartComponent(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
-    new WebPartComponent(ProjectStatus, "pp-projectstatus"),
-    new WebPartComponent(ExperienceLog, "pp-experiencelog"),
-    new WebPartComponent(LatestLogEntries, "pp-latestlogentries"),
-    new WebPartComponent(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
+const WebPartComponents: WebPartComponent<any>[] = [
+    new WebPartComponent<IProjectListProps>(ProjectList, "pp-projectlist"),
+    new WebPartComponent<IProjectInfoProps>(ProjectInfo, "pp-projectinfo", { filterField: "GtPcFrontpage" }),
+    new WebPartComponent<IProjectPhasesProps>(ProjectPhases, "pp-projectphases"),
+    new WebPartComponent<INewProjectLinkProps>(NewProjectLink, "pp-newprojectlink"),
+    new WebPartComponent<IAnnouncementsProps>(Announcements, "pp-announcements"),
+    new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8, reloadInterval: 360 }),
+    new WebPartComponent<IQuickLinksProps>(QuickLinks, "pp-quicklinks"),
+    new WebPartComponent<IDynamicPortfolioProps>(DynamicPortfolio, "pp-dynamicportfolio"),
+    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
+    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
+    new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
+    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
+    new WebPartComponent<ILatestLogEntriesProps>(LatestLogEntries, "pp-latestlogentries"),
+    new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
+    new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
+    new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
 ];
 
 /**
@@ -40,7 +44,7 @@ const WebPartComponents: WebPartComponent[] = [
  *
  * @param {string} name Name of the component
  */
-export const GetWebPartComponentByName = (name: string): WebPartComponent => {
+export const GetWebPartComponentByName = (name: string): WebPartComponent<any> => {
     let [component] = WebPartComponents.filter(wpc => wpc.name === name);
     return component;
 };
@@ -66,4 +70,6 @@ export {
     ExperienceLog,
     LatestLogEntries,
     WebPropertyBagEditor,
+    NewProjectForm,
+    RiskMatrix,
 };

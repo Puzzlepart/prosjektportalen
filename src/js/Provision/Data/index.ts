@@ -9,25 +9,21 @@ import {
     RetrieveConfig,
     ListConfig,
 } from "./Config";
-import IProgressCallback from "../IProgressCallback";
 import IProvisionContext from "../IProvisionContext";
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
  *
- * @param {string} destUrl Destination URL
+ * @param {IProvisionContext} context Provisioning context
  * @param {ListConfig} conf List configuration
- * @param {IProgressCallback} onUpdateProgress Progress callback to caller
  */
-async function Copy(destUrl: string, conf: ListConfig, onUpdateProgress: IProgressCallback): Promise<void> {
+async function Copy(context: IProvisionContext, conf: ListConfig): Promise<void> {
     await Util.ensureTaxonomy();
     try {
         if (conf.DestinationLibrary) {
-            CopyFiles(conf, destUrl, onUpdateProgress);
-            return;
+            await CopyFiles(context, conf);
         } else {
-            await CopyItems(conf, destUrl, onUpdateProgress);
-            return;
+            await CopyItems(context, conf);
         }
     } catch (err) {
         throw err;
@@ -40,15 +36,15 @@ async function Copy(destUrl: string, conf: ListConfig, onUpdateProgress: IProgre
  * @param {IProvisionContext} context Provisioning context
  */
 async function CopyDefaultData(context: IProvisionContext): Promise<void> {
-    const contentToInclude = context.model.IncludeContent;
-    Logger.log({ message: "Starting copy of default data.", data: { contentToInclude }, level: LogLevel.Info });
+    const { IncludeContent } = context.model;
+    Logger.log({ message: "Starting copy of default data.", data: { IncludeContent }, level: LogLevel.Info });
     try {
         const listContentConfig = await RetrieveConfig();
         Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
-        for (let i = 0; i < contentToInclude.length; i++) {
-            const contentKey = contentToInclude[i];
+        for (let i = 0; i < IncludeContent.length; i++) {
+            const contentKey = IncludeContent[i];
             if (listContentConfig.hasOwnProperty(contentKey)) {
-                await Copy(context.url, listContentConfig[contentKey], context.progressCallbackFunc);
+                await Copy(context, listContentConfig[contentKey]);
             }
         }
         return;

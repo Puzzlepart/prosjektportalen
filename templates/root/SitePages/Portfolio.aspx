@@ -20,7 +20,7 @@
         <div class="ms-Grid">
             <div class="ms-Grid-row">
                 <div class="ms-Grid-col ms-sm12">
-                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Right%>" ID="LeftColumn" Orientation="Vertical" />
+                    <WebPartPages:WebPartZone runat="server" FrameType="TitleBarOnly" Title="<%$Resources:cms,WebPartZoneTitle_Left%>" ID="LeftColumn" Orientation="Vertical" />
                 </div>
             </div>
         </div>

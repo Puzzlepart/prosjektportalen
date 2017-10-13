@@ -32,7 +32,7 @@
 <asp:Content ContentPlaceHolderID="PlaceHolderLeftActions" runat="server" />
 <asp:Content ContentPlaceHolderID="PlaceHolderPageDescription" runat="server" />
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="ms-Frabric gt-portfolio-page gt-home-page">
+    <div class="ms-Fabric gt-portfolio-page gt-home-page">
         <div class="ms-Grid">
             <div class="ms-Grid-row">
                 <div class="ms-Grid-col ms-sm12 ms-xl8 ms-xxl9">

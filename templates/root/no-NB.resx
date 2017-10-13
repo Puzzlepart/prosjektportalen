@@ -1410,13 +1410,13 @@
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
   </data>
-  <data name="NewProjectForm_Title" xml:space="preserve">
+  <data name="NewProjectForm_TitlePlaceholder" xml:space="preserve">
     <value>Tittel</value>
   </data>
-  <data name="NewProjectForm_Description" xml:space="preserve">
+  <data name="NewProjectForm_DescriptionPlaceholder" xml:space="preserve">
     <value>Beskrivelse</value>
   </data>
-  <data name="NewProjectForm_Url" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholder" xml:space="preserve">
     <value>Url</value>
   </data>
   <data name="NewProjectForm_Create" xml:space="preserve">
@@ -1428,13 +1428,13 @@
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
   </data>
-  <data name="NewProjectForm_DialogTitle" xml:space="preserve">
+  <data name="NewProjectForm_Title" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
   <data name="NewProjectForm_SubText" xml:space="preserve">
     <value>Opprett ett nytt prosjekt basert på Prosjektveiviseren</value>
   </data>
-  <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholderAlreadyInUse" xml:space="preserve">
     <value>Webområdeadressen er allerede i bruk.</value>
   </data>
   <data name="CreationModal_Title" xml:space="preserve">
@@ -1742,6 +1742,9 @@
   </data>
   <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
     <value>Erfaringslogg</value>
+  </data>
+  <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
+    <value>Risikomatrise</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
@@ -2085,6 +2088,9 @@
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>
   </data>
+  <data name="DynamicPortfolio_ShowCounts" xml:space="preserve">
+    <value>Viser {0} av totalt {1} prosjekter.</value>
+  </data>
   <data name="DynamicPortfolio_FieldSelector_Name" xml:space="preserve">
     <value>Felter</value>
   </data>
@@ -2108,6 +2114,12 @@
   </data>
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
     <value>Laster prosjektportefølje...</value>
+  </data>
+  <data name="LatestProjects_LoadingText" xml:space="preserve">
+    <value>Laster siste prosjekter...</value>
+  </data>
+  <data name="LatestProjects_ProjectUnderCreation" xml:space="preserve">
+    <value>Prosjekt under opprettelse...</value>
   </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Alle målinger</value>
@@ -2196,6 +2208,9 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Svært lav</value>
   </data>
+  <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
+    <value>Det finnes ingen Risiko-elementer i Usikkerhets-listen.</value>
+  </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Naviger til listen</value>
   </data>
@@ -2211,7 +2226,7 @@
   <data name="ProjectStatus_SavingSnapshot" xml:space="preserve">
     <value>Lagrer øyeblikksbilde...</value>
   </data>
-   <data name="ProjectStatus_SaveAsPdf" xml:space="preserve">
+  <data name="ProjectStatus_SaveAsPdf" xml:space="preserve">
     <value>Lagre som PDF</value>
   </data>
   <data name="ProjectStatus_SavingAsPdf" xml:space="preserve">
@@ -2223,7 +2238,7 @@
   <data name="ProjectStatus_PDFSaved" xml:space="preserve">
     <value>PDF er lagret</value>
   </data>
-   <data name="ProjectStatus_PDFRiskMatrix" xml:space="preserve">
+  <data name="ProjectStatus_PDFRiskMatrix" xml:space="preserve">
     <value>Risiko - Matrise</value>
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_Formula" xml:space="preserve">

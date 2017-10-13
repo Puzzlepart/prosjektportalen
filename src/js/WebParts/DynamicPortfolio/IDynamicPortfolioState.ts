@@ -1,7 +1,12 @@
 import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { IBaseWebPartState } from "../@BaseWebPart";
-import IFilter from "./FilterPanel/Filter/IFilter";
-import { IViewConfig, IColumnConfig } from "./Configuration";
+import { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
+import {
+    IDynamicPortfolioViewConfig,
+    IDynamicPortfolioColumnConfig,
+    IDynamicPortfolioConfiguration,
+} from "./DynamicPortfolioConfiguration";
+import { ExcelExportStatus } from "../../Util/ExportToExcel";
 
 export interface IDynamicPortfolioErrorMessage {
     message: string;
@@ -9,17 +14,19 @@ export interface IDynamicPortfolioErrorMessage {
 }
 
 export default interface IDynamicPortfolioState extends IBaseWebPartState {
+    configuration?: IDynamicPortfolioConfiguration;
     items?: any[];
     filteredItems?: any[];
-    selectedColumns?: IColumnConfig[];
+    selectedColumns?: IDynamicPortfolioColumnConfig[];
     fieldNames?: string[];
     searchTerm?: string;
-    filters?: IFilter[];
-    currentView?: IViewConfig;
+    filters?: IDynamicPortfolioFilter[];
+    currentView?: IDynamicPortfolioViewConfig;
     currentFilters?: { [key: string]: string[] };
     errorMessage?: IDynamicPortfolioErrorMessage;
     showFilterPanel?: boolean;
-    groupBy?: IColumnConfig;
+    groupBy?: IDynamicPortfolioColumnConfig;
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
+    excelExportStatus?: ExcelExportStatus;
 }

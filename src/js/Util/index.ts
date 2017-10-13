@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
-import { sp } from "sp-pnp-js";
-import AudienceTargeting from "../WebParts/AudienceTargeting";
+import pnp, { Logger, LogLevel } from "sp-pnp-js";
+import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 
@@ -17,68 +17,6 @@ export function htmlDecode(input: string): string {
     e.innerHTML = input;
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 }
-
-/**
- * Is the current user in the specified group
- *
- * @param {any} group The group to check
- */
-async function isCurrentUserInGroup(group): Promise<boolean> {
-    try {
-        const users = await group.users.get();
-        return (Array.contains(users.map(user => user.Id), _spPageContextInfo.userId));
-    } catch (err) {
-        return false;
-    }
-}
-
-/**
- * Is the current user in the visitors group
- */
-export const isCurrentUserInVisitorsGroup = () => isCurrentUserInGroup(sp.web.associatedVisitorGroup);
-
-/**
- * Is the current user in the members group
- */
-export const isCurrentUserInMembersGroup = () => isCurrentUserInGroup(sp.web.associatedMemberGroup);
-
-/**
- * Is the current user in the owners group
- */
-export const isCurrentUserInOwnersGroup = () => isCurrentUserInGroup(sp.web.associatedOwnerGroup);
-
-/**
- * Does the current user match the audience target
- *
- * @param {AudienceTargeting} audienceTarget Audience target
- */
-export const doesUserMatchAudience = (audienceTarget: AudienceTargeting) => new Promise<boolean>(resolve => {
-    switch (audienceTarget) {
-        case AudienceTargeting.None: {
-            resolve(true);
-        }
-            break;
-        case AudienceTargeting.Visitors: {
-            isCurrentUserInVisitorsGroup().then(bool => resolve(bool));
-        }
-            break;
-        case AudienceTargeting.Members: {
-            isCurrentUserInMembersGroup().then(bool => resolve(bool));
-        }
-            break;
-        case AudienceTargeting.Owners: {
-            if (_spPageContextInfo.hasOwnProperty("isSiteAdmin") && _spPageContextInfo["isSiteAdmin"] === true) {
-                resolve(true);
-            } else {
-                isCurrentUserInOwnersGroup().then(bool => resolve(bool));
-            }
-        }
-            break;
-        default: {
-            resolve(true);
-        }
-    }
-});
 
 /**
  * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
@@ -476,7 +414,47 @@ export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequest
     return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 }
 
+/**
+ * Loads a 3rd party library using SP.SOD
+ *
+ * @param {string} filename Filename
+ */
+export function loadLibrary(filename: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        SP.SOD.registerSod(filename, `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/libs/${filename}`);
+        SP.SOD.executeFunc(filename, null, resolve);
+    });
+}
+
+/**
+ * Loads 3rd party libraries using SP.SOD
+ *
+ * @param {string[]} filenames Filenames
+ */
+export async function loadLibraries(filenames: string[]): Promise<void> {
+    for (let i = 0; i < filenames.length; i++) {
+        await loadLibrary(filenames[i]);
+    }
+}
+
+/**
+ * Loads JSON configuration
+ *
+ * @param {string} name Config name
+ */
+export async function loadJsonConfiguration<T>(name: string): Promise<T> {
+    const fileServerRelativeUrl = `${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}.txt`;
+    try {
+        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
+        return json;
+    } catch (err) {
+        Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);
+        return null;
+    }
+}
+
 export {
+    ExportToExcel,
     WaitDialog,
     StampVersion,
 };

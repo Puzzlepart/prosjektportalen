@@ -6,6 +6,9 @@ import { Web } from "sp-pnp-js";
  * @param {string} siteServerRelativeUrl Url
  */
 export default async function DoesWebExist(siteServerRelativeUrl: string): Promise<boolean> {
+    if (!siteServerRelativeUrl || siteServerRelativeUrl.length === 0) {
+        return false;
+    }
     let web = new Web(`${_spPageContextInfo.siteAbsoluteUrl}/${siteServerRelativeUrl}`);
     try {
         await web.get();

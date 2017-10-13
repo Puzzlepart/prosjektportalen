@@ -113,3 +113,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         }
     }
 }
+
+export {
+    IExperienceLogProps,
+    IExperienceLogState,
+};

@@ -11,6 +11,8 @@ import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatus
 import SectionModel from "./Section/SectionModel";
 import BaseWebPart from "../@BaseWebPart";
 import { GetSetting } from "../../Settings";
+import { loadJsonConfiguration } from "../../Util";
+import IStatusFieldsConfig from "../../Model/Config/IStatusFieldsConfig";
 
 /**
  * Project Status
@@ -118,17 +120,23 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
     private async fetchData(): Promise<ProjectStatusData> {
         const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
-        const [project, fields, sections, exportType] = await Promise.all([
+        const [project, fields, sections, exportType, statusFieldsConfig] = await Promise.all([
             sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.get(),
             sitePagesLib.fields.get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
+            loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
         return {
             project,
             fields,
-            sections: sections.map(s => new SectionModel(s, project)).filter(s => s.isValid()),
+            sections: sections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid()),
             exportType,
         };
     }
 }
+
+export {
+    IProjectStatusProps,
+    IProjectStatusState,
+};

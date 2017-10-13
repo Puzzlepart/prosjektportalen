@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<pnp:Provisioning 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Preferences></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS-1044" Version="0">
+            <pnp:Files>
+                <pnp:Directory Src="libs\" Folder="siteassets/pp/libs" Overwrite="true" Recursive="false" IncludedExtensions="*.js" />
+                <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
+                <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
+                <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
+                <pnp:Directory Src="config\1044" Folder="siteassets/pp/config" Overwrite="true" Recursive="false" IncludedExtensions="*.txt" />
+            </pnp:Files>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

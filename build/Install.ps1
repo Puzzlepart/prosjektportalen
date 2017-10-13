@@ -27,8 +27,10 @@ Param(
     [switch]$SkipDefaultConfig,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing taxonomy (in case you already have all needed term sets)?")]
     [switch]$SkipTaxonomy,
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets prebiously)?")]
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets previously)?")]
     [switch]$SkipAssets,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package?")]
+    [switch]$SkipRootPackage,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
@@ -47,7 +49,10 @@ Param(
     [Parameter(Mandatory = $false)]
     [switch]$ConfirmExtensions,
     [Parameter(Mandatory = $false)]
-    [switch]$Upgrade
+    [switch]$Upgrade,
+    [Parameter(Mandatory = $false)]
+    [ValidateSet('None','File','Host')]
+    [string]$Logging = "File"
 )
 
 . ./SharedFunctions.ps1
@@ -99,16 +104,24 @@ function Start-Install() {
     $ErrorActionPreference = "Stop"
 
     # Sets up PnP trace log
-    $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
-    Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
+    if($Logging -eq "File") {
+        $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
+        Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
+    }
+    elseif($Logging -eq "Host") {
+        Set-PnPTraceLog -On -Level Debug
+    }
+    else {
+        Set-PnPTraceLog -Off
+    }
   
 
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
         try {
             Connect-SharePoint $AssetsUrl -UseWeb
-            Write-Host "Deploying required scripts, styling and images.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "assets"
+            Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
+            Apply-Template -Template "assets" -Localized
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
@@ -119,26 +132,31 @@ function Start-Install() {
             exit 1 
         }
     }
-
-    # Installing root package
-    try {
-        Connect-SharePoint $Url    
-        if (-not $SkipTaxonomy.IsPresent) {
-            Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-            $lcid = Get-TermStoreDefaultLanguage
-            Apply-Template -Template "taxonomy-$($lcid)"
-            Write-Host "DONE" -ForegroundColor Green
-        }
-        Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized
+  
+    # Installing taxonomy if switch SkipTaxonomy is not present
+    if (-not $SkipTaxonomy.IsPresent) {
+        Connect-SharePoint $Url  
+        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        $lcid = Get-TermStoreDefaultLanguage
+        Apply-Template -Template "taxonomy-$($lcid)"
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     }
-    catch {
-        Write-Host
-        Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+
+    # Installing root package if switch SkipRootPackage is not present
+    if (-not $SkipRootPackage.IsPresent) {
+        try {
+            Connect-SharePoint $Url    
+            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
     }
 
     # Installing data package
@@ -199,6 +217,20 @@ function Start-Install() {
                 Write-Host $error[0] -ForegroundColor Red
             }
         }
+    }
+
+    try {
+        Connect-SharePoint $Url    
+        Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
+        Apply-Template -Template "root" -Localized -Handlers PropertyBagEntries
+        Write-Host "DONE" -ForegroundColor Green
+        Disconnect-PnPOnline
+    }
+    catch {
+        Write-Host
+        Write-Host "Error updating web property bag for $Url" -ForegroundColor Red
+        Write-Host $error[0] -ForegroundColor Red
+        exit 1 
     }
 
     $sw.Stop()

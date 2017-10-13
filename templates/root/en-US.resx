@@ -1410,13 +1410,13 @@
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
   </data>
-  <data name="NewProjectForm_Title" xml:space="preserve">
+  <data name="NewProjectForm_TitlePlaceholder" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="NewProjectForm_Description" xml:space="preserve">
+  <data name="NewProjectForm_DescriptionPlaceholder" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="NewProjectForm_Url" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholder" xml:space="preserve">
     <value>Url</value>
   </data>
   <data name="NewProjectForm_Create" xml:space="preserve">
@@ -1428,13 +1428,13 @@
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Default list content</value>
   </data>
-  <data name="NewProjectForm_DialogTitle" xml:space="preserve">
+  <data name="NewProjectForm_Title" xml:space="preserve">
     <value>New project</value>
   </data>
   <data name="NewProjectForm_SubText" xml:space="preserve">
     <value />
   </data>
-  <data name="NewProjectForm_UrlAlreadyInUse" xml:space="preserve">
+  <data name="NewProjectForm_UrlPlaceholderAlreadyInUse" xml:space="preserve">
     <value>The URL is already in use.</value>
   </data>
   <data name="CreationModal_Title" xml:space="preserve">
@@ -1739,6 +1739,9 @@
   </data>
   <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
     <value>Experience Log</value>
+  </data>
+  <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
+    <value>Risk Matrix</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -2082,6 +2085,9 @@
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>
   </data>
+  <data name="DynamicPortfolio_ShowCounts" xml:space="preserve">
+    <value>Showing {0} of a total of {1} projects.</value>
+  </data>
   <data name="DynamicPortfolio_FieldSelector_Name" xml:space="preserve">
     <value>Fields</value>
   </data>
@@ -2104,7 +2110,13 @@
     <value>Export to Excel</value>
   </data>
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
-    <value>Laster project portfolio...</value>
+    <value>Loading project portfolio...</value>
+  </data>
+  <data name="LatestProjects_LoadingText" xml:space="preserve">
+    <value>Loading latest projects...</value>
+  </data>
+  <data name="LatestProjects_ProjectUnderCreation" xml:space="preserve">
+    <value>Project under creation...</value>
   </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>All measurements</value>
@@ -2189,6 +2201,9 @@
   </data>
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Very low</value>
+  </data>
+  <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
+    <value>There's no risk items in the Uncertainties list.</value>
   </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>
