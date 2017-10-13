@@ -1,6 +1,7 @@
 <pnp:Features 
 	xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
 	<pnp:WebFeatures>
+		<pnp:Feature ID="00bfea71-d8fe-4fec-8dad-01c19a6e4053" Description="Wiki Page Home Page Feature" />
 		<pnp:Feature ID="87294c72-f260-42f3-a41b-981a2ffce37a" Deactivate="true" Description="Minimal Download Strategy" />
 		<pnp:Feature ID="4aec7207-0d02-4f4f-aa07-b370199cd0c7" Deactivate="true" Description="Getting started" />
 	</pnp:WebFeatures>
