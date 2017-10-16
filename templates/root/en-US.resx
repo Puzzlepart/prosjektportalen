@@ -868,7 +868,7 @@
     <value>URL</value>
   </data>
   <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
-    <value>Status risk</value>
+    <value>Risk status</value>
   </data>
   <data name="SiteFields_GtMilestoneStatus_DisplayName" xml:space="preserve">
     <value>Milestone status</value>
