@@ -139,7 +139,7 @@
     <value>Benefits Overview</value>
   </data>
   <data name="Navigation_ExperienceLog_Title" xml:space="preserve">
-    <value>Experience Log</value>
+    <value>Lessons Log</value>
   </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Project Status</value>
@@ -175,7 +175,7 @@
     <value>Stakeholders</value>
   </data>
   <data name="Lists_Standarddocuments_Title" xml:space="preserve">
-    <value>Standarddocuments</value>
+    <value>Standard Documents</value>
   </data>
   <data name="Lists_Information_Title" xml:space="preserve">
     <value>Information</value>
@@ -190,7 +190,7 @@
     <value>Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Title" xml:space="preserve">
-    <value>Uncertainties</value>
+    <value>Risks</value>
   </data>
   <data name="Lists_MeetingCalendar_Title" xml:space="preserve">
     <value>Meeting Calendar</value>
@@ -208,7 +208,7 @@
     <value>Benefits Followup</value>
   </data>
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
-    <value>Project status reports</value>
+    <value>Project Status Reports</value>
   </data>
   <data name="Lists_ProjectElements_Title" xml:space="preserve">
     <value>Projects</value>
@@ -280,7 +280,7 @@
     <value>Lists/Project Deliveries</value>
   </data>
   <data name="Lists_Uncertainties_Url" xml:space="preserve">
-    <value>Lists/Uncertainties</value>
+    <value>Lists/Risks</value>
   </data>
   <data name="Lists_MeetingCalendar_Url" xml:space="preserve">
     <value>Lists/Meeting Calendar</value>
@@ -319,7 +319,7 @@
     <value>Lists/Project Deliveries/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Uncertainties_Url" xml:space="preserve">
-    <value>Lists/Uncertainties/AllItems.aspx</value>
+    <value>Lists/Risks/AllItems.aspx</value>
   </data>
   <data name="DefaultView_Tasks_Url" xml:space="preserve">
     <value>Lists/Tasks/AllItems.aspx</value>
@@ -367,7 +367,7 @@
     <value>SPSite</value>
   </data>
   <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
-    <value>Erfaringslogg</value>
+    <value>Lessons Log</value>
   </data>
   <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
     <value>SPSite</value>
@@ -391,7 +391,7 @@
     <value>Stakeholder</value>
   </data>
   <data name="ContentTypes_Kommunikasjonselement_Name" xml:space="preserve">
-    <value>Communication element</value>
+    <value>Communication Element</value>
   </data>
   <data name="ContentTypes_Sjekkpunkt_Name" xml:space="preserve">
     <value>Checkpoint</value>
@@ -400,34 +400,34 @@
     <value>Project product</value>
   </data>
   <data name="ContentTypes_Prosjektloggelement_Name" xml:space="preserve">
-    <value>Project log element</value>
+    <value>Project Log Element</value>
   </data>
   <data name="ContentTypes_Infoelement_Name" xml:space="preserve">
-    <value>Info element</value>
+    <value>Info Element</value>
   </data>
   <data name="ContentTypes_Glittertind_dokument_Name" xml:space="preserve">
     <value>Glittertind doucument</value>
   </data>
   <data name="ContentTypes_Prosjektdokument_Name" xml:space="preserve">
-    <value>Project document</value>
+    <value>Project Document</value>
   </data>
   <data name="ContentTypes_Glittertind_nettdelside_Name" xml:space="preserve">
     <value>Glittertind web part page</value>
   </data>
   <data name="ContentTypes_Prosjektforside_Name" xml:space="preserve">
-    <value>Project frontpage</value>
+    <value>Project Frontpage</value>
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
-    <value>Project item</value>
+    <value>Project Item</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
   </data>
   <data name="ContentTypes_Prosjekthendelse_Name" xml:space="preserve">
-    <value>Project event</value>
+    <value>Project Event</value>
   </data>
   <data name="ContentTypes_Prosjektoppgave_Name" xml:space="preserve">
-    <value>Project task</value>
+    <value>Project Task</value>
   </data>
   <data name="ContentTypes_Gevinst_Name" xml:space="preserve">
     <value>Benefit</value>
@@ -562,7 +562,7 @@
     <value>Title</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
-    <value>End Time</value>
+    <value>Start Time</value>
   </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
@@ -595,7 +595,7 @@
     <value>Modified</value>
   </data>
   <data name="SiteFields_GtStatusRiskComment_DisplayName" xml:space="preserve">
-    <value>Comment, risk</value>
+    <value>Comment, risk status</value>
   </data>
   <data name="SiteFields_GtProductAcceptanceResponsible_DisplayName" xml:space="preserve">
     <value>Approval responsibility</value>
@@ -607,7 +607,7 @@
     <value>Responsible</value>
   </data>
   <data name="SiteFields_GtEndDate_DisplayName" xml:space="preserve">
-    <value>End date</value>
+    <value>End Date</value>
   </data>
   <data name="SiteFields_GtProductAcceptanceMethod_DisplayName" xml:space="preserve">
     <value>Approval method</value>
@@ -655,13 +655,13 @@
     <value>Probability (P)</value>
   </data>
   <data name="SiteFields_GtRiskStrategy_DisplayName" xml:space="preserve">
-    <value>Uncertainty strategy</value>
+    <value>Risk Management Approach</value>
   </data>
   <data name="SiteFields_GtProjectLogType_DisplayName" xml:space="preserve">
     <value>Log element</value>
   </data>
   <data name="SiteFields_GtProjectLogReporter_DisplayName" xml:space="preserve">
-    <value>Reporter</value>
+    <value>Reported By</value>
   </data>
   <data name="SiteFields_GtProductPhase_DisplayName" xml:space="preserve">
     <value>Production Phase</value>
@@ -673,7 +673,7 @@
     <value>Action</value>
   </data>
   <data name="SiteFields_GtActionDate_DisplayName" xml:space="preserve">
-    <value>Action date</value>
+    <value>Action Date</value>
   </data>
   <data name="SiteFields_GtProjectLogActors_DisplayName" xml:space="preserve">
     <value>Actors</value>
@@ -709,13 +709,13 @@
     <value>Status</value>
   </data>
   <data name="SiteFields_GtActionResponsible_DisplayName" xml:space="preserve">
-    <value>Reponsible</value>
+    <value>Action Responsible</value>
   </data>
   <data name="SiteFields_GtProjectPhase_DisplayName" xml:space="preserve">
     <value>Phase</value>
   </data>
   <data name="SiteFields_GtProjectPhaseChoice_DisplayName" xml:space="preserve">
-    <value>Project phase</value>
+    <value>Project Phase</value>
   </data>
   <data name="SiteFields_GtStakeholderGroup_DisplayName" xml:space="preserve">
     <value>Stakeholder Group</value>
@@ -742,10 +742,10 @@
     <value>Project Goals</value>
   </data>
   <data name="SiteFields_GtStakeholderStrategy_DisplayName" xml:space="preserve">
-    <value>Plan / Strategy / Project</value>
+    <value>Plan / Approach / Project</value>
   </data>
   <data name="SiteFields_GtProductAcceptanceCriteria_DisplayName" xml:space="preserve">
-    <value>Acceptance criteria</value>
+    <value>Acceptance Criteria</value>
   </data>
   <data name="SiteFields_GtProductQualityExpectations_DisplayName" xml:space="preserve">
     <value>Quality Expections</value>
@@ -754,28 +754,28 @@
     <value>Description</value>
   </data>
   <data name="SiteFields_GtStartDate_DisplayName" xml:space="preserve">
-    <value>Start date</value>
+    <value>Start Date</value>
   </data>
   <data name="SiteFields_GtProductAcceptanceDate_DisplayName" xml:space="preserve">
-    <value>Approval date</value>
+    <value>Approval Date</value>
   </data>
   <data name="SiteFields_GtProjectLogConsequence_DisplayName" xml:space="preserve">
     <value>Consequence</value>
   </data>
   <data name="SiteFields_GtProjectLogExperience_DisplayName" xml:space="preserve">
-    <value>For experience log</value>
+    <value>For lessons log</value>
   </data>
   <data name="SiteFields_GtComment_DisplayName" xml:space="preserve">
     <value>Comment</value>
   </data>
   <data name="SiteFields_GtRiskFactor_DisplayName" xml:space="preserve">
-    <value>Risk factor</value>
+    <value>Risk Factor</value>
   </data>
   <data name="SiteFields_GtRiskFactorPostAction_DisplayName" xml:space="preserve">
     <value>Risk factor post action</value>
   </data>
   <data name="SiteFields_GtProjectTaskRisk_DisplayName" xml:space="preserve">
-    <value>Relevant uncertainty</value>
+    <value>Relevant risk</value>
   </data>
   <data name="SiteFields_GtProjectTaskComElement_DisplayName" xml:space="preserve">
     <value>Relevant communication element</value>
@@ -784,7 +784,7 @@
     <value>Stakeholder(s)</value>
   </data>
   <data name="SiteFields_GtProjectLogEventLookup_DisplayName" xml:space="preserve">
-    <value>To Project Management</value>
+    <value>To Project Board</value>
   </data>
   <data name="SiteFields_GtProjectLogProductLookup_DisplayName" xml:space="preserve">
     <value>Affects product</value>
@@ -799,13 +799,13 @@
     <value>Description of challenge</value>
   </data>
   <data name="SiteFields_GtGainsType_DisplayName" xml:space="preserve">
-    <value>Value Type</value>
+    <value>Benefit Type</value>
   </data>
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
-    <value>Prerequisites for Value Achievement</value>
+    <value>Prerequisites for Benefit Achievement</value>
   </data>
   <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
-    <value>Value Conversion</value>
+    <value>Benefit Conversion</value>
   </data>
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Account Manager</value>
@@ -868,10 +868,10 @@
     <value>URL</value>
   </data>
   <data name="SiteFields_GtStatusUncertainty_DisplayName" xml:space="preserve">
-    <value>Status uncertainty</value>
+    <value>Status risk</value>
   </data>
   <data name="SiteFields_GtMilestoneStatus_DisplayName" xml:space="preserve">
-    <value>Status milestone</value>
+    <value>Milestone status</value>
   </data>
   <data name="SiteFields_GtMilestoneComment_DisplayName" xml:space="preserve">
     <value>Comment, milestone</value>
@@ -1141,7 +1141,7 @@
     <value />
   </data>
   <data name="SiteFields_GtStatusGainAchievementComment_Description" xml:space="preserve">
-    <value />
+    <value>Comment to status benefit achievement specified above</value>
   </data>
   <data name="SiteFields_GtRiskConsequence_Description" xml:space="preserve">
     <value>Number 0 to 5</value>
@@ -1177,7 +1177,7 @@
     <value>Number 0 to 5</value>
   </data>
   <data name="SiteFields_GtStatusTimeComment_Description" xml:space="preserve">
-    <value>Comment on status time specified above</value>
+    <value>Comment on status time specified above. What is the project's progress when it comes to deliverables?</value>
   </data>
   <data name="SiteFields_GtProjectGoals_Description" xml:space="preserve">
     <value>Describe what the project will deliver</value>
@@ -1204,7 +1204,7 @@
     <value>Describe more in detail what this can lead to.</value>
   </data>
   <data name="SiteFields_GtProjectLogExperience_Description" xml:space="preserve">
-    <value>Should this appear in the project's experience log.</value>
+    <value>Select to include in the project's lessons log.</value>
   </data>
   <data name="SiteFields_GtComment_Description" xml:space="preserve">
     <value />
@@ -1228,25 +1228,25 @@
     <value />
   </data>
   <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
-    <value>How should the gain be realized?</value>
+    <value>How should the benefit be realized?</value>
   </data>
   <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
-    <value>Responsible for realization of gain</value>
+    <value>Responsible for realization of benefit</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_Description" xml:space="preserve">
-    <value>How should the gain be measured, eg: paper consumption per month</value>
+    <value>How should the benefit be measured, eg: paper usage per month</value>
   </data>
   <data name="SiteFields_GtStartValue_Description" xml:space="preserve">
     <value>The result of zero measurement</value>
   </data>
   <data name="SiteFields_GtDesiredValue_Description" xml:space="preserve">
-    <value>Value when the gain is realized</value>
+    <value>Value when the benefit is realized</value>
   </data>
   <data name="SiteFields_GtMeasurementUnit_Description" xml:space="preserve">
     <value>See measurement indicator for elaboration</value>
   </data>
   <data name="SiteFields_GtRealizationTime_Description" xml:space="preserve">
-    <value>Expected time of realization of the gain</value>
+    <value>Expected time of realization of the benefit</value>
   </data>
   <data name="SiteFields_GtMeasurementValue_Description" xml:space="preserve">
     <value />
@@ -1351,7 +1351,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtLccDefault_Description" xml:space="preserve">
-    <value></value>
+    <value>Selected by default</value>
   </data>
   <data name="SiteFields_GtLccSourceUrl_Description" xml:space="preserve">
     <value></value>
@@ -1360,7 +1360,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtLccFields_Description" xml:space="preserve">
-    <value></value>
+    <value>Fields to be copied</value>
   </data>
   <data name="SiteFields_GtLccSourceList_Description" xml:space="preserve">
     <value></value>
@@ -1369,7 +1369,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtLccLabel_Description" xml:space="preserve">
-    <value></value>
+    <value>Text to be visible in New Project dialog</value>
   </data>
   <data name="SiteFields_GtPcProjectStatus_Description" xml:space="preserve">
     <value></value>
@@ -1432,7 +1432,7 @@
     <value>New project</value>
   </data>
   <data name="NewProjectForm_SubText" xml:space="preserve">
-    <value />
+    <value>Create new project</value>
   </data>
   <data name="NewProjectForm_UrlPlaceholderAlreadyInUse" xml:space="preserve">
     <value>The URL is already in use.</value>
@@ -1687,10 +1687,10 @@
     <value>Site Feed</value>
   </data>
   <data name="WebPart_Uncertainties_Title" xml:space="preserve">
-    <value>Uncertainties</value>
+    <value>Risks</value>
   </data>
   <data name="WebPart_UncertaintiesCurrentPhase_Title" xml:space="preserve">
-    <value>Uncertainties (current phase)</value>
+    <value>Risks (current phase)</value>
   </data>
   <data name="WebPart_LatestsTasks_Title" xml:space="preserve">
     <value>Latest tasks</value>
@@ -1714,7 +1714,7 @@
     <value>My communication elements</value>
   </data>
   <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
-    <value>Gevinstoversikt</value>
+    <value>Benefit overview</value>
   </data>
   <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
     <value>Latest log entries</value>
@@ -1738,7 +1738,7 @@
     <value>Portfolio Overview</value>
   </data>
   <data name="WebPart_ExperienceLog_Title" xml:space="preserve">
-    <value>Experience Log</value>
+    <value>Lessons Log</value>
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
@@ -1768,7 +1768,7 @@
     <value>Portfolio Summary</value>
   </data>
   <data name="PortfolioPage_ExperienceLog_Title" xml:space="preserve">
-    <value>Experience Log</value>
+    <value>Lessons Log</value>
   </data>
   <data name="Choice_GtRiskStatus_Identified" xml:space="preserve">
     <value>Identified</value>
@@ -1846,7 +1846,7 @@
     <value>Project Manager</value>
   </data>
   <data name="Choice_GtProjectLogResponsible_ProjectGroup" xml:space="preserve">
-    <value>Project Group</value>
+    <value>Project Team</value>
   </data>
   <data name="Choice_GtProjectLogResponsible_Vendor" xml:space="preserve">
     <value>Supplier</value>
@@ -1912,7 +1912,7 @@
     <value>Project Control</value>
   </data>
   <data name="Choice_GtProjectLogActors_ProjectGroup" xml:space="preserve">
-    <value>Project Group</value>
+    <value>Project Team</value>
   </data>
   <data name="Choice_GtProjectLogActors_ReferenceGroup" xml:space="preserve">
     <value>Reference Group</value>
@@ -2164,7 +2164,7 @@
     <value>Quality</value>
   </data>
   <data name="ProjectStatus_Heading_ProjectRisk" xml:space="preserve">
-    <value>Risk</value>
+    <value>Risks</value>
   </data>
   <data name="ProjectStatus_Heading_ProjectBenefitAchievement" xml:space="preserve">
     <value>Benefits achievement</value>
@@ -2203,7 +2203,7 @@
     <value>Very low</value>
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
-    <value>There's no risk items in the Uncertainties list.</value>
+    <value>There's no relevant items in the Risks list.</value>
   </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>
@@ -2272,7 +2272,7 @@
     <value>Related log elements</value>
   </data>
   <data name="CurrencySymbol" xml:space="preserve">
-    <value>$</value>
+    <value>kr</value>
   </data>
   <data name="View_BenefitTasks_DisplayName" xml:space="preserve">
     <value>Benefit tasks</value>
@@ -2293,7 +2293,7 @@
     <value>Relevant links</value>
   </data>
   <data name="View_ProductionPhase_DisplayName" xml:space="preserve">
-    <value>Production Phase
+    <value>Execution Phase
     </value>
   </data>
   <data name="SiteSettings_Link_Resources" xml:space="preserve">
