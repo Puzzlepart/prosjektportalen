@@ -166,7 +166,7 @@
     <value>Tasks</value>
   </data>
   <data name="Lists_StandardTasks_Title" xml:space="preserve">
-    <value>Standard Tasks</value>
+    <value>Default Tasks</value>
   </data>
   <data name="Lists_PhaseChecklist_Title" xml:space="preserve">
     <value>Phase Checklist</value>
@@ -175,7 +175,7 @@
     <value>Stakeholders</value>
   </data>
   <data name="Lists_Standarddocuments_Title" xml:space="preserve">
-    <value>Standard Documents</value>
+    <value>Default Documents</value>
   </data>
   <data name="Lists_Information_Title" xml:space="preserve">
     <value>Information</value>
