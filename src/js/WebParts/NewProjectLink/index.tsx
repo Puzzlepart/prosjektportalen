@@ -1,5 +1,4 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
@@ -54,7 +53,7 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderLink({ linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) {
+    private renderLink({ linkText, linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) {
         return (
             <div>
                 <a
@@ -65,7 +64,7 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
                         this.setState({ showDialog: true });
                     }}>
                     <Icon { ...iconProps } />
-                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_Header")}</span>
+                    <span>{linkText}</span>
                 </a>
             </div>
         );
@@ -77,12 +76,14 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog({ }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
+    private renderDialog({ dlgHeaderText, dlgSubHeaderText }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
                 <NewProjectForm
                     renderMode={NewProjectFormRenderMode.Dialog}
-                    onDialogDismiss={() => this.setState({ showDialog: false })} />
+                    onDialogDismiss={() => this.setState({ showDialog: false })}
+                    headerText={dlgHeaderText}
+                    subHeaderText={dlgSubHeaderText} />
             );
         }
         return null;

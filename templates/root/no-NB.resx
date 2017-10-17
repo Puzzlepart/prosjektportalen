@@ -972,6 +972,9 @@
   <data name="SiteFields_GtDpRefinersLookup_DisplayName" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="SiteFields_GtDpGroupByLookup_DisplayName" xml:space="preserve">
+    <value>Grupper etter</value>
+  </data>
   <data name="SiteFields_GtLccDefault_DisplayName" xml:space="preserve">
     <value>Standard</value>
   </data>
@@ -1348,6 +1351,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtDpRefinersLookup_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpGroupByLookup_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtLccDefault_Description" xml:space="preserve">
@@ -2114,6 +2120,12 @@
   </data>
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
     <value>Laster prosjektportefølje...</value>
+  </data>
+  <data name="DynamicPortfolio_LoadingViewText" xml:space="preserve">
+    <value>Laster visning {0}...</value>
+  </data>
+  <data name="DynamicPortfolio_CreateNewView" xml:space="preserve">
+    <value>Opprett ny visning</value>
   </data>
   <data name="LatestProjects_LoadingText" xml:space="preserve">
     <value>Laster siste prosjekter...</value>

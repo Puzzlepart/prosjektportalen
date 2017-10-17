@@ -58,6 +58,9 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
 
     /**
      * Render header
+     *
+     * @param {ISectionProps} param0 Props
+     * @param {ISectionState} param1 State
      */
     private renderHeader({ project, section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
@@ -74,6 +77,9 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
 
     /**
      * Render inner
+     *
+     * @param {ISectionProps} param0 Props
+     * @param {ISectionState} param1 State
      */
     private renderInner({ project, fields, section }: ISectionProps, { listData }: ISectionState) {
         return (
@@ -134,6 +140,8 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
 
     /**
      * Should the component fetch data (if listTitle is specified)
+     *
+     * @param {ISectionProps} param0 Props
      */
     private shouldFetchListData = ({ section }: ISectionProps): boolean => {
         return (section.listTitle != null);
@@ -141,52 +149,66 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
 
     /**
     * Fetches required data
+     *
+     * @param {ISectionProps} param0 Props
     */
-    private fetchListData = ({ section }: ISectionProps) => new Promise<ISectionListData>((resolve, reject) => {
-        const ctx = SP.ClientContext.get_current();
-        const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
-        const camlQuery = new SP.CamlQuery();
-        let viewXml = ["<View>"];
-        if (section.viewQuery) {
-            viewXml.push(`<Query>${section.viewQuery}</Query>`);
-        }
-        if (section.rowLimit) {
-            viewXml.push(`<RowLimit>${section.rowLimit}</RowLimit>`);
-        }
-        viewXml.push("</View>");
-        camlQuery.set_viewXml(viewXml.join(""));
-        const _items = list.getItems(camlQuery);
-        const _fields = list.get_fields();
-        ctx.load(list, "DefaultViewUrl");
-        ctx.load(list, "DefaultDisplayFormUrl");
-        ctx.load(list, "DefaultEditFormUrl");
-        ctx.load(list, "DefaultNewFormUrl");
-        ctx.load(_items, "Include(FieldValuesAsHtml)");
-        ctx.load(_fields);
-        ctx.executeQueryAsync(() => {
-            let items = _items.get_data().map(i => i.get_fieldValuesAsHtml().get_fieldValues());
-            let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
-            let columns = validViewFields.map(vf => {
-                const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
-                return this.createColumnFromSpField(field);
-            });
-            resolve({
-                items,
-                columns,
-                defaultViewUrl: list.get_defaultViewUrl(),
-                defaultDisplayFormUrl: list.get_defaultDisplayFormUrl(),
-                defaultEditFormUrl: list.get_defaultEditFormUrl(),
-                defaultNewFormUrl: list.get_defaultNewFormUrl(),
-            });
-        }, reject);
-    })
+    private fetchListData({ section }: ISectionProps) {
+        return new Promise<ISectionListData>((resolve, reject) => {
+            const ctx = SP.ClientContext.get_current();
+            const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
+            const camlQuery = new SP.CamlQuery();
+            let viewXml = ["<View>"];
+            if (section.viewQuery) {
+                viewXml.push(`<Query>${section.viewQuery}</Query>`);
+            }
+            if (section.rowLimit) {
+                viewXml.push(`<RowLimit>${section.rowLimit}</RowLimit>`);
+            }
+            viewXml.push("</View>");
+            camlQuery.set_viewXml(viewXml.join(""));
+            const _items = list.getItems(camlQuery);
+            const _fields = list.get_fields();
+            ctx.load(list, "DefaultViewUrl");
+            ctx.load(list, "DefaultDisplayFormUrl");
+            ctx.load(list, "DefaultEditFormUrl");
+            ctx.load(list, "DefaultNewFormUrl");
+            ctx.load(_items, "Include(FieldValuesAsHtml)");
+            ctx.load(_fields);
+            ctx.executeQueryAsync(() => {
+                let items = _items.get_data().map(i => i.get_fieldValuesAsHtml().get_fieldValues());
+                let validViewFields = section.viewFields.filter(vf => _fields.get_data().filter(lf => lf.get_internalName() === vf).length > 0);
+                let columns = validViewFields.map(vf => {
+                    const [field] = _fields.get_data().filter(lf => lf.get_internalName() === vf);
+                    return this.createColumnFromSpField(field);
+                });
+                resolve({
+                    items,
+                    columns,
+                    defaultViewUrl: list.get_defaultViewUrl(),
+                    defaultDisplayFormUrl: list.get_defaultDisplayFormUrl(),
+                    defaultEditFormUrl: list.get_defaultEditFormUrl(),
+                    defaultNewFormUrl: list.get_defaultNewFormUrl(),
+                });
+            }, reject);
+        });
+    }
 
     /**
      * Create column from sp field
      *
-     * @param field The field
+     * @param {SP.Field} field The field
      */
     private createColumnFromSpField(field: SP.Field): IColumn {
+        const colTypeMaxWidth = {
+            number: 80,
+            calculcated: 80,
+            counter: 80,
+            text: 300,
+            note: 300,
+            datetime: 150,
+            user: 150,
+        };
+
         const baseProps = {
             key: field.get_internalName(),
             fieldName: field.get_internalName(),
@@ -202,15 +224,8 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
             isResizable: true,
         };
 
-        switch (col.data.type) {
-            case "number": case "calculated": case "counter": {
-                col.maxWidth = 80;
-            }
-                break;
-            case "text": case "note": {
-                col.maxWidth = 300;
-            }
-                break;
+        if (colTypeMaxWidth[col.data.type]) {
+            col.maxWidth = colTypeMaxWidth[col.data.type];
         }
 
         return col;

@@ -23,8 +23,8 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IDynamicPortfoli
         lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
             .items
             .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
-            .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "Author")
-            .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "Author/Id")
+            .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
+            .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "GtDpGroupByLookup/GtDpDisplayName", "Author/Id")
             .orderBy(orderBy)
             .usingCaching()
             .get(),
@@ -50,7 +50,7 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IDynamicPortfoli
             defaultHidden: ref.GtDpDefaultHidden,
             iconName: ref.GtDpIcon,
         })),
-        views: views.map(({ ID, GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup }) => ({
+        views: views.map(({ ID, GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup, GtDpGroupByLookup }) => ({
             id: ID,
             name: GtDpDisplayName,
             queryTemplate: GtDpSearchQuery,
@@ -58,6 +58,7 @@ export async function getConfig(orderBy = "GtDpOrder"): Promise<IDynamicPortfoli
             default: GtDpDefault,
             fields: GtDpFieldsLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
             refiners: GtDpRefinersLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
+            groupBy: GtDpGroupByLookup.GtDpDisplayName || null,
         })),
         statusFields,
     };
