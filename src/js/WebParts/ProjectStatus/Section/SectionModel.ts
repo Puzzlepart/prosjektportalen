@@ -1,4 +1,5 @@
 import * as Util from "../../../Util";
+import RESOURCE_MANAGER from "localization";
 import IStatusFieldsConfig, { IStatusProperties } from "../../../Model/Config/IStatusFieldsConfig";
 
 export enum SectionType {
@@ -55,7 +56,7 @@ export default class SectionModel {
         this.statusProperties = {};
 
         if (this.getType() === SectionType.RiskSection) {
-            this.listTitle = "Usikkerhet";
+            this.listTitle = RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title");
             this.fieldName = "GtStatusRisk";
         }
         if (this.fieldName) {
