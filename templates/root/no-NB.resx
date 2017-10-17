@@ -2121,6 +2121,9 @@
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
     <value>Laster prosjektportefølje...</value>
   </data>
+  <data name="DynamicPortfolio_LoadingViewText" xml:space="preserve">
+    <value>Laster visning {0}...</value>
+  </data>
   <data name="LatestProjects_LoadingText" xml:space="preserve">
     <value>Laster siste prosjekter...</value>
   </data>
