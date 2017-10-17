@@ -580,14 +580,26 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             readOnly: col.readOnly,
         }));
         let filters = this.getSelectedFiltersWithItems(response.refiners, this.state.configuration, viewConfig).concat([DynamicPortfolioFieldSelector]);
-        await this.updateState({
+
+        let updatedState: Partial<IDynamicPortfolioState> = {
             isLoading: false,
             items: response.primarySearchResults,
             filteredItems: response.primarySearchResults,
             filters: filters,
             currentView: viewConfig,
             selectedColumns: this.state.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
-        });
+            groupBy: null,
+        };
+
+        // Check if the new view has group by set
+        if (viewConfig.groupBy) {
+            let [groupByColumn] = this.state.configuration.columns.filter(fc => fc.name === viewConfig.groupBy);
+            if (groupByColumn) {
+                updatedState.groupBy = groupByColumn;
+            }
+        }
+
+        await this.updateState(updatedState);
         Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
     }
 }
