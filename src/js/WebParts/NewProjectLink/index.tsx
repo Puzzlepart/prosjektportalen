@@ -88,3 +88,8 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
         return null;
     }
 }
+
+export {
+    INewProjectLinkProps,
+    INewProjectLinkState,
+};

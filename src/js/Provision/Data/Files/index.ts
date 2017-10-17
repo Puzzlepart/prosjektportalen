@@ -9,7 +9,7 @@ import {
 import * as Util from "../../../Util";
 import IFile from "./IFile";
 import ListConfig from "../Config/ListConfig";
-import IProgressCallback from "../../IProgressCallback";
+import IProvisionContext from "../../IProvisionContext";
 import ProvisionError from "../../ProvisionError";
 
 /**
@@ -56,18 +56,31 @@ async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServ
 }
 
 /**
+ * Replace tokens in filename, e.g. {projectname}
+ *
+ * @param {string} filename File name
+ * @param {IProvisionContext} context Provisioning context
+ */
+function ReplaceTokensInFilename(filename: string, context: IProvisionContext): string {
+    const tokensMap = { "{projectname}": context.model.Title };
+    const newFilename =  Object.keys(tokensMap).reduce((name, token) => {
+        return name.replace(new RegExp(token, "g"), tokensMap[token]);
+    }, filename);
+    return newFilename;
+}
+
+/**
  * Copy files and folders to a destination web
  *
- * @param {ListConfig} conf Configuration
- * @param {string} destUrl Destination web URL
- * @param {IProgressCallback} onUpdateProgress Progress callback to caller
+ * @param {IProvisionContext} context Provisioning context
+ * @param {ListConfig} conf List configuration
  */
-export async function CopyFiles(conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback): Promise<FileAddResult[]> {
+export async function CopyFiles(context: IProvisionContext, conf: ListConfig): Promise<FileAddResult[]> {
     Logger.log({ message: "Copy of files started.", data: { conf }, level: LogLevel.Info });
     const srcWeb = new Web(Util.makeUrlAbsolute(conf.SourceUrl));
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
-    const destWeb = new Web(Util.makeUrlAbsolute(destUrl));
-    const destLibServerRelUrl = Util.makeUrlRelativeToSite(`${destUrl}/${conf.DestinationLibrary}`);
+    const destWeb = new Web(Util.makeUrlAbsolute(context.url));
+    const destLibServerRelUrl = Util.makeUrlRelativeToSite(`${context.url}/${conf.DestinationLibrary}`);
     const destLibRootFolder = destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl);
     try {
         const [{ RootFolder }, items] = await Promise.all([
@@ -82,6 +95,7 @@ export async function CopyFiles(conf: ListConfig, destUrl: string, onUpdateProgr
         ]);
         let folders: string[] = [];
         let files: IFile[] = [];
+
         items.forEach(i => {
             if (i.Folder && i.Folder.hasOwnProperty("ServerRelativeUrl")) {
                 folders.push(i.Folder.ServerRelativeUrl);
@@ -89,14 +103,15 @@ export async function CopyFiles(conf: ListConfig, destUrl: string, onUpdateProgr
                 files.push(i);
             }
         });
-        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
+
+        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
         await CreateFolderHierarchy(destLibServerRelUrl, RootFolder.ServerRelativeUrl, destLibRootFolder, folders);
 
         Logger.log({ message: "Copying files", data: { files }, level: LogLevel.Info });
         const filesWithContents = await GetFileContents(srcWeb, files);
         const fileAddPromises = filesWithContents.map(fwc => new Promise<any>((res, rej) => {
             let destFolderUrl = `${destLibServerRelUrl}${fwc.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
-            destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(fwc.LinkFilename, fwc.Blob, true).then(res, rej);
+            destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(ReplaceTokensInFilename(fwc.LinkFilename, context), fwc.Blob, true).then(res, rej);
         }));
         const fileAddResult = await Promise.all(fileAddPromises);
         Logger.log({ message: "Copy of files done.", data: { conf }, level: LogLevel.Info });

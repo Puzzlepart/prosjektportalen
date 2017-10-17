@@ -4,7 +4,7 @@ import {
     LogLevel,
 } from "sp-pnp-js";
 import ListConfig from "../Config/ListConfig";
-import IProgressCallback from "../../IProgressCallback";
+import IProvisionContext from "../../IProvisionContext";
 import ProvisionError from "../../ProvisionError";
 import * as Util from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
@@ -56,17 +56,16 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
 /**
  * Copies list items to the destination web
  *
- * @param {ListConfig} conf Configuration
- * @param {string} destUrl Destination web URL
- * @param {IProgressCallback} onUpdateProgress Progress callback to caller
+ * @param {IProvisionContext} context Provisioning context
+ * @param {ListConfig} conf List configuration
  */
-export async function CopyItems(conf: ListConfig, destUrl: string, onUpdateProgress: IProgressCallback): Promise<void> {
+export async function CopyItems(context: IProvisionContext, conf: ListConfig): Promise<void> {
     Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
     try {
-        const dataCtx = await GetDataContext(conf, destUrl);
+        const dataCtx = await GetDataContext(conf, context.url);
         const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
         await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [items]);
-        onUpdateProgress(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
+        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
         await items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
         await HandleItemsWithParent(dataCtx);
         Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });

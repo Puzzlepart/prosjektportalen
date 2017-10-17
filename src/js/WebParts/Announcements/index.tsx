@@ -132,3 +132,8 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
         return null;
     }
 }
+
+export {
+    IAnnouncementsProps,
+    IAnnouncementsState,
+};

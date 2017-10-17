@@ -3,7 +3,7 @@ import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
-import RiskMatrix from "./RiskMatrix";
+import RiskMatrix from "../../RiskMatrix";
 import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
 import ISectionListData from "./ISectionListData";
@@ -79,7 +79,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         return (
             <div id={section.getHtmlElementId("inner")}>
                 {section.showRiskMatrix && (
-                    <RiskMatrix listData={listData} />
+                    <RiskMatrix data={listData.items} />
                 )}
                 {section.listTitle && (
                     <SectionList id={section.getHtmlElementId("listview")} listData={listData} />

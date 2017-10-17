@@ -294,3 +294,8 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         });
     }
 }
+
+export {
+    IBenefitsOverviewProps,
+    IBenefitsOverviewState,
+};

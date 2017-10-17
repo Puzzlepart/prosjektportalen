@@ -82,3 +82,8 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         }
     }
 }
+
+export {
+    IQuickLinksProps,
+    IQuickLinksState,
+};

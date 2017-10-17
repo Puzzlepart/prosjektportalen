@@ -140,3 +140,8 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         this.setState({ isSaving: false });
     }
 }
+
+export {
+    IWebPropertyBagEditorProps,
+    IWebPropertyBagEditorState,
+};

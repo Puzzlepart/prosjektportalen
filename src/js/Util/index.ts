@@ -1,5 +1,7 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
+import pnp, { Logger, LogLevel } from "sp-pnp-js";
+import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 
@@ -412,7 +414,47 @@ export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequest
     return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 }
 
+/**
+ * Loads a 3rd party library using SP.SOD
+ *
+ * @param {string} filename Filename
+ */
+export function loadLibrary(filename: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        SP.SOD.registerSod(filename, `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/libs/${filename}`);
+        SP.SOD.executeFunc(filename, null, resolve);
+    });
+}
+
+/**
+ * Loads 3rd party libraries using SP.SOD
+ *
+ * @param {string[]} filenames Filenames
+ */
+export async function loadLibraries(filenames: string[]): Promise<void> {
+    for (let i = 0; i < filenames.length; i++) {
+        await loadLibrary(filenames[i]);
+    }
+}
+
+/**
+ * Loads JSON configuration
+ *
+ * @param {string} name Config name
+ */
+export async function loadJsonConfiguration<T>(name: string): Promise<T> {
+    const fileServerRelativeUrl = `${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}.txt`;
+    try {
+        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
+        return json;
+    } catch (err) {
+        Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);
+        return null;
+    }
+}
+
 export {
+    ExportToExcel,
     WaitDialog,
     StampVersion,
 };

@@ -27,15 +27,18 @@ namespace PP {
             headers: {
                 "Accept": "application/json; odata=verbose",
             },
+            defaultCachingStore: "session",
+            defaultCachingTimeoutSeconds: 60,
         });
     }
 
-    export function initialize() {
+    export async function initialize() {
+        await pnp.storage.session.deleteExpired();
         initLogging();
         initPnp();
         Forms.InitializeModifications();
         WebParts.RenderWebPartsOnPage();
-        StampVersion("startNavigation", "pp_version", ["pp-version-stamp"]);
+        StampVersion("startNavigation", "pp_version");
     }
 }
 

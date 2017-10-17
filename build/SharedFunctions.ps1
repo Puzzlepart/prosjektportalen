@@ -80,12 +80,16 @@ function Get-WebLanguage($ctx) {
 }
 
 # Apply tepmplate
-function Apply-Template([string]$Template, [switch]$Localized) {    
+function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", $ExcludeHandlers) {    
     $Language = Get-WebLanguage -ctx (Get-PnPContext)    
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"
     }
-    Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
+    if ($ExcludeHandlers.IsPresent) {
+        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;} -Handlers $Handlers -ExcludeHandlers $ExcludeHandlers
+    } else {
+        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;} -Handlers $Handlers
+    }
 }
 
 # Aim at using relative urls for referencing scripts, images etc.

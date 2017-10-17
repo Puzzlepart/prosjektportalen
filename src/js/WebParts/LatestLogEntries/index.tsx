@@ -203,3 +203,8 @@ export default class LatestLogEntries extends SecuredWebPart<ILatestLogEntriesPr
             .catch(reject);
     })
 }
+
+export {
+    ILatestLogEntriesProps,
+    ILatestLogEntriesState,
+};
