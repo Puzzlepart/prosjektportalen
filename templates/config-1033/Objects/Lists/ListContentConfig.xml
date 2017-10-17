@@ -3,14 +3,14 @@
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
-            <pnp:DataValue FieldName="GtLccSourceList">Standard Tasks</pnp:DataValue>
+            <pnp:DataValue FieldName="GtLccSourceList">Default Tasks</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Tasks</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccFields">Title,GtProjectPhase</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccLabel">Include default tasks</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
-            <pnp:DataValue FieldName="GtLccSourceList">Standarddocuments</pnp:DataValue>
+            <pnp:DataValue FieldName="GtLccSourceList">Default Documents</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationLibrary">Shared documents</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccFields">Title</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccLabel">Include default documents</pnp:DataValue>

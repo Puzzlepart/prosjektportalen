@@ -1035,6 +1035,9 @@
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
     <value>Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål</value>
   </data>
+  <data name="SiteFields_GtOverallStatus_Description" xml:space="preserve">
+    <value>Overordnet status for prosjektet</value>
+  </data>
   <data name="SiteFields_GtStatusRiskComment_Description" xml:space="preserve">
     <value>Kommentar til status risiko angitt over</value>
   </data>
@@ -1253,9 +1256,6 @@
   </data>
   <data name="SiteFields_GtMeasurementComment_Description" xml:space="preserve">
     <value />
-  </data>
-  <data name="SiteFields_GtOverallStatus_Description" xml:space="preserve">
-    <value>Overordnet status for prosjektet</value>
   </data>
   <data name="SiteFields_GtStSecViewFields_Description" xml:space="preserve">
     <value></value>
