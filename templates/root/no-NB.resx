@@ -2124,6 +2124,9 @@
   <data name="DynamicPortfolio_LoadingViewText" xml:space="preserve">
     <value>Laster visning {0}...</value>
   </data>
+  <data name="DynamicPortfolio_CreateNewView" xml:space="preserve">
+    <value>Opprett ny visning</value>
+  </data>
   <data name="LatestProjects_LoadingText" xml:space="preserve">
     <value>Laster siste prosjekter...</value>
   </data>

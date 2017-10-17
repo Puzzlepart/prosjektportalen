@@ -2118,8 +2118,8 @@
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
     <value>Loading project portfolio...</value>
   </data>
-  <data name="DynamicPortfolio_LoadingViewText" xml:space="preserve">
-    <value>Loading view {0}...</value>
+  <data name="DynamicPortfolio_CreateNewView" xml:space="preserve">
+    <value>Create new view</value>
   </data>
   <data name="LatestProjects_LoadingText" xml:space="preserve">
     <value>Loading latest projects...</value>

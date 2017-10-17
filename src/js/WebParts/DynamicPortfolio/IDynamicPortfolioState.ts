@@ -30,4 +30,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
+    canUserManageWeb?: boolean;
 }

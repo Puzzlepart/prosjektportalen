@@ -1,5 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "localization";
+import pnp, { PermissionKind } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -113,7 +114,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
 
-        const configuration = await DynamicPortfolioConfiguration.getConfig();
+        const [configuration, canUserManageWeb] = await Promise.all([DynamicPortfolioConfiguration.getConfig(), pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb)]);
 
         let currentView;
 
@@ -167,6 +168,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             filters,
             currentView,
             configuration,
+            canUserManageWeb,
             filteredItems: items,
         };
 
@@ -251,7 +253,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {IDynamicPortfolioProps} param0 Props
      * @param {IDynamicPortfolioState} param1 State
      */
-    private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { configuration, currentView, selectedColumns, groupBy }: IDynamicPortfolioState) {
+    private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { configuration, currentView, selectedColumns, groupBy, canUserManageWeb }: IDynamicPortfolioState) {
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
@@ -293,6 +295,22 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 onClick: e => {
                     e.preventDefault();
                     this.exportToExcel();
+                },
+            });
+        }
+
+        if (canUserManageWeb) {
+            farItems.push({
+                key: "NewView",
+                name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                iconProps: { iconName: "CirclePlus" },
+                itemType: ContextualMenuItemType.Normal,
+                onClick: e => {
+                    e.preventDefault();
+                    SP.UI.ModalDialog.showModalDialog({
+                        url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
+                        title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                    });
                 },
             });
         }
