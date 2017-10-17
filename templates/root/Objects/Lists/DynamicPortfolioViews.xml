@@ -19,6 +19,7 @@
                 <FieldRef Name="GtDpIcon" />
                 <FieldRef Name="GtDpFieldsLookup" />
                 <FieldRef Name="GtDpRefinersLookup" />
+                <FieldRef Name="GtDpGroupByLookup" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>
