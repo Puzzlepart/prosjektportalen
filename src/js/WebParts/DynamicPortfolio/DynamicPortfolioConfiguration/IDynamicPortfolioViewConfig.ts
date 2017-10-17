@@ -6,4 +6,5 @@ export default interface IDynamicPortfolioViewConfig {
     default: boolean;
     fields?: any[];
     refiners?: any[];
+    groupBy?: string;
 }

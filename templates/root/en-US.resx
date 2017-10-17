@@ -975,6 +975,9 @@
   <data name="SiteFields_GtDpRefinersLookup_DisplayName" xml:space="preserve">
     <value>Refiners</value>
   </data>
+  <data name="SiteFields_GtDpGroupByLookup_DisplayName" xml:space="preserve">
+    <value>Group by</value>
+  </data>
   <data name="SiteFields_GtLccDefault_DisplayName" xml:space="preserve">
     <value>Default</value>
   </data>
@@ -1348,6 +1351,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtDpRefinersLookup_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtDpGroupByLookup_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtLccDefault_Description" xml:space="preserve">

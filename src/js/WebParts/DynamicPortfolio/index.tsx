@@ -154,7 +154,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         // Sorts items from response.primarySearchResults
         let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
 
-        return ({
+        let updatedState: Partial<IDynamicPortfolioState> = {
             selectedColumns,
             fieldNames,
             items,
@@ -162,7 +162,17 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             currentView,
             configuration,
             filteredItems: items,
-        });
+        };
+
+        // Check if current view has group by set
+        if (currentView.groupBy) {
+            let [groupByColumn] = configuration.columns.filter(fc => fc.name === currentView.groupBy);
+            if (groupByColumn) {
+                updatedState.groupBy = groupByColumn;
+            }
+        }
+
+        return updatedState;
     }
 
     /**
