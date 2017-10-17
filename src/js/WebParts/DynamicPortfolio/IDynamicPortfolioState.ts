@@ -14,6 +14,7 @@ export interface IDynamicPortfolioErrorMessage {
 }
 
 export default interface IDynamicPortfolioState extends IBaseWebPartState {
+    isChangingView?: IDynamicPortfolioViewConfig;
     configuration?: IDynamicPortfolioConfiguration;
     items?: any[];
     filteredItems?: any[];

@@ -92,11 +92,17 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         return (
             <div>
                 {this.renderCommandBar(this.props, this.state)}
-                {this.renderSearchBox(this.props, this.state)}
-                {this.renderStatusBar(this.props, this.state)}
-                {this.renderItems(this.props, this.state)}
-                {this.renderFilterPanel(this.props, this.state)}
-                {this.renderProjectInfoModal(this.props, this.state)}
+                {this.state.isChangingView
+                    ? <div style={{ paddingTop: 20 }}>
+                        <Spinner label={String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), this.state.isChangingView.name)} type={SpinnerType.large} />
+                    </div>
+                    : <div>
+                        {this.renderSearchBox(this.props, this.state)}
+                        {this.renderStatusBar(this.props, this.state)}
+                        {this.renderItems(this.props, this.state)}
+                        {this.renderFilterPanel(this.props, this.state)}
+                        {this.renderProjectInfoModal(this.props, this.state)}
+                    </div>}
             </div>
         );
     }
@@ -304,7 +310,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     iconProps: { iconName: qc.iconName },
                     onClick: e => {
                         e.preventDefault();
-                        this.executeSearch(qc);
+                        this.changeView(qc);
                     },
                 })),
             },
@@ -562,16 +568,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Does a new search using queryProjects, then updates component"s state
+     * Changes view, doing a new search
      *
      * @param {DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig} viewConfig View configuration
      */
-    private async executeSearch(viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): Promise<void> {
+    private async changeView(viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): Promise<void> {
         if (this.state.currentView.id === viewConfig.id) {
             return;
         }
 
-        await this.updateState({ isLoading: true });
+        await this.updateState({ isChangingView: viewConfig });
         const response = await queryProjects(viewConfig, this.state.configuration);
         DynamicPortfolioFieldSelector.items = this.state.configuration.columns.map(col => ({
             name: col.name,
@@ -582,7 +588,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         let filters = this.getSelectedFiltersWithItems(response.refiners, this.state.configuration, viewConfig).concat([DynamicPortfolioFieldSelector]);
 
         let updatedState: Partial<IDynamicPortfolioState> = {
-            isLoading: false,
+            isChangingView: null,
             items: response.primarySearchResults,
             filteredItems: response.primarySearchResults,
             filters: filters,
