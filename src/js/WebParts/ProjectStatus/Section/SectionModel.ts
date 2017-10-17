@@ -46,7 +46,6 @@ export default class SectionModel {
         this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
         this.rowLimit = obj.GtStSecRowLimit;
         this.fieldName = obj.GtStSecFieldName;
-        this.commentFieldName = `${this.fieldName}Comment`;
         this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
         this.showInNavbar = obj.GtStSecShowInNavbar;
         this.showInStatusSection = obj.GtStSecShowInStatusSection;
@@ -59,6 +58,9 @@ export default class SectionModel {
             this.listTitle = RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title");
             this.fieldName = "GtStatusRisk";
         }
+
+        this.commentFieldName = `${this.fieldName}Comment`;
+
         if (this.fieldName) {
             if (project.hasOwnProperty(this.fieldName)) {
                 this.statusValue = project[this.fieldName];
