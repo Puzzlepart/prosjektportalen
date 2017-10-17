@@ -108,8 +108,14 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
 }
 
 function ParseVersion($VersionString) {
-    $vs = $VersionString.Split("#")[0]
-    return [Version]($vs)
+    if($VersionString  -like "*.*.*#*") {
+        $vs = $VersionString.Split("#")[0]
+        return [Version]($vs)
+    }
+    if($VersionString  -like "*.*.*.*") {
+        $vs = $VersionString.Split(".")[0..2] -join "."
+        return [Version]($vs)
+    }
 }
 
 function Get-WebLanguage($ctx) {
