@@ -43,18 +43,19 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     /**
      * Component did mount
      */
-    public componentDidMount(): void {
-        this.fetchData().then(data => {
+    public async componentDidMount() {
+        try {
+            const data = await this.fetchData();
             this.setState({
                 ...data,
                 isLoading: false,
             });
-        }).catch(error => {
+        } catch (error) {
             this.setState({
                 isLoading: false,
                 error,
             });
-        });
+        }
     }
 
     /**
@@ -70,13 +71,13 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * @param {IProjectInfoProps} param0 Props
      * @param {IProjectInfoState} param1 State
      */
-    public _render({ renderMode, modalOptions, containerClassName, innerClassName, hideChrome }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element {
+    public _render({ chromeTitle, loadingText, renderMode, modalOptions, containerClassName, innerClassName, hideChrome }: IProjectInfoProps, { isLoading }: IProjectInfoState): JSX.Element {
         switch (renderMode) {
             case ProjectInfoRenderMode.Normal: {
                 return (
                     <div className={containerClassName}>
-                        {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"), this.state.elementToToggle, ProjectInfo.displayName, hideChrome)}
-                        {isLoading && <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText")} />}
+                        {this.__renderChrome(chromeTitle, this.state.elementToToggle, ProjectInfo.displayName, hideChrome)}
+                        {isLoading && <Spinner type={SpinnerType.large} label={loadingText} />}
                         {this.renderInner(this.props, this.state)}
                     </div>
                 );
@@ -99,7 +100,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                             </div>
                             {isLoading ?
                                 (
-                                    <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText")} />
+                                    <Spinner type={SpinnerType.large} label={loadingText} />
                                 )
                                 :
                                 this.renderInner(this.props, this.state)}
@@ -157,32 +158,21 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * @param {IProjectInfoProps} param0 Props
      * @param {IProjectInfoState} param1 State
      */
-    private renderProperties({ }: IProjectInfoProps, { properties }: IProjectInfoState): JSX.Element {
+    private renderProperties({ showMissingPropsWarning, missingPropertiesMessage, noPropertiesMessage, labelSize, valueSize }: IProjectInfoProps, { properties }: IProjectInfoState): JSX.Element {
         const propertiesToRender = properties.filter(p => !p.empty);
         const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
-        if (hasMissingProps && this.props.showMissingPropsWarning) {
-            return (
-                <MessageBar messageBarType={MessageBarType.error}>
-                    {RESOURCE_MANAGER.getResource("ProjectInfo_MissingProperties")}
-                </MessageBar>
-            );
+        if (hasMissingProps && showMissingPropsWarning) {
+            return <MessageBar messageBarType={MessageBarType.error}>{missingPropertiesMessage}</MessageBar>;
         }
         if (propertiesToRender.length === 0) {
-            return (
-                <MessageBar>
-                    {RESOURCE_MANAGER.getResource("ProjectInfo_NoProperties")}
-                </MessageBar>
-            );
+            return <MessageBar>{noPropertiesMessage}</MessageBar>;
         }
         return (
             <div>
-                {propertiesToRender.map((d, index) => (
-                    <ProjectProperty
-                        key={index}
-                        model={d}
-                        labelSize={this.props.labelSize}
-                        valueSize={this.props.valueSize} />
-                ))}
+                {propertiesToRender.map((model, key) => {
+                    const props = { key, model, labelSize, valueSize };
+                    return <ProjectProperty {...props} />;
+                })}
             </div>
         );
     }

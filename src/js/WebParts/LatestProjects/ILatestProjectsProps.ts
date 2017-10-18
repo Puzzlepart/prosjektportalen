@@ -2,7 +2,7 @@ import RESOURCE_MANAGER from "../../@localization";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface ILatestProjectsProps extends IBaseWebPartProps {
-    title?: string;
+    chromeTitle?: string;
     itemsCount?: number;
     itemsOrderBy?: { orderBy: string, ascending: boolean };
     reloadInterval?: number;

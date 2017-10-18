@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "../../@localization";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
@@ -6,6 +7,10 @@ import { IModalLinkProps } from "../@Components/ModalLink";
 import ProjectInfoDefaultActionLinks from "./ProjectInfoDefaultActionLinks";
 
 export default interface IProjectInfoProps extends IBaseWebPartProps {
+    chromeTitle?: string;
+    loadingText?: string;
+    missingPropertiesMessage?: string;
+    noPropertiesMessage?: string;
     showActionLinks?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
@@ -32,6 +37,10 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
 }
 
 export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
+    chromeTitle: RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"),
+    missingPropertiesMessage: RESOURCE_MANAGER.getResource("ProjectInfo_MissingProperties"),
+    noPropertiesMessage: RESOURCE_MANAGER.getResource("ProjectInfo_NoProperties"),
+    loadingText: RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText"),
     hideChrome: false,
     showActionLinks: true,
     showMissingPropsWarning: true,
