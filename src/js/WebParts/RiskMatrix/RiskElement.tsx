@@ -8,7 +8,7 @@ export interface IRiskElementProps {
 }
 
 const RiskElement = ({ item: { ID, Title }, style }: IRiskElementProps) => {
-    let dispFormUrl = `../${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
+    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
     return (
         <div
             className={`risk-matrix-element`}

@@ -38,16 +38,6 @@ Param(
 
 . ./SharedFunctions.ps1
 
-function Connect-SharePoint ($Url) {
-    if ($UseWebLogin.IsPresent) {
-        Connect-PnPOnline $Url -UseWebLogin
-    } elseif ($CurrentCredentials.IsPresent) {
-        Connect-PnPOnline $Url -CurrentCredentials
-    } else {
-        Connect-PnPOnline $Url -Credentials $Credential
-    }
-}
-
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
@@ -70,7 +60,13 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
-Connect-SharePoint -Url $Url
+try {
+    Connect-SharePoint -Url $Url
+} catch {
+    Write-Error $Error[0]
+    Write-Error "An error occured connecting to $Url. Aborting."
+    exit 1
+}
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 
 # [version] will be replaced with the actual version by 'gulp release'
