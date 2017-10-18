@@ -14,6 +14,7 @@ export interface IDynamicPortfolioErrorMessage {
 }
 
 export default interface IDynamicPortfolioState extends IBaseWebPartState {
+    isChangingView?: IDynamicPortfolioViewConfig;
     configuration?: IDynamicPortfolioConfiguration;
     items?: any[];
     filteredItems?: any[];
@@ -29,4 +30,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     currentSort?: { fieldName: string, isSortedDescending: boolean };
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
+    canUserManageWeb?: boolean;
 }

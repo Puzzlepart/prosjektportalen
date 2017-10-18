@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import { Site } from "sp-pnp-js";
 import {
     Spinner,
@@ -66,7 +66,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"), this.state.elementToToggle, LatestProjects.displayName)}
+                {this.__renderChrome(this.props.title, this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );

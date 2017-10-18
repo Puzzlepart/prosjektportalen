@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import { Site } from "sp-pnp-js";
 import Masonry from "react-masonry-component";
 import {
@@ -69,7 +69,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         return (
             <div style={{ paddingRight: 40 }}>
                 <SearchBox
-                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")}
+                    labelText={this.props.searchBoxLabelText}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 {this.renderCards(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
