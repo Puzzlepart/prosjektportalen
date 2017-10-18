@@ -39,13 +39,16 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     /**
     * Component did mount
     */
-    public componentDidMount(): void {
-        this.fetchData()
-            .then(data => this.setState({
+    public async componentDidMount() {
+        try {
+            const data = await this.fetchData();
+            this.setState({
                 data,
                 isLoading: false,
-            }))
-            .catch(_ => this.setState({ isLoading: false }));
+            });
+        } catch {
+            this.setState({ isLoading: false });
+        }
     }
 
     /**
@@ -61,9 +64,9 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    public _render({ }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
+    public _render({ loadingText }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
         if (isLoading) {
-            return <Spinner label={RESOURCE_MANAGER.getResource("ProjectList_LoadingText")} type={SpinnerType.large} />;
+            return <Spinner label={loadingText} type={SpinnerType.large} />;
         }
 
         return (
@@ -84,12 +87,12 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    private renderCards({ masonryOptions, tileClassName, tileWidth, tileImageHeight }: IProjectListProps, { }: IProjectListState): JSX.Element {
+    private renderCards({ masonryOptions, tileClassName, tileWidth, tileImageHeight, emptyMessage }: IProjectListProps, { }: IProjectListState): JSX.Element {
         const { projects, fields } = this.getFilteredData(this.props, this.state);
 
         if (projects.length === 0) {
             return (
-                <MessageBar>{RESOURCE_MANAGER.getResource("ProjectList_NoResults")}</MessageBar>
+                <MessageBar>{emptyMessage}</MessageBar>
             );
         }
 

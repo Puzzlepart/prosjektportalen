@@ -10,6 +10,8 @@ export default interface IProjectListProps extends IBaseWebPartProps {
     masonryOptions?: any;
     rowLimit?: number;
     searchBoxLabelText?: string;
+    loadingText?: string;
+    emptyMessage?: string;
 }
 
 export const ProjectListDefaultProps: Partial<IProjectListProps> = {
@@ -24,5 +26,7 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
     },
     rowLimit: 500,
     searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
+    loadingText: RESOURCE_MANAGER.getResource("ProjectList_LoadingText"),
+    emptyMessage: RESOURCE_MANAGER.getResource("ProjectList_NoResults"),
 };
 
