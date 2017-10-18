@@ -64,7 +64,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} param0 Props
      * @param {IProjectListState} param1 State
      */
-    public _render({ loadingText }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
+    public _render({ loadingText, searchBoxLabelText }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
         if (isLoading) {
             return <Spinner label={loadingText} type={SpinnerType.large} />;
         }
@@ -72,7 +72,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         return (
             <div style={{ paddingRight: 40 }}>
                 <SearchBox
-                    labelText={this.props.searchBoxLabelText}
+                    labelText={searchBoxLabelText}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 {this.renderCards(this.props, this.state)}
                 {this.renderProjectInfoModal(this.props, this.state)}
