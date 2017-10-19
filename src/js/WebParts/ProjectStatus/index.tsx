@@ -121,9 +121,9 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
         const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
         const [project, fields, sections, exportType, statusFieldsConfig] = await Promise.all([
-            sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.get(),
-            sitePagesLib.fields.get(),
-            configList.items.orderBy(this.props.sectionConfig.orderBy).get(),
+            sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.usingCaching().get(),
+            sitePagesLib.fields.usingCaching().get(),
+            configList.items.orderBy(this.props.sectionConfig.orderBy).usingCaching().get(),
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
             loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
