@@ -9,7 +9,7 @@ import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
 import ISectionProps from "./ISectionProps";
 
-const TopSection = ({ project, sections }: ISectionProps) => {
+const TopSection = ({ project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl }: ISectionProps) => {
     return (
         <Element
             name="status-section"
@@ -24,8 +24,9 @@ const TopSection = ({ project, sections }: ISectionProps) => {
                             <h2>{RESOURCE_MANAGER.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
                             <ProjectInfo
                                 hideChrome={true}
+                                webUrl={webUrl}
                                 actionLinks={[{
-                                    url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
+                                    url: `${webUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
                                     label: RESOURCE_MANAGER.getResource("ProjectInfo_ViewProperties"),
                                     icon: { iconName: "PreviewLink" },
                                     options: {
