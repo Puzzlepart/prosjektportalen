@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";

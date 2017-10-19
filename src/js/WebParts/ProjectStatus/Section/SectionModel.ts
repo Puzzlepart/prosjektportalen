@@ -1,5 +1,5 @@
 import * as Util from "../../../Util";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import IStatusFieldsConfig, { IStatusProperties } from "../../../Model/Config/IStatusFieldsConfig";
 
 export enum SectionType {

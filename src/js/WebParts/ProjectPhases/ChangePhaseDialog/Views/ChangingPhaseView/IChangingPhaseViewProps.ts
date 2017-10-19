@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../../../@localization";
 import { PhaseModel } from "../../../../../Model";
 
 export default interface IChangingPhaseViewProps {

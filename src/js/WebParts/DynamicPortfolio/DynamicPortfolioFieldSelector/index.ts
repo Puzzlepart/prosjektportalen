@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import { IDynamicPortfolioFilter } from "../DynamicPortfolioFilterPanel";
 
 const DynamicPortfolioFieldSelector: IDynamicPortfolioFilter = {

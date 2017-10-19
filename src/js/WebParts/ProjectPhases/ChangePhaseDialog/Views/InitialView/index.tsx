@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../../../@localization";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";

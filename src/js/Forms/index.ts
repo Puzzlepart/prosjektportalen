@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../@localization";
 import * as Util from "../Util";
 import { IBaseFormModifications } from "./Base";
 import HandleQueryParams from "./HandleQueryParams";

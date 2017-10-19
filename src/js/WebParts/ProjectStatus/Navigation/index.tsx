@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Link } from "react-scroll";
 import ExportReport from "../ExportReport";

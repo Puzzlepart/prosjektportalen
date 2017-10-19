@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import * as pnp from "sp-pnp-js";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";

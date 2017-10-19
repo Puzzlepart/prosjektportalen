@@ -100,6 +100,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * @param {IProjectStatusState} param1 State
      */
     private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
+        console.log(data);
         return (
             data.sections
                 .filter(s => s.showAsSection)

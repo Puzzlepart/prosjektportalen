@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import * as unique from "array-unique";
 import {
     DetailsList,

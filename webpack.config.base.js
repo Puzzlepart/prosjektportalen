@@ -35,7 +35,6 @@ module.exports = (devtool, exclude, env) => ({
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
         alias: {
-            "localization": path.resolve(libBasePath, '@localization/index.js'),
             "model": path.resolve(libBasePath, 'Model/index.js')
         }
     },

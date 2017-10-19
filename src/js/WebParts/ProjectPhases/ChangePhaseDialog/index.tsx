@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import * as React from "react";
 import { sp, Logger, LogLevel } from "sp-pnp-js";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
