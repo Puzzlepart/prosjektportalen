@@ -7,9 +7,9 @@ import {
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
-import ISectionProps from "./ISectionProps";
+import ISummarySectionProps from "./ISummarySectionProps";
 
-const TopSection = ({ project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl }: ISectionProps) => {
+const SummarySection = ({ project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl }: ISummarySectionProps) => {
     return (
         <Element
             name="status-section"
@@ -65,4 +65,4 @@ const TopSection = ({ project, sections, webUrl = _spPageContextInfo.webAbsolute
     );
 };
 
-export default TopSection;
+export default SummarySection;

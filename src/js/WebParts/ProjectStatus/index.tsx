@@ -4,7 +4,7 @@ import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { StickyContainer, Sticky } from "react-sticky";
 import Navigation from "./Navigation";
 import Section from "./Section";
-import TopSection from "./Section/TopSection";
+import SummarySection from "./Section/SummarySection";
 import ProjectStatusData from "./ProjectStatusData";
 import IProjectStatusState from "./IProjectStatusState";
 import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
@@ -83,7 +83,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                                 }
                             }
                         </Sticky>
-                        <TopSection
+                        <SummarySection
                             project={data.project}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections(this.props, this.state)}
