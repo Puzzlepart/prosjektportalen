@@ -113,7 +113,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             case ProvisionStatus.Creating: {
                 return (
                     <CreationModal
-                        title={String.format(RESOURCE_MANAGER.getResource("CreationModal_Title"), this.state.model.Title)}
+                        title={String.format(this.props.creationModalTitle, this.state.model.Title)}
                         isBlocking={true}
                         isDarkOverlay={true}
                         progressLabel={this.state.provisioning.step}

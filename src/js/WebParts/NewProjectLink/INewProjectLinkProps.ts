@@ -11,6 +11,7 @@ export default interface INewProjectLinkProps extends ISecuredWebPartProps {
     };
     dlgHeaderText?: string;
     dlgSubHeaderText?: string;
+    creationModalTitle?: string;
 }
 
 export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
@@ -26,4 +27,5 @@ export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
     permissionKind: PermissionKind.ManageWeb,
     dlgHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_Title"),
     dlgSubHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),
+    creationModalTitle: RESOURCE_MANAGER.getResource("CreationModal_Title"),
 };
