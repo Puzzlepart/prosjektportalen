@@ -1,6 +1,7 @@
+@charset 'UTF-8';
 /* Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information. */
 /**
- * Office UI Fabric Core 7.1.2
+ * Office UI Fabric Core 9.0.0
  * The front-end framework for building experiences for Office 365.
  **/
 /*
@@ -288,85 +289,169 @@
   }
 }
 
-.ms-slideRightIn10 {
+[dir='ltr'] .ms-slideRightIn10 {
   animation-name: ms-fadeIn, ms-slideRightIn10;
   animation-duration: 0.367s;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.ms-slideRightIn20 {
-  animation-name: ms-fadeIn, ms-slideRightIn20;
-  animation-duration: 0.367s;
-  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-  animation-fill-mode: both;
-}
-
-.ms-slideRightIn40 {
-  animation-name: ms-fadeIn, ms-slideRightIn40;
-  animation-duration: 0.367s;
-  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-  animation-fill-mode: both;
-}
-
-.ms-slideRightIn400 {
-  animation-name: ms-fadeIn, ms-slideRightIn400;
-  animation-duration: 0.367s;
-  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
-  animation-fill-mode: both;
-}
-
-.ms-slideRightOut40 {
-  animation-name: ms-fadeOut, ms-slideRightOut40;
-  animation-duration: 0.167s;
-  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
-  animation-fill-mode: both;
-}
-
-.ms-slideRightOut400 {
-  animation-name: ms-fadeOut, ms-slideRightOut400;
-  animation-duration: 0.167s;
-  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
-  animation-fill-mode: both;
-}
-
-.ms-slideLeftIn10 {
+[dir='rtl'] .ms-slideRightIn10 {
   animation-name: ms-fadeIn, ms-slideLeftIn10;
   animation-duration: 0.367s;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.ms-slideLeftIn20 {
+[dir='ltr'] .ms-slideRightIn20 {
+  animation-name: ms-fadeIn, ms-slideRightIn20;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideRightIn20 {
   animation-name: ms-fadeIn, ms-slideLeftIn20;
   animation-duration: 0.367s;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.ms-slideLeftIn40 {
+[dir='ltr'] .ms-slideRightIn40 {
+  animation-name: ms-fadeIn, ms-slideRightIn40;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideRightIn40 {
   animation-name: ms-fadeIn, ms-slideLeftIn40;
   animation-duration: 0.367s;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.ms-slideLeftIn400 {
+[dir='ltr'] .ms-slideRightIn400 {
+  animation-name: ms-fadeIn, ms-slideRightIn400;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideRightIn400 {
   animation-name: ms-fadeIn, ms-slideLeftIn400;
   animation-duration: 0.367s;
   animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
   animation-fill-mode: both;
 }
 
-.ms-slideLeftOut40 {
+[dir='ltr'] .ms-slideRightOut40 {
+  animation-name: ms-fadeOut, ms-slideRightOut40;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideRightOut40 {
   animation-name: ms-fadeOut, ms-slideLeftOut40;
   animation-duration: 0.167s;
   animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
   animation-fill-mode: both;
 }
 
-.ms-slideLeftOut400 {
+[dir='ltr'] .ms-slideRightOut400 {
+  animation-name: ms-fadeOut, ms-slideRightOut400;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideRightOut400 {
   animation-name: ms-fadeOut, ms-slideLeftOut400;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftIn10 {
+  animation-name: ms-fadeIn, ms-slideLeftIn10;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftIn10 {
+  animation-name: ms-fadeIn, ms-slideRightIn10;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftIn20 {
+  animation-name: ms-fadeIn, ms-slideLeftIn20;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftIn20 {
+  animation-name: ms-fadeIn, ms-slideRightIn20;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftIn40 {
+  animation-name: ms-fadeIn, ms-slideLeftIn40;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftIn40 {
+  animation-name: ms-fadeIn, ms-slideRightIn40;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftIn400 {
+  animation-name: ms-fadeIn, ms-slideLeftIn400;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftIn400 {
+  animation-name: ms-fadeIn, ms-slideRightIn400;
+  animation-duration: 0.367s;
+  animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftOut40 {
+  animation-name: ms-fadeOut, ms-slideLeftOut40;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftOut40 {
+  animation-name: ms-fadeOut, ms-slideRightOut40;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-slideLeftOut400 {
+  animation-name: ms-fadeOut, ms-slideLeftOut400;
+  animation-duration: 0.167s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-slideLeftOut400 {
+  animation-name: ms-fadeOut, ms-slideRightOut400;
   animation-duration: 0.167s;
   animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
   animation-fill-mode: both;
@@ -524,15 +609,29 @@
   animation-delay: 0.267s;
 }
 
-.ms-rotate90deg {
+[dir='ltr'] .ms-rotate90deg {
   animation-name: ms-rotate90;
   animation-duration: 0.1s;
   animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
   animation-fill-mode: both;
 }
 
-.ms-rotateN90deg {
+[dir='rtl'] .ms-rotate90deg {
   animation-name: ms-rotateN90;
+  animation-duration: 0.1s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='ltr'] .ms-rotateN90deg {
+  animation-name: ms-rotateN90;
+  animation-duration: 0.1s;
+  animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
+  animation-fill-mode: both;
+}
+
+[dir='rtl'] .ms-rotateN90deg {
+  animation-name: ms-rotate90;
   animation-duration: 0.1s;
   animation-timing-function: cubic-bezier(0.1, 0.25, 0.75, 0.9);
   animation-fill-mode: both;
@@ -2264,12 +2363,12 @@
 
 .ms-bgColor-themeSecondary,
 .ms-bgColor-themeSecondary--hover:hover {
-  background-color: #2488d8;
+  background-color: #2b88d8;
 }
 
 .ms-bgColor-themeTertiary,
 .ms-bgColor-themeTertiary--hover:hover {
-  background-color: #69afe5;
+  background-color: #71afe5;
 }
 
 .ms-bgColor-themeLight,
@@ -2481,12 +2580,12 @@
 
 .ms-borderColor-themeSecondary,
 .ms-borderColor-themeSecondary--hover:hover {
-  border-color: #2488d8;
+  border-color: #2b88d8;
 }
 
 .ms-borderColor-themeTertiary,
 .ms-borderColor-themeTertiary--hover:hover {
-  border-color: #69afe5;
+  border-color: #71afe5;
 }
 
 .ms-borderColor-themeLight,
@@ -2654,11 +2753,6 @@
 
 .ms-borderColor-greenLight {
   border-color: #bad80a;
-}
-
-.ms-borderColorTop-themePrimary,
-.ms-borderColorTop-themePrimary--hover:hover {
-  border-top-color: #0078d7;
 }
 
 @font-face {
@@ -2982,23 +3076,19 @@
   font-weight: 600;
 }
 
-.ms-fontWeight-light,
-.ms-fontWeight-light--hover:hover {
+.ms-fontWeight-light {
   font-weight: 100;
 }
 
-.ms-fontWeight-semilight,
-.ms-fontWeight-semilight--hover:hover {
+.ms-fontWeight-semilight {
   font-weight: 300;
 }
 
-.ms-fontWeight-regular,
-.ms-fontWeight-regular--hover:hover {
+.ms-fontWeight-regular {
   font-weight: 400;
 }
 
-.ms-fontWeight-semibold,
-.ms-fontWeight-semibold--hover:hover {
+.ms-fontWeight-semibold {
   font-weight: 600;
 }
 
@@ -3068,12 +3158,12 @@
 
 .ms-fontColor-themeSecondary,
 .ms-fontColor-themeSecondary--hover:hover {
-  color: #2488d8;
+  color: #2b88d8;
 }
 
 .ms-fontColor-themeTertiary,
 .ms-fontColor-themeTertiary--hover:hover {
-  color: #69afe5;
+  color: #71afe5;
 }
 
 .ms-fontColor-themeLight,
@@ -3336,7 +3426,14 @@
   padding-left: 8px;
   padding-right: 8px;
   box-sizing: border-box;
+}
+
+[dir='ltr'] .ms-Grid-col {
   float: left;
+}
+
+[dir='rtl'] .ms-Grid-col {
+  float: right;
 }
 
 .ms-Grid-col .ms-Grid {
@@ -3348,7 +3445,7 @@
 */
 @font-face {
   font-family: 'FabricMDL2Icons';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.30.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.30.woff') format('woff'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.30.ttf') format('truetype');
+  src: url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.51.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.51.woff') format('woff'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.51.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -3362,14 +3459,18 @@
 }
 
 .ms-Icon--circle {
+  margin: 0 0.5em 0 0;
   position: relative;
   display: inline-block;
   font-size: 1rem;
   width: 1em;
   height: 1em;
-  margin: 0 0.5em 0 0;
   padding: 0;
   text-align: left;
+}
+
+[dir='rtl'] .ms-Icon--circle {
+  margin: 0 0 0 0.5em;
 }
 
 .ms-Icon--circle::before,
@@ -3417,4471 +3518,5439 @@
 }
 
 .ms-Icon--AADLogo::before {
-  content: '\ED68';
+  content: '';
 }
 
 .ms-Icon--Accept::before {
-  content: '\E8FB';
+  content: '';
 }
 
 .ms-Icon--AccessLogo::before {
-  content: '\ED69';
+  content: '';
 }
 
 .ms-Icon--AccessLogoFill::before {
-  content: '\F1DB';
+  content: '';
 }
 
 .ms-Icon--Accounts::before {
-  content: '\E910';
+  content: '';
 }
 
 .ms-Icon--ActivityFeed::before {
-  content: '\F056';
+  content: '';
 }
 
 .ms-Icon--Add::before {
-  content: '\E710';
+  content: '';
 }
 
 .ms-Icon--AddEvent::before {
-  content: '\EEB5';
+  content: '';
 }
 
 .ms-Icon--AddFavorite::before {
-  content: '\F0C8';
+  content: '';
 }
 
 .ms-Icon--AddFavoriteFill::before {
-  content: '\F0C9';
+  content: '';
 }
 
 .ms-Icon--AddFriend::before {
-  content: '\E8FA';
+  content: '';
 }
 
 .ms-Icon--AddGroup::before {
-  content: '\EE3D';
+  content: '';
 }
 
 .ms-Icon--AddOnlineMeeting::before {
-  content: '\ED8E';
+  content: '';
 }
 
 .ms-Icon--AddPhone::before {
-  content: '\ED96';
+  content: '';
 }
 
 .ms-Icon--AddTo::before {
-  content: '\ECC8';
+  content: '';
 }
 
 .ms-Icon--Admin::before {
-  content: '\E7EF';
+  content: '';
 }
 
-.ms-Icon--AdminALogo::before {
-  content: '\ED6A';
+.ms-Icon--AdminALogo32::before {
+  content: '';
 }
 
-.ms-Icon--AdminCLogo::before {
-  content: '\ED6B';
+.ms-Icon--AdminALogoFill32::before {
+  content: '';
 }
 
-.ms-Icon--AdminDLogo::before {
-  content: '\ED6C';
+.ms-Icon--AdminALogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminELogo::before {
-  content: '\ED6D';
+.ms-Icon--AdminCLogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminLLogo::before {
-  content: '\ED6E';
+.ms-Icon--AdminDLogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminMLogo::before {
-  content: '\ED6F';
+.ms-Icon--AdminELogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminOLogo::before {
-  content: '\ED70';
+.ms-Icon--AdminLLogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminPLogo::before {
-  content: '\ED71';
+.ms-Icon--AdminMLogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminSLogo::before {
-  content: '\ED72';
+.ms-Icon--AdminOLogoInverse32::before {
+  content: '';
 }
 
-.ms-Icon--AdminYLogo::before {
-  content: '\ED73';
+.ms-Icon--AdminPLogoInverse32::before {
+  content: '';
+}
+
+.ms-Icon--AdminSLogoInverse32::before {
+  content: '';
+}
+
+.ms-Icon--AdminYLogoInverse32::before {
+  content: '';
 }
 
 .ms-Icon--Airplane::before {
-  content: '\E709';
+  content: '';
 }
 
 .ms-Icon--AirplaneSolid::before {
-  content: '\EB4C';
+  content: '';
 }
 
 .ms-Icon--AirTickets::before {
-  content: '\EF7A';
+  content: '';
 }
 
 .ms-Icon--AlarmClock::before {
-  content: '\E919';
+  content: '';
 }
 
 .ms-Icon--Album::before {
-  content: '\E7AB';
+  content: '';
 }
 
 .ms-Icon--AlbumRemove::before {
-  content: '\EC62';
+  content: '';
 }
 
 .ms-Icon--AlertSolid::before {
-  content: '\F331';
+  content: '';
 }
 
 .ms-Icon--AlignCenter::before {
-  content: '\E8E3';
+  content: '';
 }
 
 .ms-Icon--AlignLeft::before {
-  content: '\E8E4';
+  content: '';
 }
 
 .ms-Icon--AlignRight::before {
-  content: '\E8E2';
+  content: '';
 }
 
 .ms-Icon--AnalyticsLogo::before {
-  content: '\F1DE';
+  content: '';
 }
 
 .ms-Icon--AnalyticsQuery::before {
-  content: '\F1DF';
+  content: '';
 }
 
 .ms-Icon--AnalyticsReport::before {
-  content: '\F1E1';
-}
-
-.ms-Icon--AndroidLogo::before {
-  content: '\EF8B';
+  content: '';
 }
 
 .ms-Icon--Annotation::before {
-  content: '\E924';
+  content: '';
 }
 
 .ms-Icon--AppIconDefault::before {
-  content: '\ECAA';
+  content: '';
 }
 
 .ms-Icon--Archive::before {
-  content: '\F03F';
+  content: '';
 }
 
 .ms-Icon--AreaChart::before {
-  content: '\E9D2';
+  content: '';
 }
 
 .ms-Icon--Arrivals::before {
-  content: '\EB34';
+  content: '';
 }
 
-.ms-Icon--ArrowDownRight8::before {
-  content: '\EED5';
+[dir='ltr'] .ms-Icon--ArrowDownRight8::before {
+  content: '';
 }
 
-.ms-Icon--ArrowDownRightMirrored8::before {
-  content: '\EEF0';
+[dir='rtl'] .ms-Icon--ArrowDownRight8::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ArrowDownRightMirrored8::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ArrowDownRightMirrored8::before {
+  content: '';
 }
 
 .ms-Icon--ArrowTallDownLeft::before {
-  content: '\F2BF';
+  content: '';
 }
 
 .ms-Icon--ArrowTallDownRight::before {
-  content: '\F2C0';
+  content: '';
 }
 
 .ms-Icon--ArrowTallUpLeft::before {
-  content: '\F2BD';
+  content: '';
 }
 
 .ms-Icon--ArrowTallUpRight::before {
-  content: '\F2BE';
+  content: '';
 }
 
-.ms-Icon--ArrowUpRight8::before {
-  content: '\EED4';
+[dir='ltr'] .ms-Icon--ArrowUpRight8::before {
+  content: '';
 }
 
-.ms-Icon--ArrowUpRightMirrored8::before {
-  content: '\EEEF';
+[dir='rtl'] .ms-Icon--ArrowUpRight8::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ArrowUpRightMirrored8::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ArrowUpRightMirrored8::before {
+  content: '';
 }
 
 .ms-Icon--Articles::before {
-  content: '\EAC1';
+  content: '';
 }
 
 .ms-Icon--Ascending::before {
-  content: '\EDC0';
+  content: '';
+}
+
+.ms-Icon--AspectRatio::before {
+  content: '';
 }
 
 .ms-Icon--AssessmentGroup::before {
-  content: '\F31A';
+  content: '';
 }
 
 .ms-Icon--AssessmentGroupTemplate::before {
-  content: '\F2B1';
+  content: '';
 }
 
 .ms-Icon--AssetLibrary::before {
-  content: '\EEB6';
+  content: '';
 }
 
 .ms-Icon--Assign::before {
-  content: '\E9D3';
+  content: '';
 }
 
 .ms-Icon--Asterisk::before {
-  content: '\EA38';
+  content: '';
 }
 
 .ms-Icon--AsteriskSolid::before {
-  content: '\F34D';
+  content: '';
 }
 
 .ms-Icon--ATPLogo::before {
-  content: '\EF85';
+  content: '';
 }
 
 .ms-Icon--Attach::before {
-  content: '\E723';
+  content: '';
 }
 
 .ms-Icon--AustralianRules::before {
-  content: '\EE70';
+  content: '';
 }
 
 .ms-Icon--AutoEnhanceOff::before {
-  content: '\E78E';
+  content: '';
 }
 
 .ms-Icon--AutoEnhanceOn::before {
-  content: '\E78D';
+  content: '';
 }
 
 .ms-Icon--AutoFillTemplate::before {
-  content: '\F313';
+  content: '';
 }
 
 .ms-Icon--AutoRacing::before {
-  content: '\EB24';
+  content: '';
 }
 
 .ms-Icon--AwayStatus::before {
-  content: '\EE6A';
+  content: '';
 }
 
 .ms-Icon--AzureAPIManagement::before {
-  content: '\F37F';
+  content: '';
 }
 
 .ms-Icon--AzureKeyVault::before {
-  content: '\F3B4';
+  content: '';
 }
 
 .ms-Icon--AzureLogo::before {
-  content: '\EB6A';
+  content: '';
 }
 
 .ms-Icon--AzureServiceEndpoint::before {
-  content: '\F380';
+  content: '';
 }
 
 .ms-Icon--Back::before {
-  content: '\E72B';
+  content: '';
+}
+
+.ms-Icon--BackgroundColor::before {
+  content: '';
 }
 
 .ms-Icon--Backlog::before {
-  content: '\F2AC';
+  content: '';
+}
+
+.ms-Icon--BacklogBoard::before {
+  content: '';
 }
 
 .ms-Icon--BackToWindow::before {
-  content: '\E73F';
+  content: '';
 }
 
 .ms-Icon--Badge::before {
-  content: '\EC1B';
+  content: '';
 }
 
 .ms-Icon--Balloons::before {
-  content: '\ED7E';
+  content: '';
 }
 
 .ms-Icon--BankSolid::before {
-  content: '\F34F';
+  content: '';
 }
 
 .ms-Icon--BarChart4::before {
-  content: '\EAE7';
+  content: '';
 }
 
 .ms-Icon--BarChartHorizontal::before {
-  content: '\E9EB';
+  content: '';
 }
 
 .ms-Icon--BarChartVertical::before {
-  content: '\E9EC';
+  content: '';
 }
 
 .ms-Icon--Baseball::before {
-  content: '\EB20';
+  content: '';
+}
+
+.ms-Icon--BeerMug::before {
+  content: '';
 }
 
 .ms-Icon--BidiLtr::before {
-  content: '\E9AA';
+  content: '';
 }
 
 .ms-Icon--BidiRtl::before {
-  content: '\E9AB';
+  content: '';
 }
 
 .ms-Icon--BingLogo::before {
-  content: '\EB6B';
+  content: '';
 }
 
 .ms-Icon--BlockContact::before {
-  content: '\E8F8';
+  content: '';
 }
 
 .ms-Icon--Blocked::before {
-  content: '\E733';
+  content: '';
 }
 
 .ms-Icon--Blocked2::before {
-  content: '\ECE4';
+  content: '';
 }
 
 .ms-Icon--BlowingSnow::before {
-  content: '\E9C9';
+  content: '';
 }
 
 .ms-Icon--Blur::before {
-  content: '\F28E';
+  content: '';
 }
 
 .ms-Icon--Boards::before {
-  content: '\EF68';
+  content: '';
 }
 
 .ms-Icon--Bold::before {
-  content: '\E8DD';
+  content: '';
 }
 
 .ms-Icon--BookingsLogo::before {
-  content: '\EDC7';
+  content: '';
 }
 
-.ms-Icon--Bookmarks::before {
-  content: '\E8A4';
+[dir='ltr'] .ms-Icon--Bookmarks::before {
+  content: '';
 }
 
-.ms-Icon--BookmarksMirrored::before {
-  content: '\EA41';
+[dir='rtl'] .ms-Icon--Bookmarks::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--BookmarksMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--BookmarksMirrored::before {
+  content: '';
 }
 
 .ms-Icon--BoxAdditionSolid::before {
-  content: '\F2D4';
+  content: '';
 }
 
 .ms-Icon--BoxCheckmarkSolid::before {
-  content: '\F2D7';
-}
-
-.ms-Icon--BoxLogo::before {
-  content: '\ED75';
+  content: '';
 }
 
 .ms-Icon--BoxMultiplySolid::before {
-  content: '\F2D5';
+  content: '';
 }
 
 .ms-Icon--BoxPlaySolid::before {
-  content: '\F2D6';
+  content: '';
 }
 
 .ms-Icon--BoxSubtractSolid::before {
-  content: '\F2D3';
+  content: '';
 }
 
 .ms-Icon--BranchCommit::before {
-  content: '\F293';
+  content: '';
 }
 
 .ms-Icon--BranchCompare::before {
-  content: '\F294';
+  content: '';
 }
 
 .ms-Icon--BranchFork::before {
-  content: '\F173';
+  content: '';
 }
 
 .ms-Icon--BranchFork2::before {
-  content: '\F291';
+  content: '';
 }
 
 .ms-Icon--BranchLocked::before {
-  content: '\F292';
+  content: '';
 }
 
 .ms-Icon--BranchMerge::before {
-  content: '\F295';
+  content: '';
 }
 
 .ms-Icon--BranchPullRequest::before {
-  content: '\F296';
+  content: '';
 }
 
 .ms-Icon--BranchSearch::before {
-  content: '\F297';
+  content: '';
 }
 
 .ms-Icon--BranchShelveset::before {
-  content: '\F298';
+  content: '';
 }
 
 .ms-Icon--Breadcrumb::before {
-  content: '\EF8C';
+  content: '';
+}
+
+.ms-Icon--Breakfast::before {
+  content: '';
 }
 
 .ms-Icon--Brightness::before {
-  content: '\E706';
+  content: '';
 }
 
 .ms-Icon--Broom::before {
-  content: '\EA99';
+  content: '';
+}
+
+.ms-Icon--Brunch::before {
+  content: '';
 }
 
 .ms-Icon--BucketColor::before {
-  content: '\F1B6';
+  content: '';
 }
 
 .ms-Icon--BucketColorFill::before {
-  content: '\F1B7';
+  content: '';
 }
 
 .ms-Icon--BufferTimeAfter::before {
-  content: '\F0D0';
+  content: '';
 }
 
 .ms-Icon--BufferTimeBefore::before {
-  content: '\F0CF';
+  content: '';
 }
 
 .ms-Icon--BufferTimeBoth::before {
-  content: '\F0D1';
+  content: '';
 }
 
 .ms-Icon--BugSolid::before {
-  content: '\F335';
+  content: '';
 }
 
 .ms-Icon--Build::before {
-  content: '\F28F';
+  content: '';
 }
 
 .ms-Icon--BuildIssue::before {
-  content: '\F319';
+  content: '';
 }
 
 .ms-Icon--BuildQueue::before {
-  content: '\F24F';
+  content: '';
 }
 
 .ms-Icon--BuildQueueNew::before {
-  content: '\F250';
+  content: '';
 }
 
-.ms-Icon--BulletedList::before {
-  content: '\E8FD';
+[dir='ltr'] .ms-Icon--BulletedList2::before {
+  content: '';
 }
 
-.ms-Icon--BulletedList2::before {
-  content: '\F2C7';
+[dir='rtl'] .ms-Icon--BulletedList2::before {
+  content: '';
 }
 
-.ms-Icon--BulletedList2Mirrored::before {
-  content: '\F2C8';
+[dir='ltr'] .ms-Icon--BulletedList2Mirrored::before {
+  content: '';
 }
 
-.ms-Icon--BulletedListMirrored::before {
-  content: '\EA42';
+[dir='rtl'] .ms-Icon--BulletedList2Mirrored::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--BulletedList::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--BulletedList::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--BulletedListMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--BulletedListMirrored::before {
+  content: '';
+}
+
+.ms-Icon--Bus::before {
+  content: '';
+}
+
+.ms-Icon--BusinessCenterLogo::before {
+  content: '';
 }
 
 .ms-Icon--BusinessHoursSign::before {
-  content: '\F310';
+  content: '';
 }
 
 .ms-Icon--BusSolid::before {
-  content: '\EB47';
+  content: '';
 }
 
 .ms-Icon--Cafe::before {
-  content: '\EC32';
+  content: '';
 }
 
 .ms-Icon--Cake::before {
-  content: '\ECA4';
+  content: '';
 }
 
 .ms-Icon--CalculatorAddition::before {
-  content: '\E948';
+  content: '';
 }
 
 .ms-Icon--CalculatorEqualTo::before {
-  content: '\E94E';
+  content: '';
 }
 
 .ms-Icon--CalculatorMultiply::before {
-  content: '\E947';
+  content: '';
 }
 
 .ms-Icon--CalculatorNotEqualTo::before {
-  content: '\F2D2';
+  content: '';
 }
 
 .ms-Icon--CalculatorSubtract::before {
-  content: '\E949';
-}
-
-.ms-Icon--Calendar::before {
-  content: '\E787';
+  content: '';
 }
 
 .ms-Icon--CalendarAgenda::before {
-  content: '\EE9A';
+  content: '';
 }
 
 .ms-Icon--CalendarDay::before {
-  content: '\E8BF';
+  content: '';
 }
 
-.ms-Icon--CalendarMirrored::before {
-  content: '\ED28';
+[dir='ltr'] .ms-Icon--Calendar::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Calendar::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--CalendarMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--CalendarMirrored::before {
+  content: '';
 }
 
 .ms-Icon--CalendarReply::before {
-  content: '\E8F5';
+  content: '';
 }
 
 .ms-Icon--CalendarWeek::before {
-  content: '\E8C0';
+  content: '';
 }
 
 .ms-Icon--CalendarWorkWeek::before {
-  content: '\EF51';
+  content: '';
 }
 
 .ms-Icon--CaloriesAdd::before {
-  content: '\F172';
+  content: '';
 }
 
 .ms-Icon--Camera::before {
-  content: '\E722';
+  content: '';
 }
 
 .ms-Icon--Cancel::before {
-  content: '\E711';
+  content: '';
 }
 
 .ms-Icon--CannedChat::before {
-  content: '\F0F2';
+  content: '';
 }
 
 .ms-Icon--Car::before {
-  content: '\E804';
+  content: '';
 }
 
 .ms-Icon--CaretBottomLeftCenter8::before {
-  content: '\F365';
+  content: '';
 }
 
 .ms-Icon--CaretBottomLeftSolid8::before {
-  content: '\F121';
+  content: '';
 }
 
 .ms-Icon--CaretBottomRightCenter8::before {
-  content: '\F364';
+  content: '';
 }
 
 .ms-Icon--CaretBottomRightSolid8::before {
-  content: '\F122';
+  content: '';
 }
 
 .ms-Icon--CaretDown8::before {
-  content: '\EDD8';
+  content: '';
 }
 
 .ms-Icon--CaretDownSolid8::before {
-  content: '\EDDC';
+  content: '';
 }
 
-.ms-Icon--CaretHollow::before {
-  content: '\E817';
+[dir='ltr'] .ms-Icon--CaretHollow::before {
+  content: '';
 }
 
-.ms-Icon--CaretHollowMirrored::before {
-  content: '\EA45';
+[dir='rtl'] .ms-Icon--CaretHollow::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--CaretHollowMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--CaretHollowMirrored::before {
+  content: '';
 }
 
 .ms-Icon--CaretLeft8::before {
-  content: '\EDD5';
+  content: '';
 }
 
 .ms-Icon--CaretLeftSolid8::before {
-  content: '\EDD9';
+  content: '';
 }
 
 .ms-Icon--CaretRight::before {
-  content: '\F06B';
+  content: '';
 }
 
 .ms-Icon--CaretRight8::before {
-  content: '\EDD6';
+  content: '';
 }
 
 .ms-Icon--CaretRightSolid8::before {
-  content: '\EDDA';
-}
-
-.ms-Icon--CaretSolid::before {
-  content: '\E818';
+  content: '';
 }
 
 .ms-Icon--CaretSolid16::before {
-  content: '\EE62';
+  content: '';
 }
 
 .ms-Icon--CaretSolidDown::before {
-  content: '\F08E';
+  content: '';
 }
 
 .ms-Icon--CaretSolidLeft::before {
-  content: '\F08D';
+  content: '';
 }
 
-.ms-Icon--CaretSolidMirrored::before {
-  content: '\EA46';
+[dir='ltr'] .ms-Icon--CaretSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--CaretSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--CaretSolidMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--CaretSolidMirrored::before {
+  content: '';
 }
 
 .ms-Icon--CaretSolidRight::before {
-  content: '\F08F';
+  content: '';
 }
 
 .ms-Icon--CaretSolidUp::before {
-  content: '\F090';
+  content: '';
 }
 
 .ms-Icon--CaretTopLeftCenter8::before {
-  content: '\F367';
+  content: '';
 }
 
 .ms-Icon--CaretTopLeftSolid8::before {
-  content: '\EF54';
+  content: '';
 }
 
 .ms-Icon--CaretTopRightCenter8::before {
-  content: '\F366';
+  content: '';
 }
 
 .ms-Icon--CaretTopRightSolid8::before {
-  content: '\EF55';
+  content: '';
 }
 
 .ms-Icon--CaretUp8::before {
-  content: '\EDD7';
+  content: '';
 }
 
 .ms-Icon--CaretUpSolid8::before {
-  content: '\EDDB';
+  content: '';
 }
 
 .ms-Icon--Cat::before {
-  content: '\ED7F';
+  content: '';
 }
 
 .ms-Icon--CellPhone::before {
-  content: '\E8EA';
+  content: '';
 }
 
 .ms-Icon--Certificate::before {
-  content: '\EB95';
+  content: '';
 }
 
 .ms-Icon--Chart::before {
-  content: '\E999';
+  content: '';
 }
 
 .ms-Icon--Chat::before {
-  content: '\E901';
+  content: '';
 }
 
 .ms-Icon--ChatInviteFriend::before {
-  content: '\ECFE';
+  content: '';
 }
 
 .ms-Icon--ChatSolid::before {
-  content: '\F344';
+  content: '';
 }
 
 .ms-Icon--Checkbox::before {
-  content: '\E739';
+  content: '';
 }
 
 .ms-Icon--CheckboxComposite::before {
-  content: '\E73A';
+  content: '';
 }
 
 .ms-Icon--CheckboxCompositeReversed::before {
-  content: '\E73D';
+  content: '';
 }
 
 .ms-Icon--CheckboxIndeterminate::before {
-  content: '\E73C';
+  content: '';
 }
 
 .ms-Icon--CheckList::before {
-  content: '\E9D5';
+  content: '';
 }
 
 .ms-Icon--CheckMark::before {
-  content: '\E73E';
+  content: '';
 }
 
 .ms-Icon--ChevronDown::before {
-  content: '\E70D';
+  content: '';
 }
 
 .ms-Icon--ChevronDownEnd6::before {
-  content: '\F36F';
+  content: '';
 }
 
 .ms-Icon--ChevronDownMed::before {
-  content: '\E972';
+  content: '';
 }
 
 .ms-Icon--ChevronDownSmall::before {
-  content: '\E96E';
+  content: '';
 }
 
 .ms-Icon--ChevronFold10::before {
-  content: '\F36A';
+  content: '';
 }
 
 .ms-Icon--ChevronLeft::before {
-  content: '\E76B';
+  content: '';
 }
 
 .ms-Icon--ChevronLeftEnd6::before {
-  content: '\F371';
+  content: '';
 }
 
 .ms-Icon--ChevronLeftMed::before {
-  content: '\E973';
+  content: '';
 }
 
 .ms-Icon--ChevronLeftSmall::before {
-  content: '\E96F';
+  content: '';
 }
 
 .ms-Icon--ChevronRight::before {
-  content: '\E76C';
+  content: '';
 }
 
 .ms-Icon--ChevronRightEnd6::before {
-  content: '\F372';
+  content: '';
 }
 
 .ms-Icon--ChevronRightMed::before {
-  content: '\E974';
+  content: '';
 }
 
 .ms-Icon--ChevronRightSmall::before {
-  content: '\E970';
+  content: '';
 }
 
 .ms-Icon--ChevronUnfold10::before {
-  content: '\F369';
+  content: '';
 }
 
 .ms-Icon--ChevronUp::before {
-  content: '\E70E';
+  content: '';
 }
 
 .ms-Icon--ChevronUpEnd6::before {
-  content: '\F370';
+  content: '';
 }
 
 .ms-Icon--ChevronUpMed::before {
-  content: '\E971';
+  content: '';
 }
 
 .ms-Icon--ChevronUpSmall::before {
-  content: '\E96D';
+  content: '';
 }
 
-.ms-Icon--ChromeBack::before {
-  content: '\E830';
+.ms-Icon--Chopsticks::before {
+  content: '';
 }
 
-.ms-Icon--ChromeBackMirrored::before {
-  content: '\EA47';
+[dir='ltr'] .ms-Icon--ChromeBack::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ChromeBack::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ChromeBackMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ChromeBackMirrored::before {
+  content: '';
 }
 
 .ms-Icon--ChromeClose::before {
-  content: '\E8BB';
+  content: '';
 }
 
 .ms-Icon--ChromeMinimize::before {
-  content: '\E921';
+  content: '';
 }
 
 .ms-Icon--CircleAddition::before {
-  content: '\F2E3';
+  content: '';
 }
 
 .ms-Icon--CircleAdditionSolid::before {
-  content: '\F2E4';
+  content: '';
 }
 
 .ms-Icon--CircleFill::before {
-  content: '\EA3B';
+  content: '';
 }
 
 .ms-Icon--CircleHalfFull::before {
-  content: '\ED9E';
+  content: '';
 }
 
 .ms-Icon--CirclePause::before {
-  content: '\F2D9';
+  content: '';
 }
 
 .ms-Icon--CirclePauseSolid::before {
-  content: '\F2D8';
+  content: '';
 }
 
 .ms-Icon--CirclePlus::before {
-  content: '\EAEE';
+  content: '';
 }
 
 .ms-Icon--CircleRing::before {
-  content: '\EA3A';
+  content: '';
 }
 
 .ms-Icon--CircleStop::before {
-  content: '\F2DC';
+  content: '';
 }
 
 .ms-Icon--CircleStopSolid::before {
-  content: '\F2DB';
+  content: '';
 }
 
 .ms-Icon--CityNext::before {
-  content: '\EC06';
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogo16::before {
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogo32::before {
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogoFill16::before {
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogoFill32::before {
+  content: '';
 }
 
 .ms-Icon--ClassNotebookLogoInverse::before {
-  content: '\EDC8';
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogoInverse16::before {
+  content: '';
+}
+
+.ms-Icon--ClassNotebookLogoInverse32::before {
+  content: '';
 }
 
 .ms-Icon--ClassroomLogo::before {
-  content: '\EF75';
+  content: '';
 }
 
 .ms-Icon--Clear::before {
-  content: '\E894';
+  content: '';
 }
 
 .ms-Icon--ClearFilter::before {
-  content: '\EF8F';
+  content: '';
 }
 
 .ms-Icon--ClearFormatting::before {
-  content: '\EDDD';
+  content: '';
 }
 
 .ms-Icon--ClearNight::before {
-  content: '\E9C2';
+  content: '';
 }
 
 .ms-Icon--Clock::before {
-  content: '\E917';
+  content: '';
 }
 
 .ms-Icon--CloneToDesktop::before {
-  content: '\F28C';
+  content: '';
 }
 
 .ms-Icon--ClosedCaption::before {
-  content: '\EF84';
+  content: '';
 }
 
-.ms-Icon--ClosePane::before {
-  content: '\E89F';
+[dir='ltr'] .ms-Icon--ClosePane::before {
+  content: '';
 }
 
-.ms-Icon--ClosePaneMirrored::before {
-  content: '\EA49';
+[dir='rtl'] .ms-Icon--ClosePane::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ClosePaneMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ClosePaneMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Cloud::before {
-  content: '\E753';
+  content: '';
 }
 
 .ms-Icon--CloudAdd::before {
-  content: '\ECA9';
+  content: '';
 }
 
 .ms-Icon--CloudDownload::before {
-  content: '\EBD3';
+  content: '';
 }
 
 .ms-Icon--CloudUpload::before {
-  content: '\EC8E';
+  content: '';
 }
 
 .ms-Icon--CloudWeather::before {
-  content: '\E9BE';
+  content: '';
 }
 
 .ms-Icon--Cloudy::before {
-  content: '\E9BF';
+  content: '';
 }
 
 .ms-Icon--Cocktails::before {
-  content: '\EA9D';
+  content: '';
 }
 
 .ms-Icon--Code::before {
-  content: '\E943';
+  content: '';
 }
 
 .ms-Icon--Coffee::before {
-  content: '\EAEF';
+  content: '';
 }
 
 .ms-Icon--CoffeeScript::before {
-  content: '\F2FA';
+  content: '';
 }
 
 .ms-Icon--CollapseContent::before {
-  content: '\F165';
+  content: '';
 }
 
 .ms-Icon--CollapseContentSingle::before {
-  content: '\F166';
+  content: '';
 }
 
 .ms-Icon--CollapseMenu::before {
-  content: '\EF66';
+  content: '';
 }
 
 .ms-Icon--CollegeFootball::before {
-  content: '\EB26';
+  content: '';
 }
 
 .ms-Icon--CollegeHoops::before {
-  content: '\EB25';
+  content: '';
 }
 
 .ms-Icon--Color::before {
-  content: '\E790';
+  content: '';
 }
 
 .ms-Icon--ColorSolid::before {
-  content: '\F354';
+  content: '';
 }
 
 .ms-Icon--ColumnLeftTwoThirds::before {
-  content: '\F1D6';
+  content: '';
 }
 
 .ms-Icon--ColumnLeftTwoThirdsEdit::before {
-  content: '\F324';
+  content: '';
 }
 
 .ms-Icon--ColumnOptions::before {
-  content: '\F317';
+  content: '';
 }
 
 .ms-Icon--ColumnRightTwoThirds::before {
-  content: '\F1D7';
+  content: '';
 }
 
 .ms-Icon--ColumnRightTwoThirdsEdit::before {
-  content: '\F325';
+  content: '';
 }
 
 .ms-Icon--Combine::before {
-  content: '\EDBB';
+  content: '';
 }
 
 .ms-Icon--CommandPrompt::before {
-  content: '\E756';
+  content: '';
 }
 
 .ms-Icon--Comment::before {
-  content: '\E90A';
+  content: '';
 }
 
 .ms-Icon--CommentAdd::before {
-  content: '\F2B3';
+  content: '';
 }
 
 .ms-Icon--CommentNext::before {
-  content: '\F2B4';
+  content: '';
 }
 
 .ms-Icon--CommentPrevious::before {
-  content: '\F2B5';
+  content: '';
 }
 
 .ms-Icon--CommentUrgent::before {
-  content: '\F307';
+  content: '';
 }
 
 .ms-Icon--Communications::before {
-  content: '\E95A';
+  content: '';
 }
 
 .ms-Icon--CompassNW::before {
-  content: '\E942';
+  content: '';
 }
 
 .ms-Icon--Completed::before {
-  content: '\E930';
+  content: '';
 }
 
 .ms-Icon--CompletedSolid::before {
-  content: '\EC61';
+  content: '';
 }
 
 .ms-Icon--ConfigurationSolid::before {
-  content: '\F334';
+  content: '';
 }
 
 .ms-Icon--ConstructionCone::before {
-  content: '\E98F';
+  content: '';
 }
 
 .ms-Icon--ConstructionConeSolid::before {
-  content: '\F339';
+  content: '';
 }
 
 .ms-Icon--Contact::before {
-  content: '\E77B';
+  content: '';
 }
 
 .ms-Icon--ContactCard::before {
-  content: '\EEBD';
+  content: '';
 }
 
 .ms-Icon--ContactInfo::before {
-  content: '\E779';
+  content: '';
+}
+
+.ms-Icon--ContextMenu::before {
+  content: '';
 }
 
 .ms-Icon--Contrast::before {
-  content: '\E7A1';
+  content: '';
 }
 
 .ms-Icon--Copy::before {
-  content: '\E8C8';
+  content: '';
 }
 
 .ms-Icon--Cotton::before {
-  content: '\EAF3';
+  content: '';
 }
 
 .ms-Icon--CPlusPlus::before {
-  content: '\F2F4';
+  content: '';
 }
 
 .ms-Icon--CPlusPlusLanguage::before {
-  content: '\F2F3';
+  content: '';
 }
 
 .ms-Icon--Cricket::before {
-  content: '\EB1E';
+  content: '';
 }
 
 .ms-Icon--CRMReport::before {
-  content: '\EFFE';
+  content: '';
+}
+
+.ms-Icon--Crop::before {
+  content: '';
+}
+
+.ms-Icon--Crown::before {
+  content: '';
 }
 
 .ms-Icon--CrownSolid::before {
-  content: '\F336';
+  content: '';
 }
 
 .ms-Icon--CSharp::before {
-  content: '\F2F0';
+  content: '';
 }
 
 .ms-Icon--CSharpLanguage::before {
-  content: '\F2EF';
+  content: '';
 }
 
 .ms-Icon--CSS::before {
-  content: '\EBEF';
+  content: '';
 }
 
-.ms-Icon--CustomList::before {
-  content: '\EEBE';
+[dir='ltr'] .ms-Icon--CustomList::before {
+  content: '';
 }
 
-.ms-Icon--CustomListMirrored::before {
-  content: '\EEBF';
+[dir='rtl'] .ms-Icon--CustomList::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--CustomListMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--CustomListMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Cut::before {
-  content: '\E8C6';
+  content: '';
 }
 
 .ms-Icon--Cycling::before {
-  content: '\EAC7';
+  content: '';
 }
 
 .ms-Icon--Database::before {
-  content: '\EFC7';
+  content: '';
 }
 
 .ms-Icon--DataConnectionLibrary::before {
-  content: '\EEB7';
-}
-
-.ms-Icon--DateTime::before {
-  content: '\EC92';
+  content: '';
 }
 
 .ms-Icon--DateTime2::before {
-  content: '\EA17';
+  content: '';
 }
 
-.ms-Icon--DateTimeMirrored::before {
-  content: '\EE93';
+[dir='ltr'] .ms-Icon--DateTime::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--DateTime::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--DateTimeMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--DateTimeMirrored::before {
+  content: '';
 }
 
 .ms-Icon--DecisionSolid::before {
-  content: '\F350';
+  content: '';
+}
+
+.ms-Icon--DeclineCall::before {
+  content: '';
 }
 
 .ms-Icon--DecreaseIndentLegacy::before {
-  content: '\E290';
+  content: '';
+}
+
+.ms-Icon--DefectSolid::before {
+  content: '';
 }
 
 .ms-Icon--Delete::before {
-  content: '\E74D';
+  content: '';
+}
+
+.ms-Icon--DeliveryTruck::before {
+  content: '';
 }
 
 .ms-Icon--DelveAnalytics::before {
-  content: '\EEEE';
+  content: '';
 }
 
 .ms-Icon--DelveAnalyticsLogo::before {
-  content: '\EDCA';
+  content: '';
 }
 
 .ms-Icon--DelveLogo::before {
-  content: '\F280';
+  content: '';
 }
 
 .ms-Icon--DelveLogoFill::before {
-  content: '\F281';
+  content: '';
 }
 
 .ms-Icon--DelveLogoInverse::before {
-  content: '\ED76';
+  content: '';
 }
 
 .ms-Icon--Deploy::before {
-  content: '\F29D';
+  content: '';
 }
 
 .ms-Icon--Descending::before {
-  content: '\EDC1';
+  content: '';
 }
 
 .ms-Icon--Design::before {
-  content: '\EB3C';
+  content: '';
 }
 
 .ms-Icon--DeveloperTools::before {
-  content: '\EC7A';
+  content: '';
 }
 
 .ms-Icon--Devices3::before {
-  content: '\EA6C';
+  content: '';
 }
 
 .ms-Icon--Devices4::before {
-  content: '\EB66';
+  content: '';
+}
+
+.ms-Icon--Diagnostic::before {
+  content: '';
 }
 
 .ms-Icon--Dialpad::before {
-  content: '\E75F';
+  content: '';
 }
 
 .ms-Icon--DiamondSolid::before {
-  content: '\F34C';
+  content: '';
 }
 
 .ms-Icon--Dictionary::before {
-  content: '\E82D';
+  content: '';
 }
 
 .ms-Icon--DietPlanNotebook::before {
-  content: '\EAC8';
+  content: '';
 }
 
 .ms-Icon--DiffInline::before {
-  content: '\F309';
+  content: '';
 }
 
 .ms-Icon--DiffSideBySide::before {
-  content: '\F30A';
+  content: '';
 }
 
 .ms-Icon--DisableUpdates::before {
-  content: '\E8D8';
+  content: '';
 }
 
 .ms-Icon--Dislike::before {
-  content: '\E8E0';
+  content: '';
 }
 
-.ms-Icon--DockLeft::before {
-  content: '\E90C';
+.ms-Icon--DislikeSolid::before {
+  content: '';
 }
 
-.ms-Icon--DockLeftMirrored::before {
-  content: '\EA4C';
+[dir='ltr'] .ms-Icon--DockLeft::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--DockLeft::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--DockLeftMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--DockLeftMirrored::before {
+  content: '';
 }
 
 .ms-Icon--DockRight::before {
-  content: '\E90D';
+  content: '';
 }
 
 .ms-Icon--DocLibrary::before {
-  content: '\EEB8';
+  content: '';
 }
 
 .ms-Icon--DocsLogoInverse::before {
-  content: '\EDCB';
+  content: '';
 }
 
 .ms-Icon--Document::before {
-  content: '\E8A5';
+  content: '';
+}
+
+.ms-Icon--DocumentApproval::before {
+  content: '';
 }
 
 .ms-Icon--Documentation::before {
-  content: '\EC17';
+  content: '';
 }
 
 .ms-Icon--DocumentManagement::before {
-  content: '\EFFC';
+  content: '';
 }
 
 .ms-Icon--DocumentReply::before {
-  content: '\EF57';
+  content: '';
 }
 
 .ms-Icon--DocumentSearch::before {
-  content: '\EF6C';
+  content: '';
 }
 
 .ms-Icon--DocumentSet::before {
-  content: '\EED6';
+  content: '';
 }
 
 .ms-Icon--DonutChart::before {
-  content: '\F368';
+  content: '';
 }
 
 .ms-Icon--Door::before {
-  content: '\EB75';
+  content: '';
 }
 
 .ms-Icon--DoubleBookmark::before {
-  content: '\EB8F';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronDown::before {
-  content: '\EE04';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronDown12::before {
-  content: '\EE97';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronDown8::before {
-  content: '\F36B';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronLeft::before {
-  content: '\EDBE';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronLeft12::before {
-  content: '\EE98';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronLeft8::before {
-  content: '\F36D';
+  content: '';
 }
 
-.ms-Icon--DoubleChevronLeftMed::before {
-  content: '\E991';
+[dir='ltr'] .ms-Icon--DoubleChevronLeftMed::before {
+  content: '';
 }
 
-.ms-Icon--DoubleChevronLeftMedMirrored::before {
-  content: '\EA4D';
+[dir='rtl'] .ms-Icon--DoubleChevronLeftMed::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--DoubleChevronLeftMedMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--DoubleChevronLeftMedMirrored::before {
+  content: '';
 }
 
 .ms-Icon--DoubleChevronRight::before {
-  content: '\EDBF';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronRight12::before {
-  content: '\EE99';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronRight8::before {
-  content: '\F36E';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronUp::before {
-  content: '\EDBD';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronUp12::before {
-  content: '\EE96';
+  content: '';
 }
 
 .ms-Icon--DoubleChevronUp8::before {
-  content: '\F36C';
+  content: '';
 }
 
 .ms-Icon--DoubleColumn::before {
-  content: '\F1D4';
+  content: '';
 }
 
 .ms-Icon--DoubleColumnEdit::before {
-  content: '\F322';
+  content: '';
 }
 
 .ms-Icon--Down::before {
-  content: '\E74B';
+  content: '';
 }
 
 .ms-Icon--Download::before {
-  content: '\E896';
+  content: '';
 }
 
 .ms-Icon--DRM::before {
-  content: '\ECA8';
+  content: '';
 }
 
 .ms-Icon--Drop::before {
-  content: '\EB42';
-}
-
-.ms-Icon--DropboxLogo::before {
-  content: '\ED77';
+  content: '';
 }
 
 .ms-Icon--Dropdown::before {
-  content: '\EDC5';
+  content: '';
 }
 
 .ms-Icon--Duststorm::before {
-  content: '\E9CD';
+  content: '';
 }
 
 .ms-Icon--Dynamics365Logo::before {
-  content: '\EDCC';
+  content: '';
 }
 
 .ms-Icon--DynamicSMBLogo::before {
-  content: '\EDCD';
+  content: '';
 }
 
 .ms-Icon--EatDrink::before {
-  content: '\E807';
+  content: '';
 }
 
 .ms-Icon--EdgeLogo::before {
-  content: '\EC60';
-}
-
-.ms-Icon--Edit::before {
-  content: '\E70F';
+  content: '';
 }
 
 .ms-Icon--EditMail::before {
-  content: '\EF61';
+  content: '';
 }
 
-.ms-Icon--EditMirrored::before {
-  content: '\EB7E';
+[dir='ltr'] .ms-Icon--Edit::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Edit::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--EditMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--EditMirrored::before {
+  content: '';
 }
 
 .ms-Icon--EditNote::before {
-  content: '\ED9D';
+  content: '';
 }
 
 .ms-Icon--EditPhoto::before {
-  content: '\EF77';
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--EditSolid12::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--EditSolid12::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--EditSolidMirrored12::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--EditSolidMirrored12::before {
+  content: '';
 }
 
 .ms-Icon--EditStyle::before {
-  content: '\EF60';
+  content: '';
 }
 
-.ms-Icon--EgnyteLogo::before {
-  content: '\F373';
+.ms-Icon--Education::before {
+  content: '';
 }
 
 .ms-Icon--Embed::before {
-  content: '\ECCE';
+  content: '';
 }
 
 .ms-Icon--EMI::before {
-  content: '\E731';
+  content: '';
 }
 
 .ms-Icon--Emoji::before {
-  content: '\E899';
+  content: '';
 }
 
 .ms-Icon--Emoji2::before {
-  content: '\E76E';
+  content: '';
 }
 
 .ms-Icon--EmojiDisappointed::before {
-  content: '\EA88';
+  content: '';
 }
 
 .ms-Icon--EmojiNeutral::before {
-  content: '\EA87';
+  content: '';
+}
+
+.ms-Icon--EmojiTabSymbols::before {
+  content: '';
 }
 
 .ms-Icon--EmptyRecycleBin::before {
-  content: '\EF88';
+  content: '';
 }
 
 .ms-Icon--EngineeringGroup::before {
-  content: '\F362';
+  content: '';
 }
 
 .ms-Icon--Equalizer::before {
-  content: '\E9E9';
+  content: '';
 }
 
 .ms-Icon--EraseTool::before {
-  content: '\E75C';
+  content: '';
 }
 
 .ms-Icon--Error::before {
-  content: '\E783';
+  content: '';
 }
 
 .ms-Icon--ErrorBadge::before {
-  content: '\EA39';
+  content: '';
 }
 
 .ms-Icon--Event::before {
-  content: '\ECA3';
+  content: '';
+}
+
+.ms-Icon--EventAccepted::before {
+  content: '';
 }
 
 .ms-Icon--EventDate::before {
-  content: '\F059';
+  content: '';
+}
+
+.ms-Icon--EventDeclined::before {
+  content: '';
 }
 
 .ms-Icon--EventInfo::before {
-  content: '\ED8B';
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--EventTentative::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--EventTentative::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--EventTentativeMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--EventTentativeMirrored::before {
+  content: '';
 }
 
 .ms-Icon--ExcelDocument::before {
-  content: '\EF73';
+  content: '';
 }
 
 .ms-Icon--ExcelLogo::before {
-  content: '\F1E5';
+  content: '';
 }
 
 .ms-Icon--ExcelLogo16::before {
-  content: '\F397';
+  content: '';
 }
 
 .ms-Icon--ExcelLogoFill::before {
-  content: '\F1E6';
+  content: '';
 }
 
 .ms-Icon--ExcelLogoFill16::before {
-  content: '\F398';
+  content: '';
 }
 
 .ms-Icon--ExcelLogoInverse::before {
-  content: '\EC28';
+  content: '';
 }
 
 .ms-Icon--ExcelLogoInverse16::before {
-  content: '\F396';
+  content: '';
 }
 
 .ms-Icon--ExchangeLogo::before {
-  content: '\F284';
+  content: '';
 }
 
 .ms-Icon--ExchangeLogoFill::before {
-  content: '\F285';
+  content: '';
 }
 
 .ms-Icon--ExchangeLogoInverse::before {
-  content: '\ED78';
+  content: '';
+}
+
+.ms-Icon--ExerciseTracker::before {
+  content: '';
 }
 
 .ms-Icon--ExpandMenu::before {
-  content: '\EF67';
+  content: '';
 }
 
 .ms-Icon--ExploreContent::before {
-  content: '\ECCD';
+  content: '';
 }
 
 .ms-Icon--ExploreContentSingle::before {
-  content: '\F164';
+  content: '';
 }
 
-.ms-Icon--Export::before {
-  content: '\EDE1';
+[dir='ltr'] .ms-Icon--Export::before {
+  content: '';
 }
 
-.ms-Icon--ExportMirrored::before {
-  content: '\EDE2';
+[dir='rtl'] .ms-Icon--Export::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ExportMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ExportMirrored::before {
+  content: '';
+}
+
+.ms-Icon--ExternalBuild::before {
+  content: '';
+}
+
+.ms-Icon--ExternalTFVC::before {
+  content: '';
+}
+
+.ms-Icon--ExternalXAML::before {
+  content: '';
+}
+
+.ms-Icon--F12DevTools::before {
+  content: '';
 }
 
 .ms-Icon--FabricAssetLibrary::before {
-  content: '\F09C';
+  content: '';
 }
 
 .ms-Icon--FabricDataConnectionLibrary::before {
-  content: '\F09D';
+  content: '';
 }
 
 .ms-Icon--FabricDocLibrary::before {
-  content: '\F09E';
+  content: '';
 }
 
 .ms-Icon--FabricFolder::before {
-  content: '\F0A9';
+  content: '';
 }
 
 .ms-Icon--FabricFolderFill::before {
-  content: '\F0AA';
+  content: '';
 }
 
 .ms-Icon--FabricFolderSearch::before {
-  content: '\F0A4';
+  content: '';
 }
 
-.ms-Icon--FabricFormLibrary::before {
-  content: '\F09F';
+[dir='ltr'] .ms-Icon--FabricFormLibrary::before {
+  content: '';
 }
 
-.ms-Icon--FabricFormLibraryMirrored::before {
-  content: '\F0A0';
+[dir='rtl'] .ms-Icon--FabricFormLibrary::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FabricFormLibraryMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FabricFormLibraryMirrored::before {
+  content: '';
 }
 
 .ms-Icon--FabricMovetoFolder::before {
-  content: '\F0A5';
+  content: '';
 }
 
 .ms-Icon--FabricNewFolder::before {
-  content: '\F0AB';
+  content: '';
 }
 
 .ms-Icon--FabricOpenFolderHorizontal::before {
-  content: '\F0A8';
+  content: '';
 }
 
 .ms-Icon--FabricPictureLibrary::before {
-  content: '\F0AC';
+  content: '';
 }
 
 .ms-Icon--FabricPublicFolder::before {
-  content: '\F0A3';
+  content: '';
 }
 
-.ms-Icon--FabricReportLibrary::before {
-  content: '\F0A1';
+[dir='ltr'] .ms-Icon--FabricReportLibrary::before {
+  content: '';
 }
 
-.ms-Icon--FabricReportLibraryMirrored::before {
-  content: '\F0A2';
+[dir='rtl'] .ms-Icon--FabricReportLibrary::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FabricReportLibraryMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FabricReportLibraryMirrored::before {
+  content: '';
 }
 
 .ms-Icon--FabricSyncFolder::before {
-  content: '\F0A7';
+  content: '';
 }
 
 .ms-Icon--FabricUnsyncFolder::before {
-  content: '\F0A6';
-}
-
-.ms-Icon--FacebookLogo::before {
-  content: '\ECB3';
+  content: '';
 }
 
 .ms-Icon--Family::before {
-  content: '\EBDA';
+  content: '';
 }
 
 .ms-Icon--FangBody::before {
-  content: '\ECEB';
+  content: '';
 }
 
 .ms-Icon--FastForward::before {
-  content: '\EB9D';
+  content: '';
 }
 
 .ms-Icon--Favicon::before {
-  content: '\E737';
+  content: '';
 }
 
 .ms-Icon--FavoriteList::before {
-  content: '\E728';
+  content: '';
 }
 
 .ms-Icon--FavoriteStar::before {
-  content: '\E734';
+  content: '';
 }
 
 .ms-Icon--FavoriteStarFill::before {
-  content: '\E735';
+  content: '';
 }
 
 .ms-Icon--Fax::before {
-  content: '\EF5C';
+  content: '';
 }
 
 .ms-Icon--Feedback::before {
-  content: '\ED15';
+  content: '';
 }
 
-.ms-Icon--FeedbackRequestMirroredSolid::before {
-  content: '\F35A';
+[dir='ltr'] .ms-Icon--FeedbackRequestSolid::before {
+  content: '';
 }
 
-.ms-Icon--FeedbackRequestSolid::before {
-  content: '\F359';
+[dir='rtl'] .ms-Icon--FeedbackRequestSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FeedbackRequestMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FeedbackRequestMirroredSolid::before {
+  content: '';
 }
 
 .ms-Icon--FeedbackResponseSolid::before {
-  content: '\F35B';
+  content: '';
 }
 
 .ms-Icon--Ferry::before {
-  content: '\E7E3';
+  content: '';
 }
 
 .ms-Icon--FerrySolid::before {
-  content: '\EB48';
+  content: '';
 }
 
 .ms-Icon--FieldChanged::before {
-  content: '\F2C3';
+  content: '';
 }
 
 .ms-Icon--FieldEmpty::before {
-  content: '\F2C1';
+  content: '';
 }
 
 .ms-Icon--FieldFilled::before {
-  content: '\F2C2';
+  content: '';
 }
 
 .ms-Icon--FieldNotChanged::before {
-  content: '\F2C4';
+  content: '';
+}
+
+.ms-Icon--FieldReadOnly::before {
+  content: '';
+}
+
+.ms-Icon--FieldRequired::before {
+  content: '';
 }
 
 .ms-Icon--FileASPX::before {
-  content: '\F2E9';
+  content: '';
 }
 
 .ms-Icon--FileBug::before {
-  content: '\F30D';
+  content: '';
 }
 
 .ms-Icon--FileCode::before {
-  content: '\F30E';
+  content: '';
 }
 
 .ms-Icon--FileComment::before {
-  content: '\F30F';
+  content: '';
 }
 
 .ms-Icon--FileCSS::before {
-  content: '\F2EA';
+  content: '';
 }
 
 .ms-Icon--FileHTML::before {
-  content: '\F2ED';
+  content: '';
 }
 
 .ms-Icon--FileImage::before {
-  content: '\F311';
+  content: '';
 }
 
 .ms-Icon--FileJAVA::before {
-  content: '\F2E8';
+  content: '';
 }
 
 .ms-Icon--FileLess::before {
-  content: '\F2EC';
+  content: '';
 }
 
 .ms-Icon--FilePDB::before {
-  content: '\F2E5';
+  content: '';
 }
 
 .ms-Icon--FileSass::before {
-  content: '\F2EB';
+  content: '';
 }
 
 .ms-Icon--FileSQL::before {
-  content: '\F2E7';
+  content: '';
 }
 
 .ms-Icon--FileSymlink::before {
-  content: '\F312';
+  content: '';
 }
 
 .ms-Icon--FileTemplate::before {
-  content: '\F2E6';
+  content: '';
 }
 
 .ms-Icon--FileTypeSolution::before {
-  content: '\F387';
+  content: '';
 }
 
 .ms-Icon--Filter::before {
-  content: '\E71C';
+  content: '';
 }
 
 .ms-Icon--Filters::before {
-  content: '\E795';
+  content: '';
+}
+
+.ms-Icon--FilterSolid::before {
+  content: '';
 }
 
 .ms-Icon--FiltersSolid::before {
-  content: '\F353';
+  content: '';
 }
 
 .ms-Icon--Financial::before {
-  content: '\E7BB';
+  content: '';
 }
 
-.ms-Icon--FinancialMirroredSolid::before {
-  content: '\F347';
+[dir='ltr'] .ms-Icon--FinancialSolid::before {
+  content: '';
 }
 
-.ms-Icon--FinancialSolid::before {
-  content: '\F346';
+[dir='rtl'] .ms-Icon--FinancialSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FinancialMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FinancialMirroredSolid::before {
+  content: '';
 }
 
 .ms-Icon--Fingerprint::before {
-  content: '\E928';
+  content: '';
 }
 
 .ms-Icon--FiveTileGrid::before {
-  content: '\F274';
+  content: '';
 }
 
 .ms-Icon--Flag::before {
-  content: '\E7C1';
+  content: '';
 }
 
 .ms-Icon--FlameSolid::before {
-  content: '\F1F3';
+  content: '';
 }
 
 .ms-Icon--FlickDown::before {
-  content: '\E935';
+  content: '';
 }
 
 .ms-Icon--FlickLeft::before {
-  content: '\E937';
+  content: '';
 }
 
 .ms-Icon--FlickRight::before {
-  content: '\E938';
+  content: '';
 }
 
 .ms-Icon--FlickUp::before {
-  content: '\E936';
+  content: '';
 }
 
 .ms-Icon--Flow::before {
-  content: '\EF90';
+  content: '';
 }
 
 .ms-Icon--FocalPoint::before {
-  content: '\F277';
+  content: '';
 }
 
 .ms-Icon--Fog::before {
-  content: '\E9CB';
+  content: '';
 }
 
 .ms-Icon--Folder::before {
-  content: '\E8B7';
+  content: '';
 }
 
 .ms-Icon--FolderFill::before {
-  content: '\E8D5';
+  content: '';
 }
 
 .ms-Icon--FolderHorizontal::before {
-  content: '\F12B';
+  content: '';
 }
 
-.ms-Icon--FolderList::before {
-  content: '\F2CE';
+[dir='ltr'] .ms-Icon--FolderList::before {
+  content: '';
 }
 
-.ms-Icon--FolderListMirrored::before {
-  content: '\F2CF';
+[dir='rtl'] .ms-Icon--FolderList::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FolderListMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FolderListMirrored::before {
+  content: '';
 }
 
 .ms-Icon--FolderOpen::before {
-  content: '\E838';
+  content: '';
 }
 
 .ms-Icon--FolderQuery::before {
-  content: '\F2CD';
+  content: '';
 }
 
 .ms-Icon--FolderSearch::before {
-  content: '\EF65';
+  content: '';
 }
 
 .ms-Icon--Font::before {
-  content: '\E8D2';
+  content: '';
 }
 
 .ms-Icon--FontColor::before {
-  content: '\E8D3';
+  content: '';
 }
 
 .ms-Icon--FontDecrease::before {
-  content: '\E8E7';
+  content: '';
 }
 
 .ms-Icon--FontIncrease::before {
-  content: '\E8E8';
+  content: '';
 }
 
 .ms-Icon--FontSize::before {
-  content: '\E8E9';
+  content: '';
 }
 
-.ms-Icon--FormLibrary::before {
-  content: '\EEB9';
+[dir='ltr'] .ms-Icon--FormLibrary::before {
+  content: '';
 }
 
-.ms-Icon--FormLibraryMirrored::before {
-  content: '\EEBA';
+[dir='rtl'] .ms-Icon--FormLibrary::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--FormLibraryMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--FormLibraryMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Forward::before {
-  content: '\E72A';
+  content: '';
 }
 
 .ms-Icon--ForwardEvent::before {
-  content: '\ED8C';
+  content: '';
 }
 
 .ms-Icon--Freezing::before {
-  content: '\E9EF';
+  content: '';
 }
 
 .ms-Icon--Frigid::before {
-  content: '\E9CA';
+  content: '';
 }
 
 .ms-Icon--FSharp::before {
-  content: '\F2F6';
+  content: '';
 }
 
 .ms-Icon--FSharpLanguage::before {
-  content: '\F2F5';
+  content: '';
 }
 
 .ms-Icon--FullCircleMask::before {
-  content: '\E91F';
+  content: '';
 }
 
 .ms-Icon--FullHistory::before {
-  content: '\F31C';
+  content: '';
 }
 
 .ms-Icon--FullScreen::before {
-  content: '\E740';
+  content: '';
 }
 
 .ms-Icon--FullWidth::before {
-  content: '\F2FE';
+  content: '';
 }
 
 .ms-Icon--FullWidthEdit::before {
-  content: '\F2FF';
+  content: '';
+}
+
+.ms-Icon--GallatinLogo::before {
+  content: '';
 }
 
 .ms-Icon--Generate::before {
-  content: '\E9DA';
+  content: '';
+}
+
+.ms-Icon--GenericScan::before {
+  content: '';
 }
 
 .ms-Icon--Giftbox::before {
-  content: '\EC1F';
+  content: '';
 }
 
 .ms-Icon--GiftboxOpen::before {
-  content: '\F133';
+  content: '';
 }
 
 .ms-Icon--GiftBoxSolid::before {
-  content: '\F341';
+  content: '';
 }
 
 .ms-Icon--GiftCard::before {
-  content: '\EB8E';
+  content: '';
 }
 
 .ms-Icon--GitGraph::before {
-  content: '\F2CA';
+  content: '';
 }
 
 .ms-Icon--Glasses::before {
-  content: '\EA16';
+  content: '';
 }
 
 .ms-Icon--Glimmer::before {
-  content: '\ECF4';
+  content: '';
 }
 
 .ms-Icon--GlobalNavButton::before {
-  content: '\E700';
+  content: '';
 }
 
 .ms-Icon--Globe::before {
-  content: '\E774';
+  content: '';
+}
+
+.ms-Icon--Globe2::before {
+  content: '';
 }
 
 .ms-Icon--GlobeFavorite::before {
-  content: '\EF53';
+  content: '';
 }
 
 .ms-Icon--Golf::before {
-  content: '\EB1F';
-}
-
-.ms-Icon--GoogleDriveLogo::before {
-  content: '\EE0B';
-}
-
-.ms-Icon--GoogleDriveLogoBottomBlue::before {
-  content: '\F375';
-}
-
-.ms-Icon--GoogleDriveLogoLeftGreen::before {
-  content: '\F374';
-}
-
-.ms-Icon--GoogleDriveLogoRightYellow::before {
-  content: '\F376';
+  content: '';
 }
 
 .ms-Icon--GotoToday::before {
-  content: '\E8D1';
+  content: '';
+}
+
+.ms-Icon--GridViewLarge::before {
+  content: '';
+}
+
+.ms-Icon--GridViewMedium::before {
+  content: '';
+}
+
+.ms-Icon--GridViewSmall::before {
+  content: '';
+}
+
+.ms-Icon--GripperBarHorizontal::before {
+  content: '';
 }
 
 .ms-Icon--GripperBarVertical::before {
-  content: '\E784';
+  content: '';
 }
 
 .ms-Icon--GripperTool::before {
-  content: '\E75E';
+  content: '';
 }
 
 .ms-Icon--Group::before {
-  content: '\E902';
+  content: '';
 }
 
 .ms-Icon--GroupedAscending::before {
-  content: '\EE67';
+  content: '';
 }
 
 .ms-Icon--GroupedDescending::before {
-  content: '\EE66';
+  content: '';
 }
 
 .ms-Icon--GroupedList::before {
-  content: '\EF74';
+  content: '';
+}
+
+.ms-Icon--Guitar::before {
+  content: '';
 }
 
 .ms-Icon--HailDay::before {
-  content: '\EA00';
+  content: '';
 }
 
 .ms-Icon--HailNight::before {
-  content: '\EA13';
+  content: '';
 }
 
 .ms-Icon--HalfAlpha::before {
-  content: '\E97E';
+  content: '';
 }
 
 .ms-Icon--Handwriting::before {
-  content: '\E929';
+  content: '';
 }
 
 .ms-Icon--HardDriveGroup::before {
-  content: '\F18F';
+  content: '';
 }
 
 .ms-Icon--Header1::before {
-  content: '\EA19';
+  content: '';
 }
 
 .ms-Icon--Header2::before {
-  content: '\EF36';
+  content: '';
 }
 
 .ms-Icon--Header3::before {
-  content: '\EF37';
+  content: '';
 }
 
 .ms-Icon--Header4::before {
-  content: '\EF38';
+  content: '';
 }
 
 .ms-Icon--Headset::before {
-  content: '\E95B';
+  content: '';
 }
 
 .ms-Icon--HeadsetSolid::before {
-  content: '\F348';
+  content: '';
 }
 
 .ms-Icon--Health::before {
-  content: '\E95E';
+  content: '';
 }
 
 .ms-Icon--HealthSolid::before {
-  content: '\F33F';
+  content: '';
 }
 
 .ms-Icon--Heart::before {
-  content: '\EB51';
+  content: '';
 }
 
 .ms-Icon--HeartFill::before {
-  content: '\EB52';
+  content: '';
 }
 
-.ms-Icon--Help::before {
-  content: '\E897';
+[dir='ltr'] .ms-Icon--Help::before {
+  content: '';
 }
 
-.ms-Icon--HelpMirrored::before {
-  content: '\EA51';
+[dir='rtl'] .ms-Icon--Help::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--HelpMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--HelpMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Hide::before {
-  content: '\ED1A';
+  content: '';
 }
 
 .ms-Icon--Hide2::before {
-  content: '\EF89';
+  content: '';
 }
 
 .ms-Icon--Highlight::before {
-  content: '\E7E6';
+  content: '';
 }
 
 .ms-Icon--HighlightMappedShapes::before {
-  content: '\F2A1';
+  content: '';
 }
 
 .ms-Icon--History::before {
-  content: '\E81C';
+  content: '';
 }
 
 .ms-Icon--Home::before {
-  content: '\E80F';
+  content: '';
 }
 
 .ms-Icon--HomeSolid::before {
-  content: '\EA8A';
+  content: '';
 }
 
 .ms-Icon--Hospital::before {
-  content: '\E91D';
+  content: '';
 }
 
 .ms-Icon--Hotel::before {
-  content: '\E824';
+  content: '';
 }
 
 .ms-Icon--IconSetsFlag::before {
-  content: '\F2A4';
+  content: '';
+}
+
+.ms-Icon--IDBadge::before {
+  content: '';
 }
 
 .ms-Icon--ImageCrosshair::before {
-  content: '\F2C9';
+  content: '';
 }
 
 .ms-Icon--ImageDiff::before {
-  content: '\F30B';
+  content: '';
 }
 
 .ms-Icon--ImagePixel::before {
-  content: '\F30C';
-}
-
-.ms-Icon--Import::before {
-  content: '\E8B5';
+  content: '';
 }
 
 .ms-Icon--Important::before {
-  content: '\E8C9';
+  content: '';
 }
 
-.ms-Icon--ImportMirrored::before {
-  content: '\EA52';
+[dir='ltr'] .ms-Icon--Import::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Import::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ImportMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ImportMirrored::before {
+  content: '';
+}
+
+.ms-Icon--Inbox::before {
+  content: '';
 }
 
 .ms-Icon--InboxCheck::before {
-  content: '\EF64';
+  content: '';
 }
 
 .ms-Icon--IncidentTriangle::before {
-  content: '\E814';
+  content: '';
 }
 
 .ms-Icon--IncreaseIndentLegacy::before {
-  content: '\E291';
+  content: '';
 }
 
 .ms-Icon--Info::before {
-  content: '\E946';
+  content: '';
 }
 
 .ms-Icon--Info2::before {
-  content: '\EA1F';
+  content: '';
 }
 
 .ms-Icon--InfoSolid::before {
-  content: '\F167';
+  content: '';
 }
 
 .ms-Icon--InsertTextBox::before {
-  content: '\EC7D';
+  content: '';
 }
 
 .ms-Icon--InstallToDrive::before {
-  content: '\F28D';
+  content: '';
 }
 
 .ms-Icon--InternetSharing::before {
-  content: '\E704';
+  content: '';
 }
 
-.ms-Icon--iOSAppStoreLogo::before {
-  content: '\EF8A';
+[dir='ltr'] .ms-Icon--IRMForward::before {
+  content: '';
 }
 
-.ms-Icon--IssueTracking::before {
-  content: '\EEC0';
+[dir='rtl'] .ms-Icon--IRMForward::before {
+  content: '';
 }
 
-.ms-Icon--IssueTrackingMirrored::before {
-  content: '\EEC1';
+[dir='ltr'] .ms-Icon--IRMForwardMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--IRMForwardMirrored::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--IRMReply::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--IRMReply::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--IRMReplyMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--IRMReplyMirrored::before {
+  content: '';
+}
+
+.ms-Icon--IssueSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--IssueTracking::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--IssueTracking::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--IssueTrackingMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--IssueTrackingMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Italic::before {
-  content: '\E8DB';
+  content: '';
 }
 
 .ms-Icon--JavaScriptLanguage::before {
-  content: '\F2EE';
+  content: '';
 }
 
 .ms-Icon--JoinOnlineMeeting::before {
-  content: '\ED8F';
+  content: '';
 }
 
 .ms-Icon--JS::before {
-  content: '\EBF0';
+  content: '';
+}
+
+.ms-Icon--KaizalaLogo::before {
+  content: '';
 }
 
 .ms-Icon--Label::before {
-  content: '\E932';
+  content: '';
+}
+
+.ms-Icon--LadybugSolid::before {
+  content: '';
 }
 
 .ms-Icon--LandscapeOrientation::before {
-  content: '\EF6B';
+  content: '';
 }
 
 .ms-Icon--LaptopSelected::before {
-  content: '\EC76';
+  content: '';
 }
 
 .ms-Icon--LargeGrid::before {
-  content: '\EECB';
+  content: '';
 }
 
 .ms-Icon--Library::before {
-  content: '\E8F1';
+  content: '';
 }
 
 .ms-Icon--Lifesaver::before {
-  content: '\EF62';
+  content: '';
 }
 
 .ms-Icon--LifesaverLock::before {
-  content: '\EF63';
+  content: '';
 }
 
 .ms-Icon--Light::before {
-  content: '\E793';
+  content: '';
 }
 
 .ms-Icon--Lightbulb::before {
-  content: '\EA80';
+  content: '';
 }
 
 .ms-Icon--LightningBolt::before {
-  content: '\E945';
+  content: '';
 }
 
 .ms-Icon--Like::before {
-  content: '\E8E1';
+  content: '';
+}
+
+.ms-Icon--LikeSolid::before {
+  content: '';
 }
 
 .ms-Icon--LineChart::before {
-  content: '\E9E6';
+  content: '';
 }
 
 .ms-Icon--Link::before {
-  content: '\E71B';
+  content: '';
 }
 
 .ms-Icon--LinkedInLogo::before {
-  content: '\F20A';
+  content: '';
 }
 
-.ms-Icon--List::before {
-  content: '\EA37';
+[dir='ltr'] .ms-Icon--List::before {
+  content: '';
 }
 
-.ms-Icon--ListMirrored::before {
-  content: '\EA55';
+[dir='rtl'] .ms-Icon--List::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ListMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ListMirrored::before {
+  content: '';
 }
 
 .ms-Icon--LocaleLanguage::before {
-  content: '\F2B7';
+  content: '';
 }
 
 .ms-Icon--Location::before {
-  content: '\E81D';
+  content: '';
 }
 
 .ms-Icon--LocationCircle::before {
-  content: '\E80E';
+  content: '';
 }
 
 .ms-Icon--LocationDot::before {
-  content: '\E827';
+  content: '';
 }
 
 .ms-Icon--LocationFill::before {
-  content: '\E920';
+  content: '';
 }
 
 .ms-Icon--LocationOutline::before {
-  content: '\F2D0';
+  content: '';
 }
 
 .ms-Icon--Lock::before {
-  content: '\E72E';
+  content: '';
 }
 
 .ms-Icon--LockSolid::before {
-  content: '\E9A2';
+  content: '';
 }
 
 .ms-Icon--LogRemove::before {
-  content: '\F316';
+  content: '';
 }
 
 .ms-Icon--LowerBrightness::before {
-  content: '\EC8A';
+  content: '';
 }
 
 .ms-Icon--LyncLogo::before {
-  content: '\ED79';
+  content: '';
 }
 
 .ms-Icon--Mail::before {
-  content: '\E715';
+  content: '';
 }
 
 .ms-Icon--MailAlert::before {
-  content: '\ED80';
+  content: '';
 }
 
 .ms-Icon--MailCheck::before {
-  content: '\ED81';
+  content: '';
 }
 
 .ms-Icon--MailFill::before {
-  content: '\E8A8';
+  content: '';
 }
 
-.ms-Icon--MailForward::before {
-  content: '\E89C';
+[dir='ltr'] .ms-Icon--MailForward::before {
+  content: '';
 }
 
-.ms-Icon--MailForwardMirrored::before {
-  content: '\EA56';
+[dir='rtl'] .ms-Icon--MailForward::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MailForwardMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MailForwardMirrored::before {
+  content: '';
 }
 
 .ms-Icon--MailLowImportance::before {
-  content: '\ED82';
+  content: '';
 }
 
 .ms-Icon--MailPause::before {
-  content: '\ED83';
+  content: '';
+}
+
+.ms-Icon--MailReminder::before {
+  content: '';
 }
 
 .ms-Icon--MailRepeat::before {
-  content: '\ED84';
+  content: '';
 }
 
-.ms-Icon--MailReply::before {
-  content: '\E8CA';
+[dir='ltr'] .ms-Icon--MailReplyAll::before {
+  content: '';
 }
 
-.ms-Icon--MailReplyAll::before {
-  content: '\E8C2';
+[dir='rtl'] .ms-Icon--MailReplyAll::before {
+  content: '';
 }
 
-.ms-Icon--MailReplyAllMirrored::before {
-  content: '\EA58';
+[dir='ltr'] .ms-Icon--MailReplyAllMirrored::before {
+  content: '';
 }
 
-.ms-Icon--MailReplyMirrored::before {
-  content: '\EA57';
+[dir='rtl'] .ms-Icon--MailReplyAllMirrored::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MailReply::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MailReply::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MailReplyMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MailReplyMirrored::before {
+  content: '';
 }
 
 .ms-Icon--MailSolid::before {
-  content: '\F343';
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MailTentative::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MailTentative::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MailTentativeMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MailTentativeMirrored::before {
+  content: '';
+}
+
+.ms-Icon--MailUndelivered::before {
+  content: '';
 }
 
 .ms-Icon--MapDirections::before {
-  content: '\E816';
+  content: '';
 }
 
 .ms-Icon--MapPin::before {
-  content: '\E707';
+  content: '';
 }
 
 .ms-Icon--MarkDownLanguage::before {
-  content: '\F2FB';
+  content: '';
 }
 
 .ms-Icon--Market::before {
-  content: '\EAFC';
+  content: '';
 }
 
 .ms-Icon--MarketDown::before {
-  content: '\EF42';
+  content: '';
 }
 
 .ms-Icon--Medical::before {
-  content: '\EAD4';
+  content: '';
 }
 
 .ms-Icon--Megaphone::before {
-  content: '\E789';
+  content: '';
 }
 
 .ms-Icon--MegaphoneSolid::before {
-  content: '\F332';
+  content: '';
 }
 
 .ms-Icon--Memo::before {
-  content: '\E77C';
+  content: '';
 }
 
 .ms-Icon--Merge::before {
-  content: '\E7D5';
+  content: '';
 }
 
 .ms-Icon--MergeDuplicate::before {
-  content: '\F29A';
+  content: '';
 }
 
 .ms-Icon--Message::before {
-  content: '\E8BD';
+  content: '';
 }
 
 .ms-Icon--MessageFill::before {
-  content: '\EC70';
+  content: '';
+}
+
+.ms-Icon--MicOff::before {
+  content: '';
 }
 
 .ms-Icon--Microphone::before {
-  content: '\E720';
+  content: '';
+}
+
+.ms-Icon--MicrosoftFlowLogo::before {
+  content: '';
 }
 
 .ms-Icon--MicrosoftStaffhubLogo::before {
-  content: '\F130';
+  content: '';
+}
+
+.ms-Icon--MiniExpand::before {
+  content: '';
 }
 
 .ms-Icon--MiniLink::before {
-  content: '\E732';
+  content: '';
+}
+
+.ms-Icon--MobileReport::before {
+  content: '';
 }
 
 .ms-Icon--MobileSelected::before {
-  content: '\EC75';
+  content: '';
 }
 
 .ms-Icon--Money::before {
-  content: '\EAFD';
+  content: '';
 }
 
 .ms-Icon--More::before {
-  content: '\E712';
+  content: '';
 }
 
 .ms-Icon--MoreSports::before {
-  content: '\EB22';
+  content: '';
 }
 
 .ms-Icon--MoreVertical::before {
-  content: '\F2BC';
+  content: '';
 }
 
 .ms-Icon--Move::before {
-  content: '\E7C2';
+  content: '';
+}
+
+.ms-Icon--Movers::before {
+  content: '';
 }
 
 .ms-Icon--MoveToFolder::before {
-  content: '\E8DE';
+  content: '';
 }
 
 .ms-Icon--MSNLogo::before {
-  content: '\EB6C';
+  content: '';
 }
 
 .ms-Icon--MSNVideos::before {
-  content: '\EB1C';
+  content: '';
 }
 
 .ms-Icon--MSNVideosSolid::before {
-  content: '\F2DA';
+  content: '';
 }
 
-.ms-Icon--MultiSelect::before {
-  content: '\E762';
+.ms-Icon--MTMLogo::before {
+  content: '';
 }
 
-.ms-Icon--MultiSelectMirrored::before {
-  content: '\EA98';
+[dir='ltr'] .ms-Icon--MultiSelect::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MultiSelect::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--MultiSelectMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--MultiSelectMirrored::before {
+  content: '';
 }
 
 .ms-Icon--MusicInCollection::before {
-  content: '\E940';
+  content: '';
 }
 
 .ms-Icon--MusicInCollectionFill::before {
-  content: '\EA36';
+  content: '';
 }
 
 .ms-Icon--MusicNote::before {
-  content: '\EC4F';
+  content: '';
+}
+
+.ms-Icon--MyMoviesTV::before {
+  content: '';
 }
 
 .ms-Icon--Nav2DMapView::before {
-  content: '\E800';
+  content: '';
 }
 
-.ms-Icon--NavigateBack::before {
-  content: '\F2DD';
+[dir='ltr'] .ms-Icon--NavigateBack::before {
+  content: '';
 }
 
-.ms-Icon--NavigateBackMirrored::before {
-  content: '\F2DE';
+[dir='rtl'] .ms-Icon--NavigateBack::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--NavigateBackMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--NavigateBackMirrored::before {
+  content: '';
 }
 
 .ms-Icon--NavigateExternalInline::before {
-  content: '\F35F';
+  content: '';
 }
 
-.ms-Icon--NavigateForward::before {
-  content: '\F2DF';
+[dir='ltr'] .ms-Icon--NavigateForward::before {
+  content: '';
 }
 
-.ms-Icon--NavigateForwardMirrored::before {
-  content: '\F2E0';
+[dir='rtl'] .ms-Icon--NavigateForward::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--NavigateForwardMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--NavigateForwardMirrored::before {
+  content: '';
 }
 
 .ms-Icon--NetworkTower::before {
-  content: '\EC05';
+  content: '';
 }
 
 .ms-Icon--NewAnalyticsQuery::before {
-  content: '\F1E0';
+  content: '';
 }
 
 .ms-Icon--NewFolder::before {
-  content: '\E8F4';
+  content: '';
 }
 
 .ms-Icon--News::before {
-  content: '\E900';
+  content: '';
 }
 
 .ms-Icon--NewTeamProject::before {
-  content: '\F2B2';
+  content: '';
 }
 
 .ms-Icon--Next::before {
-  content: '\E893';
+  content: '';
+}
+
+.ms-Icon--NonprofitLogo32::before {
+  content: '';
 }
 
 .ms-Icon--NoteForward::before {
-  content: '\ED99';
+  content: '';
 }
 
 .ms-Icon--NotePinned::before {
-  content: '\ED9A';
+  content: '';
 }
 
 .ms-Icon--NoteReply::before {
-  content: '\ED98';
+  content: '';
+}
+
+.ms-Icon--NotExecuted::before {
+  content: '';
+}
+
+.ms-Icon--NotImpactedSolid::before {
+  content: '';
+}
+
+.ms-Icon--NugetLogo::before {
+  content: '';
 }
 
 .ms-Icon--NumberedList::before {
-  content: '\EA1C';
+  content: '';
 }
 
 .ms-Icon--NumberField::before {
-  content: '\EDC4';
+  content: '';
 }
 
 .ms-Icon--OfficeAddinsLogo::before {
-  content: '\EEC7';
+  content: '';
 }
 
 .ms-Icon--OfficeAssistantLogo::before {
-  content: '\EDCE';
+  content: '';
 }
 
-.ms-Icon--OfficeFormLogo::before {
-  content: '\EF86';
+.ms-Icon--OfficeFormsLogo::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogo16::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogo24::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoFill::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoFill16::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoFill24::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoInverse::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoInverse16::before {
+  content: '';
+}
+
+.ms-Icon--OfficeFormsLogoInverse24::before {
+  content: '';
 }
 
 .ms-Icon--OfficeLogo::before {
-  content: '\EB6E';
+  content: '';
 }
 
 .ms-Icon--OfficeStoreLogo::before {
-  content: '\EDCF';
+  content: '';
 }
 
 .ms-Icon--OfficeVideoLogo::before {
-  content: '\F282';
+  content: '';
 }
 
 .ms-Icon--OfficeVideoLogoFill::before {
-  content: '\F283';
+  content: '';
 }
 
 .ms-Icon--OfficeVideoLogoInverse::before {
-  content: '\ED7A';
+  content: '';
 }
 
 .ms-Icon--OfflineOneDriveParachute::before {
-  content: '\EEC8';
+  content: '';
 }
 
 .ms-Icon--OfflineOneDriveParachuteDisabled::before {
-  content: '\EEC9';
+  content: '';
 }
 
 .ms-Icon--OfflineStorageSolid::before {
-  content: '\F34E';
+  content: '';
 }
 
 .ms-Icon--OneDrive::before {
-  content: '\E941';
+  content: '';
 }
 
 .ms-Icon--OneDriveAdd::before {
-  content: '\EF32';
+  content: '';
 }
 
 .ms-Icon--OneNoteEduLogoInverse::before {
-  content: '\EDD0';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogo::before {
-  content: '\F1E7';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogo16::before {
-  content: '\F39A';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogoFill::before {
-  content: '\F1E8';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogoFill16::before {
-  content: '\F39B';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogoInverse::before {
-  content: '\EC0D';
+  content: '';
 }
 
 .ms-Icon--OneNoteLogoInverse16::before {
-  content: '\F399';
+  content: '';
 }
 
 .ms-Icon--OpenFile::before {
-  content: '\E8E5';
+  content: '';
 }
 
 .ms-Icon--OpenFolderHorizontal::before {
-  content: '\ED25';
+  content: '';
 }
 
 .ms-Icon--OpenInNewWindow::before {
-  content: '\E8A7';
+  content: '';
 }
 
-.ms-Icon--OpenPane::before {
-  content: '\E8A0';
+[dir='ltr'] .ms-Icon--OpenPane::before {
+  content: '';
 }
 
-.ms-Icon--OpenPaneMirrored::before {
-  content: '\EA5B';
+[dir='rtl'] .ms-Icon--OpenPane::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--OpenPaneMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--OpenPaneMirrored::before {
+  content: '';
 }
 
 .ms-Icon--OpenSource::before {
-  content: '\EBC2';
+  content: '';
 }
 
 .ms-Icon--Org::before {
-  content: '\ECA6';
+  content: '';
+}
+
+.ms-Icon--Orientation::before {
+  content: '';
 }
 
 .ms-Icon--OutlookLogo::before {
-  content: '\F1E9';
+  content: '';
 }
 
 .ms-Icon--OutlookLogo16::before {
-  content: '\F39D';
+  content: '';
 }
 
 .ms-Icon--OutlookLogoFill::before {
-  content: '\F1EA';
+  content: '';
 }
 
 .ms-Icon--OutlookLogoFill16::before {
-  content: '\F39E';
+  content: '';
 }
 
 .ms-Icon--OutlookLogoInverse::before {
-  content: '\EB6D';
+  content: '';
 }
 
 .ms-Icon--OutlookLogoInverse16::before {
-  content: '\F39C';
+  content: '';
 }
 
 .ms-Icon--OutOfOffice::before {
-  content: '\ED34';
+  content: '';
 }
 
 .ms-Icon--Package::before {
-  content: '\E7B8';
+  content: '';
 }
 
 .ms-Icon--Packages::before {
-  content: '\F318';
+  content: '';
 }
 
 .ms-Icon--Page::before {
-  content: '\E7C3';
+  content: '';
 }
 
 .ms-Icon--PageAdd::before {
-  content: '\EA1A';
+  content: '';
 }
 
 .ms-Icon--PageCheckedin::before {
-  content: '\F104';
+  content: '';
 }
 
 .ms-Icon--PageCheckedOut::before {
-  content: '\F02C';
+  content: '';
 }
 
 .ms-Icon--PageEdit::before {
-  content: '\EFB6';
+  content: '';
 }
 
 .ms-Icon--PageLeft::before {
-  content: '\E760';
+  content: '';
 }
 
-.ms-Icon--PageListMirroredSolid::before {
-  content: '\F33B';
+[dir='ltr'] .ms-Icon--PageListSolid::before {
+  content: '';
 }
 
-.ms-Icon--PageListSolid::before {
-  content: '\F33A';
+[dir='rtl'] .ms-Icon--PageListSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--PageListMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--PageListMirroredSolid::before {
+  content: '';
+}
+
+.ms-Icon--PageLock::before {
+  content: '';
 }
 
 .ms-Icon--PageRight::before {
-  content: '\E761';
+  content: '';
 }
 
 .ms-Icon--PageSolid::before {
-  content: '\E729';
+  content: '';
 }
 
 .ms-Icon--PanoIndicator::before {
-  content: '\E7B0';
+  content: '';
 }
 
 .ms-Icon--Parachute::before {
-  content: '\F351';
+  content: '';
 }
 
 .ms-Icon--ParachuteSolid::before {
-  content: '\F352';
+  content: '';
 }
 
 .ms-Icon--Parameter::before {
-  content: '\F306';
+  content: '';
 }
 
-.ms-Icon--ParatureLogo::before {
-  content: '\ED7B';
+[dir='ltr'] .ms-Icon--ParkingLocation::before {
+  content: '';
 }
 
-.ms-Icon--ParkingLocation::before {
-  content: '\E811';
+[dir='rtl'] .ms-Icon--ParkingLocation::before {
+  content: '';
 }
 
-.ms-Icon--ParkingLocationMirrored::before {
-  content: '\EA5E';
+[dir='ltr'] .ms-Icon--ParkingLocationMirrored::before {
+  content: '';
 }
 
-.ms-Icon--ParkingMirroredSolid::before {
-  content: '\F34B';
+[dir='rtl'] .ms-Icon--ParkingLocationMirrored::before {
+  content: '';
 }
 
-.ms-Icon--ParkingSolid::before {
-  content: '\F34A';
+[dir='ltr'] .ms-Icon--ParkingSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ParkingSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ParkingMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ParkingMirroredSolid::before {
+  content: '';
 }
 
 .ms-Icon--PartlyCloudyDay::before {
-  content: '\E9C0';
+  content: '';
 }
 
 .ms-Icon--PartlyCloudyNight::before {
-  content: '\E9C1';
+  content: '';
 }
 
 .ms-Icon--PartyLeader::before {
-  content: '\ECA7';
+  content: '';
 }
 
 .ms-Icon--Paste::before {
-  content: '\E77F';
+  content: '';
 }
 
 .ms-Icon--Pause::before {
-  content: '\E769';
+  content: '';
 }
 
 .ms-Icon--PaymentCard::before {
-  content: '\E8C7';
+  content: '';
 }
 
 .ms-Icon--PC1::before {
-  content: '\E977';
+  content: '';
 }
 
 .ms-Icon--PDF::before {
-  content: '\EA90';
+  content: '';
 }
 
 .ms-Icon--PencilReply::before {
-  content: '\EF7B';
+  content: '';
 }
 
 .ms-Icon--People::before {
-  content: '\E716';
+  content: '';
 }
 
 .ms-Icon--PeopleAdd::before {
-  content: '\EA15';
+  content: '';
 }
 
 .ms-Icon--PeopleAlert::before {
-  content: '\ED93';
+  content: '';
 }
 
 .ms-Icon--PeopleBlock::before {
-  content: '\ED91';
+  content: '';
 }
 
 .ms-Icon--PeoplePause::before {
-  content: '\ED94';
+  content: '';
 }
 
 .ms-Icon--PeopleRepeat::before {
-  content: '\ED92';
+  content: '';
 }
 
 .ms-Icon--Permissions::before {
-  content: '\E8D7';
+  content: '';
 }
 
 .ms-Icon--PermissionsSolid::before {
-  content: '\F349';
+  content: '';
 }
 
 .ms-Icon--Personalize::before {
-  content: '\E771';
+  content: '';
 }
 
 .ms-Icon--Phone::before {
-  content: '\E717';
+  content: '';
 }
 
 .ms-Icon--Photo2::before {
-  content: '\EB9F';
+  content: '';
 }
 
 .ms-Icon--Photo2Add::before {
-  content: '\ECAB';
+  content: '';
 }
 
 .ms-Icon--Photo2Remove::before {
-  content: '\ECAC';
+  content: '';
 }
 
 .ms-Icon--PhotoCollection::before {
-  content: '\E7AA';
+  content: '';
 }
 
 .ms-Icon--Picture::before {
-  content: '\E8B9';
+  content: '';
 }
 
 .ms-Icon--PictureLibrary::before {
-  content: '\EEC2';
+  content: '';
 }
 
 .ms-Icon--PieDouble::before {
-  content: '\EB04';
+  content: '';
 }
 
 .ms-Icon--PieSingle::before {
-  content: '\EB05';
+  content: '';
 }
 
 .ms-Icon--Pill::before {
-  content: '\EACB';
+  content: '';
 }
 
 .ms-Icon--Pin::before {
-  content: '\E718';
+  content: '';
 }
 
 .ms-Icon--Pinned::before {
-  content: '\E840';
+  content: '';
 }
 
 .ms-Icon--PinnedFill::before {
-  content: '\E842';
+  content: '';
 }
 
 .ms-Icon--PivotChart::before {
-  content: '\F24C';
+  content: '';
 }
 
 .ms-Icon--PlannerLogo::before {
-  content: '\EDD1';
+  content: '';
 }
 
 .ms-Icon--PlanView::before {
-  content: '\F360';
+  content: '';
 }
 
 .ms-Icon--Play::before {
-  content: '\E768';
+  content: '';
 }
 
 .ms-Icon--PlayerSettings::before {
-  content: '\EF58';
+  content: '';
 }
 
 .ms-Icon--PlayResume::before {
-  content: '\F2C6';
+  content: '';
 }
 
 .ms-Icon--Plug::before {
-  content: '\F300';
+  content: '';
 }
 
 .ms-Icon--PlugConnected::before {
-  content: '\F302';
+  content: '';
 }
 
 .ms-Icon--PlugDisconnected::before {
-  content: '\F303';
+  content: '';
 }
 
 .ms-Icon--PlugSolid::before {
-  content: '\F301';
+  content: '';
 }
 
 .ms-Icon--POI::before {
-  content: '\ECAF';
+  content: '';
 }
 
 .ms-Icon--POISolid::before {
-  content: '\F2D1';
+  content: '';
 }
 
 .ms-Icon--PostUpdate::before {
-  content: '\E8F3';
+  content: '';
 }
 
 .ms-Icon--PowerApps::before {
-  content: '\EDD2';
+  content: '';
 }
 
 .ms-Icon--PowerApps2Logo::before {
-  content: '\F092';
+  content: '';
 }
 
 .ms-Icon--PowerAppsLogo::before {
-  content: '\F091';
+  content: '';
 }
 
 .ms-Icon--PowerBILogo::before {
-  content: '\EA1E';
+  content: '';
 }
 
 .ms-Icon--PowerPointDocument::before {
-  content: '\EF72';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogo::before {
-  content: '\F1EB';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogo16::before {
-  content: '\F394';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogoFill::before {
-  content: '\F1EC';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogoFill16::before {
-  content: '\F395';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogoInverse::before {
-  content: '\EC2A';
+  content: '';
 }
 
 .ms-Icon--PowerPointLogoInverse16::before {
-  content: '\F393';
+  content: '';
 }
 
 .ms-Icon--Precipitation::before {
-  content: '\E9CF';
+  content: '';
 }
 
 .ms-Icon--PresenceChickletVideo::before {
-  content: '\E979';
+  content: '';
 }
 
 .ms-Icon--Preview::before {
-  content: '\E8FF';
+  content: '';
 }
 
 .ms-Icon--PreviewLink::before {
-  content: '\E8A1';
+  content: '';
 }
 
 .ms-Icon--Previous::before {
-  content: '\E892';
+  content: '';
+}
+
+.ms-Icon--PrimaryCalendar::before {
+  content: '';
 }
 
 .ms-Icon--Print::before {
-  content: '\E749';
+  content: '';
 }
 
 .ms-Icon--PrintfaxPrinterFile::before {
-  content: '\E956';
+  content: '';
 }
 
 .ms-Icon--Processing::before {
-  content: '\E9F5';
+  content: '';
 }
 
 .ms-Icon--ProcessMetaTask::before {
-  content: '\F290';
+  content: '';
 }
 
 .ms-Icon--Product::before {
-  content: '\ECDC';
+  content: '';
+}
+
+.ms-Icon--ProfileSearch::before {
+  content: '';
 }
 
 .ms-Icon--ProFootball::before {
-  content: '\EB27';
+  content: '';
 }
 
 .ms-Icon--ProgressLoopInner::before {
-  content: '\ECDE';
+  content: '';
 }
 
 .ms-Icon--ProgressLoopOuter::before {
-  content: '\ECDF';
+  content: '';
 }
 
 .ms-Icon--ProgressRingDots::before {
-  content: '\F16A';
+  content: '';
 }
 
 .ms-Icon--ProHockey::before {
-  content: '\EB28';
+  content: '';
 }
 
 .ms-Icon--ProjectCollection::before {
-  content: '\F363';
+  content: '';
+}
+
+.ms-Icon--ProjectLogo16::before {
+  content: '';
+}
+
+.ms-Icon--ProjectLogo32::before {
+  content: '';
+}
+
+.ms-Icon--ProjectLogoFill16::before {
+  content: '';
+}
+
+.ms-Icon--ProjectLogoFill32::before {
+  content: '';
 }
 
 .ms-Icon--ProjectLogoInverse::before {
-  content: '\EDD4';
+  content: '';
 }
 
 .ms-Icon--ProtectedDocument::before {
-  content: '\E8A6';
+  content: '';
+}
+
+.ms-Icon--ProtectionCenterLogo32::before {
+  content: '';
 }
 
 .ms-Icon--ProtectRestrict::before {
-  content: '\F22A';
+  content: '';
 }
 
 .ms-Icon--PublicCalendar::before {
-  content: '\EF6D';
+  content: '';
 }
 
 .ms-Icon--PublicContactCard::before {
-  content: '\EF6E';
+  content: '';
 }
 
 .ms-Icon--PublicEmail::before {
-  content: '\EF6F';
+  content: '';
 }
 
 .ms-Icon--PublicFolder::before {
-  content: '\EF70';
+  content: '';
 }
 
 .ms-Icon--PublisherLogo::before {
-  content: '\F1ED';
+  content: '';
 }
 
 .ms-Icon--PublisherLogo16::before {
-  content: '\F3A0';
+  content: '';
 }
 
 .ms-Icon--PublisherLogoFill::before {
-  content: '\F1EE';
+  content: '';
 }
 
 .ms-Icon--PublisherLogoFill16::before {
-  content: '\F3A1';
+  content: '';
 }
 
 .ms-Icon--PublisherLogoInverse16::before {
-  content: '\F39F';
+  content: '';
 }
 
 .ms-Icon--Puzzle::before {
-  content: '\EA86';
+  content: '';
 }
 
 .ms-Icon--PY::before {
-  content: '\F2F9';
+  content: '';
 }
 
 .ms-Icon--PythonLanguage::before {
-  content: '\F2F8';
+  content: '';
 }
 
 .ms-Icon--QueryList::before {
-  content: '\F2B8';
+  content: '';
 }
 
-.ms-Icon--Questionnaire::before {
-  content: '\EE19';
+[dir='ltr'] .ms-Icon--Questionnaire::before {
+  content: '';
 }
 
-.ms-Icon--QuestionnaireMirrored::before {
-  content: '\EE4B';
+[dir='rtl'] .ms-Icon--Questionnaire::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--QuestionnaireMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--QuestionnaireMirrored::before {
+  content: '';
 }
 
 .ms-Icon--QuickNote::before {
-  content: '\E70B';
+  content: '';
 }
 
 .ms-Icon--QuickNoteSolid::before {
-  content: '\F338';
+  content: '';
 }
 
 .ms-Icon--RadioBtnOff::before {
-  content: '\ECCA';
+  content: '';
 }
 
 .ms-Icon--RadioBtnOn::before {
-  content: '\ECCB';
+  content: '';
 }
 
 .ms-Icon--RadioBullet::before {
-  content: '\E915';
+  content: '';
 }
 
 .ms-Icon--Rain::before {
-  content: '\E9C4';
+  content: '';
 }
 
 .ms-Icon--RainShowersDay::before {
-  content: '\E9C3';
+  content: '';
 }
 
 .ms-Icon--RainShowersNight::before {
-  content: '\EA0F';
+  content: '';
 }
 
 .ms-Icon--RainSnow::before {
-  content: '\E9C7';
+  content: '';
 }
 
 .ms-Icon--RawSource::before {
-  content: '\F299';
+  content: '';
 }
 
 .ms-Icon--Read::before {
-  content: '\E8C3';
+  content: '';
 }
 
 .ms-Icon--ReadingMode::before {
-  content: '\E736';
+  content: '';
 }
 
 .ms-Icon--ReadingModeSolid::before {
-  content: '\F33D';
+  content: '';
 }
 
 .ms-Icon--ReceiptCheck::before {
-  content: '\EF5B';
+  content: '';
 }
 
 .ms-Icon--ReceiptForward::before {
-  content: '\EF59';
+  content: '';
 }
 
 .ms-Icon--ReceiptReply::before {
-  content: '\EF5A';
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReceiptTentative::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReceiptTentative::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReceiptTentativeMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReceiptTentativeMirrored::before {
+  content: '';
+}
+
+.ms-Icon--ReceiptUndelivered::before {
+  content: '';
 }
 
 .ms-Icon--Recent::before {
-  content: '\E823';
+  content: '';
 }
 
 .ms-Icon--Record2::before {
-  content: '\EA3F';
+  content: '';
+}
+
+.ms-Icon--RectangularClipping::before {
+  content: '';
 }
 
 .ms-Icon--RecurringEvent::before {
-  content: '\EF5D';
+  content: '';
 }
 
 .ms-Icon--RecurringTask::before {
-  content: '\EDB2';
+  content: '';
 }
 
 .ms-Icon--RecycleBin::before {
-  content: '\EF87';
+  content: '';
 }
 
 .ms-Icon--Redeploy::before {
-  content: '\F29E';
+  content: '';
 }
 
 .ms-Icon--RedEye::before {
-  content: '\E7B3';
+  content: '';
 }
 
 .ms-Icon--Redo::before {
-  content: '\E7A6';
+  content: '';
 }
 
 .ms-Icon--Refresh::before {
-  content: '\E72C';
+  content: '';
 }
 
 .ms-Icon--ReminderGroup::before {
-  content: '\EBF8';
+  content: '';
+}
+
+.ms-Icon--ReminderPerson::before {
+  content: '';
 }
 
 .ms-Icon--Remove::before {
-  content: '\E738';
+  content: '';
 }
 
 .ms-Icon--RemoveEvent::before {
-  content: '\ED8A';
+  content: '';
 }
 
 .ms-Icon--RemoveFilter::before {
-  content: '\EB08';
+  content: '';
 }
 
 .ms-Icon--RemoveLink::before {
-  content: '\ED90';
+  content: '';
 }
 
 .ms-Icon--RemoveOccurrence::before {
-  content: '\ED9B';
+  content: '';
 }
 
 .ms-Icon--Rename::before {
-  content: '\E8AC';
+  content: '';
 }
 
 .ms-Icon--ReopenPages::before {
-  content: '\ED50';
+  content: '';
 }
 
 .ms-Icon--Repair::before {
-  content: '\E90F';
-}
-
-.ms-Icon--Reply::before {
-  content: '\E97A';
-}
-
-.ms-Icon--ReplyAll::before {
-  content: '\EE0A';
+  content: '';
 }
 
 .ms-Icon--ReplyAllAlt::before {
-  content: '\EF5F';
+  content: '';
 }
 
-.ms-Icon--ReplyAllMirrored::before {
-  content: '\EE36';
+[dir='ltr'] .ms-Icon--ReplyAll::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReplyAll::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReplyAllMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReplyAllMirrored::before {
+  content: '';
 }
 
 .ms-Icon--ReplyAlt::before {
-  content: '\EF5E';
+  content: '';
 }
 
-.ms-Icon--ReplyMirrored::before {
-  content: '\EE35';
+[dir='ltr'] .ms-Icon--Reply::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Reply::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReplyMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReplyMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Repo::before {
-  content: '\F2CB';
+  content: '';
 }
 
-.ms-Icon--ReportLibrary::before {
-  content: '\EEBB';
+[dir='ltr'] .ms-Icon--ReportLibrary::before {
+  content: '';
 }
 
-.ms-Icon--ReportLibraryMirrored::before {
-  content: '\EEBC';
+[dir='rtl'] .ms-Icon--ReportLibrary::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReportLibraryMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReportLibraryMirrored::before {
+  content: '';
 }
 
 .ms-Icon--RepoSolid::before {
-  content: '\F2CC';
+  content: '';
 }
 
 .ms-Icon--ReturnToSession::before {
-  content: '\ED24';
+  content: '';
 }
 
-.ms-Icon--ReviewRequestMirroredSolid::before {
-  content: '\F357';
+[dir='ltr'] .ms-Icon--ReviewRequestSolid::before {
+  content: '';
 }
 
-.ms-Icon--ReviewRequestSolid::before {
-  content: '\F356';
+[dir='rtl'] .ms-Icon--ReviewRequestSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ReviewRequestMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ReviewRequestMirroredSolid::before {
+  content: '';
 }
 
 .ms-Icon--ReviewResponseSolid::before {
-  content: '\F358';
+  content: '';
 }
 
 .ms-Icon--ReviewSolid::before {
-  content: '\F355';
+  content: '';
 }
 
 .ms-Icon--RevToggleKey::before {
-  content: '\E845';
+  content: '';
 }
 
 .ms-Icon--Rewind::before {
-  content: '\EB9E';
+  content: '';
 }
 
 .ms-Icon--Ribbon::before {
-  content: '\E9D1';
+  content: '';
 }
 
 .ms-Icon--RibbonSolid::before {
-  content: '\F345';
+  content: '';
 }
 
 .ms-Icon--RightDoubleQuote::before {
-  content: '\E9B1';
+  content: '';
 }
 
 .ms-Icon--Ringer::before {
-  content: '\EA8F';
+  content: '';
 }
 
 .ms-Icon--RingerOff::before {
-  content: '\F2C5';
+  content: '';
 }
 
 .ms-Icon--Robot::before {
-  content: '\E99A';
+  content: '';
 }
 
 .ms-Icon--Rocket::before {
-  content: '\F3B3';
+  content: '';
 }
 
 .ms-Icon--Room::before {
-  content: '\ED9F';
+  content: '';
 }
 
 .ms-Icon--Rotate::before {
-  content: '\E7AD';
+  content: '';
 }
 
 .ms-Icon--RowsChild::before {
-  content: '\F29C';
+  content: '';
 }
 
 .ms-Icon--RowsGroup::before {
-  content: '\F29B';
+  content: '';
 }
 
 .ms-Icon--Rugby::before {
-  content: '\EB2D';
+  content: '';
 }
 
 .ms-Icon--Running::before {
-  content: '\EADA';
+  content: '';
 }
 
 .ms-Icon--Sad::before {
-  content: '\E757';
+  content: '';
 }
 
 .ms-Icon--SadSolid::before {
-  content: '\F33E';
+  content: '';
 }
 
 .ms-Icon--Save::before {
-  content: '\E74E';
+  content: '';
 }
 
 .ms-Icon--SaveAll::before {
-  content: '\F203';
+  content: '';
 }
 
 .ms-Icon--SaveAndClose::before {
-  content: '\F038';
+  content: '';
 }
 
 .ms-Icon--SaveAs::before {
-  content: '\E792';
+  content: '';
 }
 
 .ms-Icon--Savings::before {
-  content: '\EB0B';
+  content: '';
+}
+
+.ms-Icon--ScaleUp::before {
+  content: '';
 }
 
 .ms-Icon--ScheduleEventAction::before {
-  content: '\F1EF';
+  content: '';
 }
 
 .ms-Icon--ScopeTemplate::before {
-  content: '\F2B0';
+  content: '';
 }
 
 .ms-Icon--Script::before {
-  content: '\F03A';
+  content: '';
 }
 
 .ms-Icon--ScrollUpDown::before {
-  content: '\EC8F';
+  content: '';
 }
 
 .ms-Icon--Search::before {
-  content: '\E721';
+  content: '';
 }
 
 .ms-Icon--SearchAndApps::before {
-  content: '\E773';
+  content: '';
+}
+
+.ms-Icon--SearchCalendar::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--SearchIssue::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--SearchIssue::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--SearchIssueMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--SearchIssueMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Section::before {
-  content: '\EC0C';
+  content: '';
 }
 
 .ms-Icon--Sections::before {
-  content: '\EF76';
+  content: '';
 }
 
 .ms-Icon--SecurityGroup::before {
-  content: '\ED85';
+  content: '';
 }
 
-.ms-Icon--Send::before {
-  content: '\E724';
+.ms-Icon--Sell::before {
+  content: '';
 }
 
-.ms-Icon--SendMirrored::before {
-  content: '\EA63';
+[dir='ltr'] .ms-Icon--Send::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Send::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--SendMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--SendMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Separator::before {
-  content: '\F35E';
+  content: '';
 }
 
 .ms-Icon--Server::before {
-  content: '\F201';
+  content: '';
 }
 
 .ms-Icon--ServerEnviroment::before {
-  content: '\F29F';
+  content: '';
 }
 
 .ms-Icon--ServerProcesses::before {
-  content: '\F1FE';
+  content: '';
 }
 
 .ms-Icon--SetAction::before {
-  content: '\F071';
+  content: '';
 }
 
 .ms-Icon--Settings::before {
-  content: '\E713';
+  content: '';
 }
 
 .ms-Icon--Share::before {
-  content: '\E72D';
+  content: '';
 }
 
 .ms-Icon--ShareiOS::before {
-  content: '\EF79';
+  content: '';
 }
 
 .ms-Icon--SharepointLogo::before {
-  content: '\F27E';
+  content: '';
 }
 
 .ms-Icon--SharepointLogoFill::before {
-  content: '\F27F';
+  content: '';
 }
 
 .ms-Icon--SharepointLogoInverse::before {
-  content: '\ED18';
+  content: '';
 }
 
 .ms-Icon--Shield::before {
-  content: '\EA18';
+  content: '';
 }
 
 .ms-Icon--ShieldSolid::before {
-  content: '\F340';
+  content: '';
 }
 
 .ms-Icon--Shop::before {
-  content: '\E719';
+  content: '';
 }
 
 .ms-Icon--ShoppingCart::before {
-  content: '\E7BF';
+  content: '';
 }
 
 .ms-Icon--ShoppingCartSolid::before {
-  content: '\F342';
+  content: '';
 }
 
 .ms-Icon--ShopServer::before {
-  content: '\F2B6';
+  content: '';
 }
 
-.ms-Icon--ShowResults::before {
-  content: '\E8BC';
+[dir='ltr'] .ms-Icon--ShowResults::before {
+  content: '';
 }
 
-.ms-Icon--ShowResultsMirrored::before {
-  content: '\EA65';
+[dir='rtl'] .ms-Icon--ShowResults::before {
+  content: '';
 }
 
-.ms-Icon--SidePanel::before {
-  content: '\EF52';
+[dir='ltr'] .ms-Icon--ShowResultsMirrored::before {
+  content: '';
 }
 
-.ms-Icon--SidePanelMirrored::before {
-  content: '\F221';
+[dir='rtl'] .ms-Icon--ShowResultsMirrored::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--SidePanel::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--SidePanel::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--SidePanelMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--SidePanelMirrored::before {
+  content: '';
 }
 
 .ms-Icon--SignOut::before {
-  content: '\F3B1';
+  content: '';
 }
 
 .ms-Icon--SingleBookmark::before {
-  content: '\EDFF';
+  content: '';
 }
 
 .ms-Icon--SingleColumn::before {
-  content: '\F1D3';
+  content: '';
 }
 
 .ms-Icon--SingleColumnEdit::before {
-  content: '\F321';
+  content: '';
 }
 
 .ms-Icon--SIPMove::before {
-  content: '\E759';
+  content: '';
+}
+
+.ms-Icon--SizeLegacy::before {
+  content: '';
+}
+
+.ms-Icon--SkiResorts::before {
+  content: '';
 }
 
 .ms-Icon--SkypeCheck::before {
-  content: '\EF80';
+  content: '';
 }
 
 .ms-Icon--SkypeCircleCheck::before {
-  content: '\EF7D';
+  content: '';
 }
 
 .ms-Icon--SkypeCircleClock::before {
-  content: '\EF7E';
+  content: '';
 }
 
 .ms-Icon--SkypeCircleMinus::before {
-  content: '\EF7F';
+  content: '';
 }
 
 .ms-Icon--SkypeClock::before {
-  content: '\EF81';
+  content: '';
+}
+
+.ms-Icon--SkypeForBusinessLogo::before {
+  content: '';
+}
+
+.ms-Icon--SkypeForBusinessLogo16::before {
+  content: '';
 }
 
 .ms-Icon--SkypeForBusinessLogoFill::before {
-  content: '\F27D';
+  content: '';
+}
+
+.ms-Icon--SkypeForBusinessLogoFill16::before {
+  content: '';
 }
 
 .ms-Icon--SkypeLogo::before {
-  content: '\EB6F';
+  content: '';
+}
+
+.ms-Icon--SkypeLogo16::before {
+  content: '';
 }
 
 .ms-Icon--SkypeMessage::before {
-  content: '\EF83';
+  content: '';
 }
 
 .ms-Icon--SkypeMinus::before {
-  content: '\EF82';
+  content: '';
 }
 
 .ms-Icon--SliderThumb::before {
-  content: '\EC13';
+  content: '';
+}
+
+.ms-Icon--Snooze::before {
+  content: '';
 }
 
 .ms-Icon--Snow::before {
-  content: '\E9C8';
+  content: '';
 }
 
 .ms-Icon--Snowflake::before {
-  content: '\EB46';
+  content: '';
 }
 
 .ms-Icon--SnowShowerDay::before {
-  content: '\E9FD';
+  content: '';
 }
 
 .ms-Icon--SnowShowerNight::before {
-  content: '\EA11';
+  content: '';
 }
 
 .ms-Icon--Soccer::before {
-  content: '\EB21';
+  content: '';
 }
 
 .ms-Icon--SocialListeningLogo::before {
-  content: '\ED7C';
+  content: '';
 }
 
 .ms-Icon--Sort::before {
-  content: '\E8CB';
+  content: '';
 }
 
 .ms-Icon--SortDown::before {
-  content: '\EE69';
+  content: '';
 }
 
 .ms-Icon--SortLines::before {
-  content: '\E9D0';
+  content: '';
 }
 
 .ms-Icon--SortUp::before {
-  content: '\EE68';
+  content: '';
+}
+
+.ms-Icon--Spacer::before {
+  content: '';
 }
 
 .ms-Icon--Speakers::before {
-  content: '\E7F5';
+  content: '';
 }
 
 .ms-Icon--SpeedHigh::before {
-  content: '\EC4A';
+  content: '';
 }
 
 .ms-Icon--Split::before {
-  content: '\EDBC';
+  content: '';
 }
 
 .ms-Icon--Sprint::before {
-  content: '\F3B0';
+  content: '';
 }
 
 .ms-Icon--Squalls::before {
-  content: '\E9CC';
+  content: '';
+}
+
+.ms-Icon--Stack::before {
+  content: '';
 }
 
 .ms-Icon--StackedBarChart::before {
-  content: '\F24D';
+  content: '';
 }
 
 .ms-Icon--StackedLineChart::before {
-  content: '\F24E';
+  content: '';
 }
 
 .ms-Icon--StackIndicator::before {
-  content: '\E7FF';
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogo16::before {
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogo32::before {
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogoFill16::before {
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogoFill32::before {
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogoInverted16::before {
+  content: '';
+}
+
+.ms-Icon--StaffNotebookLogoInverted32::before {
+  content: '';
 }
 
 .ms-Icon--Starburst::before {
-  content: '\EF78';
+  content: '';
 }
 
 .ms-Icon--StarburstSolid::before {
-  content: '\F33C';
+  content: '';
+}
+
+.ms-Icon--StatusCircleCheckmark::before {
+  content: '';
+}
+
+.ms-Icon--StatusCircleInner::before {
+  content: '';
+}
+
+.ms-Icon--StatusCircleOuter::before {
+  content: '';
 }
 
 .ms-Icon--StatusErrorFull::before {
-  content: '\EB90';
+  content: '';
 }
 
 .ms-Icon--StatusTriangle::before {
-  content: '\EA82';
+  content: '';
 }
 
 .ms-Icon--Step::before {
-  content: '\F241';
+  content: '';
 }
 
 .ms-Icon--StepInsert::before {
-  content: '\F242';
+  content: '';
 }
 
 .ms-Icon--StepShared::before {
-  content: '\F243';
+  content: '';
 }
 
 .ms-Icon--StepSharedAdd::before {
-  content: '\F244';
+  content: '';
 }
 
 .ms-Icon--StepSharedInsert::before {
-  content: '\F245';
+  content: '';
 }
 
 .ms-Icon--StockDown::before {
-  content: '\EB0F';
+  content: '';
 }
 
 .ms-Icon--StockUp::before {
-  content: '\EB11';
+  content: '';
 }
 
 .ms-Icon--Stop::before {
-  content: '\E71A';
+  content: '';
 }
 
 .ms-Icon--StopSolid::before {
-  content: '\EE95';
+  content: '';
 }
 
 .ms-Icon--Stopwatch::before {
-  content: '\E916';
+  content: '';
 }
 
 .ms-Icon--StoreLogo::before {
-  content: '\EA96';
+  content: '';
 }
 
 .ms-Icon--StoreLogoMed::before {
-  content: '\EA04';
+  content: '';
 }
 
 .ms-Icon--Storyboard::before {
-  content: '\F308';
+  content: '';
 }
 
 .ms-Icon--Streaming::before {
-  content: '\E93E';
+  content: '';
 }
 
 .ms-Icon--StreamingOff::before {
-  content: '\F2BB';
+  content: '';
 }
 
 .ms-Icon--StreamLogo::before {
-  content: '\F329';
+  content: '';
 }
 
 .ms-Icon--Strikethrough::before {
-  content: '\EDE0';
+  content: '';
 }
 
 .ms-Icon--Subscribe::before {
-  content: '\EDA1';
+  content: '';
 }
 
 .ms-Icon--Subscript::before {
-  content: '\EDDF';
+  content: '';
+}
+
+.ms-Icon--SubstitutionsIn::before {
+  content: '';
 }
 
 .ms-Icon--Suitcase::before {
-  content: '\EDD3';
+  content: '';
 }
 
 .ms-Icon--SunAdd::before {
-  content: '\EF69';
+  content: '';
 }
 
 .ms-Icon--Sunny::before {
-  content: '\E9BD';
+  content: '';
 }
 
 .ms-Icon--SunQuestionMark::before {
-  content: '\EF6A';
+  content: '';
 }
 
 .ms-Icon--Superscript::before {
-  content: '\EDDE';
+  content: '';
+}
+
+.ms-Icon--SwayLogo16::before {
+  content: '';
+}
+
+.ms-Icon--SwayLogo32::before {
+  content: '';
+}
+
+.ms-Icon--SwayLogoFill16::before {
+  content: '';
+}
+
+.ms-Icon--SwayLogoFill32::before {
+  content: '';
 }
 
 .ms-Icon--SwayLogoInverse::before {
-  content: '\ED29';
+  content: '';
 }
 
 .ms-Icon--Switch::before {
-  content: '\E8AB';
+  content: '';
 }
 
 .ms-Icon--SwitcherStartEnd::before {
-  content: '\E810';
+  content: '';
 }
 
 .ms-Icon--Sync::before {
-  content: '\E895';
+  content: '';
 }
 
 .ms-Icon--SyncFolder::before {
-  content: '\E8F7';
+  content: '';
+}
+
+.ms-Icon--SyncOccurence::before {
+  content: '';
 }
 
 .ms-Icon--SyncToPC::before {
-  content: '\EE6E';
+  content: '';
 }
 
 .ms-Icon--System::before {
-  content: '\E770';
+  content: '';
 }
 
 .ms-Icon--Tab::before {
-  content: '\E7E9';
+  content: '';
 }
 
 .ms-Icon--Table::before {
-  content: '\ED86';
+  content: '';
 }
 
 .ms-Icon--Tablet::before {
-  content: '\E70A';
+  content: '';
+}
+
+.ms-Icon--TabletMode::before {
+  content: '';
 }
 
 .ms-Icon--TabletSelected::before {
-  content: '\EC74';
+  content: '';
 }
 
 .ms-Icon--Tag::before {
-  content: '\E8EC';
+  content: '';
 }
 
 .ms-Icon--Taskboard::before {
-  content: '\F1C2';
+  content: '';
 }
 
-.ms-Icon--TaskGroup::before {
-  content: '\F2AE';
+[dir='ltr'] .ms-Icon--TaskGroup::before {
+  content: '';
 }
 
-.ms-Icon--TaskGroupMirrored::before {
-  content: '\F2AF';
+[dir='rtl'] .ms-Icon--TaskGroup::before {
+  content: '';
 }
 
-.ms-Icon--TaskManager::before {
-  content: '\EDB7';
+[dir='ltr'] .ms-Icon--TaskGroupMirrored::before {
+  content: '';
 }
 
-.ms-Icon--TaskManagerMirrored::before {
-  content: '\EDB8';
+[dir='rtl'] .ms-Icon--TaskGroupMirrored::before {
+  content: '';
+}
+
+.ms-Icon--TaskLogo::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--TaskManager::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--TaskManager::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--TaskManagerMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--TaskManagerMirrored::before {
+  content: '';
 }
 
 .ms-Icon--TaskSolid::before {
-  content: '\F333';
+  content: '';
+}
+
+.ms-Icon--Taxi::before {
+  content: '';
 }
 
 .ms-Icon--TeamFavorite::before {
-  content: '\F2AD';
+  content: '';
 }
 
 .ms-Icon--TeamsLogo::before {
-  content: '\F27B';
+  content: '';
 }
 
 .ms-Icon--TeamsLogoFill::before {
-  content: '\F27C';
+  content: '';
 }
 
 .ms-Icon--TeamsLogoInverse::before {
-  content: '\F27A';
+  content: '';
 }
 
 .ms-Icon--Teamwork::before {
-  content: '\EA12';
+  content: '';
+}
+
+.ms-Icon--Teeth::before {
+  content: '';
 }
 
 .ms-Icon--TemporaryUser::before {
-  content: '\EE58';
+  content: '';
 }
 
 .ms-Icon--Tennis::before {
-  content: '\EB33';
+  content: '';
 }
 
 .ms-Icon--TestAutoSolid::before {
-  content: '\F3A8';
+  content: '';
 }
 
 .ms-Icon--TestBeaker::before {
-  content: '\F3A5';
+  content: '';
 }
 
 .ms-Icon--TestBeakerSolid::before {
-  content: '\F3A6';
+  content: '';
 }
 
 .ms-Icon--TestCase::before {
-  content: '\F3AF';
+  content: '';
 }
 
 .ms-Icon--TestExploreSolid::before {
-  content: '\F3A7';
+  content: '';
 }
 
 .ms-Icon--TestImpactSolid::before {
-  content: '\F3AA';
+  content: '';
 }
 
 .ms-Icon--TestParameter::before {
-  content: '\F3AD';
+  content: '';
 }
 
 .ms-Icon--TestPlan::before {
-  content: '\F3AB';
+  content: '';
 }
 
 .ms-Icon--TestStep::before {
-  content: '\F3AC';
+  content: '';
 }
 
 .ms-Icon--TestSuite::before {
-  content: '\F3AE';
+  content: '';
 }
 
 .ms-Icon--TestUserSolid::before {
-  content: '\F3A9';
+  content: '';
 }
 
 .ms-Icon--TextBox::before {
-  content: '\EDC2';
+  content: '';
 }
 
 .ms-Icon--TextCallout::before {
-  content: '\F2A2';
+  content: '';
 }
 
 .ms-Icon--TextDocument::before {
-  content: '\F029';
+  content: '';
 }
 
 .ms-Icon--TextField::before {
-  content: '\EDC3';
+  content: '';
 }
 
-.ms-Icon--ThumbnailView::before {
-  content: '\E7B6';
+.ms-Icon--TFVCLogo::before {
+  content: '';
 }
 
-.ms-Icon--ThumbnailViewMirrored::before {
-  content: '\EA67';
+.ms-Icon--ThisPC::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ThumbnailView::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ThumbnailView::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--ThumbnailViewMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--ThumbnailViewMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Thunderstorms::before {
-  content: '\E9C6';
+  content: '';
 }
 
 .ms-Icon--Ticket::before {
-  content: '\EB54';
+  content: '';
 }
 
 .ms-Icon--Tiles::before {
-  content: '\ECA5';
+  content: '';
 }
 
 .ms-Icon--Tiles2::before {
-  content: '\EF7C';
+  content: '';
 }
 
 .ms-Icon--Timeline::before {
-  content: '\ED9C';
+  content: '';
 }
 
 .ms-Icon--TimelineDelivery::before {
-  content: '\F2AB';
+  content: '';
 }
 
 .ms-Icon--TimelineMatrixView::before {
-  content: '\F361';
+  content: '';
 }
 
 .ms-Icon--TimelineProgress::before {
-  content: '\F2AA';
+  content: '';
 }
 
 .ms-Icon--Timer::before {
-  content: '\E91E';
+  content: '';
+}
+
+.ms-Icon--ToDoLogoBottom::before {
+  content: '';
+}
+
+.ms-Icon--ToDoLogoInverse::before {
+  content: '';
+}
+
+.ms-Icon--ToDoLogoTop::before {
+  content: '';
 }
 
 .ms-Icon--ToggleBorder::before {
-  content: '\EC12';
+  content: '';
 }
 
 .ms-Icon--ToggleFilled::before {
-  content: '\EC11';
+  content: '';
 }
 
 .ms-Icon--ToggleThumb::before {
-  content: '\EC14';
+  content: '';
 }
 
 .ms-Icon--Touch::before {
-  content: '\E815';
+  content: '';
 }
 
 .ms-Icon--TouchPointer::before {
-  content: '\E7C9';
+  content: '';
 }
 
 .ms-Icon--Train::before {
-  content: '\E7C0';
+  content: '';
 }
 
 .ms-Icon--TrainSolid::before {
-  content: '\EB4D';
+  content: '';
 }
 
 .ms-Icon--TransferCall::before {
-  content: '\ED95';
+  content: '';
 }
 
 .ms-Icon--TriangleDown12::before {
-  content: '\EED1';
+  content: '';
 }
 
 .ms-Icon--TriangleLeft12::before {
-  content: '\EED2';
+  content: '';
 }
 
 .ms-Icon--TriangleRight12::before {
-  content: '\EED3';
+  content: '';
 }
 
 .ms-Icon--TriangleSolid::before {
-  content: '\EA08';
+  content: '';
 }
 
 .ms-Icon--TriangleSolidDown12::before {
-  content: '\EECD';
+  content: '';
 }
 
 .ms-Icon--TriangleSolidLeft12::before {
-  content: '\EECE';
+  content: '';
 }
 
 .ms-Icon--TriangleSolidRight12::before {
-  content: '\EECF';
+  content: '';
 }
 
 .ms-Icon--TriangleSolidUp12::before {
-  content: '\EECC';
+  content: '';
 }
 
 .ms-Icon--TriangleUp12::before {
-  content: '\EED0';
+  content: '';
 }
 
 .ms-Icon--TriggerApproval::before {
-  content: '\F3B2';
+  content: '';
 }
 
 .ms-Icon--TriggerAuto::before {
-  content: '\F24A';
+  content: '';
 }
 
 .ms-Icon--TriggerUser::before {
-  content: '\F24B';
+  content: '';
 }
 
 .ms-Icon--TripleColumn::before {
-  content: '\F1D5';
+  content: '';
 }
 
 .ms-Icon--TripleColumnEdit::before {
-  content: '\F323';
+  content: '';
 }
 
 .ms-Icon--Trophy::before {
-  content: '\ED3F';
+  content: '';
 }
 
 .ms-Icon--Trophy2Solid::before {
-  content: '\F337';
+  content: '';
 }
 
 .ms-Icon--TurnRight::before {
-  content: '\E7DB';
+  content: '';
 }
 
 .ms-Icon--TVMonitor::before {
-  content: '\E7F4';
+  content: '';
 }
 
 .ms-Icon--TVMonitorSelected::before {
-  content: '\EC77';
+  content: '';
 }
 
 .ms-Icon--TypeScriptLanguage::before {
-  content: '\F2F7';
+  content: '';
 }
 
 .ms-Icon--Umbrella::before {
-  content: '\EC04';
+  content: '';
 }
 
 .ms-Icon--Underline::before {
-  content: '\E8DC';
+  content: '';
 }
 
 .ms-Icon--Undo::before {
-  content: '\E7A7';
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--Uneditable::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Uneditable::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--UneditableMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--UneditableMirrored::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--UneditableSolid12::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--UneditableSolid12::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--UneditableSolidMirrored12::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--UneditableSolidMirrored12::before {
+  content: '';
 }
 
 .ms-Icon--Unfavorite::before {
-  content: '\E8D9';
+  content: '';
 }
 
 .ms-Icon--Unknown::before {
-  content: '\E9CE';
+  content: '';
 }
 
 .ms-Icon--UnknownCall::before {
-  content: '\ED97';
+  content: '';
 }
 
-.ms-Icon--UnknownMirroredSolid::before {
-  content: '\F2E2';
+[dir='ltr'] .ms-Icon--UnknownSolid::before {
+  content: '';
 }
 
-.ms-Icon--UnknownSolid::before {
-  content: '\F2E1';
+[dir='rtl'] .ms-Icon--UnknownSolid::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--UnknownMirroredSolid::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--UnknownMirroredSolid::before {
+  content: '';
 }
 
 .ms-Icon--Unlock::before {
-  content: '\E785';
+  content: '';
 }
 
 .ms-Icon--UnlockSolid::before {
-  content: '\F304';
+  content: '';
 }
 
 .ms-Icon--Unpin::before {
-  content: '\E77A';
+  content: '';
 }
 
 .ms-Icon--Unsubscribe::before {
-  content: '\EDA0';
+  content: '';
 }
 
 .ms-Icon--UnsyncFolder::before {
-  content: '\E8F6';
+  content: '';
+}
+
+.ms-Icon--UnsyncOccurence::before {
+  content: '';
 }
 
 .ms-Icon--Up::before {
-  content: '\E74A';
+  content: '';
 }
 
 .ms-Icon--Upload::before {
-  content: '\E898';
+  content: '';
 }
 
 .ms-Icon--UserFollowed::before {
-  content: '\F25C';
+  content: '';
 }
 
 .ms-Icon--UserPause::before {
-  content: '\F2BA';
+  content: '';
 }
 
 .ms-Icon--UserSync::before {
-  content: '\F2B9';
+  content: '';
+}
+
+.ms-Icon--Vacation::before {
+  content: '';
 }
 
 .ms-Icon--Variable::before {
-  content: '\F305';
+  content: '';
 }
 
 .ms-Icon--VariableGroup::before {
-  content: '\F31B';
+  content: '';
 }
 
 .ms-Icon--VB::before {
-  content: '\F2F2';
+  content: '';
 }
 
 .ms-Icon--VennDiagram::before {
-  content: '\F273';
+  content: '';
 }
 
 .ms-Icon--Video::before {
-  content: '\E714';
+  content: '';
+}
+
+.ms-Icon--VideoOff::before {
+  content: '';
 }
 
 .ms-Icon--VideoSolid::before {
-  content: '\EA0C';
+  content: '';
 }
 
 .ms-Icon--View::before {
-  content: '\E890';
+  content: '';
 }
 
 .ms-Icon--ViewAll::before {
-  content: '\E8A9';
+  content: '';
 }
 
 .ms-Icon--ViewAll2::before {
-  content: '\EF56';
+  content: '';
 }
 
 .ms-Icon--ViewDashboard::before {
-  content: '\F246';
+  content: '';
 }
 
 .ms-Icon--ViewList::before {
-  content: '\F247';
+  content: '';
 }
 
 .ms-Icon--ViewListGroup::before {
-  content: '\F248';
+  content: '';
 }
 
 .ms-Icon--ViewListTree::before {
-  content: '\F249';
+  content: '';
 }
 
 .ms-Icon--VisioDiagram::before {
-  content: '\F2A0';
+  content: '';
 }
 
 .ms-Icon--VisioDocument::before {
-  content: '\F2A9';
+  content: '';
 }
 
 .ms-Icon--VisioLogo::before {
-  content: '\F2A7';
+  content: '';
 }
 
 .ms-Icon--VisioLogo16::before {
-  content: '\F3A3';
+  content: '';
 }
 
 .ms-Icon--VisioLogoFill::before {
-  content: '\F2A8';
+  content: '';
 }
 
 .ms-Icon--VisioLogoFill16::before {
-  content: '\F3A4';
+  content: '';
 }
 
 .ms-Icon--VisioLogoInverse::before {
-  content: '\ED7D';
+  content: '';
 }
 
 .ms-Icon--VisioLogoInverse16::before {
-  content: '\F3A2';
+  content: '';
 }
 
 .ms-Icon--VisualBasicLanguage::before {
-  content: '\F2F1';
+  content: '';
 }
 
 .ms-Icon--VisualStudioLogo::before {
-  content: '\EC22';
+  content: '';
 }
 
 .ms-Icon--VoicemailForward::before {
-  content: '\ED87';
+  content: '';
+}
+
+.ms-Icon--VoicemailIRM::before {
+  content: '';
 }
 
 .ms-Icon--VoicemailReply::before {
-  content: '\ED88';
+  content: '';
 }
 
 .ms-Icon--Volume0::before {
-  content: '\E992';
+  content: '';
 }
 
 .ms-Icon--Volume1::before {
-  content: '\E993';
+  content: '';
 }
 
 .ms-Icon--Volume2::before {
-  content: '\E994';
+  content: '';
 }
 
 .ms-Icon--Volume3::before {
-  content: '\E995';
+  content: '';
 }
 
 .ms-Icon--VolumeDisabled::before {
-  content: '\EA85';
+  content: '';
 }
 
 .ms-Icon--VSTSAltLogo1::before {
-  content: '\F382';
+  content: '';
 }
 
 .ms-Icon--VSTSAltLogo2::before {
-  content: '\F383';
+  content: '';
 }
 
 .ms-Icon--VSTSLogo::before {
-  content: '\F381';
+  content: '';
 }
 
 .ms-Icon--Waffle::before {
-  content: '\ED89';
+  content: '';
 }
 
 .ms-Icon--Warning::before {
-  content: '\E7BA';
+  content: '';
 }
 
 .ms-Icon--Website::before {
-  content: '\EB41';
+  content: '';
 }
 
 .ms-Icon--Weights::before {
-  content: '\EADB';
+  content: '';
 }
 
 .ms-Icon--WifiEthernet::before {
-  content: '\EE77';
+  content: '';
 }
 
 .ms-Icon--WindDirection::before {
-  content: '\EBE6';
+  content: '';
 }
 
 .ms-Icon--WindowsLogo::before {
-  content: '\E782';
+  content: '';
+}
+
+.ms-Icon--Wines::before {
+  content: '';
 }
 
 .ms-Icon--WipePhone::before {
-  content: '\ED8D';
+  content: '';
 }
 
 .ms-Icon--WordDocument::before {
-  content: '\EF71';
+  content: '';
 }
 
 .ms-Icon--WordLogo::before {
-  content: '\F1E3';
+  content: '';
 }
 
 .ms-Icon--WordLogo16::before {
-  content: '\F391';
+  content: '';
 }
 
 .ms-Icon--WordLogoFill::before {
-  content: '\F1E4';
+  content: '';
 }
 
 .ms-Icon--WordLogoFill16::before {
-  content: '\F392';
+  content: '';
 }
 
 .ms-Icon--WordLogoInverse::before {
-  content: '\EC29';
+  content: '';
 }
 
 .ms-Icon--WordLogoInverse16::before {
-  content: '\F390';
+  content: '';
 }
 
 .ms-Icon--Work::before {
-  content: '\E821';
+  content: '';
 }
 
 .ms-Icon--WorkFlow::before {
-  content: '\EA01';
+  content: '';
 }
 
 .ms-Icon--WorkItem::before {
-  content: '\F314';
+  content: '';
 }
 
 .ms-Icon--WorkItemBar::before {
-  content: '\F35C';
+  content: '';
 }
 
 .ms-Icon--WorkItemBarSolid::before {
-  content: '\F35D';
+  content: '';
 }
 
 .ms-Icon--WorkItemBug::before {
-  content: '\F315';
+  content: '';
 }
 
 .ms-Icon--World::before {
-  content: '\E909';
+  content: '';
 }
 
 .ms-Icon--WorldClock::before {
-  content: '\E918';
+  content: '';
 }
 
 .ms-Icon--YammerLogo::before {
-  content: '\ED19';
+  content: '';
 }
 
 .ms-Icon--ZipFolder::before {
-  content: '\F012';
+  content: '';
 }
 
 .ms-Icon--Zoom::before {
-  content: '\E71E';
+  content: '';
 }
 
 .ms-Icon--ZoomIn::before {
-  content: '\E8A3';
+  content: '';
 }
 
 .ms-Icon--ZoomOut::before {
-  content: '\E71F';
-}
-
-.ms-Icon--SwayLogo::before {
-  content: '\ED29';
-}
-
-.ms-Icon--ClassNotebookLogo::before {
-  content: '\EDC8';
-}
-
-.ms-Icon--DocsLogo::before {
-  content: '\EDCB';
-}
-
-.ms-Icon--OneNoteEduLogo::before {
-  content: '\EDD0';
-}
-
-.ms-Icon--ProjectLogo::before {
-  content: '\EDD4';
+  content: '';
 }
 
 @media (max-width: 479px) {
@@ -7996,156 +9065,308 @@
   width: 8.333333333333332%;
 }
 
-.ms-smPull12 {
+[dir='ltr'] .ms-smPull12 {
   right: 100%;
 }
 
-.ms-smPull11 {
-  right: 91.66666666666666%;
-}
-
-.ms-smPull10 {
-  right: 83.33333333333334%;
-}
-
-.ms-smPull9 {
-  right: 75%;
-}
-
-.ms-smPull8 {
-  right: 66.66666666666666%;
-}
-
-.ms-smPull7 {
-  right: 58.333333333333336%;
-}
-
-.ms-smPull6 {
-  right: 50%;
-}
-
-.ms-smPull5 {
-  right: 41.66666666666667%;
-}
-
-.ms-smPull4 {
-  right: 33.33333333333333%;
-}
-
-.ms-smPull3 {
-  right: 25%;
-}
-
-.ms-smPull2 {
-  right: 16.666666666666664%;
-}
-
-.ms-smPull1 {
-  right: 8.333333333333332%;
-}
-
-.ms-smPull0 {
-  right: auto;
-}
-
-.ms-smPush12 {
+[dir='rtl'] .ms-smPull12 {
   left: 100%;
 }
 
-.ms-smPush11 {
-  left: 91.66666666666666%;
+[dir='ltr'] .ms-smPull11 {
+  right: 91.66667%;
 }
 
-.ms-smPush10 {
-  left: 83.33333333333334%;
+[dir='rtl'] .ms-smPull11 {
+  left: 91.66667%;
 }
 
-.ms-smPush9 {
+[dir='ltr'] .ms-smPull10 {
+  right: 83.33333%;
+}
+
+[dir='rtl'] .ms-smPull10 {
+  left: 83.33333%;
+}
+
+[dir='ltr'] .ms-smPull9 {
+  right: 75%;
+}
+
+[dir='rtl'] .ms-smPull9 {
   left: 75%;
 }
 
-.ms-smPush8 {
-  left: 66.66666666666666%;
+[dir='ltr'] .ms-smPull8 {
+  right: 66.66667%;
 }
 
-.ms-smPush7 {
-  left: 58.333333333333336%;
+[dir='rtl'] .ms-smPull8 {
+  left: 66.66667%;
 }
 
-.ms-smPush6 {
+[dir='ltr'] .ms-smPull7 {
+  right: 58.33333%;
+}
+
+[dir='rtl'] .ms-smPull7 {
+  left: 58.33333%;
+}
+
+[dir='ltr'] .ms-smPull6 {
+  right: 50%;
+}
+
+[dir='rtl'] .ms-smPull6 {
   left: 50%;
 }
 
-.ms-smPush5 {
-  left: 41.66666666666667%;
+[dir='ltr'] .ms-smPull5 {
+  right: 41.66667%;
 }
 
-.ms-smPush4 {
-  left: 33.33333333333333%;
+[dir='rtl'] .ms-smPull5 {
+  left: 41.66667%;
 }
 
-.ms-smPush3 {
+[dir='ltr'] .ms-smPull4 {
+  right: 33.33333%;
+}
+
+[dir='rtl'] .ms-smPull4 {
+  left: 33.33333%;
+}
+
+[dir='ltr'] .ms-smPull3 {
+  right: 25%;
+}
+
+[dir='rtl'] .ms-smPull3 {
   left: 25%;
 }
 
-.ms-smPush2 {
-  left: 16.666666666666664%;
+[dir='ltr'] .ms-smPull2 {
+  right: 16.66667%;
 }
 
-.ms-smPush1 {
-  left: 8.333333333333332%;
+[dir='rtl'] .ms-smPull2 {
+  left: 16.66667%;
 }
 
-.ms-smPush0 {
+[dir='ltr'] .ms-smPull1 {
+  right: 8.33333%;
+}
+
+[dir='rtl'] .ms-smPull1 {
+  left: 8.33333%;
+}
+
+[dir='ltr'] .ms-smPull0 {
+  right: auto;
+}
+
+[dir='rtl'] .ms-smPull0 {
   left: auto;
 }
 
-.ms-smOffset11 {
-  margin-left: 91.66666666666666%;
+[dir='ltr'] .ms-smPush12 {
+  left: 100%;
 }
 
-.ms-smOffset10 {
-  margin-left: 83.33333333333334%;
+[dir='rtl'] .ms-smPush12 {
+  right: 100%;
 }
 
-.ms-smOffset9 {
+[dir='ltr'] .ms-smPush11 {
+  left: 91.66667%;
+}
+
+[dir='rtl'] .ms-smPush11 {
+  right: 91.66667%;
+}
+
+[dir='ltr'] .ms-smPush10 {
+  left: 83.33333%;
+}
+
+[dir='rtl'] .ms-smPush10 {
+  right: 83.33333%;
+}
+
+[dir='ltr'] .ms-smPush9 {
+  left: 75%;
+}
+
+[dir='rtl'] .ms-smPush9 {
+  right: 75%;
+}
+
+[dir='ltr'] .ms-smPush8 {
+  left: 66.66667%;
+}
+
+[dir='rtl'] .ms-smPush8 {
+  right: 66.66667%;
+}
+
+[dir='ltr'] .ms-smPush7 {
+  left: 58.33333%;
+}
+
+[dir='rtl'] .ms-smPush7 {
+  right: 58.33333%;
+}
+
+[dir='ltr'] .ms-smPush6 {
+  left: 50%;
+}
+
+[dir='rtl'] .ms-smPush6 {
+  right: 50%;
+}
+
+[dir='ltr'] .ms-smPush5 {
+  left: 41.66667%;
+}
+
+[dir='rtl'] .ms-smPush5 {
+  right: 41.66667%;
+}
+
+[dir='ltr'] .ms-smPush4 {
+  left: 33.33333%;
+}
+
+[dir='rtl'] .ms-smPush4 {
+  right: 33.33333%;
+}
+
+[dir='ltr'] .ms-smPush3 {
+  left: 25%;
+}
+
+[dir='rtl'] .ms-smPush3 {
+  right: 25%;
+}
+
+[dir='ltr'] .ms-smPush2 {
+  left: 16.66667%;
+}
+
+[dir='rtl'] .ms-smPush2 {
+  right: 16.66667%;
+}
+
+[dir='ltr'] .ms-smPush1 {
+  left: 8.33333%;
+}
+
+[dir='rtl'] .ms-smPush1 {
+  right: 8.33333%;
+}
+
+[dir='ltr'] .ms-smPush0 {
+  left: auto;
+}
+
+[dir='rtl'] .ms-smPush0 {
+  right: auto;
+}
+
+[dir='ltr'] .ms-smOffset11 {
+  margin-left: 91.66667%;
+}
+
+[dir='rtl'] .ms-smOffset11 {
+  margin-right: 91.66667%;
+}
+
+[dir='ltr'] .ms-smOffset10 {
+  margin-left: 83.33333%;
+}
+
+[dir='rtl'] .ms-smOffset10 {
+  margin-right: 83.33333%;
+}
+
+[dir='ltr'] .ms-smOffset9 {
   margin-left: 75%;
 }
 
-.ms-smOffset8 {
-  margin-left: 66.66666666666666%;
+[dir='rtl'] .ms-smOffset9 {
+  margin-right: 75%;
 }
 
-.ms-smOffset7 {
-  margin-left: 58.333333333333336%;
+[dir='ltr'] .ms-smOffset8 {
+  margin-left: 66.66667%;
 }
 
-.ms-smOffset6 {
+[dir='rtl'] .ms-smOffset8 {
+  margin-right: 66.66667%;
+}
+
+[dir='ltr'] .ms-smOffset7 {
+  margin-left: 58.33333%;
+}
+
+[dir='rtl'] .ms-smOffset7 {
+  margin-right: 58.33333%;
+}
+
+[dir='ltr'] .ms-smOffset6 {
   margin-left: 50%;
 }
 
-.ms-smOffset5 {
-  margin-left: 41.66666666666667%;
+[dir='rtl'] .ms-smOffset6 {
+  margin-right: 50%;
 }
 
-.ms-smOffset4 {
-  margin-left: 33.33333333333333%;
+[dir='ltr'] .ms-smOffset5 {
+  margin-left: 41.66667%;
 }
 
-.ms-smOffset3 {
+[dir='rtl'] .ms-smOffset5 {
+  margin-right: 41.66667%;
+}
+
+[dir='ltr'] .ms-smOffset4 {
+  margin-left: 33.33333%;
+}
+
+[dir='rtl'] .ms-smOffset4 {
+  margin-right: 33.33333%;
+}
+
+[dir='ltr'] .ms-smOffset3 {
   margin-left: 25%;
 }
 
-.ms-smOffset2 {
-  margin-left: 16.666666666666664%;
+[dir='rtl'] .ms-smOffset3 {
+  margin-right: 25%;
 }
 
-.ms-smOffset1 {
-  margin-left: 8.333333333333332%;
+[dir='ltr'] .ms-smOffset2 {
+  margin-left: 16.66667%;
 }
 
-.ms-smOffset0 {
+[dir='rtl'] .ms-smOffset2 {
+  margin-right: 16.66667%;
+}
+
+[dir='ltr'] .ms-smOffset1 {
+  margin-left: 8.33333%;
+}
+
+[dir='rtl'] .ms-smOffset1 {
+  margin-right: 8.33333%;
+}
+
+[dir='ltr'] .ms-smOffset0 {
   margin-left: 0;
+}
+
+[dir='rtl'] .ms-smOffset0 {
+  margin-right: 0;
 }
 
 @media (min-width: 480px) {
@@ -8221,230 +9442,382 @@
 }
 
 @media (min-width: 480px) {
-  .ms-mdPull12 {
+  [dir='ltr'] .ms-mdPull12 {
     right: 100%;
   }
-}
 
-@media (min-width: 480px) {
-  .ms-mdPull11 {
-    right: 91.66666666666666%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull10 {
-    right: 83.33333333333334%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull9 {
-    right: 75%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull8 {
-    right: 66.66666666666666%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull7 {
-    right: 58.333333333333336%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull6 {
-    right: 50%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull5 {
-    right: 41.66666666666667%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull4 {
-    right: 33.33333333333333%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull3 {
-    right: 25%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull2 {
-    right: 16.666666666666664%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull1 {
-    right: 8.333333333333332%;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPull0 {
-    right: auto;
-  }
-}
-
-@media (min-width: 480px) {
-  .ms-mdPush12 {
+  [dir='rtl'] .ms-mdPull12 {
     left: 100%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush11 {
-    left: 91.66666666666666%;
+  [dir='ltr'] .ms-mdPull11 {
+    right: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPull11 {
+    left: 91.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush10 {
-    left: 83.33333333333334%;
+  [dir='ltr'] .ms-mdPull10 {
+    right: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPull10 {
+    left: 83.33333%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush9 {
+  [dir='ltr'] .ms-mdPull9 {
+    right: 75%;
+  }
+
+  [dir='rtl'] .ms-mdPull9 {
     left: 75%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush8 {
-    left: 66.66666666666666%;
+  [dir='ltr'] .ms-mdPull8 {
+    right: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPull8 {
+    left: 66.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush7 {
-    left: 58.333333333333336%;
+  [dir='ltr'] .ms-mdPull7 {
+    right: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPull7 {
+    left: 58.33333%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush6 {
+  [dir='ltr'] .ms-mdPull6 {
+    right: 50%;
+  }
+
+  [dir='rtl'] .ms-mdPull6 {
     left: 50%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush5 {
-    left: 41.66666666666667%;
+  [dir='ltr'] .ms-mdPull5 {
+    right: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPull5 {
+    left: 41.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush4 {
-    left: 33.33333333333333%;
+  [dir='ltr'] .ms-mdPull4 {
+    right: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPull4 {
+    left: 33.33333%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush3 {
+  [dir='ltr'] .ms-mdPull3 {
+    right: 25%;
+  }
+
+  [dir='rtl'] .ms-mdPull3 {
     left: 25%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush2 {
-    left: 16.666666666666664%;
+  [dir='ltr'] .ms-mdPull2 {
+    right: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPull2 {
+    left: 16.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush1 {
-    left: 8.333333333333332%;
+  [dir='ltr'] .ms-mdPull1 {
+    right: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPull1 {
+    left: 8.33333%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdPush0 {
+  [dir='ltr'] .ms-mdPull0 {
+    right: auto;
+  }
+
+  [dir='rtl'] .ms-mdPull0 {
     left: auto;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset11 {
-    margin-left: 91.66666666666666%;
+  [dir='ltr'] .ms-mdPush12 {
+    left: 100%;
+  }
+
+  [dir='rtl'] .ms-mdPush12 {
+    right: 100%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset10 {
-    margin-left: 83.33333333333334%;
+  [dir='ltr'] .ms-mdPush11 {
+    left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPush11 {
+    right: 91.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset9 {
+  [dir='ltr'] .ms-mdPush10 {
+    left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPush10 {
+    right: 83.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush9 {
+    left: 75%;
+  }
+
+  [dir='rtl'] .ms-mdPush9 {
+    right: 75%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush8 {
+    left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPush8 {
+    right: 66.66667%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush7 {
+    left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPush7 {
+    right: 58.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush6 {
+    left: 50%;
+  }
+
+  [dir='rtl'] .ms-mdPush6 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush5 {
+    left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPush5 {
+    right: 41.66667%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush4 {
+    left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPush4 {
+    right: 33.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush3 {
+    left: 25%;
+  }
+
+  [dir='rtl'] .ms-mdPush3 {
+    right: 25%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush2 {
+    left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-mdPush2 {
+    right: 16.66667%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush1 {
+    left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-mdPush1 {
+    right: 8.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdPush0 {
+    left: auto;
+  }
+
+  [dir='rtl'] .ms-mdPush0 {
+    right: auto;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset11 {
+    margin-left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-mdOffset11 {
+    margin-right: 91.66667%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset10 {
+    margin-left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-mdOffset10 {
+    margin-right: 83.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset9 {
     margin-left: 75%;
   }
-}
 
-@media (min-width: 480px) {
-  .ms-mdOffset8 {
-    margin-left: 66.66666666666666%;
+  [dir='rtl'] .ms-mdOffset9 {
+    margin-right: 75%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset7 {
-    margin-left: 58.333333333333336%;
+  [dir='ltr'] .ms-mdOffset8 {
+    margin-left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-mdOffset8 {
+    margin-right: 66.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset6 {
+  [dir='ltr'] .ms-mdOffset7 {
+    margin-left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-mdOffset7 {
+    margin-right: 58.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset6 {
     margin-left: 50%;
   }
-}
 
-@media (min-width: 480px) {
-  .ms-mdOffset5 {
-    margin-left: 41.66666666666667%;
+  [dir='rtl'] .ms-mdOffset6 {
+    margin-right: 50%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset4 {
-    margin-left: 33.33333333333333%;
+  [dir='ltr'] .ms-mdOffset5 {
+    margin-left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-mdOffset5 {
+    margin-right: 41.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset3 {
+  [dir='ltr'] .ms-mdOffset4 {
+    margin-left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-mdOffset4 {
+    margin-right: 33.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset3 {
     margin-left: 25%;
   }
-}
 
-@media (min-width: 480px) {
-  .ms-mdOffset2 {
-    margin-left: 16.666666666666664%;
+  [dir='rtl'] .ms-mdOffset3 {
+    margin-right: 25%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset1 {
-    margin-left: 8.333333333333332%;
+  [dir='ltr'] .ms-mdOffset2 {
+    margin-left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-mdOffset2 {
+    margin-right: 16.66667%;
   }
 }
 
 @media (min-width: 480px) {
-  .ms-mdOffset0 {
+  [dir='ltr'] .ms-mdOffset1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-mdOffset1 {
+    margin-right: 8.33333%;
+  }
+}
+
+@media (min-width: 480px) {
+  [dir='ltr'] .ms-mdOffset0 {
     margin-left: 0;
+  }
+
+  [dir='rtl'] .ms-mdOffset0 {
+    margin-right: 0;
   }
 }
 
@@ -8521,230 +9894,382 @@
 }
 
 @media (min-width: 640px) {
-  .ms-lgPull12 {
+  [dir='ltr'] .ms-lgPull12 {
     right: 100%;
   }
-}
 
-@media (min-width: 640px) {
-  .ms-lgPull11 {
-    right: 91.66666666666666%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull10 {
-    right: 83.33333333333334%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull9 {
-    right: 75%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull8 {
-    right: 66.66666666666666%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull7 {
-    right: 58.333333333333336%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull6 {
-    right: 50%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull5 {
-    right: 41.66666666666667%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull4 {
-    right: 33.33333333333333%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull3 {
-    right: 25%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull2 {
-    right: 16.666666666666664%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull1 {
-    right: 8.333333333333332%;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPull0 {
-    right: auto;
-  }
-}
-
-@media (min-width: 640px) {
-  .ms-lgPush12 {
+  [dir='rtl'] .ms-lgPull12 {
     left: 100%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush11 {
-    left: 91.66666666666666%;
+  [dir='ltr'] .ms-lgPull11 {
+    right: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPull11 {
+    left: 91.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush10 {
-    left: 83.33333333333334%;
+  [dir='ltr'] .ms-lgPull10 {
+    right: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPull10 {
+    left: 83.33333%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush9 {
+  [dir='ltr'] .ms-lgPull9 {
+    right: 75%;
+  }
+
+  [dir='rtl'] .ms-lgPull9 {
     left: 75%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush8 {
-    left: 66.66666666666666%;
+  [dir='ltr'] .ms-lgPull8 {
+    right: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPull8 {
+    left: 66.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush7 {
-    left: 58.333333333333336%;
+  [dir='ltr'] .ms-lgPull7 {
+    right: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPull7 {
+    left: 58.33333%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush6 {
+  [dir='ltr'] .ms-lgPull6 {
+    right: 50%;
+  }
+
+  [dir='rtl'] .ms-lgPull6 {
     left: 50%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush5 {
-    left: 41.66666666666667%;
+  [dir='ltr'] .ms-lgPull5 {
+    right: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPull5 {
+    left: 41.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush4 {
-    left: 33.33333333333333%;
+  [dir='ltr'] .ms-lgPull4 {
+    right: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPull4 {
+    left: 33.33333%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush3 {
+  [dir='ltr'] .ms-lgPull3 {
+    right: 25%;
+  }
+
+  [dir='rtl'] .ms-lgPull3 {
     left: 25%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush2 {
-    left: 16.666666666666664%;
+  [dir='ltr'] .ms-lgPull2 {
+    right: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPull2 {
+    left: 16.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush1 {
-    left: 8.333333333333332%;
+  [dir='ltr'] .ms-lgPull1 {
+    right: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPull1 {
+    left: 8.33333%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgPush0 {
+  [dir='ltr'] .ms-lgPull0 {
+    right: auto;
+  }
+
+  [dir='rtl'] .ms-lgPull0 {
     left: auto;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset11 {
-    margin-left: 91.66666666666666%;
+  [dir='ltr'] .ms-lgPush12 {
+    left: 100%;
+  }
+
+  [dir='rtl'] .ms-lgPush12 {
+    right: 100%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset10 {
-    margin-left: 83.33333333333334%;
+  [dir='ltr'] .ms-lgPush11 {
+    left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPush11 {
+    right: 91.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset9 {
+  [dir='ltr'] .ms-lgPush10 {
+    left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPush10 {
+    right: 83.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush9 {
+    left: 75%;
+  }
+
+  [dir='rtl'] .ms-lgPush9 {
+    right: 75%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush8 {
+    left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPush8 {
+    right: 66.66667%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush7 {
+    left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPush7 {
+    right: 58.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush6 {
+    left: 50%;
+  }
+
+  [dir='rtl'] .ms-lgPush6 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush5 {
+    left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPush5 {
+    right: 41.66667%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush4 {
+    left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPush4 {
+    right: 33.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush3 {
+    left: 25%;
+  }
+
+  [dir='rtl'] .ms-lgPush3 {
+    right: 25%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush2 {
+    left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-lgPush2 {
+    right: 16.66667%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush1 {
+    left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-lgPush1 {
+    right: 8.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgPush0 {
+    left: auto;
+  }
+
+  [dir='rtl'] .ms-lgPush0 {
+    right: auto;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset11 {
+    margin-left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-lgOffset11 {
+    margin-right: 91.66667%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset10 {
+    margin-left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-lgOffset10 {
+    margin-right: 83.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset9 {
     margin-left: 75%;
   }
-}
 
-@media (min-width: 640px) {
-  .ms-lgOffset8 {
-    margin-left: 66.66666666666666%;
+  [dir='rtl'] .ms-lgOffset9 {
+    margin-right: 75%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset7 {
-    margin-left: 58.333333333333336%;
+  [dir='ltr'] .ms-lgOffset8 {
+    margin-left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-lgOffset8 {
+    margin-right: 66.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset6 {
+  [dir='ltr'] .ms-lgOffset7 {
+    margin-left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-lgOffset7 {
+    margin-right: 58.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset6 {
     margin-left: 50%;
   }
-}
 
-@media (min-width: 640px) {
-  .ms-lgOffset5 {
-    margin-left: 41.66666666666667%;
+  [dir='rtl'] .ms-lgOffset6 {
+    margin-right: 50%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset4 {
-    margin-left: 33.33333333333333%;
+  [dir='ltr'] .ms-lgOffset5 {
+    margin-left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-lgOffset5 {
+    margin-right: 41.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset3 {
+  [dir='ltr'] .ms-lgOffset4 {
+    margin-left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-lgOffset4 {
+    margin-right: 33.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset3 {
     margin-left: 25%;
   }
-}
 
-@media (min-width: 640px) {
-  .ms-lgOffset2 {
-    margin-left: 16.666666666666664%;
+  [dir='rtl'] .ms-lgOffset3 {
+    margin-right: 25%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset1 {
-    margin-left: 8.333333333333332%;
+  [dir='ltr'] .ms-lgOffset2 {
+    margin-left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-lgOffset2 {
+    margin-right: 16.66667%;
   }
 }
 
 @media (min-width: 640px) {
-  .ms-lgOffset0 {
+  [dir='ltr'] .ms-lgOffset1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-lgOffset1 {
+    margin-right: 8.33333%;
+  }
+}
+
+@media (min-width: 640px) {
+  [dir='ltr'] .ms-lgOffset0 {
     margin-left: 0;
+  }
+
+  [dir='rtl'] .ms-lgOffset0 {
+    margin-right: 0;
   }
 }
 
@@ -8821,230 +10346,382 @@
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPull12 {
+  [dir='ltr'] .ms-xlPull12 {
     right: 100%;
   }
-}
 
-@media (min-width: 1024px) {
-  .ms-xlPull11 {
-    right: 91.66666666666666%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull10 {
-    right: 83.33333333333334%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull9 {
-    right: 75%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull8 {
-    right: 66.66666666666666%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull7 {
-    right: 58.333333333333336%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull6 {
-    right: 50%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull5 {
-    right: 41.66666666666667%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull4 {
-    right: 33.33333333333333%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull3 {
-    right: 25%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull2 {
-    right: 16.666666666666664%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull1 {
-    right: 8.333333333333332%;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPull0 {
-    right: auto;
-  }
-}
-
-@media (min-width: 1024px) {
-  .ms-xlPush12 {
+  [dir='rtl'] .ms-xlPull12 {
     left: 100%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush11 {
-    left: 91.66666666666666%;
+  [dir='ltr'] .ms-xlPull11 {
+    right: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPull11 {
+    left: 91.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush10 {
-    left: 83.33333333333334%;
+  [dir='ltr'] .ms-xlPull10 {
+    right: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPull10 {
+    left: 83.33333%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush9 {
+  [dir='ltr'] .ms-xlPull9 {
+    right: 75%;
+  }
+
+  [dir='rtl'] .ms-xlPull9 {
     left: 75%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush8 {
-    left: 66.66666666666666%;
+  [dir='ltr'] .ms-xlPull8 {
+    right: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPull8 {
+    left: 66.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush7 {
-    left: 58.333333333333336%;
+  [dir='ltr'] .ms-xlPull7 {
+    right: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPull7 {
+    left: 58.33333%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush6 {
+  [dir='ltr'] .ms-xlPull6 {
+    right: 50%;
+  }
+
+  [dir='rtl'] .ms-xlPull6 {
     left: 50%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush5 {
-    left: 41.66666666666667%;
+  [dir='ltr'] .ms-xlPull5 {
+    right: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPull5 {
+    left: 41.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush4 {
-    left: 33.33333333333333%;
+  [dir='ltr'] .ms-xlPull4 {
+    right: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPull4 {
+    left: 33.33333%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush3 {
+  [dir='ltr'] .ms-xlPull3 {
+    right: 25%;
+  }
+
+  [dir='rtl'] .ms-xlPull3 {
     left: 25%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush2 {
-    left: 16.666666666666664%;
+  [dir='ltr'] .ms-xlPull2 {
+    right: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPull2 {
+    left: 16.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush1 {
-    left: 8.333333333333332%;
+  [dir='ltr'] .ms-xlPull1 {
+    right: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPull1 {
+    left: 8.33333%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlPush0 {
+  [dir='ltr'] .ms-xlPull0 {
+    right: auto;
+  }
+
+  [dir='rtl'] .ms-xlPull0 {
     left: auto;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset11 {
-    margin-left: 91.66666666666666%;
+  [dir='ltr'] .ms-xlPush12 {
+    left: 100%;
+  }
+
+  [dir='rtl'] .ms-xlPush12 {
+    right: 100%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset10 {
-    margin-left: 83.33333333333334%;
+  [dir='ltr'] .ms-xlPush11 {
+    left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPush11 {
+    right: 91.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset9 {
+  [dir='ltr'] .ms-xlPush10 {
+    left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPush10 {
+    right: 83.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush9 {
+    left: 75%;
+  }
+
+  [dir='rtl'] .ms-xlPush9 {
+    right: 75%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush8 {
+    left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPush8 {
+    right: 66.66667%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush7 {
+    left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPush7 {
+    right: 58.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush6 {
+    left: 50%;
+  }
+
+  [dir='rtl'] .ms-xlPush6 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush5 {
+    left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPush5 {
+    right: 41.66667%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush4 {
+    left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPush4 {
+    right: 33.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush3 {
+    left: 25%;
+  }
+
+  [dir='rtl'] .ms-xlPush3 {
+    right: 25%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush2 {
+    left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xlPush2 {
+    right: 16.66667%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush1 {
+    left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xlPush1 {
+    right: 8.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlPush0 {
+    left: auto;
+  }
+
+  [dir='rtl'] .ms-xlPush0 {
+    right: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset11 {
+    margin-left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xlOffset11 {
+    margin-right: 91.66667%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset10 {
+    margin-left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xlOffset10 {
+    margin-right: 83.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset9 {
     margin-left: 75%;
   }
-}
 
-@media (min-width: 1024px) {
-  .ms-xlOffset8 {
-    margin-left: 66.66666666666666%;
+  [dir='rtl'] .ms-xlOffset9 {
+    margin-right: 75%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset7 {
-    margin-left: 58.333333333333336%;
+  [dir='ltr'] .ms-xlOffset8 {
+    margin-left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xlOffset8 {
+    margin-right: 66.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset6 {
+  [dir='ltr'] .ms-xlOffset7 {
+    margin-left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xlOffset7 {
+    margin-right: 58.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset6 {
     margin-left: 50%;
   }
-}
 
-@media (min-width: 1024px) {
-  .ms-xlOffset5 {
-    margin-left: 41.66666666666667%;
+  [dir='rtl'] .ms-xlOffset6 {
+    margin-right: 50%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset4 {
-    margin-left: 33.33333333333333%;
+  [dir='ltr'] .ms-xlOffset5 {
+    margin-left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xlOffset5 {
+    margin-right: 41.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset3 {
+  [dir='ltr'] .ms-xlOffset4 {
+    margin-left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xlOffset4 {
+    margin-right: 33.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset3 {
     margin-left: 25%;
   }
-}
 
-@media (min-width: 1024px) {
-  .ms-xlOffset2 {
-    margin-left: 16.666666666666664%;
+  [dir='rtl'] .ms-xlOffset3 {
+    margin-right: 25%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset1 {
-    margin-left: 8.333333333333332%;
+  [dir='ltr'] .ms-xlOffset2 {
+    margin-left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xlOffset2 {
+    margin-right: 16.66667%;
   }
 }
 
 @media (min-width: 1024px) {
-  .ms-xlOffset0 {
+  [dir='ltr'] .ms-xlOffset1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xlOffset1 {
+    margin-right: 8.33333%;
+  }
+}
+
+@media (min-width: 1024px) {
+  [dir='ltr'] .ms-xlOffset0 {
     margin-left: 0;
+  }
+
+  [dir='rtl'] .ms-xlOffset0 {
+    margin-right: 0;
   }
 }
 
@@ -9121,230 +10798,382 @@
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPull12 {
+  [dir='ltr'] .ms-xxlPull12 {
     right: 100%;
   }
-}
 
-@media (min-width: 1366px) {
-  .ms-xxlPull11 {
-    right: 91.66666666666666%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull10 {
-    right: 83.33333333333334%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull9 {
-    right: 75%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull8 {
-    right: 66.66666666666666%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull7 {
-    right: 58.333333333333336%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull6 {
-    right: 50%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull5 {
-    right: 41.66666666666667%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull4 {
-    right: 33.33333333333333%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull3 {
-    right: 25%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull2 {
-    right: 16.666666666666664%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull1 {
-    right: 8.333333333333332%;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPull0 {
-    right: auto;
-  }
-}
-
-@media (min-width: 1366px) {
-  .ms-xxlPush12 {
+  [dir='rtl'] .ms-xxlPull12 {
     left: 100%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush11 {
-    left: 91.66666666666666%;
+  [dir='ltr'] .ms-xxlPull11 {
+    right: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPull11 {
+    left: 91.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush10 {
-    left: 83.33333333333334%;
+  [dir='ltr'] .ms-xxlPull10 {
+    right: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPull10 {
+    left: 83.33333%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush9 {
+  [dir='ltr'] .ms-xxlPull9 {
+    right: 75%;
+  }
+
+  [dir='rtl'] .ms-xxlPull9 {
     left: 75%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush8 {
-    left: 66.66666666666666%;
+  [dir='ltr'] .ms-xxlPull8 {
+    right: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPull8 {
+    left: 66.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush7 {
-    left: 58.333333333333336%;
+  [dir='ltr'] .ms-xxlPull7 {
+    right: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPull7 {
+    left: 58.33333%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush6 {
+  [dir='ltr'] .ms-xxlPull6 {
+    right: 50%;
+  }
+
+  [dir='rtl'] .ms-xxlPull6 {
     left: 50%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush5 {
-    left: 41.66666666666667%;
+  [dir='ltr'] .ms-xxlPull5 {
+    right: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPull5 {
+    left: 41.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush4 {
-    left: 33.33333333333333%;
+  [dir='ltr'] .ms-xxlPull4 {
+    right: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPull4 {
+    left: 33.33333%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush3 {
+  [dir='ltr'] .ms-xxlPull3 {
+    right: 25%;
+  }
+
+  [dir='rtl'] .ms-xxlPull3 {
     left: 25%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush2 {
-    left: 16.666666666666664%;
+  [dir='ltr'] .ms-xxlPull2 {
+    right: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPull2 {
+    left: 16.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush1 {
-    left: 8.333333333333332%;
+  [dir='ltr'] .ms-xxlPull1 {
+    right: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPull1 {
+    left: 8.33333%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlPush0 {
+  [dir='ltr'] .ms-xxlPull0 {
+    right: auto;
+  }
+
+  [dir='rtl'] .ms-xxlPull0 {
     left: auto;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset11 {
-    margin-left: 91.66666666666666%;
+  [dir='ltr'] .ms-xxlPush12 {
+    left: 100%;
+  }
+
+  [dir='rtl'] .ms-xxlPush12 {
+    right: 100%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset10 {
-    margin-left: 83.33333333333334%;
+  [dir='ltr'] .ms-xxlPush11 {
+    left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPush11 {
+    right: 91.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset9 {
+  [dir='ltr'] .ms-xxlPush10 {
+    left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPush10 {
+    right: 83.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush9 {
+    left: 75%;
+  }
+
+  [dir='rtl'] .ms-xxlPush9 {
+    right: 75%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush8 {
+    left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPush8 {
+    right: 66.66667%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush7 {
+    left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPush7 {
+    right: 58.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush6 {
+    left: 50%;
+  }
+
+  [dir='rtl'] .ms-xxlPush6 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush5 {
+    left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPush5 {
+    right: 41.66667%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush4 {
+    left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPush4 {
+    right: 33.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush3 {
+    left: 25%;
+  }
+
+  [dir='rtl'] .ms-xxlPush3 {
+    right: 25%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush2 {
+    left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlPush2 {
+    right: 16.66667%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush1 {
+    left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlPush1 {
+    right: 8.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlPush0 {
+    left: auto;
+  }
+
+  [dir='rtl'] .ms-xxlPush0 {
+    right: auto;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset11 {
+    margin-left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset11 {
+    margin-right: 91.66667%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset10 {
+    margin-left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset10 {
+    margin-right: 83.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset9 {
     margin-left: 75%;
   }
-}
 
-@media (min-width: 1366px) {
-  .ms-xxlOffset8 {
-    margin-left: 66.66666666666666%;
+  [dir='rtl'] .ms-xxlOffset9 {
+    margin-right: 75%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset7 {
-    margin-left: 58.333333333333336%;
+  [dir='ltr'] .ms-xxlOffset8 {
+    margin-left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset8 {
+    margin-right: 66.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset6 {
+  [dir='ltr'] .ms-xxlOffset7 {
+    margin-left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset7 {
+    margin-right: 58.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset6 {
     margin-left: 50%;
   }
-}
 
-@media (min-width: 1366px) {
-  .ms-xxlOffset5 {
-    margin-left: 41.66666666666667%;
+  [dir='rtl'] .ms-xxlOffset6 {
+    margin-right: 50%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset4 {
-    margin-left: 33.33333333333333%;
+  [dir='ltr'] .ms-xxlOffset5 {
+    margin-left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset5 {
+    margin-right: 41.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset3 {
+  [dir='ltr'] .ms-xxlOffset4 {
+    margin-left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset4 {
+    margin-right: 33.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset3 {
     margin-left: 25%;
   }
-}
 
-@media (min-width: 1366px) {
-  .ms-xxlOffset2 {
-    margin-left: 16.666666666666664%;
+  [dir='rtl'] .ms-xxlOffset3 {
+    margin-right: 25%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset1 {
-    margin-left: 8.333333333333332%;
+  [dir='ltr'] .ms-xxlOffset2 {
+    margin-left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset2 {
+    margin-right: 16.66667%;
   }
 }
 
 @media (min-width: 1366px) {
-  .ms-xxlOffset0 {
+  [dir='ltr'] .ms-xxlOffset1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxlOffset1 {
+    margin-right: 8.33333%;
+  }
+}
+
+@media (min-width: 1366px) {
+  [dir='ltr'] .ms-xxlOffset0 {
     margin-left: 0;
+  }
+
+  [dir='rtl'] .ms-xxlOffset0 {
+    margin-right: 0;
   }
 }
 
@@ -9421,230 +11250,382 @@
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPull12 {
+  [dir='ltr'] .ms-xxxlPull12 {
     right: 100%;
   }
-}
 
-@media (min-width: 1920px) {
-  .ms-xxxlPull11 {
-    right: 91.66666666666666%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull10 {
-    right: 83.33333333333334%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull9 {
-    right: 75%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull8 {
-    right: 66.66666666666666%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull7 {
-    right: 58.333333333333336%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull6 {
-    right: 50%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull5 {
-    right: 41.66666666666667%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull4 {
-    right: 33.33333333333333%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull3 {
-    right: 25%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull2 {
-    right: 16.666666666666664%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull1 {
-    right: 8.333333333333332%;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPull0 {
-    right: auto;
-  }
-}
-
-@media (min-width: 1920px) {
-  .ms-xxxlPush12 {
+  [dir='rtl'] .ms-xxxlPull12 {
     left: 100%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush11 {
-    left: 91.66666666666666%;
+  [dir='ltr'] .ms-xxxlPull11 {
+    right: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull11 {
+    left: 91.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush10 {
-    left: 83.33333333333334%;
+  [dir='ltr'] .ms-xxxlPull10 {
+    right: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull10 {
+    left: 83.33333%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush9 {
+  [dir='ltr'] .ms-xxxlPull9 {
+    right: 75%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull9 {
     left: 75%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush8 {
-    left: 66.66666666666666%;
+  [dir='ltr'] .ms-xxxlPull8 {
+    right: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull8 {
+    left: 66.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush7 {
-    left: 58.333333333333336%;
+  [dir='ltr'] .ms-xxxlPull7 {
+    right: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull7 {
+    left: 58.33333%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush6 {
+  [dir='ltr'] .ms-xxxlPull6 {
+    right: 50%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull6 {
     left: 50%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush5 {
-    left: 41.66666666666667%;
+  [dir='ltr'] .ms-xxxlPull5 {
+    right: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull5 {
+    left: 41.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush4 {
-    left: 33.33333333333333%;
+  [dir='ltr'] .ms-xxxlPull4 {
+    right: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull4 {
+    left: 33.33333%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush3 {
+  [dir='ltr'] .ms-xxxlPull3 {
+    right: 25%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull3 {
     left: 25%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush2 {
-    left: 16.666666666666664%;
+  [dir='ltr'] .ms-xxxlPull2 {
+    right: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull2 {
+    left: 16.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush1 {
-    left: 8.333333333333332%;
+  [dir='ltr'] .ms-xxxlPull1 {
+    right: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPull1 {
+    left: 8.33333%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlPush0 {
+  [dir='ltr'] .ms-xxxlPull0 {
+    right: auto;
+  }
+
+  [dir='rtl'] .ms-xxxlPull0 {
     left: auto;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset11 {
-    margin-left: 91.66666666666666%;
+  [dir='ltr'] .ms-xxxlPush12 {
+    left: 100%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush12 {
+    right: 100%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset10 {
-    margin-left: 83.33333333333334%;
+  [dir='ltr'] .ms-xxxlPush11 {
+    left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush11 {
+    right: 91.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset9 {
+  [dir='ltr'] .ms-xxxlPush10 {
+    left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush10 {
+    right: 83.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush9 {
+    left: 75%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush9 {
+    right: 75%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush8 {
+    left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush8 {
+    right: 66.66667%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush7 {
+    left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush7 {
+    right: 58.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush6 {
+    left: 50%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush6 {
+    right: 50%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush5 {
+    left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush5 {
+    right: 41.66667%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush4 {
+    left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush4 {
+    right: 33.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush3 {
+    left: 25%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush3 {
+    right: 25%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush2 {
+    left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush2 {
+    right: 16.66667%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush1 {
+    left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlPush1 {
+    right: 8.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlPush0 {
+    left: auto;
+  }
+
+  [dir='rtl'] .ms-xxxlPush0 {
+    right: auto;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset11 {
+    margin-left: 91.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset11 {
+    margin-right: 91.66667%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset10 {
+    margin-left: 83.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset10 {
+    margin-right: 83.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset9 {
     margin-left: 75%;
   }
-}
 
-@media (min-width: 1920px) {
-  .ms-xxxlOffset8 {
-    margin-left: 66.66666666666666%;
+  [dir='rtl'] .ms-xxxlOffset9 {
+    margin-right: 75%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset7 {
-    margin-left: 58.333333333333336%;
+  [dir='ltr'] .ms-xxxlOffset8 {
+    margin-left: 66.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset8 {
+    margin-right: 66.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset6 {
+  [dir='ltr'] .ms-xxxlOffset7 {
+    margin-left: 58.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset7 {
+    margin-right: 58.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset6 {
     margin-left: 50%;
   }
-}
 
-@media (min-width: 1920px) {
-  .ms-xxxlOffset5 {
-    margin-left: 41.66666666666667%;
+  [dir='rtl'] .ms-xxxlOffset6 {
+    margin-right: 50%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset4 {
-    margin-left: 33.33333333333333%;
+  [dir='ltr'] .ms-xxxlOffset5 {
+    margin-left: 41.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset5 {
+    margin-right: 41.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset3 {
+  [dir='ltr'] .ms-xxxlOffset4 {
+    margin-left: 33.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset4 {
+    margin-right: 33.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset3 {
     margin-left: 25%;
   }
-}
 
-@media (min-width: 1920px) {
-  .ms-xxxlOffset2 {
-    margin-left: 16.666666666666664%;
+  [dir='rtl'] .ms-xxxlOffset3 {
+    margin-right: 25%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset1 {
-    margin-left: 8.333333333333332%;
+  [dir='ltr'] .ms-xxxlOffset2 {
+    margin-left: 16.66667%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset2 {
+    margin-right: 16.66667%;
   }
 }
 
 @media (min-width: 1920px) {
-  .ms-xxxlOffset0 {
+  [dir='ltr'] .ms-xxxlOffset1 {
+    margin-left: 8.33333%;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset1 {
+    margin-right: 8.33333%;
+  }
+}
+
+@media (min-width: 1920px) {
+  [dir='ltr'] .ms-xxxlOffset0 {
     margin-left: 0;
+  }
+
+  [dir='rtl'] .ms-xxxlOffset0 {
+    margin-right: 0;
   }
 }
 
@@ -9680,16 +11661,24 @@
   padding: 0;
 }
 
-.ms-textAlignLeft {
+[dir='ltr'] .ms-textAlignLeft {
+  text-align: left;
+}
+
+[dir='rtl'] .ms-textAlignLeft {
+  text-align: right;
+}
+
+[dir='ltr'] .ms-textAlignRight {
+  text-align: right;
+}
+
+[dir='rtl'] .ms-textAlignRight {
   text-align: left;
 }
 
 .ms-textAlignCenter {
   text-align: center;
-}
-
-.ms-textAlignRight {
-  text-align: right;
 }
 
 .ms-screenReaderOnly {
@@ -9723,7 +11712,8 @@
 }
 
 .ms-Fabric button,
-.ms-Fabric input {
+.ms-Fabric input,
+.ms-Fabric textarea {
   font-family: inherit;
 }
 
