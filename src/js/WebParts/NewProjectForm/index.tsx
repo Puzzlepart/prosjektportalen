@@ -144,14 +144,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {INewProjectFormProps} param0 Props
      * @param {INewProjectFormState} param1 State
      */
-    private renderFormInput({ }: INewProjectFormProps, { model, errorMessages, urlInputEnabled }: INewProjectFormState): JSX.Element {
+    private renderFormInput({ inputStyle }: INewProjectFormProps, { model, errorMessages, urlInputEnabled }: INewProjectFormState): JSX.Element {
         return (
             <section>
                 <TextField
+                    style={inputStyle}
                     placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
                     onChanged={newValue => this.onFormChange("Title", newValue)}
                     errorMessage={errorMessages.Title} />
                 <TextField
+                    style={inputStyle}
                     placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
                     multiline
                     autoAdjustHeight
@@ -159,6 +161,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     errorMessage={errorMessages.Description}
                 />
                 <TextField
+                    style={inputStyle}
                     placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
                     value={model.Url}
                     onChanged={newValue => this.onFormChange("Url", newValue)}
