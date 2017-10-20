@@ -1,9 +1,5 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../../../@localization";
-import {
-    MessageBar,
-    MessageBarType,
-} from "office-ui-fabric-react/lib/MessageBar";
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
@@ -11,10 +7,7 @@ import ISummarySectionProps from "./ISummarySectionProps";
 
 const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl, style }: ISummarySectionProps) => {
     return (
-        <Element
-            name="status-section"
-            className="status-section section ms-Grid-row"
-            style={style}>
+        <Element name="status-section" className="status-section section ms-Grid-row" style={style}>
             <div className="ms-Grid-col ms-sm12">
                 <div className="ms-Grid">
                     <div hidden={!title} className="ms-Grid-row">
@@ -67,11 +60,7 @@ const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageCo
                             </div>
                         </div>
                         <div className="ms-Grid-col ms-lg12 ms-xl8 status-columns-container">
-                            <div
-                                hidden={sections.length > 0}
-                                style={{ padding: 20 }}>
-                                <MessageBar messageBarType={MessageBarType.warning}>{RESOURCE_MANAGER.getResource("ProjectStatus_NoData")}</MessageBar>
-                            </div>
+
                             <div className="status-elements">
                                 {sections.map((section, key) => (
                                     <StatusElement
