@@ -15,6 +15,7 @@ export interface IDynamicPortfolioExcelExportConfig {
 }
 
 export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
+    loadingText?: string;
     searchProperty?: string;
     showGroupBy?: boolean;
     modalHeaderClassName?: string;
@@ -29,6 +30,7 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
+    loadingText: RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText"),
     searchProperty: "Title",
     showGroupBy: true,
     modalHeaderClassName: "ms-font-xxl",

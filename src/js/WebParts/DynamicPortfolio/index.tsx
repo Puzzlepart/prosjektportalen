@@ -89,7 +89,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
         if (this.state.isLoading) {
             return (
-                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
+                <Spinner label={this.props.loadingText} type={SpinnerType.large} />
             );
         }
         return (
