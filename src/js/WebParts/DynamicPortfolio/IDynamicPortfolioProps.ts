@@ -4,6 +4,7 @@ import {
     ConstrainMode,
     DetailsListLayoutMode,
 } from "office-ui-fabric-react/lib/DetailsList";
+import { IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export interface IDynamicPortfolioExcelExportConfig {
@@ -24,6 +25,7 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     excelExportEnabled?: boolean;
     excelExportConfig?: IDynamicPortfolioExcelExportConfig;
     defaultSortFunction?: (a, b) => 1 | -1;
+    view?: IDynamicPortfolioViewConfig;
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {

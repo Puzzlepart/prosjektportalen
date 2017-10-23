@@ -1,26 +1,27 @@
 import RESOURCE_MANAGER from "../../../@localization";
-import * as pnp from "sp-pnp-js";
+import { Web } from "sp-pnp-js";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
 /**
  * Get config from lists
  *
  * @param {string} orderBy Order by property
+ * @param {string} configWebUrl URL for config lists
  */
-export async function getConfig(orderBy = "GtDpOrder"): Promise<IDynamicPortfolioConfiguration> {
-    const lists = pnp.sp.web.lists;
+export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
+    const webLists = new Web(configWebUrl).lists;
     const [fields, refiners, views, statusFields] = await Promise.all([
-        lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
+        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
             .items
             .orderBy(orderBy)
             .usingCaching()
             .get(),
-        lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
+        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
             .items
             .orderBy(orderBy)
             .usingCaching()
             .get(),
-        lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
+        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
             .items
             .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
             .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
