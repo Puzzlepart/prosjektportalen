@@ -13,7 +13,7 @@ export default interface INewProjectFormProps {
     headerText?: string;
     subHeaderText?: string;
     creationModalTitle?: string;
-    inputStyle?: React.CSSProperties;
+    inputContainerStyle?: React.CSSProperties;
 }
 
 export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
@@ -28,5 +28,5 @@ export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     headerText: RESOURCE_MANAGER.getResource("NewProjectForm_Title"),
     subHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),
     creationModalTitle: RESOURCE_MANAGER.getResource("CreationModal_Title"),
-    inputStyle: { marginBottom: 5 },
+    inputContainerStyle: { marginBottom: 5 },
 };

@@ -11,7 +11,6 @@ export default interface INewProjectFormState {
     model?: IProjectModel;
     errorMessages?: any;
     showListContentSettings?: boolean;
-    urlInputEnabled?: boolean;
     formValid?: boolean;
     provisioning: {
         status: ProvisionStatus;
