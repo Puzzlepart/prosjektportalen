@@ -16,6 +16,7 @@ import {
     DialogType,
 } from "office-ui-fabric-react/lib/Dialog";
 import { IProjectModel } from "../../Model";
+import ListConfig from "../../Provision/Data/Config/ListConfig";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import * as Util from "../../Util";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
@@ -52,16 +53,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-  * Component did mount
-  */
-    public async componentDidMount(): Promise<void> {
-        const listDataConfig = await ListDataConfig.RetrieveConfig();
-        let model = this.state.model;
-        model.IncludeContent = Object.keys(listDataConfig).filter(key => listDataConfig[key].Default);
-        this.setState({
-            listDataConfig,
-            model,
-        });
+     * Component did mount
+    */
+    public async componentDidMount() {
+        const config = await this.getRequiredConfig();
+        this.setState(config);
     }
 
     /**
@@ -137,6 +133,22 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 );
             }
         }
+    }
+
+    /**
+     * Get required config for the component
+     */
+    private async getRequiredConfig(): Promise<{ showSettings: boolean, listDataConfig: { [key: string]: ListConfig }, model: IProjectModel }> {
+        const listDataConfig = await ListDataConfig.RetrieveConfig();
+        const listDataConfigKeys = Object.keys(listDataConfig);
+        const showSettings = this.props.showSettings && listDataConfigKeys.length > 0;
+        let model = this.state.model;
+        model.IncludeContent = listDataConfigKeys.filter(key => listDataConfig[key].Default);
+        return {
+            showSettings,
+            listDataConfig,
+            model,
+        };
     }
 
     /**
