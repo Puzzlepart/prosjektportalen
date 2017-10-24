@@ -202,6 +202,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         const colTypeMaxWidth = {
             calculcated: 100,
             choice: 300,
+            url: 300,
             counter: 100,
             datetime: 100,
             note: 300,
