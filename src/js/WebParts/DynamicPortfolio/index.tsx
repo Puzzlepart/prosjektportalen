@@ -61,18 +61,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     public async componentDidMount() {
         try {
             const data = await this.fetchInitialData();
-            await this.updateState({
-                ...data,
-                isLoading: false,
-            });
+            await this.updateState({ ...data, isLoading: false });
             if (this.props.viewSelectorEnabled) {
                 Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
             }
         } catch (errorMessage) {
-            this.setState({
-                errorMessage,
-                isLoading: false,
-            });
+            this.setState({ errorMessage, isLoading: false });
         }
     }
 
@@ -199,14 +193,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     */
     private renderStatusBar() {
         const data = this.getFilteredData();
-
         if (data.items.length === 0) {
             return null;
         }
-
-        return (
-            <MessageBar>{String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length)}</MessageBar>
-        );
+        return <MessageBar>{String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length)}</MessageBar>;
     }
 
     /**
@@ -412,7 +402,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         let searchTerm = newValue.toLowerCase();
                         this.setState({ searchTerm });
                     }}
-                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")} />
+                    labelText={this.props.searchBoxLabelText} />
             </div>
         );
     }
