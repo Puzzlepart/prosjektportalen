@@ -11,7 +11,7 @@ export default interface ILatestProjectsProps extends IBaseWebPartProps {
 }
 
 export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
-    title: RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"),
+    chromeTitle: RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"),
     itemsCount: 5,
     itemsOrderBy: {
         orderBy: "Created",
