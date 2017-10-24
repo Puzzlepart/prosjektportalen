@@ -196,7 +196,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (data.items.length === 0) {
             return null;
         }
-        return <MessageBar>{String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length)}</MessageBar>;
+        return <MessageBar>{String.format(this.props.showCountText, data.items.length, this.state.items.length)}</MessageBar>;
     }
 
     /**
