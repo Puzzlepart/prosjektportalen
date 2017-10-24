@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../@localization";
 import ProjectList, { IProjectListProps } from "./ProjectList";
 import ProjectInfo, { IProjectInfoProps } from "./ProjectInfo";
 import ProjectPhases, { IProjectPhasesProps } from "./ProjectPhases";

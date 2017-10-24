@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../../../../@localization";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import CheckListItem from "./CheckListItem";
 import ISummaryViewProps from "./ISummaryViewProps";

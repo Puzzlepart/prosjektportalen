@@ -200,13 +200,15 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     private createColumnFromSpField(field: SP.Field): IColumn {
         const colTypeMaxWidth = {
-            number: 80,
-            calculcated: 80,
-            counter: 80,
-            text: 300,
+            calculcated: 100,
+            choice: 300,
+            url: 300,
+            counter: 100,
+            datetime: 100,
             note: 300,
-            datetime: 150,
-            user: 150,
+            number: 100,
+            text: 300,
+            user: 100,
         };
 
         const baseProps = {

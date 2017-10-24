@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
 import {

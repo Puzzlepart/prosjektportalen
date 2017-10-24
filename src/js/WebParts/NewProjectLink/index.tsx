@@ -76,14 +76,15 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
      * @param {INewProjectLinkProps} param0 Props
      * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog({ dlgHeaderText, dlgSubHeaderText }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
+    private renderDialog({ dlgHeaderText, dlgSubHeaderText, creationModalTitle }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
         if (showDialog) {
             return (
                 <NewProjectForm
                     renderMode={NewProjectFormRenderMode.Dialog}
                     onDialogDismiss={() => this.setState({ showDialog: false })}
                     headerText={dlgHeaderText}
-                    subHeaderText={dlgSubHeaderText} />
+                    subHeaderText={dlgSubHeaderText}
+                    creationModalTitle={creationModalTitle} />
             );
         }
         return null;

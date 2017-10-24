@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import pnp, { PermissionKind } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
@@ -61,16 +61,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     public async componentDidMount() {
         try {
             const data = await this.fetchInitialData();
-            await this.updateState({
-                ...data,
-                isLoading: false,
-            });
-            Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+            await this.updateState({ ...data, isLoading: false });
+            if (this.props.viewSelectorEnabled) {
+                Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+            }
         } catch (errorMessage) {
-            this.setState({
-                errorMessage,
-                isLoading: false,
-            });
+            this.setState({ errorMessage, isLoading: false });
         }
     }
 
@@ -87,22 +83,24 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
         if (this.state.isLoading) {
             return (
-                <Spinner label={RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText")} type={SpinnerType.large} />
+                <Spinner label={this.props.loadingText} type={SpinnerType.large} />
             );
         }
         return (
             <div>
-                {this.renderCommandBar(this.props, this.state)}
+                {this.renderCommandBar()}
                 {this.state.isChangingView
                     ? <div style={{ paddingTop: 20 }}>
-                        <Spinner label={String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), this.state.isChangingView.name)} type={SpinnerType.large} />
+                        <Spinner
+                            label={String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), this.state.isChangingView.name)}
+                            type={SpinnerType.large} />
                     </div>
                     : <div>
-                        {this.renderSearchBox(this.props, this.state)}
-                        {this.renderStatusBar(this.props, this.state)}
-                        {this.renderItems(this.props, this.state)}
-                        {this.renderFilterPanel(this.props, this.state)}
-                        {this.renderProjectInfoModal(this.props, this.state)}
+                        {this.renderSearchBox()}
+                        {this.renderStatusBar()}
+                        {this.renderItems()}
+                        {this.renderFilterPanel()}
+                        {this.renderProjectInfoModal()}
                     </div>}
             </div>
         );
@@ -114,31 +112,38 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
 
-        const [configuration, canUserManageWeb] = await Promise.all([DynamicPortfolioConfiguration.getConfig(), pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb)]);
+        const [configuration, canUserManageWeb] = await Promise.all([
+            DynamicPortfolioConfiguration.getConfig(),
+            pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb),
+        ]);
 
         let currentView;
 
-        /**
-         * If we have a viewId present in the URL hash, we"ll attempt use that
-         */
-        if (hashState.viewId) {
-            [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
-            if (!currentView) {
-                throw {
-                    message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
-                    type: MessageBarType.error,
-                };
-            }
+        if (this.props.defaultView) {
+            currentView = this.props.defaultView;
         } else {
             /**
-             * Otherwise we"ll use the default view from the configuration list
+             * If we have a viewId present in the URL hash, we'll attempt to use that
              */
-            [currentView] = configuration.views.filter(qc => qc.default);
-            if (!currentView) {
-                throw {
-                    message: RESOURCE_MANAGER.getResource("DynamicPortfolio_NoDefaultView"),
-                    type: MessageBarType.error,
-                };
+            if (hashState.viewId) {
+                [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+                if (!currentView) {
+                    throw {
+                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
+                        type: MessageBarType.error,
+                    };
+                }
+            } else {
+                /**
+                 * Otherwise we"ll use the default view from the configuration list
+                 */
+                [currentView] = configuration.views.filter(qc => qc.default);
+                if (!currentView) {
+                    throw {
+                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_NoDefaultView"),
+                        type: MessageBarType.error,
+                    };
+                }
             }
         }
         const fieldNames = configuration.columns.map(f => f.fieldName);
@@ -185,30 +190,20 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
     /**
     * Render status bar
-    *
-    * @param {IDynamicPortfolioProps} param0 Props
-    * @param {IDynamicPortfolioState} param1 State
     */
-    private renderStatusBar({ }: IDynamicPortfolioProps, { items }: IDynamicPortfolioState) {
-        const data = this.getFilteredData(this.props, this.state);
-
+    private renderStatusBar() {
+        const data = this.getFilteredData();
         if (data.items.length === 0) {
             return null;
         }
-
-        return (
-            <MessageBar>{String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, items.length)}</MessageBar>
-        );
+        return <MessageBar>{String.format(this.props.showCountText, data.items.length, this.state.items.length)}</MessageBar>;
     }
 
     /**
      * Render items
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
      */
-    private renderItems({ constrainMode, layoutMode, selectionMode }: IDynamicPortfolioProps, { configuration }: IDynamicPortfolioState) {
-        const data = this.getFilteredData(this.props, this.state);
+    private renderItems() {
+        const data = this.getFilteredData();
 
         if (data.items.length === 0) {
             return (
@@ -219,12 +214,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         return (
             <DetailsList
                 items={data.items}
-                constrainMode={constrainMode}
-                layoutMode={layoutMode}
+                constrainMode={this.props.constrainMode}
+                layoutMode={this.props.layoutMode}
                 columns={data.columns}
                 groups={data.groups}
-                selectionMode={selectionMode}
-                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, configuration, evt => this._onOpenProjectModal(evt, item))}
+                selectionMode={this.props.selectionMode}
+                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
             />
         );
@@ -232,33 +227,56 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
     /**
      * Render Filter Panel
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
      */
-    private renderFilterPanel({ }: IDynamicPortfolioProps, { filters, showFilterPanel }: IDynamicPortfolioState) {
+    private renderFilterPanel() {
         return (
             <DynamicPortfolioFilterPanel
-                isOpen={showFilterPanel}
+                isOpen={this.state.showFilterPanel}
                 onDismiss={() => this.setState({ showFilterPanel: false })}
-                filters={filters}
+                filters={this.state.filters}
                 showIcons={false}
                 onFilterChange={this._onFilterChange} />
         );
     }
 
     /**
-     * Renders the command bar from office-ui-fabric-react
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
+     * Renders the Project Info modal
      */
-    private renderCommandBar({ showGroupBy, excelExportEnabled, excelExportConfig }: IDynamicPortfolioProps, { configuration, currentView, selectedColumns, groupBy, canUserManageWeb }: IDynamicPortfolioState) {
+    private renderProjectInfoModal() {
+        if (this.state.showProjectInfo) {
+            return (
+                <ProjectInfo
+                    webUrl={this.state.showProjectInfo.Path}
+                    hideChrome={true}
+                    showActionLinks={false}
+                    showMissingPropsWarning={false}
+                    filterField={this.props.projectInfoFilterField}
+                    labelSize="l"
+                    valueSize="m"
+                    renderMode={ProjectInfoRenderMode.Modal}
+                    modalOptions={{
+                        isOpen: this.state.showProjectInfo,
+                        isDarkOverlay: true,
+                        isBlocking: false,
+                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        headerClassName: this.props.modalHeaderClassName,
+                        headerStyle: { marginBottom: 20 },
+                        title: this.state.showProjectInfo.Title,
+                    }} />
+            );
+        }
+        return null;
+    }
+
+    /**
+     * Renders the command bar from office-ui-fabric-react
+     */
+    private renderCommandBar() {
         const items: IContextualMenuItem[] = [];
         const farItems: IContextualMenuItem[] = [];
 
-        if (showGroupBy) {
-            const groupByColumns = configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
+        if (this.props.showGroupBy) {
+            const groupByColumns = this.state.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: idx.toString(),
                 name: col.name,
                 onClick: e => {
@@ -268,7 +286,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }));
             items.push({
                 key: "Group",
-                name: groupBy ? groupBy.name : RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                name: this.state.groupBy ? this.state.groupBy.name : RESOURCE_MANAGER.getResource("String_NoGrouping"),
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -286,11 +304,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             });
         }
 
-        if (excelExportEnabled && excelExportConfig) {
+        if (this.props.excelExportEnabled && this.props.excelExportConfig) {
             items.push({
                 key: "ExcelExport",
-                name: excelExportConfig.buttonLabel,
-                iconProps: { iconName: excelExportConfig.buttonIcon },
+                name: this.props.excelExportConfig.buttonLabel,
+                iconProps: { iconName: this.props.excelExportConfig.buttonIcon },
                 disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
                 onClick: e => {
                     e.preventDefault();
@@ -299,30 +317,29 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             });
         }
 
-        if (canUserManageWeb) {
+        if (this.props.viewSelectorEnabled) {
+            if (this.state.canUserManageWeb) {
+                farItems.push({
+                    key: "NewView",
+                    name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                    iconProps: { iconName: "CirclePlus" },
+                    itemType: ContextualMenuItemType.Normal,
+                    onClick: e => {
+                        e.preventDefault();
+                        SP.UI.ModalDialog.showModalDialog({
+                            url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
+                            title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                        });
+                    },
+                });
+            }
             farItems.push({
-                key: "NewView",
-                name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
-                iconProps: { iconName: "CirclePlus" },
-                itemType: ContextualMenuItemType.Normal,
-                onClick: e => {
-                    e.preventDefault();
-                    SP.UI.ModalDialog.showModalDialog({
-                        url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
-                        title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
-                    });
-                },
-            });
-        }
-
-        farItems.push(
-            {
                 key: "View",
-                name: currentView.name,
+                name: this.state.currentView.name,
                 iconProps: { iconName: "List" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: configuration.views.map((qc, idx) => ({
+                items: this.state.configuration.views.map((qc, idx) => ({
                     key: idx.toString(),
                     name: qc.name,
                     iconProps: { iconName: qc.iconName },
@@ -331,17 +348,19 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         this.changeView(qc);
                     },
                 })),
-            },
-            {
-                key: "Filters",
-                name: "",
-                iconProps: { iconName: "Filter" },
-                itemType: ContextualMenuItemType.Normal,
-                onClick: e => {
-                    e.preventDefault();
-                    this.setState({ showFilterPanel: true });
-                },
             });
+        }
+
+        farItems.push({
+            key: "Filters",
+            name: "",
+            iconProps: { iconName: "Filter" },
+            itemType: ContextualMenuItemType.Normal,
+            onClick: e => {
+                e.preventDefault();
+                this.setState({ showFilterPanel: true });
+            },
+        });
 
         return (
             <CommandBar
@@ -356,7 +375,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     private async exportToExcel() {
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
-        const data = this.getFilteredData(this.props, this.state);
+        const data = this.getFilteredData();
         const sheet = {
             name: this.props.excelExportConfig.sheetName,
             data: [
@@ -374,11 +393,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
     /**
      * Renders search box
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
      */
-    private renderSearchBox({ }: IDynamicPortfolioProps, { }: IDynamicPortfolioState) {
+    private renderSearchBox() {
         return (
             <div style={{ marginTop: 10 }}>
                 <SearchBox
@@ -386,65 +402,30 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         let searchTerm = newValue.toLowerCase();
                         this.setState({ searchTerm });
                     }}
-                    labelText={RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder")} />
+                    labelText={this.props.searchBoxLabelText} />
             </div>
         );
     }
 
     /**
-     * Renders the Project Info modal
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
-     */
-    private renderProjectInfoModal({ modalHeaderClassName, projectInfoFilterField }: IDynamicPortfolioProps, { showProjectInfo }: IDynamicPortfolioState) {
-        if (showProjectInfo) {
-            return (
-                <ProjectInfo
-                    webUrl={showProjectInfo.Path}
-                    hideChrome={true}
-                    showActionLinks={false}
-                    showMissingPropsWarning={false}
-                    filterField={projectInfoFilterField}
-                    labelSize="l"
-                    valueSize="m"
-                    renderMode={ProjectInfoRenderMode.Modal}
-                    modalOptions={{
-                        isOpen: this.state.showProjectInfo,
-                        isDarkOverlay: true,
-                        isBlocking: false,
-                        onDismiss: e => this.setState({ showProjectInfo: null }),
-                        headerClassName: modalHeaderClassName,
-                        headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.Title,
-                    }} />
-            );
-        }
-        return null;
-    }
-
-    /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
-     *
-     * @param {IDynamicPortfolioProps} param0 Props
-     * @param {IDynamicPortfolioState} param1 State
      */
-    private getFilteredData({ searchProperty }: IDynamicPortfolioProps, { selectedColumns, filteredItems, groupBy, searchTerm, currentSort }: IDynamicPortfolioState) {
+    private getFilteredData() {
         let groups: IGroup[] = null;
-        if (groupBy) {
+        if (this.state.groupBy) {
             const itemsSort: any = {
-                props: [groupBy.fieldName],
+                props: [this.state.groupBy.fieldName],
                 opts: {},
             };
-            if (currentSort) {
-                itemsSort.props.push(currentSort.fieldName);
-                itemsSort.opts.reverse = !currentSort.isSortedDescending;
+            if (this.state.currentSort) {
+                itemsSort.props.push(this.state.currentSort.fieldName);
+                itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
             }
-            const groupItems = array_sort(filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map(g => g[groupBy.fieldName] ? g[groupBy.fieldName] : RESOURCE_MANAGER.getResource("String_NotSet"));
+            const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
+            const groupNames = groupItems.map(g => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : RESOURCE_MANAGER.getResource("String_NotSet"));
             groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
-                name: `${groupBy.name}: ${name}`,
+                name: `${this.state.groupBy.name}: ${name}`,
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
                 isCollapsed: false,
@@ -452,10 +433,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 isDropEnabled: false,
             }));
         }
-        let items = filteredItems ? filteredItems.filter(item => item[searchProperty].toString().toLowerCase().indexOf(searchTerm) !== -1) : [];
+        let items = this.state.filteredItems ? this.state.filteredItems.filter(item => item[this.props.searchProperty].toString().toLowerCase().indexOf(this.state.searchTerm) !== -1) : [];
         return {
             items: items,
-            columns: selectedColumns,
+            columns: this.state.selectedColumns,
             groups: groups,
         };
     }
@@ -624,7 +605,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState(updatedState);
-        Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+        if (this.props.viewSelectorEnabled) {
+            Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+        }
     }
 }
 

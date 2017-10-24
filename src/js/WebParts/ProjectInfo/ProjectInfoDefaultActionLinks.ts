@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import { IModalLinkProps } from "../@Components/ModalLink";
 import {PermissionKind} from "sp-pnp-js";
 import {

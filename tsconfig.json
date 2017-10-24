@@ -8,7 +8,6 @@
         "removeComments": false,
         "baseUrl": ".",
         "paths": {
-            "localization": ["src/js/@localization"],
             "model": ["src/js/Model"]
         },
         "typeRoots": [

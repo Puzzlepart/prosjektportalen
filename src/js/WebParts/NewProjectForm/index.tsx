@@ -16,6 +16,7 @@ import {
     DialogType,
 } from "office-ui-fabric-react/lib/Dialog";
 import { IProjectModel } from "../../Model";
+import ListConfig from "../../Provision/Data/Config/ListConfig";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import * as Util from "../../Util";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
@@ -47,22 +48,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             },
             errorMessages: {},
             listDataConfig: {},
-            urlInputEnabled: true,
             provisioning: { status: ProvisionStatus.Idle },
         };
     }
 
     /**
-  * Component did mount
-  */
-    public async componentDidMount(): Promise<void> {
-        const listDataConfig = await ListDataConfig.RetrieveConfig();
-        let model = this.state.model;
-        model.IncludeContent = Object.keys(listDataConfig).filter(key => listDataConfig[key].Default);
-        this.setState({
-            listDataConfig,
-            model,
-        });
+     * Component did mount
+    */
+    public async componentDidMount() {
+        const config = await this.getRequiredConfig();
+        this.setState(config);
     }
 
     /**
@@ -77,10 +72,12 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                             <div
                                 className={this.props.className}
                                 style={this.props.style}>
-                                <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
-                                {this.renderFormInput(this.props, this.state)}
-                                {this.renderSettingsSection(this.props, this.state)}
-                                {this.renderFooter(this.props, this.state)}
+                                <div
+                                    className="ms-font-l"
+                                    style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
+                                {this.renderFormInput()}
+                                {this.renderSettingsSection()}
+                                {this.renderFooter()}
                             </div>
                         );
                     }
@@ -100,9 +97,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 title={this.props.headerText}
                                 onDismiss={this.props.onDialogDismiss}>
                                 <div>
-                                    {this.renderFormInput(this.props, this.state)}
-                                    {this.renderSettingsSection(this.props, this.state)}
-                                    {this.renderFooter(this.props, this.state)}
+                                    {this.renderFormInput()}
+                                    {this.renderSettingsSection()}
+                                    {this.renderFooter()}
                                 </div>
                             </Dialog >
                         );
@@ -113,7 +110,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             case ProvisionStatus.Creating: {
                 return (
                     <CreationModal
-                        title={String.format(RESOURCE_MANAGER.getResource("CreationModal_Title"), this.state.model.Title)}
+                        title={String.format(this.props.creationModalTitle, this.state.model.Title)}
                         isBlocking={true}
                         isDarkOverlay={true}
                         progressLabel={this.state.provisioning.step}
@@ -139,55 +136,69 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-     * Render form input field
-     *
-     * @param {INewProjectFormProps} param0 Props
-     * @param {INewProjectFormState} param1 State
+     * Get required config for the component
      */
-    private renderFormInput({ }: INewProjectFormProps, { model, errorMessages, urlInputEnabled }: INewProjectFormState): JSX.Element {
+    private async getRequiredConfig(): Promise<{ showSettings: boolean, listDataConfig: { [key: string]: ListConfig }, model: IProjectModel }> {
+        const listDataConfig = await ListDataConfig.RetrieveConfig();
+        const listDataConfigKeys = Object.keys(listDataConfig);
+        const showSettings = this.props.showSettings && listDataConfigKeys.length > 0;
+        let model = this.state.model;
+        model.IncludeContent = listDataConfigKeys.filter(key => listDataConfig[key].Default);
+        return {
+            showSettings,
+            listDataConfig,
+            model,
+        };
+    }
+
+    /**
+     * Render form input field
+     */
+    private renderFormInput(): JSX.Element {
         return (
             <section>
-                <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
-                    onChanged={newValue => this.onFormChange("Title", newValue)}
-                    errorMessage={errorMessages.Title} />
-                <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
-                    multiline
-                    autoAdjustHeight
-                    onChanged={newValue => this.onFormChange("Description", newValue)}
-                    errorMessage={errorMessages.Description}
-                />
-                <TextField
-                    placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
-                    value={model.Url}
-                    onChanged={newValue => this.onFormChange("Url", newValue)}
-                    errorMessage={errorMessages.Url}
-                    disabled={!urlInputEnabled} />
+                <div style={this.props.inputContainerStyle}>
+                    <TextField
+                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
+                        onChanged={newValue => this.onFormChange("Title", newValue)}
+                        errorMessage={this.state.errorMessages.Title} />
+                </div>
+                <div style={this.props.inputContainerStyle}>
+                    <TextField
+                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
+                        multiline
+                        autoAdjustHeight
+                        onChanged={newValue => this.onFormChange("Description", newValue)}
+                        errorMessage={this.state.errorMessages.Description} />
+                </div>
+                <div style={this.props.inputContainerStyle}>
+                    <TextField
+                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
+                        value={this.state.model.Url}
+                        onChanged={newValue => this.onFormChange("Url", newValue)}
+                        errorMessage={this.state.errorMessages.Url} />
+                </div>
             </section>
         );
     }
 
     /**
      * Render settings section
-     *
-     * @param {INewProjectFormProps} param0 Props
-     * @param {INewProjectFormState} param1 State
      */
-    private renderSettingsSection({ settingsClassName }: INewProjectFormProps, { listDataConfig, showListContentSettings }: INewProjectFormState) {
+    private renderSettingsSection() {
         return (
-            <div className={settingsClassName}>
+            <div className={this.props.settingsClassName}>
                 <div
-                    onClick={e => this.setState({ showListContentSettings: !showListContentSettings })}
+                    onClick={e => this.setState({ showListContentSettings: !this.state.showListContentSettings })}
                     className="ms-font-l toggle-section">
                     <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
-                    <span className={showListContentSettings ? "ChevronUp" : "ChevronDown"}>
-                        <Icon iconName={showListContentSettings ? "ChevronUp" : "ChevronDown"} />
+                    <span className={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"}>
+                        <Icon iconName={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"} />
                     </span>
                 </div>
-                <section hidden={!showListContentSettings}>
-                    {Object.keys(listDataConfig).map(key => {
-                        const { Default, Label } = listDataConfig[key];
+                <section hidden={!this.state.showListContentSettings}>
+                    {Object.keys(this.state.listDataConfig).map(key => {
+                        const { Default, Label } = this.state.listDataConfig[key];
                         return (
                             <Toggle
                                 key={key}
@@ -205,19 +216,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
 
     /**
      * Render footer
-     *
-     * @param {INewProjectFormProps} param0 Props
-     * @param {INewProjectFormState} param1 State
      */
-    private renderFooter({ renderMode, onDialogDismiss }: INewProjectFormProps, { formValid }: INewProjectFormState) {
-        switch (renderMode) {
+    private renderFooter() {
+        switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
                     <div style={{ paddingTop: 15 }}>
                         <div style={{ float: "right" }}>
                             <PrimaryButton
                                 onClick={this.onSubmit}
-                                disabled={!formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
+                                disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
                         </div>
                     </div>
                 );
@@ -227,8 +235,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <DialogFooter>
                         <PrimaryButton
                             onClick={this.onSubmit}
-                            disabled={!formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
-                        <DefaultButton onClick={() => onDialogDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
+                            disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
+                        <DefaultButton onClick={() => this.props.onDialogDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
                     </DialogFooter>
                 );
             }

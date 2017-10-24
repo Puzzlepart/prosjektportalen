@@ -8,17 +8,17 @@ export enum ProvisionStatus {
 }
 
 export default interface INewProjectFormState {
-    model?: IProjectModel;
-    errorMessages?: any;
-    showListContentSettings?: boolean;
-    urlInputEnabled?: boolean;
-    formValid?: boolean;
+    model: IProjectModel;
+    errorMessages: any;
+    listDataConfig: { [key: string]: ListConfig };
     provisioning: {
         status: ProvisionStatus;
         step?: string;
         progress?: string;
         error?: any;
     };
-    listDataConfig?: { [key: string]: ListConfig };
+    showListContentSettings?: boolean;
+    formValid?: boolean;
+    showSettings?: boolean;
 }
 

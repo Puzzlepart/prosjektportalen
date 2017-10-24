@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "localization";
+import RESOURCE_MANAGER from "../../@localization";
 import { sp } from "sp-pnp-js";
 import * as Util from "../../Util";
 import {

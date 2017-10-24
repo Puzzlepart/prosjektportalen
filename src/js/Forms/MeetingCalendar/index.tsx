@@ -1,7 +1,7 @@
+import RESOURCE_MANAGER from "../../@localization";
 import * as pnp from "sp-pnp-js";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import RESOURCE_MANAGER from "localization";
 import { IBaseFormModifications } from "../Base";
 import * as FormUtil from "../FormUtils";
 import { default as RelatedLogElements } from "./RelatedLogElements";

@@ -1,7 +1,7 @@
+import RESOURCE_MANAGER from "../../../../@localization";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Site, Web } from "sp-pnp-js";
-import RESOURCE_MANAGER from "localization";
 import SectionModel, { SectionType } from "../../Section/SectionModel";
 import * as jsPDF from "jspdf";
 require("jspdf-autotable");
