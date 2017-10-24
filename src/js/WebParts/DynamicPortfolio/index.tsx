@@ -65,7 +65,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 ...data,
                 isLoading: false,
             });
-            if (!this.props.view) {
+            if (this.props.viewSelectorEnabled) {
                 Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
             }
         } catch (errorMessage) {
@@ -118,15 +118,18 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
 
-        const [configuration, canUserManageWeb] = await Promise.all([DynamicPortfolioConfiguration.getConfig(), pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb)]);
+        const [configuration, canUserManageWeb] = await Promise.all([
+            DynamicPortfolioConfiguration.getConfig(),
+            pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb),
+        ]);
 
         let currentView;
 
-        if (this.props.view) {
-            currentView = this.props.view;
+        if (this.props.defaultView) {
+            currentView = this.props.defaultView;
         } else {
             /**
-             * If we have a viewId present in the URL hash, we"ll attempt use that
+             * If we have a viewId present in the URL hash, we'll attempt to use that
              */
             if (hashState.viewId) {
                 [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
@@ -324,23 +327,22 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             });
         }
 
-        if (!this.props.view && this.state.canUserManageWeb) {
-            farItems.push({
-                key: "NewView",
-                name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
-                iconProps: { iconName: "CirclePlus" },
-                itemType: ContextualMenuItemType.Normal,
-                onClick: e => {
-                    e.preventDefault();
-                    SP.UI.ModalDialog.showModalDialog({
-                        url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
-                        title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
-                    });
-                },
-            });
-        }
-
-        if (!this.props.view) {
+        if (this.props.viewSelectorEnabled) {
+            if (this.state.canUserManageWeb) {
+                farItems.push({
+                    key: "NewView",
+                    name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                    iconProps: { iconName: "CirclePlus" },
+                    itemType: ContextualMenuItemType.Normal,
+                    onClick: e => {
+                        e.preventDefault();
+                        SP.UI.ModalDialog.showModalDialog({
+                            url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
+                            title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                        });
+                    },
+                });
+            }
             farItems.push({
                 key: "View",
                 name: this.state.currentView.name,
@@ -613,7 +615,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState(updatedState);
-        if (!this.props.view) {
+        if (this.props.viewSelectorEnabled) {
             Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
         }
     }

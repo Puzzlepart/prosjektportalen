@@ -9,19 +9,19 @@ import { loadJsonConfiguration } from "../../../Util";
  * @param {string} configWebUrl URL for config lists
  */
 export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
-    const webLists = new Web(configWebUrl).lists;
+    const configWeb = new Web(configWebUrl);
     const [fields, refiners, views, statusFields] = await Promise.all([
-        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
+        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
             .items
             .orderBy(orderBy)
             .usingCaching()
             .get(),
-        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
+        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
             .items
             .orderBy(orderBy)
             .usingCaching()
             .get(),
-        webLists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
+        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
             .items
             .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
             .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
