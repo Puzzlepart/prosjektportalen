@@ -51,55 +51,37 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         }
     }
 
-    /**
-     * Calls _render with props and state to allow for ES6 destruction
-     */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
-    }
-
-    /**
-     * Renders the component
-     *
-     * @param {IProjectListProps} param0 Props
-     * @param {IProjectListState} param1 State
-     */
-    public _render({ loadingText, searchBoxLabelText }: IProjectListProps, { isLoading }: IProjectListState): JSX.Element {
-        if (isLoading) {
-            return <Spinner label={loadingText} type={SpinnerType.large} />;
+        if (this.state.isLoading) {
+            return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
         }
 
         return (
             <div style={{ paddingRight: 40 }}>
-                <SearchBox
-                    labelText={searchBoxLabelText}
-                    onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
-                {this.renderCards(this.props, this.state)}
-                {this.renderProjectInfoModal(this.props, this.state)}
+                <div style={{ marginBottom: 10 }}>
+                    <SearchBox labelText={this.props.searchBoxLabelText} onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
+                </div>
+                {this.renderCards()}
+                {this.renderProjectInfoModal()}
                 <Style props={this.props} />
             </div>
         );
     }
 
     /**
-     * Render cards
-     *
-     * @param {IProjectListProps} param0 Props
-     * @param {IProjectListState} param1 State
+     * Render project cards
      */
-    private renderCards({ masonryOptions, tileClassName, tileWidth, tileImageHeight, emptyMessage }: IProjectListProps, { }: IProjectListState): JSX.Element {
-        const { projects, fields } = this.getFilteredData(this.props, this.state);
+    private renderCards(): JSX.Element {
+        const { projects, fields } = this.getFilteredData();
 
         if (projects.length === 0) {
-            return (
-                <MessageBar>{emptyMessage}</MessageBar>
-            );
+            return <MessageBar>{this.props.emptyMessage}</MessageBar>;
         }
 
         return (
             <Masonry
                 elementType={"div"}
-                options={masonryOptions}
+                options={this.props.masonryOptions}
                 disableImagesLoaded={false}
                 updateOnEachImageLoad={false}>
                 {projects
@@ -108,9 +90,9 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                             key={idx}
                             project={project}
                             fields={fields}
-                            className={tileClassName}
-                            tileWidth={tileWidth}
-                            tileImageHeight={tileImageHeight}
+                            className={this.props.tileClassName}
+                            tileWidth={this.props.tileWidth}
+                            tileImageHeight={this.props.tileImageHeight}
                             onClickHref={project.Url}
                             showProjectInfo={e => this.setState({ showProjectInfo: project })} />
                     ))}
@@ -119,31 +101,28 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     /**
-     * Renders the Project Info modal
-     *
-     * @param {IProjectListProps} param0 Props
-     * @param {IProjectListState} param1 State
+     * Renders the project info modal
      */
-    private renderProjectInfoModal({ projectInfoFilterField, modalHeaderClassName }: IProjectListProps, { showProjectInfo }: IProjectListState): JSX.Element {
-        if (showProjectInfo) {
+    private renderProjectInfoModal(): JSX.Element {
+        if (this.state.showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.Url}
+                    webUrl={this.state.showProjectInfo.Url}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
-                    filterField={projectInfoFilterField}
+                    filterField={this.props.projectInfoFilterField}
                     labelSize="l"
                     valueSize="m"
                     renderMode={ProjectInfoRenderMode.Modal}
                     modalOptions={{
-                        isOpen: showProjectInfo !== null,
+                        isOpen: this.state.showProjectInfo !== null,
                         isDarkOverlay: true,
                         isBlocking: false,
                         onDismiss: e => this.setState({ showProjectInfo: null }),
-                        headerClassName: modalHeaderClassName,
+                        headerClassName: this.props.modalHeaderClassName,
                         headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.Title,
+                        title: this.state.showProjectInfo.Title,
                     }}
                 />
             );
@@ -152,17 +131,15 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     /**
-     * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
-     *
-     * @param {IProjectListProps} param0 Props
-     * @param {IProjectListState} param1 State
+     * Get filtered data based on groupBy and searchTerm. Search is case-insensitive
      */
-    private getFilteredData({ }: IProjectListProps, { searchTerm, data }: IProjectListState): IProjectListData {
+    private getFilteredData(): IProjectListData {
+        const projects = this.state.data.projects
+            .filter(project => Object.keys(project).filter(key => project[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0)
+            .sort((a, b) => a.Title > b.Title ? 1 : -1);
         return {
-            ...data,
-            projects: data.projects
-                .filter(project => Object.keys(project).filter(key => project[key].toLowerCase().indexOf(searchTerm) !== -1).length > 0)
-                .sort((a, b) => a.Title > b.Title ? 1 : -1),
+            ...this.state.data,
+            projects,
         };
     }
 
@@ -171,7 +148,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      */
     private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
-
         try {
             const projectCtFieldsPromise = rootWeb
                 .contentTypes
