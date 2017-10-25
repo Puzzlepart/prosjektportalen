@@ -29,6 +29,8 @@ Param(
     [switch]$SkipTaxonomy,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets previously)?")]
     [switch]$SkipAssets,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
+    [switch]$SkipThirdParty,    
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package?")]
     [switch]$SkipRootPackage,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
@@ -130,6 +132,23 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
+    }
+
+    # Applies thirdparty template if switch SkipThirdParty is not present
+    if (-not $SkipThirdParty.IsPresent) {
+        try {
+            Connect-SharePoint $AssetsUrl -UseWeb
+            Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
+            Apply-Template -Template "thirdparty"
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing thirdparty template to $AssetsUrl" -ForegroundColor Red 
             Write-Host $error[0] -ForegroundColor Red
             exit 1 
         }
