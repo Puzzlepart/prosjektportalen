@@ -1,9 +1,11 @@
+//#region Imports
 import * as React from "react";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
+import { ActionButton } from "office-ui-fabric-react/lib/Button";
 import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
 import INewProjectLinkState from "./INewProjectLinkState";
 import SecuredWebPart from "../@SecuredWebPart";
 import NewProjectForm, { NewProjectFormRenderMode } from "../NewProjectForm";
+//#endregion
 
 /**
  * New Project link
@@ -19,6 +21,8 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
      */
     constructor(props: INewProjectLinkProps) {
         super(props, { listDataConfig: {} });
+        this._onDialogDismiss = this._onDialogDismiss.bind(this);
+        this._onOpenDialog = this._onOpenDialog.bind(this);
     }
 
     /**
@@ -28,66 +32,43 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
         await this.onInit();
     }
 
-    /**
-     * Calls _render with props and state to allow for ES6 destruction
-     */
     public render(): JSX.Element {
-        return this.state.shouldRender ? this._render() : null;
-    }
-
-    /**
-     * Renders the component
-     */
-    private _render(): JSX.Element {
         return (
             <div>
-                {this.renderLink(this.props, this.state)}
-                {this.renderDialog(this.props, this.state)}
-            </div>
-        );
-    }
-
-    /**
-     * Renders the link
-     *
-     * @param {INewProjectLinkProps} param0 Props
-     * @param {INewProjectLinkState} param1 State
-     */
-    private renderLink({ linkText, linkClassName, iconProps }: INewProjectLinkProps, { }: INewProjectLinkState) {
-        return (
-            <div>
-                <a
-                    className={linkClassName}
-                    href={_spPageContextInfo.webAbsoluteUrl}
-                    onClick={e => {
-                        e.preventDefault();
-                        this.setState({ showDialog: true });
-                    }}>
-                    <Icon { ...iconProps } />
-                    <span>{linkText}</span>
-                </a>
+                <ActionButton
+                    disabled={!this.state.shouldRender}
+                    style={{ margin: 0 }}
+                    iconProps={this.props.iconProps}
+                    text={this.props.linkText}
+                    onClick={this._onOpenDialog} />
+                {this.renderDialog()}
             </div>
         );
     }
 
     /**
      * Renders the dialog
-     *
-     * @param {INewProjectLinkProps} param0 Props
-     * @param {INewProjectLinkState} param1 State
      */
-    private renderDialog({ dlgHeaderText, dlgSubHeaderText, creationModalTitle }: INewProjectLinkProps, { listDataConfig, showDialog }: INewProjectLinkState) {
-        if (showDialog) {
+    private renderDialog() {
+        if (this.state.showDialog) {
             return (
                 <NewProjectForm
                     renderMode={NewProjectFormRenderMode.Dialog}
-                    onDialogDismiss={() => this.setState({ showDialog: false })}
-                    headerText={dlgHeaderText}
-                    subHeaderText={dlgSubHeaderText}
-                    creationModalTitle={creationModalTitle} />
+                    onDialogDismiss={this._onDialogDismiss}
+                    headerText={this.props.dlgHeaderText}
+                    subHeaderText={this.props.dlgSubHeaderText}
+                    creationModalTitle={this.props.creationModalTitle} />
             );
         }
         return null;
+    }
+
+    private _onOpenDialog() {
+        this.setState({ showDialog: true });
+    }
+
+    private _onDialogDismiss() {
+        this.setState({ showDialog: false });
     }
 }
 
