@@ -79,16 +79,28 @@ function Get-WebLanguage($ctx) {
     return $web.Language
 }
 
+# Merge hash tables
+function Merge-Hashtables {
+    $Output = @{}
+    ForEach ($Hashtable in ($Input + $Args)) {
+        If ($Hashtable -is [Hashtable]) {
+            ForEach ($Key in $Hashtable.Keys) {$Output.$Key = $Hashtable.$Key}
+        }
+    }
+    $Output
+}
+
 # Apply tepmplate
-function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", $ExcludeHandlers) {    
+function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", $ExcludeHandlers, [HashTable]$Parameters = @{}) {    
     $Language = Get-WebLanguage -ctx (Get-PnPContext)    
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"
     }
+    $MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
     if ($ExcludeHandlers.IsPresent) {
-        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;} -Handlers $Handlers -ExcludeHandlers $ExcludeHandlers
+        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -Handlers $Handlers -ExcludeHandlers $ExcludeHandlers
     } else {
-        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;} -Handlers $Handlers
+        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -Handlers $Handlers
     }
 }
 

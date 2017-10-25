@@ -52,7 +52,9 @@ Param(
     [switch]$Upgrade,
     [Parameter(Mandatory = $false)]
     [ValidateSet('None','File','Host')]
-    [string]$Logging = "File"
+    [string]$Logging = "File",
+    [Parameter(Mandatory = $false)]
+    [Hashtable]$Parameters
 )
 
 . ./SharedFunctions.ps1
@@ -147,7 +149,7 @@ function Start-Install() {
         try {
             Connect-SharePoint $Url    
             Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries
+            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
