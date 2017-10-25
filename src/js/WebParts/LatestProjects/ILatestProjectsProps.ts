@@ -8,6 +8,8 @@ export default interface ILatestProjectsProps extends IBaseWebPartProps {
     reloadInterval?: number;
     listClassName?: string;
     deleteEnabled?: boolean;
+    loadingText?: string;
+    underCreationLabel?: string;
 }
 
 export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
@@ -20,4 +22,6 @@ export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
     deleteEnabled: process.env.NODE_ENV === "development",
+    loadingText: RESOURCE_MANAGER.getResource("LatestProjects_LoadingText"),
+    underCreationLabel: RESOURCE_MANAGER.getResource("LatestProjects_ProjectUnderCreation"),
 };
