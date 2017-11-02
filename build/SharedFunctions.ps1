@@ -120,9 +120,6 @@ function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
 }
 
 function ParseVersion($VersionString) {
-    if($VersionString  -like "*.*.*") {
-        return [Version]($VersionString)
-    }
     if($VersionString  -like "*.*.*#*") {
         $vs = $VersionString.Split("#")[0]
         return [Version]($vs)
@@ -130,6 +127,9 @@ function ParseVersion($VersionString) {
     if($VersionString  -like "*.*.*.*") {
         $vs = $VersionString.Split(".")[0..2] -join "."
         return [Version]($vs)
+    }
+    if($VersionString  -like "*.*.*") {
+        return [Version]($VersionString)
     }
 }
 
