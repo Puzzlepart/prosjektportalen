@@ -47,7 +47,8 @@ module.exports = (devtool, exclude, env) => ({
                     options: {
                         presets: ["react", "env", "es2015"],
                         plugins: [
-                            require("babel-plugin-transform-class-properties")
+                            require("babel-plugin-transform-class-properties"),
+                            require("babel-plugin-transform-object-assign"),
                         ]
                     }
                 },
