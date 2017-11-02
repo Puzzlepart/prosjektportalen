@@ -11,8 +11,9 @@ import {
 import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";
-import * as Data from "./Data";
+import { fetchData } from "./ProjectPhasesData";
 import { PhaseModel } from "../../Model";
+import { cleanString } from "../../Util";
 import IProjectPhasesProps from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 import BaseWebPart from "../@BaseWebPart";
@@ -30,13 +31,11 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
+        this._onChangePhase = this._onChangePhase.bind(this);
     }
 
-    /**
-     * Component did mount
-     */
     public componentDidMount(): void {
-        Data.fetchData().then(data => {
+        fetchData().then(data => {
             this.setState({
                 data,
                 isLoading: false,
@@ -44,18 +43,15 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         });
     }
 
-    /**
-     * Render
-     */
     public render(): JSX.Element {
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
         return (
             <div>
-                {this.renderPhases(this.props, this.state)}
-                {this.renderDialog(this.props, this.state)}
-                <div hidden={this.isPhaseSet(this.state)}>
+                {this.renderPhases()}
+                {this.renderDialog()}
+                <div hidden={this.isPhaseSet()}>
                     <MessageBar messageBarType={MessageBarType.info}>
                         {RESOURCE_MANAGER.getResource("ProjectPhases_PhaseNotSetText")}
                     </MessageBar>
@@ -66,52 +62,37 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
 
     /**
      * Render phases
-     *
-     * @param {IProjectPhasesProps} param0 Props
-     * @param {IProjectPhasesState} param1 State
      */
-    private renderPhases = ({ }: IProjectPhasesProps, { data, changePhase }: IProjectPhasesState): JSX.Element => {
+    private renderPhases(): JSX.Element {
+        const { data } = this.state;
         const visiblePhases = data.phases.filter(phase => phase.ShowOnFrontpage);
         return (
             <ul>
-                {visiblePhases.map((phase, index) => {
-                    let classList = [phase.getPhasLevelClassName()];
-                    if (index === 0) {
-                        classList.push("first-phase");
-                    }
-                    if (index === (data.phases.length - 1)) {
-                        classList.push("last-phase");
-                    }
-                    if (data.activePhase && (phase.Name === data.activePhase.Name)) {
-                        classList.push("selected");
-                    }
-                    return (
-                        <ProjectPhase
-                            key={index}
-                            phase={phase}
-                            classList={classList}
-                            checkListData={data.checkListData[phase.Id]}
-                            onChangePhase={this.onChangePhase} />
-                    );
-                })}
+                {visiblePhases.map((phase, index) => (
+                    <ProjectPhase
+                        key={index}
+                        phase={phase}
+                        classList={this.getPhaseClassList(phase, index)}
+                        checkListData={data.checkListData[phase.Id]}
+                        checkListDefaultViewUrl={data.checkListDefaultViewUrl}
+                        onChangePhase={this._onChangePhase} />
+                ))}
             </ul>
         );
     }
 
     /**
      * Render dialog
-     *
-     * @param {IProjectPhasesProps} param0 Props
-     * @param {IProjectPhasesState} param1 State
      */
-    private renderDialog = ({ }: IProjectPhasesProps, { data, changePhase }: IProjectPhasesState): JSX.Element => {
+    private renderDialog(): JSX.Element {
+        const { data, changePhase } = this.state;
         const checkListItems = (data.activePhase && data.checkListData && data.checkListData[data.activePhase.Id]) ? data.checkListData[data.activePhase.Id].items : [];
-        if (changePhase) {
+        if (this.state.changePhase) {
             return (
                 <ChangePhaseDialog
                     phase={changePhase}
                     checkListItems={checkListItems}
-                    onConfirmPhaseChange={this.onChangePhase}
+                    onConfirmPhaseChange={this._onChangePhase}
                     hideHandler={e => this.setState({ changePhase: null })} />
             );
         }
@@ -119,30 +100,43 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     }
 
     /**
+     * Get classnames for a phase
+     */
+    private getPhaseClassList(phase, index): string[] {
+        const { data } = this.state;
+        let classList = [];
+        classList.push(`level-${cleanString(phase.PhaseLevel)}`);
+        classList.push(`type-${cleanString(phase.Type)}`);
+        if (index === 0) {
+            classList.push("first-phase");
+        }
+        if (index === (data.phases.length - 1)) {
+            classList.push("last-phase");
+        }
+        if (data.activePhase && (phase.Name === data.activePhase.Name)) {
+            classList.push("selected");
+        }
+        return classList;
+    }
+
+    /**
      * On change phase
      *
      * @param {PhaseModel} phase New phase
      */
-    private onChangePhase = (phase?: PhaseModel) => new Promise<void>((resolve, reject) => {
+    private async _onChangePhase(phase?: PhaseModel): Promise<void> {
         if (phase) {
-            this.setState({ changePhase: phase }, resolve);
+            this.setState({ changePhase: phase });
         } else {
-            Project.ChangeProjectPhase(this.state.changePhase, false)
-                .then(() => {
-                    resolve();
-                })
-                .catch(() => {
-                    resolve();
-                });
+            await Project.ChangeProjectPhase(this.state.changePhase, false);
         }
-    })
+    }
 
     /**
      * Checks if phase is set
-     *
-     * @param {IProjectPhasesState} param1 State
      */
-    private isPhaseSet({ data }: IProjectPhasesState): boolean {
+    private isPhaseSet(): boolean {
+        const { data } = this.state;
         return data.activePhase && data.activePhase.Name && data.activePhase.Name !== "";
     }
 }

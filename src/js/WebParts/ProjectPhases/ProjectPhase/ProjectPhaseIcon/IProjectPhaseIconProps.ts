@@ -5,6 +5,6 @@ export default interface IProjectPhaseIconProps {
     classList: string[];
     className?: string;
     phaseLetterClassName?: string;
-    phaseClassName?: string;
+    phaseTextClassName?: string;
     subTextClassName?: string;
 }

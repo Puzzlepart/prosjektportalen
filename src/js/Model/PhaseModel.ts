@@ -8,6 +8,8 @@ export default class PhaseModel {
     public PhaseLevel?: string;
     public ShowOnFrontpage?: boolean;
     public Type: string;
+    public SubText: string;
+    public PhaseLetter: string;
 
     /**
      * Constructor
@@ -22,6 +24,8 @@ export default class PhaseModel {
             this.PhaseLevel = properties.PhaseLevel || "Default";
             this.ShowOnFrontpage = properties.ShowOnFrontpage !== "false";
             this.Type = properties.PhaseType || "Default";
+            this.SubText = properties.PhaseSubText;
+            this.PhaseLetter = properties.PhaseLetter || this.Name[0];
         }
     }
 
@@ -36,19 +40,5 @@ export default class PhaseModel {
         this.Name = safe.get_label();
         this.WssId = safe.get_wssId();
         return this;
-    }
-
-    /**
-     * Get phase level class name
-     */
-    public getPhasLevelClassName() {
-        return `level-${this.PhaseLevel.trim().toLowerCase()}`;
-    }
-
-    /**
-     * Get phase letter
-     */
-    public getPhaseLetter(): string {
-        return this.Name[0];
     }
 }

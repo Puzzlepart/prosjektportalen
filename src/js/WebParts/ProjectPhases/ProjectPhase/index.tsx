@@ -8,19 +8,14 @@ import IProjectPhaseProps from "./IProjectPhaseProps";
  *
  * @param {IProjectPhaseProps} param0 Props
  */
-const ProjectPhase = ({ phase, classList, checkListData, onChangePhase }: IProjectPhaseProps) => {
-    const isSelected = Array.contains(classList, "selected");
-
+const ProjectPhase = ({ phase, classList, checkListData, checkListDefaultViewUrl, onChangePhase }: IProjectPhaseProps) => {
+    const selected = Array.contains(classList, "selected");
+    const projectPhaseIconProps = { phase, classList };
+    const projectPhaseCalloutProps = { phase, selected, checkListData, checkListDefaultViewUrl, onChangePhase };
     return (
         <li className={classList.join(" ")}>
-            <ProjectPhaseIcon
-                phase={phase}
-                classList={classList} />
-            <ProjectPhaseCallout
-                phase={phase}
-                selected={isSelected}
-                checkListData={checkListData}
-                onChangePhase={onChangePhase} />
+            <ProjectPhaseIcon { ...projectPhaseIconProps } />
+            <ProjectPhaseCallout { ...projectPhaseCalloutProps } />
         </li>
     );
 };
