@@ -30,7 +30,7 @@ export default class ProjectListModel {
         this.RawObject = obj;
         this.Title = obj.Title;
         this.Url = obj.Path;
-        this.Logo = obj.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11");
+        this.Logo = obj.SiteLogo ? obj.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
         this.Phase = obj.RefinableString52;
         this.ServiceArea = obj.RefinableString53;
         this.Type = obj.RefinableString54;

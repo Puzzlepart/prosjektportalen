@@ -48,6 +48,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 isLoading: false,
             });
         } catch (err) {
+            console.log(err);
             this.setState({ isLoading: false });
         }
     }
@@ -155,7 +156,8 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         const projects = data.projects
             .filter(project => {
                 const matches = Object.keys(project).filter(key => {
-                    return project[key] && typeof project[key] === "string" && project[key].toLowerCase().indexOf(searchTerm) !== -1;
+                    const value = project[key];
+                    return value && typeof value === "string" && value.toLowerCase().indexOf(searchTerm) !== -1;
                 }).length;
                 return matches > 0;
             })
