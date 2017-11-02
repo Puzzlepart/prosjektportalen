@@ -13,36 +13,19 @@ export interface IQueryResult {
     ViewsLifeTime: string;
 }
 
-
-/**
- * Parse search response
- *
- * @param {any} response Response object
- */
-function parseSearchResponse(response: any, selectProperties: string[]): IQueryResult[] {
-    return response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
-        let item: any = {};
-        Cells.results.forEach(({ Key, Value }) => {
-            if (Array.contains(selectProperties, Key)) {
-                item[Key] = Value ? Value : "";
-            }
-        });
-        return item;
-    });
-}
-
 /**
  * Query the REST Search API using sp-pnp-js
  *
  * @param {number} rowLimit Row limit
+ * @param {Array<string>} selectProperties Select properties
  */
-export async function queryProjects(rowLimit?: number, selectProperties = ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime"]): Promise<IQueryResult[]> {
+export async function queryProjects(rowLimit?: number, selectProperties = []): Promise<any[]> {
     try {
-        const response: any = await sp.search({
+        const { PrimarySearchResults } = await sp.search({
             Querytext: "*",
             RowLimit: rowLimit,
             TrimDuplicates: false,
-            SelectProperties: selectProperties,
+            SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime", ...selectProperties],
             Properties: [{
                 Name: "SourceName",
                 Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
@@ -52,8 +35,9 @@ export async function queryProjects(rowLimit?: number, selectProperties = ["Titl
                 Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
             }],
         });
-        return parseSearchResponse(response, selectProperties);
+        return PrimarySearchResults;
     } catch (err) {
+        console.log(err);
         throw err;
     }
 }

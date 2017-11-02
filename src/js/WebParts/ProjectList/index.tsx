@@ -12,10 +12,11 @@ import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as ProjectListSearch from "./ProjectListSearch";
 import Style from "./Style";
 import ProjectCard from "./ProjectCard";
-import Project from "./Project";
+import ProjectListModel from "./ProjectListModel";
 import IProjectListProps, { ProjectListDefaultProps } from "./IProjectListProps";
 import IProjectListState, { IProjectListData } from "./IProjectListState";
 import BaseWebPart from "../@BaseWebPart";
+import { cleanString } from "../../Util";
 
 /**
  * Project information
@@ -46,7 +47,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 data,
                 isLoading: false,
             });
-        } catch {
+        } catch (err) {
             this.setState({ isLoading: false });
         }
     }
@@ -84,18 +85,17 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 options={this.props.masonryOptions}
                 disableImagesLoaded={false}
                 updateOnEachImageLoad={false}>
-                {projects
-                    .map((project, idx) => (
-                        <ProjectCard
-                            key={idx}
-                            project={project}
-                            fields={fields}
-                            className={this.props.tileClassName}
-                            tileWidth={this.props.tileWidth}
-                            tileImageHeight={this.props.tileImageHeight}
-                            onClickHref={project.Url}
-                            showProjectInfo={e => this.setState({ showProjectInfo: project })} />
-                    ))}
+                {projects.map((project, idx) => (
+                    <ProjectCard
+                        key={idx}
+                        project={project}
+                        fields={fields}
+                        className={this.getClassName(project)}
+                        tileWidth={this.props.tileWidth}
+                        tileImageHeight={this.props.tileImageHeight}
+                        onClickHref={project.Url}
+                        showProjectInfo={e => this.setState({ showProjectInfo: project })} />
+                ))}
             </Masonry>
         );
     }
@@ -131,14 +131,37 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     /**
+     * Get class name for a ProjectListModel. Combines props.tileClassName and props.propertyClassNames.
+     *
+     * @param {ProjectListModel} project Project list model
+     */
+    private getClassName(project: ProjectListModel) {
+        const classList = [this.props.tileClassName];
+        this.props.propertyClassNames.forEach(key => {
+            const value = project.RawObject[key];
+            if (value) {
+                const className = `${cleanString(key)}-${cleanString(value)}`;
+                classList.push(className);
+            }
+        });
+        return classList.join(" ");
+    }
+
+    /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive
      */
     private getFilteredData(): IProjectListData {
-        const projects = this.state.data.projects
-            .filter(project => Object.keys(project).filter(key => project[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0)
+        const { data, searchTerm } = this.state;
+        const projects = data.projects
+            .filter(project => {
+                const matches = Object.keys(project).filter(key => {
+                    return project[key] && typeof project[key] === "string" && project[key].toLowerCase().indexOf(searchTerm) !== -1;
+                }).length;
+                return matches > 0;
+            })
             .sort((a, b) => a.Title > b.Title ? 1 : -1);
         return {
-            ...this.state.data,
+            ...data,
             projects,
         };
     }
@@ -149,18 +172,19 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         try {
-            const projectCtFieldsPromise = rootWeb
+            const projectCt = rootWeb
                 .contentTypes
-                .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+                .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
+            const projectCtFieldsPromise = projectCt
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")
                 .usingCaching()
                 .get();
             const [projectsQueryResult, projectCtFieldsArray] = await Promise.all([
-                ProjectListSearch.queryProjects(this.props.rowLimit),
+                ProjectListSearch.queryProjects(this.props.rowLimit, this.props.propertyClassNames),
                 projectCtFieldsPromise,
             ]);
-            const projects = projectsQueryResult.map(result => new Project(result));
+            const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result));
             let fields = projectCtFieldsArray.reduce((accumulator, { InternalName, Title }) => {
                 accumulator[InternalName] = Title;
                 return accumulator;

@@ -1,14 +1,14 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
-import Project from "./Project";
+import ProjectListModel from "./ProjectListModel";
 
 export interface IProjectListData {
-    projects?: Project[];
+    projects?: ProjectListModel[];
     fields?: { [key: string]: string };
 }
 
 export default interface IProjectListState extends IBaseWebPartState {
     data?: IProjectListData;
     searchTerm?: string;
-    showProjectInfo?: Project;
+    showProjectInfo?: ProjectListModel;
 }
 
