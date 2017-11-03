@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/file-saver": "0.0.1",
+    "@uifabric/icons": "^5.2.0",
     "array-sort": "^0.1.4",
     "array-unique": "^0.3.2",
     "core-js": "^2.5.1",
