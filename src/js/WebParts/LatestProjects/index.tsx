@@ -67,33 +67,30 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         return (
             <div>
                 {this.__renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
-                {this.renderItems(this.props, this.state)}
+                {this.renderItems()}
             </div>
         );
     }
 
     /**
      * Render items
-    *
-    * @param {ILatestProjectsProps} param0 Props
-    * @param {ILatestProjectsState} param1 State
      */
-    private renderItems = ({ listClassName, deleteEnabled }: ILatestProjectsProps, { isLoading, webinfos }: ILatestProjectsState) => {
-        if (isLoading) {
+    private renderItems = () => {
+        if (this.state.isLoading) {
             return (
-                <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("LatestProjects_LoadingText")} />
+                <Spinner type={SpinnerType.large} label={this.props.loadingText} />
             );
-        } else if (webinfos == null) {
+        } else if (this.state.webinfos == null) {
             return (
                 <div className="ms-metadata">
                     <Icon iconName="Error" style={{ color: "#000" }} />  {RESOURCE_MANAGER.getResource("WebPart_FailedMessage")}
                 </div>
             );
-        } else if (webinfos.length > 0) {
+        } else if (this.state.webinfos.length > 0) {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
-                    <ul className={listClassName}>
-                        {webinfos.map(({ Id, Title, ServerRelativeUrl, Created }) => (
+                    <ul className={this.props.listClassName}>
+                        {this.state.webinfos.map(({ Id, Title, ServerRelativeUrl, Created }) => (
                             <li key={Id}>
                                 {Title ?
                                     <div>
@@ -102,7 +99,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                                     </div>
                                     : (
                                         <div style={{ width: 200 }}>
-                                            <Spinner type={SpinnerType.normal} label={RESOURCE_MANAGER.getResource("LatestProjects_ProjectUnderCreation")} />
+                                            <Spinner type={SpinnerType.normal} label={this.props.underCreationLabel} />
                                         </div>
                                     )}
                             </li>

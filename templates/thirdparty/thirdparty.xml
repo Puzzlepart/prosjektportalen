@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<pnp:Provisioning 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:Preferences></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-THIRDPARTY" Version="0">
+            <pnp:Files>
+                <pnp:Directory Src="libs\" Folder="siteassets/pp/libs" Overwrite="true" Recursive="false" IncludedExtensions="*.js" />
+            </pnp:Files>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

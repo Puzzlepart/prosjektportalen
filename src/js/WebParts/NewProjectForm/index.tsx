@@ -76,7 +76,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                     className="ms-font-l"
                                     style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
                                 {this.renderFormInput()}
-                                {this.renderSettingsSection()}
+                                {this.state.showSettings && this.renderSettingsSection()}
                                 {this.renderFooter()}
                             </div>
                         );
@@ -98,7 +98,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 onDismiss={this.props.onDialogDismiss}>
                                 <div>
                                     {this.renderFormInput()}
-                                    {this.renderSettingsSection()}
+                                    {this.state.showSettings && this.renderSettingsSection()}
                                     {this.renderFooter()}
                                 </div>
                             </Dialog >

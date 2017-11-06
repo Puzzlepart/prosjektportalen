@@ -7,7 +7,7 @@ export interface IUserDetails {
     Photo: string;
 }
 
-export default class Project {
+export default class ProjectListModel {
     public Title: string;
     public Url: string;
     public Logo: string;
@@ -17,20 +17,27 @@ export default class Project {
     public Manager: string;
     public Owner: string;
     public Views: number;
+    public RawObject: any;
 
     /**
      * Constructor
      */
-    constructor({ Title, Path, SiteLogo, RefinableString52, RefinableString53, RefinableString54, GtProjectManagerOWSUSER, GtProjectOwnerOWSUSER, ViewsLifeTime }) {
-        this.Title = Title;
-        this.Url = Path;
-        this.Logo = SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11");
-        this.Phase = RefinableString52;
-        this.ServiceArea = RefinableString53;
-        this.Type = RefinableString54;
-        this.Manager = GtProjectManagerOWSUSER;
-        this.Owner = GtProjectOwnerOWSUSER;
-        this.Views = ViewsLifeTime;
+    constructor() {
+        // Empty constructor
+    }
+
+    public initFromSearchResponse(obj) {
+        this.RawObject = obj;
+        this.Title = obj.Title;
+        this.Url = obj.Path;
+        this.Logo = obj.SiteLogo ? obj.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
+        this.Phase = obj.RefinableString52;
+        this.ServiceArea = obj.RefinableString53;
+        this.Type = obj.RefinableString54;
+        this.Manager = obj.GtProjectManagerOWSUSER;
+        this.Owner = obj.GtProjectOwnerOWSUSER;
+        this.Views = obj.ViewsLifeTime;
+        return this;
     }
 
     /**

@@ -1,7 +1,7 @@
-import Project from "../Project";
+import ProjectListModel from "../ProjectListModel";
 
 interface IProjectCardProps {
-    project: Project;
+    project: ProjectListModel;
     fields: { [key: string]: string };
     className: string;
     tileWidth: number;

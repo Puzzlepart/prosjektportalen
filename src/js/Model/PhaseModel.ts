@@ -7,6 +7,7 @@ export default class PhaseModel {
     public WssId?: number;
     public PhaseLevel?: string;
     public ShowOnFrontpage?: boolean;
+    public Type: string;
 
     /**
      * Constructor
@@ -15,10 +16,12 @@ export default class PhaseModel {
      */
     constructor(term?: SP.Taxonomy.Term) {
         if (term) {
+            const properties = term.get_localCustomProperties();
             this.Id = term.get_id().toString();
             this.Name = term.get_name();
-            this.PhaseLevel = term.get_localCustomProperties().PhaseLevel;
-            this.ShowOnFrontpage = term.get_localCustomProperties().ShowOnFrontpage !== "false";
+            this.PhaseLevel = properties.PhaseLevel || "Default";
+            this.ShowOnFrontpage = properties.ShowOnFrontpage !== "false";
+            this.Type = properties.PhaseType || "Default";
         }
     }
 
@@ -37,11 +40,9 @@ export default class PhaseModel {
 
     /**
      * Get phase level class name
-     *
-     * @param {string} defaultClassName Default class name (if no phase level is specified)
      */
-    public getPhasLevelClassName(defaultClassName = "unknown-phaselevel") {
-        return this.PhaseLevel ? this.PhaseLevel.trim().toLowerCase() : defaultClassName;
+    public getPhasLevelClassName() {
+        return `level-${this.PhaseLevel.trim().toLowerCase()}`;
     }
 
     /**

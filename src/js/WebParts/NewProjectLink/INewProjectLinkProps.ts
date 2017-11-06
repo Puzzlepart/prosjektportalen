@@ -4,11 +4,7 @@ import { PermissionKind } from "sp-pnp-js";
 
 export default interface INewProjectLinkProps extends ISecuredWebPartProps {
     linkText?: string;
-    linkClassName?: string;
-    iconProps?: {
-        iconName: string,
-        style: React.CSSProperties,
-    };
+    iconProps?: { iconName: string };
     dlgHeaderText?: string;
     dlgSubHeaderText?: string;
     creationModalTitle?: string;
@@ -16,14 +12,7 @@ export default interface INewProjectLinkProps extends ISecuredWebPartProps {
 
 export const NewProjectLinkDefaultProps: Partial<INewProjectLinkProps> = {
     linkText: RESOURCE_MANAGER.getResource("NewProjectForm_Header"),
-    linkClassName: "ms-font-l",
-    iconProps: {
-        iconName: "CirclePlus",
-        style: {
-            verticalAlign: "bottom",
-            marginRight: 5,
-        },
-    },
+    iconProps: { iconName: "CirclePlus" },
     permissionKind: PermissionKind.ManageWeb,
     dlgHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_Title"),
     dlgSubHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),

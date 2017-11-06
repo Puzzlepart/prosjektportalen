@@ -73,12 +73,12 @@ gulp.task("copyResourcesToAssetsTemplate", () => {
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
 
-gulp.task("copyThirdPartyLibsToAssetsTemplate", () => {
+gulp.task("copyThirdPartyLibsToTemplate", () => {
     var src = gulp.src([
         format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
         format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
     ]);
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}/libs", config.paths.templates_temp, lcid)))));
+    return src.pipe(gulp.dest(format("{0}/thirdparty/libs", config.paths.templates_temp)));
 });
 
 gulp.task("stampVersionToTemplates", cb => {
@@ -110,7 +110,7 @@ gulp.task("stampVersionToDist", cb => {
 });
 
 gulp.task("buildPnpTemplateFiles", (done) => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToAssetsTemplate", "stampVersionToTemplates", () => {
+    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });
