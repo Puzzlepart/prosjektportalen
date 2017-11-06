@@ -63,9 +63,13 @@ Param(
 
 . ./SharedFunctions.ps1
 
-function Window-Write($ForegroundColor) {
+function Window-Write($ForegroundColor, $NoNewLine) {
     if (-not $SupressOutput.IsPresent) {
-        Write-Host $Args[0] -ForegroundColor $ForegroundColor
+        if($NoNewLine.IsPresent) {
+            Write-Host $Args[0] -ForegroundColor $ForegroundColor -NoNewLine
+        } else {
+            Write-Host $Args[0] -ForegroundColor $ForegroundColor
+        }
     }
 }
 
