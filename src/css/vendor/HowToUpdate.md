@@ -7,7 +7,3 @@
 # But why? #
 
 As far as we know, there is no way of getting the same files via npm. The office-ui-fabric-core package only includes the scss files.
-
-# Current version #
-
-Current version is fabric 7.1.2
