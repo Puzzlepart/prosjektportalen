@@ -56,18 +56,10 @@ Param(
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false)]
-    [Hashtable]$Parameters,
-    [Parameter(Mandatory = $false)]
-    [switch]$SupressOutput
+    [Hashtable]$Parameters
 )
 
 . ./SharedFunctions.ps1
-
-function Window-Write($ForegroundColor) {
-    if (-not $SupressOutput.IsPresent) {
-        Write-Host $Args[0] -ForegroundColor $ForegroundColor
-    }
-}
 
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
@@ -99,17 +91,17 @@ $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataS
 function Start-Install() {
     # Prints header
     if (-not $Upgrade.IsPresent) {
-        Window-Write "############################################################################" -ForegroundColor Green
-        Window-Write "" -ForegroundColor Green
-        Window-Write "Installing Prosjektportalen ([version])" -ForegroundColor Green
-        Window-Write "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
-        Window-Write "" -ForegroundColor Green
-        Window-Write "Installation URL:`t`t$Url" -ForegroundColor Green
-        Window-Write "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
-        Window-Write "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
-        Window-Write "Environment:`t`t`t$Environment" -ForegroundColor Green
-        Window-Write "" -ForegroundColor Green
-        Window-Write "############################################################################" -ForegroundColor Green
+        Write-Host "############################################################################" -ForegroundColor Green
+        Write-Host "" -ForegroundColor Green
+        Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+        Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+        Write-Host "" -ForegroundColor Green
+        Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
+        Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
+        Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
+        Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
+        Write-Host "" -ForegroundColor Green
+        Write-Host "############################################################################" -ForegroundColor Green
     }
 
     # Starts stop watch
@@ -133,15 +125,15 @@ function Start-Install() {
     if (-not $SkipAssets.IsPresent) {
         try {
             Connect-SharePoint $AssetsUrl -UseWeb
-            Window-Write "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "assets" -Localized
-            Window-Write "DONE" -ForegroundColor Green
+            Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
         catch {
-            Window-Write
-            Window-Write "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
-            Window-Write $error[0] -ForegroundColor Red
+            Write-Host
+            Write-Host "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
+            Write-Host $error[0] -ForegroundColor Red
             exit 1 
         }
     }
@@ -150,15 +142,15 @@ function Start-Install() {
     if (-not $SkipThirdParty.IsPresent) {
         try {
             Connect-SharePoint $AssetsUrl -UseWeb
-            Window-Write "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "thirdparty"
-            Window-Write "DONE" -ForegroundColor Green
+            Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
         catch {
-            Window-Write
-            Window-Write "Error installing thirdparty template to $AssetsUrl" -ForegroundColor Red 
-            Window-Write $error[0] -ForegroundColor Red
+            Write-Host
+            Write-Host "Error installing thirdparty template to $AssetsUrl" -ForegroundColor Red 
+            Write-Host $error[0] -ForegroundColor Red
             exit 1 
         }
     }
@@ -166,25 +158,25 @@ function Start-Install() {
     # Installing taxonomy if switch SkipTaxonomy is not present
     if (-not $SkipTaxonomy.IsPresent) {
         Connect-SharePoint $Url  
-        Window-Write "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         $lcid = Get-TermStoreDefaultLanguage
         Apply-Template -Template "taxonomy-$($lcid)"
-        Window-Write "DONE" -ForegroundColor Green
+        Write-Host "DONE" -ForegroundColor Green
     }
 
     # Installing root package if switch SkipRootPackage is not present
     if (-not $SkipRootPackage.IsPresent) {
         try {
             Connect-SharePoint $Url    
-            Window-Write "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
-            Window-Write "DONE" -ForegroundColor Green
+            Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
         catch {
-            Window-Write
-            Window-Write "Error installing root-package to $Url" -ForegroundColor Red
-            Window-Write $error[0] -ForegroundColor Red
+            Write-Host
+            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
             exit 1 
         }
     }
@@ -193,15 +185,15 @@ function Start-Install() {
     if (-not $SkipData.IsPresent) {
         try {
             Connect-SharePoint $DataSourceSiteUrl        
-            Window-Write "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "data" -Localized
-            Window-Write "DONE" -ForegroundColor Green
+            Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
         catch {
-            Window-Write
-            Window-Write "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
-            Window-Write $error[0] -ForegroundColor Red
+            Write-Host
+            Write-Host "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
         }
     }
 
@@ -209,15 +201,15 @@ function Start-Install() {
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
             Connect-SharePoint $Url
-            Window-Write "Deploying default config.." -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "config" -Localized
-            Window-Write "DONE" -ForegroundColor Green
+            Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
         }
         catch {
-            Window-Write
-            Window-Write "Error installing default config to $Url" -ForegroundColor Red
-            Window-Write $error[0] -ForegroundColor Red
+            Write-Host
+            Write-Host "Error installing default config to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
         }
     }
 
@@ -227,45 +219,45 @@ function Start-Install() {
         if ($extensionFiles.Length -gt 0) {
             try {
                 Connect-SharePoint $Url
-                Window-Write "Deploying extensions.." -ForegroundColor Green
+                Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
                     $confirmation = "y"
                     if ($ConfirmExtensions.IsPresent) {
                         $confirmation = Read-Host "`tDeploy extension $($extension.BaseName) (y/n)?"
                     }
                     if($confirmation.toLower() -eq "y") {
-                        Window-Write "`tDeploying extension $($extension.BaseName).. " -ForegroundColor White -NoNewLine
+                        Write-Host "`tDeploying extension $($extension.BaseName).. " -ForegroundColor White -NoNewLine
                         Apply-PnPProvisioningTemplate $extension.FullName -Parameters @{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;}
-                        Window-Write "DONE" -ForegroundColor White
+                        Write-Host "DONE" -ForegroundColor White
                     }
                 }
                 Disconnect-PnPOnline
             }
             catch {
-                Window-Write
-                Window-Write "Error installing extensions to $Url" -ForegroundColor Red
-                Window-Write $error[0] -ForegroundColor Red
+                Write-Host
+                Write-Host "Error installing extensions to $Url" -ForegroundColor Red
+                Write-Host $error[0] -ForegroundColor Red
             }
         }
     }
 
     try {
         Connect-SharePoint $Url    
-        Window-Write "Updating web property bag..." -ForegroundColor Green -NoNewLine
+        Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized -Handlers PropertyBagEntries
-        Window-Write "DONE" -ForegroundColor Green
+        Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
     catch {
-        Window-Write
-        Window-Write "Error updating web property bag for $Url" -ForegroundColor Red
-        Window-Write $error[0] -ForegroundColor Red
+        Write-Host
+        Write-Host "Error updating web property bag for $Url" -ForegroundColor Red
+        Write-Host $error[0] -ForegroundColor Red
         exit 1 
     }
 
     $sw.Stop()
     if (-not $Upgrade.IsPresent) {
-        Window-Write "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
+        Write-Host "Installation completed in $($sw.Elapsed)" -ForegroundColor Green
     }
 }
 
