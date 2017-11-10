@@ -128,6 +128,9 @@ function ParseVersion($VersionString) {
         $vs = $VersionString.Split(".")[0..2] -join "."
         return [Version]($vs)
     }
+    if($VersionString  -like "*.*.*") {
+        return [Version]($VersionString)
+    }
 }
 
 function Get-WebLanguage($ctx) {

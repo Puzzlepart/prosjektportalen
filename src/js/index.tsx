@@ -1,4 +1,5 @@
 import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
+import { initializeIcons } from "@uifabric/icons";
 import { GetSetting } from "./Settings";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
@@ -33,6 +34,7 @@ namespace PP {
     }
 
     export async function initialize() {
+        initializeIcons();
         await pnp.storage.session.deleteExpired();
         initLogging();
         initPnp();
