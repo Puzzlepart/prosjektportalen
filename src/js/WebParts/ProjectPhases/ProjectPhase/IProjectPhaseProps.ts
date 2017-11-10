@@ -8,4 +8,5 @@ export default interface IProjectPhaseProps {
     checkListDefaultViewUrl: string;
     changePhaseEnabled: boolean;
     onChangePhase: (phase: PhaseModel) => void;
+    onRestartPhase: (phase: PhaseModel) => void;
 }

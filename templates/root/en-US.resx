@@ -1509,6 +1509,9 @@
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Go to the phase checklist</value>
   </data>
+  <data name="ProjectPhases_RestartPhase" xml:space="preserve">
+    <value>Restart phase</value>
+  </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
     <value>Go to the &lt;a href="{0}" target="_blank"&gt;phase checklist&lt;/a&gt; (opens in new tab)</value>
   </data>

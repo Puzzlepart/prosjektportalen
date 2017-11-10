@@ -1509,6 +1509,9 @@
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Gå til fasesjekklisten</value>
   </data>
+  <data name="ProjectPhases_RestartPhase" xml:space="preserve">
+    <value>Start fase på nytt</value>
+  </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
     <value>Gå til &lt;a href="{0}" target="_blank"&gt;fasesjekklisten&lt;/a&gt; (åpnes i ny fane)</value>
   </data>

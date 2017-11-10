@@ -29,6 +29,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
         this._onChangePhase = this._onChangePhase.bind(this);
+        this._onRestartPhase = this._onRestartPhase.bind(this);
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
     }
@@ -83,6 +84,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                             checkListData={data.checkListData[phase.Id]}
                             checkListDefaultViewUrl={data.checkListDefaultViewUrl}
                             changePhaseEnabled={changePhaseEnabled}
+                            onRestartPhase={this._onRestartPhase}
                             onChangePhase={this._onChangePhase} />
                     );
                 })}
@@ -135,6 +137,18 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private _onChangePhase(phase: PhaseModel) {
         this.setState({ newPhase: phase });
+    }
+
+    /**
+     * On restart phase
+     *
+     * @param {PhaseModel} phase Phase to restart
+     */
+    private _onRestartPhase(phase: PhaseModel) {
+        const { data } = this.state;
+        const phaseGateIndex = phase.Index - 1;
+        const [phaseGate] = data.phases.filter(p => p.Index === phaseGateIndex && p.Type === "Gate");
+        this.setState({ newPhase: phaseGate ? phaseGate : phase });
     }
 
     /**
