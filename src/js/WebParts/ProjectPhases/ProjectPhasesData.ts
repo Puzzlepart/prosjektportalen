@@ -22,7 +22,7 @@ async function fetchPases(): Promise<PhaseModel[]> {
             termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
             terms = termSet.getAllTerms();
         await ExecuteJsomQuery(jsomCtx, [terms]);
-        const phases = terms.get_data().map(term => new PhaseModel(term));
+        const phases = terms.get_data().map(term => new PhaseModel(term)).filter(p => p.ShowOnFrontpage);
         return phases;
     } catch (err) {
         throw err;

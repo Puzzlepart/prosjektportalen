@@ -32,6 +32,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
         this._onChangePhase = this._onChangePhase.bind(this);
+        this._onHideDialog = this._onHideDialog.bind(this);
     }
 
     public componentDidMount(): void {
@@ -65,10 +66,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderPhases(): JSX.Element {
         const { data } = this.state;
-        const visiblePhases = data.phases.filter(phase => phase.ShowOnFrontpage);
         return (
             <ul>
-                {visiblePhases.map((phase, index) => (
+                {data.phases.map((phase, index) => (
                     <ProjectPhase
                         key={index}
                         phase={phase}
@@ -93,7 +93,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                     phase={changePhase}
                     checkListItems={checkListItems}
                     onConfirmPhaseChange={this._onChangePhase}
-                    hideHandler={e => this.setState({ changePhase: null })} />
+                    hideHandler={this._onHideDialog} />
             );
         }
         return null;
@@ -104,19 +104,16 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private getPhaseClassList(phase, index): string[] {
         const { data } = this.state;
-        let classList = [];
-        classList.push(`level-${cleanString(phase.PhaseLevel)}`);
-        classList.push(`type-${cleanString(phase.Type)}`);
-        if (index === 0) {
-            classList.push("first-phase");
-        }
-        if (index === (data.phases.length - 1)) {
-            classList.push("last-phase");
-        }
-        if (data.activePhase && (phase.Name === data.activePhase.Name)) {
-            classList.push("selected");
-        }
-        return classList;
+        const isFirst = index === 0;
+        const isLast = (index === (data.phases.length - 1));
+        const isSelected = (data.activePhase && (phase.Name === data.activePhase.Name));
+        return [
+            `level-${cleanString(phase.PhaseLevel)}`,
+            `type-${cleanString(phase.Type)}`,
+            isFirst && "first-phase",
+            isLast && "last-phase",
+            isSelected && "selected",
+        ].filter(c => c);
     }
 
     /**
@@ -130,6 +127,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         } else {
             await Project.ChangeProjectPhase(this.state.changePhase, false);
         }
+    }
+
+    /**
+     * On hide dialog
+     */
+    private _onHideDialog() {
+        this.setState({ changePhase: null });
     }
 
     /**

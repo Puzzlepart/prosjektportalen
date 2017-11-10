@@ -20,7 +20,7 @@ const GetStatusIcon = (index: number) => {
  * @param {IProjectPhaseCalloutProps} param0 Props
  */
 const ProjectPhaseCallout = ({ phase, selected, checkListData, checkListDefaultViewUrl, onChangePhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
-    const PHASE_CHECKLIST_URL = `../${RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
+    const PHASE_CHECKLIST_URL = `${checkListDefaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
 
     /**
      * Render checklist stats
