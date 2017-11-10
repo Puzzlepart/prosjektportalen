@@ -1527,6 +1527,9 @@
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Vennligst vent,Endrer fase til {0}</value>
   </data>
+  <data name="ProjectPhases_ChangingGate" xml:space="preserve">
+    <value>Vennligst vent,Endrer gate til {0}</value>
+  </data>
   <data name="ProjectPhases_CheckpointDoneTooltip" xml:space="preserve">
     <value>Sjekkpunktet er utført</value>
   </data>

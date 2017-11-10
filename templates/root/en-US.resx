@@ -1527,6 +1527,9 @@
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Please wait, Changing phase to {0}</value>
   </data>
+  <data name="ProjectPhases_ChangingGate" xml:space="preserve">
+    <value>Please wait, Changing gate to {0}</value>
+  </data>
   <data name="ProjectPhases_CheckpointDoneTooltip" xml:space="preserve">
     <value>The checkpoint has been completed</value>
   </data>

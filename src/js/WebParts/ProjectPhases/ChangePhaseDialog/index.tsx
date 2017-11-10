@@ -36,7 +36,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
 
     public componentDidMount(): void {
         if (this.openCheckListItems.length === 0) {
-            this.setState({ currentView: View.Confirm });
+            this.setState({ currentView: this.state.gateApproval ? View.GateApproval : View.Confirm });
         }
     }
 
@@ -50,10 +50,10 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
         return (
             <Dialog
                 isOpen={true}
+                title={this._getDialogTitle()}
                 dialogContentProps={{ type: DialogType.largeHeader, subText: this._getDialogSubText() }}
                 modalProps={{ isDarkOverlay: true, isBlocking: false, className: "pp-changePhaseDialog" }}
-                onDismiss={this._onDismissDialog}
-                title={this._getDialogTitle()} >
+                onDismiss={this._onDismissDialog}>
                 <Body
                     { ...baseProps }
                     phase={this.props.newPhase}
