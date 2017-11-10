@@ -87,7 +87,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * Get dialog title
      */
     private _getDialogTitle = () => {
-        return `${RESOURCE_MANAGER.getResource("ProjectPhases_ChangePase")} (${this.props.phase.Name})`;
+        return `${RESOURCE_MANAGER.getResource("ProjectPhases_ChangePhase")} (${this.props.phase.Name})`;
     }
 
     /**

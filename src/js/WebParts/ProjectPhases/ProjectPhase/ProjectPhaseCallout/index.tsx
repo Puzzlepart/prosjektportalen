@@ -39,7 +39,7 @@ const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
             <div hidden={!changePhaseEnabled}>
                 <a href="#" onClick={() => onChangePhase(phase)}>
                     <Icon iconName="DoubleChevronRight12" />
-                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePase")}</span>
+                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePhase")}</span>
                 </a>
             </div>
         </li>

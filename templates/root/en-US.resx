@@ -1491,7 +1491,7 @@
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Loading project phases...</value>
   </data>
-  <data name="ProjectPhases_ChangePase" xml:space="preserve">
+  <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
   </data>
   <data name="ProjectPhases_PhaseNotSetText" xml:space="preserve">
