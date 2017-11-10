@@ -14,8 +14,15 @@ const GetStatusIcon = (index: number) => {
     }
 };
 
-const ChecklistStats = ({ data }) => {
+const ChecklistStats = ({ phase, data }) => {
     const validStats = (data && data.stats);
+    let noCheckpointsFoundResourceKey;
+    switch (phase.Type) {
+        case "Gate": noCheckpointsFoundResourceKey = "ProjectPhases_NoCheckpointsFoundForGate";
+            break;
+        case "Default": noCheckpointsFoundResourceKey = "ProjectPhases_NoCheckpointsFoundForPhase";
+            break;
+    }
     return validStats
         ? (
             <ul>
@@ -28,18 +35,27 @@ const ChecklistStats = ({ data }) => {
         )
         : (
             <ul>
-                <li>{RESOURCE_MANAGER.getResource("ProjectPhases_NoCheckpointsFoundForPhase")}</li>
+                <li>{RESOURCE_MANAGER.getResource(noCheckpointsFoundResourceKey)}</li>
             </ul>
         );
 };
 
 const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
+    let linkTextResourceKey;
+
+    switch (phase.Type) {
+        case "Gate": linkTextResourceKey = "ProjectPhases_ChangeGate";
+            break;
+        case "Default": linkTextResourceKey = "ProjectPhases_ChangePhase";
+            break;
+    }
+
     return (
         <li>
             <div hidden={!changePhaseEnabled}>
                 <a href="#" onClick={() => onChangePhase(phase)}>
                     <Icon iconName="DoubleChevronRight12" />
-                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePhase")}</span>
+                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource(linkTextResourceKey)}</span>
                 </a>
             </div>
         </li>
@@ -79,7 +95,9 @@ const ProjectPhaseCallout = ({ phase, checkListData, checkListDefaultViewUrl, ch
     return (
         <div className={className}>
             <h3>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
-            <ChecklistStats data={checkListData} />
+            <ChecklistStats
+                phase={phase}
+                data={checkListData} />
             <ul style={{ marginTop: 15, marginBottom: 10 }}>
                 <GoToChecklistLink
                     phase={phase}

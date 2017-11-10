@@ -4,7 +4,7 @@ import * as React from "react";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase from "./ProjectPhase";
-import ChangePhaseDialog from "./ChangePhaseDialog";
+import ChangePhaseDialog, { ChangePhaseDialogResult } from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import { fetchData } from "./ProjectPhasesData";
 import { PhaseModel } from "../../Model";
@@ -29,7 +29,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
         this._onChangePhase = this._onChangePhase.bind(this);
-        this._onConfirmPhaseChange = this._onConfirmPhaseChange.bind(this);
+        this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
     }
 
@@ -47,7 +47,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
 
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectPhases_LoadingText")} />;
         }
         return (
             <div>
@@ -94,16 +94,17 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render dialog
      */
     private renderDialog(): JSX.Element {
-        if (!this.state.changePhase) {
+        if (!this.state.newPhase) {
             return null;
         }
-        const { data, changePhase } = this.state;
+        const { data, newPhase } = this.state;
         const checkListItems = data.checkListData[data.activePhase.Id] ? data.checkListData[data.activePhase.Id].items : [];
         return (
             <ChangePhaseDialog
-                phase={changePhase}
+                newPhase={newPhase}
+                activePhase={data.activePhase}
                 checkListItems={checkListItems}
-                onConfirmPhaseChange={this._onConfirmPhaseChange}
+                onChangePhaseDialogReturnCallback={this._onChangePhaseDialogReturnCallback}
                 hideHandler={this._onHideDialog} />
         );
     }
@@ -124,7 +125,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             isFirst && "first-phase",
             isLast && "last-phase",
             isSelected && "selected",
-        ].filter(c => c);
+        ].filter(className => className);
     }
 
     /**
@@ -133,18 +134,39 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {PhaseModel} phase New phase
      */
     private _onChangePhase(phase: PhaseModel) {
-        this.setState({ changePhase: phase });
+        this.setState({ newPhase: phase });
     }
 
-    private async _onConfirmPhaseChange() {
-        await Project.ChangeProjectPhase(this.state.changePhase, false);
+    /**
+     * On confirm phase dialog return callback
+     *
+     * @param {ChangePhaseDialogResult} result Result
+     */
+    private async _onChangePhaseDialogReturnCallback(result: ChangePhaseDialogResult) {
+        const { data } = this.state;
+        switch (result) {
+            case ChangePhaseDialogResult.Approved: {
+                await Project.ChangeProjectPhase(this.state.newPhase, false);
+            }
+                break;
+            case ChangePhaseDialogResult.ProvisionallyApproved: {
+                await Project.ChangeProjectPhase(this.state.newPhase, false);
+            }
+                break;
+            case ChangePhaseDialogResult.Rejected: {
+                const prevPhaseIndex = data.activePhase.Index - 1;
+                const [prevPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
+                await Project.ChangeProjectPhase(prevPhase, false);
+            }
+                break;
+        }
     }
 
     /**
      * On hide dialog
      */
     private _onHideDialog() {
-        this.setState({ changePhase: null });
+        this.setState({ newPhase: null });
     }
 
     /**

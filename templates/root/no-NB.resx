@@ -1494,11 +1494,17 @@
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>
   </data>
+  <data name="ProjectPhases_ChangeGate" xml:space="preserve">
+    <value>Endre til denne gaten</value>
+  </data>
   <data name="ProjectPhases_PhaseNotSetText" xml:space="preserve">
     <value>Fase er ikke valgt ennå. Velg fase fra figuren over.</value>
   </data>
   <data name="ProjectPhases_ConfirmChangePhase" xml:space="preserve">
     <value>Vil du endre fase til {0}?</value>
+  </data>
+  <data name="ProjectPhases_ConfirmChangeGate" xml:space="preserve">
+    <value>Vil du endre gate til {0}?</value>
   </data>
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Gå til fasesjekklisten</value>
@@ -1514,6 +1520,9 @@
   </data>
   <data name="ProjectPhases_NoCheckpointsFoundForPhase" xml:space="preserve">
     <value>Ingen punkter funnet for denne fasen.</value>
+  </data>
+  <data name="ProjectPhases_NoCheckpointsFoundForGate" xml:space="preserve">
+    <value>Ingen punkter funnet for denne gaten.</value>
   </data>
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Vennligst vent,Endrer fase til {0}</value>
@@ -1544,6 +1553,15 @@
   </data>
   <data name="ProjectPhases_Stats_NotRelevant" xml:space="preserve">
     <value>ikke relevante</value>
+  </data>
+  <data name="ProjectPhases_ApprovingPhaseChange" xml:space="preserve">
+    <value>Godkjenner faseovergang..</value>
+  </data>
+  <data name="ProjectPhases_ProvisionallyApprovingPhaseChange" xml:space="preserve">
+    <value>Godkjenner faseovergang (foreløpig godkjenning)...</value>
+  </data>
+  <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
+    <value>Avviser faseovergang...</value>
   </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Laster prosjektinformasjon...</value>
@@ -1646,6 +1664,18 @@
   </data>
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Lagre endringer</value>
+  </data>
+  <data name="String_Approved" xml:space="preserve">
+    <value>Godkjent</value>
+  </data>
+  <data name="String_ProvisionallyApproved" xml:space="preserve">
+    <value>Foreløpig godkjent</value>
+  </data>
+  <data name="String_Rejected" xml:space="preserve">
+    <value>Avvist</value>
+  </data>
+  <data name="String_Approval" xml:space="preserve">
+    <value>Godkjenning</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>

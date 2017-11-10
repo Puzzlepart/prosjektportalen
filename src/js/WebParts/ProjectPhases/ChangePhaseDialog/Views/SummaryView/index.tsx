@@ -16,7 +16,7 @@ export const SummaryView = ({ phase, checkListItems, listClassName = "pp-simpleL
                 className={listClassName}>
                 {checkListItems.map((item, idx) => (
                     <CheckListItem
-                        key={idx}
+                        key={`SummaryView_CheckListItem_${idx}`}
                         checkListItem={item} />
                 ))}
             </ul>

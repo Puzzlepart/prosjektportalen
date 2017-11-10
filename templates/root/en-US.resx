@@ -1494,11 +1494,17 @@
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
   </data>
+  <data name="ProjectPhases_ChangeGate" xml:space="preserve">
+    <value>Change to this gate</value>
+  </data>
   <data name="ProjectPhases_PhaseNotSetText" xml:space="preserve">
     <value>Phase not selected yet. Select phase from the figure above.</value>
   </data>
   <data name="ProjectPhases_ConfirmChangePhase" xml:space="preserve">
     <value>Do you want to change phase to {0}?</value>
+  </data>
+  <data name="ProjectPhases_ConfirmChangeGate" xml:space="preserve">
+    <value>Do you want to change gate to {0}?</value>
   </data>
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Go to the phase checklist</value>
@@ -1514,6 +1520,9 @@
   </data>
   <data name="ProjectPhases_NoCheckpointsFoundForPhase" xml:space="preserve">
     <value>No checkpoints found for this phase.</value>
+  </data>
+  <data name="ProjectPhases_NoCheckpointsFoundForGate" xml:space="preserve">
+    <value>No checkpoints found for this gate.</value>
   </data>
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Please wait, Changing phase to {0}</value>
@@ -1643,6 +1652,18 @@
   </data>
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Save changes</value>
+  </data>
+  <data name="String_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="String_ProvisionallyApproved" xml:space="preserve">
+    <value>Provisionally approved</value>
+  </data>
+  <data name="String_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="String_Approval" xml:space="preserve">
+    <value>Approval</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
