@@ -7,9 +7,11 @@ import IChangingPhaseViewProps from "./IChangingPhaseViewProps";
 import IChangingPhaseViewState from "./IChangingPhaseViewState";
 //#endregion
 
+//#region Fake progress config
 const INTERVAL_DELAY: number = 100;
 const INTERVAL_INCREMENT: number = .01;
 const RESTART_WAIT_TIME: number = 2000;
+//#endregion
 
 /**
  * Changing phase view
@@ -54,7 +56,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
             case "Default": progressResKey = "ProjectPhases_ChangingPhase";
                 break;
         }
-        const [progressLabel, progressDescription] = RESOURCE_MANAGER.getResource(progressResKey).split(",")[0];
+        const [progressLabel, progressDescription] = RESOURCE_MANAGER.getResource(progressResKey).split(",");
         return (
             <ProgressIndicator
                 label={progressLabel}
@@ -68,9 +70,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
      * Fake progress using Async utility from office-ui-fabric-react/lib/Utilities
      */
     private _fakeProgress = (): void => {
-        this.setState({
-            percentComplete: 0,
-        });
+        this.setState({ percentComplete: 0 });
         this._interval = this._async.setInterval(() => {
             let percentComplete = this.state.percentComplete + INTERVAL_INCREMENT;
             if (percentComplete >= 1.0) {
@@ -78,9 +78,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
                 this._async.clearInterval(this._interval);
                 this._async.setTimeout(this._fakeProgress, RESTART_WAIT_TIME);
             }
-            this.setState({
-                percentComplete: percentComplete,
-            });
+            this.setState({ percentComplete });
         }, INTERVAL_DELAY);
     }
 }

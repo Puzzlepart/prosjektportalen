@@ -1554,6 +1554,15 @@
   <data name="ProjectPhases_Stats_NotRelevant" xml:space="preserve">
     <value>not relevant</value>
   </data>
+  <data name="ProjectPhases_ApprovingPhaseChange" xml:space="preserve">
+    <value>Approving phase change..</value>
+  </data>
+  <data name="ProjectPhases_ProvisionallyApprovingPhaseChange" xml:space="preserve">
+    <value>Provisionally approving phase change...</value>
+  </data>
+  <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
+    <value>Rejecting phase change...</value>
+  </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Loading project information...</value>
   </data>
