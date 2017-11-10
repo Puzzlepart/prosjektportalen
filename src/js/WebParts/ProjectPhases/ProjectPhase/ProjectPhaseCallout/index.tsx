@@ -37,17 +37,22 @@ const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
     return (
         <li>
             <div hidden={!changePhaseEnabled}>
-                <a href="#" onClick={() => onChangePhase(phase)}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePase")}</a>
+                <a href="#" onClick={() => onChangePhase(phase)}>
+                    <Icon iconName="DoubleChevronRight12" />
+                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePase")}</span>
+                </a>
             </div>
         </li>
     );
 };
 
 const GoToChecklistLink = ({ checkListDefaultViewUrl, phase }) => {
-    const PHASE_CHECKLIST_URL = `${checkListDefaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
     return (
         <li>
-            <a className="se-all" href={PHASE_CHECKLIST_URL}>{RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist")}</a>
+            <a href={`${checkListDefaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`}>
+                <Icon iconName="BulletedList" />
+                <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist")}</span>
+            </a>
         </li>
     );
 };
@@ -56,7 +61,10 @@ const RestartPhaseLink = ({ phase, onChangePhase }) => {
     return (
         <li>
             <div hidden={!phase.IsIncremental}>
-                <a href="#" onClick={() => onChangePhase(phase)}>Start fase på nytt</a>
+                <a href="#" onClick={() => onChangePhase(phase)}>
+                    <Icon iconName="Refresh" />
+                    <span style={{ marginLeft: 5 }}>Start fase på nytt</span>
+                </a>
             </div>
         </li>
     );

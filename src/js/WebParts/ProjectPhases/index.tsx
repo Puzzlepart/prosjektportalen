@@ -29,16 +29,20 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
         this._onChangePhase = this._onChangePhase.bind(this);
+        this._onConfirmPhaseChange = this._onConfirmPhaseChange.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
     }
 
-    public componentDidMount(): void {
-        fetchData().then(data => {
+    public async componentDidMount() {
+        try {
+            const data = await fetchData();
             this.setState({
                 data,
                 isLoading: false,
             });
-        });
+        } catch {
+            // Catch error
+        }
     }
 
     public render(): JSX.Element {
@@ -67,13 +71,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             <ul>
                 {data.phases.map((phase, index) => {
                     const classList = this.getPhaseClassList(phase);
-                    let changePhaseEnabled = Array.contains(classList, "selected");
+                    let changePhaseEnabled = !Array.contains(classList, "selected");
                     if (this.props.forcedOrder && data.activePhase) {
                         changePhaseEnabled = phase.Index === data.activePhase.Index + 1;
                     }
                     return (
                         <ProjectPhase
-                            key={index}
+                            key={`ProjectPhase_${index}`}
                             phase={phase}
                             classList={classList}
                             checkListData={data.checkListData[phase.Id]}
@@ -90,18 +94,18 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render dialog
      */
     private renderDialog(): JSX.Element {
+        if (!this.state.changePhase) {
+            return null;
+        }
         const { data, changePhase } = this.state;
         const checkListItems = data.checkListData[data.activePhase.Id] ? data.checkListData[data.activePhase.Id].items : [];
-        if (this.state.changePhase) {
-            return (
-                <ChangePhaseDialog
-                    phase={changePhase}
-                    checkListItems={checkListItems}
-                    onConfirmPhaseChange={this._onChangePhase}
-                    hideHandler={this._onHideDialog} />
-            );
-        }
-        return null;
+        return (
+            <ChangePhaseDialog
+                phase={changePhase}
+                checkListItems={checkListItems}
+                onConfirmPhaseChange={this._onConfirmPhaseChange}
+                hideHandler={this._onHideDialog} />
+        );
     }
 
     /**
@@ -128,12 +132,12 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      *
      * @param {PhaseModel} phase New phase
      */
-    private async _onChangePhase(phase?: PhaseModel): Promise<void> {
-        if (phase) {
-            this.setState({ changePhase: phase });
-        } else {
-            await Project.ChangeProjectPhase(this.state.changePhase, false);
-        }
+    private _onChangePhase(phase: PhaseModel) {
+        this.setState({ changePhase: phase });
+    }
+
+    private async _onConfirmPhaseChange() {
+        await Project.ChangeProjectPhase(this.state.changePhase, false);
     }
 
     /**
