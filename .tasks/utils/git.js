@@ -9,3 +9,9 @@ exports.hash = function (cb) {
         cb(stdout.trim());
     });
 };
+
+exports.branch = function (cb) {
+    exec('git rev-parse --abbrev-ref HEAD', function (err, stdout, stderr) {
+        cb(stdout.trim());
+    });
+};

@@ -30,16 +30,22 @@ gulp.task("copyManualConfig", () => {
 
 gulp.task("zipDist", (done) => {
     git.hash(hash => {
-        gulp.src(format("{0}/**/*", config.paths.dist))
-            .pipe(zip(format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash)))
-            .pipe(gulp.dest(config.paths.release))
-            .on('end', () => done());
+        git.branch(branch => {
+            let zipFilename = format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash);
+            if (branch !== "master") {
+                zipFilename = format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, branch, hash);
+            }
+            gulp.src(format("{0}/**/*", config.paths.dist))
+                .pipe(zip(zipFilename))
+                .pipe(gulp.dest(config.paths.release))
+                .on('end', () => done());
+        });
     });
 });
 
 gulp.task("release", (done) => {
     console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
-    runSequence("clean", "buildJsonResources", "tsLint", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", `zipDist`, () => {
+    runSequence("clean", "buildJsonResources", "tsLint",  "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", `zipDist`, () => {
         console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
         done();
     });
