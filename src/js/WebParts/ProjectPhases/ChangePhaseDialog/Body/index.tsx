@@ -7,9 +7,6 @@ import {
 } from "../Views";
 import IBodyProps from "./IBodyProps";
 
-/**
- * Body
- */
 export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }: IBodyProps) => {
     const DEFAULT = (
         <div className="inner"></div>

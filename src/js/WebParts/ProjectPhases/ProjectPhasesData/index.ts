@@ -1,12 +1,12 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../../@localization";
 import { sp } from "sp-pnp-js";
 import {
     CreateJsomContext,
     ExecuteJsomQuery,
 } from "jsom-ctx";
-import * as Util from "../../Util";
-import * as Project from "../../Project/";
-import { PhaseModel } from "../../Model";
+import * as Util from "../../../Util";
+import * as Project from "../../../Project";
+import { PhaseModel } from "../../../Model";
 import IProjectPhasesData, { IChecklistDataMap } from "./IProjectPhasesData";
 
 /**
@@ -22,7 +22,7 @@ async function fetchPases(): Promise<PhaseModel[]> {
             termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
             terms = termSet.getAllTerms();
         await ExecuteJsomQuery(jsomCtx, [terms]);
-        const phases = terms.get_data().map(term => new PhaseModel(term)).filter(p => p.ShowOnFrontpage);
+        const phases = terms.get_data().map((term, index) => new PhaseModel(index, term)).filter(p => p.ShowOnFrontpage);
         return phases;
     } catch (err) {
         throw err;
@@ -43,10 +43,7 @@ async function fetchPhaseChecklist(): Promise<{ data: IChecklistDataMap, default
         const data = itemsWithPhase.reduce((obj, item) => {
             const phase = item.GtProjectPhase.TermGuid;
             if (!obj.hasOwnProperty(phase)) {
-                obj[phase] = {
-                    stats: {},
-                    items: [],
-                };
+                obj[phase] = { stats: {}, items: [] };
                 obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] = 0;
                 obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
                 obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] = 0;
@@ -77,11 +74,12 @@ async function fetchPhaseChecklist(): Promise<{ data: IChecklistDataMap, default
 export async function fetchData(): Promise<IProjectPhasesData> {
     await Util.ensureTaxonomy();
     try {
-        const [activePhase, phases, phaseChecklist] = await Promise.all([
+        const [currentPhase, phases, phaseChecklist] = await Promise.all([
             Project.GetCurrentProjectPhase(),
             fetchPases(),
             fetchPhaseChecklist(),
         ]);
+        const [activePhase] = phases.filter(p => currentPhase.Id === p.Id);
         return {
             activePhase,
             phases,
@@ -93,5 +91,5 @@ export async function fetchData(): Promise<IProjectPhasesData> {
     }
 }
 
-
+export { IProjectPhasesData };
 

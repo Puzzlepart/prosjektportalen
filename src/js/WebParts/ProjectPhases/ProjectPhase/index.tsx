@@ -1,6 +1,6 @@
 import * as React from "react";
-import ProjectPhaseIcon from "./ProjectPhaseIcon";
-import ProjectPhaseCallout from "./ProjectPhaseCallout";
+import ProjectPhaseIcon, { IProjectPhaseIconProps } from "./ProjectPhaseIcon";
+import ProjectPhaseCallout, { IProjectPhaseCalloutProps } from "./ProjectPhaseCallout";
 import IProjectPhaseProps from "./IProjectPhaseProps";
 
 /**
@@ -8,10 +8,9 @@ import IProjectPhaseProps from "./IProjectPhaseProps";
  *
  * @param {IProjectPhaseProps} param0 Props
  */
-const ProjectPhase = ({ phase, classList, checkListData, checkListDefaultViewUrl, onChangePhase }: IProjectPhaseProps) => {
-    const selected = Array.contains(classList, "selected");
-    const projectPhaseIconProps = { phase, classList };
-    const projectPhaseCalloutProps = { phase, selected, checkListData, checkListDefaultViewUrl, onChangePhase };
+const ProjectPhase = ({ phase,  classList, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onChangePhase }: IProjectPhaseProps) => {
+    const projectPhaseIconProps: IProjectPhaseIconProps = { phase, classList };
+    const projectPhaseCalloutProps: IProjectPhaseCalloutProps = { phase, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onChangePhase };
     return (
         <li className={classList.join(" ")}>
             <ProjectPhaseIcon { ...projectPhaseIconProps } />

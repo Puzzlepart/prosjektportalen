@@ -1,5 +1,5 @@
 import IChecklistData from "./IChecklistData";
-import { PhaseModel } from "../../Model";
+import { PhaseModel } from "../../../Model";
 
 export interface IChecklistDataMap {
     [phase: string]: IChecklistData;

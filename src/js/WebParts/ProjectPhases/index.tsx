@@ -1,28 +1,25 @@
+//#region Imports
 import RESOURCE_MANAGER from "../../@localization";
 import * as React from "react";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
-import {
-    MessageBar,
-    MessageBarType,
-} from "office-ui-fabric-react/lib/MessageBar";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase from "./ProjectPhase";
 import ChangePhaseDialog from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import { fetchData } from "./ProjectPhasesData";
 import { PhaseModel } from "../../Model";
 import { cleanString } from "../../Util";
-import IProjectPhasesProps from "./IProjectPhasesProps";
+import IProjectPhasesProps, { ProjectPhasesDefaultProps } from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 import BaseWebPart from "../@BaseWebPart";
+//#endregion
 
 /**
  * Project Phases
  */
 export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IProjectPhasesState> {
     public static displayName = "ProjectPhases";
+    public static defaultProps = ProjectPhasesDefaultProps;
 
     /**
      * Constructor
@@ -68,15 +65,23 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         const { data } = this.state;
         return (
             <ul>
-                {data.phases.map((phase, index) => (
-                    <ProjectPhase
-                        key={index}
-                        phase={phase}
-                        classList={this.getPhaseClassList(phase, index)}
-                        checkListData={data.checkListData[phase.Id]}
-                        checkListDefaultViewUrl={data.checkListDefaultViewUrl}
-                        onChangePhase={this._onChangePhase} />
-                ))}
+                {data.phases.map((phase, index) => {
+                    const classList = this.getPhaseClassList(phase);
+                    let changePhaseEnabled = Array.contains(classList, "selected");
+                    if (this.props.forcedOrder && data.activePhase) {
+                        changePhaseEnabled = phase.Index === data.activePhase.Index + 1;
+                    }
+                    return (
+                        <ProjectPhase
+                            key={index}
+                            phase={phase}
+                            classList={classList}
+                            checkListData={data.checkListData[phase.Id]}
+                            checkListDefaultViewUrl={data.checkListDefaultViewUrl}
+                            changePhaseEnabled={changePhaseEnabled}
+                            onChangePhase={this._onChangePhase} />
+                    );
+                })}
             </ul>
         );
     }
@@ -86,7 +91,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderDialog(): JSX.Element {
         const { data, changePhase } = this.state;
-        const checkListItems = (data.activePhase && data.checkListData && data.checkListData[data.activePhase.Id]) ? data.checkListData[data.activePhase.Id].items : [];
+        const checkListItems = data.checkListData[data.activePhase.Id] ? data.checkListData[data.activePhase.Id].items : [];
         if (this.state.changePhase) {
             return (
                 <ChangePhaseDialog
@@ -101,11 +106,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
 
     /**
      * Get classnames for a phase
+     *
+     * @param {any} phase The phase
      */
-    private getPhaseClassList(phase, index): string[] {
+    private getPhaseClassList(phase): string[] {
         const { data } = this.state;
-        const isFirst = index === 0;
-        const isLast = (index === (data.phases.length - 1));
+        const isFirst = phase.Index === 0;
+        const isLast = (phase.Index === (data.phases.length - 1));
         const isSelected = (data.activePhase && (phase.Name === data.activePhase.Name));
         return [
             `level-${cleanString(phase.PhaseLevel)}`,

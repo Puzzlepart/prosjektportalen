@@ -1,4 +1,4 @@
-import IChecklistItem from "../IChecklistItem";
+import IChecklistItem from "../ProjectPhasesData/IChecklistItem";
 import { PhaseModel } from "../../../Model";
 
 export default interface IChangePhaseDialogProps {
