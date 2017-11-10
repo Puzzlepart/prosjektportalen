@@ -38,13 +38,17 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
     /**
     * Component did mount
     */
-    public componentDidMount(): void {
-        this.fetchData()
-            .then(updatedState => this.setState({
-                ...updatedState,
+    public async componentDidMount() {
+        try {
+            const data = await this.fetchData();
+            this.setState({
+                ...data,
                 isLoading: false,
-            }))
-            .catch(_ => this.setState({ isLoading: false }));
+            });
+        } catch (err) {
+            console.log(err);
+            this.setState({ isLoading: false });
+        }
     }
 
     /**
@@ -54,14 +58,14 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
-        const filteredItems = this.state.logItems.filter(logItem => Object.keys(logItem).filter(key => logItem[key].toLowerCase().indexOf(this.state.searchTerm) !== -1).length > 0);
+
         return (
             <div>
                 <SearchBox
                     labelText={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
                     onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 <DetailsList
-                    items={filteredItems}
+                    items={this.getFilteredItems()}
                     columns={this.props.columns}
                     onRenderItemColumn={this._onRenderItemColumn}
                     constrainMode={this.props.constrainMode}
@@ -69,6 +73,18 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                     selectionMode={this.props.selectionMode} />
             </div>
         );
+    }
+
+    private getFilteredItems() {
+        return this.state.logItems
+            .filter(itm => {
+                const matches = Object.keys(itm).filter(key => {
+                    const value = itm[key];
+                    return value && typeof value === "string" && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                }).length;
+                return matches > 0;
+            })
+            .sort((a, b) => a.Title > b.Title ? 1 : -1);
     }
 
     /**
