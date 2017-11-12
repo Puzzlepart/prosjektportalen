@@ -44,7 +44,12 @@ export default class ProjectListModel {
     * Get manager (GtProjectManagerOWSUSER) details
     */
     public getManagerDetails(): IUserDetails {
-        const [EMail = "", Name = RESOURCE_MANAGER.getResource("String_NotSet")] = this.Manager.split(" | ");
+        let EMail = "";
+        let Name = RESOURCE_MANAGER.getResource("String_NotSet");
+        if (this.Manager) {
+            const managerSplit = this.Manager.split(" | ");
+            EMail = managerSplit[0], Name = managerSplit[1];
+        }
         const Photo = Util.userPhoto(EMail);
         return { Name, EMail, Photo };
     }
@@ -53,7 +58,12 @@ export default class ProjectListModel {
      * Get owner (GtProjectOwnerOWSUSER) details
      */
     public getOwnerDetails(): IUserDetails {
-        const [EMail = "", Name = RESOURCE_MANAGER.getResource("String_NotSet")] = this.Owner.split(" | ");
+        let EMail = "";
+        let Name = RESOURCE_MANAGER.getResource("String_NotSet");
+        if (this.Owner) {
+            const ownerSplit = this.Owner.split(" | ");
+            EMail = ownerSplit[0], Name = ownerSplit[1];
+        }
         const Photo = Util.userPhoto(EMail);
         return { Name, EMail, Photo };
     }
