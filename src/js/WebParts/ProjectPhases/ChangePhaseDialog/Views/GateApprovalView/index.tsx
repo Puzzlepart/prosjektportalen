@@ -25,6 +25,7 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
     }
 
     public render(): JSX.Element {
+        console.log(this.state);
         return (
             <div className="inner">
                 <h2>{RESOURCE_MANAGER.getResource("String_Approval")}</h2>

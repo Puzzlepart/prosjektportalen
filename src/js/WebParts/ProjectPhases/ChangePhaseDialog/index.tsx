@@ -134,10 +134,10 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     /**
      * Change view
      *
-     * @param {View} view New view
+     * @param {View} newView New view
      */
-    private _onChangeView = (view: View): void => {
-        this.setState({ currentView: view });
+    private _onChangeView = (newView: View): void => {
+        this.setState({ currentView: newView });
     }
 
     /**

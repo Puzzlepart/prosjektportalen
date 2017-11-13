@@ -1,4 +1,5 @@
 enum ChangePhaseDialogResult {
+    None,
     Approved,
     ProvisionallyApproved,
     Rejected,
