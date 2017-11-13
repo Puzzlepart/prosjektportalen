@@ -28,7 +28,6 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             isLoading: false,
             currentView: View.Initial,
             checkListItems: props.checkListItems,
-            gateApproval: props.activePhase.Type === "Gate",
         };
         this.openCheckListItems = props.checkListItems.filter(item => item.GtChecklistStatus === RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open"));
         this.nextCheckPoint = this.nextCheckPoint.bind(this);
@@ -36,7 +35,8 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
 
     public componentDidMount(): void {
         if (this.openCheckListItems.length === 0) {
-            this.setState({ currentView: this.state.gateApproval ? View.GateApproval : View.Confirm });
+            const currentView = this.props.gateApproval ? View.GateApproval : View.Confirm;
+            this.setState({ currentView });
         }
     }
 
@@ -63,7 +63,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                     nextCheckPointAction={this.nextCheckPoint} />
                 <Footer
                     { ...baseProps }
-                    gateApproval={this.state.gateApproval}
+                    gateApproval={this.props.gateApproval}
                     onChangeView={this._onChangeView} />
             </Dialog>
         );
@@ -108,10 +108,9 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * @param {boolean} updateStatus Should status be updated
      */
     private async nextCheckPoint(statusValue: string, commentsValue: string, updateStatus = true): Promise<void> {
-        const { checkListItems, currentIdx } = this.state;
-
-        const currentItem = this.openCheckListItems[currentIdx];
         this.setState({ isLoading: true });
+        const { checkListItems, currentIdx } = this.state;
+        const currentItem = this.openCheckListItems[currentIdx];
         let updatedValues: { [key: string]: string } = {
             GtComment: commentsValue,
         };
@@ -119,15 +118,10 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             updatedValues.GtChecklistStatus = statusValue;
         }
         await this.phaseChecklist.items.getById(currentItem.Id).update(updatedValues);
-        this.openCheckListItems[currentIdx] = Object.assign(currentItem, updatedValues);
+        this.openCheckListItems[currentIdx] = { ...currentItem, ...updatedValues };
         let newState: Partial<IChangePhaseDialogState> = {
             isLoading: false,
-            checkListItems: checkListItems.map(item => {
-                if (currentItem.ID === item.ID) {
-                    return currentItem;
-                }
-                return item;
-            }),
+            checkListItems: checkListItems.map(item => currentItem.ID === item.ID ? currentItem : item),
         };
         if (currentIdx < (this.openCheckListItems.length - 1)) {
             newState.currentIdx = (currentIdx + 1);

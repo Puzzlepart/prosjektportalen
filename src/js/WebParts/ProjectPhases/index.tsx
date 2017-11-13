@@ -101,11 +101,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         }
         const { data, newPhase } = this.state;
         const checkListItems = data.checkListData[data.activePhase.Id] ? data.checkListData[data.activePhase.Id].items : [];
+        const gateApproval = data.activePhase.Type === "Gate" && (newPhase.Index === (data.activePhase.Index + 1));
         return (
             <ChangePhaseDialog
                 newPhase={newPhase}
                 activePhase={data.activePhase}
                 checkListItems={checkListItems}
+                gateApproval={gateApproval}
                 onChangePhaseDialogReturnCallback={this._onChangePhaseDialogReturnCallback}
                 hideHandler={this._onHideDialog} />
         );

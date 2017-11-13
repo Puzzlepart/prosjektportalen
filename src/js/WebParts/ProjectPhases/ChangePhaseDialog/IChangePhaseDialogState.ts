@@ -6,6 +6,5 @@ export default interface IChangePhaseDialogState {
     isLoading?: boolean;
     currentView?: View;
     checkListItems?: IChecklistItem[];
-    gateApproval?: boolean;
 }
 
