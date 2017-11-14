@@ -1015,16 +1015,17 @@
     <value>Leveransestatus</value>
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
-    <value>Kommentar, leveransestatus</value>
+    <value>Kommentar
+    , leveransestatus</value>
   </data>
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
   </data>
   <data name="SiteFields_GtLastGateStatus_DisplayName" xml:space="preserve">
-    <value>Prosjektprosessstatus</value>
+    <value>Siste gatestatus</value>
   </data>
   <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
-    <value>Siste gatestatus</value>
+    <value>Prosjektprosessstatus</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
