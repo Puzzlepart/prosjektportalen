@@ -29,7 +29,7 @@ export const Footer = ({ currentView, isLoading, gateApproval, onChangePhaseDial
                 disabled: isLoading,
                 onClick: async () => {
                     onChangeView(View.ChangingPhase);
-                    await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Approved);
+                    await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial);
                     onCloseDialog(null, true);
                 },
             });

@@ -8,7 +8,7 @@ import IProjectPhaseProps from "./IProjectPhaseProps";
  *
  * @param {IProjectPhaseProps} param0 Props
  */
-const ProjectPhase = ({ phase,  classList, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onRestartPhase, onChangePhase }: IProjectPhaseProps) => {
+const ProjectPhase = ({ phase, classList, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onRestartPhase, onChangePhase }: IProjectPhaseProps) => {
     const projectPhaseIconProps: IProjectPhaseIconProps = { phase, classList };
     const projectPhaseCalloutProps: IProjectPhaseCalloutProps = { phase, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onRestartPhase, onChangePhase };
     return (
@@ -20,4 +20,5 @@ const ProjectPhase = ({ phase,  classList, checkListData, checkListDefaultViewUr
 };
 
 export default ProjectPhase;
+export { IProjectPhaseProps };
 

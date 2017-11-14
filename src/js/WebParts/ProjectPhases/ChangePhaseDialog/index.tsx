@@ -154,4 +154,4 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     }
 }
 
-export { ChangePhaseDialogResult };
+export { IChangePhaseDialogProps, ChangePhaseDialogResult };

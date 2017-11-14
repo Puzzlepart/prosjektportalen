@@ -79,7 +79,10 @@ export async function fetchData(): Promise<IProjectPhasesData> {
             fetchPases(),
             fetchPhaseChecklist(),
         ]);
-        const [activePhase] = phases.filter(p => currentPhase.Id === p.Id);
+        let activePhase;
+        if (currentPhase) {
+            [activePhase] = phases.filter(p => currentPhase.Id === p.Id);
+        }
         return {
             activePhase,
             phases,

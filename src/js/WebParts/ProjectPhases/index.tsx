@@ -1,10 +1,11 @@
 //#region Imports
 import RESOURCE_MANAGER from "../../@localization";
 import * as React from "react";
+import pnp from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
-import ProjectPhase from "./ProjectPhase";
-import ChangePhaseDialog, { ChangePhaseDialogResult } from "./ChangePhaseDialog";
+import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
+import ChangePhaseDialog, { IChangePhaseDialogProps, ChangePhaseDialogResult } from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import { fetchData } from "./ProjectPhasesData";
 import { PhaseModel } from "../../Model";
@@ -41,8 +42,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 data,
                 isLoading: false,
             });
-        } catch {
-            // Catch error
+        } catch (err) {
+            // Catch err
         }
     }
 
@@ -67,26 +68,26 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render phases
      */
     private renderPhases(): JSX.Element {
+        const { forcedOrder } = this.props;
         const { data } = this.state;
+        const { activePhase, checkListData, checkListDefaultViewUrl } = data;
         return (
             <ul>
                 {data.phases.map((phase, index) => {
                     const classList = this.getPhaseClassList(phase);
-                    let changePhaseEnabled = !Array.contains(classList, "selected");
-                    if (this.props.forcedOrder && data.activePhase) {
-                        changePhaseEnabled = phase.Index === data.activePhase.Index + 1;
+                    let projectPhaseProps: IProjectPhaseProps = {
+                        phase,
+                        classList,
+                        checkListDefaultViewUrl,
+                        checkListData: checkListData[phase.Id],
+                        onRestartPhase: this._onRestartPhase,
+                        onChangePhase: this._onChangePhase,
+                        changePhaseEnabled: !Array.contains(classList, "selected"),
+                    };
+                    if (forcedOrder) {
+                        projectPhaseProps.changePhaseEnabled = activePhase ? phase.Index === (activePhase.Index + 1) : index === 0;
                     }
-                    return (
-                        <ProjectPhase
-                            key={`ProjectPhase_${index}`}
-                            phase={phase}
-                            classList={classList}
-                            checkListData={data.checkListData[phase.Id]}
-                            checkListDefaultViewUrl={data.checkListDefaultViewUrl}
-                            changePhaseEnabled={changePhaseEnabled}
-                            onRestartPhase={this._onRestartPhase}
-                            onChangePhase={this._onChangePhase} />
-                    );
+                    return <ProjectPhase key={`ProjectPhase_${index}`} { ...projectPhaseProps} />;
                 })}
             </ul>
         );
@@ -96,21 +97,27 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render dialog
      */
     private renderDialog(): JSX.Element {
-        if (!this.state.newPhase) {
+        const { data, newPhase } = this.state;
+        if (!newPhase) {
             return null;
         }
-        const { data, newPhase } = this.state;
-        const checkListItems = data.checkListData[data.activePhase.Id] ? data.checkListData[data.activePhase.Id].items : [];
-        const gateApproval = data.activePhase.Type === "Gate" && (newPhase.Index === (data.activePhase.Index + 1));
-        return (
-            <ChangePhaseDialog
-                newPhase={newPhase}
-                activePhase={data.activePhase}
-                checkListItems={checkListItems}
-                gateApproval={gateApproval}
-                onChangePhaseDialogReturnCallback={this._onChangePhaseDialogReturnCallback}
-                hideHandler={this._onHideDialog} />
-        );
+        let changePhaseDialogProps: IChangePhaseDialogProps = {
+            newPhase,
+            activePhase: data.activePhase,
+            checkListItems: [],
+            gateApproval: false,
+            onChangePhaseDialogReturnCallback: this._onChangePhaseDialogReturnCallback,
+            hideHandler: this._onHideDialog,
+        };
+
+        if (data.activePhase) {
+            if (data.checkListData[data.activePhase.Id]) {
+                changePhaseDialogProps.checkListItems = data.checkListData[data.activePhase.Id].items;
+            }
+            changePhaseDialogProps.gateApproval = data.activePhase.Type === "Gate" && (newPhase.Index === (data.activePhase.Index + 1));
+        }
+
+        return <ChangePhaseDialog { ...changePhaseDialogProps } />;
     }
 
     /**
@@ -156,25 +163,63 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     /**
      * On confirm phase dialog return callback
      *
-     * @param {ChangePhaseDialogResult} result Result
+     * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
      */
-    private async _onChangePhaseDialogReturnCallback(result: ChangePhaseDialogResult) {
-        const { data } = this.state;
-        switch (result) {
+    private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult) {
+        let { data, newPhase } = this.state;
+        switch (changePhaseDialogResult) {
+            case ChangePhaseDialogResult.Initial: {
+                await Project.ChangeProjectPhase(newPhase, false);
+            }
+                break;
             case ChangePhaseDialogResult.Approved: {
-                await Project.ChangeProjectPhase(this.state.newPhase, false);
+                await Project.ChangeProjectPhase(newPhase, false);
             }
                 break;
             case ChangePhaseDialogResult.ProvisionallyApproved: {
-                await Project.ChangeProjectPhase(this.state.newPhase, false);
+                await Project.ChangeProjectPhase(newPhase, false);
             }
                 break;
             case ChangePhaseDialogResult.Rejected: {
                 const prevPhaseIndex = data.activePhase.Index - 1;
-                const [prevPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
-                await Project.ChangeProjectPhase(prevPhase, false);
+                [newPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
+                await Project.ChangeProjectPhase(newPhase, false);
             }
                 break;
+        }
+        await this.updateWelcomePage(newPhase, changePhaseDialogResult);
+    }
+
+    /**
+    * Update welcpome page
+    *
+    * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
+    */
+    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult) {
+        const projectProcessState = phase.Type === "Gate"
+            ? RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_AtGate")
+            : RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_InPhase");
+        const lastGateStatus = this.getLastGateStatus(changePhaseDialogResult);
+        let valuesToUpdate: { [key: string]: string } = {
+            GtProjectProcessState: projectProcessState,
+        };
+        if (lastGateStatus) {
+            valuesToUpdate.GtLastGateStatus = lastGateStatus;
+        }
+        await pnp.sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(_spPageContextInfo.pageItemId).update(valuesToUpdate);
+    }
+
+    /**
+    * Get last gate status
+     *
+     * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
+    */
+    private getLastGateStatus(changePhaseDialogResult: ChangePhaseDialogResult): string {
+        switch (changePhaseDialogResult) {
+            case ChangePhaseDialogResult.Approved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_Approved");
+            case ChangePhaseDialogResult.ProvisionallyApproved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_ProvisionallyApproved");
+            case ChangePhaseDialogResult.Rejected: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_Rejected");
+            default: return null;
         }
     }
 

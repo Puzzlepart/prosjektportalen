@@ -25,7 +25,6 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
     }
 
     public render(): JSX.Element {
-        console.log(this.state);
         return (
             <div className="inner">
                 <h2>{RESOURCE_MANAGER.getResource("String_Approval")}</h2>
@@ -34,8 +33,8 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
                     : (
                         <div>
                             {this.getActions().map((buttonProps, index) => (
-                                <div style={{ marginTop: 5 }}>
-                                    <ActionButton key={`GateApprovalView_Action_${index}`} { ...buttonProps } />
+                                <div key={`GateApprovalView_Action_${index}`} style={{ marginTop: 5 }}>
+                                    <ActionButton { ...buttonProps } />
                                 </div>
                             ))}
                         </div>
