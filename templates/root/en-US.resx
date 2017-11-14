@@ -1023,6 +1023,12 @@
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Enabled</value>
   </data>
+  <data name="SiteFields_GtLastGateStatus_DisplayName" xml:space="preserve">
+    <value>Project process state</value>
+  </data>
+  <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
+    <value>Last gate status</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
