@@ -2130,6 +2130,21 @@
   <data name="Choice_GtMilestoneStatus_NotAchieved" xml:space="preserve">
     <value>Not achieved</value>
   </data>
+  <data name="Choice_GtLastGateStatus_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_ProvisionallyApproved" xml:space="preserve">
+    <value>Provisionally approved</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_AtGate" xml:space="preserve">
+    <value>At a gate</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
+    <value>In a phase</value>
+  </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>
   </data>

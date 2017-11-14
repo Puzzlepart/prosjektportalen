@@ -28,14 +28,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectServiceArea}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectServiceArea}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -48,14 +48,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectType}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectType}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -129,14 +129,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -210,14 +210,14 @@
                     <Name>SspId</Name>
                     <Value 
                         xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                     </Value>
                 </Property>
                 <Property>
                     <Name>TermSetId</Name>
                     <Value 
                         xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdProjectPhase}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                     </Value>
                 </Property>
             </ArrayOfProperty>
@@ -458,4 +458,17 @@
         <Default>0</Default>
     </Field>
     <Field Type="Number" DisplayName="{resource:SiteFields_GtOrder_DisplayName}" Description="{resource:SiteFields_GtOrder_Description}" ID="{203516f7-17e1-4b92-9f1d-2b453ce125dc}" StaticName="GtOrder" Name="GtOrder" Group="{resource:SiteFields_Group}" />
+    <Field Type="Choice" DisplayName="{resource:SiteFields_GtLastGateStatus_DisplayName}" Format="RadioButtons" FillInChoice="FALSE" Group="{resource:SiteFields_Group}" ID="{13aa2254-728b-48bd-8d09-5aa5e20933e1}" StaticName="GtLastGateStatus" Name="GtLastGateStatus">
+        <CHOICES>
+            <CHOICE>{resource:Choice_GtLastGateStatus_Approved}</CHOICE>
+            <CHOICE>{resource:Choice_GtLastGateStatus_ProvisionallyApproved}</CHOICE>
+            <CHOICE>{resource:Choice_GtLastGateStatus_Rejected}</CHOICE>
+        </CHOICES>
+    </Field>
+    <Field Type="Choice" DisplayName="{resource:SiteFields_GtProjectProcessState_DisplayName}" Format="RadioButtons" FillInChoice="FALSE" Group="{resource:SiteFields_Group}" ID="{a5d5969b-faff-4e66-a17f-e6b8a681a01f}" StaticName="GtProjectProcessState" Name="GtProjectProcessState">
+        <CHOICES>
+            <CHOICE>{resource:Choice_GtProjectProcessState_AtGate}</CHOICE>
+            <CHOICE>{resource:Choice_GtProjectProcessState_InPhase}</CHOICE>
+        </CHOICES>
+    </Field>
 </pnp:SiteFields>

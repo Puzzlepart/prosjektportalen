@@ -264,6 +264,8 @@
             <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" Required="false" />
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" Required="false" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" Required="false" />
+            <pnp:FieldRef ID="a5d5969b-faff-4e66-a17f-e6b8a681a01f" Name="GtProjectProcessState" Hidden="true" />
+            <pnp:FieldRef ID="13aa2254-728b-48bd-8d09-5aa5e20933e1" Name="GtLastGateStatus" Hidden="true" />
         </pnp:FieldRefs>
         <pnp:DocumentTemplate TargetName="/_layouts/15/spcf.aspx" />
     </pnp:ContentType>
