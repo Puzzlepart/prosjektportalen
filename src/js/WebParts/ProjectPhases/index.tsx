@@ -132,9 +132,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     /**
      * Get classnames for a phase
      *
-     * @param {any} phase The phase
+     * @param {PhaseModel} phase The phase
      */
-    private getPhaseClassList(phase): string[] {
+    private getPhaseClassList(phase: PhaseModel): string[] {
         const { data } = this.state;
         const isFirst = phase.Index === 0;
         const isLast = (phase.Index === (data.phases.length - 1));
@@ -177,24 +177,15 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult) {
         let { data, newPhase } = this.state;
         switch (changePhaseDialogResult) {
-            case ChangePhaseDialogResult.Initial: {
-                await Project.ChangeProjectPhase(newPhase, false);
-            }
-                break;
-            case ChangePhaseDialogResult.Approved: {
-                await Project.ChangeProjectPhase(newPhase, false);
-            }
-                break;
-            case ChangePhaseDialogResult.ProvisionallyApproved: {
-                await Project.ChangeProjectPhase(newPhase, false);
-            }
-                break;
             case ChangePhaseDialogResult.Rejected: {
                 const prevPhaseIndex = data.activePhase.Index - 1;
                 [newPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
                 await Project.ChangeProjectPhase(newPhase, false);
             }
                 break;
+            default: {
+                await Project.ChangeProjectPhase(newPhase, false);
+            }
         }
         await this.updateWelcomePage(newPhase, changePhaseDialogResult);
     }
