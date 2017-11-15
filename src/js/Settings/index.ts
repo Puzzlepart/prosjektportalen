@@ -52,11 +52,13 @@ export async function GetSetting(settingKey: string, toLowerCase = false): Promi
     } catch (err) {
         settingsJson = {};
     }
-    if (toLowerCase) {
-        return settingsJson[settingKey].toLowerCase();
-    } else {
+    if (settingsJson.hasOwnProperty(settingKey)) {
+        if (toLowerCase) {
+            return settingsJson[settingKey].toLowerCase();
+        }
         return settingsJson[settingKey];
     }
+    return "";
 }
 
 

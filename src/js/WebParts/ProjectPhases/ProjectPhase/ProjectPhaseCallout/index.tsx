@@ -73,10 +73,10 @@ const GoToChecklistLink = ({ checkListDefaultViewUrl, phase }) => {
     );
 };
 
-const RestartPhaseLink = ({ phase, onRestartPhase }) => {
+const RestartPhaseLink = ({ phase, restartPhaseEnabled, onRestartPhase }) => {
     return (
         <li>
-            <div hidden={!phase.IsIncremental}>
+            <div hidden={!restartPhaseEnabled}>
                 <a href="#" onClick={() => onRestartPhase(phase)}>
                     <Icon iconName="Refresh" />
                     <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_RestartPhase")}</span>
@@ -91,7 +91,7 @@ const RestartPhaseLink = ({ phase, onRestartPhase }) => {
  *
  * @param {IProjectPhaseCalloutProps} param0 Props
  */
-const ProjectPhaseCallout = ({ phase, checkListData, checkListDefaultViewUrl, changePhaseEnabled, onChangePhase, onRestartPhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
+const ProjectPhaseCallout = ({ phase, checkListData, checkListDefaultViewUrl, changePhaseEnabled, restartPhaseEnabled, onChangePhase, onRestartPhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
     return (
         <div className={className}>
             <h3>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
@@ -108,6 +108,7 @@ const ProjectPhaseCallout = ({ phase, checkListData, checkListDefaultViewUrl, ch
                     onChangePhase={onChangePhase} />
                 <RestartPhaseLink
                     phase={phase}
+                    restartPhaseEnabled={restartPhaseEnabled}
                     onRestartPhase={onRestartPhase} />
             </ul>
         </div>

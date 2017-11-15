@@ -7,6 +7,7 @@ import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBa
 import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
 import ChangePhaseDialog, { IChangePhaseDialogProps, ChangePhaseDialogResult } from "./ChangePhaseDialog";
 import * as Project from "../../Project";
+import * as Settings from "../../Settings";
 import { fetchData } from "./ProjectPhasesData";
 import { PhaseModel } from "../../Model";
 import { cleanString } from "../../Util";
@@ -37,13 +38,17 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
 
     public async componentDidMount() {
         try {
-            const data = await fetchData();
+            const [data, forcedOrder] = await Promise.all([
+                fetchData(),
+                Settings.GetSetting("PROJECTPHASES_FORCED_ORDER", true),
+            ]);
             this.setState({
                 data,
+                forcedOrder: forcedOrder === "on",
                 isLoading: false,
             });
         } catch (err) {
-            // Catch err
+            // catch err
         }
     }
 
@@ -68,8 +73,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render phases
      */
     private renderPhases(): JSX.Element {
-        const { forcedOrder } = this.props;
-        const { data } = this.state;
+        const { data, forcedOrder } = this.state;
         const { activePhase, checkListData, checkListDefaultViewUrl } = data;
         return (
             <ul>
@@ -83,9 +87,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                         onRestartPhase: this._onRestartPhase,
                         onChangePhase: this._onChangePhase,
                         changePhaseEnabled: !Array.contains(classList, "selected"),
+                        restartPhaseEnabled: false,
                     };
                     if (forcedOrder) {
                         projectPhaseProps.changePhaseEnabled = activePhase ? phase.Index === (activePhase.Index + 1) : index === 0;
+                    }
+                    if (activePhase) {
+                        projectPhaseProps.restartPhaseEnabled = activePhase.Index > phase.Index && phase.IsIncremental;
                     }
                     return <ProjectPhase key={`ProjectPhase_${index}`} { ...projectPhaseProps} />;
                 })}
@@ -98,23 +106,24 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderDialog(): JSX.Element {
         const { data, newPhase } = this.state;
+        const { activePhase, checkListData } = data;
         if (!newPhase) {
             return null;
         }
         let changePhaseDialogProps: IChangePhaseDialogProps = {
             newPhase,
-            activePhase: data.activePhase,
+            activePhase: activePhase,
             checkListItems: [],
             gateApproval: false,
             onChangePhaseDialogReturnCallback: this._onChangePhaseDialogReturnCallback,
             hideHandler: this._onHideDialog,
         };
 
-        if (data.activePhase) {
-            if (data.checkListData[data.activePhase.Id]) {
-                changePhaseDialogProps.checkListItems = data.checkListData[data.activePhase.Id].items;
+        if (activePhase) {
+            if (checkListData[activePhase.Id]) {
+                changePhaseDialogProps.checkListItems = checkListData[activePhase.Id].items;
             }
-            changePhaseDialogProps.gateApproval = data.activePhase.Type === "Gate" && (newPhase.Index === (data.activePhase.Index + 1));
+            changePhaseDialogProps.gateApproval = activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1));
         }
 
         return <ChangePhaseDialog { ...changePhaseDialogProps } />;

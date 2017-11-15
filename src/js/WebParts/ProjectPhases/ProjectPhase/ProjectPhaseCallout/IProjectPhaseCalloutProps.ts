@@ -5,6 +5,7 @@ export default interface IProjectPhaseCalloutProps {
     checkListData: any;
     checkListDefaultViewUrl: string;
     changePhaseEnabled: boolean;
+    restartPhaseEnabled: boolean;
     onChangePhase: (phase: PhaseModel) => void;
     onRestartPhase: (phase: PhaseModel) => void;
     className?: string;
