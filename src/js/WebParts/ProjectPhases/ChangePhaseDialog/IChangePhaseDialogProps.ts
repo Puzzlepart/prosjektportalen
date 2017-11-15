@@ -6,7 +6,7 @@ export default interface IChangePhaseDialogProps {
     newPhase: PhaseModel;
     activePhase: PhaseModel;
     onChangePhaseDialogReturnCallback: (result: ChangePhaseDialogResult) => Promise<void>;
-    hideHandler: Function;
+    hideHandler: (e) => void;
     checkListItems: IChecklistItem[];
     gateApproval?: boolean;
 }

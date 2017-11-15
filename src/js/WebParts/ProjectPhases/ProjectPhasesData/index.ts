@@ -12,7 +12,7 @@ import IProjectPhasesData, { IChecklistDataMap } from "./IProjectPhasesData";
 /**
  * Fetch phases from the term set associated with PROJECTPHASE_FIELD
  */
-async function fetchPases(): Promise<PhaseModel[]> {
+async function fetchPhasesTaxonomy(): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
@@ -36,7 +36,7 @@ async function fetchPhaseChecklist(): Promise<{ data: IChecklistDataMap, default
     try {
         const phaseChecklist = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
         const [items, defaultView] = await Promise.all([
-            phaseChecklist.items.get(),
+            phaseChecklist.items.select("ID", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment").get(),
             phaseChecklist.defaultView.get(),
         ]);
         const itemsWithPhase = items.filter(f => f.GtProjectPhase);
@@ -76,7 +76,7 @@ export async function fetchData(): Promise<IProjectPhasesData> {
     try {
         const [currentPhase, phases, phaseChecklist] = await Promise.all([
             Project.GetCurrentProjectPhase(),
-            fetchPases(),
+            fetchPhasesTaxonomy(),
             fetchPhaseChecklist(),
         ]);
         let activePhase;

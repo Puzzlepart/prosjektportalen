@@ -1,7 +1,7 @@
 //#region Imports
 import RESOURCE_MANAGER from "../../../@localization";
 import * as React from "react";
-import pnp from "sp-pnp-js";
+import pnp, { List } from "sp-pnp-js";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { View } from "./Views";
 import { Body } from "./Body";
@@ -9,14 +9,15 @@ import { Footer } from "./Footer";
 import IChangePhaseDialogProps from "./IChangePhaseDialogProps";
 import IChangePhaseDialogState from "./IChangePhaseDialogState";
 import ChangePhaseDialogResult from "./ChangePhaseDialogResult";
+import IChecklistItem from "../ProjectPhasesData/IChecklistItem";
 //#endregion
 
 /**
  * Change phase dialog
  */
 export default class ChangePhaseDialog extends React.Component<IChangePhaseDialogProps, IChangePhaseDialogState> {
-    private phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
-    private openCheckListItems;
+    private phaseChecklist: List;
+    private openCheckListItems: IChecklistItem[];
 
     /**
      * Constructor
@@ -29,6 +30,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             currentView: View.Initial,
             checkListItems: props.checkListItems,
         };
+        this.phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
         this.openCheckListItems = props.checkListItems.filter(item => item.GtChecklistStatus === RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open"));
         this.nextCheckPoint = this.nextCheckPoint.bind(this);
     }
@@ -111,17 +113,20 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
         this.setState({ isLoading: true });
         const { checkListItems, currentIdx } = this.state;
         const currentItem = this.openCheckListItems[currentIdx];
-        let updatedValues: { [key: string]: string } = {
-            GtComment: commentsValue,
-        };
+        let updatedValues: { [key: string]: string } = { GtComment: commentsValue };
         if (updateStatus) {
             updatedValues.GtChecklistStatus = statusValue;
         }
-        await this.phaseChecklist.items.getById(currentItem.Id).update(updatedValues);
+        await this.phaseChecklist.items.getById(currentItem.ID).update(updatedValues);
         this.openCheckListItems[currentIdx] = { ...currentItem, ...updatedValues };
         let newState: Partial<IChangePhaseDialogState> = {
             isLoading: false,
-            checkListItems: checkListItems.map(item => currentItem.ID === item.ID ? currentItem : item),
+            checkListItems: checkListItems.map(item => {
+                if (this.openCheckListItems[currentIdx].ID === item.ID) {
+                    return this.openCheckListItems[currentIdx];
+                }
+                return item;
+            }),
         };
         if (currentIdx < (this.openCheckListItems.length - 1)) {
             newState.currentIdx = (currentIdx + 1);
