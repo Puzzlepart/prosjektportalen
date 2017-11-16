@@ -2019,6 +2019,9 @@
   <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
     <value>Exceeds expectations</value>
   </data>
+  <data name="Choice_GtChecklistStatus_Archived" xml:space="preserve">
+    <value>Archived</value>
+  </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Open</value>
   </data>

@@ -2023,6 +2023,9 @@
   <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
     <value>Bedre enn spesifikasjon</value>
   </data>
+  <data name="Choice_GtChecklistStatus_Archived" xml:space="preserve">
+    <value>Arkivert</value>
+  </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Åpen</value>
   </data>
