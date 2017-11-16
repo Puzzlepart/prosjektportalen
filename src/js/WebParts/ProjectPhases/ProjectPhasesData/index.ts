@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../../@localization";
-import { sp } from "sp-pnp-js";
+import pnp, { List } from "sp-pnp-js";
 import {
     CreateJsomContext,
     ExecuteJsomQuery,
@@ -16,7 +16,7 @@ import IProjectPhasesData from "./IProjectPhasesData";
 async function fetchAvailablePhases(): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
+        const phaseField = pnp.sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
         const { TermSetId } = await phaseField.select("TermSetId").get();
         let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(jsomCtx.clientContext),
             termStore = taxSession.getDefaultSiteCollectionTermStore(),
@@ -35,7 +35,11 @@ async function fetchAvailablePhases(): Promise<PhaseModel[]> {
  */
 async function fetchChecklistItemsWithPhase(phaseChecklist): Promise<IChecklistItem[]> {
     try {
-        const items = await phaseChecklist.items.select("ID", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment").get();
+        const items = await phaseChecklist
+            .items
+            .select("ID", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment")
+            .filter(`GtChecklistStatus ne '${RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived")}'`)
+            .get();
         const itemsWithPhase = items.filter(f => f.GtProjectPhase);
         return itemsWithPhase;
     } catch (err) {
@@ -53,16 +57,17 @@ async function fetchChecklistItemsWithPhase(phaseChecklist): Promise<IChecklistI
 function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithPhase: IChecklistItem[], checkListDefaultViewUrl: string) {
     let mergedPhases = phases.map(phase => {
         const checklistItemsForPhase = checklistItemsWithPhase.filter(item => item.GtProjectPhase.TermGuid === phase.Id);
-        checklistItemsForPhase.forEach(item => {
-            switch (item.GtChecklistStatus) {
+        checklistItemsForPhase.forEach(({ GtChecklistStatus }) => {
+            switch (GtChecklistStatus) {
+                case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open"):
+                    phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] += 1;
+                    break;
                 case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"):
                     phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] += 1;
                     break;
                 case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"):
                     phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] += 1;
                     break;
-                default:
-                    phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] += 1;
             }
         });
         phase.Checklist.items = checklistItemsForPhase;
@@ -74,10 +79,11 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
 
 /**
  * Fetch data using sp-pnp-js and sp.taxonomy.js
+ *
+ * @param {List} phaseChecklist Phase checklist
  */
-export async function fetchData(): Promise<IProjectPhasesData> {
+export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesData> {
     await Util.ensureTaxonomy();
-    const phaseChecklist = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
     try {
         const [checklistItemsWithPhase, checkListDefaultViewUrl] = await Promise.all([
             fetchChecklistItemsWithPhase(phaseChecklist),
@@ -98,5 +104,5 @@ export async function fetchData(): Promise<IProjectPhasesData> {
     }
 }
 
-export { PhaseModel, IProjectPhasesData };
+export { PhaseModel, IChecklistItem, IProjectPhasesData };
 

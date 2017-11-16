@@ -1,14 +1,14 @@
 //#region Imports
 import RESOURCE_MANAGER from "../../@localization";
 import * as React from "react";
-import pnp from "sp-pnp-js";
+import pnp, { List } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
 import ChangePhaseDialog, { IChangePhaseDialogProps, ChangePhaseDialogResult } from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import * as Settings from "../../Settings";
-import { fetchData, PhaseModel } from "./ProjectPhasesData";
+import { fetchData, PhaseModel, IChecklistItem } from "./ProjectPhasesData";
 import { cleanString } from "../../Util";
 import IProjectPhasesProps, { ProjectPhasesDefaultProps } from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
@@ -22,6 +22,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public static displayName = "ProjectPhases";
     public static defaultProps = ProjectPhasesDefaultProps;
 
+    private phaseChecklist: List;
+
     /**
      * Constructor
      *
@@ -33,12 +35,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         this._onRestartPhase = this._onRestartPhase.bind(this);
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
+        this.phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
     }
 
     public async componentDidMount() {
         try {
             const [data, forcedOrder] = await Promise.all([
-                fetchData(),
+                fetchData(this.phaseChecklist),
                 Settings.GetSetting("PROJECTPHASES_FORCED_ORDER", true),
             ]);
             this.setState({
@@ -168,7 +171,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
      */
     private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult) {
-        let { data, newPhase } = this.state;
+        let { data, newPhase, restartPhase } = this.state;
         switch (changePhaseDialogResult) {
             case ChangePhaseDialogResult.Rejected: {
                 const prevPhaseIndex = data.activePhase.Index - 1;
@@ -177,11 +180,20 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             }
                 break;
             default: {
-                console.log(this.state.restartPhase);
                 await Project.ChangeProjectPhase(newPhase, false);
+                if (restartPhase) {
+                    await this.archivePhaseChecklistItems(restartPhase);
+                }
             }
         }
         await this.updateWelcomePage(newPhase, changePhaseDialogResult);
+    }
+
+    /**
+     * On hide dialog
+     */
+    private _onHideDialog() {
+        this.setState({ newPhase: null, restartPhase: null });
     }
 
     /**
@@ -193,7 +205,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         const projectProcessState = phase.Type === "Gate"
             ? RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_AtGate")
             : RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_InPhase");
-        const lastGateStatus = this.getLastGateStatus(changePhaseDialogResult);
+        const lastGateStatus = this.getLastGateStatusLocalized(changePhaseDialogResult);
         let valuesToUpdate: { [key: string]: string } = {
             GtProjectProcessState: projectProcessState,
         };
@@ -204,11 +216,11 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     }
 
     /**
-    * Get last gate status
+    * Get last gate status localized
      *
      * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
     */
-    private getLastGateStatus(changePhaseDialogResult: ChangePhaseDialogResult): string {
+    private getLastGateStatusLocalized(changePhaseDialogResult: ChangePhaseDialogResult): string {
         switch (changePhaseDialogResult) {
             case ChangePhaseDialogResult.Approved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_Approved");
             case ChangePhaseDialogResult.ProvisionallyApproved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_ProvisionallyApproved");
@@ -218,10 +230,17 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     }
 
     /**
-     * On hide dialog
-     */
-    private _onHideDialog() {
-        this.setState({ newPhase: null, restartPhase: null });
+    * Archive phase checklist items
+    *
+    * @param {IChecklistItem[]} items Checklist items
+    */
+    private async archivePhaseChecklistItems(items: IChecklistItem[]) {
+        let listItemEntityTypeFullName = await this.phaseChecklist.getListItemEntityTypeFullName();
+        for (let i = 0; i < items.length; i++) {
+            const { ID, Title, GtProjectPhase } = items[i];
+            await this.phaseChecklist.items.getById(ID).update({ GtChecklistStatus: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived") });
+            await this.phaseChecklist.items.add({ Title, GtProjectPhase, GtChecklistStatus: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open") }, listItemEntityTypeFullName);
+        }
     }
 
     /**
