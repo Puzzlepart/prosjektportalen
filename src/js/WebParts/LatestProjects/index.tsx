@@ -1,16 +1,15 @@
+//#region Imports
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
-import { Site } from "sp-pnp-js";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../Util";
 import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
 import ILatestProjectsState from "./ILatestProjectsState";
 import BaseWebPart from "../@BaseWebPart";
+//#endregion
 
 export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, ILatestProjectsState> {
     public static displayName = "LatestProjects";
@@ -25,8 +24,8 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
      */
     constructor(props: ILatestProjectsProps) {
         super(props, {
-            webinfos: null,
             isLoading: true,
+            subwebs: null,
         });
     }
 
@@ -34,21 +33,17 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
      * Component did mount
      */
     public async componentDidMount() {
-        const self = this;
         try {
-            const webinfos = await this.fetchData();
-            this.setState({
-                webinfos,
-                isLoading: false,
-            });
+            const subwebs = await this.fetchSubwebsForCurrentUser();
+            this.setState({ subwebs, isLoading: false });
         } catch (err) {
             this.setState({ isLoading: false });
         }
 
         if (this.props.reloadInterval !== -1) {
-            this.reloadInterval = window.setInterval(async function () {
-                const webinfos = await self.fetchData();
-                self.setState({ webinfos });
+            this.reloadInterval = window.setInterval(async () => {
+                const subwebs = await this.fetchSubwebsForCurrentUser();
+                this.setState({ subwebs });
             }, (this.props.reloadInterval * 1000));
         }
     }
@@ -75,33 +70,27 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     /**
      * Render items
      */
-    private renderItems = () => {
-        if (this.state.isLoading) {
+    private renderItems() {
+        const { isLoading, subwebs } = this.state;
+
+        if (isLoading) {
+            return <Spinner type={SpinnerType.large} label={this.props.loadingText} />;
+        } else if (subwebs == null) {
             return (
-                <Spinner type={SpinnerType.large} label={this.props.loadingText} />
-            );
-        } else if (this.state.webinfos == null) {
-            return (
-                <div className="ms-metadata">
+                <div className="ms-font-xs">
                     <Icon iconName="Error" style={{ color: "#000" }} />  {RESOURCE_MANAGER.getResource("WebPart_FailedMessage")}
                 </div>
             );
-        } else if (this.state.webinfos.length > 0) {
+        } else if (subwebs.length > 0) {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
                     <ul className={this.props.listClassName}>
-                        {this.state.webinfos.map(({ Id, Title, ServerRelativeUrl, Created }) => (
-                            <li key={Id}>
-                                {Title ?
-                                    <div>
-                                        <h5><a href={ServerRelativeUrl}>{Title}</a></h5>
-                                        <div className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(Created)}</div>
-                                    </div>
-                                    : (
-                                        <div style={{ width: 200 }}>
-                                            <Spinner type={SpinnerType.normal} label={this.props.underCreationLabel} />
-                                        </div>
-                                    )}
+                        {subwebs.map(({ Title, Url, Created }, index) => (
+                            <li key={`Project_${index}`}>
+                                <div>
+                                    <h5><a href={Url}>{Title}</a></h5>
+                                    <div className="ms-font-xs">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(Created)}</div>
+                                </div>
                             </li>
                         ))}
                     </ul>
@@ -117,17 +106,31 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     }
 
     /**
-     * Fetch data (webinfos)
+     * Fetch subwebs for current user using JSOM
      */
-    private async fetchData(): Promise<any> {
-        const webinfos = await new Site(_spPageContextInfo.siteAbsoluteUrl)
-            .rootWeb
-            .webinfos
-            .top(this.props.itemsCount)
-            .select("Id", "ServerRelativeUrl", "Title", "Created")
-            .orderBy(this.props.itemsOrderBy.orderBy, this.props.itemsOrderBy.ascending)
-            .get();
-        return webinfos;
+    private async fetchSubwebsForCurrentUser(): Promise<any> {
+        const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
+        const webCollection: SP.WebCollection = await jsomCtx.web.getSubwebsForCurrentUser(null);
+        await ExecuteJsomQuery(jsomCtx, [webCollection]);
+        const subwebs = webCollection.get_data()
+            .map(web => ({
+                Title: web.get_title(),
+                Url: web.get_url(),
+                Created: web.get_created(),
+            }))
+            .sort((a, b) => {
+                const aCreatedTime = a.Created.getTime();
+                const bCreatedTime = b.Created.getTime();
+                if (aCreatedTime < bCreatedTime) {
+                    return 1;
+                }
+                if (aCreatedTime > bCreatedTime) {
+                    return -1;
+                }
+                return 0;
+            })
+            .splice(0, this.props.itemsCount);
+        return subwebs;
     }
 }
 
