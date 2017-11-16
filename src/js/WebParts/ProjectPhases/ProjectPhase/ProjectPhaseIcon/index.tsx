@@ -12,7 +12,7 @@ const ProjectPhaseIcon = ({ phase, classList, className = "phaseIcon", phaseLett
         <a href="#">
             <div className={[className, ...classList].join(" ")}>
                 <span className={phaseLetterClassName}>{phase.PhaseLetter}</span>
-                <span className={phaseTextClassName} hidden={phase.Type === "Gate"}>{phase.Name} <span hidden={!phase.IsIncremental}><Icon iconName="Refresh" /></span></span>
+                <span className={phaseTextClassName} hidden={phase.Type === "Gate"}>{phase.Name} <span hidden={!phase.IsIncremental}><Icon style={{ fontSize: 12 }} iconName="Refresh" /></span></span>
                 <span className={subTextClassName}></span>
             </div>
         </a>

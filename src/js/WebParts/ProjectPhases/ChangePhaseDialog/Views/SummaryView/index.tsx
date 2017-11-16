@@ -7,14 +7,14 @@ import ISummaryViewProps from "./ISummaryViewProps";
 /**
  * Summary view
  */
-export const SummaryView = ({ phase, checkListItems, listClassName = "pp-simpleList spacing-m" }: ISummaryViewProps) => {
-    let listViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${phase.Name}`;
+export const SummaryView = ({ activePhase }: ISummaryViewProps) => {
+    let listViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${activePhase.Name}`;
     return (
         <div className="inner">
             <ul
                 style={{ marginBottom: 20 }}
-                className={listClassName}>
-                {checkListItems.map((item, idx) => (
+                className={"pp-simpleList spacing-m"}>
+                {activePhase.Checklist.items.map((item, idx) => (
                     <CheckListItem
                         key={`SummaryView_CheckListItem_${idx}`}
                         checkListItem={item} />

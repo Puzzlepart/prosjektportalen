@@ -6,13 +6,14 @@ import {
 } from "jsom-ctx";
 import * as Util from "../../../Util";
 import * as Project from "../../../Project";
-import { PhaseModel } from "../../../Model";
-import IProjectPhasesData, { IChecklistDataMap } from "./IProjectPhasesData";
+import PhaseModel from "./PhaseModel";
+import IChecklistItem from "./IChecklistItem";
+import IProjectPhasesData from "./IProjectPhasesData";
 
 /**
- * Fetch phases from the term set associated with PROJECTPHASE_FIELD
+ * Fetch available phases from the term set associated with PROJECTPHASE_FIELD
  */
-async function fetchPhasesTaxonomy(): Promise<PhaseModel[]> {
+async function fetchAvailablePhases(): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
@@ -30,42 +31,45 @@ async function fetchPhasesTaxonomy(): Promise<PhaseModel[]> {
 }
 
 /**
- * Fetch phase checklist data items with stats per status
+ * Fetch phase checklist items with phase
  */
-async function fetchPhaseChecklist(): Promise<{ data: IChecklistDataMap, defaultViewUrl: string }> {
+async function fetchChecklistItemsWithPhase(phaseChecklist): Promise<IChecklistItem[]> {
     try {
-        const phaseChecklist = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
-        const [items, defaultView] = await Promise.all([
-            phaseChecklist.items.select("ID", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment").get(),
-            phaseChecklist.defaultView.get(),
-        ]);
+        const items = await phaseChecklist.items.select("ID", "Title", "GtProjectPhase", "GtChecklistStatus", "GtComment").get();
         const itemsWithPhase = items.filter(f => f.GtProjectPhase);
-        const data = itemsWithPhase.reduce((obj, item) => {
-            const phase = item.GtProjectPhase.TermGuid;
-            if (!obj.hasOwnProperty(phase)) {
-                obj[phase] = { stats: {}, items: [] };
-                obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] = 0;
-                obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
-                obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] = 0;
-            }
-            switch (item.GtChecklistStatus) {
-                case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"):
-                    obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] += 1;
-                    break;
-                case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"):
-                    obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] += 1;
-                    break;
-                default:
-                    obj[phase].stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] += 1;
-            }
-            obj[phase].items.push(item);
-            return obj;
-        }, {});
-        const defaultViewUrl = defaultView.ServerRelativeUrl;
-        return { data, defaultViewUrl };
+        return itemsWithPhase;
     } catch (err) {
         throw err;
     }
+}
+
+/**
+ * Merge phases with checklist items
+ *
+ * @param {PhaseModel[]} phases Phases
+ * @param {IChecklistItem[]} checklistItemsWithPhase Checklist items that has phase set
+ * @param {string} checkListDefaultViewUrl Checklist default view URL
+ */
+function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithPhase: IChecklistItem[], checkListDefaultViewUrl: string) {
+    let mergedPhases = phases.map(phase => {
+        const checklistItemsForPhase = checklistItemsWithPhase.filter(item => item.GtProjectPhase.TermGuid === phase.Id);
+        checklistItemsForPhase.forEach(item => {
+            switch (item.GtChecklistStatus) {
+                case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"):
+                    phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] += 1;
+                    break;
+                case RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"):
+                    phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] += 1;
+                    break;
+                default:
+                    phase.Checklist.stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] += 1;
+            }
+        });
+        phase.Checklist.items = checklistItemsForPhase;
+        phase.Checklist.defaultViewUrl = checkListDefaultViewUrl;
+        return phase;
+    });
+    return mergedPhases;
 }
 
 /**
@@ -73,26 +77,26 @@ async function fetchPhaseChecklist(): Promise<{ data: IChecklistDataMap, default
  */
 export async function fetchData(): Promise<IProjectPhasesData> {
     await Util.ensureTaxonomy();
+    const phaseChecklist = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
     try {
-        const [currentPhase, phases, phaseChecklist] = await Promise.all([
-            Project.GetCurrentProjectPhase(),
-            fetchPhasesTaxonomy(),
-            fetchPhaseChecklist(),
+        const [checklistItemsWithPhase, checkListDefaultViewUrl] = await Promise.all([
+            fetchChecklistItemsWithPhase(phaseChecklist),
+            phaseChecklist.defaultView.get(),
         ]);
+        const [currentPhase, availablePhases] = await Promise.all([
+            Project.GetCurrentProjectPhase(),
+            fetchAvailablePhases(),
+        ]);
+        let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checkListDefaultViewUrl);
         let activePhase;
         if (currentPhase) {
-            [activePhase] = phases.filter(p => currentPhase.Id === p.Id);
+            [activePhase] = availablePhases.filter(p => currentPhase.Id === p.Id);
         }
-        return {
-            activePhase,
-            phases,
-            checkListData: phaseChecklist.data,
-            checkListDefaultViewUrl: phaseChecklist.defaultViewUrl,
-        };
+        return { activePhase, phases };
     } catch (err) {
         throw err;
     }
 }
 
-export { IProjectPhasesData };
+export { PhaseModel, IProjectPhasesData };
 

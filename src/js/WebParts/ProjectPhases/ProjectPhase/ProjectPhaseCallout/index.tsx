@@ -14,42 +14,27 @@ const GetStatusIcon = (index: number) => {
     }
 };
 
-const ChecklistStats = ({ phase, data }) => {
-    const validStats = (data && data.stats);
-    let noCheckpointsFoundResourceKey;
-    switch (phase.Type) {
-        case "Gate": noCheckpointsFoundResourceKey = "ProjectPhases_NoCheckpointsFoundForGate";
-            break;
-        case "Default": noCheckpointsFoundResourceKey = "ProjectPhases_NoCheckpointsFoundForPhase";
-            break;
-    }
-    return validStats
-        ? (
-            <ul>
-                {Object.keys(data.stats).map((c, index) => (
-                    <li key={index} style={{ paddingTop: "5px" }}>
-                        <Icon iconName={GetStatusIcon(index)} /> <span>{data.stats[c]} {c} {RESOURCE_MANAGER.getResource("ProjectPhases_Checkpoints")}.</span>
-                    </li>
-                ))}
-            </ul>
-        )
-        : (
-            <ul>
-                <li>{RESOURCE_MANAGER.getResource(noCheckpointsFoundResourceKey)}</li>
-            </ul>
-        );
+const ChecklistStats = ({ phase }) => {
+    const { stats } = phase.Checklist;
+    return (
+        <ul>
+            {Object.keys(stats).map((c, index) => (
+                <li key={index} style={{ paddingTop: "5px" }}>
+                    <Icon iconName={GetStatusIcon(index)} /> <span>{stats[c]} {c} {RESOURCE_MANAGER.getResource("ProjectPhases_Checkpoints")}.</span>
+                </li>
+            ))}
+        </ul>
+    );
 };
 
 const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
     let linkTextResourceKey;
-
     switch (phase.Type) {
         case "Gate": linkTextResourceKey = "ProjectPhases_ChangeGate";
             break;
         case "Default": linkTextResourceKey = "ProjectPhases_ChangePhase";
             break;
     }
-
     return (
         <li>
             <div hidden={!changePhaseEnabled}>
@@ -62,10 +47,10 @@ const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
     );
 };
 
-const GoToChecklistLink = ({ checkListDefaultViewUrl, phase }) => {
+const GoToChecklistLink = ({ phase }) => {
     return (
         <li>
-            <a href={`${checkListDefaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`}>
+            <a href={`${phase.Checklist.defaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`}>
                 <Icon iconName="BulletedList" />
                 <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist")}</span>
             </a>
@@ -91,17 +76,13 @@ const RestartPhaseLink = ({ phase, restartPhaseEnabled, onRestartPhase }) => {
  *
  * @param {IProjectPhaseCalloutProps} param0 Props
  */
-const ProjectPhaseCallout = ({ phase, checkListData, checkListDefaultViewUrl, changePhaseEnabled, restartPhaseEnabled, onChangePhase, onRestartPhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
+const ProjectPhaseCallout = ({ phase, changePhaseEnabled, restartPhaseEnabled, onChangePhase, onRestartPhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
     return (
         <div className={className}>
             <h3>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
-            <ChecklistStats
-                phase={phase}
-                data={checkListData} />
+            <ChecklistStats phase={phase} />
             <ul style={{ marginTop: 15, marginBottom: 10 }}>
-                <GoToChecklistLink
-                    phase={phase}
-                    checkListDefaultViewUrl={checkListDefaultViewUrl} />
+                <GoToChecklistLink phase={phase} />
                 <ChangePhaseLink
                     phase={phase}
                     changePhaseEnabled={changePhaseEnabled}

@@ -8,7 +8,7 @@ import {
 } from "../Views";
 import IBodyProps from "./IBodyProps";
 
-export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading, onCloseDialog, onChangePhaseDialogReturnCallback }: IBodyProps) => {
+export const Body = ({ newPhase, activePhase, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading, onCloseDialog, onChangePhaseDialogReturnCallback }: IBodyProps) => {
     switch (currentView) {
         case View.Initial: {
             const currentChecklistItem = openCheckListItems[currentIdx];
@@ -21,14 +21,12 @@ export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, ne
         }
         case View.Summary: {
             return (
-                <SummaryView
-                    phase={phase}
-                    checkListItems={checkListItems} />
+                <SummaryView activePhase={activePhase} />
             );
         }
         case View.ChangingPhase: {
             return (
-                <ChangingPhaseView phase={phase} />
+                <ChangingPhaseView newPhase={newPhase} />
             );
         }
         case View.GateApproval: {

@@ -1,5 +1,5 @@
-import { PhaseModel } from "../../../../../Model";
+import { PhaseModel } from "../../../ProjectPhasesData";
 
 export default interface IChangingPhaseViewProps {
-    phase: PhaseModel;
+    newPhase: PhaseModel;
 }

@@ -1,14 +1,7 @@
-import IChecklistData from "./IChecklistData";
-import { PhaseModel } from "../../../Model";
-
-export interface IChecklistDataMap {
-    [phase: string]: IChecklistData;
-}
+import PhaseModel from "./PhaseModel";
 
 export default interface IProjectPhasesData {
     phases?: PhaseModel[];
     activePhase?: PhaseModel;
-    checkListData?: IChecklistDataMap;
-    checkListDefaultViewUrl?: string;
 }
 

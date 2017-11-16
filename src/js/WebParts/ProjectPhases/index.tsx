@@ -8,8 +8,7 @@ import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
 import ChangePhaseDialog, { IChangePhaseDialogProps, ChangePhaseDialogResult } from "./ChangePhaseDialog";
 import * as Project from "../../Project";
 import * as Settings from "../../Settings";
-import { fetchData } from "./ProjectPhasesData";
-import { PhaseModel } from "../../Model";
+import { fetchData, PhaseModel } from "./ProjectPhasesData";
 import { cleanString } from "../../Util";
 import IProjectPhasesProps, { ProjectPhasesDefaultProps } from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
@@ -59,7 +58,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         return (
             <div>
                 {this.renderPhases()}
-                {this.renderDialog()}
+                {this.renderChangePhaseDialog()}
                 <div hidden={this.isPhaseSet()}>
                     <MessageBar messageBarType={MessageBarType.info}>
                         {RESOURCE_MANAGER.getResource("ProjectPhases_PhaseNotSetText")}
@@ -74,16 +73,14 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderPhases(): JSX.Element {
         const { data, forcedOrder } = this.state;
-        const { activePhase, checkListData, checkListDefaultViewUrl } = data;
+        const { activePhase, phases } = data;
         return (
             <ul>
-                {data.phases.map((phase, index) => {
+                {phases.map((phase, index) => {
                     const classList = this.getPhaseClassList(phase);
                     let projectPhaseProps: IProjectPhaseProps = {
                         phase,
                         classList,
-                        checkListDefaultViewUrl,
-                        checkListData: checkListData[phase.Id],
                         onRestartPhase: this._onRestartPhase,
                         onChangePhase: this._onChangePhase,
                         changePhaseEnabled: !Array.contains(classList, "selected"),
@@ -104,26 +101,22 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     /**
      * Render dialog
      */
-    private renderDialog(): JSX.Element {
-        const { data, newPhase } = this.state;
-        const { activePhase, checkListData } = data;
+    private renderChangePhaseDialog(): JSX.Element {
+        const { data, newPhase, restartPhase } = this.state;
+        const { activePhase } = data;
         if (!newPhase) {
             return null;
         }
         let changePhaseDialogProps: IChangePhaseDialogProps = {
             newPhase,
             activePhase: activePhase,
-            checkListItems: [],
             gateApproval: false,
             onChangePhaseDialogReturnCallback: this._onChangePhaseDialogReturnCallback,
             hideHandler: this._onHideDialog,
         };
 
         if (activePhase) {
-            if (checkListData[activePhase.Id]) {
-                changePhaseDialogProps.checkListItems = checkListData[activePhase.Id].items;
-            }
-            changePhaseDialogProps.gateApproval = activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1));
+            changePhaseDialogProps.gateApproval = (activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1)) || !!restartPhase);
         }
 
         return <ChangePhaseDialog { ...changePhaseDialogProps } />;
@@ -163,10 +156,10 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {PhaseModel} phase Phase to restart
      */
     private _onRestartPhase(phase: PhaseModel) {
-        const { data } = this.state;
-        const phaseGateIndex = phase.Index - 1;
-        const [phaseGate] = data.phases.filter(p => p.Index === phaseGateIndex && p.Type === "Gate");
-        this.setState({ newPhase: phaseGate ? phaseGate : phase });
+        this.setState({
+            newPhase: phase,
+            restartPhase: phase.Checklist.items,
+        });
     }
 
     /**
@@ -184,6 +177,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             }
                 break;
             default: {
+                console.log(this.state.restartPhase);
                 await Project.ChangeProjectPhase(newPhase, false);
             }
         }
@@ -227,7 +221,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * On hide dialog
      */
     private _onHideDialog() {
-        this.setState({ newPhase: null });
+        this.setState({ newPhase: null, restartPhase: null });
     }
 
     /**

@@ -1,5 +1,6 @@
-
-import * as Util from "../Util";
+import RESOURCE_MANAGER from "../../../@localization";
+import IChecklistItem from "./IChecklistItem";
+import * as Util from "../../../Util";
 
 export default class PhaseModel {
     public Index: number;
@@ -12,6 +13,7 @@ export default class PhaseModel {
     public Type: string;
     public SubText: string;
     public PhaseLetter: string;
+    public Checklist: { stats: { [key: string]: number }, items: IChecklistItem[], defaultViewUrl: string };
 
     /**
      * Constructor
@@ -31,6 +33,7 @@ export default class PhaseModel {
             this.Type = properties.PhaseType || "Default";
             this.SubText = properties.PhaseSubText;
             this.PhaseLetter = properties.PhaseLetter || this.Name[0];
+            this.initChecklist();
         }
     }
 
@@ -45,5 +48,20 @@ export default class PhaseModel {
         this.Name = safe.get_label();
         this.WssId = safe.get_wssId();
         return this;
+    }
+
+    /**
+     * Initialize checklist property
+     */
+    private initChecklist() {
+        let stats = {};
+        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] = 0;
+        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
+        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] = 0;
+        this.Checklist = {
+            stats,
+            items: [],
+            defaultViewUrl: "",
+        };
     }
 }

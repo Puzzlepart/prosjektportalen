@@ -50,7 +50,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
 
     public render(): JSX.Element {
         let progressResKey;
-        switch (this.props.phase.Type) {
+        switch (this.props.newPhase.Type) {
             case "Gate": progressResKey = "ProjectPhases_ChangingGate";
                 break;
             case "Default": progressResKey = "ProjectPhases_ChangingPhase";
@@ -60,7 +60,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
         return (
             <ProgressIndicator
                 label={progressLabel}
-                description={String.format(progressDescription, this.props.phase.Name)}
+                description={String.format(progressDescription, this.props.newPhase.Name)}
                 percentComplete={this.state.percentComplete} />
         );
     }

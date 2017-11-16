@@ -1,11 +1,11 @@
 import { View } from "../Views";
-import { PhaseModel } from "../../../../Model";
 import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
+import { PhaseModel } from "../../ProjectPhasesData";
 import IChecklistItem from "../../ProjectPhasesData/IChecklistItem";
 
 export default interface IBodyProps {
-    phase: PhaseModel;
-    checkListItems: IChecklistItem[];
+    newPhase: PhaseModel;
+    activePhase: PhaseModel;
     openCheckListItems: IChecklistItem[];
     currentIdx: number;
     nextCheckPointAction;
