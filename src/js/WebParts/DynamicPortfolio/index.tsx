@@ -196,7 +196,13 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (data.items.length === 0) {
             return null;
         }
-        return <MessageBar>{String.format(this.props.showCountText, data.items.length, this.state.items.length)}</MessageBar>;
+        const { currentFilters } = this.state;
+        const currentFiltersStr = [].concat.apply([], Object.keys(currentFilters).map(key => currentFilters[key])).join(", ");
+        let statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length);
+        if (currentFiltersStr) {
+            statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCountsWithFilters"), data.items.length, this.state.items.length, currentFiltersStr);
+        }
+        return <MessageBar>{statusText}</MessageBar>;
     }
 
     /**
