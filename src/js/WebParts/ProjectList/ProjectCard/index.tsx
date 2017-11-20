@@ -15,6 +15,7 @@ import IProjectCardProps from "./IProjectCardProps";
 
 /**
  * Project Card
+ * If no logo is set, it most likely means the project item is from ppv1. In that case we're rendering a history logo.
  *
  * @param {IProjectCardProps} param0 Props
  */
@@ -28,6 +29,7 @@ const ProjectCard = ({ project, fields, className, tileWidth, tileImageHeight, o
             <DocumentCardPreview previewImages={[
                 {
                     previewImageSrc: project.Logo,
+                    previewIconProps: project.Logo ? null : { iconName: "History",  styles: { root: {fontSize: 50, color: "rgb(51, 51, 51)", opacity: 0.5}}},
                     imageFit: ImageFit.cover,
                     accentColor: Util.stringToColour(project.Phase),
                     width: tileWidth,

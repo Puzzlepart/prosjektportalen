@@ -1,9 +1,10 @@
-import DataSource from "../DataSource";
+import DataSource, { IDataSourceSearchCustom } from "../DataSource";
 import IGroupByOption from "./IGroupByOption";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     dataSource?: DataSource;
+    customSearchSettings?: IDataSourceSearchCustom;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
     showCommandBar?: boolean;
