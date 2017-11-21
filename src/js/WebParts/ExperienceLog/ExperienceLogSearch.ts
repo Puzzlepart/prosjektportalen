@@ -1,60 +1,32 @@
-import RESOURCE_MANAGER from "../../@localization";
-import { sp } from "sp-pnp-js";
-
-/**
- * Default Search Settings used for sp-pnp-js
- */
-export const DEFAULT_SEARCH_SETTINGS = {
-    Querytext: "*",
-    RowLimit: 500,
-    TrimDuplicates: false,
-    Properties: [{
-        Name: "SourceName",
-        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
-    },
-    {
-        Name: "SourceLevel",
-        Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog"), QueryPropertyValueTypeIndex: 1 },
-    }],
-};
-
-export interface IQueryResult {
-    Path: string;
-    Title: string;
-    SiteTitle: string;
-    SPWebUrl: string;
-    GtProjectLogDescriptionOWSMTXT: string;
-    GtProjectLogResponsibleOWSCHCS: string;
-    GtProjectLogConsequenceOWSMTXT: string;
-    GtProjectLogRecommendationOWSMTXT: string;
-    GtProjectLogActorsOWSCHCM: string;
-}
-
-export interface IQueryResponse {
-    primarySearchResults: IQueryResult[];
-}
+import pnp from "sp-pnp-js";
+import ISearchResultSource from "../ISearchResultSource";
+import LogElement from "./LogElement";
 
 /**
  * Query the REST Search API using sp-pnp-js
+ *
+ * @param {ISearchResultSource} resultSource Result source
+ * @param {string[]} SelectProperties Select properties
  */
-export const queryLogElements = (SelectProperties: string[]) => new Promise<IQueryResponse>((resolve, reject) => {
+export async function queryLogElements(resultSource: ISearchResultSource, SelectProperties: string[]): Promise<LogElement[]> {
     SelectProperties = SelectProperties.concat(["Path", "SPWebUrl"]);
-    sp.search({
-        ...DEFAULT_SEARCH_SETTINGS,
-        SelectProperties,
-    })
-        .then((response: any) => {
-            resolve({
-                primarySearchResults: response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results.map(({ Cells }) => {
-                    let item: any = {};
-                    Cells.results.forEach(({ Key, Value }) => {
-                        if (Array.contains(SelectProperties, Key)) {
-                            item[Key] = Value ? Value : "";
-                        }
-                    });
-                    return item;
-                }),
-            });
-        })
-        .catch(reject);
-});
+    try {
+        const response = await pnp.sp.search({
+            Querytext: "*",
+            RowLimit: 500,
+            TrimDuplicates: false,
+            Properties: [{
+                Name: "SourceName",
+                Value: { StrVal: resultSource.Name, QueryPropertyValueTypeIndex: 1 },
+            },
+            {
+                Name: "SourceLevel",
+                Value: { StrVal: resultSource.Level, QueryPropertyValueTypeIndex: 1 },
+            }],
+            SelectProperties,
+        });
+        return response.PrimarySearchResults.map(r => new LogElement(r));
+    } catch (err) {
+        throw err;
+    }
+}
