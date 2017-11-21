@@ -18,7 +18,6 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     loadingText?: string;
     searchProperty?: string;
     searchBoxLabelText?: string;
-    showCountText?: string;
     showGroupBy?: boolean;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
@@ -36,7 +35,6 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     loadingText: RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText"),
     searchProperty: "Title",
     searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
-    showCountText: RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"),
     showGroupBy: true,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",

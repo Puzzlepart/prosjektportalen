@@ -33,7 +33,11 @@ Param(
     [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
     [ValidateSet('SharePointPnPPowerShell2013','SharePointPnPPowerShell2016','SharePointPnPPowerShellOnline')]
-    [string]$Environment = "SharePointPnPPowerShellOnline"
+    [string]$Environment = "SharePointPnPPowerShellOnline",    
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets previously)?")]
+    [switch]$SkipAssets,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
+    [switch]$SkipThirdParty
 )
 
 . ./SharedFunctions.ps1
@@ -82,7 +86,7 @@ if ($InstallVersion -gt $CurrentVersion) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         Connect-SharePoint $Url

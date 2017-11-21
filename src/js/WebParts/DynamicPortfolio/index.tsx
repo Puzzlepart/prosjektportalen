@@ -196,7 +196,13 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (data.items.length === 0) {
             return null;
         }
-        return <MessageBar>{String.format(this.props.showCountText, data.items.length, this.state.items.length)}</MessageBar>;
+        const { currentFilters } = this.state;
+        const currentFiltersStr = [].concat.apply([], Object.keys(currentFilters).map(key => currentFilters[key])).join(", ");
+        let statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length);
+        if (currentFiltersStr) {
+            statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCountsWithFilters"), data.items.length, this.state.items.length, currentFiltersStr);
+        }
+        return <MessageBar>{statusText}</MessageBar>;
     }
 
     /**
@@ -206,9 +212,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const data = this.getFilteredData();
 
         if (data.items.length === 0) {
-            return (
-                <MessageBar>{RESOURCE_MANAGER.getResource("DynamicPortfolio_NoResults")}</MessageBar>
-            );
+            return <MessageBar>{RESOURCE_MANAGER.getResource("DynamicPortfolio_NoResults")}</MessageBar>;
         }
 
         return (
@@ -345,7 +349,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     iconProps: { iconName: qc.iconName },
                     onClick: e => {
                         e.preventDefault();
-                        this.changeView(qc);
+                        this._onChangeView(qc);
                     },
                 })),
             });
@@ -368,27 +372,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 farItems={farItems}
             />
         );
-    }
-
-    /**
-     * Export current view to Excel (xlsx)
-     */
-    private async exportToExcel() {
-        this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
-        const data = this.getFilteredData();
-        const sheet = {
-            name: this.props.excelExportConfig.sheetName,
-            data: [
-                data.columns.map(col => col.name),
-                ...data.items.map(item => data.columns.map(col => item[col.fieldName])),
-            ],
-        };
-        const fileName = String.format(this.props.excelExportConfig.fileName, this.state.currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
-        await ExportToExcel({
-            sheets: [sheet],
-            fileName,
-        });
-        this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }
 
     /**
@@ -440,6 +423,28 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             groups: groups,
         };
     }
+
+    /**
+     * Export current view to Excel (xlsx)
+     */
+    private async exportToExcel() {
+        this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
+        const data = this.getFilteredData();
+        const sheet = {
+            name: this.props.excelExportConfig.sheetName,
+            data: [
+                data.columns.map(col => col.name),
+                ...data.items.map(item => data.columns.map(col => item[col.fieldName])),
+            ],
+        };
+        const fileName = String.format(this.props.excelExportConfig.fileName, this.state.currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        await ExportToExcel({
+            sheets: [sheet],
+            fileName,
+        });
+        this.setState({ excelExportStatus: ExcelExportStatus.Idle });
+    }
+
 
     /**
      * Get selected filters with items. Based on refiner configuration retrieved from the config list,
@@ -561,6 +566,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         });
     }
 
+    /**
+    * On open project Modal
+    *
+    * @param {any} event Event
+    * @param {any} item The item
+    */
     private _onOpenProjectModal = (evt, item) => {
         evt.preventDefault();
         this.setState({ showProjectInfo: item });
@@ -571,7 +582,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      *
      * @param {DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig} viewConfig View configuration
      */
-    private async changeView(viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): Promise<void> {
+    private async _onChangeView(viewConfig: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig): Promise<void> {
         if (this.state.currentView.id === viewConfig.id) {
             return;
         }

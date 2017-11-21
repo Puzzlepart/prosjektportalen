@@ -2097,6 +2097,9 @@
   <data name="DynamicPortfolio_ShowCounts" xml:space="preserve">
     <value>Viser {0} av totalt {1} prosjekter.</value>
   </data>
+  <data name="DynamicPortfolio_ShowCountsWithFilters" xml:space="preserve">
+    <value>Viser {0} av totalt {1} prosjekter, filtrert på {2}.</value>
+  </data>
   <data name="DynamicPortfolio_FieldSelector_Name" xml:space="preserve">
     <value>Felter</value>
   </data>

@@ -4,6 +4,7 @@ import pnp from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";
 import DataSource, { IDataSourceSearchCustom } from "../../DataSource";
+import ISearchResultSource from "../../ISearchResultSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
 import MeasurementEntry from "./MeasurementEntry";
 import BenefitEntry from "./BenefitEntry";
@@ -47,13 +48,14 @@ function GenerateData(benefits: BenefitEntry[], measures: MeasurementEntry[]): a
  */
 async function fetchFieldsAsMap(spObject: any, spFieldPrefix = "Gt") {
     try {
-        const fields = await spObject
+        const fields: any[] = await spObject
             .fields
             .filter(`substringof('${spFieldPrefix}', InternalName) eq true`)
             .get();
-        let fieldNamesMap: { [key: string]: string } = {};
-        fields.forEach(({ InternalName, Title }) => fieldNamesMap[InternalName] = Title);
-        return fieldNamesMap;
+        return fields.reduce((obj, { InternalName, Title }) => {
+            obj[InternalName] = Title;
+            return obj;
+        }, {});
     } catch (err) {
         throw err;
     }
@@ -64,8 +66,9 @@ async function fetchFieldsAsMap(spObject: any, spFieldPrefix = "Gt") {
  *
  * @param {DataSource} dataSource Data source (list/search)
  * @param {IDataSourceSearchCustom} customSearchSettings Custom search settings
+ * @param {ISearchResultSource} resultSource Result source
  */
-export async function retrieveFromSource(dataSource: DataSource, customSearchSettings?: IDataSourceSearchCustom): Promise<IBenefitsOverviewData> {
+export async function retrieveFromSource(dataSource: DataSource, customSearchSettings?: IDataSourceSearchCustom, resultSource?: ISearchResultSource): Promise<IBenefitsOverviewData> {
     try {
         switch (dataSource) {
             case DataSource.List: {
@@ -73,11 +76,11 @@ export async function retrieveFromSource(dataSource: DataSource, customSearchSet
                 return data;
             }
             case DataSource.Search: {
-                const data = await retrieveDataSearch();
+                const data = await retrieveDataSearch(resultSource);
                 return data;
             }
             case DataSource.SearchCustom: {
-                const data = await retrieveDataSearch(customSearchSettings);
+                const data = await retrieveDataSearch(resultSource, customSearchSettings);
                 return data;
             }
             default: {
@@ -126,9 +129,10 @@ async function retrieveDataList(): Promise<IBenefitsOverviewData> {
 /**
  * Fetches data using search
  *
+ * @param {ISearchResultSource} resultSource Result source
  * @param {IDataSourceSearchCustom} customSearchSettings Custom search settings
  */
-async function retrieveDataSearch(customSearchSettings?: IDataSourceSearchCustom): Promise<IBenefitsOverviewData> {
+async function retrieveDataSearch(resultSource?: ISearchResultSource, customSearchSettings?: IDataSourceSearchCustom): Promise<IBenefitsOverviewData> {
     const searchSettingsBase = {
         Querytext: "*",
         RowLimit: 500,
@@ -161,11 +165,11 @@ async function retrieveDataSearch(customSearchSettings?: IDataSourceSearchCustom
             ...searchSettingsBase,
             Properties: [{
                 Name: "SourceName",
-                Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_Benefits"), QueryPropertyValueTypeIndex: 1 },
+                Value: { StrVal: resultSource.Name, QueryPropertyValueTypeIndex: 1 },
             },
             {
                 Name: "SourceLevel",
-                Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_Benefits"), QueryPropertyValueTypeIndex: 1 },
+                Value: { StrVal: resultSource.Level, QueryPropertyValueTypeIndex: 1 },
             }],
         };
     }

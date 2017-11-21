@@ -1,20 +1,15 @@
+//#region Imports
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
-import {
-    DetailsList,
-    IColumn,
-} from "office-ui-fabric-react/lib/DetailsList";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { ModalLink } from "../../WebParts/@Components";
 import { queryLogElements } from "./ExperienceLogSearch";
-import LogElement from "./LogElement";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
 import IExperienceLogState from "./IExperienceLogState";
 import BaseWebPart from "../@BaseWebPart";
+//#endregion
 
 /**
  * Experience Log
@@ -46,8 +41,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 isLoading: false,
             });
         } catch (err) {
-            console.log(err);
-            this.setState({ isLoading: false });
+            this.setState({ logItems: [], isLoading: false });
         }
     }
 
@@ -122,8 +116,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async fetchData(): Promise<Partial<IExperienceLogState>> {
         try {
-            const response = await queryLogElements(this.props.columns.map(col => col.key));
-            return ({ logItems: response.primarySearchResults.map(r => new LogElement(r)) });
+            const logItems = await queryLogElements(this.props.resultSource, this.props.columns.map(col => col.key));
+            return { logItems };
         } catch (err) {
             throw err;
         }
