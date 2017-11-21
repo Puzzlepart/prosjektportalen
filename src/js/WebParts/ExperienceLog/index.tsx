@@ -41,11 +41,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 isLoading: false,
             });
         } catch (err) {
-<<<<<<< HEAD
-            this.setState({ isLoading: false });
-=======
             this.setState({ logItems: [], isLoading: false });
->>>>>>> dev
         }
     }
 
