@@ -5,12 +5,14 @@ import {
     DetailsListLayoutMode,
 } from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
+import ISearchResultSource from "../ISearchResultSource";
 
 export default interface IExperienceLogProps extends IBaseWebPartProps {
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
     columns?: any[];
+    resultSource?: ISearchResultSource;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
@@ -56,4 +58,5 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         ...col,
         isResizable: true,
     })),
+    resultSource: { Name: RESOURCE_MANAGER.getResource("ResultSourceName_ExperienceLog"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog") },
 };
