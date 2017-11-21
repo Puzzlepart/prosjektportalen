@@ -9,6 +9,7 @@ export default class PhaseModel {
     public WssId?: number;
     public PhaseLevel?: string;
     public ShowOnFrontpage?: boolean;
+    public ShowPhaseText?: boolean;
     public IsIncremental?: boolean;
     public Type: string;
     public SubText: string;
@@ -29,6 +30,7 @@ export default class PhaseModel {
             this.Name = term.get_name();
             this.PhaseLevel = properties.PhaseLevel || "Default";
             this.ShowOnFrontpage = properties.ShowOnFrontpage !== "false";
+            this.ShowPhaseText = properties.ShowPhaseText !== "false";
             this.IsIncremental = properties.IsIncremental === "true";
             this.Type = properties.PhaseType || "Default";
             this.SubText = properties.PhaseSubText;

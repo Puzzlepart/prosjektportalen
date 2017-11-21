@@ -93,7 +93,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                         projectPhaseProps.changePhaseEnabled = activePhase ? phase.Index === (activePhase.Index + 1) : index === 0;
                     }
                     if (activePhase) {
-                        projectPhaseProps.restartPhaseEnabled = activePhase.Index > phase.Index && phase.IsIncremental;
+                        projectPhaseProps.restartPhaseEnabled = activePhase.Index - 1 === phase.Index && phase.IsIncremental;
                     }
                     return <ProjectPhase key={`ProjectPhase_${index}`} { ...projectPhaseProps} />;
                 })}
