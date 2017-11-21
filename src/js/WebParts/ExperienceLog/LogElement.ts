@@ -1,6 +1,4 @@
-import { IQueryResult } from "./ExperienceLogSearch";
-
-export class LogElement {
+export default class LogElement {
     public Path: string;
     public Title: string;
     public SiteTitle: string;
@@ -11,7 +9,7 @@ export class LogElement {
     public Recommendation: string;
     public Actors: string;
 
-    constructor(data: IQueryResult) {
+    constructor(data) {
         this.Path = data.Path;
         this.Title = data.Title;
         this.SiteTitle = data.SiteTitle;
@@ -23,8 +21,4 @@ export class LogElement {
         this.Actors = data.GtProjectLogActorsOWSCHCM.split(";#").join(", ");
     }
 }
-
-
-export default LogElement;
-
 

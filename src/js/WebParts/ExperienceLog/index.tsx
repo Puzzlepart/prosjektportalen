@@ -122,8 +122,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async fetchData(): Promise<Partial<IExperienceLogState>> {
         try {
-            const response = await queryLogElements(this.props.columns.map(col => col.key));
-            return ({ logItems: response.primarySearchResults.map(r => new LogElement(r)) });
+            const primarySearchResults = await queryLogElements(this.props.resultSource, this.props.columns.map(col => col.key));
+            return ({ logItems: primarySearchResults.map(r => new LogElement(r)) });
         } catch (err) {
             throw err;
         }
