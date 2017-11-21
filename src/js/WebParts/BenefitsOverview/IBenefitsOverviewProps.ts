@@ -1,3 +1,5 @@
+import RESOURCE_MANAGER from "../../@localization";
+import ISearchResultSource from "../ISearchResultSource";
 import DataSource, { IDataSourceSearchCustom } from "../DataSource";
 import IGroupByOption from "./IGroupByOption";
 import { IBaseWebPartProps } from "../@BaseWebPart";
@@ -11,6 +13,7 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     searchProperty?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
+    resultSource?: ISearchResultSource;
 }
 
 export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
@@ -21,4 +24,5 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     showSearchBox: false,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
+    resultSource: { Name: RESOURCE_MANAGER.getResource("ResultSourceName_Benefits"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_Benefits") },
 };
