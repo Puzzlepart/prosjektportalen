@@ -18,7 +18,7 @@ export default class LogElement {
         this.Responsible = data.GtProjectLogResponsibleOWSCHCS;
         this.Consequence = data.GtProjectLogConsequenceOWSMTXT;
         this.Recommendation = data.GtProjectLogRecommendationOWSMTXT;
-        this.Actors = data.GtProjectLogActorsOWSCHCM.split(";#").join(", ");
+        this.Actors = data.GtProjectLogActorsOWSCHCM ? data.GtProjectLogActorsOWSCHCM.split(";#").join(", ") : "";
     }
 }
 

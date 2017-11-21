@@ -1,5 +1,6 @@
 import pnp from "sp-pnp-js";
 import ISearchResultSource from "../ISearchResultSource";
+import LogElement from "./LogElement";
 
 /**
  * Query the REST Search API using sp-pnp-js
@@ -7,7 +8,7 @@ import ISearchResultSource from "../ISearchResultSource";
  * @param {ISearchResultSource} resultSource Result source
  * @param {string[]} SelectProperties Select properties
  */
-export async function queryLogElements(resultSource: ISearchResultSource, SelectProperties: string[]): Promise<any[]> {
+export async function queryLogElements(resultSource: ISearchResultSource, SelectProperties: string[]): Promise<LogElement[]> {
     SelectProperties = SelectProperties.concat(["Path", "SPWebUrl"]);
     try {
         const response = await pnp.sp.search({
@@ -24,7 +25,7 @@ export async function queryLogElements(resultSource: ISearchResultSource, Select
             }],
             SelectProperties,
         });
-        return response.PrimarySearchResults;
+        return response.PrimarySearchResults.map(r => new LogElement(r));
     } catch (err) {
         throw err;
     }
