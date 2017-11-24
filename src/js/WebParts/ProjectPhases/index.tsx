@@ -105,7 +105,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * Render dialog
      */
     private renderChangePhaseDialog(): JSX.Element {
-        const { data, newPhase, restartPhase } = this.state;
+        const { data, newPhase, checklistItemsToArchive } = this.state;
         const { activePhase } = data;
         if (!newPhase) {
             return null;
@@ -119,7 +119,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         };
 
         if (activePhase) {
-            changePhaseDialogProps.gateApproval = (activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1)) || !!restartPhase);
+            changePhaseDialogProps.gateApproval = (activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1)) || !!checklistItemsToArchive);
         }
 
         return <ChangePhaseDialog { ...changePhaseDialogProps } />;
@@ -159,9 +159,10 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {PhaseModel} phase Phase to restart
      */
     private _onRestartPhase(phase: PhaseModel) {
+        const { activePhase } = this.state.data;
         this.setState({
             newPhase: phase,
-            restartPhase: phase.Checklist.items,
+            checklistItemsToArchive: [...phase.Checklist.items, ...activePhase.Checklist.items],
         });
     }
 
@@ -171,7 +172,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
      */
     private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult) {
-        let { data, newPhase, restartPhase } = this.state;
+        let { data, newPhase, checklistItemsToArchive } = this.state;
         switch (changePhaseDialogResult) {
             case ChangePhaseDialogResult.Rejected: {
                 const prevPhaseIndex = data.activePhase.Index - 1;
@@ -181,8 +182,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 break;
             default: {
                 await Project.ChangeProjectPhase(newPhase, false);
-                if (restartPhase) {
-                    await this.archivePhaseChecklistItems(restartPhase);
+                if (checklistItemsToArchive) {
+                    await this.archivePhaseChecklistItems(checklistItemsToArchive);
                 }
             }
         }
@@ -193,7 +194,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * On hide dialog
      */
     private _onHideDialog() {
-        this.setState({ newPhase: null, restartPhase: null });
+        this.setState({ newPhase: null, checklistItemsToArchive: null });
     }
 
     /**
