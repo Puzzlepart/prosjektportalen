@@ -1,6 +1,6 @@
 import * as Util from "../Util";
 import * as Config from "./Config";
-import { PhaseModel } from "../Model";
+import { PhaseModel } from "../WebParts/ProjectPhases/ProjectPhasesData";
 /**
  * Get site pages library
  *

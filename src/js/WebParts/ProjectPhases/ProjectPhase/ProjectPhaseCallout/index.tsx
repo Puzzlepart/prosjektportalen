@@ -14,45 +14,87 @@ const GetStatusIcon = (index: number) => {
     }
 };
 
+const ChecklistStats = ({ phase }) => {
+    const { stats } = phase.Checklist;
+    return (
+        <ul>
+            {Object.keys(stats).map((c, index) => (
+                <li key={index} style={{ paddingTop: "5px" }}>
+                    <Icon iconName={GetStatusIcon(index)} /> <span>{stats[c]} {c} {RESOURCE_MANAGER.getResource("ProjectPhases_Checkpoints")}.</span>
+                </li>
+            ))}
+        </ul>
+    );
+};
+
+const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhase }) => {
+    let linkTextResourceKey;
+    switch (phase.Type) {
+        case "Gate": linkTextResourceKey = "ProjectPhases_ChangeGate";
+            break;
+        case "Default": linkTextResourceKey = "ProjectPhases_ChangePhase";
+            break;
+    }
+    return (
+        <li>
+            <div hidden={!changePhaseEnabled}>
+                <a href="#" onClick={() => onChangePhase(phase)}>
+                    <Icon iconName="DoubleChevronRight12" />
+                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource(linkTextResourceKey)}</span>
+                </a>
+            </div>
+        </li>
+    );
+};
+
+const GoToChecklistLink = ({ phase }) => {
+    return (
+        <li>
+            <a href={`${phase.Checklist.defaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`}>
+                <Icon iconName="BulletedList" />
+                <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist")}</span>
+            </a>
+        </li>
+    );
+};
+
+const RestartPhaseLink = ({ phase, restartPhaseEnabled, onRestartPhase }) => {
+    return (
+        <li>
+            <div hidden={!restartPhaseEnabled}>
+                <a href="#" onClick={() => onRestartPhase(phase)}>
+                    <Icon iconName="Refresh" />
+                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource("ProjectPhases_RestartPhase")}</span>
+                </a>
+            </div>
+        </li>
+    );
+};
+
 /**
  * Project Phase Callout
  *
  * @param {IProjectPhaseCalloutProps} param0 Props
  */
-const ProjectPhaseCallout = ({ phase, selected, checkListData, onChangePhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
-    const PHASE_CHECKLIST_URL = `../${RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
-
-    /**
-     * Render checklist stats
-     */
-    const renderChecklistStats = () => {
-        const validStats = (checkListData && checkListData.stats);
-        return validStats
-            ? (Object.keys(checkListData.stats).map((c, index) => (
-                <li key={index} style={{ paddingTop: "5px" }}>
-                    <Icon iconName={GetStatusIcon(index)} /> <span>{checkListData.stats[c]} {c} {RESOURCE_MANAGER.getResource("ProjectPhases_Checkpoints")}.</span>
-                </li>
-            )))
-            : (
-                <li>{RESOURCE_MANAGER.getResource("ProjectPhases_NoCheckpointsFoundForPhase")}</li>
-            );
-    };
-
+const ProjectPhaseCallout = ({ phase, changePhaseEnabled, restartPhaseEnabled, onChangePhase, onRestartPhase, className = "phaseCallout" }: IProjectPhaseCalloutProps) => {
     return (
         <div className={className}>
             <h3>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_PhaseCalloutHeader"), phase.Name)}</h3>
-            <ul className="checkList">
-                {renderChecklistStats()}
-                <li className="spacer"></li>
-                <li>
-                    <a className="se-all" href={PHASE_CHECKLIST_URL}>{RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist")}</a>
-                </li>
-                {!selected && <li>
-                    <span style={{ cursor: "pointer" }} onClick={() => onChangePhase(phase)}>{RESOURCE_MANAGER.getResource("ProjectPhases_ChangePase")}</span>
-                </li>}
+            <ChecklistStats phase={phase} />
+            <ul style={{ marginTop: 15, marginBottom: 10 }}>
+                <GoToChecklistLink phase={phase} />
+                <ChangePhaseLink
+                    phase={phase}
+                    changePhaseEnabled={changePhaseEnabled}
+                    onChangePhase={onChangePhase} />
+                <RestartPhaseLink
+                    phase={phase}
+                    restartPhaseEnabled={restartPhaseEnabled}
+                    onRestartPhase={onRestartPhase} />
             </ul>
         </div>
     );
 };
 
 export default ProjectPhaseCallout;
+export { IProjectPhaseCalloutProps };

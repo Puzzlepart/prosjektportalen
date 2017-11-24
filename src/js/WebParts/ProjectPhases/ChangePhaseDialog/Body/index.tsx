@@ -4,16 +4,11 @@ import {
     InitialView,
     SummaryView,
     ChangingPhaseView,
+    GateApprovalView,
 } from "../Views";
 import IBodyProps from "./IBodyProps";
 
-/**
- * Body
- */
-export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }: IBodyProps) => {
-    const DEFAULT = (
-        <div className="inner"></div>
-    );
+export const Body = ({ newPhase, activePhase, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading, onCloseDialog, onChangePhaseDialogReturnCallback }: IBodyProps) => {
     switch (currentView) {
         case View.Initial: {
             const currentChecklistItem = openCheckListItems[currentIdx];
@@ -26,18 +21,23 @@ export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, ne
         }
         case View.Summary: {
             return (
-                <SummaryView
-                    phase={phase}
-                    checkListItems={checkListItems} />
+                <SummaryView activePhase={activePhase} />
             );
         }
         case View.ChangingPhase: {
             return (
-                <ChangingPhaseView phase={phase} />
+                <ChangingPhaseView newPhase={newPhase} />
+            );
+        }
+        case View.GateApproval: {
+            return (
+                <GateApprovalView
+                    onCloseDialog={onCloseDialog}
+                    onChangePhaseDialogReturnCallback={onChangePhaseDialogReturnCallback} />
             );
         }
         default: {
-            return DEFAULT;
+            return <div className="inner"></div>;
         }
     }
 };

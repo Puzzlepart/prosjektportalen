@@ -1,9 +1,10 @@
-import { PhaseModel } from "../../../Model";
-import IChecklistData from "../IChecklistData";
+import { PhaseModel } from "../ProjectPhasesData";
 
 export default interface IProjectPhaseProps {
     phase: PhaseModel;
     classList: string[];
-    checkListData: IChecklistData;
+    changePhaseEnabled: boolean;
+    restartPhaseEnabled: boolean;
     onChangePhase: (phase: PhaseModel) => void;
+    onRestartPhase: (phase: PhaseModel) => void;
 }

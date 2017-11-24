@@ -56,31 +56,22 @@ export default class CheckListItem extends React.PureComponent<IChecklistItemPro
             color: GetStatusColor(GtChecklistStatus),
             cursor: hasComment ? "pointer" : "initial",
         };
-
         return (
             <li>
-                <div
-                    className="ms-Grid"
-                    style={style}>
-                    <div
-                        className="ms-Grid-row"
-                        onClick={e => {
-                            if (hasComment) {
-                                this.setState({ showComment: !showComment });
-                            }
-                        }}>
+                <div className="ms-Grid" style={style}>
+                    <div className="ms-Grid-row" onClick={e => {
+                        if (hasComment) {
+                            this.setState({ showComment: !showComment });
+                        }
+                    }}>
                         <div className="ms-Grid-col ms-sm10">
                             <b>#{ID}</b> <span>{Title}</span>
                         </div>
-                        <div
-                            className="ms-Grid-col ms-sm2"
-                            hidden={!hasComment}>
+                        <div className="ms-Grid-col ms-sm2" hidden={!hasComment}>
                             <Icon iconName={showComment ? "ChevronDown" : "ChevronUp"} />
                         </div>
                     </div>
-                    <div
-                        className="ms-Grid-row"
-                        hidden={!showComment}>
+                    <div className="ms-Grid-row" hidden={!showComment}>
                         <div className="ms-Grid-col ms-sm12">
                             <p className="ms-metadata">
                                 {GtComment}

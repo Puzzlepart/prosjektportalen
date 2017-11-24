@@ -1,5 +1,5 @@
 export default interface IChecklistItem {
-    ID: string;
+    ID: number;
     Title: string;
     GtProjectPhase: any;
     GtChecklistStatus: string;

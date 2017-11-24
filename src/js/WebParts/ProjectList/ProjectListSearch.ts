@@ -37,7 +37,6 @@ export async function queryProjects(rowLimit?: number, selectProperties = []): P
         });
         return PrimarySearchResults;
     } catch (err) {
-        console.log(err);
         throw err;
     }
 }
