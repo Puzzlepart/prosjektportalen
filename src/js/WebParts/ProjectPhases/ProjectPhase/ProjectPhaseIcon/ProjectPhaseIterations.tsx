@@ -13,10 +13,10 @@ const ProjectPhaseIterations = (props: IProjectPhaseIterationsProps) => {
     const iconStyle: React.CSSProperties = { fontSize: 18, color: "green" };
     const textStyle: React.CSSProperties = { position: "absolute", top: 1, left: 6, fontSize: 10 };
     return (
-        <div hidden={!props.phase.IsIncremental || !props.phaseIterations} style={containerStyle}>
+        <div hidden={!props.phase.IsIncremental} style={containerStyle}>
             <div style={innerStyle}>
                 <Icon iconName="Sync" style={iconStyle} />
-                <span style={textStyle}>{props.phaseIterations}</span>
+                <span hidden={!props.phaseIterations} style={textStyle}>{props.phaseIterations}</span>
             </div>
         </div>
     );
