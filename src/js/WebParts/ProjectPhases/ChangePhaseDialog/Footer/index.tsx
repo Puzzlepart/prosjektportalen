@@ -1,3 +1,4 @@
+//#region Imports
 import * as React from "react";
 import RESOURCE_MANAGER from "../../../../@localization";
 import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
@@ -5,42 +6,66 @@ import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button"
 import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
 import { View } from "../Views";
 import IFooterProps from "./IFooterProps";
+//#endregion
 
 /**
  * Footer
  */
-export const Footer = ({ currentView, isLoading, gateApproval, onChangePhaseDialogReturnCallback, onCloseDialog, onChangeView }: IFooterProps) => {
+export const Footer = (props: IFooterProps) => {
     let actions = [];
 
-    switch (currentView) {
+    switch (props.currentView) {
         case View.Initial: {
             actions.push({
                 text: RESOURCE_MANAGER.getResource("String_Skip"),
-                disabled: isLoading,
+                disabled: props.isLoading,
                 onClick: () => {
-                    onChangeView(gateApproval ? View.GateApproval : View.Confirm);
+                    props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
                 },
             });
         }
             break;
         case View.Confirm: {
-            actions.push({
-                text: RESOURCE_MANAGER.getResource("String_Yes"),
-                disabled: isLoading,
-                onClick: async () => {
-                    onChangeView(View.ChangingPhase);
-                    await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial);
-                    onCloseDialog(null, true);
-                },
-            });
+            if (props.activePhase && props.activePhase.IsIncremental) {
+                actions.push(
+                    {
+                        text: props.activePhase.Name,
+                        disabled: props.isLoading,
+                        onClick: async () => {
+                            props.onChangeView(View.ChangingPhase);
+                            await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, props.activePhase.Name);
+                            props.onCloseDialog(null, true);
+                        },
+                    },
+                    {
+                        text: props.nextPhase.Name,
+                        disabled: props.isLoading,
+                        onClick: async () => {
+                            props.onChangeView(View.ChangingPhase);
+                            await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, props.nextPhase.Name);
+                            props.onCloseDialog(null, true);
+                        },
+                    },
+                );
+            } else {
+                actions.push({
+                    text: RESOURCE_MANAGER.getResource("String_Yes"),
+                    disabled: props.isLoading,
+                    onClick: async () => {
+                        props.onChangeView(View.ChangingPhase);
+                        await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial);
+                        props.onCloseDialog(null, true);
+                    },
+                });
+            }
         }
             break;
         case View.Summary: {
             actions.push({
                 text: RESOURCE_MANAGER.getResource("String_MoveOn"),
-                disabled: isLoading,
+                disabled: props.isLoading,
                 onClick: () => {
-                    onChangeView(gateApproval ? View.GateApproval : View.Confirm);
+                    props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
                 },
             });
         }
@@ -49,11 +74,13 @@ export const Footer = ({ currentView, isLoading, gateApproval, onChangePhaseDial
 
     return (
         <DialogFooter>
-            {actions.map((buttonProps, index) => <PrimaryButton key={`FooterAction_${index}`} { ...buttonProps } />)}
+            {actions.map((buttonProps, index) => {
+                return <PrimaryButton key={`FooterAction_${index}`} { ...buttonProps } />;
+            })}
             <DefaultButton
                 text={RESOURCE_MANAGER.getResource("String_Close")}
-                disabled={isLoading}
-                onClick={onCloseDialog} />
+                disabled={props.isLoading}
+                onClick={props.onCloseDialog} />
         </DialogFooter>
     );
 };
