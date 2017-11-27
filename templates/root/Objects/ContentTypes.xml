@@ -267,6 +267,7 @@
             <pnp:FieldRef ID="a5d5969b-faff-4e66-a17f-e6b8a681a01f" Name="GtProjectProcessState" />
             <pnp:FieldRef ID="13aa2254-728b-48bd-8d09-5aa5e20933e1" Name="GtLastGateStatus" />
             <pnp:FieldRef ID="469d8b96-f097-46de-b9b7-4630670c8ed4" Name="GtRequestedPhase" />
+            <pnp:FieldRef ID="de171613-5f6d-4152-b547-79cf3776992b" Name="GtPhaseIterations" />
         </pnp:FieldRefs>
         <pnp:DocumentTemplate TargetName="/_layouts/15/spcf.aspx" />
     </pnp:ContentType>
