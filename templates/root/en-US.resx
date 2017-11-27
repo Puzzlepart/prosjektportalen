@@ -354,6 +354,9 @@
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>All Documents</value>
   </data>
+  <data name="View_Archived_DisplayName" xml:space="preserve">
+    <value>Archived</value>
+  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>

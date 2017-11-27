@@ -21,7 +21,30 @@ const PhaseChecklist: IList = {
             ViewQuery: `<OrderBy>
               <FieldRef Name="GtSortOrder" />
               <FieldRef Name="ID" />
-            </OrderBy>`,
+            </OrderBy>
+            <Where>
+                <Neq>
+                    <FieldRef Name="GtChecklistStatus" />
+                    <Value Type="Text">${RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived")}</Value>
+                </Neq>
+            </Where>`,
+        },
+    },
+    {
+        Title: RESOURCE_MANAGER.getResource("View_Archived_DisplayName"),
+        ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
+        AdditionalSettings: {
+            RowLimit: 50,
+            ViewQuery: `<OrderBy>
+              <FieldRef Name="GtSortOrder" />
+              <FieldRef Name="ID" />
+            </OrderBy>
+            <Where>
+                <Eq>
+                    <FieldRef Name="GtChecklistStatus" />
+                    <Value Type="Text">${RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived")}</Value>
+                </Eq>
+            </Where>`,
         },
     },
     {
