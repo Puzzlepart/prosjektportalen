@@ -1,7 +1,7 @@
 //#region Imports
 import RESOURCE_MANAGER from "../../@localization";
 import * as React from "react";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { List, Item } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
@@ -22,7 +22,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public static displayName = "ProjectPhases";
     public static defaultProps = ProjectPhasesDefaultProps;
 
+    private sitePagesLibrary: List;
     private phaseChecklist: List;
+    private welcomePage: Item;
 
     /**
      * Constructor
@@ -35,7 +37,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         this._onRestartPhase = this._onRestartPhase.bind(this);
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
+        this.sitePagesLibrary = pnp.sp.web.lists.getById(_spPageContextInfo.pageListId);
         this.phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
+        this.welcomePage = this.sitePagesLibrary.items.getById(_spPageContextInfo.pageItemId);
     }
 
     public async componentDidMount() {
@@ -76,13 +80,14 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderPhases(): JSX.Element {
         const { data, forcedOrder } = this.state;
-        const { activePhase, requestedPhase, phases } = data;
+        const { activePhase, phaseIterations, requestedPhase, phases } = data;
         return (
             <ul>
                 {phases.map((phase, index) => {
                     const classList = this.getPhaseClassList(phase);
                     let projectPhaseProps: IProjectPhaseProps = {
                         phase,
+                        phaseIterations,
                         requestedPhase,
                         classList,
                         onRestartPhaseHandler: this._onRestartPhase,
@@ -182,7 +187,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             default: {
                 await Project.ChangeProjectPhase(newPhase, false);
                 if (checklistItemsToArchive) {
-                    await this.archivePhaseChecklistItems(checklistItemsToArchive);
+                    await this.restartIncrementalPhase(checklistItemsToArchive);
                 }
             }
         }
@@ -203,7 +208,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
     * @param {string} requestedPhase Requesed phase
     */
-    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "")  {
+    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "") {
         const projectProcessState = phase.Type === "Gate"
             ? RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_AtGate")
             : RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_InPhase");
@@ -215,7 +220,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             valuesToUpdate.GtLastGateStatus = lastGateStatus;
         }
         valuesToUpdate.GtRequestedPhase = requestedPhase;
-        await pnp.sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(_spPageContextInfo.pageItemId).update(valuesToUpdate);
+        await this.welcomePage.update(valuesToUpdate);
     }
 
     /**
@@ -233,17 +238,23 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     }
 
     /**
-    * Archive phase checklist items
+    * Restart incremental phase.
+    *
+    * Archive phase checklist items and update iterations
     *
     * @param {IChecklistItem[]} items Checklist items
     */
-    private async archivePhaseChecklistItems(items: IChecklistItem[]) {
-        let listItemEntityTypeFullName = await this.phaseChecklist.getListItemEntityTypeFullName();
+    private async restartIncrementalPhase(items: IChecklistItem[]) {
+        const statusArchived = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived");
+        const statusOpen = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open");
+        const listItemEntityTypeFullName = await this.phaseChecklist.getListItemEntityTypeFullName();
         for (let i = 0; i < items.length; i++) {
             const { ID, Title, GtProjectPhase } = items[i];
-            await this.phaseChecklist.items.getById(ID).update({ GtChecklistStatus: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived") });
-            await this.phaseChecklist.items.add({ Title, GtProjectPhase, GtChecklistStatus: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open") }, listItemEntityTypeFullName);
+            await this.phaseChecklist.items.getById(ID).update({ GtChecklistStatus: statusArchived });
+            await this.phaseChecklist.items.add({ Title, GtProjectPhase, GtChecklistStatus: statusOpen }, listItemEntityTypeFullName);
         }
+        const phaseIterations = this.state.data.phaseIterations || 1;
+        await this.welcomePage.update({ GtPhaseIterations: phaseIterations + 1 });
     }
 
     /**

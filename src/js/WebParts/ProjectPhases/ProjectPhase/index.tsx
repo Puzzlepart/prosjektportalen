@@ -8,9 +8,9 @@ import IProjectPhaseProps from "./IProjectPhaseProps";
  *
  * @param {IProjectPhaseProps} param0 Props
  */
-const ProjectPhase = ({ phase, requestedPhase, classList, changePhaseEnabled, restartPhaseEnabled, onRestartPhaseHandler, onChangePhaseHandler }: IProjectPhaseProps) => {
+const ProjectPhase = ({ phase, phaseIterations, requestedPhase, classList, changePhaseEnabled, restartPhaseEnabled, onRestartPhaseHandler, onChangePhaseHandler }: IProjectPhaseProps) => {
     const selected = classList.indexOf("selected") !== -1;
-    const projectPhaseIconProps: IProjectPhaseIconProps = { phase, classList };
+    const projectPhaseIconProps: IProjectPhaseIconProps = { phase, phaseIterations, classList };
     const projectPhaseCalloutProps: IProjectPhaseCalloutProps = { phase, requestedPhase, selected, changePhaseEnabled, restartPhaseEnabled, onRestartPhaseHandler, onChangePhaseHandler };
     return (
         <li className={classList.join(" ")}>

@@ -2,9 +2,6 @@ import { PhaseModel } from "../../ProjectPhasesData";
 
 export default interface IProjectPhaseIconProps {
     phase: PhaseModel;
+    phaseIterations: number;
     classList: string[];
-    className?: string;
-    phaseLetterClassName?: string;
-    phaseTextClassName?: string;
-    subTextClassName?: string;
 }

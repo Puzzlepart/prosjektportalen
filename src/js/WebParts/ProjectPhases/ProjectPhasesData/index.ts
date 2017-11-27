@@ -85,21 +85,30 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
 export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesData> {
     await Util.ensureTaxonomy();
     try {
-        const [checklistItemsWithPhase, checkListDefaultViewUrl] = await Promise.all([
+        const [
+            checklistItemsWithPhase,
+            checklistDefaultViewUrl,
+            currentPhase,
+            { GtRequestedPhase, GtPhaseIterations },
+            availablePhases,
+        ] = await Promise.all([
             fetchChecklistItemsWithPhase(phaseChecklist),
             phaseChecklist.defaultView.get(),
-        ]);
-        const [currentPhase, requestedPhase, availablePhases] = await Promise.all([
             Project.GetCurrentProjectPhase(),
-            Project.GetRequestedProjectPhase(),
+            Project.GetWelcomePageFieldValues(),
             fetchAvailablePhases(),
         ]);
-        let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checkListDefaultViewUrl);
+        let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checklistDefaultViewUrl);
         let activePhase;
         if (currentPhase) {
             [activePhase] = availablePhases.filter(p => currentPhase.Id === p.Id);
         }
-        return { activePhase, requestedPhase, phases };
+        return {
+            activePhase,
+            requestedPhase: GtRequestedPhase,
+            phaseIterations: GtPhaseIterations,
+            phases,
+        };
     } catch (err) {
         throw err;
     }
