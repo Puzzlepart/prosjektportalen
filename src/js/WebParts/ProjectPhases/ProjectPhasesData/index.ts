@@ -9,7 +9,7 @@ import IProjectPhasesData from "./IProjectPhasesData";
 
 /**
  * Fetch available phases from the term set associated with PROJECTPHASE_FIELD
- * 
+ *
  * @param {boolean} gatesEnabled Gates enabled
  */
 async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]> {
@@ -24,7 +24,7 @@ async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]
         await ExecuteJsomQuery(jsomCtx, [terms]);
         const termsData = terms.get_data();
         const phases = termsData
-            .map((term, index) => new PhaseModel(index, term))
+            .map((term, index) => new PhaseModel(index, term, gatesEnabled))
             .filter(p => {
                 if (!p.ShowOnFrontpage) {
                     return false;

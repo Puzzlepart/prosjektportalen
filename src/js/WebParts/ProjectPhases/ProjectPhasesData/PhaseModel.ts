@@ -21,8 +21,9 @@ export default class PhaseModel {
      *
      * @param {number} index Index
      * @param {SP.Taxonomy.Term} term Taxonomy term
+     * @param {boolean} gatesEnabled Gates enabled
      */
-    constructor(index?: number, term?: SP.Taxonomy.Term) {
+    constructor(index?: number, term?: SP.Taxonomy.Term, gatesEnabled?: boolean) {
         this.Index = index;
         if (term) {
             const properties = term.get_localCustomProperties();
@@ -32,7 +33,7 @@ export default class PhaseModel {
             this.PhaseLevel = properties.PhaseLevel || "Default";
             this.ShowOnFrontpage = properties.ShowOnFrontpage !== "false";
             this.ShowPhaseText = properties.ShowPhaseText !== "false";
-            this.IsIncremental = properties.IsIncremental === "true" && this.Type === "Gate";
+            this.IsIncremental = properties.IsIncremental === "true" && gatesEnabled;
             this.SubText = properties.PhaseSubText;
             this.PhaseLetter = properties.PhaseLetter || this.Name[0];
             this.initChecklist();
