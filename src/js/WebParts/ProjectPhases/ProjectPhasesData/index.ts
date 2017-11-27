@@ -1,9 +1,6 @@
 import RESOURCE_MANAGER from "../../../@localization";
 import pnp, { List } from "sp-pnp-js";
-import {
-    CreateJsomContext,
-    ExecuteJsomQuery,
-} from "jsom-ctx";
+import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import * as Util from "../../../Util";
 import * as Project from "../../../Project";
 import PhaseModel from "./PhaseModel";
@@ -12,8 +9,10 @@ import IProjectPhasesData from "./IProjectPhasesData";
 
 /**
  * Fetch available phases from the term set associated with PROJECTPHASE_FIELD
+ * 
+ * @param {boolean} gatesEnabled Gates enabled
  */
-async function fetchAvailablePhases(): Promise<PhaseModel[]> {
+async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const phaseField = pnp.sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
@@ -23,7 +22,22 @@ async function fetchAvailablePhases(): Promise<PhaseModel[]> {
             termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
             terms = termSet.getAllTerms();
         await ExecuteJsomQuery(jsomCtx, [terms]);
-        const phases = terms.get_data().map((term, index) => new PhaseModel(index, term)).filter(p => p.ShowOnFrontpage);
+        const termsData = terms.get_data();
+        const phases = termsData
+            .map((term, index) => new PhaseModel(index, term))
+            .filter(p => {
+                if (!p.ShowOnFrontpage) {
+                    return false;
+                }
+                if (p.Type === "Gate" && !gatesEnabled) {
+                    return false;
+                }
+                return true;
+            })
+            .map((p, index) => {
+                p.Index = index;
+                return p;
+            });
         return phases;
     } catch (err) {
         throw err;
@@ -33,7 +47,7 @@ async function fetchAvailablePhases(): Promise<PhaseModel[]> {
 /**
  * Fetch phase checklist items with phase
  */
-async function fetchChecklistItemsWithPhase(phaseChecklist): Promise<IChecklistItem[]> {
+async function fetchChecklistItemsWithPhase(phaseChecklist: List): Promise<IChecklistItem[]> {
     try {
         const items = await phaseChecklist
             .items
@@ -81,8 +95,9 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
  * Fetch data using sp-pnp-js and sp.taxonomy.js
  *
  * @param {List} phaseChecklist Phase checklist
+ * @param {boolean} gatesEnabled Gates enabled
  */
-export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesData> {
+export async function fetchData(phaseChecklist: List, gatesEnabled: boolean): Promise<IProjectPhasesData> {
     await Util.ensureTaxonomy();
     try {
         const [
@@ -96,7 +111,7 @@ export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesDat
             phaseChecklist.defaultView.select("ServerRelativeUrl").get(),
             Project.GetCurrentProjectPhase(),
             Project.GetWelcomePageFieldValues(),
-            fetchAvailablePhases(),
+            fetchAvailablePhases(gatesEnabled),
         ]);
         let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checklistDefaultViewUrl.ServerRelativeUrl);
         let activePhase;

@@ -28,11 +28,11 @@ export default class PhaseModel {
             const properties = term.get_localCustomProperties();
             this.Id = term.get_id().toString();
             this.Name = term.get_name();
+            this.Type = properties.PhaseType || "Default";
             this.PhaseLevel = properties.PhaseLevel || "Default";
             this.ShowOnFrontpage = properties.ShowOnFrontpage !== "false";
             this.ShowPhaseText = properties.ShowPhaseText !== "false";
-            this.IsIncremental = properties.IsIncremental === "true";
-            this.Type = properties.PhaseType || "Default";
+            this.IsIncremental = properties.IsIncremental === "true" && this.Type === "Gate";
             this.SubText = properties.PhaseSubText;
             this.PhaseLetter = properties.PhaseLetter || this.Name[0];
             this.initChecklist();

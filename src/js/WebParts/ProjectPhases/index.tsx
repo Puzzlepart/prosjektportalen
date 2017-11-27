@@ -45,7 +45,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public async componentDidMount() {
         try {
             const [data, forcedOrder] = await Promise.all([
-                fetchData(this.phaseChecklist),
+                fetchData(this.phaseChecklist, this.props.gatesEnabled),
                 Settings.GetSetting("PROJECTPHASES_FORCED_ORDER", true),
             ]);
             this.setState({
