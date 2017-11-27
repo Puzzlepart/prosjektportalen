@@ -2,9 +2,10 @@ import { PhaseModel } from "../../ProjectPhasesData";
 
 export default interface IProjectPhaseCalloutProps {
     phase: PhaseModel;
+    requestedPhase: string;
+    selected: boolean;
     changePhaseEnabled: boolean;
     restartPhaseEnabled: boolean;
-    onChangePhase: (phase: PhaseModel) => void;
-    onRestartPhase: (phase: PhaseModel) => void;
-    className?: string;
+    onChangePhaseHandler: (phase: PhaseModel) => void;
+    onRestartPhaseHandler: (phase: PhaseModel) => void;
 }
