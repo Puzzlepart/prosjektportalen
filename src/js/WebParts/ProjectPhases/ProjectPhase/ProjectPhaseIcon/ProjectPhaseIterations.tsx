@@ -9,15 +9,12 @@ export interface IProjectPhaseIterationsProps {
 
 const ProjectPhaseIterations = (props: IProjectPhaseIterationsProps) => {
     const containerStyle: React.CSSProperties = { position: "absolute", top: -12, left: 35 };
-    const innerStyle: React.CSSProperties = { position: "relative" };
-    const iconStyle: React.CSSProperties = { fontSize: 18, color: "green" };
-    const textStyle: React.CSSProperties = { position: "absolute", top: 1, left: 6, fontSize: 10 };
+    const iconStyle: React.CSSProperties = {};
+    const textStyle: React.CSSProperties = { marginLeft: 2, fontSize: 10 };
     return (
         <div hidden={!props.phase.IsIncremental} style={containerStyle}>
-            <div style={innerStyle}>
-                <Icon iconName="Sync" style={iconStyle} />
-                <span hidden={!props.phaseIterations} style={textStyle}>{props.phaseIterations}</span>
-            </div>
+            <Icon iconName="Sync" style={iconStyle} />
+            <span hidden={!props.phaseIterations} style={textStyle}>{props.phaseIterations}</span>
         </div>
     );
 };
