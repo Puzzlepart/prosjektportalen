@@ -1,4 +1,4 @@
-import { GetWelcomePageFieldValues, UpdatePhaseWelcomePage, GetCurrentProjectPhase } from "./WelcomePage";
+import { GetWelcomePageFieldValues, UpdatePhaseWelcomePage, GetCurrentProjectPhase, GetRequestedProjectPhase } from "./WelcomePage";
 import ChangeProjectPhase from "./ChangeProjectPhase";
 import { EnsureLocationBasedMetadataDefaultsReceiverForLibrary, SetMetadataDefaultsForLibrary } from "./MetadataDefaults";
 import UpdateFrontpageListViews from "./UpdateFrontpageListViews";
@@ -7,6 +7,7 @@ import { DOCUMENT_LIBRARY, FRONTPAGE_LISTS, FRONTPAGE_LISTS_VIEQUERY, PROJECTPHA
 export {
     ChangeProjectPhase,
     GetCurrentProjectPhase,
+    GetRequestedProjectPhase,
     GetWelcomePageFieldValues,
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
     SetMetadataDefaultsForLibrary,

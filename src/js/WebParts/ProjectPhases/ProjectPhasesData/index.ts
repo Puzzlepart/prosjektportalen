@@ -89,8 +89,9 @@ export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesDat
             fetchChecklistItemsWithPhase(phaseChecklist),
             phaseChecklist.defaultView.get(),
         ]);
-        const [currentPhase, availablePhases] = await Promise.all([
+        const [currentPhase, requestedPhase, availablePhases] = await Promise.all([
             Project.GetCurrentProjectPhase(),
+            Project.GetRequestedProjectPhase(),
             fetchAvailablePhases(),
         ]);
         let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checkListDefaultViewUrl);
@@ -98,7 +99,7 @@ export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesDat
         if (currentPhase) {
             [activePhase] = availablePhases.filter(p => currentPhase.Id === p.Id);
         }
-        return { activePhase, phases };
+        return { activePhase, requestedPhase, phases };
     } catch (err) {
         throw err;
     }

@@ -72,4 +72,17 @@ export const GetCurrentProjectPhase = () => new Promise<PhaseModel>((resolve, re
     });
 });
 
+/**
+ * Get requested project phase
+ */
+export const GetRequestedProjectPhase = () => new Promise<string>((resolve, reject) => {
+    Util.getClientContext(_spPageContextInfo.webAbsoluteUrl).then(ctx => {
+        const welcomePage = GetWelcomePage(ctx, true);
+        ctx.executeQueryAsync(() => {
+            let requestedPhaseFieldValue = welcomePage.get_item(Config.REQUESTEDPROJECTPHASE_FIELD);
+            resolve(requestedPhaseFieldValue);
+        }, reject);
+    });
+});
+
 
