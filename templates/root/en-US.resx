@@ -1572,6 +1572,15 @@
   <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
     <value>Rejecting phase change...</value>
   </data>
+    <data name="ProjectPhases_CurrentPhaseIncremental" xml:space="preserve">
+    <value>The phase you're in ({0}) is incremental.</value>
+  </data>
+  <data name="ProjectPhases_RestartPhaseOrContinue" xml:space="preserve">
+    <value>Do you want to start the phase over again, or move on to {0}?</value>
+  </data>
+  <data name="ProjectPhases_NextPhase" xml:space="preserve">
+    <value>Next phase is {0}.</value>
+  </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Loading project information...</value>
   </data>
