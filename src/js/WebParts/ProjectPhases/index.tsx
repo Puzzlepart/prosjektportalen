@@ -76,16 +76,17 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     private renderPhases(): JSX.Element {
         const { data, forcedOrder } = this.state;
-        const { activePhase, phases } = data;
+        const { activePhase, requestedPhase, phases } = data;
         return (
             <ul>
                 {phases.map((phase, index) => {
                     const classList = this.getPhaseClassList(phase);
                     let projectPhaseProps: IProjectPhaseProps = {
                         phase,
+                        requestedPhase,
                         classList,
-                        onRestartPhase: this._onRestartPhase,
-                        onChangePhase: this._onChangePhase,
+                        onRestartPhaseHandler: this._onRestartPhase,
+                        onChangePhaseHandler: this._onChangePhase,
                         changePhaseEnabled: !Array.contains(classList, "selected"),
                         restartPhaseEnabled: false,
                     };
@@ -110,9 +111,12 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         if (!newPhase) {
             return null;
         }
+        const nextPhaseIndex = newPhase.Index + 1;
+        const [nextPhase] = data.phases.filter(p => p.Index === nextPhaseIndex);
         let changePhaseDialogProps: IChangePhaseDialogProps = {
             newPhase,
-            activePhase: activePhase,
+            activePhase,
+            nextPhase,
             gateApproval: false,
             onChangePhaseDialogReturnCallback: this._onChangePhaseDialogReturnCallback,
             hideHandler: this._onHideDialog,
@@ -135,13 +139,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         const isFirst = phase.Index === 0;
         const isLast = (phase.Index === (data.phases.length - 1));
         const isSelected = (data.activePhase && (phase.Name === data.activePhase.Name));
-        return [
-            `level-${cleanString(phase.PhaseLevel)}`,
-            `type-${cleanString(phase.Type)}`,
-            isFirst && "first-phase",
-            isLast && "last-phase",
-            isSelected && "selected",
-        ].filter(className => className);
+        return [`level-${cleanString(phase.PhaseLevel)}`, `type-${cleanString(phase.Type)}`, isFirst && "first-phase", isLast && "last-phase", isSelected && "selected"].filter(cn => cn);
     }
 
     /**
@@ -170,8 +168,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * On confirm phase dialog return callback
      *
      * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
+     * @param {string} requestedPhase Requesed phase
      */
-    private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult) {
+    private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase?: string) {
         let { data, newPhase, checklistItemsToArchive } = this.state;
         switch (changePhaseDialogResult) {
             case ChangePhaseDialogResult.Rejected: {
@@ -187,7 +186,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 }
             }
         }
-        await this.updateWelcomePage(newPhase, changePhaseDialogResult);
+        await this.updateWelcomePage(newPhase, changePhaseDialogResult, requestedPhase);
     }
 
     /**
@@ -200,9 +199,11 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     /**
     * Update welcpome page
     *
+    * @param {PhaseModel} phase Phase
     * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
+    * @param {string} requestedPhase Requesed phase
     */
-    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult) {
+    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "")  {
         const projectProcessState = phase.Type === "Gate"
             ? RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_AtGate")
             : RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_InPhase");
@@ -213,6 +214,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         if (lastGateStatus) {
             valuesToUpdate.GtLastGateStatus = lastGateStatus;
         }
+        valuesToUpdate.GtRequestedPhase = requestedPhase;
         await pnp.sp.web.lists.getById(_spPageContextInfo.pageListId).items.getById(_spPageContextInfo.pageItemId).update(valuesToUpdate);
     }
 
