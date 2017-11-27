@@ -52,6 +52,9 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             isLoading: this.state.isLoading,
             onCloseDialog: this._onDismissDialog,
             onChangePhaseDialogReturnCallback: this.props.onChangePhaseDialogReturnCallback,
+            newPhase: this.props.newPhase,
+            activePhase: this.state.activePhase,
+            nextPhase: this.props.nextPhase,
         };
         return (
             <Dialog
@@ -62,8 +65,6 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 onDismiss={this._onDismissDialog}>
                 <Body
                     { ...dlgContentBaseProps }
-                    newPhase={this.props.newPhase}
-                    activePhase={this.state.activePhase}
                     openCheckListItems={this.openChecklistItems}
                     currentIdx={this.state.currentIdx}
                     nextCheckPointAction={this.nextCheckPoint} />
