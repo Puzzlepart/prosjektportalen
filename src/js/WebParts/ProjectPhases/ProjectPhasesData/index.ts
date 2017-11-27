@@ -93,12 +93,12 @@ export async function fetchData(phaseChecklist: List): Promise<IProjectPhasesDat
             availablePhases,
         ] = await Promise.all([
             fetchChecklistItemsWithPhase(phaseChecklist),
-            phaseChecklist.defaultView.get(),
+            phaseChecklist.defaultView.select("ServerRelativeUrl").get(),
             Project.GetCurrentProjectPhase(),
             Project.GetWelcomePageFieldValues(),
             fetchAvailablePhases(),
         ]);
-        let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checklistDefaultViewUrl);
+        let phases = mergePhasesWithChecklistItems(availablePhases, checklistItemsWithPhase, checklistDefaultViewUrl.ServerRelativeUrl);
         let activePhase;
         if (currentPhase) {
             [activePhase] = availablePhases.filter(p => currentPhase.Id === p.Id);
