@@ -1555,9 +1555,6 @@
   <data name="ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty" xml:space="preserve">
     <value>Du kan ikke sette sjekkpunktet som 'Fortsatt åpen' uten å legge inn enn kommentar.</value>
   </data>
-  <data name="ProjectPhases_Stats_" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
-  </data>
   <data name="ProjectPhases_Stats_Open" xml:space="preserve">
     <value>åpne</value>
   </data>
@@ -1575,6 +1572,24 @@
   </data>
   <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
     <value>Avviser faseovergang...</value>
+  </data>
+  <data name="ProjectPhases_CurrentPhaseIncremental" xml:space="preserve">
+    <value>Fasen du er i ({0}) er inkrementell.</value>
+  </data>
+  <data name="ProjectPhases_RestartPhaseOrContinue" xml:space="preserve">
+    <value>Vil du gjenta fasen, eller gå videre til {0}?</value>
+  </data>
+  <data name="ProjectPhases_NextPhase" xml:space="preserve">
+    <value>Neste fase er {0}.</value>
+  </data>
+  <data name="ProjectPhases_CurrentPhaseIncremental" xml:space="preserve">
+    <value>The phase you're in ({0}) is incremental.</value>
+  </data>
+  <data name="ProjectPhases_RestartPhaseOrContinue" xml:space="preserve">
+    <value>Do you want to start the phase over again, or move on to {0}?</value>
+  </data>
+  <data name="ProjectPhases_NextPhase" xml:space="preserve">
+    <value>Next phase is {0}.</value>
   </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Laster prosjektinformasjon...</value>
