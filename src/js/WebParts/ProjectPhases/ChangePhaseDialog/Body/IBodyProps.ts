@@ -6,6 +6,7 @@ import IChecklistItem from "../../ProjectPhasesData/IChecklistItem";
 export default interface IBodyProps {
     newPhase: PhaseModel;
     activePhase: PhaseModel;
+    nextPhase: PhaseModel;
     openCheckListItems: IChecklistItem[];
     currentIdx: number;
     nextCheckPointAction;
