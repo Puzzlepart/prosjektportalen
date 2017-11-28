@@ -472,6 +472,6 @@
             <CHOICE>{resource:Choice_GtProjectProcessState_InPhase}</CHOICE>
         </CHOICES>
     </Field>
-    <Field Type="Text" DisplayName="GtRequestedPhase" ShowInEditForm="FALSE" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE" MaxLength="255" Group="Prosjektportalenkolonner" ID="{469d8b96-f097-46de-b9b7-4630670c8ed4}" StaticName="GtRequestedPhase" Name="GtRequestedPhase"></Field>
-    <Field Type="Number" DisplayName="GtPhaseIterations" ShowInEditForm="FALSE" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE"  Group="Prosjektportalenkolonner" ID="{de171613-5f6d-4152-b547-79cf3776992b}" StaticName="GtPhaseIterations" Name="GtPhaseIterations"></Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtRequestedPhase_DisplayName}" ShowInEditForm="FALSE" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE" MaxLength="255" Group="Prosjektportalenkolonner" ID="{469d8b96-f097-46de-b9b7-4630670c8ed4}" StaticName="GtRequestedPhase" Name="GtRequestedPhase"></Field>
+    <Field Type="Number" DisplayName="{resource:SiteFields_GtPhaseIterations_DisplayName}" ShowInEditForm="FALSE" ShowInDisplayForm="FALSE" ShowInNewForm="FALSE"  Group="Prosjektportalenkolonner" ID="{de171613-5f6d-4152-b547-79cf3776992b}" StaticName="GtPhaseIterations" Name="GtPhaseIterations"></Field>
 </pnp:SiteFields>

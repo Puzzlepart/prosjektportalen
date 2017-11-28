@@ -1030,6 +1030,12 @@
   <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
     <value>Prosjektprosessstatus</value>
   </data>
+  <data name="SiteFields_GtRequestedPhase_DisplayName" xml:space="preserve">
+    <value>Ønsket fase</value>
+  </data>
+  <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
+    <value>Faseiterasjoner</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
