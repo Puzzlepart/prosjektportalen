@@ -23,82 +23,67 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         };
     }
 
-    /**
-     * Calls _render with props and state to allow for ES6 destruction to allow for ES6 destruction
-     */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
-    }
-
-    /**
-     * Renders the component
-     *
-     * @param {IInitialViewProps} param0 Props
-     * @param {IInitialViewState} param1 State
-     */
-    public _render({ currentChecklistItem, className, commentLabel }: IInitialViewProps, { comment }: IInitialViewState): JSX.Element {
-        if (!currentChecklistItem) {
+        if (!this.props.currentChecklistItem) {
             return null;
         }
-        const {
-            ID,
-            Title,
-         } = currentChecklistItem;
-
         return (
-            <div className={className}>
-                <h3>#{ID} {Title}</h3>
-                <TextField
-                    onChanged={newValue => this.setState({ comment: newValue })}
-                    label={commentLabel}
-                    multiline
-                    value={comment}
-                    resizable={false} />
-                {this.renderStatusOptions(this.props, this.state)}
+            <div className={this.props.className}>
+                <h3>{this.props.currentChecklistItem.Title}</h3>
+                <div style={{ marginTop: 10 }}>
+                    <TextField
+                        onChanged={newValue => this.setState({ comment: newValue })}
+                        placeholder={this.props.commentLabel}
+                        multiline
+                        value={this.state.comment}
+                        resizable={false}
+                        style={{ height: 100 }} />
+                </div>
+                {this.renderStatusOptions()}
             </div>
         );
     }
 
     /**
-     * Status options
-     *
-     * @param {IInitialViewProps} param0 Props
-     * @param {IInitialViewState} param1 State
+     * Render status options
      */
-    private renderStatusOptions = ({ isLoading, nextCheckPointAction, commentMinLength }: IInitialViewProps, { comment }: IInitialViewState) => {
-        const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
+    private renderStatusOptions = () => {
+        const isCommentValid = (this.state.comment.length >= this.props.commentMinLength) && /\S/.test(this.state.comment);
+        const checklistStatusNotRelevant = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant");
+        const checkpointNotRelevantTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty");
+        const checkpointNotRelevantTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip");
+        const checkpointStillOpenTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty");
+        const checkpointStillOpenTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip");
+        const checklistStatusStillOpen = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_StillOpen");
+        const checklistStatusClosed = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed");
+        const checkpointDoneTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointDoneTooltip");
         const options = [
             {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"),
-                disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip"),
+                value: checklistStatusNotRelevant,
+                disabled: (this.props.isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? checkpointNotRelevantTooltipCommentEmpty : checkpointNotRelevantTooltip,
                 updateStatus: true,
             },
             {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_StillOpen"),
-                disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip"),
+                value: checklistStatusStillOpen,
+                disabled: (this.props.isLoading || !isCommentValid),
+                tooltip: !isCommentValid ? checkpointStillOpenTooltipCommentEmpty : checkpointStillOpenTooltip,
                 updateStatus: false,
             },
             {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"),
-                disabled: isLoading,
-                tooltip: RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointDoneTooltip"),
+                value: checklistStatusClosed,
+                disabled: this.props.isLoading,
+                tooltip: checkpointDoneTooltip,
                 updateStatus: true,
             }];
         return (
-            <div style={{
-                marginTop: 20,
-                marginBottom: 25,
-            }}>
+            <div style={{ marginTop: 20, marginBottom: 25 }}>
                 {options.map((opt, key) => (
-                    <span
-                        key={key}
-                        title={opt.tooltip}>
+                    <span key={key} title={opt.tooltip}>
                         <PrimaryButton
                             disabled={opt.disabled}
                             onClick={e => {
-                                nextCheckPointAction(opt.value, comment, opt.updateStatus);
+                                this.props.nextCheckPointAction(opt.value, this.state.comment, opt.updateStatus);
                                 this.setState({ comment: "" });
                             }}>{opt.value}</PrimaryButton>
                     </span>
