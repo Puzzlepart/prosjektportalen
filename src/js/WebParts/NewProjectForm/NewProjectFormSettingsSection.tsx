@@ -12,7 +12,7 @@ export interface INewProjectFormSettingsSectionProps {
     listData: { [key: string]: ListConfig };
     extensions: Extension[];
     toggleListContentHandler: (key: string, checked: boolean) => void;
-    toggleExtensionHandler: (key: string, checked: boolean, extension: Extension) => void;
+    toggleExtensionHandler: (extension: Extension, checked: boolean) => void;
 }
 
 export interface INewProjectFormSettingsSectionState {
@@ -35,45 +35,53 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     }
 
     public render() {
+        const { listData, extensions, toggleListContentHandler, toggleExtensionHandler } = this.props;
+        const { showListContentSettings, showExtensionSettings } = this.state;
+
+        const listDataKeys = Object.keys(listData);
+
         return (
             <div className={this.props.className}>
-                <div onClick={e => this.setState({ showListContentSettings: !this.state.showListContentSettings })} className="ms-font-l toggle-section">
-                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
-                    <span className={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"}>
-                        <Icon iconName={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"} />
-                    </span>
-                </div>
-                <section hidden={!this.state.showListContentSettings}>
-                    {Object.keys(this.props.listData).map(key => (
-                        <Toggle
-                            key={key}
-                            defaultChecked={this.props.listData[key].Default}
-                            label={this.props.listData[key].Label}
-                            onChanged={checked => this.props.toggleListContentHandler(key, checked)}
-                            onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                            offText={RESOURCE_MANAGER.getResource("String_No")} />
-                    ))}
-                </section>
-                <div onClick={e => this.setState({ showExtensionSettings: !this.state.showExtensionSettings })} className="ms-font-l toggle-section">
-                    <span>Utvidelser</span>
-                    <span className={this.state.showExtensionSettings ? "ChevronUp" : "ChevronDown"}>
-                        <Icon iconName={this.state.showExtensionSettings ? "ChevronUp" : "ChevronDown"} />
-                    </span>
-                </div>
-                <section hidden={!this.state.showExtensionSettings}>
-                    {Object.keys(this.props.extensions).map(key => {
-                        const extension: Extension = this.props.extensions[key];
-                        return (
+                <div hidden={listDataKeys.length === 0}>
+                    <div onClick={e => this.setState({ showListContentSettings: !showListContentSettings })} className="ms-font-l toggle-section">
+                        <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
+                        <span className={showListContentSettings ? "ChevronUp" : "ChevronDown"}>
+                            <Icon iconName={showListContentSettings ? "ChevronUp" : "ChevronDown"} />
+                        </span>
+                    </div>
+                    <section hidden={!showListContentSettings}>
+                        {listDataKeys.map(key => (
                             <Toggle
-                                key={key}
-                                defaultChecked={extension.IsEnabled}
-                                label={extension.Title}
-                                onChanged={checked => this.props.toggleExtensionHandler(key, checked, extension)}
+                                key={`ListData_${key}`}
+                                defaultChecked={listData[key].Default}
+                                label={listData[key].Label}
+                                onChanged={checked => toggleListContentHandler(key, checked)}
                                 onText={RESOURCE_MANAGER.getResource("String_Yes")}
                                 offText={RESOURCE_MANAGER.getResource("String_No")} />
-                        );
-                    })}
-                </section>
+                        ))}
+                    </section>
+                </div>
+                <div hidden={extensions.length === 0}>
+                    <div onClick={e => this.setState({ showExtensionSettings: !showExtensionSettings })} className="ms-font-l toggle-section">
+                        <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowExtensionSettings")}</span>
+                        <span className={showExtensionSettings ? "ChevronUp" : "ChevronDown"}>
+                            <Icon iconName={showExtensionSettings ? "ChevronUp" : "ChevronDown"} />
+                        </span>
+                    </div>
+                    <section hidden={!showExtensionSettings}>
+                        {extensions.map((extension, index) => {
+                            return (
+                                <Toggle
+                                    key={`Extension_${index}`}
+                                    defaultChecked={extension.IsEnabled}
+                                    label={extension.Title}
+                                    onChanged={checked => toggleExtensionHandler(extension, checked)}
+                                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                                    offText={RESOURCE_MANAGER.getResource("String_No")} />
+                            );
+                        })}
+                    </section>
+                </div>
             </div>
         );
     }

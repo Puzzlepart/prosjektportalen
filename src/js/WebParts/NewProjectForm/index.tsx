@@ -230,11 +230,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Toggle extension
      *
-     * @param {string} key Key
-     * @param {boolean} checked Is checked
      * @param {Extension} extension Extension
+     * @param {boolean} checked Is checked
      */
-    private toggleExtension(key: string, checked: boolean, extension: Extension) {
+    private toggleExtension(extension: Extension, checked: boolean) {
         this.setState(prevState => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
@@ -251,7 +250,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * On form change
      *
      * @param {string} input Input (key) that was changed
-     * @param {string} newTitleValue New Title value
+     * @param {string} newValue New value
      */
     private async onFormChange(input: string, newValue: string) {
         const self = this;
