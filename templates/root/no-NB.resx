@@ -357,6 +357,9 @@
   <data name="View_Archived_DisplayName" xml:space="preserve">
     <value>Arkivert</value>
   </data>
+  <data name="View_Activated_DisplayName" xml:space="preserve">
+    <value>Aktivert</value>
+  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>

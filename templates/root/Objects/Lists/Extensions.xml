@@ -13,6 +13,7 @@
             <ViewFields>
                 <FieldRef Name="GtOrder" />
                 <FieldRef Name="GtIsEnabled" />
+                <FieldRef Name="GtShowInNewForm" />
                 <FieldRef Name="LinkFilename" />
                 <FieldRef Name="Title" />
                 <FieldRef Name="Modified" />
@@ -21,7 +22,7 @@
             <Aggregations Value="Off" />
             <JSLink>clienttemplates.js</JSLink>
         </View>
-        <View MobileView="TRUE" Type="HTML" DisplayName="Aktivert" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
+        <View MobileView="TRUE" Type="HTML" DisplayName="{resource:View_Activated_DisplayName}" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
             <Query>
                 <OrderBy>
                     <FieldRef Name="GtOrder" />
@@ -35,6 +36,7 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="GtOrder" />
+                <FieldRef Name="GtShowInNewForm" />
                 <FieldRef Name="LinkFilename" />
                 <FieldRef Name="Title" />
                 <FieldRef Name="Modified" />
