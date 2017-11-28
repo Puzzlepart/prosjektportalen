@@ -1,9 +1,12 @@
+import Extension from "../Provision/Extensions/Extension";
+
 export interface IProjectModel {
     Title?: string;
     Url?: string;
     Description?: string;
     InheritPermissions?: boolean;
     IncludeContent?: string[];
+    Extensions?: Extension[];
     ProjectPhase?: string;
     ProjectPhaseLetter?: string;
     ProjectOwner?: string;
@@ -16,6 +19,7 @@ export class ProjectModel implements IProjectModel {
     public Description?: string;
     public InheritPermissions?: boolean;
     public IncludeContent?: string[];
+    public Extensions?: Extension[];
     public ProjectPhase?: string;
     public ProjectPhaseLetter?: string;
     public ProjectOwner?: string;
@@ -28,6 +32,7 @@ export class ProjectModel implements IProjectModel {
             this.Description = obj.Description || "";
             this.InheritPermissions = obj.InheritPermissions;
             this.IncludeContent = obj.IncludeContent;
+            this.Extensions = [];
         }
     }
 }
