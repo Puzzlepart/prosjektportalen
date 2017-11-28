@@ -34,7 +34,7 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
                         <div>
                             {this.getActions().map((buttonProps, index) => (
                                 <div key={`GateApprovalView_Action_${index}`} style={{ marginTop: 5 }}>
-                                    <ActionButton { ...buttonProps } />
+                                    <ActionButton { ...buttonProps } style={{ margin: 0 }} />
                                 </div>
                             ))}
                         </div>
