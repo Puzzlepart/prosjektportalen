@@ -1036,6 +1036,9 @@
   <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
     <value>Faseiterasjoner</value>
   </data>
+  <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
+    <value>Vis i skjema</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1449,6 +1452,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
+  </data>
+  <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
+    <value>Utvidelser</value>
   </data>
   <data name="NewProjectForm_Title" xml:space="preserve">
     <value>Nytt prosjekt</value>

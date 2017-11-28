@@ -1038,6 +1038,9 @@
   <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
     <value>Phase iterations</value>
   </data>
+  <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
+    <value>Show in form</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1448,6 +1451,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Default list content</value>
+  </data>
+  <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
+    <value>Extensions</value>
   </data>
   <data name="NewProjectForm_Title" xml:space="preserve">
     <value>New project</value>
