@@ -319,6 +319,7 @@
             <pnp:FieldRef ID="b3e95def-a4ea-4e8b-927d-f724744b74a1" Name="GtShowInNewForm" Required="false" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Description" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="Dynamic Portfolio Config Base" Description="" Group="{resource:ContentTypes_Group}">

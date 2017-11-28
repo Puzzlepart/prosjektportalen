@@ -567,6 +567,9 @@
   <data name="SiteFields_Title_DisplayName" xml:space="preserve">
     <value>Tittel</value>
   </data>
+  <data name="SiteFields_Description_DisplayName" xml:space="preserve">
+    <value>Beskrivelse</value>
+  </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Starttidspunkt</value>
   </data>
