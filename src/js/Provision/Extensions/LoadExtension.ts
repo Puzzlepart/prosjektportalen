@@ -13,7 +13,7 @@ const listLogger = new SpListLogger();
 async function LoadExtension(fileInfo): Promise<Extension> {
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     const fileObject = rootWeb.getFileByServerRelativeUrl(fileInfo.FileRef);
-    const extension = new Extension(fileInfo.Title, fileInfo.Filename, fileInfo.FileRef, fileInfo.GtIsEnabled);
+    const extension = new Extension(fileInfo.Title, fileInfo.Comments, fileInfo.Filename, fileInfo.FileRef, fileInfo.GtIsEnabled);
     try {
         const fileSchemaText = await fileObject.getText();
         try {

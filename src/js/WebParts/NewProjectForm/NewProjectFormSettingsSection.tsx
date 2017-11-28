@@ -9,6 +9,7 @@ import Extension from "../../Provision/Extensions/Extension";
 
 export interface INewProjectFormSettingsSectionProps {
     className: string;
+    toggleSectionClassName?: string;
     listData: { [key: string]: ListConfig };
     extensions: Extension[];
     toggleListContentHandler: (key: string, checked: boolean) => void;
@@ -21,6 +22,10 @@ export interface INewProjectFormSettingsSectionState {
 }
 
 export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
+    public static defaultProps = {
+        toggleSectionClassName: "ms-font-l toggle-section",
+    };
+
     /**
     * Constructor
     *
@@ -35,15 +40,15 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     }
 
     public render() {
-        const { listData, extensions, toggleListContentHandler, toggleExtensionHandler } = this.props;
+        const { className, toggleSectionClassName, listData, extensions, toggleListContentHandler, toggleExtensionHandler } = this.props;
         const { showListContentSettings, showExtensionSettings } = this.state;
 
         const listDataKeys = Object.keys(listData);
 
         return (
-            <div className={this.props.className}>
+            <div className={className}>
                 <div hidden={listDataKeys.length === 0}>
-                    <div onClick={e => this.setState({ showListContentSettings: !showListContentSettings })} className="ms-font-l toggle-section">
+                    <div onClick={e => this.setState({ showListContentSettings: !showListContentSettings })} className={toggleSectionClassName}>
                         <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
                         <span className={showListContentSettings ? "ChevronUp" : "ChevronDown"}>
                             <Icon iconName={showListContentSettings ? "ChevronUp" : "ChevronDown"} />
@@ -62,7 +67,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     </section>
                 </div>
                 <div hidden={extensions.length === 0}>
-                    <div onClick={e => this.setState({ showExtensionSettings: !showExtensionSettings })} className="ms-font-l toggle-section">
+                    <div onClick={e => this.setState({ showExtensionSettings: !showExtensionSettings })} className={toggleSectionClassName}>
                         <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowExtensionSettings")}</span>
                         <span className={showExtensionSettings ? "ChevronUp" : "ChevronDown"}>
                             <Icon iconName={showExtensionSettings ? "ChevronUp" : "ChevronDown"} />
@@ -71,13 +76,18 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     <section hidden={!showExtensionSettings}>
                         {extensions.map((extension, index) => {
                             return (
-                                <Toggle
-                                    key={`Extension_${index}`}
-                                    defaultChecked={extension.IsEnabled}
-                                    label={extension.Title}
-                                    onChanged={checked => toggleExtensionHandler(extension, checked)}
-                                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                                    offText={RESOURCE_MANAGER.getResource("String_No")} />
+                                <div>
+                                    <Toggle
+                                        key={`Extension_${index}`}
+                                        defaultChecked={extension.IsEnabled}
+                                        label={extension.Title}
+                                        onChanged={checked => toggleExtensionHandler(extension, checked)}
+                                        onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                                        offText={RESOURCE_MANAGER.getResource("String_No")} />
+                                    <div className="ms-font-xs" style={{ paddingTop: 10, paddingBottom: 10 }} hidden={!extension.Comments}>
+                                        {extension.Comments}
+                                    </div>
+                                </div>
                             );
                         })}
                     </section>
