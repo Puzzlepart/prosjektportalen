@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "../../@localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { UpdatePropertyArray } from "../../Util/PropertyBag";
-import GetValidExtensions from "./GetValidExtensions";
+import GetActivatedExtensions from "./GetActivatedExtensions";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 
@@ -13,13 +13,14 @@ import ProvisionError from "../ProvisionError";
 async function ApplyExtensions(context: IProvisionContext): Promise<void> {
     context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), "");
     try {
-        const extensions = await GetValidExtensions();
+        const activatedExtensions = await GetActivatedExtensions(context);
+        const extensions = [...activatedExtensions, ...context.model.Extensions];
         const webProvisioner = new WebProvisioner(context.web);
         for (let i = 0; i < extensions.length; i++) {
-            const extensionToApply = extensions[i];
-            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extensionToApply.Title);
-            await webProvisioner.applyTemplate(extensionToApply.data);
-            await UpdatePropertyArray("pp_installed_extensions", extensionToApply.LinkFilename, ",", context.url);
+            const extension = extensions[i];
+            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
+            await webProvisioner.applyTemplate(extension.Schema);
+            await UpdatePropertyArray("pp_installed_extensions", extension.Filename, ",", context.url);
         }
         return;
     } catch (err) {

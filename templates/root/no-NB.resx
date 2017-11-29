@@ -357,6 +357,9 @@
   <data name="View_Archived_DisplayName" xml:space="preserve">
     <value>Arkivert</value>
   </data>
+  <data name="View_Activated_DisplayName" xml:space="preserve">
+    <value>Aktivert</value>
+  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
@@ -563,6 +566,9 @@
   </data>
   <data name="SiteFields_Title_DisplayName" xml:space="preserve">
     <value>Tittel</value>
+  </data>
+  <data name="SiteFields_Description_DisplayName" xml:space="preserve">
+    <value>Beskrivelse</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Starttidspunkt</value>
@@ -1036,6 +1042,9 @@
   <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
     <value>Faseiterasjoner</value>
   </data>
+  <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
+    <value>Vis i skjema</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1449,6 +1458,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
+  </data>
+  <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
+    <value>Utvidelser</value>
   </data>
   <data name="NewProjectForm_Title" xml:space="preserve">
     <value>Nytt prosjekt</value>

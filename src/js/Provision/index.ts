@@ -1,7 +1,5 @@
-import {
-    CreateWeb,
-    DoesWebExist,
-} from "./Subsite";
+import { Site } from "sp-pnp-js";
+import { CreateWeb, DoesWebExist } from "./Subsite";
 import { IProjectModel } from "../Model/ProjectModel";
 import { CopyDefaultData } from "./Data";
 import { ApplyProvisioningTemplate } from "./Template";
@@ -21,9 +19,11 @@ import IProvisionContext from "./IProvisionContext";
  */
 export default async function ProvisionWeb(project: IProjectModel, progressCallbackFunc: IProgressCallback): Promise<string> {
     try {
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         let context: IProvisionContext = {
             model: project,
             progressCallbackFunc,
+            rootWeb,
         };
         context = await CreateWeb(context);
         context.webProperties = await GetAllProperties();
