@@ -5,10 +5,7 @@ import {
 import * as Util from "../../Util";
 import { CopyFiles } from "./Files";
 import { CopyItems } from "./Items";
-import {
-    RetrieveConfig,
-    ListConfig,
-} from "./Config";
+import { ListConfig } from "./Config";
 import IProvisionContext from "../IProvisionContext";
 
 /**
@@ -39,13 +36,8 @@ async function CopyDefaultData(context: IProvisionContext): Promise<void> {
     const { IncludeContent } = context.model;
     Logger.log({ message: "Starting copy of default data.", data: { IncludeContent }, level: LogLevel.Info });
     try {
-        const listContentConfig = await RetrieveConfig();
-        Logger.log({ message: "List content config retrieved.", data: { listContentConfig }, level: LogLevel.Info });
         for (let i = 0; i < IncludeContent.length; i++) {
-            const contentKey = IncludeContent[i];
-            if (listContentConfig.hasOwnProperty(contentKey)) {
-                await Copy(context, listContentConfig[contentKey]);
-            }
+            await Copy(context, IncludeContent[i]);
         }
         return;
     } catch (err) {

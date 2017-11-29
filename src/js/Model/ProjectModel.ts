@@ -1,11 +1,12 @@
 import Extension from "../Provision/Extensions/Extension";
+import ListConfig from "../Provision/Data/Config/ListConfig";
 
 export interface IProjectModel {
     Title?: string;
     Url?: string;
     Description?: string;
     InheritPermissions?: boolean;
-    IncludeContent?: string[];
+    IncludeContent?: ListConfig[];
     Extensions?: Extension[];
     ProjectPhase?: string;
     ProjectPhaseLetter?: string;
@@ -18,7 +19,7 @@ export class ProjectModel implements IProjectModel {
     public Url?: string;
     public Description?: string;
     public InheritPermissions?: boolean;
-    public IncludeContent?: string[];
+    public IncludeContent?: ListConfig[];
     public Extensions?: Extension[];
     public ProjectPhase?: string;
     public ProjectPhaseLetter?: string;
@@ -31,7 +32,7 @@ export class ProjectModel implements IProjectModel {
             this.Url = obj.Url;
             this.Description = obj.Description || "";
             this.InheritPermissions = obj.InheritPermissions;
-            this.IncludeContent = obj.IncludeContent;
+            this.IncludeContent = [];
             this.Extensions = [];
         }
     }

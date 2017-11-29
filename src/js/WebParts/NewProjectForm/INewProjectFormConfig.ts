@@ -3,6 +3,6 @@ import Extension from "../../Provision/Extensions/Extension";
 
 export default interface INewProjectFormConfig {
     showSettings?: boolean;
-    listData: { [key: string]: ListConfig };
+    listData?: ListConfig[];
     extensions?: Extension[];
 }

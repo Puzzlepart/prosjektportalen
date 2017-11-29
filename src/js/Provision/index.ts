@@ -32,11 +32,7 @@ export default async function ProvisionWeb(project: IProjectModel, progressCallb
         await CopyDefaultData(context);
         return context.redirectUrl;
     } catch (err) {
-        const logEntry: ILogEntry = {
-            ...err,
-            LogURL: project.Url,
-            LogLevel: LogLevel.Error,
-        };
+        const logEntry: ILogEntry = { ...err, LogURL: project.Url, LogLevel: LogLevel.Error };
         new SpListLogger().log(logEntry);
         throw err;
     }

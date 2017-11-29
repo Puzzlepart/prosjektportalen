@@ -10,9 +10,9 @@ import Extension from "../../Provision/Extensions/Extension";
 export interface INewProjectFormSettingsSectionProps {
     className: string;
     toggleSectionClassName?: string;
-    listData: { [key: string]: ListConfig };
+    listData: ListConfig[];
     extensions: Extension[];
-    toggleListContentHandler: (key: string, checked: boolean) => void;
+    toggleListContentHandler: (lc: ListConfig, checked: boolean) => void;
     toggleExtensionHandler: (extension: Extension, checked: boolean) => void;
 }
 
@@ -55,12 +55,12 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                         </span>
                     </div>
                     <section hidden={!showListContentSettings}>
-                        {listDataKeys.map(key => (
+                        {listData.map((lc, index) => (
                             <Toggle
-                                key={`ListData_${key}`}
-                                defaultChecked={listData[key].Default}
-                                label={listData[key].Label}
-                                onChanged={checked => toggleListContentHandler(key, checked)}
+                                key={`ListData_${index}`}
+                                defaultChecked={lc.Default}
+                                label={lc.Label}
+                                onChanged={checked => toggleListContentHandler(lc, checked)}
                                 onText={RESOURCE_MANAGER.getResource("String_Yes")}
                                 offText={RESOURCE_MANAGER.getResource("String_No")} />
                         ))}

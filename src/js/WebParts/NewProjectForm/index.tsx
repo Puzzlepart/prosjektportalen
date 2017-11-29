@@ -7,9 +7,9 @@ import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button"
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
-import { IProjectModel } from "../../Model";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import Extension from "../../Provision/Extensions/Extension";
+import ListConfig from "../../Provision/Data/Config/ListConfig";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import * as Util from "../../Util";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
@@ -39,18 +39,18 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             model: { Title: "", Description: "", Url: "", InheritPermissions: false },
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
-            config: { listData: {} },
+            config: {},
         };
 
         this.toggleListContent = this.toggleListContent.bind(this);
         this.toggleExtension = this.toggleExtension.bind(this);
+        this._onSubmit = this._onSubmit.bind(this);
     }
 
     public async componentDidMount() {
         const config = await this.getRequiredConfig();
-        const listDataConfigKeys = Object.keys(config.listData);
         let model = this.state.model;
-        model.IncludeContent = listDataConfigKeys.filter(key => config.listData[key].Default);
+        model.IncludeContent = config.listData.filter(ld => ld.Default);
         model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
         this.setState({ config, model });
     }
@@ -63,16 +63,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         return (
                             <div className={this.props.className} style={this.props.style}>
                                 <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
-                                {this.renderFormInput()}
-                                {this.state.config.showSettings && (
-                                    <NewProjectFormSettingsSection
-                                        className={this.props.settingsClassName}
-                                        listData={this.state.config.listData}
-                                        extensions={this.state.config.extensions}
-                                        toggleListContentHandler={this.toggleListContent}
-                                        toggleExtensionHandler={this.toggleExtension} />
-                                )}
-                                {this.renderFooter()}
+                                {this.renderInner()}
                             </div>
                         );
                     }
@@ -91,18 +82,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 }}
                                 title={this.props.headerText}
                                 onDismiss={this.props.onDialogDismiss}>
-                                <div>
-                                    {this.renderFormInput()}
-                                    {this.state.config.showSettings && (
-                                        <NewProjectFormSettingsSection
-                                            className={this.props.settingsClassName}
-                                            listData={this.state.config.listData}
-                                            extensions={this.state.config.extensions}
-                                            toggleListContentHandler={this.toggleListContent}
-                                            toggleExtensionHandler={this.toggleExtension} />
-                                    )}
-                                    {this.renderFooter()}
-                                </div>
+                                {this.renderInner()}
                             </Dialog >
                         );
                     }
@@ -149,9 +129,29 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
+     * Render inner (form inputs, setting section and footer)
+     */
+    private renderInner() {
+        return (
+            <div>
+                {this.renderFormInput()}
+                {this.state.config.showSettings && (
+                    <NewProjectFormSettingsSection
+                        className={this.props.settingsClassName}
+                        listData={this.state.config.listData}
+                        extensions={this.state.config.extensions}
+                        toggleListContentHandler={this.toggleListContent}
+                        toggleExtensionHandler={this.toggleExtension} />
+                )}
+                {this.renderFooter()}
+            </div>
+        );
+    }
+
+    /**
      * Render form input field
      */
-    private renderFormInput(): JSX.Element {
+    private renderFormInput() {
         return (
             <section>
                 <div style={this.props.inputContainerStyle}>
@@ -189,7 +189,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <div style={{ paddingTop: 15 }}>
                         <div style={{ float: "right" }}>
                             <PrimaryButton
-                                onClick={this.onSubmit}
+                                onClick={this._onSubmit}
                                 disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
                         </div>
                     </div>
@@ -199,7 +199,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 return (
                     <DialogFooter>
                         <PrimaryButton
-                            onClick={this.onSubmit}
+                            onClick={this._onSubmit}
                             disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
                         <DefaultButton onClick={() => this.props.onDialogDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
                     </DialogFooter>
@@ -211,19 +211,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Toggle content
      *
-     * @param {string} key Key
+     * @param {ListConfig} lc List config
      * @param {boolean} checked Is checked
      */
-    private toggleListContent(key: string, checked: boolean) {
+    private toggleListContent(lc: ListConfig, checked: boolean) {
         this.setState(prevState => {
             let { IncludeContent } = prevState.model;
-            checked ? IncludeContent.push(key) : IncludeContent.splice(IncludeContent.indexOf(key), 1);
-            return {
-                model: {
-                    ...prevState.model,
-                    IncludeContent,
-                },
-            };
+            checked ? IncludeContent.push(lc) : IncludeContent.splice(IncludeContent.indexOf(lc), 1);
+            return { model: { ...prevState.model, IncludeContent } };
         });
     }
 
@@ -237,12 +232,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         this.setState(prevState => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
-            return {
-                model: {
-                    ...prevState.model,
-                    Extensions,
-                },
-            };
+            return { model: { ...prevState.model, Extensions } };
         });
     }
 
@@ -321,26 +311,12 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-     * Submit handler
-     *
-     * @param {any} Event Click event
-     */
-    private onSubmit = (event?): void => {
-        if (event) {
-            event.preventDefault();
-        }
-        this._onSubmit(this.state.model);
-    }
-
-    /**
      * Submits a project model
-     *
-     * @param {IProjectModel} model Project model
      */
-    private async _onSubmit(model: IProjectModel): Promise<void> {
+    private async _onSubmit() {
         this.setState({ provisioning: { status: ProvisionStatus.Creating } });
         try {
-            const redirectUrl = await ProvisionWeb(model, (step, progress) => {
+            const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {
                 this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } });
             });
             document.location.href = redirectUrl;
