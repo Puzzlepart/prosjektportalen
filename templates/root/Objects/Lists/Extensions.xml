@@ -13,15 +13,17 @@
             <ViewFields>
                 <FieldRef Name="GtOrder" />
                 <FieldRef Name="GtIsEnabled" />
+                <FieldRef Name="GtShowInNewForm" />
                 <FieldRef Name="LinkFilename" />
                 <FieldRef Name="Title" />
+                <FieldRef Name="Comments" />
                 <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />
             <JSLink>clienttemplates.js</JSLink>
         </View>
-        <View MobileView="TRUE" Type="HTML" DisplayName="Aktivert" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
+        <View MobileView="TRUE" Type="HTML" DisplayName="{resource:View_Activated_DisplayName}" Url="{site}/Extensions/Forms/Activated.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
             <Query>
                 <OrderBy>
                     <FieldRef Name="GtOrder" />
@@ -35,8 +37,10 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="GtOrder" />
+                <FieldRef Name="GtShowInNewForm" />
                 <FieldRef Name="LinkFilename" />
                 <FieldRef Name="Title" />
+                <FieldRef Name="Comments" />
                 <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
@@ -47,6 +51,7 @@
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
         <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
+        <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" DisplayName="{resource:SiteFields_Description_DisplayName}" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">

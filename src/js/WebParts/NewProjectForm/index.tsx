@@ -1,28 +1,24 @@
+//#region Imports
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
 import * as delay from "delay";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
-import {
-    PrimaryButton,
-    DefaultButton,
-} from "office-ui-fabric-react/lib/Button";
+import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
-import { Toggle } from "office-ui-fabric-react/lib/Toggle";
-import {
-    Dialog,
-    DialogFooter,
-    DialogType,
-} from "office-ui-fabric-react/lib/Dialog";
+import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { IProjectModel } from "../../Model";
-import ListConfig from "../../Provision/Data/Config/ListConfig";
+import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
+import Extension from "../../Provision/Extensions/Extension";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import * as Util from "../../Util";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 import INewProjectFormProps, { NewProjectFormDefaultProps } from "./INewProjectFormProps";
 import INewProjectFormState, { ProvisionStatus } from "./INewProjectFormState";
+import INewProjectFormConfig from "./INewProjectFormConfig";
+import NewProjectFormSettingsSection from "./NewProjectFormSettingsSection";
 import CreationModal from "./CreationModal";
+//#endregion
 
 /**
  * New Project Form
@@ -40,43 +36,42 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     constructor(props: INewProjectFormProps) {
         super(props);
         this.state = {
-            model: {
-                Title: "",
-                Description: "",
-                Url: "",
-                InheritPermissions: false,
-            },
+            model: { Title: "", Description: "", Url: "", InheritPermissions: false },
             errorMessages: {},
-            listDataConfig: {},
             provisioning: { status: ProvisionStatus.Idle },
+            config: { listData: {} },
         };
+
+        this.toggleListContent = this.toggleListContent.bind(this);
+        this.toggleExtension = this.toggleExtension.bind(this);
     }
 
-    /**
-     * Component did mount
-    */
     public async componentDidMount() {
         const config = await this.getRequiredConfig();
-        this.setState(config);
+        const listDataConfigKeys = Object.keys(config.listData);
+        let model = this.state.model;
+        model.IncludeContent = listDataConfigKeys.filter(key => config.listData[key].Default);
+        model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
+        this.setState({ config, model });
     }
 
-    /**
-     * Renders the component
-     */
     public render(): JSX.Element {
         switch (this.state.provisioning.status) {
             case ProvisionStatus.Idle: {
                 switch (this.props.renderMode) {
                     case NewProjectFormRenderMode.Default: {
                         return (
-                            <div
-                                className={this.props.className}
-                                style={this.props.style}>
-                                <div
-                                    className="ms-font-l"
-                                    style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
+                            <div className={this.props.className} style={this.props.style}>
+                                <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
                                 {this.renderFormInput()}
-                                {this.state.showSettings && this.renderSettingsSection()}
+                                {this.state.config.showSettings && (
+                                    <NewProjectFormSettingsSection
+                                        className={this.props.settingsClassName}
+                                        listData={this.state.config.listData}
+                                        extensions={this.state.config.extensions}
+                                        toggleListContentHandler={this.toggleListContent}
+                                        toggleExtensionHandler={this.toggleExtension} />
+                                )}
                                 {this.renderFooter()}
                             </div>
                         );
@@ -98,7 +93,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 onDismiss={this.props.onDialogDismiss}>
                                 <div>
                                     {this.renderFormInput()}
-                                    {this.state.showSettings && this.renderSettingsSection()}
+                                    {this.state.config.showSettings && (
+                                        <NewProjectFormSettingsSection
+                                            className={this.props.settingsClassName}
+                                            listData={this.state.config.listData}
+                                            extensions={this.state.config.extensions}
+                                            toggleListContentHandler={this.toggleListContent}
+                                            toggleExtensionHandler={this.toggleExtension} />
+                                    )}
                                     {this.renderFooter()}
                                 </div>
                             </Dialog >
@@ -138,17 +140,12 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Get required config for the component
      */
-    private async getRequiredConfig(): Promise<{ showSettings: boolean, listDataConfig: { [key: string]: ListConfig }, model: IProjectModel }> {
-        const listDataConfig = await ListDataConfig.RetrieveConfig();
-        const listDataConfigKeys = Object.keys(listDataConfig);
-        const showSettings = this.props.showSettings && listDataConfigKeys.length > 0;
-        let model = this.state.model;
-        model.IncludeContent = listDataConfigKeys.filter(key => listDataConfig[key].Default);
-        return {
-            showSettings,
-            listDataConfig,
-            model,
-        };
+    private async getRequiredConfig(): Promise<INewProjectFormConfig> {
+        const listData = await ListDataConfig.RetrieveConfig();
+        const extensions = await GetSelectableExtensions();
+        const listDataKeys = Object.keys(listData);
+        const showSettings = this.props.showSettings && listDataKeys.length > 0;
+        return { showSettings, listData, extensions };
     }
 
     /**
@@ -179,38 +176,6 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         errorMessage={this.state.errorMessages.Url} />
                 </div>
             </section>
-        );
-    }
-
-    /**
-     * Render settings section
-     */
-    private renderSettingsSection() {
-        return (
-            <div className={this.props.settingsClassName}>
-                <div
-                    onClick={e => this.setState({ showListContentSettings: !this.state.showListContentSettings })}
-                    className="ms-font-l toggle-section">
-                    <span>{RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}</span>
-                    <span className={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"}>
-                        <Icon iconName={this.state.showListContentSettings ? "ChevronUp" : "ChevronDown"} />
-                    </span>
-                </div>
-                <section hidden={!this.state.showListContentSettings}>
-                    {Object.keys(this.state.listDataConfig).map(key => {
-                        const { Default, Label } = this.state.listDataConfig[key];
-                        return (
-                            <Toggle
-                                key={key}
-                                defaultChecked={Default}
-                                label={Label}
-                                onChanged={checked => this.toggleContent(key, checked)}
-                                onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                                offText={RESOURCE_MANAGER.getResource("String_No")} />
-                        );
-                    })}
-                </section>
-            </div>
         );
     }
 
@@ -249,18 +214,33 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {string} key Key
      * @param {boolean} checked Is checked
      */
-    private toggleContent = (key: string, checked: boolean): void => {
+    private toggleListContent(key: string, checked: boolean) {
         this.setState(prevState => {
             let { IncludeContent } = prevState.model;
-            if (checked) {
-                IncludeContent.push(key);
-            } else {
-                IncludeContent.splice(IncludeContent.indexOf(key), 1);
-            }
+            checked ? IncludeContent.push(key) : IncludeContent.splice(IncludeContent.indexOf(key), 1);
             return {
                 model: {
                     ...prevState.model,
-                    IncludeContent: IncludeContent,
+                    IncludeContent,
+                },
+            };
+        });
+    }
+
+    /**
+     * Toggle extension
+     *
+     * @param {Extension} extension Extension
+     * @param {boolean} checked Is checked
+     */
+    private toggleExtension(extension: Extension, checked: boolean) {
+        this.setState(prevState => {
+            let { Extensions } = prevState.model;
+            checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
+            return {
+                model: {
+                    ...prevState.model,
+                    Extensions,
                 },
             };
         });
@@ -270,7 +250,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * On form change
      *
      * @param {string} input Input (key) that was changed
-     * @param {string} newTitleValue New Title value
+     * @param {string} newValue New value
      */
     private async onFormChange(input: string, newValue: string) {
         const self = this;
@@ -361,15 +341,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         this.setState({ provisioning: { status: ProvisionStatus.Creating } });
         try {
             const redirectUrl = await ProvisionWeb(model, (step, progress) => {
-                this.setState({
-                    provisioning: { status: ProvisionStatus.Creating, step, progress },
-                });
+                this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } });
             });
             document.location.href = redirectUrl;
         } catch {
-            this.setState({
-                provisioning: { status: ProvisionStatus.Error },
-            });
+            this.setState({ provisioning: { status: ProvisionStatus.Error } });
         }
     }
 }
