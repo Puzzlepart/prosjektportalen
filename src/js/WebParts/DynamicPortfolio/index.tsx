@@ -122,10 +122,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (this.props.defaultView) {
             currentView = this.props.defaultView;
         } else {
-            /**
-             * If we have a viewId present in the URL hash, we'll attempt to use that
-             */
-            if (hashState.viewId) {
+            let viewIdUrlParam = GetUrlKeyValue("viewId");
+            if (viewIdUrlParam !== "") {
+                [currentView] = configuration.views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
+                if (!currentView) {
+                    throw {
+                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
+                        type: MessageBarType.error,
+                    };
+                }
+            } else if (hashState.viewId) {
                 [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
                 if (!currentView) {
                     throw {
@@ -134,9 +140,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     };
                 }
             } else {
-                /**
-                 * Otherwise we"ll use the default view from the configuration list
-                 */
                 [currentView] = configuration.views.filter(qc => qc.default);
                 if (!currentView) {
                     throw {
