@@ -16,6 +16,18 @@ Thank you for reporting an issue, suggesting an enhancement, or asking a questio
 
 [ ] SharePoint 2016
 
+#### Browser
+
+[ ] Chrome
+
+[ ] Internet Explorer
+
+[ ] Edge
+
+[ ] Safari
+
+[ ] Other
+
 #### Summary
 
 Please summarize the issue.
