@@ -1,10 +1,12 @@
-import IChecklistItem from "../IChecklistItem";
-import { PhaseModel } from "../../../Model";
+import ChangePhaseDialogResult from "./ChangePhaseDialogResult";
+import { PhaseModel } from "../ProjectPhasesData";
 
 export default interface IChangePhaseDialogProps {
-    phase: PhaseModel;
-    onConfirmPhaseChange: (phase?: PhaseModel) => Promise<void>;
-    hideHandler: Function;
-    checkListItems: IChecklistItem[];
+    newPhase: PhaseModel;
+    activePhase: PhaseModel;
+    nextPhase: PhaseModel;
+    onChangePhaseDialogReturnCallback: (result: ChangePhaseDialogResult, requestedPhase?: string) => Promise<void>;
+    hideHandler: (e) => void;
+    gateApproval?: boolean;
 }
 

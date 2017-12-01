@@ -354,6 +354,12 @@
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>Alle dokumenter</value>
   </data>
+  <data name="View_Archived_DisplayName" xml:space="preserve">
+    <value>Arkivert</value>
+  </data>
+  <data name="View_Activated_DisplayName" xml:space="preserve">
+    <value>Aktivert</value>
+  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
@@ -560,6 +566,9 @@
   </data>
   <data name="SiteFields_Title_DisplayName" xml:space="preserve">
     <value>Tittel</value>
+  </data>
+  <data name="SiteFields_Description_DisplayName" xml:space="preserve">
+    <value>Beskrivelse</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Starttidspunkt</value>
@@ -1015,10 +1024,26 @@
     <value>Leveransestatus</value>
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
-    <value>Kommentar, leveransestatus</value>
+    <value>Kommentar
+    , leveransestatus</value>
   </data>
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
+  </data>
+  <data name="SiteFields_GtLastGateStatus_DisplayName" xml:space="preserve">
+    <value>Siste beslutningspunktstatus</value>
+  </data>
+  <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
+    <value>Prosjektprosessstatus</value>
+  </data>
+  <data name="SiteFields_GtRequestedPhase_DisplayName" xml:space="preserve">
+    <value>Ønsket fase</value>
+  </data>
+  <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
+    <value>Faseiterasjoner</value>
+  </data>
+  <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
+    <value>Vis i skjema</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1434,6 +1459,9 @@
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
   </data>
+  <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
+    <value>Utvidelser</value>
+  </data>
   <data name="NewProjectForm_Title" xml:space="preserve">
     <value>Nytt prosjekt</value>
   </data>
@@ -1491,8 +1519,11 @@
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Laster prosjektets faser...</value>
   </data>
-  <data name="ProjectPhases_ChangePase" xml:space="preserve">
+  <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>
+  </data>
+  <data name="ProjectPhases_ChangeGate" xml:space="preserve">
+    <value>Endre til dette beslutningspunktet</value>
   </data>
   <data name="ProjectPhases_PhaseNotSetText" xml:space="preserve">
     <value>Fase er ikke valgt ennå. Velg fase fra figuren over.</value>
@@ -1500,8 +1531,14 @@
   <data name="ProjectPhases_ConfirmChangePhase" xml:space="preserve">
     <value>Vil du endre fase til {0}?</value>
   </data>
+  <data name="ProjectPhases_ConfirmChangeGate" xml:space="preserve">
+    <value>Vil du endre til {0}?</value>
+  </data>
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Gå til fasesjekklisten</value>
+  </data>
+  <data name="ProjectPhases_RestartPhase" xml:space="preserve">
+    <value>Start fase på nytt</value>
   </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
     <value>Gå til &lt;a href="{0}" target="_blank"&gt;fasesjekklisten&lt;/a&gt; (åpnes i ny fane)</value>
@@ -1515,8 +1552,14 @@
   <data name="ProjectPhases_NoCheckpointsFoundForPhase" xml:space="preserve">
     <value>Ingen punkter funnet for denne fasen.</value>
   </data>
+  <data name="ProjectPhases_NoCheckpointsFoundForGate" xml:space="preserve">
+    <value>Ingen punkter funnet for dette beslutningspunktet.</value>
+  </data>
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Vennligst vent,Endrer fase til {0}</value>
+  </data>
+  <data name="ProjectPhases_ChangingGate" xml:space="preserve">
+    <value>Vennligst vent,Endrer beslutningspunkt til {0}</value>
   </data>
   <data name="ProjectPhases_CheckpointDoneTooltip" xml:space="preserve">
     <value>Sjekkpunktet er utført</value>
@@ -1533,9 +1576,6 @@
   <data name="ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty" xml:space="preserve">
     <value>Du kan ikke sette sjekkpunktet som 'Fortsatt åpen' uten å legge inn enn kommentar.</value>
   </data>
-  <data name="ProjectPhases_Stats_" xml:space="preserve">
-    <value>Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.</value>
-  </data>
   <data name="ProjectPhases_Stats_Open" xml:space="preserve">
     <value>åpne</value>
   </data>
@@ -1544,6 +1584,24 @@
   </data>
   <data name="ProjectPhases_Stats_NotRelevant" xml:space="preserve">
     <value>ikke relevante</value>
+  </data>
+  <data name="ProjectPhases_ApprovingPhaseChange" xml:space="preserve">
+    <value>Godkjenner faseovergang..</value>
+  </data>
+  <data name="ProjectPhases_ProvisionallyApprovingPhaseChange" xml:space="preserve">
+    <value>Godkjenner faseovergang (foreløpig godkjenning)...</value>
+  </data>
+  <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
+    <value>Avviser faseovergang...</value>
+  </data>
+  <data name="ProjectPhases_CurrentPhaseIncremental" xml:space="preserve">
+    <value>Fasen du er i ({0}) er inkrementell.</value>
+  </data>
+  <data name="ProjectPhases_RestartPhaseOrContinue" xml:space="preserve">
+    <value>Vil du gjenta fasen, eller gå videre til {0}?</value>
+  </data>
+  <data name="ProjectPhases_NextPhase" xml:space="preserve">
+    <value>Neste fase er {0}.</value>
   </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Laster prosjektinformasjon...</value>
@@ -1646,6 +1704,18 @@
   </data>
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Lagre endringer</value>
+  </data>
+  <data name="String_Approved" xml:space="preserve">
+    <value>Godkjent</value>
+  </data>
+  <data name="String_ProvisionallyApproved" xml:space="preserve">
+    <value>Foreløpig godkjent</value>
+  </data>
+  <data name="String_Rejected" xml:space="preserve">
+    <value>Avvist</value>
+  </data>
+  <data name="String_Approval" xml:space="preserve">
+    <value>Godkjenning</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
@@ -1980,6 +2050,9 @@
   <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
     <value>Bedre enn spesifikasjon</value>
   </data>
+  <data name="Choice_GtChecklistStatus_Archived" xml:space="preserve">
+    <value>Arkivert</value>
+  </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Åpen</value>
   </data>
@@ -2090,6 +2163,21 @@
   </data>
   <data name="Choice_GtMilestoneStatus_NotAchieved" xml:space="preserve">
     <value>Ikke oppnådd</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_Approved" xml:space="preserve">
+    <value>Godkjent</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_ProvisionallyApproved" xml:space="preserve">
+    <value>Foreløpig godkjent</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_Rejected" xml:space="preserve">
+    <value>Avvist</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_AtGate" xml:space="preserve">
+    <value>Ved en gate</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
+    <value>I en fase</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>

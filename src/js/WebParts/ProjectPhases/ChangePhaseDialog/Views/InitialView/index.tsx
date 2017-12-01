@@ -1,6 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../../../../@localization";
-import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import { PrimaryButton, IButtonProps } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
 import IInitialViewState from "./IInitialViewState";
@@ -21,89 +21,82 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         this.state = {
             comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || "") : "",
         };
+        this.nextCheckPointAction = this.nextCheckPointAction.bind(this);
+        this._onCommentUpdate = this.nextCheckPointAction.bind(this);
     }
 
-    /**
-     * Calls _render with props and state to allow for ES6 destruction to allow for ES6 destruction
-     */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
-    }
-
-    /**
-     * Renders the component
-     *
-     * @param {IInitialViewProps} param0 Props
-     * @param {IInitialViewState} param1 State
-     */
-    public _render({ currentChecklistItem, className, commentLabel }: IInitialViewProps, { comment }: IInitialViewState): JSX.Element {
-        if (!currentChecklistItem) {
+        if (!this.props.currentChecklistItem) {
             return null;
         }
-        const {
-            ID,
-            Title,
-         } = currentChecklistItem;
-
         return (
-            <div className={className}>
-                <h3>#{ID} {Title}</h3>
-                <TextField
-                    onChanged={newValue => this.setState({ comment: newValue })}
-                    label={commentLabel}
-                    multiline
-                    value={comment}
-                    resizable={false} />
-                {this.renderStatusOptions(this.props, this.state)}
+            <div className={this.props.className}>
+                <h3>{this.props.currentChecklistItem.Title}</h3>
+                <div style={{ marginTop: 10 }}>
+                    <TextField
+                        onChanged={this._onCommentUpdate}
+                        placeholder={this.props.commentLabel}
+                        multiline
+                        value={this.state.comment}
+                        resizable={false}
+                        style={{ height: 100 }} />
+                </div>
+                {this.renderStatusOptions()}
             </div>
         );
     }
 
     /**
-     * Status options
-     *
-     * @param {IInitialViewProps} param0 Props
-     * @param {IInitialViewState} param1 State
+     * Render status options
      */
-    private renderStatusOptions = ({ isLoading, nextCheckPointAction, commentMinLength }: IInitialViewProps, { comment }: IInitialViewState) => {
+    private renderStatusOptions() {
+        const { isLoading, commentMinLength } = this.props;
+        const { comment } = this.state;
+
         const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
-        const options = [
-            {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant"),
-                disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty") : RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip"),
-                updateStatus: true,
-            },
-            {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_StillOpen"),
-                disabled: (isLoading || !isCommentValid),
-                tooltip: !isCommentValid ? RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty") : RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip"),
-                updateStatus: false,
-            },
-            {
-                value: RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed"),
-                disabled: isLoading,
-                tooltip: RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointDoneTooltip"),
-                updateStatus: true,
-            }];
+        const statusNotRelevantTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty");
+        const statusNotRelevantTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip");
+        const statusStillOpenTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty");
+        const statusStillOpenTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip");
+        const statusDoneTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointDoneTooltip");
+
+        const statusNotRelevant = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant");
+        const statusStillOpen = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_StillOpen");
+        const statusClosed = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed");
+
+        const statusOptions: IButtonProps[] = [
+            { text: statusNotRelevant, disabled: (isLoading || !isCommentValid), title: !isCommentValid ? statusNotRelevantTooltipCommentEmpty : statusNotRelevantTooltip, onClick: e => this.nextCheckPointAction(statusNotRelevant, comment) },
+            { text: statusStillOpen, disabled: (isLoading || !isCommentValid), title: !isCommentValid ? statusStillOpenTooltipCommentEmpty : statusStillOpenTooltip, onClick: e => this.nextCheckPointAction(statusStillOpen, comment, false) },
+            { text: statusClosed, disabled: isLoading, title: statusDoneTooltip, onClick: e => this.nextCheckPointAction(statusClosed, comment) }];
         return (
-            <div style={{
-                marginTop: 20,
-                marginBottom: 25,
-            }}>
-                {options.map((opt, key) => (
-                    <span
-                        key={key}
-                        title={opt.tooltip}>
-                        <PrimaryButton
-                            disabled={opt.disabled}
-                            onClick={e => {
-                                nextCheckPointAction(opt.value, comment, opt.updateStatus);
-                                this.setState({ comment: "" });
-                            }}>{opt.value}</PrimaryButton>
+            <div style={{ marginTop: 20, marginBottom: 25 }}>
+                {statusOptions.map((statusOpt, key) => (
+                    <span key={key} >
+                        <PrimaryButton { ...statusOpt } />
                     </span>
                 ))}
             </div>
         );
+    }
+
+    /**
+    * Next checkpoint action
+    *
+    * @param {string} status Status value
+    * @param {string} comment Comment value
+    * @param {boolean} updateStatus Update status
+    */
+    private nextCheckPointAction(status: string, comment: string, updateStatus = true) {
+        this.props.nextCheckPointAction(status, comment, true);
+        this.setState({ comment: "" });
+    }
+
+    /**
+    * On comment update
+    *
+    * @param {string} newValue New value
+    */
+    private _onCommentUpdate(newValue: string) {
+        this.setState({ comment: newValue });
     }
 }

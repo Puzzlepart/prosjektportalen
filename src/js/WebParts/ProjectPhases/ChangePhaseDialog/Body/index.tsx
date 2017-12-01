@@ -1,43 +1,54 @@
+//#region Imports
 import * as React from "react";
-import {
-    View,
-    InitialView,
-    SummaryView,
-    ChangingPhaseView,
-} from "../Views";
+import RESOURCE_MANAGER from "../../../../@localization";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+import { View, InitialView, SummaryView, ChangingPhaseView, GateApprovalView } from "../Views";
 import IBodyProps from "./IBodyProps";
+//#endregion
 
-/**
- * Body
- */
-export const Body = ({ phase, checkListItems, openCheckListItems, currentIdx, nextCheckPointAction, currentView, isLoading }: IBodyProps) => {
-    const DEFAULT = (
-        <div className="inner"></div>
-    );
-    switch (currentView) {
+export const Body = (props: IBodyProps) => {
+    switch (props.currentView) {
         case View.Initial: {
-            const currentChecklistItem = openCheckListItems[currentIdx];
+            const currentChecklistItem = props.openCheckListItems[props.currentIdx];
             return (
                 <InitialView
-                    isLoading={isLoading}
+                    isLoading={props.isLoading}
                     currentChecklistItem={currentChecklistItem}
-                    nextCheckPointAction={nextCheckPointAction} />
+                    nextCheckPointAction={props.nextCheckPointAction} />
             );
         }
         case View.Summary: {
             return (
-                <SummaryView
-                    phase={phase}
-                    checkListItems={checkListItems} />
+                <SummaryView activePhase={props.activePhase} />
             );
         }
         case View.ChangingPhase: {
             return (
-                <ChangingPhaseView phase={phase} />
+                <ChangingPhaseView newPhase={props.newPhase} />
             );
         }
+        case View.GateApproval: {
+            return (
+                <GateApprovalView
+                    onCloseDialog={props.onCloseDialog}
+                    onChangePhaseDialogReturnCallback={props.onChangePhaseDialogReturnCallback} />
+            );
+        }
+        case View.Confirm: {
+            if (props.activePhase && props.activePhase.IsIncremental) {
+                return (
+                    <div className="inner">
+                        <MessageBar>
+                            <p>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_CurrentPhaseIncremental"), props.activePhase.Name)}</p>
+                            <p>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_RestartPhaseOrContinue"), props.nextPhase.Name)}</p>
+                        </MessageBar>
+                    </div>
+                );
+            }
+            return <div className="inner"></div>;
+        }
         default: {
-            return DEFAULT;
+            return <div className="inner"></div>;
         }
     }
 };

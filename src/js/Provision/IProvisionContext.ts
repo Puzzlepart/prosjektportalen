@@ -5,6 +5,7 @@ import IProgressCallback from "./IProgressCallback";
 export default interface IProvisionContext {
     model: IProjectModel;
     progressCallbackFunc: IProgressCallback;
+    rootWeb: Web;
     web?: Web;
     url?: string;
     redirectUrl?: string;

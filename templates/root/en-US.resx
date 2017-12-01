@@ -354,6 +354,12 @@
   <data name="View_AllDocuments_DisplayName" xml:space="preserve">
     <value>All Documents</value>
   </data>
+  <data name="View_Archived_DisplayName" xml:space="preserve">
+    <value>Archived</value>
+  </data>
+  <data name="View_Activated_DisplayName" xml:space="preserve">
+    <value>Activated</value>
+  </data>
   <data name="ResultSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
@@ -560,6 +566,9 @@
   </data>
   <data name="SiteFields_Title_DisplayName" xml:space="preserve">
     <value>Title</value>
+  </data>
+  <data name="SiteFields_Description_DisplayName" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Start Time</value>
@@ -1023,6 +1032,21 @@
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Enabled</value>
   </data>
+  <data name="SiteFields_GtLastGateStatus_DisplayName" xml:space="preserve">
+    <value>Last gate status</value>
+  </data>
+  <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
+    <value>Project process state</value>
+  </data>
+  <data name="SiteFields_GtRequestedPhase_DisplayName" xml:space="preserve">
+    <value>Requested phase</value>
+  </data>
+  <data name="SiteFields_GtPhaseIterations_DisplayName" xml:space="preserve">
+    <value>Phase iterations</value>
+  </data>
+  <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
+    <value>Show in form</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1434,6 +1458,9 @@
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Default list content</value>
   </data>
+  <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
   <data name="NewProjectForm_Title" xml:space="preserve">
     <value>New project</value>
   </data>
@@ -1491,8 +1518,11 @@
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Loading project phases...</value>
   </data>
-  <data name="ProjectPhases_ChangePase" xml:space="preserve">
+  <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
+  </data>
+  <data name="ProjectPhases_ChangeGate" xml:space="preserve">
+    <value>Change to this gate</value>
   </data>
   <data name="ProjectPhases_PhaseNotSetText" xml:space="preserve">
     <value>Phase not selected yet. Select phase from the figure above.</value>
@@ -1500,8 +1530,14 @@
   <data name="ProjectPhases_ConfirmChangePhase" xml:space="preserve">
     <value>Do you want to change phase to {0}?</value>
   </data>
+  <data name="ProjectPhases_ConfirmChangeGate" xml:space="preserve">
+    <value>Do you want to change gate to {0}?</value>
+  </data>
   <data name="ProjectPhases_GoToChecklist" xml:space="preserve">
     <value>Go to the phase checklist</value>
+  </data>
+  <data name="ProjectPhases_RestartPhase" xml:space="preserve">
+    <value>Restart phase</value>
   </data>
   <data name="ProjectPhases_GoToChecklist2" xml:space="preserve">
     <value>Go to the &lt;a href="{0}" target="_blank"&gt;phase checklist&lt;/a&gt; (opens in new tab)</value>
@@ -1515,8 +1551,14 @@
   <data name="ProjectPhases_NoCheckpointsFoundForPhase" xml:space="preserve">
     <value>No checkpoints found for this phase.</value>
   </data>
+  <data name="ProjectPhases_NoCheckpointsFoundForGate" xml:space="preserve">
+    <value>No checkpoints found for this gate.</value>
+  </data>
   <data name="ProjectPhases_ChangingPhase" xml:space="preserve">
     <value>Please wait, Changing phase to {0}</value>
+  </data>
+  <data name="ProjectPhases_ChangingGate" xml:space="preserve">
+    <value>Please wait, Changing gate to {0}</value>
   </data>
   <data name="ProjectPhases_CheckpointDoneTooltip" xml:space="preserve">
     <value>The checkpoint has been completed</value>
@@ -1541,6 +1583,24 @@
   </data>
   <data name="ProjectPhases_Stats_NotRelevant" xml:space="preserve">
     <value>not relevant</value>
+  </data>
+  <data name="ProjectPhases_ApprovingPhaseChange" xml:space="preserve">
+    <value>Approving phase change..</value>
+  </data>
+  <data name="ProjectPhases_ProvisionallyApprovingPhaseChange" xml:space="preserve">
+    <value>Provisionally approving phase change...</value>
+  </data>
+  <data name="ProjectPhases_RejectingPhaseChange" xml:space="preserve">
+    <value>Rejecting phase change...</value>
+  </data>
+  <data name="ProjectPhases_CurrentPhaseIncremental" xml:space="preserve">
+    <value>The phase you're in ({0}) is incremental.</value>
+  </data>
+  <data name="ProjectPhases_RestartPhaseOrContinue" xml:space="preserve">
+    <value>Do you want to start the phase over again, or move on to {0}?</value>
+  </data>
+  <data name="ProjectPhases_NextPhase" xml:space="preserve">
+    <value>Next phase is {0}.</value>
   </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Loading project information...</value>
@@ -1643,6 +1703,18 @@
   </data>
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Save changes</value>
+  </data>
+  <data name="String_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="String_ProvisionallyApproved" xml:space="preserve">
+    <value>Provisionally approved</value>
+  </data>
+  <data name="String_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="String_Approval" xml:space="preserve">
+    <value>Approval</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
@@ -1977,6 +2049,9 @@
   <data name="Choice_GtStatusQuality_ExceedsExpectations" xml:space="preserve">
     <value>Exceeds expectations</value>
   </data>
+  <data name="Choice_GtChecklistStatus_Archived" xml:space="preserve">
+    <value>Archived</value>
+  </data>
   <data name="Choice_GtChecklistStatus_Open" xml:space="preserve">
     <value>Open</value>
   </data>
@@ -2087,6 +2162,21 @@
   </data>
   <data name="Choice_GtMilestoneStatus_NotAchieved" xml:space="preserve">
     <value>Not achieved</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_Approved" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_ProvisionallyApproved" xml:space="preserve">
+    <value>Provisionally approved</value>
+  </data>
+  <data name="Choice_GtLastGateStatus_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_AtGate" xml:space="preserve">
+    <value>At a gate</value>
+  </data>
+  <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
+    <value>In a phase</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>

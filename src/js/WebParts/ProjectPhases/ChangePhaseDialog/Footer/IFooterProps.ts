@@ -1,10 +1,16 @@
+import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
 import { View } from "../Views";
+import { PhaseModel } from "../../ProjectPhasesData";
 
 export default interface IFooterProps {
+    newPhase: PhaseModel;
+    activePhase: PhaseModel;
+    nextPhase: PhaseModel;
     currentView: View;
     isLoading: boolean;
-    onConfirmPhaseChange: () => Promise<void>;
+    gateApproval: boolean;
+    onChangePhaseDialogReturnCallback: (result: ChangePhaseDialogResult, requestedPhase?: string) => Promise<void>;
     onCloseDialog: (e, reload?: boolean) => void;
-    changeView: (view: View) => void;
+    onChangeView: (view: View) => void;
 }
 

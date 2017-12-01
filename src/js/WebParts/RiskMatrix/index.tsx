@@ -132,7 +132,7 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
             const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
             return itemsForCell.map((risk, key) => (
                 <RiskElement
-                    key={`${key}`}
+                    key={`RiskElement_PostAction_${key}`}
                     item={risk}
                     style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
             ));
@@ -150,7 +150,7 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
         const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
         return itemsForCell.map((risk, key) => (
             <RiskElement
-                key={`${key}`}
+                key={`RiskElement_${key}`}
                 item={risk} />
         ));
     }

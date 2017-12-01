@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../../../../@localization";
-import IChecklistItem from "../../../IChecklistItem";
+import IChecklistItem from "../../../ProjectPhasesData/IChecklistItem";
 
 export default interface IInitialViewProps {
     className?: string;

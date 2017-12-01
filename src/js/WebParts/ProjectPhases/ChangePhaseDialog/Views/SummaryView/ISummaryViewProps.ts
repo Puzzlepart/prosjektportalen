@@ -1,9 +1,5 @@
-
-import { PhaseModel } from "model";
-import IChecklistItem from "../../../IChecklistItem";
+import { PhaseModel } from "../../../ProjectPhasesData";
 
 export default interface ISummaryViewProps {
-    phase: PhaseModel;
-    checkListItems: IChecklistItem[];
-    listClassName?: string;
+    activePhase: PhaseModel;
 }

@@ -48,7 +48,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 isLoading: false,
             });
         } catch (err) {
-            console.log(err);
             this.setState({ isLoading: false });
         }
     }
