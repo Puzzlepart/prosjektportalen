@@ -14,6 +14,7 @@ import LatestLogEntries, { ILatestLogEntriesProps } from "./LatestLogEntries";
 import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyBagEditor";
 import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
 import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
+import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -37,6 +38,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
+    new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-dice", {}),
 ];
 
 /**
