@@ -118,7 +118,6 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
             prevVal[currVal.fieldNames[1]] = currVal.score;
             return prevVal;
         }, { DiceOverallScore: this.calculateOverallScore() });
-        console.log(item);
         pnp.sp.web.lists.getByTitle("Dice").items.add(item);
     }
 }
