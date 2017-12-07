@@ -89,7 +89,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-        <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:NewProjectForm_Title}" />
         </pnp:Properties>
@@ -179,16 +179,9 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-      <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_RiskMatrix_Title}" />
-            <pnp:Property Key="WebPartDescription" Value="" />
-            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
-        </pnp:Properties>
-    </pnp:File>
-      <pnp:File Src="WebPartGallery\DiceCalculator.webpart" Folder="_catalogs/wp" Overwrite="true">
-        <pnp:Properties>
-            <pnp:Property Key="Title" Value="DiceCalculator" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>

@@ -74,13 +74,13 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
                 <div hidden={!this.isSaveScoreEnabled()}>
                     <ActionButton
                         iconProps={{ iconName: "Save" }}
-                        text="Save"
+                        text="Save score"
                         onClick={this.saveScore} />
                 </div>
                 <div hidden={!this.isRemoveScoreEnabled()}>
                     <ActionButton
                         iconProps={{ iconName: "Remove" }}
-                        text="Remove"
+                        text="Remove score"
                         onClick={this.removeScore} />
                 </div>
             </div>
