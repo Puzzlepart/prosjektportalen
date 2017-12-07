@@ -1,8 +1,16 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
-import IDiceElement from "./IDiceElement";
+import { IMessageBarProps } from "office-ui-fabric-react/lib/MessageBar";
+import DiceCalculatorElement from "./DiceCalculatorElement";
 
-export default interface IDiceCalculatorState extends IBaseWebPartState {
-    elements: IDiceElement[];
+export interface IStatusMessage extends IMessageBarProps {
+    content;
 }
 
-export { IDiceElement };
+export default interface IDiceCalculatorState extends IBaseWebPartState {
+    statusMessage?: IStatusMessage;
+    elements?: DiceCalculatorElement[];
+    scoreSubmitted?: boolean;
+    scoreId?: number;
+}
+
+export { DiceCalculatorElement };

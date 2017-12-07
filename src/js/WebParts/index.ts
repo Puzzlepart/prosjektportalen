@@ -38,7 +38,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
-    new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-dice", {}),
+    new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
 ];
 
 /**

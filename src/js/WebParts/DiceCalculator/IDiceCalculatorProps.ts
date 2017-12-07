@@ -1,10 +1,13 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import DiceCalculatorElement from "./DiceCalculatorElement";
 
 export default interface IDiceCalculatorProps extends IBaseWebPartProps {
+    elements?: DiceCalculatorElement[];
     choices?: string[][];
     choicesScores?: number[][];
     columns?: IColumn[];
+    diceListTitle?: string;
 }
 
 export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
@@ -42,5 +45,13 @@ export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
         name: "Score",
         minWidth: 100,
     }],
+    diceListTitle: "Dice",
+    elements: [
+        new DiceCalculatorElement("Duration (between learning milestones or till completion)", "DiceDuration"),
+        new DiceCalculatorElement("Team Performance Integrity", "DiceTPI"),
+        new DiceCalculatorElement("Commitment (Senior Mgmt)", "DiceCommSeniorMgmt"),
+        new DiceCalculatorElement("Commitment (Local)", "DiceCommLocal"),
+        new DiceCalculatorElement("Effort", "DiceEffort"),
+    ],
 };
 
