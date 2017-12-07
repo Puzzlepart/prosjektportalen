@@ -186,6 +186,13 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
+      <pnp:File Src="WebPartGallery\DiceCalculator.webpart" Folder="_catalogs/wp" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="DiceCalculator" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
+        </pnp:Properties>
+    </pnp:File>
     <pnp:Directory Src="Theme" Folder="_catalogs/theme/15" Overwrite="true" Recursive="false" IncludedExtensions="*.spcolor,*.spfont" />
     <pnp:Directory Src="Resources" Folder="Resources" Overwrite="true" Recursive="false" IncludedExtensions="*.txt,*.webpart" />
 </pnp:Files>

@@ -1,0 +1,29 @@
+﻿<webParts>
+  <webPart 
+    xmlns="http://schemas.microsoft.com/WebPart/v3">
+    <metaData>
+      <type name="Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+      <importErrorMessage>Kan ikke importere denne webdelen.</importErrorMessage>
+    </metaData>
+    <data>
+      <properties>
+        <property name="ExportMode" type="exportmode">All</property>
+        <property name="Hidden" type="bool">False</property>
+        <property name="Description" type="string" null="true" />
+        <property name="Content" type="string">&lt;div id="pp-diceCalculator"&gt;&lt;/div&gt;</property>
+        <property name="CatalogIconImageUrl" type="string" />
+        <property name="Title" type="string">DiceCalculator</property>
+        <property name="AllowHide" type="bool">False</property>
+        <property name="AllowMinimize" type="bool">False</property>
+        <property name="AllowZoneChange" type="bool">True</property>
+        <property name="TitleUrl" type="string"></property>
+        <property name="ChromeType" type="chrometype">None</property>
+        <property name="Width" type="unit" />
+        <property name="Height" type="unit" />
+        <property name="AllowEdit" type="bool">False</property>
+        <property name="AllowClose" type="bool">False</property>
+        <property name="ChromeState" type="chromestate">Normal</property>
+      </properties>
+    </data>
+  </webPart>
+</webParts>
