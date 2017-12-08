@@ -2236,6 +2236,30 @@
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>
   </data>
+  <data name="DiceCalculator_LoadFailed" xml:space="preserve">
+    <value>Det skjedde en feil under lasting. DICE er ikke riktig konfigurert.</value>
+  </data>
+  <data name="DiceCalculator_SaveScore" xml:space="preserve">
+    <value>Lagre resultat</value>
+  </data>
+  <data name="DiceCalculator_RemoveScore" xml:space="preserve">
+    <value>Fjern resultat</value>
+  </data>
+  <data name="DiceCalculator_DropdownPlaceholder" xml:space="preserve">
+    <value>Vennligst velg</value>
+  </data>
+  <data name="DiceCalculator_ScoreSavedSuccess" xml:space="preserve">
+    <value>Resultatet ble lagret.</value>
+  </data>
+  <data name="DiceCalculator_ScoreSavedFailed" xml:space="preserve">
+    <value>Det skjedde en feil under lagring av resultatet.</value>
+  </data>
+  <data name="DiceCalculator_ScoreRemovedSuccess" xml:space="preserve">
+    <value>Resultatet ble fjernet.</value>
+  </data>
+  <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
+    <value>Det skjedde en feil under fjerning av resultatet.</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>
   </data>
