@@ -63,7 +63,7 @@ async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServ
  */
 function ReplaceTokensInFilename(filename: string, context: IProvisionContext): string {
     const tokensMap = { "{projectname}": context.model.Title };
-    const newFilename =  Object.keys(tokensMap).reduce((name, token) => {
+    const newFilename = Object.keys(tokensMap).reduce((name, token) => {
         return name.replace(new RegExp(token, "g"), tokensMap[token]);
     }, filename);
     return newFilename;
@@ -91,6 +91,7 @@ export async function CopyFiles(context: IProvisionContext, conf: ListConfig): P
                 .items
                 .expand("Folder")
                 .select("Title", "LinkFilename", "FileRef", "FileDirRef", "Folder/ServerRelativeUrl")
+                .top(500)
                 .get(),
         ]);
         let folders: string[] = [];
