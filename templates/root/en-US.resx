@@ -2232,6 +2232,30 @@
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all log elements...</value>
   </data>
+  <data name="DiceCalculator_LoadFailed" xml:space="preserve">
+    <value>An error occurred during loading. DICE is not properly configured.</value>
+  </data>
+  <data name="DiceCalculator_SaveScore" xml:space="preserve">
+    <value>Save score</value>
+  </data>
+  <data name="DiceCalculator_RemoveScore" xml:space="preserve">
+    <value>Remove score</value>
+  </data>
+  <data name="DiceCalculator_DropdownPlaceholder" xml:space="preserve">
+    <value>Please Select</value>
+  </data>
+  <data name="DiceCalculator_ScoreSavedSuccess" xml:space="preserve">
+    <value>DICE score successfully saved.</value>
+  </data>
+  <data name="DiceCalculator_ScoreSavedFailed" xml:space="preserve">
+    <value>Failed to save DICE score.</value>
+  </data>
+  <data name="DiceCalculator_ScoreRemovedSuccess" xml:space="preserve">
+    <value>DICE score successfully removed.</value>
+  </data>
+  <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
+    <value>Failed to remove DICE score.</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full Control</value>
   </data>

@@ -8,6 +8,7 @@ export interface IStatusMessage extends IMessageBarProps {
 
 export default interface IDiceCalculatorState extends IBaseWebPartState {
     statusMessage?: IStatusMessage;
+    error?: any;
     elements?: DiceCalculatorElement[];
     scoreSubmitted?: boolean;
     scoreId?: number;

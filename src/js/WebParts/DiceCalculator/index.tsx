@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "../../@localization";
 import pnp, { List } from "sp-pnp-js";
 import { DetailsList, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -32,24 +33,28 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
     }
 
     public async componentDidMount() {
-        const [diceScore] = await this.diceList.items.filter(`Title eq '${_spPageContextInfo.webTitle}'`).get();
-        const scoreSubmitted = !!diceScore;
-        this.setState((prevState: IDiceCalculatorState) => ({
-            scoreSubmitted,
-            scoreId: diceScore ? diceScore.ID : -1,
-            elements: prevState.elements.map((ele, i) => {
-                const [fieldNameTxt, fieldNameScore] = ele.fieldNames;
-                if (scoreSubmitted) {
-                    return {
-                        ...ele,
-                        selection: diceScore[fieldNameTxt],
-                        score: diceScore[fieldNameScore],
-                    };
-                }
-                return ele;
-            }),
-            isLoading: false,
-        }));
+        try {
+            const [diceScore] = await this.diceList.items.filter(`Title eq '${_spPageContextInfo.webTitle}'`).get();
+            const scoreSubmitted = !!diceScore;
+            this.setState((prevState: IDiceCalculatorState) => ({
+                scoreSubmitted,
+                scoreId: diceScore ? diceScore.ID : -1,
+                elements: prevState.elements.map((ele, i) => {
+                    const [fieldNameTxt, fieldNameScore] = ele.fieldNames;
+                    if (scoreSubmitted) {
+                        return {
+                            ...ele,
+                            selection: diceScore[fieldNameTxt],
+                            score: diceScore[fieldNameScore],
+                        };
+                    }
+                    return ele;
+                }),
+                isLoading: false,
+            }));
+        } catch (error) {
+            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_LoadFailed"), messageBarType: MessageBarType.error }, { isLoading: false, error }, -1);
+        }
     }
 
     public render(): JSX.Element {
@@ -63,26 +68,30 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
                         <MessageBar messageBarType={this.state.statusMessage.messageBarType}>{this.state.statusMessage.content}</MessageBar>
                     </div>
                 )}
-                <DetailsList
-                    items={[
-                        ...this.state.elements,
-                        new DiceCalculatorElement("Overall Score", "", this.calculateOverallScore()),
-                    ]}
-                    columns={this.props.columns}
-                    onRenderItemColumn={this._onRenderItemColumn}
-                    selectionMode={SelectionMode.none} />
-                <div hidden={!this.isSaveScoreEnabled()}>
-                    <ActionButton
-                        iconProps={{ iconName: "Save" }}
-                        text="Save score"
-                        onClick={this.saveScore} />
-                </div>
-                <div hidden={!this.isRemoveScoreEnabled()}>
-                    <ActionButton
-                        iconProps={{ iconName: "Remove" }}
-                        text="Remove score"
-                        onClick={this.removeScore} />
-                </div>
+                {!this.state.error && (
+                    <div>
+                        <DetailsList
+                            items={[
+                                ...this.state.elements,
+                                new DiceCalculatorElement("Overall Score", "", this.calculateOverallScore()),
+                            ]}
+                            columns={this.props.columns}
+                            onRenderItemColumn={this._onRenderItemColumn}
+                            selectionMode={SelectionMode.none} />
+                        <div hidden={!this.isSaveScoreEnabled()}>
+                            <ActionButton
+                                iconProps={{ iconName: "Save" }}
+                                text={RESOURCE_MANAGER.getResource("DiceCalculator_SaveScore")}
+                                onClick={this.saveScore} />
+                        </div>
+                        <div hidden={!this.isRemoveScoreEnabled()}>
+                            <ActionButton
+                                iconProps={{ iconName: "Remove" }}
+                                text={RESOURCE_MANAGER.getResource("DiceCalculator_RemoveScore")}
+                                onClick={this.removeScore} />
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }
@@ -101,7 +110,7 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
             }
             return (
                 <Dropdown
-                    placeHolder="Please Select"
+                    placeHolder={RESOURCE_MANAGER.getResource("DiceCalculator_DropdownPlaceholder")}
                     onChanged={option => this._onChoiceChanged(index, option)}
                     options={this.props.choices[index].map((c, i) => ({
                         key: i,
@@ -152,9 +161,9 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
         }, { Title: _spPageContextInfo.webTitle, DiceOverallScore: this.calculateOverallScore() });
         try {
             const itemAddResult = await this.diceList.items.add(item);
-            this.postStatusMessage({ content: "DICE score successfully saved.", messageBarType: MessageBarType.success }, { scoreSubmitted: true, scoreId: itemAddResult.data.ID });
+            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreSavedSuccess"), messageBarType: MessageBarType.success }, { scoreSubmitted: true, scoreId: itemAddResult.data.ID });
         } catch (err) {
-            this.postStatusMessage({ content: "Failed to save DICE score.", messageBarType: MessageBarType.error });
+            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreSavedFailed"), messageBarType: MessageBarType.error });
         }
     }
 
@@ -164,9 +173,9 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
     private async removeScore() {
         try {
             await this.diceList.items.getById(this.state.scoreId).delete();
-            this.postStatusMessage({ content: "DICE score successfully removed.", messageBarType: MessageBarType.info }, { scoreSubmitted: false, scoreId: -1, elements: this.props.elements });
+            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreRemovedSuccess"), messageBarType: MessageBarType.info }, { scoreSubmitted: false, scoreId: -1, elements: this.props.elements });
         } catch (err) {
-            this.postStatusMessage({ content: "Failed to remove DICE score.", messageBarType: MessageBarType.error });
+            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreRemovedFailed"), messageBarType: MessageBarType.error });
         }
     }
 
@@ -193,6 +202,9 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
      */
     private postStatusMessage(sm: IStatusMessage, additionalUpdates: Partial<IDiceCalculatorState> = {}, duration = 2500) {
         this.setState({ statusMessage: sm, ...additionalUpdates });
+        if (duration === -1) {
+            return;
+        }
         window.setTimeout(() => {
             this.setState({ statusMessage: null });
         }, duration);
