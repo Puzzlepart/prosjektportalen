@@ -21,10 +21,9 @@ export default class SecuredWebPart<P extends ISecuredWebPartProps, S extends IS
         if (this.props.permissionKind) {
             const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
             const permissions = new SP.BasePermissions();
-            permissions.set(SP.PermissionKind.manageWeb);
+            permissions.set(this.props.permissionKind);
             const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);
             await ExecuteJsomQuery(jsomCtx);
-            // const userHasPermission = await pnp.sp.web.usingCaching().currentUserHasPermissions(this.props.permissionKind);
             this.setState({ shouldRender: userHasPermission.get_value() });
         } else {
             this.setState({ shouldRender: true });

@@ -1,6 +1,5 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
-import pnp, { PermissionKind } from "sp-pnp-js";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import {
@@ -32,6 +31,7 @@ import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
 import BaseWebPart from "../@BaseWebPart";
+import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 
 /**
  * Dynamic Portfolio
@@ -111,10 +111,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
         let hashState = Util.getUrlHash();
-
+        const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
+        const permissions = new SP.BasePermissions();
+        permissions.set(SP.PermissionKind.manageWeb);
+        const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);
+        await ExecuteJsomQuery(jsomCtx);
         const [configuration, canUserManageWeb] = await Promise.all([
             DynamicPortfolioConfiguration.getConfig(),
-            pnp.sp.web.usingCaching().currentUserHasPermissions(PermissionKind.ManageWeb),
+            userHasPermission.get_value(),
         ]);
 
         let currentView;

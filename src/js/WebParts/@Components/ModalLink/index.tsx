@@ -6,6 +6,7 @@ import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 import IModalLinkProps, { ModalLinkDefaultProps } from "./IModalLinkProps";
 import IModalLinkState from "./IModalLinkState";
+import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 
 /**
  * Modal Link
@@ -29,8 +30,12 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
      */
     public async componentDidMount(): Promise<void> {
         if (this.props.permissionKind) {
-            const userHasPermission = await pnp.sp.web.usingCaching().currentUserHasPermissions(this.props.permissionKind);
-            this.setState({ shouldRender: userHasPermission });
+            const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
+            const permissions = new SP.BasePermissions();
+            permissions.set(this.props.permissionKind);
+            const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);
+            await ExecuteJsomQuery(jsomCtx);
+            this.setState({ shouldRender: userHasPermission.get_value() });
         } else {
             this.setState({ shouldRender: true });
         }
