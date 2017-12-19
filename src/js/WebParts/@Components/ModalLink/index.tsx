@@ -1,5 +1,4 @@
 import * as React from "react";
-import pnp from "sp-pnp-js";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";

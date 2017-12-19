@@ -1,6 +1,5 @@
 import RESOURCE_MANAGER from "../../@localization";
 import { IModalLinkProps } from "../@Components/ModalLink";
-import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import {
     SetMetadataDefaultsForLibrary,
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
