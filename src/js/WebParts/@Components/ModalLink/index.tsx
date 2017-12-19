@@ -29,7 +29,7 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
      */
     public async componentDidMount(): Promise<void> {
         if (this.props.permissionKind) {
-            const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
+            const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
             const permissions = new SP.BasePermissions();
             permissions.set(this.props.permissionKind);
             const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);

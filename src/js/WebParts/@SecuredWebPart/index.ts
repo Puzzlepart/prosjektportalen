@@ -19,7 +19,7 @@ export default class SecuredWebPart<P extends ISecuredWebPartProps, S extends IS
      */
     public async onInit(): Promise<void> {
         if (this.props.permissionKind) {
-            const jsomCtx = await CreateJsomContext(_spPageContextInfo.siteAbsoluteUrl);
+            const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
             const permissions = new SP.BasePermissions();
             permissions.set(this.props.permissionKind);
             const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);
