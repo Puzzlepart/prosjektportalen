@@ -1,5 +1,4 @@
 import { ISecuredWebPartProps } from "../@SecuredWebPart";
-import { PermissionKind } from "sp-pnp-js";
 
 export default interface ILatestLogEntriesProps extends ISecuredWebPartProps {
     itemsCount?: number;
@@ -16,5 +15,5 @@ export const LatestLogEntriesDefaultProps: Partial<ILatestLogEntriesProps> = {
     },
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
-    permissionKind: PermissionKind.ManageWeb,
+    permissionKind: SP.PermissionKind.manageWeb,
 };

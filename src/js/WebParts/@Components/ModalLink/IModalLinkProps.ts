@@ -1,4 +1,3 @@
-import { PermissionKind } from "sp-pnp-js";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
 
@@ -14,7 +13,7 @@ export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElemen
     height?: number;
     icon?: IModalLinkIconProps;
     id?: string;
-    permissionKind?: PermissionKind;
+    permissionKind?: SP.PermissionKind;
 }
 
 export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
