@@ -4,9 +4,7 @@ import pnp, { Logger, LogLevel } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
-import {
-    GetProperty,
-} from "./PropertyBag";
+import { GetProperty } from "./PropertyBag";
 
 declare var MSOWebPartPageFormName: string;
 
