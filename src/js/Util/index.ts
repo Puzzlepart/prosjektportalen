@@ -51,6 +51,10 @@ export function makeUrlRelativeToSite(absUrl: string): string {
  * @param {string} relUrl Absolute URL
  */
 export function makeUrlAbsolute(relUrl: string): string {
+    const rootSite = document.location.protocol + "//" + document.location.hostname;
+    if (!relUrl) {
+        return rootSite;
+    }
     if (relUrl.startsWith("http")) {
         return relUrl;
     }
@@ -58,7 +62,7 @@ export function makeUrlAbsolute(relUrl: string): string {
     if (!relUrl.startsWith("/")) {
         properRelativeUrl = "/" + relUrl;
     }
-    return document.location.protocol + "//" + document.location.hostname + properRelativeUrl;
+    return rootSite + properRelativeUrl;
 }
 
 /**
