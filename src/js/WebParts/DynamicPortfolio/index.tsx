@@ -114,12 +114,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const permissions = new SP.BasePermissions();
         permissions.set(SP.PermissionKind.manageWeb);
-        const userHasPermission = jsomCtx.web.doesUserHavePermissions(permissions);
+        const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
         await ExecuteJsomQuery(jsomCtx);
-        const [configuration, canUserManageWeb] = await Promise.all([
-            DynamicPortfolioConfiguration.getConfig(),
-            userHasPermission.get_value(),
-        ]);
+        const configuration = await DynamicPortfolioConfiguration.getConfig();
 
         let currentView;
 
@@ -180,7 +177,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             filters,
             currentView,
             configuration,
-            canUserManageWeb,
+            canUserManageWeb: canUserManageWeb.get_value(),
             filteredItems: items,
         };
 
