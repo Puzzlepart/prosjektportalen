@@ -4,6 +4,9 @@ import pnp, { Logger, LogLevel } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
+import {
+    GetProperty,
+} from "./PropertyBag";
 
 declare var MSOWebPartPageFormName: string;
 
@@ -447,7 +450,8 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  * @param {string} name Config name
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
-    const fileServerRelativeUrl = `${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}.txt`;
+    const assetsUrl = await GetProperty("pp_assetssiteurl");
+    const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
         const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
         return json;
