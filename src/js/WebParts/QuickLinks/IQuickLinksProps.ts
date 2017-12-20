@@ -6,7 +6,7 @@ export default interface IQuickLinksProps extends IBaseWebPartProps {
 }
 
 export const QuickLinksDefaultProps: Partial<IQuickLinksProps> = {
-    itemsCount: 5,
+    itemsCount: 10,
     listClassName: "pp-simpleList spacing-m",
 };
 

@@ -4,6 +4,7 @@ import pnp, { Logger, LogLevel } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
+import { GetProperty } from "./PropertyBag";
 
 declare var MSOWebPartPageFormName: string;
 
@@ -51,6 +52,10 @@ export function makeUrlRelativeToSite(absUrl: string): string {
  * @param {string} relUrl Absolute URL
  */
 export function makeUrlAbsolute(relUrl: string): string {
+    const rootSite = document.location.protocol + "//" + document.location.hostname;
+    if (!relUrl) {
+        return rootSite;
+    }
     if (relUrl.startsWith("http")) {
         return relUrl;
     }
@@ -58,7 +63,7 @@ export function makeUrlAbsolute(relUrl: string): string {
     if (!relUrl.startsWith("/")) {
         properRelativeUrl = "/" + relUrl;
     }
-    return document.location.protocol + "//" + document.location.hostname + properRelativeUrl;
+    return rootSite + properRelativeUrl;
 }
 
 /**
@@ -443,7 +448,8 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  * @param {string} name Config name
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
-    const fileServerRelativeUrl = `${_spPageContextInfo.siteServerRelativeUrl}/SiteAssets/pp/config/${name}.txt`;
+    const assetsUrl = await GetProperty("pp_assetssiteurl");
+    const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
         const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
         return json;
