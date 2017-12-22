@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
-import pnp, { Logger, LogLevel } from "sp-pnp-js";
+import pnp, { Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -449,9 +449,10 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     const assetsUrl = await GetProperty("pp_assetssiteurl");
+    let assetsWeb = new Web(assetsUrl);
     const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
-        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
+        const json = await assetsWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
         return json;
     } catch (err) {
         Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);
