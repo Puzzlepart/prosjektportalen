@@ -1,28 +1,14 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
-import {
-    DetailsList,
-    ConstrainMode,
-    SelectionMode,
-    DetailsListLayoutMode,
-} from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
-import {
-    Spinner,
-    SpinnerSize,
-} from "office-ui-fabric-react/lib/Spinner";
-import {
-    MessageBar,
-    MessageBarType,
-} from "office-ui-fabric-react/lib/MessageBar";
+import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import IWebPropertyBagEditorProps, { WebPropertyBagEditorDefaultProps } from "./IWebPropertyBagEditorProps";
 import IWebPropertyBagEditorState from "./IWebPropertyBagEditorState";
-import {
-    GetSettingsAndOptions,
-    UpdateSettings,
-} from "../../Settings";
+import { GetSettingsAndOptions, UpdateSettings } from "../../Settings";
 import BaseWebPart from "../@BaseWebPart";
 
 export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEditorProps, IWebPropertyBagEditorState> {
@@ -47,7 +33,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
 
     public async componentDidMount(): Promise<void> {
         const { settings, options } = await GetSettingsAndOptions();
-        return this.setState({ settings, options, isLoading: false });
+        this.setState({ settings, options, isLoading: false });
     }
 
     public render() {
@@ -91,8 +77,10 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                         <Spinner size={SpinnerSize.large} />
                         :
                         <PrimaryButton
+                            text={RESOURCE_MANAGER.getResource("String_SaveChanges")}
+                            disabled={this.state.isSaving}
                             style={{ marginTop: 20, marginLeft: 0 }}
-                            onClick={this._onSaveChanges}>{RESOURCE_MANAGER.getResource("String_SaveChanges")}</PrimaryButton>}
+                            onClick={this._onSaveChanges} />}
                 </div>
             </div>
         );
@@ -128,15 +116,25 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         return colValue;
     }
 
-    private _onSettingChanged({ key, value }, newValue: string) {
-        let settings = this.state.settings;
-        settings[key] = newValue;
+    /**
+     * On setting changed
+     *
+     * @param {any} setting Setting
+     * @param {string} newValue New value
+     */
+    private _onSettingChanged(setting: any, newValue: string) {
+        let { settings } = this.state;
+        settings[setting.key] = newValue;
         this.setState({ settings });
     }
 
+    /**
+     * On save changes
+     */
     private async _onSaveChanges() {
+        let { settings } = this.state;
         this.setState({ isSaving: true });
-        UpdateSettings(this.state.settings);
+        await UpdateSettings(settings);
         this.setState({ isSaving: false });
     }
 }

@@ -7,7 +7,7 @@
         <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="ScriptLoadTimeout">1000</pnp:Parameter>
-        <pnp:Parameter Key="DefaultSettings">{"PROJECTSTATUS_EXPORT_TYPE":"PNG","LOG_LEVEL":"Error","PROJECTPHASES_FORCED_ORDER":"Off"}</pnp:Parameter>
-        <pnp:Parameter Key="SettingsOptions">{"PROJECTSTATUS_EXPORT_TYPE":["PNG","PDF"],"LOG_LEVEL":["Off","Info","Warning","Error"],"PROJECTPHASES_FORCED_ORDER":["On","Off"]}</pnp:Parameter>
+        <pnp:Parameter Key="DefaultSettings">{"PROJECTSTATUS_EXPORT_TYPE":"PNG","LOG_LEVEL":"Error","PROJECTPHASES_FORCED_ORDER":"Off","PROJECT_INHERIT_PERMISSIONS":"Off"}</pnp:Parameter>
+        <pnp:Parameter Key="SettingsOptions">{"PROJECTSTATUS_EXPORT_TYPE":["PNG","PDF"],"LOG_LEVEL":["Off","Info","Warning","Error"],"PROJECTPHASES_FORCED_ORDER":["On","Off"],"PROJECT_INHERIT_PERMISSIONS":["On","Off"]}</pnp:Parameter>
     </pnp:Parameters>
 </pnp:Preferences>
