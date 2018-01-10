@@ -111,7 +111,7 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
         {
             cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell neutral-cell",
             consequence: 3,
             probability: 4,
         },
