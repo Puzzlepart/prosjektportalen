@@ -1,15 +1,15 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
 import IQuickLinksState from "./IQuickLinksState";
 import BaseWebPart from "../@BaseWebPart";
 
+/**
+ * QuickLinks
+ */
 export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLinksState> {
     public static displayName = "QuickLinks";
     public static defaultProps = QuickLinksDefaultProps;
@@ -23,22 +23,20 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
         super(props, { isLoading: true });
     }
 
-    /**
-     * Component did mount
-     */
-    public componentDidMount(): void {
-        new Site(_spPageContextInfo.siteAbsoluteUrl)
-            .rootWeb
+    public async componentDidMount() {
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+        const links = await rootWeb
             .lists
             .getByTitle(RESOURCE_MANAGER.getResource("Lists_QuickLinks_Title"))
             .items
             .top(this.props.itemsCount)
             .select("URL", "Comments")
-            .get().then(links => this.setState({ links: links, isLoading: false }));
+            .get();
+        this.setState({ links: links, isLoading: false });
     }
 
     /**
-     * Renders the component
+     * Renders the <QuickLinks /> component
      */
     public render(): JSX.Element {
         return (
@@ -57,9 +55,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     */
     private renderItems = ({ listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
         if (isLoading) {
-            return (
-                <Spinner type={SpinnerType.large} />
-            );
+            return <Spinner type={SpinnerType.large} />;
         } else if (links.length > 0) {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
