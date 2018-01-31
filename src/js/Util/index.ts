@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
-import {Logger, LogLevel, Web } from "sp-pnp-js";
+import { Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -449,7 +449,7 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     const assetsUrl = await GetProperty("pp_assetssiteurl");
-    let assetsWeb = new Web(assetsUrl);
+    const assetsWeb = new Web(makeUrlAbsolute(assetsUrl));
     const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
         const json = await assetsWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
