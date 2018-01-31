@@ -27,7 +27,7 @@
                 display: inline-block;
 
                 &.active {
-                    .ms-Icon, span {
+                    [data-icon-name], span {
                         color: #000;
                     }
                     span {
@@ -35,7 +35,7 @@
                     }
                 }
 
-                .ms-Icon {
+                [data-icon-name] {
                     font-size: 25px;
                     color: #575757
                     vertical-align: middle;
@@ -51,7 +51,7 @@
                 }
 
                 @media (max-width: 1280px) {
-                    .ms-Icon {
+                    [data-icon-name] {
                         display: none;
                     }
                 }
@@ -81,7 +81,7 @@
             }
 
             .export-section {
-                .ms-Icon.ms-Icon--History {
+                [data-icon-name='History'] {
                     vertical-align: top;
                     margin-top: 9px;
                 }

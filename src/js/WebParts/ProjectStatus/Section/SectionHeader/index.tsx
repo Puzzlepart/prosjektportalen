@@ -28,9 +28,7 @@ const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
         return (
             <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
                 <a href={navUrl}>
-                    <i
-                        className="ms-Icon ms-Icon--Forward"
-                        title={RESOURCE_MANAGER.getResource("String_NavigateToList")}></i>
+                    <Icon iconName="Forward" title={RESOURCE_MANAGER.getResource("String_NavigateToList")} />
                 </a>
             </div>
         );
