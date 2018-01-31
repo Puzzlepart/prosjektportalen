@@ -1,5 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../../../@localization";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
@@ -19,7 +20,7 @@ const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageCo
                                     </div>
                                     <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
                                         <a href={titleUrl}>
-                                            <i className="ms-Icon ms-Icon--Forward"></i>
+                                            <Icon iconName="Forward" />
                                         </a>
                                     </div>
                                 </div>
@@ -31,7 +32,7 @@ const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageCo
                             <div className="status-elements">
                                 <div className="status-element">
                                     <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
-                                        <i className="ms-Icon ms-Icon--CustomList no-status"></i>
+                                        <Icon iconName="CustomList" />
                                     </div>
                                     <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
                                         <h2>{RESOURCE_MANAGER.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>

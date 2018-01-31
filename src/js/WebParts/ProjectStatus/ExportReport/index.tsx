@@ -3,7 +3,7 @@ import RESOURCE_MANAGER from "../../../@localization";
 import * as pnp from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
-import { Icon } from "../../@Components";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
@@ -64,7 +64,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                         {this.renderExportBtn(exportStatus, exportType)}
                     </div>
                     <div className="ms-Grid-col ms-md7">
-                        <Icon name="History" />
+                        <Icon iconName="History" />
                         <Dropdown
                             id="pp-reportDropdown"
                             label=""
