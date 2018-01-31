@@ -3,7 +3,7 @@ import { Logger, LogLevel } from "sp-pnp-js";
 import ListConfig from "../Config/ListConfig";
 import IProvisionContext from "../../IProvisionContext";
 import ProvisionError from "../../ProvisionError";
-import * as Util from "../../../Util";
+import { setItemFieldValue, SetItemFieldValueResult } from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
 interface IRecord {
@@ -23,15 +23,21 @@ let __RECORDS: IRecord[] = [];
  * @param {CopyContext} dataCtx Copy context
  */
 export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: CopyContext): Promise<void> {
-    const sourceItemId = srcItem.get_fieldValues()["ID"];
-    Logger.log({ message: `Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
-    const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
-    fields.forEach(fieldName => {
-        const fieldValue = srcItem.get_item(fieldName);
-        Logger.log({ message: `Setting value for field ${fieldName}`, data: {}, level: LogLevel.Info });
-        Util.setItemFieldValue(fieldName, destItem, fieldValue, dataCtx.Destination._, dataCtx.Destination.list);
-    });
     try {
+        const sourceItemId = srcItem.get_fieldValues()["ID"];
+        Logger.log({ message: `Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
+        const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
+        fields.forEach(fieldName => {
+            const fieldValue = srcItem.get_item(fieldName);
+            const fieldType = dataCtx.listFieldsMap[fieldName];
+            Logger.log({ message: `Setting value for field ${fieldName}`, data: { fieldType }, level: LogLevel.Info });
+            const result = setItemFieldValue(fieldName, destItem, fieldValue, fieldType, dataCtx.Destination._, dataCtx.Destination.list);
+            switch (result) {
+                case SetItemFieldValueResult.FieldTypeNotSupported: {
+                    Logger.log({ message: `Field type ${fieldType} is not supported`, data: {}, level: LogLevel.Warning });
+                }
+            }
+        });
         destItem.update();
         await dataCtx.loadAndExecuteQuery(dataCtx.Destination._, [destItem]);
         const record: IRecord = {
@@ -64,8 +70,13 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
     try {
         dataCtx = await GetDataContext(conf, context.url);
         const listItemCollection = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
-        await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [listItemCollection]);
+        const listFieldCollection = dataCtx.Source.list.get_fields();
+        await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [listItemCollection, listFieldCollection]);
         listItems = listItemCollection.get_data();
+        dataCtx.listFieldsMap = listFieldCollection.get_data().reduce((obj, field) => {
+            obj[field.get_internalName()] = field.get_typeAsString();
+            return obj;
+        }, {});
     } catch (err) {
         throw new ProvisionError(err, "CopyItems");
     }
