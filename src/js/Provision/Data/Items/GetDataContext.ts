@@ -12,6 +12,7 @@ export interface CopyContext {
         list?: SP.List,
     };
     loadAndExecuteQuery: (clCtx: SP.ClientContext, clObj?: SP.ClientObject[]) => Promise<void>;
+    listFieldsMap?: { [fieldName: string]: string };
 }
 
 /**
