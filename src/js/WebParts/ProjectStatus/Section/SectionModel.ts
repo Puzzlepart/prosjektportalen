@@ -70,7 +70,9 @@ export default class SectionModel {
             }
             if (statusFieldsConfig.hasOwnProperty(this.fieldName)) {
                 const [statusProperties] = statusFieldsConfig[this.fieldName].statuses.filter(({ statusValue }) => this.statusValue === statusValue);
-                this.statusProperties = statusProperties;
+                if (statusProperties) {
+                    this.statusProperties = statusProperties;
+                }
             }
         }
     }
