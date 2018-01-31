@@ -10,23 +10,6 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
         hidden: false,
         width: "100%",
     };
-    /**
-     * Chrome header style
-     */
-    private h2Style: React.CSSProperties = {
-        textAlign: "justify",
-        position: "relative",
-    };
-
-    /**
-     * Icon style
-     */
-    private iconStyle: React.CSSProperties = {
-        fontSize: 14,
-        position: "absolute",
-        right: 5,
-        top: 10,
-    };
 
     /**
      * Toggle storage key
@@ -40,9 +23,7 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
      */
     constructor(props: IChromeTitleProps) {
         super(props);
-        this.state = {
-            isCollapsed: false,
-        };
+        this.state = { isCollapsed: false };
     }
 
     /**
@@ -70,10 +51,6 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
      * Renders the component
      */
     public render(): JSX.Element {
-        if (this.props.toggleElement) {
-            this.h2Style.cursor = "pointer";
-        }
-
         return (
             <div
                 hidden={this.props.hidden}
@@ -83,13 +60,21 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
                 <span
                     title={this.props.title}
                     className="js-webpart-titleCell">
-                    <h2
-                        style={this.h2Style}
-                        className="ms-webpart-titleText">
+                    <h2 className="ms-webpart-titleText"
+                        style={{
+                            cursor: this.props.toggleElement ? "poiner" : "inherit",
+                            textAlign: "justify",
+                            position: "relative",
+                        }}                    >
                         <span>{this.props.title}</span>
-                        {this.props.toggleElement && <Icon
-                            iconName={this.state.isCollapsed ? "ChevronDown" : "ChevronUp"}
-                            style={this.iconStyle} />}
+                        {this.props.toggleElement && (
+                            <Icon iconName={this.state.isCollapsed ? "ChevronDown" : "ChevronUp"} style={{
+                                fontSize: 14,
+                                position: "absolute",
+                                right: 5,
+                                top: 10,
+                            }} />
+                        )}
                     </h2>
                 </span>
             </div >

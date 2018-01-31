@@ -12,6 +12,7 @@ import Extension from "../../Provision/Extensions/Extension";
 import ListConfig from "../../Provision/Data/Config/ListConfig";
 import * as ListDataConfig from "../../Provision/Data/Config";
 import * as Util from "../../Util";
+import { GetSetting } from "../../Settings";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 import INewProjectFormProps, { NewProjectFormDefaultProps } from "./INewProjectFormProps";
 import INewProjectFormState, { ProvisionStatus } from "./INewProjectFormState";
@@ -52,6 +53,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         let model = this.state.model;
         model.IncludeContent = config.listData.filter(ld => ld.Default);
         model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
+        model.InheritPermissions = config.inheritPermissions;
         this.setState({ config, model });
     }
 
@@ -121,11 +123,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * Get required config for the component
      */
     private async getRequiredConfig(): Promise<INewProjectFormConfig> {
-        const listData = await ListDataConfig.RetrieveConfig();
-        const extensions = await GetSelectableExtensions();
+        const [listData, extensions, inheritPermissionsString] = await Promise.all([
+            ListDataConfig.RetrieveConfig(),
+            GetSelectableExtensions(),
+            GetSetting("PROJECT_INHERIT_PERMISSIONS", true),
+        ]);
         const listDataKeys = Object.keys(listData);
         const showSettings = this.props.showSettings && listDataKeys.length > 0;
-        return { showSettings, listData, extensions };
+        return { showSettings, listData, extensions, inheritPermissions: inheritPermissionsString === "on" };
     }
 
     /**

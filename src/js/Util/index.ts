@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
-import pnp, { Logger, LogLevel } from "sp-pnp-js";
+import { Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -170,53 +170,76 @@ export function encodeSpaces(str: string): string {
     return str.replace(/ /g, "%20");
 }
 
+export enum SetItemFieldValueResult {
+    ValueNull,
+    OK,
+    FieldTypeNotSupported,
+}
+
 /**
- * Sets item field value (supports text/choice, number and taxonomy)
+ * Sets item field value (supports text/choice, number, url and taxonomy)
  *
  * @param {string} fieldName Field name
  * @param {SP.ListItem} item SP list item
  * @param {any} fieldValue Field value
+ * @param {string} fieldType Field type
  * @param {SP.ClientContext} ctx Client context
  * @param {SP.List} list SP list
+ *
+ * @returns {SetItemFieldValueResult} SetItemFieldValueResult
  */
-export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldValue: any, ctx: SP.ClientContext, list: SP.List): void {
+export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldValue: any, fieldType: string, clientContext: SP.ClientContext, list: SP.List): SetItemFieldValueResult {
     if (fieldValue === null) {
-        return;
+        return SetItemFieldValueResult.ValueNull;
     }
-    let fieldValueType = (typeof fieldValue);
-    switch (fieldValueType) {
-        case "string": {
+    switch (fieldType) {
+        case "Text":
+        case "Note":
+        case "Choice":
+        case "MultiChoice":
+        case "Number":
+        case "User":
+        case "UserMulti":
+        case "Boolean":
+        case "Currency": {
             item.set_item(fieldName, fieldValue);
+            return SetItemFieldValueResult.OK;
         }
-            break;
-        case "number": {
-            item.set_item(fieldName, fieldValue);
+        case "TaxonomyFieldType": {
+            const listField = list.get_fields().getByInternalNameOrTitle(fieldName);
+            const taxField: any = clientContext.castTo(listField, SP.Taxonomy.TaxonomyField);
+            const taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
+            taxSingle.set_label(fieldValue.Label || fieldValue.get_label());
+            taxSingle.set_termGuid(fieldValue.TermGuid || fieldValue.get_termGuid());
+            taxSingle.set_wssId(-1);
+            taxField.setFieldValueByValue(item, taxSingle);
+            return SetItemFieldValueResult.OK;
         }
-            break;
-        case "object": {
-            let { Label, TermGuid, get_termGuid, get_url, get_description } = fieldValue;
-            if (TermGuid || get_termGuid) {
-                let field = list.get_fields().getByInternalNameOrTitle(fieldName),
-                    taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
-                    taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
-                taxSingle.set_label(Label || fieldValue.get_label());
-                taxSingle.set_termGuid(TermGuid || fieldValue.get_termGuid());
-                taxSingle.set_wssId(-1);
-                taxField.setFieldValueByValue(item, taxSingle);
-            }
-            if (get_url && get_description) {
-                const webServerUrl = _spPageContextInfo.siteAbsoluteUrl.replace(_spPageContextInfo.siteServerRelativeUrl, "");
-                const ctxRelativeUrl = ctx.get_url().replace(webServerUrl, "");
-                let url = fieldValue.get_url()
-                    .replace("{webRelativeUrl}", ctxRelativeUrl)
-                    .replace(/([^:]\/)\/+/g, "$1");
-                let fieldUrlValue = new SP.FieldUrlValue();
-                fieldUrlValue.set_url(url);
-                fieldUrlValue.set_description(fieldValue.get_description());
-                item.set_item(fieldName, fieldUrlValue);
-            }
+        case "TaxonomyFieldTypeMulti": {
+            const taxonomyFieldValues = (fieldValue as SP.Taxonomy.TaxonomyFieldValueCollection).get_data();
+            const listField = list.get_fields().getByInternalNameOrTitle(fieldName);
+            const taxField: any = clientContext.castTo(listField, SP.Taxonomy.TaxonomyField);
+            const taxMulti = new SP.Taxonomy.TaxonomyFieldValueCollection(clientContext, taxonomyFieldValues.map(t => `-1;#${t.get_label()}|${t.get_termGuid()}`).join(";#"), taxField);
+            taxField.setFieldValueByValueCollection(item, taxMulti);
+            return SetItemFieldValueResult.OK;
         }
-            break;
+        case "URL": {
+            const webServerUrl = _spPageContextInfo.siteAbsoluteUrl.replace(_spPageContextInfo.siteServerRelativeUrl, "");
+            const ctxRelativeUrl = clientContext.get_url().replace(webServerUrl, "");
+            let url = fieldValue.get_url().replace("{webRelativeUrl}", ctxRelativeUrl).replace(/([^:]\/)\/+/g, "$1");
+            let fieldUrlValue = new SP.FieldUrlValue();
+            fieldUrlValue.set_url(url);
+            fieldUrlValue.set_description(fieldValue.get_description());
+            item.set_item(fieldName, fieldUrlValue);
+            return SetItemFieldValueResult.OK;
+        }
+        case "DateTime": {
+            item.set_item(fieldName, fieldValue.toISOString());
+            return SetItemFieldValueResult.OK;
+        }
+        default: {
+            return SetItemFieldValueResult.FieldTypeNotSupported;
+        }
     }
 }
 
@@ -449,9 +472,10 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     const assetsUrl = await GetProperty("pp_assetssiteurl");
+    const assetsWeb = new Web(makeUrlAbsolute(assetsUrl));
     const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
     try {
-        const json = await pnp.sp.site.rootWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
+        const json = await assetsWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
         return json;
     } catch (err) {
         Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);

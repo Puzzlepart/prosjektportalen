@@ -19,7 +19,7 @@ const HandleQueryParams = () => {
         (document.querySelector("a[id*='WebPartMaintenancePageLink']") as any).parentNode.parentNode.parentNode.parentNode.style.display = "none";
     }
     if (HideFormFields) {
-        const fieldsArray = HideFormFields.split(",");
+        const fieldsArray = (HideFormFields as string).split(",");
         Logger.log({ message: "HideFormFields specified in URL, hiding fields", level: LogLevel.Info, data: { fieldsArray } });
         fieldsArray.forEach(fName => FormUtils.hideFormField(fName));
     }

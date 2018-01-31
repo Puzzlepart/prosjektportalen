@@ -5,4 +5,5 @@ export default interface INewProjectFormConfig {
     showSettings?: boolean;
     listData?: ListConfig[];
     extensions?: Extension[];
+    inheritPermissions?: boolean;
 }

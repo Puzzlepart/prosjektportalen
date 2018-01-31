@@ -5,7 +5,7 @@
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Standardoppgaver</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccDestinationList">Oppgaver</pnp:DataValue>
-            <pnp:DataValue FieldName="GtLccFields">Title,GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtLccFields">Title,GtProjectPhase,Order</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccLabel">Inkluder standardoppgaver</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>

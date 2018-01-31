@@ -37,7 +37,9 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing assets (in case you already have installed assets previously)?")]
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
-    [switch]$SkipThirdParty
+    [switch]$SkipThirdParty,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip custom action removal?")]
+    [switch]$SkipCustomActionRemoval
 )
 
 . ./SharedFunctions.ps1
@@ -85,11 +87,27 @@ if ($InstallVersion -gt $CurrentVersion) {
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
+    if (-not $SkipCustomActionRemoval.IsPresent) {
+        try {
+            Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
+            Connect-SharePoint $Url       
+            Get-PnPCustomAction -Scope Site | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Site -Force }
+            Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
+    }
 
     .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-        Connect-SharePoint $Url
+        Connect-SharePoint $Url       
         Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
         $upgradePkgs = Get-ChildItem "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp"

@@ -4,7 +4,7 @@ var gulp = require("gulp"),
     wpDev = require('../webpack.config.development.js'),
     wpProd = require('../webpack.config.production.js'),
     stylus = require('gulp-stylus'),
-    gutil = require('gulp-util'),
+    pluginError = require('plugin-error'),
     autoprefixer = require('autoprefixer-stylus'),
     settings = require('./@settings.js'),
     config = require('./@configuration.js');
@@ -12,7 +12,7 @@ var gulp = require("gulp"),
 gulp.task("packageCode", ["buildLib"], (done) => {
     webpack(wpDev("source-map"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("packageCode", err);
+            throw new pluginError("packageCode", err);
         }
         console.log(stats.toString({
             colors: true
@@ -24,7 +24,7 @@ gulp.task("packageCode", ["buildLib"], (done) => {
 gulp.task("packageCodeEval", ["buildLib"], (done) => {
     webpack(wpDev("eval"), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("packageCodeEval", err);
+            throw new pluginError("packageCodeEval", err);
         }
         console.log(stats.toString({
             colors: true
@@ -46,7 +46,7 @@ gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], (done
 gulp.task("packageCodeMinify", ["buildLib"], (done) => {
     webpack(wpProd(), (err, stats) => {
         if (err) {
-            throw new gutil.PluginError("packageCodeMinify", err);
+            throw new pluginError("packageCodeMinify", err);
         }
         console.log(stats.toString({
             colors: true

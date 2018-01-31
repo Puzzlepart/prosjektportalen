@@ -19,8 +19,8 @@ export default class ProgressModal extends React.Component<IProgressModalProps, 
     /**
      * Constructor
      */
-    constructor() {
-        super();
+    constructor(props: IProgressModalProps, state: IProgressModalState) {
+        super(props, state);
         this.state = {
             percentComplete: 0,
         };
