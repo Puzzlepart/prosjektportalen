@@ -58,15 +58,22 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
  */
 export async function CopyItems(context: IProvisionContext, conf: ListConfig): Promise<void> {
     Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
+    let dataCtx: CopyContext;
+    let listItems: SP.ListItem<any>[];
+
     try {
-        const dataCtx = await GetDataContext(conf, context.url);
-        const items = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
-        await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [items]);
-        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), items.get_count(), conf.SourceList, conf.DestinationList));
-        await items.get_data().reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
+        dataCtx = await GetDataContext(conf, context.url);
+        const listItemCollection = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
+        await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [listItemCollection]);
+        listItems = listItemCollection.get_data();
+    } catch (err) {
+        throw new ProvisionError(err, "CopyItems");
+    }
+    try {
+        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), listItems.length, conf.SourceList, conf.DestinationList));
+        await listItems.reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
         await HandleItemsWithParent(dataCtx);
         Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
-        return;
     } catch (err) {
         throw err;
     }

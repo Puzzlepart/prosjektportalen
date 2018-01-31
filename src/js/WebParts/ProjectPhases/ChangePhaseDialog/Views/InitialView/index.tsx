@@ -21,8 +21,8 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         this.state = {
             comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || "") : "",
         };
-        this.nextCheckPointAction = this.nextCheckPointAction.bind(this);
-        this._onCommentUpdate = this.nextCheckPointAction.bind(this);
+        this._onNextCheckPoint = this._onNextCheckPoint.bind(this);
+        this._onCommentUpdate = this._onCommentUpdate.bind(this);
     }
 
     public render(): JSX.Element {
@@ -65,9 +65,24 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         const statusClosed = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed");
 
         const statusOptions: IButtonProps[] = [
-            { text: statusNotRelevant, disabled: (isLoading || !isCommentValid), title: !isCommentValid ? statusNotRelevantTooltipCommentEmpty : statusNotRelevantTooltip, onClick: e => this.nextCheckPointAction(statusNotRelevant, comment) },
-            { text: statusStillOpen, disabled: (isLoading || !isCommentValid), title: !isCommentValid ? statusStillOpenTooltipCommentEmpty : statusStillOpenTooltip, onClick: e => this.nextCheckPointAction(statusStillOpen, comment, false) },
-            { text: statusClosed, disabled: isLoading, title: statusDoneTooltip, onClick: e => this.nextCheckPointAction(statusClosed, comment) }];
+            {
+                text: statusNotRelevant,
+                disabled: (isLoading || !isCommentValid),
+                title: !isCommentValid ? statusNotRelevantTooltipCommentEmpty : statusNotRelevantTooltip,
+                onClick: () => this._onNextCheckPoint(statusNotRelevant, comment),
+            },
+            {
+                text: statusStillOpen,
+                disabled: (isLoading || !isCommentValid),
+                title: !isCommentValid ? statusStillOpenTooltipCommentEmpty : statusStillOpenTooltip,
+                onClick: () => this._onNextCheckPoint(statusStillOpen, comment, false),
+            },
+            {
+                text: statusClosed,
+                disabled: isLoading,
+                title: statusDoneTooltip,
+                onClick: () => this._onNextCheckPoint(statusClosed, comment),
+            }];
         return (
             <div style={{ marginTop: 20, marginBottom: 25 }}>
                 {statusOptions.map((statusOpt, key) => (
@@ -86,7 +101,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     * @param {string} comment Comment value
     * @param {boolean} updateStatus Update status
     */
-    private nextCheckPointAction(status: string, comment: string, updateStatus = true) {
+    private _onNextCheckPoint(status: string, comment: string, updateStatus = true) {
         this.props.nextCheckPointAction(status, comment, true);
         this.setState({ comment: "" });
     }
