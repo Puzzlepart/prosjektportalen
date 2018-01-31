@@ -8,7 +8,7 @@ const distBasePath = path.join(__dirname, "dist/js");
 const useBundleAnalyzer = false;
 
 module.exports = (devtool, exclude, env) => ({
-    devtool: devtool,
+    devtool,
     entry: {
         main: [
             'core-js/fn/object/assign',
@@ -23,20 +23,9 @@ module.exports = (devtool, exclude, env) => ({
         filename: "pp.[name].js",
         libraryTarget: "umd",
     },
-    stats: {
-        hash: true,
-        timing: true,
-        assets: true,
-        chunks: true,
-        modules: true,
-        reasons: true,
-        children: true
-    },
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
-        alias: {
-            "model": path.resolve(libBasePath, 'Model/index.js')
-        }
+        alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
         rules: [
@@ -89,9 +78,5 @@ module.exports = (devtool, exclude, env) => ({
             }),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
-        .concat(useBundleAnalyzer ? [
-            new BundleAnalyzerPlugin({
-                analyzerMode: 'static'
-            })
-        ] : [])
+        .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({analyzerMode: 'static' })] : [])
 });
