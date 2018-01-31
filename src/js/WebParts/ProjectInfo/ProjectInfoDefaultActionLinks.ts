@@ -26,7 +26,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     },
     reloadOnSubmit: false,
     showLabel: true,
-    permissionKind: SP.PermissionKind.manageWeb,
+    permissionKind: 31,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
@@ -74,14 +74,14 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
             });
     },
     showLabel: true,
-    permissionKind: SP.PermissionKind.manageWeb,
+    permissionKind: 31,
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
     label: RESOURCE_MANAGER.getResource("ProjectInfo_EditLogo"),
     icon: { iconName: "AppIconDefault" },
     showLabel: true,
-    permissionKind: SP.PermissionKind.manageWeb,
+    permissionKind: 31,
 }];
 
 export default ProjectInfoDefaultActionLinks;

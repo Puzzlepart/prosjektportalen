@@ -15,5 +15,5 @@ export const LatestLogEntriesDefaultProps: Partial<ILatestLogEntriesProps> = {
     },
     reloadInterval: -1,
     listClassName: "pp-simpleList spacing-m",
-    permissionKind: SP.PermissionKind.manageWeb,
+    permissionKind: 31,
 };

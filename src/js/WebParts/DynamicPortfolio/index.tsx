@@ -113,7 +113,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         let hashState = Util.getUrlHash();
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const permissions = new SP.BasePermissions();
-        permissions.set(SP.PermissionKind.manageWeb);
+        permissions.set(31);
         const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
         await ExecuteJsomQuery(jsomCtx);
         const configuration = await DynamicPortfolioConfiguration.getConfig();
