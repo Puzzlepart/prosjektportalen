@@ -19,7 +19,7 @@ module.exports = {
         scriptsGlob: "./.scripts/**/*",
         sourceGlob: "./src/js/**/*.ts*",
         stylesGlob: "./src/**/*.styl",
-        stylesMain: ["./src/*/pp.main.styl", "./src/*/pp.project.styl"],
+        stylesMain: ["./src/*/pp.main.styl"],
         assetsFilesGlob: ["./src/**/*.png", "./src/**/*.txt"],
         libGlob: ["./lib/**/*.js", "./lib/**/**/*.js"],
         testGlob: ["./lib/js/_tests/**/*.js"],

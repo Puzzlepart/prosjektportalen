@@ -316,7 +316,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             items.push({
                 key: "ExcelExport",
                 name: this.props.excelExportConfig.buttonLabel,
-                iconProps: { iconName: this.props.excelExportConfig.buttonIcon },
+                iconProps: {
+                    iconName: this.props.excelExportConfig.buttonIcon,
+                    styles: {root: {color: "green !important"}},
+                },
                 disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
                 onClick: e => {
                     e.preventDefault();
