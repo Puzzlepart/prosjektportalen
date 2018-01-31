@@ -25,8 +25,10 @@ namespace PP {
      */
     function initPnp() {
         pnp.setup({
-            headers: {
-                "Accept": "application/json; odata=verbose",
+            sp: {
+                headers: {
+                    "Accept": "application/json; odata=verbose",
+                },
             },
             defaultCachingStore: "session",
             defaultCachingTimeoutSeconds: 60,

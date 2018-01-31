@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../@localization";
 import * as moment from "moment";
-import pnp, { Logger, LogLevel, Web } from "sp-pnp-js";
+import {Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
