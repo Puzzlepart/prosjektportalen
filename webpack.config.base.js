@@ -11,6 +11,8 @@ module.exports = (devtool, exclude, env) => ({
     devtool,
     entry: {
         main: [
+            'core-js/es6/map',
+            'core-js/es6/set',
             'core-js/fn/object/assign',
             'core-js/es6/promise',
             'whatwg-fetch',
@@ -78,5 +80,5 @@ module.exports = (devtool, exclude, env) => ({
             }),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
-        .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({analyzerMode: 'static' })] : [])
+        .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerMode: 'static' })] : [])
 });
