@@ -202,9 +202,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
         const { currentFilters } = this.state;
         const currentFiltersStr = [].concat.apply([], Object.keys(currentFilters).map(key => currentFilters[key])).join(", ");
-        let statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"), data.items.length, this.state.items.length);
+        let statusText = String.format(this.props.showCountText, data.items.length, this.state.items.length);
         if (currentFiltersStr) {
-            statusText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCountsWithFilters"), data.items.length, this.state.items.length, currentFiltersStr);
+            statusText = String.format(this.props.showCountTextWithFilters, data.items.length, this.state.items.length, currentFiltersStr);
         }
         return <MessageBar>{statusText}</MessageBar>;
     }
@@ -318,7 +318,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 name: this.props.excelExportConfig.buttonLabel,
                 iconProps: {
                     iconName: this.props.excelExportConfig.buttonIcon,
-                    styles: {root: {color: "green !important"}},
+                    styles: { root: { color: "green !important" } },
                 },
                 disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
                 onClick: e => {
