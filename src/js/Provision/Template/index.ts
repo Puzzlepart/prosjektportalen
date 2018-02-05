@@ -1,15 +1,8 @@
 import RESOURCE_MANAGER from "../../@localization";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
-import { Schema } from "sp-pnp-provisioning/lib/schema";
-import {
-    Files,
-    Lists,
-    Navigation,
-    WebSettings,
-    ComposedLook,
-} from "./Objects";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
+import FullTemplate from "./FullTemplate";
 
 /**
  * Maps the current handler to a text explaining the current handlers action
@@ -23,19 +16,6 @@ const PROGRESS_MAP = {
     PropertyBagEntries: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_PropertyBagEntries"),
 };
 
-let baseTemplate: Schema = {
-    Files,
-    Lists,
-    Navigation,
-    WebSettings,
-    ComposedLook,
-    Features: [{
-        id: "87294c72-f260-42f3-a41b-981a2ffce37a",
-        deactivate: true,
-        force: true,
-    }],
-};
-
 /**
  * Applies the template to the specified web
  *
@@ -47,9 +27,9 @@ export async function ApplyProvisioningTemplate(context: IProvisionContext): Pro
     const callbackFunc = objHandler => context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), PROGRESS_MAP[objHandler]);
     try {
         const template = {
-            ...baseTemplate,
+            ...FullTemplate,
             WebSettings: {
-                ...baseTemplate.WebSettings,
+                ...FullTemplate.WebSettings,
                 AlternateCssUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/css/pp.main.css`,
                 SiteLogoUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
             },
