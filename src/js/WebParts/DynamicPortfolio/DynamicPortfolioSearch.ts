@@ -7,13 +7,9 @@ import {
 /**
  * Default Search Settings used for sp-pnp-js
  */
-export const DEFAULT_SEARCH_SETTINGS = {
-    Querytext: "*",
-    RowLimit: 500,
-    TrimDuplicates: false,
-};
+export const DEFAULT_SEARCH_SETTINGS = { Querytext: "*", RowLimit: 500, TrimDuplicates: false };
 
-export interface IQueryResponse {
+export interface IProjectsQueryResponse {
     primarySearchResults: any[];
     refiners: any[];
 }
@@ -24,33 +20,34 @@ export interface IQueryResponse {
  * @param {IDynamicPortfolioViewConfig} viewConfig View configuration
  * @param {IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration
  */
-export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, configuration: IDynamicPortfolioConfiguration): Promise<IQueryResponse> {
+export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, configuration: IDynamicPortfolioConfiguration): Promise<IProjectsQueryResponse> {
     try {
-        const response: any = await sp.search({
+        const response = await sp.search({
             ...DEFAULT_SEARCH_SETTINGS,
             SelectProperties: configuration.columns.map(f => f.fieldName),
             Refiners: configuration.refiners.map(ref => ref.key).join(","),
             QueryTemplate: viewConfig.queryTemplate,
         });
-        let primarySearchResults = response.RawSearchResults.PrimaryQueryResult.RelevantResults.Table.Rows.results
-            .map(({ Cells }) => {
-                let item: any = {};
-                Cells.results.forEach(({ Key, Value }) => {
-                    item[Key] = Value ? Value : "";
-                    /**
-                     * Using parseInt if we have a Currency or Number field
-                     */
-                    if (item[Key] !== "" && (Key.indexOf("OWSNMBR") !== -1 || Key.indexOf("OWSCURR") !== -1)) {
-                        item[Key] = parseInt(item[Key], 10);
-                    }
-                });
-                return item;
-            });
-        let refiners = response.RawSearchResults.PrimaryQueryResult.RefinementResults ? response.RawSearchResults.PrimaryQueryResult.RefinementResults.Refiners.results : [];
-        return ({
-            primarySearchResults,
-            refiners,
+        const primaryQueryResult = response.RawSearchResults.PrimaryQueryResult;
+        const relevantResults = primaryQueryResult.RelevantResults;
+        const resultRows = relevantResults.Table.Rows;
+        const refinementResults = primaryQueryResult.RefinementResults;
+        let primarySearchResults = (resultRows["results"] ? resultRows["results"] : resultRows).map(row => {
+            let item: any = {};
+            let cells: Array<{ Key: string, Value: string, ValueType: string }> = row.Cells["results"] ? row.Cells["results"] : row.Cells;
+            return cells.reduce((obj, { Key, Value }) => {
+                obj[Key] = Value;
+                if (obj[Key] !== "" && (Key.indexOf("OWSNMBR") !== -1 || Key.indexOf("OWSCURR") !== -1)) {
+                    obj[Key] = parseInt(item[Key], 10);
+                }
+                return obj;
+            }, {});
         });
+        let refiners = [];
+        if (refinementResults) {
+            refiners = refinementResults.Refiners["results"] ? refinementResults.Refiners["results"] : refinementResults.Refiners;
+        }
+        return ({ primarySearchResults, refiners });
     } catch (err) {
         throw err;
     }
