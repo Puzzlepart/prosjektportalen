@@ -3,7 +3,7 @@ import * as queryString from "querystring";
 /**
  * Get query parameters using querystring
  */
-export function getQueryParams(): queryString.ParsedUrlQuery {
+export function getQueryParams(): any {
     return queryString.parse(document.location.search.substring(1));
 }
 
