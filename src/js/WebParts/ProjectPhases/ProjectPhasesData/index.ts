@@ -21,7 +21,7 @@ async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]
             termStore = taxSession.getDefaultSiteCollectionTermStore(),
             termSet = termStore.getTermSet(new SP.Guid(TermSetId)),
             terms = termSet.getAllTerms();
-        await ExecuteJsomQuery(jsomCtx, [terms]);
+        await ExecuteJsomQuery(jsomCtx, [{ clientObject: terms }]);
         const termsData = terms.get_data();
         const phases = termsData
             .map((term, index) => new PhaseModel(index, term, gatesEnabled))
