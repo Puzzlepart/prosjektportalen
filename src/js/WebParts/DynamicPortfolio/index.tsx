@@ -2,24 +2,12 @@ import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import {
-    IGroup,
-    DetailsList,
-} from "office-ui-fabric-react/lib/DetailsList";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { IGroup, DetailsList } from "office-ui-fabric-react/lib/DetailsList";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import {
-    ContextualMenuItemType,
-    IContextualMenuItem,
-} from "office-ui-fabric-react/lib/ContextualMenu";
+import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
-import {
-    MessageBar,
-    MessageBarType,
-} from "office-ui-fabric-react/lib/MessageBar";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import * as Util from "../../Util";
 import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
 import DynamicPortfolioFieldSelector from "./DynamicPortfolioFieldSelector";
@@ -55,9 +43,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         });
     }
 
-    /**
-     * Component did mount
-     */
     public async componentDidMount() {
         try {
             const data = await this.fetchInitialData();
@@ -74,26 +59,26 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * Renders the component
      */
     public render(): JSX.Element {
-        if (this.state.errorMessage) {
+        const { isLoading, errorMessage, isChangingView } = this.state;
+        if (errorMessage) {
             return (
                 <div>
-                    <MessageBar messageBarType={this.state.errorMessage.type}>{this.state.errorMessage.message}</MessageBar>
+                    <MessageBar messageBarType={errorMessage.type}>{errorMessage.message}</MessageBar>
                 </div>
             );
         }
-        if (this.state.isLoading) {
+        if (isLoading) {
             return (
                 <Spinner label={this.props.loadingText} type={SpinnerType.large} />
             );
         }
+        const loadingText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
         return (
             <div>
                 {this.renderCommandBar()}
-                {this.state.isChangingView
+                {isChangingView
                     ? <div style={{ paddingTop: 20 }}>
-                        <Spinner
-                            label={String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), this.state.isChangingView.name)}
-                            type={SpinnerType.large} />
+                        <Spinner label={loadingText} type={SpinnerType.large} />
                     </div>
                     : <div>
                         {this.renderSearchBox()}
