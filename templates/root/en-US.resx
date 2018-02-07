@@ -468,6 +468,9 @@
   <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
     <value>Extension</value>
   </data>
+  <data name="ContentTypes_Malfil_Name" xml:space="preserve">
+    <value>Template file</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
@@ -529,6 +532,9 @@
     <value>Create a new list item.</value>
   </data>
   <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_Malfil_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">
