@@ -1,4 +1,5 @@
 import RESOURCE_MANAGER from "../../@localization";
+import { Logger, LogLevel } from "sp-pnp-js";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
@@ -25,11 +26,14 @@ export async function GetDefaultTemplate(context: IProvisionContext): Promise<IP
             const defaultTemplateFile = context.rootWeb.getFileByServerRelativeUrl(fileRef);
             const defaultTemplateFileText = await defaultTemplateFile.getText();
             const defaultTemplateFileJson = JSON.parse(defaultTemplateFileText);
+            Logger.log({ message: "GetDefaultTemplate: Successfully retrieved default template", data: { fileRef }, level: LogLevel.Info });
             return { fileRef, schema: defaultTemplateFileJson };
         } else {
+            Logger.log({ message: "GetDefaultTemplate: No default template found", level: LogLevel.Info });
             throw new ProvisionError("No default template found.", "GetDefaultTemplate");
         }
     } catch (err) {
+        Logger.log({ message: "GetDefaultTemplate: Failed to retrieve default template", level: LogLevel.Error });
         throw new ProvisionError(err, "GetDefaultTemplate");
     }
 }
@@ -41,7 +45,6 @@ export async function GetDefaultTemplate(context: IProvisionContext): Promise<IP
  */
 export async function ApplyTemplate(context: IProvisionContext): Promise<void> {
     context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
-    const webProvisioner = new WebProvisioner(context.web);
     const callbackFunc = objHandler => context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), ApplyTemplateProgressMap[objHandler]);
     try {
         const template = {
@@ -58,9 +61,10 @@ export async function ApplyTemplate(context: IProvisionContext): Promise<void> {
                 Indexed: true,
             }],
         };
-        await webProvisioner.applyTemplate(template, callbackFunc);
-        return;
+        await new WebProvisioner(context.web).applyTemplate(template, callbackFunc);
+        Logger.log({ message: "ApplyTemplate: Template applied successfully", data: {}, level: LogLevel.Info });
     } catch (err) {
+        Logger.log({ message: "ApplyTemplate: Failed to apply template", data: {}, level: LogLevel.Error });
         throw new ProvisionError(err, "ApplyTemplate");
     }
 }
