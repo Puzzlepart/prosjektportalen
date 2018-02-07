@@ -1,5 +1,5 @@
 <pnp:TermGroups 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:TermGroup Name="Prosjektportalen" ID="c56bb677-f782-4cf6-a6d6-17685ee9f19d" Description=" ">
         <pnp:TermSets>
             <pnp:TermSet Name="Fase" ID="abcfc9d9-a263-4abb-8234-be973c46258a" Description=" ">

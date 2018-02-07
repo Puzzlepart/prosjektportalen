@@ -1,5 +1,5 @@
 <pnp:Files 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:File Src="StandardDocuments\Gevinstrealiseringsplan.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Gevinstrealiseringsplan" />
