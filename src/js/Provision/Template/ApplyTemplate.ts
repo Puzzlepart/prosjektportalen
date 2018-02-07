@@ -35,9 +35,9 @@ export default async function ApplyTemplate(context: IProvisionContext): Promise
             }],
         };
         await new WebProvisioner(context.web).applyTemplate(template, callbackFunc);
-        Logger.log({ message: "ApplyTemplate: Template applied successfully", data: {}, level: LogLevel.Info });
+        Logger.log({ message: "(ApplyTemplate) Template applied successfully", data: {}, level: LogLevel.Info });
     } catch (err) {
-        Logger.log({ message: "ApplyTemplate: Failed to apply template", data: {}, level: LogLevel.Error });
+        Logger.log({ message: "(ApplyTemplate) Failed to apply template", data: {}, level: LogLevel.Error });
         throw new ProvisionError(err, "ApplyTemplate");
     }
 }

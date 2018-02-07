@@ -16,7 +16,7 @@ export default async function GetTemplate(context: IProvisionContext): Promise<I
         template.Schema = JSON.parse(templateFileText);
         return template;
     } catch (err) {
-        Logger.log({ message: "GetTemplate: Failed to retrieve or parse template", level: LogLevel.Error });
+        Logger.log({ message: "(GetTemplate) Failed to retrieve or parse template", level: LogLevel.Error });
         throw new ProvisionError(err, "GetTemplate");
     }
 }

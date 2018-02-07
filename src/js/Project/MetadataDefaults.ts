@@ -23,11 +23,11 @@ const UpdateClientLocationBasedDefaults = (folderServerRelativeUrl: string, cont
     const folder = sp.web.getFolderByServerRelativeUrl(`${folderServerRelativeUrl}/Forms`);
     folder.files.add("client_LocationBasedDefaults.html", new Blob(contents, { type: "text/plain" }), true)
         .then(() => {
-            Logger.log({ message: `UpdateClientLocationBasedDefaults: Updated client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Info });
+            Logger.log({ message: `(UpdateClientLocationBasedDefaults) Updated client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Info });
             resolve();
         })
         .catch(reason => {
-            Logger.log({ message: `UpdateClientLocationBasedDefaults: Failed to update client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Error });
+            Logger.log({ message: `(UpdateClientLocationBasedDefaults) Failed to update client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Error });
             reject();
         });
 });
@@ -137,7 +137,7 @@ export async function EnsureLocationBasedMetadataDefaultsReceiverForLibrary(type
     }
     if (ctx.get_hasPendingRequest()) {
         await Util.executeJsom(ctx, [eventReceivers]);
-        Logger.log({ message: `EnsureLocationBasedMetadataDefaultsReceiverForLibrary: Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
+        Logger.log({ message: `(EnsureLocationBasedMetadataDefaultsReceiverForLibrary) Event receiver ${type} ensured`, data: {}, level: LogLevel.Info });
     }
     return;
 }
