@@ -1,0 +1,37 @@
+<pnp:ListInstance Title="{resource:Lists_Templates_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="Templates" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" EnableAttachments="false" Hidden="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Default="true" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views RemoveExistingViews="true">
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Templates/Forms/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="GtOrder" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="GtOrder" />
+                <FieldRef Name="GtIsEnabled" />
+                <FieldRef Name="LinkFilename" />
+                <FieldRef Name="Title" />
+                <FieldRef Name="Modified" />
+                <FieldRef Name="GtIsDefault" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
+    </pnp:FieldRefs>
+    <pnp:Security>
+        <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
+            <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
+            <pnp:RoleAssignment Principal="{associatedmembergroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+            <pnp:RoleAssignment Principal="{associatedvisitorgroup}" RoleDefinition="{resource:RoleDefinition_Read}" />
+        </pnp:BreakRoleInheritance>
+    </pnp:Security>
+</pnp:ListInstance>
