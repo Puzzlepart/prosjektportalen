@@ -36,7 +36,4 @@ export default async function ProvisionWeb(model: IProjectModel, progressCallbac
     }
 }
 
-export {
-    DoesWebExist,
-    IProvisionContext,
-};
+export { DoesWebExist, IProvisionContext };
