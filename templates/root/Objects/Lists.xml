@@ -34,4 +34,6 @@
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatusSections.xml" />
     <xi:include 
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Log.xml" />
+    <xi:include 
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Templates.xml" />
 </pnp:Lists>
