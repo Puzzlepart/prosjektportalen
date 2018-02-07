@@ -13,6 +13,14 @@
                         <pnp:Property Key="GtIsDefault" Value="1" />
                     </pnp:Properties>
                 </pnp:File>
+                <pnp:File Src="sitetemplates\1033\LiteTemplate.txt" Folder="SiteTemplates" Overwrite="true">
+                    <pnp:Properties>
+                        <pnp:Property Key="GtOrder" Value="20" />
+                        <pnp:Property Key="GtIsEnabled" Value="1" />
+                        <pnp:Property Key="Title" Value="Lite template" />
+                        <pnp:Property Key="GtIsDefault" Value="0" />
+                    </pnp:Properties>
+                </pnp:File>
                 <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
                 <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
                 <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
