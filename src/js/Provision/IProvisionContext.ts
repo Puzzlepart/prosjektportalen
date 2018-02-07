@@ -1,4 +1,3 @@
-import { Schema } from "sp-pnp-provisioning/lib/schema";
 import { Web } from "sp-pnp-js";
 import { IProjectModel } from "../Model/ProjectModel";
 import IProgressCallback from "./IProgressCallback";
