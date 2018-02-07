@@ -26,6 +26,12 @@ export default async function ApplyTemplate(context: IProvisionContext): Promise
                 Value: context.webProperties.pp_version,
                 Overwrite: true,
                 Indexed: true,
+            },
+            {
+                Key: "pp_template",
+                Value: context.template.Title,
+                Overwrite: true,
+                Indexed: true,
             }],
         };
         await new WebProvisioner(context.web).applyTemplate(template, callbackFunc);
