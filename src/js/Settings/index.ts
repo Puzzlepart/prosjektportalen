@@ -1,7 +1,4 @@
-import {
-    GetAllProperties,
-    SetProperty,
-} from "../Util/PropertyBag";
+import { GetAllProperties, SetProperty } from "../Util/PropertyBag";
 import { IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 
 export const SETTINGS_PROPERTY_KEY = "pp_settings";

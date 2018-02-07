@@ -6,8 +6,10 @@ import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
+import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
+import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
 import Extension from "../../Provision/Extensions/Extension";
 import ListConfig from "../../Provision/Data/Config/ListConfig";
 import * as ListDataConfig from "../../Provision/Data/Config";
@@ -40,12 +42,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             model: { Title: "", Description: "", Url: "", InheritPermissions: false },
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
-            config: {},
         };
-
-        this.toggleListContent = this.toggleListContent.bind(this);
-        this.toggleExtension = this.toggleExtension.bind(this);
-        this._onSubmit = this._onSubmit.bind(this);
+        this._onToggleListContent = this._onToggleListContent.bind(this);
+        this._onToggleExtension = this._onToggleExtension.bind(this);
+        this._onSubmitForm = this._onSubmitForm.bind(this);
     }
 
     public async componentDidMount() {
@@ -54,10 +54,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         model.IncludeContent = config.listData.filter(ld => ld.Default);
         model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
         model.InheritPermissions = config.inheritPermissions;
-        this.setState({ config, model });
+        this.setState({
+            config,
+            model,
+            selectedTemplate: config.defaultTemplate,
+        });
     }
 
-    public render(): JSX.Element {
+    public render(): React.ReactElement<INewProjectFormProps> {
         switch (this.state.provisioning.status) {
             case ProvisionStatus.Idle: {
                 switch (this.props.renderMode) {
@@ -120,33 +124,19 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-     * Get required config for the component
-     */
-    private async getRequiredConfig(): Promise<INewProjectFormConfig> {
-        const [listData, extensions, inheritPermissionsString] = await Promise.all([
-            ListDataConfig.RetrieveConfig(),
-            GetSelectableExtensions(),
-            GetSetting("PROJECT_INHERIT_PERMISSIONS", true),
-        ]);
-        const listDataKeys = Object.keys(listData);
-        const showSettings = this.props.showSettings && listDataKeys.length > 0;
-        return { showSettings, listData, extensions, inheritPermissions: inheritPermissionsString === "on" };
-    }
-
-    /**
      * Render inner (form inputs, setting section and footer)
      */
-    private renderInner() {
+    private renderInner(): React.ReactElement<INewProjectFormProps> {
         return (
             <div>
                 {this.renderFormInput()}
-                {this.state.config.showSettings && (
+                {(this.state.config && this.state.config.showSettings) && (
                     <NewProjectFormSettingsSection
                         className={this.props.settingsClassName}
                         listData={this.state.config.listData}
                         extensions={this.state.config.extensions}
-                        toggleListContentHandler={this.toggleListContent}
-                        toggleExtensionHandler={this.toggleExtension} />
+                        toggleListContentHandler={this._onToggleListContent}
+                        toggleExtensionHandler={this._onToggleExtension} />
                 )}
                 {this.renderFooter()}
             </div>
@@ -154,47 +144,63 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-     * Render form input field
+     * Render form input fields
      */
-    private renderFormInput() {
+    private renderFormInput(): React.ReactElement<INewProjectFormProps> {
+        const { inputContainerStyle } = this.props;
+        const { errorMessages, model, config } = this.state;
         return (
             <section>
-                <div style={this.props.inputContainerStyle}>
+                <div style={inputContainerStyle}>
                     <TextField
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
                         onChanged={newValue => this.onFormChange("Title", newValue)}
-                        errorMessage={this.state.errorMessages.Title} />
+                        errorMessage={errorMessages.Title} />
                 </div>
-                <div style={this.props.inputContainerStyle}>
+                <div style={inputContainerStyle}>
                     <TextField
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
                         onChanged={newValue => this.onFormChange("Description", newValue)}
-                        errorMessage={this.state.errorMessages.Description} />
+                        errorMessage={errorMessages.Description} />
                 </div>
-                <div style={this.props.inputContainerStyle}>
+                <div style={inputContainerStyle}>
                     <TextField
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
-                        value={this.state.model.Url}
+                        value={model.Url}
                         onChanged={newValue => this.onFormChange("Url", newValue)}
-                        errorMessage={this.state.errorMessages.Url} />
+                        errorMessage={errorMessages.Url} />
                 </div>
-            </section>
+                {this.state.config && (
+                    <div style={inputContainerStyle} hidden={config.templates.length < 2}>
+                        <Dropdown
+                            disabled={!config.siteTemplateSelectorEnabled}
+                            placeHolder="Områdemal"
+                            defaultSelectedKey={config.defaultTemplate ? config.defaultTemplate.FileRef : ""}
+                            options={config.templates.map(t => ({
+                                key: t.FileRef,
+                                text: t.Title,
+                                data: t,
+                            }))}
+                            onChanged={opt => this.setState({ selectedTemplate: opt.data })} />
+                    </div>
+                )}
+            </section >
         );
     }
 
     /**
      * Render footer
      */
-    private renderFooter() {
+    private renderFooter(): React.ReactElement<INewProjectFormProps> {
         switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
                     <div style={{ paddingTop: 15 }}>
                         <div style={{ float: "right" }}>
                             <PrimaryButton
-                                onClick={this._onSubmit}
+                                onClick={this._onSubmitForm}
                                 disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
                         </div>
                     </div>
@@ -204,9 +210,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 return (
                     <DialogFooter>
                         <PrimaryButton
-                            onClick={this._onSubmit}
+                            onClick={this._onSubmitForm}
                             disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
-                        <DefaultButton onClick={() => this.props.onDialogDismiss()}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
+                        <DefaultButton onClick={this.props.onDialogDismiss}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
                     </DialogFooter>
                 );
             }
@@ -219,7 +225,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {ListConfig} lc List config
      * @param {boolean} checked Is checked
      */
-    private toggleListContent(lc: ListConfig, checked: boolean) {
+    private _onToggleListContent(lc: ListConfig, checked: boolean) {
         this.setState(prevState => {
             let { IncludeContent } = prevState.model;
             checked ? IncludeContent.push(lc) : IncludeContent.splice(IncludeContent.indexOf(lc), 1);
@@ -233,7 +239,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {Extension} extension Extension
      * @param {boolean} checked Is checked
      */
-    private toggleExtension(extension: Extension, checked: boolean) {
+    private _onToggleExtension(extension: Extension, checked: boolean) {
         this.setState(prevState => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
@@ -266,14 +272,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                             Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
                         formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
-                        model: {
-                            ...prevState.model,
-                            Title: newValue,
-                            Url: url,
-                        },
+                        model: { ...prevState.model, Title: newValue, Url: url },
                     }));
                 } catch (err) {
-                    // Timeout cancelled
+                    throw err;
                 }
             }
                 break;
@@ -292,23 +294,17 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                             Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                         },
                         formValid: (prevState.model.Title.length >= self.props.titleMinLength) && !doesExist,
-                        model: {
-                            ...prevState.model,
-                            Url: newValue,
-                        },
+                        model: { ...prevState.model, Url: newValue },
                     }));
                 } catch (err) {
-                    // Timeout cancelled
+                    throw err;
                 }
             }
                 break;
             case "Description": {
                 this.setState(prevState => ({
                     formValid: (prevState.model.Title.length >= this.props.titleMinLength),
-                    model: {
-                        ...prevState.model,
-                        Description: newValue,
-                    },
+                    model: { ...prevState.model, Description: newValue },
                 }));
             }
                 break;
@@ -318,16 +314,46 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Submits a project model
      */
-    private async _onSubmit() {
+    private async _onSubmitForm() {
         this.setState({ provisioning: { status: ProvisionStatus.Creating } });
         try {
             const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {
                 this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } });
-            });
+            }, this.state.selectedTemplate);
             document.location.href = redirectUrl;
         } catch {
             this.setState({ provisioning: { status: ProvisionStatus.Error } });
         }
+    }
+
+    /**
+     * Get required config for the component
+     *
+     * @returns {INewProjectFormConfig} An object of interface INewProjectFormConfig
+     */
+    private async getRequiredConfig(): Promise<INewProjectFormConfig> {
+        const [listData, extensions, templates, inheritPermissionsString, siteTemplateSelectorEnabledString] = await Promise.all([
+            ListDataConfig.RetrieveConfig(),
+            GetSelectableExtensions(),
+            GetSelectableTemplates(),
+            GetSetting("PROJECT_INHERIT_PERMISSIONS", true),
+            GetSetting("SITE_TEMPLATE_SELECTOR_ENABLED", true),
+        ]);
+        let defaultTemplate;
+        const listDataKeys = Object.keys(listData);
+        const showSettings = this.props.showSettings && listDataKeys.length > 0;
+        if (templates.length > 0) {
+            [defaultTemplate] = templates.filter(t => t.GtIsDefault);
+        }
+        return {
+            showSettings,
+            listData,
+            extensions,
+            templates,
+            defaultTemplate,
+            inheritPermissions: inheritPermissionsString === "on",
+            siteTemplateSelectorEnabled: siteTemplateSelectorEnabledString === "on",
+        };
     }
 }
 
