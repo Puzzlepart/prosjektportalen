@@ -912,7 +912,6 @@
           "<Field Type=\"Lookup\" DisplayName=\"Relevant kommunikasjonselement\" List=\"{listid:Kommunikasjonsplan}\" ShowField=\"Title\" ID=\"{087dae25-b007-4e58-91b4-347dde464840}\" StaticName=\"GtProjectTaskComElement\" InternalName=\"GtProjectTaskComElement\" />",
           "<Field Type=\"Lookup\" DisplayName=\"Relevant usikkerhet\" List=\"{listid:Usikkerhet}\" ShowField=\"Title\" ID=\"{920b385c-756f-49eb-98e7-4c3ebf15b7f4}\" StaticName=\"GtProjectTaskRisk\" InternalName=\"GtProjectTaskRisk\" />",
           "<Field Type=\"Lookup\" DisplayName=\"Relevant leveranse\" List=\"{listid:Prosjektleveranser}\" ShowField=\"Title\" ID=\"{a3ab9d99-78da-436d-a299-5854340a504f}\" StaticName=\"GtProjectTaskProduct\" InternalName=\"GtProjectTaskProduct\" />",
-          "<Field Type=\"Lookup\" DisplayName=\"Relevant endring\" List=\"{listid:Endringsanalyse}\" ShowField=\"Title\" ID=\"{2b55bfc2-44c5-4b67-92a7-9b43bffbceb4}\" StaticName=\"GtProjectTaskChange\" InternalName=\"GtProjectTaskChange\" />"
         ],
         "Views": [
           {
@@ -937,8 +936,6 @@
             "Title": "Relevante koblinger",
             "ViewFields": [
               "LinkTitle",
-              "GtProjectTaskChange",
-              "GtProjectTaskGain",
               "GtProjectTaskComElement",
               "GtProjectTaskProduct",
               "GtProjectTaskRisk"
@@ -947,25 +944,6 @@
               "RowLimit": 30,
               "Paged": true,
               "ViewQuery": ""
-            }
-          },
-          {
-            "Title": "Gevinstoppgaver",
-            "ViewFields": [
-              "Checkmark",
-              "LinkTitle",
-              "StartDate",
-              "DueDate",
-              "AssignedTo",
-              "GtProjectPhase",
-              "Modified",
-              "Editor",
-              "GtProjectTaskGain"
-            ],
-            "AdditionalSettings": {
-              "RowLimit": 30,
-              "Paged": true,
-              "ViewQuery": "<Where><IsNotNull><FieldRef Name=\"GtProjectTaskGain\" /></IsNotNull></Where>"
             }
           }
         ]

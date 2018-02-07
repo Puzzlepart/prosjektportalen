@@ -911,9 +911,7 @@
             "Fields": [
                 "<Field Type=\"Lookup\" DisplayName=\"Relevant communication element\" List=\"{listid:Communication Plan}\" ShowField=\"Title\" ID=\"{087dae25-b007-4e58-91b4-347dde464840}\" StaticName=\"GtProjectTaskComElement\" InternalName=\"GtProjectTaskComElement\" />",
                 "<Field Type=\"Lookup\" DisplayName=\"Relevant risk\" List=\"{listid:Risks}\" ShowField=\"Title\" ID=\"{920b385c-756f-49eb-98e7-4c3ebf15b7f4}\" StaticName=\"GtProjectTaskRisk\" InternalName=\"GtProjectTaskRisk\" />",
-                "<Field Type=\"Lookup\" DisplayName=\"Relevant product\" List=\"{listid:Project Deliveries}\" ShowField=\"Title\" ID=\"{a3ab9d99-78da-436d-a299-5854340a504f}\" StaticName=\"GtProjectTaskProduct\" InternalName=\"GtProjectTaskProduct\" />",
-                "<Field Type=\"Lookup\" DisplayName=\"Relevant change\" List=\"{listid:Change Analysis}\" ShowField=\"Title\" ID=\"{2b55bfc2-44c5-4b67-92a7-9b43bffbceb4}\" StaticName=\"GtProjectTaskChange\" InternalName=\"GtProjectTaskChange\" />"
-            ],
+                "<Field Type=\"Lookup\" DisplayName=\"Relevant product\" List=\"{listid:Project Deliveries}\" ShowField=\"Title\" ID=\"{a3ab9d99-78da-436d-a299-5854340a504f}\" StaticName=\"GtProjectTaskProduct\" InternalName=\"GtProjectTaskProduct\" />"            ],
             "Views": [
                 {
                     "Title": "All Tasks",
@@ -937,8 +935,6 @@
                     "Title": "Relevant links",
                     "ViewFields": [
                         "LinkTitle",
-                        "GtProjectTaskChange",
-                        "GtProjectTaskGain",
                         "GtProjectTaskComElement",
                         "GtProjectTaskProduct",
                         "GtProjectTaskRisk"
@@ -947,25 +943,6 @@
                         "RowLimit": 30,
                         "Paged": true,
                         "ViewQuery": ""
-                    }
-                },
-                {
-                    "Title": "Benefit tasks",
-                    "ViewFields": [
-                        "Checkmark",
-                        "LinkTitle",
-                        "StartDate",
-                        "DueDate",
-                        "AssignedTo",
-                        "GtProjectPhase",
-                        "Modified",
-                        "Editor",
-                        "GtProjectTaskGain"
-                    ],
-                    "AdditionalSettings": {
-                        "RowLimit": 30,
-                        "Paged": true,
-                        "ViewQuery": "<Where><IsNotNull><FieldRef Name=\"GtProjectTaskGain\" /></IsNotNull></Where>"
                     }
                 }
             ]
