@@ -468,8 +468,8 @@
   <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
     <value>Utvidelse</value>
   </data>
-  <data name="ContentTypes_Malfil_Name" xml:space="preserve">
-    <value>Malfil</value>
+  <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
+    <value>Områdemal</value>
   </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
@@ -534,7 +534,7 @@
   <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="ContentTypes_Malfil_Description" xml:space="preserve">
+  <data name="ContentTypes_SiteTemplate_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">

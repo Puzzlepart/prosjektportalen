@@ -322,7 +322,7 @@
             <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Name="{resource:ContentTypes_Malfil_Name}" Description="{resource:ContentTypes_Malfil_Description}" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Name="{resource:ContentTypes_SiteTemplate_Name}" Description="{resource:ContentTypes_SiteTemplate_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
             <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="GtIsEnabled" />
