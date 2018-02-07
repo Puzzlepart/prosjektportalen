@@ -9,7 +9,7 @@
                     <pnp:Properties>
                         <pnp:Property Key="GtOrder" Value="10" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
-                        <pnp:Property Key="Title" Value="FullTemplate" />
+                        <pnp:Property Key="Title" Value="Fullstendig mal" />
                         <pnp:Property Key="GtIsDefault" Value="1" />
                     </pnp:Properties>
                 </pnp:File>
@@ -17,7 +17,7 @@
                     <pnp:Properties>
                         <pnp:Property Key="GtOrder" Value="20" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
-                        <pnp:Property Key="Title" Value="LiteTemplate" />
+                        <pnp:Property Key="Title" Value="Forenklet mal" />
                         <pnp:Property Key="GtIsDefault" Value="0" />
                     </pnp:Properties>
                 </pnp:File>
