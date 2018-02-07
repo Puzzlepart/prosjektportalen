@@ -1,2 +1,2 @@
 <pnp:ComposedLook Name="PP Default" ColorFile="{themecatalog}/15/Default.spcolor" FontFile="{themecatalog}/15/SharePointPersonality.spfont" BackgroundFile="" Version="0" 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema" />
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema" />

@@ -1,5 +1,5 @@
 <pnp:Features 
-	xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+	xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
 	<pnp:WebFeatures>
 		<pnp:Feature ID="00bfea71-d8fe-4fec-8dad-01c19a6e4053" Description="Wiki Page Home Page Feature" />
 		<pnp:Feature ID="15a572c6-e545-4d32-897a-bab6f5846e18" Description="Sitefeed" />
