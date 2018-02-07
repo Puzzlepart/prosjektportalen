@@ -1,5 +1,5 @@
 <pnp:Preferences 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:Parameters>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
     </pnp:Parameters>

@@ -1,5 +1,5 @@
 <pnp:ListInstance Title="{resource:Lists_DynamicPortfolioFields_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioFields" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x0100B98DDFB576777B409846155F0D450EB401" Default="true" />
     </pnp:ContentTypeBindings>

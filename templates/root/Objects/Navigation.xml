@@ -1,5 +1,5 @@
 <pnp:Navigation 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <pnp:GlobalNavigation NavigationType="Structural">
         <pnp:StructuralNavigation RemoveExistingNodes="true">
             <pnp:NavigationNode Title="{res:Navigation_PortfolioSite_Title}" Url="{sitecollection}" />

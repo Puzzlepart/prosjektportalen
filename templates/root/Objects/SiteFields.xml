@@ -1,5 +1,5 @@
 <pnp:SiteFields 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
     <Field ID="{0e82c395-9ed9-43f9-871a-208215b18558}" Name="GtSortOrder" DisplayName="{resource:SiteFields_GtSortOrder_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtSortOrder_Description}" StaticName="GtSortOrder"></Field>
     <Field ID="{b5932b1d-bee4-410c-aac2-54a7cd9d5381}" Name="GtStatusRiskComment" DisplayName="{resource:SiteFields_GtStatusRiskComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusRiskComment_Description}" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusRiskComment"></Field>
     <Field ID="{dc856c1d-0b98-4d38-9918-d7068f74bd8b}" Name="GtProductAcceptanceResponsible" DisplayName="{resource:SiteFields_GtProductAcceptanceResponsible_DisplayName}" Type="User" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProductAcceptanceResponsible_Description}" StaticName="GtProductAcceptanceResponsible"></Field>
