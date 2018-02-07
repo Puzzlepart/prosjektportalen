@@ -978,6 +978,9 @@
   <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
     <value>Rekkefølge</value>
   </data>
+  <data name="SiteFields_GtIsDefault_DisplayName" xml:space="preserve">
+    <value>Standard</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Søkespørring</value>
   </data>
@@ -1373,6 +1376,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtIsDefault_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">

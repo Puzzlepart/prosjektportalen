@@ -981,6 +981,9 @@
   <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="SiteFields_GtIsDefault_DisplayName" xml:space="preserve">
+    <value>Default</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Query</value>
   </data>
@@ -1372,6 +1375,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtIsDefault_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
