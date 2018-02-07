@@ -156,6 +156,9 @@
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Utvidelser</value>
   </data>
+  <data name="Lists_Templates_Title" xml:space="preserve">
+    <value>Maler</value>
+  </data>
   <data name="Lists_QuickLinks_Title" xml:space="preserve">
     <value>Lenker</value>
   </data>

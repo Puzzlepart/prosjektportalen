@@ -5,7 +5,6 @@
             <ViewFields>
                 <FieldRef Name="LinkFilename" />
                 <FieldRef Name="Title" />
-                <FieldRef Name="Comments" />
                 <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
@@ -16,7 +15,6 @@
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
         <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
-        <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" DisplayName="{resource:SiteFields_Description_DisplayName}" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
