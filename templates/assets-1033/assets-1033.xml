@@ -5,7 +5,7 @@
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS-1033" Version="0">
             <pnp:Files>
-                <pnp:File Src="sitetemplates\1033\FullTemplate.txt" Folder="Templates" Overwrite="true">
+                <pnp:File Src="sitetemplates\1033\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
                     <pnp:Properties>
                         <pnp:Property Key="GtOrder" Value="10" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
