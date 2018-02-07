@@ -156,8 +156,8 @@
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Utvidelser</value>
   </data>
-  <data name="Lists_Templates_Title" xml:space="preserve">
-    <value>Maler</value>
+  <data name="Lists_SiteTemplates_Title" xml:space="preserve">
+    <value>Områdemaler</value>
   </data>
   <data name="Lists_QuickLinks_Title" xml:space="preserve">
     <value>Lenker</value>
@@ -2478,6 +2478,9 @@
   </data>
   <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
     <value>Prosjektportalen - Statusseksjoner</value>
+  </data>
+  <data name="SiteSettings_Link_SiteTemplates" xml:space="preserve">
+    <value>Prosjektportalen - Områdemaler</value>
   </data>
   <data name="SiteSettings_Link_Log" xml:space="preserve">
     <value>Prosjektportalen - Logg</value>

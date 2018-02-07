@@ -93,7 +93,7 @@ function Start-Install() {
     if (-not $Upgrade.IsPresent) {
         Write-Host "############################################################################" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
-        Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+        Write-Host "Installing Prosjektportalen ({package-version})" -ForegroundColor Green
         Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
