@@ -193,6 +193,7 @@ function Start-Install() {
             Write-Host
             Write-Host "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
             Write-Host $error[0] -ForegroundColor Red
+            exit 1 
         }
     }
 
@@ -209,6 +210,7 @@ function Start-Install() {
             Write-Host
             Write-Host "Error installing default config to $Url" -ForegroundColor Red
             Write-Host $error[0] -ForegroundColor Red
+            exit 1 
         }
     }
 
@@ -236,6 +238,7 @@ function Start-Install() {
                 Write-Host
                 Write-Host "Error installing extensions to $Url" -ForegroundColor Red
                 Write-Host $error[0] -ForegroundColor Red
+                exit 1 
             }
         }
     }
