@@ -325,6 +325,7 @@
     <pnp:ContentType ID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Name="{resource:ContentTypes_Malfil_Name}" Description="{resource:ContentTypes_Malfil_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
+            <pnp:FieldRef ID="c69cc4de-f0fa-43aa-a5cc-2a9ae3a2ef9a" Name="GtIsDefault" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
         </pnp:FieldRefs>
