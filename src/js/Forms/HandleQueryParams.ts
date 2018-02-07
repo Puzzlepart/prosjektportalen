@@ -1,7 +1,4 @@
-import {
-    Logger,
-    LogLevel,
-} from "sp-pnp-js";
+import { Logger, LogLevel } from "sp-pnp-js";
 import * as FormUtils from "./FormUtils";
 
 /**
@@ -26,6 +23,4 @@ export default function HandleQueryParams() {
         Logger.log({ message: "(HandleQueryParams) HideViewSelector specified in URL, hiding .ms-csrlistview-controldiv", level: LogLevel.Info, data: {} });
         (document.querySelector(".ms-csrlistview-controldiv") as any).style.display = "none";
     }
-};
-
-
+}
