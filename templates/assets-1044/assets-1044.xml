@@ -5,6 +5,7 @@
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS-1044" Version="0">
             <pnp:Files>
+                <pnp:File Src="templates\1044\FullTemplate.txt" Folder="Templates" Overwrite="true" />
                 <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
                 <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
                 <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
