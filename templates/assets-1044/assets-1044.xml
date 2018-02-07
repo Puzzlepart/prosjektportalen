@@ -10,6 +10,7 @@
                         <pnp:Property Key="GtOrder" Value="10" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
                         <pnp:Property Key="Title" Value="Fullstendig mal" />
+                        <pnp:Property Key="Comments" Value="Malen inneholder alle lister, felter og sider." />
                         <pnp:Property Key="GtIsDefault" Value="1" />
                     </pnp:Properties>
                 </pnp:File>
@@ -18,6 +19,7 @@
                         <pnp:Property Key="GtOrder" Value="20" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
                         <pnp:Property Key="Title" Value="Forenklet mal" />
+                        <pnp:Property Key="Comments" Value="Dette er en forenklet versjon som ikke inneholder listene for gevinstarbeid." />
                         <pnp:Property Key="GtIsDefault" Value="0" />
                     </pnp:Properties>
                 </pnp:File>

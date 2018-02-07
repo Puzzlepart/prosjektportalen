@@ -7,6 +7,7 @@ import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button"
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
@@ -148,7 +149,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     private renderFormInput(): React.ReactElement<INewProjectFormProps> {
         const { inputContainerStyle } = this.props;
-        const { errorMessages, model, config } = this.state;
+        const { errorMessages, model, selectedTemplate, config } = this.state;
         return (
             <section>
                 <div style={inputContainerStyle}>
@@ -176,14 +177,12 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <div style={inputContainerStyle} hidden={config.templates.length < 2}>
                         <Dropdown
                             disabled={!config.siteTemplateSelectorEnabled}
-                            placeHolder="Områdemal"
                             defaultSelectedKey={config.defaultTemplate ? config.defaultTemplate.FileRef : ""}
-                            options={config.templates.map(t => ({
-                                key: t.FileRef,
-                                text: t.Title,
-                                data: t,
-                            }))}
+                            options={config.templates.map(t => ({ key: t.FileRef, text: t.Title, data: t }))}
                             onChanged={opt => this.setState({ selectedTemplate: opt.data })} />
+                        <div style={{ marginTop: 10 }} hidden={!selectedTemplate.Comments || !config.siteTemplateSelectorEnabled}>
+                            <MessageBar><i>{selectedTemplate.Comments}</i></MessageBar>
+                        </div>
                     </div>
                 )}
             </section >

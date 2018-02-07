@@ -11,7 +11,7 @@ export default async function GetSelectableTemplates(): Promise<ITemplateFile[]>
     try {
         const selectableTemplates = await templatesLib
             .items
-            .select("Title", "FileRef", "GtIsDefault")
+            .select("Title", "Comments", "FileRef", "GtIsDefault")
             .filter("GtIsEnabled eq 1")
             .orderBy("GtOrder")
             .get();
