@@ -1,6 +1,6 @@
 <pnp:Files 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:File Src="SitePages\Home.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\Home.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:PortfolioPage_Homepage_Title}" />
         </pnp:Properties>
@@ -37,7 +37,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\ExperienceLog.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\ExperienceLog.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_ExperienceLog_Title}" />
         </pnp:Properties>
@@ -50,7 +50,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_Portfolio_Title}" />
         </pnp:Properties>
@@ -76,7 +76,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:SiteSettings_Link_Settings}" />
         </pnp:Properties>
@@ -89,7 +89,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:NewProjectForm_Title}" />
         </pnp:Properties>
