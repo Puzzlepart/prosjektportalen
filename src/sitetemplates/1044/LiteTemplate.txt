@@ -1,0 +1,1114 @@
+{
+  "Files": [
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/SitePage.txt",
+      "Url": "ProjectHome.aspx",
+      "Overwrite": true,
+      "Properties": {
+        "Title": "Hjemmeside",
+        "ContentTypeId": "0x010109010058561F86D956412B9DD7957BBCD67AAE01"
+      },
+      "RemoveExistingWebParts": true,
+      "WebParts": [
+        {
+          "Title": "Prosjektets faser",
+          "Zone": "LeftColumn",
+          "Order": 0,
+          "Contents": {
+            "FileSrc": "{wpgallery}/ProjectPhases.webpart"
+          }
+        },
+        {
+          "Title": "Tidslinje",
+          "Zone": "LeftColumn",
+          "Order": 1,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Tidslinje"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver/AllItems.aspx"
+            },
+            {
+              "name": "CurrentTaskListWebAddress",
+              "type": "string",
+              "value": "{site}"
+            },
+            {
+              "name": "PageAddress",
+              "type": "string",
+              "value": "{site}"
+            },
+            {
+              "name": "ViewName",
+              "type": "string",
+              "value": "Tidslinje"
+            },
+            {
+              "name": "TimelineType",
+              "type": "string",
+              "value": "TaskListTimeline"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{wpgallery}/Timeline.webpart"
+          }
+        },
+        {
+          "Title": "Dokumenter (gjeldende fase)",
+          "Zone": "LeftColumn",
+          "Order": 2,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Dokumenter (gjeldende fase)"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Delte dokumenter"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Delte dokumenter/Forms/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Dokumenter",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "DocIcon",
+                "LinkFilename",
+                "Modified",
+                "Editor"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>",
+                "Scope": 0
+              }
+            }
+          }
+        },
+        {
+          "Title": "Om prosjektet",
+          "Zone": "RightColumn",
+          "Order": 0,
+          "Contents": {
+            "FileSrc": "{wpgallery}/ProjectInfo.webpart"
+          }
+        },
+        {
+          "Title": "Områdefeed",
+          "Zone": "RightColumn",
+          "Order": 1,
+          "Contents": {
+            "FileSrc": "{wpgallery}/SiteFeed.dwp"
+          }
+        },
+        {
+          "Title": "Usikkerhet (gjeldende fase)",
+          "Zone": "RightColumn",
+          "Order": 2,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Usikkerhet (gjeldende fase)"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Usikkerhet"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Usikkerhet/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Usikkerhet",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "LinkTitle",
+                "GtRiskProximity",
+                "GtRiskFactor"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/SitePage.txt",
+      "Url": "Nofilter.aspx",
+      "Overwrite": true,
+      "WebParts": [
+        {
+          "Title": "Oppgaver",
+          "Zone": "LeftColumn",
+          "Order": 0,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Oppgaver"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Oppgaver",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "Checkmark",
+                "LinkTitle",
+                "StartDate",
+                "DueDate",
+                "AssignedTo"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+              }
+            }
+          }
+        },
+        {
+          "Title": "Dokumenter",
+          "Zone": "LeftColumn",
+          "Order": 1,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Dokumenter"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Delte dokumenter"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Delte dokumenter/Forms/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Dokumenter",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "DocIcon",
+                "LinkFilename",
+                "Modified",
+                "Editor"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+              }
+            }
+          }
+        },
+        {
+          "Title": "Områdefeed",
+          "Zone": "RightColumn",
+          "Order": 0,
+          "Contents": {
+            "FileSrc": "{wpgallery}/SiteFeed.dwp"
+          }
+        },
+        {
+          "Title": "Usikkerhet",
+          "Zone": "RightColumn",
+          "Order": 1,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Usikkerhet"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Usikkerhet"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Usikkerhet/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Usikkerhet",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "LinkTitle",
+                "GtRiskProbability",
+                "GtRiskConsequence",
+                "GtRiskProximity",
+                "GtRiskFactor"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/SitePage.txt",
+      "Url": "Assigned.aspx",
+      "Overwrite": true,
+      "WebParts": [
+        {
+          "Title": "Mine oppgaver",
+          "Zone": "LeftColumn",
+          "Order": 0,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Mine oppgaver"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Oppgaver",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "Checkmark",
+                "LinkTitle",
+                "GtProjectPhase",
+                "StartDate",
+                "DueDate"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 10,
+                "Paged": true,
+                "ViewQuery": "<Where><Eq><FieldRef Name='AssignedTo' /><Value Type='Integer'><UserID/></Value></Eq></Where><OrderBy><FieldRef Name='DueDate' /></OrderBy>"
+              }
+            }
+          }
+        },
+        {
+          "Title": "Mine kommunikasjonselementer",
+          "Zone": "RightColumn",
+          "Order": 0,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Mine kommunikasjonselementer"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Kommunikasjonsplan"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Kommunikasjonsplan/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Kommunikasjonsplan",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "LinkTitle",
+                "GtProjectPhase",
+                "GtActionDate",
+                "GtCommunicationTarget"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 30,
+                "Paged": true,
+                "ViewQuery": "<Where><Eq><FieldRef Name='GtActionResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where>"
+              }
+            }
+          }
+        },
+        {
+          "Title": "Prosjektleveranser jeg har ansvar for",
+          "Zone": "RightColumn",
+          "Order": 0,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Prosjektleveranser jeg har ansvar for"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Prosjektleveranser"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Prosjektleveranser/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Prosjektleveranser",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "LinkTitle",
+                "GtProductPhase",
+                "GtProductInteressent",
+                "GtProductAcceptanceMethod",
+                "GtProductAcceptanceDate"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 30,
+                "Paged": true,
+                "ViewQuery": "<Where><Or><Eq><FieldRef Name='GtProductQualityResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq><Eq><FieldRef Name='GtProductAcceptanceResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Or></Where>"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/SitePage.txt",
+      "Url": "Mom.aspx",
+      "Overwrite": true,
+      "WebParts": [
+        {
+          "Title": "Siste oppgaver",
+          "Zone": "LeftColumn",
+          "Order": 0,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Siste oppgaver"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Oppgaver/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Oppgaver",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "Checkmark",
+                "LinkTitle",
+                "StartDate",
+                "DueDate",
+                "AssignedTo"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 30,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+              }
+            }
+          }
+        },
+        {
+          "Title": "Siste informasjonselementer",
+          "Zone": "RightColumn",
+          "Order": 1,
+          "PropertyOverrides": [
+            {
+              "name": "Title",
+              "type": "string",
+              "value": "Siste informasjonselementer"
+            },
+            {
+              "name": "ListUrl",
+              "type": "string",
+              "value": "{site}/Lists/Informasjon"
+            },
+            {
+              "name": "TitleUrl",
+              "type": "string",
+              "value": "{site}/Lists/Informasjon/AllItems.aspx"
+            }
+          ],
+          "Contents": {
+            "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+          },
+          "ListView": {
+            "List": "Informasjon",
+            "View": {
+              "Title": "",
+              "ViewFields": [
+                "LinkTitle",
+                "GtProjectInfoDescription"
+              ],
+              "AdditionalSettings": {
+                "RowLimit": 30,
+                "Paged": true,
+                "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/SitePage_OneColumn.txt",
+      "Url": "BenefitsOverview.aspx",
+      "Overwrite": true,
+      "Properties": {
+        "Title": "Gevinstoversikt"
+      },
+      "RemoveExistingWebParts": true,
+      "WebParts": [
+        {
+          "Title": "Gevinstoversikt",
+          "Zone": "LeftColumn",
+          "Order": 0,
+          "Contents": {
+            "Xml": "<webParts>\n    <webPart\n        xmlns=\"http://schemas.microsoft.com/WebPart/v3\">\n        <metaData>\n            <type name=\"Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c\" />\n            <importErrorMessage>Kan ikke importere denne webdelen.</importErrorMessage>\n        </metaData>\n        <data>\n            <properties>\n                <property name=\"Title\" type=\"string\">Gevinstoversikt</property>\n                <property name=\"ChromeType\" type=\"chrometype\">Default</property>\n                <property name=\"ChromeState\" type=\"chromestate\">Normal</property>\n                <property name=\"Content\" type=\"string\">&lt;div id=\"pp-benefitsoverview\"&gt;&lt;/div&gt;</property>\n            </properties>\n        </data>\n    </webPart>\n</webParts>"
+          }
+        }
+      ]
+    },
+    {
+      "Folder": "SitePages",
+      "Src": "{sitecollection}/Resources/ProjectStatus.txt",
+      "Url": "ProjectStatus.aspx",
+      "Overwrite": true,
+      "Properties": {
+        "Title": "Prosjektstatus"
+      }
+    }
+  ],
+  "Lists": [
+    {
+      "Title": "Områdesider",
+      "Description": "",
+      "Template": 119,
+      "ContentTypesEnabled": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010109010058561F86D956412B9DD7957BBCD67AAE01"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      }
+    },
+    {
+      "Title": "Fasesjekkliste",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070204"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectPhase",
+            "GtChecklistStatus",
+            "GtComment"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 50,
+            "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtSortOrder\" />\n              <FieldRef Name=\"ID\" />\n            </OrderBy>\n            <Where>\n                <Neq>\n                    <FieldRef Name=\"GtChecklistStatus\" />\n                    <Value Type=\"Text\">Arkivert</Value>\n                </Neq>\n            </Where>"
+          }
+        },
+        {
+          "Title": "Arkivert",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectPhase",
+            "GtComment"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 50,
+            "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtSortOrder\" />\n              <FieldRef Name=\"ID\" />\n            </OrderBy>\n            <Where>\n                <Eq>\n                    <FieldRef Name=\"GtChecklistStatus\" />\n                    <Value Type=\"Text\">Arkivert</Value>\n                </Eq>\n            </Where>"
+          }
+        },
+        {
+          "Title": "Per status",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectPhase",
+            "GtComment"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 50,
+            "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\">\n              <FieldRef Name=\"GtChecklistStatus\" Ascending=\"FALSE\" />\n            </GroupBy>\n            <OrderBy>\n                <FieldRef Name=\"GtSortOrder\" />\n                <FieldRef Name=\"ID\" />\n            </OrderBy>"
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Informasjon",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070207"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectInfoDescription"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Interessentregister",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070202"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtStakeholderGroup",
+            "GtStakeholderContext",
+            "GtStakeholderStrategy",
+            "GtStakeholderInterest",
+            "GtStakeholderInfluence",
+            "GtStakeholderInfluencePossibilty",
+            "GtStakeholderActions"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Kommunikasjonsplan",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070203"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Fields": [
+        "<Field Type=\"LookupMulti\" DisplayName=\"Målgruppe\" List=\"{listid:Interessentregister}\" ShowField=\"Title\" ID=\"{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}\" Name=\"GtCommunicationTarget\" StaticName=\"GtCommunicationTarget\" InternalName=\"GtCommunicationTarget\" Mult=\"TRUE\" />"
+      ],
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectPhase",
+            "GtActionDate",
+            "GtActionResponsible"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 10,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Milepæler",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x01006E5BC3A4008144DC8ACEC0107AFC999A"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtMilestonePlannedDate",
+            "GtMilestoneActualDate",
+            "GtMilestoneStatus",
+            "GtMilestoneComment"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtMilestonePlannedDate\" Ascending=\"TRUE\" />\n            </OrderBy>"
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Prosjektlogg",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070206"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Fields": [
+        "<Field Type=\"Lookup\" DisplayName=\"Påvirker leveranse\" List=\"{listid:Prosjektleveranser}\" ShowField=\"Title\" ID=\"{022cc93f-13df-4420-bd47-55e4fdae5d18}\" StaticName=\"GtProjectLogProductLookup\" InternalName=\"GtProjectLogProductLookup\" />"
+      ],
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectLogType",
+            "GtProjectLogReporter",
+            "GtProjectLogResponsible",
+            "GtProjectLogConsequence",
+            "GtProjectLogRecommendation",
+            "GtProjectLogExperience"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Prosjektleveranser",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070205"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Fields": [
+        "<Field Type=\"LookupMulti\" DisplayName=\"Interessent(er)\" List=\"{listid:Interessentregister}\" ShowField=\"Title\" ID=\"{6d90e0b6-73e6-48fb-aa1e-b897b214f934}\" Name=\"GtProductInteressent\" StaticName=\"GtProductInteressent\" InternalName=\"GtProductInteressent\" Mult=\"TRUE\" />"
+      ],
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProductPhase",
+            "GtProductQualityResponsible",
+            "GtProductAcceptanceMethod",
+            "GtProductAcceptanceResponsible",
+            "GtProductAcceptanceDate"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        },
+        {
+          "Title": "Leveransefase",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProductQualityResponsible",
+            "GtProductAcceptanceMethod",
+            "GtProductAcceptanceResponsible",
+            "GtProductAcceptanceDate"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\">\n            <FieldRef Name=\"GtProductPhase\" />\n          </GroupBy>"
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Usikkerhet",
+      "Description": "",
+      "Template": 100,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D566346483107020101"
+        },
+        {
+          "ContentTypeID": "0x010088578E7470CC4AA68D566346483107020102"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle elementer",
+          "ViewFields": [
+            "ID",
+            "LinkTitle",
+            "GtRiskProximity",
+            "GtRiskProbability",
+            "GtRiskConsequence",
+            "GtRiskFactor",
+            "GtRiskProbabilityPostAction",
+            "GtRiskConsequencePostAction",
+            "GtRiskFactorPostAction",
+            "GtRiskStrategy"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Oppgaver",
+      "Description": "",
+      "Template": 171,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010800233B015F95174C9A8EB505493841DE8D"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Fields": [
+        "<Field Type=\"Lookup\" DisplayName=\"Relevant kommunikasjonselement\" List=\"{listid:Kommunikasjonsplan}\" ShowField=\"Title\" ID=\"{087dae25-b007-4e58-91b4-347dde464840}\" StaticName=\"GtProjectTaskComElement\" InternalName=\"GtProjectTaskComElement\" />",
+        "<Field Type=\"Lookup\" DisplayName=\"Relevant usikkerhet\" List=\"{listid:Usikkerhet}\" ShowField=\"Title\" ID=\"{920b385c-756f-49eb-98e7-4c3ebf15b7f4}\" StaticName=\"GtProjectTaskRisk\" InternalName=\"GtProjectTaskRisk\" />",
+        "<Field Type=\"Lookup\" DisplayName=\"Relevant leveranse\" List=\"{listid:Prosjektleveranser}\" ShowField=\"Title\" ID=\"{a3ab9d99-78da-436d-a299-5854340a504f}\" StaticName=\"GtProjectTaskProduct\" InternalName=\"GtProjectTaskProduct\" />"
+      ],
+      "Views": [
+        {
+          "Title": "Alle oppgaver",
+          "ViewFields": [
+            "Checkmark",
+            "LinkTitle",
+            "StartDate",
+            "DueDate",
+            "AssignedTo",
+            "GtProjectPhase",
+            "Modified",
+            "Editor"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        },
+        {
+          "Title": "Relevante koblinger",
+          "ViewFields": [
+            "LinkTitle",
+            "GtProjectTaskComElement",
+            "GtProjectTaskProduct",
+            "GtProjectTaskRisk"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Møtekalender",
+      "Description": "",
+      "Template": 106,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010200A2B2AC17A2244B8590398A9D1E7E3E3701"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      }
+    },
+    {
+      "Title": "Dokumenter",
+      "Description": "",
+      "Template": 101,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle dokumenter",
+          "ViewFields": [
+            "DocIcon",
+            "LinkFilename",
+            "GtProjectPhase",
+            "Modified",
+            "Editor"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": ""
+          }
+        }
+      ]
+    },
+    {
+      "Title": "Prosjektstatusrapporter",
+      "Description": "",
+      "Template": 101,
+      "ContentTypesEnabled": true,
+      "RemoveExistingContentTypes": true,
+      "ContentTypeBindings": [
+        {
+          "ContentTypeID": "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02"
+        }
+      ],
+      "AdditionalSettings": {
+        "EnableVersioning": true
+      },
+      "Views": [
+        {
+          "Title": "Alle dokumenter",
+          "ViewFields": [
+            "DocIcon",
+            "LinkFilename",
+            "Modified",
+            "Editor"
+          ],
+          "AdditionalSettings": {
+            "RowLimit": 30,
+            "Paged": true,
+            "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"ID\" Ascending=\"FALSE\" />\n            </OrderBy>"
+          }
+        }
+      ]
+    }
+  ],
+  "Navigation": {
+    "QuickLaunch": [
+      {
+        "Url": "SitePages/ProjectHome.aspx",
+        "Title": "Hjem",
+        "IgnoreExisting": true
+      },
+      {
+        "Url": "SitePages/ProjectStatus.aspx",
+        "Title": "Prosjektstatus"
+      },
+      {
+        "Url": "Lists/Prosjektlogg/AllItems.aspx",
+        "Title": "Prosjektlogg"
+      },
+      {
+        "Url": "Lists/Interessentregister/AllItems.aspx",
+        "Title": "Interessentregister"
+      },
+      {
+        "Url": "Lists/Kommunikasjonsplan/AllItems.aspx",
+        "Title": "Kommunikasjonsplan"
+      },
+      {
+        "Url": "Lists/Usikkerhet/AllItems.aspx",
+        "Title": "Usikkerhet"
+      },
+      {
+        "Url": "Lists/Oppgaver/AllItems.aspx",
+        "Title": "Oppgaver"
+      },
+      {
+        "Url": "Lists/Mtekalender/calendar.aspx",
+        "Title": "Møtekalender"
+      },
+      {
+        "Url": "Delte dokumenter/Forms/AllItems.aspx",
+        "Title": "Dokumenter"
+      },
+      {
+        "Url": "Lists/Fasesjekkliste/AllItems.aspx",
+        "Title": "Fasesjekkliste"
+      },
+      {
+        "Url": "#",
+        "Title": "Notatblokk"
+      },
+      {
+        "Url": "Lists/Prosjektleveranser/AllItems.aspx",
+        "Title": "Prosjektleveranser"
+      },
+      {
+        "Url": "SitePages/Nofilter.aspx",
+        "Title": "Forside alle faser"
+      },
+      {
+        "Url": "_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22Ingen%20fase%22",
+        "Title": "Prosjektelementer uten fase"
+      },
+      {
+        "Url": "SitePages/Assigned.aspx",
+        "Title": "Mine prosjektelementer"
+      },
+      {
+        "Url": "_layouts/15/viewlsts.aspx",
+        "Title": "Områdeinnhold"
+      }
+    ]
+  },
+  "WebSettings": {
+    "WelcomePage": "SitePages/ProjectHome.aspx"
+  },
+  "ComposedLook": {
+    "ColorPaletteUrl": "{sitecollection}/_catalogs/theme/15/Project.spcolor",
+    "FontSchemeUrl": "{sitecollection}/_catalogs/theme/15/SharePointPersonality.spfont",
+    "BackgroundImageUrl": null
+  },
+  "Features": [
+    {
+      "id": "87294c72-f260-42f3-a41b-981a2ffce37a",
+      "deactivate": true,
+      "force": true
+    }
+  ]
+}

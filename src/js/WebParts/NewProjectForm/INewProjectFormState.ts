@@ -1,12 +1,8 @@
 import { IProjectModel } from "../../Model";
-
 import INewProjectFormConfig from "./INewProjectFormConfig";
+import ITemplateFile from "../../Provision/Template/ITemplateFile";
 
-export enum ProvisionStatus {
-    Idle,
-    Creating,
-    Error,
-}
+export enum ProvisionStatus { Idle, Creating, Error }
 
 export default interface INewProjectFormState {
     model: IProjectModel;
@@ -19,6 +15,7 @@ export default interface INewProjectFormState {
     };
     formValid?: boolean;
     showListContentSettings?: boolean;
-    config: INewProjectFormConfig;
+    config?: INewProjectFormConfig;
+    selectedTemplate?: ITemplateFile;
 }
 

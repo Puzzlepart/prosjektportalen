@@ -24,7 +24,7 @@ async function LoadExtension(fileInfo): Promise<Extension> {
             extension.IsValid = false;
             listLogger.log({ Message: `Extension ${extension.Filename} is invalid.`, Source: "LoadExtension", LogLevel: LogLevel.Warning });
             Logger.log({
-                message: `Extensions in file '${extension.Filename}' contains invalid JSON.`,
+                message: `(LoadExtension) Extensions in file '${extension.Filename}' contains invalid JSON.`,
                 data: { fileSchemaText },
                 level: LogLevel.Warning,
             });

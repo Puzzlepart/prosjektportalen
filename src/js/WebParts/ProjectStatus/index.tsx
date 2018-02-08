@@ -30,63 +30,39 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
         super(props, { isLoading: true });
     }
 
-    /**
-     * Component did mount
-     */
     public async componentDidMount(): Promise<void> {
         const data = await this.fetchData();
-        this.setState({
-            data,
-            isLoading: false,
-        });
+        this.setState({ data, isLoading: false });
     }
 
     /**
      * Calls _render with props and state to allow for ES6 destruction
      */
-    public render(): JSX.Element {
-        return this._render(this.props, this.state);
-    }
-
-    /**
-     * Renders the component
-     *
-     * @param {IProjectStatusProps} param0 Props
-     * @param {IProjectStatusState} param1 State
-     */
-    public _render({ }: IProjectStatusProps, { isLoading, data }: IProjectStatusState): JSX.Element {
+    public render(): React.ReactElement<IProjectStatusProps> {
+        const { isLoading, data } = this.state;
         if (isLoading) {
-            return (
-                <Spinner type={SpinnerType.large} />
-            );
+            return <Spinner type={SpinnerType.large} />;
         } else {
             return (
                 <div className="ms-Grid">
                     <StickyContainer className="status-report-container">
                         <Sticky>
-                            {
-                                ({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => {
-                                    return (
-                                        <div
-                                            id="status-navigation"
-                                            className="navigation ms-Grid-row"
-                                            style={{
-                                                ...style,
-                                                height: 100,
-                                            }}>
-                                            <Navigation
-                                                project={data.project}
-                                                sections={data.sections.filter(s => s.showInNavbar)}
-                                                exportType={data.exportType} />
-                                        </div>
-                                    );
-                                }
-                            }
+                            {({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => (
+                                <div
+                                    id="status-navigation"
+                                    className="navigation ms-Grid-row"
+                                    style={{ ...style, height: 100 }}>
+                                    <Navigation
+                                        project={data.project}
+                                        sections={data.sections.filter(s => s.showInNavbar)}
+                                        exportType={data.exportType} />
+                                </div>
+                            )}
                         </Sticky>
                         <SummarySection
                             project={data.project}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
-                        {this.renderSections(this.props, this.state)}
+                        {this.renderSections()}
                     </StickyContainer>
                 </div>
             );
@@ -95,11 +71,9 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
 
     /**
      * Render sections
-     *
-     * @param {IProjectStatusProps} param0 Props
-     * @param {IProjectStatusState} param1 State
      */
-    private renderSections({ }: IProjectStatusProps, { data }: IProjectStatusState) {
+    private renderSections() {
+        const { data } = this.state;
         return (
             data.sections
                 .filter(s => s.showAsSection)
@@ -110,8 +84,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                         section={s}
                         project={data.project}
                         fields={data.fields} />
-                ))
-        );
+                )));
     }
 
     /**
@@ -120,23 +93,16 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
     private async fetchData(): Promise<ProjectStatusData> {
         const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
-        const [project, fields, sections, exportType, statusFieldsConfig] = await Promise.all([
+        const [project, spFields, spSections, exportType, statusFieldsConfig] = await Promise.all([
             sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.usingCaching().get(),
             sitePagesLib.fields.usingCaching().get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).usingCaching().get(),
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
             loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
-        return {
-            project,
-            fields,
-            sections: sections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid()),
-            exportType,
-        };
+        const sections = spSections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid());
+        return { project, fields: spFields, sections, exportType };
     }
 }
 
-export {
-    IProjectStatusProps,
-    IProjectStatusState,
-};
+export { IProjectStatusProps, IProjectStatusState };

@@ -1,5 +1,5 @@
 <pnp:ListInstance Title="Statusseksjoner" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x01004CEFE616A94A3A48A27D9DEBDF5EC82802</pnp:DataValue>

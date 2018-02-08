@@ -3,38 +3,11 @@ import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Site, Web } from "sp-pnp-js";
 import SectionModel, { SectionType } from "../../Section/SectionModel";
-import * as jsPDF from "jspdf";
-require("jspdf-autotable");
+import JsPdfWithAutoTable from "./JsPdfWithAutoTable";
+import FONT_SIZE from "./FONT_SIZE";
+import IProject from "./IProject";
+import ITableColumn from "./ITableColumn";
 
-interface ITableColumn {
-    title: string;
-    dataKey: string;
-    widthStyle?: number;
-    type?: string;
-}
-
-interface IProject {
-    item: any;
-    fields: any;
-}
-
-
-enum FONT_SIZE {
-    xlarge = 24,
-    large = 20,
-    medium = 14,
-    small = 10,
-    xsmall = 8,
-}
-
-export class JsPdfWithAutoTable extends jsPDF {
-    public autoTable: any;
-    public pageHeight: any;
-
-    constructor(layout) {
-        super(layout);
-    }
-}
 
 export default class PDFExport {
     private jspdf: JsPdfWithAutoTable;
@@ -49,7 +22,10 @@ export default class PDFExport {
         this.generateBlob = this.generateBlob.bind(this);
     }
 
-    public async generateBlob(): Promise<any> {
+    /**
+     * Generate blob
+     */
+    public async generateBlob(): Promise<Blob> {
         await this.addProjectPropertiesPage();
         await this.addStatusSection();
         for (let i = 0; i < this.sections.length; i++) {
@@ -67,35 +43,44 @@ export default class PDFExport {
                 await this.addPageWithImage(section.getHtmlElementId("inner"), section.name);
             }
         }
-        return this.jspdf.output("blob");
+        const blob: Blob = this.jspdf.output("blob");
+        return blob;
     }
 
+    /**
+     * Add project properties page
+     */
     public async addProjectPropertiesPage(): Promise<void> {
         this.addDocumentTitle(`${RESOURCE_MANAGER.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
         const project = await this.fetchProject();
         this.addProperty(this.createColumn(RESOURCE_MANAGER.getResource("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
         const data = await this.fetchProjectData(project);
         data.properties
-            .filter((property) => property.value)
-            .map((property) => {
-                this.addProperty(property.field, property.value, null, this.jspdf.autoTable.previous.finalY);
-            });
+            .filter(prop => prop.value)
+            .forEach(prop => this.addProperty(prop.field, prop.value, null, this.jspdf.autoTable.previous.finalY));
         return;
     }
 
-
-    public addStatusSection = (): void => {
+    /**
+     * Add status section
+     */
+    public addStatusSection(): void {
         this.jspdf.addPage();
         this.sections
             .filter((section: SectionModel) => section.showInStatusSection)
-            .map((section, index) => {
+            .forEach((section, index) => {
                 const yPosition = (index > 0) ? this.jspdf.autoTable.previous.finalY : 20;
                 this.addProperty(this.createColumn(section.name, section.fieldName), section.statusValue, section.statusComment, yPosition);
             });
     }
 
+    /**
+     * Add page with list
+     *
+     * @param {SectionModel} section Section
+     */
     public async addPageWithList(section: SectionModel): Promise<void> {
-        const data = await this.fetchData(section);
+        const data = await this.fetchDataForSection(section);
         if (data.items.length) {
             this.jspdf.addPage();
             this.addPageTitle(section.name, 15, this.MARGIN_LEFT);
@@ -108,37 +93,41 @@ export default class PDFExport {
                     tableWidth: "auto",
                 },
                 createdCell: (cell, element) => {
-                    element.column.widthStyle = this.getColumnWidth(element.column.raw.type);
+                    element.column.widthStyle = 40;
                 },
             };
             this.jspdf.autoTable(data.columns, data.items, settings);
         }
-        return;
     }
 
-    public addPageWithImage(imageId: string, pageTitle: string) {
-        return new Promise<void>((resolve, reject) => {
-            if (!document.getElementById(imageId)) {
-                resolve();
-            }
-            html2canvas(document.getElementById(imageId), {
-                onrendered: canvas => {
-                    this.jspdf.addPage();
-                    this.addPageTitle(pageTitle, 15, this.MARGIN_LEFT);
-                    this.addImageToCanvas(canvas);
-                    resolve();
-                },
-            });
-        });
+    /**
+     * Add page with image
+     *
+     * @param {string} imageId Image id
+     * @param {string} pageTitle Page title
+     */
+    public async addPageWithImage(imageId: string, pageTitle: string) {
+        const imageElement = document.getElementById(imageId);
+        if (imageElement !== null) {
+            const imageCanvas = await html2canvas(imageElement);
+            this.jspdf.addPage();
+            this.addPageTitle(pageTitle, 15, this.MARGIN_LEFT);
+            this.addImageToCanvas(imageCanvas);
+        }
     }
 
+    /**
+    * Add project properties section
+    *
+    * @param {SectionModel} section Section
+    */
     public async addProjectPropertiesSection(section: SectionModel): Promise<void> {
         const project = await this.fetchProject();
         this.jspdf.addPage();
         this.addPageTitle(section.name, 15, this.MARGIN_LEFT);
         section.viewFields
-            .filter((field) => project.item.hasOwnProperty(field))
-            .map((viewField, index) => {
+            .filter(field => project.item.hasOwnProperty(field))
+            .forEach((viewField, index) => {
                 const yPosition = (index > 0) ? this.jspdf.autoTable.previous.finalY : 30;
                 let field = project.fields.filter((_) => _.InternalName === viewField)[0];
                 let value = project.item[field.InternalName];
@@ -146,14 +135,13 @@ export default class PDFExport {
             });
     }
 
-    private getColumnWidth = (type: string): number => {
-        switch (type) {
-            case "text": case "note": {
-                return 40;
-            }
-        }
-    }
-
+    /**
+     * Add document title
+     *
+     * @param {string} value Value
+     * @param {number} yPosition Y position
+     * @param {number} xPosition X postion
+     */
     private addDocumentTitle = (value: string, yPosition: number, xPosition: number) => {
         this.jspdf.setTextColor(51);
         this.jspdf.setFontSize(FONT_SIZE.xlarge);
@@ -165,7 +153,14 @@ export default class PDFExport {
         this.jspdf.line(this.MARGIN_LEFT, yPosition + 20, 280, yPosition + 20);
     }
 
-
+    /**
+     * Add property
+     *
+     * @param {ITableColumn} column Table column
+     * @param {string} value Value
+     * @param {string} comment Comment
+     * @param {number} yPosition Y position
+     */
     private addProperty = (column: ITableColumn, value: string, comment?: string, yPosition?: number) => {
         const tableWidth = 200;
         const settings = {
@@ -208,12 +203,27 @@ export default class PDFExport {
     }
 
 
-    private addPageTitle = (value: string, yPosition: number, xPosition: number) => {
-        this.jspdf.setTextColor(51);
+    /**
+     * Add page title
+     *
+     * @param {string} value Value
+     * @param {number} yPosition Y position
+     * @param {number} xPosition X postion
+     * @param {number} textColor Text color
+     */
+    private addPageTitle = (value: string, yPosition: number, xPosition: number, textColor = 51) => {
+        this.jspdf.setTextColor(textColor);
         this.jspdf.setFontSize(FONT_SIZE.large);
         this.jspdf.text(value, xPosition, 20);
     }
 
+    /**
+     * Create column
+     *
+     * @param {string} title Title
+     * @param {string} key Key
+     * @param {string} type Type (optional)
+     */
     private createColumn = (title: string, key: string, type?: string): ITableColumn => {
         let column: ITableColumn = {
             title: title,
@@ -223,7 +233,12 @@ export default class PDFExport {
         return column;
     }
 
-    private fetchData = (section: SectionModel) => new Promise<any>((resolve, reject) => {
+    /**
+     * Fetch data
+     *
+     * @param {SectionModel} section Section
+     */
+    private fetchDataForSection = (section: SectionModel) => new Promise<any>((resolve, reject) => {
         const ctx = SP.ClientContext.get_current();
         const list = ctx.get_web().get_lists().getByTitle(section.listTitle);
         const camlQuery = new SP.CamlQuery();
@@ -252,11 +267,17 @@ export default class PDFExport {
     })
 
 
-    private fetchProjectData = (project: IProject, configList = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
+    /**
+     * Fetch project data
+     *
+     * @param {IProject} project The project
+     * @param {string} configListTitle Config list title
+     */
+    private fetchProjectData = (project: IProject, configListTitle = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const configPromise = rootWeb
             .lists
-            .getByTitle(configList)
+            .getByTitle(configListTitle)
             .items
             .select("Title", "GtPcProjectStatus")
             .get();
@@ -292,6 +313,9 @@ export default class PDFExport {
             .catch(reject);
     })
 
+    /**
+     * Fetch projects
+     */
     private async fetchProject(): Promise<IProject> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const fieldsPromise = rootWeb
@@ -316,7 +340,12 @@ export default class PDFExport {
         }
     }
 
-    private addImageToCanvas = (canvas: any) => {
+    /**
+     * Add image to canvas
+     *
+     * @param {any} canvas The canvas
+     */
+    private addImageToCanvas(canvas): void {
         const imgData = canvas.toDataURL("image/jpeg");
         const imgWidth = this.IMAGE_WIDTH;
         const pageHeight = this.jspdf.pageHeight;

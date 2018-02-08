@@ -1,7 +1,7 @@
 enum ExportReportStatus {
-    default,
-    isExporting,
-    hasExported,
+    IDLE,
+    IS_EXPORTING,
+    HAS_EXPORTED,
 }
 
 export default ExportReportStatus;

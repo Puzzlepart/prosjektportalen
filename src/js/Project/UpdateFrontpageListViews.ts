@@ -7,7 +7,7 @@ import * as Config from "./Config";
  *
  * @param {string} phaseName Phase term name
  */
-async function UpdateFrontpageListViews(phaseName: string): Promise<void> {
+export default async function UpdateFrontpageListViews(phaseName: string): Promise<void> {
     const newViewQuery = String.format(Config.FRONTPAGE_LISTS_VIEQUERY, Config.PROJECTPHASE_FIELD, phaseName);
     const listsOnFrontpage = Config.FRONTPAGE_LISTS.filter(({ wpTitle }) => document.querySelector(`.ms-webpart-chrome-title .js-webpart-titleCell[title='${wpTitle}']`) !== null);
     try {
@@ -22,13 +22,12 @@ async function UpdateFrontpageListViews(phaseName: string): Promise<void> {
             ];
         });
         await Promise.all(updateViewsPromises);
-        Logger.log({ message: "Successfully updated front page list views", data: { phaseName, lists: Config.FRONTPAGE_LISTS }, level: LogLevel.Info });
+        Logger.log({ message: "(UpdateFrontpageListViews) Successfully updated front page list views", data: { phaseName, lists: Config.FRONTPAGE_LISTS }, level: LogLevel.Info });
         return;
     } catch (err) {
-        Logger.log({ message: "Failed to update front page list views", data: { phaseName, lists: Config.FRONTPAGE_LISTS, err }, level: LogLevel.Info });
+        Logger.log({ message: "(UpdateFrontpageListViews) Failed to update front page list views", data: { phaseName, lists: Config.FRONTPAGE_LISTS, err }, level: LogLevel.Info });
         throw err;
     }
 
 }
 
-export default UpdateFrontpageListViews;

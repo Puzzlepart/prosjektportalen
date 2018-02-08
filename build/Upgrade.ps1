@@ -75,8 +75,8 @@ try {
 }
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 
-# [version] will be replaced with the actual version by 'gulp release'
-$InstallVersion = ParseVersion -VersionString "[version]"
+# {package-version} will be replaced with the actual version by 'gulp release'
+$InstallVersion = ParseVersion -VersionString "{package-version}"
 
 if ($InstallVersion -gt $CurrentVersion) {
     Write-Host "############################################################################" -ForegroundColor Green

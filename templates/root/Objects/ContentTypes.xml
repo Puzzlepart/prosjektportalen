@@ -1,5 +1,5 @@
 <pnp:ContentTypes 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="{resource:ContentTypes_Section_Name}" Description="{resource:ContentTypes_Section_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
@@ -317,6 +317,16 @@
             <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
             <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="GtIsEnabled" Required="false" />
             <pnp:FieldRef ID="b3e95def-a4ea-4e8b-927d-f724744b74a1" Name="GtShowInNewForm" Required="false" />
+            <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Name="{resource:ContentTypes_SiteTemplate_Name}" Description="{resource:ContentTypes_SiteTemplate_Description}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
+            <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="GtIsEnabled" />
+            <pnp:FieldRef ID="c69cc4de-f0fa-43aa-a5cc-2a9ae3a2ef9a" Name="GtIsDefault" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" />

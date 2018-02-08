@@ -27,10 +27,6 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         this._onSettingChanged = this._onSettingChanged.bind(this);
     }
 
-    public shouldComponentUpdate(nextProps: IWebPropertyBagEditorProps, nextState: IWebPropertyBagEditorState) {
-        return (this.state.isLoading !== nextState.isLoading || this.state.isSaving !== nextState.isSaving);
-    }
-
     public async componentDidMount(): Promise<void> {
         const { settings, options } = await GetSettingsAndOptions();
         this.setState({ settings, options, isLoading: false });

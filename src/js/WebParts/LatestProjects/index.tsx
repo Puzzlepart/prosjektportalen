@@ -111,7 +111,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     private async fetchSubwebsForCurrentUser(): Promise<any> {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const webCollection: SP.WebCollection = await jsomCtx.web.getSubwebsForCurrentUser(null);
-        await ExecuteJsomQuery(jsomCtx, [webCollection]);
+        await ExecuteJsomQuery(jsomCtx, [{ clientObject: webCollection }]);
         const subwebs = webCollection.get_data()
             .map(web => ({
                 Title: web.get_title(),

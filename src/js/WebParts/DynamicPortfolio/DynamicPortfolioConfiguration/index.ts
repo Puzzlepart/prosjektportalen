@@ -2,6 +2,34 @@ import RESOURCE_MANAGER from "../../../@localization";
 import { Web } from "sp-pnp-js";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
+
+function getFieldsConfig(configWeb: Web, orderBy: string) {
+    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
+        .items
+        .orderBy(orderBy)
+        .usingCaching()
+        .get();
+}
+
+function getRefinersConfig(configWeb: Web, orderBy: string) {
+    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
+        .items
+        .orderBy(orderBy)
+        .usingCaching()
+        .get();
+}
+
+function getViewsConfig(configWeb: Web, orderBy: string) {
+    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
+        .items
+        .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
+        .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
+        .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "GtDpGroupByLookup/GtDpDisplayName", "Author/Id")
+        .orderBy(orderBy)
+        .usingCaching()
+        .get();
+}
+
 /**
  * Get config from lists
  *
@@ -10,59 +38,60 @@ import { loadJsonConfiguration } from "../../../Util";
  */
 export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
     const configWeb = new Web(configWebUrl);
-    const [fields, refiners, views, statusFields] = await Promise.all([
-        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
-            .items
-            .orderBy(orderBy)
-            .usingCaching()
-            .get(),
-        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
-            .items
-            .orderBy(orderBy)
-            .usingCaching()
-            .get(),
-        configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
-            .items
-            .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
-            .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
-            .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "GtDpGroupByLookup/GtDpDisplayName", "Author/Id")
-            .orderBy(orderBy)
-            .usingCaching()
-            .get(),
+    const [dpFields, dpRefiners, dpViews, statusFields] = await Promise.all([
+        getFieldsConfig(configWeb, orderBy),
+        getRefinersConfig(configWeb, orderBy),
+        getViewsConfig(configWeb, orderBy),
         loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
     ]);
-    return {
-        columns: fields.map(col => ({
-            name: col.GtDpDisplayName,
-            key: col.GtDpProperty,
-            fieldName: col.GtDpProperty,
-            readOnly: col.GtDpReadOnly,
-            render: col.GtDpRender,
-            minWidth: col.GtDpMinWidth,
-            maxWidth: col.GtDpMaxWidth,
-            isResizable: col.GtDpIsResizable,
-            groupBy: col.GtDpGroupBy,
-        })),
-        refiners: refiners.map(ref => ({
+    const columns = dpFields.map(fld => {
+        return {
+            name: fld.GtDpDisplayName,
+            key: fld.GtDpProperty,
+            fieldName: fld.GtDpProperty,
+            readOnly: fld.GtDpReadOnly,
+            render: fld.GtDpRender,
+            minWidth: fld.GtDpMinWidth,
+            maxWidth: fld.GtDpMaxWidth,
+            isResizable: fld.GtDpIsResizable,
+            groupBy: fld.GtDpGroupBy,
+        };
+    });
+    const refiners = dpRefiners.map(ref => {
+        return {
             name: ref.GtDpDisplayName,
             key: ref.GtDpProperty,
             fieldName: ref.GtDpProperty,
             multi: ref.GtDpMultiple,
             defaultHidden: ref.GtDpDefaultHidden,
             iconName: ref.GtDpIcon,
-        })),
-        views: views.map(({ ID, GtDpDisplayName, GtDpSearchQuery, GtDpIcon, GtDpDefault, GtDpFieldsLookup, GtDpRefinersLookup, GtDpGroupByLookup }) => ({
-            id: ID,
-            name: GtDpDisplayName,
-            queryTemplate: GtDpSearchQuery,
-            iconName: GtDpIcon,
-            default: GtDpDefault,
-            fields: GtDpFieldsLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
-            refiners: GtDpRefinersLookup.results.map(({ GtDpDisplayName: lookupValue }) => lookupValue),
-            groupBy: GtDpGroupByLookup.GtDpDisplayName || null,
-        })),
-        statusFields,
-    };
+        };
+    });
+    const views = dpViews.map(view => {
+        let fieldsLookupItems = [];
+        let refinersLookupItems = [];
+        if (view.GtDpFieldsLookup.hasOwnProperty("results")) {
+            fieldsLookupItems = view.GtDpFieldsLookup.results;
+        } else {
+            fieldsLookupItems = view.GtDpFieldsLookup;
+        }
+        if (view.GtDpRefinersLookup.hasOwnProperty("results")) {
+            refinersLookupItems = view.GtDpRefinersLookup.results;
+        } else {
+            refinersLookupItems = view.GtDpRefinersLookup;
+        }
+        return {
+            id: view.ID,
+            name: view.GtDpDisplayName,
+            queryTemplate: view.GtDpSearchQuery,
+            iconName: view.GtDpIcon,
+            default: view.GtDpDefault,
+            fields: fieldsLookupItems.map(item => item.GtDpDisplayName),
+            refiners: refinersLookupItems.map(item => item.GtDpDisplayName),
+            groupBy: view.GtDpGroupByLookup ? view.GtDpGroupByLookup.GtDpDisplayName : null,
+        };
+    });
+    return { columns, refiners, views, statusFields };
 }
 
 export {

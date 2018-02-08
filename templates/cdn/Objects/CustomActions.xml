@@ -1,8 +1,0 @@
-<pnp:CustomActions 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
-    <pnp:SiteCustomActions>
-        <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
-            SP.SOD.registerSod('pp.main.js', 'https://publiccdn.sharepointonline.com/{parameter:TenantHostName}/{parameter:PublicCdnOriginId}/js/pp.main.js');
-            EnsureScriptFunc('pp.main.js', null, function() {});"  />
-    </pnp:SiteCustomActions>
-</pnp:CustomActions>

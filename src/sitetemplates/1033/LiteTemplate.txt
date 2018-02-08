@@ -1,0 +1,1118 @@
+{
+    "Files": [
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/SitePage.txt",
+        "Url": "ProjectHome.aspx",
+        "Overwrite": true,
+        "Properties": {
+          "Title": "Hjemmeside",
+          "ContentTypeId": "0x010109010058561F86D956412B9DD7957BBCD67AAE01"
+        },
+        "RemoveExistingWebParts": true,
+        "WebParts": [
+          {
+            "Title": "Project Phases",
+            "Zone": "LeftColumn",
+            "Order": 0,
+            "Contents": {
+              "FileSrc": "{wpgallery}/ProjectPhases.webpart"
+            }
+          },
+          {
+            "Title": "Timeline",
+            "Zone": "LeftColumn",
+            "Order": 1,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Timeline"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks/AllItems.aspx"
+              },
+              {
+                "name": "CurrentTaskListWebAddress",
+                "type": "string",
+                "value": "{site}"
+              },
+              {
+                "name": "PageAddress",
+                "type": "string",
+                "value": "{site}"
+              },
+              {
+                "name": "ViewName",
+                "type": "string",
+                "value": "Timeline"
+              },
+              {
+                "name": "TimelineType",
+                "type": "string",
+                "value": "TaskListTimeline"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{wpgallery}/Timeline.webpart"
+            }
+          },
+          {
+            "Title": "Documents (current phase)",
+            "Zone": "LeftColumn",
+            "Order": 2,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Documents (current phase)"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Shared documents"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Shared documents/Forms/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Documents",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "DocIcon",
+                  "LinkFilename",
+                  "Modified",
+                  "Editor"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>",
+                  "Scope": 0
+                }
+              }
+            }
+          },
+          {
+            "Title": "Project Info",
+            "Zone": "RightColumn",
+            "Order": 0,
+            "Contents": {
+              "FileSrc": "{wpgallery}/ProjectInfo.webpart"
+            }
+          },
+          {
+            "Title": "Site Feed",
+            "Zone": "RightColumn",
+            "Order": 1,
+            "Contents": {
+              "FileSrc": "{wpgallery}/SiteFeed.dwp"
+            }
+          },
+          {
+            "Title": "Risks (current phase)",
+            "Zone": "RightColumn",
+            "Order": 2,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Risks (current phase)"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Risks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Risks/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Risks",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "LinkTitle",
+                  "GtRiskProximity",
+                  "GtRiskFactor"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/SitePage.txt",
+        "Url": "Nofilter.aspx",
+        "Overwrite": true,
+        "WebParts": [
+          {
+            "Title": "Tasks",
+            "Zone": "LeftColumn",
+            "Order": 0,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Tasks"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Tasks",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "Checkmark",
+                  "LinkTitle",
+                  "StartDate",
+                  "DueDate",
+                  "AssignedTo"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+                }
+              }
+            }
+          },
+          {
+            "Title": "Documents",
+            "Zone": "LeftColumn",
+            "Order": 1,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Documents"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Shared documents"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Shared documents/Forms/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Documents",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "DocIcon",
+                  "LinkFilename",
+                  "Modified",
+                  "Editor"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+                }
+              }
+            }
+          },
+          {
+            "Title": "Site Feed",
+            "Zone": "RightColumn",
+            "Order": 0,
+            "Contents": {
+              "FileSrc": "{wpgallery}/SiteFeed.dwp"
+            }
+          },
+          {
+            "Title": "Risks",
+            "Zone": "RightColumn",
+            "Order": 1,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Risks"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Risks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Risks/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Risks",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "LinkTitle",
+                  "GtRiskProbability",
+                  "GtRiskConsequence",
+                  "GtRiskProximity",
+                  "GtRiskFactor"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy><GroupBy Collapse='TRUE'><FieldRef Name='GtProjectPhase' /></GroupBy>"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/SitePage.txt",
+        "Url": "Assigned.aspx",
+        "Overwrite": true,
+        "WebParts": [
+          {
+            "Title": "My tasks",
+            "Zone": "LeftColumn",
+            "Order": 0,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "My tasks"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Tasks",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "Checkmark",
+                  "LinkTitle",
+                  "GtProjectPhase",
+                  "StartDate",
+                  "DueDate"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 10,
+                  "Paged": true,
+                  "ViewQuery": "<Where><Eq><FieldRef Name='AssignedTo' /><Value Type='Integer'><UserID/></Value></Eq></Where><OrderBy><FieldRef Name='DueDate' /></OrderBy>"
+                }
+              }
+            }
+          },
+          {
+            "Title": "My communication elements",
+            "Zone": "RightColumn",
+            "Order": 0,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "My communication elements"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Communication Plan"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Communication Plan/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Communication Plan",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "LinkTitle",
+                  "GtProjectPhase",
+                  "GtActionDate",
+                  "GtCommunicationTarget"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 30,
+                  "Paged": true,
+                  "ViewQuery": "<Where><Eq><FieldRef Name='GtActionResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Where>"
+                }
+              }
+            }
+          },
+          {
+            "Title": "Project deliveries I am responsible for",
+            "Zone": "RightColumn",
+            "Order": 0,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Project deliveries I am responsible for"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Project Deliveries"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Project Deliveries/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Project Deliveries",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "LinkTitle",
+                  "GtProductPhase",
+                  "GtProductInteressent",
+                  "GtProductAcceptanceMethod",
+                  "GtProductAcceptanceDate"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 30,
+                  "Paged": true,
+                  "ViewQuery": "<Where><Or><Eq><FieldRef Name='GtProductQualityResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq><Eq><FieldRef Name='GtProductAcceptanceResponsible' /><Value Type='Integer'><UserID Type='Integer' /></Value></Eq></Or></Where>"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/SitePage.txt",
+        "Url": "Mom.aspx",
+        "Overwrite": true,
+        "WebParts": [
+          {
+            "Title": "Latest tasks",
+            "Zone": "LeftColumn",
+            "Order": 0,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Latest tasks"
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Tasks/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Tasks",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "Checkmark",
+                  "LinkTitle",
+                  "StartDate",
+                  "DueDate",
+                  "AssignedTo"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 30,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+                }
+              }
+            }
+          },
+          {
+            "Title": "Latest information elements ",
+            "Zone": "RightColumn",
+            "Order": 1,
+            "PropertyOverrides": [
+              {
+                "name": "Title",
+                "type": "string",
+                "value": "Latest information elements "
+              },
+              {
+                "name": "ListUrl",
+                "type": "string",
+                "value": "{site}/Lists/Information"
+              },
+              {
+                "name": "TitleUrl",
+                "type": "string",
+                "value": "{site}/Lists/Information/AllItems.aspx"
+              }
+            ],
+            "Contents": {
+              "FileSrc": "{sitecollection}/Resources/ListViewWebPart.txt"
+            },
+            "ListView": {
+              "List": "Information",
+              "View": {
+                "Title": "",
+                "ViewFields": [
+                  "LinkTitle",
+                  "GtProjectInfoDescription"
+                ],
+                "AdditionalSettings": {
+                  "RowLimit": 30,
+                  "Paged": true,
+                  "ViewQuery": "<OrderBy><FieldRef Name='Created' Ascending='FALSE' /></OrderBy>"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/SitePage_OneColumn.txt",
+        "Url": "BenefitsOverview.aspx",
+        "Overwrite": true,
+        "Properties": {
+          "Title": "Gevinstoversikt"
+        },
+        "RemoveExistingWebParts": true,
+        "WebParts": [
+          {
+            "Title": "Gevinstoversikt",
+            "Zone": "LeftColumn",
+            "Order": 0,
+            "Contents": {
+              "Xml": "<webParts>\n    <webPart\n        xmlns=\"http://schemas.microsoft.com/WebPart/v3\">\n        <metaData>\n            <type name=\"Microsoft.SharePoint.WebPartPages.ScriptEditorWebPart, Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c\" />\n            <importErrorMessage>Kan ikke importere denne webdelen.</importErrorMessage>\n        </metaData>\n        <data>\n            <properties>\n                <property name=\"Title\" type=\"string\">Benefit overview</property>\n                <property name=\"ChromeType\" type=\"chrometype\">Default</property>\n                <property name=\"ChromeState\" type=\"chromestate\">Normal</property>\n                <property name=\"Content\" type=\"string\">&lt;div id=\"pp-benefitsoverview\"&gt;&lt;/div&gt;</property>\n            </properties>\n        </data>\n    </webPart>\n</webParts>"
+            }
+          }
+        ]
+      },
+      {
+        "Folder": "SitePages",
+        "Src": "{sitecollection}/Resources/ProjectStatus.txt",
+        "Url": "ProjectStatus.aspx",
+        "Overwrite": true,
+        "Properties": {
+          "Title": "Project Status"
+        }
+      }
+    ],
+    "Lists": [
+      {
+        "Title": "Site Pages",
+        "Description": "",
+        "Template": 119,
+        "ContentTypesEnabled": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010109010058561F86D956412B9DD7957BBCD67AAE01"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        }
+      },
+      {
+        "Title": "Phase Checklist",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070204"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectPhase",
+              "GtChecklistStatus",
+              "GtComment"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 50,
+              "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtSortOrder\" />\n              <FieldRef Name=\"ID\" />\n            </OrderBy>\n            <Where>\n                <Neq>\n                    <FieldRef Name=\"GtChecklistStatus\" />\n                    <Value Type=\"Text\">Archived</Value>\n                </Neq>\n            </Where>"
+            }
+          },
+          {
+            "Title": "Archived",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectPhase",
+              "GtComment"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 50,
+              "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtSortOrder\" />\n              <FieldRef Name=\"ID\" />\n            </OrderBy>\n            <Where>\n                <Eq>\n                    <FieldRef Name=\"GtChecklistStatus\" />\n                    <Value Type=\"Text\">Archived</Value>\n                </Eq>\n            </Where>"
+            }
+          },
+          {
+            "Title": "Grouped by Status",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectPhase",
+              "GtComment"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 50,
+              "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\">\n              <FieldRef Name=\"GtChecklistStatus\" Ascending=\"FALSE\" />\n            </GroupBy>\n            <OrderBy>\n                <FieldRef Name=\"GtSortOrder\" />\n                <FieldRef Name=\"ID\" />\n            </OrderBy>"
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Information",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070207"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectInfoDescription"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Stakeholders",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070202"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtStakeholderGroup",
+              "GtStakeholderContext",
+              "GtStakeholderStrategy",
+              "GtStakeholderInterest",
+              "GtStakeholderInfluence",
+              "GtStakeholderInfluencePossibilty",
+              "GtStakeholderActions"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Communication Plan",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070203"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Fields": [
+          "<Field Type=\"LookupMulti\" DisplayName=\"Audience\" List=\"{listid:Stakeholders}\" ShowField=\"Title\" ID=\"{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}\" Name=\"GtCommunicationTarget\" StaticName=\"GtCommunicationTarget\" InternalName=\"GtCommunicationTarget\" Mult=\"TRUE\" />"
+        ],
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectPhase",
+              "GtActionDate",
+              "GtActionResponsible"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 10,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Milestones",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x01006E5BC3A4008144DC8ACEC0107AFC999A"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtMilestonePlannedDate",
+              "GtMilestoneActualDate",
+              "GtMilestoneStatus",
+              "GtMilestoneComment"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"GtMilestonePlannedDate\" Ascending=\"TRUE\" />\n            </OrderBy>"
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Project Log",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070206"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Fields": [
+          "<Field Type=\"Lookup\" DisplayName=\"Affects product\" List=\"{listid:Project Deliveries}\" ShowField=\"Title\" ID=\"{022cc93f-13df-4420-bd47-55e4fdae5d18}\" StaticName=\"GtProjectLogProductLookup\" InternalName=\"GtProjectLogProductLookup\" />"
+        ],
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectLogType",
+              "GtProjectLogReporter",
+              "GtProjectLogResponsible",
+              "GtProjectLogConsequence",
+              "GtProjectLogRecommendation",
+              "GtProjectLogExperience"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Project Deliveries",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D5663464831070205"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Fields": [
+          "<Field Type=\"LookupMulti\" DisplayName=\"Stakeholder(s)\" List=\"{listid:Stakeholders}\" ShowField=\"Title\" ID=\"{6d90e0b6-73e6-48fb-aa1e-b897b214f934}\" Name=\"GtProductInteressent\" StaticName=\"GtProductInteressent\" InternalName=\"GtProductInteressent\" Mult=\"TRUE\" />"
+        ],
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProductPhase",
+              "GtProductQualityResponsible",
+              "GtProductAcceptanceMethod",
+              "GtProductAcceptanceResponsible",
+              "GtProductAcceptanceDate"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          },
+          {
+            "Title": "Execution Phase\n    ",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProductQualityResponsible",
+              "GtProductAcceptanceMethod",
+              "GtProductAcceptanceResponsible",
+              "GtProductAcceptanceDate"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\">\n            <FieldRef Name=\"GtProductPhase\" />\n          </GroupBy>"
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Risks",
+        "Description": "",
+        "Template": 100,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D566346483107020101"
+          },
+          {
+            "ContentTypeID": "0x010088578E7470CC4AA68D566346483107020102"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Items",
+            "ViewFields": [
+              "ID",
+              "LinkTitle",
+              "GtRiskProximity",
+              "GtRiskProbability",
+              "GtRiskConsequence",
+              "GtRiskFactor",
+              "GtRiskProbabilityPostAction",
+              "GtRiskConsequencePostAction",
+              "GtRiskFactorPostAction",
+              "GtRiskStrategy"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Tasks",
+        "Description": "",
+        "Template": 171,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010800233B015F95174C9A8EB505493841DE8D"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Fields": [
+          "<Field Type=\"Lookup\" DisplayName=\"Relevant communication element\" List=\"{listid:Communication Plan}\" ShowField=\"Title\" ID=\"{087dae25-b007-4e58-91b4-347dde464840}\" StaticName=\"GtProjectTaskComElement\" InternalName=\"GtProjectTaskComElement\" />",
+          "<Field Type=\"Lookup\" DisplayName=\"Relevant risk\" List=\"{listid:Risks}\" ShowField=\"Title\" ID=\"{920b385c-756f-49eb-98e7-4c3ebf15b7f4}\" StaticName=\"GtProjectTaskRisk\" InternalName=\"GtProjectTaskRisk\" />",
+          "<Field Type=\"Lookup\" DisplayName=\"Relevant product\" List=\"{listid:Project Deliveries}\" ShowField=\"Title\" ID=\"{a3ab9d99-78da-436d-a299-5854340a504f}\" StaticName=\"GtProjectTaskProduct\" InternalName=\"GtProjectTaskProduct\" />"
+        ],
+        "Views": [
+          {
+            "Title": "All Tasks",
+            "ViewFields": [
+              "Checkmark",
+              "LinkTitle",
+              "StartDate",
+              "DueDate",
+              "AssignedTo",
+              "GtProjectPhase",
+              "Modified",
+              "Editor"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          },
+          {
+            "Title": "Relevant links",
+            "ViewFields": [
+              "LinkTitle",
+              "GtProjectTaskComElement",
+              "GtProjectTaskProduct",
+              "GtProjectTaskRisk"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Meeting Calendar",
+        "Description": "",
+        "Template": 106,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010200A2B2AC17A2244B8590398A9D1E7E3E3701"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        }
+      },
+      {
+        "Title": "Documents",
+        "Description": "",
+        "Template": 101,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Documents",
+            "ViewFields": [
+              "DocIcon",
+              "LinkFilename",
+              "GtProjectPhase",
+              "Modified",
+              "Editor"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": ""
+            }
+          }
+        ]
+      },
+      {
+        "Title": "Project Status Reports",
+        "Description": "",
+        "Template": 101,
+        "ContentTypesEnabled": true,
+        "RemoveExistingContentTypes": true,
+        "ContentTypeBindings": [
+          {
+            "ContentTypeID": "0x010100293FDE3FCADA480B9A77BBDAD7DFA28C02"
+          }
+        ],
+        "AdditionalSettings": {
+          "EnableVersioning": true
+        },
+        "Views": [
+          {
+            "Title": "All Documents",
+            "ViewFields": [
+              "DocIcon",
+              "LinkFilename",
+              "Modified",
+              "Editor"
+            ],
+            "AdditionalSettings": {
+              "RowLimit": 30,
+              "Paged": true,
+              "ViewQuery": "<OrderBy>\n              <FieldRef Name=\"ID\" Ascending=\"FALSE\" />\n            </OrderBy>"
+            }
+          }
+        ]
+      }
+    ],
+    "Navigation": {
+      "QuickLaunch": [
+        {
+          "Url": "SitePages/ProjectHome.aspx",
+          "Title": "Home",
+          "IgnoreExisting": true
+        },
+        {
+          "Url": "SitePages/ProjectStatus.aspx",
+          "Title": "Project Status"
+        },
+        {
+          "Url": "Lists/Project Log/AllItems.aspx",
+          "Title": "Project Log"
+        },
+        {
+          "Url": "Lists/Stakeholders/AllItems.aspx",
+          "Title": "Stakeholders"
+        },
+        {
+          "Url": "Lists/Communication Plan/AllItems.aspx",
+          "Title": "Communication Plan"
+        },
+        {
+          "Url": "Lists/Risks/AllItems.aspx",
+          "Title": "Risks"
+        },
+        {
+          "Url": "Lists/Tasks/AllItems.aspx",
+          "Title": "Tasks"
+        },
+        {
+          "Url": "Lists/Meeting Calendar/calendar.aspx",
+          "Title": "Meeting Calendar"
+        },
+        {
+          "Url": "Shared documents/Forms/AllItems.aspx",
+          "Title": "Documents"
+        },
+        {
+          "Url": "Lists/Phase Checklist/AllItems.aspx",
+          "Title": "Phase Checklist"
+        },
+        {
+          "Url": "SitePages/Mom.aspx",
+          "Title": "Minutes of meeting"
+        },
+        {
+          "Url": "#",
+          "Title": "Notebook"
+        },
+        {
+          "Url": "Lists/Project Deliveries/AllItems.aspx",
+          "Title": "Project Deliveries"
+        },
+        {
+          "Url": "SitePages/Nofilter.aspx",
+          "Title": "Home (all phases)"
+        },
+        {
+          "Url": "_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22",
+          "Title": "Project elements without phase"
+        },
+        {
+          "Url": "SitePages/Assigned.aspx",
+          "Title": "My project elements"
+        },
+        {
+          "Url": "_layouts/15/viewlsts.aspx",
+          "Title": "Site contents"
+        }
+      ]
+    },
+    "WebSettings": {
+      "WelcomePage": "SitePages/ProjectHome.aspx"
+    },
+    "ComposedLook": {
+      "ColorPaletteUrl": "{sitecollection}/_catalogs/theme/15/Project.spcolor",
+      "FontSchemeUrl": "{sitecollection}/_catalogs/theme/15/SharePointPersonality.spfont",
+      "BackgroundImageUrl": null
+    },
+    "Features": [
+      {
+        "id": "87294c72-f260-42f3-a41b-981a2ffce37a",
+        "deactivate": true,
+        "force": true
+      }
+    ]
+  }

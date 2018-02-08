@@ -10,22 +10,20 @@ import ProvisionError from "../ProvisionError";
  *
  * @param {IProvisionContext} context Provisioning context
  */
-async function ApplyExtensions(context: IProvisionContext): Promise<void> {
-    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), "");
+export async function ApplyExtensions(context: IProvisionContext): Promise<void> {
     try {
         const activatedExtensions = await GetActivatedExtensions(context);
         const extensions = [...activatedExtensions, ...context.model.Extensions];
-        const webProvisioner = new WebProvisioner(context.web);
-        for (let i = 0; i < extensions.length; i++) {
-            const extension = extensions[i];
-            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
-            await webProvisioner.applyTemplate(extension.Schema);
-            await UpdatePropertyArray("pp_installed_extensions", extension.Filename, ",", context.url);
+        if (extensions.length > 0) {
+            context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), "");
+            for (let i = 0; i < extensions.length; i++) {
+                const extension = extensions[i];
+                context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingExtensions"), extension.Title);
+                await new WebProvisioner(context.web).applyTemplate(extension.Schema);
+                await UpdatePropertyArray("pp_installed_extensions", extension.Filename, ",", context.url);
+            }
         }
-        return;
     } catch (err) {
         throw new ProvisionError(err, "ApplyExtensions");
     }
 }
-
-export { ApplyExtensions };

@@ -76,11 +76,11 @@ export const GetCurrentProjectPhase = () => new Promise<PhaseModel>((resolve, re
 /**
  * Get requested project phase
  */
-export async function GetRequestedProjectPhase():  Promise<string> {
+export async function GetRequestedProjectPhase(): Promise<string> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const welcomePage = GetWelcomePage(jsomCtx.clientContext, true);
-        await ExecuteJsomQuery(jsomCtx, [welcomePage]);
+        await ExecuteJsomQuery(jsomCtx, [{ clientObject: welcomePage }]);
         return welcomePage.get_item("GtRequestedPhase");
     } catch (err) {
         throw err;
@@ -94,7 +94,7 @@ export async function GetPhaseIterations(): Promise<number> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
         const welcomePage = GetWelcomePage(jsomCtx.clientContext, true);
-        await ExecuteJsomQuery(jsomCtx, [welcomePage]);
+        await ExecuteJsomQuery(jsomCtx, [{ clientObject: welcomePage }]);
         return welcomePage.get_item("GtPhaseIterations");
     } catch (err) {
         throw err;

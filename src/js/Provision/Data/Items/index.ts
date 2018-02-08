@@ -25,16 +25,16 @@ let __RECORDS: IRecord[] = [];
 export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: CopyContext): Promise<void> {
     try {
         const sourceItemId = srcItem.get_fieldValues()["ID"];
-        Logger.log({ message: `Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
+        Logger.log({ message: `(CopyItem) Copy of list item #${sourceItemId} starting.`, data: { fields }, level: LogLevel.Info });
         const destItem = dataCtx.Destination.list.addItem(new SP.ListItemCreationInformation());
         fields.forEach(fieldName => {
             const fieldValue = srcItem.get_item(fieldName);
             const fieldType = dataCtx.listFieldsMap[fieldName];
-            Logger.log({ message: `Setting value for field ${fieldName}`, data: { fieldType }, level: LogLevel.Info });
+            Logger.log({ message: `(CopyItem) Setting value for field ${fieldName}`, data: { fieldType }, level: LogLevel.Info });
             const result = setItemFieldValue(fieldName, destItem, fieldValue, fieldType, dataCtx.Destination._, dataCtx.Destination.list);
             switch (result) {
                 case SetItemFieldValueResult.FieldTypeNotSupported: {
-                    Logger.log({ message: `Field type ${fieldType} is not supported`, data: {}, level: LogLevel.Warning });
+                    Logger.log({ message: `(CopyItem) Field type ${fieldType} is not supported`, data: {}, level: LogLevel.Warning });
                 }
             }
         });
@@ -49,7 +49,7 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
             record.ParentID = parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10);
         }
         __RECORDS.push(record);
-        Logger.log({ message: `Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
+        Logger.log({ message: `(CopyItem) Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         return;
     } catch (err) {
         throw new ProvisionError(err, "CopyItem");
@@ -63,7 +63,7 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
  * @param {ListConfig} conf List configuration
  */
 export async function CopyItems(context: IProvisionContext, conf: ListConfig): Promise<void> {
-    Logger.log({ message: "Copy of list items started.", data: { conf }, level: LogLevel.Info });
+    Logger.log({ message: "(CopyItem) Copy of list items started.", data: { conf }, level: LogLevel.Info });
     let dataCtx: CopyContext;
     let listItems: SP.ListItem<any>[];
 
@@ -82,9 +82,9 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
     }
     try {
         context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), listItems.length, conf.SourceList, conf.DestinationList));
-        await listItems.reduce((chain, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
+        await listItems.reduce((chain: Promise<any>, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
         await HandleItemsWithParent(dataCtx);
-        Logger.log({ message: "Copy of list items done.", data: { conf }, level: LogLevel.Info });
+        Logger.log({ message: "(CopyItems) Copy of list items done.", data: { conf }, level: LogLevel.Info });
     } catch (err) {
         throw err;
     }

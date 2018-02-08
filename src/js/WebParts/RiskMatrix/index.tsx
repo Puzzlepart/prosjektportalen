@@ -37,10 +37,6 @@ export default class RiskMatrix extends React.PureComponent<IRiskMatrixProps, IR
         }
     }
 
-    public shouldComponentUpdate(nextProps: IRiskMatrixProps, nextState: IRiskMatrixState) {
-        return true;
-    }
-
     public render(): JSX.Element {
         let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
 

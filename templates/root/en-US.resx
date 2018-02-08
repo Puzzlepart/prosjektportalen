@@ -156,6 +156,9 @@
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Extensions</value>
   </data>
+  <data name="Lists_SiteTemplates_Title" xml:space="preserve">
+    <value>Site Templates</value>
+  </data>
   <data name="Lists_QuickLinks_Title" xml:space="preserve">
     <value>Quick Links</value>
   </data>
@@ -465,6 +468,9 @@
   <data name="ContentTypes_Utvidelse_Name" xml:space="preserve">
     <value>Extension</value>
   </data>
+  <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
+    <value>Site Template</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
@@ -526,6 +532,9 @@
     <value>Create a new list item.</value>
   </data>
   <data name="ContentTypes_Utvidelse_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="ContentTypes_SiteTemplate_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ContentTypes_Section_Description" xml:space="preserve">
@@ -972,6 +981,9 @@
   <data name="SiteFields_GtOrder_DisplayName" xml:space="preserve">
     <value>Order</value>
   </data>
+  <data name="SiteFields_GtIsDefault_DisplayName" xml:space="preserve">
+    <value>Default</value>
+  </data>
   <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
     <value>Query</value>
   </data>
@@ -1363,6 +1375,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtIsDefault_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
@@ -2448,6 +2463,9 @@
   </data>
   <data name="SiteSettings_Link_StatusSections" xml:space="preserve">
     <value>Project Portal - Status Sections</value>
+  </data>
+  <data name="SiteSettings_Link_SiteTemplates" xml:space="preserve">
+    <value>Project Portal - Site Templates</value>
   </data>
   <data name="SiteSettings_Link_Log" xml:space="preserve">
     <value>Project Portal - Logs</value>

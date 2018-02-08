@@ -25,11 +25,7 @@ namespace PP {
      */
     function initPnp() {
         pnp.setup({
-            sp: {
-                headers: {
-                    "Accept": "application/json; odata=verbose",
-                },
-            },
+            sp: { headers: { Accept: "application/json; odata=verbose" } },
             defaultCachingStore: "session",
             defaultCachingTimeoutSeconds: 60,
         });
@@ -42,7 +38,7 @@ namespace PP {
         initPnp();
         Forms.InitializeModifications();
         WebParts.RenderWebPartsOnPage();
-        StampVersion("startNavigation", "pp_version");
+        StampVersion("startNavigation", "pp_version", "v", 40);
     }
 }
 

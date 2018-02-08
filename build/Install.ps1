@@ -93,7 +93,7 @@ function Start-Install() {
     if (-not $Upgrade.IsPresent) {
         Write-Host "############################################################################" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
-        Write-Host "Installing Prosjektportalen ([version])" -ForegroundColor Green
+        Write-Host "Installing Prosjektportalen ({package-version})" -ForegroundColor Green
         Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
@@ -120,6 +120,31 @@ function Start-Install() {
         Set-PnPTraceLog -Off
     }
   
+    # Installing taxonomy if switch SkipTaxonomy is not present
+    if (-not $SkipTaxonomy.IsPresent) {
+        Connect-SharePoint $Url  
+        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
+        $lcid = Get-TermStoreDefaultLanguage
+        Apply-Template -Template "taxonomy-$($lcid)"
+        Write-Host "DONE" -ForegroundColor Green
+    }
+
+    # Installing root package if switch SkipRootPackage is not present
+    if (-not $SkipRootPackage.IsPresent) {
+        try {
+            Connect-SharePoint $Url    
+            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
+    }  
 
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
@@ -154,32 +179,6 @@ function Start-Install() {
             exit 1 
         }
     }
-  
-    # Installing taxonomy if switch SkipTaxonomy is not present
-    if (-not $SkipTaxonomy.IsPresent) {
-        Connect-SharePoint $Url  
-        Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
-        $lcid = Get-TermStoreDefaultLanguage
-        Apply-Template -Template "taxonomy-$($lcid)"
-        Write-Host "DONE" -ForegroundColor Green
-    }
-
-    # Installing root package if switch SkipRootPackage is not present
-    if (-not $SkipRootPackage.IsPresent) {
-        try {
-            Connect-SharePoint $Url    
-            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
-            Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
-        }
-        catch {
-            Write-Host
-            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
-        }
-    }
 
     # Installing data package
     if (-not $SkipData.IsPresent) {
@@ -194,6 +193,7 @@ function Start-Install() {
             Write-Host
             Write-Host "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
             Write-Host $error[0] -ForegroundColor Red
+            exit 1 
         }
     }
 
@@ -210,6 +210,7 @@ function Start-Install() {
             Write-Host
             Write-Host "Error installing default config to $Url" -ForegroundColor Red
             Write-Host $error[0] -ForegroundColor Red
+            exit 1 
         }
     }
 
@@ -237,6 +238,7 @@ function Start-Install() {
                 Write-Host
                 Write-Host "Error installing extensions to $Url" -ForegroundColor Red
                 Write-Host $error[0] -ForegroundColor Red
+                exit 1 
             }
         }
     }

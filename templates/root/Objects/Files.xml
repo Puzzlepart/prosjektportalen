@@ -1,6 +1,6 @@
 <pnp:Files 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2016/05/ProvisioningSchema">
-    <pnp:File Src="SitePages\Home.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:File Src="SitePages\Home.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:PortfolioPage_Homepage_Title}" />
         </pnp:Properties>
@@ -37,7 +37,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\ExperienceLog.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\ExperienceLog.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_ExperienceLog_Title}" />
         </pnp:Properties>
@@ -50,7 +50,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_Portfolio_Title}" />
         </pnp:Properties>
@@ -76,7 +76,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:SiteSettings_Link_Settings}" />
         </pnp:Properties>
@@ -89,7 +89,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\NewProjectForm.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:NewProjectForm_Title}" />
         </pnp:Properties>
@@ -102,90 +102,90 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectList_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\Announcements.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\Announcements.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_Announcements_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\LatestProjects.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\LatestProjects.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_LatestProjects_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\NewProjectLink.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\NewProjectLink.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_NewProjectLink_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\QuickLinks.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\QuickLinks.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_QuickLinks_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\DynamicPortfolio.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\DynamicPortfolio.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_DynamicPortfolio_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\BenefitsOverview.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\BenefitsOverview.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_BenefitsOverview_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\ExperienceLog.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\ExperienceLog.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ExperienceLog_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\ProjectInfo.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\ProjectInfo.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectInfo_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\ProjectPhases.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\ProjectPhases.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectPhases_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\LatestLogEntries.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\LatestLogEntries.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_LatestLogEntries_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="true">
+    <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_RiskMatrix_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:Directory Src="Theme" Folder="_catalogs/theme/15" Overwrite="true" Recursive="false" IncludedExtensions="*.spcolor,*.spfont" />
+    <pnp:Directory Src="Theme" Folder="_catalogs/theme/15" Overwrite="false" Recursive="false" IncludedExtensions="*.spcolor,*.spfont" />
     <pnp:Directory Src="Resources" Folder="Resources" Overwrite="true" Recursive="false" IncludedExtensions="*.txt,*.webpart" />
 </pnp:Files>
