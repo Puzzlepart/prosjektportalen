@@ -1,0 +1,1 @@
+Site templates reside under `src\js\Provision\Template\_` and are built and packaged to `.txt` files during `gulp release`.
