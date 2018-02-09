@@ -28,7 +28,7 @@ gulp.task("copyResourcesToLib", () => {
     return gulp.src("./src/js/**/*.json").pipe(gulp.dest(config.paths.lib))
 });
 
-gulp.task("buildLib", ["copyResourcesToLib"], () => {
+gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
     var project = typescript.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
         .pipe(project(typescript.reporter.fullReporter()));
