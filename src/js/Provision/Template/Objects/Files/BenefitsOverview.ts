@@ -1,22 +1,23 @@
 import RESOURCE_MANAGER from "../../../../@localization";
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
-const BenefitsOverview: IFile = {
-    Folder: "SitePages",
-    Src: "{sitecollection}/Resources/SitePage_OneColumn.txt",
-    Url: "BenefitsOverview.aspx",
-    Overwrite: true,
-    Properties: {
-        Title: "Gevinstoversikt",
-    },
-    RemoveExistingWebParts: true,
-    WebParts: [
-        {
+export default function BenefitsOverview(language: number): IFile {
+    return {
+        Folder: "SitePages",
+        Src: "{sitecollection}/Resources/SitePage_OneColumn.txt",
+        Url: "BenefitsOverview.aspx",
+        Overwrite: true,
+        Properties: {
             Title: "Gevinstoversikt",
-            Zone: "LeftColumn",
-            Order: 0,
-            Contents: {
-                Xml: `<webParts>
+        },
+        RemoveExistingWebParts: true,
+        WebParts: [
+            {
+                Title: "Gevinstoversikt",
+                Zone: "LeftColumn",
+                Order: 0,
+                Contents: {
+                    Xml: `<webParts>
     <webPart
         xmlns="http://schemas.microsoft.com/WebPart/v3">
         <metaData>
@@ -25,7 +26,7 @@ const BenefitsOverview: IFile = {
         </metaData>
         <data>
             <properties>
-                <property name="Title" type="string">${RESOURCE_MANAGER.getResource("WebPart_BenefitsOverview_Title")}</property>
+                <property name="Title" type="string">${RESOURCE_MANAGER.getResource("WebPart_BenefitsOverview_Title", language)}</property>
                 <property name="ChromeType" type="chrometype">Default</property>
                 <property name="ChromeState" type="chromestate">Normal</property>
                 <property name="Content" type="string">&lt;div id="pp-benefitsoverview"&gt;&lt;/div&gt;</property>
@@ -33,9 +34,8 @@ const BenefitsOverview: IFile = {
         </data>
     </webPart>
 </webParts>`,
+                },
             },
-        },
-    ],
-};
-
-export default BenefitsOverview;
+        ],
+    };
+}

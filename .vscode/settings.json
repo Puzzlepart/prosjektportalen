@@ -17,7 +17,8 @@
         "manual-conf": true,
         ".github": true,
         "package-lock.json": true,
-        "src/js/Provision/Template/Objects": false
+        "templates/assets-*": true,
+        "templates/root-*": true,
     },
     "files.associations": {
         "**/webparts/**/*.txt": "xml",

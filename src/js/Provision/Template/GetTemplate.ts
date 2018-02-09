@@ -3,7 +3,6 @@ import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 import ITemplateFile from "./ITemplateFile";
 
-
 /**
  * Get template from templates library
  *

@@ -1,52 +1,43 @@
 'use strict';
 var gulp = require("gulp"),
-    color = require('gulp-color'),
     zip = require("gulp-zip"),
     format = require("string-format"),
     runSequence = require("run-sequence"),
+    log = require("fancy-log"),
     git = require("./utils/git.js"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
 
-gulp.task("copyLicense", () => {
-    return gulp.src(config.paths.license)
-        .pipe(gulp.dest(config.paths.dist))
-});
+function getReleasePackageName() {
+    return new Promise((resolve, reject) => {
+        git.hash(hash => {
+            git.branch(branch => {
+                let releasePackageName = format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash);
 
-gulp.task("copyBuild", () => {
-    return gulp.src(config.paths.buildGlob)
-        .pipe(gulp.dest(config.paths.dist))
-});
+                // If we're not on the master branch, we'll include th branch name
+                if (branch !== "master") {
+                    releasePackageName = format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, branch, hash);
+                }
 
-gulp.task("copyScripts", () => {
-    return gulp.src(config.paths.scriptsGlob)
-        .pipe(gulp.dest(config.paths.distScripts))
-});
-
-gulp.task("copyManualConfig", () => {
-    return gulp.src(config.paths.manualConfGlob)
-        .pipe(gulp.dest(config.paths.dist))
-});
-
-gulp.task("zipDist", done => {
-    git.hash(hash => {
-        git.branch(branch => {
-            let zipFilename = format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash);
-            if (branch !== "master") {
-                zipFilename = format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, branch, hash);
-            }
-            gulp.src(format("{0}/**/*", config.paths.dist))
-                .pipe(zip(zipFilename))
-                .pipe(gulp.dest(config.paths.release))
-                .on('end', () => done());
+                resolve(releasePackageName);
+            });
         });
+    })
+}
+
+gulp.task("zipReleasePackage", done => {
+    getReleasePackageName().then(releasePkgName => {
+        log(`(zipReleasePackage) Release ${pkg.version} done. Find ${releasePkgName} in ${config.paths.release}`);
+        gulp.src(format("{0}/**/*", config.paths.dist))
+            .pipe(zip(releasePkgName))
+            .pipe(gulp.dest(config.paths.release))
+            .on('end', done);
     });
 });
 
 gulp.task("release", done => {
-    console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
-    runSequence("clean", "buildJsonResources", "tsLint", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", "zipDist", () => {
-        console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
+    log(`(release) Building release ${pkg.version}`);
+    runSequence("clean", "buildJsonResources", "packageProd", "buildPnpTemplateFiles", "copyReleaseFiles", "stampVersionToScripts", "zipReleasePackage", () => {
         done();
     });
 });
