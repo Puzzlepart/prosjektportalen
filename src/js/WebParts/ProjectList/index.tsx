@@ -2,10 +2,7 @@ import * as React from "react";
 import RESOURCE_MANAGER from "../../@localization";
 import { Site } from "sp-pnp-js";
 import Masonry from "react-masonry-component";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
@@ -37,9 +34,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         });
     }
 
-    /**
-    * Component did mount
-    */
     public async componentDidMount() {
         try {
             const data = await this.fetchData();

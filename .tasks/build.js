@@ -1,5 +1,5 @@
 'use strict';
-var gulp = require("gulp"),
+const gulp = require("gulp"),
     typescript = require("gulp-typescript"),
     config = require('./@configuration.js'),
     merge = require("merge2"),
@@ -20,92 +20,69 @@ var gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
-gulp.task("copyAssetsToDist", () => {
-    return gulp.src(config.paths.assetsFilesGlob).pipe(gulp.dest(config.paths.dist))
-});
+//#region Helpers
+function replaceVersionToken(hash) {
+    return replace(config.versionToken, format("{0}.{1}", pkg.version, hash));
+}
+//#endregion
 
-gulp.task("copyResourcesToLib", () => {
-    return gulp.src("./src/js/**/*.json").pipe(gulp.dest(config.paths.lib))
-});
-
-gulp.task("buildLib", ["copyResourcesToLib"], () => {
-    var project = typescript.createProject("tsconfig.json", { declaration: true });
-    var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(typescript.reporter.fullReporter()));
+gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
+    const project = typescript.createProject("tsconfig.json", { declaration: true });
+    const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()));
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
 gulp.task("buildJsonResources", () => {
-    return gulp.src(config.resources.glob)
+    return gulp.src(config.globs.resx)
         .pipe(resx2())
         .pipe(rename(path => {
             path.extname = ".json"
         }))
-        .pipe(gulp.dest(config.resources.json));
+        .pipe(gulp.dest(path.join(config.paths.source, "js", "Resources")));
 });
 
 gulp.task("buildTheme", () => {
-    return gulp.src(config.theme.glob)
+    return gulp.src(config.globs.theme)
         .pipe(spcs())
-        .pipe(rename(path => {
-            path.extname += ".styl"
-        }))
-        .pipe(gulp.dest(config.theme.styl));
+        .pipe(rename(path => { path.extname += ".styl" }))
+        .pipe(gulp.dest(path.join(config.paths.source, "css", "conf")));
 });
 
-gulp.task("copyPnpTemplates", () => {
-    return gulp.src(config.paths.templatesGlob)
-        .pipe(gulp.dest(config.paths.templates_temp));
-});
-
-gulp.task("copyPnpRootTemplate", () => {
-    const src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
-});
-
-gulp.task("copyResourcesToAssetsTemplate", () => {
-    const src = gulp.src(format("{0}/**/*.*", config.paths.dist))
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
-});
-
-gulp.task("copyThirdPartyLibsToTemplate", () => {
-    const src = gulp.src([
-        format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
-        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
-    ]);
-    return src.pipe(gulp.dest(format("{0}/thirdparty/libs", config.paths.templates_temp)));
-});
 
 gulp.task("stampVersionToTemplates", done => {
+    const src = gulp.src(path.join(config.paths.templatesTemp, "**", "*.xml"));
     git.hash(hash => {
-        gulp.src("./_templates/**/*.xml")
-            .pipe(flatmap((stream, file) => {
-                return stream
-                    .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
-                    .pipe(gulp.dest(config.paths.templates_temp))
-            }))
-            .on('end', done);
+        es.concat(src.pipe(flatmap((stream, file) => {
+            return stream
+                .pipe(replaceVersionToken(hash))
+                .pipe(gulp.dest(config.paths.templatesTemp))
+        }))).on('end', done);
     });
 });
 
-gulp.task("stampVersionToDist", done => {
+gulp.task("stampVersionToScripts", done => {
+    const src = gulp.src(path.join(config.paths.dist, "*.ps1"));
     git.hash(hash => {
-        es.concat(
-            gulp.src("./dist/*.ps1")
-                .pipe(flatmap((stream, file) => {
-                    return stream
-                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
-                        .pipe(gulp.dest(config.paths.dist))
-                }))
-        )
-            .on('end', done);
+        es.concat(src.pipe(flatmap((stream, file) => {
+            return stream
+                .pipe(replaceVersionToken(hash))
+                .pipe(gulp.dest(config.paths.dist))
+        }))).on('end', done);
     });
 });
 
-gulp.task("buildPnpTemplateFiles", done => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
-        powershell.execute("Build-PnP-Templates.ps1", "", done);
-    })
+gulp.task("convertPnpTemplates", done => {
+    powershell.execute("Build-PnP-Templates.ps1", "")
+        .then(() => {
+            done();
+        })
+        .catch(err => {
+            console.log(err);
+        });
+});
+
+gulp.task("buildPnpTemplateFiles", ["copyPnpTemplates"], done => {
+    runSequence("localizePnpTemplates", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", "convertPnpTemplates", done);
 });
 
 gulp.task("buildSiteTemplates", done => {

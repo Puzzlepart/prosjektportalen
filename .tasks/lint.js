@@ -4,7 +4,7 @@ var gulp = require("gulp"),
     config = require('./@configuration.js');
 
 gulp.task("tsLint", () => {
-    return gulp.src(config.paths.sourceGlob)
+    return gulp.src(config.globs.js)
         .pipe(tslint({ formatter: config.lint.formatter }))
         .pipe(tslint.report({ emitError: config.lint.emitError }));
 });

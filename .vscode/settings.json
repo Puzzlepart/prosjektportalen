@@ -16,7 +16,9 @@
         ".gitignore": true,
         "manual-conf": true,
         ".github": true,
-        "package-lock.json": true
+        "package-lock.json": true,
+        "templates/assets-*": true,
+        "templates/root-*": true,
     },
     "files.associations": {
         "**/webparts/**/*.txt": "xml",

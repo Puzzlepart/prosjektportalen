@@ -2,32 +2,14 @@
 <pnp:Provisioning 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
+    <pnp:Localizations>
+        <pnp:Localization LCID="1033" Name="Norwegian" ResourceFile="en-US.resx" />
+        <pnp:Localization LCID="1044" Name="English (US)" ResourceFile="en-US.resx" />
+    </pnp:Localizations>
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS-1033" Version="0">
-            <pnp:Files>
-                <pnp:File Src="sitetemplates\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
-                    <pnp:Properties>
-                        <pnp:Property Key="GtOrder" Value="10" />
-                        <pnp:Property Key="GtIsEnabled" Value="1" />
-                        <pnp:Property Key="Title" Value="Full template" />
-                        <pnp:Property Key="Comments" Value="This template contains all lists, fields and pages." />
-                        <pnp:Property Key="GtIsDefault" Value="1" />
-                    </pnp:Properties>
-                </pnp:File>
-                    <pnp:File Src="sitetemplates\LiteTemplate.txt" Folder="SiteTemplates" Overwrite="true">
-                    <pnp:Properties>
-                        <pnp:Property Key="GtOrder" Value="20" />
-                        <pnp:Property Key="GtIsEnabled" Value="1" />
-                        <pnp:Property Key="Title" Value="Lite template" />
-                        <pnp:Property Key="Comments" Value="This is a simplified version that does not contain lists for benefit work." />
-                        <pnp:Property Key="GtIsDefault" Value="0" />
-                    </pnp:Properties>
-                </pnp:File>
-                <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
-                <pnp:Directory Src="css\" Folder="siteassets/pp/css" Overwrite="true" Recursive="false" IncludedExtensions="*.css" />
-                <pnp:Directory Src="img\" Folder="siteassets/pp/img" Overwrite="true" Recursive="false" IncludedExtensions="*.png" />
-                <pnp:Directory Src="config\1033" Folder="siteassets/pp/config" Overwrite="true" Recursive="false" IncludedExtensions="*.txt" />
-            </pnp:Files>
+            <xi:include 
+                xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Files.xml" />
         </pnp:ProvisioningTemplate>
     </pnp:Templates>
 </pnp:Provisioning>

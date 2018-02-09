@@ -31,7 +31,7 @@ function __startWatch(packageCodeFunc) {
             uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
         })
     });
-    watch(config.resources.glob).on("change", () => {
+    watch(config.globs.resxJson).on("change", () => {
         runSequence("buildJsonResources");
     });
 }
