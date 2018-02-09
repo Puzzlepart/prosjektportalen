@@ -32,7 +32,7 @@ module.exports = {
         resx: "./templates/root/*.resx",
     },
     assets: {
-        fileTypes: ["png", "txt", "md"],
+        fileTypes: ["png", "md"],
     },
     stylus: {
         compress: false,
