@@ -3,9 +3,9 @@ import { Files, Lists, Navigation, WebSettings, ComposedLook } from "../Objects"
 
 export default function FullTemplate(language: number): Schema {
     return {
-        Files: Files(language),
-        Lists: Lists(language),
-        Navigation: Navigation(language),
+        Files,
+        Lists,
+        Navigation,
         WebSettings,
         ComposedLook,
         Features: [{
