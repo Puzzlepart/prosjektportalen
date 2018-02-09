@@ -32,7 +32,7 @@ gulp.task("copyResourcesToLib", () => {
 gulp.task("buildLib", ["copyResourcesToLib"], () => {
     var project = typescript.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(typescript.reporter.nullReporter()));
+        .pipe(project(typescript.reporter.fullReporter()));
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
@@ -84,14 +84,12 @@ gulp.task("copyThirdPartyLibsToTemplate", () => {
 
 gulp.task("stampVersionToTemplates", cb => {
     git.hash(hash => {
-        es.concat(
-            gulp.src("./_templates/**/*.xml")
-                .pipe(flatmap((stream, file) => {
-                    return stream
-                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
-                        .pipe(gulp.dest(config.paths.templates_temp))
-                }))
-        )
+        gulp.src("./_templates/**/*.xml")
+            .pipe(flatmap((stream, file) => {
+                return stream
+                    .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
+                    .pipe(gulp.dest(config.paths.templates_temp))
+            }))
             .on('end', cb);
     });
 });
@@ -119,13 +117,17 @@ gulp.task("buildPnpTemplateFiles", (done) => {
 gulp.task("buildSiteTemplates", done => {
     // Faking _spPageContextInfo to be able to use localization
     global._spPageContextInfo = {};
+
     const files = [];
-    const basePath = path.join(__dirname, "../_templates");
-    config.siteTemplates.forEach(template => {
-        const js = require(format("../lib/Provision/Template/{0}.js", template));
-        files.push({
-            path: path.join(basePath, format("{0}.txt", template)),
-            contents: JSON.stringify(js),
+    const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
+
+    config.siteTemplates.forEach(tmpl => {
+        const tmplJs = require(format("../lib/Provision/Template/{0}.js", tmpl)).default;
+        config.availableLanguages.forEach(lang => {
+            files.push({
+                path: format(filepath, lang.toString(), tmpl),
+                contents: JSON.stringify(tmplJs(lang)),
+            });
         });
     });
     const fileWritePromises = [];
