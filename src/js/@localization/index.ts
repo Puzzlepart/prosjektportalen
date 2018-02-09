@@ -11,7 +11,8 @@ export default new class Localization {
      * @param {number} language Language
      */
     public getResource(key: string, language = _spPageContextInfo.webLanguage): string {
-        return this.__resources[language][key];
+        const dict = this.__resources[language];
+        return dict ? dict[key] : "";
     }
 };
 

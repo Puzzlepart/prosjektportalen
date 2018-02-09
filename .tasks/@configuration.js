@@ -48,5 +48,6 @@ module.exports = {
         v: pkg.version,
         token: "{package-version}"
     },
-    availableLanguages: ["1033", "1044"]
+    availableLanguages: [1033, 1044],
+    siteTemplates: ["FullTemplate", "LiteTemplate"]
 }

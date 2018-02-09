@@ -12,20 +12,20 @@ var gulp = require("gulp"),
     fs = require('fs'),
     es = require('event-stream'),
     path = require("path"),
+    log = require("fancy-log"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
     git = require("./utils/git.js"),
+    file = require("./utils/file.js"),
     format = require("string-format"),
     pkg = require("../package.json");
 
 gulp.task("copyAssetsToDist", () => {
-    return gulp.src(config.paths.assetsFilesGlob)
-        .pipe(gulp.dest(config.paths.dist))
+    return gulp.src(config.paths.assetsFilesGlob).pipe(gulp.dest(config.paths.dist))
 });
 
 gulp.task("copyResourcesToLib", () => {
-    return gulp.src("./src/js/**/*.json")
-        .pipe(gulp.dest(config.paths.lib))
+    return gulp.src("./src/js/**/*.json").pipe(gulp.dest(config.paths.lib))
 });
 
 gulp.task("buildLib", ["copyResourcesToLib"], () => {
@@ -64,12 +64,16 @@ gulp.task("copyPnpRootTemplate", () => {
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
+<<<<<<< HEAD
     const src = gulp.src([
         format("{0}/**/*.js", config.paths.dist),
         format("{0}/**/*.css", config.paths.dist),
         format("{0}/**/*.png", config.paths.dist),
         format("{0}/**/*.txt", config.paths.dist),
         format("{0}/**/*.js", config.paths.build)])
+=======
+    const src = gulp.src(format("{0}/**/*.*", config.paths.dist))
+>>>>>>> master
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
 
@@ -81,21 +85,19 @@ gulp.task("copyThirdPartyLibsToTemplate", () => {
     return src.pipe(gulp.dest(format("{0}/thirdparty/libs", config.paths.templates_temp)));
 });
 
-gulp.task("stampVersionToTemplates", cb => {
+gulp.task("stampVersionToTemplates", done => {
     git.hash(hash => {
-        es.concat(
-            gulp.src("./_templates/**/*.xml")
-                .pipe(flatmap((stream, file) => {
-                    return stream
-                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
-                        .pipe(gulp.dest(config.paths.templates_temp))
-                }))
-        )
-            .on('end', cb);
+        gulp.src("./_templates/**/*.xml")
+            .pipe(flatmap((stream, file) => {
+                return stream
+                    .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
+                    .pipe(gulp.dest(config.paths.templates_temp))
+            }))
+            .on('end', done);
     });
 });
 
-gulp.task("stampVersionToDist", cb => {
+gulp.task("stampVersionToDist", done => {
     git.hash(hash => {
         es.concat(
             gulp.src("./dist/*.ps1")
@@ -105,12 +107,37 @@ gulp.task("stampVersionToDist", cb => {
                         .pipe(gulp.dest(config.paths.dist))
                 }))
         )
-            .on('end', cb);
+            .on('end', done);
     });
 });
 
-gulp.task("buildPnpTemplateFiles", (done) => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
+gulp.task("buildPnpTemplateFiles", done => {
+    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
+});
+
+gulp.task("buildSiteTemplates", done => {
+    // Faking _spPageContextInfo to be able to use localization
+    global._spPageContextInfo = {};
+
+    const files = [];
+    const jspath = "../lib/Provision/Template/_/{0}.js";
+    const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
+
+    config.siteTemplates.forEach(tmpl => {
+        const tmplJs = require(format(jspath, tmpl)).default;
+        config.availableLanguages.forEach(lcid => {
+            log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lcid}`)
+            files.push({
+                path: format(filepath, lcid.toString(), tmpl),
+                contents: JSON.stringify(tmplJs(lcid)),
+            });
+        });
+    });
+    const fileWritePromises = [];
+    files.forEach(f => {
+        fileWritePromises.push(file.write(f.path, f.contents));
+    });
+    Promise.all(fileWritePromises).then(() => done());
 });
