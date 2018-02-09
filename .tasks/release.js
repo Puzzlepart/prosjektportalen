@@ -37,7 +37,5 @@ gulp.task("zipReleasePackage", done => {
 
 gulp.task("release", done => {
     log(`(release) Building release ${pkg.version}`);
-    runSequence("clean", "buildJsonResources", "packageProd", "buildPnpTemplateFiles", "copyReleaseFiles", "stampVersionToScripts", "zipReleasePackage", () => {
-        done();
-    });
+    runSequence("clean", "packageProd", "buildPnpTemplateFiles", "copyReleaseFiles", "stampVersionToScripts", "zipReleasePackage", done);
 });

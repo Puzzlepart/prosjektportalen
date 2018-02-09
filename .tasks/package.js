@@ -4,6 +4,7 @@ var gulp = require("gulp"),
     webpackConfigDev = require('../webpack.config.development.js'),
     webpackConfigProduction = require('../webpack.config.production.js'),
     stylus = require('gulp-stylus'),
+    runSequence = require("run-sequence"),
     pluginError = require('plugin-error'),
     config = require('./@configuration.js');
 
@@ -38,6 +39,6 @@ gulp.task("packageCodeMinify", ["buildLib"], done => {
     });
 });
 
-gulp.task("packageProd", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done => {
-    done();
+gulp.task("packageProd", done => {
+    runSequence("buildJsonResources", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done);
 });
