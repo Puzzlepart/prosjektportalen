@@ -63,7 +63,6 @@ gulp.task("copyConfigToAssetsTemplate", () => {
     }));
 });
 
-
 gulp.task("copyResourcesToAssetsTemplate", ["copyConfigToAssetsTemplate"], () => {
     const glob = ["js", "css", ...config.assets.fileTypes].map(ext => {
         return path.join(config.paths.dist, "**", `*.${ext}`);
