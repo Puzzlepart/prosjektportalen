@@ -10,25 +10,21 @@ var gulp = require("gulp"),
     config = require('./@configuration.js');
 
 gulp.task("packageCode", ["buildLib"], done => {
-    webpack(wpDev("source-map"), (err, stats) => {
-        if (err) {
-            throw new pluginError("packageCode", err);
-        }
+    webpack(wpDev("source-map"), err => {
+        if (err) throw new pluginError("packageCode", err);
         done();
     });
 });
 
 gulp.task("packageCodeEval", ["buildLib"], done => {
-    webpack(wpDev("eval"), (err, stats) => {
-        if (err) {
-            throw new pluginError("packageCodeEval", err);
-        }
+    webpack(wpDev("eval"), err => {
+        if (err) throw new pluginError("packageCodeEval", err)
         done();
     });
 });
 
 gulp.task("packageStyles", ["buildTheme"], done => {
-    return gulp.src(config.paths.stylesMain)
+    return gulp.src(config.globs.styles)
         .pipe(stylus(config.stylus))
         .pipe(gulp.dest(config.paths.dist));
 });
@@ -38,10 +34,8 @@ gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], done 
 });
 
 gulp.task("packageCodeMinify", ["buildLib"], done => {
-    webpack(wpProd(), (err, stats) => {
-        if (err) {
-            throw new pluginError("packageCodeMinify", err);
-        }
+    webpack(wpProd(), err => {
+        if (err) throw new pluginError("packageCodeMinify", err)
         done();
     });
 });

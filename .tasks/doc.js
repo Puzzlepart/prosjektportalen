@@ -7,6 +7,6 @@ let gulp = require("gulp"),
 
 gulp.task("doc", () => {
     return gulp
-        .src(config.paths.sourceGlob)
+        .src(config.globs.js)
         .pipe(typedoc(typedocConfig));
 });

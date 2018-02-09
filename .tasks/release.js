@@ -1,32 +1,12 @@
 'use strict';
 var gulp = require("gulp"),
-    color = require('gulp-color'),
     zip = require("gulp-zip"),
     format = require("string-format"),
     runSequence = require("run-sequence"),
+    log = require("fancy-log"),
     git = require("./utils/git.js"),
     pkg = require("../package.json"),
     config = require('./@configuration.js');
-
-gulp.task("copyLicense", () => {
-    return gulp.src(config.paths.license)
-        .pipe(gulp.dest(config.paths.dist))
-});
-
-gulp.task("copyBuild", () => {
-    return gulp.src(config.paths.buildGlob)
-        .pipe(gulp.dest(config.paths.dist))
-});
-
-gulp.task("copyScripts", () => {
-    return gulp.src(config.paths.scriptsGlob)
-        .pipe(gulp.dest(config.paths.distScripts))
-});
-
-gulp.task("copyManualConfig", () => {
-    return gulp.src(config.paths.manualConfGlob)
-        .pipe(gulp.dest(config.paths.dist))
-});
 
 gulp.task("zipReleasePackage", done => {
     git.hash(hash => {
@@ -44,9 +24,9 @@ gulp.task("zipReleasePackage", done => {
 });
 
 gulp.task("release", done => {
-    console.log(color(`[Building release ${pkg.version}]`, 'GREEN'));
+    log(`(release) Building release ${pkg.version}`);
     runSequence("clean", "buildJsonResources", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", "zipReleasePackage", () => {
-        console.log(color(`[Build done. Find your .zip in /releases]`, 'GREEN'));
+        log(`(release) Build done. Find your .zip in ${config.paths.release}`);
         done();
     });
 });

@@ -1,5 +1,5 @@
 'use strict';
-var gulp = require("gulp"),
+const gulp = require("gulp"),
     typescript = require("gulp-typescript"),
     config = require('./@configuration.js'),
     merge = require("merge2"),
@@ -20,68 +20,36 @@ var gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
-gulp.task("copyAssetsToDist", () => {
-    return gulp.src(config.paths.assetsFilesGlob).pipe(gulp.dest(config.paths.dist))
-});
-
-gulp.task("copyResourcesToLib", () => {
-    return gulp.src("./src/js/**/*.json").pipe(gulp.dest(config.paths.lib))
-});
 
 gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
-    var project = typescript.createProject("tsconfig.json", { declaration: true });
-    var built = gulp.src(config.paths.sourceGlob)
+    const project = typescript.createProject("tsconfig.json", { declaration: true });
+    const built = gulp.src(config.globs.js)
         .pipe(project(typescript.reporter.fullReporter()));
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
 gulp.task("buildJsonResources", () => {
-    return gulp.src(config.resources.glob)
+    return gulp.src(config.globs.resx)
         .pipe(resx2())
         .pipe(rename(path => {
             path.extname = ".json"
         }))
-        .pipe(gulp.dest(config.resources.json));
+        .pipe(gulp.dest(path.join(config.paths.source, "js", "Resources")));
 });
 
 gulp.task("buildTheme", () => {
-    return gulp.src(config.theme.glob)
+    return gulp.src(config.globs.theme)
         .pipe(spcs())
-        .pipe(rename(path => {
-            path.extname += ".styl"
-        }))
-        .pipe(gulp.dest(config.theme.styl));
-});
-
-gulp.task("copyPnpTemplates", () => {
-    return gulp.src(config.paths.templatesGlob)
-        .pipe(gulp.dest(config.paths.templates_temp));
-});
-
-gulp.task("copyPnpRootTemplate", () => {
-    const src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
-});
-
-gulp.task("copyResourcesToAssetsTemplate", () => {
-    const src = gulp.src(format("{0}/**/*.*", config.paths.dist))
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
-});
-
-gulp.task("copyThirdPartyLibsToTemplate", () => {
-    const src = gulp.src([
-        format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
-        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
-    ]);
-    return src.pipe(gulp.dest(format("{0}/thirdparty/libs", config.paths.templates_temp)));
+        .pipe(rename(path => { path.extname += ".styl" }))
+        .pipe(gulp.dest(path.join(config.paths.source, "css", "conf")));
 });
 
 gulp.task("stampVersionToTemplates", done => {
     git.hash(hash => {
-        gulp.src("./_templates/**/*.xml")
+        gulp.src(path.join(config.paths.templates_temp, "**", "*.xml"))
             .pipe(flatmap((stream, file) => {
                 return stream
-                    .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
+                    .pipe(replace(config.versionToken, format("{0}.{1}", pkg.version, hash)))
                     .pipe(gulp.dest(config.paths.templates_temp))
             }))
             .on('end', done);
@@ -91,10 +59,10 @@ gulp.task("stampVersionToTemplates", done => {
 gulp.task("stampVersionToDist", done => {
     git.hash(hash => {
         es.concat(
-            gulp.src("./dist/*.ps1")
+            gulp.src(path.join(config.paths.dist, "*.ps1"))
                 .pipe(flatmap((stream, file) => {
                     return stream
-                        .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
+                        .pipe(replace(config.versionToken, format("{0}.{1}", pkg.version, hash)))
                         .pipe(gulp.dest(config.paths.dist))
                 }))
         )
