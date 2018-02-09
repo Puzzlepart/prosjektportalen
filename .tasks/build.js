@@ -20,13 +20,11 @@ var gulp = require("gulp"),
     pkg = require("../package.json");
 
 gulp.task("copyAssetsToDist", () => {
-    return gulp.src(config.paths.assetsFilesGlob)
-        .pipe(gulp.dest(config.paths.dist))
+    return gulp.src(config.paths.assetsFilesGlob)        .pipe(gulp.dest(config.paths.dist))
 });
 
 gulp.task("copyResourcesToLib", () => {
-    return gulp.src("./src/js/**/*.json")
-        .pipe(gulp.dest(config.paths.lib))
+    return gulp.src("./src/js/**/*.json")        .pipe(gulp.dest(config.paths.lib))
 });
 
 gulp.task("buildLib", ["copyResourcesToLib"], () => {
@@ -82,7 +80,7 @@ gulp.task("copyThirdPartyLibsToTemplate", () => {
     return src.pipe(gulp.dest(format("{0}/thirdparty/libs", config.paths.templates_temp)));
 });
 
-gulp.task("stampVersionToTemplates", cb => {
+gulp.task("stampVersionToTemplates", done => {
     git.hash(hash => {
         gulp.src("./_templates/**/*.xml")
             .pipe(flatmap((stream, file) => {
@@ -90,11 +88,11 @@ gulp.task("stampVersionToTemplates", cb => {
                     .pipe(replace(config.version.token, format("{0}.{1}", config.version.v, hash)))
                     .pipe(gulp.dest(config.paths.templates_temp))
             }))
-            .on('end', cb);
+            .on('end', done);
     });
 });
 
-gulp.task("stampVersionToDist", cb => {
+gulp.task("stampVersionToDist", done => {
     git.hash(hash => {
         es.concat(
             gulp.src("./dist/*.ps1")
@@ -104,12 +102,12 @@ gulp.task("stampVersionToDist", cb => {
                         .pipe(gulp.dest(config.paths.dist))
                 }))
         )
-            .on('end', cb);
+            .on('end', done);
     });
 });
 
-gulp.task("buildPnpTemplateFiles", (done) => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
+gulp.task("buildPnpTemplateFiles", done => {
+    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });
