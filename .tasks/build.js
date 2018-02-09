@@ -23,8 +23,7 @@ const gulp = require("gulp"),
 
 gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
     const project = typescript.createProject("tsconfig.json", { declaration: true });
-    const built = gulp.src(config.globs.js)
-        .pipe(project(typescript.reporter.fullReporter()));
+    const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()));
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
@@ -46,17 +45,17 @@ gulp.task("buildTheme", () => {
 
 gulp.task("stampVersionToTemplates", done => {
     git.hash(hash => {
-        gulp.src(path.join(config.paths.templates_temp, "**", "*.xml"))
+        gulp.src(path.join(config.paths.templatesTemp, "**", "*.xml"))
             .pipe(flatmap((stream, file) => {
                 return stream
                     .pipe(replace(config.versionToken, format("{0}.{1}", pkg.version, hash)))
-                    .pipe(gulp.dest(config.paths.templates_temp))
+                    .pipe(gulp.dest(config.paths.templatesTemp))
             }))
             .on('end', done);
     });
 });
 
-gulp.task("stampVersionToDist", done => {
+gulp.task("stampVersionToScripts", done => {
     git.hash(hash => {
         es.concat(
             gulp.src(path.join(config.paths.dist, "*.ps1"))

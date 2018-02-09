@@ -25,7 +25,7 @@ gulp.task("zipReleasePackage", done => {
 
 gulp.task("release", done => {
     log(`(release) Building release ${pkg.version}`);
-    runSequence("clean", "buildJsonResources", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToDist", "zipReleasePackage", () => {
+    runSequence("clean", "buildJsonResources", "packageProd", "buildPnpTemplateFiles", "copyBuild", "copyManualConfig", "copyScripts", "copyLicense", "stampVersionToScripts", "zipReleasePackage", () => {
         log(`(release) Build done. Find your .zip in ${config.paths.release}`);
         done();
     });

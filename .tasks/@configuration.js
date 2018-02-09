@@ -14,7 +14,7 @@ module.exports = {
         temp: "./temp",
         docs: "./docs",
         templates: "./templates",
-        templates_temp: "./_templates",
+        templatesTemp: "./_templates",
         scripts: "./.scripts"
     },
     globs: {
@@ -44,5 +44,12 @@ module.exports = {
     },
     versionToken: "{package-version}",
     availableLanguages: [1033, 1044],
-    siteTemplates: ["FullTemplate", "LiteTemplate"]
+    siteTemplates: [
+        "FullTemplate",
+        "LiteTemplate",
+    ],
+    thirdPartyLibs: [
+        "xlsx/dist/xlsx.full.min.js",
+        "file-saver/FileSaver.min.js",
+    ],
 }

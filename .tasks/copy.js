@@ -2,6 +2,7 @@
 const gulp = require("gulp"),
     path = require("path"),
     es = require("event-stream"),
+    log = require("fancy-log"),
     format = require("string-format"),
     config = require("./@configuration.js");
 
@@ -22,7 +23,7 @@ gulp.task("copyManualConfig", () => {
 });
 
 gulp.task("copyAssetsToDist", () => {
-    const src = config.assets.fileTypes.map(ext => `./src/**/*.${ext}`);
+    const src = config.assets.fileTypes.map(ext => path.join(config.paths.source, "**", `*.${ext}`));
     return gulp.src(src).pipe(gulp.dest(config.paths.dist))
 });
 
@@ -31,27 +32,33 @@ gulp.task("copyResourcesToLib", () => {
 });
 
 gulp.task("copyPnpTemplates", () => {
-    return gulp.src(config.globs.templates).pipe(gulp.dest(config.paths.templates_temp));
+    return gulp.src(config.globs.templates).pipe(gulp.dest(config.paths.templatesTemp));
 });
 
 gulp.task("copyPnpRootTemplate", () => {
-    const src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
-    return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
+    const src = gulp.src(path.join(config.paths.templatesTemp, "**", "*"));
+    return es.concat(config.availableLanguages.map(lcid => {
+        log(`(copyPnpRootTemplate) Creating template root-${lcid}`);
+        return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `root-${lcid}`)));
+    }));
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
-    const src = ["js", "css", config.paths.assets.fileTypes].map(ext => {
+    const glob = ["js", "css", ...config.assets.fileTypes].map(ext => {
         return path.join(config.paths.dist, "**", `*.${ext}`);
     });
+    const src = gulp.src(glob);
     return es.concat(config.availableLanguages.map(lcid => {
-        return src.pipe(gulp.dest(path.join(config.paths.templates_temp, `assets-${lcid}`)));
+        log(`(copyResourcesToAssetsTemplate) Copying resources to template assets-${lcid}`);
+        return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `assets-${lcid}`)));
     }));
 });
 
 gulp.task("copyThirdPartyLibsToTemplate", () => {
-    const src = gulp.src([
-        format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
-        format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
-    ]);
-    return src.pipe(gulp.dest(path.join(config.paths.templates_temp, "thirdparty", "libs")));
+    const glob = config.thirdPartyLibs.map(tpl => {
+        log(`(copyThirdPartyLibsToTemplate) Copying lib '${tpl}' to template thirdparty`);
+        return path.join(config.paths.nodeModules, tpl);
+    });
+    const src = gulp.src(glob);
+    return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, "thirdparty", "libs")));
 });
