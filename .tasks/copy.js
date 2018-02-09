@@ -36,14 +36,35 @@ gulp.task("copyPnpTemplates", () => {
 });
 
 gulp.task("copyPnpRootTemplate", () => {
-    const src = gulp.src(path.join(config.paths.templatesTemp, "**", "*"));
+    const src = gulp.src(path.join(config.paths.templatesTemp, "root", "**", "*"));
     return es.concat(config.availableLanguages.map(lcid => {
         log(`(copyPnpRootTemplate) Creating template root-${lcid}`);
         return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `root-${lcid}`)));
     }));
 });
 
-gulp.task("copyResourcesToAssetsTemplate", () => {
+gulp.task("copyPnpAssetsTemplate", () => {
+    const src = gulp.src(path.join(config.paths.templatesTemp, "assets", "**", "*"));
+    return es.concat(config.availableLanguages.map(lcid => {
+        log(`(copyPnpAssetsTemplate) Creating template assets-${lcid}`);
+        return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `assets-${lcid}`)));
+    }));
+});
+
+gulp.task("localizePnpTemplates", ["copyPnpRootTemplate", "copyPnpAssetsTemplate"], done => {
+    done();
+});
+
+gulp.task("copyConfigToAssetsTemplate", () => {
+    return es.concat(config.availableLanguages.map(lcid => {
+        const glob = path.join(config.paths.source, "config", lcid.toString(), `*.txt`);
+        const src = gulp.src(glob);
+        return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `assets-${lcid}`, "config")));
+    }));
+});
+
+
+gulp.task("copyResourcesToAssetsTemplate", ["copyConfigToAssetsTemplate"], () => {
     const glob = ["js", "css", ...config.assets.fileTypes].map(ext => {
         return path.join(config.paths.dist, "**", `*.${ext}`);
     });
