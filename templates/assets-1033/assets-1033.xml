@@ -5,22 +5,13 @@
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS-1033" Version="0">
             <pnp:Files>
-                <pnp:File Src="sitetemplates\1033\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
+                <pnp:File Src="sitetemplates\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
                     <pnp:Properties>
                         <pnp:Property Key="GtOrder" Value="10" />
                         <pnp:Property Key="GtIsEnabled" Value="1" />
                         <pnp:Property Key="Title" Value="Full template" />
                         <pnp:Property Key="Comments" Value="This template contains all lists, fields and pages." />
                         <pnp:Property Key="GtIsDefault" Value="1" />
-                    </pnp:Properties>
-                </pnp:File>
-                <pnp:File Src="sitetemplates\1033\LiteTemplate.txt" Folder="SiteTemplates" Overwrite="true">
-                    <pnp:Properties>
-                        <pnp:Property Key="GtOrder" Value="20" />
-                        <pnp:Property Key="GtIsEnabled" Value="1" />
-                        <pnp:Property Key="Title" Value="Lite template" />
-                        <pnp:Property Key="Comments" Value="This is a simplified version that does not contain lists for benefit work." />
-                        <pnp:Property Key="GtIsDefault" Value="0" />
                     </pnp:Properties>
                 </pnp:File>
                 <pnp:Directory Src="js\" Folder="siteassets/pp/js" Overwrite="true" Recursive="false" IncludedExtensions="*.js,*.map" />
