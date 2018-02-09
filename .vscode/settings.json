@@ -16,12 +16,7 @@
         ".gitignore": true,
         "manual-conf": true,
         ".github": true,
-<<<<<<< HEAD
-        "package-lock.json": true,
-        "src/js/Provision/Template/Objects": false
-=======
         "package-lock.json": true
->>>>>>> master
     },
     "files.associations": {
         "**/webparts/**/*.txt": "xml",

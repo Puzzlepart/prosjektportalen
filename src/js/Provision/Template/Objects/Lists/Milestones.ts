@@ -15,13 +15,8 @@ return {
         EnableVersioning: true,
     },
     Views: [{
-<<<<<<< HEAD
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtProjectPhase", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
-=======
         Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName", language),
         ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
->>>>>>> master
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,

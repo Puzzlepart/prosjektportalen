@@ -64,16 +64,7 @@ gulp.task("copyPnpRootTemplate", () => {
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
-<<<<<<< HEAD
-    const src = gulp.src([
-        format("{0}/**/*.js", config.paths.dist),
-        format("{0}/**/*.css", config.paths.dist),
-        format("{0}/**/*.png", config.paths.dist),
-        format("{0}/**/*.txt", config.paths.dist),
-        format("{0}/**/*.js", config.paths.build)])
-=======
     const src = gulp.src(format("{0}/**/*.*", config.paths.dist))
->>>>>>> master
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
 
