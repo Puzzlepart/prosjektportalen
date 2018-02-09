@@ -1,11 +1,5 @@
 import { Schema } from "sp-pnp-provisioning/lib/schema";
-import {
-    Files,
-    Lists,
-    Navigation,
-    WebSettings,
-    ComposedLook,
-} from "./Objects";
+import { Files, Lists, Navigation, WebSettings, ComposedLook } from "../Objects";
 
 export default function FullTemplate(language: number): Schema {
     return {
