@@ -6,11 +6,15 @@ const gulp = require("gulp"),
     format = require("string-format"),
     config = require("./@configuration.js");
 
+gulp.task("copyReleaseFiles", ["copyBuildFiles", "copyManualConfig", "copyScripts", "copyLicense"], done => {
+    done();
+})
+
 gulp.task("copyLicense", () => {
     return gulp.src(config.paths.license).pipe(gulp.dest(config.paths.dist))
 });
 
-gulp.task("copyBuild", () => {
+gulp.task("copyBuildFiles", () => {
     return gulp.src(config.globs.build).pipe(gulp.dest(config.paths.dist))
 });
 
@@ -75,9 +79,9 @@ gulp.task("copyResourcesToAssetsTemplate", ["copyConfigToAssetsTemplate"], () =>
 });
 
 gulp.task("copyThirdPartyLibsToTemplate", () => {
-    const glob = config.thirdPartyLibs.map(tpl => {
-        log(`(copyThirdPartyLibsToTemplate) Copying lib '${tpl}' to template thirdparty`);
-        return path.join(config.paths.nodeModules, tpl);
+    const glob = config.thirdPartyLibs.map(libRelPath => {
+        log(`(copyThirdPartyLibsToTemplate) Copying lib '${libRelPath}' to template thirdparty`);
+        return path.join(config.paths.nodeModules, libRelPath);
     });
     const src = gulp.src(glob);
     return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, "thirdparty", "libs")));

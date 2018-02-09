@@ -20,7 +20,6 @@ const gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
-
 gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
     const project = typescript.createProject("tsconfig.json", { declaration: true });
     const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()));
@@ -43,29 +42,29 @@ gulp.task("buildTheme", () => {
         .pipe(gulp.dest(path.join(config.paths.source, "css", "conf")));
 });
 
+function replaceVersionToken(hash) {
+    return replace(config.versionToken, format("{0}.{1}", pkg.version, hash));
+}
+
 gulp.task("stampVersionToTemplates", done => {
+    const src = gulp.src(path.join(config.paths.templatesTemp, "**", "*.xml"));
     git.hash(hash => {
-        gulp.src(path.join(config.paths.templatesTemp, "**", "*.xml"))
-            .pipe(flatmap((stream, file) => {
-                return stream
-                    .pipe(replace(config.versionToken, format("{0}.{1}", pkg.version, hash)))
-                    .pipe(gulp.dest(config.paths.templatesTemp))
-            }))
-            .on('end', done);
+        es.concat(src.pipe(flatmap((stream, file) => {
+            return stream
+                .pipe(replaceVersionToken(hash))
+                .pipe(gulp.dest(config.paths.templatesTemp))
+        }))).on('end', done);
     });
 });
 
 gulp.task("stampVersionToScripts", done => {
+    const src = gulp.src(path.join(config.paths.dist, "*.ps1"));
     git.hash(hash => {
-        es.concat(
-            gulp.src(path.join(config.paths.dist, "*.ps1"))
-                .pipe(flatmap((stream, file) => {
-                    return stream
-                        .pipe(replace(config.versionToken, format("{0}.{1}", pkg.version, hash)))
-                        .pipe(gulp.dest(config.paths.dist))
-                }))
-        )
-            .on('end', done);
+        es.concat(src.pipe(flatmap((stream, file) => {
+            return stream
+                .pipe(replaceVersionToken(hash))
+                .pipe(gulp.dest(config.paths.dist))
+        }))).on('end', done);
     });
 });
 
