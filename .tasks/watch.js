@@ -16,7 +16,7 @@ function __startWatch(packageCodeFunc) {
         start: true,
     });
     console.log("Started watching...", settings.siteUrl)
-    watch(config.paths.sourceGlob).on("change", () => {
+    watch(config.globs.js).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
         }
@@ -26,7 +26,7 @@ function __startWatch(packageCodeFunc) {
             })
         }, 100);
     });
-    watch(config.paths.stylesGlob).on("change", () => {
+    watch(config.globs.styles).on("change", () => {
         runSequence("packageStyles", () => {
             uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
         })
