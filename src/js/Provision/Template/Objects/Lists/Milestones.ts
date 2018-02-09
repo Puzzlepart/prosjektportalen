@@ -1,9 +1,8 @@
 import RESOURCE_MANAGER from "../../../../@localization";
 import { IList } from "sp-pnp-provisioning/lib/schema";
 
-export default function Milestones(language: number): IList {
-return {
-    Title: RESOURCE_MANAGER.getResource("Lists_Milestones_Title", language),
+const Milestones: IList = {
+    Title: RESOURCE_MANAGER.getResource("Lists_Milestones_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -15,7 +14,7 @@ return {
         EnableVersioning: true,
     },
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName", language),
+        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -26,4 +25,5 @@ return {
         },
     }],
 };
-}
+
+export default Milestones;

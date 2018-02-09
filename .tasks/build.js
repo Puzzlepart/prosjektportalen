@@ -94,9 +94,10 @@ gulp.task("buildSiteTemplates", done => {
     const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
 
     config.siteTemplates.forEach(tmpl => {
-        const tmplJs = require(format(jspath, tmpl)).default;
         config.availableLanguages.forEach(lcid => {
             log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lcid}`)
+            global._spPageContextInfo.webLanguage = lcid;
+            const tmplJs = require(format(jspath, tmpl)).default;
             files.push({
                 path: format(filepath, lcid.toString(), tmpl),
                 contents: JSON.stringify(tmplJs(lcid)),

@@ -16,24 +16,23 @@ import BenefitsAnalysis from "./BenefitsAnalysis";
 import ChangeAnalysis from "./ChangeAnalysis";
 import BenefitsFollowup from "./BenefitsFollowup";
 
+const Lists: IList[] = [
+    SitePages,
+    PhaseChecklist,
+    Information,
+    Stakeholders,
+    CommunicationPlan,
+    Milestones,
+    ProjectLog,
+    ProjectDeliveries,
+    Uncertainties,
+    Tasks,
+    MeetingCalendar,
+    Documents,
+    ProjectStatus,
+    BenefitsAnalysis,
+    ChangeAnalysis,
+    BenefitsFollowup,
+];
 
-export default function Lists(language: number): IList[] {
-    return [
-        SitePages(language),
-        PhaseChecklist(language),
-        Information(language),
-        Stakeholders(language),
-        CommunicationPlan(language),
-        Milestones(language),
-        ProjectLog(language),
-        ProjectDeliveries(language),
-        Uncertainties(language),
-        Tasks(language),
-        MeetingCalendar(language),
-        Documents(language),
-        ProjectStatus(language),
-        BenefitsAnalysis(language),
-        ChangeAnalysis(language),
-        BenefitsFollowup(language),
-    ];
-}
+export default Lists;
