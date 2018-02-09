@@ -73,12 +73,12 @@ gulp.task("stampVersionToScripts", done => {
 
 gulp.task("convertPnpTemplates", done => {
     powershell.execute("Build-PnP-Templates.ps1", "")
-    .then(() => {
-        done();
-    })
-    .catch(err => {
-        console.log(err);
-    });
+        .then(() => {
+            done();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 gulp.task("buildPnpTemplateFiles", ["copyPnpTemplates"], done => {
