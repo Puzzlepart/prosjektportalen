@@ -2,6 +2,5 @@
 module.exports = {
     siteUrl: "",
     username: "",
-    password: "",    
-    language: 1044
+    password: ""
 }
