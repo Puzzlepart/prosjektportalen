@@ -1,23 +1,21 @@
 'use strict';
 var gulp = require("gulp"),
     webpack = require('webpack'),
-    wpDev = require('../webpack.config.development.js'),
-    wpProd = require('../webpack.config.production.js'),
+    webpackConfigDev = require('../webpack.config.development.js'),
+    webpackConfigProduction = require('../webpack.config.production.js'),
     stylus = require('gulp-stylus'),
     pluginError = require('plugin-error'),
-    autoprefixer = require('autoprefixer-stylus'),
-    settings = require('./@settings.js'),
     config = require('./@configuration.js');
 
 gulp.task("packageCode", ["buildLib"], done => {
-    webpack(wpDev("source-map"), err => {
+    webpack(webpackConfigDev("source-map"), err => {
         if (err) throw new pluginError("packageCode", err);
         done();
     });
 });
 
 gulp.task("packageCodeEval", ["buildLib"], done => {
-    webpack(wpDev("eval"), err => {
+    webpack(webpackConfigDev("eval"), err => {
         if (err) throw new pluginError("packageCodeEval", err)
         done();
     });
@@ -34,7 +32,7 @@ gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], done 
 });
 
 gulp.task("packageCodeMinify", ["buildLib"], done => {
-    webpack(wpProd(), err => {
+    webpack(webpackConfigProduction(), err => {
         if (err) throw new pluginError("packageCodeMinify", err)
         done();
     });
