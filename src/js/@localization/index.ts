@@ -11,8 +11,18 @@ export default new class Localization {
      * @param {number} language Language
      */
     public getResource(resKey: string, lcid = _spPageContextInfo.webLanguage): string {
-        const dict = this._res[lcid];
+        const dict = this.getResources(lcid);
         return dict ? dict[resKey] : "";
+    }
+
+    /**
+     * Get all resources for the specified language
+     *
+     * @param {number} language Language
+     */
+    public getResources(lcid = _spPageContextInfo.webLanguage): string {
+        const dict = this._res[lcid];
+        return dict;
     }
 };
 
