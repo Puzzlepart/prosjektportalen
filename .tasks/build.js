@@ -21,11 +21,11 @@ var gulp = require("gulp"),
     pkg = require("../package.json");
 
 gulp.task("copyAssetsToDist", () => {
-    return gulp.src(config.paths.assetsFilesGlob)        .pipe(gulp.dest(config.paths.dist))
+    return gulp.src(config.paths.assetsFilesGlob).pipe(gulp.dest(config.paths.dist))
 });
 
 gulp.task("copyResourcesToLib", () => {
-    return gulp.src("./src/js/**/*.json")        .pipe(gulp.dest(config.paths.lib))
+    return gulp.src("./src/js/**/*.json").pipe(gulp.dest(config.paths.lib))
 });
 
 gulp.task("buildLib", ["copyResourcesToLib"], () => {
@@ -59,23 +59,17 @@ gulp.task("copyPnpTemplates", () => {
 });
 
 gulp.task("copyPnpRootTemplate", () => {
-    var src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
+    const src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
-    var src = gulp.src([
-        format("{0}/**/*.js", config.paths.dist),
-        format("{0}/**/*.css", config.paths.dist),
-        format("{0}/**/*.png", config.paths.dist),
-        format("{0}/**/*.txt", config.paths.dist),
-        format("{0}/**/*.md", config.paths.dist),
-        format("{0}/**/*.js", config.paths.build)])
+    const src = gulp.src(format("{0}/**/*.*", config.paths.dist))
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("copyThirdPartyLibsToTemplate", () => {
-    var src = gulp.src([
+    const src = gulp.src([
         format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
         format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
     ]);
@@ -124,11 +118,11 @@ gulp.task("buildSiteTemplates", done => {
 
     config.siteTemplates.forEach(tmpl => {
         const tmplJs = require(format(jspath, tmpl)).default;
-        config.availableLanguages.forEach(lang => {
-            log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lang}`)
+        config.availableLanguages.forEach(lcid => {
+            log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lcid}`)
             files.push({
-                path: format(filepath, lang.toString(), tmpl),
-                contents: JSON.stringify(tmplJs(lang)),
+                path: format(filepath, lcid.toString(), tmpl),
+                contents: JSON.stringify(tmplJs(lcid)),
             });
         });
     });
