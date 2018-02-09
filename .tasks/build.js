@@ -15,6 +15,7 @@ var gulp = require("gulp"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
     git = require("./utils/git.js"),
+    file = require("./utils/file.js"),
     format = require("string-format"),
     pkg = require("../package.json");
 
@@ -31,7 +32,7 @@ gulp.task("copyResourcesToLib", () => {
 gulp.task("buildLib", ["copyResourcesToLib"], () => {
     var project = typescript.createProject("tsconfig.json", { declaration: true });
     var built = gulp.src(config.paths.sourceGlob)
-        .pipe(project(typescript.reporter.fullReporter()));
+        .pipe(project(typescript.reporter.nullReporter()));
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))]);
 });
 
@@ -113,4 +114,22 @@ gulp.task("buildPnpTemplateFiles", (done) => {
     runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
+});
+
+gulp.task("buildSiteTemplates", done => {
+    const _spPageContextInfo = {};
+    const files = [];
+    const basePath = path.join(__dirname, "../_templates");
+    config.siteTemplates.forEach(template => {
+        const js = require(format("../lib/Provision/Template/{0}.js", template));
+        files.push({
+            path: path.join(basePath, format("{0}.txt", template)),
+            contents: JSON.stringify(js),
+        });
+    });
+    const fileWritePromises = [];
+    files.forEach(f => {
+        fileWritePromises.push(file.write(f.path, f.contents));
+    });
+    Promise.all(fileWritePromises).then(() => done());
 });
