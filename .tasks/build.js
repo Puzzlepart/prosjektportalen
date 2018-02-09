@@ -70,7 +70,7 @@ gulp.task("stampVersionToScripts", done => {
 });
 
 gulp.task("buildPnpTemplateFiles", done => {
-    runSequence("copyPnpTemplates", "copyPnpRootTemplate", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
+    runSequence("copyPnpTemplates", "localizePnpTemplates", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
         powershell.execute("Build-PnP-Templates.ps1", "", done);
     })
 });
