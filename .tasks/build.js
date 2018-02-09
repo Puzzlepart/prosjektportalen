@@ -59,12 +59,12 @@ gulp.task("copyPnpTemplates", () => {
 });
 
 gulp.task("copyPnpRootTemplate", () => {
-    var src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
+    const src = gulp.src(format("{0}/root/**/*", config.paths.templates_temp));
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/root-{1}", config.paths.templates_temp, lcid)))));
 });
 
 gulp.task("copyResourcesToAssetsTemplate", () => {
-    var src = gulp.src([
+    const src = gulp.src([
         format("{0}/**/*.js", config.paths.dist),
         format("{0}/**/*.css", config.paths.dist),
         format("{0}/**/*.png", config.paths.dist),
@@ -74,7 +74,7 @@ gulp.task("copyResourcesToAssetsTemplate", () => {
 });
 
 gulp.task("copyThirdPartyLibsToTemplate", () => {
-    var src = gulp.src([
+    const src = gulp.src([
         format("{0}/xlsx/dist/xlsx.full.min.js", config.paths.nodeModules),
         format("{0}/file-saver/FileSaver.min.js", config.paths.nodeModules)
     ]);
