@@ -69,6 +69,7 @@ gulp.task("copyResourcesToAssetsTemplate", () => {
         format("{0}/**/*.css", config.paths.dist),
         format("{0}/**/*.png", config.paths.dist),
         format("{0}/**/*.txt", config.paths.dist),
+        format("{0}/**/*.md", config.paths.dist),
         format("{0}/**/*.js", config.paths.build)])
     return es.concat(config.availableLanguages.map(lcid => src.pipe(gulp.dest(format("{0}/assets-{1}", config.paths.templates_temp, lcid)))));
 });
