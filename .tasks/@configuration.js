@@ -49,5 +49,5 @@ module.exports = {
         token: "{package-version}"
     },
     availableLanguages: [1033, 1044],
-    siteTemplates: ["FullTemplate"]
+    siteTemplates: ["FullTemplate", "LiteTemplate"]
 }

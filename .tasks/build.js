@@ -12,6 +12,7 @@ var gulp = require("gulp"),
     fs = require('fs'),
     es = require('event-stream'),
     path = require("path"),
+    log = require("fancy-log"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
     git = require("./utils/git.js"),
@@ -117,11 +118,13 @@ gulp.task("buildSiteTemplates", done => {
     global._spPageContextInfo = {};
 
     const files = [];
+    const jspath = "../lib/Provision/Template/_/{0}.js";
     const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
 
     config.siteTemplates.forEach(tmpl => {
-        const tmplJs = require(format("../lib/Provision/Template/{0}.js", tmpl)).default;
+        const tmplJs = require(format(jspath, tmpl)).default;
         config.availableLanguages.forEach(lang => {
+            log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lang}`)
             files.push({
                 path: format(filepath, lang.toString(), tmpl),
                 contents: JSON.stringify(tmplJs(lang)),
