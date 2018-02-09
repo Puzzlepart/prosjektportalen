@@ -795,6 +795,7 @@
                     "Title": "All Items",
                     "ViewFields": [
                         "LinkTitle",
+                        "GtProjectPhase",
                         "GtMilestonePlannedDate",
                         "GtMilestoneActualDate",
                         "GtMilestoneStatus",
