@@ -15,7 +15,7 @@ const Milestones: IList = {
     },
     Views: [{
         Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
+        ViewFields: ["LinkTitle", "GtProjectPhase", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
