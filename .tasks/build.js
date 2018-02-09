@@ -117,7 +117,8 @@ gulp.task("buildPnpTemplateFiles", (done) => {
 });
 
 gulp.task("buildSiteTemplates", done => {
-    const _spPageContextInfo = {};
+    // Faking _spPageContextInfo to be able to use localization
+    global._spPageContextInfo = {};
     const files = [];
     const basePath = path.join(__dirname, "../_templates");
     config.siteTemplates.forEach(template => {
