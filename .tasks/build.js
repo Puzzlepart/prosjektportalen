@@ -20,6 +20,12 @@ const gulp = require("gulp"),
     format = require("string-format"),
     pkg = require("../package.json");
 
+//#region Helpers
+function replaceVersionToken(hash) {
+    return replace(config.versionToken, format("{0}.{1}", pkg.version, hash));
+}
+//#endregion
+
 gulp.task("buildLib", ["copyResourcesToLib", "tsLint"], () => {
     const project = typescript.createProject("tsconfig.json", { declaration: true });
     const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()));
@@ -42,9 +48,6 @@ gulp.task("buildTheme", () => {
         .pipe(gulp.dest(path.join(config.paths.source, "css", "conf")));
 });
 
-function replaceVersionToken(hash) {
-    return replace(config.versionToken, format("{0}.{1}", pkg.version, hash));
-}
 
 gulp.task("stampVersionToTemplates", done => {
     const src = gulp.src(path.join(config.paths.templatesTemp, "**", "*.xml"));
@@ -68,10 +71,18 @@ gulp.task("stampVersionToScripts", done => {
     });
 });
 
-gulp.task("buildPnpTemplateFiles", done => {
-    runSequence("copyPnpTemplates", "localizePnpTemplates", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", () => {
-        powershell.execute("Build-PnP-Templates.ps1", "", done);
+gulp.task("convertPnpTemplates", done => {
+    powershell.execute("Build-PnP-Templates.ps1", "")
+    .then(() => {
+        done();
     })
+    .catch(err => {
+        console.log(err);
+    });
+});
+
+gulp.task("buildPnpTemplateFiles", ["copyPnpTemplates"], done => {
+    runSequence("localizePnpTemplates", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", "convertPnpTemplates", done);
 });
 
 gulp.task("buildSiteTemplates", done => {
