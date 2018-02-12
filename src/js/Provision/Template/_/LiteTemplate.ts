@@ -1,11 +1,74 @@
 import RESOURCE_MANAGER from "../../../@localization";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
-import { Files, Lists, WebSettings, ComposedLook } from "../Objects";
+import { Files, WebSettings, ComposedLook } from "../Objects";
+import SitePages from "../Objects/Lists/SitePages";
+import PhaseChecklist from "../Objects/Lists/PhaseChecklist";
+import Information from "../Objects/Lists/Information";
+import Stakeholders from "../Objects/Lists/Stakeholders";
+import CommunicationPlan from "../Objects/Lists/CommunicationPlan";
+import Milestones from "../Objects/Lists/Milestones";
+import ProjectLog from "../Objects/Lists/ProjectLog";
+import ProjectDeliveries from "../Objects/Lists/ProjectDeliveries";
+import Uncertainties from "../Objects/Lists/Uncertainties";
+import MeetingCalendar from "../Objects/Lists/MeetingCalendar";
+import Documents from "../Objects/Lists/Documents";
+import ProjectStatus from "../Objects/Lists/ProjectStatus";
+import { GtProjectTaskComElement, GtProjectTaskRisk, GtProjectTaskProduct } from "../Objects/Lists/SiteFields";
+
 
 export default function LiteTemplate(language: number): Schema {
     return {
         Files,
-        Lists,
+        Lists: [
+            SitePages,
+            PhaseChecklist,
+            Information,
+            Stakeholders,
+            CommunicationPlan,
+            Milestones,
+            ProjectLog,
+            ProjectDeliveries,
+            Uncertainties,
+            {
+                Title: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+                Description: "",
+                Template: 171,
+                ContentTypesEnabled: true,
+                RemoveExistingContentTypes: true,
+                ContentTypeBindings: [{
+                    ContentTypeID: "0x010800233B015F95174C9A8EB505493841DE8D",
+                }],
+                AdditionalSettings: {
+                    EnableVersioning: true,
+                },
+                Fields: [
+                    GtProjectTaskComElement,
+                    GtProjectTaskRisk,
+                    GtProjectTaskProduct,
+                ],
+                Views: [{
+                    Title: RESOURCE_MANAGER.getResource("View_AllTasks_DisplayName"),
+                    ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor"],
+                    AdditionalSettings: {
+                        RowLimit: 30,
+                        Paged: true,
+                        ViewQuery: "",
+                    },
+                },
+                {
+                    Title: RESOURCE_MANAGER.getResource("View_RelevantLinks_DisplayName"),
+                    ViewFields: ["LinkTitle", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
+                    AdditionalSettings: {
+                        RowLimit: 30,
+                        Paged: true,
+                        ViewQuery: "",
+                    },
+                }],
+            },
+            MeetingCalendar,
+            Documents,
+            ProjectStatus,
+        ],
         Navigation: {
             QuickLaunch: [
                 {

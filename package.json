@@ -4,7 +4,7 @@
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "lib/index.js",
   "scripts": {
-    "release": "gulp cleanNodeModules && npm install && gulp release",
+    "release": "rimraf.cmd .\\node_modules && npm install && gulp release",
     "postversion": "npm run release",
     "watch": "gulp watch"
   },
