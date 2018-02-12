@@ -26,7 +26,7 @@ function __startWatch(packageCodeFunc) {
         }
         buildTimeout = setTimeout(() => {
             runSequence("clean", packageCodeFunc, () => {
-                uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "css"));
+                uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
             });
         }, 100);
     });
