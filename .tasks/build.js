@@ -1,5 +1,6 @@
 'use strict';
 const gulp = require("gulp"),
+    requireUncached = require('require-uncached'),
     typescript = require("gulp-typescript"),
     config = require('./@configuration.js'),
     merge = require("merge2"),
@@ -97,10 +98,10 @@ gulp.task("buildSiteTemplates", done => {
         config.availableLanguages.forEach(lcid => {
             log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lcid}`)
             global._spPageContextInfo.webLanguage = lcid;
-            const tmplJs = require(format(jspath, tmpl)).default;
+            const tmplJs = requireUncached(format(jspath, tmpl)).default;
             files.push({
                 path: format(filepath, lcid.toString(), tmpl),
-                contents: JSON.stringify(tmplJs(lcid)),
+                contents: JSON.stringify(tmplJs),
             });
         });
     });
