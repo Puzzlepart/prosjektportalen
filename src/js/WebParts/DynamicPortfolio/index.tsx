@@ -68,25 +68,29 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             );
         }
         if (isLoading) {
+            return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
+        }
+        if (isChangingView) {
+            const loadingText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
-                <Spinner label={this.props.loadingText} type={SpinnerType.large} />
+                <div>
+                    {this.renderCommandBar()}
+                    <div style={{ paddingTop: 20 }}>
+                        <Spinner label={loadingText} type={SpinnerType.large} />
+                    </div>
+                </div>
             );
         }
-        const loadingText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
         return (
             <div>
                 {this.renderCommandBar()}
-                {isChangingView
-                    ? <div style={{ paddingTop: 20 }}>
-                        <Spinner label={loadingText} type={SpinnerType.large} />
-                    </div>
-                    : <div>
-                        {this.renderSearchBox()}
-                        {this.renderStatusBar()}
-                        {this.renderItems()}
-                        {this.renderFilterPanel()}
-                        {this.renderProjectInfoModal()}
-                    </div>}
+                <div>
+                    {this.renderSearchBox()}
+                    {this.renderStatusBar()}
+                    {this.renderItems()}
+                    {this.renderFilterPanel()}
+                    {this.renderProjectInfoModal()}
+                </div>
             </div>
         );
     }

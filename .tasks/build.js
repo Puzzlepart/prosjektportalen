@@ -1,5 +1,6 @@
 'use strict';
 const gulp = require("gulp"),
+    requireUncached = require('require-uncached'),
     typescript = require("gulp-typescript"),
     config = require('./@configuration.js'),
     merge = require("merge2"),
@@ -12,7 +13,6 @@ const gulp = require("gulp"),
     fs = require('fs'),
     es = require('event-stream'),
     path = require("path"),
-    log = require("fancy-log"),
     runSequence = require("run-sequence"),
     powershell = require("./utils/powershell.js"),
     git = require("./utils/git.js"),
@@ -77,35 +77,38 @@ gulp.task("convertPnpTemplates", done => {
             done();
         })
         .catch(err => {
-            console.log(err);
+            done(err);
         });
 });
 
-gulp.task("buildPnpTemplateFiles", ["copyPnpTemplates"], done => {
-    runSequence("localizePnpTemplates", "copyResourcesToAssetsTemplate", "buildSiteTemplates", "copyThirdPartyLibsToTemplate", "stampVersionToTemplates", "convertPnpTemplates", done);
-});
+function getTemplateJson(tmpl, lcid) {
+    const jsPath = format("../lib/Provision/Template/_/{0}.js", tmpl);
+    global._spPageContextInfo = { webLanguage: lcid };
+    const tmplJs = require(jsPath).default;
+    return JSON.stringify(tmplJs);
+}
 
-gulp.task("buildSiteTemplates", done => {
-    // Faking _spPageContextInfo to be able to use localization
-    global._spPageContextInfo = {};
-
-    const files = [];
-    const jspath = "../lib/Provision/Template/_/{0}.js";
-    const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
-
-    config.siteTemplates.forEach(tmpl => {
-        const tmplJs = require(format(jspath, tmpl)).default;
-        config.availableLanguages.forEach(lcid => {
-            log(`(buildSiteTemplates) Building site template ${tmpl} for language ${lcid}`)
+function _buildSiteTemplate(lcid) {
+    return new Promise((resolve, reject) => {
+        const files = [];
+        const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
+        config.siteTemplates.forEach(tmpl => {
             files.push({
                 path: format(filepath, lcid.toString(), tmpl),
-                contents: JSON.stringify(tmplJs(lcid)),
+                contents: getTemplateJson(tmpl, lcid),
             });
         });
+        Promise.all(files.map(f => file.write(f.path, f.contents))).then(resolve, reject);
     });
-    const fileWritePromises = [];
-    files.forEach(f => {
-        fileWritePromises.push(file.write(f.path, f.contents));
-    });
-    Promise.all(fileWritePromises).then(() => done());
+}
+
+gulp.task("buildSiteTemplates", done => {
+    const argv = require('yargs').argv;
+    if (argv.lcid) {
+        _buildSiteTemplate(argv.lcid).then(() => {
+            done();
+        });
+    } else {
+        done("Argument lcid not specified");
+    }
 });
