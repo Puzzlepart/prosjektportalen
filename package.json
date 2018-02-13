@@ -4,7 +4,9 @@
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "lib/index.js",
   "scripts": {
-    "release": "gulp release",
+    "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
+    "buildPnpTemplateFiles": "gulp copyPnpTemplates && gulp localizePnpTemplates && gulp copyResourcesToAssetsTemplate && npm run buildSiteTemplates && gulp copyThirdPartyLibsToTemplate && gulp stampVersionToTemplates",
+    "release": "gulp clean && gulp packageProd && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
     "postversion": "npm run release",
     "watch": "gulp watch"
   },
@@ -106,6 +108,7 @@
     "tslint": "^5.9.1",
     "typedoc": "^0.9.0",
     "typescript": "^2.6.2",
+    "wait-until": "0.0.2",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.9.2",
     "yargs": "^11.0.0"
