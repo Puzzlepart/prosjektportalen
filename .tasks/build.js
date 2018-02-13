@@ -77,7 +77,7 @@ gulp.task("convertPnpTemplates", done => {
             done();
         })
         .catch(err => {
-           done(err);
+            done(err);
         });
 });
 
