@@ -112,10 +112,10 @@
     <value>Fullstendig mal</value>
   </data>
   <data name="SiteTemplates_FullTemplate_Comments" xml:space="preserve">
-    <value>Forenklet mal</value>
+    <value>Malen inneholder alle lister, felter og sider.</value>
   </data>
   <data name="SiteTemplates_LiteTemplate_Title" xml:space="preserve">
-    <value>Malen inneholder alle lister, felter og sider.</value>
+    <value>Forenklet mal</value>
   </data>
   <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
     <value>Dette er en forenklet versjon som ikke inneholder listene for gevinstarbeid.</value>
