@@ -91,7 +91,6 @@
     "gulp-typescript": "^3.2.4",
     "gulp-watch": "^5.0.0",
     "gulp-zip": "^4.1.0",
-    "i18n-webpack-plugin": "^1.0.0",
     "jsdom": "^11.6.2",
     "json-loader": "^0.5.7",
     "merge2": "^1.2.1",
