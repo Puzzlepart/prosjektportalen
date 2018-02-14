@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var gulp = require("gulp"),
     path = require("path"),
     plumber = require("gulp-plumber"),
@@ -6,14 +6,22 @@ var gulp = require("gulp"),
     watch = require("gulp-watch"),
     spsave = require("gulp-spsave"),
     runSequence = require("run-sequence"),
-    livereload = require('gulp-livereload'),
-    config = require('./@configuration.js'),
-    defaultSettings = require('./@settings.js');
+    livereload = require("gulp-livereload"),
+    config = require("./@configuration.js"),
+    defaultSettings = require("./@settings.js");
 
 let buildTimeout;
 
 function __startWatch(packageCodeFunc) {
-    const argv = require('yargs').argv;
+  
+}
+
+gulp.task("watchTests", () => {
+    __startWatch("test");
+});
+
+gulp.task("watch", () => {
+    const argv = require("yargs").argv;
     livereload.listen({ start: true });
     const settings = {
         siteUrl: argv.siteUrl || defaultSettings.siteUrl,
@@ -25,7 +33,7 @@ function __startWatch(packageCodeFunc) {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean", packageCodeFunc, () => {
+            runSequence("clean", argv.minify ? "packageCodeMinify" : "packageCode", () => {
                 uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
             });
         }, 100);
@@ -38,22 +46,6 @@ function __startWatch(packageCodeFunc) {
     watch(config.globs.resxJson).on("change", () => {
         runSequence("buildJsonResources");
     });
-}
-
-gulp.task("watchTests", () => {
-    __startWatch("test");
-});
-
-gulp.task("watch", () => {
-    __startWatch("packageCode");
-});
-
-gulp.task("watchEval", () => {
-    __startWatch("packageCodeEval");
-});
-
-gulp.task("watchProd", () => {
-    __startWatch("packageCodeMinify");
 });
 
 function uploadFileToSp(glob, settings, folder) {
