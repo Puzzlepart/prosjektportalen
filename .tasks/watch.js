@@ -1,5 +1,6 @@
 'use strict';
 var gulp = require("gulp"),
+    path = require("path"),
     plumber = require("gulp-plumber"),
     format = require("string-format"),
     watch = require("gulp-watch"),
@@ -7,29 +8,32 @@ var gulp = require("gulp"),
     runSequence = require("run-sequence"),
     livereload = require('gulp-livereload'),
     config = require('./@configuration.js'),
-    settings = require('./@settings.js');
+    defaultSettings = require('./@settings.js');
 
 let buildTimeout;
 
 function __startWatch(packageCodeFunc) {
-    livereload.listen({
-        start: true,
-    });
-    console.log("Started watching...", settings.siteUrl)
+    const argv = require('yargs').argv;
+    livereload.listen({ start: true });
+    const settings = {
+        siteUrl: argv.siteUrl || defaultSettings.siteUrl,
+        username: argv.username || defaultSettings.username,
+        password: argv.password || defaultSettings.password,
+    };
     watch(config.globs.js).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
             runSequence("clean", packageCodeFunc, () => {
-                uploadFile(format("{0}/js/pp.main.js", config.paths.dist), settings.siteUrl, "siteassets/pp/js")
-            })
+                uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
+            });
         }, 100);
     });
     watch(config.globs.styles).on("change", () => {
         runSequence("packageStyles", () => {
-            uploadFile(format("{0}/css/*.css", config.paths.dist), settings.siteUrl, "siteassets/pp/css")
-        })
+            uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
+        });
     });
     watch(config.globs.resxJson).on("change", () => {
         runSequence("buildJsonResources");
@@ -49,19 +53,17 @@ gulp.task("watchEval", () => {
 });
 
 gulp.task("watchProd", () => {
-    __startWatch(`packageCodeMinify`);
+    __startWatch("packageCodeMinify");
 });
 
-function uploadFile(glob, url, folder) {
+function uploadFileToSp(glob, settings, folder) {
     gulp.src(glob)
         .pipe(plumber({
-            errorHandler: function (err) {
-                this.emit("end");
-            }
+            errorHandler: (err) => this.emit("end"),
         }))
-        .pipe(spsave({ folder: folder, siteUrl: url }, {
+        .pipe(spsave({ folder: folder, siteUrl: settings.siteUrl }, {
             username: settings.username,
-            password: settings.password
+            password: settings.password,
         }))
         .pipe(livereload());
 }

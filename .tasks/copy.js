@@ -2,7 +2,6 @@
 const gulp = require("gulp"),
     path = require("path"),
     es = require("event-stream"),
-    log = require("fancy-log"),
     format = require("string-format"),
     config = require("./@configuration.js");
 
@@ -42,7 +41,6 @@ gulp.task("copyPnpTemplates", () => {
 gulp.task("copyPnpRootTemplate", () => {
     const src = gulp.src(path.join(config.paths.templatesTemp, "root", "**", "*"));
     return es.concat(config.availableLanguages.map(lcid => {
-        log(`(copyPnpRootTemplate) Creating template root-${lcid}`);
         return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `root-${lcid}`)));
     }));
 });
@@ -50,7 +48,6 @@ gulp.task("copyPnpRootTemplate", () => {
 gulp.task("copyPnpAssetsTemplate", () => {
     const src = gulp.src(path.join(config.paths.templatesTemp, "assets", "**", "*"));
     return es.concat(config.availableLanguages.map(lcid => {
-        log(`(copyPnpAssetsTemplate) Creating template assets-${lcid}`);
         return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `assets-${lcid}`)));
     }));
 });
@@ -73,14 +70,12 @@ gulp.task("copyResourcesToAssetsTemplate", ["copyConfigToAssetsTemplate"], () =>
     });
     const src = gulp.src(glob);
     return es.concat(config.availableLanguages.map(lcid => {
-        log(`(copyResourcesToAssetsTemplate) Copying resources to template assets-${lcid}`);
         return src.pipe(gulp.dest(path.join(config.paths.templatesTemp, `assets-${lcid}`)));
     }));
 });
 
 gulp.task("copyThirdPartyLibsToTemplate", () => {
     const glob = config.thirdPartyLibs.map(libRelPath => {
-        log(`(copyThirdPartyLibsToTemplate) Copying lib '${libRelPath}' to template thirdparty`);
         return path.join(config.paths.nodeModules, libRelPath);
     });
     const src = gulp.src(glob);

@@ -15,7 +15,8 @@ module.exports = {
         docs: "./docs",
         templates: "./templates",
         templatesTemp: "./_templates",
-        scripts: "./.scripts"
+        scripts: "./.scripts",
+        spAssetsFolder: "siteassets/pp",
     },
     globs: {
         build: "./build/**/*",

@@ -1,7 +1,6 @@
 "use strict";
 var exec = require("child_process").exec,
     path = require("path"),
-    log = require("fancy-log"),
     format = require("string-format"),
     config = require("../@configuration.js");
 
