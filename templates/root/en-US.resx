@@ -1068,6 +1068,9 @@
   <data name="SiteFields_GtBudgetLastReportDate_Description" xml:space="preserve">
     <value />
   </data>
+  <data name="SiteFields_GtStatusUncertainty_Description" xml:space="preserve">
+    <value>If the status is 'No longer relevant', the risk is not shown in the risk matrix.</value>
+  </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
   </data>
