@@ -1070,7 +1070,7 @@
     <value />
   </data>
   <data name="SiteFields_GtStatusUncertainty_Description" xml:space="preserve">
-    <value>Dersom status er 'Ikke lenger aktuell' vil ikke elementet vises i matrisen</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
