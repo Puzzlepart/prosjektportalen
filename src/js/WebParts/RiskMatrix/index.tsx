@@ -74,13 +74,15 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             return null;
         }
 
+        const viewOptions = this.getViewOptions();
+
         return (
             <div className={this.props.className}>
-                <div hidden={!this.props.showViewSelector || data.views.length < 2}>
+                <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
                     <Dropdown
                         label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
                         defaultSelectedKey={selectedViewId}
-                        options={this.getViewOptions()}
+                        options={viewOptions}
                         onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
                 </div>
                 <table {...tableProps} ref={ele => this._tableElement = ele}>
