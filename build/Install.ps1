@@ -133,7 +133,6 @@ function Start-Install() {
     if (-not $SkipRootPackage.IsPresent) {
         try {
             Connect-SharePoint $Url    
-            Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
                 Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
