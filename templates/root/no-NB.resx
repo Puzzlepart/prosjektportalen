@@ -2353,6 +2353,9 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Svært lav</value>
   </data>
+  <data name="RiskMatrix_ViewSelectorLabel" xml:space="preserve">
+    <value>Velg en visning:</value>
+  </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i Usikkerhets-listen.</value>
   </data>

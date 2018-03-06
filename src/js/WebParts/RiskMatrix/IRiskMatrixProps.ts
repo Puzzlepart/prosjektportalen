@@ -1,7 +1,10 @@
+import IRiskMatrixData from "./IRiskMatrixData";
+
 export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLElement> {
-    data?: any[];
+    data?: IRiskMatrixData;
     contentTypeId?: string;
     showEmptyMessage?: boolean;
+    showViewSelector?: boolean;
 }
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
@@ -9,4 +12,5 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     className: "risk-matrix-container",
     id: "risk-matrix",
     showEmptyMessage: false,
+    showViewSelector: true,
 };
