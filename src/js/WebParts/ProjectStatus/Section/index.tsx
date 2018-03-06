@@ -24,9 +24,6 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         };
     }
 
-    /**
-    * Component did mount
-    */
     public componentDidMount(): void {
         if (this.shouldFetchListData(this.props)) {
             this.fetchListData(this.props).then(listData => {
@@ -41,7 +38,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     /**
      * Renders the component
      */
-    public render() {
+    public render(): React.ReactElement<ISectionProps> {
         if (this.state.isLoading) {
             return <Spinner />;
         }
@@ -85,10 +82,14 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         return (
             <div id={section.getHtmlElementId("inner")}>
                 {section.showRiskMatrix && (
-                    <RiskMatrix data={listData.items} />
+                    <RiskMatrix
+                        data={{ items: listData.items }}
+                        showViewSelector={false} />
                 )}
                 {section.listTitle && (
-                    <SectionList id={section.getHtmlElementId("listview")} listData={listData} />
+                    <SectionList
+                        id={section.getHtmlElementId("listview")}
+                        listData={listData} />
                 )}
                 {section.getType() === SectionType.ProjectPropertiesSection && (
                     <div
