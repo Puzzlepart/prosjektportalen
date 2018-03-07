@@ -42,6 +42,8 @@ Param(
     [switch]$SkipCustomActionRemoval,
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
+    [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
+    [switch]$Force,
 )
 
 . ./SharedFunctions.ps1
@@ -92,7 +94,7 @@ $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_versio
 # {package-version} will be replaced with the actual version by 'gulp release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
 
-if ($InstallVersion -gt $CurrentVersion) {
+if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
