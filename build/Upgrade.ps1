@@ -39,7 +39,9 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip custom action removal?")]
-    [switch]$SkipCustomActionRemoval
+    [switch]$SkipCustomActionRemoval,
+    [ValidateSet('None','File','Host')]
+    [string]$Logging = "File",
 )
 
 . ./SharedFunctions.ps1
@@ -47,6 +49,18 @@ Param(
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
+}
+
+# Sets up PnP trace log
+if($Logging -eq "File") {
+    $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
+    Set-PnPTraceLog -On -Level Debug -LogFile "pplog-$execDateTime.txt"
+}
+elseif($Logging -eq "Host") {
+    Set-PnPTraceLog -On -Level Debug
+}
+else {
+    Set-PnPTraceLog -Off
 }
 
 # Handling credentials
@@ -104,7 +118,7 @@ if ($InstallVersion -gt $CurrentVersion) {
         }
     }
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         Connect-SharePoint $Url       
