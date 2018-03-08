@@ -2,10 +2,6 @@
 <pnp:Provisioning 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
-    <pnp:Localizations>
-        <pnp:Localization LCID="1044" Name="Norwegian" ResourceFile="../root/no-NB.resx" />
-        <pnp:Localization LCID="1033" Name="English (US)" ResourceFile="../root/no-NB.resx" />
-    </pnp:Localizations>
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-ASSETS" Version="0">
             <xi:include 
