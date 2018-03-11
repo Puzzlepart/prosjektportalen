@@ -2482,4 +2482,16 @@
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>There's no settings to change.</value>
   </data>
+  <data name="SiteTemplates_FullTemplate_Title" xml:space="preserve">
+    <value>Full template</value>
+  </data>
+  <data name="SiteTemplates_FullTemplate_Comments" xml:space="preserve">
+    <value>This template contains all lists, fields and pages.</value>
+  </data>
+  <data name="SiteTemplates_LiteTemplate_Title" xml:space="preserve">
+    <value>Lite template</value>
+  </data>
+  <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
+    <value>This is a simplified version that does not contain lists for benefit work.</value>
+  </data>
 </root>
