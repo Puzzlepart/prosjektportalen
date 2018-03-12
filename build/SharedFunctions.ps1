@@ -4,7 +4,7 @@ function Connect-SharePoint ($Url) {
         if ($UseWebLogin.IsPresent) {
             Connect-PnPOnline $Url -UseWebLogin
         } elseif ($CurrentCredentials.IsPresent) {
-            Connect-PnPOnline $Url -CurrentCredentials -ErrorAction 
+            Connect-PnPOnline $Url -CurrentCredentials 
         } else {
             Connect-PnPOnline $Url -Credentials $Credential
         }

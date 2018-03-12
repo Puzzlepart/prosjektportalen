@@ -91,7 +91,7 @@ function getTemplateJson(tmpl, lcid) {
 function _buildSiteTemplate(lcid) {
     return new Promise((resolve, reject) => {
         const files = [];
-        const filepath = path.join(__dirname, "../_templates", "assets-{0}", "sitetemplates", "{1}.txt");
+        const filepath = path.join(__dirname, "../_templates", "root-{0}", "SiteTemplates", "{1}.txt");
         config.siteTemplates.forEach(tmpl => {
             files.push({
                 path: format(filepath, lcid.toString(), tmpl),

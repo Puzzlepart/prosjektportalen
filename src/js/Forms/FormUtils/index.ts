@@ -29,7 +29,7 @@ export function hideContentTypeChoice(): void {
  * @param {string} id ID of form container
  * @param {string} refNodeId Reference node ID
  */
-export function insertFormContainer(id: string, refNodeId = "WebPartWPQ1"): HTMLElement {
+export function insertFormContainer(id: string, refNodeId = "DeltaPlaceHolderMain"): HTMLElement {
     let refNode = document.getElementById(refNodeId),
         newNode = document.createElement("div");
     newNode.id = id;

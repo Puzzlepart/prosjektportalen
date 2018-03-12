@@ -18,11 +18,9 @@ import BenefitEntry from "./BenefitEntry";
  */
 const GetBenefitMeasurements = (measures: MeasurementEntry[], benefit: BenefitEntry): MeasurementEntry[] => {
     return measures
-        .filter(measure => {
-            return (benefit.ID === measure.LookupId && benefit.WebUrl === measure.WebUrl);
-        })
+        .filter(measure => (benefit.ID === measure.LookupId && benefit.WebUrl === measure.WebUrl))
         .map(measure => {
-            measure.Percentage = Util.percentage(benefit.StartValue, measure.MeasurementValue, benefit.DesiredValue, true);
+            measure.Percentage = Util.percentage(benefit.StartValue, measure.MeasurementValue, benefit.DesiredValue, false);
             return measure;
         });
 };
@@ -36,7 +34,7 @@ const GetBenefitMeasurements = (measures: MeasurementEntry[], benefit: BenefitEn
 function GenerateData(benefits: BenefitEntry[], measures: MeasurementEntry[]): any[] {
     return benefits.map(bf => {
         const relevantMeasures = GetBenefitMeasurements(measures, bf);
-        return bf.initStats(relevantMeasures);
+        return bf.setMeasurementStats(relevantMeasures);
     });
 }
 
@@ -48,14 +46,13 @@ function GenerateData(benefits: BenefitEntry[], measures: MeasurementEntry[]): a
  */
 async function fetchFieldsAsMap(spObject: any, spFieldPrefix = "Gt") {
     try {
-        const fields: any[] = await spObject
-            .fields
-            .filter(`substringof('${spFieldPrefix}', InternalName) eq true`)
-            .get();
-        return fields.reduce((obj, { InternalName, Title }) => {
+        const filterStr = `substringof('${spFieldPrefix}', InternalName) eq true`;
+        const spFields: any[] = await spObject.fields.filter(filterStr).get();
+        const spFieldsMap = spFields.reduce((obj, { InternalName, Title }) => {
             obj[InternalName] = Title;
             return obj;
         }, {});
+        return spFieldsMap;
     } catch (err) {
         throw err;
     }

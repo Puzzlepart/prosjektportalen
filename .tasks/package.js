@@ -15,13 +15,6 @@ gulp.task("packageCode", ["buildLib"], done => {
     });
 });
 
-gulp.task("packageCodeEval", ["buildLib"], done => {
-    webpack(webpackConfigDev("eval"), err => {
-        if (err) throw new pluginError("packageCodeEval", err)
-        done();
-    });
-});
-
 gulp.task("packageStyles", ["buildTheme"], done => {
     return gulp.src(config.globs.styles)
         .pipe(stylus(config.stylus))

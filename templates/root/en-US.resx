@@ -1059,6 +1059,15 @@
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Show in form</value>
   </data>
+  <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_DisplayName" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
+    <value>End time</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1067,6 +1076,9 @@
   </data>
   <data name="SiteFields_GtBudgetLastReportDate_Description" xml:space="preserve">
     <value />
+  </data>
+  <data name="SiteFields_GtStatusUncertainty_Description" xml:space="preserve">
+    <value>If the status is 'No longer relevant', the risk is not shown in the risk matrix.</value>
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
@@ -1438,6 +1450,15 @@
     <value>Comment on status delivery specified above</value>
   </data>
   <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductDescription_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
@@ -2343,6 +2364,9 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Very low</value>
   </data>
+  <data name="RiskMatrix_ViewSelectorLabel" xml:space="preserve">
+    <value>Pick a view:</value>
+  </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the Risks list.</value>
   </data>
@@ -2475,5 +2499,17 @@
   </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>There's no settings to change.</value>
+  </data>
+  <data name="SiteTemplates_FullTemplate_Title" xml:space="preserve">
+    <value>Full template</value>
+  </data>
+  <data name="SiteTemplates_FullTemplate_Comments" xml:space="preserve">
+    <value>This template contains all lists, fields and pages.</value>
+  </data>
+  <data name="SiteTemplates_LiteTemplate_Title" xml:space="preserve">
+    <value>Lite template</value>
+  </data>
+  <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
+    <value>This is a simplified version that does not contain lists for benefit work.</value>
   </data>
 </root>
