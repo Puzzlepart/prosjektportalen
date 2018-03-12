@@ -43,7 +43,7 @@ Param(
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
-    [switch]$Force,
+    [switch]$Force
 )
 
 . ./SharedFunctions.ps1
