@@ -21,49 +21,20 @@ export default class BenefitEntry {
     public DisplayFormUrl?: string;
 
     /**
-     * Constructor
-     */
-    constructor() {
-        /**
-         * Empty constructor
-         */
-    }
-
-    /**
      * Init
      *
      * @param {DataSource} dataSource Data source
      * @param {any} data Data
      */
-    public init(dataSource: DataSource, data: any): BenefitEntry {
+    public init(dataSource: DataSource, data): BenefitEntry {
         this.Title = data.Title;
         switch (dataSource) {
             case DataSource.List: {
-                this.ID = data.ID;
-                if (data.GtGainsResponsible) {
-                    this.Responsible = data.GtGainsResponsible.Title;
-                }
-                this.MeasureIndicator = data.GtMeasureIndicator;
-                this.MeasurementUnit = data.GtMeasurementUnit;
-                this.StartValue = data.GtStartValue;
-                this.DesiredValue = data.GtDesiredValue;
-                this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
+                this._initFromList(data);
             }
                 break;
             case DataSource.Search: {
-                this.ID = parseInt(data.ListItemID, 10);
-                this.Responsible = this.getOwsUserDisplayName(data.GtGainsResponsibleOWSUSER);
-                this.MeasureIndicator = data.GtMeasureIndicatorOWSTEXT;
-                this.MeasurementUnit = data.GtMeasurementUnitOWSCHCS;
-                if (data.GtStartValueOWSNMBR) {
-                    this.StartValue = parseInt(data.GtStartValueOWSNMBR, 10);
-                }
-                if (data.GtDesiredValueOWSNMBR) {
-                    this.DesiredValue = parseInt(data.GtDesiredValueOWSNMBR, 10);
-                }
-                this.SiteTitle = data.SiteTitle;
-                this.WebUrl = data.SPWebUrl;
-                this.DisplayFormUrl = data.Path;
+                this._initFromSearch(data);
             }
                 break;
         }
@@ -72,11 +43,11 @@ export default class BenefitEntry {
     }
 
     /**
-     * Initialize stats
+     * Set measurement stats
      *
      * @param {MeasurementEntry[]} measurements Measurements
      */
-    public initStats(measurements: MeasurementEntry[]): BenefitEntry {
+    public setMeasurementStats(measurements: MeasurementEntry[]): BenefitEntry {
         this.Measurements = measurements;
         if (measurements.length > 0) {
             let [latest, previous] = measurements;
@@ -103,5 +74,43 @@ export default class BenefitEntry {
             return displayName;
         }
         return "";
+    }
+
+    /**
+     * Init from list
+     *
+     * @param {any} data Data
+     */
+    private _initFromList(data) {
+        this.ID = data.ID;
+        if (data.GtGainsResponsible) {
+            this.Responsible = data.GtGainsResponsible.Title;
+        }
+        this.MeasureIndicator = data.GtMeasureIndicator;
+        this.MeasurementUnit = data.GtMeasurementUnit;
+        this.StartValue = data.GtStartValue;
+        this.DesiredValue = data.GtDesiredValue;
+        this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
+    }
+
+    /**
+     * Init from search
+     *
+     * @param {any} data Data
+     */
+    private _initFromSearch(data) {
+        this.ID = parseInt(data.ListItemID, 10);
+        this.Responsible = this.getOwsUserDisplayName(data.GtGainsResponsibleOWSUSER);
+        this.MeasureIndicator = data.GtMeasureIndicatorOWSTEXT;
+        this.MeasurementUnit = data.GtMeasurementUnitOWSCHCS;
+        if (data.GtStartValueOWSNMBR) {
+            this.StartValue = parseInt(data.GtStartValueOWSNMBR, 10);
+        }
+        if (data.GtDesiredValueOWSNMBR) {
+            this.DesiredValue = parseInt(data.GtDesiredValueOWSNMBR, 10);
+        }
+        this.SiteTitle = data.SiteTitle;
+        this.WebUrl = data.SPWebUrl;
+        this.DisplayFormUrl = data.Path;
     }
 }
