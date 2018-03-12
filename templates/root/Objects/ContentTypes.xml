@@ -132,6 +132,9 @@
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070205" Name="{resource:ContentTypes_Prosjektprodukt_Name}" Description="{resource:ContentTypes_Prosjektprodukt_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="99430a99-1354-418f-921f-7ddfdb6c0d7f" Name="GtProductDescription" />
+            <pnp:FieldRef ID="219a5cdf-799c-48ee-8869-ea39e4b9a6aa" Name="GtProductStartTime" />
+            <pnp:FieldRef ID="eb78509b-4109-474e-aca8-90d024a960de" Name="GtProductEndTime" />
             <pnp:FieldRef ID="5563056f-533f-4333-bd29-85a2f94a37d0" Name="GtProductPhase" />
             <pnp:FieldRef ID="c8e260c2-6887-4f9e-a713-7200246c3b1c" Name="GtProductQualityExpectations" />
             <pnp:FieldRef ID="149a30c2-056d-44f0-9cb5-29bfc632ca25" Name="GtProductAcceptanceCriteria" />
