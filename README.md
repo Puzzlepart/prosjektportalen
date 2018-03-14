@@ -19,7 +19,7 @@ Siste versjon av Prosjektportalen kan lastes ned [herfra](https://github.com/Puz
 
 ## Kontakt ##
 
-Har du spørsmål om Prosjektportlaen, behov for bistand til installasjon av løsningen eller muligheter for videreutvikling og spesialtilpasninger, ta kontakt med <a href="mailto:prosjektportalen@puzzlepart.com">Prosjektportalen @ Puzzlepart</a>. For tekniske spørsmål, ta kontakt med [<a href="mailto:tarjeieo@puzzlepart.com">Tarjei Ormestøyl</a>] eller [<a href="mailto:olemp@puzzlepart.com">Ole Martin Pettersen</a>]. Vi gjør oppmerksom på at eventuell bistand vil være en fakturerbar tjeneste. 
+Har du spørsmål om Prosjektportalen, behov for bistand til installasjon av løsningen eller muligheter for videreutvikling og spesialtilpasninger, ta kontakt med <a href="mailto:prosjektportalen@puzzlepart.com">Prosjektportalen @ Puzzlepart</a>. For tekniske spørsmål, ta kontakt med [<a href="mailto:tarjeieo@puzzlepart.com">Tarjei Ormestøyl</a>] eller [<a href="mailto:olemp@puzzlepart.com">Ole Martin Pettersen</a>]. Vi gjør oppmerksom på at eventuell bistand vil være en fakturerbar tjeneste. 
 
 ## Maintainers ##
 
