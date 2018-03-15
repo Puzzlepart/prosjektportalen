@@ -29,8 +29,7 @@ gulp.task("watch", () => {
     let settings = env[envKey];
 
     if (!settings) {
-        console.log(format("Environment {0} not found.", envKey));
-        return;
+        throw format("Environment {0} not found.", envKey);
     }
 
     watch(config.globs.js).on("change", () => {
