@@ -65,19 +65,7 @@ module.exports = (devtool, exclude, env) => ({
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
         .concat(env === "production" ? [
-            new webpack.optimize.UglifyJsPlugin({
-                mangle: true,
-                compress: {
-                    warnings: false,
-                    pure_getters: true,
-                    unsafe: true,
-                    unsafe_comps: true,
-                    screw_ie8: true
-                },
-                output: {
-                    comments: false,
-                },
-            }),
+            new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
         .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerMode: 'static' })] : [])

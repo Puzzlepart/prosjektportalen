@@ -8,12 +8,12 @@ var gulp = require("gulp"),
     runSequence = require("run-sequence"),
     livereload = require("gulp-livereload"),
     config = require("./@configuration.js"),
-    defaultSettings = require("./@settings.js");
+    env = require("./@env.js");
 
 let buildTimeout;
 
 function __startWatch(packageCodeFunc) {
-  
+
 }
 
 gulp.task("watchTests", () => {
@@ -23,11 +23,15 @@ gulp.task("watchTests", () => {
 gulp.task("watch", () => {
     const argv = require("yargs").argv;
     livereload.listen({ start: true });
-    const settings = {
-        siteUrl: argv.siteUrl || defaultSettings.siteUrl,
-        username: argv.username || defaultSettings.username,
-        password: argv.password || defaultSettings.password,
-    };
+
+    let envKey = argv.env || "default";
+
+    let settings = env[envKey];
+
+    if (!settings) {
+        throw format("Environment {0} not found.", envKey);
+    }
+
     watch(config.globs.js).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
@@ -50,12 +54,7 @@ gulp.task("watch", () => {
 
 function uploadFileToSp(glob, settings, folder) {
     gulp.src(glob)
-        .pipe(plumber({
-            errorHandler: (err) => this.emit("end"),
-        }))
-        .pipe(spsave({ folder: folder, siteUrl: settings.siteUrl }, {
-            username: settings.username,
-            password: settings.password,
-        }))
+        .pipe(plumber({ errorHandler: (err) => this.emit("end") }))
+        .pipe(spsave({ folder: folder, siteUrl: settings.siteUrl }, { username: settings.username, password: settings.password }))
         .pipe(livereload());
 }
