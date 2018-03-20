@@ -8,7 +8,7 @@ import {
  *
  * @param {string} url URL for the webb
  */
-export async function GetAllProperties(url = _spPageContextInfo.webAbsoluteUrl): Promise<any> {
+export async function GetAllProperties(url = _spPageContextInfo.siteAbsoluteUrl): Promise<any> {
     const { ctx, propertyBag } = await getJsomContext(url);
     await executeJsom(ctx, [propertyBag]);
     return propertyBag.get_fieldValues();
@@ -20,7 +20,7 @@ export async function GetAllProperties(url = _spPageContextInfo.webAbsoluteUrl):
  * @param {string} key Property key
  * @param {string} url URL for the web
  */
-export async function GetProperty(key: string, url = _spPageContextInfo.webAbsoluteUrl): Promise<string> {
+export async function GetProperty(key: string, url = _spPageContextInfo.siteAbsoluteUrl): Promise<string> {
     try {
         const properties = await GetAllProperties(url);
         return properties[key];
@@ -36,7 +36,7 @@ export async function GetProperty(key: string, url = _spPageContextInfo.webAbsol
  * @param {string} delimiter Delimiter
  * @param {string} url URL for the web
  */
-export async function GetPropertyAsArray(key: string, delimiter = ",", url = _spPageContextInfo.webAbsoluteUrl): Promise<any[]> {
+export async function GetPropertyAsArray(key: string, delimiter = ",", url = _spPageContextInfo.siteAbsoluteUrl): Promise<any[]> {
     try {
         const property = await GetProperty(key, url);
         const array = property.split(delimiter);
@@ -54,7 +54,7 @@ export async function GetPropertyAsArray(key: string, delimiter = ",", url = _sp
  * @param {string} delimiter Delimiter
  * @param {string} url URL for the web
  */
-export async function UpdatePropertyArray(key: string, valueToAdd: string, delimiter = ",", url = _spPageContextInfo.webAbsoluteUrl): Promise<boolean> {
+export async function UpdatePropertyArray(key: string, valueToAdd: string, delimiter = ",", url = _spPageContextInfo.siteAbsoluteUrl): Promise<boolean> {
     try {
         let array = await GetPropertyAsArray(key, delimiter, url);
         array.push(valueToAdd);
