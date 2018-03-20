@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 /* Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE in the project root for license information. */
 /**
- * Office UI Fabric Core 9.4.0
+ * Office UI Fabric Core 9.5.0
  * The front-end framework for building experiences for Office 365.
  **/
 /*
@@ -3898,6 +3898,16 @@
   background-color: #c8c8c8;
 }
 
+.ms-bgColor-neutralQuaternary,
+.ms-bgColor-neutralQuaternary--hover:hover {
+  background-color: #d0d0d0;
+}
+
+.ms-bgColor-neutralQuaternaryAlt,
+.ms-bgColor-neutralQuaternaryAlt--hover:hover {
+  background-color: #dadada;
+}
+
 .ms-bgColor-neutralLight,
 .ms-bgColor-neutralLight--hover:hover {
   background-color: #eaeaea;
@@ -4141,6 +4151,16 @@
 .ms-borderColor-neutralTertiaryAlt,
 .ms-borderColor-neutralTertiaryAlt--hover:hover {
   border-color: #c8c8c8;
+}
+
+.ms-borderColor-neutralQuaternary,
+.ms-borderColor-neutralQuaternary--hover:hover {
+  border-color: #d0d0d0;
+}
+
+.ms-borderColor-neutralQuaternaryAlt,
+.ms-borderColor-neutralQuaternaryAlt--hover:hover {
+  border-color: #dadada;
 }
 
 .ms-borderColor-neutralLight,
@@ -4811,6 +4831,16 @@
   color: #c8c8c8;
 }
 
+.ms-fontColor-neutralQuaternary,
+.ms-fontColor-neutralQuaternary--hover:hover {
+  color: #d0d0d0;
+}
+
+.ms-fontColor-neutralQuaternaryAlt,
+.ms-fontColor-neutralQuaternaryAlt--hover:hover {
+  color: #dadada;
+}
+
 .ms-fontColor-neutralLight,
 .ms-fontColor-neutralLight--hover:hover {
   color: #eaeaea;
@@ -5035,7 +5065,7 @@
 */
 @font-face {
   font-family: 'FabricMDL2Icons';
-  src: url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.64.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.64.woff') format('woff'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.64.ttf') format('truetype');
+  src: url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.68.woff2') format('woff2'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.68.woff') format('woff'), url('https://static2.sharepointonline.com/files/fabric/assets/icons/fabricmdl2icons-2.68.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -5311,6 +5341,22 @@
   content: '';
 }
 
+[dir='ltr'] .ms-Icon--AllApps::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--AllApps::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--AllAppsMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--AllAppsMirrored::before {
+  content: '';
+}
+
 .ms-Icon--AnalyticsLogo::before {
   content: '';
 }
@@ -5401,6 +5447,10 @@
 
 .ms-Icon--ArrowTallUpRight::before {
   content: '';
+}
+
+.ms-Icon--ArrowUpRight::before {
+  content: '';
 }
 
 [dir='ltr'] .ms-Icon--ArrowUpRight8::before {
@@ -6807,6 +6857,10 @@
   content: '';
 }
 
+.ms-Icon--DictionaryRemove::before {
+  content: '';
+}
+
 .ms-Icon--DietPlanNotebook::before {
   content: '';
 }
@@ -7137,6 +7191,10 @@
 
 .ms-Icon--EmptyRecycleBin::before {
   content: '';
+}
+
+.ms-Icon--Encryption::before {
+  content: '';
 }
 
 .ms-Icon--EngineeringGroup::before {
@@ -9331,6 +9389,10 @@
   content: '';
 }
 
+.ms-Icon--PowerButton::before {
+  content: '';
+}
+
 .ms-Icon--PowerPointDocument::before {
   content: '';
 }
@@ -9491,6 +9553,10 @@
   content: '';
 }
 
+.ms-Icon--PublishCourse::before {
+  content: '';
+}
+
 .ms-Icon--PublisherLogo::before {
   content: '';
 }
@@ -9603,6 +9669,10 @@
   content: '';
 }
 
+.ms-Icon--ReadOutLoud::before {
+  content: '';
+}
+
 .ms-Icon--ReceiptCheck::before {
   content: '';
 }
@@ -9641,6 +9711,10 @@
 
 .ms-Icon--Record2::before {
   content: '';
+}
+
+.ms-Icon--RectangleShapeSolid::before {
+  content: '';
 }
 
 .ms-Icon--RectangularClipping::before {
@@ -10123,6 +10197,10 @@
   content: '';
 }
 
+.ms-Icon--SingleBookmarkSolid::before {
+  content: '';
+}
+
 .ms-Icon--SingleColumn::before {
   content: '';
 }
@@ -10255,6 +10333,10 @@
   content: '';
 }
 
+.ms-Icon--Source::before {
+  content: '';
+}
+
 .ms-Icon--Spacer::before {
   content: '';
 }
@@ -10335,8 +10417,24 @@
   content: '';
 }
 
+.ms-Icon--StatusCircleBlock2::before {
+  content: '';
+}
+
 .ms-Icon--StatusCircleCheckmark::before {
   content: '';
+}
+
+.ms-Icon--StatusCircleErrorX::before {
+  content: '';
+}
+
+.ms-Icon--StatusCircleExclamation::before {
+  content: '';
+}
+
+.ms-Icon--StatusCircleInfo::before {
+  content: '';
 }
 
 .ms-Icon--StatusCircleInner::before {
@@ -10347,12 +10445,32 @@
   content: '';
 }
 
+.ms-Icon--StatusCircleQuestionMark::before {
+  content: '';
+}
+
+.ms-Icon--StatusCircleRing::before {
+  content: '';
+}
+
 .ms-Icon--StatusErrorFull::before {
   content: '';
 }
 
 .ms-Icon--StatusTriangle::before {
   content: '';
+}
+
+.ms-Icon--StatusTriangleExclamation::before {
+  content: '';
+}
+
+.ms-Icon--StatusTriangleInner::before {
+  content: '';
+}
+
+.ms-Icon--StatusTriangleOuter::before {
+  content: '';
 }
 
 .ms-Icon--Step::before {
@@ -10667,6 +10785,10 @@
   content: '';
 }
 
+.ms-Icon--TextDocumentShared::before {
+  content: '';
+}
+
 .ms-Icon--TextField::before {
   content: '';
 }
@@ -10785,6 +10907,22 @@
 
 .ms-Icon--TouchPointer::before {
   content: '';
+}
+
+[dir='ltr'] .ms-Icon--Trackers::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--Trackers::before {
+  content: '';
+}
+
+[dir='ltr'] .ms-Icon--TrackersMirrored::before {
+  content: '';
+}
+
+[dir='rtl'] .ms-Icon--TrackersMirrored::before {
+  content: '';
 }
 
 .ms-Icon--Train::before {
@@ -11027,12 +11165,20 @@
   content: '';
 }
 
+.ms-Icon--UserEvent::before {
+  content: '';
+}
+
 .ms-Icon--UserFollowed::before {
   content: '';
 }
 
 .ms-Icon--UserPause::before {
   content: '';
+}
+
+.ms-Icon--UserRemove::before {
+  content: '';
 }
 
 .ms-Icon--UserSync::before {
@@ -11249,6 +11395,14 @@
 
 .ms-Icon--Weights::before {
   content: '';
+}
+
+.ms-Icon--WhiteBoardApp16::before {
+  content: '';
+}
+
+.ms-Icon--WhiteBoardApp32::before {
+  content: '';
 }
 
 .ms-Icon--WifiEthernet::before {
