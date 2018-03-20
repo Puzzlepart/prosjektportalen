@@ -1,6 +1,6 @@
 ﻿@{
     RootModule = 'SharePointPnP.PowerShell.Online.Commands.dll'
-    ModuleVersion = '2.23.1802.0'
+    ModuleVersion = '2.24.1803.0'
     Description = 'SharePoint Patterns and Practices PowerShell Cmdlets for SharePoint Online'
     GUID = '8f1147be-a8e4-4bd2-a705-841d5334edc0'
     Author = 'SharePoint Patterns and Practices'
@@ -8,8 +8,9 @@
     DotNetFrameworkVersion = '4.5'
     ProcessorArchitecture = 'None'
     FunctionsToExport = '*'
-    CmdletsToExport = 'Add-PnPApp','Add-PnPClientSidePage','Add-PnPClientSidePageSection','Add-PnPClientSideText','Add-PnPClientSideWebPart','Add-PnPContentType','Add-PnPContentTypeToDocumentSet','Add-PnPContentTypeToList','Add-PnPCustomAction','Add-PnPDataRowsToProvisioningTemplate','Add-PnPDocumentSet','Add-PnPEventReceiver','Add-PnPField','Add-PnPFieldFromXml','Add-PnPFieldToContentType','Add-PnPFile','Add-PnPFileToProvisioningTemplate','Add-PnPFolder','Add-PnPHtmlPublishingPageLayout','Add-PnPIndexedProperty','Add-PnPJavaScriptBlock','Add-PnPJavaScriptLink','Add-PnPListFoldersToProvisioningTemplate','Add-PnPListItem','Add-PnPMasterPage','Add-PnPNavigationNode','Add-PnPOffice365GroupToSite','Add-PnPPublishingImageRendition','Add-PnPPublishingPage','Add-PnPPublishingPageLayout','Add-PnPSiteClassification','Add-PnPSiteCollectionAdmin','Add-PnPSiteDesign','Add-PnPSiteScript','Add-PnPTaxonomyField','Add-PnPUserToGroup','Add-PnPView','Add-PnPWebhookSubscription','Add-PnPWebPartToWebPartPage','Add-PnPWebPartToWikiPage','Add-PnPWikiPage','Add-PnPWorkflowDefinition','Add-PnPWorkflowSubscription','Apply-PnPProvisioningTemplate','Set-PnPSitePolicy','Clear-PnPListItemAsRecord','Clear-PnPRecycleBinItem','Clear-PnPTenantRecycleBinItem','Connect-PnPOnline','Connect-PnPMicrosoftGraph','Convert-PnPProvisioningTemplate','Convert-PnPFolderToProvisioningTemplate','Copy-PnPFile','Disable-PnPFeature','Disable-PnPInPlaceRecordsManagementForSite','Disable-PnPResponsiveUI','Disable-PnPSiteClassification','Disconnect-PnPOnline','Enable-PnPFeature','Enable-PnPInPlaceRecordsManagementForSite','Enable-PnPResponsiveUI','Enable-PnPSiteClassification','Ensure-PnPFolder','Get-PnPProperty','Execute-PnPQuery','Export-PnPTaxonomy','Export-PnPTermGroupToXml','Find-PnPFile','Get-PnPApp','Get-PnPAppInstance','Get-PnPAuditing','Get-PnPAuthenticationRealm','Get-PnPAvailableClientSideComponents','Get-PnPAzureADManifestKeyCredentials','Get-PnPClientSideComponent','Get-PnPClientSidePage','Get-PnPContentType','Get-PnPContentTypePublishingHubUrl','Get-PnPCustomAction','Get-PnPDefaultColumnValues','Get-PnPDocumentSetTemplate','Get-PnPEventReceiver','Get-PnPFeature','Get-PnPField','Get-PnPFile','Get-PnPFolder','Get-PnPFolderItem','Get-PnPGroup','Get-PnPGroupMembers','Get-PnPGroupPermissions','Get-PnPHealthScore','Get-PnPHomePage','Get-PnPIndexedPropertyKeys','Get-PnPJavaScriptLink','Get-PnPList','Get-PnPListItem','Get-PnPMasterPage','Get-PnPAccessToken','Get-PnPAppAuthAccessToken','Get-PnPConnection','Get-PnPSiteCollectionTermStore','Get-PnPStorageEntity','Get-PnPPropertyBag','Get-PnPProvisioningTemplate','Get-PnPProvisioningTemplateFromGallery','Get-PnPPublishingImageRendition','Get-PnPRecycleBinItem','Get-PnPRequestAccessEmails','Get-PnPSearchConfiguration','Get-PnPSite','Get-PnPSiteClassification','Get-PnPSiteClosure','Get-PnPSiteCollectionAdmin','Get-PnPSiteDesign','Get-PnPSiteDesignRights','Get-PnPSitePolicy','Get-PnPSiteScript','Get-PnPSiteSearchQueryResults','Get-PnPContext','Get-PnPStoredCredential','Get-PnPSubWebs','Get-PnPTaxonomyItem','Get-PnPTaxonomySession','Get-PnPTenantAppCatalogUrl','Get-PnPTenantRecycleBinItem','Get-PnPTenantSite','Get-PnPTerm','Get-PnPTermGroup','Get-PnPTermSet','Get-PnPTheme','Get-PnPTimeZoneId','Get-PnPUnifiedGroup','Get-PnPUnifiedGroupMembers','Get-PnPUnifiedGroupOwners','Get-PnPUser','Get-PnPUserProfileProperty','Get-PnPView','Get-PnPWeb','Get-PnPWebhookSubscriptions','Get-PnPWebPart','Get-PnPWebPartProperty','Get-PnPWebPartXml','Get-PnPWebTemplates','Get-PnPWikiPageContent','Get-PnPWorkflowDefinition','Get-PnPWorkflowInstance','Get-PnPWorkflowSubscription','Grant-PnPSiteDesignRights','Import-PnPAppPackage','Import-PnPTaxonomy','Import-PnPTermGroupFromXml','Import-PnPTermSet','Install-PnPApp','Install-PnPSolution','Invoke-PnPWebAction','Load-PnPProvisioningTemplate','Measure-PnPList','Measure-PnPWeb','Measure-PnPResponseTime','Move-PnPClientSideComponent','Move-PnPFile','Move-PnPFolder','Move-PnPListItemToRecycleBin','Move-PnPRecycleBinItem','New-PnPExtensibilityHandlerObject','New-PnPGroup','New-PnPList','New-PnPPersonalSite','New-PnPUnifiedGroup','New-PnPProvisioningTemplate','New-PnPProvisioningTemplateFromFolder','New-PnPSite','New-PnPTenantSite','New-PnPTerm','New-PnPTermGroup','New-PnPTermSet','New-PnPUser','New-PnPWeb','Publish-PnPApp','Remove-PnPApp','Remove-PnPClientSideComponent','Remove-PnPClientSidePage','Remove-PnPContentType','Remove-PnPContentTypeFromDocumentSet','Remove-PnPContentTypeFromList','Remove-PnPCustomAction','Remove-PnPIndexedProperty','Remove-PnPEventReceiver','Remove-PnPField','Remove-PnPFieldFromContentType','Remove-PnPFile','Remove-PnPFileFromProvisioningTemplate','Remove-PnPFolder','Remove-PnPGroup','Remove-PnPJavaScriptLink','Remove-PnPList','Remove-PnPListItem','Remove-PnPNavigationNode','Remove-PnPStorageEntity','Remove-PnPPropertyBagValue','Remove-PnPPublishingImageRendition','Remove-PnPTenantSite','Remove-PnPSiteClassification','Remove-PnPSiteCollectionAdmin','Remove-PnPSiteDesign','Remove-PnPSiteScript','Remove-PnPTaxonomyItem','Remove-PnPTermGroup','Remove-PnPUnifiedGroup','Remove-PnPUser','Remove-PnPUserFromGroup','Remove-PnPView','Remove-PnPWeb','Remove-PnPWebhookSubscription','Remove-PnPWebPart','Remove-PnPWikiPage','Remove-PnPWorkflowDefinition','Remove-PnPWorkflowSubscription','Rename-PnPFile','Rename-PnPFolder','Request-PnPReIndexList','Request-PnPReIndexWeb','Restore-PnPRecycleBinItem','Restore-PnPTenantRecycleBinItem','Resume-PnPWorkflowInstance','Revoke-PnPSiteDesignRights','Save-PnPProvisioningTemplate','Send-PnPMail','Set-PnPAppSideLoading','Set-PnPAuditing','Set-PnPAvailablePageLayouts','Set-PnPClientSidePage','Set-PnPClientSideText','Set-PnPClientSideWebPart','Set-PnPContext','Set-PnPDefaultColumnValues','Set-PnPDefaultContentTypeToList','Set-PnPDefaultPageLayout','Set-PnPField','Set-PnPDocumentSetField','Set-PnPFileCheckedIn','Set-PnPFileCheckedOut','Set-PnPGroup','Set-PnPGroupPermissions','Set-PnPHomePage','Set-PnPIndexedProperties','Set-PnPInPlaceRecordsManagement','Set-PnPList','Set-PnPListItem','Set-PnPListItemAsRecord','Set-PnPListItemPermission','Set-PnPListPermission','Set-PnPMasterPage','Set-PnPMinimalDownloadStrategy','Set-PnPStorageEntity','Set-PnPPropertyBagValue','Set-PnPProvisioningTemplateMetadata','Set-PnPRequestAccessEmails','Set-PnPSearchConfiguration','Set-PnPSite','Set-PnPSiteClosure','Set-PnPSiteDesign','Set-PnPSiteScript','Set-PnPTaxonomyFieldValue','Set-PnPTenantSite','Set-PnPTheme','Set-PnPTraceLog','Set-PnPUnifiedGroup','Set-PnPUserProfileProperty','Set-PnPView','Set-PnPWeb','Set-PnPWebhookSubscription','Set-PnPWebPartProperty','Set-PnPWebPermission','Set-PnPWikiPageContent','Copy-PnPItemProxy','Move-PnPItemProxy','Start-PnPWorkflowInstance','Stop-PnPWorkflowInstance','Submit-PnPSearchQuery','Test-PnPListItemIsRecord','Uninstall-PnPApp','Uninstall-PnPAppInstance','Uninstall-PnPSolution','Unpublish-PnPApp','Update-PnPApp','Update-PnPSiteClassification'
+    CmdletsToExport = 'Add-PnPApp','Add-PnPClientSidePage','Add-PnPClientSidePageSection','Add-PnPClientSideText','Add-PnPClientSideWebPart','Add-PnPContentType','Add-PnPContentTypeToDocumentSet','Add-PnPContentTypeToList','Add-PnPCustomAction','Add-PnPDataRowsToProvisioningTemplate','Add-PnPDocumentSet','Add-PnPEventReceiver','Add-PnPField','Add-PnPFieldFromXml','Add-PnPFieldToContentType','Add-PnPFile','Add-PnPFileToProvisioningTemplate','Add-PnPFolder','Add-PnPHtmlPublishingPageLayout','Add-PnPIndexedProperty','Add-PnPJavaScriptBlock','Add-PnPJavaScriptLink','Add-PnPListFoldersToProvisioningTemplate','Add-PnPListItem','Add-PnPMasterPage','Add-PnPNavigationNode','Test-PnPOffice365GroupAliasIsUsed','Add-PnPOffice365GroupToSite','Add-PnPPublishingImageRendition','Add-PnPPublishingPage','Add-PnPPublishingPageLayout','Add-PnPRoleDefinition','Add-PnPSiteClassification','Add-PnPSiteCollectionAdmin','Add-PnPSiteCollectionAppCatalog','Add-PnPSiteDesign','Add-PnPSiteScript','Add-PnPStoredCredential','Add-PnPTaxonomyField','Add-PnPTenantCdnOrigin','Add-PnPTenantTheme','Add-PnPUserToGroup','Add-PnPView','Add-PnPWebhookSubscription','Add-PnPWebPartToWebPartPage','Add-PnPWebPartToWikiPage','Add-PnPWikiPage','Add-PnPWorkflowDefinition','Add-PnPWorkflowSubscription','Apply-PnPProvisioningTemplate','Set-PnPSitePolicy','Clear-PnPListItemAsRecord','Clear-PnPRecycleBinItem','Clear-PnPTenantRecycleBinItem','Connect-PnPHubSite','Connect-PnPOnline','Connect-PnPMicrosoftGraph','Convert-PnPProvisioningTemplate','Convert-PnPFolderToProvisioningTemplate','Copy-PnPFile','Disable-PnPFeature','Disable-PnPInPlaceRecordsManagementForSite','Disable-PnPResponsiveUI','Disable-PnPSiteClassification','Disconnect-PnPHubSite','Disconnect-PnPOnline','Enable-PnPFeature','Enable-PnPInPlaceRecordsManagementForSite','Enable-PnPResponsiveUI','Enable-PnPSiteClassification','Get-PnPProperty','Export-PnPTaxonomy','Export-PnPTermGroupToXml','Find-PnPFile','Get-PnPApp','Get-PnPAppInstance','Get-PnPAuditing','Get-PnPAuthenticationRealm','Get-PnPAvailableClientSideComponents','Get-PnPAzureADManifestKeyCredentials','Get-PnPClientSideComponent','Get-PnPClientSidePage','Get-PnPContentType','Get-PnPContentTypePublishingHubUrl','Get-PnPCustomAction','Get-PnPDefaultColumnValues','Get-PnPDocumentSetTemplate','Get-PnPEventReceiver','Get-PnPFeature','Get-PnPField','Get-PnPFile','Get-PnPFolder','Get-PnPFolderItem','Get-PnPGroup','Get-PnPGroupMembers','Get-PnPGroupPermissions','Get-PnPHealthScore','Get-PnPHomePage','Get-PnPHubSite','Get-PnPIndexedPropertyKeys','Get-PnPJavaScriptLink','Get-PnPList','Get-PnPListItem','Get-PnPMasterPage','Get-PnPNavigationNode','Get-PnPAccessToken','Get-PnPAzureCertificate','Get-PnPAppAuthAccessToken','Get-PnPConnection','Get-PnPSiteCollectionTermStore','Get-PnPStorageEntity','Get-PnPPropertyBag','Get-PnPProvisioningTemplate','Get-PnPProvisioningTemplateFromGallery','Get-PnPPublishingImageRendition','Get-PnPRecycleBinItem','Get-PnPRequestAccessEmails','Get-PnPRoleDefinition','Get-PnPSearchConfiguration','Get-PnPSite','Get-PnPSiteClassification','Get-PnPSiteClosure','Get-PnPSiteCollectionAdmin','Get-PnPSiteDesign','Get-PnPSiteDesignRights','Get-PnPSitePolicy','Get-PnPSiteScript','Get-PnPSiteSearchQueryResults','Get-PnPContext','Get-PnPStoredCredential','Get-PnPSubWebs','Get-PnPTaxonomyItem','Get-PnPTaxonomySession','Get-PnPTenant','Get-PnPTenantAppCatalogUrl','Get-PnPTenantCdnEnabled','Get-PnPTenantCdnOrigin','Get-PnPTenantCdnPolicies','Get-PnPTenantRecycleBinItem','Get-PnPTenantSite','Get-PnPTenantTheme','Get-PnPTerm','Get-PnPTermGroup','Get-PnPTermSet','Get-PnPTheme','Get-PnPTimeZoneId','Get-PnPUnifiedGroup','Get-PnPUnifiedGroupMembers','Get-PnPUnifiedGroupOwners','Get-PnPUser','Get-PnPUserProfileProperty','Get-PnPView','Get-PnPWeb','Get-PnPWebhookSubscriptions','Get-PnPWebPart','Get-PnPWebPartProperty','Get-PnPWebPartXml','Get-PnPWebTemplates','Get-PnPWikiPageContent','Get-PnPWorkflowDefinition','Get-PnPWorkflowInstance','Get-PnPWorkflowSubscription','Grant-PnPHubSiteRights','Grant-PnPSiteDesignRights','Import-PnPAppPackage','Import-PnPTaxonomy','Import-PnPTermGroupFromXml','Import-PnPTermSet','Install-PnPApp','Install-PnPSolution','Invoke-PnPQuery','Invoke-PnPSiteDesign','Invoke-PnPWebAction','Measure-PnPList','Measure-PnPWeb','Measure-PnPResponseTime','Move-PnPClientSideComponent','Move-PnPFile','Move-PnPFolder','Move-PnPListItemToRecycleBin','Move-PnPRecycleBinItem','New-PnPExtensibilityHandlerObject','New-PnPGroup','New-PnPList','New-PnPPersonalSite','New-PnPAzureCertificate','New-PnPUnifiedGroup','New-PnPProvisioningTemplate','New-PnPProvisioningTemplateFromFolder','New-PnPSite','New-PnPTenantSite','New-PnPTerm','New-PnPTermGroup','New-PnPTermSet','New-PnPUser','New-PnPWeb','Publish-PnPApp','Read-PnPProvisioningTemplate','Register-PnPHubSite','Remove-PnPApp','Remove-PnPClientSideComponent','Remove-PnPClientSidePage','Remove-PnPContentType','Remove-PnPContentTypeFromDocumentSet','Remove-PnPContentTypeFromList','Remove-PnPCustomAction','Remove-PnPIndexedProperty','Remove-PnPEventReceiver','Remove-PnPField','Remove-PnPFieldFromContentType','Remove-PnPFile','Remove-PnPFileFromProvisioningTemplate','Remove-PnPFolder','Remove-PnPGroup','Remove-PnPJavaScriptLink','Remove-PnPList','Remove-PnPListItem','Remove-PnPNavigationNode','Remove-PnPStorageEntity','Remove-PnPPropertyBagValue','Remove-PnPPublishingImageRendition','Remove-PnPRoleDefinition','Remove-PnPTenantSite','Remove-PnPSiteClassification','Remove-PnPSiteCollectionAdmin','Remove-PnPSiteCollectionAppCatalog','Remove-PnPSiteDesign','Remove-PnPSiteScript','Remove-PnPStoredCredential','Remove-PnPTaxonomyItem','Remove-PnPTenantCdnOrigin','Remove-PnPTenantTheme','Remove-PnPTermGroup','Remove-PnPUnifiedGroup','Remove-PnPUser','Remove-PnPUserFromGroup','Remove-PnPView','Remove-PnPWeb','Remove-PnPWebhookSubscription','Remove-PnPWebPart','Remove-PnPWikiPage','Remove-PnPWorkflowDefinition','Remove-PnPWorkflowSubscription','Rename-PnPFile','Rename-PnPFolder','Request-PnPReIndexList','Request-PnPReIndexWeb','Resolve-PnPFolder','Restore-PnPRecycleBinItem','Restore-PnPTenantRecycleBinItem','Resume-PnPWorkflowInstance','Revoke-PnPSiteDesignRights','Save-PnPProvisioningTemplate','Send-PnPMail','Set-PnPAppSideLoading','Set-PnPAuditing','Set-PnPAvailablePageLayouts','Set-PnPClientSidePage','Set-PnPClientSideText','Set-PnPClientSideWebPart','Set-PnPContext','Set-PnPDefaultColumnValues','Set-PnPDefaultContentTypeToList','Set-PnPDefaultPageLayout','Set-PnPField','Set-PnPDocumentSetField','Set-PnPFileCheckedIn','Set-PnPFileCheckedOut','Set-PnPGroup','Set-PnPGroupPermissions','Set-PnPHomePage','Set-PnPHubSite','Set-PnPIndexedProperties','Set-PnPInPlaceRecordsManagement','Set-PnPList','Set-PnPListItem','Set-PnPListItemAsRecord','Set-PnPListItemPermission','Set-PnPListPermission','Set-PnPMasterPage','Set-PnPMinimalDownloadStrategy','Set-PnPStorageEntity','Set-PnPPropertyBagValue','Set-PnPProvisioningTemplateMetadata','Set-PnPRequestAccessEmails','Set-PnPSearchConfiguration','Set-PnPSite','Set-PnPSiteClosure','Set-PnPSiteDesign','Set-PnPSiteScript','Set-PnPTaxonomyFieldValue','Set-PnPTenant','Set-PnPTenantCdnEnabled','Set-PnPTenantCdnPolicy','Set-PnPTenantSite','Set-PnPTheme','Set-PnPTraceLog','Set-PnPUnifiedGroup','Set-PnPUserProfileProperty','Set-PnPView','Set-PnPWeb','Set-PnPWebhookSubscription','Set-PnPWebPartProperty','Set-PnPWebPermission','Set-PnPWebTheme','Set-PnPWikiPageContent','Copy-PnPItemProxy','Move-PnPItemProxy','Start-PnPWorkflowInstance','Stop-PnPWorkflowInstance','Submit-PnPSearchQuery','Test-PnPListItemIsRecord','Uninstall-PnPApp','Uninstall-PnPAppInstance','Uninstall-PnPSolution','Unpublish-PnPApp','Unregister-PnPHubSite','Update-PnPApp','Update-PnPSiteClassification'
     VariablesToExport = '*'
+    AliasesToExport = '*'
     FormatsToProcess = 'SharePointPnP.PowerShell.Online.Commands.Format.ps1xml' 
     PrivateData = @{
         PSData = @{
@@ -19,10 +20,10 @@
     }
 }
 # SIG # Begin signature block
-# MIIj7AYJKoZIhvcNAQcCoIIj3TCCI9kCAQExDzANBglghkgBZQMEAgEFADB5Bgor
+# MIIj6QYJKoZIhvcNAQcCoIIj2jCCI9YCAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
-# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCBUjLjNHBrLp+Hk
-# 4YBIp5vhNbNXQBCRRwSR1cBIgfjtEqCCDYMwggYBMIID6aADAgECAhMzAAAAxOmJ
+# KX7zUQIBAAIBAAIBAAIBAAIBADAxMA0GCWCGSAFlAwQCAQUABCCVbmKLeHZ1hryB
+# 5totT9djIqtKstZjpGUwqPZSNZJpFKCCDYMwggYBMIID6aADAgECAhMzAAAAxOmJ
 # +HqBUOn/AAAAAADEMA0GCSqGSIb3DQEBCwUAMH4xCzAJBgNVBAYTAlVTMRMwEQYD
 # VQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYDVQQKExVNaWNy
 # b3NvZnQgQ29ycG9yYXRpb24xKDAmBgNVBAMTH01pY3Jvc29mdCBDb2RlIFNpZ25p
@@ -94,28 +95,28 @@
 # 30HHDiju3mUv7Jf2oVyW2ADWoUa9WfOXpQlLSBCZgB/QACnFsZulP0V3HjXG0qKi
 # n3p6IvpIlR+r+0cjgPWe+L9rt0uX4ut1eBrs6jeZeRhL/9azI2h15q/6/IvrC4Dq
 # aTuv/DDtBEyO3991bWORPdGdVk5Pv4BXIqF4ETIheu9BCrE/+6jMpF3BoYibV3FW
-# TkhFwELJm3ZbCoBIa/15n8G9bW1qyVJzEw16UM0xghW/MIIVuwIBATCBlTB+MQsw
+# TkhFwELJm3ZbCoBIa/15n8G9bW1qyVJzEw16UM0xghW8MIIVuAIBATCBlTB+MQsw
 # CQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9u
 # ZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMSgwJgYDVQQDEx9NaWNy
 # b3NvZnQgQ29kZSBTaWduaW5nIFBDQSAyMDExAhMzAAAAxOmJ+HqBUOn/AAAAAADE
 # MA0GCWCGSAFlAwQCAQUAoIGuMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEEMBwG
-# CisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCDIWjQn
-# rILJiNixkmXGs4u4Kvgk4nAAgEP8eDkzzplYhzBCBgorBgEEAYI3AgEMMTQwMqAU
+# CisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMC8GCSqGSIb3DQEJBDEiBCBQaXme
+# bldksZ5+MOoMroyFY1GCN4jgSHGucVrLKxEJ0TBCBgorBgEEAYI3AgEMMTQwMqAU
 # gBIATQBpAGMAcgBvAHMAbwBmAHShGoAYaHR0cDovL3d3dy5taWNyb3NvZnQuY29t
-# MA0GCSqGSIb3DQEBAQUABIIBAHLgsVQGS0Qpw+t80b6y9xiLj3clm1+vYFxlSRYc
-# UtVdyUanBcQaXKBOiJFcqR9xfr9s6BNOwT7E+IPT1Q2S4o1QJ1yCScROzcJK7wAh
-# +MkXNrPSmJaTXCgZx1KqpLxiXEpiarQ2vwNXAwIxQNSgx0QhVPaKVsobhJiAbYVh
-# /Xv+ORpSXg0YyV7z7bbsXxsx9TFKzUc8XKw22cFk3IHpgo/Ro00CkJKi0nhlDWu0
-# Xg3MwAT3ms2cCpyTOgZc4XJocZSn5LYF3xDQejridQ+NGstPWZkrP2c2LCalRMbh
-# BUxMI5ybSHSjAPjtzNIk+JqS/f/boELheRkfOi/Mc2AMp+WhghNJMIITRQYKKwYB
-# BAGCNwMDATGCEzUwghMxBgkqhkiG9w0BBwKgghMiMIITHgIBAzEPMA0GCWCGSAFl
+# MA0GCSqGSIb3DQEBAQUABIIBAEdwigssbJX+/zkFyTbYiDh835VfTOyLln+1AkO6
+# blHJGhnQTf6ZX83Ukd97YXGhrzqlCIRhEdCaYl3k6iIVGbSVX2vjoiSf1vMMPI88
+# R0yIeWcOD7ZlQlhdVYnnJlIp9nHfMs3cHNVmR7qUPBYc7pIaXbVanBGJVy9OfO8m
+# SSJ6Pc+m6w9qeQeCz3IatgcbTlO8+hmYPSkQO1F0hAzt8OBLLYjxlPZC/GBXb6Im
+# dFovoHz5zQVvTVfAdGajRYtrNuctXKNbxBKCEdlXt/6aOLK3l7ftf1EEXVkbQmOp
+# freCuop3ZaDtwV5Js5WDgJNRPhD6w//MocjtnVLFjXwQ0jKhghNGMIITQgYKKwYB
+# BAGCNwMDATGCEzIwghMuBgkqhkiG9w0BBwKgghMfMIITGwIBAzEPMA0GCWCGSAFl
 # AwQCAQUAMIIBPAYLKoZIhvcNAQkQAQSgggErBIIBJzCCASMCAQEGCisGAQQBhFkK
-# AwEwMTANBglghkgBZQMEAgEFAAQgMkLc+Dd82I2AQTfk+BCaxFFOSZsP3AOzf0GG
-# t90Ruq8CBlpOz88VYxgTMjAxODAyMDMwOTA4NTAuODcyWjAHAgEBgAIB9KCBuKSB
+# AwEwMTANBglghkgBZQMEAgEFAAQgjxIMQnpHOa0uthfh+1Bn2G3VwxZ1H0x/h9BF
+# 8eiifNECBlqVgL8DihgTMjAxODAzMDYxOTUzMjcuMTU2WjAHAgEBgAIB9KCBuKSB
 # tTCBsjELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcT
 # B1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEMMAoGA1UE
-# CxMDQU9DMScwJQYDVQQLEx5uQ2lwaGVyIERTRSBFU046MTJFNy0zMDY0LTYxMTIx
-# JTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1wIFNlcnZpY2Wggg7NMIIGcTCC
+# CxMDQU9DMScwJQYDVQQLEx5uQ2lwaGVyIERTRSBFU046RjZGRi0yREE3LUJCNzUx
+# JTAjBgNVBAMTHE1pY3Jvc29mdCBUaW1lLVN0YW1wIFNlcnZpY2Wggg7KMIIGcTCC
 # BFmgAwIBAgIKYQmBKgAAAAAAAjANBgkqhkiG9w0BAQsFADCBiDELMAkGA1UEBhMC
 # VVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcTB1JlZG1vbmQxHjAcBgNV
 # BAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEyMDAGA1UEAxMpTWljcm9zb2Z0IFJv
@@ -150,65 +151,65 @@
 # cs0d9LiFAR6A+xuJKlQ5slvayA1VmXqHczsI5pgt6o3gMy4SKfXAL1QnIffIrE7a
 # KLixqduWsqdCosnPGUFN4Ib5KpqjEWYw07t0MkvfY3v1mYovG8chr1m1rtxEPJdQ
 # cdeh0sVV42neV8HR3jDA/czmTfsNv11P6Z0eGTgvvM9YBS7vDaBQNdrvCScc1bN+
-# NR4Iuto229Nfj950iEkSMIIE2TCCA8GgAwIBAgITMwAAAKyKIbx60pty9AAAAAAA
-# rDANBgkqhkiG9w0BAQsFADB8MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGlu
+# NR4Iuto229Nfj950iEkSMIIE2TCCA8GgAwIBAgITMwAAAKVIF3In+XC+YwAAAAAA
+# pTANBgkqhkiG9w0BAQsFADB8MQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGlu
 # Z3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBv
 # cmF0aW9uMSYwJAYDVQQDEx1NaWNyb3NvZnQgVGltZS1TdGFtcCBQQ0EgMjAxMDAe
-# Fw0xNjA5MDcxNzU2NTRaFw0xODA5MDcxNzU2NTRaMIGyMQswCQYDVQQGEwJVUzET
+# Fw0xNjA5MDcxNzU2NTBaFw0xODA5MDcxNzU2NTBaMIGyMQswCQYDVQQGEwJVUzET
 # MBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMV
 # TWljcm9zb2Z0IENvcnBvcmF0aW9uMQwwCgYDVQQLEwNBT0MxJzAlBgNVBAsTHm5D
-# aXBoZXIgRFNFIEVTTjoxMkU3LTMwNjQtNjExMjElMCMGA1UEAxMcTWljcm9zb2Z0
+# aXBoZXIgRFNFIEVTTjpGNkZGLTJEQTctQkI3NTElMCMGA1UEAxMcTWljcm9zb2Z0
 # IFRpbWUtU3RhbXAgU2VydmljZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC
-# ggEBAKHE9DyljnMxoRdBXKt3CLep0UOqu9/cdPm6NVZqhAnYqbv7VPcY2cals0Po
-# +iYBzD019X4L5EyYKtOGlSUFXN67Ow0vYuyP2Yx0rzeLF5trN6dKsDStcsiJ9YHM
-# odU/qPOxBaj3pwe6QdmojzFGne1iK+Bqm3ksuuf1GbYmf4TSHaUoM7Dmwi15mKuI
-# 4w8fZnua2BhebIHxOGB0Hjqnp+s0alxevXWlrVWSV2XSJjqgEApBBLEnkGfg3u6L
-# laPnAOQNnMYCDqfWm0w9M8mEva6ixbzhiOdKn/ay41qneo6MoRheakbO9qyrmrKo
-# /K9+p+Sw580Fome1+kLx0gMkqucCAwEAAaOCARswggEXMB0GA1UdDgQWBBTYR3Co
-# hTWLE2Gvh5DoRRck4JinDTAfBgNVHSMEGDAWgBTVYzpcijGQ80N7fEYbxTNoWoVt
+# ggEBALTaktS9TF7w21cH31lhgTomttMYs2nD/fvMI2/SDczTG1YWzFBNvsMS+1zW
+# wTSzwjnJtPsh+jLXYWwKCl5uT74Kly/RrQLk4dDvaYGfHzLGTYQm/eJ7qNIiLDzx
+# zCs5Mi/+G+yeT2/9i8dU84WdfoJLUhKO7g9jPbY3RPpOW7tf3Y/+5oXXA1IRnsGU
+# /zX7hzL2EyCRp5o3ofJPpDJUS+AoFOXnIYbt1sOamTQhJjB1B5igZehTt9CZWpQS
+# ZrvbVlY01ESRYYnQuNRfOk7lgDrH8lKbOnXX3HaoIFMgxxm3FFV1fPvKAiIOoUuB
+# 87DmWcUapQuByhcCPmrFC46/wbcCAwEAAaOCARswggEXMB0GA1UdDgQWBBTiE6tL
+# 8u2xYLh48YWgUf5y57EvpDAfBgNVHSMEGDAWgBTVYzpcijGQ80N7fEYbxTNoWoVt
 # VTBWBgNVHR8ETzBNMEugSaBHhkVodHRwOi8vY3JsLm1pY3Jvc29mdC5jb20vcGtp
 # L2NybC9wcm9kdWN0cy9NaWNUaW1TdGFQQ0FfMjAxMC0wNy0wMS5jcmwwWgYIKwYB
 # BQUHAQEETjBMMEoGCCsGAQUFBzAChj5odHRwOi8vd3d3Lm1pY3Jvc29mdC5jb20v
 # cGtpL2NlcnRzL01pY1RpbVN0YVBDQV8yMDEwLTA3LTAxLmNydDAMBgNVHRMBAf8E
-# AjAAMBMGA1UdJQQMMAoGCCsGAQUFBwMIMA0GCSqGSIb3DQEBCwUAA4IBAQBI7Ohe
-# J8MbGJxdtM52bjcMH11jHA1dpCPSFbTO0EAJ5ZtfrPF57XDtMl5dDHUh9PPUFYkB
-# 9WVrscDWjFrQuIX9R/qt9G8QSYaYev3BYRuvfGISuWVMUTZX+Z1gFITB2PvibxAs
-# F4VjfsKPHhMV74AH8VCXLeS9+skoNphhNNdMAVgAqmLQBwNNwRJdlyyEn87xRmz1
-# +vQGCs6bmHup5DUIk2YMxUSoSVC39wU7d3GqsAq/cW7+exPkaQAG768iJuDFfq02
-# apxwghcoAuC/vMMhpEABa1dX0vCeay0NRsinx0f+hJWbe0+cI+WsHf4Lby8+e8l1
-# u0mL/I64RN36suf6oYIDdzCCAl8CAQEwgeKhgbikgbUwgbIxCzAJBgNVBAYTAlVT
+# AjAAMBMGA1UdJQQMMAoGCCsGAQUFBwMIMA0GCSqGSIb3DQEBCwUAA4IBAQA2fW15
+# K8YuLyQgyiX1NBWM3PJLRwf0oz7uhngI3nuH1gbFWOn7y/MXTh/pMaDG0MJmA5+u
+# zfDsnCtZk4JTupERHAqex2IaWqPVFsstpurA8rT/eX77DvAz6k4brlza9FAu6Euo
+# ZxkGq8ffwX1hBSIwYc6lmMDAAih9aTEpmSBupDbn4pTShGzcDRpJyfXjNlVtbffV
+# WxHUOboA36bRJMtJMbwlgIJgpOsZ5iGCaS9IkrJQxQ8OnTffHrz+uHLrk0P+W8Yf
+# G16gaF3eDhTkItRqFVbk6OLnrY/KJzhiZtZs2yYSLwmDxa5wQeI5HoQtC7HviXAm
+# UgQy6TwMA55sbPhuoYIDdDCCAlwCAQEwgeKhgbikgbUwgbIxCzAJBgNVBAYTAlVT
 # MRMwEQYDVQQIEwpXYXNoaW5ndG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYDVQQK
 # ExVNaWNyb3NvZnQgQ29ycG9yYXRpb24xDDAKBgNVBAsTA0FPQzEnMCUGA1UECxMe
-# bkNpcGhlciBEU0UgRVNOOjEyRTctMzA2NC02MTEyMSUwIwYDVQQDExxNaWNyb3Nv
-# ZnQgVGltZS1TdGFtcCBTZXJ2aWNloiUKAQEwCQYFKw4DAhoFAAMVADlwJYsUyHnd
-# Xwxd6Yucs5SZ9xy3oIHBMIG+pIG7MIG4MQswCQYDVQQGEwJVUzETMBEGA1UECBMK
+# bkNpcGhlciBEU0UgRVNOOkY2RkYtMkRBNy1CQjc1MSUwIwYDVQQDExxNaWNyb3Nv
+# ZnQgVGltZS1TdGFtcCBTZXJ2aWNloiUKAQEwCQYFKw4DAhoFAAMVAJvCNd37siYr
+# GhQxZVAvHVOUaYJvoIHBMIG+pIG7MIG4MQswCQYDVQQGEwJVUzETMBEGA1UECBMK
 # V2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0
 # IENvcnBvcmF0aW9uMQwwCgYDVQQLEwNBT0MxJzAlBgNVBAsTHm5DaXBoZXIgTlRT
 # IEVTTjoyNjY1LTRDM0YtQzVERTErMCkGA1UEAxMiTWljcm9zb2Z0IFRpbWUgU291
-# cmNlIE1hc3RlciBDbG9jazANBgkqhkiG9w0BAQUFAAIFAN4fV88wIhgPMjAxODAy
-# MDIyMTM0MDdaGA8yMDE4MDIwMzIxMzQwN1owdzA9BgorBgEEAYRZCgQBMS8wLTAK
-# AgUA3h9XzwIBADAKAgEAAgIm3gIB/zAHAgEAAgIZkDAKAgUA3iCpTwIBADA2Bgor
-# BgEEAYRZCgQCMSgwJjAMBgorBgEEAYRZCgMBoAowCAIBAAIDFuNgoQowCAIBAAID
-# B6EgMA0GCSqGSIb3DQEBBQUAA4IBAQAZt7C3QODM2MG2Ew23mOEetEeq4eOGUZ8J
-# mnLnnCTV7AEdz5mJQDZ9zc/DY//Mpmbr0mXgCwJtf4VxN204qEzCRIpqVHDp28mr
-# V9J8NBpsLL4tWO/gWz6Lr99BWYThBTA+hI6+GEquHX5Iyi8Yjp3PJiN39ggwT4mh
-# CzJ0q8I112vSoQSJEQy7cppR3u5gev6C0VrLoBGUXF6SANXhXD0sCxqro8TOEg3k
-# 8rU3DgbSR2fJxR47sVk0FRAmOzyY0MQT1o54z79YK9ULT4Y7RhiBJEAWUphxVeFq
-# k71RJF3JUlzw5lLthtF6czG4FaOOBtlflWxPmWkw8JlwJjeDQc7BMYIC9TCCAvEC
-# AQEwgZMwfDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNV
-# BAcTB1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEmMCQG
-# A1UEAxMdTWljcm9zb2Z0IFRpbWUtU3RhbXAgUENBIDIwMTACEzMAAACsiiG8etKb
-# cvQAAAAAAKwwDQYJYIZIAWUDBAIBBQCgggEyMBoGCSqGSIb3DQEJAzENBgsqhkiG
-# 9w0BCRABBDAvBgkqhkiG9w0BCQQxIgQgoa9tjQ4M2hFE/FZbMxu8iFAx0Anweycw
-# mUt/ZCWjoaowgeIGCyqGSIb3DQEJEAIMMYHSMIHPMIHMMIGxBBQ5cCWLFMh53V8M
-# XemLnLOUmfcctzCBmDCBgKR+MHwxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNo
-# aW5ndG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYDVQQKExVNaWNyb3NvZnQgQ29y
-# cG9yYXRpb24xJjAkBgNVBAMTHU1pY3Jvc29mdCBUaW1lLVN0YW1wIFBDQSAyMDEw
-# AhMzAAAArIohvHrSm3L0AAAAAACsMBYEFIMHjXxj8tnHvTgYlZneHFMWyow4MA0G
-# CSqGSIb3DQEBCwUABIIBACUcJTq2Sxg3IzXhWpslffPzPJRJsIf6xIbEFikheMHk
-# KGmYGPBn8vlVfn/huMfxix16oqJIDP87adClb40Va76FR0uAprmV+Psj23IwymBE
-# g6uop0GUSZuX+RODta+DNYdQtXZZun0ex3r3+i7Ac8+dREMbEPsc0U4SoMxIIIu9
-# angtBIz58JhUY9lzRWsRLAkkSGypaM9orrscAzsqMiV7WlAPfKyLn6Td/rF8+sS3
-# Kd0y7j6OfIyLJC+ffkNMLSScRlTYiirqqNk91e0K9f/v4cIvuzHmSHHLeMJickVp
-# xGLM4gvq+0ZxT7zaLRDo2AkVuqo3HVK8WpDK7hlVio4=
+# cmNlIE1hc3RlciBDbG9jazANBgkqhkiG9w0BAQUFAAIFAN5I3pcwIhgPMjAxODAz
+# MDYwOTMyMDdaGA8yMDE4MDMwNzA5MzIwN1owdDA6BgorBgEEAYRZCgQBMSwwKjAK
+# AgUA3kjelwIBADAHAgEAAgIxDTAHAgEAAgIZETAKAgUA3kowFwIBADA2BgorBgEE
+# AYRZCgQCMSgwJjAMBgorBgEEAYRZCgMBoAowCAIBAAIDFuNgoQowCAIBAAIDB6Eg
+# MA0GCSqGSIb3DQEBBQUAA4IBAQBA2YUtjf5LSX/e4VGlJSS7gBUtp6ethQxHXBA1
+# WKH6JBbme3ZotnHbCJXGtogEbN08r4By7j8TIa6z2eDIyf+GmeooLTbZc6u1uOIw
+# xBRTCfinks11siEwdEBD8cMNTs0LyXKq4D2PdKZ+1VmlNm4pOpFcjIwQWvhi4Kpc
+# YyFl63WhGdgPHM5+AJ3xlohNdj84pbkyG3/l31KtENpXvXUcL9nQY5WFXbGLz9Tn
+# KeqaIxAZtwEhRJyOmu7UKhIpyICQwGu1RXTmIGGXzNMmxOwt05eHdSZsn109re8d
+# lDa9jG4Lv35vpXmgH0xEBGi5t4IPrBHFnVipPFZq8SZ3JUkTMYIC9TCCAvECAQEw
+# gZMwfDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCldhc2hpbmd0b24xEDAOBgNVBAcT
+# B1JlZG1vbmQxHjAcBgNVBAoTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEmMCQGA1UE
+# AxMdTWljcm9zb2Z0IFRpbWUtU3RhbXAgUENBIDIwMTACEzMAAAClSBdyJ/lwvmMA
+# AAAAAKUwDQYJYIZIAWUDBAIBBQCgggEyMBoGCSqGSIb3DQEJAzENBgsqhkiG9w0B
+# CRABBDAvBgkqhkiG9w0BCQQxIgQgAOy9aUDvBhZMKYT+Sw8Wyb58GaTbQ6wtEdDt
+# Mdu6/wowgeIGCyqGSIb3DQEJEAIMMYHSMIHPMIHMMIGxBBSbwjXd+7ImKxoUMWVQ
+# Lx1TlGmCbzCBmDCBgKR+MHwxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpXYXNoaW5n
+# dG9uMRAwDgYDVQQHEwdSZWRtb25kMR4wHAYDVQQKExVNaWNyb3NvZnQgQ29ycG9y
+# YXRpb24xJjAkBgNVBAMTHU1pY3Jvc29mdCBUaW1lLVN0YW1wIFBDQSAyMDEwAhMz
+# AAAApUgXcif5cL5jAAAAAAClMBYEFFdnPMy2xWwhHVzGN2VwcGFo7+7WMA0GCSqG
+# SIb3DQEBCwUABIIBAGMlYSm7iBucyyFuqUHf3YaHSg23BoY2fg7spdNIFp0F3d2q
+# mkiH3Vmfjwwm0F8LA0I6hTMM75tTPHyx97PP9QS8w9+5lOCoi5ijuc8FKhtwQ6zg
+# WPsaMf7Cps62pueLuntsUZuuRaheZJngjpik9HW3K7uTY+GoLj2+RtCQavUrAeq4
+# WkJaua0B9TJbi2GkZFs1O+Pl/q7SpzKN+5v9LEQl154TcY5eYArMGufpUaLy2DlZ
+# /BNhz1ZXcY8r5QzaHENxAEJB18ko3mWaEoDhqAyI2m5nv5QOj039UN2e1xDpYyN4
+# sHW7EH+ri/RaePNuDTJ2g0TY0P9O54QpLxXxtsM=
 # SIG # End signature block
