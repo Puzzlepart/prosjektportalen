@@ -22,6 +22,7 @@ export default class Chart {
     public showItemSelector: boolean;
     public marginTop: number;
     private _pnpList: List;
+    private _spItem: any;
     private _statsFields: StatsField[];
     private _data: ProjectStatsChartData;
     private _widthFields: { [key: string]: string };
@@ -34,11 +35,12 @@ export default class Chart {
      */
     constructor(spItem, pnpList: List) {
         this._pnpList = pnpList;
+        this._spItem = spItem;
         this.id = spItem.ID;
         this.order = spItem.GtChrOrder;
         this.title = spItem.Title;
         this.subTitle = spItem.GtChrSubTitle;
-        this.type = spItem.GtChrChartType;
+        this.type = this._getChartType();
         this._widthFields = {
             sm: "GtChrWidthSm",
             md: "GtChrWidthMd",
@@ -239,6 +241,28 @@ export default class Chart {
      */
     private async _updateItem(updateValues) {
         await this._pnpList.items.getById(this.id).update(updateValues);
+    }
+
+    /**
+     * Get chart type
+     */
+    private _getChartType() {
+        let contentTypeId = this._spItem.ContentTypeId;
+        let chartType;
+        switch (this._spItem.ContentTypeId.replace("0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D", "").substring(0, 3)) {
+            case "010": chartType = "bar";
+                break;
+            case "020": chartType = "column";
+                break;
+            case "030": chartType = "pie";
+                break;
+        }
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "_getChartType", "Getting chart type based on content type id"),
+            data: { contentTypeId, chartType },
+            level: LogLevel.Info,
+        });
+        return chartType;
     }
 }
 
