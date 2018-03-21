@@ -13,6 +13,7 @@ export default interface IProjectListProps extends IBaseWebPartProps {
     loadingText?: string;
     emptyMessage?: string;
     propertyClassNames?: string[];
+    searchTimeoutMs?: number;
 }
 
 export const ProjectListDefaultProps: Partial<IProjectListProps> = {
@@ -30,5 +31,6 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
     loadingText: RESOURCE_MANAGER.getResource("ProjectList_LoadingText"),
     emptyMessage: RESOURCE_MANAGER.getResource("ProjectList_NoResults"),
     propertyClassNames: [],
+    searchTimeoutMs: 250,
 };
 

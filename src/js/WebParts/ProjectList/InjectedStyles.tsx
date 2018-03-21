@@ -1,7 +1,7 @@
 import * as React from "react";
 import IProjectListProps from "./IProjectListProps";
 
-const Style = ({ props }: { props: IProjectListProps }) => {
+const InjectedStyles = ({ props }: { props: IProjectListProps }) => {
     return <style type="text/css">{`
                 .${props.tileClassName} {
                     width: ${props.tileWidth}px;
@@ -29,4 +29,4 @@ const Style = ({ props }: { props: IProjectListProps }) => {
     </style>;
 };
 
-export default Style;
+export default InjectedStyles;
