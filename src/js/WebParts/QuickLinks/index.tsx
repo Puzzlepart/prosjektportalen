@@ -41,7 +41,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
+                {this._renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );

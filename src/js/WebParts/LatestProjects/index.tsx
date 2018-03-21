@@ -61,7 +61,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
+                {this._renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems()}
             </div>
         );
