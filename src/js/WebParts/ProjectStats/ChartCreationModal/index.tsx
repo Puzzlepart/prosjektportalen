@@ -60,7 +60,7 @@ export default class ChartCreationModal extends React.Component<IChartCreationMo
                                 { key: "normal", text: "Normal" },
                                 { key: "percent", text: "Prosent" },
                             ]}
-                            onChanged={opt => this._onModelChanged("PzlChStacking", opt.key)} />
+                            onChanged={opt => this._onModelChanged("GtChrStacking", opt.key)} />
                         <TextField placeholder="Tittel (Y-akse)" />
                         <TextField placeholder="Min (Y-akse)" />
                         <TextField placeholder="Max (Y-akse)" />

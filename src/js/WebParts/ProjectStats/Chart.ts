@@ -35,32 +35,32 @@ export default class Chart {
     constructor(spItem, pnpList: List) {
         this._pnpList = pnpList;
         this.id = spItem.ID;
-        this.order = spItem.PzlChOrder;
+        this.order = spItem.GtChrOrder;
         this.title = spItem.Title;
-        this.subTitle = spItem.PzlChSubTitle;
-        this.type = spItem.PzlChChartType;
+        this.subTitle = spItem.GtChrSubTitle;
+        this.type = spItem.GtChrChartType;
         this._widthFields = {
-            sm: "PzlChWidthSm",
-            md: "PzlChWidthMd",
-            lg: "PzlChWidthLg",
-            xl: "PzlChWidthXl",
-            xxl: "PzlChWidthXxl",
-            xxxl: "PzlChWidthXxxl",
+            sm: "GtChrWidthSm",
+            md: "GtChrWidthMd",
+            lg: "GtChrWidthLg",
+            xl: "GtChrWidthXl",
+            xxl: "GtChrWidthXxl",
+            xxxl: "GtChrWidthXxxl",
         };
         this.width = Object.keys(this._widthFields).reduce((obj, key) => {
             obj[key] = spItem[this._widthFields[key]];
             return obj;
         }, {});
-        this.stacking = spItem.PzlChStacking;
-        this.yAxisTitle = spItem.PzlChYAxisTitle;
-        this.yAxisMin = spItem.PzlChYMin;
-        this.yAxisMax = spItem.PzlChYMax;
-        this.yAxisTickInterval = spItem.PzlChYTickInterval;
-        this.valueSuffix = spItem.PzlChValueSuffix;
-        this.showLegend = spItem.PzlChShowLegend;
-        this.showAverage = spItem.PzlChShowAverage;
-        this.showItemSelector = spItem.PzlChShowItemSelector;
-        this.marginTop = spItem.PzlChMarginTop;
+        this.stacking = spItem.GtChrStacking;
+        this.yAxisTitle = spItem.GtChrYAxisTitle;
+        this.yAxisMin = spItem.GtChrYMin;
+        this.yAxisMax = spItem.GtChrYMax;
+        this.yAxisTickInterval = spItem.GtChrYTickInterval;
+        this.valueSuffix = spItem.GtChrValueSuffix;
+        this.showLegend = spItem.GtChrShowLegend;
+        this.showAverage = spItem.GtChrShowAverage;
+        this.showItemSelector = spItem.GtChrShowItemSelector;
+        this.marginTop = spItem.GtChrMarginTop;
     }
 
     /**

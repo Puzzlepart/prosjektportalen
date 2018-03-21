@@ -149,7 +149,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
             const [{ views }, fieldsSpItems, chartsSpItems] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", "PzlChManagedPropertyName", "PzlChDataType").get(),
+                statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").get(),
                 chartsConfigList.items.get(),
             ]);
             if (!view) {
@@ -168,7 +168,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 level: LogLevel.Info,
             });
 
-            const fields = fieldsSpItems.map(i => new StatsField(i.ID, i.Title, i.PzlChManagedPropertyName, i.PzlChDataType));
+            const fields = fieldsSpItems.map(i => new StatsField(i.ID, i.Title, i.GtChrManagedPropertyName, i.GtChrDataType));
             const response = await sp.search({
                 Querytext: "*",
                 QueryTemplate: view.queryTemplate,
@@ -181,7 +181,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
-                return new Chart(spItem, chartsConfigList).set(data, fields.filter(f => spItem.PzlChFieldsId.results.indexOf(f.id) !== -1));
+                return new Chart(spItem, chartsConfigList).set(data, fields.filter(f => spItem.GtChrFieldsId.results.indexOf(f.id) !== -1));
             });
             const config: Partial<IProjectStatsState> = {
                 charts,

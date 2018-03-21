@@ -483,65 +483,65 @@
     <Field Type="Note" DisplayName="{resource:SiteFields_GtProductDescription_DisplayName}" Description="{resource:SiteFields_GtProductDescription_Description}" UnlimitedLengthInDocumentLibrary="TRUE" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{99430a99-1354-418f-921f-7ddfdb6c0d7f}" StaticName="GtProductDescription" Name="GtProductDescription" CustomFormatter="" RestrictedMode="TRUE" RichTextMode="Compatible" IsolateStyles="FALSE" />
     <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductStartTime_DisplayName}" Description="{resource:SiteFields_GtProductStartTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{219a5cdf-799c-48ee-8869-ea39e4b9a6aa}" StaticName="GtProductStartTime" Name="GtProductStartTime" CustomFormatter="" CalType="0" />
     <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductEndTime_DisplayName}" Description="{resource:SiteFields_GtProductEndTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{eb78509b-4109-474e-aca8-90d024a960de}" StaticName="GtProductEndTime" Name="GtProductEndTime" CustomFormatter="" CalType="0" />
-    <Field DisplayName="Forvaltet egenskap" Title="ManagedPropertyName" Type="Text" Group="Prosjektstatistikk" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="PzlChManagedPropertyName" Name="PzlChManagedPropertyName" ColName="nvarchar4" />
-    <Field DisplayName="Datatype" Title="DataType" Type="Choice" Group="Prosjektstatistikk" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="PzlChDataType" Name="PzlChDataType">
+    <Field DisplayName="Forvaltet egenskap" Title="ManagedPropertyName" Type="Text" Group="Prosjektstatistikk" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="GtChrManagedPropertyName" Name="GtChrManagedPropertyName" ColName="nvarchar4" />
+    <Field DisplayName="Datatype" Title="DataType" Type="Choice" Group="Prosjektstatistikk" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="GtChrDataType" Name="GtChrDataType">
         <CHOICES>
             <CHOICE>Number</CHOICE>
             <CHOICE>Percentage</CHOICE>
             <CHOICE>String</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="Undertekst" Title="Undertekst" Type="Text" Group="Prosjektstatistikk" ID="{fca6d80c-225a-4bb0-a0b6-f4c004f8151c}" StaticName="PzlChSubTitle" Name="PzlChSubTitle" />
-    <Field DisplayName="Graftype" Title="Graftype" Type="Choice" Group="Prosjektstatistikk" ID="{5dedce24-35cc-4e14-b6a2-2fc1658de4a4}" StaticName="PzlChChartType" Name="PzlChChartType">
+    <Field DisplayName="Undertekst" Title="Undertekst" Type="Text" Group="Prosjektstatistikk" ID="{fca6d80c-225a-4bb0-a0b6-f4c004f8151c}" StaticName="GtChrSubTitle" Name="GtChrSubTitle" />
+    <Field DisplayName="Graftype" Title="Graftype" Type="Choice" Group="Prosjektstatistikk" ID="{5dedce24-35cc-4e14-b6a2-2fc1658de4a4}" StaticName="GtChrChartType" Name="GtChrChartType">
         <CHOICES>
             <CHOICE>bar</CHOICE>
             <CHOICE>column</CHOICE>
             <CHOICE>pie</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="Bredde (320px - 479px)" Title="Bredde (320px - 479px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{69a75937-35ab-4b35-9081-c8f841460d44}" StaticName="PzlChWidthSm" Name="PzlChWidthSm">
+    <Field DisplayName="Bredde (320px - 479px)" Title="Bredde (320px - 479px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{69a75937-35ab-4b35-9081-c8f841460d44}" StaticName="GtChrWidthSm" Name="GtChrWidthSm">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (480px - 639px)" Title="Bredde (480px - 639px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{d25031a3-9fbb-48b7-8c3a-554805fc4eb9}" StaticName="PzlChWidthMd" Name="PzlChWidthMd">
+    <Field DisplayName="Bredde (480px - 639px)" Title="Bredde (480px - 639px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{d25031a3-9fbb-48b7-8c3a-554805fc4eb9}" StaticName="GtChrWidthMd" Name="GtChrWidthMd">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (640px - 1023px)" Title="Bredde (640px - 1023px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{047c422a-fdcd-407c-839f-e96d7f639082}" StaticName="PzlChWidthLg" Name="PzlChWidthLg">
+    <Field DisplayName="Bredde (640px - 1023px)" Title="Bredde (640px - 1023px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{047c422a-fdcd-407c-839f-e96d7f639082}" StaticName="GtChrWidthLg" Name="GtChrWidthLg">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1024px - 1365px)" Title="Bredde (1024px - 1365px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{2a0d7d7e-44f4-40e5-a444-3df1e07ef71d}" StaticName="PzlChWidthXl" Name="PzlChWidthXl">
+    <Field DisplayName="Bredde (1024px - 1365px)" Title="Bredde (1024px - 1365px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{2a0d7d7e-44f4-40e5-a444-3df1e07ef71d}" StaticName="GtChrWidthXl" Name="GtChrWidthXl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1366px - 1919px)" Title="Bredde (1366px - 1919px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{af569b60-0010-4108-9c92-cb03a90b7498}" StaticName="PzlChWidthXxl" Name="PzlChWidthXxl">
+    <Field DisplayName="Bredde (1366px - 1919px)" Title="Bredde (1366px - 1919px)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{af569b60-0010-4108-9c92-cb03a90b7498}" StaticName="GtChrWidthXxl" Name="GtChrWidthXxl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1920px og oppover)" Title="Bredde (1920px og oppover)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{41d29afe-b026-4417-9166-3e22dda59d78}" StaticName="PzlChWidthXxxl" Name="PzlChWidthXxxl">
+    <Field DisplayName="Bredde (1920px og oppover)" Title="Bredde (1920px og oppover)" Type="Number" Min="1" Max="12" Decimals="0" Group="Prosjektstatistikk" ID="{41d29afe-b026-4417-9166-3e22dda59d78}" StaticName="GtChrWidthXxxl" Name="GtChrWidthXxxl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Stabling" Title="Stabling" Type="Choice" Group="Prosjektstatistikk" ID="{9c6285f2-0bf6-4092-8ca6-656859d797fd}" StaticName="PzlChStacking" Name="PzlChStacking">
+    <Field DisplayName="Stabling" Title="Stabling" Type="Choice" Group="Prosjektstatistikk" ID="{9c6285f2-0bf6-4092-8ca6-656859d797fd}" StaticName="GtChrStacking" Name="GtChrStacking">
         <CHOICES>
             <CHOICE>normal</CHOICE>
             <CHOICE>percent</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="Tittel (Y-akse)" Title="Tittel (Y-akse)" Type="Text" Group="Prosjektstatistikk" ID="{c990240d-4c3b-4dfe-8abb-b6119b4b9856}" StaticName="PzlChYAxisTitle" Name="PzlChYAxisTitle" />
-    <Field DisplayName="Verdisuffiks" Title="Verdisuffiks" Type="Text" Group="Prosjektstatistikk" ID="{5b12b6c1-2db4-4280-a52f-d11f62068162}" StaticName="PzlChValueSuffix" Name="PzlChValueSuffix" />
-    <Field Type="LookupMulti" Group="Prosjektstatistikk" DisplayName="Felter" Title="Felter" List="{listid:Statistikkfelter}" ShowField="Title" Mult="TRUE" ID="{75f699b2-7ec6-4442-956d-7b35f409b521}" StaticName="PzlChFields" Name="PzlChFields" />
-    <Field DisplayName="Vis merkelapp" Title="Vis merkelapp" Type="Boolean" Group="Prosjektstatistikk" ID="{f6c928f6-4b57-478c-866d-42d5f2874d57}" StaticName="PzlChShowLegend" Name="PzlChShowLegend">
+    <Field DisplayName="Tittel (Y-akse)" Title="Tittel (Y-akse)" Type="Text" Group="Prosjektstatistikk" ID="{c990240d-4c3b-4dfe-8abb-b6119b4b9856}" StaticName="GtChrYAxisTitle" Name="GtChrYAxisTitle" />
+    <Field DisplayName="Verdisuffiks" Title="Verdisuffiks" Type="Text" Group="Prosjektstatistikk" ID="{5b12b6c1-2db4-4280-a52f-d11f62068162}" StaticName="GtChrValueSuffix" Name="GtChrValueSuffix" />
+    <Field Type="LookupMulti" Group="Prosjektstatistikk" DisplayName="Felter" Title="Felter" List="{listid:Statistikkfelter}" ShowField="Title" Mult="TRUE" ID="{75f699b2-7ec6-4442-956d-7b35f409b521}" StaticName="GtChrFields" Name="GtChrFields" />
+    <Field DisplayName="Vis merkelapp" Title="Vis merkelapp" Type="Boolean" Group="Prosjektstatistikk" ID="{f6c928f6-4b57-478c-866d-42d5f2874d57}" StaticName="GtChrShowLegend" Name="GtChrShowLegend">
         <Default>0</Default>
     </Field>
-    <Field DisplayName="Vis gjennomsnitt" Title="Vis gjennomsnitt" Type="Boolean" Group="Prosjektstatistikk" ID="{f5e3aede-8d38-4608-88fd-655908778bee}" StaticName="PzlChShowAverage" Name="PzlChShowAverage">
+    <Field DisplayName="Vis gjennomsnitt" Title="Vis gjennomsnitt" Type="Boolean" Group="Prosjektstatistikk" ID="{f5e3aede-8d38-4608-88fd-655908778bee}" StaticName="GtChrShowAverage" Name="GtChrShowAverage">
         <Default>1</Default>
     </Field>
-    <Field DisplayName="Margin topp" Percentage="FALSE" Title="Margin topp" Type="Number" Group="Prosjektstatistikk" ID="{77ab03d9-6310-41e4-ba20-613f956ad954}" StaticName="PzlChMarginTop" Name="PzlChMarginTop">
+    <Field DisplayName="Margin topp" Percentage="FALSE" Title="Margin topp" Type="Number" Group="Prosjektstatistikk" ID="{77ab03d9-6310-41e4-ba20-613f956ad954}" StaticName="GtChrMarginTop" Name="GtChrMarginTop">
         <Default>75</Default>
     </Field>
-    <Field DisplayName="Vis elementvelger" Title="Vis elementvelger" Type="Boolean" Group="Prosjektstatistikk" ID="{762a2801-2882-40f1-8fa1-a6604ef2808f}" StaticName="PzlChShowItemSelector" Name="PzlChShowItemSelector">
+    <Field DisplayName="Vis elementvelger" Title="Vis elementvelger" Type="Boolean" Group="Prosjektstatistikk" ID="{762a2801-2882-40f1-8fa1-a6604ef2808f}" StaticName="GtChrShowItemSelector" Name="GtChrShowItemSelector">
         <Default>0</Default>
     </Field>
-    <Field Decimals="0" DisplayName="Rekkefølge" Percentage="FALSE" Title="Rekkefølge" Type="Number" Group="Prosjektstatistikk" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="PzlChOrder" Name="PzlChOrder">
+    <Field Decimals="0" DisplayName="Rekkefølge" Percentage="FALSE" Title="Rekkefølge" Type="Number" Group="Prosjektstatistikk" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="GtChrOrder" Name="GtChrOrder">
         <Default>100</Default>
     </Field>
-    <Field DisplayName="Min (Y-akse)" Percentage="FALSE" Title="Min (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="PzlChYMin" Name="PzlChYMin" />
-    <Field DisplayName="Max (Y-akse)" Percentage="FALSE" Title="Max (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="PzlChYMax" Name="PzlChYMax" />
-    <Field DisplayName="Intervall (Y-akse)" Percentage="FALSE" Title="Intervall (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{60dac89b-70f5-4a49-87a9-b253bd5df7ca}" StaticName="PzlChYTickInterval" Name="PzlChYTickInterval" />
+    <Field DisplayName="Min (Y-akse)" Percentage="FALSE" Title="Min (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="GtChrYMin" Name="GtChrYMin" />
+    <Field DisplayName="Max (Y-akse)" Percentage="FALSE" Title="Max (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="GtChrYMax" Name="GtChrYMax" />
+    <Field DisplayName="Intervall (Y-akse)" Percentage="FALSE" Title="Intervall (Y-akse)" Type="Number" Group="Prosjektstatistikk" ID="{60dac89b-70f5-4a49-87a9-b253bd5df7ca}" StaticName="GtChrYTickInterval" Name="GtChrYTickInterval" />
 </pnp:SiteFields>

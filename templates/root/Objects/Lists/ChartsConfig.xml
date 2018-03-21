@@ -1,37 +1,29 @@
-<pnp:ListInstance Title="Grafkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" RemoveExistingContentTypes="true" 
+<pnp:ListInstance Title="Grafkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
-        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" />
     </pnp:ContentTypeBindings>
     <pnp:Views>
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="/sites/pp-70/Lists/Charts/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="PzlChOrder" />
+                    <FieldRef Name="GtChrOrder" />
                 </OrderBy>
             </Query>
             <ViewFields>
-                <FieldRef Name="PzlChOrder" />
+                <FieldRef Name="GtChrOrder" />
                 <FieldRef Name="LinkTitle" />
-                <FieldRef Name="PzlChSubTitle" />
-                <FieldRef Name="PzlChChartType" />
-                <FieldRef Name="PzlChStacking" />
-                <FieldRef Name="PzlChYAxisTitle" />
-                <FieldRef Name="PzlChYMin" />
-                <FieldRef Name="PzlChYMax" />
-                <FieldRef Name="PzlChYTickInterval" />
-                <FieldRef Name="PzlChValueSuffix" />
-                <FieldRef Name="PzlChFields" />
-                <FieldRef Name="PzlChShowLegend" />
-                <FieldRef Name="PzlChShowAverage" />
-                <FieldRef Name="PzlChShowItemSelector" />
-                <FieldRef Name="PzlChWidthSm" />
-                <FieldRef Name="PzlChWidthMd" />
-                <FieldRef Name="PzlChWidthLg" />
-                <FieldRef Name="PzlChWidthXl" />
-                <FieldRef Name="PzlChWidthXxl" />
-                <FieldRef Name="PzlChWidthXxxl" />
-                <FieldRef Name="PzlChMarginTop" />
+                <FieldRef Name="GtChrSubTitle" />
+                <FieldRef Name="GtChrChartType" />
+                <FieldRef Name="GtChrWidthSm" />
+                <FieldRef Name="GtChrWidthMd" />
+                <FieldRef Name="GtChrWidthLg" />
+                <FieldRef Name="GtChrWidthXl" />
+                <FieldRef Name="GtChrWidthXxl" />
+                <FieldRef Name="GtChrWidthXxxl" />
+                <FieldRef Name="GtChrMarginTop" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />
