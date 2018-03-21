@@ -76,7 +76,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             case ProjectInfoRenderMode.Normal: {
                 return (
                     <div className={containerClassName}>
-                        {this.__renderChrome(chromeTitle, this.state.elementToToggle, ProjectInfo.displayName, hideChrome)}
+                        {this._renderChrome(chromeTitle, this.state.elementToToggle, ProjectInfo.displayName, hideChrome)}
                         {isLoading && <Spinner type={SpinnerType.large} label={loadingText} />}
                         {this.renderInner(this.props, this.state)}
                     </div>
