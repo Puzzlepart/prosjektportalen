@@ -23,12 +23,12 @@ export default class Chart {
     public marginTop: number;
     private _pnpList: List;
     private _statsFields: StatsField[];
-    private _data: ProjectStatsChartData
+    private _data: ProjectStatsChartData;
     private _widthFields: { [key: string]: string };
 
     /**
      * Constructor
-     * 
+     *
      * @param {any} spItem SharePoint item
      * @param {List} pnpList PnP list
      */
@@ -70,7 +70,7 @@ export default class Chart {
         let yAxis: any = {
             title: { text: this.yAxisTitle, align: "high" },
             labels: { overflow: "justify" },
-        }
+        };
         if (this.yAxisMin) {
             yAxis.min = this.yAxisMin;
         }
@@ -147,7 +147,7 @@ export default class Chart {
                                     name: i.name,
                                     y: this._data.getPercentage(this._statsFields[0], index),
                                 })),
-                            }])
+                            }]);
                         }
                         case "string": {
                             return ([{
@@ -156,7 +156,7 @@ export default class Chart {
                                     name: v || "Ikke satt",
                                     y: (this._data.getItemsWithValue(field, v).length / this._data.getCount()) * 100,
                                 })),
-                            }])
+                            }]);
                         }
                     }
                 }
@@ -201,7 +201,7 @@ export default class Chart {
 
     /**
      * Set data/fields
-     * 
+     *
      * @param {ProjectStatsChartData} data Data
      * @param {StatsField[]} statsFields Stats fields
      */
@@ -215,7 +215,7 @@ export default class Chart {
 
     /**
      * Set width
-     * 
+     *
      * @param {string} breakpoint Breakpoint
      * @param {number} width Width
      */
@@ -223,7 +223,7 @@ export default class Chart {
         Logger.log({
             message: String.format(LOG_TEMPLATE, "setWidth", `Setting width to ${width} for ${breakpoint}.`, this.title),
             level: LogLevel.Info,
-        })
+        });
         this.width[breakpoint] = width;
         const widthField = this._widthFields[breakpoint];
         let updateValues: any = {};
@@ -234,7 +234,7 @@ export default class Chart {
 
     /**
      * Update item
-     * 
+     *
      * @param {any} updateValues Update values
      */
     private async _updateItem(updateValues) {

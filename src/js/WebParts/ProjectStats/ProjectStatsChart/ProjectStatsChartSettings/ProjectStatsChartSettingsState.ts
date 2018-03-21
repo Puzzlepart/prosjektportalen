@@ -1,1 +1,1 @@
-export default interface ProjectStatsChartSettingsState {};
+export default interface ProjectStatsChartSettingsState {}

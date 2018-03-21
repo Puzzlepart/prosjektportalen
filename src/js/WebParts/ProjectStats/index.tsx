@@ -148,7 +148,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const [{ views }, fieldsSpItems, chartsSpItems] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
                 statsFieldsList.items.select("ID", "Title", "PzlChManagedPropertyName", "PzlChDataType").get(),
-                chartsConfigList.items.get()
+                chartsConfigList.items.get(),
             ]);
             if (!view) {
                 [view] = views.filter(v => v.default);

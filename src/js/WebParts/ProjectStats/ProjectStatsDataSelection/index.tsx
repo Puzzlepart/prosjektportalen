@@ -4,11 +4,11 @@ import { ProjectStatsChartData, ProjectStatsChartDataItem } from "../ProjectStat
 import IProjectStatsDataSelectionProps from "./IProjectStatsDataSelectionProps";
 import IProjectStatsDataSelectionState from "./IProjectStatsDataSelectionState";
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
-import { MarqueeSelection } from 'office-ui-fabric-react/lib/MarqueeSelection';
-import { PrimaryButton } from 'office-ui-fabric-react/lib/Button';
-import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
-import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { MarqueeSelection } from "office-ui-fabric-react/lib/MarqueeSelection";
+import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 
 export default class ProjectStatsDataSelection extends React.PureComponent<IProjectStatsDataSelectionProps, IProjectStatsDataSelectionState> {
     public static defaultProps: Partial<IProjectStatsDataSelectionProps> = {
@@ -18,7 +18,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
             name: "Tittel",
             minWidth: 100,
         }],
-    }
+    };
     private _selection: Selection;
 
     constructor(props: IProjectStatsDataSelectionProps) {
@@ -75,7 +75,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                                         <DetailsList
                                             items={this.props.data.getItems()}
                                             columns={this.props.columns}
-                                            setKey='set'
+                                            setKey="set"
                                             layoutMode={DetailsListLayoutMode.fixedColumns}
                                             selection={this._selection}
                                             selectionPreservedOnEmptyClick={true}
@@ -93,21 +93,32 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
+    /**
+     * On toggle
+     */
     private _onToggle() {
         this.setState(prevState => ({ isExpanded: !prevState.isExpanded }), () => {
             Logger.log({ message: `(ProjectStatsDataSelection) _onToggle`, data: { isExpanded: this.state.isExpanded }, level: LogLevel.Info });
         });
     }
 
+    /**
+     * On selection changed
+     */
     private _onSelectionChanged() {
         const selection = this._selection.getSelection();
         Logger.log({ message: `(ProjectStatsDataSelection) _onSelectionChanged: ${selection.length} items selected`, level: LogLevel.Info });
         this.setState({ selection: (selection as ProjectStatsChartDataItem[]) });
     }
 
+    /**
+     * On update selection
+     *
+     * @param {React.MouseEvent} event Event
+     */
     private _onUpdateSelection(event: React.MouseEvent<HTMLButtonElement>) {
         Logger.log({ message: "(ProjectStatsDataSelection) _onUpdate", level: LogLevel.Info });
         event.preventDefault();
@@ -120,4 +131,4 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
 export {
     IProjectStatsDataSelectionProps,
     IProjectStatsDataSelectionState,
-}
+};

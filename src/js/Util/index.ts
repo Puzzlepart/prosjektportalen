@@ -5,7 +5,6 @@ import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 import { GetProperty } from "./PropertyBag";
-import SortAlphabetically from "./SortAlphabetically";
 import GetBreakpoint from "./GetBreakpoint";
 
 declare var MSOWebPartPageFormName: string;
@@ -485,10 +484,19 @@ export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     }
 }
 
+/**
+ * Sort an array alphabetically
+ */
+export function SortAlphabetically(a, b, prop: string): number {
+    if (a[prop] < b[prop]) { return -1; }
+    if (a[prop] > b[prop]) { return 1; }
+    return 0;
+}
+
+
 export {
     ExportToExcel,
     WaitDialog,
     StampVersion,
-    SortAlphabetically,
     GetBreakpoint,
 };

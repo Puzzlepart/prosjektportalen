@@ -8,11 +8,11 @@ import * as strings from "../../strings";
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
 export default class ProjectStatsChartSettings extends React.Component<ProjectStatsChartSettingsProps, ProjectStatsChartSettingsState> {
-    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = {}
+    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = {};
 
     /**
      * Constructor
-     * 
+     *
      * @param {ProjectStatsChartSettingsProps} props Props
      */
     constructor(props: ProjectStatsChartSettingsProps) {
@@ -39,6 +39,9 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         );
     }
 
+    /**
+     * Get items
+     */
     private _getItems(): ICommandBarItemProps[] {
         const { chart } = this.props;
 
@@ -70,6 +73,9 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         return items;
     }
 
+    /**
+     * Get far items
+     */
     private _getFarItems(): ICommandBarItemProps[] {
         let farItems = [
             {
@@ -86,7 +92,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
                         return {
                             key: `${i}`,
                             name: name,
-                            ['data-width']: w,
+                            ["data-width"]: w,
                             onClick: this.props.onWidthChanged,
                         };
                     }),
@@ -101,4 +107,4 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
 export {
     ProjectStatsChartSettingsProps,
     ProjectStatsChartSettingsState,
-}
+};

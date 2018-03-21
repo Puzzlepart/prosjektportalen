@@ -57,7 +57,7 @@ export default class ProjectStatsChartData {
                 level: LogLevel.Error,
             });
         }
-        return this._items.map(i => i.getValue(field)).reduce((prev, curr, index) => prev += curr, 0)
+        return this._items.map(i => i.getValue(field)).reduce((prev, curr, index) => prev += curr, 0);
     }
 
     public getPercentage(field: StatsField, index: number) {

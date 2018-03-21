@@ -2,7 +2,7 @@ import * as React from "react";
 import { LogLevel, Logger } from "sp-pnp-js";
 import IProjectStatsSettingsProps from "./IProjectStatsSettingsProps";
 import IProjectStatsSettingsState from "./IProjectStatsSettingsState";
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { Icon } from "office-ui-fabric-react/lib/Icon";
 
 export default class ProjectStatsSettings extends React.PureComponent<IProjectStatsSettingsProps, IProjectStatsSettingsState> {
 
@@ -40,7 +40,7 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
     private _onToggle() {
@@ -53,4 +53,4 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
 export {
     IProjectStatsSettingsProps,
     IProjectStatsSettingsState,
-}
+};

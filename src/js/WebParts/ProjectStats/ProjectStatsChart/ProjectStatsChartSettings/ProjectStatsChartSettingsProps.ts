@@ -5,4 +5,4 @@ export default interface ProjectStatsChartSettingsProps {
     chart: Chart;
     onItemChanged: (item: ProjectStatsChartDataItem) => void;
     onWidthChanged: (event: React.MouseEvent<any>) => void;
-};
+}

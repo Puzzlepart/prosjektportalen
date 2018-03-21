@@ -11,4 +11,3 @@ export default class StatsField {
         this.dataType = dataType.toLowerCase();
     }
 }
-

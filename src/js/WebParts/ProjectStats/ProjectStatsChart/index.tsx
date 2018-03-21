@@ -12,12 +12,12 @@ import * as ReactHighcharts from "react-highcharts";
 const LOG_TEMPLATE = "(ProjectStatsChart) {0}: {1}";
 
 export default class ProjectStatsChart extends React.Component<IProjectStatsChartProps, IProjectStatsChartState> {
-    public static defaultProps: Partial<IProjectStatsChartProps> = {}
+    public static defaultProps: Partial<IProjectStatsChartProps> = {};
     private _chartRef: any;
 
     /**
      * Constructor
-     * 
+     *
      * @param {IProjectStatsChartProps} props Props
      */
     constructor(props: IProjectStatsChartProps) {
@@ -61,7 +61,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 
     /**
@@ -80,7 +80,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
 
     /**
      * On item changed
-     * 
+     *
      * @param {ProjectStatsChartDataItem} item Item
      */
     private _onItemChanged(item: ProjectStatsChartDataItem): void {
@@ -100,7 +100,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
 
     /**
      * On change width
-     * 
+     *
      * @param {React.MouseEvent} event Event
      */
     private async _onChangeWidth(event: React.MouseEvent<any>): Promise<void> {
@@ -172,4 +172,5 @@ export {
     ProjectStatsChartData,
     ProjectStatsChartDataItem,
     IProjectStatsChartSeries,
-}
+};
+

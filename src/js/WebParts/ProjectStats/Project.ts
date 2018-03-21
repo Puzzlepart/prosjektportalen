@@ -5,4 +5,3 @@ export default class Project extends ProjectStatsChartDataItem {
         super(data.Title, data);
     }
 }
-
