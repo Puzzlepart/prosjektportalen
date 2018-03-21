@@ -33,8 +33,8 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                             </div>
                         </div>
                         {this.state.isExpanded && (
-                            <div className="ms-Grid-col ms-sm12">
-                                TODO
+                            <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }}>
+                                <p>TODO</p>
                             </div>
                         )}
                     </div>

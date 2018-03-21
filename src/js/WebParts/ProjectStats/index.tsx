@@ -12,6 +12,7 @@ import Chart from "./Chart";
 import StatsField from "./StatsField";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
+import ProjectStatsSettings from "./ProjectStatsSettings";
 import BaseWebPart from "../@BaseWebPart";
 import * as strings from "./strings";
 
@@ -84,6 +85,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                         selectedView={this.state.selectedView}
                         onUpdateSelection={this._onDataSelectionUpdated}
                         onViewChanged={this._onViewChanged} />
+                    <ProjectStatsSettings />
                 </div>
                 <div className="ms-Grid-row">
                     {data.getCount() === 0
@@ -181,12 +183,13 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const charts = chartsSpItems.map(spItem => {
                 return new Chart(spItem, chartsConfigList).set(data, fields.filter(f => spItem.PzlChFieldsId.results.indexOf(f.id) !== -1));
             });
-            return {
+            const config: Partial<IProjectStatsState> = {
                 charts,
                 data,
                 views,
                 selectedView: view,
             };
+            return config;
         } catch (err) {
             throw err;
         }
