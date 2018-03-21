@@ -1,0 +1,45 @@
+<pnp:ListInstance Title="Statistikkfelter" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false" RemoveExistingContentTypes="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">URL</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">Path</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">String</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Tittel</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">Title</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">String</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Fase</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtProjectPhase</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">String</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Tjenesteområde</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtProjectServiceArea</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">String</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Prosjekttype</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtProjectType</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">String</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Totalbudsjett for prosjektet</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtBudgetTotalOWSCURR</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">Number</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Prognose for prosjektet</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtProjectForecastOWSCURR</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">Number</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Kostnader påløpt totalt</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChManagedPropertyName">GtCostsTotalOWSCURR</pnp:DataValue>
+            <pnp:DataValue FieldName="PzlChDataType">Number</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>
