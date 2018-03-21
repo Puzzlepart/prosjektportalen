@@ -16,7 +16,6 @@
                 <FieldRef Name="GtChrOrder" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtChrSubTitle" />
-                <FieldRef Name="GtChrChartType" />
                 <FieldRef Name="GtChrWidthSm" />
                 <FieldRef Name="GtChrWidthMd" />
                 <FieldRef Name="GtChrWidthLg" />
