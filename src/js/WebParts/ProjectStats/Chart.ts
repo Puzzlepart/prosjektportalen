@@ -40,7 +40,7 @@ export default class Chart {
         this.order = spItem.GtChrOrder;
         this.title = spItem.Title;
         this.subTitle = spItem.GtChrSubTitle;
-        this.type = this._getChartType();
+        this.type = this._getChartTypeFromContentType();
         this._widthFields = {
             sm: "GtChrWidthSm",
             md: "GtChrWidthMd",
@@ -244,9 +244,9 @@ export default class Chart {
     }
 
     /**
-     * Get chart type
+     * Get chart type from content type id
      */
-    private _getChartType() {
+    private _getChartTypeFromContentType() {
         let contentTypeId = this._spItem.ContentTypeId;
         let chartType;
         switch (this._spItem.ContentTypeId.replace("0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D", "").substring(0, 3)) {
@@ -258,7 +258,7 @@ export default class Chart {
                 break;
         }
         Logger.log({
-            message: String.format(LOG_TEMPLATE, "_getChartType", "Getting chart type based on content type id"),
+            message: String.format(LOG_TEMPLATE, "_getChartTypeFromContentType", "Getting chart type based on content type id", this.title),
             data: { contentTypeId, chartType },
             level: LogLevel.Info,
         });
