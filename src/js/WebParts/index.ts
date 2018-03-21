@@ -15,6 +15,7 @@ import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyB
 import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
 import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
+import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -39,6 +40,10 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
+    new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
+        statsFieldsListName: "Statistikkfelter",
+        chartsConfigListName: "Grafkonfigurasjon",
+    }),
 ];
 
 /**
@@ -74,4 +79,6 @@ export {
     WebPropertyBagEditor,
     NewProjectForm,
     RiskMatrix,
+    DiceCalculator,
+    ProjectStats,
 };

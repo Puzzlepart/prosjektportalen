@@ -1,4 +1,4 @@
-import IDynamicPortfolioViewConfig from "prosjektportalen/lib/WebParts/DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
+import IDynamicPortfolioViewConfig from "../../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
 import { ProjectStatsChartData } from "../ProjectStatsChart";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 

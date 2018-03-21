@@ -1,6 +1,6 @@
 import * as React from "react";
-import GetBreakpoint from "../../../@Utils/GetBreakpoint";
-import { Logger, LogLevel } from "@pnp/logging";
+import { GetBreakpoint } from "../../../Util";
+import { LogLevel, Logger } from "sp-pnp-js";
 import IProjectStatsChartProps from "./IProjectStatsChartProps";
 import IProjectStatsChartState from "./IProjectStatsChartState";
 import ProjectStatsChartData from "./ProjectStatsChartData";

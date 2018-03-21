@@ -31,6 +31,7 @@
     "querystring": "^0.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-highcharts": "^16.0.2",
     "react-masonry-component": "^6.0.2",
     "react-scroll": "^1.7.6",
     "react-sticky": "^6.0.1",

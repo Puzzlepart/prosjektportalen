@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Logger, LogLevel } from "@pnp/logging";
+import { LogLevel, Logger } from "sp-pnp-js";
 import { ProjectStatsChartData, ProjectStatsChartDataItem } from "../ProjectStatsChart";
 import IProjectStatsDataSelectionProps from "./IProjectStatsDataSelectionProps";
 import IProjectStatsDataSelectionState from "./IProjectStatsDataSelectionState";

@@ -1,10 +1,9 @@
 import * as React from "react";
-import { Logger, LogLevel } from "@pnp/logging";
+import { LogLevel, Logger } from "sp-pnp-js";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
-import * as config from "../../../../config";
-import * as strings from "../../../../strings";
+import * as strings from "../../strings";
 
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
@@ -82,7 +81,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
                     e.stopPropagation();
                 },
                 subMenuProps: {
-                    items: config.SELECT_WIDTH_OPTIONS.map((w, i) => {
+                    items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((w, i) => {
                         const name = `${w} (${((w / 12) * 100).toFixed(2)}%)`;
                         return {
                             key: `${i}`,

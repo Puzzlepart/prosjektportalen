@@ -13,6 +13,7 @@ import StatsField from "./StatsField";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import BaseWebPart from "../@BaseWebPart";
+import * as strings from "./strings";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -95,6 +96,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         );
     }
 
+    /**
+     * On data selection updated
+     */
     private async _onDataSelectionUpdated(data: ProjectStatsChartData): Promise<void> {
         Logger.log({
             message: String.format(LOG_TEMPLATE, "_onDataSelectionUpdated", "Selection was updated."),
@@ -105,6 +109,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         });
     }
 
+    /**
+     * On view changed
+     */
     private async _onViewChanged(view: IDynamicPortfolioViewConfig): Promise<void> {
         Logger.log({
             message: String.format(LOG_TEMPLATE, "_onViewChanged", "View was updated."),
@@ -136,8 +143,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async fetchChartConfig(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         try {
-            const statsFieldsList = sp.web.lists.getByTitle(config.STATS_FIELDS_LISTNAME);
-            const chartsConfigList = sp.web.lists.getByTitle(config.CHARTS_CONFIG_LISTNAME);
+            const statsFieldsList = sp.web.lists.getByTitle(this.props.statsFieldsListName);
+            const chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
             const [{ views }, fieldsSpItems, chartsSpItems] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
                 statsFieldsList.items.select("ID", "Title", "PzlChManagedPropertyName", "PzlChDataType").get(),
