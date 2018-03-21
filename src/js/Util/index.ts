@@ -5,6 +5,8 @@ import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 import { GetProperty } from "./PropertyBag";
+import SortAlphabetically from "./SortAlphabetically";
+import GetBreakpoint from "./GetBreakpoint";
 
 declare var MSOWebPartPageFormName: string;
 
@@ -487,4 +489,6 @@ export {
     ExportToExcel,
     WaitDialog,
     StampVersion,
+    SortAlphabetically,
+    GetBreakpoint,
 };
