@@ -1,0 +1,22 @@
+<pnp:ListInstance Title="Statistikkfelter" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" RemoveExistingContentTypes="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x0100A26931086AEA154693049BC467AA08F3" Default="true" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="/sites/pp-70/Lists/StatsFields/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="Title" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="PzlChManagedPropertyName" />
+                <FieldRef Name="PzlChDataType" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+</pnp:ListInstance>
