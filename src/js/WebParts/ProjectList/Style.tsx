@@ -21,10 +21,6 @@ const Style = ({ props }: { props: IProjectListProps }) => {
                     transition: opacity .35s ease-in-out;
                     text-decoration: none;
                 }
-                .${props.tileClassName} .ms-DocumentCardPreview img {
-                    max-width: 100%;
-                    max-height: 100%;
-                }
             `}
     </style>;
 };
