@@ -56,7 +56,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
                         <div className="ms-Grid-col ms-sm12">
                             <ReactHighcharts
                                 ref={ele => this._chartRef = ele}
-                                config={this._generateChartConfig()} />
+                                config={this.state.chart.getConfig()} />
                         </div>
                     </div>
                 </div>
@@ -109,60 +109,6 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
         const { chart, breakpoint } = this.state;
         await chart.setWidth(breakpoint, event.currentTarget.getAttribute("data-width") as number);
         this.setState({ chart });
-    }
-
-    /**
-     * Generate Highcharts chart config
-     */
-    private _generateChartConfig() {
-        const { chart } = this.state;
-        const { title, type, stacking } = chart;
-
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "_generateChartConfig", `Generating chart config for chart "${title}" (${type}).`),
-            level: LogLevel.Info,
-        });
-
-        let chartConfig = {
-            ...chart.getBase(),
-            series: chart.getSeries(),
-        };
-        switch (type) {
-            case "bar": {
-                chartConfig.xAxis = chart.getXAxis();
-                chartConfig.yAxis = chart.getYAxis();
-                chartConfig.plotOptions = {
-                    bar: {
-                        dataLabels: { enabled: true },
-                    },
-                };
-                chartConfig.legend = chart.getLegend();
-                break;
-            }
-            case "column": {
-                chartConfig.xAxis = chart.getXAxis();
-                chartConfig.yAxis = chart.getYAxis();
-                chartConfig.plotOptions = { series: { stacking: stacking } };
-                chartConfig.legend = chart.getLegend();
-                break;
-            }
-            case "pie": {
-                chartConfig.plotOptions = {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: "pointer",
-                        dataLabels: {
-                            enabled: true,
-                            format: "<b>{point.name}</b>: {point.percentage: .1f} %",
-                            style: { color: "black" },
-                        },
-                    },
-                };
-                chartConfig.tooltip = { pointFormat: "<b>{point.percentage: .1f}%</b>" };
-                break;
-            }
-        }
-        return chartConfig;
     }
 }
 

@@ -7,3 +7,4 @@ export const DEFAULT_TOGGLE_OFF_TEXT = "Nei";
 export const SHOW_LEGEND_LABEL = "Vis merkelapp";
 export const SELECT_PROJECT_NAME = "Velg prosjekt:";
 export const SELECT_WIDTH_NAME = "Bredde";
+export const NOT_SET = "Ikke satt";

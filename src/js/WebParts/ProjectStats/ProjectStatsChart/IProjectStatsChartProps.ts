@@ -1,5 +1,5 @@
-import Chart from "../Chart";
+import ChartConfiguration from "../ChartConfiguration";
 
 export default interface IProjectStatsChartProps {
-    chart: Chart;
+    chart: ChartConfiguration;
 }

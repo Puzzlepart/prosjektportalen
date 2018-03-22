@@ -1,8 +1,8 @@
 import ProjectStatsChartDataItem from "../ProjectStatsChartDataItem";
-import Chart from "../../Chart";
+import ChartConfiguration from "../../ChartConfiguration";
 
 export default interface ProjectStatsChartSettingsProps {
-    chart: Chart;
+    chart: ChartConfiguration;
     onItemChanged: (item: ProjectStatsChartDataItem) => void;
     onWidthChanged: (event: React.MouseEvent<any>) => void;
 }

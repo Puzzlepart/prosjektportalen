@@ -8,7 +8,7 @@ import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBa
 import IProjectStatsProps, { ProjectStatsDefaultProps } from "./IProjectStatsProps";
 import IProjectStatsState from "./IProjectStatsState";
 import Project from "./Project";
-import Chart from "./Chart";
+import ChartConfiguration from "./ChartConfiguration";
 import StatsField from "./StatsField";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
@@ -38,7 +38,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
 
     public async componentDidMount() {
         try {
-            const config = await this.fetchChartConfig();
+            const config = await this._fetchData();
 
             Logger.log({
                 message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`),
@@ -85,7 +85,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                         selectedView={this.state.selectedView}
                         onUpdateSelection={this._onDataSelectionUpdated}
                         onViewChanged={this._onViewChanged} />
-                    <ProjectStatsSettings />
+                    <ProjectStatsSettings contentTypes={this.state.contentTypes} />
                 </div>
                 <div className="ms-Grid-row">
                     {data.getCount() === 0
@@ -122,7 +122,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         });
         this.setState({ isLoading: true }, async () => {
             try {
-                const { data } = await this.fetchChartConfig(view);
+                const { data } = await this._fetchData(view);
                 this.setState({
                     isLoading: false,
                     selectedView: view,
@@ -141,34 +141,54 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     }
 
     /**
-     * Fetch chart config
+     * Fetch data
      */
-    private async fetchChartConfig(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
+    private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
+        const {
+            statsFieldsListName,
+            chartsConfigListName,
+            fieldsPrefix,
+            chartConfigurationBaseContentTypeId,
+            statsFieldsContentTypeId,
+        } = this.props;
+        const statsFieldsList = sp.web.lists.getByTitle(statsFieldsListName);
+        const chartsConfigList = sp.web.lists.getByTitle(chartsConfigListName);
         try {
-            const statsFieldsList = sp.web.lists.getByTitle(this.props.statsFieldsListName);
-            const chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
-            const [{ views }, fieldsSpItems, chartsSpItems] = await Promise.all([
+            let [{ views }, fieldsSpItems, chartsSpItems, contentTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").get(),
+                statsFieldsList.items.select("ID", "Title", `${fieldsPrefix}ManagedPropertyName`, `${fieldsPrefix}DataType`).get(),
                 chartsConfigList.items.get(),
+                sp.web.contentTypes.usingCaching().get(),
             ]);
+            contentTypes = contentTypes.filter(ct => {
+                if (ct.StringId === statsFieldsContentTypeId) {
+                    return true;
+                }
+                if (ct.StringId.indexOf(chartConfigurationBaseContentTypeId) === -1) {
+                    return false;
+                }
+                if (ct.StringId.length <= chartConfigurationBaseContentTypeId.length) {
+                    return false;
+                }
+                return true;
+            });
             if (!view) {
                 [view] = views.filter(v => v.default);
                 if (!view) {
+                    view = views[0];
                     Logger.log({
-                        message: String.format(LOG_TEMPLATE, "fetchChartConfig", `No default view found. Using ${views[0].name}.`),
+                        message: String.format(LOG_TEMPLATE, "_fetchData", `No default view found. Using ${view.name}.`),
                         level: LogLevel.Info,
                     });
-                    view = views[0];
                 }
             }
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "fetchChartConfig", `Fetching view ${view.name}.`),
+                message: String.format(LOG_TEMPLATE, "_fetchData", `Fetching view ${view.name}.`),
                 data: { queryTemplate: view.queryTemplate },
                 level: LogLevel.Info,
             });
 
-            const fields = fieldsSpItems.map(i => new StatsField(i.ID, i.Title, i.GtChrManagedPropertyName, i.GtChrDataType));
+            const fields = fieldsSpItems.map(i => new StatsField(i.ID, i.Title, i[`${fieldsPrefix}ManagedPropertyName`], i[`${fieldsPrefix}DataType`]));
             const response = await sp.search({
                 Querytext: "*",
                 QueryTemplate: view.queryTemplate,
@@ -181,12 +201,14 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
-                return new Chart(spItem, chartsConfigList).set(data, fields.filter(f => spItem.GtChrFieldsId.results.indexOf(f.id) !== -1));
+                const chartFields = fields.filter(f => spItem[`${fieldsPrefix}FieldsId`].results.indexOf(f.id) !== -1);
+                return new ChartConfiguration(spItem, fieldsPrefix, chartConfigurationBaseContentTypeId, chartsConfigList).set(data, chartFields);
             });
             const config: Partial<IProjectStatsState> = {
                 charts,
                 data,
                 views,
+                contentTypes,
                 selectedView: view,
             };
             return config;

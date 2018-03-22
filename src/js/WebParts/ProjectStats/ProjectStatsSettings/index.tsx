@@ -3,6 +3,7 @@ import { LogLevel, Logger } from "sp-pnp-js";
 import IProjectStatsSettingsProps from "./IProjectStatsSettingsProps";
 import IProjectStatsSettingsState from "./IProjectStatsSettingsState";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 
 export default class ProjectStatsSettings extends React.PureComponent<IProjectStatsSettingsProps, IProjectStatsSettingsState> {
 
@@ -16,6 +17,7 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
      * Renders the <ProjectStatsSettings /> component
      */
     public render(): React.ReactElement<IProjectStatsSettingsProps> {
+        console.log(this.props.contentTypes);
         return (
             <div className={`ms-Grid-col ms-sm6`}>
                 <div className="ms-Grid">
@@ -34,7 +36,16 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                         </div>
                         {this.state.isExpanded && (
                             <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }}>
-                                <p>TODO</p>
+                                {this.props.contentTypes.map(contentType => (
+                                    <DefaultButton
+                                        text={contentType.Description}
+                                        onClick={e => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+                                            document.location.href = this._getContentTypeNewFormUrl(contentType);
+                                        }}
+                                    />
+                                ))}
                             </div>
                         )}
                     </div>
@@ -43,6 +54,18 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
         );
     }
 
+    /**
+     * Get new form url for a content type
+     *
+     * @param {any} contentType Content type
+     */
+    private _getContentTypeNewFormUrl(contentType): string {
+        return `${contentType.NewFormUrl}?ContentTypeId=${contentType.StringId}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
+    }
+
+    /**
+     * On toggle
+     */
     private _onToggle() {
         this.setState(prevState => ({ isExpanded: !prevState.isExpanded }), () => {
             Logger.log({ message: `(ProjectStatsSettings) _onToggle`, data: { isExpanded: this.state.isExpanded }, level: LogLevel.Info });

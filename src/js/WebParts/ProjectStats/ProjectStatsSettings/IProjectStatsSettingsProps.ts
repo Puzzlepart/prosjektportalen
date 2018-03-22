@@ -1,1 +1,3 @@
-export default interface IProjectStatsSettingsProps {}
+export default interface IProjectStatsSettingsProps {
+    contentTypes: any[];
+}
