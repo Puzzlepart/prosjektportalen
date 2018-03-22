@@ -32,7 +32,7 @@ export default async function ProvisionWeb(model: IProjectModel, progressCallbac
         return context.redirectUrl;
     } catch (err) {
         const logEntry: ILogEntry = { ...err, LogURL: model.Url, LogLevel: LogLevel.Error };
-        new SpListLogger().log(logEntry);
+        await new SpListLogger().log(logEntry);
         throw err;
     }
 }

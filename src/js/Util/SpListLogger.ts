@@ -1,8 +1,5 @@
 import RESOURCE_MANAGER from "../@localization";
-import {
-    Site,
-    LogLevel,
-} from "sp-pnp-js";
+import { Site, LogLevel } from "sp-pnp-js";
 
 interface ILogEntry {
     ID?: string;
@@ -37,9 +34,9 @@ export default class SpListLogger {
      *
      * @param {ILogEntry} entry Log entry
      */
-    public log(entry: ILogEntry): void {
+    public async log(entry: ILogEntry): Promise<void> {
         const spList = new Site(this.SiteUrl).rootWeb.lists.getByTitle(this.List);
-        spList.items.add({
+        await spList.items.add({
             ...entry,
             LogLevel: this.getLogLevelString(entry),
         });
