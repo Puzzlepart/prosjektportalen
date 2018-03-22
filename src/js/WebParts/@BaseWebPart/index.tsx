@@ -16,6 +16,17 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
     }
 
     /**
+     * Update state
+     *
+     * @param {S} updatedState Updated state
+     */
+    public async updateState(updatedState: S): Promise<void> {
+        this.setState(updatedState, () => {
+            return;
+        });
+    }
+
+    /**
      * Render chrome
      *
      * @param {string} title Title
@@ -23,7 +34,7 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
      * @param {string} key Storage key
      * @param {boolean} hideChrome Hide chrome
      */
-    public __renderChrome = (title: string, element: HTMLElement, key: string, hideChrome = false) => {
+    public _renderChrome(title: string, element: HTMLElement, key: string, hideChrome = false) {
         return (
             <ChromeTitle
                 title={title}
@@ -37,17 +48,6 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
                 hidden={hideChrome}
             />
         );
-    }
-
-    /**
-     * Update state
-     *
-     * @param {S} updatedState Updated state
-     */
-    public async updateState(updatedState: S): Promise<void> {
-        this.setState(updatedState, () => {
-            return;
-        });
     }
 }
 

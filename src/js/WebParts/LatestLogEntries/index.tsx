@@ -72,7 +72,7 @@ export default class LatestLogEntries extends SecuredWebPart<ILatestLogEntriesPr
     public _render() {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), this.state.elementToToggle, LatestLogEntries.displayName)}
+                {this._renderChrome(RESOURCE_MANAGER.getResource("WebPart_LatestLogEntries_Title"), this.state.elementToToggle, LatestLogEntries.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );

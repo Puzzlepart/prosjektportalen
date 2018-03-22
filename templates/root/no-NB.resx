@@ -1012,7 +1012,7 @@
     <value>Listenavn (kilde)</value>
   </data>
   <data name="SiteFields_GtLccDestinationLibrary_DisplayName" xml:space="preserve">
-    <value>Biblioteksnavn (mål)</value>
+    <value>Biblioteksurl (mål)</value>
   </data>
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Tekst</value>
@@ -1036,8 +1036,7 @@
     <value>Leveransestatus</value>
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
-    <value>Kommentar
-    , leveransestatus</value>
+    <value>Kommentar, leveransestatus</value>
   </data>
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Aktivert</value>

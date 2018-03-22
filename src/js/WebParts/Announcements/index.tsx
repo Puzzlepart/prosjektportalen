@@ -59,7 +59,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), this.state.elementToToggle, Announcements.displayName)}
+                {this._renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), this.state.elementToToggle, Announcements.displayName)}
                 {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
