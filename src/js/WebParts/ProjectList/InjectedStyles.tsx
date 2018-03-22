@@ -1,7 +1,7 @@
 import * as React from "react";
 import IProjectListProps from "./IProjectListProps";
 
-const Style = ({ props }: { props: IProjectListProps }) => {
+const InjectedStyles = ({ props }: { props: IProjectListProps }) => {
     return <style type="text/css">{`
                 .${props.tileClassName} {
                     width: ${props.tileWidth}px;
@@ -21,12 +21,8 @@ const Style = ({ props }: { props: IProjectListProps }) => {
                     transition: opacity .35s ease-in-out;
                     text-decoration: none;
                 }
-                .${props.tileClassName} .ms-DocumentCardPreview img {
-                    max-width: 100%;
-                    max-height: 100%;
-                }
             `}
     </style>;
 };
 
-export default Style;
+export default InjectedStyles;
