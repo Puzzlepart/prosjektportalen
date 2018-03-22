@@ -1,25 +1,25 @@
 export default class ProvisionError {
-    public Message: string;
-    public Source: string;
-    public ErrorTraceCorrelationId: string;
-    public ErrorTypeName: string;
+    public message: string;
+    public source: string;
+    public errorTraceCorrelationId: string;
+    public errorTypeName: string;
 
     constructor(err: any, source: string) {
         this.parseError(err);
-        this.Source = source;
+        this.errorTypeName = source;
     }
 
     private parseError(err) {
         if (err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
             const { args } = err;
-            this.ErrorTraceCorrelationId = args.get_errorTraceCorrelationId();
-            this.ErrorTypeName = args.get_errorTypeName();
-            this.Message = args.get_message();
+            this.errorTraceCorrelationId = args.get_errorTraceCorrelationId();
+            this.errorTypeName = args.get_errorTypeName();
+            this.message = args.get_message();
         } else {
             if (typeof err === "string") {
-                this.Message = err;
+                this.message = err;
             } else {
-                this.Message = "Unable to parse error details.";
+                this.message = "Unable to parse error details.";
             }
         }
     }

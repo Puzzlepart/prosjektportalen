@@ -1,46 +1,49 @@
 import RESOURCE_MANAGER from "../@localization";
-import {
-    Site,
-    LogLevel,
-} from "sp-pnp-js";
+import { Site, List, LogLevel, LogEntry } from "sp-pnp-js";
 
-interface ILogEntry {
-    ID?: string;
-    Message: string;
-    Source?: string;
-    LogLevel: LogLevel;
-    ErrorTraceCorrelationId?: string;
-    ErrorTypeName?: string;
-    LogURL?: string;
-    Created?: string;
+export interface ISpListLoggerEntry extends LogEntry {
+    id?: string;
+    source?: string;
+    errorTraceCorrelationId?: string;
+    errorTypeName?: string;
+    url?: string;
+    created?: string;
 }
 
 /**
  * SharePoint List logger
  */
 export default class SpListLogger {
-    private List: string;
-    private SiteUrl: string;
+    private _listName: string;
+    private _siteUrl: string;
+    private _pnpList: List;
 
     /**
      * Constructor
      *
-     * @param {string} list SP list title
+     * @param {string} listName List name
+     * @param {string} siteUrl Site URL (defaults to _spPageContextInfo.siteAbsoluteUrl)
      */
-    constructor(list = RESOURCE_MANAGER.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
-        this.List = list;
-        this.SiteUrl = siteUrl;
+    constructor(listName = RESOURCE_MANAGER.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
+        this._listName = listName;
+        this._siteUrl = siteUrl;
+        this._pnpList = new Site(this._siteUrl).rootWeb.lists.getByTitle(this._listName);
     }
 
     /**
      * Logs an entry to the SP list
      *
-     * @param {ILogEntry} entry Log entry
+     * @param {ISpListLoggerEntry} entry Log entry
      */
-    public log(entry: ILogEntry): void {
-        const spList = new Site(this.SiteUrl).rootWeb.lists.getByTitle(this.List);
-        spList.items.add({
+    public async log(entry: ISpListLoggerEntry): Promise<void> {
+        await this._pnpList.items.add({
             ...entry,
+            Message: entry.message,
+            Source: entry.source,
+            ErrorTraceCorrelationId: entry.errorTraceCorrelationId,
+            ErrorTypeName: entry.errorTypeName,
+            LogURL: entry.url,
+            Created: entry.created,
             LogLevel: this.getLogLevelString(entry),
         });
     }
@@ -50,8 +53,8 @@ export default class SpListLogger {
      *
      * @param {entry} entry Log entry
      */
-    private getLogLevelString(entry: ILogEntry): string {
-        switch (entry.LogLevel) {
+    private getLogLevelString(entry: ISpListLoggerEntry): string {
+        switch (entry.level) {
             case LogLevel.Error: {
                 return RESOURCE_MANAGER.getResource("String_LogLevel_Error");
             }
@@ -68,7 +71,4 @@ export default class SpListLogger {
     }
 }
 
-export {
-    LogLevel,
-    ILogEntry,
-};
+export { LogLevel };

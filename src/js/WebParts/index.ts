@@ -10,7 +10,6 @@ import DynamicPortfolio, { IDynamicPortfolioProps } from "./DynamicPortfolio";
 import BenefitsOverview, { IBenefitsOverviewProps } from "./BenefitsOverview";
 import ProjectStatus, { IProjectStatusProps } from "./ProjectStatus";
 import ExperienceLog, { IExperienceLogProps } from "./ExperienceLog";
-import LatestLogEntries, { ILatestLogEntriesProps } from "./LatestLogEntries";
 import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyBagEditor";
 import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
 import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
@@ -35,7 +34,6 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
-    new WebPartComponent<ILatestLogEntriesProps>(LatestLogEntries, "pp-latestlogentries"),
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
@@ -75,7 +73,6 @@ export {
     BenefitsOverview,
     ProjectStatus,
     ExperienceLog,
-    LatestLogEntries,
     WebPropertyBagEditor,
     NewProjectForm,
     RiskMatrix,
