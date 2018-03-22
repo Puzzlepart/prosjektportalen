@@ -462,10 +462,9 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="Statistikkfelt" Description="Opprett et nytt statistikkfelt" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="GtChrDataType" />
-            <pnp:FieldRef ID="35632a65-9b43-4320-9b5e-13ef6268957b" Name="GtChrManagedPropertyName" />
+            <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="GtChrDataType" Required="true" />
+            <pnp:FieldRef ID="35632a65-9b43-4320-9b5e-13ef6268957b" Name="GtChrManagedPropertyName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D" Name="Grafkonfigurasjonelement" Description="Opprett et nytt grafkonfigurasjonelement" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx">
