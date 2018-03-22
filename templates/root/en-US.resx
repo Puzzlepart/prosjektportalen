@@ -1830,9 +1830,6 @@
   <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
     <value>Benefit overview</value>
   </data>
-  <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
-    <value>Latest log entries</value>
-  </data>
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Latest information elements </value>
   </data>
