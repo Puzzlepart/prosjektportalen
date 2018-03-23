@@ -14,7 +14,7 @@ import StatsFieldConfiguration from "./StatsFieldConfiguration";
 import { IContentType } from "../../Model";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
-import ProjectStatsSettings from "./ProjectStatsSettings";
+import ProjectStatsConfiguration from "./ProjectStatsConfiguration";
 import BaseWebPart from "../@BaseWebPart";
 import Preferences from "../../Preferences";
 import * as strings from "./strings";
@@ -84,7 +84,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                         selectedView={this.state.selectedView}
                         onUpdateSelection={this._onDataSelectionUpdated}
                         onViewChanged={this._onViewChanged} />
-                    <ProjectStatsSettings contentTypes={this.state.contentTypes} />
+                    <ProjectStatsConfiguration contentTypes={this.state.contentTypes} />
                 </div>
                 <div className="ms-Grid-row">
                     {this._renderInner()}

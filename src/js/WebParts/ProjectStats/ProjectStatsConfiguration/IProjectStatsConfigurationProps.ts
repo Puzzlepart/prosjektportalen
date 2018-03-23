@@ -1,4 +1,4 @@
 import { IContentType } from "../../../Model";
-export default interface IProjectStatsSettingsProps {
+export default interface IProjectStatsConfigurationProps {
     contentTypes: IContentType[];
 }
