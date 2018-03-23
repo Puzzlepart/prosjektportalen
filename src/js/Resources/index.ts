@@ -1,7 +1,7 @@
-export default new class Localization {
+export default new class Resources {
     private _res = {
-        1033: require("../en-US.json"),
-        1044: require("../no-NB.json"),
+        1033: require("./en-US.json"),
+        1044: require("./no-NB.json"),
     };
 
     /**
