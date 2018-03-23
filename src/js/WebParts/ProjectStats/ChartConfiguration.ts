@@ -176,7 +176,7 @@ export default class ChartConfiguration {
      */
     public getEditFormUrl(): string {
         let [contentType] = this._contentTypes.filter(ct => ct.StringId.indexOf(this.contentTypeId) !== -1);
-        return `${contentType.EditFormUrl}?Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
+        return `${contentType.EditFormUrl}?ID=${this.id}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
     }
 
     /**

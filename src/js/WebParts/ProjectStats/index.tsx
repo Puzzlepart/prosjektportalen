@@ -1,4 +1,5 @@
 import * as React from "react";
+import RESOURCE_MANAGER from "../../@localization";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
@@ -157,12 +158,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
-        const {
-            statsFieldsListName,
-            chartsConfigListName,
-        } = this.props;
-        const statsFieldsList = sp.web.lists.getByTitle(statsFieldsListName);
-        const chartsConfigList = sp.web.lists.getByTitle(chartsConfigListName);
+        const statsFieldsList = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"));
+        const chartsConfigList = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"));
         try {
             const batch = sp.createBatch();
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([

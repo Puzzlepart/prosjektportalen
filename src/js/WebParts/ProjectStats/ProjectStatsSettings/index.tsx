@@ -6,6 +6,7 @@ import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 
 export default class ProjectStatsSettings extends React.PureComponent<IProjectStatsSettingsProps, IProjectStatsSettingsState> {
+    private _content: HTMLDivElement;
 
     constructor(props: IProjectStatsSettingsProps) {
         super(props);
@@ -32,7 +33,7 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                                 </span>
                             </div>
                         </div>
-                        <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }} hidden={!this.state.isExpanded}>
+                        <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }} hidden={!this.state.isExpanded} ref={ele => this._content = ele}>
                             {this.props.contentTypes.map((contentType) => (
                                 <DefaultButton
                                     key={contentType.StringId}
@@ -42,13 +43,14 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                                         e.stopPropagation();
                                         document.location.href = this._getContentTypeNewFormUrl(contentType);
                                     }}
+                                    iconProps={{ iconName: "Add" }}
                                     style={{ margin: "0 5px 0 0" }}
                                 />
                             ))}
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 

@@ -50,11 +50,11 @@ export default class ChromeTitle extends React.PureComponent<IChromeTitleProps, 
     /**
      * Renders the component
      */
-    public render(): JSX.Element {
+    public render(): React.ReactElement<IChromeTitleProps> {
         return (
             <div
                 hidden={this.props.hidden}
-                className="ms-webpart-chrome-title"
+                className={"ms-webpart-chrome-title"}
                 onClick={this.onClick}
                 style={{ width: this.props.width }}>
                 <span
