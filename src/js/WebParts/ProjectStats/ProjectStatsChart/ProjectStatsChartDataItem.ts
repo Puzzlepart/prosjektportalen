@@ -9,22 +9,39 @@ export default class ProjectStatsChartDataItem {
         this.data = data;
     }
 
-    public getValue(field: StatsFieldConfiguration) {
+    /**
+     * Has value
+     *
+     * @param {StatsFieldConfiguration} field Field
+     */
+    public hasValue(field: StatsFieldConfiguration): boolean {
+        const rawValue = this.data[field.managedPropertyName];
+        return rawValue != null;
+    }
+
+    /**
+     * Get value
+     *
+     * @param {StatsFieldConfiguration} field Field
+     */
+    public getValue(field: StatsFieldConfiguration): any {
         const rawValue = this.data[field.managedPropertyName];
         switch (field.dataType) {
             case "percentage": {
-                return Math.floor((parseFloat(rawValue) * 100));
+                if (this.hasValue(field)) {
+                    return Math.floor((parseFloat(rawValue) * 100));
+                }
+                return 0;
             }
             case "number": {
-                return parseInt(rawValue, 10);
+                if (this.hasValue(field)) {
+                    return parseInt(rawValue, 10);
+                }
+                return 0;
             }
             default: {
                 return rawValue;
             }
         }
-    }
-
-    public isValid(): boolean {
-        return false;
     }
 }

@@ -243,6 +243,11 @@ export default class ChartConfiguration {
      * Get series
      */
     private _generateSeries() {
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "_generateSeries", `Generating series for chart of type ${this.type}`, this.title),
+            data: { statsFields: this._statsFields },
+            level: LogLevel.Info,
+        });
         switch (this.type) {
             case "column": case "bar": {
                 return this._statsFields.map(sf => {
@@ -261,7 +266,7 @@ export default class ChartConfiguration {
                                 colorByPoint: true,
                                 data: this._data.getItems().map((i, index) => ({
                                     name: i.name,
-                                    y: this._data.getPercentage(this._statsFields[0], index),
+                                    y: this._data.getPercentage(field, index),
                                 })),
                             }]);
                         }
@@ -270,7 +275,7 @@ export default class ChartConfiguration {
                                 colorByPoint: true,
                                 data: this._data.getValuesUnique(field).map((value, index) => ({
                                     name: value || strings.NOT_SET,
-                                    y: (this._data.getItemsWithValue(field, value).length / this._data.getCount()) * 100,
+                                    y: (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100,
                                 })),
                             }]);
                         }
