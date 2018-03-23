@@ -492,6 +492,33 @@
   <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
     <value>Pie chart</value>
   </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Config Base</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Field_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Field</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Refiner_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Refiner</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_View_Name" xml:space="preserve">
+    <value>Dynamic Portfolio View</value>
+  </data>
+  <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
+    <value>List Content Config</value>
+  </data>
+  <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
+    <value>Project Config Base</value>
+  </data>
+  <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
+    <value>Project Field</value>
+  </data>
+  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
+    <value>Project Key Value</value>
+  </data>
+  <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>

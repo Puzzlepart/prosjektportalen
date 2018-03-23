@@ -492,6 +492,33 @@
   <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
     <value>Kakediagram</value>
   </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
+    <value>Porteføljekonfigurasjonsbase</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Field_Name" xml:space="preserve">
+    <value>Porteføljefelt</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Refiner_Name" xml:space="preserve">
+    <value>Porteføljepresiseringsfelt</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_View_Name" xml:space="preserve">
+    <value>Porteføljevisning</value>
+  </data>
+  <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
+    <value>Listeinnehold</value>
+  </data>
+  <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
+    <value>Prosjektkonfigurasjonsbase</value>
+  </data>
+  <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
+    <value>Prosjektfelt</value>
+  </data>
+  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
+    <value>Nøkkelverdipar</value>
+  </data>
+  <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
+    <value>Tilbakemelding</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
