@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="Statistikkfelter" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false" RemoveExistingContentTypes="true" 
+<pnp:ListInstance Title="Statistics fields" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false" RemoveExistingContentTypes="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
