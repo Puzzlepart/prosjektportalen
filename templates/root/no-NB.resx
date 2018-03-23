@@ -573,6 +573,21 @@
   <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Description" xml:space="preserve">
+    <value>Opprett et nytt statistikkfelt</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Description" xml:space="preserve">
+    <value>Opprett et nytt grafkonfigurasjonelement</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt stolpediagram</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt kolonnediagram</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt kakediagram</value>
+  </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
   </data>

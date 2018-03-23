@@ -573,6 +573,21 @@
   <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Description" xml:space = "preserve">
+    <value>Create a new statistics field</value>
+  </data>
+  <data name="ContentTypes_Grafconfigurationelement_Description" xml:space = "preserve">
+    <value>Create a new graph configuration element</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Description" xml:space = "preserve">
+    <value>Create a new bar chart</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Description" xml:space = "preserve">
+    <value>Create a new column chart</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Description" xml:space = "preserve">
+    <value>Create a new pie chart</value>
+  </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
   </data>
@@ -1089,67 +1104,67 @@
   <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
     <value>End time</value>
   </data>
-  <data name = "SiteFields_GtChrShowItemSelector_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrShowItemSelector_DisplayName" xml:space = "preserve">
     <value>Show item selector</value>
   </data>
-  <data name = "SiteFields_GtChrSubTitle_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrSubTitle_DisplayName" xml:space = "preserve">
     <value>Subtitle</value>
   </data>
-  <data name = "SiteFields_GtChrYAxisTitle_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrYAxisTitle_DisplayName" xml:space = "preserve">
     <value>Title (Y-axis)</value>
   </data>
-  <data name = "SiteFields_GtChrWidthLg_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthLg_DisplayName" xml:space = "preserve">
     <value>Width (640px - 1023px)</value>
   </data>
-  <data name = "SiteFields_GtChrWidthSm_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthSm_DisplayName" xml:space = "preserve">
     <value>Width (320px - 479px)</value>
   </data>
-  <data name = "SiteFields_GtChrYMin_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrYMin_DisplayName" xml:space = "preserve">
     <value>Min (Y axis)</value>
   </data>
-  <data name = "SiteFields_GtChrWidthXxl_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthXxl_DisplayName" xml:space = "preserve">
     <value>Width (1366px - 1919px)</value>
   </data>
-  <data name = "SiteFields_GtChrManagedPropertyName_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrManagedPropertyName_DisplayName" xml:space = "preserve">
     <value>Managed property</value>
   </data>
-  <data name = "SiteFields_GtChrWidthXl_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthXl_DisplayName" xml:space = "preserve">
     <value>Width (1024px - 1365px)</value>
   </data>
-  <data name = "SiteFields_GtChrYMax_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrYMax_DisplayName" xml:space = "preserve">
     <value>Max (Y-axis)</value>
   </data>
-  <data name = "SiteFields_GtChrDataType_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrDataType_DisplayName" xml:space = "preserve">
     <value>Data type</value>
   </data>
-  <data name = "SiteFields_GtChrYTickInterval_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space = "preserve">
     <value>Interval (Y-axis)</value>
   </data>
-  <data name = "SiteFields_GtChrWidthMd_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthMd_DisplayName" xml:space = "preserve">
     <value>Width (480px - 639px)</value>
   </data>
-  <data name = "SiteFields_GtChrFields_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrFields_DisplayName" xml:space = "preserve">
     <value>Fields</value>
   </data>
-  <data name = "SiteFields_GtChrValueSuffix_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space = "preserve">
     <value>Value ​​suffix</value>
   </data>
-  <data name = "SiteFields_GtChrMarginTop_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrMarginTop_DisplayName" xml:space = "preserve">
     <value>Margin top</value>
   </data>
-  <data name = "SiteFields_GtChrOrder_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrOrder_DisplayName" xml:space = "preserve">
     <value>Order</value>
   </data>
-  <data name = "SiteFields_GtChrShowAverage_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space = "preserve">
     <value>Show average</value>
   </data>
-  <data name = "SiteFields_GtChrStacking_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrStacking_DisplayName" xml:space = "preserve">
     <value>Stacking</value>
   </data>
-  <data name = "SiteFields_GtChrShowLegend_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrShowLegend_DisplayName" xml:space = "preserve">
     <value>Show legend</value>
   </data>
-  <data name = "SiteFields_GtChrWidthXxxl_DisplayName" xml:space = "preserve">
+  <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space = "preserve">
     <value>Width (1920px and up)</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
