@@ -460,14 +460,14 @@
             <pnp:FieldRef ID="dabdcbab-7bab-4fb2-8d65-85bd03809a8d" Name="{parameter:GenericFieldPrefix}MilestoneComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="Statistikkfelt" Description="Opprett et nytt statistikkfelt" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx">
+    <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="Statistikkfelt" Description="Opprett et nytt statistikkfelt" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/StatsFieldsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/StatsFieldsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="{parameter:ProjectStatsFieldPrefix}DataType" Required="true" />
             <pnp:FieldRef ID="35632a65-9b43-4320-9b5e-13ef6268957b" Name="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D" Name="Grafkonfigurasjonelement" Description="Opprett et nytt grafkonfigurasjonelement" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx">
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D" Name="Grafkonfigurasjonelement" Description="Opprett et nytt grafkonfigurasjonelement" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
@@ -482,7 +482,7 @@
             <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="Stolpediagram" Description="Opprett et nytt stolpediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx">
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="Stolpediagram" Description="Opprett et nytt stolpediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
@@ -502,7 +502,7 @@
             <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" Name="Kolonnediagram" Description="Opprett et nytt kolonnediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx">
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" Name="Kolonnediagram" Description="Opprett et nytt kolonnediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
@@ -515,7 +515,7 @@
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
             <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
-            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" />
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" Required="true" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
@@ -523,7 +523,7 @@
             <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="Kakediagram" Description="Opprett et nytt kakediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx">
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="Kakediagram" Description="Opprett et nytt kakediagram" Group="Prosjektstatistikk" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
