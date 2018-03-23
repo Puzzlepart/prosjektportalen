@@ -3,7 +3,13 @@ import { Web } from "sp-pnp-js";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
 
-function getFieldsConfig(configWeb: Web, orderBy: string) {
+/**
+ * Get fields config from list
+ *
+ * @param {string} orderBy Order by property
+ * @param {Web} configWeb Config web
+ */
+export function getFieldsConfig(orderBy: string, configWeb: Web): Promise<any[]> {
     return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
         .items
         .orderBy(orderBy)
@@ -11,7 +17,13 @@ function getFieldsConfig(configWeb: Web, orderBy: string) {
         .get();
 }
 
-function getRefinersConfig(configWeb: Web, orderBy: string) {
+/**
+ * Get refiner config from list
+ *
+ * @param {string} orderBy Order by property
+ * @param {Web} configWeb Config web
+ */
+export function getRefinersConfig(orderBy: string, configWeb: Web): Promise<any[]> {
     return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
         .items
         .orderBy(orderBy)
@@ -19,7 +31,13 @@ function getRefinersConfig(configWeb: Web, orderBy: string) {
         .get();
 }
 
-function getViewsConfig(configWeb: Web, orderBy: string) {
+/**
+ * Get view config from list
+ *
+ * @param {string} orderBy Order by property
+ * @param {Web} configWeb Config web
+ */
+export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> {
     return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
         .items
         .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
@@ -39,9 +57,9 @@ function getViewsConfig(configWeb: Web, orderBy: string) {
 export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
     const configWeb = new Web(configWebUrl);
     const [dpFields, dpRefiners, dpViews, statusFields] = await Promise.all([
-        getFieldsConfig(configWeb, orderBy),
-        getRefinersConfig(configWeb, orderBy),
-        getViewsConfig(configWeb, orderBy),
+        getFieldsConfig(orderBy, configWeb),
+        getRefinersConfig(orderBy, configWeb),
+        getViewsConfig(orderBy, configWeb),
         loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
     ]);
     const columns = dpFields.map(fld => {
