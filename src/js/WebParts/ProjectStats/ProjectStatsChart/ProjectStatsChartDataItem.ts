@@ -1,4 +1,4 @@
-import StatsField from "../StatsField";
+import StatsFieldConfiguration from "../StatsFieldConfiguration";
 
 export default class ProjectStatsChartDataItem {
     public data: { [key: string]: any };
@@ -9,7 +9,7 @@ export default class ProjectStatsChartDataItem {
         this.data = data;
     }
 
-    public getValue(field: StatsField) {
+    public getValue(field: StatsFieldConfiguration) {
         const rawValue = this.data[field.managedPropertyName];
         switch (field.dataType) {
             case "percentage": {
