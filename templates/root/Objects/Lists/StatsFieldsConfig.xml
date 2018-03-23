@@ -4,7 +4,7 @@
         <pnp:ContentTypeBinding ContentTypeID="0x0100A26931086AEA154693049BC467AA08F3" Default="true" />
     </pnp:ContentTypeBindings>
     <pnp:Views>
-        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/StatsFields/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/StatsFields/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
             <Query>
                 <OrderBy>
                     <FieldRef Name="Title" />
@@ -14,19 +14,6 @@
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtChrManagedPropertyName" />
                 <FieldRef Name="GtChrDataType" />
-            </ViewFields>
-            <RowLimit Paged="TRUE">30</RowLimit>
-            <JSLink>clienttemplates.js</JSLink>
-        </View>
-        <View MobileView="TRUE" Type="HTML" DisplayName="Gruppert på datatype" Url="{site}/Lists/StatsFields/GroupedDataType.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
-            <Query>
-                <OrderBy>
-                    <FieldRef Name="Title" />
-                </OrderBy>
-            </Query>
-            <ViewFields>
-                <FieldRef Name="LinkTitle" />
-                <FieldRef Name="GtChrManagedPropertyName" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>
