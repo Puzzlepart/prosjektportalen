@@ -477,6 +477,21 @@
   <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
     <value>Områdemal</value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Name" xml:space="preserve">
+    <value>Statistikkfelt</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
+    <value>Grafkonfigurasjonelement</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
+    <value>Stolpediagram</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
+    <value>Kolonnediagram</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
+    <value>Kakediagram</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>

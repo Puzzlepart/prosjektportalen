@@ -477,6 +477,21 @@
   <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
     <value>Site Template</value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Name" xml:space="preserve">
+    <value>Statistics field</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
+    <value>Graph configuration base</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
+    <value>Bar chart</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
+    <value>Column chart</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
+    <value>Pie chart</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
