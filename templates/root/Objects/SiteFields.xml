@@ -483,58 +483,58 @@
     <Field Type="Note" DisplayName="{resource:SiteFields_GtProductDescription_DisplayName}" Description="{resource:SiteFields_GtProductDescription_Description}" UnlimitedLengthInDocumentLibrary="TRUE" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{99430a99-1354-418f-921f-7ddfdb6c0d7f}" StaticName="GtProductDescription" Name="GtProductDescription" CustomFormatter="" RestrictedMode="TRUE" RichTextMode="Compatible" IsolateStyles="FALSE" />
     <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductStartTime_DisplayName}" Description="{resource:SiteFields_GtProductStartTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{219a5cdf-799c-48ee-8869-ea39e4b9a6aa}" StaticName="GtProductStartTime" Name="GtProductStartTime" CustomFormatter="" CalType="0" />
     <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductEndTime_DisplayName}" Description="{resource:SiteFields_GtProductEndTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{eb78509b-4109-474e-aca8-90d024a960de}" StaticName="GtProductEndTime" Name="GtProductEndTime" CustomFormatter="" CalType="0" />
-    <Field DisplayName="Forvaltet egenskap" Title="ManagedPropertyName" Type="Text" Group="{resource:SiteFields_Group}" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="GtChrManagedPropertyName" Name="GtChrManagedPropertyName" ColName="nvarchar4" />
-    <Field DisplayName="Datatype" Title="DataType" Type="Choice" Group="{resource:SiteFields_Group}" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="GtChrDataType" Name="GtChrDataType">
+    <Field DisplayName="Forvaltet egenskap" Title="ManagedPropertyName" Type="Text" Group="{resource:SiteFields_Group}" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" Name="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" ColName="nvarchar4" />
+    <Field DisplayName="Datatype" Title="DataType" Type="Choice" Group="{resource:SiteFields_Group}" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="{parameter:ProjectStatsFieldPrefix}DataType" Name="{parameter:ProjectStatsFieldPrefix}DataType">
         <CHOICES>
             <CHOICE>Number</CHOICE>
             <CHOICE>Percentage</CHOICE>
             <CHOICE>String</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="Undertekst" Title="Undertekst" Type="Text" Group="{resource:SiteFields_Group}" ID="{fca6d80c-225a-4bb0-a0b6-f4c004f8151c}" StaticName="GtChrSubTitle" Name="GtChrSubTitle" />
-    <Field DisplayName="Bredde (320px - 479px)" Title="Bredde (320px - 479px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{69a75937-35ab-4b35-9081-c8f841460d44}" StaticName="GtChrWidthSm" Name="GtChrWidthSm">
+    <Field DisplayName="Undertekst" Title="Undertekst" Type="Text" Group="{resource:SiteFields_Group}" ID="{fca6d80c-225a-4bb0-a0b6-f4c004f8151c}" StaticName="{parameter:ProjectStatsFieldPrefix}SubTitle" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
+    <Field DisplayName="Bredde (320px - 479px)" Title="Bredde (320px - 479px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{69a75937-35ab-4b35-9081-c8f841460d44}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthSm" Name="{parameter:ProjectStatsFieldPrefix}WidthSm">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (480px - 639px)" Title="Bredde (480px - 639px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{d25031a3-9fbb-48b7-8c3a-554805fc4eb9}" StaticName="GtChrWidthMd" Name="GtChrWidthMd">
+    <Field DisplayName="Bredde (480px - 639px)" Title="Bredde (480px - 639px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{d25031a3-9fbb-48b7-8c3a-554805fc4eb9}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthMd" Name="{parameter:ProjectStatsFieldPrefix}WidthMd">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (640px - 1023px)" Title="Bredde (640px - 1023px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{047c422a-fdcd-407c-839f-e96d7f639082}" StaticName="GtChrWidthLg" Name="GtChrWidthLg">
+    <Field DisplayName="Bredde (640px - 1023px)" Title="Bredde (640px - 1023px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{047c422a-fdcd-407c-839f-e96d7f639082}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthLg" Name="{parameter:ProjectStatsFieldPrefix}WidthLg">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1024px - 1365px)" Title="Bredde (1024px - 1365px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{2a0d7d7e-44f4-40e5-a444-3df1e07ef71d}" StaticName="GtChrWidthXl" Name="GtChrWidthXl">
+    <Field DisplayName="Bredde (1024px - 1365px)" Title="Bredde (1024px - 1365px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{2a0d7d7e-44f4-40e5-a444-3df1e07ef71d}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthXl" Name="{parameter:ProjectStatsFieldPrefix}WidthXl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1366px - 1919px)" Title="Bredde (1366px - 1919px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{af569b60-0010-4108-9c92-cb03a90b7498}" StaticName="GtChrWidthXxl" Name="GtChrWidthXxl">
+    <Field DisplayName="Bredde (1366px - 1919px)" Title="Bredde (1366px - 1919px)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{af569b60-0010-4108-9c92-cb03a90b7498}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthXxl" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Bredde (1920px og oppover)" Title="Bredde (1920px og oppover)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{41d29afe-b026-4417-9166-3e22dda59d78}" StaticName="GtChrWidthXxxl" Name="GtChrWidthXxxl">
+    <Field DisplayName="Bredde (1920px og oppover)" Title="Bredde (1920px og oppover)" Type="Number" Min="1" Max="12" Decimals="0" Group="{resource:SiteFields_Group}" ID="{41d29afe-b026-4417-9166-3e22dda59d78}" StaticName="{parameter:ProjectStatsFieldPrefix}WidthXxxl" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl">
         <Default>12</Default>
     </Field>
-    <Field DisplayName="Stabling" Title="Stabling" Type="Choice" Group="{resource:SiteFields_Group}" ID="{9c6285f2-0bf6-4092-8ca6-656859d797fd}" StaticName="GtChrStacking" Name="GtChrStacking">
+    <Field DisplayName="Stabling" Title="Stabling" Type="Choice" Group="{resource:SiteFields_Group}" ID="{9c6285f2-0bf6-4092-8ca6-656859d797fd}" StaticName="{parameter:ProjectStatsFieldPrefix}Stacking" Name="{parameter:ProjectStatsFieldPrefix}Stacking">
         <CHOICES>
             <CHOICE>normal</CHOICE>
             <CHOICE>percent</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="Tittel (Y-akse)" Title="Tittel (Y-akse)" Type="Text" Group="{resource:SiteFields_Group}" ID="{c990240d-4c3b-4dfe-8abb-b6119b4b9856}" StaticName="GtChrYAxisTitle" Name="GtChrYAxisTitle" />
-    <Field DisplayName="Verdisuffiks" Title="Verdisuffiks" Type="Text" Group="{resource:SiteFields_Group}" ID="{5b12b6c1-2db4-4280-a52f-d11f62068162}" StaticName="GtChrValueSuffix" Name="GtChrValueSuffix" />
-    <Field Type="LookupMulti" Group="{resource:SiteFields_Group}" DisplayName="Felter" Title="Felter" List="{listid:Statistikkfelter}" ShowField="Title" Mult="TRUE" ID="{75f699b2-7ec6-4442-956d-7b35f409b521}" StaticName="GtChrFields" Name="GtChrFields" />
-    <Field DisplayName="Vis merkelapp" Title="Vis merkelapp" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{f6c928f6-4b57-478c-866d-42d5f2874d57}" StaticName="GtChrShowLegend" Name="GtChrShowLegend">
+    <Field DisplayName="Tittel (Y-akse)" Title="Tittel (Y-akse)" Type="Text" Group="{resource:SiteFields_Group}" ID="{c990240d-4c3b-4dfe-8abb-b6119b4b9856}" StaticName="{parameter:ProjectStatsFieldPrefix}YAxisTitle" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
+    <Field DisplayName="Verdisuffiks" Title="Verdisuffiks" Type="Text" Group="{resource:SiteFields_Group}" ID="{5b12b6c1-2db4-4280-a52f-d11f62068162}" StaticName="{parameter:ProjectStatsFieldPrefix}ValueSuffix" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
+    <Field Type="LookupMulti" Group="{resource:SiteFields_Group}" DisplayName="Felter" Title="Felter" List="{listid:Statistikkfelter}" ShowField="Title" Mult="TRUE" ID="{75f699b2-7ec6-4442-956d-7b35f409b521}" StaticName="{parameter:ProjectStatsFieldPrefix}Fields" Name="{parameter:ProjectStatsFieldPrefix}Fields" />
+    <Field DisplayName="Vis merkelapp" Title="Vis merkelapp" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{f6c928f6-4b57-478c-866d-42d5f2874d57}" StaticName="{parameter:ProjectStatsFieldPrefix}ShowLegend" Name="{parameter:ProjectStatsFieldPrefix}ShowLegend">
         <Default>0</Default>
     </Field>
-    <Field DisplayName="Vis gjennomsnitt" Title="Vis gjennomsnitt" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{f5e3aede-8d38-4608-88fd-655908778bee}" StaticName="GtChrShowAverage" Name="GtChrShowAverage">
+    <Field DisplayName="Vis gjennomsnitt" Title="Vis gjennomsnitt" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{f5e3aede-8d38-4608-88fd-655908778bee}" StaticName="{parameter:ProjectStatsFieldPrefix}ShowAverage" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage">
         <Default>1</Default>
     </Field>
-    <Field DisplayName="Margin topp" Percentage="FALSE" Title="Margin topp" Type="Number" Group="{resource:SiteFields_Group}" ID="{77ab03d9-6310-41e4-ba20-613f956ad954}" StaticName="GtChrMarginTop" Name="GtChrMarginTop">
+    <Field DisplayName="Margin topp" Percentage="FALSE" Title="Margin topp" Type="Number" Group="{resource:SiteFields_Group}" ID="{77ab03d9-6310-41e4-ba20-613f956ad954}" StaticName="{parameter:ProjectStatsFieldPrefix}MarginTop" Name="{parameter:ProjectStatsFieldPrefix}MarginTop">
         <Default>75</Default>
     </Field>
-    <Field DisplayName="Vis elementvelger" Title="Vis elementvelger" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{762a2801-2882-40f1-8fa1-a6604ef2808f}" StaticName="GtChrShowItemSelector" Name="GtChrShowItemSelector">
+    <Field DisplayName="Vis elementvelger" Title="Vis elementvelger" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{762a2801-2882-40f1-8fa1-a6604ef2808f}" StaticName="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector">
         <Default>0</Default>
     </Field>
-    <Field Decimals="0" DisplayName="Rekkefølge" Percentage="FALSE" Title="Rekkefølge" Type="Number" Group="{resource:SiteFields_Group}" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="GtChrOrder" Name="GtChrOrder">
+    <Field Decimals="0" DisplayName="Rekkefølge" Percentage="FALSE" Title="Rekkefølge" Type="Number" Group="{resource:SiteFields_Group}" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="{parameter:ProjectStatsFieldPrefix}Order" Name="{parameter:ProjectStatsFieldPrefix}Order">
         <Default>100</Default>
     </Field>
-    <Field DisplayName="Min (Y-akse)" Percentage="FALSE" Title="Min (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="GtChrYMin" Name="GtChrYMin" />
-    <Field DisplayName="Max (Y-akse)" Percentage="FALSE" Title="Max (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="GtChrYMax" Name="GtChrYMax" />
-    <Field DisplayName="Intervall (Y-akse)" Percentage="FALSE" Title="Intervall (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{60dac89b-70f5-4a49-87a9-b253bd5df7ca}" StaticName="GtChrYTickInterval" Name="GtChrYTickInterval" />
+    <Field DisplayName="Min (Y-akse)" Percentage="FALSE" Title="Min (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="{parameter:ProjectStatsFieldPrefix}YMin" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
+    <Field DisplayName="Max (Y-akse)" Percentage="FALSE" Title="Max (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="{parameter:ProjectStatsFieldPrefix}YMax" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
+    <Field DisplayName="Intervall (Y-akse)" Percentage="FALSE" Title="Intervall (Y-akse)" Type="Number" Group="{resource:SiteFields_Group}" ID="{60dac89b-70f5-4a49-87a9-b253bd5df7ca}" StaticName="{parameter:ProjectStatsFieldPrefix}YTickInterval" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
 </pnp:SiteFields>
