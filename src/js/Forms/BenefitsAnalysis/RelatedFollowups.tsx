@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import * as React from "react";
 import * as Util from "../../Util";
 import { ChromeTitle, ModalLink } from "../../WebParts/@Components";

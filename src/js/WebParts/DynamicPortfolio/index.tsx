@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import { IGroup, DetailsList } from "office-ui-fabric-react/lib/DetailsList";

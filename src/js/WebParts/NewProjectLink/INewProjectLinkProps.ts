@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { ISecuredWebPartProps } from "../@SecuredWebPart";
 
 export default interface INewProjectLinkProps extends ISecuredWebPartProps {

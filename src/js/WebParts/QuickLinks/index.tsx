@@ -1,6 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";

@@ -1,5 +1,5 @@
 //#region Imports
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import * as React from "react";
 import pnp, { List } from "sp-pnp-js";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";

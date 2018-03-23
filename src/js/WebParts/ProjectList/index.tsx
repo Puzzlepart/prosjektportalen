@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { Site, Logger, LogLevel } from "sp-pnp-js";
 import Masonry from "react-masonry-component";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";

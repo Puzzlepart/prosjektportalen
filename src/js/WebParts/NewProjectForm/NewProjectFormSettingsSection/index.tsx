@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import INewProjectFormSettingsSectionProps from "./INewProjectFormSettingsSectionProps";
 import INewProjectFormSettingsSectionState from "./INewProjectFormSettingsSectionState";
 import ToggleSection from "./ToggleSection";

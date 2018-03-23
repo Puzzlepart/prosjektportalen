@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../@localization";
+import RESOURCE_MANAGER from "../Resources";
 import { Site, List, LogLevel, LogEntry } from "sp-pnp-js";
 
 export interface ISpListLoggerEntry extends LogEntry {

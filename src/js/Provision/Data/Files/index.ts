@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import { Web, Folder, FileAddResult, Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import IFile from "./IFile";
