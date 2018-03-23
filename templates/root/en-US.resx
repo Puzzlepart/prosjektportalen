@@ -1929,6 +1929,9 @@
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Save changes</value>
   </data>
+  <data name="String_ChangesWasSaved" xml:space="preserve">
+    <value>Your changes was saved successfully</value>
+  </data>
   <data name="String_Approved" xml:space="preserve">
     <value>Approved</value>
   </data>

@@ -1929,6 +1929,9 @@
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Lagre endringer</value>
   </data>
+  <data name="String_ChangesWasSaved" xml:space="preserve">
+    <value>Endringene dine ble lagret</value>
+  </data>
   <data name="String_Approved" xml:space="preserve">
     <value>Godkjent</value>
   </data>

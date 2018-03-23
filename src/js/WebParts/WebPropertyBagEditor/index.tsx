@@ -1,6 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
-import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
@@ -32,57 +32,55 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
         this.setState({ settings, options, isLoading: false });
     }
 
-    public render() {
+    public render(): React.ReactElement<IWebPropertyBagEditorProps> {
         if (this.state.isLoading) {
             return <Spinner size={SpinnerSize.large} />;
         }
-        const settingsKeys = Object.keys(this.state.settings);
-        if (settingsKeys.length === 0) {
+        if (Object.keys(this.state.settings).length === 0) {
             return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("WebPropertyBagEditor_NoSettings")}</MessageBar>;
         }
+        const items = Object.keys(this.state.settings).map(key => ({
+            key,
+            value: this.state.settings[key],
+            options: this.state.options[key],
+        }));
         return (
             <div>
                 <DetailsList
-                    items={settingsKeys.map(key => ({
-                        key,
-                        value: this.state.settings[key],
-                        options: this.state.options[key],
-                    }))}
-                    columns={[
-                        {
-                            key: "key",
-                            fieldName: "key",
-                            name: RESOURCE_MANAGER.getResource("SiteFields_GtKey_DisplayName"),
-                            minWidth: 150,
-                            maxWidth: 200,
-                        },
-                        {
-                            key: "value",
-                            fieldName: "value",
-                            name: RESOURCE_MANAGER.getResource("SiteFields_GtValue_DisplayName"),
-                            minWidth: 100,
-                            maxWidth: 300,
-                        },
-                    ]}
-                    onRenderItemColumn={(item, index, column) => this._onRenderItemColumn(item, index, column)}
+                    items={items}
+                    columns={this.props.columns}
+                    onRenderItemColumn={this._onRenderItemColumn}
                     constrainMode={ConstrainMode.horizontalConstrained}
                     layoutMode={DetailsListLayoutMode.justified}
                     selectionMode={SelectionMode.none} />
-                <div style={{ width: 200 }}>
+                <div style={{ width: 400, marginTop: 20 }}>
                     {this.state.isSaving ?
                         <Spinner size={SpinnerSize.large} />
                         :
                         <PrimaryButton
                             text={RESOURCE_MANAGER.getResource("String_SaveChanges")}
                             disabled={this.state.isSaving}
-                            style={{ marginTop: 20, marginLeft: 0 }}
+                            style={{ margin: 0 }}
+                            iconProps={{ iconName: "SaveAll" }}
                             onClick={this._onSaveChanges} />}
+                    {this.state.statusMessage && (
+                        <div style={{ marginTop: 20 }}>
+                            <MessageBar messageBarType={this.state.statusMessage.messageBarType}>{this.state.statusMessage.children}</MessageBar>
+                        </div>
+                    )}
                 </div>
             </div>
         );
     }
 
-    private _onRenderItemColumn(item, index, column) {
+    /**
+     * On render item column
+     *
+     * @param {any} item Item
+     * @param {number} index index
+     * @param {IColumn} column Column
+     */
+    private _onRenderItemColumn(item, index: number, column: IColumn) {
         const colValue = item[column.fieldName];
         if (column.fieldName === "value") {
             if (item.options) {
@@ -129,9 +127,20 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
      */
     private async _onSaveChanges() {
         let { settings } = this.state;
-        this.setState({ isSaving: true });
-        await UpdateSettings(settings);
-        this.setState({ isSaving: false });
+        this.setState({ isSaving: true }, async () => {
+            await UpdateSettings(settings);
+            this.setState({
+                isSaving: false,
+                statusMessage: {
+                    messageBarType: MessageBarType.success,
+                    children: <span>{RESOURCE_MANAGER.getResource("String_ChangesWasSaved")}</span>,
+                },
+            }, () => {
+                window.setTimeout(() => {
+                    this.setState({ statusMessage: null });
+                }, 5000);
+            });
+        });
     }
 }
 
