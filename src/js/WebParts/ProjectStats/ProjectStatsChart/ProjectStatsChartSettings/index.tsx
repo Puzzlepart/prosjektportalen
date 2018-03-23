@@ -70,6 +70,17 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             });
         }
 
+        items.push({
+            key: "edit-chart",
+            name: "Rediger",
+            icon: "EditPhoto",
+            onClick: e => {
+                e.preventDefault();
+                e.stopPropagation();
+                document.location.href = chart.getEditFormUrl();
+            },
+        });
+
         return items;
     }
 

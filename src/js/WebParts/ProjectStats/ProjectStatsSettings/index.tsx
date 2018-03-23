@@ -17,7 +17,6 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
      * Renders the <ProjectStatsSettings /> component
      */
     public render(): React.ReactElement<IProjectStatsSettingsProps> {
-        console.log(this.props.contentTypes);
         return (
             <div className={`ms-Grid-col ms-sm6`}>
                 <div className="ms-Grid">
@@ -26,28 +25,27 @@ export default class ProjectStatsSettings extends React.PureComponent<IProjectSt
                             <div
                                 onClick={this._onToggle}
                                 className="ms-font-xl"
-                                style={{
-                                    cursor: "pointer",
-                                    position: "relative",
-                                }}>
+                                style={{ cursor: "pointer", position: "relative" }}>
                                 <span>Innstillinger</span>
-                                <span style={{ position: "absolute", right: 25 }}><Icon iconName={this.state.isExpanded ? "ChevronDown" : "ChevronUp"} /></span>
+                                <span style={{ position: "absolute", right: 25 }}>
+                                    <Icon iconName={this.state.isExpanded ? "ChevronDown" : "ChevronUp"} />
+                                </span>
                             </div>
                         </div>
-                        {this.state.isExpanded && (
-                            <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }}>
-                                {this.props.contentTypes.map(contentType => (
-                                    <DefaultButton
-                                        text={contentType.Description}
-                                        onClick={e => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            document.location.href = this._getContentTypeNewFormUrl(contentType);
-                                        }}
-                                    />
-                                ))}
-                            </div>
-                        )}
+                        <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }} hidden={!this.state.isExpanded}>
+                            {this.props.contentTypes.map((contentType) => (
+                                <DefaultButton
+                                    key={contentType.StringId}
+                                    text={contentType.Description}
+                                    onClick={e => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        document.location.href = this._getContentTypeNewFormUrl(contentType);
+                                    }}
+                                    style={{ margin: "0 5px 0 0" }}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import { List, LogLevel, Logger } from "sp-pnp-js";
 import { ProjectStatsChartData } from "./ProjectStatsChart";
-import StatsField from "./StatsField";
+import StatsFieldConfiguration from "./StatsFieldConfiguration";
+import Preferences from "../../Preferences";
 import * as strings from "./strings";
 
 const LOG_TEMPLATE = "(ChartConfiguration) {0}: {1} ({2})";
@@ -24,8 +25,10 @@ export default class ChartConfiguration {
     public showAverage: boolean;
     public showItemSelector: boolean;
     public marginTop: number;
+    private _fieldPrefix: string;
     private _pnpList: List;
-    private _statsFields: StatsField[];
+    private _contentTypes: any[];
+    private _statsFields: StatsFieldConfiguration[];
     private _data: ProjectStatsChartData;
     private _widthFields = {
         sm: "WidthSm",
@@ -41,32 +44,33 @@ export default class ChartConfiguration {
      * Constructor
      *
      * @param {any} spItem SharePoint item
-     * @param {string} fieldPrefix Field prefix
-     * @param {string} baseContentTypeId Base content type id
      * @param {List} pnpList PnP list
+     * @param {any[]} contentTypes Content types
      */
-    constructor(spItem, fieldPrefix: string, baseContentTypeId: string, pnpList: List) {
+    constructor(spItem, pnpList: List, contentTypes) {
+        this._fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
         this._pnpList = pnpList;
+        this._contentTypes = contentTypes;
         this.contentTypeId = spItem.ContentTypeId;
         this.id = spItem.ID;
         this.title = spItem.Title;
-        this.order = spItem[`${fieldPrefix}Order`];
-        this.subTitle = spItem[`${fieldPrefix}SubTitle`];
+        this.order = spItem[`${this._fieldPrefix}Order`];
+        this.subTitle = spItem[`${this._fieldPrefix}SubTitle`];
         this.width = Object.keys(this._widthFields).reduce((obj, key) => {
-            obj[key] = spItem[`${fieldPrefix}${this._widthFields[key]}`];
+            obj[key] = spItem[`${this._fieldPrefix}${this._widthFields[key]}`];
             return obj;
         }, {});
-        this.stacking = spItem[`${fieldPrefix}Stacking`];
-        this.yAxisTitle = spItem[`${fieldPrefix}YAxisTitle`];
-        this.yAxisMin = spItem[`${fieldPrefix}YMin`];
-        this.yAxisMax = spItem[`${fieldPrefix}YMax`];
-        this.yAxisTickInterval = spItem[`${fieldPrefix}YTickInterval`];
-        this.valueSuffix = spItem[`${fieldPrefix}ValueSuffix`];
-        this.showLegend = spItem[`${fieldPrefix}ShowLegend`];
-        this.showAverage = spItem[`${fieldPrefix}ShowAverage`];
-        this.showItemSelector = spItem[`${fieldPrefix}ShowItemSelector`];
-        this.marginTop = spItem[`${fieldPrefix}MarginTop`];
-        this._setChartTypeFromContentType(baseContentTypeId);
+        this.stacking = spItem[`${this._fieldPrefix}Stacking`];
+        this.yAxisTitle = spItem[`${this._fieldPrefix}YAxisTitle`];
+        this.yAxisMin = spItem[`${this._fieldPrefix}YMin`];
+        this.yAxisMax = spItem[`${this._fieldPrefix}YMax`];
+        this.yAxisTickInterval = spItem[`${this._fieldPrefix}YTickInterval`];
+        this.valueSuffix = spItem[`${this._fieldPrefix}ValueSuffix`];
+        this.showLegend = spItem[`${this._fieldPrefix}ShowLegend`];
+        this.showAverage = spItem[`${this._fieldPrefix}ShowAverage`];
+        this.showItemSelector = spItem[`${this._fieldPrefix}ShowItemSelector`];
+        this.marginTop = spItem[`${this._fieldPrefix}MarginTop`];
+        this._setChartTypeFromContentType();
     }
 
     /**
@@ -84,12 +88,12 @@ export default class ChartConfiguration {
     }
 
     /**
-     * Set data/fields
+     * Initialize or update ChartConfiguration with data/fields
      *
      * @param {ProjectStatsChartData} data Data
-     * @param {StatsField[]} statsFields Stats fields
+     * @param {StatsFieldConfiguration[]} statsFields Stats fields
      */
-    public set(data: ProjectStatsChartData, statsFields?: StatsField[]): ChartConfiguration {
+    public initOrUpdate(data: ProjectStatsChartData, statsFields?: StatsFieldConfiguration[]): ChartConfiguration {
         this._data = data;
         if (statsFields) {
             this._statsFields = statsFields;
@@ -109,10 +113,10 @@ export default class ChartConfiguration {
             level: LogLevel.Info,
         });
         this.width[breakpoint] = width;
-        const widthField = this._widthFields[breakpoint];
+        const widthField = `${this._fieldPrefix}${this._widthFields[breakpoint]}`;
         let updateValues: any = {};
         updateValues[widthField] = width;
-        await this._updateItem(updateValues);
+        this._updateItem(updateValues);
         return this;
     }
 
@@ -165,6 +169,14 @@ export default class ChartConfiguration {
             }
         }
         return chartConfig;
+    }
+
+    /**
+     * Get edit form url
+     */
+    public getEditFormUrl(): string {
+        let [contentType] = this._contentTypes.filter(ct => ct.StringId.indexOf(this.contentTypeId) !== -1);
+        return `${contentType.EditFormUrl}?Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
     }
 
     /**
@@ -295,15 +307,19 @@ export default class ChartConfiguration {
      * @param {any} updateValues Update values
      */
     private async _updateItem(updateValues) {
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "_updateItem", `Updating item with ID ${this.id}.`, this.title),
+            data: updateValues,
+            level: LogLevel.Info,
+        });
         await this._pnpList.items.getById(this.id).update(updateValues);
     }
 
     /**
      * Get chart type from content type id
-     *
-     * @param {string} baseContentTypeId Base content type id
      */
-    private _setChartTypeFromContentType(baseContentTypeId: string) {
+    private _setChartTypeFromContentType() {
+        const baseContentTypeId = Preferences.getParameter("ChartsConfigContentTypeBase");
         this.typeIndex = parseInt(this.contentTypeId.replace(baseContentTypeId, "").substring(0, 2), 10) - 1;
         this.type = this._supportedChartTypes[this.typeIndex];
         Logger.log({

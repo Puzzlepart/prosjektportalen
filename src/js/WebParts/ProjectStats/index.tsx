@@ -9,11 +9,13 @@ import IProjectStatsProps, { ProjectStatsDefaultProps } from "./IProjectStatsPro
 import IProjectStatsState from "./IProjectStatsState";
 import Project from "./Project";
 import ChartConfiguration from "./ChartConfiguration";
-import StatsField from "./StatsField";
+import StatsFieldConfiguration from "./StatsFieldConfiguration";
+import { IContentType } from "../../Model";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import ProjectStatsSettings from "./ProjectStatsSettings";
 import BaseWebPart from "../@BaseWebPart";
+import Preferences from "../../Preferences";
 import * as strings from "./strings";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
@@ -39,7 +41,6 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public async componentDidMount() {
         try {
             const config = await this._fetchData();
-
             Logger.log({
                 message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`),
                 level: LogLevel.Info,
@@ -61,16 +62,13 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     /**
      * Renders the <ProjectStats /> component
      */
-    public render(): JSX.Element {
-        const { isLoading, errorMessage, charts, data } = this.state;
+    public render(): React.ReactElement<IProjectStatsProps> {
+        const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
             return <Spinner label={strings.PROJECTSTATS_LOADING_TEXT} type={SpinnerType.large} />;
         }
         if (errorMessage) {
             return <MessageBar messageBarType={MessageBarType.error}>{strings.PROJECTSTATS_ERROR_TEXT}</MessageBar>;
-        }
-        if (charts.length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_CHARTS_TEXT}</MessageBar>;
         }
         Logger.log({
             message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."),
@@ -88,14 +86,26 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                     <ProjectStatsSettings contentTypes={this.state.contentTypes} />
                 </div>
                 <div className="ms-Grid-row">
-                    {data.getCount() === 0
-                        ? <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_DATA_TEXT}</MessageBar>
-                        : charts
-                            .sort((a, b) => a.order - b.order)
-                            .map((c, i) => <ProjectStatsChart key={i} chart={c} />)}
+                    {this._renderInner()}
                 </div>
             </div>
         );
+    }
+
+    /**
+     * Render inner
+     */
+    private _renderInner() {
+        const { charts, data } = this.state;
+        if (charts.length === 0) {
+            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_CHARTS_TEXT}</MessageBar>;
+        }
+        if (data.getCount() === 0) {
+            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_DATA_TEXT}</MessageBar>;
+        }
+        return charts
+            .sort((a, b) => a.order - b.order)
+            .map((c, i) => <ProjectStatsChart key={i} chart={c} />);
     }
 
     /**
@@ -107,7 +117,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             level: LogLevel.Info,
         });
         this.setState({
-            charts: this.state.charts.map(c => c.set(data)),
+            charts: this.state.charts.map(c => c.initOrUpdate(data)),
         });
     }
 
@@ -127,7 +137,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                     isLoading: false,
                     selectedView: view,
                     data,
-                    charts: this.state.charts.map(c => c.set(data)),
+                    charts: this.state.charts.map(c => c.initOrUpdate(data)),
                 });
             } catch (errorMessage) {
                 Logger.log({
@@ -142,36 +152,28 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
 
     /**
      * Fetch data
+     *
+     * @param {IDynamicPortfolioViewConfig} view View
      */
     private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
+        const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
         const {
             statsFieldsListName,
             chartsConfigListName,
-            fieldsPrefix,
-            chartConfigurationBaseContentTypeId,
-            statsFieldsContentTypeId,
         } = this.props;
         const statsFieldsList = sp.web.lists.getByTitle(statsFieldsListName);
         const chartsConfigList = sp.web.lists.getByTitle(chartsConfigListName);
         try {
-            let [{ views }, fieldsSpItems, chartsSpItems, contentTypes] = await Promise.all([
+            const batch = sp.createBatch();
+            const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", `${fieldsPrefix}ManagedPropertyName`, `${fieldsPrefix}DataType`).get(),
-                chartsConfigList.items.get(),
-                sp.web.contentTypes.usingCaching().get(),
+                statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().inBatch(batch).get(),
+                chartsConfigList.items.usingCaching().inBatch(batch).get(),
+                chartsConfigList.contentTypes.usingCaching().inBatch(batch).get(),
+                statsFieldsList.contentTypes.usingCaching().inBatch(batch).get(),
+                batch.execute(),
             ]);
-            contentTypes = contentTypes.filter(ct => {
-                if (ct.StringId === statsFieldsContentTypeId) {
-                    return true;
-                }
-                if (ct.StringId.indexOf(chartConfigurationBaseContentTypeId) === -1) {
-                    return false;
-                }
-                if (ct.StringId.length <= chartConfigurationBaseContentTypeId.length) {
-                    return false;
-                }
-                return true;
-            });
+            const contentTypes: IContentType[] = [...chartsConfigListContentTypes, ...statsFieldsListContenTypes];
             if (!view) {
                 [view] = views.filter(v => v.default);
                 if (!view) {
@@ -188,7 +190,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 level: LogLevel.Info,
             });
 
-            const fields = fieldsSpItems.map(i => new StatsField(i.ID, i.Title, i[`${fieldsPrefix}ManagedPropertyName`], i[`${fieldsPrefix}DataType`]));
+            const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`${fieldPrefix}ManagedPropertyName`], i[`${fieldPrefix}DataType`]));
             const response = await sp.search({
                 Querytext: "*",
                 QueryTemplate: view.queryTemplate,
@@ -201,8 +203,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
-                const chartFields = fields.filter(f => spItem[`${fieldsPrefix}FieldsId`].results.indexOf(f.id) !== -1);
-                return new ChartConfiguration(spItem, fieldsPrefix, chartConfigurationBaseContentTypeId, chartsConfigList).set(data, chartFields);
+                const chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
+                return new ChartConfiguration(spItem, chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
             const config: Partial<IProjectStatsState> = {
                 charts,
