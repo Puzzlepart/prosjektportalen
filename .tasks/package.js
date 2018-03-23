@@ -33,5 +33,5 @@ gulp.task("packageCodeMinify", ["buildLib"], done => {
 });
 
 gulp.task("packageProd", done => {
-    runSequence("buildJsonResources", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done);
+    runSequence("buildJsonResources", "buildJsonPreferences", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done);
 });
