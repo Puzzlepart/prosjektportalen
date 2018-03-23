@@ -1,6 +1,6 @@
 {
   "name": "prosjektportalen",
-  "version": "2.1.70",
+  "version": "2.1.71",
   "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
   "main": "lib/index.js",
   "scripts": {
