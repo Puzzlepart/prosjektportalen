@@ -1,6 +1,6 @@
 import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
 import { initializeIcons } from "@uifabric/icons";
-import { GetSettings, GetSetting } from "./Settings";
+import { GetSettings } from "./Settings";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
