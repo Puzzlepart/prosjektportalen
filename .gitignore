@@ -8,4 +8,5 @@ _templates/
 src/css/conf/Default.spcolor.styl
 src/css/conf/Project.spcolor.styl
 npm-debug.log
-src/js/Resources/
+src/js/Resources/*.json
+src/js/Preferences/Preferences.json

@@ -1,5 +1,5 @@
 
-import RESOURCE_MANAGER from "../../../../../@localization";
+import RESOURCE_MANAGER from "../../../../../Resources";
 import * as React from "react";
 import { ActionButton, IButtonProps } from "office-ui-fabric-react/lib/Button";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";

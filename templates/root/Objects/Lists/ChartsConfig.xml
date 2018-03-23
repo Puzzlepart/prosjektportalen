@@ -1,0 +1,32 @@
+<pnp:ListInstance Title="{resource:Lists_ChartsConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="/sites/pp-70/Lists/Charts/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="GtChrOrder" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="GtChrOrder" />
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="GtChrSubTitle" />
+                <FieldRef Name="GtChrWidthSm" />
+                <FieldRef Name="GtChrWidthMd" />
+                <FieldRef Name="GtChrWidthLg" />
+                <FieldRef Name="GtChrWidthXl" />
+                <FieldRef Name="GtChrWidthXxl" />
+                <FieldRef Name="GtChrWidthXxxl" />
+                <FieldRef Name="GtChrMarginTop" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <Aggregations Value="Off" />
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+</pnp:ListInstance>

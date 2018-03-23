@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 
 const ApplyTemplateProgressMap = {
     Files: RESOURCE_MANAGER.getResource("ProvisionWeb_Progress_Handler_Files"),

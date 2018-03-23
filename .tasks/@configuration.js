@@ -31,6 +31,7 @@ module.exports = {
         theme: "./templates/root/Theme/Project.spcolor",
         resxJson: "./src/js/**/*.json",
         resx: "./templates/root/*.resx",
+        preferences: "./templates/root/Preferences.xml"
     },
     assets: {
         fileTypes: ["png", "md"],

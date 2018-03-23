@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import { Schema } from "sp-pnp-provisioning/lib/schema";
 import { WebSettings, ComposedLook } from "../Objects";
 import SitePages from "../Objects/Lists/SitePages";

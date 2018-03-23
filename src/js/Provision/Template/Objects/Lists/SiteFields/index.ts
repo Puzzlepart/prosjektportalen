@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../../@localization";
+import RESOURCE_MANAGER from "../../../../../Resources";
 
 export const GtCommunicationTarget = `<Field Type="LookupMulti" DisplayName="${RESOURCE_MANAGER.getResource("SiteFields_GtCommunicationTarget_DisplayName")}" List="{listid:${RESOURCE_MANAGER.getResource("Lists_Stakeholders_Title")}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" StaticName="GtCommunicationTarget" Name="GtCommunicationTarget" Mult="TRUE" />`;
 export const GtProjectLogEventLookup = `<Field Type="Lookup" DisplayName="${RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogEventLookup_DisplayName")}" List="{listid:${RESOURCE_MANAGER.getResource("Lists_MeetingCalendar_Title")}}" ShowField="GtProjectEventDateAndTitle" ID="{20731fb1-e98e-4fdc-b3d6-941b41b8fd6e}" StaticName="GtProjectLogEventLookup" Name="GtProjectLogEventLookup" />`;

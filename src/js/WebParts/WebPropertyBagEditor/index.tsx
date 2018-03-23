@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import { IFile } from "sp-pnp-provisioning/lib/schema";
 
 const Nofilter: IFile = {

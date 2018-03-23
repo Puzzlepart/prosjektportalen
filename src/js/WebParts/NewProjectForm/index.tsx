@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import * as delay from "delay";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
