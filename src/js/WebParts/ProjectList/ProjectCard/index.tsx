@@ -15,48 +15,34 @@ import IProjectCardProps from "./IProjectCardProps";
 
 /**
  * Project Card
- * If no logo is set, it most likely means the project item is from ppv1. In that case we're rendering a history logo.
  *
- * @param {IProjectCardProps} param0 Props
+ * @param {IProjectCardProps} props Props
  */
-const ProjectCard = ({ project, fields, className, tileWidth, tileImageHeight, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
+const ProjectCard = (props: IProjectCardProps): JSX.Element => {
+    const fallbackIconProps = { iconName: "History", styles: { root: { fontSize: 50, color: "rgb(51, 51, 51)", opacity: 0.5 } } };
+    const previewImage = {
+        previewImageSrc: props.project.Logo,
+        previewIconProps: props.project.Logo ? null : fallbackIconProps,
+        imageFit: ImageFit.cover,
+        accentColor: Util.stringToColour(props.project.Phase),
+        width: props.tileWidth,
+        height: props.tileImageHeight,
+    };
     return (
         <DocumentCard
-            className={className}
+            className={props.className}
             type={DocumentCardType.normal}
-            onClickHref={onClickHref}
-        >
-            <DocumentCardPreview previewImages={[
-                {
-                    previewImageSrc: project.Logo,
-                    previewIconProps: project.Logo ? null : { iconName: "History",  styles: { root: {fontSize: 50, color: "rgb(51, 51, 51)", opacity: 0.5}}},
-                    imageFit: ImageFit.cover,
-                    accentColor: Util.stringToColour(project.Phase),
-                    width: tileWidth,
-                    height: tileImageHeight,
-                },
-            ]} />
-            <DocumentCardTitle
-                title={project.Title}
-                shouldTruncate={true} />
-            <DocumentCardLocation location={project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
+            onClickHref={props.onClickHref} >
+            <DocumentCardPreview previewImages={[previewImage]} />
+            <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
+            <DocumentCardLocation location={props.project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
             <DocumentCardActivity
-                activity={fields["GtProjectOwner"]}
-                people={[
-                    {
-                        name: project.getOwnerDetails().Name,
-                        profileImageSrc: project.getOwnerDetails().Photo,
-                    },
-                ]}
+                activity={props.fields["GtProjectOwner"]}
+                people={[props.project.getOwner()]}
             />
             <DocumentCardActivity
-                activity={fields["GtProjectManager"]}
-                people={[
-                    {
-                        name: project.getManagerDetails().Name,
-                        profileImageSrc: project.getManagerDetails().Photo,
-                    },
-                ]}
+                activity={props.fields["GtProjectManager"]}
+                people={[props.project.getManager()]}
             />
             <DocumentCardActions
                 actions={
@@ -65,11 +51,11 @@ const ProjectCard = ({ project, fields, className, tileWidth, tileImageHeight, o
                         onClick: e => {
                             e.preventDefault();
                             e.stopPropagation();
-                            showProjectInfo(e);
+                            props.showProjectInfo(e);
                         },
                     },
                     ]}
-                views={project.Views}
+                views={props.project.Views}
             />
         </DocumentCard>
     );
