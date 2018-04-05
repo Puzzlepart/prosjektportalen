@@ -2,9 +2,9 @@ import RESOURCE_MANAGER from "../../Resources";
 import * as Util from "../../Util";
 
 export interface IUserDetails {
-    Name: string;
-    EMail: string;
-    Photo: string;
+    name: string;
+    email: string;
+    profileImageSrc: string;
 }
 
 export default class ProjectListModel {
@@ -44,28 +44,26 @@ export default class ProjectListModel {
     * Get manager (GtProjectManagerOWSUSER) details
     */
     public getManagerDetails(): IUserDetails {
-        let EMail = "";
-        let Name = RESOURCE_MANAGER.getResource("String_NotSet");
+        let email = "";
+        let name = RESOURCE_MANAGER.getResource("String_NotSet");
         if (this.Manager) {
-            const managerSplit = this.Manager.split(" | ");
-            EMail = managerSplit[0], Name = managerSplit[1];
+            [email, name] = this.Manager.split(" | ");
         }
-        const Photo = Util.userPhoto(EMail);
-        return { Name, EMail, Photo };
+        const profileImageSrc = Util.userPhoto(email);
+        return { name, email, profileImageSrc };
     }
 
     /**
      * Get owner (GtProjectOwnerOWSUSER) details
      */
     public getOwnerDetails(): IUserDetails {
-        let EMail = "";
-        let Name = RESOURCE_MANAGER.getResource("String_NotSet");
+        let email = "";
+        let name = RESOURCE_MANAGER.getResource("String_NotSet");
         if (this.Owner) {
-            const ownerSplit = this.Owner.split(" | ");
-            EMail = ownerSplit[0], Name = ownerSplit[1];
+            [email, name] = this.Owner.split(" | ");
         }
-        const Photo = Util.userPhoto(EMail);
-        return { Name, EMail, Photo };
+        const profileImageSrc = Util.userPhoto(email);
+        return { name, email, profileImageSrc };
     }
 
     /**
