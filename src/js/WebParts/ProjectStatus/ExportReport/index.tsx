@@ -108,10 +108,11 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             case ExportReportStatus.IDLE: {
                 return (
                     <PrimaryButton
+                        id="pp-saveSnapshotBtn"
                         text={exportTypeContext.SAVE}
                         className="save-snapshot-btn"
                         iconProps={{ iconName: exportTypeContext.SAVE_ICON_NAME }}
-                        onClick={this._onExportClick} />
+                        onClick={(e) => {this._onExportClick(e); }} />
                 );
             }
         }
@@ -194,7 +195,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * On export click
      */
-    private async _onExportClick(): Promise<void> {
+    private async _onExportClick(e): Promise<void> {
+        e.preventDefault();
         this.startExport();
     }
 
