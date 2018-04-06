@@ -3,6 +3,7 @@ import RESOURCE_MANAGER from "../../../Resources";
 import pnp, { List, Logger, LogLevel } from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
+import * as sanitize from "sanitize-filename";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -265,7 +266,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveReportToLibrary(reportBlob: Blob, fileExtension: string): Promise<IReport> {
         const dtFormatted = moment(new Date()).format("YYYY-MM-D-HHmm");
-        const fileName = `${dtFormatted}-${_spPageContextInfo.webTitle}.${fileExtension}`;
+        const fileName = `${dtFormatted}-${sanitize(_spPageContextInfo.webTitle)}.${fileExtension}`;
         const fileTitle = `${dtFormatted} ${_spPageContextInfo.webTitle}`;
         const libServerRelativeUrl = `${_spPageContextInfo.webServerRelativeUrl}/${this.props.reportsLibTitle}`;
         Logger.log({ message: `(saveReportToLibrary) Saving report as ${fileExtension}`, data: { fileName, fileTitle, libServerRelativeUrl }, level: LogLevel.Info });
