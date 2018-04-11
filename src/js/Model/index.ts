@@ -2,5 +2,6 @@ import {
     ProjectModel,
     IProjectModel,
 } from "./ProjectModel";
+import IContentType from "./IContentType";
 
-export { ProjectModel, IProjectModel };
+export { ProjectModel, IProjectModel, IContentType };

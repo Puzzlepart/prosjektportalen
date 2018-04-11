@@ -1,6 +1,6 @@
 import * as React from "react";
 import pnp, { List } from "sp-pnp-js";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";

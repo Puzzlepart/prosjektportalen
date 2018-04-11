@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import IChecklistItem from "./IChecklistItem";
 import * as Util from "../../../Util";
 

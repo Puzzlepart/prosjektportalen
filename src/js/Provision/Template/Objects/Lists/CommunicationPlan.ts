@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import { GtCommunicationTarget } from "./SiteFields";
 import { IList } from "sp-pnp-provisioning/lib/schema";
 

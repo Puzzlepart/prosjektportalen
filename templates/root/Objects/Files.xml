@@ -102,6 +102,19 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
+    <!-- <pnp:File Src="SitePages\ProjectStats.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="Prosjektstatistikk" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="ProjectStats" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectStats.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
+    </pnp:File> -->
     <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectList_Title}" />
@@ -172,13 +185,6 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\LatestLogEntries.webpart" Folder="_catalogs/wp" Overwrite="false">
-        <pnp:Properties>
-            <pnp:Property Key="Title" Value="{resource:WebPart_LatestLogEntries_Title}" />
-            <pnp:Property Key="WebPartDescription" Value="" />
-            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
-        </pnp:Properties>
-    </pnp:File>
     <pnp:File Src="WebPartGallery\RiskMatrix.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_RiskMatrix_Title}" />
@@ -186,6 +192,13 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
+    <!-- <pnp:File Src="WebPartGallery\ProjectStats.webpart" Folder="_catalogs/wp" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="ProjectStats" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="UD" />
+        </pnp:Properties>
+    </pnp:File> -->
     <pnp:File Src="SiteTemplates\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="GtOrder" Value="10" />

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 
 export default interface INewProjectFormProps {

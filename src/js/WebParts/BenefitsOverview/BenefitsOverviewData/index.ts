@@ -1,5 +1,5 @@
 //#region Imports
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import pnp from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";

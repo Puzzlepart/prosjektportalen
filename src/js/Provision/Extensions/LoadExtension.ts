@@ -3,7 +3,7 @@ import Extension from "./Extension";
 import ProvisionError from "../ProvisionError";
 import SpListLogger from "../../Util/SpListLogger";
 
-const listLogger = new SpListLogger();
+const spListLogger = new SpListLogger();
 
 /**
  * Loads extension JSON
@@ -22,12 +22,13 @@ async function LoadExtension(fileInfo): Promise<Extension> {
             extension.Schema = data;
         } catch (e) {
             extension.IsValid = false;
-            listLogger.log({ Message: `Extension ${extension.Filename} is invalid.`, Source: "LoadExtension", LogLevel: LogLevel.Warning });
-            Logger.log({
+            const logElement = {
                 message: `(LoadExtension) Extensions in file '${extension.Filename}' contains invalid JSON.`,
                 data: { fileSchemaText },
                 level: LogLevel.Warning,
-            });
+            };
+            spListLogger.log({ ...logElement, source: "LoadExtension" });
+            Logger.log(logElement);
         }
         return extension;
     } catch (err) {

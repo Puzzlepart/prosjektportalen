@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../@localization";
+import RESOURCE_MANAGER from "../Resources";
 
 export const DOCUMENT_LIBRARY = RESOURCE_MANAGER.getResource("Lists_Documents_Title");
 export const FRONTPAGE_LISTS = [

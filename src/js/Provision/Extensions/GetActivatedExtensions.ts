@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import IProvisionContext from "../IProvisionContext";
 import Extension from "./Extension";
 import LoadExtension from "./LoadExtension";

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import pnp, { List } from "sp-pnp-js";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import * as Util from "../../../Util";

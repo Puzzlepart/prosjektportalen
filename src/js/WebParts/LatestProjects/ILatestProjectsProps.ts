@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface ILatestProjectsProps extends IBaseWebPartProps {

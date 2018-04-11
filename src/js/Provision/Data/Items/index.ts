@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import { Logger, LogLevel } from "sp-pnp-js";
 import ListConfig from "../Config/ListConfig";
 import IProvisionContext from "../../IProvisionContext";

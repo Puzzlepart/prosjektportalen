@@ -1,14 +1,6 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../@localization";
-import {
-    DocumentCard,
-    DocumentCardPreview,
-    DocumentCardTitle,
-    DocumentCardLocation,
-    DocumentCardActivity,
-    DocumentCardActions,
-    DocumentCardType,
-} from "office-ui-fabric-react/lib/DocumentCard";
+import RESOURCE_MANAGER from "../../../Resources";
+import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import * as Util from "../../../Util";
 import IProjectCardProps from "./IProjectCardProps";
@@ -38,12 +30,10 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
             <DocumentCardLocation location={props.project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
             <DocumentCardActivity
                 activity={props.fields["GtProjectOwner"]}
-                people={[props.project.getOwner()]}
-            />
+                people={[props.project.getOwner()]} />
             <DocumentCardActivity
                 activity={props.fields["GtProjectManager"]}
-                people={[props.project.getManager()]}
-            />
+                people={[props.project.getManager()]} />
             <DocumentCardActions
                 actions={
                     [{
