@@ -50,13 +50,14 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 ...config,
                 isLoading: false,
             });
-        } catch (errorMessage) {
+        } catch (err) {
+            console.log(err);
             Logger.log({
                 message: String.format(LOG_TEMPLATE, "componentDidMount", "Failed to fetch data."),
-                data: errorMessage,
+                data: err,
                 level: LogLevel.Error,
             });
-            this.setState({ errorMessage, isLoading: false });
+            this.setState({ errorMessage: err, isLoading: false });
         }
     }
 

@@ -125,50 +125,53 @@ export default class ChartConfiguration {
      */
     public getConfig() {
         Logger.log({
-            message: String.format(LOG_TEMPLATE, "getConfig", `Generating chart config`, this.title),
+            message: String.format(LOG_TEMPLATE, "getConfig", "Generating chart config", this.title),
             level: LogLevel.Info,
         });
-
-        let chartConfig = {
-            ...this._getBase(),
-            series: this._generateSeries(),
-        };
-        switch (this.type) {
-            case "bar": {
-                chartConfig.xAxis = this._getXAxis();
-                chartConfig.yAxis = this._getYAxis();
-                chartConfig.plotOptions = {
-                    bar: {
-                        dataLabels: { enabled: true },
-                    },
-                };
-                chartConfig.legend = this._getLegend();
-                break;
-            }
-            case "column": {
-                chartConfig.xAxis = this._getXAxis();
-                chartConfig.yAxis = this._getYAxis();
-                chartConfig.plotOptions = { series: { stacking: this.stacking } };
-                chartConfig.legend = this._getLegend();
-                break;
-            }
-            case "pie": {
-                chartConfig.plotOptions = {
-                    pie: {
-                        allowPointSelect: true,
-                        cursor: "pointer",
-                        dataLabels: {
-                            enabled: true,
-                            format: "<b>{point.name}</b>: {point.percentage: .1f} %",
-                            style: { color: "black" },
+        try {
+            let chartConfig = {
+                ...this._getBase(),
+                series: this._generateSeries(),
+            };
+            switch (this.type) {
+                case "bar": {
+                    chartConfig.xAxis = this._getXAxis();
+                    chartConfig.yAxis = this._getYAxis();
+                    chartConfig.plotOptions = {
+                        bar: {
+                            dataLabels: { enabled: true },
                         },
-                    },
-                };
-                chartConfig.tooltip = { pointFormat: "<b>{point.percentage: .1f}%</b>" };
-                break;
+                    };
+                    chartConfig.legend = this._getLegend();
+                    break;
+                }
+                case "column": {
+                    chartConfig.xAxis = this._getXAxis();
+                    chartConfig.yAxis = this._getYAxis();
+                    chartConfig.plotOptions = { series: { stacking: this.stacking } };
+                    chartConfig.legend = this._getLegend();
+                    break;
+                }
+                case "pie": {
+                    chartConfig.plotOptions = {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: "pointer",
+                            dataLabels: {
+                                enabled: true,
+                                format: "<b>{point.name}</b>: {point.percentage: .1f} %",
+                                style: { color: "black" },
+                            },
+                        },
+                    };
+                    chartConfig.tooltip = { pointFormat: "<b>{point.percentage: .1f}%</b>" };
+                    break;
+                }
             }
+            return chartConfig;
+        } catch (err) {
+            throw err;
         }
-        return chartConfig;
     }
 
     /**
@@ -200,13 +203,34 @@ export default class ChartConfiguration {
     }
 
     /**
-     * Get X axis
+     * Get X axis based on type
      */
     private _getXAxis() {
-        return {
-            categories: this._data.getNames(),
-            title: { text: null },
-        };
+        switch (this.type) {
+            case "bar": {
+                if (this._statsFields.length === 1) {
+                    const [field] = this._statsFields;
+                    switch (field.dataType) {
+                        case "string": {
+                            return {
+                                categories: this._data.getValuesUnique(field),
+                                title: { text: null },
+                            };
+                        }
+                    }
+                }
+                return {
+                    categories: this._data.getNames(),
+                    title: { text: null },
+                };
+            }
+            default: {
+                return {
+                    categories: this._data.getNames(),
+                    title: { text: null },
+                };
+            }
+        }
     }
 
     /**
@@ -249,7 +273,26 @@ export default class ChartConfiguration {
             level: LogLevel.Info,
         });
         switch (this.type) {
-            case "column": case "bar": {
+            case "column": {
+                return this._statsFields.map(sf => {
+                    return {
+                        name: sf.title,
+                        data: this._data.getValues(sf),
+                    };
+                });
+            }
+            case "bar": {
+                if (this._statsFields.length === 1) {
+                    const [field] = this._statsFields;
+                    switch (field.dataType) {
+                        case "string": {
+                            return [{
+                                name: field.title,
+                                data: this._data.getValuesUnique(field).map(value => this._data.getItemsWithStringValue(field, value).length),
+                            }];
+                        }
+                    }
+                }
                 return this._statsFields.map(sf => {
                     return {
                         name: sf.title,
