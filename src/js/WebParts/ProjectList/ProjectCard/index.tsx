@@ -30,12 +30,10 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
             <DocumentCardLocation location={props.project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
             <DocumentCardActivity
                 activity={props.fields["GtProjectOwner"]}
-                people={[props.project.getOwnerDetails()]}
-            />
+                people={[props.project.getOwner()]} />
             <DocumentCardActivity
                 activity={props.fields["GtProjectManager"]}
-                people={[props.project.getManagerDetails()]}
-            />
+                people={[props.project.getManager()]} />
             <DocumentCardActions
                 actions={
                     [{
