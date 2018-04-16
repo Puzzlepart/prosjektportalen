@@ -41,9 +41,9 @@ export default class ProjectListModel {
     }
 
     /**
-    * Get manager (GtProjectManagerOWSUSER) details
+    * Get manager (GtProjectManagerOWSUSER)
     */
-    public getManagerDetails(): IUserDetails {
+    public getManager(): IUserDetails {
         let email = "";
         let name = RESOURCE_MANAGER.getResource("String_NotSet");
         if (this.Manager) {
@@ -54,9 +54,9 @@ export default class ProjectListModel {
     }
 
     /**
-     * Get owner (GtProjectOwnerOWSUSER) details
+     * Get owner (GtProjectOwnerOWSUSER)
      */
-    public getOwnerDetails(): IUserDetails {
+    public getOwner(): IUserDetails {
         let email = "";
         let name = RESOURCE_MANAGER.getResource("String_NotSet");
         if (this.Owner) {

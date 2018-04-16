@@ -1,4 +1,5 @@
 import * as React from "react";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { GetBreakpoint } from "../../../Util";
 import { LogLevel, Logger } from "sp-pnp-js";
 import IProjectStatsChartProps from "./IProjectStatsChartProps";
@@ -45,6 +46,21 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
             data: { title: this.state.chart.title },
             level: LogLevel.Info,
         });
+
+        let config;
+        let configError;
+
+        try {
+            config = this.state.chart.getConfig();
+        } catch (err) {
+            configError = err;
+            Logger.log({
+                message: String.format(LOG_TEMPLATE, "render", "Failed to get config for chart"),
+                data: { err },
+                level: LogLevel.Error,
+            });
+        }
+
         return (
             <div className={`ms-Grid-col ${this._getLayoutClassNames()}`} style={{ marginTop: this.state.chart.marginTop }}>
                 <div className="ms-Grid">
@@ -54,9 +70,11 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
                         onWidthChanged={this._onChangeWidth} />
                     <div className="ms-Grid-row">
                         <div className="ms-Grid-col ms-sm12">
-                            <ReactHighcharts
-                                ref={ele => this._chartRef = ele}
-                                config={this.state.chart.getConfig()} />
+                            {config ? (
+                                <ReactHighcharts
+                                    ref={ele => this._chartRef = ele}
+                                    config={config} />)
+                                : <MessageBar messageBarType={MessageBarType.error}>{configError}</MessageBar>}
                         </div>
                     </div>
                 </div>
