@@ -46,7 +46,6 @@
         "react": "^15.5.4",
         "react-dom": "^15.5.4",
         "react-highcharts": "^16.0.2",
-        "react-masonry-component": "^6.0.2",
         "react-scroll": "^1.7.6",
         "react-sticky": "^6.0.1",
         "regenerator-runtime": "^0.11.1",

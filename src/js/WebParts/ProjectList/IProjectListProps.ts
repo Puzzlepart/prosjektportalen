@@ -7,7 +7,6 @@ export default interface IProjectListProps extends IBaseWebPartProps {
     tileClassName?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
-    masonryOptions?: any;
     rowLimit?: number;
     searchBoxLabelText?: string;
     loadingText?: string;
@@ -22,10 +21,6 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
     tileClassName: "pp-projectCard",
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
-    masonryOptions: {
-        transitionDuration: "slow",
-        gutter: 10,
-    },
     rowLimit: 500,
     searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
     loadingText: RESOURCE_MANAGER.getResource("ProjectList_LoadingText"),

@@ -1,7 +1,6 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
 import { Site, Logger, LogLevel } from "sp-pnp-js";
-import Masonry from "react-masonry-component";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -104,11 +103,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         });
 
         return (
-            <Masonry
-                elementType={"div"}
-                options={this.props.masonryOptions}
-                disableImagesLoaded={false}
-                updateOnEachImageLoad={false}>
+            <div className={`pp-cardContainer`}>
                 {projects.map((project, idx) => (
                     <ProjectCard
                         key={idx}
@@ -120,7 +115,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                         onClickHref={project.Url}
                         showProjectInfo={e => this.setState({ showProjectInfo: project })} />
                 ))}
-            </Masonry>
+            </div>
         );
     }
 
