@@ -230,7 +230,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         const report = await this.saveReportToLibrary(blob, this.props.exportType);
         Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
         this.setState({
-            reports: [...this.state.reports, report],
+            reports: [report, ...this.state.reports],
             exportStatus: ExportReportStatus.HAS_EXPORTED,
         });
     }
