@@ -146,7 +146,7 @@
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="Title">Målsetning</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Målsetting</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcProjectStatus">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcPortfolioPage">1</pnp:DataValue>

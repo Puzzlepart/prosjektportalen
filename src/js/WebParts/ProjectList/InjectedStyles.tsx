@@ -5,7 +5,9 @@ const InjectedStyles = ({ props }: { props: IProjectListProps }) => {
     return <style type="text/css">{`
                 .${props.tileClassName} {
                     width: ${props.tileWidth}px;
-                    margin-bottom: ${props.masonryOptions.gutter}px;
+                    margin: 0 10px 10px 0;
+                    display: inline-block;
+                    float: left;
                 }
                 .${props.tileClassName} .ms-DocumentCardLocation {
                     background-color: none;

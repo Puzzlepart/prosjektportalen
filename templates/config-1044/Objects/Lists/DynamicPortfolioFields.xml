@@ -112,7 +112,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">GtProjectGoalsOWSMTXT</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpDisplayName">Målsetning</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpDisplayName">Målsetting</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">160</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
