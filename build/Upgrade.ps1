@@ -38,8 +38,6 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip custom action removal?")]
-    [switch]$SkipCustomActionRemoval,
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
@@ -103,21 +101,19 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
-    if (-not $SkipCustomActionRemoval.IsPresent) {
-        try {
-            Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
-            Connect-SharePoint $Url       
-            Get-PnPCustomAction -Scope Site | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Site -Force }
-            Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
-            Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
-        }
-        catch {
-            Write-Host
-            Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
-        }
+
+    try {
+        Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
+        Connect-SharePoint $Url       
+        Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
+        Write-Host "DONE" -ForegroundColor Green
+        Disconnect-PnPOnline
+    }
+    catch {
+        Write-Host
+        Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
+        Write-Host $error[0] -ForegroundColor Red
+        exit 1 
     }
 
     .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging
