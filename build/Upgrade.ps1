@@ -115,6 +115,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Write-Host $error[0] -ForegroundColor Red
         exit 1 
     }
+    
 
     .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging
 
