@@ -2559,6 +2559,36 @@
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the Risks list.</value>
   </data>
+  <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
+    <value>Very high</value>
+  </data>
+  <data name="OpportunityMatrix_Header_High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="OpportunityMatrix_Header_VeryLow" xml:space="preserve">
+    <value>Very low</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Insignificant" xml:space="preserve">
+    <value>Insignificant</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Limited" xml:space="preserve">
+    <value>Limited</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Moderate" xml:space="preserve">
+    <value>Moderate</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Significant" xml:space="preserve">
+    <value>Significant</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Large" xml:space="preserve">
+    <value>Large</value>
+  </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>
   </data>
