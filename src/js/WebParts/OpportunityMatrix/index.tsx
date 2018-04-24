@@ -4,7 +4,9 @@ import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
-import OpportunityMatrixCells, { IOpportunityMatrixCell, OpportunityMatrixCellType } from "./OpportunityMatrixCells";
+import OpportunityMatrixCells from "./OpportunityMatrixCells";
+import MatrixCellType from "../../Model/MatrixCellType";
+import IMatrixCell from "../../Model/IMatrixCell";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -114,7 +116,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
                     OpportunityElements = this.getOpportunityElementsForCell(opportunityItems, cell),
                     OpportunityElementsPostAction = this.getOpportunityElementsPostActionForCell(opportunityItems, cell);
                 switch (cell.cellType) {
-                    case OpportunityMatrixCellType.Cell: {
+                    case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
                                 key={j}
@@ -122,10 +124,11 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
                                     ...OpportunityElements,
                                     ...OpportunityElementsPostAction,
                                 ]}
-                                className={cell.className} />
+                                className={cell.className}
+                                style={cell.style} />
                         );
                     }
-                    case OpportunityMatrixCellType.Header: {
+                    case MatrixCellType.Header: {
                         return (
                             <MatrixHeaderCell
                                 key={j}
@@ -148,9 +151,9 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
      * Helper function to get opportunity elements for cell post action
      *
      * @param {Array<any>} items Items
-     * @param {IOpportunityMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getOpportunityElementsPostActionForCell(items: any[], cell: IOpportunityMatrixCell) {
+    private getOpportunityElementsPostActionForCell(items: any[], cell: IMatrixCell) {
         if (this.state.postAction) {
             const itemsForCell = items.filter(opportunity => cell.probability === parseInt(opportunity.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(opportunity.GtRiskConsequencePostAction, 10));
             return itemsForCell.map((opportunity, key) => (
@@ -167,9 +170,9 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
      * Helper function to get opportunity elements
      *
      * @param {Array<any>} items Items
-     * @param {IOpportunityMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getOpportunityElementsForCell(items: any[], cell: IOpportunityMatrixCell) {
+    private getOpportunityElementsForCell(items: any[], cell: IMatrixCell) {
         const itemsForCell = items.filter(opportunity => cell.probability === parseInt(opportunity.GtRiskProbability, 10) && cell.consequence === parseInt(opportunity.GtRiskConsequence, 10));
         return itemsForCell.map((opportunity, key) => (
             <OpportunityElement

@@ -4,7 +4,9 @@ import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
-import RiskMatrixCells, { IRiskMatrixCell, RiskMatrixCellType } from "./RiskMatrixCells";
+import RiskMatrixCells from "./RiskMatrixCells";
+import MatrixCellType from "../../Model/MatrixCellType";
+import IMatrixCell from "../../Model/IMatrixCell";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -37,7 +39,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     public async componentDidMount() {
-        let matrixCells = await loadJsonConfiguration<Array<IRiskMatrixCell[]>>("risk-matrix-cells");
+        let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>("risk-matrix-cells");
         if (matrixCells == null || !matrixCells.length) {
             matrixCells = RiskMatrixCells;
         }
@@ -124,7 +126,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     riskElements = this.getRiskElementsForCell(riskItems, cell),
                     riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
                 switch (cell.cellType) {
-                    case RiskMatrixCellType.Cell: {
+                    case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
                                 key={j}
@@ -136,7 +138,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                 className={cell.className} />
                         );
                     }
-                    case RiskMatrixCellType.Header: {
+                    case MatrixCellType.Header: {
                         return (
                             <MatrixHeaderCell
                                 key={j}
@@ -159,9 +161,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements for cell post action
      *
      * @param {Array<any>} items Items
-     * @param {IRiskMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell(items: any[], cell: IRiskMatrixCell) {
+    private getRiskElementsPostActionForCell(items: any[], cell: IMatrixCell) {
         if (this.state.postAction) {
             const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
             return itemsForCell.map((risk, key) => (
@@ -178,9 +180,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements
      *
      * @param {Array<any>} items Items
-     * @param {IRiskMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsForCell(items: any[], cell: IRiskMatrixCell) {
+    private getRiskElementsForCell(items: any[], cell: IMatrixCell) {
         const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
         return itemsForCell.map((risk, key) => (
             <RiskElement

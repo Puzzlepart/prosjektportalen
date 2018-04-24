@@ -4,6 +4,7 @@ import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { Element } from "react-scroll";
 import ProjectProperty from "../../ProjectInfo/ProjectProperty";
 import RiskMatrix from "../../RiskMatrix";
+import OpportunityMatrix from "../../OpportunityMatrix";
 import SectionList from "./SectionList";
 import SectionHeader from "./SectionHeader";
 import ISectionListData from "./ISectionListData";
@@ -82,9 +83,14 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
         return (
             <div id={section.getHtmlElementId("inner")}>
                 {section.showRiskMatrix && (
-                    <RiskMatrix
-                        data={{ items: listData.items }}
-                        showViewSelector={false} />
+                    <div>
+                        <RiskMatrix
+                            data={{ items: listData.items }}
+                            showViewSelector={false} />
+                        <OpportunityMatrix
+                            data={{ items: listData.items }}
+                            showViewSelector={false} />
+                    </div>
                 )}
                 {section.listTitle && (
                     <SectionList
