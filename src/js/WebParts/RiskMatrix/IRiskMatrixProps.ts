@@ -5,6 +5,7 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     contentTypeId?: string;
     showEmptyMessage?: boolean;
     showViewSelector?: boolean;
+    hideLabelsBreakpoint?: number;
 }
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
@@ -13,4 +14,5 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     id: "risk-matrix",
     showEmptyMessage: false,
     showViewSelector: true,
+    hideLabelsBreakpoint: 900,
 };
