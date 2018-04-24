@@ -1,4 +1,4 @@
-import { IRiskMatrixCell } from "./RiskMatrixCells";
+import IMatrixCell from "../../Model/IMatrixCell";
 import IRiskMatrixData from "./IRiskMatrixData";
 
 export default interface IRiskMatrixState {
@@ -8,5 +8,5 @@ export default interface IRiskMatrixState {
     postAction?: boolean;
     hideLabels?: boolean;
     selectedViewId?: string;
-    matrixCells?: Array<IRiskMatrixCell[]>;
+    matrixCells?: Array<IMatrixCell[]>;
 }
