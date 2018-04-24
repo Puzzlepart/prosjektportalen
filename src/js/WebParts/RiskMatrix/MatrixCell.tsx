@@ -1,10 +1,10 @@
 import * as React from "react";
 
-const MatrixCell = ({ className, contents }) => {
+const MatrixCell = (props) => {
     return (
-        <td className={className}>
+        <td className={props.className} style={props.style}>
             <div className="cell-container">
-                {contents}
+                {props.contents}
             </div>
         </td>
     );

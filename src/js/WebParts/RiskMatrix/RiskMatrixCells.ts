@@ -5,10 +5,11 @@ export enum RiskMatrixCellType {
     Cell,
 }
 
-export interface IRiskMatrixCell  {
-    cellValue: string;
+export interface IRiskMatrixCell {
+    cellValue?: string;
     cellType: RiskMatrixCellType;
     className: string;
+    style?: React.CSSProperties;
     consequence?: number;
     probability?: number;
 }
@@ -16,7 +17,7 @@ export interface IRiskMatrixCell  {
 const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
     [
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Header,
             className: "risk-header",
         },
@@ -53,37 +54,37 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 1,
             probability: 5,
         },
         {
-            cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 2,
             probability: 5,
         },
         {
-            cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 3,
             probability: 5,
         },
         {
-            cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 4,
             probability: 5,
         },
         {
-            cellValue: "",
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 5,
             probability: 5,
         },
@@ -95,37 +96,42 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 1,
             probability: 4,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 2,
             probability: 4,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 3,
             probability: 4,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 4,
             probability: 4,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 5,
             probability: 4,
         },
@@ -137,37 +143,42 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 1,
             probability: 3,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 2,
             probability: 3,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 3,
             probability: 3,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 4,
             probability: 3,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell negative-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#ea5c73" },
             consequence: 5,
             probability: 3,
         },
@@ -179,37 +190,42 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 1,
             probability: 2,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 2,
             probability: 2,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 3,
             probability: 2,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 4,
             probability: 2,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 5,
             probability: 2,
         },
@@ -221,37 +237,42 @@ const RiskMatrixCells: Array<IRiskMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 1,
             probability: 1,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 2,
             probability: 1,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 3,
             probability: 1,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell positive-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#2da748" },
             consequence: 4,
             probability: 1,
         },
         {
-            cellValue: "",
+
             cellType: RiskMatrixCellType.Cell,
-            className: "risk-matrix-cell neutral-cell",
+            className: "risk-matrix-cell",
+            style: { backgroundColor: "#e9b359" },
             consequence: 5,
             probability: 1,
         },
