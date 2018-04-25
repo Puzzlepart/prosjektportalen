@@ -2046,6 +2046,9 @@
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risikomatrise</value>
   </data>
+  <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
+    <value>Mulighetsmatrise</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
