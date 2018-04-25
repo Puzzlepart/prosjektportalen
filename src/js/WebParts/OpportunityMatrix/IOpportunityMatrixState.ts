@@ -1,9 +1,9 @@
 import IMatrixCell from "../../Model/IMatrixCell";
-import IRiskMatrixData from "./IRiskMatrixData";
+import IOpportunityMatrixData from "./IOpportunityMatrixData";
 
-export default interface IRiskMatrixState {
-    data?: IRiskMatrixData;
-    selectedRisk?: any;
+export default interface IOpportunityMatrixState {
+    data?: IOpportunityMatrixData;
+    selectedOpportunity?: any;
     showDialog?: boolean;
     postAction?: boolean;
     hideLabels?: boolean;
