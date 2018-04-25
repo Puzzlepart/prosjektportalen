@@ -13,6 +13,7 @@ import ExperienceLog, { IExperienceLogProps } from "./ExperienceLog";
 import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyBagEditor";
 import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
 import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
+import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix";
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DataSource from "./DataSource";
@@ -37,6 +38,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
+    new WebPartComponent<IOpportunityMatrixProps>(OpportunityMatrix, "pp-opportunityMatrix", { showEmptyMessage: true }),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
         statsFieldsListName: "Statistikkfelter",

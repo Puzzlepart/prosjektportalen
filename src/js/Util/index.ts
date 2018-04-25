@@ -450,8 +450,10 @@ export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequest
  */
 export function loadLibrary(filename: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        SP.SOD.registerSod(filename, `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/libs/${filename}`);
-        SP.SOD.executeFunc(filename, null, resolve);
+        GetProperty("pp_assetssiteurl").then(assetsUrl => {
+            SP.SOD.registerSod(filename, `${assetsUrl}/SiteAssets/pp/libs/${filename}`);
+            SP.SOD.executeFunc(filename, null, resolve);
+        });
     });
 }
 

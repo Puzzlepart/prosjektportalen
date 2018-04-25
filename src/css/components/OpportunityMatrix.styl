@@ -1,4 +1,4 @@
-#risk-matrix {
+#opportunity-matrix {
     width: 100%;
     padding-top: 40px;
     border-width: 0px;
@@ -6,28 +6,28 @@
     background: white;
 
     &.hide-labels {
-        .risk-header {
+        .opportunity-header {
             display: none;
         }
-        .risk-matrix-cell {
+        .opportunity-matrix-cell {
             width: 20%;
         }
     }
 
-    .risk-matrix-row {
+    .opportunity-matrix-row {
         min-height: 50px;
 
-        .risk-matrix-cell, .risk-header {
+        .opportunity-matrix-cell, .opportunity-header {
             width: 16.6%;
             border-right: 1px solid #99A8AD;
             border-bottom: 1px solid #99A8AD;
         }
 
-        .risk-matrix-cell {
+        .opportunity-matrix-cell {
             .cell-container {
                 min-height: 50px;
             }
-            .risk-matrix-element {
+            .opportunity-matrix-element {
                 border-radius: 50%;
                 padding: 1px;
                 margin: 2px;
@@ -39,9 +39,21 @@
                 background-color: #fff;
                 color: #666;
             }
+
+            &.positive-cell {
+                background-color: #2da748;
+            }
+
+            &.negative-cell {
+                background-color: #ea5c73;
+            }
+
+            &.neutral-cell {
+                background-color: #e9b359;
+            }
         }
 
-        .risk-header {
+        .opportunity-header {
             min-height: 50px;
             line-height: 50px;
             padding-left: 5px;
