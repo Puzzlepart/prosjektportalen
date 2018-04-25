@@ -14,10 +14,11 @@ import OpportunityElement from "./OpportunityElement";
 import IOpportunityMatrixData from "./IOpportunityMatrixData";
 import IOpportunityMatrixProps, { OpportunityMatrixDefaultProps } from "./IOpportunityMatrixProps";
 import IOpportunityMatrixState from "./IOpportunityMatrixState";
+import { loadJsonConfiguration } from "../../Util";
 
 
 /**
- * Risk Matrix
+ * Opportunity Matrix
  */
 export default class OpportunityMatrix extends React.Component<IOpportunityMatrixProps, IOpportunityMatrixState> {
     public static displayName = "OpportunityMatrix";
@@ -39,12 +40,19 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
     }
 
     public async componentDidMount() {
-        if (!this.state.data) {
+        let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>("opportunity-matrix-cells");
+        if (matrixCells == null || !matrixCells.length) {
+            matrixCells = OpportunityMatrixCells;
+        }
+        if (this.state.data) {
+            this.setState({ matrixCells });
+        } else {
             const { data, selectedViewId } = await this.fetchData();
             this.setState({
                 data,
-                hideLabels: this._tableElement.offsetWidth < 900,
+                hideLabels: this._tableElement.offsetWidth < this.props.hideLabelsBreakpoint,
                 selectedViewId,
+                matrixCells,
             });
         }
     }
@@ -76,53 +84,56 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
             return null;
         }
 
-        const viewOptions = this.getViewOptions();
+        if (this.state.matrixCells) {
+            const viewOptions = this.getViewOptions();
 
-        return (
-            <div className={this.props.className}>
-                <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
-                    <Dropdown
-                        label={RESOURCE_MANAGER.getResource("OpportunityMatrix_ViewSelectorLabel")}
-                        defaultSelectedKey={selectedViewId}
-                        options={viewOptions}
-                        onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
+            return (
+                <div className={this.props.className}>
+                    <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
+                        <Dropdown
+                            label={RESOURCE_MANAGER.getResource("OpportunityMatrix_ViewSelectorLabel")}
+                            defaultSelectedKey={selectedViewId}
+                            options={viewOptions}
+                            onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
+                    </div>
+                    <table {...tableProps} ref={ele => this._tableElement = ele}>
+                        <tbody>
+                            {this.renderRows(opportunityItems)}
+                        </tbody>
+                    </table>
+                    <div>
+                        <Toggle
+                            defaultChecked={false}
+                            onChanged={isChecked => this.setState({ postAction: isChecked })}
+                            label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                            onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                            offText={RESOURCE_MANAGER.getResource("String_No")} />
+                    </div>
                 </div>
-                <table {...tableProps} ref={ele => this._tableElement = ele}>
-                    <tbody>
-                        {this.renderRows(opportunityItems)}
-                    </tbody>
-                </table>
-                <div>
-                    <Toggle
-                        defaultChecked={false}
-                        onChanged={isChecked => this.setState({ postAction: isChecked })}
-                        label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                        onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                        offText={RESOURCE_MANAGER.getResource("String_No")} />
-                </div>
-            </div>
-        );
+            );
+        }
+        return null;
     }
 
     /**
      * Render rows
      *
-     * @param {any[]} opportunityItems Risk items
+     * @param {any[]} opportunityItems Opportunity items
      */
-    private renderRows(opportunityItems) {
-        const OpportunityMatrixRows = OpportunityMatrixCells.map((rows, i) => {
+    private renderRows(opportunityItems: any[]) {
+        const OpportunityMatrixRows = this.state.matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = OpportunityMatrixCells[i][j],
-                    OpportunityElements = this.getOpportunityElementsForCell(opportunityItems, cell),
-                    OpportunityElementsPostAction = this.getOpportunityElementsPostActionForCell(opportunityItems, cell);
+                const cell = this.state.matrixCells[i][j],
+                    opportunityElements = this.getOpportunityElementsForCell(opportunityItems, cell),
+                    opportunityElementsPostAction = this.getOpportunityElementsPostActionForCell(opportunityItems, cell);
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
                                 key={j}
                                 contents={[
-                                    ...OpportunityElements,
-                                    ...OpportunityElementsPostAction,
+                                    ...opportunityElements,
+                                    ...opportunityElementsPostAction,
                                 ]}
                                 className={cell.className}
                                 style={cell.style} />

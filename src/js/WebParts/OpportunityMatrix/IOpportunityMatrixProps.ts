@@ -5,6 +5,7 @@ export default interface IOpportunityMatrixProps extends React.HTMLAttributes<HT
     contentTypeId?: string;
     showEmptyMessage?: boolean;
     showViewSelector?: boolean;
+    hideLabelsBreakpoint?: number;
 }
 
 export const OpportunityMatrixDefaultProps: Partial<IOpportunityMatrixProps> = {
@@ -13,4 +14,5 @@ export const OpportunityMatrixDefaultProps: Partial<IOpportunityMatrixProps> = {
     id: "opportunity-matrix",
     showEmptyMessage: false,
     showViewSelector: true,
+    hideLabelsBreakpoint: 900,
 };

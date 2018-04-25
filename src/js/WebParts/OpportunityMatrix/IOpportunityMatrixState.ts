@@ -1,3 +1,4 @@
+import IMatrixCell from "../../Model/IMatrixCell";
 import IOpportunityMatrixData from "./IOpportunityMatrixData";
 
 export default interface IOpportunityMatrixState {
@@ -7,4 +8,5 @@ export default interface IOpportunityMatrixState {
     postAction?: boolean;
     hideLabels?: boolean;
     selectedViewId?: string;
+    matrixCells?: Array<IMatrixCell[]>;
 }
