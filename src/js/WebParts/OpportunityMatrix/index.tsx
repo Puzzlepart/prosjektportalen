@@ -4,33 +4,34 @@ import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
-import RiskMatrixCells from "./RiskMatrixCells";
+import OpportunityMatrixCells from "./OpportunityMatrixCells";
 import MatrixCellType from "../../Model/MatrixCellType";
 import IMatrixCell from "../../Model/IMatrixCell";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
-import RiskElement from "./RiskElement";
-import IRiskMatrixData from "./IRiskMatrixData";
-import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
-import IRiskMatrixState from "./IRiskMatrixState";
+import OpportunityElement from "./OpportunityElement";
+import IOpportunityMatrixData from "./IOpportunityMatrixData";
+import IOpportunityMatrixProps, { OpportunityMatrixDefaultProps } from "./IOpportunityMatrixProps";
+import IOpportunityMatrixState from "./IOpportunityMatrixState";
 import { loadJsonConfiguration } from "../../Util";
 
+
 /**
- * Risk Matrix
+ * Opportunity Matrix
  */
-export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixState> {
-    public static displayName = "RiskMatrix";
-    public static defaultProps = RiskMatrixDefaultProps;
+export default class OpportunityMatrix extends React.Component<IOpportunityMatrixProps, IOpportunityMatrixState> {
+    public static displayName = "OpportunityMatrix";
+    public static defaultProps = OpportunityMatrixDefaultProps;
     private _tableElement: HTMLTableElement;
     private _pnpList: List;
 
     /**
      * Constructor
      *
-     * @param {IRiskMatrixProps} props Props
+     * @param {IOpportunityMatrixProps} props Props
      */
-    constructor(props: IRiskMatrixProps) {
+    constructor(props: IOpportunityMatrixProps) {
         super(props);
         this.state = { data: props.data };
         this._pnpList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
@@ -39,9 +40,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     public async componentDidMount() {
-        let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>("risk-matrix-cells");
+        let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>("opportunity-matrix-cells");
         if (matrixCells == null || !matrixCells.length) {
-            matrixCells = RiskMatrixCells;
+            matrixCells = OpportunityMatrixCells;
         }
         if (this.state.data) {
             this.setState({ matrixCells });
@@ -57,9 +58,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     /**
-     * Renders the <RiskMatrix /> component
+     * Renders the <OpportunityMatrix /> component
      */
-    public render(): React.ReactElement<IRiskMatrixProps> {
+    public render(): React.ReactElement<IOpportunityMatrixProps> {
         const { data, selectedViewId, hideLabels } = this.state;
         let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
 
@@ -74,11 +75,11 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             );
         }
 
-        const riskItems = data.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
+        const opportunityItems = data.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
 
-        if (riskItems.length === 0) {
+        if (opportunityItems.length === 0) {
             if (this.props.showEmptyMessage) {
-                return <MessageBar>{RESOURCE_MANAGER.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
+                return <MessageBar>{RESOURCE_MANAGER.getResource("OpportunityMatrix_EmptyMessage")}</MessageBar>;
             }
             return null;
         }
@@ -90,14 +91,14 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 <div className={this.props.className}>
                     <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
                         <Dropdown
-                            label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
+                            label={RESOURCE_MANAGER.getResource("OpportunityMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
                             onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
                     </div>
                     <table {...tableProps} ref={ele => this._tableElement = ele}>
                         <tbody>
-                            {this.renderRows(riskItems)}
+                            {this.renderRows(opportunityItems)}
                         </tbody>
                     </table>
                     <div>
@@ -117,25 +118,25 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Render rows
      *
-     * @param {any[]} riskItems Risk items
+     * @param {any[]} opportunityItems Opportunity items
      */
-    private renderRows(riskItems) {
-        const riskMatrixRows = this.state.matrixCells.map((rows, i) => {
+    private renderRows(opportunityItems: any[]) {
+        const OpportunityMatrixRows = this.state.matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
                 const cell = this.state.matrixCells[i][j],
-                    riskElements = this.getRiskElementsForCell(riskItems, cell),
-                    riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
+                    opportunityElements = this.getOpportunityElementsForCell(opportunityItems, cell),
+                    opportunityElementsPostAction = this.getOpportunityElementsPostActionForCell(opportunityItems, cell);
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
                                 key={j}
                                 contents={[
-                                    ...riskElements,
-                                    ...riskElementsPostAction,
+                                    ...opportunityElements,
+                                    ...opportunityElementsPostAction,
                                 ]}
-                                style={cell.style}
-                                className={cell.className} />
+                                className={cell.className}
+                                style={cell.style} />
                         );
                     }
                     case MatrixCellType.Header: {
@@ -154,22 +155,22 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     cells={cells} />
             );
         });
-        return riskMatrixRows;
+        return OpportunityMatrixRows;
     }
 
     /**
-     * Helper function to get risk elements for cell post action
+     * Helper function to get opportunity elements for cell post action
      *
      * @param {Array<any>} items Items
      * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell(items: any[], cell: IMatrixCell) {
+    private getOpportunityElementsPostActionForCell(items: any[], cell: IMatrixCell) {
         if (this.state.postAction) {
-            const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
-            return itemsForCell.map((risk, key) => (
-                <RiskElement
-                    key={`RiskElement_PostAction_${key}`}
-                    item={risk}
+            const itemsForCell = items.filter(opportunity => cell.probability === parseInt(opportunity.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(opportunity.GtRiskConsequencePostAction, 10));
+            return itemsForCell.map((opportunity, key) => (
+                <OpportunityElement
+                    key={`OpportunityElement_PostAction_${key}`}
+                    item={opportunity}
                     style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
             ));
         }
@@ -177,17 +178,17 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     /**
-     * Helper function to get risk elements
+     * Helper function to get opportunity elements
      *
      * @param {Array<any>} items Items
      * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsForCell(items: any[], cell: IMatrixCell) {
-        const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
-        return itemsForCell.map((risk, key) => (
-            <RiskElement
-                key={`RiskElement_${key}`}
-                item={risk} />
+    private getOpportunityElementsForCell(items: any[], cell: IMatrixCell) {
+        const itemsForCell = items.filter(opportunity => cell.probability === parseInt(opportunity.GtRiskProbability, 10) && cell.consequence === parseInt(opportunity.GtRiskConsequence, 10));
+        return itemsForCell.map((opportunity, key) => (
+            <OpportunityElement
+                key={`OpportunityElement_${key}`}
+                item={opportunity} />
         ));
     }
 
@@ -232,7 +233,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Fetch data
      */
-    private async fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
+    private async fetchData(): Promise<{ data: IOpportunityMatrixData, selectedViewId?: string }> {
         let { data } = this.state;
         if (!data) {
             data = { items: [] };
@@ -248,6 +249,6 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
 }
 
 export {
-    IRiskMatrixProps,
-    IRiskMatrixState,
+    IOpportunityMatrixProps,
+    IOpportunityMatrixState,
 };
