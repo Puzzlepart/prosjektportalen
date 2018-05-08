@@ -135,10 +135,10 @@ function Start-Install() {
             Connect-SharePoint $Url    
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries -Parameters $Parameters
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
             } else {
                 Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers PropertyBagEntries,Navigation,SearchSettings -Parameters $Parameters
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation,SearchSettings" -Parameters $Parameters
             }
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
@@ -251,7 +251,7 @@ function Start-Install() {
     try {
         Connect-SharePoint $Url    
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized -Handlers PropertyBagEntries
+        Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green
         Disconnect-PnPOnline
     }
