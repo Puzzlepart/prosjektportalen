@@ -102,7 +102,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <!-- <pnp:File Src="SitePages\ProjectStats.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+    <pnp:File Src="SitePages\ProjectStats.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Prosjektstatistikk" />
         </pnp:Properties>
@@ -114,7 +114,7 @@
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
-    </pnp:File> -->
+    </pnp:File>
     <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ProjectList_Title}" />
@@ -199,13 +199,13 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <!-- <pnp:File Src="WebPartGallery\ProjectStats.webpart" Folder="_catalogs/wp" Overwrite="false">
+    <pnp:File Src="WebPartGallery\ProjectStats.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="ProjectStats" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="UD" />
         </pnp:Properties>
-    </pnp:File> -->
+    </pnp:File>
     <pnp:File Src="SiteTemplates\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="GtOrder" Value="10" />

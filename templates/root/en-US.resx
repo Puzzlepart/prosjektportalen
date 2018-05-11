@@ -141,6 +141,9 @@
   <data name="Navigation_ExperienceLog_Title" xml:space="preserve">
     <value>Lessons Log</value>
   </data>
+  <data name="Navigation_PortfolioStats_Title" xml:space="preserve">
+    <value>Portfolio Insight</value>
+  </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Project Status</value>
   </data>

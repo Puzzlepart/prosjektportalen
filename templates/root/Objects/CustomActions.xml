@@ -27,7 +27,7 @@
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_SiteTemplates}" Title="{resource:SiteSettings_Link_SiteTemplates}" Url="SiteTemplates/Forms/AllItems.aspx" Rights="ManageWeb" Sequence="2010" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Log}" Title="{resource:SiteSettings_Link_Log}" Url="Lists/Log/AllItems.aspx" Rights="ManageWeb" Sequence="2011" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="{resource:SiteSettings_Link_Settings}" Title="{resource:SiteSettings_Link_Settings}" Url="SitePages/EditWebPropertyBag.aspx" Rights="ManageWeb" Sequence="2012" />
-        <!-- <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="Prosjektportalen - Statistikkfelter" Title="Prosjektportalen - Statistikkfelter" Url="Lists/StatsFieldsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2013" />
-        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="Prosjektportalen - Grafkonfigurasjon" Title="Prosjektportalen - Grafkonfigurasjon" Url="Lists/ChartsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2014" /> -->
+        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="Prosjektportalen - Statistikkfelter" Title="Prosjektportalen - Statistikkfelter" Url="Lists/StatsFieldsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2013" />
+        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="Prosjektportalen - Grafkonfigurasjon" Title="Prosjektportalen - Grafkonfigurasjon" Url="Lists/ChartsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2014" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>
