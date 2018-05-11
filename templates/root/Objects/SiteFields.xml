@@ -529,8 +529,14 @@
     <Field DisplayName="{resource:SiteFields_GtChrShowItemSelector_DisplayName}" Description="{resource:SiteFields_GtChrShowItemSelector_Description}" Title="{resource:SiteFields_GtChrShowItemSelector_DisplayName}" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{762a2801-2882-40f1-8fa1-a6604ef2808f}" StaticName="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector">
         <Default>0</Default>
     </Field>
+    <Field DisplayName="{resource:SiteFields_GtChrShowPercentage_DisplayName}" Description="{resource:SiteFields_GtChrShowPercentage_Description}" Title="{resource:SiteFields_GtChrShowPercentage_DisplayName}" Type="Boolean" Group="{resource:SiteFields_Group}" ID="{9d2a7860-17b2-4919-8e9c-8596414519d3}" StaticName="{parameter:ProjectStatsFieldPrefix}ShowPercentage" Name="{parameter:ProjectStatsFieldPrefix}ShowPercentage">
+        <Default>0</Default>
+    </Field>
     <Field Decimals="0" DisplayName="{resource:SiteFields_GtChrOrder_DisplayName}" Description="{resource:SiteFields_GtChrOrder_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrOrder_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="{parameter:ProjectStatsFieldPrefix}Order" Name="{parameter:ProjectStatsFieldPrefix}Order">
         <Default>100</Default>
+    </Field>
+    <Field Decimals="0" DisplayName="{resource:SiteFields_GtChrHeight_DisplayName}" Description="{resource:SiteFields_GtChrHeight_Description}" Percentage="FALSE" Min="100" Max="1600" Title="{resource:SiteFields_GtChrHeight_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{ed4f667a-b106-4cc3-a773-bfefa2b69e14}" StaticName="{parameter:ProjectStatsFieldPrefix}Height" Name="{parameter:ProjectStatsFieldPrefix}Height">
+        <Default>400</Default>
     </Field>
     <Field DisplayName="{resource:SiteFields_GtChrYMin_DisplayName}" Description="{resource:SiteFields_GtChrYMin_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrYMin_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="{parameter:ProjectStatsFieldPrefix}YMin" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
     <Field DisplayName="{resource:SiteFields_GtChrYMax_DisplayName}" Description="{resource:SiteFields_GtChrYMax_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrYMax_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="{parameter:ProjectStatsFieldPrefix}YMax" Name="{parameter:ProjectStatsFieldPrefix}YMax" />

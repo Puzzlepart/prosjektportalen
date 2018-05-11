@@ -194,7 +194,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 QueryTemplate: view.queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
-                SelectProperties: fields.map(f => f.managedPropertyName),
+                SelectProperties: ["Title", "Path", ...fields.map(f => f.managedPropertyName)],
             });
             const items = response.PrimarySearchResults
                 .map(searchRes => new Project(searchRes))

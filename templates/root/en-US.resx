@@ -1188,6 +1188,9 @@
   <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space = "preserve">
     <value>Show average</value>
   </data>
+  <data name="SiteFields_GtChrShowPercentage_DisplayName" xml:space="preserve">
+    <value>Show as percentage</value>
+  </data>
   <data name="SiteFields_GtChrStacking_DisplayName" xml:space = "preserve">
     <value>Stacking</value>
   </data>
@@ -1196,6 +1199,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space = "preserve">
     <value>Width (1920px and up)</value>
+  </data>
+  <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
+    <value>Height</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1644,6 +1650,9 @@
   <data name="SiteFields_GtChrShowAverage_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtChrShowPercentage_Description" xml:space="preserve">
+    <value>Show each slice as a percentage of the total</value>
+  </data>
   <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1652,6 +1661,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
+    <value>The height of the graph in pixels</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>

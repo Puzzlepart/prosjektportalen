@@ -1185,6 +1185,9 @@
   <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space="preserve">
     <value>Vis gjennomsnitt</value>
   </data>
+  <data name="SiteFields_GtChrShowPercentage_DisplayName" xml:space="preserve">
+    <value>Vis verdi i prosent</value>
+  </data>
   <data name="SiteFields_GtChrStacking_DisplayName" xml:space="preserve">
     <value>Stabling</value>
   </data>
@@ -1193,6 +1196,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space="preserve">
     <value>Bredde (1920px og oppover)</value>
+  </data>
+  <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
+    <value>Høyde</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1644,6 +1650,9 @@
   <data name="SiteFields_GtChrShowAverage_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtChrShowPercentage_Description" xml:space="preserve">
+    <value>Vis verdiene for hvert kakestykke som prosent av totalen</value>
+  </data>
   <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1652,6 +1661,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
+    <value>Høyden på grafen i piksler</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>

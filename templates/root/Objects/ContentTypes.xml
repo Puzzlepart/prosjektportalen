@@ -479,6 +479,7 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="{resource:ContentTypes_Stolpediagram_Name}" Description="{resource:ContentTypes_Stolpediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
@@ -493,6 +494,7 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
@@ -513,6 +515,7 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
             <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" Required="true" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
@@ -534,8 +537,10 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
-            <pnp:FieldRef ID="762a2801-2882-40f1-8fa1-a6604ef2808f" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" />
-            <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="762a2801-2882-40f1-8fa1-a6604ef2808f" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" Hidden="true"/>
+            <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" Hidden="true" />
+            <pnp:FieldRef ID="9d2a7860-17b2-4919-8e9c-8596414519d3" Name="{parameter:ProjectStatsFieldPrefix}ShowPercentage" />
         </pnp:FieldRefs>
     </pnp:ContentType>
 </pnp:ContentTypes> 

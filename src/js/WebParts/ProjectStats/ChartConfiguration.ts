@@ -20,9 +20,11 @@ export default class ChartConfiguration {
     public yAxisMin: number;
     public yAxisMax: number;
     public yAxisTickInterval: number;
+    public height: number;
     public valueSuffix: string;
     public showLegend: boolean;
     public showAverage: boolean;
+    public showPercentage: boolean;
     public showItemSelector: boolean;
     private _fieldPrefix: string;
     private _pnpList: List;
@@ -55,6 +57,7 @@ export default class ChartConfiguration {
         this.title = spItem.Title;
         this.order = spItem[`${this._fieldPrefix}Order`];
         this.subTitle = spItem[`${this._fieldPrefix}SubTitle`];
+        this.height = spItem[`${this._fieldPrefix}Height`];
         this.width = Object.keys(this._widthFields).reduce((obj, key) => {
             obj[key] = spItem[`${this._fieldPrefix}${this._widthFields[key]}`];
             return obj;
@@ -67,6 +70,7 @@ export default class ChartConfiguration {
         this.valueSuffix = spItem[`${this._fieldPrefix}ValueSuffix`];
         this.showLegend = spItem[`${this._fieldPrefix}ShowLegend`];
         this.showAverage = spItem[`${this._fieldPrefix}ShowAverage`];
+        this.showPercentage = spItem[`${this._fieldPrefix}ShowPercentage`];
         this.showItemSelector = spItem[`${this._fieldPrefix}ShowItemSelector`];
         this._setChartTypeFromContentType();
     }
@@ -157,7 +161,7 @@ export default class ChartConfiguration {
                             cursor: "pointer",
                             dataLabels: {
                                 enabled: true,
-                                format: "<b>{point.name}</b>: {point.percentage: .1f} %",
+                                format: this.showPercentage ?  "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.value: .1f}",
                                 style: { color: "black" },
                             },
                         },
@@ -258,6 +262,7 @@ export default class ChartConfiguration {
         base.subtitle = { text: this.subTitle };
         base.tooltip = { valueSuffix: this.valueSuffix };
         base.credits = { enabled: false };
+        base.height = this.height;
         return base;
     }
 
@@ -307,7 +312,7 @@ export default class ChartConfiguration {
                                 colorByPoint: true,
                                 data: this._data.getItems().map((i, index) => ({
                                     name: i.name,
-                                    y: this._data.getPercentage(field, index),
+                                    y: this.showPercentage ? this._data.getPercentage(field, index) : this._data.getItem(index).getValue(field),
                                 })),
                             }]);
                         }
@@ -316,7 +321,7 @@ export default class ChartConfiguration {
                                 colorByPoint: true,
                                 data: this._data.getValuesUnique(field).map((value, index) => ({
                                     name: value || strings.NOT_SET,
-                                    y: (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100,
+                                    y: this.showPercentage ? (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100 : this._data.getItemsWithStringValue(field, value).length,
                                 })),
                             }]);
                         }
