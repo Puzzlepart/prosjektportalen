@@ -1171,13 +1171,13 @@
     <value>Bredde (480px - 639px)</value>
   </data>
   <data name="SiteFields_GtChrFields_DisplayName" xml:space="preserve">
-    <value>Felter</value>
+    <value>Kolonner for datagrunnlag</value>
+  </data>
+  <data name="SiteFields_GtChrField_DisplayName" xml:space="preserve">
+    <value>Kolonne for datagrunnlag</value>
   </data>
   <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space="preserve">
     <value>Verdisuffiks</value>
-  </data>
-  <data name="SiteFields_GtChrMarginTop_DisplayName" xml:space="preserve">
-    <value>Margin topp</value>
   </data>
   <data name="SiteFields_GtChrOrder_DisplayName" xml:space="preserve">
     <value>Rekkefølge</value>
@@ -1632,10 +1632,10 @@
   <data name="SiteFields_GtChrFields_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
+  <data name="SiteFields_GtChrField_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtChrMarginTop_Description" xml:space="preserve">
+  <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtChrOrder_Description" xml:space="preserve">
