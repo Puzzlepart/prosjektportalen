@@ -161,7 +161,7 @@ export default class ChartConfiguration {
                             cursor: "pointer",
                             dataLabels: {
                                 enabled: true,
-                                format: this.showPercentage ?  "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.value: .1f}",
+                                format: this.showPercentage ?  "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.y:,.0f}",
                                 style: { color: "black" },
                             },
                         },
@@ -262,7 +262,7 @@ export default class ChartConfiguration {
         base.subtitle = { text: this.subTitle };
         base.tooltip = { valueSuffix: this.valueSuffix };
         base.credits = { enabled: false };
-        base.height = this.height;
+        base.height = { height: this.height};
         return base;
     }
 
