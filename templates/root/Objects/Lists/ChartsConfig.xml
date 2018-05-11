@@ -22,7 +22,6 @@
                 <FieldRef Name="GtChrWidthXl" />
                 <FieldRef Name="GtChrWidthXxl" />
                 <FieldRef Name="GtChrWidthXxxl" />
-                <FieldRef Name="GtChrMarginTop" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />

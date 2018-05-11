@@ -24,7 +24,6 @@ export default class ChartConfiguration {
     public showLegend: boolean;
     public showAverage: boolean;
     public showItemSelector: boolean;
-    public marginTop: number;
     private _fieldPrefix: string;
     private _pnpList: List;
     private _contentTypes: any[];
@@ -69,7 +68,6 @@ export default class ChartConfiguration {
         this.showLegend = spItem[`${this._fieldPrefix}ShowLegend`];
         this.showAverage = spItem[`${this._fieldPrefix}ShowAverage`];
         this.showItemSelector = spItem[`${this._fieldPrefix}ShowItemSelector`];
-        this.marginTop = spItem[`${this._fieldPrefix}MarginTop`];
         this._setChartTypeFromContentType();
     }
 
