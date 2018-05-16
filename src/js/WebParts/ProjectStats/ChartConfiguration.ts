@@ -140,6 +140,7 @@ export default class ChartConfiguration {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
                     chartConfig.plotOptions = {
+                        series: { stacking: this.stacking },
                         bar: {
                             dataLabels: { enabled: true },
                         },
@@ -150,7 +151,12 @@ export default class ChartConfiguration {
                 case "column": {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
-                    chartConfig.plotOptions = { series: { stacking: this.stacking } };
+                    chartConfig.plotOptions = {
+                        series: { stacking: this.stacking },
+                        column: {
+                            dataLabels: { enabled: true },
+                        },
+                    };
                     chartConfig.legend = this._getLegend();
                     break;
                 }
@@ -191,6 +197,7 @@ export default class ChartConfiguration {
         let yAxis: any = {
             title: { text: this.yAxisTitle, align: "high" },
             labels: { overflow: "justify" },
+            showEmpty: false,
         };
         if (this.yAxisMin) {
             yAxis.min = this.yAxisMin;
@@ -216,6 +223,7 @@ export default class ChartConfiguration {
                         case "string": {
                             return {
                                 categories: this._data.getValuesUnique(field),
+                                showEmpty: false,
                                 title: { text: null },
                             };
                         }
@@ -223,6 +231,7 @@ export default class ChartConfiguration {
                 }
                 return {
                     categories: this._data.getNames(),
+                    showEmpty: false,
                     title: { text: null },
                 };
             }
