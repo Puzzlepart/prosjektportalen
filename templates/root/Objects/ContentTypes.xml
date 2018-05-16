@@ -480,6 +480,7 @@
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
             <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="f6c928f6-4b57-478c-866d-42d5f2874d57" Name="{parameter:ProjectStatsFieldPrefix}ShowLegend" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="{resource:ContentTypes_Stolpediagram_Name}" Description="{resource:ContentTypes_Stolpediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
@@ -495,12 +496,12 @@
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
             <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
             <pnp:FieldRef ID="60dac89b-70f5-4a49-87a9-b253bd5df7ca" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
             <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
-            <pnp:FieldRef ID="f6c928f6-4b57-478c-866d-42d5f2874d57" Name="{parameter:ProjectStatsFieldPrefix}ShowLegend" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" Name="{resource:ContentTypes_Kolonnediagram_Name}" Description="{resource:ContentTypes_Kolonnediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
@@ -516,13 +517,12 @@
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
             <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
-            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" Required="true" />
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
             <pnp:FieldRef ID="60dac89b-70f5-4a49-87a9-b253bd5df7ca" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
             <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
-            <pnp:FieldRef ID="f6c928f6-4b57-478c-866d-42d5f2874d57" Name="{parameter:ProjectStatsFieldPrefix}ShowLegend" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="{resource:ContentTypes_Kakediagram_Name}" Description="{resource:ContentTypes_Kakediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
