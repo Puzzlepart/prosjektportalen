@@ -1,0 +1,29 @@
+<pnp:ListInstance Title="Grafkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:DataRows>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrOrder">10</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Prosjektfaser</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle">Antall prosjekter i hver fase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrField">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrStacking"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrShowLegend">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrValueSuffix">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrYAxisTitle"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrYMin"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrYMax"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrYTickInterval"></pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthSm">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthMd">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthXl">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthXxl">6</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrWidthXxxl">6</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
+</pnp:ListInstance>
