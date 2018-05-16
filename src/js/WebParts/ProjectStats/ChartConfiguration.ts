@@ -257,12 +257,11 @@ export default class ChartConfiguration {
      */
     private _getBase() {
         let base: any = {};
-        base.chart = { type: this.type };
+        base.chart = { type: this.type, height: this.height };
         base.title = { text: this.showItemSelector ? `${this.title} - ${this.getData().getItem(0).name}` : this.title };
         base.subtitle = { text: this.subTitle };
         base.tooltip = { valueSuffix: this.valueSuffix };
         base.credits = { enabled: false };
-        base.height = { height: this.height};
         return base;
     }
 
