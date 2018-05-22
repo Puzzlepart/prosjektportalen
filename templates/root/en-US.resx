@@ -1959,6 +1959,36 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Approval</value>
   </data>
+  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+    <value>An error occured while fetching data.</value>
+  </data>
+  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+    <value>No graphs configured yet.</value>
+  </data>
+  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+    <value>No projects found.</value>
+  </data>
+  <data name="String_Default_Toggle_On_Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="String_Default_Toggle_Off_Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="String_Show_Legend_Label" xml:space="preserve">
+    <value>Show legend</value>
+  </data>
+  <data name="String_Select_Project_Name" xml:space="preserve">
+    <value>Select project:</value>
+  </data>
+  <data name="String_Select_Width_Name" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="String_Not_Set" xml:space="preserve">
+    <value>Not set</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>

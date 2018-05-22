@@ -17,7 +17,6 @@ import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import ProjectStatsConfiguration from "./ProjectStatsConfiguration";
 import BaseWebPart from "../@BaseWebPart";
 import Preferences from "../../Preferences";
-import * as strings from "./strings";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -67,10 +66,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public render(): React.ReactElement<IProjectStatsProps> {
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
-            return <Spinner label={strings.PROJECTSTATS_LOADING_TEXT} type={SpinnerType.large} />;
+            return <Spinner label={RESOURCE_MANAGER.getResource("String_Projectstats_Loading_Text")} type={SpinnerType.large} />;
         }
         if (errorMessage) {
-            return <MessageBar messageBarType={MessageBarType.error}>{strings.PROJECTSTATS_ERROR_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>{RESOURCE_MANAGER.getResource("String_Projectstats_Error_Text")}</MessageBar>;
         }
         Logger.log({
             message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."),
@@ -100,10 +99,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     private _renderInner() {
         const { charts, data } = this.state;
         if (charts.length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_CHARTS_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Charts_Text")}</MessageBar>;
         }
         if (data.getCount() === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_DATA_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Data_Text")}</MessageBar>;
         }
         return charts
             .sort((a, b) => a.order - b.order)
