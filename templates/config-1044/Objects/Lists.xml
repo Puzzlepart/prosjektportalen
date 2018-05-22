@@ -14,4 +14,6 @@
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatusSections.xml" />
     <xi:include 
         xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatsFieldsConfig.xml" />
+    <xi:include 
+        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/GraphConfig.xml" />
 </pnp:Lists>

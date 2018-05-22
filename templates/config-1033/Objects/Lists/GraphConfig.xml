@@ -1,11 +1,11 @@
-<pnp:ListInstance Title="Grafkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
+<pnp:ListInstance Title="Graph configuration" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">10</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Prosjekter i ulike faser</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på faser</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Projects by phase</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrField">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
@@ -19,8 +19,8 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">20</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Tjenesteområder</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på tjenesteområder</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Projects by service areas</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrField">2</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
@@ -34,8 +34,8 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">30</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Status fremdrift</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på fremdrift for prosjektene?</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Status progress</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrField">7</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
@@ -49,8 +49,8 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">40</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Status økonomi</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på økonomi for prosjektene?</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Status economy</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrField">8</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
@@ -64,8 +64,8 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">50</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Status risiko</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på risiko for prosjektene?</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Status risk</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrField">9</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
@@ -79,8 +79,8 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrOrder">100</pnp:DataValue>
-            <pnp:DataValue FieldName="Title">Økonomioversikt</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrSubTitle">Prosjektets kostnader vs totalbudsjett</pnp:DataValue>
+            <pnp:DataValue FieldName="Title">Economy overview</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrSubTitle">Project cost vs budget</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">1000</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrFields">4,6</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrStacking">0</pnp:DataValue>
