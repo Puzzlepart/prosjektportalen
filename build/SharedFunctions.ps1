@@ -95,14 +95,14 @@ function Merge-Hashtables {
 }
 
 # Apply tepmplate
-function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", $ExcludeHandlers, [HashTable]$Parameters = @{}) {    
+function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", [string[]]$ExcludeHandlers, [HashTable]$Parameters = @{}) {    
     $Language = Get-WebLanguage -ctx (Get-PnPContext)    
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"
     }
     $MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
-    if ($ExcludeHandlers.IsPresent) {
-        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -Handlers $Handlers -ExcludeHandlers $ExcludeHandlers
+    if ($ExcludeHandlers -ne $null) {
+        Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -ExcludeHandlers $ExcludeHandlers
     } else {
         Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -Handlers $Handlers
     }
