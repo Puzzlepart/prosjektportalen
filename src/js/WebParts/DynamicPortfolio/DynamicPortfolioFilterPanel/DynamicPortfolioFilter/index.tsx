@@ -31,7 +31,7 @@ export default class DynamicPortfolioFilter extends React.PureComponent<IDynamic
     /**
      * Renders the <DynamicPortfolioFilter /> component
     */
-    public render(): JSX.Element {
+    public render(): React.ReactElement<IDynamicPortfolioFilterProps> {
         return (
             <div className="ms-Grid-row" style={{ marginTop: 20 }}>
                 <div
@@ -55,19 +55,19 @@ export default class DynamicPortfolioFilter extends React.PureComponent<IDynamic
     /**
      * Render filter items
      */
-    private renderItems = () => {
-        if (this.state.filter) {
-            return this.state.filter.items.map((item, idx) => {
+    private renderItems() {
+        const { filter } = this.state;
+        if (filter) {
+            return filter.items.map((item, idx) => {
                 item.selected = item.defaultSelected || (Util.isArray(this.state.filter.selected) && Array.contains(this.state.filter.selected, item.value));
                 return (
                     <DynamicPortfolioFilterItem
                         key={`DynamicPortfolioFilterItem_${idx}`}
-                        filter={this.state.filter}
+                        filter={filter}
                         item={item}
                         className="ms-font-m"
-                        padding={2}
-                        marginBottom={2}
-                        onChange={this.onChange} />
+                        style={{ padding: 2, marginBottom: 2 }}
+                        onChanged={this.onChange} />
                 );
             });
         } else {
