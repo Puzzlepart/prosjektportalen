@@ -1,12 +1,8 @@
 import IDynamicPortfolioFilterItem from "../DynamicPortfolioFilterItem/IDynamicPortfolioFilterItem";
+import IDynamicPortfolioRefinerConfig from "../../DynamicPortfolioConfiguration/IDynamicPortfolioRefinerConfig";
 
-export default  interface IDynamicPortfolioFilter {
-    name: string;
-    key?: string;
+export default interface IDynamicPortfolioFilter extends IDynamicPortfolioRefinerConfig {
     emptyMessage: string;
-    multi: boolean;
     items: IDynamicPortfolioFilterItem[];
     selected?: string[];
-    defaultHidden?: boolean;
-    iconName?: string;
 }
