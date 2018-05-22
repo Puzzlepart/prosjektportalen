@@ -7,20 +7,17 @@ import IDynamicPortfolioFilterItemProps from "./IDynamicPortfolioFilterItemProps
  *
  * @param {IDynamicPortfolioFilterItemProps} param0 Props
  */
-const DynamicPortfolioFilterItem = ({ filter, item, className, marginBottom, padding, onChange }: IDynamicPortfolioFilterItemProps) => {
+const DynamicPortfolioFilterItem = (props: IDynamicPortfolioFilterItemProps) => {
     return (
         <li>
             <div
-                className={className}
-                style={{
-                    padding,
-                    marginBottom,
-                }}>
+                className={props.className}
+                style={props.style}>
                 <Checkbox
-                    label={item.name}
-                    disabled={item.readOnly}
-                    defaultChecked={item.selected}
-                    onChange={(e, checked) => onChange(item, checked)} />
+                    label={props.item.name}
+                    disabled={props.item.readOnly}
+                    defaultChecked={props.item.selected}
+                    onChange={(e, checked) => props.onChanged(props.item, checked)} />
             </div>
         </li>
     );
