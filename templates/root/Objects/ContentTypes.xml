@@ -472,7 +472,6 @@
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
-            <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="{parameter:ProjectStatsFieldPrefix}Fields" Required="true" />
             <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="{parameter:ProjectStatsFieldPrefix}WidthSm" />
             <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="{parameter:ProjectStatsFieldPrefix}WidthMd" />
             <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="{parameter:ProjectStatsFieldPrefix}WidthLg" />
