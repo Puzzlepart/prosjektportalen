@@ -20,9 +20,6 @@
                 <FieldRef Name="GtChrHeight" />
                 <FieldRef Name="GtChrFields" />
                 <FieldRef Name="GtChrField" />
-                <FieldRef Name="GtChrStacking" />
-                <FieldRef Name="GtChrShowLegend" />
-                <FieldRef Name="GtChrShowPercentage" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />

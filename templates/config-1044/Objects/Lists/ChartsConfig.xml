@@ -1,5 +1,10 @@
 <pnp:ListInstance Title="Grafkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" />
+    </pnp:ContentTypeBindings>
     <pnp:DataRows>
         <pnp:DataRow>
             <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
