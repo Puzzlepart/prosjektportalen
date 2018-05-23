@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -61,7 +61,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
+                {this._renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems()}
             </div>
         );

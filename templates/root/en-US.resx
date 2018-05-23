@@ -240,6 +240,12 @@
   <data name="Lists_Log_Title" xml:space="preserve">
     <value>Log</value>
   </data>
+  <data name="Lists_StatsFieldsConfig_Title" xml:space="preserve">
+    <value>Statistics fields</value>
+  </data>
+  <data name="Lists_ChartsConfig_Title" xml:space="preserve">
+    <value>Graph configuration</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -471,6 +477,48 @@
   <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
     <value>Site Template</value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Name" xml:space="preserve">
+    <value>Statistics field</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
+    <value>Graph configuration base</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
+    <value>Bar chart</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
+    <value>Column chart</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
+    <value>Pie chart</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Config Base</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Field_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Field</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Refiner_Name" xml:space="preserve">
+    <value>Dynamic Portfolio Refiner</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_View_Name" xml:space="preserve">
+    <value>Dynamic Portfolio View</value>
+  </data>
+  <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
+    <value>List Content Config</value>
+  </data>
+  <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
+    <value>Project Config Base</value>
+  </data>
+  <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
+    <value>Project Field</value>
+  </data>
+  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
+    <value>Project Key Value</value>
+  </data>
+  <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
@@ -551,6 +599,21 @@
   </data>
   <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="ContentTypes_Statistikkfelt_Description" xml:space = "preserve">
+    <value>Create a new statistics field</value>
+  </data>
+  <data name="ContentTypes_Grafconfigurationelement_Description" xml:space = "preserve">
+    <value>Create a new graph configuration element</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Description" xml:space = "preserve">
+    <value>Create a new bar chart</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Description" xml:space = "preserve">
+    <value>Create a new column chart</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Description" xml:space = "preserve">
+    <value>Create a new pie chart</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
@@ -1059,6 +1122,78 @@
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Show in form</value>
   </data>
+  <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_DisplayName" xml:space="preserve">
+    <value>Start time</value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
+    <value>End time</value>
+  </data>
+  <data name="SiteFields_GtChrShowItemSelector_DisplayName" xml:space = "preserve">
+    <value>Show item selector</value>
+  </data>
+  <data name="SiteFields_GtChrSubTitle_DisplayName" xml:space = "preserve">
+    <value>Subtitle</value>
+  </data>
+  <data name="SiteFields_GtChrYAxisTitle_DisplayName" xml:space = "preserve">
+    <value>Title (Y-axis)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthLg_DisplayName" xml:space = "preserve">
+    <value>Width (640px - 1023px)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthSm_DisplayName" xml:space = "preserve">
+    <value>Width (320px - 479px)</value>
+  </data>
+  <data name="SiteFields_GtChrYMin_DisplayName" xml:space = "preserve">
+    <value>Min (Y axis)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxl_DisplayName" xml:space = "preserve">
+    <value>Width (1366px - 1919px)</value>
+  </data>
+  <data name="SiteFields_GtChrManagedPropertyName_DisplayName" xml:space = "preserve">
+    <value>Managed property</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXl_DisplayName" xml:space = "preserve">
+    <value>Width (1024px - 1365px)</value>
+  </data>
+  <data name="SiteFields_GtChrYMax_DisplayName" xml:space = "preserve">
+    <value>Max (Y-axis)</value>
+  </data>
+  <data name="SiteFields_GtChrDataType_DisplayName" xml:space = "preserve">
+    <value>Data type</value>
+  </data>
+  <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space = "preserve">
+    <value>Interval (Y-axis)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthMd_DisplayName" xml:space = "preserve">
+    <value>Width (480px - 639px)</value>
+  </data>
+  <data name="SiteFields_GtChrFields_DisplayName" xml:space = "preserve">
+    <value>Fields</value>
+  </data>
+  <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space = "preserve">
+    <value>Value ​​suffix</value>
+  </data>
+  <data name="SiteFields_GtChrMarginTop_DisplayName" xml:space = "preserve">
+    <value>Margin top</value>
+  </data>
+  <data name="SiteFields_GtChrOrder_DisplayName" xml:space = "preserve">
+    <value>Order</value>
+  </data>
+  <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space = "preserve">
+    <value>Show average</value>
+  </data>
+  <data name="SiteFields_GtChrStacking_DisplayName" xml:space = "preserve">
+    <value>Stacking</value>
+  </data>
+  <data name="SiteFields_GtChrShowLegend_DisplayName" xml:space = "preserve">
+    <value>Show legend</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space = "preserve">
+    <value>Width (1920px and up)</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1443,6 +1578,78 @@
   <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtProductDescription_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowItemSelector_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrSubTitle_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYAxisTitle_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthLg_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthSm_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYMin_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxl_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrManagedPropertyName_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXl_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYMax_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrDataType_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYTickInterval_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthMd_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrFields_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrMarginTop_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowAverage_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowLegend_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxxl_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -1722,6 +1929,9 @@
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Save changes</value>
   </data>
+  <data name="String_ChangesWasSaved" xml:space="preserve">
+    <value>Your changes was saved successfully</value>
+  </data>
   <data name="String_Approved" xml:space="preserve">
     <value>Approved</value>
   </data>
@@ -1812,9 +2022,6 @@
   <data name="WebPart_BenefitsOverview_Title" xml:space="preserve">
     <value>Benefit overview</value>
   </data>
-  <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
-    <value>Latest log entries</value>
-  </data>
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Latest information elements </value>
   </data>
@@ -1838,6 +2045,9 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
+  </data>
+  <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
+    <value>Opportunity Matrix</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -2351,6 +2561,36 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the Risks list.</value>
+  </data>
+  <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
+    <value>Very high</value>
+  </data>
+  <data name="OpportunityMatrix_Header_High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="OpportunityMatrix_Header_VeryLow" xml:space="preserve">
+    <value>Very low</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Insignificant" xml:space="preserve">
+    <value>Insignificant</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Limited" xml:space="preserve">
+    <value>Limited</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Moderate" xml:space="preserve">
+    <value>Moderate</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Significant" xml:space="preserve">
+    <value>Significant</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Large" xml:space="preserve">
+    <value>Large</value>
   </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>

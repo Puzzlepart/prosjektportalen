@@ -1,16 +1,12 @@
-import RESOURCE_MANAGER from "../../../@localization";
-import {
-    Web,
-    Folder,
-    FileAddResult,
-    Logger,
-    LogLevel,
-} from "sp-pnp-js";
+import RESOURCE_MANAGER from "../../../Resources";
+import { Web, Folder, FileAddResult, Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import IFile from "./IFile";
 import ListConfig from "../Config/ListConfig";
 import IProvisionContext from "../../IProvisionContext";
 import ProvisionError from "../../ProvisionError";
+
+const LOG_TEMPLATE = "(Files) {0}: {1}";
 
 /**
  * Get file contents
@@ -37,10 +33,14 @@ async function GetFileContents(srcWeb: Web, files: IFile[]): Promise<IFile[]> {
  * @param {string} destLibServerRelUrl Destination library server relative URL
  * @param {string} rootFolderServerRelUrl Root folder server relative URL
  * @param {Folder} destLibRootFolder Destination library root foler
- * @param {string[]} folders Folders
+ * @param {string[]} folders An array of folders to provision
  */
-async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServerRelUrl: string, destLibRootFolder: Folder, folders: string[]): Promise<void> {
-    Logger.log({ message: "(CreateFolderHierarchy) Creating folder hierarchy", data: { folders }, level: LogLevel.Info });
+async function ProvisionFolderHierarchy(destLibServerRelUrl: string, rootFolderServerRelUrl: string, destLibRootFolder: Folder, folders: string[]): Promise<void> {
+    Logger.log({
+        message: String.format(LOG_TEMPLATE, "ProvisionFolderHierarchy", "Creating folder hierarchy"),
+        data: { folders },
+        level: LogLevel.Info,
+    });
     try {
         await folders
             .sort()
@@ -48,10 +48,14 @@ async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServ
                 const folderServerRelUrl = `${destLibServerRelUrl}/${folder.replace(rootFolderServerRelUrl, "")}`;
                 return chain.then(_ => destLibRootFolder.folders.add(folderServerRelUrl));
             }, Promise.resolve());
-        Logger.log({ message: "(CreateFolderHierarchy) Folder hierarchy created", data: { folders }, level: LogLevel.Info });
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "ProvisionFolderHierarchy", "Folder hierarchy created"),
+            data: { folders },
+            level: LogLevel.Info,
+        });
         return;
     } catch (err) {
-        throw new ProvisionError(err, "CreateFolderHierarchy");
+        throw new ProvisionError(err, "ProvisionFolderHierarchy");
     }
 }
 
@@ -63,9 +67,12 @@ async function CreateFolderHierarchy(destLibServerRelUrl: string, rootFolderServ
  */
 function ReplaceTokensInFilename(filename: string, context: IProvisionContext): string {
     const tokensMap = { "{projectname}": context.model.Title };
-    const newFilename = Object.keys(tokensMap).reduce((name, token) => {
-        return name.replace(new RegExp(token, "g"), tokensMap[token]);
-    }, filename);
+    const newFilename = Object.keys(tokensMap).reduce((name, token) => name.replace(new RegExp(token, "g"), tokensMap[token]), filename);
+    Logger.log({
+        message: String.format(LOG_TEMPLATE, "ReplaceTokensInFilename", "Replaced tokens in filename"),
+        data: { filename, newFilename },
+        level: LogLevel.Info,
+    });
     return newFilename;
 }
 
@@ -74,51 +81,91 @@ function ReplaceTokensInFilename(filename: string, context: IProvisionContext): 
  *
  * @param {IProvisionContext} context Provisioning context
  * @param {ListConfig} conf List configuration
+ * @param {number} top Number of files to fetch
  */
-export async function CopyFiles(context: IProvisionContext, conf: ListConfig): Promise<FileAddResult[]> {
-    Logger.log({ message: "(CopyFiles) Copy of files started.", data: { conf }, level: LogLevel.Info });
-    const srcWeb = new Web(Util.makeUrlAbsolute(conf.SourceUrl));
+export async function CopyFiles(context: IProvisionContext, conf: ListConfig, top = 500): Promise<FileAddResult[]> {
+    Logger.log({
+        message: String.format(LOG_TEMPLATE, "CopyFiles", "Copy of files started"),
+        data: { conf },
+        level: LogLevel.Info,
+    });
+
+    // Constants
+    const srcWebAbsoluteUrl = Util.makeUrlAbsolute(conf.SourceUrl);
+    const destWebAbsoluteUrl = Util.makeUrlAbsolute(context.url);
+    const srcWeb = new Web(srcWebAbsoluteUrl);
     const srcList = srcWeb.lists.getByTitle(conf.SourceList);
-    const destWeb = new Web(Util.makeUrlAbsolute(context.url));
+    const destWeb = new Web(destWebAbsoluteUrl);
     const destLibServerRelUrl = Util.makeUrlRelativeToSite(`${context.url}/${conf.DestinationLibrary}`);
     const destLibRootFolder = destWeb.getFolderByServerRelativeUrl(destLibServerRelUrl);
+
     try {
-        const [{ RootFolder }, items] = await Promise.all([
-            srcList
-                .expand("RootFolder")
-                .get(),
+        const [spList, spItems] = await Promise.all([
+            srcList.expand("RootFolder").get(),
             srcList
                 .items
                 .expand("Folder")
                 .select("Title", "LinkFilename", "FileRef", "FileDirRef", "Folder/ServerRelativeUrl")
-                .top(500)
+                .top(top)
                 .get(),
         ]);
+
         let folders: string[] = [];
         let files: IFile[] = [];
 
-        items.forEach(i => {
-            if (i.Folder && i.Folder.hasOwnProperty("ServerRelativeUrl")) {
-                folders.push(i.Folder.ServerRelativeUrl);
+        spItems.forEach(item => {
+            if (item.Folder && item.Folder.hasOwnProperty("ServerRelativeUrl")) {
+                folders.push(item.Folder.ServerRelativeUrl);
             } else {
-                files.push(i);
+                files.push(item);
             }
         });
 
-        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary));
-        await CreateFolderHierarchy(destLibServerRelUrl, RootFolder.ServerRelativeUrl, destLibRootFolder, folders);
+        // Progress update
+        const step = RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent");
+        const progress = String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary);
+        context.progressCallbackFunc(step, progress);
+        await ProvisionFolderHierarchy(destLibServerRelUrl, spList.RootFolder.ServerRelativeUrl, destLibRootFolder, folders);
 
-        Logger.log({ message: "(CopyFiles) Copying files", data: { files }, level: LogLevel.Info });
         const filesWithContents = await GetFileContents(srcWeb, files);
-        const fileAddPromises = filesWithContents.map(fwc => new Promise<any>((res, rej) => {
-            let destFolderUrl = `${destLibServerRelUrl}${fwc.FileDirRef.replace(RootFolder.ServerRelativeUrl, "")}`;
-            destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(ReplaceTokensInFilename(fwc.LinkFilename, context), fwc.Blob, true).then(res, rej);
-        }));
-        const fileAddResult = await Promise.all(fileAddPromises);
-        Logger.log({ message: "(CopyFiles) Copy of files done.", data: { conf }, level: LogLevel.Info });
-        return fileAddResult;
+        let filesCopied = [];
+
+        for (let i = 0; i < filesWithContents.length; i++) {
+            let file = filesWithContents[i];
+            let destFolderUrl = `${destLibServerRelUrl}${file.FileDirRef.replace(spList.RootFolder.ServerRelativeUrl, "")}`;
+            try {
+                Logger.log({
+                    message: String.format(LOG_TEMPLATE, "CopyFiles", `Copying file ${file.LinkFilename}`),
+                    level: LogLevel.Info,
+                });
+                const filename = ReplaceTokensInFilename(file.LinkFilename, context);
+                const fileAddResult = await destWeb.getFolderByServerRelativeUrl(destFolderUrl).files.add(filename, file.Blob, true);
+                filesCopied.push(fileAddResult);
+                Logger.log({
+                    message: String.format(LOG_TEMPLATE, "CopyFiles", `Successfully copied file ${file.LinkFilename}`),
+                    level: LogLevel.Info,
+                });
+            } catch (err) {
+                Logger.log({
+                    message: String.format(LOG_TEMPLATE, "CopyFiles", `Copy of file ${file.LinkFilename} failed`),
+                    data: { file, err },
+                    level: LogLevel.Warning,
+                });
+            }
+        }
+
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "CopyFiles", `Successfully copied ${filesCopied.length} of ${filesWithContents.length} files`),
+            level: LogLevel.Info,
+        });
+
+        return filesCopied;
     } catch (err) {
-        Logger.log({ message: "(CopyFiles) Copy of files failed.", data: { conf, err }, level: LogLevel.Error });
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "CopyFiles", "Copy of files failed"),
+            data: { conf, err },
+            level: LogLevel.Error,
+        });
         throw new ProvisionError(err, "CopyFiles");
     }
 }

@@ -1,8 +1,9 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../@localization";
+import RESOURCE_MANAGER from "../../../Resources";
 import pnp, { List, Logger, LogLevel } from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
+import * as sanitize from "sanitize-filename";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -107,10 +108,11 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             case ExportReportStatus.IDLE: {
                 return (
                     <PrimaryButton
+                        id="pp-saveSnapshotBtn"
                         text={exportTypeContext.SAVE}
                         className="save-snapshot-btn"
                         iconProps={{ iconName: exportTypeContext.SAVE_ICON_NAME }}
-                        onClick={this._onExportClick} />
+                        onClick={(e) => {this._onExportClick(e); }} />
                 );
             }
         }
@@ -193,7 +195,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * On export click
      */
-    private async _onExportClick(): Promise<void> {
+    private async _onExportClick(e): Promise<void> {
+        e.preventDefault();
         this.startExport();
     }
 
@@ -227,7 +230,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         const report = await this.saveReportToLibrary(blob, this.props.exportType);
         Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
         this.setState({
-            reports: [...this.state.reports, report],
+            reports: [report, ...this.state.reports],
             exportStatus: ExportReportStatus.HAS_EXPORTED,
         });
     }
@@ -265,7 +268,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveReportToLibrary(reportBlob: Blob, fileExtension: string): Promise<IReport> {
         const dtFormatted = moment(new Date()).format("YYYY-MM-D-HHmm");
-        const fileName = `${dtFormatted}-${_spPageContextInfo.webTitle}.${fileExtension}`;
+        const fileName = `${dtFormatted}-${sanitize(_spPageContextInfo.webTitle)}.${fileExtension}`;
         const fileTitle = `${dtFormatted} ${_spPageContextInfo.webTitle}`;
         const libServerRelativeUrl = `${_spPageContextInfo.webServerRelativeUrl}/${this.props.reportsLibTitle}`;
         Logger.log({ message: `(saveReportToLibrary) Saving report as ${fileExtension}`, data: { fileName, fileTitle, libServerRelativeUrl }, level: LogLevel.Info });

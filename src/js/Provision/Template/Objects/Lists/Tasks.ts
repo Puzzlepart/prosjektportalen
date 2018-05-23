@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import { IList } from "sp-pnp-provisioning/lib/schema";
 import { GtProjectTaskComElement, GtProjectTaskRisk, GtProjectTaskProduct, GtProjectTaskChange, GtProjectTaskGain } from "./SiteFields";
 

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
 import { UpdatePropertyArray } from "../../Util/PropertyBag";
 import GetActivatedExtensions from "./GetActivatedExtensions";

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../@localization";
+import RESOURCE_MANAGER from "../Resources";
 import ProjectList, { IProjectListProps } from "./ProjectList";
 import ProjectInfo, { IProjectInfoProps } from "./ProjectInfo";
 import ProjectPhases, { IProjectPhasesProps } from "./ProjectPhases";
@@ -10,11 +10,12 @@ import DynamicPortfolio, { IDynamicPortfolioProps } from "./DynamicPortfolio";
 import BenefitsOverview, { IBenefitsOverviewProps } from "./BenefitsOverview";
 import ProjectStatus, { IProjectStatusProps } from "./ProjectStatus";
 import ExperienceLog, { IExperienceLogProps } from "./ExperienceLog";
-import LatestLogEntries, { ILatestLogEntriesProps } from "./LatestLogEntries";
 import WebPropertyBagEditor, { IWebPropertyBagEditorProps } from "./WebPropertyBagEditor";
 import NewProjectForm, { INewProjectFormProps } from "./NewProjectForm";
 import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
+import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix";
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
+import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -34,11 +35,15 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", { dataSource: DataSource.Search, groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
-    new WebPartComponent<ILatestLogEntriesProps>(LatestLogEntries, "pp-latestlogentries"),
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
+    new WebPartComponent<IOpportunityMatrixProps>(OpportunityMatrix, "pp-opportunityMatrix", { showEmptyMessage: true }),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
+    new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
+        statsFieldsListName: "Statistikkfelter",
+        chartsConfigListName: "Grafkonfigurasjon",
+    }),
 ];
 
 /**
@@ -70,8 +75,9 @@ export {
     BenefitsOverview,
     ProjectStatus,
     ExperienceLog,
-    LatestLogEntries,
     WebPropertyBagEditor,
     NewProjectForm,
     RiskMatrix,
+    DiceCalculator,
+    ProjectStats,
 };

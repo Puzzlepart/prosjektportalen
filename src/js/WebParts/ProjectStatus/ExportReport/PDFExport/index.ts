@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Site, Web } from "sp-pnp-js";

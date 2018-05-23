@@ -4,95 +4,95 @@
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
-            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
-            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
-            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="{parameter:GenericFieldPrefix}StSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="{parameter:GenericFieldPrefix}StSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="{parameter:GenericFieldPrefix}StSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="{parameter:GenericFieldPrefix}StSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="{parameter:GenericFieldPrefix}StSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="{parameter:GenericFieldPrefix}StSecSource" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82802" Name="{resource:ContentTypes_StatusSection_Name}" Description="{resource:ContentTypes_StatusSection_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
-            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
-            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
-            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
-            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" />
-            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
-            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
-            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" Required="true" />
-            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="GtStSecCustomComponent" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="{parameter:GenericFieldPrefix}StSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="{parameter:GenericFieldPrefix}StSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="{parameter:GenericFieldPrefix}StSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="{parameter:GenericFieldPrefix}StSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="{parameter:GenericFieldPrefix}StSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="{parameter:GenericFieldPrefix}StSecSource" />
+            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="{parameter:GenericFieldPrefix}StSecList" />
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="{parameter:GenericFieldPrefix}StSecViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="{parameter:GenericFieldPrefix}StSecViewFields" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="{parameter:GenericFieldPrefix}StSecRowLimit" />
+            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="{parameter:GenericFieldPrefix}StSecFieldName" Required="true" />
+            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="{parameter:GenericFieldPrefix}StSecCustomComponent" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Name="{resource:ContentTypes_ProjectPropertiesSection_Name}" Description="{resource:ContentTypes_ProjectPropertiesSection_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
-            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
-            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
-            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" />
-            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="GtStSecFieldName" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="{parameter:GenericFieldPrefix}StSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="{parameter:GenericFieldPrefix}StSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="{parameter:GenericFieldPrefix}StSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="{parameter:GenericFieldPrefix}StSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="{parameter:GenericFieldPrefix}StSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="{parameter:GenericFieldPrefix}StSecSource" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="{parameter:GenericFieldPrefix}StSecViewFields" />
+            <pnp:FieldRef ID="fe762779-f5d6-475d-ad1d-68e7d9ae0034" Name="{parameter:GenericFieldPrefix}StSecFieldName" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82804" Name="{resource:ContentTypes_RiskSection_Name}" Description="{resource:ContentTypes_RiskSection_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
-            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
-            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
-            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
-            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
-            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
-            <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="GtStSecShowRiskMatrix" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="{parameter:GenericFieldPrefix}StSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="{parameter:GenericFieldPrefix}StSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="{parameter:GenericFieldPrefix}StSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="{parameter:GenericFieldPrefix}StSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="{parameter:GenericFieldPrefix}StSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="{parameter:GenericFieldPrefix}StSecSource" />
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="{parameter:GenericFieldPrefix}StSecViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="{parameter:GenericFieldPrefix}StSecViewFields" Required="true" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="{parameter:GenericFieldPrefix}StSecRowLimit" />
+            <pnp:FieldRef ID="f93b92b8-1a69-445f-b13f-0fc3ef924101" Name="{parameter:GenericFieldPrefix}StSecShowRiskMatrix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82805" Name="{resource:ContentTypes_ListSection_Name}" Description="{resource:ContentTypes_ListSection_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="GtStSecOrder" />
-            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="GtStSecIcon" Required="true" />
-            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="GtStSecShowInNavbar" />
-            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="GtStSecShowInStatusSection" />
-            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="GtStSecShowAsSection" />
-            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="GtStSecSource" />
-            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="GtStSecList" Required="true" />
-            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="GtStSecViewQuery" />
-            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="GtStSecViewFields" Required="true" />
-            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtStSecRowLimit" />
-            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="GtStSecCustomComponent" />
+            <pnp:FieldRef ID="06889695-8107-4ca8-9813-256df32654c6" Name="{parameter:GenericFieldPrefix}StSecOrder" />
+            <pnp:FieldRef ID="b2af224f-5e07-4f9f-9a3a-9f5345bb3153" Name="{parameter:GenericFieldPrefix}StSecIcon" Required="true" />
+            <pnp:FieldRef ID="1c6ac96b-0f62-4396-8e87-d7db512d96b9" Name="{parameter:GenericFieldPrefix}StSecShowInNavbar" />
+            <pnp:FieldRef ID="9985ae83-9e19-48dc-b33d-2fbf84f7202b" Name="{parameter:GenericFieldPrefix}StSecShowInStatusSection" />
+            <pnp:FieldRef ID="3aad67a9-d8bb-41ce-9324-17a757e6b14b" Name="{parameter:GenericFieldPrefix}StSecShowAsSection" />
+            <pnp:FieldRef ID="2d6790ad-9da9-408c-a87f-8d56d7b377f6" Name="{parameter:GenericFieldPrefix}StSecSource" />
+            <pnp:FieldRef ID="4b5ca6f2-a470-4c11-a738-edd9d55fb096" Name="{parameter:GenericFieldPrefix}StSecList" Required="true" />
+            <pnp:FieldRef ID="dd9a8b72-c646-4ec2-b834-614fa27fb79a" Name="{parameter:GenericFieldPrefix}StSecViewQuery" />
+            <pnp:FieldRef ID="2d165a4d-a3e9-4756-acd2-abb537041fd4" Name="{parameter:GenericFieldPrefix}StSecViewFields" Required="true" />
+            <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="{parameter:GenericFieldPrefix}StSecRowLimit" />
+            <pnp:FieldRef ID="03773961-9514-419b-b77b-1137036107b3" Name="{parameter:GenericFieldPrefix}StSecCustomComponent" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D56634648310702" Name="{resource:ContentTypes_Glittertind_element_Name}" Description="{resource:ContentTypes_Glittertind_element_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070201" Name="{resource:ContentTypes_Usikkerhet_Name}" Description="{resource:ContentTypes_Usikkerhet_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
-            <pnp:FieldRef ID="c755525b-3716-4ee8-a4f4-f9684808c009" Name="GtRiskProximity" />
-            <pnp:FieldRef ID="6219fd33-2f3c-42f5-9790-174143bfb99c" Name="GtRiskAction" />
-            <pnp:FieldRef ID="04cfd3c0-5f18-4906-bdca-b5f84b693437" Name="GtRiskStrategy" />
-            <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="GtActionResponsible" />
-            <pnp:FieldRef ID="0e1b295d-2bfb-4ef6-ae92-e72068e56111" Name="GtRiskProbability" />
-            <pnp:FieldRef ID="554d32a0-0148-4b3c-bfc4-f101232ee501" Name="GtRiskConsequence" />
-            <pnp:FieldRef ID="8499bd48-4c5d-43ae-8e27-7968d49ca14f" Name="GtRiskFactor" />
-            <pnp:FieldRef ID="f81ebcb7-8791-44b0-9919-08ed5524b11d" Name="GtRiskProbabilityPostAction" />
-            <pnp:FieldRef ID="00f17233-d4c0-49d0-aebd-5004552abb17" Name="GtRiskConsequencePostAction" />
-            <pnp:FieldRef ID="62f0454d-1150-4d55-86ef-075f786d6e5c" Name="GtRiskFactorPostAction" />
-            <pnp:FieldRef ID="6c2da0dc-77b1-4152-b751-97adf436faa0" Name="GtRiskStatus" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
+            <pnp:FieldRef ID="c755525b-3716-4ee8-a4f4-f9684808c009" Name="{parameter:GenericFieldPrefix}RiskProximity" />
+            <pnp:FieldRef ID="6219fd33-2f3c-42f5-9790-174143bfb99c" Name="{parameter:GenericFieldPrefix}RiskAction" />
+            <pnp:FieldRef ID="04cfd3c0-5f18-4906-bdca-b5f84b693437" Name="{parameter:GenericFieldPrefix}RiskStrategy" />
+            <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="{parameter:GenericFieldPrefix}ActionResponsible" />
+            <pnp:FieldRef ID="0e1b295d-2bfb-4ef6-ae92-e72068e56111" Name="{parameter:GenericFieldPrefix}RiskProbability" />
+            <pnp:FieldRef ID="554d32a0-0148-4b3c-bfc4-f101232ee501" Name="{parameter:GenericFieldPrefix}RiskConsequence" />
+            <pnp:FieldRef ID="8499bd48-4c5d-43ae-8e27-7968d49ca14f" Name="{parameter:GenericFieldPrefix}RiskFactor" />
+            <pnp:FieldRef ID="f81ebcb7-8791-44b0-9919-08ed5524b11d" Name="{parameter:GenericFieldPrefix}RiskProbabilityPostAction" />
+            <pnp:FieldRef ID="00f17233-d4c0-49d0-aebd-5004552abb17" Name="{parameter:GenericFieldPrefix}RiskConsequencePostAction" />
+            <pnp:FieldRef ID="62f0454d-1150-4d55-86ef-075f786d6e5c" Name="{parameter:GenericFieldPrefix}RiskFactorPostAction" />
+            <pnp:FieldRef ID="6c2da0dc-77b1-4152-b751-97adf436faa0" Name="{parameter:GenericFieldPrefix}RiskStatus" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107020101" Name="{resource:ContentTypes_Risiko_Name}" Description="{resource:ContentTypes_Risiko_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
@@ -100,67 +100,70 @@
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070202" Name="{resource:ContentTypes_Interessent_Name}" Description="{resource:ContentTypes_Interessent_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="2847b3b0-ed22-4c47-b7c0-3ebfc83dae4a" Name="GtStakeholderGroup" />
-            <pnp:FieldRef ID="970ed1b2-9e71-45aa-8f8d-c391a15f067f" Name="GtStakeholderContext" />
-            <pnp:FieldRef ID="1150d6bd-c9ba-4014-bd74-7d559110841d" Name="GtStakeholderStrategy" />
-            <pnp:FieldRef ID="748ae9b5-223d-4daa-b8f8-dc14284b59db" Name="GtStakeholderInterest" />
-            <pnp:FieldRef ID="475d2ca1-5b8e-4479-96ae-81c0a89354f3" Name="GtStakeholderInfluence" />
-            <pnp:FieldRef ID="2bb7e155-3af4-4353-a460-8da404c4e748" Name="GtStakeholderInfluencePossibilty" />
-            <pnp:FieldRef ID="45d5b378-67ce-4f21-b622-fe54b27c83a6" Name="GtStakeholderActions" />
+            <pnp:FieldRef ID="2847b3b0-ed22-4c47-b7c0-3ebfc83dae4a" Name="{parameter:GenericFieldPrefix}StakeholderGroup" />
+            <pnp:FieldRef ID="970ed1b2-9e71-45aa-8f8d-c391a15f067f" Name="{parameter:GenericFieldPrefix}StakeholderContext" />
+            <pnp:FieldRef ID="1150d6bd-c9ba-4014-bd74-7d559110841d" Name="{parameter:GenericFieldPrefix}StakeholderStrategy" />
+            <pnp:FieldRef ID="748ae9b5-223d-4daa-b8f8-dc14284b59db" Name="{parameter:GenericFieldPrefix}StakeholderInterest" />
+            <pnp:FieldRef ID="475d2ca1-5b8e-4479-96ae-81c0a89354f3" Name="{parameter:GenericFieldPrefix}StakeholderInfluence" />
+            <pnp:FieldRef ID="2bb7e155-3af4-4353-a460-8da404c4e748" Name="{parameter:GenericFieldPrefix}StakeholderInfluencePossibilty" />
+            <pnp:FieldRef ID="45d5b378-67ce-4f21-b622-fe54b27c83a6" Name="{parameter:GenericFieldPrefix}StakeholderActions" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070203" Name="{resource:ContentTypes_Kommunikasjonselement_Name}" Description="{resource:ContentTypes_Kommunikasjonselement_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="27d85299-57fd-4c76-a752-edafe1ca944e" Name="GtActionDescription" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
-            <pnp:FieldRef ID="bf340fba-c512-4a07-a543-cdf2d10c578e" Name="GtActionStatus" />
-            <pnp:FieldRef ID="4d5e69a2-2eb5-422c-af04-70b67697cd23" Name="GtActionChannel" />
-            <pnp:FieldRef ID="77450582-a061-4416-af17-6dfb99fa9036" Name="GtActionDate" />
-            <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="GtActionResponsible" />
+            <pnp:FieldRef ID="27d85299-57fd-4c76-a752-edafe1ca944e" Name="{parameter:GenericFieldPrefix}ActionDescription" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
+            <pnp:FieldRef ID="bf340fba-c512-4a07-a543-cdf2d10c578e" Name="{parameter:GenericFieldPrefix}ActionStatus" />
+            <pnp:FieldRef ID="4d5e69a2-2eb5-422c-af04-70b67697cd23" Name="{parameter:GenericFieldPrefix}ActionChannel" />
+            <pnp:FieldRef ID="77450582-a061-4416-af17-6dfb99fa9036" Name="{parameter:GenericFieldPrefix}ActionDate" />
+            <pnp:FieldRef ID="2ae541a5-5ecc-481d-afb6-c03a6f1e71b4" Name="{parameter:GenericFieldPrefix}ActionResponsible" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070204" Name="{resource:ContentTypes_Sjekkpunkt_Name}" Description="{resource:ContentTypes_Sjekkpunkt_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
-            <pnp:FieldRef ID="249527a3-c7f9-4ea5-9c33-f942c06c9215" Name="GtChecklistStatus" />
-            <pnp:FieldRef ID="509a6bfe-004e-41f9-bd73-9a0e02d5c4a7" Name="GtComment" />
-            <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="GtSortOrder" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
+            <pnp:FieldRef ID="249527a3-c7f9-4ea5-9c33-f942c06c9215" Name="{parameter:GenericFieldPrefix}ChecklistStatus" />
+            <pnp:FieldRef ID="509a6bfe-004e-41f9-bd73-9a0e02d5c4a7" Name="{parameter:GenericFieldPrefix}Comment" />
+            <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="{parameter:GenericFieldPrefix}SortOrder" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070205" Name="{resource:ContentTypes_Prosjektprodukt_Name}" Description="{resource:ContentTypes_Prosjektprodukt_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="5563056f-533f-4333-bd29-85a2f94a37d0" Name="GtProductPhase" />
-            <pnp:FieldRef ID="c8e260c2-6887-4f9e-a713-7200246c3b1c" Name="GtProductQualityExpectations" />
-            <pnp:FieldRef ID="149a30c2-056d-44f0-9cb5-29bfc632ca25" Name="GtProductAcceptanceCriteria" />
-            <pnp:FieldRef ID="3dd7058b-0ba1-46e5-b40a-4f2f542638ea" Name="GtProductQualityTolerance" />
-            <pnp:FieldRef ID="c845028e-3395-49d4-86fe-6d94992c38c2" Name="GtProductQualityResponsible" />
-            <pnp:FieldRef ID="3bcfaa2c-e9bd-4a22-bf65-af4d68c308e7" Name="GtProductAcceptanceMethod" />
-            <pnp:FieldRef ID="dc856c1d-0b98-4d38-9918-d7068f74bd8b" Name="GtProductAcceptanceResponsible" />
-            <pnp:FieldRef ID="ce9474dd-407b-4480-951a-5381857fad6a" Name="GtProductAcceptanceDate" />
-            <pnp:FieldRef ID="4322afd6-5f0f-4a22-819a-cb61668e6ede" Name="GtProductStatus" />
-            <pnp:FieldRef ID="4393ed3c-1599-4ab3-8444-444ab35754bb" Name="GtProductStatusComment" />
+            <pnp:FieldRef ID="99430a99-1354-418f-921f-7ddfdb6c0d7f" Name="{parameter:GenericFieldPrefix}ProductDescription" />
+            <pnp:FieldRef ID="219a5cdf-799c-48ee-8869-ea39e4b9a6aa" Name="{parameter:GenericFieldPrefix}ProductStartTime" />
+            <pnp:FieldRef ID="eb78509b-4109-474e-aca8-90d024a960de" Name="{parameter:GenericFieldPrefix}ProductEndTime" />
+            <pnp:FieldRef ID="5563056f-533f-4333-bd29-85a2f94a37d0" Name="{parameter:GenericFieldPrefix}ProductPhase" />
+            <pnp:FieldRef ID="c8e260c2-6887-4f9e-a713-7200246c3b1c" Name="{parameter:GenericFieldPrefix}ProductQualityExpectations" />
+            <pnp:FieldRef ID="149a30c2-056d-44f0-9cb5-29bfc632ca25" Name="{parameter:GenericFieldPrefix}ProductAcceptanceCriteria" />
+            <pnp:FieldRef ID="3dd7058b-0ba1-46e5-b40a-4f2f542638ea" Name="{parameter:GenericFieldPrefix}ProductQualityTolerance" />
+            <pnp:FieldRef ID="c845028e-3395-49d4-86fe-6d94992c38c2" Name="{parameter:GenericFieldPrefix}ProductQualityResponsible" />
+            <pnp:FieldRef ID="3bcfaa2c-e9bd-4a22-bf65-af4d68c308e7" Name="{parameter:GenericFieldPrefix}ProductAcceptanceMethod" />
+            <pnp:FieldRef ID="dc856c1d-0b98-4d38-9918-d7068f74bd8b" Name="{parameter:GenericFieldPrefix}ProductAcceptanceResponsible" />
+            <pnp:FieldRef ID="ce9474dd-407b-4480-951a-5381857fad6a" Name="{parameter:GenericFieldPrefix}ProductAcceptanceDate" />
+            <pnp:FieldRef ID="4322afd6-5f0f-4a22-819a-cb61668e6ede" Name="{parameter:GenericFieldPrefix}ProductStatus" />
+            <pnp:FieldRef ID="4393ed3c-1599-4ab3-8444-444ab35754bb" Name="{parameter:GenericFieldPrefix}ProductStatusComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070206" Name="{resource:ContentTypes_Prosjektloggelement_Name}" Description="{resource:ContentTypes_Prosjektloggelement_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="2391d165-5d13-46b7-87d2-e32040293210" Name="GtProjectLogType" />
-            <pnp:FieldRef ID="49b0ba6b-d1ec-4644-91b7-691a33524c90" Name="GtProjectLogReporter" />
-            <pnp:FieldRef ID="a3462545-ac76-4681-96b4-f883fea4b2ba" Name="GtProjectLogDescription" />
-            <pnp:FieldRef ID="7838332a-cf7f-47d5-924f-8c6d134935ea" Name="GtProjectLogResponsible" />
-            <pnp:FieldRef ID="7b424ee7-bcc8-490a-8c4c-01637da03347" Name="GtProjectLogConsequence" />
-            <pnp:FieldRef ID="6aad1f97-ba6f-4865-b325-9deea7bd0564" Name="GtProjectLogRecommendation" />
-            <pnp:FieldRef ID="832a2eeb-5709-40b4-9f7c-04ae67ddd86b" Name="GtProjectLogExperience" />
-            <pnp:FieldRef ID="6539658a-b186-402c-b224-9fb41cb48596" Name="GtProjectLogActors" />
+            <pnp:FieldRef ID="2391d165-5d13-46b7-87d2-e32040293210" Name="{parameter:GenericFieldPrefix}ProjectLogType" />
+            <pnp:FieldRef ID="49b0ba6b-d1ec-4644-91b7-691a33524c90" Name="{parameter:GenericFieldPrefix}ProjectLogReporter" />
+            <pnp:FieldRef ID="a3462545-ac76-4681-96b4-f883fea4b2ba" Name="{parameter:GenericFieldPrefix}ProjectLogDescription" />
+            <pnp:FieldRef ID="7838332a-cf7f-47d5-924f-8c6d134935ea" Name="{parameter:GenericFieldPrefix}ProjectLogResponsible" />
+            <pnp:FieldRef ID="7b424ee7-bcc8-490a-8c4c-01637da03347" Name="{parameter:GenericFieldPrefix}ProjectLogConsequence" />
+            <pnp:FieldRef ID="6aad1f97-ba6f-4865-b325-9deea7bd0564" Name="{parameter:GenericFieldPrefix}ProjectLogRecommendation" />
+            <pnp:FieldRef ID="832a2eeb-5709-40b4-9f7c-04ae67ddd86b" Name="{parameter:GenericFieldPrefix}ProjectLogExperience" />
+            <pnp:FieldRef ID="6539658a-b186-402c-b224-9fb41cb48596" Name="{parameter:GenericFieldPrefix}ProjectLogActors" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070207" Name="{resource:ContentTypes_Infoelement_Name}" Description="{resource:ContentTypes_Infoelement_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="a3038ecc-69db-4179-b23b-5fdb0535b38c" Name="GtProjectInfoDescription" Required="true" />
+            <pnp:FieldRef ID="a3038ecc-69db-4179-b23b-5fdb0535b38c" Name="{parameter:GenericFieldPrefix}ProjectInfoDescription" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070208" Name="{resource:ContentTypes_Prosjektelement_Name}" Group="{resource:ContentTypes_Group}">
@@ -168,35 +171,35 @@
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
             <pnp:FieldRef ID="83315d18-b8b5-4b60-b1eb-0617e1a1b2d9" Name="ProjectWebUniqueId" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
-            <pnp:FieldRef ID="7b200383-c491-4e5d-8f83-c66231e7a52c" Name="GtProjectUrl" Hidden="false" />
-            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" />
-            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" />
-            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" />
-            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="GtProjectServiceArea" />
-            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="GtProjectType" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
-            <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="GtProjectManager" />
-            <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" />
-            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" />
-            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" />
-            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" />
-            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" />
-            <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="GtStatusTime" />
-            <pnp:FieldRef ID="cb1fc0b7-cbb8-40af-a782-c6b9ad4ee40f" Name="GtStatusTimeComment" />
-            <pnp:FieldRef ID="a9902b9d-8aad-40df-9788-ba73c64c3cb5" Name="GtStatusBudget" />
-            <pnp:FieldRef ID="f2bb8a37-f4cf-43a4-b180-0b07ab14abd5" Name="GtStatusBudgetComment" />
-            <pnp:FieldRef ID="0bbe6a84-67e6-4a9c-b26b-a5973dacd473" Name="GtStatusQuality" />
-            <pnp:FieldRef ID="733a47e1-4465-41c0-89e3-037f9a65c403" Name="GtStatusQualityComment" />
-            <pnp:FieldRef ID="fc8a879d-83bc-4670-b1f6-c9817e333614" Name="GtStatusRisk" />
-            <pnp:FieldRef ID="b5932b1d-bee4-410c-aac2-54a7cd9d5381" Name="GtStatusRiskComment" />
-            <pnp:FieldRef ID="b1958607-cd56-4ecb-9ad7-65fb7d3c22c7" Name="GtStatusGainAchievement" />
-            <pnp:FieldRef ID="cb41572a-78c6-4e33-8505-b97bfd8fd162" Name="GtStatusGainAchievementComment" />
-            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="GtBudgetTotal" />
-            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" />
-            <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" />
-            <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" />
-            <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="GtProjectPhaseChoice" />
+            <pnp:FieldRef ID="7b200383-c491-4e5d-8f83-c66231e7a52c" Name="{parameter:GenericFieldPrefix}ProjectUrl" Hidden="false" />
+            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="{parameter:GenericFieldPrefix}ProjectFinanceName" />
+            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="{parameter:GenericFieldPrefix}ProjectNumber" />
+            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="{parameter:GenericFieldPrefix}ArchiveReference" />
+            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="{parameter:GenericFieldPrefix}ProjectServiceArea" />
+            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="{parameter:GenericFieldPrefix}ProjectType" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
+            <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="{parameter:GenericFieldPrefix}ProjectManager" />
+            <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="{parameter:GenericFieldPrefix}ProjectOwner" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="{parameter:GenericFieldPrefix}GainsResponsible" />
+            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="{parameter:GenericFieldPrefix}StartDate" />
+            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" />
+            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="{parameter:GenericFieldPrefix}ProjectGoals" />
+            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="{parameter:GenericFieldPrefix}OverallStatus" />
+            <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="{parameter:GenericFieldPrefix}StatusTime" />
+            <pnp:FieldRef ID="cb1fc0b7-cbb8-40af-a782-c6b9ad4ee40f" Name="{parameter:GenericFieldPrefix}StatusTimeComment" />
+            <pnp:FieldRef ID="a9902b9d-8aad-40df-9788-ba73c64c3cb5" Name="{parameter:GenericFieldPrefix}StatusBudget" />
+            <pnp:FieldRef ID="f2bb8a37-f4cf-43a4-b180-0b07ab14abd5" Name="{parameter:GenericFieldPrefix}StatusBudgetComment" />
+            <pnp:FieldRef ID="0bbe6a84-67e6-4a9c-b26b-a5973dacd473" Name="{parameter:GenericFieldPrefix}StatusQuality" />
+            <pnp:FieldRef ID="733a47e1-4465-41c0-89e3-037f9a65c403" Name="{parameter:GenericFieldPrefix}StatusQualityComment" />
+            <pnp:FieldRef ID="fc8a879d-83bc-4670-b1f6-c9817e333614" Name="{parameter:GenericFieldPrefix}StatusRisk" />
+            <pnp:FieldRef ID="b5932b1d-bee4-410c-aac2-54a7cd9d5381" Name="{parameter:GenericFieldPrefix}StatusRiskComment" />
+            <pnp:FieldRef ID="b1958607-cd56-4ecb-9ad7-65fb7d3c22c7" Name="{parameter:GenericFieldPrefix}StatusGainAchievement" />
+            <pnp:FieldRef ID="cb41572a-78c6-4e33-8505-b97bfd8fd162" Name="{parameter:GenericFieldPrefix}StatusGainAchievementComment" />
+            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="{parameter:GenericFieldPrefix}BudgetTotal" />
+            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="{parameter:GenericFieldPrefix}CostsTotal" />
+            <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="{parameter:GenericFieldPrefix}ProjectForecast" />
+            <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="{parameter:GenericFieldPrefix}BudgetLastReportDate" />
+            <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="{parameter:GenericFieldPrefix}ProjectPhaseChoice" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
@@ -206,12 +209,12 @@
             <pnp:FieldRef ID="5f47e085-2150-41dc-b661-442f3027f552" Name="SelectFilename" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
-            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" Hidden="true" />
-            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" Hidden="true" />
-            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" Hidden="true" />
-            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="GtProjectServiceArea" Hidden="true" />
-            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="GtProjectType" Hidden="true" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
+            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="{parameter:GenericFieldPrefix}ProjectFinanceName" Hidden="true" />
+            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="{parameter:GenericFieldPrefix}ProjectNumber" Hidden="true" />
+            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="{parameter:GenericFieldPrefix}ArchiveReference" Hidden="true" />
+            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="{parameter:GenericFieldPrefix}ProjectServiceArea" Hidden="true" />
+            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="{parameter:GenericFieldPrefix}ProjectType" Hidden="true" />
             <pnp:FieldRef ID="8c06beca-0777-48f7-91c7-6da68bc07b69" Name="Created" Hidden="true" />
             <pnp:FieldRef ID="28cf69c5-fa48-462a-b5cd-27b6f9d2bd5f" Name="Modified" Hidden="true" />
             <pnp:FieldRef ID="822c78e3-1ea9-4943-b449-57863ad33ca9" Name="Modified_x0020_By" />
@@ -237,37 +240,37 @@
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Hidden="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" Required="false" />
-            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" Required="false" />
-            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" Required="false" />
-            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="GtProjectServiceArea" Required="true" />
-            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="GtProjectType" Required="true" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
-            <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="GtProjectManager" Required="true" />
-            <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="GtProjectOwner" Required="true" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" Required="false" />
-            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
-            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
-            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="GtProjectGoals" Required="false" />
-            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" Required="false" />
-            <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="GtStatusTime" Required="false" />
-            <pnp:FieldRef ID="cb1fc0b7-cbb8-40af-a782-c6b9ad4ee40f" Name="GtStatusTimeComment" Required="false" />
-            <pnp:FieldRef ID="a9902b9d-8aad-40df-9788-ba73c64c3cb5" Name="GtStatusBudget" Required="false" />
-            <pnp:FieldRef ID="f2bb8a37-f4cf-43a4-b180-0b07ab14abd5" Name="GtStatusBudgetComment" Required="false" />
-            <pnp:FieldRef ID="0bbe6a84-67e6-4a9c-b26b-a5973dacd473" Name="GtStatusQuality" Required="false" />
-            <pnp:FieldRef ID="733a47e1-4465-41c0-89e3-037f9a65c403" Name="GtStatusQualityComment" Required="false" />
-            <pnp:FieldRef ID="fc8a879d-83bc-4670-b1f6-c9817e333614" Name="GtStatusRisk" Required="false" />
-            <pnp:FieldRef ID="b5932b1d-bee4-410c-aac2-54a7cd9d5381" Name="GtStatusRiskComment" Required="false" />
-            <pnp:FieldRef ID="b1958607-cd56-4ecb-9ad7-65fb7d3c22c7" Name="GtStatusGainAchievement" Required="false" />
-            <pnp:FieldRef ID="cb41572a-78c6-4e33-8505-b97bfd8fd162" Name="GtStatusGainAchievementComment" Required="false" />
-            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="GtBudgetTotal" Required="false" />
-            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" Required="false" />
-            <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" Required="false" />
-            <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" Required="false" />
-            <pnp:FieldRef ID="a5d5969b-faff-4e66-a17f-e6b8a681a01f" Name="GtProjectProcessState" />
-            <pnp:FieldRef ID="13aa2254-728b-48bd-8d09-5aa5e20933e1" Name="GtLastGateStatus" />
-            <pnp:FieldRef ID="469d8b96-f097-46de-b9b7-4630670c8ed4" Name="GtRequestedPhase" />
-            <pnp:FieldRef ID="de171613-5f6d-4152-b547-79cf3776992b" Name="GtPhaseIterations" />
+            <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="{parameter:GenericFieldPrefix}ProjectFinanceName" Required="false" />
+            <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="{parameter:GenericFieldPrefix}ProjectNumber" Required="false" />
+            <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="{parameter:GenericFieldPrefix}ArchiveReference" Required="false" />
+            <pnp:FieldRef ID="3275d73a-fd4d-48ba-bcc1-31526460d57b" Name="{parameter:GenericFieldPrefix}ProjectServiceArea" Required="true" />
+            <pnp:FieldRef ID="ddb69044-7d2c-4865-86ec-b71413780409" Name="{parameter:GenericFieldPrefix}ProjectType" Required="true" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" Required="false" />
+            <pnp:FieldRef ID="d46bed8f-0fb6-4684-8221-632fdb12598f" Name="{parameter:GenericFieldPrefix}ProjectManager" Required="true" />
+            <pnp:FieldRef ID="3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2" Name="{parameter:GenericFieldPrefix}ProjectOwner" Required="true" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="{parameter:GenericFieldPrefix}GainsResponsible" Required="false" />
+            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="{parameter:GenericFieldPrefix}StartDate" Required="true" />
+            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" Required="true" />
+            <pnp:FieldRef ID="018f09b8-4954-41bb-a8f6-fa531b90b79f" Name="{parameter:GenericFieldPrefix}ProjectGoals" Required="false" />
+            <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="{parameter:GenericFieldPrefix}OverallStatus" Required="false" />
+            <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="{parameter:GenericFieldPrefix}StatusTime" Required="false" />
+            <pnp:FieldRef ID="cb1fc0b7-cbb8-40af-a782-c6b9ad4ee40f" Name="{parameter:GenericFieldPrefix}StatusTimeComment" Required="false" />
+            <pnp:FieldRef ID="a9902b9d-8aad-40df-9788-ba73c64c3cb5" Name="{parameter:GenericFieldPrefix}StatusBudget" Required="false" />
+            <pnp:FieldRef ID="f2bb8a37-f4cf-43a4-b180-0b07ab14abd5" Name="{parameter:GenericFieldPrefix}StatusBudgetComment" Required="false" />
+            <pnp:FieldRef ID="0bbe6a84-67e6-4a9c-b26b-a5973dacd473" Name="{parameter:GenericFieldPrefix}StatusQuality" Required="false" />
+            <pnp:FieldRef ID="733a47e1-4465-41c0-89e3-037f9a65c403" Name="{parameter:GenericFieldPrefix}StatusQualityComment" Required="false" />
+            <pnp:FieldRef ID="fc8a879d-83bc-4670-b1f6-c9817e333614" Name="{parameter:GenericFieldPrefix}StatusRisk" Required="false" />
+            <pnp:FieldRef ID="b5932b1d-bee4-410c-aac2-54a7cd9d5381" Name="{parameter:GenericFieldPrefix}StatusRiskComment" Required="false" />
+            <pnp:FieldRef ID="b1958607-cd56-4ecb-9ad7-65fb7d3c22c7" Name="{parameter:GenericFieldPrefix}StatusGainAchievement" Required="false" />
+            <pnp:FieldRef ID="cb41572a-78c6-4e33-8505-b97bfd8fd162" Name="{parameter:GenericFieldPrefix}StatusGainAchievementComment" Required="false" />
+            <pnp:FieldRef ID="28be4cc9-bc5e-4a55-a557-f652b564ca75" Name="{parameter:GenericFieldPrefix}BudgetTotal" Required="false" />
+            <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="{parameter:GenericFieldPrefix}CostsTotal" Required="false" />
+            <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="{parameter:GenericFieldPrefix}ProjectForecast" Required="false" />
+            <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="{parameter:GenericFieldPrefix}BudgetLastReportDate" Required="false" />
+            <pnp:FieldRef ID="a5d5969b-faff-4e66-a17f-e6b8a681a01f" Name="{parameter:GenericFieldPrefix}ProjectProcessState" />
+            <pnp:FieldRef ID="13aa2254-728b-48bd-8d09-5aa5e20933e1" Name="{parameter:GenericFieldPrefix}LastGateStatus" />
+            <pnp:FieldRef ID="469d8b96-f097-46de-b9b7-4630670c8ed4" Name="{parameter:GenericFieldPrefix}RequestedPhase" />
+            <pnp:FieldRef ID="de171613-5f6d-4152-b547-79cf3776992b" Name="{parameter:GenericFieldPrefix}PhaseIterations" />
         </pnp:FieldRefs>
         <pnp:DocumentTemplate TargetName="/_layouts/15/spcf.aspx" />
     </pnp:ContentType>
@@ -299,7 +302,7 @@
     <pnp:ContentType ID="0x010800233B015F95174C9A8EB505493841DE8D" Name="{resource:ContentTypes_Prosjektoppgave_Name}" Description="{resource:ContentTypes_Prosjektoppgave_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" Required="false" />
             <pnp:FieldRef ID="64cd368d-2f95-4bfc-a1f9-8d4324ecb007" Name="StartDate" />
             <pnp:FieldRef ID="cd21b4c2-6841-4f9e-a23a-738a65f99889" Name="TaskDueDate" />
             <pnp:FieldRef ID="53101f38-dd2e-458c-b245-0c236cc13d1a" Name="AssignedTo" />
@@ -314,9 +317,9 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x01010064749FE34557AA4095744EFFC3F5140C" Name="{resource:ContentTypes_Utvidelse_Name}" Description="{resource:ContentTypes_Utvidelse_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
-            <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="GtIsEnabled" Required="false" />
-            <pnp:FieldRef ID="b3e95def-a4ea-4e8b-927d-f724744b74a1" Name="GtShowInNewForm" Required="false" />
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="{parameter:GenericFieldPrefix}Order" Required="true" />
+            <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="{parameter:GenericFieldPrefix}IsEnabled" Required="false" />
+            <pnp:FieldRef ID="b3e95def-a4ea-4e8b-927d-f724744b74a1" Name="{parameter:GenericFieldPrefix}ShowInNewForm" Required="false" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" />
@@ -324,137 +327,217 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Name="{resource:ContentTypes_SiteTemplate_Name}" Description="{resource:ContentTypes_SiteTemplate_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
-            <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="GtIsEnabled" />
-            <pnp:FieldRef ID="c69cc4de-f0fa-43aa-a5cc-2a9ae3a2ef9a" Name="GtIsDefault" />
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="{parameter:GenericFieldPrefix}Order" Required="true" />
+            <pnp:FieldRef ID="13703194-10d1-4ea7-94d9-0d9e543aac3c" Name="{parameter:GenericFieldPrefix}IsEnabled" />
+            <pnp:FieldRef ID="c69cc4de-f0fa-43aa-a5cc-2a9ae3a2ef9a" Name="{parameter:GenericFieldPrefix}IsDefault" />
             <pnp:FieldRef ID="8553196d-ec8d-4564-9861-3dbe931050c8" Name="FileLeafRef" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="9da97a8a-1da5-4a77-98d3-4bc10456e700" Name="Comments" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="Dynamic Portfolio Config Base" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="{resource:ContentTypes_Dynamic_Portfolio_Config_Base_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB401" Name="Dynamic Portfolio Field" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB401" Name="{resource:ContentTypes_Dynamic_Portfolio_Field_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
-            <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="GtDpReadOnly" />
-            <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="GtDpRender" />
-            <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="GtDpMinWidth" />
-            <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="GtDpMaxWidth" />
-            <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="GtDpIsResizable" />
-            <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="GtDpGroupBy" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:GenericFieldPrefix}DpProperty" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
+            <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="{parameter:GenericFieldPrefix}DpReadOnly" />
+            <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="{parameter:GenericFieldPrefix}DpRender" />
+            <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="{parameter:GenericFieldPrefix}DpMinWidth" />
+            <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="{parameter:GenericFieldPrefix}DpMaxWidth" />
+            <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="{parameter:GenericFieldPrefix}DpIsResizable" />
+            <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="{parameter:GenericFieldPrefix}DpGroupBy" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB402" Name="Dynamic Portfolio Refiner" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB402" Name="{resource:ContentTypes_Dynamic_Portfolio_Refiner_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
-            <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="GtDpMultiple" />
-            <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="GtDpDefaultHidden" />
-            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:GenericFieldPrefix}DpProperty" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
+            <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="{parameter:GenericFieldPrefix}DpMultiple" />
+            <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="{parameter:GenericFieldPrefix}DpDefaultHidden" />
+            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:GenericFieldPrefix}DpIcon" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="Dynamic Portfolio View" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="{resource:ContentTypes_Dynamic_Portfolio_View_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
-            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="GtDpSearchQuery" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
-            <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="GtDpDefault" />
-            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
-            <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="GtDpFieldsLookup" />
-            <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="GtDpRefinersLookup" />
-            <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="GtDpGroupByLookup" />
-            <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="GtDpPersonalView" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
+            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:GenericFieldPrefix}DpSearchQuery" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
+            <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="{parameter:GenericFieldPrefix}DpDefault" />
+            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:GenericFieldPrefix}DpIcon" />
+            <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="{parameter:GenericFieldPrefix}DpFieldsLookup" />
+            <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="{parameter:GenericFieldPrefix}DpRefinersLookup" />
+            <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="{parameter:GenericFieldPrefix}DpGroupByLookup" />
+            <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="{parameter:GenericFieldPrefix}DpPersonalView" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="List Content Config" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="{resource:ContentTypes_List_Content_Config_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="753af53c-e135-4992-9f12-cffa889be1b8" Name="GtLccSourceUrl"/>
-            <pnp:FieldRef ID="82c3fe98-7bce-4234-9eea-0ae30984dbd8" Name="GtLccSourceList"/>
-            <pnp:FieldRef ID="008bb566-26c3-4cac-8d16-9bf3b1c5fb4b" Name="GtLccDestinationList"/>
-            <pnp:FieldRef ID="91d0b1bf-0a05-44f1-9885-cab0f3c3b77c" Name="GtLccDestinationLibrary"/>
-            <pnp:FieldRef ID="525a7269-b880-4266-8482-fe7a1bfaac3e" Name="GtLccFields"/>
-            <pnp:FieldRef ID="bc92bffb-3ab8-4208-a9c9-8af39e399eec" Name="GtLccLabel"/>
-            <pnp:FieldRef ID="19c0c03c-678a-4c2a-ab9b-cb9ffd903012" Name="GtLccDefault"/>
+            <pnp:FieldRef ID="753af53c-e135-4992-9f12-cffa889be1b8" Name="{parameter:GenericFieldPrefix}LccSourceUrl"/>
+            <pnp:FieldRef ID="82c3fe98-7bce-4234-9eea-0ae30984dbd8" Name="{parameter:GenericFieldPrefix}LccSourceList"/>
+            <pnp:FieldRef ID="008bb566-26c3-4cac-8d16-9bf3b1c5fb4b" Name="{parameter:GenericFieldPrefix}LccDestinationList"/>
+            <pnp:FieldRef ID="91d0b1bf-0a05-44f1-9885-cab0f3c3b77c" Name="{parameter:GenericFieldPrefix}LccDestinationLibrary"/>
+            <pnp:FieldRef ID="525a7269-b880-4266-8482-fe7a1bfaac3e" Name="{parameter:GenericFieldPrefix}LccFields"/>
+            <pnp:FieldRef ID="bc92bffb-3ab8-4208-a9c9-8af39e399eec" Name="{parameter:GenericFieldPrefix}LccLabel"/>
+            <pnp:FieldRef ID="19c0c03c-678a-4c2a-ab9b-cb9ffd903012" Name="{parameter:GenericFieldPrefix}LccDefault"/>
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A3" Name="Project Config Base" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A3" Name="{resource:ContentTypes_Project_Config_Base_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A301" Name="Project Field" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A301" Name="{resource:ContentTypes_Project_Field_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="1e99fca0-3e0f-4632-9dd1-901bd09a13bc" Name="GtPcProjectStatus" />
-            <pnp:FieldRef ID="6c72e8a8-1bfa-4323-9103-8baa067bbfb3" Name="GtPcFrontpage" />
-            <pnp:FieldRef ID="7441ace5-d9e4-4c1d-85fc-ce1614b056ca" Name="GtPcPortfolioPage" />
+            <pnp:FieldRef ID="1e99fca0-3e0f-4632-9dd1-901bd09a13bc" Name="{parameter:GenericFieldPrefix}PcProjectStatus" />
+            <pnp:FieldRef ID="6c72e8a8-1bfa-4323-9103-8baa067bbfb3" Name="{parameter:GenericFieldPrefix}PcFrontpage" />
+            <pnp:FieldRef ID="7441ace5-d9e4-4c1d-85fc-ce1614b056ca" Name="{parameter:GenericFieldPrefix}PcPortfolioPage" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A302" Name="Project Key Value" Description="" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A302" Name="{resource:ContentTypes_Project_Key_Value_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="e122c57e-2d2e-4852-9096-70cc1a30a2ff" Name="GtKey" Required="true" />
-            <pnp:FieldRef ID="60f1e1e1-4cff-4c1f-bb44-5b017393d17c" Name="GtValue" Required="true" />
+            <pnp:FieldRef ID="e122c57e-2d2e-4852-9096-70cc1a30a2ff" Name="{parameter:GenericFieldPrefix}Key" Required="true" />
+            <pnp:FieldRef ID="60f1e1e1-4cff-4c1f-bb44-5b017393d17c" Name="{parameter:GenericFieldPrefix}Value" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="GtGainsType" />
-            <pnp:FieldRef ID="de5cf8b7-6823-4dac-b4a7-916c53bd3376" Name="GtPrereqProfitAchievement" />
-            <pnp:FieldRef ID="d79d8a58-1079-4a3a-9f27-02de9a3eace1" Name="GtGainsTurnover" />
-            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="GtGainsResponsible" />
-            <pnp:FieldRef ID="8d497830-9012-437c-aa65-4b05807f4415" Name="GtMeasureIndicator" />
-            <pnp:FieldRef ID="c5fc8781-7fbd-43a2-a215-c8c959bbab69" Name="GtStartValue" />
-            <pnp:FieldRef ID="8b399cb6-c53e-432c-8ffa-b48e2bfbbf71" Name="GtDesiredValue" />
-            <pnp:FieldRef ID="0d38db52-2040-44c1-823e-7642f76519ee" Name="GtMeasurementUnit" />
-            <pnp:FieldRef ID="b0d03734-a5b1-4e85-a752-45b2da8df7dd" Name="GtRealizationTime" />
+            <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="{parameter:GenericFieldPrefix}GainsType" />
+            <pnp:FieldRef ID="de5cf8b7-6823-4dac-b4a7-916c53bd3376" Name="{parameter:GenericFieldPrefix}PrereqProfitAchievement" />
+            <pnp:FieldRef ID="d79d8a58-1079-4a3a-9f27-02de9a3eace1" Name="{parameter:GenericFieldPrefix}GainsTurnover" />
+            <pnp:FieldRef ID="fcf9c850-8267-4452-8366-74b7a76da177" Name="{parameter:GenericFieldPrefix}GainsResponsible" />
+            <pnp:FieldRef ID="8d497830-9012-437c-aa65-4b05807f4415" Name="{parameter:GenericFieldPrefix}MeasureIndicator" />
+            <pnp:FieldRef ID="c5fc8781-7fbd-43a2-a215-c8c959bbab69" Name="{parameter:GenericFieldPrefix}StartValue" />
+            <pnp:FieldRef ID="8b399cb6-c53e-432c-8ffa-b48e2bfbbf71" Name="{parameter:GenericFieldPrefix}DesiredValue" />
+            <pnp:FieldRef ID="0d38db52-2040-44c1-823e-7642f76519ee" Name="{parameter:GenericFieldPrefix}MeasurementUnit" />
+            <pnp:FieldRef ID="b0d03734-a5b1-4e85-a752-45b2da8df7dd" Name="{parameter:GenericFieldPrefix}RealizationTime" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004D8897A0212F9A40A4C2209D89E5AD4C" Name="{resource:ContentTypes_Endring_Name}" Description="{resource:ContentTypes_Endring_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-            <pnp:FieldRef ID="68a5a2da-048c-4d2d-8ba4-5a8b32b60120" Name="GtProcess" />
-            <pnp:FieldRef ID="1fb52a28-81c4-405f-8da6-883c29b6b856" Name="GtChallengeDescription" />
+            <pnp:FieldRef ID="68a5a2da-048c-4d2d-8ba4-5a8b32b60120" Name="{parameter:GenericFieldPrefix}Process" />
+            <pnp:FieldRef ID="1fb52a28-81c4-405f-8da6-883c29b6b856" Name="{parameter:GenericFieldPrefix}ChallengeDescription" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01007A831AC68204F04AAA022CFF06C7BAA2" Name="{resource:ContentTypes_Gevinstoppfolging_Name}" Description="{resource:ContentTypes_Gevinstoppfolging_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="5c6fafbb-aee4-4e46-b110-5c798916c2ca" Name="GtMeasurementDate" />
-            <pnp:FieldRef ID="70dc7c4a-54ec-4674-b238-2b2a889e1b49" Name="GtMeasurementValue" />
-            <pnp:FieldRef ID="0b78e51d-84d9-4885-9e79-2fe382a2ceb9" Name="GtMeasurementComment" />
+            <pnp:FieldRef ID="5c6fafbb-aee4-4e46-b110-5c798916c2ca" Name="{parameter:GenericFieldPrefix}MeasurementDate" />
+            <pnp:FieldRef ID="70dc7c4a-54ec-4674-b238-2b2a889e1b49" Name="{parameter:GenericFieldPrefix}MeasurementValue" />
+            <pnp:FieldRef ID="0b78e51d-84d9-4885-9e79-2fe382a2ceb9" Name="{parameter:GenericFieldPrefix}MeasurementComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100461A724553D2BC4187101D19A502A9AF" Name="Tilbakemelding" Group="{resource:ContentTypes_Group}">
+    <pnp:ContentType ID="0x0100461A724553D2BC4187101D19A502A9AF" Name="{resource:ContentTypes_Tilbakemelding_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
-            <pnp:FieldRef ID="4deb5071-24b5-4709-be74-39361ab14adb" Name="GtFeedbackScope" Required="true" />
-            <pnp:FieldRef ID="fd69746d-b3c5-4676-8659-e6e3fc09e09f" Name="GtFeedbackDescription" Required="true" />
-            <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="GtFeedbackStatus" />
-            <pnp:FieldRef ID="db42d9aa-f4ab-47e0-b0d6-8c0af0d70d70" Name="GtFeedbackCriticality" Required="true" />
-            <pnp:FieldRef ID="8534f635-0d38-4754-b772-48b0a105357c" Name="GtFeedbackComment" />
+            <pnp:FieldRef ID="4deb5071-24b5-4709-be74-39361ab14adb" Name="{parameter:GenericFieldPrefix}FeedbackScope" Required="true" />
+            <pnp:FieldRef ID="fd69746d-b3c5-4676-8659-e6e3fc09e09f" Name="{parameter:GenericFieldPrefix}FeedbackDescription" Required="true" />
+            <pnp:FieldRef ID="7dc25f7c-9923-4846-94ad-1c2c073aa44f" Name="{parameter:GenericFieldPrefix}FeedbackStatus" />
+            <pnp:FieldRef ID="db42d9aa-f4ab-47e0-b0d6-8c0af0d70d70" Name="{parameter:GenericFieldPrefix}FeedbackCriticality" Required="true" />
+            <pnp:FieldRef ID="8534f635-0d38-4754-b772-48b0a105357c" Name="{parameter:GenericFieldPrefix}FeedbackComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x01006E5BC3A4008144DC8ACEC0107AFC999A" Name="{resource:ContentTypes_Milestone_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
-            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" Required="false" />
-            <pnp:FieldRef ID="1fa322ec-6b56-4ea9-a1fd-2623e34083e6" Name="GtMilestonePlannedDate" />
-            <pnp:FieldRef ID="cbf2ae22-2c77-4ad0-a639-07fddfb5cd81" Name="GtMilestoneActualDate"/>
-            <pnp:FieldRef ID="17a4b359-5819-4e7c-9894-a154320a661d" Name="GtMilestoneStatus"/>
-            <pnp:FieldRef ID="dabdcbab-7bab-4fb2-8d65-85bd03809a8d" Name="GtMilestoneComment" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" Required="false" />
+            <pnp:FieldRef ID="1fa322ec-6b56-4ea9-a1fd-2623e34083e6" Name="{parameter:GenericFieldPrefix}MilestonePlannedDate" />
+            <pnp:FieldRef ID="cbf2ae22-2c77-4ad0-a639-07fddfb5cd81" Name="{parameter:GenericFieldPrefix}MilestoneActualDate"/>
+            <pnp:FieldRef ID="17a4b359-5819-4e7c-9894-a154320a661d" Name="{parameter:GenericFieldPrefix}MilestoneStatus"/>
+            <pnp:FieldRef ID="dabdcbab-7bab-4fb2-8d65-85bd03809a8d" Name="{parameter:GenericFieldPrefix}MilestoneComment" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <!-- <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="{resource:ContentTypes_Statistikkfelt_Name}" Description="{resource:ContentTypes_Statistikkfelt_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/StatsFieldsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/StatsFieldsConfig/DispForm.aspx">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="{parameter:ProjectStatsFieldPrefix}DataType" Required="true" />
+            <pnp:FieldRef ID="35632a65-9b43-4320-9b5e-13ef6268957b" Name="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" Required="true" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D" Name="{resource:ContentTypes_Grafkonfigurasjonelement_Name}" Description="{resource:ContentTypes_Grafkonfigurasjonelement_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
+            <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="{parameter:ProjectStatsFieldPrefix}Fields" Required="true" />
+            <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="{parameter:ProjectStatsFieldPrefix}WidthSm" />
+            <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="{parameter:ProjectStatsFieldPrefix}WidthMd" />
+            <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="{parameter:ProjectStatsFieldPrefix}WidthLg" />
+            <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
+            <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
+            <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="{resource:ContentTypes_Stolpediagram_Name}" Description="{resource:ContentTypes_Stolpediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
+            <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="{parameter:ProjectStatsFieldPrefix}Fields" Required="true" />
+            <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="{parameter:ProjectStatsFieldPrefix}WidthSm" />
+            <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="{parameter:ProjectStatsFieldPrefix}WidthMd" />
+            <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="{parameter:ProjectStatsFieldPrefix}WidthLg" />
+            <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
+            <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
+            <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+            <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
+            <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
+            <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
+            <pnp:FieldRef ID="60dac89b-70f5-4a49-87a9-b253bd5df7ca" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
+            <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" Name="{resource:ContentTypes_Kolonnediagram_Name}" Description="{resource:ContentTypes_Kolonnediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
+            <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="{parameter:ProjectStatsFieldPrefix}Fields" Required="true" />
+            <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="{parameter:ProjectStatsFieldPrefix}WidthSm" />
+            <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="{parameter:ProjectStatsFieldPrefix}WidthMd" />
+            <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="{parameter:ProjectStatsFieldPrefix}WidthLg" />
+            <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
+            <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
+            <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" Required="true" />
+            <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
+            <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
+            <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
+            <pnp:FieldRef ID="60dac89b-70f5-4a49-87a9-b253bd5df7ca" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
+            <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="{resource:ContentTypes_Kakediagram_Name}" Description="{resource:ContentTypes_Kakediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="{parameter:ProjectStatsFieldPrefix}SubTitle" />
+            <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="{parameter:ProjectStatsFieldPrefix}Fields" Required="true" />
+            <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="{parameter:ProjectStatsFieldPrefix}WidthSm" />
+            <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="{parameter:ProjectStatsFieldPrefix}WidthMd" />
+            <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="{parameter:ProjectStatsFieldPrefix}WidthLg" />
+            <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
+            <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
+            <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
+            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+            <pnp:FieldRef ID="762a2801-2882-40f1-8fa1-a6604ef2808f" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" />
+            <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" />
+        </pnp:FieldRefs>
+    </pnp:ContentType> -->
 </pnp:ContentTypes> 

@@ -1,0 +1,63 @@
+#opportunity-matrix {
+    width: 100%;
+    padding-top: 40px;
+    border-width: 0px;
+    border-spacing: 0;
+    background: white;
+
+    &.hide-labels {
+        .opportunity-header {
+            display: none;
+        }
+        .opportunity-matrix-cell {
+            width: 20%;
+        }
+    }
+
+    .opportunity-matrix-row {
+        min-height: 50px;
+
+        .opportunity-matrix-cell, .opportunity-header {
+            width: 16.6%;
+            border-right: 1px solid #99A8AD;
+            border-bottom: 1px solid #99A8AD;
+        }
+
+        .opportunity-matrix-cell {
+            .cell-container {
+                min-height: 50px;
+            }
+            .opportunity-matrix-element {
+                border-radius: 50%;
+                padding: 1px;
+                margin: 2px;
+                text-align: center;
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                cursor: pointer;
+                background-color: #fff;
+                color: #666;
+            }
+
+            &.positive-cell {
+                background-color: #2da748;
+            }
+
+            &.negative-cell {
+                background-color: #ea5c73;
+            }
+
+            &.neutral-cell {
+                background-color: #e9b359;
+            }
+        }
+
+        .opportunity-header {
+            min-height: 50px;
+            line-height: 50px;
+            padding-left: 5px;
+            color: #444444;
+        }
+    }
+}

@@ -240,6 +240,12 @@
   <data name="Lists_Log_Title" xml:space="preserve">
     <value>Logg</value>
   </data>
+  <data name="Lists_StatsFieldsConfig_Title" xml:space="preserve">
+    <value>Statistikkfelter</value>
+  </data>
+  <data name="Lists_ChartsConfig_Title" xml:space="preserve">
+    <value>Grafkonfigurasjon</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -471,6 +477,48 @@
   <data name="ContentTypes_SiteTemplate_Name" xml:space="preserve">
     <value>Områdemal</value>
   </data>
+  <data name="ContentTypes_Statistikkfelt_Name" xml:space="preserve">
+    <value>Statistikkfelt</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
+    <value>Grafkonfigurasjonelement</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
+    <value>Stolpediagram</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
+    <value>Kolonnediagram</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
+    <value>Kakediagram</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
+    <value>Porteføljekonfigurasjonsbase</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Field_Name" xml:space="preserve">
+    <value>Porteføljefelt</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_Refiner_Name" xml:space="preserve">
+    <value>Porteføljepresiseringsfelt</value>
+  </data>
+  <data name="ContentTypes_Dynamic_Portfolio_View_Name" xml:space="preserve">
+    <value>Porteføljevisning</value>
+  </data>
+  <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
+    <value>Listeinnehold</value>
+  </data>
+  <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
+    <value>Prosjektkonfigurasjonsbase</value>
+  </data>
+  <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
+    <value>Prosjektfelt</value>
+  </data>
+  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
+    <value>Nøkkelverdipar</value>
+  </data>
+  <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
+    <value>Tilbakemelding</value>
+  </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -551,6 +599,21 @@
   </data>
   <data name="ContentTypes_RiskSection_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="ContentTypes_Statistikkfelt_Description" xml:space="preserve">
+    <value>Opprett et nytt statistikkfelt</value>
+  </data>
+  <data name="ContentTypes_Grafkonfigurasjonelement_Description" xml:space="preserve">
+    <value>Opprett et nytt grafkonfigurasjonelement</value>
+  </data>
+  <data name="ContentTypes_Stolpediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt stolpediagram</value>
+  </data>
+  <data name="ContentTypes_Kolonnediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt kolonnediagram</value>
+  </data>
+  <data name="ContentTypes_Kakediagram_Description" xml:space="preserve">
+    <value>Opprett et nytt kakediagram</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
@@ -754,7 +817,7 @@
     <value>Kommentar, gevinstoppnåelse</value>
   </data>
   <data name="SiteFields_GtProjectGoals_DisplayName" xml:space="preserve">
-    <value>Målsetning</value>
+    <value>Målsetting</value>
   </data>
   <data name="SiteFields_GtStakeholderStrategy_DisplayName" xml:space="preserve">
     <value>Plan/strategi/prosjekt</value>
@@ -1012,7 +1075,7 @@
     <value>Listenavn (kilde)</value>
   </data>
   <data name="SiteFields_GtLccDestinationLibrary_DisplayName" xml:space="preserve">
-    <value>Biblioteksnavn (mål)</value>
+    <value>Biblioteksurl (mål)</value>
   </data>
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Tekst</value>
@@ -1036,8 +1099,7 @@
     <value>Leveransestatus</value>
   </data>
   <data name="SiteFields_GtProductStatusComment_DisplayName" xml:space="preserve">
-    <value>Kommentar
-    , leveransestatus</value>
+    <value>Kommentar, leveransestatus</value>
   </data>
   <data name="SiteFields_GtIsEnabled_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
@@ -1056,6 +1118,78 @@
   </data>
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Vis i skjema</value>
+  </data>
+  <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
+    <value>Leveransebeskrivelse</value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_DisplayName" xml:space="preserve">
+    <value>Starttidspunkt</value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
+    <value>Slutttidspunkt</value>
+  </data>
+  <data name="SiteFields_GtChrShowItemSelector_DisplayName" xml:space="preserve">
+    <value>Vis elementvelger</value>
+  </data>
+  <data name="SiteFields_GtChrSubTitle_DisplayName" xml:space="preserve">
+    <value>Undertekst</value>
+  </data>
+  <data name="SiteFields_GtChrYAxisTitle_DisplayName" xml:space="preserve">
+    <value>Tittel (Y-akse)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthLg_DisplayName" xml:space="preserve">
+    <value>Bredde (640px - 1023px)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthSm_DisplayName" xml:space="preserve">
+    <value>Bredde (320px - 479px)</value>
+  </data>
+  <data name="SiteFields_GtChrYMin_DisplayName" xml:space="preserve">
+    <value>Min (Y-akse)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxl_DisplayName" xml:space="preserve">
+    <value>Bredde (1366px - 1919px)</value>
+  </data>
+  <data name="SiteFields_GtChrManagedPropertyName_DisplayName" xml:space="preserve">
+    <value>Forvaltet egenskap</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXl_DisplayName" xml:space="preserve">
+    <value>Bredde (1024px - 1365px)</value>
+  </data>
+  <data name="SiteFields_GtChrYMax_DisplayName" xml:space="preserve">
+    <value>Max (Y-akse)</value>
+  </data>
+  <data name="SiteFields_GtChrDataType_DisplayName" xml:space="preserve">
+    <value>Datatype</value>
+  </data>
+  <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space="preserve">
+    <value>Intervall (Y-akse)</value>
+  </data>
+  <data name="SiteFields_GtChrWidthMd_DisplayName" xml:space="preserve">
+    <value>Bredde (480px - 639px)</value>
+  </data>
+  <data name="SiteFields_GtChrFields_DisplayName" xml:space="preserve">
+    <value>Felter</value>
+  </data>
+  <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space="preserve">
+    <value>Verdisuffiks</value>
+  </data>
+  <data name="SiteFields_GtChrMarginTop_DisplayName" xml:space="preserve">
+    <value>Margin topp</value>
+  </data>
+  <data name="SiteFields_GtChrOrder_DisplayName" xml:space="preserve">
+    <value>Rekkefølge</value>
+  </data>
+  <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space="preserve">
+    <value>Vis gjennomsnitt</value>
+  </data>
+  <data name="SiteFields_GtChrStacking_DisplayName" xml:space="preserve">
+    <value>Stabling</value>
+  </data>
+  <data name="SiteFields_GtChrShowLegend_DisplayName" xml:space="preserve">
+    <value>Vis merkelapp</value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space="preserve">
+    <value>Bredde (1920px og oppover)</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1444,6 +1578,78 @@
   <data name="SiteFields_GtIsEnabled_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtProductDescription_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductStartTime_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtProductEndTime_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowItemSelector_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrSubTitle_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYAxisTitle_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthLg_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthSm_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYMin_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxl_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrManagedPropertyName_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXl_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYMax_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrDataType_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrYTickInterval_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthMd_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrFields_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrMarginTop_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrOrder_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowAverage_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowLegend_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtChrWidthXxxl_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
@@ -1723,6 +1929,9 @@
   <data name="String_SaveChanges" xml:space="preserve">
     <value>Lagre endringer</value>
   </data>
+  <data name="String_ChangesWasSaved" xml:space="preserve">
+    <value>Endringene dine ble lagret</value>
+  </data>
   <data name="String_Approved" xml:space="preserve">
     <value>Godkjent</value>
   </data>
@@ -1816,9 +2025,6 @@
   <data name="WebPart_LatestInformation_Title" xml:space="preserve">
     <value>Siste informasjonselementer</value>
   </data>
-  <data name="WebPart_LatestLogEntries_Title" xml:space="preserve">
-    <value>Siste loggelementer</value>
-  </data>
   <data name="WebPart_ProjectList_Title" xml:space="preserve">
     <value>Prosjektliste</value>
   </data>
@@ -1839,6 +2045,9 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risikomatrise</value>
+  </data>
+  <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
+    <value>Mulighetsmatrise</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
@@ -2358,6 +2567,36 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i Usikkerhets-listen.</value>
+  </data>
+  <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
+    <value>Svært høy</value>
+  </data>
+  <data name="OpportunityMatrix_Header_High" xml:space="preserve">
+    <value>Høy</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Medium" xml:space="preserve">
+    <value>Middels</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Low" xml:space="preserve">
+    <value>Lav</value>
+  </data>
+  <data name="OpportunityMatrix_Header_VeryLow" xml:space="preserve">
+    <value>Svært lav</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Insignificant" xml:space="preserve">
+    <value>Ubetydelig</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Limited" xml:space="preserve">
+    <value>Begrenset</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Moderate" xml:space="preserve">
+    <value>Moderat</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Significant" xml:space="preserve">
+    <value>Vesentlig</value>
+  </data>
+  <data name="OpportunityMatrix_Header_Large" xml:space="preserve">
+    <value>Stor</value>
   </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Naviger til listen</value>

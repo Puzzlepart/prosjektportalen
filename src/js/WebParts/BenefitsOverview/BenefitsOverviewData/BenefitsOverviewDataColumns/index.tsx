@@ -1,10 +1,11 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { ModalLink } from "../../../@Components";
 import DataSource from "../../../DataSource";
 import BenefitEntry from "../BenefitEntry";
+import TrendIcon from "./TrendIcon";
 
 const Columns = (): any[] => {
     return [{
@@ -122,74 +123,6 @@ export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSo
     return generatedColumns;
 };
 
-interface ITrendIconProps {
-    latestVal: number;
-    latestPercentage: number;
-    prevVal: number;
-    shouldIncrease: boolean;
-}
-
-/**
- * TrendIcon
- */
-const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITrendIconProps): JSX.Element => {
-    if (prevVal !== undefined && prevVal !== null) {
-        if (prevVal !== latestVal) {
-            if (shouldIncrease && (prevVal > latestVal)) {
-                if (latestPercentage >= 100) {
-                    return (
-                        <span>
-                            <Icon iconName="StockDown" style={{ color: "red" }} />
-                            <Icon iconName="Trophy" style={{ color: "gold" }} />
-                        </span>
-                    );
-                }
-                return (
-                    <span>
-                        <Icon iconName="StockDown" style={{ color: "red" }} />
-                    </span>
-                );
-            }
-            if (!shouldIncrease && (latestVal > prevVal)) {
-                if (latestPercentage >= 100) {
-                    return (
-                        <span>
-                            <Icon iconName="StockDown" style={{ color: "red" }} />
-                            <Icon iconName="Trophy" style={{ color: "gold" }} />
-                        </span>
-                    );
-                }
-                return (
-                    <span>
-                        <Icon iconName="StockDown" style={{ color: "red" }} />
-                    </span>
-                );
-            } else {
-                if (latestPercentage >= 100) {
-                    return (
-                        <span>
-                            <Icon iconName="StockUp" style={{ color: "green" }} />
-                            <Icon iconName="Trophy" style={{ color: "gold" }} />
-                        </span>
-                    );
-                }
-                return (
-                    <span>
-                        <Icon iconName="StockUp" style={{ color: "green" }} />
-                    </span>
-                );
-            }
-        }
-    } else if (latestPercentage >= 100) {
-        return (
-            <span>
-                <Icon iconName="Trophy" style={{ color: "gold" }} />
-            </span>
-        );
-    }
-    return null;
-};
-
 /**
  * On render item column
  *
@@ -201,12 +134,7 @@ const TrendIcon = ({ latestVal, latestPercentage, prevVal, shouldIncrease }: ITr
  */
 const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn, onSiteTitleClick: (e) => void, showAllMeasurements: (entry: BenefitEntry) => void): any => {
     const colValue = item[column.fieldName];
-    const {
-        LatestValue,
-        PreviousValue,
-        LatestPercentage,
-        ValueShouldIncrease,
-     } = item;
+    const { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrease } = item;
 
     switch (column.key) {
         case "Title": {
@@ -220,13 +148,7 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
         case "SiteTitle": {
             let { SiteTitle: Title } = item;
             return (
-                <a
-                    href={item.DisplayFormUrl}
-                    onClick={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        onSiteTitleClick(e);
-                    }}>{Title}</a>
+                <a href={item.DisplayFormUrl} onClick={onSiteTitleClick}>{Title}</a>
             );
         }
         case "PreviousPercentage": {
@@ -234,13 +156,14 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
             if (PreviousPercentage && PreviousPercentage >= 100) {
                 return (
                     <div>
-                        <span>{PreviousPercentage}</span> <span><Icon iconName="Trophy" style={{ color: "gold" }} /></span>
+                        <span>{PreviousPercentage}%</span>
+                        <span><Icon iconName="Trophy" style={{ color: "gold" }} /></span>
                     </div>
                 );
             } else if (PreviousPercentage || PreviousPercentage === 0) {
                 return (
                     <div>
-                        <span>{PreviousPercentage}</span>
+                        <span>{PreviousPercentage}%</span>
                     </div>
                 );
             } else {
@@ -262,11 +185,14 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
             if (LatestPercentage || LatestPercentage === 0) {
                 return (
                     <div style={{ position: "relative" }}>
-                        <span>{LatestPercentage}</span> <TrendIcon
-                            latestVal={LatestValue}
-                            latestPercentage={LatestPercentage}
-                            prevVal={PreviousValue}
-                            shouldIncrease={ValueShouldIncrease} />
+                        <span>{LatestPercentage}%</span>
+                        <span>
+                            <TrendIcon
+                                latestVal={LatestValue}
+                                latestPercentage={LatestPercentage}
+                                prevVal={PreviousValue}
+                                shouldIncrease={ValueShouldIncrease} />
+                        </span>
                     </div>
                 );
             } else {
@@ -277,11 +203,14 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
             if (LatestValue || LatestValue === 0) {
                 return (
                     <div>
-                        <span> {LatestValue}</span> <TrendIcon
-                            latestVal={LatestValue}
-                            latestPercentage={LatestPercentage}
-                            prevVal={PreviousValue}
-                            shouldIncrease={ValueShouldIncrease} />
+                        <span>{LatestValue}</span>
+                        <span>
+                            <TrendIcon
+                                latestVal={LatestValue}
+                                latestPercentage={LatestPercentage}
+                                prevVal={PreviousValue}
+                                shouldIncrease={ValueShouldIncrease} />
+                        </span>
                     </div>
                 );
             } else {
@@ -291,13 +220,7 @@ const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn,
         case "AllMeasurements": {
             if (item.Measurements.length > 0) {
                 return (
-                    <a
-                        href="#"
-                        onClick={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            showAllMeasurements(item);
-                        }}>{RESOURCE_MANAGER.getResource("BenefitsOverview_AllMeasurements")}</a>
+                    <a href="#" onClick={e => showAllMeasurements(item)}>{RESOURCE_MANAGER.getResource("BenefitsOverview_AllMeasurements")}</a>
                 );
             }
             return null;

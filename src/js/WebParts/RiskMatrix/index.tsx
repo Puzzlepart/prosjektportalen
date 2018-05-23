@@ -1,10 +1,12 @@
 import * as React from "react";
 import pnp, { List } from "sp-pnp-js";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
-import RiskMatrixCells, { IRiskMatrixCell, RiskMatrixCellType } from "./RiskMatrixCells";
+import RiskMatrixCells from "./RiskMatrixCells";
+import MatrixCellType from "../../Model/MatrixCellType";
+import IMatrixCell from "../../Model/IMatrixCell";
 import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
@@ -12,7 +14,7 @@ import RiskElement from "./RiskElement";
 import IRiskMatrixData from "./IRiskMatrixData";
 import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
-
+import { loadJsonConfiguration } from "../../Util";
 
 /**
  * Risk Matrix
@@ -37,12 +39,19 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     public async componentDidMount() {
-        if (!this.state.data) {
+        let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>("risk-matrix-cells");
+        if (matrixCells == null || !matrixCells.length) {
+            matrixCells = RiskMatrixCells;
+        }
+        if (this.state.data) {
+            this.setState({ matrixCells });
+        } else {
             const { data, selectedViewId } = await this.fetchData();
             this.setState({
                 data,
-                hideLabels: this._tableElement.offsetWidth < 900,
+                hideLabels: this._tableElement.offsetWidth < this.props.hideLabelsBreakpoint,
                 selectedViewId,
+                matrixCells,
             });
         }
     }
@@ -74,32 +83,35 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             return null;
         }
 
-        const viewOptions = this.getViewOptions();
+        if (this.state.matrixCells) {
+            const viewOptions = this.getViewOptions();
 
-        return (
-            <div className={this.props.className}>
-                <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
-                    <Dropdown
-                        label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
-                        defaultSelectedKey={selectedViewId}
-                        options={viewOptions}
-                        onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
+            return (
+                <div className={this.props.className}>
+                    <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
+                        <Dropdown
+                            label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
+                            defaultSelectedKey={selectedViewId}
+                            options={viewOptions}
+                            onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
+                    </div>
+                    <table {...tableProps} ref={ele => this._tableElement = ele}>
+                        <tbody>
+                            {this.renderRows(riskItems)}
+                        </tbody>
+                    </table>
+                    <div>
+                        <Toggle
+                            defaultChecked={false}
+                            onChanged={isChecked => this.setState({ postAction: isChecked })}
+                            label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                            onText={RESOURCE_MANAGER.getResource("String_Yes")}
+                            offText={RESOURCE_MANAGER.getResource("String_No")} />
+                    </div>
                 </div>
-                <table {...tableProps} ref={ele => this._tableElement = ele}>
-                    <tbody>
-                        {this.renderRows(riskItems)}
-                    </tbody>
-                </table>
-                <div>
-                    <Toggle
-                        defaultChecked={false}
-                        onChanged={isChecked => this.setState({ postAction: isChecked })}
-                        label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                        onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                        offText={RESOURCE_MANAGER.getResource("String_No")} />
-                </div>
-            </div>
-        );
+            );
+        }
+        return null;
     }
 
     /**
@@ -108,13 +120,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * @param {any[]} riskItems Risk items
      */
     private renderRows(riskItems) {
-        const riskMatrixRows = RiskMatrixCells.map((rows, i) => {
+        const riskMatrixRows = this.state.matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = RiskMatrixCells[i][j],
+                const cell = this.state.matrixCells[i][j],
                     riskElements = this.getRiskElementsForCell(riskItems, cell),
                     riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
                 switch (cell.cellType) {
-                    case RiskMatrixCellType.Cell: {
+                    case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
                                 key={j}
@@ -122,10 +134,11 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                     ...riskElements,
                                     ...riskElementsPostAction,
                                 ]}
+                                style={cell.style}
                                 className={cell.className} />
                         );
                     }
-                    case RiskMatrixCellType.Header: {
+                    case MatrixCellType.Header: {
                         return (
                             <MatrixHeaderCell
                                 key={j}
@@ -148,9 +161,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements for cell post action
      *
      * @param {Array<any>} items Items
-     * @param {IRiskMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell(items: any[], cell: IRiskMatrixCell) {
+    private getRiskElementsPostActionForCell(items: any[], cell: IMatrixCell) {
         if (this.state.postAction) {
             const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
             return itemsForCell.map((risk, key) => (
@@ -167,9 +180,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Helper function to get risk elements
      *
      * @param {Array<any>} items Items
-     * @param {IRiskMatrixCell} cell The cell
+     * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsForCell(items: any[], cell: IRiskMatrixCell) {
+    private getRiskElementsForCell(items: any[], cell: IMatrixCell) {
         const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
         return itemsForCell.map((risk, key) => (
             <RiskElement

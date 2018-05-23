@@ -1,6 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
@@ -41,7 +41,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this.__renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
+                {this._renderChrome(RESOURCE_MANAGER.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
         );

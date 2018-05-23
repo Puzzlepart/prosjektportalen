@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../@localization";
+import RESOURCE_MANAGER from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import IToggleSectionProps from "./IToggleSectionProps";

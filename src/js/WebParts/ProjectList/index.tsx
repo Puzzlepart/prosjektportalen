@@ -1,13 +1,12 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
-import { Site } from "sp-pnp-js";
-import Masonry from "react-masonry-component";
+import RESOURCE_MANAGER from "../../Resources";
+import { Site, Logger, LogLevel } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as ProjectListSearch from "./ProjectListSearch";
-import Style from "./Style";
+import InjectedStyles from "./InjectedStyles";
 import ProjectCard from "./ProjectCard";
 import ProjectListModel from "./ProjectListModel";
 import IProjectListProps, { ProjectListDefaultProps } from "./IProjectListProps";
@@ -15,12 +14,15 @@ import IProjectListState, { IProjectListData } from "./IProjectListState";
 import BaseWebPart from "../@BaseWebPart";
 import { cleanString } from "../../Util";
 
+const LOG_TEMPLATE = "(ProjectList) {0}: {1}";
+
 /**
  * Project information
  */
 export default class ProjectList extends BaseWebPart<IProjectListProps, IProjectListState> {
     public static displayName = "ProjectList";
     public static defaultProps = ProjectListDefaultProps;
+    private _searchTimeout;
 
     /**
      * Constructor
@@ -32,9 +34,18 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
             isLoading: true,
             searchTerm: "",
         });
+        this._onSearch = this._onSearch.bind(this);
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "constructor", "Initializing the <ProjectList /> component"),
+            level: LogLevel.Info,
+        });
     }
 
     public async componentDidMount() {
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "componentDidMount", "<ProjectList /> mounted"),
+            level: LogLevel.Info,
+        });
         try {
             const data = await this.fetchData();
             this.setState({
@@ -47,18 +58,31 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     public render(): JSX.Element {
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "render", "Rendering the <ProjectList /> component"),
+            level: LogLevel.Info,
+        });
+
         if (this.state.isLoading) {
             return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
         }
 
         return (
-            <div style={{ paddingRight: 40 }}>
-                <div style={{ marginBottom: 10 }}>
-                    <SearchBox labelText={this.props.searchBoxLabelText} onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
+            <div className="ms-Grid" style={{ paddingRight: 40 }}>
+                <div className="ms-Grid-row" style={{ marginBottom: 10 }}>
+                    <div className="ms-Grid-col ms-sm12">
+                        <SearchBox
+                            labelText={this.props.searchBoxLabelText}
+                            onChanged={this._onSearch} />
+                    </div>
                 </div>
-                {this.renderCards()}
+                <div className="ms-Grid-row" style={{ marginBottom: 10 }}>
+                    <div className="ms-Grid-col ms-sm12">
+                        {this.renderCards()}
+                    </div>
+                </div>
+                <InjectedStyles props={this.props} />
                 {this.renderProjectInfoModal()}
-                <Style props={this.props} />
             </div>
         );
     }
@@ -73,12 +97,13 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
             return <MessageBar>{this.props.emptyMessage}</MessageBar>;
         }
 
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "renderCards", `Rendering ${projects.length} <ProjectCard />`),
+            level: LogLevel.Info,
+        });
+
         return (
-            <Masonry
-                elementType={"div"}
-                options={this.props.masonryOptions}
-                disableImagesLoaded={false}
-                updateOnEachImageLoad={false}>
+            <div className={`pp-cardContainer`}>
                 {projects.map((project, idx) => (
                     <ProjectCard
                         key={idx}
@@ -90,7 +115,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                         onClickHref={project.Url}
                         showProjectInfo={e => this.setState({ showProjectInfo: project })} />
                 ))}
-            </Masonry>
+            </div>
         );
     }
 
@@ -127,8 +152,8 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     /**
      * Get class name for a ProjectListModel. Combines props.tileClassName and props.propertyClassNames.
      *
-     * @param {ProjectListModel} project Project list model
-     */
+ * @param {ProjectListModel} project Project list model
+            */
     private getClassName(project: ProjectListModel) {
         const classList = [this.props.tileClassName];
         this.props.propertyClassNames.forEach(key => {
@@ -161,10 +186,33 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         };
     }
 
+    private _onSearch(searchTerm: string) {
+        if (this._searchTimeout) {
+            Logger.log({
+                message: String.format(LOG_TEMPLATE, "_onSearch", "Clearing timeout"),
+                data: { searchTerm },
+                level: LogLevel.Info,
+            });
+            clearTimeout(this._searchTimeout);
+        }
+        this._searchTimeout = setTimeout(() => {
+            Logger.log({
+                message: String.format(LOG_TEMPLATE, "_onSearch", "Updating state"),
+                data: { searchTerm },
+                level: LogLevel.Info,
+            });
+            this.setState({ searchTerm: searchTerm.toLowerCase() });
+        }, this.props.searchTimeoutMs);
+    }
+
     /**
      * Fetch data using sp-pnp-js search
      */
     private async fetchData(): Promise<IProjectListData> {
+        Logger.log({
+            message: String.format(LOG_TEMPLATE, "fetchData", "Fetching data"),
+            level: LogLevel.Info,
+        });
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         try {
             const projectCt = rootWeb
@@ -180,11 +228,18 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 projectCtFieldsPromise,
             ]);
             const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result));
-            let fields = projectCtFieldsArray.reduce((accumulator, { InternalName, Title }) => {
-                accumulator[InternalName] = Title;
-                return accumulator;
+            let fieldsMap = projectCtFieldsArray.reduce((obj, fld) => {
+                obj[fld.InternalName] = fld.Title;
+                return obj;
             }, {});
-            return { projects, fields };
+            Logger.log({
+                message: String.format(LOG_TEMPLATE, "fetchData", `Retrieved ${projects.length} projects and ${Object.keys(fieldsMap).length} fields`),
+                level: LogLevel.Info,
+            });
+            return {
+                projects,
+                fields: fieldsMap,
+            };
         } catch (err) {
             throw err;
         }

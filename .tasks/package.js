@@ -1,15 +1,15 @@
 'use strict';
 var gulp = require("gulp"),
+    path = require("path"),
     webpack = require('webpack'),
-    webpackConfigDev = require('../webpack.config.development.js'),
-    webpackConfigProduction = require('../webpack.config.production.js'),
+    webpackConfig = require('../webpack.config.js'),
     stylus = require('gulp-stylus'),
     runSequence = require("run-sequence"),
     pluginError = require('plugin-error'),
     config = require('./@configuration.js');
 
 gulp.task("packageCode", ["buildLib"], done => {
-    webpack(webpackConfigDev("source-map"), err => {
+    webpack(webpackConfig("source-map", [path.join(__dirname, "../", "node_modules")], "development"), err => {
         if (err) throw new pluginError("packageCode", err);
         done();
     });
@@ -26,12 +26,12 @@ gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], done 
 });
 
 gulp.task("packageCodeMinify", ["buildLib"], done => {
-    webpack(webpackConfigProduction(), err => {
+    webpack(webpackConfig("source-map", [path.join(__dirname, "../", "node_modules/disposables")], "production"), err => {
         if (err) throw new pluginError("packageCodeMinify", err)
         done();
     });
 });
 
 gulp.task("packageProd", done => {
-    runSequence("buildJsonResources", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done);
+    runSequence("buildJsonResources", "buildJsonPreferences", ["copyAssetsToDist", "packageCodeMinify", "packageStyles"], done);
 });

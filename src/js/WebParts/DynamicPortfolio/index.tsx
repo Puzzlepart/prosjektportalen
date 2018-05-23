@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../@localization";
+import RESOURCE_MANAGER from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import { IGroup, DetailsList } from "office-ui-fabric-react/lib/DetailsList";
@@ -455,12 +455,15 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
-                return {
-                    ...ref,
-                    items: entries.results.map(entry => ({
+                let items = entries.results
+                    .map(entry => ({
                         name: entry.RefinementName,
                         value: entry.RefinementValue,
-                    })),
+                    }))
+                    .sort((a, b) => a.value > b.value ? 1 : -1);
+                return {
+                    ...ref,
+                    items,
                 };
             });
     }
@@ -542,7 +545,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const {
             filteredItems,
             selectedColumns,
-         } = this.state;
+        } = this.state;
 
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {

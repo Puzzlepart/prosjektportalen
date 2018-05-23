@@ -1,10 +1,11 @@
-import RESOURCE_MANAGER from "../@localization";
+import RESOURCE_MANAGER from "../Resources";
 import * as moment from "moment";
 import { Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 import { GetProperty } from "./PropertyBag";
+import GetBreakpoint from "./GetBreakpoint";
 
 declare var MSOWebPartPageFormName: string;
 
@@ -449,8 +450,10 @@ export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequest
  */
 export function loadLibrary(filename: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-        SP.SOD.registerSod(filename, `${_spPageContextInfo.siteAbsoluteUrl}/SiteAssets/pp/libs/${filename}`);
-        SP.SOD.executeFunc(filename, null, resolve);
+        GetProperty("pp_assetssiteurl").then(assetsUrl => {
+            SP.SOD.registerSod(filename, `${assetsUrl}/SiteAssets/pp/libs/${filename}`);
+            SP.SOD.executeFunc(filename, null, resolve);
+        });
     });
 }
 
@@ -483,8 +486,19 @@ export async function loadJsonConfiguration<T>(name: string): Promise<T> {
     }
 }
 
+/**
+ * Sort an array alphabetically
+ */
+export function SortAlphabetically(a, b, prop: string): number {
+    if (a[prop] < b[prop]) { return -1; }
+    if (a[prop] > b[prop]) { return 1; }
+    return 0;
+}
+
+
 export {
     ExportToExcel,
     WaitDialog,
     StampVersion,
+    GetBreakpoint,
 };
