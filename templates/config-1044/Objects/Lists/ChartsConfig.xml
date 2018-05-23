@@ -88,7 +88,7 @@
             <pnp:DataValue FieldName="GtChrSubTitle">Prosjektets kostnader vs totalbudsjett</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">1000</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrFields">4,6</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrStacking">0</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrStacking">null</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowLegend">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrValueSuffix">kr</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrYAxisTitle">kroner</pnp:DataValue>
