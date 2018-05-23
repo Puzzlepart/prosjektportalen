@@ -484,7 +484,7 @@
     <value>Statistikkfelt</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
-    <value>Grafkonfigurasjonelement</value>
+    <value>Diagramkonfigurasjonselement</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
     <value>Stolpediagram</value>
@@ -607,7 +607,7 @@
     <value>Opprett et nytt statistikkfelt</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Description" xml:space="preserve">
-    <value>Opprett et nytt grafkonfigurasjonelement</value>
+    <value>Opprett et nytt diagramkonfigurasjonselement</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Description" xml:space="preserve">
     <value>Opprett et nytt stolpediagram</value>
@@ -1663,7 +1663,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
-    <value>Høyden på grafen i piksler</value>
+    <value>Høyden på diagrammet i piksler</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
@@ -2747,6 +2747,12 @@
   </data>
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Prosjektportalen - Innstillinger</value>
+  </data>
+  <data name="SiteSettings_Link_StatsFields" xml:space="preserve">
+    <value>Prosjektportalen - Datafelter for diagrammer</value>
+  </data>
+  <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
+    <value>Prosjektportalen - Diagramkonfigurasjon</value>
   </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>Det finnes ingen instillinger å endre.</value>

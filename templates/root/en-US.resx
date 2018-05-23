@@ -2734,6 +2734,12 @@
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Project Portal - Settings</value>
   </data>
+  <data name="SiteSettings_Link_StatsFields" xml:space="preserve">
+    <value>Project Portal - Data fields for graphs</value>
+  </data>
+  <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
+    <value>Project Portal - Graph configuration</value>
+  </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>There's no settings to change.</value>
   </data>
