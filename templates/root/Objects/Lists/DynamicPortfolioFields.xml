@@ -17,10 +17,8 @@
                 <FieldRef Name="GtDpDisplayName" />
                 <FieldRef Name="GtDpReadOnly" />
                 <FieldRef Name="GtDpRender" />
-                <FieldRef Name="GtDpMinWidth" />
-                <FieldRef Name="GtDpMaxWidth" />
-                <FieldRef Name="GtDpIsResizable" />
                 <FieldRef Name="GtDpGroupBy" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>

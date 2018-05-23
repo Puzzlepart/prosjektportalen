@@ -15,11 +15,13 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="GtChrOrder" />
+                <FieldRef Name="ContentType" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtChrSubTitle" />
                 <FieldRef Name="GtChrHeight" />
                 <FieldRef Name="GtChrFields" />
                 <FieldRef Name="GtChrField" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />
