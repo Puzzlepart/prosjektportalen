@@ -15,6 +15,7 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="GtStSecOrder" />
+                <FieldRef Name="ContentType" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtStSecShowInNavbar" />
                 <FieldRef Name="GtStSecShowInStatusSection" />
