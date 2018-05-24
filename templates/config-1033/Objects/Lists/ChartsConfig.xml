@@ -12,7 +12,7 @@
             <pnp:DataValue FieldName="Title">Projects by phase</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -27,7 +27,7 @@
             <pnp:DataValue FieldName="Title">Projects by service areas</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">2</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">2</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -42,7 +42,7 @@
             <pnp:DataValue FieldName="Title">Status progress</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">7</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">7</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -57,7 +57,7 @@
             <pnp:DataValue FieldName="Title">Status economy</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">8</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">8</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -72,7 +72,7 @@
             <pnp:DataValue FieldName="Title">Status risk</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle"></pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">9</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">9</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>

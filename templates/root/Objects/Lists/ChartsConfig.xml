@@ -20,7 +20,6 @@
                 <FieldRef Name="GtChrSubTitle" />
                 <FieldRef Name="GtChrHeight" />
                 <FieldRef Name="GtChrFields" />
-                <FieldRef Name="GtChrField" />
                 <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>

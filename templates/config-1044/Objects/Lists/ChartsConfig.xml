@@ -12,7 +12,7 @@
             <pnp:DataValue FieldName="Title">Prosjekter i ulike faser</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på faser</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">1</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">1</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -27,7 +27,7 @@
             <pnp:DataValue FieldName="Title">Tjenesteområder</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på tjenesteområder</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">2</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">2</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -42,7 +42,7 @@
             <pnp:DataValue FieldName="Title">Status fremdrift</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på fremdrift for prosjektene?</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">7</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">7</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -57,7 +57,7 @@
             <pnp:DataValue FieldName="Title">Status økonomi</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på økonomi for prosjektene?</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">8</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">8</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
@@ -72,7 +72,7 @@
             <pnp:DataValue FieldName="Title">Status risiko</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på risiko for prosjektene?</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
-            <pnp:DataValue FieldName="GtChrField">9</pnp:DataValue>
+            <pnp:DataValue FieldName="GtChrFields">9</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>

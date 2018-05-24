@@ -201,9 +201,6 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
                 let chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
-                if (!chartFields) {
-                    chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldId`].results.indexOf(f.id) !== -1);
-                }
                 return new ChartConfiguration(spItem, chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
             const config: Partial<IProjectStatsState> = {

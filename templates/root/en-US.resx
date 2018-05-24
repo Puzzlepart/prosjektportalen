@@ -615,7 +615,7 @@
   <data name="ContentTypes_Kolonnediagram_Description" xml:space = "preserve">
     <value>Create a new column chart</value>
   </data>
-  <data name="ContentTypes_Kakediagram_Description" xml:space = "preserve">
+  <data name="ContentTypes_Sektordiagram_Description" xml:space = "preserve">
     <value>Create a new pie chart</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
@@ -1174,10 +1174,7 @@
     <value>Width (480px - 639px)</value>
   </data>
   <data name="SiteFields_GtChrFields_DisplayName" xml:space = "preserve">
-    <value>Fields as data source</value>
-  </data>
-  <data name="SiteFields_GtChrField_DisplayName" xml:space = "preserve">
-    <value>Field as data source</value>
+    <value>Field(s) as data source</value>
   </data>
   <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space = "preserve">
     <value>Value ​​suffix</value>
@@ -1636,9 +1633,6 @@
     <value></value>
   </data>
   <data name="SiteFields_GtChrFields_Description" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="SiteFields_GtChrField_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
