@@ -247,7 +247,7 @@
     <value>Statistikkfelter</value>
   </data>
   <data name="Lists_ChartsConfig_Title" xml:space="preserve">
-    <value>Grafkonfigurasjon</value>
+    <value>Diagrammer</value>
   </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
@@ -484,7 +484,7 @@
     <value>Statistikkfelt</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
-    <value>Grafkonfigurasjonelement</value>
+    <value>Diagramkonfigurasjonselement</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
     <value>Stolpediagram</value>
@@ -492,8 +492,8 @@
   <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
     <value>Kolonnediagram</value>
   </data>
-  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
-    <value>Kakediagram</value>
+  <data name="ContentTypes_Sektordiagram_Name" xml:space="preserve">
+    <value>Sektordiagram</value>
   </data>
   <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
     <value>Porteføljekonfigurasjonsbase</value>
@@ -607,7 +607,7 @@
     <value>Opprett et nytt statistikkfelt</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Description" xml:space="preserve">
-    <value>Opprett et nytt grafkonfigurasjonelement</value>
+    <value>Opprett et nytt diagramkonfigurasjonselement</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Description" xml:space="preserve">
     <value>Opprett et nytt stolpediagram</value>
@@ -616,7 +616,7 @@
     <value>Opprett et nytt kolonnediagram</value>
   </data>
   <data name="ContentTypes_Kakediagram_Description" xml:space="preserve">
-    <value>Opprett et nytt kakediagram</value>
+    <value>Opprett et nytt sektordiagram</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
     <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
@@ -1138,7 +1138,7 @@
     <value>Undertekst</value>
   </data>
   <data name="SiteFields_GtChrYAxisTitle_DisplayName" xml:space="preserve">
-    <value>Tittel (Y-akse)</value>
+    <value>Tittel (primærakse)</value>
   </data>
   <data name="SiteFields_GtChrWidthLg_DisplayName" xml:space="preserve">
     <value>Bredde (640px - 1023px)</value>
@@ -1147,7 +1147,7 @@
     <value>Bredde (320px - 479px)</value>
   </data>
   <data name="SiteFields_GtChrYMin_DisplayName" xml:space="preserve">
-    <value>Min (Y-akse)</value>
+    <value>Min (primærakse)</value>
   </data>
   <data name="SiteFields_GtChrWidthXxl_DisplayName" xml:space="preserve">
     <value>Bredde (1366px - 1919px)</value>
@@ -1159,13 +1159,13 @@
     <value>Bredde (1024px - 1365px)</value>
   </data>
   <data name="SiteFields_GtChrYMax_DisplayName" xml:space="preserve">
-    <value>Max (Y-akse)</value>
+    <value>Max (primærakse)</value>
   </data>
   <data name="SiteFields_GtChrDataType_DisplayName" xml:space="preserve">
     <value>Datatype</value>
   </data>
   <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space="preserve">
-    <value>Intervall (Y-akse)</value>
+    <value>Intervall (primærakse)</value>
   </data>
   <data name="SiteFields_GtChrWidthMd_DisplayName" xml:space="preserve">
     <value>Bredde (480px - 639px)</value>
@@ -1192,7 +1192,7 @@
     <value>Stabling</value>
   </data>
   <data name="SiteFields_GtChrShowLegend_DisplayName" xml:space="preserve">
-    <value>Vis merkelapp</value>
+    <value>Vis forklarende merkelapp</value>
   </data>
   <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space="preserve">
     <value>Bredde (1920px og oppover)</value>
@@ -1651,7 +1651,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtChrShowPercentage_Description" xml:space="preserve">
-    <value>Vis verdiene for hvert kakestykke som prosent av totalen</value>
+    <value>Vis verdiene for hver sektor som prosent av totalen</value>
   </data>
   <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
     <value></value>
@@ -1663,7 +1663,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
-    <value>Høyden på grafen i piksler</value>
+    <value>Høyden på diagrammet i piksler</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
@@ -2777,6 +2777,12 @@
   </data>
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Prosjektportalen - Innstillinger</value>
+  </data>
+  <data name="SiteSettings_Link_StatsFields" xml:space="preserve">
+    <value>Prosjektportalen - Datafelter for diagrammer</value>
+  </data>
+  <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
+    <value>Prosjektportalen - Diagramkonfigurasjon</value>
   </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>Det finnes ingen instillinger å endre.</value>
