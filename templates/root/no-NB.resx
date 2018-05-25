@@ -372,23 +372,26 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
   </data>
-  <data name="ResultSourceName_Projects" xml:space="preserve">
+  <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
   <data name="ResultSourceLevel_Projects" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_Benefits" xml:space="preserve">
+  <data name="DataSourceName_Benefits" xml:space="preserve">
     <value>Gevinstmålinger</value>
   </data>
   <data name="ResultSourceLevel_Benefits" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
+  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
     <value>Erfaringslogg</value>
   </data>
   <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
     <value>SPSite</value>
+  </data>
+  <data name="DataSourceName_RiskElements" xml:space="preserve">
+    <value>Risk Elements</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
