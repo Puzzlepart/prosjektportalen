@@ -2739,6 +2739,9 @@
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Prosjektportalen - Innstillinger</value>
   </data>
+  <data name="SiteSettings_Link_DataSources" xml:space="preserve">
+    <value>Prosjektportalen - Datakilder</value>
+  </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>Det finnes ingen instillinger å endre.</value>
   </data>
