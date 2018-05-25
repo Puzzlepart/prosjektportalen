@@ -1,22 +1,21 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
 import { ModalLink } from "../@Components";
+import RiskElementModel from "./RiskElementModel";
 
 export interface IRiskElementProps {
-    item: any;
+    model: RiskElementModel;
     style?: React.CSSProperties;
 }
 
-const RiskElement = ({ item: { ID, Title }, style }: IRiskElementProps) => {
-    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
+const RiskElement = (props: IRiskElementProps) => {
     return (
         <div
-            className={`risk-matrix-element`}
-            title={Title}
-            style={style}>
+            className="risk-matrix-element"
+            title={props.model.title}
+            style={props.style}>
             <ModalLink
-                label={ID}
-                url={dispFormUrl}
+                label={props.model.id}
+                url={props.model.url}
                 options={{ HideRibbon: true }} />
         </div>
     );

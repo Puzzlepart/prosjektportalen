@@ -1,9 +1,10 @@
 import * as React from "react";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { Site, List } from "sp-pnp-js";
 import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import RiskMatrixCells from "./RiskMatrixCells";
 import MatrixCellType from "../../Model/MatrixCellType";
 import IMatrixCell from "../../Model/IMatrixCell";
@@ -11,6 +12,7 @@ import MatrixRow from "./MatrixRow";
 import MatrixHeaderCell from "./MatrixHeaderCell";
 import MatrixCell from "./MatrixCell";
 import RiskElement from "./RiskElement";
+import RiskElementModel from "./RiskElementModel";
 import IRiskMatrixData from "./IRiskMatrixData";
 import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
@@ -34,8 +36,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         super(props);
         this.state = { data: props.data };
         this._pnpList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
-        this.onViewChanged = this.onViewChanged.bind(this);
-        this.getViewOptions = this.getViewOptions.bind(this);
+
     }
 
     public async componentDidMount() {
@@ -74,7 +75,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             );
         }
 
-        const riskItems = data.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
+        // const riskItems = data.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
+        const riskItems = data.items;
 
         if (riskItems.length === 0) {
             if (this.props.showEmptyMessage) {
@@ -84,7 +86,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         }
 
         if (this.state.matrixCells) {
-            const viewOptions = this.getViewOptions();
+            const viewOptions = this._getViewOptions();
 
             return (
                 <div className={this.props.className}>
@@ -93,7 +95,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                             label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
-                            onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
+                            onChanged={opt => this._onViewChanged(opt.data.viewQuery)} />
                     </div>
                     <table {...tableProps} ref={ele => this._tableElement = ele}>
                         <tbody>
@@ -117,9 +119,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Render rows
      *
-     * @param {any[]} riskItems Risk items
+     * @param {Array<RiskElementModel>} riskItems Risk items
      */
-    private renderRows(riskItems) {
+    private renderRows(riskItems: Array<RiskElementModel>) {
         const riskMatrixRows = this.state.matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
                 const cell = this.state.matrixCells[i][j],
@@ -160,16 +162,16 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Helper function to get risk elements for cell post action
      *
-     * @param {Array<any>} items Items
+     * @param {Array<RiskElementModel>} items Items
      * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsPostActionForCell(items: any[], cell: IMatrixCell) {
+    private getRiskElementsPostActionForCell(items: Array<RiskElementModel>, cell: IMatrixCell) {
         if (this.state.postAction) {
-            const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbabilityPostAction, 10) && cell.consequence === parseInt(risk.GtRiskConsequencePostAction, 10));
+            const itemsForCell = items.filter(risk => cell.probability === risk.probabilityPostAction && cell.consequence === risk.consequencePostAction);
             return itemsForCell.map((risk, key) => (
                 <RiskElement
                     key={`RiskElement_PostAction_${key}`}
-                    item={risk}
+                    model={risk}
                     style={{ opacity: this.state.postAction ? 0.5 : 1 }} />
             ));
         }
@@ -179,31 +181,32 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * Helper function to get risk elements
      *
-     * @param {Array<any>} items Items
+     * @param {Array<RiskElementModel>} items Items
      * @param {IMatrixCell} cell The cell
      */
-    private getRiskElementsForCell(items: any[], cell: IMatrixCell) {
-        const itemsForCell = items.filter(risk => cell.probability === parseInt(risk.GtRiskProbability, 10) && cell.consequence === parseInt(risk.GtRiskConsequence, 10));
+    private getRiskElementsForCell(items: Array<RiskElementModel>, cell: IMatrixCell) {
+        const itemsForCell = items.filter(risk => cell.probability === risk.probability && cell.consequence === risk.consequence);
         return itemsForCell.map((risk, key) => (
             <RiskElement
                 key={`RiskElement_${key}`}
-                item={risk} />
+                model={risk} />
         ));
     }
 
     /**
      * Transform SP list views to IDropdownOption[]
      */
-    private getViewOptions(): IDropdownOption[] {
+    private _getViewOptions(): IDropdownOption[] {
         const { views } = this.state.data;
         if (views) {
-            return views
+            const viewOptions = views
                 .filter(view => view.Title)
                 .map(view => ({
                     key: view.Id,
                     text: view.Title,
                     data: { viewQuery: view.ViewQuery },
                 }));
+            return viewOptions;
         } else {
             return [];
         }
@@ -214,7 +217,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      *
      * @param {string} viewQuery View query
      */
-    private async onViewChanged(viewQuery: string) {
+    @autobind
+    private async _onViewChanged(viewQuery: string) {
         let { data } = this.state;
         data.items = await this._pnpList.getItemsByCAMLQuery(this.createCamlQuery(viewQuery));
         this.setState({ data });
@@ -235,13 +239,34 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     private async fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
         let { data } = this.state;
         if (!data) {
-            data = { items: [] };
+            data = { items: [], views: [] };
         }
-        if (!data.views) {
-            data.views = await this._pnpList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
+        let selectedView = { Id: "", ViewQuery: "" };
+
+        if (this.props.dataSource) {
+            const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+            const dataSourcesList = rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
+            const response = await pnp.sp.search({
+                Querytext: "*",
+                RowLimit: 10,
+                TrimDuplicates: false,
+                SelectProperties: ["ListItemID", "Path", "Title", "GtRiskProbabilityOWSNMBR", "GtRiskConsequenceOWSNMBR", "GtRiskProbabilityPostActionOWSNMBR", "GtRiskConsequencePostActionOWSNMBR"],
+                QueryTemplate: dataSource.GtDpSearchQuery,
+            });
+            data.items = response.PrimarySearchResults.map((item: any) => {
+                return new RiskElementModel(item.ListItemID, item.Title, item.GtRiskProbabilityOWSNMBR, item.GtRiskConsequenceOWSNMBR, item.GtRiskProbabilityPostActionOWSNMBR, item.GtRiskConsequencePostActionOWSNMBR, item.Path);
+            });
+        } else {
+            if (!data.views) {
+                data.views = await this._pnpList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
+            }
+            [selectedView] = data.views.filter(view => view.DefaultView);
+            const spListItems = await this._pnpList.getItemsByCAMLQuery(this.createCamlQuery(selectedView.ViewQuery));
+            data.items = spListItems.map(item => {
+                return new RiskElementModel(item.ID, item.Title, item.GtRiskProbability, item.GtRiskConsequence, item.GtRiskProbabilityPostAction, item.GtRiskConsequencePostAction);
+            });
         }
-        let [selectedView] = data.views.filter(view => view.DefaultView);
-        data.items = await this._pnpList.getItemsByCAMLQuery(this.createCamlQuery(selectedView.ViewQuery));
 
         return { data, selectedViewId: selectedView.Id };
     }
