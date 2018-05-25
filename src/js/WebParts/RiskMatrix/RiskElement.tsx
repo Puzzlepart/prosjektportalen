@@ -1,25 +1,34 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
 import { ModalLink } from "../@Components";
+import RiskElementModel from "./RiskElementModel";
 
-export interface IRiskElementProps {
-    item: any;
-    style?: React.CSSProperties;
+export interface IRiskElementProps extends React.HTMLProps<HTMLDivElement> {
+    model: RiskElementModel;
 }
 
-const RiskElement = ({ item: { ID, Title }, style }: IRiskElementProps) => {
-    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
-    return (
-        <div
-            className={`risk-matrix-element`}
-            title={Title}
-            style={style}>
-            <ModalLink
-                label={ID}
-                url={dispFormUrl}
-                options={{ HideRibbon: true }} />
-        </div>
-    );
-};
+export default class RiskMatrix extends React.Component<IRiskElementProps, {}> {
+    public static defaultProps = { className: "risk-matrix-element" };
 
-export default RiskElement;
+    public render(): React.ReactElement<IRiskElementProps> {
+        return (
+            <div
+                className={this.props.className}
+                title={this._getTooltip()}
+                style={this.props.style}>
+                <ModalLink
+                    label={this.props.model.id}
+                    url={this.props.model.url}
+                    options={{ HideRibbon: true }} />
+            </div>
+        );
+    }
+
+    protected _getTooltip() {
+        let tooltip = "";
+        if (this.props.model.siteTitle) {
+            tooltip += `${this.props.model.siteTitle}: `;
+        }
+        tooltip += this.props.model.title;
+        return tooltip;
+    }
+}
