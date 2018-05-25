@@ -25,8 +25,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     public static displayName = "RiskMatrix";
     public static defaultProps = RiskMatrixDefaultProps;
     private _tableElement: HTMLTableElement;
-    private _pnpList: List;
-
+    private _uncertaintiesList: List;
+    private _dataSourcesList: List;
     /**
      * Constructor
      *
@@ -35,8 +35,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     constructor(props: IRiskMatrixProps) {
         super(props);
         this.state = this._getInitialState(props);
-        this._pnpList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
-
+        this._uncertaintiesList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
+        this._dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
     }
 
     public async componentDidMount() {
@@ -92,7 +92,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                             label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
-                            onChanged={opt => this._onViewChanged(opt.data.viewQuery)} />
+                            onChanged={this._onViewChanged} />
                     </div>
                     <table {...tableProps} ref={ele => this._tableElement = ele}>
                         <tbody>
@@ -220,12 +220,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
      * On view changed
      *
-     * @param {string} viewQuery View query
+     * @param {IDropdownOption} opt Dropdown option
      */
     @autobind
-    protected async _onViewChanged(viewQuery: string) {
+    protected async _onViewChanged(opt: IDropdownOption) {
         let { data } = this.state;
-        data.items = await this._pnpList.getItemsByCAMLQuery(this._createCamlQuery(viewQuery));
+        const camlQuery = this._createCamlQuery(opt.data.viewQuery);
+        data.items = await this._uncertaintiesList.getItemsByCAMLQuery(camlQuery);
         this.setState({ data });
     }
 
@@ -274,10 +275,11 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             });
         } else {
             if (!data.views) {
-                data.views = await this._pnpList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
+                data.views = await this._uncertaintiesList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
             }
             [selectedView] = data.views.filter(view => view.DefaultView);
-            const spListItems = await this._pnpList.getItemsByCAMLQuery(this._createCamlQuery(selectedView.ViewQuery));
+            const camlQuery = this._createCamlQuery(selectedView.ViewQuery);
+            const spListItems = await this._uncertaintiesList.getItemsByCAMLQuery(camlQuery);
             data.items = this._mapSpListItems(spListItems);
         }
 
@@ -290,27 +292,29 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     * @param {string} name Data source name
     */
     protected async _fetchFromDataSource(name: string): Promise<Array<any>> {
-        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
-        const dataSourcesList = rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
-        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${name}'`).get();
-        const response = await pnp.sp.search({
-            Querytext: "*",
-            RowLimit: this.props.rowLimit,
-            TrimDuplicates: false,
-            SelectProperties: [
-                "ListItemID",
-                "Path",
-                "WebId",
-                "Title",
-                "GtRiskProbabilityOWSNMBR",
-                "GtRiskConsequenceOWSNMBR",
-                "GtRiskProbabilityPostActionOWSNMBR",
-                "GtRiskConsequencePostActionOWSNMBR",
-                "SiteTitle",
-            ],
-            QueryTemplate: dataSource.GtDpSearchQuery,
-        });
-        return response.PrimarySearchResults;
+        const [dataSource] = await this._dataSourcesList.items.filter(`Title eq '${name}'`).get();
+        if (dataSource) {
+            const searchResults = await pnp.sp.search({
+                Querytext: "*",
+                RowLimit: this.props.rowLimit,
+                TrimDuplicates: false,
+                SelectProperties: [
+                    "ListItemID",
+                    "Path",
+                    "WebId",
+                    "Title",
+                    "GtRiskProbabilityOWSNMBR",
+                    "GtRiskConsequenceOWSNMBR",
+                    "GtRiskProbabilityPostActionOWSNMBR",
+                    "GtRiskConsequencePostActionOWSNMBR",
+                    "SiteTitle",
+                ],
+                QueryTemplate: dataSource.GtDpSearchQuery,
+            });
+            return searchResults.PrimarySearchResults;
+        } else {
+            return [];
+        }
     }
 }
 
