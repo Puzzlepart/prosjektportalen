@@ -2,23 +2,33 @@ import * as React from "react";
 import { ModalLink } from "../@Components";
 import RiskElementModel from "./RiskElementModel";
 
-export interface IRiskElementProps {
+export interface IRiskElementProps extends React.HTMLProps<HTMLDivElement> {
     model: RiskElementModel;
-    style?: React.CSSProperties;
 }
 
-const RiskElement = (props: IRiskElementProps) => {
-    return (
-        <div
-            className="risk-matrix-element"
-            title={props.model.title}
-            style={props.style}>
-            <ModalLink
-                label={props.model.id}
-                url={props.model.url}
-                options={{ HideRibbon: true }} />
-        </div>
-    );
-};
+export default class RiskMatrix extends React.Component<IRiskElementProps, {}> {
+    public static defaultProps = { className: "risk-matrix-element" };
 
-export default RiskElement;
+    public render(): React.ReactElement<IRiskElementProps> {
+        return (
+            <div
+                className={this.props.className}
+                title={this._getTooltip()}
+                style={this.props.style}>
+                <ModalLink
+                    label={this.props.model.id}
+                    url={this.props.model.url}
+                    options={{ HideRibbon: true }} />
+            </div>
+        );
+    }
+
+    protected _getTooltip() {
+        let tooltip = "";
+        if (this.props.model.siteTitle) {
+            tooltip += `${this.props.model.siteTitle}: `;
+        }
+        tooltip += this.props.model.title;
+        return tooltip;
+    }
+}

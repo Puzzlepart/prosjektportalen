@@ -75,10 +75,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             );
         }
 
-        // const riskItems = data.items.filter(i => i.ContentTypeId.indexOf(this.props.contentTypeId) !== -1);
-        const riskItems = data.items;
-
-        if (riskItems.length === 0) {
+        if (data.items.length === 0) {
             if (this.props.showEmptyMessage) {
                 return <MessageBar>{RESOURCE_MANAGER.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
             }
@@ -99,7 +96,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     </div>
                     <table {...tableProps} ref={ele => this._tableElement = ele}>
                         <tbody>
-                            {this.renderRows(riskItems)}
+                            {this.renderRows(data.items)}
                         </tbody>
                     </table>
                     <div>
@@ -122,28 +119,28 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * @param {Array<RiskElementModel>} riskItems Risk items
      */
     protected renderRows(riskItems: Array<RiskElementModel>) {
-        const riskMatrixRows = this.state.matrixCells.map((rows, i) => {
+        const { matrixCells } = this.state;
+        const riskMatrixRows = matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = this.state.matrixCells[i][j],
+                const cell = matrixCells[i][j],
                     riskElements = this.getRiskElementsForCell(riskItems, cell),
                     riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (
                             <MatrixCell
-                                key={j}
-                                contents={[
-                                    ...riskElements,
-                                    ...riskElementsPostAction,
-                                ]}
+                                key={`MatrixCell_${j}`}
                                 style={cell.style}
-                                className={cell.className} />
+                                className={cell.className}>
+                                {riskElements}
+                                {riskElementsPostAction}
+                            </MatrixCell>
                         );
                     }
                     case MatrixCellType.Header: {
                         return (
                             <MatrixHeaderCell
-                                key={j}
+                                key={`MatrixHeaderCell_${j}`}
                                 label={c.cellValue}
                                 className={cell.className} />
                         );
@@ -151,9 +148,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 }
             });
             return (
-                <MatrixRow
-                    key={i}
-                    cells={cells} />
+                <MatrixRow key={i}>
+                    {cells}
+                </MatrixRow>
             );
         });
         return riskMatrixRows;
@@ -168,11 +165,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         if (props.data) {
             return {
                 data: {
-                    items: props.data
-                        ? props.data.items.map((item: any) => {
-                            return new RiskElementModel(item.ID, item.Title, item.GtRiskProbability, item.GtRiskConsequence, item.GtRiskProbabilityPostAction, item.GtRiskConsequencePostAction);
-                        })
-                        : [],
+                    items: props.data ? this._mapSpListItems(props.data.items) : [],
                 },
             };
         } else {
@@ -246,21 +239,37 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     /**
+     * Map items
+     *
+     * @param {Array<any>} spListItems SP list items
+     */
+    protected _mapSpListItems(spListItems: Array<any>): Array<RiskElementModel> {
+        return spListItems
+            .filter(item => item.ContentTypeId.indexOf(this.props.contentTypeId) !== -1)
+            .map(item => {
+                return new RiskElementModel(item.ID, item.Title, item.GtRiskProbability, item.GtRiskConsequence, item.GtRiskProbabilityPostAction, item.GtRiskConsequencePostAction);
+            });
+    }
+
+    /**
      * Fetch data
      */
     protected async _fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
+        const { dataSource } = this.props;
         let { data } = this.state;
+
         if (!data) {
             data = { items: [], views: [] };
         }
         let selectedView = { Id: "", ViewQuery: "" };
 
-        if (this.props.dataSource) {
-            const spSearchItems = await this._fetchFromDataSource(this.props.dataSource);
+        if (dataSource) {
+            const spSearchItems = await this._fetchFromDataSource(dataSource);
             data.items = spSearchItems.map(item => {
                 const risk = new RiskElementModel(item.ListItemID, item.Title, item.GtRiskProbabilityOWSNMBR, item.GtRiskConsequenceOWSNMBR, item.GtRiskProbabilityPostActionOWSNMBR, item.GtRiskConsequencePostActionOWSNMBR);
                 risk.url = item.Path;
                 risk.webId = item.WebId;
+                risk.siteTitle = item.SiteTitle;
                 return risk;
             });
         } else {
@@ -269,19 +278,17 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             }
             [selectedView] = data.views.filter(view => view.DefaultView);
             const spListItems = await this._pnpList.getItemsByCAMLQuery(this._createCamlQuery(selectedView.ViewQuery));
-            data.items = spListItems.map(item => {
-                return new RiskElementModel(item.ID, item.Title, item.GtRiskProbability, item.GtRiskConsequence, item.GtRiskProbabilityPostAction, item.GtRiskConsequencePostAction);
-            });
+            data.items = this._mapSpListItems(spListItems);
         }
 
         return { data, selectedViewId: selectedView.Id };
     }
 
-     /**
-     * Fetch data from data source
-     *
-     * @param {string} name Data source name
-     */
+    /**
+    * Fetch data from data source
+    *
+    * @param {string} name Data source name
+    */
     protected async _fetchFromDataSource(name: string): Promise<Array<any>> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const dataSourcesList = rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
@@ -299,6 +306,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 "GtRiskConsequenceOWSNMBR",
                 "GtRiskProbabilityPostActionOWSNMBR",
                 "GtRiskConsequencePostActionOWSNMBR",
+                "SiteTitle",
             ],
             QueryTemplate: dataSource.GtDpSearchQuery,
         });

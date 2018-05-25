@@ -9,6 +9,7 @@ export default class RiskElementModel {
     public consequencePostAction: number;
     public url: string;
     public webId: string;
+    public siteTitle: string;
 
     constructor(id: string, title: string, probability: string, consequence: string, probabilityPostAction: string, consequencePostAction: string) {
         this.id = id;
@@ -17,13 +18,12 @@ export default class RiskElementModel {
         this.consequence = parseInt(consequence, 10);
         this.probabilityPostAction = parseInt(probabilityPostAction, 10);
         this.consequencePostAction = parseInt(consequencePostAction, 10);
-        this.url = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${this.id}`;
-
+        const listDefaultViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url")}`;
+        this.url = `${listDefaultViewUrl.replace("AllItems", "DispForm")}?ID=${this.id}`;
     }
 
     public getKey(postfix?: string): string {
         const key = ["RiskElement", this.webId, this.id, postfix].filter(p => p).join("_");
-        console.log(key);
         return key;
     }
 }
