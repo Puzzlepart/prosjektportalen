@@ -2,6 +2,7 @@
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Parameters>
         <pnp:Parameter Key="GenericFieldPrefix">Gt</pnp:Parameter>
+        <pnp:Parameter Key="DynamicPortfolioFieldPrefix">GtDp</pnp:Parameter>
         <pnp:Parameter Key="ProjectStatsFieldPrefix">GtChr</pnp:Parameter>
         <pnp:Parameter Key="ChartsConfigContentTypeBase">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D</pnp:Parameter>
         <pnp:Parameter Key="TermSetIdProjectServiceArea">{99af1a25-88c1-4781-a05c-8446928d3fdd}</pnp:Parameter>
