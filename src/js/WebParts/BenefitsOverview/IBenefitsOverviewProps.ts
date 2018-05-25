@@ -24,5 +24,5 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     showSearchBox: false,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
-    resultSource: { Name: RESOURCE_MANAGER.getResource("ResultSourceName_Benefits"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_Benefits") },
+    resultSource: { Name: RESOURCE_MANAGER.getResource("DataSourceName_Benefits"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_Benefits") },
 };

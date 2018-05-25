@@ -58,5 +58,5 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         ...col,
         isResizable: true,
     })),
-    resultSource: { Name: RESOURCE_MANAGER.getResource("ResultSourceName_ExperienceLog"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog") },
+    resultSource: { Name: RESOURCE_MANAGER.getResource("DataSourceName_ExperienceLog"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog") },
 };
