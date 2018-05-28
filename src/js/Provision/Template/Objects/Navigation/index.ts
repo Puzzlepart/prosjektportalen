@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../../../Resources";
-import { INavigation } from "sp-pnp-provisioning/lib/schema";
+import { INavigation } from "sp-js-provisioning/lib/schema";
 
 const Navigation: INavigation = {
     QuickLaunch: [

@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../../../Resources";
-import { IFile } from "sp-pnp-provisioning/lib/schema";
+import { IFile } from "sp-js-provisioning/lib/schema";
 
 const BenefitsOverview: IFile = {
     Folder: "SitePages",
