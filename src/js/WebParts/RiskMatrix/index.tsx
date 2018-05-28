@@ -246,16 +246,17 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     /**
-     * Map items
+     * Map items to RiskElementModel
      *
      * @param {Array<any>} spListItems SP list items
      */
     protected _mapSpListItems(spListItems: Array<any>): Array<RiskElementModel> {
-        return spListItems
+        const riskItems: Array<RiskElementModel> = spListItems
             .filter(item => item.ContentTypeId.indexOf(this.props.contentTypeId) !== -1)
             .map(item => {
                 return new RiskElementModel(item.ID, item.Title, item.GtRiskProbability, item.GtRiskConsequence, item.GtRiskProbabilityPostAction, item.GtRiskConsequencePostAction);
             });
+        return riskItems;
     }
 
     /**
