@@ -4,6 +4,7 @@ import RESOURCE_MANAGER from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
+import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import RiskMatrixCells from "./RiskMatrixCells";
 import MatrixCellType from "../../Model/MatrixCellType";
@@ -49,6 +50,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         } else {
             const { data, selectedViewId } = await this._fetchData();
             this.setState({
+                isLoading: false,
                 data,
                 hideLabels: this._tableElement.offsetWidth < this.props.hideLabelsBreakpoint,
                 selectedViewId,
@@ -61,18 +63,21 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Renders the <RiskMatrix /> component
      */
     public render(): React.ReactElement<IRiskMatrixProps> {
-        const { data, selectedViewId, hideLabels } = this.state;
+        const { isLoading, data, selectedViewId, hideLabels } = this.state;
+
         let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
 
-        if (hideLabels) {
-            tableProps.className = "hide-labels";
-        }
-        if (!data) {
+        if (isLoading) {
             return (
                 <div className={this.props.className}>
+                    <Spinner size={SpinnerSize.large} />
                     <table {...tableProps} ref={ele => this._tableElement = ele}></table>
                 </div>
             );
+        }
+
+        if (hideLabels) {
+            tableProps.className = "hide-labels";
         }
 
         if (data.items.length === 0) {
@@ -163,12 +168,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     protected _getInitialState(props: IRiskMatrixProps) {
         if (props.data) {
             return {
+                isLoading: false,
                 data: {
                     items: props.data ? this._mapSpListItems(props.data.items) : [],
                 },
             };
         } else {
-            return {};
+            return { isLoading: true };
         }
     }
 
@@ -258,7 +264,10 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         let { data } = this.state;
 
         if (!data) {
-            data = { items: [], views: [] };
+            data = {
+                items: [],
+                views: null,
+            };
         }
         let selectedView;
 
