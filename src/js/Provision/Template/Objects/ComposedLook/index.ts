@@ -1,4 +1,4 @@
-import { IComposedLook } from "sp-pnp-provisioning/lib/schema";
+import { IComposedLook } from "sp-js-provisioning/lib/schema";
 
 const ComposedLook: IComposedLook = {
     ColorPaletteUrl: "{sitecollection}/_catalogs/theme/15/Project.spcolor",

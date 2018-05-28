@@ -1,4 +1,4 @@
-import { Schema } from "sp-pnp-provisioning/lib/schema";
+import { Schema } from "sp-js-provisioning/lib/schema";
 
 export default class Extension {
     public Title?: string;
