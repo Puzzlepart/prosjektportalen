@@ -7,6 +7,7 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     showViewSelector?: boolean;
     hideLabelsBreakpoint?: number;
     dataSource?: string;
+    viewName?: string;
     rowLimit?: number;
 }
 

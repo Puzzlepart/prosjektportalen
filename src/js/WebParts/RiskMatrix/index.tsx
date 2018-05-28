@@ -101,8 +101,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     </table>
                     <div>
                         <Toggle
-                            defaultChecked={false}
-                            onChanged={isChecked => this.setState({ postAction: isChecked })}
+                            onChanged={postAction => this.setState({ postAction })}
                             label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
                             onText={RESOURCE_MANAGER.getResource("String_Yes")}
                             offText={RESOURCE_MANAGER.getResource("String_No")} />
@@ -256,13 +255,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Fetch data
      */
     protected async _fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
-        const { dataSource } = this.props;
+        const { dataSource, viewName } = this.props;
         let { data } = this.state;
 
         if (!data) {
             data = { items: [], views: [] };
         }
-        let selectedView = { Id: "", ViewQuery: "" };
+        let selectedView;
 
         if (dataSource) {
             const spSearchItems = await this._fetchFromDataSource(dataSource);
@@ -277,13 +276,17 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             if (!data.views) {
                 data.views = await this._uncertaintiesList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
             }
-            [selectedView] = data.views.filter(view => view.DefaultView);
+            if (viewName) {
+                [selectedView] = data.views.filter(view => view.Title === viewName);
+            } else {
+                [selectedView] = data.views.filter(view => view.DefaultView);
+            }
             const camlQuery = this._createCamlQuery(selectedView.ViewQuery);
             const spListItems = await this._uncertaintiesList.getItemsByCAMLQuery(camlQuery);
             data.items = this._mapSpListItems(spListItems);
         }
 
-        return { data, selectedViewId: selectedView.Id };
+        return { data, selectedViewId: selectedView ? selectedView.Id : null };
     }
 
     /**
