@@ -231,7 +231,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     protected async _onViewChanged(opt: IDropdownOption) {
         let { data } = this.state;
         const camlQuery = this._createCamlQuery(opt.data.viewQuery);
-        data.items = await this._uncertaintiesList.getItemsByCAMLQuery(camlQuery);
+        const spListItems = await this._uncertaintiesList.getItemsByCAMLQuery(camlQuery);
+        data.items = this._mapSpListItems(spListItems);
         this.setState({ data });
     }
 
