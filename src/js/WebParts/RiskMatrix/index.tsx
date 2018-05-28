@@ -255,7 +255,6 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Fetch data
      */
     protected async _fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
-        const { dataSource, viewName } = this.props;
         let { data } = this.state;
 
         if (!data) {
@@ -263,8 +262,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         }
         let selectedView;
 
-        if (dataSource) {
-            const spSearchItems = await this._fetchFromDataSource(dataSource);
+        if (this.props.dataSource) {
+            const spSearchItems = await this._fetchFromDataSource(this.props.dataSource);
             data.items = spSearchItems.map(item => {
                 const risk = new RiskElementModel(item.ListItemID, item.Title, item.GtRiskProbabilityOWSNMBR, item.GtRiskConsequenceOWSNMBR, item.GtRiskProbabilityPostActionOWSNMBR, item.GtRiskConsequencePostActionOWSNMBR);
                 risk.url = item.Path;
@@ -276,8 +275,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             if (!data.views) {
                 data.views = await this._uncertaintiesList.views.select("Id", "Title", "DefaultView", "ViewQuery").get();
             }
-            if (viewName) {
-                [selectedView] = data.views.filter(view => view.Title === viewName);
+            if (this.props.viewName) {
+                [selectedView] = data.views.filter(view => view.Title === this.props.viewName);
             } else {
                 [selectedView] = data.views.filter(view => view.DefaultView);
             }
