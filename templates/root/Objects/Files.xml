@@ -104,7 +104,7 @@
     </pnp:File>
     <pnp:File Src="SitePages\ProjectStats.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="Prosjektstatistikk" />
+            <pnp:Property Key="Title" Value="{resource:Navigation_PortfolioStats_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
             <pnp:WebPart Title="ProjectStats" Order="0" Zone="LeftColumn">
