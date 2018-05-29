@@ -29,5 +29,6 @@
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="SiteSettings_Link_Settings" Title="{resource:SiteSettings_Link_Settings}" Url="SitePages/EditWebPropertyBag.aspx" Rights="ManageWeb" Sequence="2012" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="SiteSettings_Link_StatsFields" Title="{resource:SiteSettings_Link_StatsFields}" Url="Lists/StatsFieldsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2013" />
         <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="SiteSettings_Link_ChartsConfig" Title="{resource:SiteSettings_Link_ChartsConfig}" Url="Lists/ChartsConfig/AllItems.aspx" Rights="ManageWeb" Sequence="2014" />
+        <pnp:CustomAction Group="Customization" Location="Microsoft.SharePoint.SiteSettings" Name="SiteSettings_Link_DataSources" Title="{resource:SiteSettings_Link_DataSources}" Url="Lists/DataSources/AllItems.aspx" Rights="ManageWeb" Sequence="2015" />
     </pnp:WebCustomActions>
 </pnp:CustomActions>

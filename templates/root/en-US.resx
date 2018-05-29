@@ -249,6 +249,9 @@
   <data name="Lists_ChartsConfig_Title" xml:space="preserve">
     <value>Chart configuration</value>
   </data>
+  <data name="Lists_DataSources_Title" xml:space="preserve">
+    <value>Data Sources</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>
@@ -372,23 +375,26 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Activated</value>
   </data>
-  <data name="ResultSourceName_Projects" xml:space="preserve">
-    <value>Prosjektområder</value>
+  <data name="DataSourceName_Projects" xml:space="preserve">
+    <value>Projects</value>
   </data>
   <data name="ResultSourceLevel_Projects" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_Benefits" xml:space="preserve">
-    <value>Gevinstmålinger</value>
+  <data name="DataSourceName_Benefits" xml:space="preserve">
+    <value>Benefits</value>
   </data>
   <data name="ResultSourceLevel_Benefits" xml:space="preserve">
     <value>SPSite</value>
   </data>
-  <data name="ResultSourceName_ExperienceLog" xml:space="preserve">
-    <value>Erfaringslogg</value>
+  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
+    <value>ExperienceLog</value>
   </data>
   <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
     <value>SPSite</value>
+  </data>
+  <data name="DataSourceName_RiskElements" xml:space="preserve">
+    <value>Risk Elements</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
@@ -521,6 +527,9 @@
   </data>
   <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
     <value>Feedback</value>
+  </data>
+  <data name="ContentTypes_DataSource_Name" xml:space="preserve">
+    <value>Data Source</value>
   </data>
   <data name="ContentTypes_Glittertind_element_Description" xml:space="preserve">
     <value>Create a new list item.</value>
@@ -1210,7 +1219,7 @@
     <value />
   </data>
   <data name="SiteFields_GtStatusUncertainty_Description" xml:space="preserve">
-    <value>If the status is 'No longer relevant', the risk is not shown in the risk matrix.</value>
+    <value></value>
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
@@ -2763,6 +2772,9 @@
   </data>
   <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
     <value>Project Portal - Graph configuration</value>
+  </data>
+  <data name="SiteSettings_Link_DataSources" xml:space="preserve">
+    <value>Project Portal - Data Sources</value>
   </data>
   <data name="WebPropertyBagEditor_NoSettings" xml:space="preserve">
     <value>There's no settings to change.</value>

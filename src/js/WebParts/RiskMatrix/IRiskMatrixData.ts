@@ -1,3 +1,5 @@
+import RiskElementModel from "./RiskElementModel";
+
 export interface IListView {
     Id: string;
     Title: string;
@@ -6,6 +8,6 @@ export interface IListView {
 }
 
 export default interface IRiskMatrixData {
-    items: any[];
+    items: RiskElementModel[];
     views?: IListView[];
 }

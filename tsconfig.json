@@ -28,7 +28,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": false,
         "pretty": true,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true
     },
     "include": [
         "src/**/*",

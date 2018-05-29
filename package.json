@@ -95,8 +95,8 @@
         "require-uncached": "^1.0.3",
         "run-sequence": "^2.2.1",
         "sanitize-filename": "^1.6.1",
+        "sp-js-provisioning": "git+https://github.com/Puzzlepart/sp-js-provisioning.git#dev",
         "sp-pnp-js": "^3.0.4",
-        "sp-pnp-provisioning": "git+https://github.com/Puzzlepart/pnp-js-provisioning.git#dev",
         "string-format": "^0.5.0",
         "truncate-html": "^0.1.4",
         "tslint": "^5.9.1",
@@ -106,7 +106,7 @@
         "webpack": "^3.10.0",
         "webpack-bundle-analyzer": "^2.9.2",
         "whatwg-fetch": "^2.0.3",
-        "xlsx": "^0.12.12",
+        "xlsx": "^0.12.13",
         "yargs": "^11.0.0"
     }
 }

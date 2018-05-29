@@ -338,44 +338,44 @@
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB4" Name="{resource:ContentTypes_Dynamic_Portfolio_Config_Base_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:DynamicPortfolioFieldPrefix}Order" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:DynamicPortfolioFieldPrefix}DisplayName" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB401" Name="{resource:ContentTypes_Dynamic_Portfolio_Field_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:GenericFieldPrefix}DpProperty" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
-            <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="{parameter:GenericFieldPrefix}DpReadOnly" />
-            <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="{parameter:GenericFieldPrefix}DpRender" />
-            <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="{parameter:GenericFieldPrefix}DpMinWidth" />
-            <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="{parameter:GenericFieldPrefix}DpMaxWidth" />
-            <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="{parameter:GenericFieldPrefix}DpIsResizable" />
-            <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="{parameter:GenericFieldPrefix}DpGroupBy" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:DynamicPortfolioFieldPrefix}Order" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:DynamicPortfolioFieldPrefix}Property" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:DynamicPortfolioFieldPrefix}DisplayName" Required="true" />
+            <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="{parameter:DynamicPortfolioFieldPrefix}ReadOnly" />
+            <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="{parameter:DynamicPortfolioFieldPrefix}Render" />
+            <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="{parameter:DynamicPortfolioFieldPrefix}MinWidth" />
+            <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="{parameter:DynamicPortfolioFieldPrefix}MaxWidth" />
+            <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="{parameter:DynamicPortfolioFieldPrefix}IsResizable" />
+            <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="{parameter:DynamicPortfolioFieldPrefix}GroupBy" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB402" Name="{resource:ContentTypes_Dynamic_Portfolio_Refiner_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
-            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:GenericFieldPrefix}DpProperty" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
-            <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="{parameter:GenericFieldPrefix}DpMultiple" />
-            <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="{parameter:GenericFieldPrefix}DpDefaultHidden" />
-            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:GenericFieldPrefix}DpIcon" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:DynamicPortfolioFieldPrefix}Order" />
+            <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:DynamicPortfolioFieldPrefix}Property" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:DynamicPortfolioFieldPrefix}DisplayName" Required="true" />
+            <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="{parameter:DynamicPortfolioFieldPrefix}Multiple" />
+            <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="{parameter:DynamicPortfolioFieldPrefix}DefaultHidden" />
+            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:DynamicPortfolioFieldPrefix}Icon" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B98DDFB576777B409846155F0D450EB403" Name="{resource:ContentTypes_Dynamic_Portfolio_View_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:GenericFieldPrefix}DpOrder" />
-            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:GenericFieldPrefix}DpSearchQuery" Required="true" />
-            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:GenericFieldPrefix}DpDisplayName" Required="true" />
-            <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="{parameter:GenericFieldPrefix}DpDefault" />
-            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:GenericFieldPrefix}DpIcon" />
-            <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="{parameter:GenericFieldPrefix}DpFieldsLookup" />
-            <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="{parameter:GenericFieldPrefix}DpRefinersLookup" />
-            <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="{parameter:GenericFieldPrefix}DpGroupByLookup" />
-            <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="{parameter:GenericFieldPrefix}DpPersonalView" />
+            <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:DynamicPortfolioFieldPrefix}Order" />
+            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Required="true" />
+            <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:DynamicPortfolioFieldPrefix}DisplayName" Required="true" />
+            <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="{parameter:DynamicPortfolioFieldPrefix}Default" />
+            <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="{parameter:DynamicPortfolioFieldPrefix}Icon" />
+            <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="{parameter:DynamicPortfolioFieldPrefix}FieldsLookup" />
+            <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="{parameter:DynamicPortfolioFieldPrefix}RefinersLookup" />
+            <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="{parameter:DynamicPortfolioFieldPrefix}GroupByLookup" />
+            <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="{parameter:DynamicPortfolioFieldPrefix}PersonalView" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Name="{resource:ContentTypes_List_Content_Config_Name}" Description="" Group="{resource:ContentTypes_Group}">
@@ -458,6 +458,12 @@
             <pnp:FieldRef ID="cbf2ae22-2c77-4ad0-a639-07fddfb5cd81" Name="{parameter:GenericFieldPrefix}MilestoneActualDate"/>
             <pnp:FieldRef ID="17a4b359-5819-4e7c-9894-a154320a661d" Name="{parameter:GenericFieldPrefix}MilestoneStatus"/>
             <pnp:FieldRef ID="dabdcbab-7bab-4fb2-8d65-85bd03809a8d" Name="{parameter:GenericFieldPrefix}MilestoneComment" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x0100A0AB42EFAB986D4A8E8038BC2391BEB2" Name="{resource:ContentTypes_DataSource_Name}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="{resource:ContentTypes_Statistikkfelt_Name}" Description="{resource:ContentTypes_Statistikkfelt_Description}" Group="{resource:ContentTypes_Group}">
