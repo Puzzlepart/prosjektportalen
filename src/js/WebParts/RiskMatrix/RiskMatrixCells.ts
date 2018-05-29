@@ -5,7 +5,6 @@ import IMatrixCell from "../../Model/IMatrixCell";
 const RiskMatrixCells: Array<IMatrixCell[]> = [
     [
         {
-
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },

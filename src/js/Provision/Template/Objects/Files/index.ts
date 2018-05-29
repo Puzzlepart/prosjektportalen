@@ -1,4 +1,4 @@
-import { IFile } from "sp-pnp-provisioning/lib/schema";
+import { IFile } from "sp-js-provisioning/lib/schema";
 import  ProjectHome  from "./ProjectHome";
 import BenefitsOverview  from "./BenefitsOverview";
 import ProjectStatus from "./ProjectStatus";

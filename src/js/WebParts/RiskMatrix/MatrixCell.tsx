@@ -1,13 +1,19 @@
 import * as React from "react";
 
-const MatrixCell = (props) => {
-    return (
-        <td className={props.className} style={props.style}>
-            <div className="cell-container">
-                {props.contents}
-            </div>
-        </td>
-    );
-};
+export interface IMatrixCellProps extends React.HTMLProps<HTMLElement> {
+    containerClassName?: string;
+}
 
-export default MatrixCell;
+export default class MatrixCell extends React.Component<IMatrixCellProps, {}> {
+    public static defaultProps = { containerClassName: "cell-container" };
+
+    public render(): React.ReactElement<IMatrixCellProps> {
+        return (
+            <td className={this.props.className} style={this.props.style}>
+                <div className={this.props.containerClassName}>
+                    {this.props.children}
+                </div>
+            </td>
+        );
+    }
+}
