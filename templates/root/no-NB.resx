@@ -2469,8 +2469,14 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
+  <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>Gevinstoversikt</value>
+  </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>
+  </data>
+  <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>Erfaringslogg</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>Det skjedde en feil under lasting. DICE er ikke riktig konfigurert.</value>

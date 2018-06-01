@@ -21,6 +21,8 @@ import * as Data from "./BenefitsOverviewData";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
 import BaseWebPart from "../@BaseWebPart";
+import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
+import * as Util from "../../Util";
 
 /**
  * Benefits Overview
@@ -89,7 +91,10 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                         groups={groups}
                         selectionMode={SelectionMode.none}
                         onRenderItemColumn={(item, index, column: any) => {
-                            return _onRenderItemColumn(item, index, column, () => this.setState({ showProjectInfo: item }), entry => this.setState({ showMeasurements: entry }));
+                            return _onRenderItemColumn(item, index, column, (evt) => {
+                                evt.preventDefault();
+                                this.setState({ showProjectInfo: item });
+                            }, entry => this.setState({ showMeasurements: entry }));
                         }}
                         onColumnHeaderClick={(col, evt) => this._onColumnClick(col, evt)}
                     />
@@ -137,6 +142,23 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 })),
             });
         }
+
+        if (this.props.excelExportEnabled && this.props.excelExportConfig) {
+            items.push({
+                key: "ExcelExport",
+                name: this.props.excelExportConfig.buttonLabel,
+                iconProps: {
+                    iconName: this.props.excelExportConfig.buttonIcon,
+                    styles: { root: { color: "green !important" } },
+                },
+                disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
+                onClick: e => {
+                    e.preventDefault();
+                    this.exportToExcel();
+                },
+            });
+        }
+
         if (items.length > 0 || farItems.length > 0) {
             return (
                 <CommandBar
@@ -292,6 +314,27 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 columns: columns,
             },
         });
+    }
+
+    /**
+     * Export current view to Excel (xlsx)
+     */
+    private async exportToExcel() {
+        this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
+        let { items, columns } = this.getFilteredData(this.props, this.state);
+        const sheet = {
+            name: this.props.excelExportConfig.sheetName,
+            data: [
+                columns.map(col => col.name),
+                ...items.map(item => columns.map(col => item[col.fieldName])),
+            ],
+        };
+        const fileName = String.format(this.props.excelExportConfig.fileName, RESOURCE_MANAGER.getResource("ExperienceLog_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        await ExportToExcel({
+            sheets: [sheet],
+            fileName,
+        });
+        this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }
 }
 
