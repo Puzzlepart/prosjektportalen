@@ -1135,7 +1135,7 @@
     <value>Starttidspunkt</value>
   </data>
   <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
-    <value>Slutttidspunkt</value>
+    <value>Sluttidspunkt</value>
   </data>
   <data name="SiteFields_GtChrShowItemSelector_DisplayName" xml:space="preserve">
     <value>Vis elementvelger</value>
