@@ -17,7 +17,7 @@ const ProjectDeliveries: IList = {
     Fields: [GtProductInteressent],
     Views: [{
         Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtProductPhase", "GtProductStartTime", "GtProductEndTime", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
+        ViewFields: ["LinkTitle", "GtProductDescription", "GtProductStartTime", "GtProductEndTime", "GtProductStatus", "GtProductStatusComment", "GtProductPhase"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -26,7 +26,7 @@ const ProjectDeliveries: IList = {
     },
     {
         Title: RESOURCE_MANAGER.getResource("View_ProductionPhase_DisplayName"),
-        ViewFields: ["LinkTitle", "GtProductStartTime", "GtProductEndTime", "GtProductAcceptanceMethod", "GtProductAcceptanceResponsible", "GtProductAcceptanceDate"],
+        ViewFields: ["LinkTitle", "GtProductDescription", "GtProductStartTime", "GtProductEndTime", "GtProductStatus", "GtProductStatusComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
