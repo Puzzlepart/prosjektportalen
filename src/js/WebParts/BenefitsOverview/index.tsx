@@ -329,7 +329,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 ...items.map(item => columns.map(col => item[col.fieldName])),
             ],
         };
-        const fileName = String.format(this.props.excelExportConfig.fileName, RESOURCE_MANAGER.getResource("ExperienceLog_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format(this.props.excelExportConfig.fileName, RESOURCE_MANAGER.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         await ExportToExcel({
             sheets: [sheet],
             fileName,
