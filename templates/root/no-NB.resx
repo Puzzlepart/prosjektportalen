@@ -372,6 +372,18 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
   </data>
+  <data name="View_CurrentRisk_DisplayName" xml:space="preserve">
+    <value>Aktuell risiko</value>
+  </data>
+  <data name="View_UnacceptableRisk_DisplayName" xml:space="preserve">
+    <value>Uakseptabel risiko</value>
+  </data>
+  <data name="View_ClarifiedRisks_DisplayName" xml:space="preserve">
+    <value>Avklart risiko</value>
+  </data>
+  <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
+    <value>Uten ansvarlig</value>
+  </data>
   <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>

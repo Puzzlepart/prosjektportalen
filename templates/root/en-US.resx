@@ -372,6 +372,18 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Activated</value>
   </data>
+  <data name="View_CurrentRisk_DisplayName" xml:space="preserve">
+    <value>Current risk</value>
+  </data>
+  <data name="View_UnacceptableRisk_DisplayName" xml:space="preserve">
+    <value>Unacceptable risk</value>
+  </data>
+  <data name="View_ClarifiedRisks_DisplayName" xml:space="preserve">
+    <value>Clarified risk</value>
+  </data>
+  <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
+    <value>Without responsible</value>
+  </data>
   <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
