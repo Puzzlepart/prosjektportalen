@@ -95,7 +95,7 @@ function Merge-Hashtables {
 }
 
 # Apply tepmplate
-function Apply-Template([string]$Template, [switch]$Localized, $Handlers = "All", [string[]]$ExcludeHandlers, [HashTable]$Parameters = @{}) {    
+function Apply-Template([string]$Template, [switch]$Localized, [OfficeDevPnP.Core.Framework.Provisioning.Model.Handlers]$Handlers = "All", [OfficeDevPnP.Core.Framework.Provisioning.Model.Handlers]$ExcludeHandlers, [HashTable]$Parameters = @{}) {    
     $Language = Get-WebLanguage -ctx (Get-PnPContext)    
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"

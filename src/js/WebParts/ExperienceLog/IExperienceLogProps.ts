@@ -6,17 +6,35 @@ import {
 } from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import ISearchResultSource from "../ISearchResultSource";
+import IGroupByOption from "../IGroupByOption";
 
+export interface IExperienceLogExcelExportConfig {
+    fileName: string;
+    sheetName: string;
+    buttonLabel: string;
+    buttonIcon: string;
+}
 export default interface IExperienceLogProps extends IBaseWebPartProps {
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
+    groupByOptions?: IGroupByOption[];
+    showSearchBox?: boolean;
+    showCommandBar?: boolean;
+    searchProperty?: string;
+    modalHeaderClassName?: string;
+    projectInfoFilterField?: string;
     columns?: any[];
     resultSource?: ISearchResultSource;
+    excelExportEnabled?: boolean;
+    excelExportConfig?: IExperienceLogExcelExportConfig;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
+    showSearchBox: false,
+    groupByOptions: [],
     constrainMode: ConstrainMode.horizontalConstrained,
+    projectInfoFilterField: "GtPcPortfolioPage",
     layoutMode: DetailsListLayoutMode.fixedColumns,
     selectionMode: SelectionMode.none,
     columns: [{
@@ -59,4 +77,11 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         isResizable: true,
     })),
     resultSource: { Name: RESOURCE_MANAGER.getResource("DataSourceName_ExperienceLog"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog") },
+    excelExportEnabled: true,
+    excelExportConfig: {
+        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
+        sheetName: "Sheet A",
+        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonIcon: "ExcelDocument",
+    },
 };

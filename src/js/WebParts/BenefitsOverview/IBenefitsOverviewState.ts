@@ -1,5 +1,6 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
-import IGroupByOption from "./IGroupByOption";
+import IGroupByOption from "../IGroupByOption";
+import { ExcelExportStatus } from "../../Util/ExportToExcel";
 import {
     IBenefitsOverviewData,
     BenefitEntry,
@@ -11,5 +12,6 @@ export default interface IBenefitsOverviewState extends IBaseWebPartState {
     groupBy: IGroupByOption;
     showProjectInfo?: BenefitEntry;
     showMeasurements?: BenefitEntry;
+    excelExportStatus?: ExcelExportStatus;
 }
 

@@ -2478,8 +2478,14 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all Benefits...</value>
   </data>
+  <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>BenefitsOverview</value>
+  </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all log elements...</value>
+  </data>
+  <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>LessonsLearned</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>An error occurred during loading. DICE is not properly configured.</value>
