@@ -1,7 +1,7 @@
 import RESOURCE_MANAGER from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
-const Uncertainties: IList =  {
+const Uncertainties: IList = {
     Title: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
     Description: "",
     Template: 100,
@@ -21,19 +21,141 @@ const Uncertainties: IList =  {
         ViewFields: [
             "ID",
             "LinkTitle",
-            "GtRiskProximity",
             "GtRiskProbability",
             "GtRiskConsequence",
             "GtRiskFactor",
+            "GtRiskStatus",
+            "GtRiskStrategy",
+            "GtRiskAction",
             "GtRiskProbabilityPostAction",
             "GtRiskConsequencePostAction",
             "GtRiskFactorPostAction",
-            "GtRiskStrategy",
+            "Modified",
         ],
         AdditionalSettings: {
-            RowLimit: 30,
+            RowLimit: 100,
             Paged: true,
-            ViewQuery: "",
+            ViewQuery: `<FieldRef Name="GtRiskFactor" Ascending="FALSE" />`,
+        },
+    },
+    {
+        Title: RESOURCE_MANAGER.getResource("View_CurrentRisk_DisplayName"),
+        ViewFields: [
+            "ID",
+            "LinkTitle",
+            "GtRiskProbability",
+            "GtRiskConsequence",
+            "GtRiskFactor",
+            "GtRiskStatus",
+            "GtRiskStrategy",
+            "GtRiskAction",
+            "Modified",
+        ],
+        AdditionalSettings: {
+            RowLimit: 100,
+            Paged: true,
+            ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
+            <FieldRef Name="GtRiskStatus" Ascending="FALSE" />
+          </GroupBy>
+          <OrderBy>
+            <FieldRef Name="GtRiskFactor" Ascending="FALSE" />
+          </OrderBy>
+          <Where>
+            <Neq>
+              <FieldRef Name="GtRiskStatus" />
+              <Value Type="Text">Ikke lenger aktuell</Value>
+            </Neq>
+          </Where>`,
+        },
+    },
+    {
+        Title: RESOURCE_MANAGER.getResource("View_UnacceptableRisk_DisplayName"),
+        ViewFields: [
+            "ID",
+            "LinkTitle",
+            "GtRiskProbability",
+            "GtRiskConsequence",
+            "GtRiskFactor",
+            "GtRiskStatus",
+            "GtRiskStrategy",
+            "GtRiskAction",
+            "Modified",
+        ],
+        AdditionalSettings: {
+            RowLimit: 100,
+            Paged: true,
+            ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
+            <FieldRef Name="GtRiskStatus" Ascending="FALSE" />
+          </GroupBy>
+          <OrderBy>
+            <FieldRef Name="GtRiskFactor" Ascending="FALSE" />
+          </OrderBy>
+          <Where>
+            <And>
+              <Neq>
+                <FieldRef Name="GtRiskStatus" />
+                <Value Type="Text">Ikke lenger aktuell</Value>
+              </Neq>
+              <Gt>
+                <FieldRef Name="GtRiskFactor" />
+                <Value Type="Number">10</Value>
+              </Gt>
+            </And>
+          </Where>`,
+        },
+    },
+    {
+        Title: RESOURCE_MANAGER.getResource("View_ClarifiedRisks_DisplayName"),
+        ViewFields: [
+            "ID",
+            "LinkTitle",
+            "GtRiskProbability",
+            "GtRiskConsequence",
+            "GtRiskFactor",
+            "GtRiskStatus",
+            "GtRiskStrategy",
+            "GtRiskAction",
+            "GtRiskProbabilityPostAction",
+            "GtRiskConsequencePostAction",
+            "GtRiskFactorPostAction",
+            "Modified",
+        ],
+        AdditionalSettings: {
+            RowLimit: 100,
+            Paged: true,
+            ViewQuery: `<OrderBy>
+            <FieldRef Name="GtRiskFactor" Ascending="FALSE" />
+          </OrderBy>
+          <Where>
+            <Eq>
+              <FieldRef Name="GtRiskStatus" />
+              <Value Type="Text">Ikke lenger aktuell</Value>
+            </Eq>
+          </Where>`,
+        },
+    },
+    {
+        Title: RESOURCE_MANAGER.getResource("View_WithoutResponsible_DisplayName"),
+        ViewFields: [
+            "ID",
+            "LinkTitle",
+            "GtRiskFactor",
+            "GtRiskStatus",
+            "GtRiskAction",
+            "GtActionResponsible",
+            "Modified",
+        ],
+        AdditionalSettings: {
+            RowLimit: 100,
+            Paged: true,
+            ViewQuery: ` <OrderBy>
+            <FieldRef Name="GtRiskFactor" Ascending="FALSE" />
+          </OrderBy>
+          <Where>
+            <IsNull>
+              <FieldRef Name="GtActionResponsible" />
+            </IsNull>
+          </Where>`,
         },
     }],
 };
