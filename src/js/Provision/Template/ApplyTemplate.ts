@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../../Resources";
 import { Logger, LogLevel } from "sp-pnp-js";
-import { WebProvisioner } from "sp-pnp-provisioning/lib/webprovisioner";
+import { WebProvisioner } from "sp-js-provisioning/lib/webprovisioner";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 import ApplyTemplateProgressMap from "./ApplyTemplateProgressMap";

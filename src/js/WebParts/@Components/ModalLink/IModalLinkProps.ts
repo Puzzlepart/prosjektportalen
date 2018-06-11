@@ -4,6 +4,7 @@ import IModalLinkOptions from "./IModalLinkOptions";
 export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
     label?: string;
     showLabel?: boolean;
+    title?: string;
     url: string;
     options?: IModalLinkOptions;
     onDialogReturnValueCallback?: (result) => void;

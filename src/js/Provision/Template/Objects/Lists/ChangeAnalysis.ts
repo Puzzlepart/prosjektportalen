@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../../../Resources";
-import { IList } from "sp-pnp-provisioning/lib/schema";
+import { IList } from "sp-js-provisioning/lib/schema";
 
 const ChangeAnalysis: IList =   {
     Title: RESOURCE_MANAGER.getResource("Lists_ChangeAnalysis_Title"),

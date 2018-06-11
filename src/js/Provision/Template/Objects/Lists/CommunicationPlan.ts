@@ -1,6 +1,6 @@
 import RESOURCE_MANAGER from "../../../../Resources";
 import { GtCommunicationTarget } from "./SiteFields";
-import { IList } from "sp-pnp-provisioning/lib/schema";
+import { IList } from "sp-js-provisioning/lib/schema";
 
 const CommunicationPlan: IList = {
     Title: RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Title"),

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ModalLinkIconPosition from "./ModalLinkIconPosition";
 import IModalLinkIconProps from "./IModalLinkIconProps";
 import IModalLinkOptions from "./IModalLinkOptions";
@@ -42,71 +43,64 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
     }
 
     /**
-     * Calls _render with props and state to allow for ES6 destruction
+     * Renders the <ModalLink /> component
      */
     public render(): JSX.Element {
-        return this.state.shouldRender ? this._render(this.props, this.state) : null;
-    }
-
-    /**
-     * Renders the component
-     *
-     * @param {IModalLinkProps} param0 Props
-     * @param {IModalLinkState} param1 State
-     */
-    private _render({ label, url, showLabel, icon, className, id, style, hidden }: IModalLinkProps, { }: IModalLinkState): JSX.Element {
-        if (icon && !icon.hasOwnProperty("position")) {
-            icon.position = ModalLinkIconPosition.Left;
+        if (this.state.shouldRender) {
+            let iconPosition = ModalLinkIconPosition.Left;
+            if (this.props.icon && this.props.icon.hasOwnProperty("position")) {
+                iconPosition = this.props.icon.position;
+            }
+            return (
+                <a
+                    href={this.props.url}
+                    hidden={this.props.hidden}
+                    onClick={this.showModalDialog}
+                    id={this.props.id}
+                    className={this.props.className}
+                    style={this.props.style} >
+                    {this.props.icon && iconPosition === ModalLinkIconPosition.Left && (
+                        <Icon
+                            iconName={this.props.icon.iconName}
+                            style={{ marginRight: 5 }} />
+                    )}
+                    {(this.props.label && this.props.showLabel) && this.props.label}
+                    {this.props.icon && iconPosition === ModalLinkIconPosition.Right && (
+                        <Icon
+                            iconName={this.props.icon.iconName}
+                            style={{ marginLeft: 5 }} />
+                    )
+                    }
+                </a >
+            );
         }
-        return (
-            <a
-                href={url}
-                hidden={hidden}
-                onClick={e => this.showModalDialog(e, this.props, this.state)}
-                id={id}
-                className={className}
-                style={style} >
-                {icon && icon.position === ModalLinkIconPosition.Left && (
-                    <Icon
-                        iconName={icon.iconName}
-                        style={{ marginRight: 5 }} />
-                )}
-                {(label && showLabel) && label}
-                {icon && icon.position === ModalLinkIconPosition.Right && (
-                    <Icon
-                        iconName={icon.iconName}
-                        style={{ marginLeft: 5 }} />
-                )
-                }
-            </a >
-        );
+        return null;
     }
 
     /**
      * Show Modal Dialog
      *
-     * @param {any} e Event
-     * @param {IModalLinkProps} param1 Props
-     * @param {IModalLinkState} param2 State
+     * @param {React.MouseEvent<HTMLAnchorElement>} event Event
      */
-    private showModalDialog = (e, { label, url, options, onDialogReturnValueCallback, reloadOnSubmit, reloadOnCancel, width, height }: IModalLinkProps, { }: IModalLinkState): void => {
-        e.preventDefault();
-        e.stopPropagation();
+    @autobind
+    private showModalDialog(event: React.MouseEvent<HTMLAnchorElement>): void {
+        event.preventDefault();
+        event.stopPropagation();
 
-        let mOptions: Partial<SP.UI.DialogOptions> = {
-            title: label,
-            url: url,
+        let modalOptions: Partial<SP.UI.DialogOptions> = {
+            title: this.props.title || this.props.label,
+            url: this.props.url,
         };
-        if (width) {
-            mOptions.width = width;
+        if (this.props.width) {
+            modalOptions.width = this.props.width;
         }
-        if (height) {
-            mOptions.height = height;
+        if (this.props.height) {
+            modalOptions.height = this.props.height;
         }
         let urlParams = [];
-        if (options) {
-            Object.keys(options).forEach(key => {
-                let value = options[key];
+        if (this.props.options) {
+            Object.keys(this.props.options).forEach(key => {
+                let value = this.props.options[key];
                 if (value === true) {
                     value = "1";
                 } else if (value === false) {
@@ -115,24 +109,24 @@ export default class ModalLink extends React.PureComponent<IModalLinkProps, IMod
                 urlParams.push(`${key}=${value}`);
             });
             if (urlParams.length > 0) {
-                let u = url.indexOf("?") === -1 ? "?" : "&";
-                mOptions.url = `${mOptions.url}${u}${urlParams.join("&")}`;
+                let u = this.props.url.indexOf("?") === -1 ? "?" : "&";
+                modalOptions.url = `${modalOptions.url}${u}${urlParams.join("&")}`;
             }
         }
-        if (onDialogReturnValueCallback) {
-            mOptions.dialogReturnValueCallback = onDialogReturnValueCallback;
-        } else if (reloadOnSubmit || reloadOnCancel) {
-            mOptions.dialogReturnValueCallback = result => {
-                if (result === 1 && reloadOnSubmit) {
+        if (this.props.onDialogReturnValueCallback) {
+            modalOptions.dialogReturnValueCallback = this.props.onDialogReturnValueCallback;
+        } else if (this.props.reloadOnSubmit || this.props.reloadOnCancel) {
+            modalOptions.dialogReturnValueCallback = result => {
+                if (result === 1 && this.props.reloadOnSubmit) {
                     SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
 
                 }
-                if (result === 0 && reloadOnCancel) {
+                if (result === 0 && this.props.reloadOnCancel) {
                     SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
                 }
             };
         }
-        SP.UI.ModalDialog.showModalDialog(mOptions);
+        SP.UI.ModalDialog.showModalDialog(modalOptions);
     }
 }
 

@@ -1,4 +1,4 @@
-import { IList } from "sp-pnp-provisioning/lib/schema";
+import { IList } from "sp-js-provisioning/lib/schema";
 import SitePages from "./SitePages";
 import PhaseChecklist from "./PhaseChecklist";
 import Information from "./Information";

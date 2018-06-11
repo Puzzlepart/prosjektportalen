@@ -125,9 +125,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         </div>
                     </div>
                 )}
-                {section.customComponent && (
-                    this.renderCustomComponent(section.customComponent)
-                )}
+                {section.customComponent && this.renderCustomComponent(section.customComponent)}
             </div>
         );
     }

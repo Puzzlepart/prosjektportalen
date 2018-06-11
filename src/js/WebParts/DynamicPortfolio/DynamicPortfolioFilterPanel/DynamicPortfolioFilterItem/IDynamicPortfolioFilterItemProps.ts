@@ -1,13 +1,10 @@
 import IDynamicPortfolioFilter from "../DynamicPortfolioFilter/IDynamicPortfolioFilter";
 import IDynamicPortfolioFilterItem from "./IDynamicPortfolioFilterItem";
 
-export default interface IDynamicPortfolioFilterItemProps {
+export default interface IDynamicPortfolioFilterItemProps extends React.HTMLAttributes<HTMLElement> {
     filter: IDynamicPortfolioFilter;
     item: IDynamicPortfolioFilterItem;
-    className: string;
-    padding?: number | string;
-    marginBottom?: number;
-    onChange: (item: any, checked: boolean) => void;
+    onChanged: (item: any, checked: boolean) => void;
 }
 
 export { IDynamicPortfolioFilter };

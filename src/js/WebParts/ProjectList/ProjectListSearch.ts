@@ -28,7 +28,7 @@ export async function queryProjects(rowLimit?: number, selectProperties = []): P
             SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime", ...selectProperties],
             Properties: [{
                 Name: "SourceName",
-                Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
+                Value: { StrVal: RESOURCE_MANAGER.getResource("DataSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
             },
             {
                 Name: "SourceLevel",
