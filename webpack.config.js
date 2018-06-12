@@ -7,7 +7,7 @@ const libBasePath = path.join(__dirname, "lib");
 const distBasePath = path.join(__dirname, "dist/js");
 const useBundleAnalyzer = false;
 
-module.exports = (devtool, exclude, env) => ({
+module.exports = (devtool, env) => ({
     devtool,
     entry: {
         main: [
@@ -41,8 +41,7 @@ module.exports = (devtool, exclude, env) => ({
                             require("babel-plugin-transform-object-assign"),
                         ]
                     }
-                },
-                exclude: exclude
+                }
             },
             {
                 test: /\.txt$/,
