@@ -381,7 +381,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         let searchTerm = newValue.toLowerCase();
                         this.setState({ searchTerm });
                     }}
-                    labelText={this.props.searchBoxLabelText} />
+                    placeholder={this.props.searchBoxLabelText} />
             </div>
         );
     }

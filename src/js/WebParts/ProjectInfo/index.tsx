@@ -9,7 +9,7 @@ import {
     SpinnerType,
 } from "office-ui-fabric-react/lib/Spinner";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
-import Modal from "office-ui-fabric-react/lib/Modal";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import {
     MessageBar,
     MessageBarType,
@@ -83,14 +83,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                 );
             }
             case ProjectInfoRenderMode.Modal: {
-                return (
-                    <Modal
-                        isOpen={modalOptions.isOpen}
-                        isDarkOverlay={modalOptions.isDarkOverlay}
-                        onDismiss={modalOptions.onDismiss}
-                        containerClassName={`${containerClassName} pp-modal`}
-                        isBlocking={false}
-                    >
+                return <Modal isOpen={modalOptions.isOpen} isDarkOverlay={modalOptions.isDarkOverlay} onDismiss={modalOptions.onDismiss} containerClassName={`${containerClassName} pp-modal`} isBlocking={false}>
                         <div style={{ padding: 50 }}>
                             <div
                                 className={modalOptions.headerClassName}
@@ -108,7 +101,6 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 hidden={isLoading}
                                 href={this.props.webUrl}
                                 iconProps={{ iconName: "Home" }}
-                                description=""
                                 text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectLinkText")}
                                 style={{
                                     marginLeft: 0,
@@ -119,7 +111,6 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 hidden={isLoading}
                                 href={`${this.props.webUrl}/SitePages/ProjectStatus.aspx`}
                                 iconProps={{ iconName: "BarChart4" }}
-                                description=""
                                 text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectStatusLinkText")}
                                 style={{
                                     marginLeft: 0,
@@ -127,7 +118,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                     display: "block",
                                 }} />
                         </div>
-                    </Modal>);
+                    </Modal>;
             }
         }
     }
