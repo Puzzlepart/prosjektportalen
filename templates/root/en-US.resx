@@ -1998,8 +1998,23 @@
   <data name="String_Select_Project_Name" xml:space="preserve">
     <value>Select project:</value>
   </data>
+  <data name="String_Select_View_Name" xml:space="preserve">
+    <value>Select view:</value>
+  </data>
+  <data name="String_Select_View_Placeholder" xml:space="preserve">
+    <value>View:</value>
+  </data>
+  <data name="String_Select_View_Description" xml:space="preserve">
+    <data>Select a view. These are the same views as available from the portfolio overview page.</value>
+  </data>
   <data name="String_Select_Width_Name" xml:space="preserve">
     <value>Width</value>
+  </data>
+  <data name="String_Button_Update_Selection" xml:space="preserve">
+    <value>Update selection</value>
+  </data>
+  <data name="String_Selection_Status_MessageBar_Text" xml:space="preserve">
+    <value>You've selected {0} out of a total of {1} projects</value>
   </data>
   <data name="String_Not_Set" xml:space="preserve">
     <value>Not set</value>
