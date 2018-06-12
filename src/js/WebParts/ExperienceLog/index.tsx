@@ -99,7 +99,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.WebUrl}
+                    webUrl={showProjectInfo.SPWebUrl}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}

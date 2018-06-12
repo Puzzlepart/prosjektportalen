@@ -2005,7 +2005,7 @@
     <value>Visning:</value>
   </data>
   <data name="String_Select_View_Description" xml:space="preserve">
-    <data>Velg en visning. Dette er de samme visningene som brukes på porteføljeoversikten.</value>
+    <value>Velg en visning. Dette er de samme visningene som brukes på porteføljeoversikten.</value>
   </data>
   <data name="String_Select_Width_Name" xml:space="preserve">
     <value>Bredde</value>

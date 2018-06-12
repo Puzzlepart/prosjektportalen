@@ -2005,7 +2005,7 @@
     <value>View:</value>
   </data>
   <data name="String_Select_View_Description" xml:space="preserve">
-    <data>Select a view. These are the same views as available from the portfolio overview page.</value>
+    <value>Select a view. These are the same views as available from the portfolio overview page.</value>
   </data>
   <data name="String_Select_Width_Name" xml:space="preserve">
     <value>Width</value>
