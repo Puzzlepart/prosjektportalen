@@ -22,7 +22,7 @@
             <pnp:DataValue FieldName="GtStSecOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">DateTime</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecList">Prosjektleveranser</pnp:DataValue>
-            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment,GtProductQualityExpectations</pnp:DataValue>
+            <pnp:DataValue FieldName="GtStSecViewFields">Title,GtProductStartTime,GtProductEndTime,GtProductAcceptanceDate,GtProductStatus,GtProductStatusComment</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecFieldName">GtStatusTime</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>

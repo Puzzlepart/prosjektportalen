@@ -375,6 +375,18 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Activated</value>
   </data>
+  <data name="View_CurrentRisk_DisplayName" xml:space="preserve">
+    <value>Current risk</value>
+  </data>
+  <data name="View_UnacceptableRisk_DisplayName" xml:space="preserve">
+    <value>Unacceptable risk</value>
+  </data>
+  <data name="View_ClarifiedRisks_DisplayName" xml:space="preserve">
+    <value>Clarified risk</value>
+  </data>
+  <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
+    <value>Without responsible</value>
+  </data>
   <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -2505,8 +2517,14 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all Benefits...</value>
   </data>
+  <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>BenefitsOverview</value>
+  </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all log elements...</value>
+  </data>
+  <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>LessonsLearned</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>An error occurred during loading. DICE is not properly configured.</value>
@@ -2608,7 +2626,7 @@
     <value>Pick a view:</value>
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
-    <value>There's no relevant items in the Risks list.</value>
+    <value>There's no relevant items in the selected view.</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Very high</value>

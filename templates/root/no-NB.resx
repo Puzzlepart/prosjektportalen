@@ -375,6 +375,18 @@
   <data name="View_Activated_DisplayName" xml:space="preserve">
     <value>Aktivert</value>
   </data>
+  <data name="View_CurrentRisk_DisplayName" xml:space="preserve">
+    <value>Aktuell risiko</value>
+  </data>
+  <data name="View_UnacceptableRisk_DisplayName" xml:space="preserve">
+    <value>Uakseptabel risiko</value>
+  </data>
+  <data name="View_ClarifiedRisks_DisplayName" xml:space="preserve">
+    <value>Avklart risiko</value>
+  </data>
+  <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
+    <value>Uten ansvarlig</value>
+  </data>
   <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
@@ -1138,7 +1150,7 @@
     <value>Starttidspunkt</value>
   </data>
   <data name="SiteFields_GtProductEndTime_DisplayName" xml:space="preserve">
-    <value>Slutttidspunkt</value>
+    <value>Sluttidspunkt</value>
   </data>
   <data name="SiteFields_GtChrShowItemSelector_DisplayName" xml:space="preserve">
     <value>Vis elementvelger</value>
@@ -2508,8 +2520,14 @@
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle gevinster...</value>
   </data>
+  <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>Gevinstoversikt</value>
+  </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>
+  </data>
+  <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>Erfaringslogg</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>Det skjedde en feil under lasting. DICE er ikke riktig konfigurert.</value>
@@ -2614,7 +2632,7 @@
     <value>Velg en visning:</value>
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
-    <value>Det finnes ingen Risiko-elementer i Usikkerhets-listen.</value>
+    <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Svært høy</value>

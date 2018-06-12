@@ -17,6 +17,7 @@ export default class RiskMatrix extends React.Component<IRiskElementProps, {}> {
                 style={this.props.style}>
                 <ModalLink
                     label={this.props.model.id}
+                    title={this._getTooltip()}
                     url={this.props.model.url}
                     options={{ HideRibbon: true }} />
             </div>

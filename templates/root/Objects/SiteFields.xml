@@ -480,11 +480,11 @@
     <Field Type="Boolean" DisplayName="{resource:SiteFields_GtShowInNewForm_DisplayName}" Group="{resource:SiteFields_Group}" ID="{b3e95def-a4ea-4e8b-927d-f724744b74a1}" StaticName="{parameter:GenericFieldPrefix}ShowInNewForm" Name="{parameter:GenericFieldPrefix}ShowInNewForm">
         <Default>0</Default>
     </Field>
-    <Field Type="Note" DisplayName="{resource:SiteFields_GtProductDescription_DisplayName}" Description="{resource:SiteFields_GtProductDescription_Description}" UnlimitedLengthInDocumentLibrary="TRUE" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{99430a99-1354-418f-921f-7ddfdb6c0d7f}" StaticName="{parameter:GenericFieldPrefix}ProductDescription" Name="{parameter:GenericFieldPrefix}ProductDescription" CustomFormatter="" RestrictedMode="TRUE" RichTextMode="Compatible" IsolateStyles="FALSE" />
-    <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductStartTime_DisplayName}" Description="{resource:SiteFields_GtProductStartTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{219a5cdf-799c-48ee-8869-ea39e4b9a6aa}" StaticName="{parameter:GenericFieldPrefix}ProductStartTime" Name="{parameter:GenericFieldPrefix}ProductStartTime" CustomFormatter="" CalType="0" />
-    <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductEndTime_DisplayName}" Description="{resource:SiteFields_GtProductEndTime_Description}" Format="DateTime" Group="{resource:SiteFields_Group}" ID="{eb78509b-4109-474e-aca8-90d024a960de}" StaticName="{parameter:GenericFieldPrefix}ProductEndTime" Name="{parameter:GenericFieldPrefix}ProductEndTime" CustomFormatter="" CalType="0" />
-    <Field DisplayName="{resource:SiteFields_GtChrManagedPropertyName_DisplayName}" Description="{resource:SiteFields_GtChrManagedPropertyName_Description}" Title="{resource:SiteFields_GtChrManagedPropertyName_DisplayName}" Type="Text" Group="{resource:SiteFields_Group}" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" Name="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" ColName="nvarchar4" />
-    <Field DisplayName="{resource:SiteFields_GtChrDataType_DisplayName}" Description="{resource:SiteFields_GtChrDataType_Description}" Title="{resource:SiteFields_GtChrDataType_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="{parameter:ProjectStatsFieldPrefix}DataType" Name="{parameter:ProjectStatsFieldPrefix}DataType">
+    <Field Type="Note" DisplayName="{resource:SiteFields_GtProductDescription_DisplayName}" Description="{resource:SiteFields_GtProductDescription_Description}" UnlimitedLengthInDocumentLibrary="TRUE" NumLines="6" RichText="FALSE" Group="{resource:SiteFields_Group}" ID="{99430a99-1354-418f-921f-7ddfdb6c0d7f}" StaticName="{parameter:GenericFieldPrefix}ProductDescription" Name="{parameter:GenericFieldPrefix}ProductDescription" RichTextMode="Compatible" />
+    <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductStartTime_DisplayName}" Description="{resource:SiteFields_GtProductStartTime_Description}" Format="DateOnly" FriendlyDisplayFormat="Disabled" Group="{resource:SiteFields_Group}" ID="{219a5cdf-799c-48ee-8869-ea39e4b9a6aa}" StaticName="{parameter:GenericFieldPrefix}ProductStartTime" Name="{parameter:GenericFieldPrefix}ProductStartTime" />
+    <Field Type="DateTime" DisplayName="{resource:SiteFields_GtProductEndTime_DisplayName}" Description="{resource:SiteFields_GtProductEndTime_Description}" Format="DateOnly" FriendlyDisplayFormat="Disabled" Group="{resource:SiteFields_Group}" ID="{eb78509b-4109-474e-aca8-90d024a960de}" StaticName="{parameter:GenericFieldPrefix}ProductEndTime" Name="{parameter:GenericFieldPrefix}ProductEndTime" />
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtChrManagedPropertyName_DisplayName}" Description="{resource:SiteFields_GtChrManagedPropertyName_Description}" Title="{resource:SiteFields_GtChrManagedPropertyName_DisplayName}" Group="{resource:SiteFields_Group}" ID="{35632a65-9b43-4320-9b5e-13ef6268957b}" StaticName="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName" Name="{parameter:ProjectStatsFieldPrefix}ManagedPropertyName"/>
+    <Field Type="Choice" DisplayName="{resource:SiteFields_GtChrDataType_DisplayName}" Description="{resource:SiteFields_GtChrDataType_Description}" Title="{resource:SiteFields_GtChrDataType_DisplayName}" Group="{resource:SiteFields_Group}" ID="{7463d38f-5f51-4b25-a920-04ea1ec24a26}" StaticName="{parameter:ProjectStatsFieldPrefix}DataType" Name="{parameter:ProjectStatsFieldPrefix}DataType">
         <CHOICES>
             <CHOICE>Number</CHOICE>
             <CHOICE>Percentage</CHOICE>
@@ -511,9 +511,9 @@
         <Default>12</Default>
     </Field>
     <Field DisplayName="{resource:SiteFields_GtChrStacking_DisplayName}" Description="{resource:SiteFields_GtChrStacking_Description}" Title="{resource:SiteFields_GtChrStacking_DisplayName}" Type="Choice" Group="{resource:SiteFields_Group}" ID="{9c6285f2-0bf6-4092-8ca6-656859d797fd}" StaticName="{parameter:ProjectStatsFieldPrefix}Stacking" Name="{parameter:ProjectStatsFieldPrefix}Stacking">
-        <Default>null</Default>
+        <Default>none</Default>
         <CHOICES>
-            <CHOICE>null</CHOICE>
+            <CHOICE>none</CHOICE>
             <CHOICE>normal</CHOICE>
             <CHOICE>percent</CHOICE>
         </CHOICES>
@@ -534,7 +534,6 @@
         <Default>0</Default>
     </Field>
     <Field Decimals="0" DisplayName="{resource:SiteFields_GtChrOrder_DisplayName}" Description="{resource:SiteFields_GtChrOrder_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrOrder_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{89cb87dc-01b5-416d-b325-8cc79f52ae1f}" StaticName="{parameter:ProjectStatsFieldPrefix}Order" Name="{parameter:ProjectStatsFieldPrefix}Order">
-        <Default>100</Default>
     </Field>
     <Field Decimals="0" DisplayName="{resource:SiteFields_GtChrHeight_DisplayName}" Description="{resource:SiteFields_GtChrHeight_Description}" Percentage="FALSE" Min="100" Max="9999" Title="{resource:SiteFields_GtChrHeight_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{ed4f667a-b106-4cc3-a773-bfefa2b69e14}" StaticName="{parameter:ProjectStatsFieldPrefix}Height" Name="{parameter:ProjectStatsFieldPrefix}Height">
         <Default>400</Default>

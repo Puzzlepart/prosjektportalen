@@ -140,7 +140,7 @@ export default class ChartConfiguration {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
                     chartConfig.plotOptions = {
-                        series: { stacking: this.stacking && this.stacking !== "null" ? this.stacking : "" },
+                        series: { stacking: this.stacking && this.stacking !== "none" ? this.stacking : "" },
                         bar: {
                             dataLabels: { enabled: true },
                         },
@@ -152,7 +152,7 @@ export default class ChartConfiguration {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
                     chartConfig.plotOptions = {
-                        series: { stacking: this.stacking && this.stacking !== "null" ? this.stacking : "" },
+                        series: { stacking: this.stacking && this.stacking !== "none" ? this.stacking : "" },
                         column: {
                             dataLabels: { enabled: true },
                         },
