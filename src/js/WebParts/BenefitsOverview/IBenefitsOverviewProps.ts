@@ -3,13 +3,8 @@ import ISearchResultSource from "../ISearchResultSource";
 import DataSource, { IDataSourceSearchCustom } from "../DataSource";
 import IGroupByOption from "../IGroupByOption";
 import { IBaseWebPartProps } from "../@BaseWebPart";
+import IExcelExportConfig from "../IExcelExportConfig";
 
-export interface IBenefitsOverviewExcelExportConfig {
-    fileName: string;
-    sheetName: string;
-    buttonLabel: string;
-    buttonIcon: string;
-}
 export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     dataSource?: DataSource;
     customSearchSettings?: IDataSourceSearchCustom;
@@ -21,7 +16,7 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     projectInfoFilterField?: string;
     resultSource?: ISearchResultSource;
     excelExportEnabled?: boolean;
-    excelExportConfig?: IBenefitsOverviewExcelExportConfig;
+    excelExportConfig?: IExcelExportConfig;
 }
 
 export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {

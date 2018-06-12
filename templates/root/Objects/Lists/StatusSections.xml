@@ -15,10 +15,12 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="GtStSecOrder" />
+                <FieldRef Name="ContentType" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtStSecShowInNavbar" />
                 <FieldRef Name="GtStSecShowInStatusSection" />
                 <FieldRef Name="GtStSecShowAsSection" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />

@@ -7,13 +7,8 @@ import {
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import ISearchResultSource from "../ISearchResultSource";
 import IGroupByOption from "../IGroupByOption";
+import IExcelExportConfig from "../IExcelExportConfig";
 
-export interface IExperienceLogExcelExportConfig {
-    fileName: string;
-    sheetName: string;
-    buttonLabel: string;
-    buttonIcon: string;
-}
 export default interface IExperienceLogProps extends IBaseWebPartProps {
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
@@ -27,7 +22,7 @@ export default interface IExperienceLogProps extends IBaseWebPartProps {
     columns?: any[];
     resultSource?: ISearchResultSource;
     excelExportEnabled?: boolean;
-    excelExportConfig?: IExperienceLogExcelExportConfig;
+    excelExportConfig?: IExcelExportConfig;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
@@ -35,6 +30,7 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     groupByOptions: [],
     constrainMode: ConstrainMode.horizontalConstrained,
     projectInfoFilterField: "GtPcPortfolioPage",
+    modalHeaderClassName: "ms-font-xxl",
     layoutMode: DetailsListLayoutMode.fixedColumns,
     selectionMode: SelectionMode.none,
     columns: [{

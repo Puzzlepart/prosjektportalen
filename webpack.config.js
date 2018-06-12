@@ -30,8 +30,7 @@ module.exports = (devtool, exclude, env) => ({
         alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
@@ -56,16 +55,15 @@ module.exports = (devtool, exclude, env) => ({
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            __VERSION: JSON.stringify(pkg.version),
-            'process.env': {
-                NODE_ENV: JSON.stringify(env)
-            }
-        }),
-        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
-    ]
+            new webpack.DefinePlugin({
+                __VERSION: JSON.stringify(pkg.version),
+                'process.env': {
+                    NODE_ENV: JSON.stringify(env)
+                }
+            }),
+            new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+        ]
         .concat(env === "production" ? [
-            new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
         .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerMode: 'static' })] : [])

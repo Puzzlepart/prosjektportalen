@@ -72,7 +72,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 <div className="ms-Grid-row" style={{ marginBottom: 10 }}>
                     <div className="ms-Grid-col ms-sm12">
                         <SearchBox
-                            labelText={this.props.searchBoxLabelText}
+                            placeholder={this.props.searchBoxLabelText}
                             onChanged={this._onSearch} />
                     </div>
                 </div>

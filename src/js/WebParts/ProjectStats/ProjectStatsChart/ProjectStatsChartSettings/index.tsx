@@ -3,7 +3,7 @@ import { LogLevel, Logger } from "sp-pnp-js";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
-import * as strings from "../../strings";
+import RESOURCE_MANAGER from "../../../../Resources";
 
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
@@ -30,10 +30,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         return (
             <div className="ms-Grid-row">
                 <div className="ms-Grid-col ms-sm12">
-                    <CommandBar
-                        isSearchBoxVisible={false}
-                        items={this._getItems()}
-                        farItems={this._getFarItems()} />
+                    <CommandBar items={this._getItems()} farItems={this._getFarItems()} />
                 </div>
             </div>
         );
@@ -50,7 +47,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         if (chart.showItemSelector) {
             items.push({
                 key: "pick-project",
-                name: strings.SELECT_PROJECT_NAME,
+                name: RESOURCE_MANAGER.getResource("String_Select_Project_Name"),
                 icon: "ProjectCollection",
                 onClick: e => {
                     e.preventDefault();
@@ -91,7 +88,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         let farItems = [
             {
                 key: "chart-width",
-                name: strings.SELECT_WIDTH_NAME,
+                name: RESOURCE_MANAGER.getResource("String_Select_Width_Name"),
                 icon: "FullWidthEdit",
                 onClick: e => {
                     e.preventDefault();

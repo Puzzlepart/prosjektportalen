@@ -83,7 +83,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     <div hidden={!showSearchBox}>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                            labelText={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />
+                            placeholder={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />
                     </div>
                     <DetailsList
                         items={items}
