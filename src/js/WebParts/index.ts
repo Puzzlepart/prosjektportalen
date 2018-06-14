@@ -16,6 +16,7 @@ import RiskMatrix, { IRiskMatrixProps } from "./RiskMatrix";
 import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix";
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
+import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -41,6 +42,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
     new WebPartComponent<IOpportunityMatrixProps>(OpportunityMatrix, "pp-opportunityMatrix", { showEmptyMessage: true }),
+    new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesOverview", { showEmptyMessage: true }),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
         statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),

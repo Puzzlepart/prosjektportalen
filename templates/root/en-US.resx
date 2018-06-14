@@ -408,6 +408,9 @@
   <data name="DataSourceName_RiskElements" xml:space="preserve">
     <value>Risk Elements</value>
   </data>
+  <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
+    <value>Prosjektleveranser</value>
+  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
   </data>
