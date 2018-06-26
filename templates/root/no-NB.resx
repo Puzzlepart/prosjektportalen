@@ -2541,6 +2541,15 @@
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>
   </data>
+  <data name="DeliveriesOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>Leveranseoversikt</value>
+  </data>
+  <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
+    <value>Søk i alle prosjektleveranser</value>
+  </data>
+  <data name="DeliveriesOverview_EmptyMessage" xml:space="preserve">
+    <value>Fant ingen leveranser</value>
+  </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Erfaringslogg</value>
   </data>

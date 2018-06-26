@@ -1,6 +1,5 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
-import pnp, { Site, List } from "sp-pnp-js";
 import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
@@ -14,7 +13,6 @@ import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import * as Util from "../../Util";
 import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDeliveriesOverviewProps";
 import IDeliveriesOverviewState from "./IDeliveriesOverviewState";
-import DeliveryElement from "./DeliveryElement";
 import { queryDeliveryElements } from "./DeliveriesOverviewSearch";
 
 /**
@@ -23,7 +21,6 @@ import { queryDeliveryElements } from "./DeliveriesOverviewSearch";
 export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewProps, IDeliveriesOverviewState> {
     public static displayName = "DeliveriesOverview";
     public static defaultProps = DeliveriesOverviewDefaultProps;
-    private _dataSourcesList: List;
 
     /**
      * Constructor
@@ -39,7 +36,6 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             },
         });
-        this._dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
     }
 
     /**
@@ -70,7 +66,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
 
         if (deliveryElements.length === 0) {
             if (this.props.showEmptyMessage) {
-                return <MessageBar>{RESOURCE_MANAGER.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
+                return <MessageBar>{RESOURCE_MANAGER.getResource("DeliveriesOverview_EmptyMessage")}</MessageBar>;
             }
             return null;
         }

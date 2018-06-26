@@ -403,7 +403,7 @@
     <value>Risk Elements</value>
   </data>
   <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Prosjektleveranser</value>
+    <value>Project deliveries</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
@@ -2530,7 +2530,7 @@
     <value>Difference from previous measurement</value>
   </data>
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
-    <value>Search all Benefits...</value>
+    <value>Search all benefit items...</value>
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>BenefitsOverview</value>
@@ -2540,6 +2540,15 @@
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>LessonsLearned</value>
+  </data>
+  <data name="DeliveriesOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>DeliveriesOverview</value>
+  </data>
+  <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
+    <value>Search all project deliveries</value>
+  </data>
+  <data name="DeliveriesOverview_EmptyMessage" xml:space="preserve">
+    <value>No deliveries found</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>An error occurred during loading. DICE is not properly configured.</value>
