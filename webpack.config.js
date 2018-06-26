@@ -1,7 +1,6 @@
 var path = require("path"),
     webpack = require('webpack'),
-    pkg = require("./package.json"),
-    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+    pkg = require("./package.json");
 
 const libBasePath = path.join(__dirname, "lib");
 const distBasePath = path.join(__dirname, "dist/js");

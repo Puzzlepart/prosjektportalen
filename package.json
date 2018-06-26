@@ -104,7 +104,6 @@
         "typescript": "^2.6.2",
         "uuid": "^3.2.1",
         "webpack": "^3.10.0",
-        "webpack-bundle-analyzer": "^2.9.2",
         "whatwg-fetch": "^2.0.3",
         "xlsx": "^0.11.18",
         "yargs": "^11.0.0"
