@@ -29,7 +29,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IProjectPhasesProps>(ProjectPhases, "pp-projectphases"),
     new WebPartComponent<INewProjectLinkProps>(NewProjectLink, "pp-newprojectlink"),
     new WebPartComponent<IAnnouncementsProps>(Announcements, "pp-announcements"),
-    new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8, reloadInterval: 360 }),
+    new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8 }),
     new WebPartComponent<IQuickLinksProps>(QuickLinks, "pp-quicklinks"),
     new WebPartComponent<IDynamicPortfolioProps>(DynamicPortfolio, "pp-dynamicportfolio"),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),

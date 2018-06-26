@@ -390,20 +390,11 @@
   <data name="DataSourceName_Projects" xml:space="preserve">
     <value>Prosjektområder</value>
   </data>
-  <data name="ResultSourceLevel_Projects" xml:space="preserve">
-    <value>SPSite</value>
-  </data>
   <data name="DataSourceName_Benefits" xml:space="preserve">
     <value>Gevinstmålinger</value>
   </data>
-  <data name="ResultSourceLevel_Benefits" xml:space="preserve">
-    <value>SPSite</value>
-  </data>
   <data name="DataSourceName_ExperienceLog" xml:space="preserve">
     <value>Erfaringslogg</value>
-  </data>
-  <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
-    <value>SPSite</value>
   </data>
   <data name="DataSourceName_RiskElements" xml:space="preserve">
     <value>Risikoelementer</value>
