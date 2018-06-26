@@ -1,20 +1,12 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
 import * as unique from "array-unique";
-import {
-    DetailsList,
-    IGroup,
-    SelectionMode,
-    IColumn,
-} from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IGroup, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
 import { _onRenderItemColumn } from "./BenefitsOverviewData/BenefitsOverviewDataColumns";
 import * as Data from "./BenefitsOverviewData";
@@ -40,47 +32,28 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         super(props, {
             isLoading: true,
             searchTerm: "",
-            groupBy: {
-                key: "NoGrouping",
-                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
-            },
+            groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
         });
     }
 
-    /**
-     * Component did mount
-     */
     public async componentDidMount(): Promise<void> {
-        const data = await Data.retrieveFromSource(this.props.dataSource, this.props.customSearchSettings, this.props.resultSource);
-        this.setState({
-            data: data,
-            isLoading: false,
-        });
+        const data = await Data.retrieveFromSource(this.props.dataSource, this.props.customSearchSettings, this.props.dataSourceName);
+        this.setState({ data: data, isLoading: false });
     }
 
     /**
-     * Calls _render with props and state to allow for ES6 destruction
+     * Render the <BenefitsOverview /> component
      */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
-    }
-
-    /**
-     * Render the component
-     *
-     * @param {IBenefitsOverviewProps} param0 Props
-     * @param {IBenefitsOverviewState} param1 State
-     */
-    public _render({ showSearchBox }: IBenefitsOverviewProps, { isLoading, data }: IBenefitsOverviewState): JSX.Element {
-        if (isLoading) {
+        if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
-        if (data) {
+        if (this.state.data) {
             let { items, columns, groups } = this.getFilteredData(this.props, this.state);
             return (
                 <div style={{ width: "100%" }}>
                     {this.renderCommandBar(this.props, this.state)}
-                    <div hidden={!showSearchBox}>
+                    <div hidden={!this.props.showSearchBox}>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                             placeholder={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />

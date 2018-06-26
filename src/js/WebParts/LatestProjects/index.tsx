@@ -29,9 +29,6 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         });
     }
 
-    /**
-     * Component did mount
-     */
     public async componentDidMount() {
         try {
             const subwebs = await this.fetchSubwebsForCurrentUser();
@@ -39,24 +36,14 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } catch (err) {
             this.setState({ isLoading: false });
         }
-
-        if (this.props.reloadInterval !== -1) {
-            this.reloadInterval = window.setInterval(async () => {
-                const subwebs = await this.fetchSubwebsForCurrentUser();
-                this.setState({ subwebs });
-            }, (this.props.reloadInterval * 1000));
-        }
     }
 
-    /**
-     * Component will unmount
-     */
     public componentWillUnmount(): void {
         window.clearInterval(this.reloadInterval);
     }
 
     /**
-     * Renders the component
+     * Renders the <LatestProjects /> component
      */
     public render(): JSX.Element {
         return (

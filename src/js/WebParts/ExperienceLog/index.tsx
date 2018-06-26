@@ -30,10 +30,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         super(props, {
             isLoading: true,
             searchTerm: "",
-            groupBy: {
-                key: "NoGrouping",
-                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
-            },
+            groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
         });
     }
 
@@ -233,7 +230,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async fetchData(): Promise<Partial<IExperienceLogState>> {
         try {
-            const logItems = await queryLogElements(this.props.resultSource, this.props.columns.map(col => col.key));
+            const logItems = await queryLogElements(this.props.dataSource, this.props.columns.map(col => col.key));
             return { logItems };
         } catch (err) {
             throw err;
