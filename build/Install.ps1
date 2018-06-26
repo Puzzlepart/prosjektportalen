@@ -138,7 +138,7 @@ function Start-Install() {
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
             } else {
                 Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation,SearchSettings" -Parameters $Parameters
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
             }
             Write-Host "DONE" -ForegroundColor Green
             Disconnect-PnPOnline
