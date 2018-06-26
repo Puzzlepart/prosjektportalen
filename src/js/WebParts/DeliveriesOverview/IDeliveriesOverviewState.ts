@@ -4,7 +4,7 @@ import IGroupByOption from "../IGroupByOption";
 import { ExcelExportStatus } from "../../Util/ExportToExcel";
 
 export default interface IDeliveriesOverviewState extends IBaseWebPartState {
-    items?: DeliveryElement[];
+    deliveryElements?: DeliveryElement[];
     showProjectInfo?: any;
     searchTerm?: string;
     groupBy?: IGroupByOption;

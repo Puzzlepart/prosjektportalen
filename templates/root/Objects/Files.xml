@@ -76,6 +76,19 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
+    <pnp:File Src="SitePages\DeliveriesOverview.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:Navigation_DeliveriesOverview_Title}" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="DeliveriesOverview" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DeliveriesOverview.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
+    </pnp:File>
     <pnp:File Src="SitePages\EditWebPropertyBag.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:SiteSettings_Link_Settings}" />
@@ -114,6 +127,13 @@
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\DeliveriesOverview.webpart" Folder="_catalogs/wp" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:WebPart_DeliveriesOverview_Title}" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
+        </pnp:Properties>
     </pnp:File>
     <pnp:File Src="WebPartGallery\ProjectList.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>

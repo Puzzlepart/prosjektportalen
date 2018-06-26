@@ -15,6 +15,7 @@ import * as Util from "../../Util";
 import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDeliveriesOverviewProps";
 import IDeliveriesOverviewState from "./IDeliveriesOverviewState";
 import DeliveryElement from "./DeliveryElement";
+import { queryDeliveryElements } from "./DeliveriesOverviewSearch";
 
 /**
  * Deliveries Overview SPA
@@ -52,7 +53,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 isLoading: false,
             });
         } catch (err) {
-            this.setState({ items: [], isLoading: false });
+            this.setState({ deliveryElements: [], isLoading: false });
         }
     }
 
@@ -60,14 +61,14 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * Renders the component
      */
     public render(): JSX.Element {
-        const { items, isLoading } = this.state;
+        const { deliveryElements, isLoading } = this.state;
         const { showSearchBox } = this.props;
 
         if (isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
 
-        if (items.length === 0) {
+        if (deliveryElements.length === 0) {
             if (this.props.showEmptyMessage) {
                 return <MessageBar>{RESOURCE_MANAGER.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
             }
@@ -197,7 +198,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
     }
 
     private getFilteredItems() {
-        return this.state.items
+        return this.state.deliveryElements
             .filter(itm => {
                 const matches = Object.keys(itm).filter(key => {
                     const value = itm[key];
@@ -244,50 +245,14 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * Fetch data using sp-pnp-js search
      */
     private async fetchData(): Promise<Partial<IDeliveriesOverviewState>> {
-        let { items } = this.state;
-
-        if (!items) {
-            items = [];
-        }
         try {
-            if (this.props.dataSource) {
-                const spSearchItems = await this._fetchFromDataSource(this.props.dataSource);
-                items = spSearchItems.map(item => {
-                    return new DeliveryElement(item);
-                });
-            }
-            return { items };
+            const deliveryElements = await queryDeliveryElements(this.props.dataSource, this.props.columns.map(col => col.key));
+            return { deliveryElements };
         } catch (err) {
             throw err;
         }
     }
 
-    /**
-    * Fetch data from data source
-    *
-    * @param {string} name Data source name
-    */
-   private async _fetchFromDataSource(name: string): Promise<Array<any>> {
-    const [dataSource] = await this._dataSourcesList.items.filter(`Title eq '${name}'`).get();
-    if (dataSource) {
-        const searchResults = await pnp.sp.search({
-            Querytext: "*",
-            RowLimit: this.props.rowLimit,
-            TrimDuplicates: false,
-            SelectProperties: [
-                "ListItemID",
-                "Path",
-                "WebId",
-                "Title",
-                "SiteTitle",
-            ],
-            QueryTemplate: dataSource.GtDpSearchQuery,
-        });
-        return searchResults.PrimarySearchResults;
-    } else {
-        return [];
-    }
-}
     /**
      * Export current view to Excel (xlsx)
      */
