@@ -1,32 +1,30 @@
-import pnp from "sp-pnp-js";
-import ISearchResultSource from "../ISearchResultSource";
+import RESOURCE_MANAGER from "../../Resources";
+import pnp, { Site } from "sp-pnp-js";
 import LogElement from "./LogElement";
 
 /**
  * Query the REST Search API using sp-pnp-js
  *
- * @param {ISearchResultSource} resultSource Result source
- * @param {string[]} SelectProperties Select properties
+ * @param {string} dataSourceName Data source name
+ * @param {string[]} selectProperties Select properties
  */
-export async function queryLogElements(resultSource: ISearchResultSource, SelectProperties: string[]): Promise<LogElement[]> {
-    SelectProperties = SelectProperties.concat(["Path", "SPWebUrl"]);
-    try {
-        const response = await pnp.sp.search({
-            Querytext: "*",
-            RowLimit: 500,
-            TrimDuplicates: false,
-            Properties: [{
-                Name: "SourceName",
-                Value: { StrVal: resultSource.Name, QueryPropertyValueTypeIndex: 1 },
-            },
-            {
-                Name: "SourceLevel",
-                Value: { StrVal: resultSource.Level, QueryPropertyValueTypeIndex: 1 },
-            }],
-            SelectProperties,
-        });
-        return response.PrimarySearchResults.map(r => new LogElement(r));
-    } catch (err) {
-        throw err;
+export async function queryLogElements(dataSourceName: string, selectProperties: string[]): Promise<LogElement[]> {
+    const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+    const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
+    if (dataSource) {
+        try {
+            const { PrimarySearchResults } = await pnp.sp.search({
+                Querytext: "*",
+                QueryTemplate: dataSource.GtDpSearchQuery,
+                RowLimit: 500,
+                TrimDuplicates: false,
+                SelectProperties: ["Path", "SPWebUrl", ...selectProperties],
+            });
+            return PrimarySearchResults.map(r => new LogElement(r));
+        } catch (err) {
+            throw err;
+        }
+    } else {
+        return [];
     }
 }
