@@ -1,7 +1,6 @@
 //#region Imports
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
-import * as delay from "delay";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
@@ -258,46 +257,47 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             case "Title": {
                 const url = Util.cleanString(newValue, this.props.maxUrlLength);
                 if (this.doesWebExistDelay) {
-                    this.doesWebExistDelay.cancel();
+                    clearTimeout(this.doesWebExistDelay);
                     this.doesWebExistDelay = null;
                 }
-                this.doesWebExistDelay = delay(250);
-                try {
-                    await this.doesWebExistDelay;
-                    const doesExist = await DoesWebExist(url);
-                    self.setState(prevState => ({
-                        errorMessages: {
-                            ...prevState.errorMessages,
-                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
-                        },
-                        formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
-                        model: { ...prevState.model, Title: newValue, Url: url },
-                    }));
-                } catch (err) {
-                    throw err;
-                }
+                this.doesWebExistDelay = setTimeout(async () => {
+                    try {
+                        const doesExist = await DoesWebExist(url);
+                        self.setState(prevState => ({
+                            errorMessages: {
+                                ...prevState.errorMessages,
+                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
+                            },
+                            formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
+                            model: { ...prevState.model, Title: newValue, Url: url },
+                        }));
+                    } catch (err) {
+                        throw err;
+                    }
+                }, 300);
             }
                 break;
             case "Url": {
                 if (this.doesWebExistDelay) {
-                    this.doesWebExistDelay.cancel();
+                    clearTimeout(this.doesWebExistDelay);
                     this.doesWebExistDelay = null;
                 }
-                this.doesWebExistDelay = delay(250);
-                try {
-                    await this.doesWebExistDelay;
-                    const doesExist = await DoesWebExist(newValue);
-                    self.setState(prevState => ({
-                        errorMessages: {
-                            ...prevState.errorMessages,
-                            Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
-                        },
-                        formValid: (prevState.model.Title.length >= self.props.titleMinLength) && !doesExist,
-                        model: { ...prevState.model, Url: newValue },
-                    }));
-                } catch (err) {
-                    throw err;
-                }
+                this.doesWebExistDelay = setTimeout(async () => {
+                    try {
+                        await this.doesWebExistDelay;
+                        const doesExist = await DoesWebExist(newValue);
+                        self.setState(prevState => ({
+                            errorMessages: {
+                                ...prevState.errorMessages,
+                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
+                            },
+                            formValid: (prevState.model.Title.length >= self.props.titleMinLength) && !doesExist,
+                            model: { ...prevState.model, Url: newValue },
+                        }));
+                    } catch (err) {
+                        throw err;
+                    }
+                }, 300);
             }
                 break;
             case "Description": {
