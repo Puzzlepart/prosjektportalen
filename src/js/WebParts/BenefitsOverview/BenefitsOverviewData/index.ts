@@ -133,7 +133,6 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
     const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
     if (dataSource) {
         const contentType = pnp.sp.site.rootWeb.contentTypes.getById(RESOURCE_MANAGER.getResource("ContentTypes_Gevinst_ContentTypeId"));
-
         let searchSettings: { [key: string]: any } = {
             Querytext: "*",
             QueryTemplate: dataSource.GtDpSearchQuery,
