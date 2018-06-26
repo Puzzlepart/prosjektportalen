@@ -403,7 +403,7 @@
     <value>Risk Elements</value>
   </data>
   <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Project deliveries</value>
+    <value>Project Deliveries</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
@@ -1143,6 +1143,9 @@
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Show in form</value>
   </data>
+  <data name="SiteFields_GtShowInPortfolio_DisplayName" xml:space="preserve">
+    <value>Show at portfolio level</value>
+  </data>
   <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -1232,6 +1235,9 @@
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
+  </data>
+  <data name="SiteFields_GtShowInPortfolio_Description" xml:space="preserve">
+    <value>Check this to show the item in the risk overview at the portfolio level</value>
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
     <value>Comment on status quality specified above</value>

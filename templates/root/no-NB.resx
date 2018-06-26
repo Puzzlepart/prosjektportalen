@@ -403,7 +403,7 @@
     <value>Risikoelementer</value>
   </data>
   <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Prosjektleveranser</value>
+    <value>Leveranser</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
@@ -1140,6 +1140,9 @@
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Vis i skjema</value>
   </data>
+  <data name="SiteFields_GtShowInPortfolio_DisplayName" xml:space="preserve">
+    <value>Vis i portefølje</value>
+  </data>
   <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
     <value>Leveransebeskrivelse</value>
   </data>
@@ -1232,6 +1235,9 @@
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
+  </data>
+  <data name="SiteFields_GtShowInPortfolio_Description" xml:space="preserve">
+    <value>Huk av denne for å vise risikoen i oversikten på porteføljenivå</value>
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
     <value>Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål</value>

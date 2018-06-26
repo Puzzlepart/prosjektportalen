@@ -93,6 +93,7 @@
             <pnp:FieldRef ID="00f17233-d4c0-49d0-aebd-5004552abb17" Name="{parameter:GenericFieldPrefix}RiskConsequencePostAction" />
             <pnp:FieldRef ID="62f0454d-1150-4d55-86ef-075f786d6e5c" Name="{parameter:GenericFieldPrefix}RiskFactorPostAction" />
             <pnp:FieldRef ID="6c2da0dc-77b1-4152-b751-97adf436faa0" Name="{parameter:GenericFieldPrefix}RiskStatus" />
+            <pnp:FieldRef ID="6bd17911-c48a-4900-be61-54ae26207d78" Name="{parameter:GenericFieldPrefix}ShowInPortfolio" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107020101" Name="{resource:ContentTypes_Risiko_Name}" Description="{resource:ContentTypes_Risiko_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>

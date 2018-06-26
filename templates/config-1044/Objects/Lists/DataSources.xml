@@ -7,15 +7,19 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Gevinstmålinger</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpSearchQuery">(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2*) Path:{Site.URL} </pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2*) Path:{SiteCollection.URL} </pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Prosjektområder</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* contentclass:STS_Web Path:{Site.URL}</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* contentclass:STS_Web Path:{SiteCollection.URL}</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Risikoelementer</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D566346483107020101* Path:{Site.URL}</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D566346483107020101* GtRiskOverviewSelectedOWSBOOL=1 Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">Leveranser</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070205* Path:{SiteCollection.URL}</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
