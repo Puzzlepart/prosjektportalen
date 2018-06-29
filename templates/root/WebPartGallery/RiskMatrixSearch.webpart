@@ -10,7 +10,7 @@
         <property name="ExportMode" type="exportmode">All</property>
         <property name="Hidden" type="bool">False</property>
         <property name="Description" type="string" null="true" />
-        <property name="Content" type="string">&lt;div id=&quot;pp-riskMatrix&quot; data-props=&#39;{&quot;dataSource&quot;:&quot;{resource:DataSourceName_RiskElements}&quot;}&#39;&gt;&lt;/div&gt;</property>
+        <property name="Content" type="string">&lt;div id=&quot;pp-riskMatrix&quot; data-props=&#39;{&quot;dataSource&quot;:&quot;RISKOVERVIEW&quot;}&#39;&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
         <property name="Title" type="string">RiskMatrixSearch</property>
         <property name="AllowHide" type="bool">False</property>
