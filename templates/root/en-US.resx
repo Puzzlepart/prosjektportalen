@@ -393,21 +393,6 @@
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Without responsible</value>
   </data>
-  <data name="DataSourceName_Projects" xml:space="preserve">
-    <value>Projects</value>
-  </data>
-  <data name="DataSourceName_Benefits" xml:space="preserve">
-    <value>Benefits</value>
-  </data>
-  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
-    <value>ExperienceLog</value>
-  </data>
-  <data name="DataSourceName_RiskElements" xml:space="preserve">
-    <value>Risk Elements</value>
-  </data>
-  <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Project Deliveries</value>
-  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
   </data>

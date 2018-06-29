@@ -393,21 +393,6 @@
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Uten ansvarlig</value>
   </data>
-  <data name="DataSourceName_Projects" xml:space="preserve">
-    <value>Prosjektområder</value>
-  </data>
-  <data name="DataSourceName_Benefits" xml:space="preserve">
-    <value>Gevinstmålinger</value>
-  </data>
-  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
-    <value>Erfaringslogg</value>
-  </data>
-  <data name="DataSourceName_RiskElements" xml:space="preserve">
-    <value>Risikoelementer</value>
-  </data>
-  <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Leveranser</value>
-  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
   </data>
