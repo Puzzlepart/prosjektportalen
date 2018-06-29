@@ -152,6 +152,9 @@
   </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Prosjektstatus</value>
+  </data>  
+  <data name="Navigation_RiskOverview_Title" xml:space="preserve">
+    <value>Risikooversikt</value>
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22Ingen%20fase%22</value>
@@ -392,21 +395,6 @@
   </data>
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Uten ansvarlig</value>
-  </data>
-  <data name="DataSourceName_Projects" xml:space="preserve">
-    <value>Prosjektområder</value>
-  </data>
-  <data name="DataSourceName_Benefits" xml:space="preserve">
-    <value>Gevinstmålinger</value>
-  </data>
-  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
-    <value>Erfaringslogg</value>
-  </data>
-  <data name="DataSourceName_RiskElements" xml:space="preserve">
-    <value>Risikoelementer</value>
-  </data>
-  <data name="DataSourceName_DeliveriesOverview" xml:space="preserve">
-    <value>Leveranser</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
@@ -2126,6 +2114,9 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risikomatrise</value>
+  </data>
+  <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
+    <value>Risikomatrise (aggregert)</value>
   </data>
   <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
     <value>Mulighetsmatrise</value>
