@@ -8,6 +8,7 @@ import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
 import Extension from "../../Provision/Extensions/Extension";
@@ -43,9 +44,6 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
         };
-        this._onToggleListContent = this._onToggleListContent.bind(this);
-        this._onToggleExtension = this._onToggleExtension.bind(this);
-        this._onSubmitForm = this._onSubmitForm.bind(this);
     }
 
     public async componentDidMount() {
@@ -69,7 +67,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         return (
                             <div className={this.props.className} style={this.props.style}>
                                 <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
-                                {this.renderInner()}
+                                {this._renderInner()}
                             </div>
                         );
                     }
@@ -88,7 +86,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 }}
                                 title={this.props.headerText}
                                 onDismiss={this.props.onDialogDismiss}>
-                                {this.renderInner()}
+                                {this._renderInner()}
                             </Dialog >
                         );
                     }
@@ -126,10 +124,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Render inner (form inputs, setting section and footer)
      */
-    private renderInner(): React.ReactElement<INewProjectFormProps> {
+    private _renderInner(): React.ReactElement<INewProjectFormProps> {
         return (
             <div>
-                {this.renderFormInput()}
+                {this._renderFormInputSection()}
                 {(this.state.config && this.state.config.showSettings) && (
                     <NewProjectFormSettingsSection
                         className={this.props.settingsClassName}
@@ -138,15 +136,15 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         toggleListContentHandler={this._onToggleListContent}
                         toggleExtensionHandler={this._onToggleExtension} />
                 )}
-                {this.renderFooter()}
+                {this._renderFooter()}
             </div>
         );
     }
 
     /**
-     * Render form input fields
+     * Render form input section
      */
-    private renderFormInput(): React.ReactElement<INewProjectFormProps> {
+    private _renderFormInputSection(): React.ReactElement<INewProjectFormProps> {
         const { inputContainerStyle } = this.props;
         const { errorMessages, model, selectedTemplate, config } = this.state;
         return (
@@ -154,7 +152,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 <div style={inputContainerStyle}>
                     <TextField
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
-                        onChanged={newValue => this.onFormChange("Title", newValue)}
+                        value={model.Title}
+                        onChanged={newValue => this._onFormChange("Title", newValue)}
                         errorMessage={errorMessages.Title} />
                 </div>
                 <div style={inputContainerStyle}>
@@ -162,14 +161,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
-                        onChanged={newValue => this.onFormChange("Description", newValue)}
+                        onChanged={newValue => this._onFormChange("Description", newValue)}
                         errorMessage={errorMessages.Description} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
                         placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
                         value={model.Url}
-                        onChanged={newValue => this.onFormChange("Url", newValue)}
+                        onChanged={newValue => this._onFormChange("Url", newValue)}
                         errorMessage={errorMessages.Url} />
                 </div>
                 {this.state.config && (
@@ -191,7 +190,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Render footer
      */
-    private renderFooter(): React.ReactElement<INewProjectFormProps> {
+    private _renderFooter(): React.ReactElement<INewProjectFormProps> {
         switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
@@ -223,6 +222,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {ListConfig} lc List config
      * @param {boolean} checked Is checked
      */
+    @autobind
     private _onToggleListContent(lc: ListConfig, checked: boolean) {
         this.setState(prevState => {
             let { IncludeContent } = prevState.model;
@@ -237,6 +237,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {Extension} extension Extension
      * @param {boolean} checked Is checked
      */
+    @autobind
     private _onToggleExtension(extension: Extension, checked: boolean) {
         this.setState(prevState => {
             let { Extensions } = prevState.model;
@@ -251,8 +252,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {string} input Input (key) that was changed
      * @param {string} newValue New value
      */
-    private async onFormChange(input: string, newValue: string) {
-        const self = this;
+    private async _onFormChange(input: string, newValue: string) {
+        const { titleMinLength } = this.props;
         switch (input) {
             case "Title": {
                 const url = Util.cleanString(newValue, this.props.maxUrlLength);
@@ -263,18 +264,18 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 this.doesWebExistDelay = setTimeout(async () => {
                     try {
                         const doesExist = await DoesWebExist(url);
-                        self.setState(prevState => ({
+                        this.setState(prevState => ({
                             errorMessages: {
                                 ...prevState.errorMessages,
                                 Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                             },
-                            formValid: (newValue.length >= self.props.titleMinLength) && !doesExist,
+                            formValid: (newValue.length >= titleMinLength) && !doesExist,
                             model: { ...prevState.model, Title: newValue, Url: url },
                         }));
                     } catch (err) {
                         throw err;
                     }
-                }, 300);
+                }, 250);
             }
                 break;
             case "Url": {
@@ -286,23 +287,23 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     try {
                         await this.doesWebExistDelay;
                         const doesExist = await DoesWebExist(newValue);
-                        self.setState(prevState => ({
+                        this.setState(prevState => ({
                             errorMessages: {
                                 ...prevState.errorMessages,
                                 Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                             },
-                            formValid: (prevState.model.Title.length >= self.props.titleMinLength) && !doesExist,
+                            formValid: (prevState.model.Title.length >= titleMinLength) && !doesExist,
                             model: { ...prevState.model, Url: newValue },
                         }));
                     } catch (err) {
                         throw err;
                     }
-                }, 300);
+                }, 250);
             }
                 break;
             case "Description": {
                 this.setState(prevState => ({
-                    formValid: (prevState.model.Title.length >= this.props.titleMinLength),
+                    formValid: (prevState.model.Title.length >= titleMinLength),
                     model: { ...prevState.model, Description: newValue },
                 }));
             }
@@ -311,8 +312,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
-     * Submits a project model
+     * Submits the form
      */
+    @autobind
     private async _onSubmitForm() {
         this.setState({ provisioning: { status: ProvisionStatus.Creating } });
         try {
