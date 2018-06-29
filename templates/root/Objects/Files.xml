@@ -127,6 +127,19 @@
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
+    </pnp:File>    
+    <pnp:File Src="SitePages\RiskOverview.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:Navigation_RiskOverview_Title}" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="RiskMatrixSearch" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include 
+                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/RiskMatrixSearch.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
     </pnp:File>
     <pnp:File Src="WebPartGallery\DeliveriesOverview.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
