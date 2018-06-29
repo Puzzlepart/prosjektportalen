@@ -19,7 +19,7 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
 }
 
 export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
-    dataSourceName: RESOURCE_MANAGER.getResource("DataSourceKey_Benefits"),
+    dataSourceName: "BENEFITSOVERVIEW",
     dataSource: DataSource.List,
     groupByOptions: [],
     searchProperty: "Title",

@@ -22,7 +22,7 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
     tileClassName: "pp-projectCard",
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
-    dataSourceName: RESOURCE_MANAGER.getResource("DataSourceKey_Projects"),
+    dataSourceName: "PROJECTS",
     rowLimit: 500,
     searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
     loadingText: RESOURCE_MANAGER.getResource("ProjectList_LoadingText"),
