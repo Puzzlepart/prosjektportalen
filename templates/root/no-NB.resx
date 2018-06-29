@@ -149,6 +149,9 @@
   </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Prosjektstatus</value>
+  </data>  
+  <data name="Navigation_RiskOverview_Title" xml:space="preserve">
+    <value>Risikooversikt</value>
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22Ingen%20fase%22</value>
