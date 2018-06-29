@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:Preferences></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-DATASOURCES-1044" Version="0">
+            <pnp:Lists>
+                <pnp:ListInstance Title="Datakilder" Description="" Hidden="true" DocumentTemplate="" TemplateType="100" Url="Lists/DataSources" EnableFolderCreation="false" EnableAttachments="false">
+                    <pnp:DataRows>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">PROJECTS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* contentclass:STS_Web Path:{SiteCollection.URL}</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">LESSONSLOG</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578e7470cc4aa68d5663464831070206* GtProjectLogExperienceOWSBOOL=1 Path:{SiteCollection.URL}</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">BENEFITSOVERVIEW</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2*) Path:{SiteCollection.URL} </pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">RISKOVERVIEW</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D566346483107020101* GtShowInPortfolioOWSBOOL=1 Path:{SiteCollection.URL}</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">DELIVERIESOVERVIEW</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070205* Path:{SiteCollection.URL}</pnp:DataValue>
+                        </pnp:DataRow>
+                    </pnp:DataRows>
+                </pnp:ListInstance>
+            </pnp:Lists>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>
+
