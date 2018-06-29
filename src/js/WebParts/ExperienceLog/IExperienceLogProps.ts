@@ -21,7 +21,7 @@ export default interface IExperienceLogProps extends IBaseWebPartProps {
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
-    dataSource: RESOURCE_MANAGER.getResource("DataSourceName_ExperienceLog"),
+    dataSource: "LESSONSLOG",
     showSearchBox: false,
     groupByOptions: [],
     constrainMode: ConstrainMode.horizontalConstrained,
