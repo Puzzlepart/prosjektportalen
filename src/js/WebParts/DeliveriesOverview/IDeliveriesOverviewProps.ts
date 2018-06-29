@@ -31,7 +31,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     showEmptyMessage: false,
     groupByOptions: [],
     constrainMode: ConstrainMode.horizontalConstrained,
-    dataSource: RESOURCE_MANAGER.getResource("DataSourceName_DeliveriesOverview"),
+    dataSource: RESOURCE_MANAGER.getResource("DataSourceKey_DeliveriesOverview"),
     rowLimit: 100,
     projectInfoFilterField: "GtPcPortfolioPage",
     modalHeaderClassName: "ms-font-xxl",
