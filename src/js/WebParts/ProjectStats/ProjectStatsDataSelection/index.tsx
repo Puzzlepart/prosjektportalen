@@ -9,6 +9,7 @@ import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
+import RESOURCE_MANAGER from "../../../Resources";
 
 export default class ProjectStatsDataSelection extends React.PureComponent<IProjectStatsDataSelectionProps, IProjectStatsDataSelectionState> {
     public static defaultProps: Partial<IProjectStatsDataSelectionProps> = {
@@ -49,7 +50,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                                     cursor: "pointer",
                                     position: "relative",
                                 }}>
-                                <span>Velg prosjekter</span>
+                                <span>{RESOURCE_MANAGER.getResource("String_Select_Project_Name")}</span>
                                 <span style={{ position: "absolute", right: 25 }}><Icon iconName={this.state.isExpanded ? "ChevronDown" : "ChevronUp"} /></span>
                             </div>
                         </div>
@@ -57,18 +58,18 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                             <div className="ms-Grid-row">
                                 <div className="ms-Grid-col ms-sm12" style={{ marginTop: 20, marginBottom: 20 }}>
                                     <Dropdown
-                                        placeHolder={"Velg visning"}
-                                        label={"Visning:"}
+                                        placeHolder={RESOURCE_MANAGER.getResource("String_Select_View_Name")}
+                                        label={RESOURCE_MANAGER.getResource("String_Select_View_Placeholder")}
                                         defaultSelectedKey={this.props.views.indexOf(this.props.selectedView)}
                                         options={this.props.views.map((view, i) => ({ key: i, text: view.name, data: view }))}
                                         onChanged={opt => this.props.onViewChanged(opt.data)} />
-                                    <div className="ms-font-xs" style={{ marginTop: 20 }}>Velg en visning. Dette er de samme visningene som brukes på porteføljeoversikten.</div>
+                                    <div className="ms-font-xs" style={{ marginTop: 20 }}>{RESOURCE_MANAGER.getResource("String_Select_View_Description")}</div>
                                 </div>
                                 <div
                                     className="ms-Grid-col ms-sm12"
                                     style={{ marginTop: 20, marginBottom: 20 }}
                                     hidden={this.state.selection.length === 0} >
-                                    <MessageBar>Du har valgt {this.state.selection.length} av totalt {this.props.data.getCount()} prosjekter</MessageBar>
+                                    <MessageBar>{String.format(RESOURCE_MANAGER.getResource("String_Selection_Status_MessageBar_Text"), this.state.selection.length, this.props.data.getCount())}</MessageBar>
                                 </div>
                                 <div className="ms-Grid-col ms-sm12" hidden={this.props.data.getCount() === 0}>
                                     <MarqueeSelection selection={this._selection}>
@@ -84,7 +85,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                                     </MarqueeSelection>
                                     <div hidden={this.state.selection.length === 0} style={{ marginTop: 25 }} >
                                         <PrimaryButton
-                                            text="Oppdater utvalg"
+                                            text={RESOURCE_MANAGER.getResource("String_Button_Update_Selection")}
                                             onClick={this._onUpdateSelection} />
                                     </div>
                                 </div>

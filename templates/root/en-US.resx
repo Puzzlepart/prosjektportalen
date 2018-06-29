@@ -141,8 +141,17 @@
   <data name="Navigation_ExperienceLog_Title" xml:space="preserve">
     <value>Lessons Log</value>
   </data>
+  <data name="Navigation_DeliveriesOverview_Title" xml:space="preserve">
+    <value>Deliveries Overview</value>
+  </data>
+  <data name="Navigation_PortfolioStats_Title" xml:space="preserve">
+    <value>Portfolio Insight</value>
+  </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Project Status</value>
+  </data>
+  <data name="Navigation_RiskOverview_Title" xml:space="preserve">
+    <value>Risk Overview</value>
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
@@ -244,7 +253,7 @@
     <value>Statistics fields</value>
   </data>
   <data name="Lists_ChartsConfig_Title" xml:space="preserve">
-    <value>Graph configuration</value>
+    <value>Chart configuration</value>
   </data>
   <data name="Lists_DataSources_Title" xml:space="preserve">
     <value>Data Sources</value>
@@ -384,27 +393,6 @@
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Without responsible</value>
   </data>
-  <data name="DataSourceName_Projects" xml:space="preserve">
-    <value>Projects</value>
-  </data>
-  <data name="ResultSourceLevel_Projects" xml:space="preserve">
-    <value>SPSite</value>
-  </data>
-  <data name="DataSourceName_Benefits" xml:space="preserve">
-    <value>Benefits</value>
-  </data>
-  <data name="ResultSourceLevel_Benefits" xml:space="preserve">
-    <value>SPSite</value>
-  </data>
-  <data name="DataSourceName_ExperienceLog" xml:space="preserve">
-    <value>ExperienceLog</value>
-  </data>
-  <data name="ResultSourceLevel_ExperienceLog" xml:space="preserve">
-    <value>SPSite</value>
-  </data>
-  <data name="DataSourceName_RiskElements" xml:space="preserve">
-    <value>Risk Elements</value>
-  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
   </data>
@@ -507,7 +495,7 @@
   <data name="ContentTypes_Kolonnediagram_Name" xml:space="preserve">
     <value>Column chart</value>
   </data>
-  <data name="ContentTypes_Kakediagram_Name" xml:space="preserve">
+  <data name="ContentTypes_Sektordiagram_Name" xml:space="preserve">
     <value>Pie chart</value>
   </data>
   <data name="ContentTypes_Dynamic_Portfolio_Config_Base_Name" xml:space="preserve">
@@ -633,7 +621,7 @@
   <data name="ContentTypes_Kolonnediagram_Description" xml:space = "preserve">
     <value>Create a new column chart</value>
   </data>
-  <data name="ContentTypes_Kakediagram_Description" xml:space = "preserve">
+  <data name="ContentTypes_Sektordiagram_Description" xml:space = "preserve">
     <value>Create a new pie chart</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
@@ -1143,6 +1131,9 @@
   <data name="SiteFields_GtShowInNewForm_DisplayName" xml:space="preserve">
     <value>Show in form</value>
   </data>
+  <data name="SiteFields_GtShowInPortfolio_DisplayName" xml:space="preserve">
+    <value>Show at portfolio level</value>
+  </data>
   <data name="SiteFields_GtProductDescription_DisplayName" xml:space="preserve">
     <value>Description</value>
   </data>
@@ -1159,7 +1150,7 @@
     <value>Subtitle</value>
   </data>
   <data name="SiteFields_GtChrYAxisTitle_DisplayName" xml:space = "preserve">
-    <value>Title (Y-axis)</value>
+    <value>Title (primary axis)</value>
   </data>
   <data name="SiteFields_GtChrWidthLg_DisplayName" xml:space = "preserve">
     <value>Width (640px - 1023px)</value>
@@ -1168,7 +1159,7 @@
     <value>Width (320px - 479px)</value>
   </data>
   <data name="SiteFields_GtChrYMin_DisplayName" xml:space = "preserve">
-    <value>Min (Y axis)</value>
+    <value>Min (primary axis)</value>
   </data>
   <data name="SiteFields_GtChrWidthXxl_DisplayName" xml:space = "preserve">
     <value>Width (1366px - 1919px)</value>
@@ -1180,31 +1171,31 @@
     <value>Width (1024px - 1365px)</value>
   </data>
   <data name="SiteFields_GtChrYMax_DisplayName" xml:space = "preserve">
-    <value>Max (Y-axis)</value>
+    <value>Max (primary axis)</value>
   </data>
   <data name="SiteFields_GtChrDataType_DisplayName" xml:space = "preserve">
     <value>Data type</value>
   </data>
   <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space = "preserve">
-    <value>Interval (Y-axis)</value>
+    <value>Interval (primary axis)</value>
   </data>
   <data name="SiteFields_GtChrWidthMd_DisplayName" xml:space = "preserve">
     <value>Width (480px - 639px)</value>
   </data>
   <data name="SiteFields_GtChrFields_DisplayName" xml:space = "preserve">
-    <value>Fields</value>
+    <value>Field(s) as data source</value>
   </data>
   <data name="SiteFields_GtChrValueSuffix_DisplayName" xml:space = "preserve">
     <value>Value ​​suffix</value>
-  </data>
-  <data name="SiteFields_GtChrMarginTop_DisplayName" xml:space = "preserve">
-    <value>Margin top</value>
   </data>
   <data name="SiteFields_GtChrOrder_DisplayName" xml:space = "preserve">
     <value>Order</value>
   </data>
   <data name="SiteFields_GtChrShowAverage_DisplayName" xml:space = "preserve">
     <value>Show average</value>
+  </data>
+  <data name="SiteFields_GtChrShowPercentage_DisplayName" xml:space="preserve">
+    <value>Show as percentage</value>
   </data>
   <data name="SiteFields_GtChrStacking_DisplayName" xml:space = "preserve">
     <value>Stacking</value>
@@ -1214,6 +1205,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_DisplayName" xml:space = "preserve">
     <value>Width (1920px and up)</value>
+  </data>
+  <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
+    <value>Height</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1229,6 +1223,9 @@
   </data>
   <data name="SiteFields_GtStatusQuality_Description" xml:space="preserve">
     <value />
+  </data>
+  <data name="SiteFields_GtShowInPortfolio_Description" xml:space="preserve">
+    <value>Check this to show the item in the risk overview at the portfolio level</value>
   </data>
   <data name="SiteFields_GtStatusQualityComment_Description" xml:space="preserve">
     <value>Comment on status quality specified above</value>
@@ -1653,14 +1650,14 @@
   <data name="SiteFields_GtChrValueSuffix_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtChrMarginTop_Description" xml:space="preserve">
-    <value></value>
-  </data>
   <data name="SiteFields_GtChrOrder_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtChrShowAverage_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtChrShowPercentage_Description" xml:space="preserve">
+    <value>Show each slice as a percentage of the total</value>
   </data>
   <data name="SiteFields_GtChrStacking_Description" xml:space="preserve">
     <value></value>
@@ -1670,6 +1667,9 @@
   </data>
   <data name="SiteFields_GtChrWidthXxxl_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
+    <value>The height of the graph in pixels</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
@@ -1965,6 +1965,51 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Approval</value>
   </data>
+  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+    <value>An error occured while fetching data.</value>
+  </data>
+  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+    <value>No graphs configured yet.</value>
+  </data>
+  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+    <value>No projects found.</value>
+  </data>
+  <data name="String_Default_Toggle_On_Text" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="String_Default_Toggle_Off_Text" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="String_Show_Legend_Label" xml:space="preserve">
+    <value>Show legend</value>
+  </data>
+  <data name="String_Select_Project_Name" xml:space="preserve">
+    <value>Select project:</value>
+  </data>
+  <data name="String_Select_View_Name" xml:space="preserve">
+    <value>Select view:</value>
+  </data>
+  <data name="String_Select_View_Placeholder" xml:space="preserve">
+    <value>View:</value>
+  </data>
+  <data name="String_Select_View_Description" xml:space="preserve">
+    <value>Select a view. These are the same views as available from the portfolio overview page.</value>
+  </data>
+  <data name="String_Select_Width_Name" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="String_Button_Update_Selection" xml:space="preserve">
+    <value>Update selection</value>
+  </data>
+  <data name="String_Selection_Status_MessageBar_Text" xml:space="preserve">
+    <value>You've selected {0} out of a total of {1} projects</value>
+  </data>
+  <data name="String_Not_Set" xml:space="preserve">
+    <value>Not set</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2066,9 +2111,15 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
+  </data>  
+  <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
+    <value>Risk Matrix (aggregated)</value>
   </data>
   <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
     <value>Opportunity Matrix</value>
+  </data>
+  <data name="WebPart_DeliveriesOverview_Title" xml:space="preserve">
+    <value>Deliveries Overview</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -2476,7 +2527,7 @@
     <value>Difference from previous measurement</value>
   </data>
   <data name="BenefitsOverview_SearchBox_Placeholder" xml:space="preserve">
-    <value>Search all Benefits...</value>
+    <value>Search all benefit items...</value>
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>BenefitsOverview</value>
@@ -2486,6 +2537,15 @@
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>LessonsLearned</value>
+  </data>
+  <data name="DeliveriesOverview_ExcelExportFileNamePrefix" xml:space="preserve">
+    <value>DeliveriesOverview</value>
+  </data>
+  <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
+    <value>Search all project deliveries</value>
+  </data>
+  <data name="DeliveriesOverview_EmptyMessage" xml:space="preserve">
+    <value>No deliveries found</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>An error occurred during loading. DICE is not properly configured.</value>
@@ -2745,6 +2805,12 @@
   </data>
   <data name="SiteSettings_Link_Settings" xml:space="preserve">
     <value>Project Portal - Settings</value>
+  </data>
+  <data name="SiteSettings_Link_StatsFields" xml:space="preserve">
+    <value>Project Portal - Data fields for graphs</value>
+  </data>
+  <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
+    <value>Project Portal - Graph configuration</value>
   </data>
   <data name="SiteSettings_Link_DataSources" xml:space="preserve">
     <value>Project Portal - Data Sources</value>

@@ -4,7 +4,6 @@ var path = require("path"),
 
 const libBasePath = path.join(__dirname, "lib");
 const distBasePath = path.join(__dirname, "dist/js");
-const useBundleAnalyzer = false;
 
 module.exports = (devtool, exclude, env) => ({
     devtool,
@@ -29,29 +28,28 @@ module.exports = (devtool, exclude, env) => ({
         alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
-        rules: [
-            {
-                test: /\.js$/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ["react", "env", "es2015"],
-                        plugins: [
-                            require("babel-plugin-transform-class-properties"),
-                            require("babel-plugin-transform-object-assign"),
-                        ]
-                    }
-                },
-                exclude: exclude
+        rules: [{
+            test: /\.js$/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ["react", "env", "es2015"],
+                    plugins: [
+                        require("babel-plugin-transform-class-properties"),
+                        require("babel-plugin-transform-object-assign"),
+                    ]
+                }
             },
-            {
-                test: /\.txt$/,
-                use: 'raw-loader'
-            },
-            {
-                test: /\.json$/,
-                loader: "json-loader"
-            }
+            exclude: exclude
+        },
+        {
+            test: /\.txt$/,
+            use: 'raw-loader'
+        },
+        {
+            test: /\.json$/,
+            loader: "json-loader"
+        }
         ]
     },
     plugins: [
@@ -64,8 +62,6 @@ module.exports = (devtool, exclude, env) => ({
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
         .concat(env === "production" ? [
-            new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
-        .concat(useBundleAnalyzer ? [new BundleAnalyzerPlugin({ analyzerMode: 'static' })] : [])
 });

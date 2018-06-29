@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../../Resources";
-import { sp } from "sp-pnp-js";
+import { sp, Site } from "sp-pnp-js";
 
 export interface IQueryResult {
     Title: string;
@@ -16,26 +16,26 @@ export interface IQueryResult {
 /**
  * Query the REST Search API using sp-pnp-js
  *
+ * @param {string} dataSourceName Data source name
  * @param {number} rowLimit Row limit
  * @param {Array<string>} selectProperties Select properties
  */
-export async function queryProjects(rowLimit?: number, selectProperties = []): Promise<any[]> {
+export async function queryProjects(dataSourceName: string, rowLimit?: number, selectProperties = []): Promise<any[]> {
     try {
-        const { PrimarySearchResults } = await sp.search({
-            Querytext: "*",
-            RowLimit: rowLimit,
-            TrimDuplicates: false,
-            SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime", ...selectProperties],
-            Properties: [{
-                Name: "SourceName",
-                Value: { StrVal: RESOURCE_MANAGER.getResource("DataSourceName_Projects"), QueryPropertyValueTypeIndex: 1 },
-            },
-            {
-                Name: "SourceLevel",
-                Value: { StrVal: RESOURCE_MANAGER.getResource("ResultSourceLevel_Projects"), QueryPropertyValueTypeIndex: 1 },
-            }],
-        });
-        return PrimarySearchResults;
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
+        if (dataSource) {
+            const { PrimarySearchResults } = await sp.search({
+                Querytext: "*",
+                QueryTemplate: dataSource.GtDpSearchQuery,
+                SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime", ...selectProperties],
+                RowLimit: rowLimit,
+                TrimDuplicates: false,
+            });
+            return PrimarySearchResults;
+        } else {
+            return [];
+        }
     } catch (err) {
         throw err;
     }

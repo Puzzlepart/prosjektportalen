@@ -813,6 +813,22 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>Add-PnPCustomAction -Title "CollabFooter" -Name "CollabFooter" -Location "ClientSideExtension.ApplicationCustomizer" -ClientSideComponentId c0ab3b94-8609-40cf-861e-2a1759170b43 -ClientSideComponentProperties "{`"sourceTermSet`":`"PnP-CollabFooter-SharedLinks`",`"personalItemsStorageProperty`":`"PnP-CollabFooter-MyLinks`"}</dev:code>
+        <maml:remarks>
+          <maml:para>Adds a new application customizer to the site. This requires that an SPFX solution has been deployed containing the application customizer specified.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -4072,7 +4088,7 @@ Currency: -Values @{"Number" = "10"}
 
 Currency: -Values @{"Currency" = "10"}
 
-Date and Time: -Values @{"DateAndTime" = "03/10/2015 14:16"}
+Date and Time: -Values @{"DateAndTime" = "03/13/2015 14:16"}
 
 Lookup (id of lookup value): -Values @{"Lookup" = "2"}
 
@@ -4174,7 +4190,7 @@ Currency: -Values @{"Number" = "10"}
 
 Currency: -Values @{"Currency" = "10"}
 
-Date and Time: -Values @{"DateAndTime" = "03/10/2015 14:16"}
+Date and Time: -Values @{"DateAndTime" = "03/13/2015 14:16"}
 
 Lookup (id of lookup value): -Values @{"Lookup" = "2"}
 
@@ -4533,7 +4549,7 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <command:parameter required="true" position="named">
           <maml:name>Location</maml:name>
           <maml:description>
-            <maml:para>The location of the node to add. Either TopNavigationBar, QuickLaunch or SearchNav</maml:para>
+            <maml:para>The location of the node to add. Either TopNavigationBar, QuickLaunch, SearchNav</maml:para>
           </maml:description>
           <command:parameterValue required="true">NavigationType</command:parameterValue>
         </command:parameter>
@@ -4552,11 +4568,11 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
-          <maml:name>Header</maml:name>
+          <maml:name>Parent</maml:name>
           <maml:description>
-            <maml:para>Optionally value of a header entry to add the menu item to.</maml:para>
+            <maml:para>The key of the parent. Leave empty to add to the top level</maml:para>
           </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
+          <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>First</maml:name>
@@ -4611,25 +4627,25 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <maml:uri />
         </dev:type>
       </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>Header</maml:name>
-        <maml:description>
-          <maml:para>Optionally value of a header entry to add the menu item to.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
       <command:parameter required="true" position="named">
         <maml:name>Location</maml:name>
         <maml:description>
-          <maml:para>The location of the node to add. Either TopNavigationBar, QuickLaunch or SearchNav</maml:para>
+          <maml:para>The location of the node to add. Either TopNavigationBar, QuickLaunch, SearchNav</maml:para>
         </maml:description>
         <command:parameterValue required="true">NavigationType</command:parameterValue>
         <dev:type>
           <maml:name>NavigationType</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Parent</maml:name>
+        <maml:description>
+          <maml:para>The key of the parent. Leave empty to add to the top level</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -4711,9 +4727,9 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Add-PnPNavigationNode -Title "Contoso USA" -Url "http://contoso.sharepoint.com/sites/contoso/usa/" -Location "QuickLaunch" -Header "Contoso"</dev:code>
+        <dev:code>PS:&gt; Add-PnPNavigationNode -Title "Contoso USA" -Url "http://contoso.sharepoint.com/sites/contoso/usa/" -Location "QuickLaunch" -Parent 2012</dev:code>
         <maml:remarks>
-          <maml:para>Adds a navigation node to the quicklaunch. The navigation node will have the title "Contoso USA", will link to the url "http://contoso.sharepoint.com/sites/contoso/usa/" and will have "Contoso" as a parent navigation node.</maml:para>
+          <maml:para>Adds a navigation node to the quicklaunch. The navigation node will have the title "Contoso USA", will link to the url "http://contoso.sharepoint.com/sites/contoso/usa/" and will have the node with id 2012 as a parent navigation node.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -7735,6 +7751,13 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>ProvisionFieldsToSubWebs</maml:name>
+          <maml:description>
+            <maml:para>If set fields will be provisioned if the target web is a subweb.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>ClearNavigation</maml:name>
           <maml:description>
             <maml:para>Override the RemoveExistingNodes attribute in the Navigation elements of the template. If you specify this value the navigation nodes will always be removed before adding the nodes in the template</maml:para>
@@ -7829,6 +7852,13 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>ProvisionFieldsToSubWebs</maml:name>
+          <maml:description>
+            <maml:para>If set fields will be provisioned if the target web is a subweb.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>ClearNavigation</maml:name>
           <maml:description>
             <maml:para>Override the RemoveExistingNodes attribute in the Navigation elements of the template. If you specify this value the navigation nodes will always be removed before adding the nodes in the template</maml:para>
@@ -7919,6 +7949,13 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
           <maml:name>ProvisionContentTypesToSubWebs</maml:name>
           <maml:description>
             <maml:para>If set content types will be provisioned if the target web is a subweb.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ProvisionFieldsToSubWebs</maml:name>
+          <maml:description>
+            <maml:para>If set fields will be provisioned if the target web is a subweb.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -8095,6 +8132,17 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <maml:name>ProvisionContentTypesToSubWebs</maml:name>
         <maml:description>
           <maml:para>If set content types will be provisioned if the target web is a subweb.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ProvisionFieldsToSubWebs</maml:name>
+        <maml:description>
+          <maml:para>If set fields will be provisioned if the target web is a subweb.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -8642,6 +8690,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>LoginProviderName</maml:name>
+          <maml:description>
+            <maml:para>The name of the ADFS trusted login provider</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>MinimalHealthScore</maml:name>
           <maml:description>
             <maml:para>Specifies a minimal server healthscore before any requests are executed.</maml:para>
@@ -8711,13 +8766,20 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoTelemetry</maml:name>
+          <maml:description>
+            <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Connect-PnPOnline</maml:name>
         <command:parameter required="true" position="named">
           <maml:name>UseWebLogin</maml:name>
           <maml:description>
-            <maml:para>If you want to connect to SharePoint with browser based login</maml:para>
+            <maml:para>If you want to connect to SharePoint with browser based login. This is required when you have multi-factor authentication (MFA) enabled.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -8795,6 +8857,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
           <maml:name>IgnoreSslErrors</maml:name>
           <maml:description>
             <maml:para>Ignores any SSL errors. To be used i.e. when connecting to a SharePoint farm using self signed certificates or using a certificate authority not trusted by this machine.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoTelemetry</maml:name>
+          <maml:description>
+            <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -8899,6 +8968,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoTelemetry</maml:name>
+          <maml:description>
+            <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Connect-PnPOnline</maml:name>
@@ -8999,6 +9075,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
             <maml:para>The IssuerID under which the certificate has been registered in SharePoint as a Trusted Security Token issuer to use for the High Trust connection. Uses the ClientID if not specified.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoTelemetry</maml:name>
+          <maml:description>
+            <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
@@ -9107,6 +9190,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
             <maml:para>The IssuerID under which the CER counterpart of the PFX has been registered in SharePoint as a Trusted Security Token issuer to use for the High Trust connection. Uses the ClientID if not specified.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>NoTelemetry</maml:name>
+          <maml:description>
+            <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -9255,6 +9345,17 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="named">
+        <maml:name>LoginProviderName</maml:name>
+        <maml:description>
+          <maml:para>The name of the ADFS trusted login provider</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
         <maml:name>MinimalHealthScore</maml:name>
         <maml:description>
           <maml:para>Specifies a minimal server healthscore before any requests are executed.</maml:para>
@@ -9262,6 +9363,17 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameterValue required="false">Int32</command:parameterValue>
         <dev:type>
           <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>NoTelemetry</maml:name>
+        <maml:description>
+          <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off in general or use the -NoTelemetry switch to turn it off for that session.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -9367,7 +9479,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
       <command:parameter required="true" position="named">
         <maml:name>UseWebLogin</maml:name>
         <maml:description>
-          <maml:para>If you want to connect to SharePoint with browser based login</maml:para>
+          <maml:para>If you want to connect to SharePoint with browser based login. This is required when you have multi-factor authentication (MFA) enabled.</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10600,6 +10712,83 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Disable-PnPPowerShellTelemetry</command:name>
+      <maml:description>
+        <maml:para>Disables PnP PowerShell telemetry tracking</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Disable</command:verb>
+      <command:noun>PnPPowerShellTelemetry</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>Disables PnP PowerShell telemetry tracking</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Disable-PnPPowerShellTelemetry</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Disable-PnPPowerShellTelemetry</dev:code>
+        <maml:remarks>
+          <maml:para>Will prompt you to confirm to disable telemetry tracking.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Disable-PnPResponsiveUI</command:name>
       <maml:description>
         <maml:para>Deactive the PnP Response UI add-on</maml:para>
@@ -11024,6 +11213,83 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
         <dev:code>PS:&gt; Enable-PnPInPlaceRecordsManagementForSite</dev:code>
         <maml:remarks>
           <maml:para>The in place records management feature will be enabled and the in place record management will be enabled in all locations with record declaration allowed by all contributors and undeclaration by site admins</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Enable-PnPPowerShellTelemetry</command:name>
+      <maml:description>
+        <maml:para>Enables PnP PowerShell telemetry tracking.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Enable</command:verb>
+      <command:noun>PnPPowerShellTelemetry</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off, alternative, use the -NoTelemetry switch on Connect-PnPOnline to turn it off for that session.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Enable-PnPPowerShellTelemetry</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Enable-PnPPowerShellTelemetry</dev:code>
+        <maml:remarks>
+          <maml:para>Will prompt you to confirm to enable telemetry tracking.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -13571,6 +13837,13 @@ PS:&gt; Get-PnPContentType
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>InSiteHierarchy</maml:name>
+          <maml:description>
+            <maml:para>Search site hierarchy for fields</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>The web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -13631,6 +13904,17 @@ PS:&gt; Get-PnPContentType
         <command:parameterValue required="false">String[]</command:parameterValue>
         <dev:type>
           <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>InSiteHierarchy</maml:name>
+        <maml:description>
+          <maml:para>Search site hierarchy for fields</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -14457,7 +14741,7 @@ PS:&gt; Get-PnPContentType
     <command:details>
       <command:name>Get-PnPGroup</command:name>
       <maml:description>
-        <maml:para>Returns a specific group or all groups.</maml:para>
+        <maml:para>Returns a specific SharePoint group or all SharePoint groups in site.</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -14686,7 +14970,7 @@ PS:&gt; Get-PnPContentType
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPGroup</dev:code>
         <maml:remarks>
-          <maml:para>Returns all groups</maml:para>
+          <maml:para>Returns all SharePoint groups in a site</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -14702,7 +14986,7 @@ PS:&gt; Get-PnPContentType
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPGroup -Identity 'My Site Users'</dev:code>
         <maml:remarks>
-          <maml:para>This will return the group called 'My Site Users' if available</maml:para>
+          <maml:para>This will return the group called 'My Site Users' in if available in the current site</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -15232,6 +15516,98 @@ PS:&gt; Get-PnPContentType
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Get-PnPInPlaceRecordsManagement</command:name>
+      <maml:description>
+        <maml:para>Returns if the place records management feature is enabled.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPInPlaceRecordsManagement</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPInPlaceRecordsManagement</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPInPlaceRecordsManagement</dev:code>
+        <maml:remarks>
+          <maml:para>Returns if $true if in place records management is active</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Get-PnPJavaScriptLink</command:name>
       <maml:description>
         <maml:para>Returns all or a specific custom action(s) with location type ScriptLink</maml:para>
@@ -15602,6 +15978,116 @@ PS:&gt; Get-PnPContentType
         <dev:code>PS:&gt; Get-PnPList -Identity Lists/Announcements</dev:code>
         <maml:remarks>
           <maml:para>Returns a list with the given url.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PnPListInformationRightsManagement</command:name>
+      <maml:description>
+        <maml:para>Get the site closure status of the site which has a site policy applied</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPListInformationRightsManagement</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPListInformationRightsManagement</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPListInformationRightsManagement -List "Documents"</dev:code>
+        <maml:remarks>
+          <maml:para>Returns Information Rights Management (IRM) settings for the list. See 'Get-Help Set-PnPListInformationRightsManagement -Detailed' for more information about the various values.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -16034,6 +16520,118 @@ PS:&gt; Get-PnPContentType
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Get-PnPListRecordDeclaration</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+Returns the manual record declaration settings for a list</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPListRecordDeclaration</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPListRecordDeclaration</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The list to retrieve the record declaration settings for</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The list to retrieve the record declaration settings for</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPListRecordDeclaration -List "Documents"</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the record declaration setting for the list "Documents"</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Get-PnPMasterPage</command:name>
       <maml:description>
         <maml:para>Returns the URLs of the default Master Page and the custom Master Page.</maml:para>
@@ -16131,6 +16729,13 @@ PS:&gt; Get-PnPContentType
           <command:parameterValue required="true">NavigationType</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>Tree</maml:name>
+          <maml:description>
+            <maml:para>Show a tree view of all navigation nodes</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -16153,6 +16758,13 @@ PS:&gt; Get-PnPContentType
             <maml:para>The Id of the node to retrieve</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Tree</maml:name>
+          <maml:description>
+            <maml:para>Show a tree view of all navigation nodes</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
@@ -16190,6 +16802,17 @@ PS:&gt; Get-PnPContentType
         <command:parameterValue required="false">NavigationType</command:parameterValue>
         <dev:type>
           <maml:name>NavigationType</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Tree</maml:name>
+        <maml:description>
+          <maml:para>Show a tree view of all navigation nodes</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -16699,6 +17322,83 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <dev:code>PS:&gt; Get-PnPSiteCollectionTermStore</dev:code>
         <maml:remarks>
           <maml:para>Returns the site collection term store.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PnPPowerShellTelemetryEnabled</command:name>
+      <maml:description>
+        <maml:para>Returns true if the PnP PowerShell Telemetry has been enabled.</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPPowerShellTelemetryEnabled</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>In order to help to make PnP PowerShell better, we can track anonymous telemetry. We track the version of the cmdlets you are using, which cmdlet you are executing and which version of SharePoint you are connecting to. Use Disable-PnPPowerShellTelemetry to turn this off, alternative, use the -NoTelemetry switch on Connect-PnPOnline to turn it off for that session.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPPowerShellTelemetryEnabled</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPPowerShellTelemetryEnabled</dev:code>
+        <maml:remarks>
+          <maml:para>Will return true of false.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -18504,6 +19204,288 @@ Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
         <dev:code>PS:&gt; Get-PnPSearchConfiguration -Scope Site -OutputFormat ManagedPropertyMappings</dev:code>
         <maml:remarks>
           <maml:para>Returns all custom managed properties and crawled property mapping at the current site collection</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Get-PnPSearchCrawlLog</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+Returns entries from the SharePoint search crawl log</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPSearchCrawlLog</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPSearchCrawlLog</maml:name>
+        <command:parameter required="false" position="named">
+          <maml:name>LogLevel</maml:name>
+          <maml:description>
+            <maml:para>Filter what log entries to return (All, Success, Warning, Error). Defaults to All</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">LogLevel</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>RowLimit</maml:name>
+          <maml:description>
+            <maml:para>Number of entries to return. Defaults to 100.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Filter</maml:name>
+          <maml:description>
+            <maml:para>Filter to limit what is being returned. Has to be a URL prefix for SharePoint content, and part of a user principal name for user profiles. Wildcard characters are not supported.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ContentSource</maml:name>
+          <maml:description>
+            <maml:para>Content to retrieve (Sites, User Profiles). Defaults to Sites.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ContentSource</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>StartDate</maml:name>
+          <maml:description>
+            <maml:para>Start date to start getting entries from. Defaults to start of time.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">DateTime</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EndDate</maml:name>
+          <maml:description>
+            <maml:para>End date to stop getting entries from. Default to current time.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">DateTime</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>ContentSource</maml:name>
+        <maml:description>
+          <maml:para>Content to retrieve (Sites, User Profiles). Defaults to Sites.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">ContentSource</command:parameterValue>
+        <dev:type>
+          <maml:name>ContentSource</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EndDate</maml:name>
+        <maml:description>
+          <maml:para>End date to stop getting entries from. Default to current time.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Filter</maml:name>
+        <maml:description>
+          <maml:para>Filter to limit what is being returned. Has to be a URL prefix for SharePoint content, and part of a user principal name for user profiles. Wildcard characters are not supported.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>LogLevel</maml:name>
+        <maml:description>
+          <maml:para>Filter what log entries to return (All, Success, Warning, Error). Defaults to All</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">LogLevel</command:parameterValue>
+        <dev:type>
+          <maml:name>LogLevel</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>RowLimit</maml:name>
+        <maml:description>
+          <maml:para>Number of entries to return. Defaults to 100.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>StartDate</maml:name>
+        <maml:description>
+          <maml:para>Start date to start getting entries from. Defaults to start of time.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 100 crawl log entries for site content.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog "https://&lt;tenant&gt;-my.sharepoint.com/personal"</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 100 crawl log entries for OneDrive content.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -ContentSource UserProfiles </dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 100 crawl log entries for user profiles.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -ContentSource UserProfiles -Filter "mikael"</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 100 crawl log entries for user profiles with the term "mikael" in the user principal name.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -ContentSource Sites LogLevel Error -RowLimit 10</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 10 crawl log entries with a state of Error for site content.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 6---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -EndDate (Get-Date).AddDays(-100)</dev:code>
+        <maml:remarks>
+          <maml:para>Returns the last 100 crawl log entries for site content up until 100 days ago.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -22704,6 +23686,22 @@ Gets one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</ma
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Import-PnPTaxonomy -Path ./mytaxonomyterms.txt</dev:code>
+        <maml:remarks>
+          <maml:para>Imports the taxonomy from the file specified. Each line has to be in the format TERMGROUP|TERMSET|TERM. See example 2 for examples of the format.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -25103,16 +26101,34 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
-        <command:parameter required="false" position="6">
+        <command:parameter required="false" position="7">
           <maml:name>ValidYears</maml:name>
           <maml:description>
             <maml:para>Number of years until expiration (default is 10, max is 30)</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="8">
+          <maml:name>CertificatePassword</maml:name>
+          <maml:description>
+            <maml:para>Optional certificate password</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SecureString</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="8">
+        <maml:name>CertificatePassword</maml:name>
+        <maml:description>
+          <maml:para>Optional certificate password</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SecureString</command:parameterValue>
+        <dev:type>
+          <maml:name>SecureString</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>CommonName</maml:name>
         <maml:description>
@@ -25190,7 +26206,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
           <maml:uri />
         </dev:type>
       </command:parameter>
-      <command:parameter required="false" position="6">
+      <command:parameter required="false" position="7">
         <maml:name>ValidYears</maml:name>
         <maml:description>
           <maml:para>Number of years until expiration (default is 10, max is 30)</maml:para>
@@ -25219,7 +26235,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Generate-PnPAzureCertificate</dev:code>
+        <dev:code>PS:&gt; New-PnPAzureCertificate</dev:code>
         <maml:remarks>
           <maml:para>This will generate a default self-signed certificate named "pnp.contoso.com" valid for 10 years.</maml:para>
           <maml:para></maml:para>
@@ -25235,7 +26251,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Generate-PnPAzureCertificate -CommonName "My Certificate" -ValidYears 30 </dev:code>
+        <dev:code>PS:&gt; New-PnPAzureCertificate -CommonName "My Certificate" -ValidYears 30 </dev:code>
         <maml:remarks>
           <maml:para>This will output a certificate named "My Certificate" which expires in 30 years from now.</maml:para>
           <maml:para></maml:para>
@@ -29602,7 +30618,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <command:parameter required="false" position="named">
           <maml:name>Recycle</maml:name>
           <maml:description>
-            <maml:para />
+            <maml:para>Defines if the list should be moved to recycle bin or directly deleted.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -29655,7 +30671,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
       <command:parameter required="false" position="named">
         <maml:name>Recycle</maml:name>
         <maml:description>
-          <maml:para />
+          <maml:para>Defines if the list should be moved to recycle bin or directly deleted.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -31818,7 +32834,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <command:parameter required="true" position="named">
           <maml:name>ServerRelativePageUrl</maml:name>
           <maml:description>
-            <maml:para>Full server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
+            <maml:para>Server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -31849,7 +32865,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <command:parameter required="true" position="named">
           <maml:name>ServerRelativePageUrl</maml:name>
           <maml:description>
-            <maml:para>Full server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
+            <maml:para>Server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -31884,7 +32900,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
       <command:parameter required="true" position="named">
         <maml:name>ServerRelativePageUrl</maml:name>
         <maml:description>
-          <maml:para>Full server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
+          <maml:para>Server relative url of the webpart page, e.g. /sites/demo/sitepages/home.aspx</maml:para>
         </maml:description>
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
@@ -31943,9 +32959,9 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Remove-PnPWebPartToWikiPage -ServerRelativePageUrl "/sites/demo/sitepages/home.aspx" -Identity a2875399-d6ff-43a0-96da-be6ae5875f82</dev:code>
+        <dev:code>PS:&gt; Remove-PnPWebPart -ServerRelativePageUrl "/sites/demo/sitepages/home.aspx" -Identity a2875399-d6ff-43a0-96da-be6ae5875f82</dev:code>
         <maml:remarks>
-          <maml:para>This will remove the webpart as defined by the XML in the listview.webpart file to the specified page in the first row and the first column of the HTML table present on the page</maml:para>
+          <maml:para>This will remove the webpart specified by ID to the specified page in the first row and the first column of the HTML table present on the page</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -31959,9 +32975,9 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Remove-PnPWebPartToWikiPage -ServerRelativePageUrl "/sites/demo/sitepages/home.aspx" -Name MyWebpart</dev:code>
+        <dev:code>PS:&gt; Remove-PnPWebPart -ServerRelativePageUrl "/sites/demo/sitepages/home.aspx" -Title MyWebpart</dev:code>
         <maml:remarks>
-          <maml:para>This will remove the webpart as defined by the XML in the listview.webpart file to the specified page in the first row and the first column of the HTML table present on the page</maml:para>
+          <maml:para>This will remove the webpart specified by title to the specified page in the first row and the first column of the HTML table present on the page</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -36388,35 +37404,11 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
       <command:syntaxItem>
         <maml:name>Set-PnPInPlaceRecordsManagement</maml:name>
         <command:parameter required="true" position="named">
-          <maml:name>On</maml:name>
+          <maml:name>Enabled</maml:name>
           <maml:description>
-            <maml:para>Turn records management on</maml:para>
+            <maml:para />
           </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Web</maml:name>
-          <maml:description>
-            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Connection</maml:name>
-          <maml:description>
-            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Set-PnPInPlaceRecordsManagement</maml:name>
-        <command:parameter required="true" position="named">
-          <maml:name>Off</maml:name>
-          <maml:description>
-            <maml:para>Turn records management off</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
@@ -36436,24 +37428,13 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
     </command:syntax>
     <command:parameters>
       <command:parameter required="true" position="named">
-        <maml:name>Off</maml:name>
+        <maml:name>Enabled</maml:name>
         <maml:description>
-          <maml:para>Turn records management off</maml:para>
+          <maml:para />
         </maml:description>
-        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
+        <command:parameterValue required="true">Boolean</command:parameterValue>
         <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="true" position="named">
-        <maml:name>On</maml:name>
-        <maml:description>
-          <maml:para>Turn records management on</maml:para>
-        </maml:description>
-        <command:parameterValue required="true">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
+          <maml:name>Boolean</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -36497,7 +37478,7 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Set-PnPInPlaceRecordsManagement -On</dev:code>
+        <dev:code>PS:&gt; Set-PnPInPlaceRecordsManagement -Enabled $true</dev:code>
         <maml:remarks>
           <maml:para>Activates In Place Records Management</maml:para>
           <maml:para></maml:para>
@@ -36513,7 +37494,7 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Set-PnPInPlaceRecordsManagement -Off</dev:code>
+        <dev:code>PS:&gt; Set-PnPInPlaceRecordsManagement -Enabled $false</dev:code>
         <maml:remarks>
           <maml:para>Deactivates In Place Records Management</maml:para>
           <maml:para></maml:para>
@@ -36591,6 +37572,13 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>Description</maml:name>
+          <maml:description>
+            <maml:para>The description of the list</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Hidden</maml:name>
           <maml:description>
             <maml:para>Hide the list from the SharePoint UI. Set to $true to hide, $false to show.</maml:para>
@@ -36598,9 +37586,23 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
           <command:parameterValue required="true">Boolean</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>ForceCheckout</maml:name>
+          <maml:description>
+            <maml:para>Enable or disable force checkout. Set to $true to enable, $false to disable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>EnableAttachments</maml:name>
           <maml:description>
             <maml:para>Enable or disable attachments. Set to $true to enable, $false to disable.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableFolderCreation</maml:name>
+          <maml:description>
+            <maml:para>Enable or disable folder creation. Set to $true to enable, $false to disable.</maml:para>
           </maml:description>
           <command:parameterValue required="true">Boolean</command:parameterValue>
         </command:parameter>
@@ -36690,6 +37692,17 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="named">
+        <maml:name>Description</maml:name>
+        <maml:description>
+          <maml:para>The description of the list</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
         <maml:name>EnableAttachments</maml:name>
         <maml:description>
           <maml:para>Enable or disable attachments. Set to $true to enable, $false to disable.</maml:para>
@@ -36704,6 +37717,17 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         <maml:name>EnableContentTypes</maml:name>
         <maml:description>
           <maml:para>Set to $true to enable content types, set to $false to disable content types</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableFolderCreation</maml:name>
+        <maml:description>
+          <maml:para>Enable or disable folder creation. Set to $true to enable, $false to disable.</maml:para>
         </maml:description>
         <command:parameterValue required="false">Boolean</command:parameterValue>
         <dev:type>
@@ -36737,6 +37761,17 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         <maml:name>EnableVersioning</maml:name>
         <maml:description>
           <maml:para>Enable or disable versioning. Set to $true to enable, $false to disable.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ForceCheckout</maml:name>
+        <maml:description>
+          <maml:para>Enable or disable force checkout. Set to $true to enable, $false to disable.</maml:para>
         </maml:description>
         <command:parameterValue required="false">Boolean</command:parameterValue>
         <dev:type>
@@ -36940,6 +37975,440 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Set-PnPListInformationRightsManagement</command:name>
+      <maml:description>
+        <maml:para>Get the site closure status of the site which has a site policy applied</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>PnPListInformationRightsManagement</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-PnPListInformationRightsManagement</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The list to set Information Rights Management (IRM) settings for.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Enable</maml:name>
+          <maml:description>
+            <maml:para>Specifies whether Information Rights Management (IRM) is enabled for the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableExpiration</maml:name>
+          <maml:description>
+            <maml:para>Specifies whether Information Rights Management (IRM) expiration is enabled for the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableRejection</maml:name>
+          <maml:description>
+            <maml:para>Specifies whether Information Rights Management (IRM) rejection is enabled for the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AllowPrint</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether the viewer can print the downloaded document.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AllowScript</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether the viewer can run a script on the downloaded document.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AllowWriteCopy</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether the viewer can write on a copy of the downloaded document.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>DisableDocumentBrowserView</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether to block Office Web Application Companion applications (WACs) from showing this document.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>DocumentAccessExpireDays</maml:name>
+          <maml:description>
+            <maml:para>Sets the number of days after which the downloaded document will expire.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>DocumentLibraryProtectionExpireDate</maml:name>
+          <maml:description>
+            <maml:para>Sets the date after which the Information Rights Management (IRM) protection of this document library will stop.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">DateTime</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableDocumentAccessExpire</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether the downloaded document will expire.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableDocumentBrowserPublishingView</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether to enable Office Web Application Companion applications (WACs) to publishing view.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableGroupProtection</maml:name>
+          <maml:description>
+            <maml:para>Sets a value indicating whether the permission of the downloaded document is applicable to a group.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>EnableLicenseCacheExpire</maml:name>
+          <maml:description>
+            <maml:para>Sets whether a user must verify their credentials after some interval.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>LicenseCacheExpireDays</maml:name>
+          <maml:description>
+            <maml:para>Sets the number of days that the application that opens the document caches the IRM license. When these elapse, the application will connect to the IRM server to validate the license.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>GroupName</maml:name>
+          <maml:description>
+            <maml:para>Sets the group name (email address) that the permission is also applicable to.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>PolicyDescription</maml:name>
+          <maml:description>
+            <maml:para>Sets the permission policy description.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>PolicyTitle</maml:name>
+          <maml:description>
+            <maml:para>Sets the permission policy title.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>TemplateId</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>AllowPrint</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether the viewer can print the downloaded document.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>AllowScript</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether the viewer can run a script on the downloaded document.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>AllowWriteCopy</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether the viewer can write on a copy of the downloaded document.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>DisableDocumentBrowserView</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether to block Office Web Application Companion applications (WACs) from showing this document.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>DocumentAccessExpireDays</maml:name>
+        <maml:description>
+          <maml:para>Sets the number of days after which the downloaded document will expire.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>DocumentLibraryProtectionExpireDate</maml:name>
+        <maml:description>
+          <maml:para>Sets the date after which the Information Rights Management (IRM) protection of this document library will stop.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">DateTime</command:parameterValue>
+        <dev:type>
+          <maml:name>DateTime</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Enable</maml:name>
+        <maml:description>
+          <maml:para>Specifies whether Information Rights Management (IRM) is enabled for the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableDocumentAccessExpire</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether the downloaded document will expire.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableDocumentBrowserPublishingView</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether to enable Office Web Application Companion applications (WACs) to publishing view.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableExpiration</maml:name>
+        <maml:description>
+          <maml:para>Specifies whether Information Rights Management (IRM) expiration is enabled for the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableGroupProtection</maml:name>
+        <maml:description>
+          <maml:para>Sets a value indicating whether the permission of the downloaded document is applicable to a group.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableLicenseCacheExpire</maml:name>
+        <maml:description>
+          <maml:para>Sets whether a user must verify their credentials after some interval.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>EnableRejection</maml:name>
+        <maml:description>
+          <maml:para>Specifies whether Information Rights Management (IRM) rejection is enabled for the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>GroupName</maml:name>
+        <maml:description>
+          <maml:para>Sets the group name (email address) that the permission is also applicable to.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>LicenseCacheExpireDays</maml:name>
+        <maml:description>
+          <maml:para>Sets the number of days that the application that opens the document caches the IRM license. When these elapse, the application will connect to the IRM server to validate the license.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The list to set Information Rights Management (IRM) settings for.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>PolicyDescription</maml:name>
+        <maml:description>
+          <maml:para>Sets the permission policy description.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>PolicyTitle</maml:name>
+        <maml:description>
+          <maml:para>Sets the permission policy title.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>TemplateId</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListInformationRightsManagement -List "Documents" -Enabled $true</dev:code>
+        <maml:remarks>
+          <maml:para>Enables Information Rights Management (IRM) on the list.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Set-PnPListItem</command:name>
       <maml:description>
         <maml:para>Updates a list item</maml:para>
@@ -36994,7 +38463,7 @@ Currency: -Values @{"NumberField" = "10"}
 
 Currency: -Values @{"CurrencyField" = "10"}
 
-Date and Time: -Values @{"DateAndTimeField" = "03/10/2015 14:16"}
+Date and Time: -Values @{"DateAndTimeField" = "03/13/2015 14:16"}
 
 Lookup (id of lookup value): -Values @{"LookupField" = "2"}
 
@@ -37089,7 +38558,7 @@ Currency: -Values @{"NumberField" = "10"}
 
 Currency: -Values @{"CurrencyField" = "10"}
 
-Date and Time: -Values @{"DateAndTimeField" = "03/10/2015 14:16"}
+Date and Time: -Values @{"DateAndTimeField" = "03/13/2015 14:16"}
 
 Lookup (id of lookup value): -Values @{"LookupField" = "2"}
 
@@ -37797,6 +39266,175 @@ Hyperlink or Picture: -Values @{"HyperlinkField" = "https://github.com/OfficeDev
         <dev:code>PS:&gt; Set-PnPListPermission -Identity 'Documents' -User 'user@contoso.com' -RemoveRole 'Contribute'</dev:code>
         <maml:remarks>
           <maml:para>Removes the 'Contribute' permission to the user 'user@contoso.com' for the list 'Documents'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Set-PnPListRecordDeclaration</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+The RecordDeclaration parameter supports 4 values:
+
+AlwaysAllowManualDeclaration
+NeverAllowManualDeclaration
+UseSiteCollectionDefaults
+</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>PnPListRecordDeclaration</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-PnPListRecordDeclaration</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The List to set the manual record declaration settings for</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ManualRecordDeclaration</maml:name>
+          <maml:description>
+            <maml:para>Defines the manual record declaration setting for the lists</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">EcmListManualRecordDeclaration</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>AutoRecordDeclaration</maml:name>
+          <maml:description>
+            <maml:para>Defines if you want to set auto record declaration on the list</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>AutoRecordDeclaration</maml:name>
+        <maml:description>
+          <maml:para>Defines if you want to set auto record declaration on the list</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The List to set the manual record declaration settings for</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ManualRecordDeclaration</maml:name>
+        <maml:description>
+          <maml:para>Defines the manual record declaration setting for the lists</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">EcmListManualRecordDeclaration</command:parameterValue>
+        <dev:type>
+          <maml:name>EcmListManualRecordDeclaration</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListRecordDeclaration -List "Documents" -ManualRecordDeclaration NeverAllowManualDeclaration</dev:code>
+        <maml:remarks>
+          <maml:para>Sets the manual record declaration to never allow</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPListRecordDeclaration -List "Documents" -AutoRecordDeclaration $true</dev:code>
+        <maml:remarks>
+          <maml:para>Turns on auto record declaration for the list</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -39840,14 +41478,14 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>Owners</maml:name>
           <maml:description>
-            <maml:para>The array UPN values of owners to add to the group.</maml:para>
+            <maml:para>The array UPN values of owners to set to the group. Note: Will replace owners.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String[]</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>Members</maml:name>
           <maml:description>
-            <maml:para>The array UPN values of members to add to the group.</maml:para>
+            <maml:para>The array UPN values of members to set to the group. Note: Will replace members.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String[]</command:parameterValue>
         </command:parameter>
@@ -39926,7 +41564,7 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Members</maml:name>
         <maml:description>
-          <maml:para>The array UPN values of members to add to the group.</maml:para>
+          <maml:para>The array UPN values of members to set to the group. Note: Will replace members.</maml:para>
         </maml:description>
         <command:parameterValue required="false">String[]</command:parameterValue>
         <dev:type>
@@ -39937,7 +41575,7 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Owners</maml:name>
         <maml:description>
-          <maml:para>The array UPN values of owners to add to the group.</maml:para>
+          <maml:para>The array UPN values of owners to set to the group. Note: Will replace owners.</maml:para>
         </maml:description>
         <command:parameterValue required="false">String[]</command:parameterValue>
         <dev:type>
@@ -41578,6 +43216,13 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>CollapseSpecification</maml:name>
+          <maml:description>
+            <maml:para>Limit the number of items per the collapse specification. See https://docs.microsoft.com/en-us/sharepoint/dev/general-development/customizing-search-results-in-sharepoint#collapse-similar-search-results-using-the-collapsespecification-property for more information.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>HiddenConstraints</maml:name>
           <maml:description>
             <maml:para>The keyword query’s hidden constraints.</maml:para>
@@ -41742,6 +43387,13 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>CollapseSpecification</maml:name>
+          <maml:description>
+            <maml:para>Limit the number of items per the collapse specification. See https://docs.microsoft.com/en-us/sharepoint/dev/general-development/customizing-search-results-in-sharepoint#collapse-similar-search-results-using-the-collapsespecification-property for more information.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>HiddenConstraints</maml:name>
           <maml:description>
             <maml:para>The keyword query’s hidden constraints.</maml:para>
@@ -41836,6 +43488,17 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
         <maml:name>ClientType</maml:name>
         <maml:description>
           <maml:para>Specifies the name of the client which issued the query.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>CollapseSpecification</maml:name>
+        <maml:description>
+          <maml:para>Limit the number of items per the collapse specification. See https://docs.microsoft.com/en-us/sharepoint/dev/general-development/customizing-search-results-in-sharepoint#collapse-similar-search-results-using-the-collapsespecification-property for more information.</maml:para>
         </maml:description>
         <command:parameterValue required="false">String</command:parameterValue>
         <dev:type>

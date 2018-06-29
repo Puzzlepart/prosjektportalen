@@ -6,13 +6,7 @@ import {
 } from "office-ui-fabric-react/lib/DetailsList";
 import { IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-
-export interface IDynamicPortfolioExcelExportConfig {
-    fileName: string;
-    sheetName: string;
-    buttonLabel: string;
-    buttonIcon: string;
-}
+import IExcelExportConfig from "../IExcelExportConfig";
 
 export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     loadingText?: string;
@@ -27,7 +21,7 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
     excelExportEnabled?: boolean;
-    excelExportConfig?: IDynamicPortfolioExcelExportConfig;
+    excelExportConfig?: IExcelExportConfig;
     defaultSortFunction?: (a, b) => 1 | -1;
     defaultView?: IDynamicPortfolioViewConfig;
     viewSelectorEnabled?: boolean;

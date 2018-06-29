@@ -67,6 +67,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
         switch (column.fieldName) {
             case "Title": {
                 let defaultDisplayFormUrl = `${listData.defaultDisplayFormUrl}?ID=${item.ID}`;
+                column.isMultiline = true;
                 return (
                     <a
                         href={defaultDisplayFormUrl}
