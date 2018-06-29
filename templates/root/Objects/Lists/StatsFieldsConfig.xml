@@ -14,6 +14,7 @@
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtChrManagedPropertyName" />
                 <FieldRef Name="GtChrDataType" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>

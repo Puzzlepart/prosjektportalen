@@ -37,6 +37,7 @@
                 <FieldRef Name="GtPcFrontpage" />
                 <FieldRef Name="GtPcProjectStatus" />
                 <FieldRef Name="GtPcPortfolioPage" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <Aggregations Value="Off" />

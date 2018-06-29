@@ -93,6 +93,7 @@
             <pnp:FieldRef ID="00f17233-d4c0-49d0-aebd-5004552abb17" Name="{parameter:GenericFieldPrefix}RiskConsequencePostAction" />
             <pnp:FieldRef ID="62f0454d-1150-4d55-86ef-075f786d6e5c" Name="{parameter:GenericFieldPrefix}RiskFactorPostAction" />
             <pnp:FieldRef ID="6c2da0dc-77b1-4152-b751-97adf436faa0" Name="{parameter:GenericFieldPrefix}RiskStatus" />
+            <pnp:FieldRef ID="6bd17911-c48a-4900-be61-54ae26207d78" Name="{parameter:GenericFieldPrefix}ShowInPortfolio" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107020101" Name="{resource:ContentTypes_Risiko_Name}" Description="{resource:ContentTypes_Risiko_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
@@ -466,7 +467,7 @@
         <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <!-- <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="{resource:ContentTypes_Statistikkfelt_Name}" Description="{resource:ContentTypes_Statistikkfelt_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/StatsFieldsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/StatsFieldsConfig/DispForm.aspx">
+    <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="{resource:ContentTypes_Statistikkfelt_Name}" Description="{resource:ContentTypes_Statistikkfelt_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/StatsFieldsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/StatsFieldsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="{parameter:ProjectStatsFieldPrefix}DataType" Required="true" />
@@ -485,7 +486,8 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
-            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="f6c928f6-4b57-478c-866d-42d5f2874d57" Name="{parameter:ProjectStatsFieldPrefix}ShowLegend" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Name="{resource:ContentTypes_Stolpediagram_Name}" Description="{resource:ContentTypes_Stolpediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
@@ -500,7 +502,8 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
-            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
@@ -520,8 +523,8 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
-            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
-            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" Required="true" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="{parameter:ProjectStatsFieldPrefix}Stacking" />
             <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="{parameter:ProjectStatsFieldPrefix}YAxisTitle" />
             <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
             <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
@@ -529,7 +532,7 @@
             <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="{parameter:ProjectStatsFieldPrefix}ValueSuffix" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="{resource:ContentTypes_Kakediagram_Name}" Description="{resource:ContentTypes_Kakediagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
+    <pnp:ContentType ID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" Name="{resource:ContentTypes_Sektordiagram_Name}" Description="{resource:ContentTypes_Sektordiagram_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/ChartsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/ChartsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/ChartsConfig/DispForm.aspx">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="{parameter:ProjectStatsFieldPrefix}Order" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
@@ -541,9 +544,10 @@
             <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="{parameter:ProjectStatsFieldPrefix}WidthXl" />
             <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="{parameter:ProjectStatsFieldPrefix}WidthXxl" />
             <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="{parameter:ProjectStatsFieldPrefix}WidthXxxl" />
-            <pnp:FieldRef ID="77ab03d9-6310-41e4-ba20-613f956ad954" Name="{parameter:ProjectStatsFieldPrefix}MarginTop" />
-            <pnp:FieldRef ID="762a2801-2882-40f1-8fa1-a6604ef2808f" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" />
-            <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" />
+            <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="{parameter:ProjectStatsFieldPrefix}Height"/>
+            <pnp:FieldRef ID="762a2801-2882-40f1-8fa1-a6604ef2808f" Name="{parameter:ProjectStatsFieldPrefix}ShowItemSelector" Hidden="true"/>
+            <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" Hidden="true" />
+            <pnp:FieldRef ID="9d2a7860-17b2-4919-8e9c-8596414519d3" Name="{parameter:ProjectStatsFieldPrefix}ShowPercentage" />
         </pnp:FieldRefs>
-    </pnp:ContentType> -->
+    </pnp:ContentType>
 </pnp:ContentTypes> 

@@ -17,7 +17,6 @@ import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import ProjectStatsConfiguration from "./ProjectStatsConfiguration";
 import BaseWebPart from "../@BaseWebPart";
 import Preferences from "../../Preferences";
-import * as strings from "./strings";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -67,10 +66,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public render(): React.ReactElement<IProjectStatsProps> {
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
-            return <Spinner label={strings.PROJECTSTATS_LOADING_TEXT} type={SpinnerType.large} />;
+            return <Spinner label={RESOURCE_MANAGER.getResource("String_Projectstats_Loading_Text")} type={SpinnerType.large} />;
         }
         if (errorMessage) {
-            return <MessageBar messageBarType={MessageBarType.error}>{strings.PROJECTSTATS_ERROR_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>{RESOURCE_MANAGER.getResource("String_Projectstats_Error_Text")}</MessageBar>;
         }
         Logger.log({
             message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."),
@@ -100,10 +99,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     private _renderInner() {
         const { charts, data } = this.state;
         if (charts.length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_CHARTS_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Charts_Text")}</MessageBar>;
         }
         if (data.getCount() === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{strings.PROJECTSTATS_NO_DATA_TEXT}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Data_Text")}</MessageBar>;
         }
         return charts
             .sort((a, b) => a.order - b.order)
@@ -194,14 +193,14 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 QueryTemplate: view.queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
-                SelectProperties: fields.map(f => f.managedPropertyName),
+                SelectProperties: ["Title", "Path", ...fields.map(f => f.managedPropertyName)],
             });
             const items = response.PrimarySearchResults
                 .map(searchRes => new Project(searchRes))
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
-                const chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
+                let chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
                 return new ChartConfiguration(spItem, chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
             const config: Partial<IProjectStatsState> = {

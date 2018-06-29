@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_Extensions_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="Extensions" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-e717-4e80-aa17-d0c71b360101" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_Extensions_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="Extensions" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x01010064749FE34557AA4095744EFFC3F5140C" Default="true" />

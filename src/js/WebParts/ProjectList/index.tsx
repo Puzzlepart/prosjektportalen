@@ -4,8 +4,9 @@ import { Site, Logger, LogLevel } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import * as ProjectListSearch from "./ProjectListSearch";
+import { queryProjects } from "./ProjectListSearch";
 import InjectedStyles from "./InjectedStyles";
 import ProjectCard from "./ProjectCard";
 import ProjectListModel from "./ProjectListModel";
@@ -30,10 +31,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * @param {IProjectListProps} props Props
      */
     constructor(props: IProjectListProps) {
-        super(props, {
-            isLoading: true,
-            searchTerm: "",
-        });
+        super(props, { isLoading: true, searchTerm: "" });
         this._onSearch = this._onSearch.bind(this);
         Logger.log({
             message: String.format(LOG_TEMPLATE, "constructor", "Initializing the <ProjectList /> component"),
@@ -72,7 +70,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 <div className="ms-Grid-row" style={{ marginBottom: 10 }}>
                     <div className="ms-Grid-col ms-sm12">
                         <SearchBox
-                            labelText={this.props.searchBoxLabelText}
+                            placeholder={this.props.searchBoxLabelText}
                             onChanged={this._onSearch} />
                     </div>
                 </div>
@@ -152,8 +150,8 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     /**
      * Get class name for a ProjectListModel. Combines props.tileClassName and props.propertyClassNames.
      *
- * @param {ProjectListModel} project Project list model
-            */
+    * @param {ProjectListModel} project Project list model
+    */
     private getClassName(project: ProjectListModel) {
         const classList = [this.props.tileClassName];
         this.props.propertyClassNames.forEach(key => {
@@ -180,12 +178,10 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 return matches > 0;
             })
             .sort((a, b) => a.Title > b.Title ? 1 : -1);
-        return {
-            ...data,
-            projects,
-        };
+        return { ...data, projects };
     }
 
+    @autobind
     private _onSearch(searchTerm: string) {
         if (this._searchTimeout) {
             Logger.log({
@@ -224,7 +220,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 .usingCaching()
                 .get();
             const [projectsQueryResult, projectCtFieldsArray] = await Promise.all([
-                ProjectListSearch.queryProjects(this.props.rowLimit, this.props.propertyClassNames),
+                queryProjects(this.props.dataSourceName, this.props.rowLimit, this.props.propertyClassNames),
                 projectCtFieldsPromise,
             ]);
             const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result));

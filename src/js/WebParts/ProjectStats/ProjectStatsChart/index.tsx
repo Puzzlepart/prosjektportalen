@@ -62,7 +62,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
         }
 
         return (
-            <div className={`ms-Grid-col ${this._getLayoutClassNames()}`} style={{ marginTop: this.state.chart.marginTop }}>
+            <div className={`ms-Grid-col ${this._getLayoutClassNames()}`} style={{ marginTop: "75px" }}>
                 <div className="ms-Grid">
                     <ProjectStatsChartSettings
                         chart={this.state.chart}

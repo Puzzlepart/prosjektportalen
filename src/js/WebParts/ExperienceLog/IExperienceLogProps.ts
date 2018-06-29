@@ -1,20 +1,11 @@
 import RESOURCE_MANAGER from "../../Resources";
-import {
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
-} from "office-ui-fabric-react/lib/DetailsList";
+import { SelectionMode, ConstrainMode, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import ISearchResultSource from "../ISearchResultSource";
 import IGroupByOption from "../IGroupByOption";
+import IExcelExportConfig from "../IExcelExportConfig";
 
-export interface IExperienceLogExcelExportConfig {
-    fileName: string;
-    sheetName: string;
-    buttonLabel: string;
-    buttonIcon: string;
-}
 export default interface IExperienceLogProps extends IBaseWebPartProps {
+    dataSource?: string;
     constrainMode?: ConstrainMode;
     layoutMode?: DetailsListLayoutMode;
     selectionMode?: SelectionMode;
@@ -25,16 +16,17 @@ export default interface IExperienceLogProps extends IBaseWebPartProps {
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
     columns?: any[];
-    resultSource?: ISearchResultSource;
     excelExportEnabled?: boolean;
-    excelExportConfig?: IExperienceLogExcelExportConfig;
+    excelExportConfig?: IExcelExportConfig;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
+    dataSource: "LESSONSLOG",
     showSearchBox: false,
     groupByOptions: [],
     constrainMode: ConstrainMode.horizontalConstrained,
     projectInfoFilterField: "GtPcPortfolioPage",
+    modalHeaderClassName: "ms-font-xxl",
     layoutMode: DetailsListLayoutMode.fixedColumns,
     selectionMode: SelectionMode.none,
     columns: [{
@@ -76,7 +68,6 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         ...col,
         isResizable: true,
     })),
-    resultSource: { Name: RESOURCE_MANAGER.getResource("DataSourceName_ExperienceLog"), Level: RESOURCE_MANAGER.getResource("ResultSourceLevel_ExperienceLog") },
     excelExportEnabled: true,
     excelExportConfig: {
         fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),

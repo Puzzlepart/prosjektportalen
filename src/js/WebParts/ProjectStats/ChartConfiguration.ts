@@ -2,7 +2,7 @@ import { List, LogLevel, Logger } from "sp-pnp-js";
 import { ProjectStatsChartData } from "./ProjectStatsChart";
 import StatsFieldConfiguration from "./StatsFieldConfiguration";
 import Preferences from "../../Preferences";
-import * as strings from "./strings";
+import RESOURCE_MANAGER from "../../Resources";
 
 const LOG_TEMPLATE = "(ChartConfiguration) {0}: {1} ({2})";
 
@@ -20,11 +20,12 @@ export default class ChartConfiguration {
     public yAxisMin: number;
     public yAxisMax: number;
     public yAxisTickInterval: number;
+    public height: number;
     public valueSuffix: string;
     public showLegend: boolean;
     public showAverage: boolean;
+    public showPercentage: boolean;
     public showItemSelector: boolean;
-    public marginTop: number;
     private _fieldPrefix: string;
     private _pnpList: List;
     private _contentTypes: any[];
@@ -56,6 +57,7 @@ export default class ChartConfiguration {
         this.title = spItem.Title;
         this.order = spItem[`${this._fieldPrefix}Order`];
         this.subTitle = spItem[`${this._fieldPrefix}SubTitle`];
+        this.height = spItem[`${this._fieldPrefix}Height`];
         this.width = Object.keys(this._widthFields).reduce((obj, key) => {
             obj[key] = spItem[`${this._fieldPrefix}${this._widthFields[key]}`];
             return obj;
@@ -68,8 +70,8 @@ export default class ChartConfiguration {
         this.valueSuffix = spItem[`${this._fieldPrefix}ValueSuffix`];
         this.showLegend = spItem[`${this._fieldPrefix}ShowLegend`];
         this.showAverage = spItem[`${this._fieldPrefix}ShowAverage`];
+        this.showPercentage = spItem[`${this._fieldPrefix}ShowPercentage`];
         this.showItemSelector = spItem[`${this._fieldPrefix}ShowItemSelector`];
-        this.marginTop = spItem[`${this._fieldPrefix}MarginTop`];
         this._setChartTypeFromContentType();
     }
 
@@ -138,6 +140,7 @@ export default class ChartConfiguration {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
                     chartConfig.plotOptions = {
+                        series: { stacking: this.stacking && this.stacking !== "none" ? this.stacking : "" },
                         bar: {
                             dataLabels: { enabled: true },
                         },
@@ -148,7 +151,12 @@ export default class ChartConfiguration {
                 case "column": {
                     chartConfig.xAxis = this._getXAxis();
                     chartConfig.yAxis = this._getYAxis();
-                    chartConfig.plotOptions = { series: { stacking: this.stacking } };
+                    chartConfig.plotOptions = {
+                        series: { stacking: this.stacking && this.stacking !== "none" ? this.stacking : "" },
+                        column: {
+                            dataLabels: { enabled: true },
+                        },
+                    };
                     chartConfig.legend = this._getLegend();
                     break;
                 }
@@ -159,7 +167,7 @@ export default class ChartConfiguration {
                             cursor: "pointer",
                             dataLabels: {
                                 enabled: true,
-                                format: "<b>{point.name}</b>: {point.percentage: .1f} %",
+                                format: this.showPercentage ?  "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.y:,.0f}",
                                 style: { color: "black" },
                             },
                         },
@@ -189,6 +197,7 @@ export default class ChartConfiguration {
         let yAxis: any = {
             title: { text: this.yAxisTitle, align: "high" },
             labels: { overflow: "justify" },
+            showEmpty: false,
         };
         if (this.yAxisMin) {
             yAxis.min = this.yAxisMin;
@@ -214,6 +223,7 @@ export default class ChartConfiguration {
                         case "string": {
                             return {
                                 categories: this._data.getValuesUnique(field),
+                                showEmpty: false,
                                 title: { text: null },
                             };
                         }
@@ -221,6 +231,7 @@ export default class ChartConfiguration {
                 }
                 return {
                     categories: this._data.getNames(),
+                    showEmpty: false,
                     title: { text: null },
                 };
             }
@@ -255,7 +266,7 @@ export default class ChartConfiguration {
      */
     private _getBase() {
         let base: any = {};
-        base.chart = { type: this.type };
+        base.chart = { type: this.type, height: this.height };
         base.title = { text: this.showItemSelector ? `${this.title} - ${this.getData().getItem(0).name}` : this.title };
         base.subtitle = { text: this.subTitle };
         base.tooltip = { valueSuffix: this.valueSuffix };
@@ -309,7 +320,7 @@ export default class ChartConfiguration {
                                 colorByPoint: true,
                                 data: this._data.getItems().map((i, index) => ({
                                     name: i.name,
-                                    y: this._data.getPercentage(field, index),
+                                    y: this.showPercentage ? this._data.getPercentage(field, index) : this._data.getItem(index).getValue(field),
                                 })),
                             }]);
                         }
@@ -317,8 +328,8 @@ export default class ChartConfiguration {
                             return ([{
                                 colorByPoint: true,
                                 data: this._data.getValuesUnique(field).map((value, index) => ({
-                                    name: value || strings.NOT_SET,
-                                    y: (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100,
+                                    name: value || RESOURCE_MANAGER.getResource("String_Not_Set"),
+                                    y: this.showPercentage ? (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100 : this._data.getItemsWithStringValue(field, value).length,
                                 })),
                             }]);
                         }

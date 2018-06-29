@@ -30,10 +30,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         super(props, {
             isLoading: true,
             searchTerm: "",
-            groupBy: {
-                key: "NoGrouping",
-                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
-            },
+            groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
         });
     }
 
@@ -68,7 +65,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 {this.renderCommandBar(this.props, this.state)}
                 <div hidden={!showSearchBox}>
                     <SearchBox
-                        labelText={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
+                        placeholder={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
                         onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 </div>
                 <DetailsList
@@ -99,7 +96,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.WebUrl}
+                    webUrl={showProjectInfo.SPWebUrl}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -233,7 +230,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async fetchData(): Promise<Partial<IExperienceLogState>> {
         try {
-            const logItems = await queryLogElements(this.props.resultSource, this.props.columns.map(col => col.key));
+            const logItems = await queryLogElements(this.props.dataSource, this.props.columns.map(col => col.key));
             return { logItems };
         } catch (err) {
             throw err;

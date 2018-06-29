@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_ListContentConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
+<pnp:ListInstance Title="{resource:Lists_ListContentConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" ContentTypesEnabled="false" RemoveExistingContentTypes="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x0100B8B4EE61A547B247B49CFC21B67D5B7D" Default="true" />
@@ -18,6 +18,7 @@
                 <FieldRef Name="GtLccDestinationList" />
                 <FieldRef Name="GtLccFields" />
                 <FieldRef Name="GtLccDefault" />
+                <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">30</RowLimit>
             <JSLink>clienttemplates.js</JSLink>
