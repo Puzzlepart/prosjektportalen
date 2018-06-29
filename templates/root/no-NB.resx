@@ -2127,6 +2127,9 @@
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risikomatrise</value>
   </data>
+  <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
+    <value>Risikomatrise (aggregert)</value>
+  </data>
   <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
     <value>Mulighetsmatrise</value>
   </data>

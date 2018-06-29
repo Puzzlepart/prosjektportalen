@@ -2126,6 +2126,9 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
+  </data>  
+  <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
+    <value>Risk Matrix (aggregated)</value>
   </data>
   <data name="WebPart_OpportunityMatrix_Title" xml:space="preserve">
     <value>Opportunity Matrix</value>
