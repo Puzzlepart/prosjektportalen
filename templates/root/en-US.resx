@@ -949,7 +949,7 @@
     <value>Date of last cost report</value>
   </data>
   <data name="SiteFields_GtActionChannel_DisplayName" xml:space="preserve">
-    <value>Channel</value>
+    <value>Communication channel</value>
   </data>
   <data name="SiteFields_GtActionStatus_DisplayName" xml:space="preserve">
     <value>Status</value>
