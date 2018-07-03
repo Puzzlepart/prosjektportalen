@@ -946,7 +946,7 @@
     <value>Dato for siste rapportering av kostnader</value>
   </data>
   <data name="SiteFields_GtActionChannel_DisplayName" xml:space="preserve">
-    <value>Kanal</value>
+    <value>Kommunikasjonskanal</value>
   </data>
   <data name="SiteFields_GtActionStatus_DisplayName" xml:space="preserve">
     <value>Status</value>
