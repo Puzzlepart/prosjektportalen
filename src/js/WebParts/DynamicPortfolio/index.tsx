@@ -274,7 +274,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         if (this.props.showGroupBy) {
             const groupByColumns = this.state.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
-                key: idx.toString(),
+                key: `GroupByCol_${idx.toString()}`,
                 name: col.name,
                 onClick: e => {
                     e.preventDefault();
@@ -287,17 +287,19 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: [
-                    {
-                        key: "NoGrouping",
-                        name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
-                        onClick: e => {
-                            e.preventDefault();
-                            this.setState({ groupBy: null });
+                subMenuProps: {
+                    items: [
+                        {
+                            key: "NoGrouping",
+                            name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                            onClick: e => {
+                                e.preventDefault();
+                                this.setState({ groupBy: null });
+                            },
                         },
-                    },
-                    ...groupByColumns,
-                ],
+                        ...groupByColumns,
+                    ],
+                },
             });
         }
 
@@ -339,15 +341,17 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 iconProps: { iconName: "List" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: this.state.configuration.views.map((qc, idx) => ({
-                    key: idx.toString(),
-                    name: qc.name,
-                    iconProps: { iconName: qc.iconName },
-                    onClick: e => {
-                        e.preventDefault();
-                        this._onChangeView(qc);
-                    },
-                })),
+                subMenuProps: {
+                    items: this.state.configuration.views.map((qc, idx) => ({
+                        key: `View_${idx.toString()}`,
+                        name: qc.name,
+                        iconProps: { iconName: qc.iconName },
+                        onClick: e => {
+                            e.preventDefault();
+                            this._onChangeView(qc);
+                        },
+                    })),
+                },
             });
         }
 
