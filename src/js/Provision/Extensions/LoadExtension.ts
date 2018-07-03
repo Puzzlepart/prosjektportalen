@@ -1,4 +1,4 @@
-import { Site, Logger, LogLevel } from "sp-pnp-js";
+import { Site, Logger, LogEntry, LogLevel } from "sp-pnp-js";
 import Extension from "./Extension";
 import ProvisionError from "../ProvisionError";
 import SpListLogger from "../../Util/SpListLogger";
@@ -22,7 +22,7 @@ async function LoadExtension(fileInfo): Promise<Extension> {
             extension.Schema = data;
         } catch (e) {
             extension.IsValid = false;
-            const logElement = {
+            const logElement: LogEntry = {
                 message: `(LoadExtension) Extensions in file '${extension.Filename}' contains invalid JSON.`,
                 data: { fileSchemaText },
                 level: LogLevel.Warning,
