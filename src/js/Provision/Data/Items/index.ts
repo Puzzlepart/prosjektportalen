@@ -30,7 +30,7 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
         fields.forEach(fieldName => {
             const fieldValue = srcItem.get_item(fieldName);
             const fieldType = dataCtx.listFieldsMap[fieldName];
-            Logger.log({ message: `(CopyItem) Setting value for field ${fieldName}`, data: { fieldType }, level: LogLevel.Info });
+            Logger.log({ message: `(CopyItem) Setting value for field ${fieldName} (${fieldType})`, level: LogLevel.Info });
             const result = setItemFieldValue(fieldName, destItem, fieldValue, fieldType, dataCtx.Destination._, dataCtx.Destination.list);
             switch (result) {
                 case SetItemFieldValueResult.FieldTypeNotSupported: {
@@ -38,7 +38,6 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
                 }
             }
         });
-        destItem.update();
         await dataCtx.loadAndExecuteQuery(dataCtx.Destination._, [destItem]);
         const record: IRecord = {
             SourceId: sourceItemId,
@@ -52,7 +51,7 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
         Logger.log({ message: `(CopyItem) Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         return;
     } catch (err) {
-        throw new ProvisionError(err, "CopyItem");
+        throw err;
     }
 }
 
@@ -74,11 +73,12 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
         await dataCtx.loadAndExecuteQuery(dataCtx.Source._, [listItemCollection, listFieldCollection]);
         listItems = listItemCollection.get_data();
         dataCtx.listFieldsMap = listFieldCollection.get_data().reduce((obj, field) => {
-            obj[field.get_internalName()] = field.get_typeAsString();
+            const fieldName = field.get_internalName();
+            obj[fieldName] = field.get_typeAsString();
             return obj;
         }, {});
     } catch (err) {
-        throw new ProvisionError(err, "CopyItems");
+        throw err;
     }
     try {
         context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), listItems.length, conf.SourceList, conf.DestinationList));
@@ -106,7 +106,6 @@ async function HandleItemsWithParent(dataCtx: CopyContext): Promise<void> {
     });
     try {
         await dataCtx.loadAndExecuteQuery(dataCtx.Destination._);
-        return;
     } catch (err) {
         throw new ProvisionError(err, "HandleItemsWithParent");
     }

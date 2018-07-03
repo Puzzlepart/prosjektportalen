@@ -1,5 +1,5 @@
 import RESOURCE_MANAGER from "../Resources";
-import { Site, List, LogLevel, LogEntry } from "sp-pnp-js";
+import { Site, List, LogEntry, LogLevel } from "sp-pnp-js";
 
 export interface ISpListLoggerEntry extends LogEntry {
     id?: string;
@@ -37,7 +37,6 @@ export default class SpListLogger {
      */
     public async log(entry: ISpListLoggerEntry): Promise<void> {
         await this._pnpList.items.add({
-            ...entry,
             Message: entry.message,
             Source: entry.source,
             ErrorTraceCorrelationId: entry.errorTraceCorrelationId,

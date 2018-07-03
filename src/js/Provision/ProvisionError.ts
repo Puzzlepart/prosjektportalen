@@ -12,7 +12,7 @@ export default class ProvisionError {
      */
     constructor(err: any, source: string) {
         this.parseError(err);
-        this.errorTypeName = source;
+        this.source = source;
     }
 
     /**
@@ -21,7 +21,7 @@ export default class ProvisionError {
      * @param {any} err Error
      */
     private parseError(err: any) {
-        if (err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
+        if (typeof err === "object" && err.hasOwnProperty("sender") && err.hasOwnProperty("args")) {
             const { args } = err;
             this.errorTraceCorrelationId = args.get_errorTraceCorrelationId();
             this.errorTypeName = args.get_errorTypeName();

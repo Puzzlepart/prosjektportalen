@@ -3,6 +3,7 @@ import * as Util from "../../Util";
 import { CopyFiles } from "./Files";
 import { CopyItems } from "./Items";
 import { ListConfig } from "./Config";
+import ProvisionError from "../ProvisionError";
 import IProvisionContext from "../IProvisionContext";
 
 /**
@@ -36,9 +37,8 @@ async function CopyDefaultData(context: IProvisionContext): Promise<void> {
         for (let i = 0; i < IncludeContent.length; i++) {
             await Copy(context, IncludeContent[i]);
         }
-        return;
     } catch (err) {
-        throw err;
+        throw new ProvisionError(err, "CopyDefaultData");
     }
 }
 

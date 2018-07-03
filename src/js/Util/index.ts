@@ -204,16 +204,12 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
         case "Boolean":
         case "Currency": {
             item.set_item(fieldName, fieldValue);
+            item.update();
             return SetItemFieldValueResult.OK;
         }
         case "TaxonomyFieldType": {
-            const listField = list.get_fields().getByInternalNameOrTitle(fieldName);
-            const taxField: any = clientContext.castTo(listField, SP.Taxonomy.TaxonomyField);
-            const taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
-            taxSingle.set_label(fieldValue.Label || fieldValue.get_label());
-            taxSingle.set_termGuid(fieldValue.TermGuid || fieldValue.get_termGuid());
-            taxSingle.set_wssId(-1);
-            taxField.setFieldValueByValue(item, taxSingle);
+            console.log(fieldType, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()));
+            setTaxonomySingleValue(clientContext, list, item, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()), -1);
             return SetItemFieldValueResult.OK;
         }
         case "TaxonomyFieldTypeMulti": {
@@ -232,10 +228,12 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
             fieldUrlValue.set_url(url);
             fieldUrlValue.set_description(fieldValue.get_description());
             item.set_item(fieldName, fieldUrlValue);
+            item.update();
             return SetItemFieldValueResult.OK;
         }
         case "DateTime": {
             item.set_item(fieldName, fieldValue.toISOString());
+            item.update();
             return SetItemFieldValueResult.OK;
         }
         default: {
@@ -295,9 +293,9 @@ export function getSafeTerm(term): ISafeTerm {
  * @param {number} wssId Term WSS ID
  */
 export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid, wssId = -1) {
-    let field = list.get_fields().getByInternalNameOrTitle(fieldName),
-        taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField),
-        taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
+    const field = list.get_fields().getByInternalNameOrTitle(fieldName);
+    const taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField);
+    const taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
     taxSingle.set_label(label);
     taxSingle.set_termGuid(termGuid);
     taxSingle.set_wssId(wssId);

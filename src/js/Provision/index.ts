@@ -5,7 +5,7 @@ import { CopyDefaultData } from "./Data";
 import { ApplyTemplate, GetTemplate } from "./Template";
 import { ApplyExtensions } from "./Extensions";
 import { GetAllProperties } from "../Util/PropertyBag";
-import SpListLogger, { LogLevel, ISpListLoggerEntry } from "../Util/SpListLogger";
+import SpListLogger, { LogLevel } from "../Util/SpListLogger";
 import IProgressCallback from "./IProgressCallback";
 import IProvisionContext from "./IProvisionContext";
 import ITemplateFile from "./Template/ITemplateFile";
@@ -31,12 +31,11 @@ export default async function ProvisionWeb(model: IProjectModel, progressCallbac
         await CopyDefaultData(context);
         return context.redirectUrl;
     } catch (err) {
-        const logEntry: ISpListLoggerEntry = {
+        await new SpListLogger().log({
             ...err,
-            LogURL: model.Url,
-            LogLevel: LogLevel.Error,
-        };
-        await new SpListLogger().log(logEntry);
+            url: model.Url,
+            level: LogLevel.Error,
+        });
         throw err;
     }
 }
