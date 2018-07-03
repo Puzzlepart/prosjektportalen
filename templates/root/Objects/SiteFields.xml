@@ -21,7 +21,7 @@
     <Field ID="{6219fd33-2f3c-42f5-9790-174143bfb99c}" Name="{parameter:GenericFieldPrefix}RiskAction" DisplayName="{resource:SiteFields_GtRiskAction_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtRiskAction_Description}" AppendOnly="FALSE" StaticName="{parameter:GenericFieldPrefix}RiskAction"></Field>
     <Field ID="{f2bb8a37-f4cf-43a4-b180-0b07ab14abd5}" Name="{parameter:GenericFieldPrefix}StatusBudgetComment" DisplayName="{resource:SiteFields_GtStatusBudgetComment_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStatusBudgetComment_Description}" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="{parameter:GenericFieldPrefix}StatusBudgetComment"></Field>
     <Field ID="{8be4cd39-1468-4258-95f3-10343dc4ef11}" Name="{parameter:GenericFieldPrefix}AverageRisk" DisplayName="{resource:SiteFields_GtAverageRisk_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtAverageRisk_Description}" ShowInEditForm="FALSE" ShowInDisplayForm="TRUE" StaticName="{parameter:GenericFieldPrefix}AverageRisk"></Field>
-    <Field ID="{3275d73a-fd4d-48ba-bcc1-31526460d57b}" Name="{parameter:GenericFieldPrefix}ProjectServiceArea" DisplayName="{resource:SiteFields_GtProjectServiceArea_DisplayName}" Type="TaxonomyFieldTypeMulti" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectServiceArea_Description}" ShowField="Term1044" Mult="TRUE" StaticName="{parameter:GenericFieldPrefix}ProjectServiceArea" List="{{listid:TaxonomyHiddenList}}">
+    <Field ID="{3275d73a-fd4d-48ba-bcc1-31526460d57b}" Name="{parameter:GenericFieldPrefix}ProjectServiceArea" DisplayName="{resource:SiteFields_GtProjectServiceArea_DisplayName}" Type="TaxonomyFieldTypeMulti" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectServiceArea_Description}" ShowField="Term1044" Mult="TRUE" StaticName="{parameter:GenericFieldPrefix}ProjectServiceArea"  WebId="{siteid}" List="{{listid:TaxonomyHiddenList}}">
         <Customization>
             <ArrayOfProperty>
                 <Property>
@@ -41,7 +41,7 @@
             </ArrayOfProperty>
         </Customization>
     </Field>
-    <Field ID="{ddb69044-7d2c-4865-86ec-b71413780409}" Name="{parameter:GenericFieldPrefix}ProjectType" DisplayName="{resource:SiteFields_GtProjectType_DisplayName}" Type="TaxonomyFieldTypeMulti" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectType_Description}" ShowField="Term1044" Mult="TRUE" StaticName="{parameter:GenericFieldPrefix}ProjectType" List="{{listid:TaxonomyHiddenList}}">
+    <Field ID="{ddb69044-7d2c-4865-86ec-b71413780409}" Name="{parameter:GenericFieldPrefix}ProjectType" DisplayName="{resource:SiteFields_GtProjectType_DisplayName}" Type="TaxonomyFieldTypeMulti" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectType_Description}" ShowField="Term1044" Mult="TRUE" StaticName="{parameter:GenericFieldPrefix}ProjectType" WebId="{siteid}" List="{{listid:TaxonomyHiddenList}}">
         <Customization>
             <ArrayOfProperty>
                 <Property>
@@ -122,7 +122,7 @@
         </CHOICES>
     </Field>
     <Field ID="{49b0ba6b-d1ec-4644-91b7-691a33524c90}" Name="{parameter:GenericFieldPrefix}ProjectLogReporter" DisplayName="{resource:SiteFields_GtProjectLogReporter_DisplayName}" Type="User" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectLogReporter_Description}" StaticName="{parameter:GenericFieldPrefix}ProjectLogReporter"></Field>
-    <Field ID="{5563056f-533f-4333-bd29-85a2f94a37d0}" Name="{parameter:GenericFieldPrefix}ProductPhase" DisplayName="{resource:SiteFields_GtProductPhase_DisplayName}" Type="TaxonomyFieldType" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProductPhase_Description}" ShowField="Term1044" Indexed="TRUE" StaticName="{parameter:GenericFieldPrefix}ProductPhase" List="{{listid:TaxonomyHiddenList}}">
+    <Field ID="{5563056f-533f-4333-bd29-85a2f94a37d0}" Name="{parameter:GenericFieldPrefix}ProductPhase" DisplayName="{resource:SiteFields_GtProductPhase_DisplayName}" Type="TaxonomyFieldType" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProductPhase_Description}" ShowField="Term1044" Indexed="TRUE" StaticName="{parameter:GenericFieldPrefix}ProductPhase" WebId="{siteid}" List="{{listid:TaxonomyHiddenList}}">
         <Customization>
             <ArrayOfProperty>
                 <Property>
