@@ -329,9 +329,7 @@
     <Field Type="Number" DisplayName="{resource:SiteFields_GtDpMaxWidth_DisplayName}" Description="{resource:SiteFields_GtDpMaxWidth_Description}" ID="{915edd68-78cd-48fb-8648-9ec38bc02d86}" StaticName="{parameter:DynamicPortfolioFieldPrefix}MaxWidth" Name="{parameter:DynamicPortfolioFieldPrefix}MaxWidth" Group="{resource:SiteFields_Group}">
         <Default>100</Default>
     </Field>
-    <Field Type="Note" DisplayName="{resource:SiteFields_GtDpSearchQuery_DisplayName}" Description="{resource:SiteFields_GtDpSearchQuery_Description}" ID="{31e405e0-2890-439d-9c9f-42354154feda}" StaticName="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Group="{resource:SiteFields_Group}">
-        <Default>ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL}</Default>
-    </Field>
+    <Field Type="Note" DisplayName="{resource:SiteFields_GtDpSearchQuery_DisplayName}" Description="{resource:SiteFields_GtDpSearchQuery_Description}" ID="{31e405e0-2890-439d-9c9f-42354154feda}" StaticName="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Group="{resource:SiteFields_Group}" />
     <Field Type="Text" DisplayName="{resource:SiteFields_GtDpIcon_DisplayName}" Description="{resource:SiteFields_GtDpIcon_Description}" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="{parameter:DynamicPortfolioFieldPrefix}Icon" Name="{parameter:DynamicPortfolioFieldPrefix}Icon" Group="{resource:SiteFields_Group}" />
     <Field Type="Boolean" DisplayName="{resource:SiteFields_GtDpPersonalView_DisplayName}" Description="{resource:SiteFields_GtDpPersonalView_Description}" ID="{9f4ee969-ea00-4cc1-a466-a05c7db4156d}" StaticName="{parameter:DynamicPortfolioFieldPrefix}PersonalView" Name="{parameter:DynamicPortfolioFieldPrefix}PersonalView" Group="{resource:SiteFields_Group}">
         <Default>0</Default>
