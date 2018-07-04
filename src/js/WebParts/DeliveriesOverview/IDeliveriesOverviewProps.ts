@@ -80,7 +80,8 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         key: "GtProductStatusCommentOWSMTXT",
         fieldName: "ProductStatusComment",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatusComment_DisplayName"),
-        isMultiline: false,
+        minWidth: 220,
+        isMultiline: true,
     }].map(col => ({
         ...col,
         isResizable: true,
