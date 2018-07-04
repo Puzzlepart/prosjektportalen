@@ -62,7 +62,7 @@ const Navigation: INavigation = {
         },
         {
             Url: RESOURCE_MANAGER.getResource("DefaultView_BenefitsFollowup_Url"),
-            Title: RESOURCE_MANAGER.getResource("Lists_BenefitsFollowup_Title"),
+            Title: RESOURCE_MANAGER.getResource("Navigation_BenefitsFollowup_Title"),
         },
         {
             Url: "SitePages/BenefitsOverview.aspx",

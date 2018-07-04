@@ -158,6 +158,9 @@
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
+  </data>  
+  <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
+    <value>Benefits Followup</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
