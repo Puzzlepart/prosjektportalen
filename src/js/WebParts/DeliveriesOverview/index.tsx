@@ -71,7 +71,6 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
             return null;
         }
 
-
         return (
             <div style={{ width: "100%" }}>
                 {this.renderCommandBar(this.props, this.state)}
@@ -92,7 +91,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                     constrainMode={this.props.constrainMode}
                     layoutMode={this.props.layoutMode}
                     selectionMode={this.props.selectionMode}
-                    />
+                />
                 {this.renderProjectInfoModal(this.props, this.state)}
             </div>
         );
@@ -213,13 +212,13 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * @param column The column
      */
     private _onRenderItemColumn = (item: any, index: number, column: IColumn, projectOnClick: (evt: any) => void): any => {
-        let colValue = item[column.fieldName];
+        let columnValue = item[column.fieldName];
         switch (column.key) {
             case "Title": {
                 let dispFormUrl = item.Path;
                 return (
                     <ModalLink
-                        label={colValue}
+                        label={columnValue}
                         url={dispFormUrl}
                         options={{ HideRibbon: true }} />
                 );
@@ -227,14 +226,19 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
             case "SiteTitle": {
                 return (
                     <a
-                    href={item.SPWebUrl}
-                    onClick={projectOnClick}>{item.SiteTitle}</a>
+                        href={item.SPWebUrl}
+                        onClick={projectOnClick}>{item.SiteTitle}</a>
                 );
             }
-            default: {
-                return colValue;
-            }
         }
+        if (column.key.indexOf("OWSDATE") > -1) {
+            return (
+                <span>
+                    {columnValue ? Util.dateFormat(columnValue, "LL") : null}
+                </span>
+            );
+        }
+        return <span title={columnValue}>{columnValue}</span>;
     }
 
     /**
