@@ -3,7 +3,7 @@ import RESOURCE_MANAGER from "../../Resources";
 import * as unique from "array-unique";
 import { DetailsList, IGroup, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
-import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
@@ -87,32 +87,28 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      * @param {IBenefitsOverviewState} param1 State
      */
     private renderCommandBar = ({ groupByOptions, showCommandBar }: IBenefitsOverviewProps, { groupBy }: IBenefitsOverviewState) => {
-        const items = [];
-        const farItems = [];
+        const items: Array<ICommandBarItemProps> = [];
+        const farItems: Array<ICommandBarItemProps> = [];
 
         if (groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
                 name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             };
+            const subItems = [{ ...noGrouping }, ...groupByOptions].map(item => ({
+                ...item,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ groupBy: item });
+                },
+            }));
             items.push({
                 key: "Group",
                 name: groupBy.name,
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: [
-                    {
-                        ...noGrouping,
-                    },
-                    ...groupByOptions,
-                ].map(item => ({
-                    ...item,
-                    onClick: e => {
-                        e.preventDefault();
-                        this.setState({ groupBy: item });
-                    },
-                })),
+                subMenuProps: { items: subItems },
             });
         }
 
