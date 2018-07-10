@@ -112,7 +112,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                         text={exportTypeContext.SAVE}
                         className="save-snapshot-btn"
                         iconProps={{ iconName: exportTypeContext.SAVE_ICON_NAME }}
-                        onClick={(e) => {this._onExportClick(e); }} />
+                        onClick={(e) => { this._onExportClick(e); }} />
                 );
             }
         }
@@ -310,6 +310,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             const reports: IReport[] = await this._reportsLib
                 .items
                 .select("FileLeafRef", "Title", "EncodedAbsUrl")
+                .filter("substringof('.png',FileLeafRef) or substringof('.pdf',FileLeafRef)")
                 .orderBy("Modified", false)
                 .top(this.props.maxReportHistory)
                 .get();
