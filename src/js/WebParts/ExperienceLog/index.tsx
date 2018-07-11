@@ -1,6 +1,7 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
-import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import * as unique from "array-unique";
+import { DetailsList, IColumn, IGroup } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
@@ -45,7 +46,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 isLoading: false,
             });
         } catch (err) {
-            this.setState({ logItems: [], isLoading: false });
+            this.setState({ items: [], isLoading: false });
         }
     }
 
@@ -53,24 +54,24 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * Renders the component
      */
     public render(): JSX.Element {
-        const { isLoading } = this.state;
-        const { showSearchBox } = this.props;
-
-        if (isLoading) {
+        if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
+
+        const { items, groups } = this.getFilteredData();
 
         return (
             <div style={{ width: "100%" }}>
                 {this.renderCommandBar(this.props, this.state)}
-                <div hidden={!showSearchBox}>
+                <div hidden={!this.props.showSearchBox}>
                     <SearchBox
                         placeholder={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
                         onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 </div>
                 <DetailsList
-                    items={this.getFilteredItems()}
+                    items={items}
                     columns={this.props.columns}
+                    groups={groups}
                     onRenderItemColumn={(item, index, column: any) => {
                         return this._onRenderItemColumn(item, index, column, (evt) => {
                             evt.preventDefault();
@@ -80,7 +81,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                     constrainMode={this.props.constrainMode}
                     layoutMode={this.props.layoutMode}
                     selectionMode={this.props.selectionMode}
-                    />
+                />
                 {this.renderProjectInfoModal(this.props, this.state)}
             </div>
         );
@@ -132,24 +133,20 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 key: "NoGrouping",
                 name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             };
+            const subItems = [{ ...noGrouping }, ...groupByOptions].map(item => ({
+                ...item,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ groupBy: item });
+                },
+            }));
             items.push({
                 key: "Group",
                 name: groupBy.name,
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: [
-                    {
-                        ...noGrouping,
-                    },
-                    ...groupByOptions,
-                ].map(item => ({
-                    ...item,
-                    onClick: e => {
-                        e.preventDefault();
-                        this.setState({ groupBy: item });
-                    },
-                })),
+                subMenuProps: { items: subItems },
             });
         }
 
@@ -181,16 +178,38 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         return null;
     }
 
-    private getFilteredItems() {
-        return this.state.logItems
+    /**
+     * Get filtered data based on groupBy and searchTerm (search is case-insensitive)
+     */
+    private getFilteredData(): { items: any[], groups: IGroup[] } {
+        const { items, groupBy, searchTerm } = this.state;
+        let groups: IGroup[] = null;
+        if (groupBy.key !== "NoGrouping") {
+            const groupItems = items.sort((a, b) => a[groupBy.key] > b[groupBy.key] ? -1 : 1);
+            const groupNames = groupItems.map(g => g[groupBy.key]);
+            groups = unique([].concat(groupNames)).map((name, idx) => ({
+                key: idx,
+                name: `${groupBy.name}: ${name}`,
+                startIndex: groupNames.indexOf(name, 0),
+                count: [].concat(groupNames).filter(n => n === name).length,
+                isCollapsed: false,
+                isShowingAll: true,
+                isDropEnabled: false,
+            }));
+        }
+        const filteredItems = this.state.items
             .filter(itm => {
                 const matches = Object.keys(itm).filter(key => {
                     const value = itm[key];
-                    return value && typeof value === "string" && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                    return value && typeof value === "string" && value.toLowerCase().indexOf(searchTerm) !== -1;
                 }).length;
                 return matches > 0;
             })
             .sort((a, b) => a.Title > b.Title ? 1 : -1);
+        return {
+            items: filteredItems,
+            groups: groups,
+        };
     }
 
     /**
@@ -215,8 +234,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
             case "SiteTitle": {
                 return (
                     <a
-                    href={item.SPWebUrl}
-                    onClick={projectOnClick}>{item.SiteTitle}</a>
+                        href={item.SPWebUrl}
+                        onClick={projectOnClick}>{item.SiteTitle}</a>
                 );
             }
             default: {
@@ -230,8 +249,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async fetchData(): Promise<Partial<IExperienceLogState>> {
         try {
-            const logItems = await queryLogElements(this.props.dataSource, this.props.columns.map(col => col.key));
-            return { logItems };
+            const items = await queryLogElements(this.props.dataSource, this.props.columns.map(col => col.key));
+            return { items };
         } catch (err) {
             throw err;
         }
@@ -242,7 +261,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     private async exportToExcel() {
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
-        const items = this.getFilteredItems();
+        const { items } = this.getFilteredData();
         const sheet = {
             name: this.props.excelExportConfig.sheetName,
             data: [
