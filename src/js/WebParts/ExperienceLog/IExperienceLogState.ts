@@ -4,7 +4,7 @@ import IGroupByOption from "../IGroupByOption";
 import { ExcelExportStatus } from "../../Util/ExportToExcel";
 
 export default interface IExperienceLogState extends IBaseWebPartState {
-    logItems?: LogElement[];
+    items?: LogElement[];
     showProjectInfo?: any;
     searchTerm?: string;
     groupBy?: IGroupByOption;

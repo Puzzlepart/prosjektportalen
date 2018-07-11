@@ -1,6 +1,7 @@
 import * as React from "react";
 import RESOURCE_MANAGER from "../../Resources";
-import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import * as unique from "array-unique";
+import { DetailsList, IColumn, IGroup } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
@@ -49,7 +50,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 isLoading: false,
             });
         } catch (err) {
-            this.setState({ deliveryElements: [], isLoading: false });
+            this.setState({ items: [], isLoading: false });
         }
     }
 
@@ -57,14 +58,13 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * Renders the component
      */
     public render(): JSX.Element {
-        const { deliveryElements, isLoading } = this.state;
-        const { showSearchBox } = this.props;
-
-        if (isLoading) {
+        if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} />;
         }
 
-        if (deliveryElements.length === 0) {
+        const { items, groups } = this.getFilteredData();
+
+        if (items.length === 0) {
             if (this.props.showEmptyMessage) {
                 return <MessageBar>{RESOURCE_MANAGER.getResource("DeliveriesOverview_EmptyMessage")}</MessageBar>;
             }
@@ -74,14 +74,15 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
         return (
             <div style={{ width: "100%" }}>
                 {this.renderCommandBar(this.props, this.state)}
-                <div hidden={!showSearchBox}>
+                <div hidden={!this.props.showSearchBox}>
                     <SearchBox
                         placeholder={RESOURCE_MANAGER.getResource("DeliveriesOverview_SearchBox_Placeholder")}
                         onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
                 </div>
                 <DetailsList
-                    items={this.getFilteredItems()}
+                    items={items}
                     columns={this.props.columns}
+                    groups={groups}
                     onRenderItemColumn={(item, index, column: any) => {
                         return this._onRenderItemColumn(item, index, column, (evt) => {
                             evt.preventDefault();
@@ -143,24 +144,20 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 key: "NoGrouping",
                 name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
             };
+            const subItems = [{ ...noGrouping }, ...groupByOptions].map(item => ({
+                ...item,
+                onClick: e => {
+                    e.preventDefault();
+                    this.setState({ groupBy: item });
+                },
+            }));
             items.push({
                 key: "Group",
                 name: groupBy.name,
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
-                items: [
-                    {
-                        ...noGrouping,
-                    },
-                    ...groupByOptions,
-                ].map(item => ({
-                    ...item,
-                    onClick: e => {
-                        e.preventDefault();
-                        this.setState({ groupBy: item });
-                    },
-                })),
+                subMenuProps: { items: subItems },
             });
         }
 
@@ -192,8 +189,26 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
         return null;
     }
 
-    private getFilteredItems() {
-        return this.state.deliveryElements
+    /**
+     * Get filtered data based on groupBy and searchTerm (search is case-insensitive)
+     */
+    private getFilteredData(): { items: any[], groups: IGroup[] } {
+        const { items, groupBy } = this.state;
+        let groups: IGroup[] = null;
+        if (groupBy.key !== "NoGrouping") {
+            const groupItems = items.sort((a, b) => a[groupBy.key] > b[groupBy.key] ? -1 : 1);
+            const groupNames = groupItems.map(g => g[groupBy.key]);
+            groups = unique([].concat(groupNames)).map((name, idx) => ({
+                key: idx,
+                name: `${groupBy.name}: ${name}`,
+                startIndex: groupNames.indexOf(name, 0),
+                count: [].concat(groupNames).filter(n => n === name).length,
+                isCollapsed: false,
+                isShowingAll: true,
+                isDropEnabled: false,
+            }));
+        }
+        const filteredItems = this.state.items
             .filter(itm => {
                 const matches = Object.keys(itm).filter(key => {
                     const value = itm[key];
@@ -202,6 +217,10 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 return matches > 0;
             })
             .sort((a, b) => a.Title > b.Title ? 1 : -1);
+        return {
+            items: filteredItems,
+            groups: groups,
+        };
     }
 
     /**
@@ -242,12 +261,12 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
     }
 
     /**
-     * Fetch data using sp-pnp-js search
+     * Fetch data
      */
     private async fetchData(): Promise<Partial<IDeliveriesOverviewState>> {
         try {
-            const deliveryElements = await queryDeliveryElements(this.props.dataSource, this.props.columns.map(col => col.key));
-            return { deliveryElements };
+            const items = await queryDeliveryElements(this.props.dataSource, this.props.columns.map(col => col.key));
+            return { items };
         } catch (err) {
             throw err;
         }
@@ -258,7 +277,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      */
     private async exportToExcel() {
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
-        const items = this.getFilteredItems();
+        const { items } = this.getFilteredData();
         const sheet = {
             name: this.props.excelExportConfig.sheetName,
             data: [
