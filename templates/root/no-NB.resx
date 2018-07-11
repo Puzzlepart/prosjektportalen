@@ -2580,6 +2580,90 @@
   <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
     <value>Det skjedde en feil under fjerning av resultatet.</value>
   </data>
+  <data name="DiceCalculator_LessThanTwoMonths" xml:space="preserve">
+    <value>< 2 måneder</value>
+  </data>
+  <data name="DiceCalculator_TwoToFourMonths" xml:space="preserve">
+    <value>2-4 måneder</value>
+  </data>
+  <data name="DiceCalculator_FourToEightMonths" xml:space="preserve">
+    <value>4-8 måneder</value>
+  </data>
+  <data name="DiceCalculator_EightMonths" xml:space="preserve">
+    <value>8 måneder</value>
+  </data>
+  <data name="DiceCalculator_VeryGood" xml:space="preserve">
+    <value>Veldig bra</value>
+  </data>
+  <data name="DiceCalculator_GoodToVeryGood" xml:space="preserve">
+    <value>Bra - Veldig bra</value>
+  </data>
+  <data name="DiceCalculator_AverageToGood" xml:space="preserve">
+    <value>Gjennomsnittlig - Bra</value>
+  </data>
+  <data name="DiceCalculator_Average" xml:space="preserve">
+    <value>Gjennomsnittlig</value>
+  </data>
+  <data name="DiceCalculator_PoorToAverage" xml:space="preserve">
+    <value>Dårlig - Gjennomsnittlig</value>
+  </data>
+  <data name="DiceCalculator_Poor" xml:space="preserve">
+    <value>Dårlig</value>
+  </data>
+  <data name="DiceCalculator_ClearlyStronglyCommunicateNeed" xml:space="preserve">
+    <value>Klar, sterkt kommunikasjonsbehov</value>
+  </data>
+  <data name="DiceCalculator_ReasonablyCommunicateNeed" xml:space="preserve">
+    <value>Rimelig kommunikasjonsbehov</value>
+  </data>
+  <data name="DiceCalculator_SeemToWantSuccess" xml:space="preserve">
+    <value>Synes å ønske suksess</value>
+  </data>
+  <data name="DiceCalculator_NeutralSeemToWantSuccess" xml:space="preserve">
+    <value>Nøytral - Synes å ønske suksess</value>
+  </data>
+  <data name="DiceCalculator_Neutral" xml:space="preserve">
+    <value>Nøytral</value>
+  </data>
+  <data name="DiceCalculator_ReluctantToNeutral" xml:space="preserve">
+    <value>Motvillig - Nøytral</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Motvillig</value>
+  </data>
+  <data name="DiceCalculator_Eager" xml:space="preserve">
+    <value>Ivrig</value>
+  </data>
+  <data name="DiceCalculator_WillingEager" xml:space="preserve">
+    <value>Villig - Ivrig</value>
+  </data>
+  <data name="DiceCalculator_Willing" xml:space="preserve">
+    <value>Villig</value>
+  </data>
+  <data name="DiceCalculator_ReluctantWilling" xml:space="preserve">
+    <value>Motvillig - Villig</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Motvillig</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctantToReluctant" xml:space="preserve">
+    <value>Sterkt motvillig - Motvillig</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctant" xml:space="preserve">
+    <value>Sterkt motvillig</value>
+  </data>
+  <data name="DiceCalculator_LessThan10Additional" xml:space="preserve">
+    <value>&lt;10% ekstra</value>
+  </data>
+  <data name="DiceCalculator_10To20Additional" xml:space="preserve">
+    <value>10-20% ekstra</value>
+  </data>
+  <data name="DiceCalculator_20To40Additional" xml:space="preserve">
+    <value>20-40% ekstra</value>
+  </data>
+  <data name="DiceCalculator_Above40Additional" xml:space="preserve">
+    <value>&gt;40% ekstra</value>
+  </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>
   </data>

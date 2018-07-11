@@ -158,7 +158,7 @@
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
-  </data>  
+  </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
@@ -2117,7 +2117,7 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
-  </data>  
+  </data>
   <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
     <value>Risk Matrix (aggregated)</value>
   </data>
@@ -2576,6 +2576,90 @@
   </data>
   <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
     <value>Failed to remove DICE score.</value>
+  </data>
+  <data name="DiceCalculator_LessThanTwoMonths" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_TwoToFourMonths" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_FourToEightMonths" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_EightMonths" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_VeryGood" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_GoodToVeryGood" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_AverageToGood" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Average" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_PoorToAverage" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Poor" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_ClearlyStronglyCommunicateNeed" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_ReasonablyCommunicateNeed" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_SeemToWantSuccess" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_NeutralSeemToWantSuccess" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Neutral" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_ReluctantToNeutral" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Eager" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_WillingEager" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Willing" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_ReluctantWilling" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctantToReluctant" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctant" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_LessThan10Additional" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_10To20Additional" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_20To40Additional" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="DiceCalculator_Above40Additional" xml:space="preserve">
+    <value></value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full Control</value>
