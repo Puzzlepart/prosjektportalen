@@ -1,3 +1,4 @@
+import RESOURCE_MANAGER from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import DiceCalculatorElement from "./DiceCalculatorElement";
@@ -12,11 +13,45 @@ export default interface IDiceCalculatorProps extends IBaseWebPartProps {
 
 export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     choices: [
-        ["< 2 months", "2-4 months", "4-8 months", "8 months"],
-        ["Very Good", "Good - Very Good", "Good", "Average - Good", "Average", "Poor - Average", "Poor"],
-        ["Clearly, strongly communicate need", "Reasonably communicate need", "Seem to want success", "Neutral - Seem to want success", "Neutral", "Reluctant - Neutral", "Reluctant"],
-        ["Eager", "Willing - Eager", "Willing", "Reluctant - Willing", "Reluctant", "Strongly Reluctant - Reluctant", "Strongly Reluctant"],
-        ["<10% additional", "10-20% additional", "20-40% additional", ">40% additional"],
+        [
+            RESOURCE_MANAGER.getResource("DiceCalculator_LessThanTwoMonths"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_TwoToFourMonths"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_FourToEightMonths"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_EightMonths"),
+        ],
+        [
+            RESOURCE_MANAGER.getResource("DiceCalculator_VeryGood"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_GoodToVeryGood"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_AverageToGood"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Good"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Average"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_PoorToAverage"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Poor"),
+        ],
+        [
+            RESOURCE_MANAGER.getResource("DiceCalculator_ClearlyStronglyCommunicateNeed"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_ReasonablyCommunicateNeed"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_SeemToWantSuccess"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_NeutralSeemToWantSuccess"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Neutral"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_ReluctantToNeutral"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Reluctant"),
+        ],
+        [
+            RESOURCE_MANAGER.getResource("DiceCalculator_Eager"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_WillingEager"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Willing"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_ReluctantWilling"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Reluctant"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_StronglyReluctantToReluctant"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_StronglyReluctant"),
+        ],
+        [
+            RESOURCE_MANAGER.getResource("DiceCalculator_LessThan10Additional"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_10To20Additional"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_20To40Additional"),
+            RESOURCE_MANAGER.getResource("DiceCalculator_Above40Additional"),
+        ],
     ],
     choicesScores: [
         [1, 2, 3, 4],
@@ -47,11 +82,11 @@ export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     }],
     diceListTitle: "Dice",
     elements: [
-        new DiceCalculatorElement("Duration (between learning milestones or till completion)", "DiceDuration"),
-        new DiceCalculatorElement("Team Performance Integrity", "DiceTPI"),
-        new DiceCalculatorElement("Commitment (Senior Mgmt)", "DiceCommSeniorMgmt"),
-        new DiceCalculatorElement("Commitment (Local)", "DiceCommLocal"),
-        new DiceCalculatorElement("Effort", "DiceEffort"),
+        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_Duration"), "DiceDuration"),
+        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_TeamPerformanceIntegrity"), "DiceTPI"),
+        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_CommitmentSeniorMgmt"), "DiceCommSeniorMgmt"),
+        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_CommitmentLocal"), "DiceCommLocal"),
+        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_Effort"), "DiceEffort"),
     ],
 };
 
