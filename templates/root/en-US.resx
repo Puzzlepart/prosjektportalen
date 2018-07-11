@@ -158,7 +158,7 @@
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
-  </data>  
+  </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
@@ -2117,7 +2117,7 @@
   </data>
   <data name="WebPart_RiskMatrix_Title" xml:space="preserve">
     <value>Risk Matrix</value>
-  </data>  
+  </data>
   <data name="WebPart_RiskMatrixSearch_Title" xml:space="preserve">
     <value>Risk Matrix (aggregated)</value>
   </data>
@@ -2576,6 +2576,108 @@
   </data>
   <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
     <value>Failed to remove DICE score.</value>
+  </data>
+  <data name="DiceCalculator_LessThanTwoMonths" xml:space="preserve">
+    <value>&lt; 2 months</value>
+  </data>
+  <data name="DiceCalculator_TwoToFourMonths" xml:space="preserve">
+    <value>2-4 months</value>
+  </data>
+  <data name="DiceCalculator_FourToEightMonths" xml:space="preserve">
+    <value>4-8 months</value>
+  </data>
+  <data name="DiceCalculator_EightMonths" xml:space="preserve">
+    <value>8 months</value>
+  </data>
+  <data name="DiceCalculator_VeryGood" xml:space="preserve">
+    <value>Very Good", "", "", "", "", "", "</value>
+  </data>
+  <data name="DiceCalculator_GoodToVeryGood" xml:space="preserve">
+    <value>Good - Very Good</value>
+  </data>
+  <data name="DiceCalculator_AverageToGood" xml:space="preserve">
+    <value>Average - Good</value>
+  </data>
+  <data name="DiceCalculator_Good" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="DiceCalculator_Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="DiceCalculator_PoorToAverage" xml:space="preserve">
+    <value>Poor - Average</value>
+  </data>
+  <data name="DiceCalculator_Poor" xml:space="preserve">
+    <value>Poor</value>
+  </data>
+  <data name="DiceCalculator_ClearlyStronglyCommunicateNeed" xml:space="preserve">
+    <value>Clearly, strongly communicate need</value>
+  </data>
+  <data name="DiceCalculator_ReasonablyCommunicateNeed" xml:space="preserve">
+    <value>Reasonably communicate need</value>
+  </data>
+  <data name="DiceCalculator_SeemToWantSuccess" xml:space="preserve">
+    <value>Seem to want success</value>
+  </data>
+  <data name="DiceCalculator_NeutralSeemToWantSuccess" xml:space="preserve">
+    <value>Neutral - Seem to want success</value>
+  </data>
+  <data name="DiceCalculator_Neutral" xml:space="preserve">
+    <value>Neutral</value>
+  </data>
+  <data name="DiceCalculator_ReluctantToNeutral" xml:space="preserve">
+    <value>Reluctant - Neutral</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Reluctant</value>
+  </data>
+  <data name="DiceCalculator_Eager" xml:space="preserve">
+    <value>Eager</value>
+  </data>
+  <data name="DiceCalculator_WillingEager" xml:space="preserve">
+    <value>Willing - Eager</value>
+  </data>
+  <data name="DiceCalculator_Willing" xml:space="preserve">
+    <value>Willing</value>
+  </data>
+  <data name="DiceCalculator_ReluctantWilling" xml:space="preserve">
+    <value>Reluctant - Willing</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Reluctant</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctantToReluctant" xml:space="preserve">
+    <value>Strongly Reluctant - Reluctant</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctant" xml:space="preserve">
+    <value>Strongly Reluctant</value>
+  </data>
+  <data name="DiceCalculator_LessThan10Additional" xml:space="preserve">
+    <value>&lt;10% additional</value>
+  </data>
+  <data name="DiceCalculator_10To20Additional" xml:space="preserve">
+    <value>10-20% additional</value>
+  </data>
+  <data name="DiceCalculator_20To40Additional" xml:space="preserve">
+    <value>20-40% additional</value>
+  </data>
+  <data name="DiceCalculator_Above40Additional" xml:space="preserve">
+    <value>&gt;40% additional</value>
+  </data>
+  <data name="DiceCalculator_Duration" xml:space="preserve">
+    <value>Duration (between learning milestones or till completion)</value>
+  </data>
+  <data name="DiceCalculator_TeamPerformanceIntegrity" xml:space="preserve">
+    <value>Team Performance Integrity</value>
+  </data>
+  <data name="DiceCalculator_CommitmentSeniorMgmt" xml:space="preserve">
+    <value>Commitment (Senior Mgmt)</value>
+  </data>
+  <data name="DiceCalculator_CommitmentLocal" xml:space="preserve">
+    <value>Commitment (Local)</value>
+  </data>
+  <data name="DiceCalculator_Effort" xml:space="preserve">
+    <value>Effort</value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full Control</value>
