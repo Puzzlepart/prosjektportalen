@@ -2653,16 +2653,31 @@
     <value>Sterkt motvillig</value>
   </data>
   <data name="DiceCalculator_LessThan10Additional" xml:space="preserve">
-    <value>&lt;10% ekstra</value>
+    <value>&lt;10% ekstrainnsats</value>
   </data>
   <data name="DiceCalculator_10To20Additional" xml:space="preserve">
-    <value>10-20% ekstra</value>
+    <value>10-20% ekstrainnsats</value>
   </data>
   <data name="DiceCalculator_20To40Additional" xml:space="preserve">
-    <value>20-40% ekstra</value>
+    <value>20-40% ekstrainnsats</value>
   </data>
   <data name="DiceCalculator_Above40Additional" xml:space="preserve">
-    <value>&gt;40% ekstra</value>
+    <value>&gt;40% ekstrainnsats</value>
+  </data>
+   <data name="DiceCalculator_Duration" xml:space="preserve">
+    <value></value>
+  </data>
+   <data name="DiceCalculator_TeamPerformanceIntegrity" xml:space="preserve">
+    <value></value>
+  </data>
+   <data name="DiceCalculator_CommitmentSeniorMgmt" xml:space="preserve">
+    <value></value>
+  </data>
+   <data name="DiceCalculator_CommitmentLocal" xml:space="preserve">
+    <value></value>
+  </data>
+   <data name="DiceCalculator_Effort" xml:space="preserve">
+    <value></value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>
