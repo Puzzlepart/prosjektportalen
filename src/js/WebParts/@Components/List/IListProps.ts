@@ -7,6 +7,7 @@ export default interface IListProps {
     columns: Array<IColumn>;
     showSearchBox?: boolean;
     showCommandBar?: boolean;
+    defaultGroupBy?: IGroupByOption;
     groupByOptions?: IGroupByOption[];
     excelExportEnabled?: boolean;
     excelExportConfig?: IExcelExportConfig;

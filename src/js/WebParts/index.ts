@@ -17,6 +17,7 @@ import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix"
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
+import ProjectResources, { IProjectResourcesProps } from "./ProjectResources";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -48,6 +49,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"),
     }),
+    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources"),
 ];
 
 /**

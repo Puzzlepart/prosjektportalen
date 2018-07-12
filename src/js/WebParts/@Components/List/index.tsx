@@ -16,6 +16,7 @@ import * as Util from "../../../Util";
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
         groupByOptions: [],
+        defaultGroupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
     };
 
     /**
@@ -25,7 +26,10 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      */
     constructor(props: IListProps) {
         super(props);
-        this.state = { groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") } };
+        this.state = {
+            searchTerm: "",
+            groupBy: props.defaultGroupBy,
+        };
     }
 
     /**
@@ -78,7 +82,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 name: this.state.groupBy.name,
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
-                onClick: e => e.preventDefault(),
+                onClick: evt => evt.preventDefault(),
                 subMenuProps: { items: subItems },
             });
         }
@@ -92,8 +96,8 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                     styles: { root: { color: "green !important" } },
                 },
                 disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
-                onClick: e => {
-                    e.preventDefault();
+                onClick: evt => {
+                    evt.preventDefault();
                     this._exportToExcel();
                 },
             });
@@ -135,9 +139,12 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 }
             }
             case "SiteTitle": {
-                return <a href={item.SPWebUrl} onClick={_ => this._openProject(item)}>{item.SiteTitle}</a>;
+                return <a href={item.SPWebUrl} onClick={() => this._openProject(item)}>{item.SiteTitle}</a>;
             }
             default: {
+                if (column.key.indexOf("OWSDATE") > -1) {
+                    return <span>{colValue ? Util.dateFormat(colValue, "LL") : null}</span>;
+                }
                 return colValue;
             }
         }
@@ -150,6 +157,14 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      */
     private _openProject(project: any) {
         this.setState({ showProjectInfo: project });
+    }
+
+    /**
+     * Dismiss project modal
+     */
+    @autobind
+    private _dismissProjectInfoModal() {
+        this.setState({ showProjectInfo: null });
     }
 
     /**
@@ -166,10 +181,11 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      * Renders the Project Info modal
      */
     private _renderProjectInfoModal() {
-        if (this.state.showProjectInfo) {
+        const { showProjectInfo } = this.state;
+        if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={this.state.showProjectInfo.SPWebUrl}
+                    webUrl={showProjectInfo.SPWebUrl}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -181,10 +197,10 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                         isOpen: true,
                         isDarkOverlay: true,
                         isBlocking: false,
-                        onDismiss: () => this.setState({ showProjectInfo: null }),
+                        onDismiss: this._dismissProjectInfoModal,
                         headerClassName: "ms-font-xxl",
                         headerStyle: { marginBottom: 20 },
-                        title: this.state.showProjectInfo.SiteTitle,
+                        title: showProjectInfo.SiteTitle,
                     }} />
             );
         }
@@ -228,16 +244,17 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      * Export to Excel
      */
     private async _exportToExcel() {
+        const { excelExportConfig } = this.props;
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
         let { items, columns } = this._getFilteredData();
         const sheet = {
-            name: this.props.excelExportConfig.sheetName,
+            name: excelExportConfig.sheetName,
             data: [
                 columns.map(col => col.name),
                 ...items.map(item => columns.map(col => item[col.fieldName])),
             ],
         };
-        const fileName = String.format(this.props.excelExportConfig.fileName, RESOURCE_MANAGER.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format("{0}-{1}.xlsx", excelExportConfig.fileNamePrefix, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         await ExportToExcel({ sheets: [sheet], fileName });
         this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }
