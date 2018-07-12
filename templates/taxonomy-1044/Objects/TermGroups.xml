@@ -186,54 +186,54 @@
                             <pnp:Label Language="1033" Value="Quality Manager" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
-                    <pnp:Term Name="Ansvarlig Bestiller" ID="50b5fe74-cd67-4f58-9297-3f0b5771c4e0" SourceTermId="50b5fe74-cd67-4f58-9297-3f0b5771c4e0">
+                    <pnp:Term Name="Ansvarlig bestiller" ID="50b5fe74-cd67-4f58-9297-3f0b5771c4e0" SourceTermId="50b5fe74-cd67-4f58-9297-3f0b5771c4e0">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Ansvarlig Bestiller" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Brukerkoordinator" ID="6a7bb370-ccbc-40ea-81fb-02d0e11cb546" SourceTermId="6a7bb370-ccbc-40ea-81fb-02d0e11cb546">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Brukerkoordinator" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Prosjektgruppe" ID="b2a11f01-3d52-485a-b561-d0c380d77d47" SourceTermId="b2a11f01-3d52-485a-b561-d0c380d77d47">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Prosjektgruppe" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="SHA koordinator (KP/KU)" ID="63426c2e-f280-4ca5-ae36-a92d5de22b24" SourceTermId="63426c2e-f280-4ca5-ae36-a92d5de22b24">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="SHA koordinator (KP/KU)" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="BH-ombud/ BH kontrollør/BL" ID="31696167-8758-463c-afee-63163e3df1ec" SourceTermId="31696167-8758-463c-afee-63163e3df1ec">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="BH-ombud/ BH kontrollør/BL" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="PGL/rådgivningsgruppe" ID="51a925e3-f902-45d5-9938-b4a7d68cd79b" SourceTermId="51a925e3-f902-45d5-9938-b4a7d68cd79b">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="PGL/rådgivningsgruppe" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Hovedentreprenør" ID="57d6abaf-c218-4e4f-a106-66e9857581cf" SourceTermId="57d6abaf-c218-4e4f-a106-66e9857581cf">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Hovedentreprenør" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Seksjon for drift og forvaltning" ID="e2b67291-1e04-4992-8f18-6124f40abe0b" SourceTermId="e2b67291-1e04-4992-8f18-6124f40abe0b">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Seksjon for drift og forvaltning" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Kundeservice/marked" ID="2735d5c0-d259-410b-a30a-f0d80ab5cac8" SourceTermId="2735d5c0-d259-410b-a30a-f0d80ab5cac8">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Kundeservice/marked" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                     <pnp:Term Name="Eiendomskontoret" ID="85edc24e-1af9-431b-8b8c-86b53235368e" SourceTermId="85edc24e-1af9-431b-8b8c-86b53235368e">
                         <pnp:Labels>
-                            <!--<pnp:Label Language="1033" Value="N/A" IsDefaultForLanguage="true" />-->
+                            <pnp:Label Language="1033" Value="Eiendomskontoret" IsDefaultForLanguage="true" />
                         </pnp:Labels>
                     </pnp:Term>
                 </pnp:Terms>
