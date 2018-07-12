@@ -162,6 +162,9 @@
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
+  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
+    <value>Project Resources</value>
+  </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
   </data>
