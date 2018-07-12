@@ -1,29 +1,9 @@
 import __ from "../../Resources";
-import {
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
-} from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import IGroupByOption from "../IGroupByOption";
-import IExcelExportConfig from "../IExcelExportConfig";
+import { IListProps } from "../@Components/List";
 
-export default interface IDeliveriesOverviewProps extends IBaseWebPartProps {
-    constrainMode?: ConstrainMode;
-    layoutMode?: DetailsListLayoutMode;
-    selectionMode?: SelectionMode;
-    groupByOptions?: IGroupByOption[];
-    showSearchBox?: boolean;
-    showCommandBar?: boolean;
-    showEmptyMessage?: boolean;
-    searchProperty?: string;
-    modalHeaderClassName?: string;
-    projectInfoFilterField?: string;
-    excelExportEnabled?: boolean;
-    excelExportConfig?: IExcelExportConfig;
+export default interface IDeliveriesOverviewProps extends IBaseWebPartProps, IListProps {
     dataSource?: string;
-    rowLimit?: number;
-    columns?: any[];
 }
 
 export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> = {
