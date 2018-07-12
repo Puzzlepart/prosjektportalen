@@ -2145,6 +2145,12 @@
   <data name="WebPart_DeliveriesOverview_Title" xml:space="preserve">
     <value>Deliveries Overview</value>
   </data>
+  <data name="WebPart_ProjectStats_Title" xml:space="preserve">
+    <value>Project Stats</value>
+  </data>
+  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
+    <value>Project Resources</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
   </data>
