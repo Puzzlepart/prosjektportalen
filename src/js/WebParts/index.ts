@@ -52,9 +52,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"),
     }),
-    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources", {
-        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
-    }),
+    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources"),
 ];
 
 /**

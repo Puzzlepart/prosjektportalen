@@ -16,7 +16,7 @@ export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
     {
         key: "RefinableString71",
         fieldName: "ResourceUser",
-        name: "Navn",
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtResourceUser_DisplayName"),
         minWidth: 200,
         maxWidth: 300,
         isResizable: true,
@@ -24,7 +24,7 @@ export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
     {
         key: "RefinableString72",
         fieldName: "ResourceRole",
-        name: "Rolle",
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtResourceRole_DisplayName"),
         minWidth: 100,
         maxWidth: 150,
         isResizable: true,
@@ -32,7 +32,7 @@ export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
     {
         key: "GtStartDateOWSDATE",
         fieldName: "StartDate",
-        name: "Startdato",
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtStartDate_DisplayName"),
         minWidth: 100,
         maxWidth: 150,
         isResizable: true,
@@ -40,7 +40,7 @@ export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
     {
         key: "GtEndDateOWSDATE",
         fieldName: "EndDate",
-        name: "Sluttdato",
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtEndDate_DisplayName"),
         minWidth: 100,
         maxWidth: 150,
         isResizable: true,
@@ -48,9 +48,15 @@ export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
     {
         key: "RefinableString52",
         fieldName: "ProjectPhase",
-        name: "Fase",
+        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectPhase_DisplayName"),
         minWidth: 100,
         maxWidth: 150,
         isResizable: true,
     }],
+    groupByOptions: [
+        { name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" },
+        { name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectPhase_DisplayName"), key: "ProjectPhase" },
+        { name: RESOURCE_MANAGER.getResource("SiteFields_GtResourceUser_DisplayName"), key: "ResourceUser" },
+        { name: RESOURCE_MANAGER.getResource("SiteFields_GtResourceRole_DisplayName"), key: "ResourceRole" },
+    ],
 };

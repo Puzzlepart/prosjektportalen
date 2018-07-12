@@ -43,10 +43,15 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
         return (
             <List
                 items={this.state.items}
-                columns={this.props.columns} />
+                columns={this.props.columns}
+                showCommandBar={true}
+                groupByOptions={this.props.groupByOptions} />
         );
     }
 
+    /**
+     * Fetch items
+     */
     protected async _fetchItems() {
         const searchResults = await pnp.sp.search({
             Querytext: "*",
