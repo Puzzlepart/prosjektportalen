@@ -1,10 +1,11 @@
 import * as React from "react";
 import * as unique from "array-unique";
 import RESOURCE_MANAGER from "../../../Resources";
-import { DetailsList, IColumn, IGroup } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ProjectInfo, { ProjectInfoRenderMode } from "../../ProjectInfo";
 import ModalLink from "../ModalLink";
 import IListProps from "./IListProps";
@@ -13,6 +14,10 @@ import ExportToExcel, { ExcelExportStatus } from "../../../Util/ExportToExcel";
 import * as Util from "../../../Util";
 
 export default class List extends React.PureComponent<IListProps, IListState> {
+    public static defaultProps: Partial<IListProps> = {
+        groupByOptions: [],
+    };
+
     /**
      * Constructor
      *
@@ -20,7 +25,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      */
     constructor(props: IListProps) {
         super(props);
-        this.state = {};
+        this.state = { groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") } };
     }
 
     /**
@@ -34,22 +39,16 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 <div hidden={!this.props.showSearchBox}>
                     <SearchBox
                         placeholder={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
-                        onChanged={st => this.setState({ searchTerm: st.toLowerCase() })} />
+                        onChanged={this._onSearch} />
                 </div>
                 <DetailsList
                     items={items}
                     columns={columns}
                     groups={groups}
-                    onRenderItemColumn={(item, index, column: any) => {
-                        return this._onRenderItemColumn(item, index, column, evt => {
-                            evt.preventDefault();
-                            evt.stopPropagation();
-                            this.setState({ showProjectInfo: item });
-                        });
-                    }}
-                    constrainMode={this.props.constrainMode}
-                    layoutMode={this.props.layoutMode}
-                    selectionMode={this.props.selectionMode} />
+                    onRenderItemColumn={this._onRenderItemColumn}
+                    constrainMode={ConstrainMode.horizontalConstrained}
+                    layoutMode={DetailsListLayoutMode.justified}
+                    selectionMode={SelectionMode.none} />
                 {this._renderProjectInfoModal()}
             </div>
         );
@@ -118,9 +117,9 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      * @param {any} item The item
      * @param {number} index The index
      * @param {IColumn} column The column
-     * @param {void} onClick onClick handler
      */
-    private _onRenderItemColumn = (item: any, index: number, column: IColumn, onClick: (evt: React.MouseEvent<any>) => void): any => {
+    @autobind
+    private _onRenderItemColumn(item: any, index: number, column: IColumn) {
         let colValue = item[column.fieldName];
         switch (column.key) {
             case "Title": {
@@ -136,12 +135,31 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 }
             }
             case "SiteTitle": {
-                return <a href={item.SPWebUrl} onClick={onClick}>{item.SiteTitle}</a>;
+                return <a href={item.SPWebUrl} onClick={_ => this._openProject(item)}>{item.SiteTitle}</a>;
             }
             default: {
                 return colValue;
             }
         }
+    }
+
+    /**
+     * Open project in modal
+     *
+     * @param {any} project The project
+     */
+    private _openProject(project: any) {
+        this.setState({ showProjectInfo: project });
+    }
+
+    /**
+     * On search
+     *
+     * @param {string} searchTerm Search term
+     */
+    @autobind
+    private _onSearch(searchTerm: any) {
+        this.setState({ searchTerm: searchTerm.toLowerCase() });
     }
 
     /**
