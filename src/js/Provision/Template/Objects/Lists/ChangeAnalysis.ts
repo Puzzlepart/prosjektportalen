@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const ChangeAnalysis: IList =   {
-    Title: RESOURCE_MANAGER.getResource("Lists_ChangeAnalysis_Title"),
+    Title: __.getResource("Lists_ChangeAnalysis_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -19,7 +19,7 @@ const ChangeAnalysis: IList =   {
         DisplayName: "Endring",
     }],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -30,7 +30,7 @@ const ChangeAnalysis: IList =   {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_GroupedProcess_DisplayName"),
+        Title: __.getResource("View_GroupedProcess_DisplayName"),
         ViewFields: ["GtChallengeDescription", "LinkTitle"],
         AdditionalSettings: {
             RowLimit: 30,

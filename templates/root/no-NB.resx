@@ -161,6 +161,9 @@
   </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstoppfølging</value>
+  </data>  
+  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
+    <value>Prosjektressurser</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
@@ -263,6 +266,9 @@
   </data>
   <data name="Lists_DataSources_Title" xml:space="preserve">
     <value>Datakilder</value>
+  </data>  
+  <data name="Lists_ProjectResources_Title" xml:space="preserve">
+    <value>Prosjektressurser</value>
   </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
@@ -368,6 +374,9 @@
   </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
+  </data>  
+  <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
+    <value>Lists/Prosjektressurser/AllItems.aspx</value>
   </data>
   <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
     <value>Prosjektstatus</value>
@@ -446,6 +455,9 @@
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Prosjektelement</value>
+  </data>
+  <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
+    <value>Prosjektressurs</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind basehendelse</value>
@@ -1212,6 +1224,12 @@
   <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
     <value>Høyde</value>
   </data>
+  <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
+    <value>Navn</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1677,6 +1695,12 @@
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>Høyden på diagrammet i piksler</value>
   </data>
+  <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
@@ -2127,6 +2151,12 @@
   <data name="WebPart_DeliveriesOverview_Title" xml:space="preserve">
     <value>Leveranseoversikt</value>
   </data>
+  <data name="WebPart_ProjectStats_Title" xml:space="preserve">
+    <value>Prosjektstatistikk</value>
+  </data>
+  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
+    <value>Prosjektressurser</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
@@ -2540,6 +2570,9 @@
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Gevinstoversikt</value>
+  </data>  
+  <data name="BenefitsOverview_LoadingText" xml:space="preserve">
+    <value>Laster gevinster og målinger...</value>
   </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>
@@ -2549,12 +2582,15 @@
   </data>
   <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjektleveranser</value>
-  </data>
-  <data name="DeliveriesOverview_EmptyMessage" xml:space="preserve">
-    <value>Fant ingen leveranser</value>
+  </data>  
+  <data name="DeliveriesOverview_LoadingText" xml:space="preserve">
+    <value>Laster prosjektleveranser...</value>
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Erfaringslogg</value>
+  </data>  
+  <data name="ExperienceLog_LoadingText" xml:space="preserve">
+    <value>Laster loggelementer..</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>Det skjedde en feil under lasting. DICE er ikke riktig konfigurert.</value>
@@ -2579,6 +2615,108 @@
   </data>
   <data name="DiceCalculator_ScoreRemovedFailed" xml:space="preserve">
     <value>Det skjedde en feil under fjerning av resultatet.</value>
+  </data>
+  <data name="DiceCalculator_LessThanTwoMonths" xml:space="preserve">
+    <value>&lt; 2 måneder</value>
+  </data>
+  <data name="DiceCalculator_TwoToFourMonths" xml:space="preserve">
+    <value>2-4 måneder</value>
+  </data>
+  <data name="DiceCalculator_FourToEightMonths" xml:space="preserve">
+    <value>4-8 måneder</value>
+  </data>
+  <data name="DiceCalculator_EightMonths" xml:space="preserve">
+    <value>8 måneder</value>
+  </data>
+  <data name="DiceCalculator_VeryGood" xml:space="preserve">
+    <value>Veldig bra</value>
+  </data>
+  <data name="DiceCalculator_GoodToVeryGood" xml:space="preserve">
+    <value>Bra - Veldig bra</value>
+  </data>
+  <data name="DiceCalculator_AverageToGood" xml:space="preserve">
+    <value>Gjennomsnittlig - Bra</value>
+  </data>
+  <data name="DiceCalculator_Good" xml:space="preserve">
+    <value>Bra</value>
+  </data>
+  <data name="DiceCalculator_Average" xml:space="preserve">
+    <value>Gjennomsnittlig</value>
+  </data>
+  <data name="DiceCalculator_PoorToAverage" xml:space="preserve">
+    <value>Dårlig - Gjennomsnittlig</value>
+  </data>
+  <data name="DiceCalculator_Poor" xml:space="preserve">
+    <value>Dårlig</value>
+  </data>
+  <data name="DiceCalculator_ClearlyStronglyCommunicateNeed" xml:space="preserve">
+    <value>Klar, sterkt kommunikasjonsbehov</value>
+  </data>
+  <data name="DiceCalculator_ReasonablyCommunicateNeed" xml:space="preserve">
+    <value>Rimelig kommunikasjonsbehov</value>
+  </data>
+  <data name="DiceCalculator_SeemToWantSuccess" xml:space="preserve">
+    <value>Synes å ønske suksess</value>
+  </data>
+  <data name="DiceCalculator_NeutralSeemToWantSuccess" xml:space="preserve">
+    <value>Nøytral - Synes å ønske suksess</value>
+  </data>
+  <data name="DiceCalculator_Neutral" xml:space="preserve">
+    <value>Nøytral</value>
+  </data>
+  <data name="DiceCalculator_ReluctantToNeutral" xml:space="preserve">
+    <value>Motvillig - Nøytral</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Motvillig</value>
+  </data>
+  <data name="DiceCalculator_Eager" xml:space="preserve">
+    <value>Ivrig</value>
+  </data>
+  <data name="DiceCalculator_WillingEager" xml:space="preserve">
+    <value>Villig - Ivrig</value>
+  </data>
+  <data name="DiceCalculator_Willing" xml:space="preserve">
+    <value>Villig</value>
+  </data>
+  <data name="DiceCalculator_ReluctantWilling" xml:space="preserve">
+    <value>Motvillig - Villig</value>
+  </data>
+  <data name="DiceCalculator_Reluctant" xml:space="preserve">
+    <value>Motvillig</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctantToReluctant" xml:space="preserve">
+    <value>Sterkt motvillig - Motvillig</value>
+  </data>
+  <data name="DiceCalculator_StronglyReluctant" xml:space="preserve">
+    <value>Sterkt motvillig</value>
+  </data>
+  <data name="DiceCalculator_LessThan10Additional" xml:space="preserve">
+    <value>&lt;10% ekstrainnsats</value>
+  </data>
+  <data name="DiceCalculator_10To20Additional" xml:space="preserve">
+    <value>10-20% ekstrainnsats</value>
+  </data>
+  <data name="DiceCalculator_20To40Additional" xml:space="preserve">
+    <value>20-40% ekstrainnsats</value>
+  </data>
+  <data name="DiceCalculator_Above40Additional" xml:space="preserve">
+    <value>&gt;40% ekstrainnsats</value>
+  </data>
+  <data name="DiceCalculator_Duration" xml:space="preserve">
+    <value>Varighet mellom beslutningspunkter</value>
+  </data>
+  <data name="DiceCalculator_TeamPerformanceIntegrity" xml:space="preserve">
+    <value>Prosjektgruppens integritet og ytelse</value>
+  </data>
+  <data name="DiceCalculator_CommitmentSeniorMgmt" xml:space="preserve">
+    <value>Støtte fra prosjekteier</value>
+  </data>
+  <data name="DiceCalculator_CommitmentLocal" xml:space="preserve">
+    <value>Støtte fra gevinsteier</value>
+  </data>
+  <data name="DiceCalculator_Effort" xml:space="preserve">
+    <value>Behov for ekstrainnsats</value>
   </data>
   <data name="RoleDefinition_FullControl" xml:space="preserve">
     <value>Full kontroll</value>

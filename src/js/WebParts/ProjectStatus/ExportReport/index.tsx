@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import pnp, { List, Logger, LogLevel } from "sp-pnp-js";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
@@ -18,7 +18,7 @@ import IExportTypeContext from "./IExportTypeContext";
 
 export default class ExportReport extends React.Component<IExportReportProps, IExportReportState> {
     public static defaultProps: Partial<IExportReportProps> = {
-        reportsLibTitle: RESOURCE_MANAGER.getResource("Lists_ProjectStatus_Title"),
+        reportsLibTitle: __.getResource("Lists_ProjectStatus_Title"),
         maxReportHistory: 25,
     };
     private _reportsLib: List;
@@ -112,7 +112,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                         text={exportTypeContext.SAVE}
                         className="save-snapshot-btn"
                         iconProps={{ iconName: exportTypeContext.SAVE_ICON_NAME }}
-                        onClick={(e) => {this._onExportClick(e); }} />
+                        onClick={(e) => { this._onExportClick(e); }} />
                 );
             }
         }
@@ -151,18 +151,18 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         switch (exportType) {
             case "pdf": {
                 return {
-                    SAVE: RESOURCE_MANAGER.getResource("ProjectStatus_SaveAsPdf"),
-                    IS_SAVING: RESOURCE_MANAGER.getResource("ProjectStatus_SavingAsPdf"),
-                    IS_SAVED: RESOURCE_MANAGER.getResource("ProjectStatus_PDFSaved"),
+                    SAVE: __.getResource("ProjectStatus_SaveAsPdf"),
+                    IS_SAVING: __.getResource("ProjectStatus_SavingAsPdf"),
+                    IS_SAVED: __.getResource("ProjectStatus_PDFSaved"),
                     SAVE_ICON_NAME: "PDF",
                     IS_SAVED_ICON_NAME: "Save",
                 };
             }
             case "png": {
                 return {
-                    SAVE: RESOURCE_MANAGER.getResource("ProjectStatus_SaveSnapshot"),
-                    IS_SAVING: RESOURCE_MANAGER.getResource("ProjectStatus_SavingSnapshot"),
-                    IS_SAVED: RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotIsSaved"),
+                    SAVE: __.getResource("ProjectStatus_SaveSnapshot"),
+                    IS_SAVING: __.getResource("ProjectStatus_SavingSnapshot"),
+                    IS_SAVED: __.getResource("ProjectStatus_SnapshotIsSaved"),
                     SAVE_ICON_NAME: "Camera",
                     IS_SAVED_ICON_NAME: "Save",
                 };
@@ -184,10 +184,10 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         }));
         let firstOption: IDropdownOption = {
             key: "ReportOption_0",
-            text: RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotNoHistory"),
+            text: __.getResource("ProjectStatus_SnapshotNoHistory"),
         };
         if (hasHistory) {
-            firstOption.text = String.format(RESOURCE_MANAGER.getResource("ProjectStatus_SnapshotHistory"), reports.length);
+            firstOption.text = String.format(__.getResource("ProjectStatus_SnapshotHistory"), reports.length);
         }
         return [firstOption, ...options];
     }
@@ -310,6 +310,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             const reports: IReport[] = await this._reportsLib
                 .items
                 .select("FileLeafRef", "Title", "EncodedAbsUrl")
+                .filter("substringof('.png',FileLeafRef) or substringof('.pdf',FileLeafRef)")
                 .orderBy("Modified", false)
                 .top(this.props.maxReportHistory)
                 .get();

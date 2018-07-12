@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
@@ -10,7 +10,7 @@ export const WebPropertyBagEditorDefaultProps: Partial<IWebPropertyBagEditorProp
         {
             key: "key",
             fieldName: "key",
-            name: RESOURCE_MANAGER.getResource("SiteFields_GtKey_DisplayName"),
+            name: __.getResource("SiteFields_GtKey_DisplayName"),
             minWidth: 150,
             maxWidth: 200,
             isResizable: true,
@@ -18,7 +18,7 @@ export const WebPropertyBagEditorDefaultProps: Partial<IWebPropertyBagEditorProp
         {
             key: "value",
             fieldName: "value",
-            name: RESOURCE_MANAGER.getResource("SiteFields_GtValue_DisplayName"),
+            name: __.getResource("SiteFields_GtValue_DisplayName"),
             minWidth: 100,
             maxWidth: 300,
             isResizable: true,

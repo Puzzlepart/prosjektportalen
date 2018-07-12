@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PhaseModel } from "../../ProjectPhasesData";
 
@@ -24,7 +24,7 @@ const ChecklistStats = ({ phase }: IChecklistStatsProps) => {
         <ul>
             {Object.keys(stats).map((c, index) => (
                 <li key={index} style={{ paddingTop: "5px" }}>
-                    <Icon iconName={GetStatusIcon(index)} /> <span>{stats[c]} {c} {RESOURCE_MANAGER.getResource("ProjectPhases_Checkpoints")}.</span>
+                    <Icon iconName={GetStatusIcon(index)} /> <span>{stats[c]} {c} {__.getResource("ProjectPhases_Checkpoints")}.</span>
                 </li>
             ))}
         </ul>

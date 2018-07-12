@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Logger, LogLevel } from "sp-pnp-js";
 import { WebProvisioner } from "sp-js-provisioning/lib/webprovisioner";
 import IProvisionContext from "../IProvisionContext";
@@ -11,8 +11,8 @@ import ApplyTemplateProgressMap from "./ApplyTemplateProgressMap";
  * @param {IProvisionContext} context Provisioning context
  */
 export default async function ApplyTemplate(context: IProvisionContext): Promise<void> {
-    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), "");
-    const callbackFunc = objHandler => context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_ApplyingTemplate"), ApplyTemplateProgressMap[objHandler]);
+    context.progressCallbackFunc(__.getResource("ProvisionWeb_ApplyingTemplate"), "");
+    const callbackFunc = objHandler => context.progressCallbackFunc(__.getResource("ProvisionWeb_ApplyingTemplate"), ApplyTemplateProgressMap[objHandler]);
     try {
         const template = {
             ...context.template.Schema,

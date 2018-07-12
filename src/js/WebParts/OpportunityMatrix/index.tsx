@@ -1,6 +1,6 @@
 import * as React from "react";
 import pnp, { List } from "sp-pnp-js";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -34,7 +34,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
     constructor(props: IOpportunityMatrixProps) {
         super(props);
         this.state = { data: props.data };
-        this._pnpList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
+        this._pnpList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
         this.onViewChanged = this.onViewChanged.bind(this);
         this.getViewOptions = this.getViewOptions.bind(this);
     }
@@ -79,7 +79,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
 
         if (opportunityItems.length === 0) {
             if (this.props.showEmptyMessage) {
-                return <MessageBar>{RESOURCE_MANAGER.getResource("OpportunityMatrix_EmptyMessage")}</MessageBar>;
+                return <MessageBar>{__.getResource("OpportunityMatrix_EmptyMessage")}</MessageBar>;
             }
             return null;
         }
@@ -91,7 +91,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
                 <div className={this.props.className}>
                     <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
                         <Dropdown
-                            label={RESOURCE_MANAGER.getResource("OpportunityMatrix_ViewSelectorLabel")}
+                            label={__.getResource("OpportunityMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
                             onChanged={opt => this.onViewChanged(opt.data.viewQuery)} />
@@ -105,9 +105,9 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
                         <Toggle
                             defaultChecked={false}
                             onChanged={isChecked => this.setState({ postAction: isChecked })}
-                            label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                            onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                            offText={RESOURCE_MANAGER.getResource("String_No")} />
+                            label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                            onText={__.getResource("String_Yes")}
+                            offText={__.getResource("String_No")} />
                     </div>
                 </div>
             );

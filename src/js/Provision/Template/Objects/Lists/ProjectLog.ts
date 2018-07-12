@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 import { GtProjectLogProductLookup } from "./SiteFields";
 
 const ProjectLog: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_ProjectLog_Title"),
+    Title: __.getResource("Lists_ProjectLog_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -16,7 +16,7 @@ const ProjectLog: IList = {
     },
     Fields: [GtProjectLogProductLookup],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectLogType", "GtProjectLogReporter", "GtProjectLogResponsible", "GtProjectLogConsequence", "GtProjectLogRecommendation", "GtProjectLogExperience"],
         AdditionalSettings: {
             RowLimit: 30,

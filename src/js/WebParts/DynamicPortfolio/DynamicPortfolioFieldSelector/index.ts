@@ -1,11 +1,11 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { IDynamicPortfolioFilter } from "../DynamicPortfolioFilterPanel";
 
 const DynamicPortfolioFieldSelector: IDynamicPortfolioFilter = {
     fieldName: "Fields",
-    name: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_Name"),
+    name: __.getResource("DynamicPortfolio_FieldSelector_Name"),
     key: "Fields",
-    emptyMessage: RESOURCE_MANAGER.getResource("DynamicPortfolio_FieldSelector_EmptyMessage"),
+    emptyMessage: __.getResource("DynamicPortfolio_FieldSelector_EmptyMessage"),
     multi: true,
     defaultHidden: false,
     iconName: "ShowResults",

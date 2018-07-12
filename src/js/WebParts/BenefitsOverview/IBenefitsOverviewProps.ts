@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import DataSource, { IDataSourceSearchCustom } from "../DataSource";
 import IGroupByOption from "../IGroupByOption";
 import { IBaseWebPartProps } from "../@BaseWebPart";
@@ -29,9 +29,9 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     projectInfoFilterField: "GtPcPortfolioPage",
     excelExportEnabled: true,
     excelExportConfig: {
-        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
+        fileName: __.getResource("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
-        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
 };

@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { View, InitialView, SummaryView, ChangingPhaseView, GateApprovalView } from "../Views";
 import IBodyProps from "./IBodyProps";
@@ -39,8 +39,8 @@ export const Body = (props: IBodyProps) => {
                 return (
                     <div className="inner">
                         <MessageBar>
-                            <p>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_CurrentPhaseIncremental"), props.activePhase.Name)}</p>
-                            <p>{String.format(RESOURCE_MANAGER.getResource("ProjectPhases_RestartPhaseOrContinue"), props.nextPhase.Name)}</p>
+                            <p>{String.format(__.getResource("ProjectPhases_CurrentPhaseIncremental"), props.activePhase.Name)}</p>
+                            <p>{String.format(__.getResource("ProjectPhases_RestartPhaseOrContinue"), props.nextPhase.Name)}</p>
                         </MessageBar>
                     </div>
                 );

@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
@@ -35,13 +35,13 @@ const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageCo
                                         <Icon iconName="CustomList" />
                                     </div>
                                     <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
-                                        <h2>{RESOURCE_MANAGER.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
+                                        <h2>{__.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
                                         <ProjectInfo
                                             hideChrome={true}
                                             webUrl={webUrl}
                                             actionLinks={[{
                                                 url: `${webUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
-                                                label: RESOURCE_MANAGER.getResource("ProjectInfo_ViewProperties"),
+                                                label: __.getResource("ProjectInfo_ViewProperties"),
                                                 icon: { iconName: "PreviewLink" },
                                                 options: {
                                                     HideContentTypeChoice: true,

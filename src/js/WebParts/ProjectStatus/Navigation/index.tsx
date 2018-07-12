@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Link } from "react-scroll";
 import ExportReport from "../ExportReport";
@@ -10,7 +10,7 @@ const Navigation = ({ project, sections, exportType }: INavigationProps) => {
         <div className="ms-Grid nav-status-container">
             <div className="nav-details ms-Grid-row">
                 <div className="ms-Grid-col ms-md6">
-                    <h2 className="status-page-header">{`${RESOURCE_MANAGER.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
+                    <h2 className="status-page-header">{`${__.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
                 <div className=" ms-Grid-col ms-md6">
                     <ExportReport

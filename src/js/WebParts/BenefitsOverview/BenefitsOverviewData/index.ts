@@ -1,5 +1,5 @@
 //#region Imports
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import pnp, { Site } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";
@@ -92,8 +92,8 @@ export async function retrieveFromSource(dataSource: DataSource, customSearchSet
  * Fetches data from list(s)
  */
 async function retrieveDataList(): Promise<IBenefitsOverviewData> {
-    const gainsList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"));
-    const measuresList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_BenefitsFollowup_Title"));
+    const gainsList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_BenefitsAnalysis_Title"));
+    const measuresList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
     try {
         const fieldsMap = await fetchFieldsAsMap(gainsList);
         let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...Object.keys(fieldsMap)].join(",");
@@ -129,10 +129,10 @@ async function retrieveDataList(): Promise<IBenefitsOverviewData> {
  * @param {IDataSourceSearchCustom} customSearchSettings Custom search settings
  */
 async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?: IDataSourceSearchCustom): Promise<IBenefitsOverviewData> {
-    const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+    const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
     const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
     if (dataSource) {
-        const contentType = pnp.sp.site.rootWeb.contentTypes.getById(RESOURCE_MANAGER.getResource("ContentTypes_Gevinst_ContentTypeId"));
+        const contentType = pnp.sp.site.rootWeb.contentTypes.getById(__.getResource("ContentTypes_Gevinst_ContentTypeId"));
         let searchSettings: { [key: string]: any } = {
             Querytext: "*",
             QueryTemplate: dataSource.GtDpSearchQuery,
@@ -166,10 +166,10 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
                 pnp.sp.search(searchSettings),
             ]);
             const gains = PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(RESOURCE_MANAGER.getResource("ContentTypes_Gevinst_ContentTypeId")) !== -1)
+                .filter(s => s.ContentTypeID.indexOf(__.getResource("ContentTypes_Gevinst_ContentTypeId")) !== -1)
                 .map(m => new BenefitEntry().init(DataSource.Search, m));
             const measures = PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(RESOURCE_MANAGER.getResource("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
+                .filter(s => s.ContentTypeID.indexOf(__.getResource("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
                 .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1)
                 .map(m => new MeasurementEntry().init(DataSource.Search, m));
             const data: IBenefitsOverviewData = ({

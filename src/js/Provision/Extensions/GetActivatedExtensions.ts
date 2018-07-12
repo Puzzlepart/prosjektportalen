@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import IProvisionContext from "../IProvisionContext";
 import Extension from "./Extension";
 import LoadExtension from "./LoadExtension";
@@ -9,7 +9,7 @@ import LoadExtension from "./LoadExtension";
  * @param {IProvisionContext} context Provisioning context
  */
 export default async function GetActivatedExtensions(context: IProvisionContext): Promise<Extension[]> {
-    const extensionLib = context.rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Extensions_Title"));
+    const extensionLib = context.rootWeb.lists.getByTitle(__.getResource("Lists_Extensions_Title"));
     try {
         const files = await extensionLib.items.select("Title", "Comments", "LinkFilename", "FileRef", "GtIsEnabled").filter("GtIsEnabled eq 1 and GtShowInNewForm ne 1").orderBy("GtOrder").get();
         const extensions: Extension[] = await Promise.all(files.map(file => LoadExtension(file)));

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 
 export default class RiskElementModel {
     public id: string;
@@ -18,7 +18,7 @@ export default class RiskElementModel {
         this.consequence = parseInt(consequence, 10);
         this.probabilityPostAction = parseInt(probabilityPostAction, 10);
         this.consequencePostAction = parseInt(consequencePostAction, 10);
-        const listDefaultViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url")}`;
+        const listDefaultViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource("DefaultView_Uncertainties_Url")}`;
         this.url = `${listDefaultViewUrl.replace("AllItems", "DispForm")}?ID=${this.id}`;
     }
 

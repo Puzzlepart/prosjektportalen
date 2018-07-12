@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { sp, Site } from "sp-pnp-js";
 
 export interface IQueryResult {
@@ -22,7 +22,7 @@ export interface IQueryResult {
  */
 export async function queryProjects(dataSourceName: string, rowLimit?: number, selectProperties = []): Promise<any[]> {
     try {
-        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
         if (dataSource) {
             const { PrimarySearchResults } = await sp.search({

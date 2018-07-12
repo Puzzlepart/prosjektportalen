@@ -1,5 +1,5 @@
 
-import RESOURCE_MANAGER from "../../../../../Resources";
+import __ from "../../../../../Resources";
 import * as React from "react";
 import { ActionButton, IButtonProps } from "office-ui-fabric-react/lib/Button";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
@@ -27,7 +27,7 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
     public render(): JSX.Element {
         return (
             <div className="inner">
-                <h2>{RESOURCE_MANAGER.getResource("String_Approval")}</h2>
+                <h2>{__.getResource("String_Approval")}</h2>
                 {this.state.review
                     ? <Spinner size={SpinnerSize.large} label={this.getLoadingText()} />
                     : (
@@ -50,17 +50,17 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
     private getActions(): IButtonProps[] {
         return [
             {
-                text: RESOURCE_MANAGER.getResource("String_Approved"),
+                text: __.getResource("String_Approved"),
                 iconProps: { iconName: "Accept" },
                 onClick: () => this._onSubmitReview(ChangePhaseDialogResult.Approved),
             },
             {
-                text: RESOURCE_MANAGER.getResource("String_ProvisionallyApproved"),
+                text: __.getResource("String_ProvisionallyApproved"),
                 iconProps: { iconName: "Warning" },
                 onClick: () => this._onSubmitReview(ChangePhaseDialogResult.ProvisionallyApproved),
             },
             {
-                text: RESOURCE_MANAGER.getResource("String_Rejected"),
+                text: __.getResource("String_Rejected"),
                 iconProps: { iconName: "Error" },
                 onClick: () => this._onSubmitReview(ChangePhaseDialogResult.Rejected),
             },
@@ -73,13 +73,13 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
     private getLoadingText(): string {
         switch (this.state.review) {
             case ChangePhaseDialogResult.Approved: {
-                return RESOURCE_MANAGER.getResource("ProjectPhases_ApprovingPhaseChange");
+                return __.getResource("ProjectPhases_ApprovingPhaseChange");
             }
             case ChangePhaseDialogResult.ProvisionallyApproved: {
-                return RESOURCE_MANAGER.getResource("ProjectPhases_ProvisionallyApprovingPhaseChange");
+                return __.getResource("ProjectPhases_ProvisionallyApprovingPhaseChange");
             }
             case ChangePhaseDialogResult.Rejected: {
-                return RESOURCE_MANAGER.getResource("ProjectPhases_RejectingPhaseChange");
+                return __.getResource("ProjectPhases_RejectingPhaseChange");
             }
         }
     }

@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 import { GtChangeLookup } from "./SiteFields";
 
 const BenefitsAnalysis: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"),
+    Title: __.getResource("Lists_BenefitsAnalysis_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -18,10 +18,10 @@ const BenefitsAnalysis: IList = {
     FieldRefs: [{
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
         Required: true,
-        DisplayName: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
+        DisplayName: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
     }],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -30,7 +30,7 @@ const BenefitsAnalysis: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_GroupedBenefitType_DisplayName"),
+        Title: __.getResource("View_GroupedBenefitType_DisplayName"),
         ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,

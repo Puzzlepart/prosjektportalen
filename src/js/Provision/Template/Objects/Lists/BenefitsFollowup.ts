@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 import { GtGainLookup, GtMeasureIndicatorLookup, GtGainLookup_ID } from "./SiteFields";
 
 const BenefitsFollowup: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_BenefitsFollowup_Title"),
+    Title: __.getResource("Lists_BenefitsFollowup_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -25,7 +25,7 @@ const BenefitsFollowup: IList = {
         GtGainLookup_ID,
     ],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -39,7 +39,7 @@ const BenefitsFollowup: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_Flat_DisplayName"),
+        Title: __.getResource("View_Flat_DisplayName"),
         ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,

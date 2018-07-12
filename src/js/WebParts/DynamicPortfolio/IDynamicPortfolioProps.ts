@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import {
     SelectionMode,
     ConstrainMode,
@@ -28,11 +28,11 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
-    loadingText: RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingText"),
+    loadingText: __.getResource("DynamicPortfolio_LoadingText"),
     searchProperty: "Title",
-    searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
-    showCountText: RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCounts"),
-    showCountTextWithFilters: RESOURCE_MANAGER.getResource("DynamicPortfolio_ShowCountsWithFilters"),
+    searchBoxLabelText: __.getResource("DynamicPortfolio_SearchBox_Placeholder"),
+    showCountText: __.getResource("DynamicPortfolio_ShowCounts"),
+    showCountTextWithFilters: __.getResource("DynamicPortfolio_ShowCountsWithFilters"),
     showGroupBy: true,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
@@ -41,9 +41,9 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     selectionMode: SelectionMode.none,
     excelExportEnabled: true,
     excelExportConfig: {
-        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
+        fileName: __.getResource("DynamicPortfolio_ExcelExportFileName"),
         sheetName: "Sheet A",
-        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
     defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,

@@ -1,5 +1,5 @@
 import * as Util from "../Util";
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import {
     UpdatePhaseWelcomePage,
     UpdateFrontpageListViews,
@@ -16,7 +16,7 @@ import {
  * @param {boolean} useWaitDialog Should a wait dialog be used
  */
 async function ChangeProjectPhase(newPhase: any, useWaitDialog = true): Promise<void> {
-    let [Title, Message] = RESOURCE_MANAGER.getResource("ProjectPhases_ChangingPhase").split(",");
+    let [Title, Message] = __.getResource("ProjectPhases_ChangingPhase").split(",");
 
     let waitDlg = null;
     if (useWaitDialog) {

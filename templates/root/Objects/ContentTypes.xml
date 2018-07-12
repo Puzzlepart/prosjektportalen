@@ -1,5 +1,4 @@
-<pnp:ContentTypes 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+<pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentType ID="0x01004CEFE616A94A3A48A27D9DEBDF5EC828" Name="{resource:ContentTypes_Section_Name}" Description="{resource:ContentTypes_Section_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" />
@@ -201,6 +200,16 @@
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="{parameter:GenericFieldPrefix}ProjectForecast" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="{parameter:GenericFieldPrefix}BudgetLastReportDate" />
             <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="{parameter:GenericFieldPrefix}ProjectPhaseChoice" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070209" Name="{resource:ContentTypes_Prosjektressurs_Name}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="88d9b92c-efed-45d0-a586-86d9196b77d0" Name="{parameter:GenericFieldPrefix}ResourceUser" Required="true" />
+            <pnp:FieldRef ID="3a0ae560-bd55-45d4-907f-5119bf0a83bb" Name="{parameter:GenericFieldPrefix}ResourceRole" Required="true" />
+            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="{parameter:GenericFieldPrefix}StartDate" Required="true" />
+            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" Required="true" />
+            <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
@@ -463,8 +472,8 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100A0AB42EFAB986D4A8E8038BC2391BEB2" Name="{resource:ContentTypes_DataSource_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
-        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-        <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Required="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="{parameter:DynamicPortfolioFieldPrefix}SearchQuery" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100A26931086AEA154693049BC467AA08F3" Name="{resource:ContentTypes_Statistikkfelt_Name}" Description="{resource:ContentTypes_Statistikkfelt_Description}" Group="{resource:ContentTypes_Group}" NewFormUrl="{site}/Lists/StatsFieldsConfig/NewForm.aspx" EditFormUrl="{site}/Lists/StatsFieldsConfig/EditForm.aspx" DisplayFormUrl="{site}/Lists/StatsFieldsConfig/DispForm.aspx">

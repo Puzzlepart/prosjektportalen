@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import { sp, Logger, LogLevel } from "sp-pnp-js";
 import * as Config from "./Config";
 
@@ -15,7 +15,7 @@ export default async function UpdateFrontpageListViews(phaseName: string): Promi
         let updateViewsPromises = [];
         listViews.forEach((views, index) => {
             const list = sp.web.lists.getByTitle(listsOnFrontpage[index].listTitle);
-            const frontpageViews = views.filter(v => v.ServerRelativeUrl.indexOf(RESOURCE_MANAGER.getResource("Project_WelcomePage")) !== -1);
+            const frontpageViews = views.filter(v => v.ServerRelativeUrl.indexOf(__.getResource("Project_WelcomePage")) !== -1);
             updateViewsPromises = [
                 ...updateViewsPromises,
                 frontpageViews.map(v => list.views.getById(v.Id).update({ ViewQuery: newViewQuery })),

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Site } from "sp-pnp-js";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
@@ -21,7 +21,7 @@ const GetRedirectUrl = (url: string, inheritPermissions: boolean): string => {
  * @param {IProvisionContext} context Provisioning context
  */
 async function CreateWeb(context: IProvisionContext): Promise<IProvisionContext> {
-    context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CreatingWeb"), "");
+    context.progressCallbackFunc(__.getResource("ProvisionWeb_CreatingWeb"), "");
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     try {
         const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url.toLowerCase(), context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);

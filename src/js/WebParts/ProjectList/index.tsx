@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Site, Logger, LogLevel } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
@@ -213,7 +213,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         try {
             const projectCt = rootWeb
                 .contentTypes
-                .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
+                .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
             const projectCtFieldsPromise = projectCt
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")

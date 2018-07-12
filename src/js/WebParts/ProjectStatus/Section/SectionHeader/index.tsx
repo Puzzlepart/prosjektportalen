@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import * as Util from "../../../../Util";
 import ISectionHeaderProps from "./ISectionHeaderProps";
@@ -28,7 +28,7 @@ const SectionHeaderNavigate = ({ source, fallbackNavigateUrl }) => {
         return (
             <div className="section-navigate-to ms-Grid-col ms-sm12 ms-md1 ms-lg1">
                 <a href={navUrl}>
-                    <Icon iconName="Forward" title={RESOURCE_MANAGER.getResource("String_NavigateToList")} />
+                    <Icon iconName="Forward" title={__.getResource("String_NavigateToList")} />
                 </a>
             </div>
         );

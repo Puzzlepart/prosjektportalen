@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import INewProjectFormSettingsSectionProps from "./INewProjectFormSettingsSectionProps";
 import INewProjectFormSettingsSectionState from "./INewProjectFormSettingsSectionState";
 import ToggleSection from "./ToggleSection";
@@ -25,14 +25,14 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
         return (
             <div className={this.props.className}>
                 <ToggleSection
-                    title={RESOURCE_MANAGER.getResource("NewProjectForm_ShowListContentSettings")}
+                    title={__.getResource("NewProjectForm_ShowListContentSettings")}
                     options={this.props.listData}
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
                     toggleOptionHandler={this.props.toggleListContentHandler}
                     hidden={this.props.listData.length === 0} />
                 <ToggleSection
-                    title={RESOURCE_MANAGER.getResource("NewProjectForm_ShowExtensionSettings")}
+                    title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.extensions}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"

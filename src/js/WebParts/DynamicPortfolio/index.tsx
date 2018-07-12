@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
 import { IGroup, DetailsList } from "office-ui-fabric-react/lib/DetailsList";
@@ -71,7 +71,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
         }
         if (isChangingView) {
-            const loadingText = String.format(RESOURCE_MANAGER.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
+            const loadingText = String.format(__.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
                 <div>
                     {this.renderCommandBar()}
@@ -117,7 +117,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 [currentView] = configuration.views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
                 if (!currentView) {
                     throw {
-                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
+                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
                         type: MessageBarType.error,
                     };
                 }
@@ -125,7 +125,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
                 if (!currentView) {
                     throw {
-                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_ViewNotFound"),
+                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
                         type: MessageBarType.error,
                     };
                 }
@@ -133,7 +133,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 [currentView] = configuration.views.filter(qc => qc.default);
                 if (!currentView) {
                     throw {
-                        message: RESOURCE_MANAGER.getResource("DynamicPortfolio_NoDefaultView"),
+                        message: __.getResource("DynamicPortfolio_NoDefaultView"),
                         type: MessageBarType.error,
                     };
                 }
@@ -205,7 +205,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const data = this.getFilteredData();
 
         if (data.items.length === 0) {
-            return <MessageBar>{RESOURCE_MANAGER.getResource("DynamicPortfolio_NoResults")}</MessageBar>;
+            return <MessageBar>{__.getResource("DynamicPortfolio_NoResults")}</MessageBar>;
         }
 
         return (
@@ -283,7 +283,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }));
             items.push({
                 key: "Group",
-                name: this.state.groupBy ? this.state.groupBy.name : RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                name: this.state.groupBy ? this.state.groupBy.name : __.getResource("String_NoGrouping"),
                 iconProps: { iconName: "GroupedList" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -291,7 +291,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     items: [
                         {
                             key: "NoGrouping",
-                            name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                            name: __.getResource("String_NoGrouping"),
                             onClick: e => {
                                 e.preventDefault();
                                 this.setState({ groupBy: null });
@@ -323,14 +323,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             if (this.state.canUserManageWeb) {
                 farItems.push({
                     key: "NewView",
-                    name: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                    name: __.getResource("DynamicPortfolio_CreateNewView"),
                     iconProps: { iconName: "CirclePlus" },
                     itemType: ContextualMenuItemType.Normal,
                     onClick: e => {
                         e.preventDefault();
                         SP.UI.ModalDialog.showModalDialog({
                             url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
-                            title: RESOURCE_MANAGER.getResource("DynamicPortfolio_CreateNewView"),
+                            title: __.getResource("DynamicPortfolio_CreateNewView"),
                         });
                     },
                 });
@@ -405,7 +405,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
             }
             const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map(g => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : RESOURCE_MANAGER.getResource("String_NotSet"));
+            const groupNames = groupItems.map(g => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
             groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
                 key: idx,
                 name: `${this.state.groupBy.name}: ${name}`,

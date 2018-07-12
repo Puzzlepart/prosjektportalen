@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const Information: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_Information_Title"),
+    Title: __.getResource("Lists_Information_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -14,7 +14,7 @@ const Information: IList = {
         EnableVersioning: true,
     },
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectInfoDescription"],
         AdditionalSettings: {
             RowLimit: 30,

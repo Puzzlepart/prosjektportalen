@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import { Site, List, LogEntry, LogLevel } from "sp-pnp-js";
 
 export interface ISpListLoggerEntry extends LogEntry {
@@ -24,7 +24,7 @@ export default class SpListLogger {
      * @param {string} listName List name
      * @param {string} siteUrl Site URL (defaults to _spPageContextInfo.siteAbsoluteUrl)
      */
-    constructor(listName = RESOURCE_MANAGER.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
+    constructor(listName = __.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
         this._listName = listName;
         this._siteUrl = siteUrl;
         this._pnpList = new Site(this._siteUrl).rootWeb.lists.getByTitle(this._listName);
@@ -55,13 +55,13 @@ export default class SpListLogger {
     private getLogLevelString(entry: ISpListLoggerEntry): string {
         switch (entry.level) {
             case LogLevel.Error: {
-                return RESOURCE_MANAGER.getResource("String_LogLevel_Error");
+                return __.getResource("String_LogLevel_Error");
             }
             case LogLevel.Info: {
-                return RESOURCE_MANAGER.getResource("String_LogLevel_Info");
+                return __.getResource("String_LogLevel_Info");
             }
             case LogLevel.Warning: {
-                return RESOURCE_MANAGER.getResource("String_LogLevel_Warning");
+                return __.getResource("String_LogLevel_Warning");
             }
             default: {
                 return "";
