@@ -73,6 +73,10 @@ const Navigation: INavigation = {
             Title: __.getResource("Lists_ProjectDeliveries_Title"),
         },
         {
+            Url: __.getResource("DefaultView_ProjectResources_Url"),
+            Title: __.getResource("Lists_ProjectResources_Title"),
+        },
+        {
             Url: "SitePages/Nofilter.aspx",
             Title: __.getResource("Navigation_NoFilterFrontpage_Title"),
         },

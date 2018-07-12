@@ -267,8 +267,11 @@
   <data name="Lists_DataSources_Title" xml:space="preserve">
     <value>Data Sources</value>
   </data>
-  <data name="Lists_SitePages_Url" xml:space="preserve">
-    <value>SitePages</value>
+  <data name="Lists_DataSources_Title" xml:space="preserve">
+    <value>Data Sources</value>
+  </data>
+  <data name="Lists_ProjectResources_Title" xml:space="preserve">
+    <value>Project Resources</value>
   </data>
   <data name="Lists_Announcements_Url" xml:space="preserve">
     <value>Lists/Announcements</value>
@@ -371,6 +374,9 @@
   </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Benefits Followup/AllItems.aspx</value>
+  </data>
+  <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
+    <value>Lists/Project Resources/AllItems.aspx</value>
   </data>
   <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
     <value>Project Status</value>
