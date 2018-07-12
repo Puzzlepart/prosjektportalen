@@ -1218,6 +1218,9 @@
   <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
     <value>Height</value>
   </data>
+  <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
+    <value>Role</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1679,6 +1682,9 @@
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>The height of the graph in pixels</value>
+  </data>  
+  <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>

@@ -1215,6 +1215,9 @@
   <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
     <value>Høyde</value>
   </data>
+  <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1679,6 +1682,9 @@
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>Høyden på diagrammet i piksler</value>
+  </data>
+  <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
