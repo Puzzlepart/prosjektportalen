@@ -39,9 +39,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
-    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog", {
-        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
-    }),
+    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),

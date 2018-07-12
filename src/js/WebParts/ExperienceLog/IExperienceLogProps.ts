@@ -56,6 +56,7 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         minWidth: 100,
         isResizable: true,
     }],
+    groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
     excelExportEnabled: true,
     excelExportConfig: {
         fileNamePrefix: RESOURCE_MANAGER.getResource("ExperienceLog_ExcelExportFileNamePrefix"),
