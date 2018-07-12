@@ -11,7 +11,7 @@ const ProjectResources: IList = {
         ContentTypeID: "0x010088578E7470CC4AA68D5663464831070209",
     }],
     Views: [{
-        Title: __.getResource("View_AllTasks_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["GtResourceUser", "GtResourceRole", "GtStartDate", "GtEndDate", "GtProjectPhase", "Modified", "Editor"],
         AdditionalSettings: {
             RowLimit: 100,
