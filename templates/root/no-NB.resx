@@ -2564,6 +2564,9 @@
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Gevinstoversikt</value>
+  </data>  
+  <data name="BenefitsOverview_LoadingText" xml:space="preserve">
+    <value>Laster gevinster og målinger...</value>
   </data>
   <data name="ExperienceLog_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle loggelementer....</value>

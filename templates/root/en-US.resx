@@ -2853,6 +2853,9 @@
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Show all measurements</value>
   </data>
+  <data name="BenefitsOverview_LoadingText" xml:space="preserve">
+    <value>Loading benefits and measurements...</value>
+  </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
   </data>

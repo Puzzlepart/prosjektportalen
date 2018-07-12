@@ -46,7 +46,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner
+                    type={SpinnerType.large}
+                    label={__.getResource("BenefitsOverview_LoadingText")} />
+            );
         }
         if (this.state.data) {
             let { items, columns, groups } = this.getFilteredData(this.props, this.state);
