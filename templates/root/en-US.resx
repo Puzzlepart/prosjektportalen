@@ -1220,6 +1220,9 @@
   </data>
   <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
     <value>Role</value>
+  </data>  
+  <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1684,6 +1687,9 @@
     <value>The height of the graph in pixels</value>
   </data>  
   <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
