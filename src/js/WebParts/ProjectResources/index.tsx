@@ -15,7 +15,7 @@ import ProjectResource from "./ProjectResource";
 export default class ProjectResources extends BaseWebPart<IProjectResourcesProps, IProjectResourcesState> {
     public static displayName = "ProjectResources";
     protected _columns: Array<IColumn> = [{
-        key: "GtResourceUserOWSUSER",
+        key: "RefinableString71",
         fieldName: "ResourceUser",
         name: "Navn",
         minWidth: 200,
@@ -23,7 +23,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
         isResizable: true,
     },
     {
-        key: "owstaxIdGtResourceRole",
+        key: "RefinableString72",
         fieldName: "ResourceRole",
         name: "Rolle",
         minWidth: 100,
@@ -47,7 +47,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
         isResizable: true,
     },
     {
-        key: "GtProjectPhase",
+        key: "RefinableString52",
         fieldName: "ProjectPhase",
         name: "Fase",
         minWidth: 100,
@@ -94,7 +94,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
             QueryTemplate: "ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* Path:{SiteCollection.URL}",
             RowLimit: 500,
             TrimDuplicates: false,
-            SelectProperties: ["Path", "SPWebUrl", "SiteTitle", "Title", "GtResourceUserOWSUSER", "owstaxIdGtResourceRole", "GtStartDateOWSDATE", "GtEndDateOWSDATE", "GtProjectPhase"],
+            SelectProperties: ["Path", "SPWebUrl", "SiteTitle", "Title", "RefinableString71", "RefinableString72", "GtStartDateOWSDATE", "GtEndDateOWSDATE", "RefinableString52"],
         });
         const items = searchResults.PrimarySearchResults.map(r => new ProjectResource(r));
         return items;
