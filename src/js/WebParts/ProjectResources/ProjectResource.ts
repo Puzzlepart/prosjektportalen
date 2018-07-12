@@ -14,11 +14,11 @@ export default class ProjectResource {
         this.Title = data.Title;
         this.SiteTitle = data.SiteTitle;
         this.SPWebUrl = data.SPWebUrl;
-        this.ResourceUser = data.GtResourceUserOWSUSER;
-        this.ResourceRole = data.owstaxIdGtResourceRole;
+        this.ResourceUser = data.RefinableString71;
+        this.ResourceRole = data.RefinableString72;
         this.StartDate = data.GtStartDateOWSDATE;
         this.EndDate = data.GtEndDateOWSDATE;
-        this.ProjectPhase = data.GtProjectPhase;
+        this.ProjectPhase = data.RefinableString52;
     }
 }
 
