@@ -36,9 +36,12 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
         dataSource: DataSource.Search,
-        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }] }),
+        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
+    }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
-    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
+    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog", {
+        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
+    }),
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
@@ -49,7 +52,9 @@ const WebPartComponents: WebPartComponent<any>[] = [
         statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"),
     }),
-    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources"),
+    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources", {
+        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
+    }),
 ];
 
 /**

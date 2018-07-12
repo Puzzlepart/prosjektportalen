@@ -1,6 +1,6 @@
 
 interface IExcelExportConfig {
-    fileName: string;
+    fileName?: string;
     fileNamePrefix?: string;
     sheetName: string;
     buttonLabel: string;

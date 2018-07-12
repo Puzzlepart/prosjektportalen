@@ -3,8 +3,8 @@ import IGroupByOption from "../../IGroupByOption";
 import IExcelExportConfig from "../../IExcelExportConfig";
 
 export default interface IListProps {
-    items: Array<any>;
-    columns: Array<IColumn>;
+    items?: Array<any>;
+    columns?: Array<IColumn>;
     showSearchBox?: boolean;
     showCommandBar?: boolean;
     defaultGroupBy?: IGroupByOption;

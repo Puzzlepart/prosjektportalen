@@ -1,34 +1,13 @@
 import RESOURCE_MANAGER from "../../Resources";
-import { SelectionMode, ConstrainMode, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import IGroupByOption from "../IGroupByOption";
-import IExcelExportConfig from "../IExcelExportConfig";
+import { IListProps } from "../@Components/List";
 
-export default interface IExperienceLogProps extends IBaseWebPartProps {
+export default interface IExperienceLogProps extends IBaseWebPartProps, IListProps {
     dataSource?: string;
-    constrainMode?: ConstrainMode;
-    layoutMode?: DetailsListLayoutMode;
-    selectionMode?: SelectionMode;
-    groupByOptions?: IGroupByOption[];
-    showSearchBox?: boolean;
-    showCommandBar?: boolean;
-    searchProperty?: string;
-    modalHeaderClassName?: string;
-    projectInfoFilterField?: string;
-    columns?: any[];
-    excelExportEnabled?: boolean;
-    excelExportConfig?: IExcelExportConfig;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     dataSource: "LESSONSLOG",
-    showSearchBox: false,
-    groupByOptions: [],
-    constrainMode: ConstrainMode.horizontalConstrained,
-    projectInfoFilterField: "GtPcPortfolioPage",
-    modalHeaderClassName: "ms-font-xxl",
-    layoutMode: DetailsListLayoutMode.fixedColumns,
-    selectionMode: SelectionMode.none,
     columns: [{
         key: "Title",
         fieldName: "Title",
@@ -39,38 +18,47 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         key: "SiteTitle",
         fieldName: "SiteTitle",
         name: RESOURCE_MANAGER.getResource("String_Project"),
+        minWidth: 100,
+        isResizable: true,
     },
     {
         key: "GtProjectLogDescriptionOWSMTXT",
         fieldName: "Description",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogDescription_DisplayName"),
+        minWidth: 100,
+        isResizable: true,
     },
     {
         key: "GtProjectLogResponsibleOWSCHCS",
         fieldName: "Responsible",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogResponsible_DisplayName"),
+        minWidth: 100,
+        isResizable: true,
     },
     {
         key: "GtProjectLogConsequenceOWSMTXT",
         fieldName: "Consequence",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogConsequence_DisplayName"),
+        minWidth: 100,
+        isResizable: true,
     },
     {
         key: "GtProjectLogRecommendationOWSMTXT",
         fieldName: "Recommendation",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogRecommendation_DisplayName"),
+        minWidth: 100,
+        isResizable: true,
     },
     {
         key: "GtProjectLogActorsOWSCHCM",
         fieldName: "Actors",
         name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogActors_DisplayName"),
-    }].map(col => ({
-        ...col,
+        minWidth: 100,
         isResizable: true,
-    })),
+    }],
     excelExportEnabled: true,
     excelExportConfig: {
-        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
+        fileNamePrefix: RESOURCE_MANAGER.getResource("ExperienceLog_ExcelExportFileNamePrefix"),
         sheetName: "Sheet A",
         buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",

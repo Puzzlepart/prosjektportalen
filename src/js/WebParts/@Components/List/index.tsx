@@ -51,7 +51,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                     groups={groups}
                     onRenderItemColumn={this._onRenderItemColumn}
                     constrainMode={ConstrainMode.horizontalConstrained}
-                    layoutMode={DetailsListLayoutMode.justified}
+                    layoutMode={DetailsListLayoutMode.fixedColumns}
                     selectionMode={SelectionMode.none} />
                 {this._renderProjectInfoModal()}
             </div>
