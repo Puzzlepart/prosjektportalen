@@ -38,7 +38,11 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner
+                    type={SpinnerType.large}
+                    label={__.getResource("ExperienceLog_LoadingText")} />
+            );
         }
 
         return (

@@ -2568,6 +2568,9 @@
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>LessonsLearned</value>
   </data>
+  <data name="ExperienceLog_LoadingText" xml:space="preserve">
+    <value>Loading log elements...</value>
+  </data>
   <data name="DeliveriesOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>DeliveriesOverview</value>
   </data>

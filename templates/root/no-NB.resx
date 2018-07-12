@@ -2579,6 +2579,9 @@
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Erfaringslogg</value>
+  </data>  
+  <data name="ExperienceLog_LoadingText" xml:space="preserve">
+    <value>Laster loggelementer..</value>
   </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>Det skjedde en feil under lasting. DICE er ikke riktig konfigurert.</value>
