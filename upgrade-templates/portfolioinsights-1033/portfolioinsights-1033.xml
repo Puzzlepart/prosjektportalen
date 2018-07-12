@@ -2,7 +2,7 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
     <pnp:Templates ID="CONTAINER-PP">
-        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTFOLIOINSIGHTS-1044-PATCH" Version="0">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTFOLIOINSIGHTS-1033-PATCH" Version="0">
             <pnp:Lists>
                 <pnp:ListInstance Title="Statistics fields" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false" 
                     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
