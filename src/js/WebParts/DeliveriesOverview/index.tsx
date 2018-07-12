@@ -1,6 +1,6 @@
 import * as React from "react";
 import pnp, { Site } from "sp-pnp-js";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import BaseWebPart from "../@BaseWebPart";
 import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDeliveriesOverviewProps";
@@ -40,7 +40,11 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner
+                    type={SpinnerType.large}
+                    label={__.getResource("DeliveriesOverview_LoadingText")} />
+            );
         }
 
         return (
@@ -58,7 +62,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * Fetch items
      */
     protected async _fetchItems() {
-        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
         if (dataSource) {
             try {
