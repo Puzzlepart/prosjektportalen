@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PhaseModel } from "../../ProjectPhasesData";
 
@@ -22,7 +22,7 @@ const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhaseHandler }: IC
             <div hidden={!changePhaseEnabled}>
                 <a href="#" onClick={() => onChangePhaseHandler(phase)}>
                     <Icon iconName="DoubleChevronRight12" />
-                    <span style={{ marginLeft: 5 }}>{RESOURCE_MANAGER.getResource(linkTextResourceKey)}</span>
+                    <span style={{ marginLeft: 5 }}>{__.getResource(linkTextResourceKey)}</span>
                 </a>
             </div>
         </li>

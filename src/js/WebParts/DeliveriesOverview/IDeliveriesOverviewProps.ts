@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import {
     SelectionMode,
     ConstrainMode,
@@ -28,21 +28,21 @@ export default interface IDeliveriesOverviewProps extends IBaseWebPartProps {
 
 export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> = {
     groupByOptions: [
-        { name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" },
-        { name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatus_DisplayName"), key: "ProductStatus" },
+        { name: __.getResource("String_Project"), key: "SiteTitle" },
+        { name: __.getResource("SiteFields_GtProductStatus_DisplayName"), key: "ProductStatus" },
     ],
     dataSource: "DELIVERIESOVERVIEW",
     columns: [{
         key: "Title",
         fieldName: "Title",
-        name: RESOURCE_MANAGER.getResource("SiteFields_Title_DisplayName"),
+        name: __.getResource("SiteFields_Title_DisplayName"),
         minWidth: 220,
         isMultiline: true,
     },
     {
         key: "SiteTitle",
         fieldName: "SiteTitle",
-        name: RESOURCE_MANAGER.getResource("String_Project"),
+        name: __.getResource("String_Project"),
         minWidth: 220,
         isMultiline: true,
         isResizable: true,
@@ -50,7 +50,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     {
         key: "GtProductDescriptionOWSMTXT",
         fieldName: "ProductDescription",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductDescription_DisplayName"),
+        name: __.getResource("SiteFields_GtProductDescription_DisplayName"),
         minWidth: 220,
         isMultiline: true,
         isResizable: true,
@@ -58,7 +58,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     {
         key: "GtProductStartTimeOWSDATE",
         fieldName: "ProductStartTime",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStartTime_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStartTime_DisplayName"),
         minWidth: 100,
         isMultiline: false,
         isResizable: true,
@@ -66,7 +66,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     {
         key: "GtProductEndTimeOWSDATE",
         fieldName: "ProductEndTime",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductEndTime_DisplayName"),
+        name: __.getResource("SiteFields_GtProductEndTime_DisplayName"),
         minWidth: 100,
         isMultiline: false,
         isResizable: true,
@@ -74,7 +74,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     {
         key: "GtProductStatusOWSCHCS",
         fieldName: "ProductStatus",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatus_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStatus_DisplayName"),
         minWidth: 100,
         isMultiline: false,
         isResizable: true,
@@ -82,16 +82,16 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
     {
         key: "GtProductStatusCommentOWSMTXT",
         fieldName: "ProductStatusComment",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatusComment_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStatusComment_DisplayName"),
         minWidth: 220,
         isMultiline: true,
         isResizable: true,
     }],
     excelExportEnabled: true,
     excelExportConfig: {
-        fileNamePrefix: RESOURCE_MANAGER.getResource("DeliveriesOverview_ExcelExportFileNamePrefix"),
+        fileNamePrefix: __.getResource("DeliveriesOverview_ExcelExportFileNamePrefix"),
         sheetName: "Sheet A",
-        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
 };

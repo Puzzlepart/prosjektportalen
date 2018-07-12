@@ -1,6 +1,6 @@
 import * as React from "react";
 import pnp, { Site, List } from "sp-pnp-js";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -36,8 +36,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     constructor(props: IRiskMatrixProps) {
         super(props);
         this.state = this._getInitialState(props);
-        this._uncertaintiesList = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"));
-        this._dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+        this._uncertaintiesList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
+        this._dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
     }
 
     public async componentDidMount() {
@@ -82,7 +82,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
 
         if (data.items.length === 0) {
             if (this.props.showEmptyMessage) {
-                return <MessageBar>{RESOURCE_MANAGER.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
+                return <MessageBar>{__.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
             }
             return null;
         }
@@ -94,7 +94,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 <div className={this.props.className}>
                     <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
                         <Dropdown
-                            label={RESOURCE_MANAGER.getResource("RiskMatrix_ViewSelectorLabel")}
+                            label={__.getResource("RiskMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
                             onChanged={this._onViewChanged} />
@@ -107,9 +107,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     <div>
                         <Toggle
                             onChanged={postAction => this.setState({ postAction })}
-                            label={RESOURCE_MANAGER.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                            onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                            offText={RESOURCE_MANAGER.getResource("String_No")} />
+                            label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                            onText={__.getResource("String_Yes")}
+                            offText={__.getResource("String_No")} />
                     </div>
                 </div>
             );

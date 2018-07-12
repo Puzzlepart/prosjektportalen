@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
@@ -66,10 +66,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public render(): React.ReactElement<IProjectStatsProps> {
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
-            return <Spinner label={RESOURCE_MANAGER.getResource("String_Projectstats_Loading_Text")} type={SpinnerType.large} />;
+            return <Spinner label={__.getResource("String_Projectstats_Loading_Text")} type={SpinnerType.large} />;
         }
         if (errorMessage) {
-            return <MessageBar messageBarType={MessageBarType.error}>{RESOURCE_MANAGER.getResource("String_Projectstats_Error_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>{__.getResource("String_Projectstats_Error_Text")}</MessageBar>;
         }
         Logger.log({
             message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."),
@@ -99,10 +99,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     private _renderInner() {
         const { charts, data } = this.state;
         if (charts.length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Charts_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_Projectstats_No_Charts_Text")}</MessageBar>;
         }
         if (data.getCount() === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("String_Projectstats_No_Data_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_Projectstats_No_Data_Text")}</MessageBar>;
         }
         return charts
             .sort((a, b) => a.order - b.order)
@@ -158,8 +158,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
-        const statsFieldsList = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"));
-        const chartsConfigList = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"));
+        const statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
+        const chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
         try {
             const batch = sp.createBatch();
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import MatrixCellType from "../../Model/MatrixCellType";
 import IMatrixCell from "../../Model/IMatrixCell";
 
@@ -9,34 +9,34 @@ const RiskMatrixCells: Array<IMatrixCell[]> = [
             className: "risk-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Insignificant"),
+            cellValue: __.getResource("RiskMatrix_Header_Insignificant"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Small"),
+            cellValue: __.getResource("RiskMatrix_Header_Small"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Moderate"),
+            cellValue: __.getResource("RiskMatrix_Header_Moderate"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Serious"),
+            cellValue: __.getResource("RiskMatrix_Header_Serious"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Critical"),
+            cellValue: __.getResource("RiskMatrix_Header_Critical"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryHigh"),
+            cellValue: __.getResource("RiskMatrix_Header_VeryHigh"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
@@ -78,7 +78,7 @@ const RiskMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_High"),
+            cellValue: __.getResource("RiskMatrix_Header_High"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
@@ -125,7 +125,7 @@ const RiskMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Medium"),
+            cellValue: __.getResource("RiskMatrix_Header_Medium"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
@@ -172,7 +172,7 @@ const RiskMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_Low"),
+            cellValue: __.getResource("RiskMatrix_Header_Low"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },
@@ -219,7 +219,7 @@ const RiskMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("RiskMatrix_Header_VeryLow"),
+            cellValue: __.getResource("RiskMatrix_Header_VeryLow"),
             cellType: MatrixCellType.Header,
             className: "risk-header",
         },

@@ -9,7 +9,7 @@ import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 
 export default class ProjectStatsDataSelection extends React.PureComponent<IProjectStatsDataSelectionProps, IProjectStatsDataSelectionState> {
     public static defaultProps: Partial<IProjectStatsDataSelectionProps> = {
@@ -50,7 +50,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                                     cursor: "pointer",
                                     position: "relative",
                                 }}>
-                                <span>{RESOURCE_MANAGER.getResource("String_Select_Project_Name")}</span>
+                                <span>{__.getResource("String_Select_Project_Name")}</span>
                                 <span style={{ position: "absolute", right: 25 }}><Icon iconName={this.state.isExpanded ? "ChevronDown" : "ChevronUp"} /></span>
                             </div>
                         </div>
@@ -58,18 +58,18 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                             <div className="ms-Grid-row">
                                 <div className="ms-Grid-col ms-sm12" style={{ marginTop: 20, marginBottom: 20 }}>
                                     <Dropdown
-                                        placeHolder={RESOURCE_MANAGER.getResource("String_Select_View_Name")}
-                                        label={RESOURCE_MANAGER.getResource("String_Select_View_Placeholder")}
+                                        placeHolder={__.getResource("String_Select_View_Name")}
+                                        label={__.getResource("String_Select_View_Placeholder")}
                                         defaultSelectedKey={this.props.views.indexOf(this.props.selectedView)}
                                         options={this.props.views.map((view, i) => ({ key: i, text: view.name, data: view }))}
                                         onChanged={opt => this.props.onViewChanged(opt.data)} />
-                                    <div className="ms-font-xs" style={{ marginTop: 20 }}>{RESOURCE_MANAGER.getResource("String_Select_View_Description")}</div>
+                                    <div className="ms-font-xs" style={{ marginTop: 20 }}>{__.getResource("String_Select_View_Description")}</div>
                                 </div>
                                 <div
                                     className="ms-Grid-col ms-sm12"
                                     style={{ marginTop: 20, marginBottom: 20 }}
                                     hidden={this.state.selection.length === 0} >
-                                    <MessageBar>{String.format(RESOURCE_MANAGER.getResource("String_Selection_Status_MessageBar_Text"), this.state.selection.length, this.props.data.getCount())}</MessageBar>
+                                    <MessageBar>{String.format(__.getResource("String_Selection_Status_MessageBar_Text"), this.state.selection.length, this.props.data.getCount())}</MessageBar>
                                 </div>
                                 <div className="ms-Grid-col ms-sm12" hidden={this.props.data.getCount() === 0}>
                                     <MarqueeSelection selection={this._selection}>
@@ -85,7 +85,7 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
                                     </MarqueeSelection>
                                     <div hidden={this.state.selection.length === 0} style={{ marginTop: 25 }} >
                                         <PrimaryButton
-                                            text={RESOURCE_MANAGER.getResource("String_Button_Update_Selection")}
+                                            text={__.getResource("String_Button_Update_Selection")}
                                             onClick={this._onUpdateSelection} />
                                     </div>
                                 </div>

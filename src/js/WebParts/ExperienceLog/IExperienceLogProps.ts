@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IListProps } from "../@Components/List";
 
@@ -11,57 +11,57 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     columns: [{
         key: "Title",
         fieldName: "Title",
-        name: RESOURCE_MANAGER.getResource("SiteFields_Title_DisplayName"),
+        name: __.getResource("SiteFields_Title_DisplayName"),
         minWidth: 220,
     },
     {
         key: "SiteTitle",
         fieldName: "SiteTitle",
-        name: RESOURCE_MANAGER.getResource("String_Project"),
+        name: __.getResource("String_Project"),
         minWidth: 100,
         isResizable: true,
     },
     {
         key: "GtProjectLogDescriptionOWSMTXT",
         fieldName: "Description",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogDescription_DisplayName"),
+        name: __.getResource("SiteFields_GtProjectLogDescription_DisplayName"),
         minWidth: 100,
         isResizable: true,
     },
     {
         key: "GtProjectLogResponsibleOWSCHCS",
         fieldName: "Responsible",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogResponsible_DisplayName"),
+        name: __.getResource("SiteFields_GtProjectLogResponsible_DisplayName"),
         minWidth: 100,
         isResizable: true,
     },
     {
         key: "GtProjectLogConsequenceOWSMTXT",
         fieldName: "Consequence",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogConsequence_DisplayName"),
+        name: __.getResource("SiteFields_GtProjectLogConsequence_DisplayName"),
         minWidth: 100,
         isResizable: true,
     },
     {
         key: "GtProjectLogRecommendationOWSMTXT",
         fieldName: "Recommendation",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogRecommendation_DisplayName"),
+        name: __.getResource("SiteFields_GtProjectLogRecommendation_DisplayName"),
         minWidth: 100,
         isResizable: true,
     },
     {
         key: "GtProjectLogActorsOWSCHCM",
         fieldName: "Actors",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProjectLogActors_DisplayName"),
+        name: __.getResource("SiteFields_GtProjectLogActors_DisplayName"),
         minWidth: 100,
         isResizable: true,
     }],
-    groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
+    groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
     excelExportEnabled: true,
     excelExportConfig: {
-        fileNamePrefix: RESOURCE_MANAGER.getResource("ExperienceLog_ExcelExportFileNamePrefix"),
+        fileNamePrefix: __.getResource("ExperienceLog_ExcelExportFileNamePrefix"),
         sheetName: "Sheet A",
-        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
 };

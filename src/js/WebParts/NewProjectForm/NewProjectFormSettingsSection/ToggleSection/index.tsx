@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import IToggleSectionProps from "./IToggleSectionProps";
@@ -41,8 +41,8 @@ export default class ToggleSection extends React.Component<IToggleSectionProps, 
                                     defaultChecked={opt[this.props.optDefaultCheckedProp] === true}
                                     label={opt[this.props.optLabelProp]}
                                     onChanged={checked => this.props.toggleOptionHandler(opt, checked)}
-                                    onText={RESOURCE_MANAGER.getResource("String_Yes")}
-                                    offText={RESOURCE_MANAGER.getResource("String_No")} />
+                                    onText={__.getResource("String_Yes")}
+                                    offText={__.getResource("String_No")} />
                                 <div className="ms-font-xs" style={{ paddingTop: 10, paddingBottom: 10 }} hidden={!opt.Comments}>
                                     {opt.Comments}
                                 </div>

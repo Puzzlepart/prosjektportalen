@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import ProjectList, { IProjectListProps } from "./ProjectList";
 import ProjectInfo, { IProjectInfoProps } from "./ProjectInfo";
 import ProjectPhases, { IProjectPhasesProps } from "./ProjectPhases";
@@ -36,7 +36,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
         dataSource: DataSource.Search,
-        groupByOptions: [{ name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" }],
+        groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
@@ -47,8 +47,8 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesoverview", { showEmptyMessage: true }),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
-        statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),
-        chartsConfigListName: RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"),
+        statsFieldsListName: __.getResource("Lists_StatsFieldsConfig_Title"),
+        chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),
     new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources"),
 ];

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import MatrixCellType from "../../Model/MatrixCellType";
 import IMatrixCell from "../../Model/IMatrixCell";
 
@@ -10,34 +10,34 @@ const OpportunityMatrixCells: Array<IMatrixCell[]> = [
             className: "opportunity-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Insignificant"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Insignificant"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Limited"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Limited"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Moderate"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Moderate"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Significant"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Significant"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Large"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Large"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_VeryHigh"),
+            cellValue: __.getResource("OpportunityMatrix_Header_VeryHigh"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
@@ -84,7 +84,7 @@ const OpportunityMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_High"),
+            cellValue: __.getResource("OpportunityMatrix_Header_High"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
@@ -131,7 +131,7 @@ const OpportunityMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Medium"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Medium"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
@@ -178,7 +178,7 @@ const OpportunityMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_Low"),
+            cellValue: __.getResource("OpportunityMatrix_Header_Low"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },
@@ -225,7 +225,7 @@ const OpportunityMatrixCells: Array<IMatrixCell[]> = [
     ],
     [
         {
-            cellValue: RESOURCE_MANAGER.getResource("OpportunityMatrix_Header_VeryLow"),
+            cellValue: __.getResource("OpportunityMatrix_Header_VeryLow"),
             cellType: MatrixCellType.Header,
             className: "opportunity-header",
         },

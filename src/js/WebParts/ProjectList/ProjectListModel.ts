@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import * as Util from "../../Util";
 
 export interface IUserDetails {
@@ -45,7 +45,7 @@ export default class ProjectListModel {
     */
     public getManager(): IUserDetails {
         let email = "";
-        let name = RESOURCE_MANAGER.getResource("String_NotSet");
+        let name = __.getResource("String_NotSet");
         if (this.Manager) {
             [email, name] = this.Manager.split(" | ");
         }
@@ -58,7 +58,7 @@ export default class ProjectListModel {
      */
     public getOwner(): IUserDetails {
         let email = "";
-        let name = RESOURCE_MANAGER.getResource("String_NotSet");
+        let name = __.getResource("String_NotSet");
         if (this.Owner) {
             [email, name] = this.Owner.split(" | ");
         }

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as unique from "array-unique";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
@@ -16,7 +16,7 @@ import * as Util from "../../../Util";
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
         groupByOptions: [],
-        defaultGroupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
+        defaultGroupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
     };
 
     /**
@@ -42,7 +42,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 {this._renderCommandBar()}
                 <div hidden={!this.props.showSearchBox}>
                     <SearchBox
-                        placeholder={RESOURCE_MANAGER.getResource("ExperienceLog_SearchBox_Placeholder")}
+                        placeholder={__.getResource("ExperienceLog_SearchBox_Placeholder")}
                         onChanged={this._onSearch} />
                 </div>
                 <DetailsList
@@ -68,7 +68,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         if (this.props.groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
-                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                name: __.getResource("String_NoGrouping"),
             };
             const subItems = [noGrouping, ...this.props.groupByOptions].map(item => ({
                 ...item,

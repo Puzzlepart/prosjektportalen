@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import pnp, { Site } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
@@ -56,7 +56,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * Fetch items
      */
     protected async _fetchItems() {
-        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DataSources_Title"));
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
         if (dataSource) {
             try {

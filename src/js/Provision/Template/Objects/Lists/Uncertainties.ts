@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const Uncertainties: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+    Title: __.getResource("Lists_Uncertainties_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -17,7 +17,7 @@ const Uncertainties: IList = {
         EnableVersioning: true,
     },
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: [
             "ID",
             "LinkTitle",
@@ -39,7 +39,7 @@ const Uncertainties: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_CurrentRisk_DisplayName"),
+        Title: __.getResource("View_CurrentRisk_DisplayName"),
         ViewFields: [
             "ID",
             "LinkTitle",
@@ -69,7 +69,7 @@ const Uncertainties: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_UnacceptableRisk_DisplayName"),
+        Title: __.getResource("View_UnacceptableRisk_DisplayName"),
         ViewFields: [
             "ID",
             "LinkTitle",
@@ -105,7 +105,7 @@ const Uncertainties: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_ClarifiedRisks_DisplayName"),
+        Title: __.getResource("View_ClarifiedRisks_DisplayName"),
         ViewFields: [
             "ID",
             "LinkTitle",
@@ -135,7 +135,7 @@ const Uncertainties: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_WithoutResponsible_DisplayName"),
+        Title: __.getResource("View_WithoutResponsible_DisplayName"),
         ViewFields: [
             "ID",
             "LinkTitle",

@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import DataSource from "../../DataSource";
 import MeasurementEntry from "./MeasurementEntry";
 
@@ -90,7 +90,7 @@ export default class BenefitEntry {
         this.MeasurementUnit = data.GtMeasurementUnit;
         this.StartValue = data.GtStartValue;
         this.DesiredValue = data.GtDesiredValue;
-        this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
+        this.DisplayFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource("DefaultView_BenefitsAnalysis_Url")}?ID=${this.ID}`.replace("AllItems", "DispForm");
     }
 
     /**

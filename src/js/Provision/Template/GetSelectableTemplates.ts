@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { Site } from "sp-pnp-js";
 import ITemplateFile from "./ITemplateFile";
 
@@ -7,7 +7,7 @@ import ITemplateFile from "./ITemplateFile";
  */
 export default async function GetSelectableTemplates(): Promise<ITemplateFile[]> {
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
-    const templatesLib = rootWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_SiteTemplates_Title"));
+    const templatesLib = rootWeb.lists.getByTitle(__.getResource("Lists_SiteTemplates_Title"));
     try {
         const selectableTemplates = await templatesLib
             .items

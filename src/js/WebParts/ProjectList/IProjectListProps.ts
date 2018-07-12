@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface IProjectListProps extends IBaseWebPartProps {
@@ -24,9 +24,9 @@ export const ProjectListDefaultProps: Partial<IProjectListProps> = {
     projectInfoFilterField: "GtPcPortfolioPage",
     dataSourceName: "PROJECTS",
     rowLimit: 500,
-    searchBoxLabelText: RESOURCE_MANAGER.getResource("DynamicPortfolio_SearchBox_Placeholder"),
-    loadingText: RESOURCE_MANAGER.getResource("ProjectList_LoadingText"),
-    emptyMessage: RESOURCE_MANAGER.getResource("ProjectList_NoResults"),
+    searchBoxLabelText: __.getResource("DynamicPortfolio_SearchBox_Placeholder"),
+    loadingText: __.getResource("ProjectList_LoadingText"),
+    emptyMessage: __.getResource("ProjectList_NoResults"),
     propertyClassNames: [],
     searchTimeoutMs: 250,
 };

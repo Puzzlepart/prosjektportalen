@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IFile } from "sp-js-provisioning/lib/schema";
 
 const BenefitsOverview: IFile = {
@@ -25,7 +25,7 @@ const BenefitsOverview: IFile = {
         </metaData>
         <data>
             <properties>
-                <property name="Title" type="string">${RESOURCE_MANAGER.getResource("WebPart_BenefitsOverview_Title")}</property>
+                <property name="Title" type="string">${__.getResource("WebPart_BenefitsOverview_Title")}</property>
                 <property name="ChromeType" type="chrometype">Default</property>
                 <property name="ChromeState" type="chromestate">Normal</property>
                 <property name="Content" type="string">&lt;div id="pp-benefitsoverview"&gt;&lt;/div&gt;</property>

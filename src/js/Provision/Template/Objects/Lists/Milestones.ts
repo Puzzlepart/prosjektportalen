@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const Milestones: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_Milestones_Title"),
+    Title: __.getResource("Lists_Milestones_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -14,7 +14,7 @@ const Milestones: IList = {
         EnableVersioning: true,
     },
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtMilestonePlannedDate", "GtMilestoneActualDate", "GtMilestoneStatus", "GtMilestoneComment"],
         AdditionalSettings: {
             RowLimit: 30,

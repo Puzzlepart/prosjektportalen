@@ -1,5 +1,5 @@
 //#region Imports
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import * as React from "react";
 import pnp, { List, Item } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
@@ -38,7 +38,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
         this.sitePagesLibrary = pnp.sp.web.lists.getById(_spPageContextInfo.pageListId);
-        this.phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
+        this.phaseChecklist = pnp.sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
         this.welcomePage = this.sitePagesLibrary.items.getById(_spPageContextInfo.pageItemId);
     }
 
@@ -60,7 +60,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
 
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} label={RESOURCE_MANAGER.getResource("ProjectPhases_LoadingText")} />;
+            return <Spinner type={SpinnerType.large} label={__.getResource("ProjectPhases_LoadingText")} />;
         }
         return (
             <div>
@@ -68,7 +68,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 {this.renderChangePhaseDialog()}
                 <div hidden={this.isPhaseSet()}>
                     <MessageBar messageBarType={MessageBarType.info}>
-                        {RESOURCE_MANAGER.getResource("ProjectPhases_PhaseNotSetText")}
+                        {__.getResource("ProjectPhases_PhaseNotSetText")}
                     </MessageBar>
                 </div>
             </div>
@@ -210,8 +210,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     */
     private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "") {
         const projectProcessState = phase.Type === "Gate"
-            ? RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_AtGate")
-            : RESOURCE_MANAGER.getResource("Choice_GtProjectProcessState_InPhase");
+            ? __.getResource("Choice_GtProjectProcessState_AtGate")
+            : __.getResource("Choice_GtProjectProcessState_InPhase");
         const lastGateStatus = this.getLastGateStatusLocalized(changePhaseDialogResult);
         let valuesToUpdate: { [key: string]: string } = {
             GtProjectProcessState: projectProcessState,
@@ -230,9 +230,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     */
     private getLastGateStatusLocalized(changePhaseDialogResult: ChangePhaseDialogResult): string {
         switch (changePhaseDialogResult) {
-            case ChangePhaseDialogResult.Approved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_Approved");
-            case ChangePhaseDialogResult.ProvisionallyApproved: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_ProvisionallyApproved");
-            case ChangePhaseDialogResult.Rejected: return RESOURCE_MANAGER.getResource("Choice_GtLastGateStatus_Rejected");
+            case ChangePhaseDialogResult.Approved: return __.getResource("Choice_GtLastGateStatus_Approved");
+            case ChangePhaseDialogResult.ProvisionallyApproved: return __.getResource("Choice_GtLastGateStatus_ProvisionallyApproved");
+            case ChangePhaseDialogResult.Rejected: return __.getResource("Choice_GtLastGateStatus_Rejected");
             default: return null;
         }
     }
@@ -245,8 +245,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     * @param {IChecklistItem[]} items Checklist items
     */
     private async restartIncrementalPhase(items: IChecklistItem[]) {
-        const statusArchived = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived");
-        const statusOpen = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open");
+        const statusArchived = __.getResource("Choice_GtChecklistStatus_Archived");
+        const statusOpen = __.getResource("Choice_GtChecklistStatus_Open");
         const listItemEntityTypeFullName = await this.phaseChecklist.getListItemEntityTypeFullName();
         for (let i = 0; i < items.length; i++) {
             const { ID, Title, GtProjectPhase } = items[i];

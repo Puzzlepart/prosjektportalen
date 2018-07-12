@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { Web } from "sp-pnp-js";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
@@ -10,7 +10,7 @@ import { loadJsonConfiguration } from "../../../Util";
  * @param {Web} configWeb Config web
  */
 export function getFieldsConfig(orderBy: string, configWeb: Web): Promise<any[]> {
-    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioFields_Title"))
+    return configWeb.lists.getByTitle(__.getResource("Lists_DynamicPortfolioFields_Title"))
         .items
         .orderBy(orderBy)
         .usingCaching()
@@ -24,7 +24,7 @@ export function getFieldsConfig(orderBy: string, configWeb: Web): Promise<any[]>
  * @param {Web} configWeb Config web
  */
 export function getRefinersConfig(orderBy: string, configWeb: Web): Promise<any[]> {
-    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioRefiners_Title"))
+    return configWeb.lists.getByTitle(__.getResource("Lists_DynamicPortfolioRefiners_Title"))
         .items
         .orderBy(orderBy)
         .usingCaching()
@@ -38,7 +38,7 @@ export function getRefinersConfig(orderBy: string, configWeb: Web): Promise<any[
  * @param {Web} configWeb Config web
  */
 export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> {
-    return configWeb.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_DynamicPortfolioViews_Title"))
+    return configWeb.lists.getByTitle(__.getResource("Lists_DynamicPortfolioViews_Title"))
         .items
         .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
         .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")

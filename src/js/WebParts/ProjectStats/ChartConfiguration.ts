@@ -2,7 +2,7 @@ import { List, LogLevel, Logger } from "sp-pnp-js";
 import { ProjectStatsChartData } from "./ProjectStatsChart";
 import StatsFieldConfiguration from "./StatsFieldConfiguration";
 import Preferences from "../../Preferences";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 
 const LOG_TEMPLATE = "(ChartConfiguration) {0}: {1} ({2})";
 
@@ -328,7 +328,7 @@ export default class ChartConfiguration {
                             return ([{
                                 colorByPoint: true,
                                 data: this._data.getValuesUnique(field).map((value, index) => ({
-                                    name: value || RESOURCE_MANAGER.getResource("String_Not_Set"),
+                                    name: value || __.getResource("String_Not_Set"),
                                     y: this.showPercentage ? (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100 : this._data.getItemsWithStringValue(field, value).length,
                                 })),
                             }]);

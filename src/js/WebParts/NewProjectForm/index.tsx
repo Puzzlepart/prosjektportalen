@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
@@ -112,8 +112,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         onDismiss={this.props.onDialogDismiss}
                         containerClassName="pp-modal" >
                         <div style={{ padding: 50 }}>
-                            <div style={{ marginBottom: 25 }} className="ms-font-xl">{RESOURCE_MANAGER.getResource("ProvisionWeb_Failed")}</div>
-                            <div className="ms-font-m">{RESOURCE_MANAGER.getResource("String_ContactAdmin")}</div>
+                            <div style={{ marginBottom: 25 }} className="ms-font-xl">{__.getResource("ProvisionWeb_Failed")}</div>
+                            <div className="ms-font-m">{__.getResource("String_ContactAdmin")}</div>
                         </div>
                     </Modal>
                 );
@@ -151,14 +151,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             <section>
                 <div style={inputContainerStyle}>
                     <TextField
-                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_TitlePlaceholder")}
+                        placeholder={__.getResource("NewProjectForm_TitlePlaceholder")}
                         value={model.Title}
                         onChanged={newValue => this._onFormChange("Title", newValue)}
                         errorMessage={errorMessages.Title} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
-                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_DescriptionPlaceholder")}
+                        placeholder={__.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
                         onChanged={newValue => this._onFormChange("Description", newValue)}
@@ -166,7 +166,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
-                        placeholder={RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholder")}
+                        placeholder={__.getResource("NewProjectForm_UrlPlaceholder")}
                         value={model.Url}
                         onChanged={newValue => this._onFormChange("Url", newValue)}
                         errorMessage={errorMessages.Url} />
@@ -198,7 +198,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         <div style={{ float: "right" }}>
                             <PrimaryButton
                                 onClick={this._onSubmitForm}
-                                disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
+                                disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
                         </div>
                     </div>
                 );
@@ -208,8 +208,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <DialogFooter>
                         <PrimaryButton
                             onClick={this._onSubmitForm}
-                            disabled={!this.state.formValid}>{RESOURCE_MANAGER.getResource("String_Create")}</PrimaryButton>
-                        <DefaultButton onClick={this.props.onDialogDismiss}>{RESOURCE_MANAGER.getResource("String_Close")}</DefaultButton>
+                            disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
+                        <DefaultButton onClick={this.props.onDialogDismiss}>{__.getResource("String_Close")}</DefaultButton>
                     </DialogFooter>
                 );
             }
@@ -267,7 +267,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         this.setState(prevState => ({
                             errorMessages: {
                                 ...prevState.errorMessages,
-                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
+                                Url: doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                             },
                             formValid: (newValue.length >= titleMinLength) && !doesExist,
                             model: { ...prevState.model, Title: newValue, Url: url },
@@ -290,7 +290,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         this.setState(prevState => ({
                             errorMessages: {
                                 ...prevState.errorMessages,
-                                Url: doesExist ? RESOURCE_MANAGER.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
+                                Url: doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
                             },
                             formValid: (prevState.model.Title.length >= titleMinLength) && !doesExist,
                             model: { ...prevState.model, Url: newValue },

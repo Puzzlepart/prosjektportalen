@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 
 export default interface INewProjectFormProps {
@@ -26,9 +26,9 @@ export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     onDialogDismiss: () => {
         //
     },
-    headerText: RESOURCE_MANAGER.getResource("NewProjectForm_Title"),
-    subHeaderText: RESOURCE_MANAGER.getResource("NewProjectForm_SubText"),
-    creationModalTitle: RESOURCE_MANAGER.getResource("CreationModal_Title"),
+    headerText: __.getResource("NewProjectForm_Title"),
+    subHeaderText: __.getResource("NewProjectForm_SubText"),
+    creationModalTitle: __.getResource("CreationModal_Title"),
     inputContainerStyle: { marginBottom: 5 },
     showSettings: true,
 };

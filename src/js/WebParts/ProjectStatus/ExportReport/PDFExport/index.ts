@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import { Site, Web } from "sp-pnp-js";
@@ -31,7 +31,7 @@ export default class PDFExport {
         for (let i = 0; i < this.sections.length; i++) {
             let section = this.sections[i];
             if (section.showRiskMatrix && section.showAsSection) {
-                await this.addPageWithImage("risk-matrix", RESOURCE_MANAGER.getResource("ProjectStatus_PDFRiskMatrix"));
+                await this.addPageWithImage("risk-matrix", __.getResource("ProjectStatus_PDFRiskMatrix"));
             }
             if (section.listTitle && section.showAsSection) {
                 await this.addPageWithList(section);
@@ -51,9 +51,9 @@ export default class PDFExport {
      * Add project properties page
      */
     public async addProjectPropertiesPage(): Promise<void> {
-        this.addDocumentTitle(`${RESOURCE_MANAGER.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
+        this.addDocumentTitle(`${__.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`, 15, this.MARGIN_LEFT);
         const project = await this.fetchProject();
-        this.addProperty(this.createColumn(RESOURCE_MANAGER.getResource("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
+        this.addProperty(this.createColumn(__.getResource("SiteFields_GtOverallStatus_DisplayName"), "GtOverallStatus"), project.item.GtOverallStatus, null, 40);
         const data = await this.fetchProjectData(project);
         data.properties
             .filter(prop => prop.value)
@@ -273,7 +273,7 @@ export default class PDFExport {
      * @param {IProject} project The project
      * @param {string} configListTitle Config list title
      */
-    private fetchProjectData = (project: IProject, configListTitle = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
+    private fetchProjectData = (project: IProject, configListTitle = __.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<any>>((resolve, reject) => {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const configPromise = rootWeb
             .lists
@@ -320,14 +320,14 @@ export default class PDFExport {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const fieldsPromise = rootWeb
             .contentTypes
-            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .get();
 
         const itemPromise = new Web(_spPageContextInfo.webAbsoluteUrl)
             .lists
-            .getByTitle(RESOURCE_MANAGER.getResource("Lists_SitePages_Title"))
+            .getByTitle(__.getResource("Lists_SitePages_Title"))
             .items
             .getById(3)
             .fieldValuesAsText

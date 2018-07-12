@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { sp } from "sp-pnp-js";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
@@ -10,7 +10,7 @@ import { ChromeTitle } from "../../WebParts/@Components";
 
 const _: IBaseFormModifications = {
     DispForm: () => {
-        const measuresList = sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_BenefitsFollowup_Title"));
+        const measuresList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
         const id = "pp-related-gains-followup";
         const lookupField = "GtGainLookup";
         const container = FormUtil.insertFormContainer(id);
@@ -26,11 +26,11 @@ const _: IBaseFormModifications = {
         const id = "pp-next-step";
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render(<div>
-            <ChromeTitle title={RESOURCE_MANAGER.getResource("BenefitAnalysis_NextStep_Title")} />
+            <ChromeTitle title={__.getResource("BenefitAnalysis_NextStep_Title")} />
             <p>
-                {RESOURCE_MANAGER.getResource("BenefitAnalysis_NextStep_Text")}
-                <a href={`../../${RESOURCE_MANAGER.getResource("DefaultView_Tasks_Url")}`}>
-                    {RESOURCE_MANAGER.getResource("BenefitAnalysis_NextStep_LinkText")}
+                {__.getResource("BenefitAnalysis_NextStep_Text")}
+                <a href={`../../${__.getResource("DefaultView_Tasks_Url")}`}>
+                    {__.getResource("BenefitAnalysis_NextStep_LinkText")}
                 </a>​.
             </p>
         </div>, container);

@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import * as unique from "array-unique";
 import { DetailsList, IGroup, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
@@ -32,7 +32,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         super(props, {
             isLoading: true,
             searchTerm: "",
-            groupBy: { key: "NoGrouping", name: RESOURCE_MANAGER.getResource("String_NoGrouping") },
+            groupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
         });
     }
 
@@ -56,7 +56,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     <div hidden={!this.props.showSearchBox}>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
-                            placeholder={RESOURCE_MANAGER.getResource("BenefitsOverview_SearchBox_Placeholder")} />
+                            placeholder={__.getResource("BenefitsOverview_SearchBox_Placeholder")} />
                     </div>
                     <DetailsList
                         items={items}
@@ -93,7 +93,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
-                name: RESOURCE_MANAGER.getResource("String_NoGrouping"),
+                name: __.getResource("String_NoGrouping"),
             };
             const subItems = [{ ...noGrouping }, ...groupByOptions].map(item => ({
                 ...item,
@@ -194,19 +194,19 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                                 {
                                     key: "MeasurementValue",
                                     fieldName: "MeasurementValue",
-                                    name: RESOURCE_MANAGER.getResource("SiteFields_GtMeasurementValue_DisplayName"),
+                                    name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "Percentage",
                                     fieldName: "Percentage",
-                                    name: RESOURCE_MANAGER.getResource("String_AchievementOfObjectives"),
+                                    name: __.getResource("String_AchievementOfObjectives"),
                                     minWidth: 100,
                                 },
                                 {
                                     key: "MeasurementDate",
                                     fieldName: "MeasurementDate",
-                                    name: RESOURCE_MANAGER.getResource("SiteFields_GtMeasurementDate_DisplayName"),
+                                    name: __.getResource("SiteFields_GtMeasurementDate_DisplayName"),
                                     minWidth: 150,
                                 },
                             ]}
@@ -298,7 +298,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 ...items.map(item => columns.map(col => item[col.fieldName])),
             ],
         };
-        const fileName = String.format(this.props.excelExportConfig.fileName, RESOURCE_MANAGER.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format(this.props.excelExportConfig.fileName, __.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         await ExportToExcel({
             sheets: [sheet],
             fileName,

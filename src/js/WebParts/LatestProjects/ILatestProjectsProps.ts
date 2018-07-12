@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
 export default interface ILatestProjectsProps extends IBaseWebPartProps {
@@ -9,8 +9,8 @@ export default interface ILatestProjectsProps extends IBaseWebPartProps {
 }
 
 export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
-    chromeTitle: RESOURCE_MANAGER.getResource("WebPart_RecentProjects_Title"),
+    chromeTitle: __.getResource("WebPart_RecentProjects_Title"),
     itemsCount: 5,
     listClassName: "pp-simpleList spacing-m",
-    loadingText: RESOURCE_MANAGER.getResource("LatestProjects_LoadingText"),
+    loadingText: __.getResource("LatestProjects_LoadingText"),
 };

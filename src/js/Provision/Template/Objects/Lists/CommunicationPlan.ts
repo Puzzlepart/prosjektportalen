@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { GtCommunicationTarget } from "./SiteFields";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const CommunicationPlan: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Title"),
+    Title: __.getResource("Lists_CommunicationPlan_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -16,7 +16,7 @@ const CommunicationPlan: IList = {
     },
     Fields: [GtCommunicationTarget],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectPhase", "GtActionDate", "GtActionResponsible"],
         AdditionalSettings: {
             RowLimit: 10,

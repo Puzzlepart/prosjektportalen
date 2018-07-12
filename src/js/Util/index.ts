@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import * as moment from "moment";
 import { Logger, LogLevel, Web } from "sp-pnp-js";
 import ExportToExcel from "./ExportToExcel";
@@ -27,7 +27,7 @@ export function htmlDecode(input: string): string {
  * @param {string} dFormat Date format
  * @param {string} locale Date locale
  */
-export function dateFormat(date: string, dFormat = RESOURCE_MANAGER.getResource("MomentDate_DefaultFormat"), locale = RESOURCE_MANAGER.getResource("MomentDate_Locale")): string {
+export function dateFormat(date: string, dFormat = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
     return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
 }
 
@@ -345,7 +345,7 @@ export function generateStorageKey(parts: string[], addWebPrefix = true) {
  * @param {string} val The value
  * @param {string} prefix Currency prefix
  */
-export function toCurrencyFormat(val: string, prefix = RESOURCE_MANAGER.getResource("CurrencySymbol")): string {
+export function toCurrencyFormat(val: string, prefix = __.getResource("CurrencySymbol")): string {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");

@@ -1,5 +1,5 @@
 //#region Imports
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import * as React from "react";
 import pnp, { List } from "sp-pnp-js";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
@@ -30,12 +30,12 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             isLoading: false,
             currentView: View.Initial,
         };
-        this.phaseChecklist = pnp.sp.web.lists.getByTitle(RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"));
+        this.phaseChecklist = pnp.sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
         this.nextCheckPoint = this.nextCheckPoint.bind(this);
 
         if (props.activePhase) {
             const { items } = props.activePhase.Checklist;
-            this.openChecklistItems = items.filter(item => item.GtChecklistStatus === RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Open"));
+            this.openChecklistItems = items.filter(item => item.GtChecklistStatus === __.getResource("Choice_GtChecklistStatus_Open"));
         }
     }
 
@@ -87,7 +87,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             case "Default": titleResKey = "ProjectPhases_ChangePhase";
                 break;
         }
-        return `${RESOURCE_MANAGER.getResource(titleResKey)} (${this.props.newPhase.Name})`;
+        return `${__.getResource(titleResKey)} (${this.props.newPhase.Name})`;
     }
 
     /**
@@ -102,7 +102,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
                 case "Default": subTextResKey = "ProjectPhases_ConfirmChangePhase";
                     break;
             }
-            return String.format(RESOURCE_MANAGER.getResource(subTextResKey), this.props.newPhase.Name);
+            return String.format(__.getResource(subTextResKey), this.props.newPhase.Name);
         }
         return "";
     }

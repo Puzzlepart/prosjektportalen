@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import pnp, { List } from "sp-pnp-js";
 import { DetailsList, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -53,7 +53,7 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
                 isLoading: false,
             }));
         } catch (error) {
-            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_LoadFailed"), messageBarType: MessageBarType.error }, { isLoading: false, error }, -1);
+            this.postStatusMessage({ content: __.getResource("DiceCalculator_LoadFailed"), messageBarType: MessageBarType.error }, { isLoading: false, error }, -1);
         }
     }
 
@@ -81,13 +81,13 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
                         <div hidden={!this.isSaveScoreEnabled()}>
                             <ActionButton
                                 iconProps={{ iconName: "Save" }}
-                                text={RESOURCE_MANAGER.getResource("DiceCalculator_SaveScore")}
+                                text={__.getResource("DiceCalculator_SaveScore")}
                                 onClick={this.saveScore} />
                         </div>
                         <div hidden={!this.isRemoveScoreEnabled()}>
                             <ActionButton
                                 iconProps={{ iconName: "Remove" }}
-                                text={RESOURCE_MANAGER.getResource("DiceCalculator_RemoveScore")}
+                                text={__.getResource("DiceCalculator_RemoveScore")}
                                 onClick={this.removeScore} />
                         </div>
                     </div>
@@ -110,7 +110,7 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
             }
             return (
                 <Dropdown
-                    placeHolder={RESOURCE_MANAGER.getResource("DiceCalculator_DropdownPlaceholder")}
+                    placeHolder={__.getResource("DiceCalculator_DropdownPlaceholder")}
                     onChanged={option => this._onChoiceChanged(index, option)}
                     options={this.props.choices[index].map((c, i) => ({
                         key: i,
@@ -161,9 +161,9 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
         }, { Title: _spPageContextInfo.webTitle, DiceOverallScore: this.calculateOverallScore() });
         try {
             const itemAddResult = await this.diceList.items.add(item);
-            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreSavedSuccess"), messageBarType: MessageBarType.success }, { scoreSubmitted: true, scoreId: itemAddResult.data.ID });
+            this.postStatusMessage({ content: __.getResource("DiceCalculator_ScoreSavedSuccess"), messageBarType: MessageBarType.success }, { scoreSubmitted: true, scoreId: itemAddResult.data.ID });
         } catch (err) {
-            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreSavedFailed"), messageBarType: MessageBarType.error });
+            this.postStatusMessage({ content: __.getResource("DiceCalculator_ScoreSavedFailed"), messageBarType: MessageBarType.error });
         }
     }
 
@@ -173,9 +173,9 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
     private async removeScore() {
         try {
             await this.diceList.items.getById(this.state.scoreId).delete();
-            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreRemovedSuccess"), messageBarType: MessageBarType.info }, { scoreSubmitted: false, scoreId: -1, elements: this.props.elements });
+            this.postStatusMessage({ content: __.getResource("DiceCalculator_ScoreRemovedSuccess"), messageBarType: MessageBarType.info }, { scoreSubmitted: false, scoreId: -1, elements: this.props.elements });
         } catch (err) {
-            this.postStatusMessage({ content: RESOURCE_MANAGER.getResource("DiceCalculator_ScoreRemovedFailed"), messageBarType: MessageBarType.error });
+            this.postStatusMessage({ content: __.getResource("DiceCalculator_ScoreRemovedFailed"), messageBarType: MessageBarType.error });
         }
     }
 

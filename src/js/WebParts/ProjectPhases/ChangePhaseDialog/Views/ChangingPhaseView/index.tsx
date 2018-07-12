@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../../Resources";
+import __ from "../../../../../Resources";
 import { ProgressIndicator } from "office-ui-fabric-react/lib/ProgressIndicator";
 import { Async } from "office-ui-fabric-react/lib/Utilities";
 import IChangingPhaseViewProps from "./IChangingPhaseViewProps";
@@ -56,7 +56,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
             case "Default": progressResKey = "ProjectPhases_ChangingPhase";
                 break;
         }
-        const [progressLabel, progressDescription] = RESOURCE_MANAGER.getResource(progressResKey).split(",");
+        const [progressLabel, progressDescription] = __.getResource(progressResKey).split(",");
         return (
             <ProgressIndicator
                 label={progressLabel}

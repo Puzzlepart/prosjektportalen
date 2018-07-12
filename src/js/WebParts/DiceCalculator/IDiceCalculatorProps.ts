@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import DiceCalculatorElement from "./DiceCalculatorElement";
@@ -14,43 +14,43 @@ export default interface IDiceCalculatorProps extends IBaseWebPartProps {
 export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     choices: [
         [
-            RESOURCE_MANAGER.getResource("DiceCalculator_LessThanTwoMonths"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_TwoToFourMonths"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_FourToEightMonths"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_EightMonths"),
+            __.getResource("DiceCalculator_LessThanTwoMonths"),
+            __.getResource("DiceCalculator_TwoToFourMonths"),
+            __.getResource("DiceCalculator_FourToEightMonths"),
+            __.getResource("DiceCalculator_EightMonths"),
         ],
         [
-            RESOURCE_MANAGER.getResource("DiceCalculator_VeryGood"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_GoodToVeryGood"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_AverageToGood"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Good"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Average"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_PoorToAverage"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Poor"),
+            __.getResource("DiceCalculator_VeryGood"),
+            __.getResource("DiceCalculator_GoodToVeryGood"),
+            __.getResource("DiceCalculator_AverageToGood"),
+            __.getResource("DiceCalculator_Good"),
+            __.getResource("DiceCalculator_Average"),
+            __.getResource("DiceCalculator_PoorToAverage"),
+            __.getResource("DiceCalculator_Poor"),
         ],
         [
-            RESOURCE_MANAGER.getResource("DiceCalculator_ClearlyStronglyCommunicateNeed"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_ReasonablyCommunicateNeed"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_SeemToWantSuccess"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_NeutralSeemToWantSuccess"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Neutral"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_ReluctantToNeutral"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Reluctant"),
+            __.getResource("DiceCalculator_ClearlyStronglyCommunicateNeed"),
+            __.getResource("DiceCalculator_ReasonablyCommunicateNeed"),
+            __.getResource("DiceCalculator_SeemToWantSuccess"),
+            __.getResource("DiceCalculator_NeutralSeemToWantSuccess"),
+            __.getResource("DiceCalculator_Neutral"),
+            __.getResource("DiceCalculator_ReluctantToNeutral"),
+            __.getResource("DiceCalculator_Reluctant"),
         ],
         [
-            RESOURCE_MANAGER.getResource("DiceCalculator_Eager"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_WillingEager"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Willing"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_ReluctantWilling"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Reluctant"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_StronglyReluctantToReluctant"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_StronglyReluctant"),
+            __.getResource("DiceCalculator_Eager"),
+            __.getResource("DiceCalculator_WillingEager"),
+            __.getResource("DiceCalculator_Willing"),
+            __.getResource("DiceCalculator_ReluctantWilling"),
+            __.getResource("DiceCalculator_Reluctant"),
+            __.getResource("DiceCalculator_StronglyReluctantToReluctant"),
+            __.getResource("DiceCalculator_StronglyReluctant"),
         ],
         [
-            RESOURCE_MANAGER.getResource("DiceCalculator_LessThan10Additional"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_10To20Additional"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_20To40Additional"),
-            RESOURCE_MANAGER.getResource("DiceCalculator_Above40Additional"),
+            __.getResource("DiceCalculator_LessThan10Additional"),
+            __.getResource("DiceCalculator_10To20Additional"),
+            __.getResource("DiceCalculator_20To40Additional"),
+            __.getResource("DiceCalculator_Above40Additional"),
         ],
     ],
     choicesScores: [
@@ -82,11 +82,11 @@ export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     }],
     diceListTitle: "Dice",
     elements: [
-        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_Duration"), "DiceDuration"),
-        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_TeamPerformanceIntegrity"), "DiceTPI"),
-        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_CommitmentSeniorMgmt"), "DiceCommSeniorMgmt"),
-        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_CommitmentLocal"), "DiceCommLocal"),
-        new DiceCalculatorElement(RESOURCE_MANAGER.getResource("DiceCalculator_Effort"), "DiceEffort"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_Duration"), "DiceDuration"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_TeamPerformanceIntegrity"), "DiceTPI"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_CommitmentSeniorMgmt"), "DiceCommSeniorMgmt"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_CommitmentLocal"), "DiceCommLocal"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_Effort"), "DiceEffort"),
     ],
 };
 

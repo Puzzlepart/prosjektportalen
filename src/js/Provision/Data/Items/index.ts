@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { Logger, LogLevel } from "sp-pnp-js";
 import ListConfig from "../Config/ListConfig";
 import IProvisionContext from "../../IProvisionContext";
@@ -81,7 +81,7 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
         throw err;
     }
     try {
-        context.progressCallbackFunc(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent"), String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyItems"), listItems.length, conf.SourceList, conf.DestinationList));
+        context.progressCallbackFunc(__.getResource("ProvisionWeb_CopyListContent"), String.format(__.getResource("ProvisionWeb_CopyItems"), listItems.length, conf.SourceList, conf.DestinationList));
         await listItems.reduce((chain: Promise<any>, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve());
         await HandleItemsWithParent(dataCtx);
         Logger.log({ message: "(CopyItems) Copy of list items done.", data: { conf }, level: LogLevel.Info });

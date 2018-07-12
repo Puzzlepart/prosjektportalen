@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { Schema } from "sp-js-provisioning/lib/schema";
 import { WebSettings, ComposedLook } from "../Objects";
 import SitePages from "../Objects/Lists/SitePages";
@@ -34,7 +34,7 @@ const LiteTemplate: Schema = {
             RemoveExistingWebParts: true,
             WebParts: [
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_ProjectPhases_Title"),
+                    Title: __.getResource("WebPart_ProjectPhases_Title"),
                     Zone: "LeftColumn",
                     Order: 0,
                     Contents: {
@@ -42,23 +42,23 @@ const LiteTemplate: Schema = {
                     },
                 },
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_Timeline_Title"),
+                    Title: __.getResource("WebPart_Timeline_Title"),
                     Zone: "LeftColumn",
                     Order: 1,
                     PropertyOverrides: [{
                         name: "Title",
                         type: "string",
-                        value: RESOURCE_MANAGER.getResource("WebPart_Timeline_Title"),
+                        value: __.getResource("WebPart_Timeline_Title"),
                     },
                     {
                         name: "ListUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Tasks_Url")}`,
+                        value: `{site}/${__.getResource("Lists_Tasks_Url")}`,
                     },
                     {
                         name: "TitleUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Tasks_Url")}`,
+                        value: `{site}/${__.getResource("DefaultView_Tasks_Url")}`,
                     },
                     {
                         name: "CurrentTaskListWebAddress",
@@ -73,7 +73,7 @@ const LiteTemplate: Schema = {
                     {
                         name: "ViewName",
                         type: "string",
-                        value: RESOURCE_MANAGER.getResource("WebPart_Timeline_ViewName"),
+                        value: __.getResource("WebPart_Timeline_ViewName"),
                     },
                     {
                         name: "TimelineType",
@@ -85,29 +85,29 @@ const LiteTemplate: Schema = {
                     },
                 },
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
+                    Title: __.getResource("WebPart_DocumentsCurrentPhase_Title"),
                     Zone: "LeftColumn",
                     Order: 2,
                     PropertyOverrides: [{
                         name: "Title",
                         type: "string",
-                        value: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
+                        value: __.getResource("WebPart_DocumentsCurrentPhase_Title"),
                     },
                     {
                         name: "ListUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Documents_Url")}`,
+                        value: `{site}/${__.getResource("Lists_Documents_Url")}`,
                     },
                     {
                         name: "TitleUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Documents_Url")}`,
+                        value: `{site}/${__.getResource("DefaultView_Documents_Url")}`,
                     }],
                     Contents: {
                         FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
                     },
                     ListView: {
-                        List: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
+                        List: __.getResource("Lists_Documents_Title"),
                         View: {
                             Title: "",
                             ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
@@ -121,7 +121,7 @@ const LiteTemplate: Schema = {
                     },
                 },
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"),
+                    Title: __.getResource("WebPart_ProjectInfo_Title"),
                     Zone: "RightColumn",
                     Order: 0,
                     Contents: {
@@ -129,7 +129,7 @@ const LiteTemplate: Schema = {
                     },
                 },
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_SiteFeed_Title"),
+                    Title: __.getResource("WebPart_SiteFeed_Title"),
                     Zone: "RightColumn",
                     Order: 1,
                     Contents: {
@@ -137,29 +137,29 @@ const LiteTemplate: Schema = {
                     },
                 },
                 {
-                    Title: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
+                    Title: __.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
                     Zone: "RightColumn",
                     Order: 2,
                     PropertyOverrides: [{
                         name: "Title",
                         type: "string",
-                        value: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
+                        value: __.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
                     },
                     {
                         name: "ListUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Uncertainties_Url")}`,
+                        value: `{site}/${__.getResource("Lists_Uncertainties_Url")}`,
                     },
                     {
                         name: "TitleUrl",
                         type: "string",
-                        value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url")}`,
+                        value: `{site}/${__.getResource("DefaultView_Uncertainties_Url")}`,
                     }],
                     Contents: {
                         FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
                     },
                     ListView: {
-                        List: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+                        List: __.getResource("Lists_Uncertainties_Title"),
                         View: {
                             Title: "",
                             ViewFields: ["LinkTitle", "GtRiskProximity", "GtRiskFactor"],
@@ -189,7 +189,7 @@ const LiteTemplate: Schema = {
         ProjectDeliveries,
         Uncertainties,
         {
-            Title: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+            Title: __.getResource("Lists_Tasks_Title"),
             Description: "",
             Template: 171,
             ContentTypesEnabled: true,
@@ -206,7 +206,7 @@ const LiteTemplate: Schema = {
                 GtProjectTaskProduct,
             ],
             Views: [{
-                Title: RESOURCE_MANAGER.getResource("View_AllTasks_DisplayName"),
+                Title: __.getResource("View_AllTasks_DisplayName"),
                 ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor"],
                 AdditionalSettings: {
                     RowLimit: 30,
@@ -215,7 +215,7 @@ const LiteTemplate: Schema = {
                 },
             },
             {
-                Title: RESOURCE_MANAGER.getResource("View_RelevantLinks_DisplayName"),
+                Title: __.getResource("View_RelevantLinks_DisplayName"),
                 ViewFields: ["LinkTitle", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
                 AdditionalSettings: {
                     RowLimit: 30,
@@ -231,69 +231,69 @@ const LiteTemplate: Schema = {
     Navigation: {
         QuickLaunch: [
             {
-                Url: RESOURCE_MANAGER.getResource("Project_WelcomePage"),
-                Title: RESOURCE_MANAGER.getResource("Navigation_Home_Title"),
+                Url: __.getResource("Project_WelcomePage"),
+                Title: __.getResource("Navigation_Home_Title"),
                 IgnoreExisting: true,
             },
             {
                 Url: "SitePages/ProjectStatus.aspx",
-                Title: RESOURCE_MANAGER.getResource("Navigation_ProjectStatus_Title"),
+                Title: __.getResource("Navigation_ProjectStatus_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_ProjectLog_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_ProjectLog_Title"),
+                Url: __.getResource("DefaultView_ProjectLog_Url"),
+                Title: __.getResource("Lists_ProjectLog_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_Stakeholders_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_Stakeholders_Title"),
+                Url: __.getResource("DefaultView_Stakeholders_Url"),
+                Title: __.getResource("Lists_Stakeholders_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_CommunicationPlan_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Title"),
+                Url: __.getResource("DefaultView_CommunicationPlan_Url"),
+                Title: __.getResource("Lists_CommunicationPlan_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+                Url: __.getResource("DefaultView_Uncertainties_Url"),
+                Title: __.getResource("Lists_Uncertainties_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_Tasks_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+                Url: __.getResource("DefaultView_Tasks_Url"),
+                Title: __.getResource("Lists_Tasks_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_MeetingCalendar_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_MeetingCalendar_Title"),
+                Url: __.getResource("DefaultView_MeetingCalendar_Url"),
+                Title: __.getResource("Lists_MeetingCalendar_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_Documents_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
+                Url: __.getResource("DefaultView_Documents_Url"),
+                Title: __.getResource("Lists_Documents_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"),
+                Url: __.getResource("DefaultView_PhaseChecklist_Url"),
+                Title: __.getResource("Lists_PhaseChecklist_Title"),
             },
             {
                 Url: "#",
-                Title: RESOURCE_MANAGER.getResource("Navigation_Notebook_Title"),
+                Title: __.getResource("Navigation_Notebook_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("DefaultView_ProjectDeliveries_Url"),
-                Title: RESOURCE_MANAGER.getResource("Lists_ProjectDeliveries_Title"),
+                Url: __.getResource("DefaultView_ProjectDeliveries_Url"),
+                Title: __.getResource("Lists_ProjectDeliveries_Title"),
             },
             {
                 Url: "SitePages/Nofilter.aspx",
-                Title: RESOURCE_MANAGER.getResource("Navigation_NoFilterFrontpage_Title"),
+                Title: __.getResource("Navigation_NoFilterFrontpage_Title"),
             },
             {
-                Url: RESOURCE_MANAGER.getResource("Navigation_NoPhaseProjectItems_Url"),
-                Title: RESOURCE_MANAGER.getResource("Navigation_NoPhaseProjectItems_Title"),
+                Url: __.getResource("Navigation_NoPhaseProjectItems_Url"),
+                Title: __.getResource("Navigation_NoPhaseProjectItems_Title"),
             },
             {
                 Url: "SitePages/Assigned.aspx",
-                Title: RESOURCE_MANAGER.getResource("Navigation_MyProjectItems_Title"),
+                Title: __.getResource("Navigation_MyProjectItems_Title"),
             },
             {
                 Url: "_layouts/15/viewlsts.aspx",
-                Title: RESOURCE_MANAGER.getResource("Navigation_SiteContents_Title"),
+                Title: __.getResource("Navigation_SiteContents_Title"),
             },
         ],
 

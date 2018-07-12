@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { Web, Folder, FileAddResult, Logger, LogLevel } from "sp-pnp-js";
 import * as Util from "../../../Util";
 import IFile from "./IFile";
@@ -122,8 +122,8 @@ export async function CopyFiles(context: IProvisionContext, conf: ListConfig, to
         });
 
         // Progress update
-        const step = RESOURCE_MANAGER.getResource("ProvisionWeb_CopyListContent");
-        const progress = String.format(RESOURCE_MANAGER.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary);
+        const step = __.getResource("ProvisionWeb_CopyListContent");
+        const progress = String.format(__.getResource("ProvisionWeb_CopyFiles"), files.length, folders.length, conf.SourceList, conf.DestinationLibrary);
         context.progressCallbackFunc(step, progress);
         await ProvisionFolderHierarchy(destLibServerRelUrl, spList.RootFolder.ServerRelativeUrl, destLibRootFolder, folders);
 

@@ -3,7 +3,7 @@ import { LogLevel, Logger } from "sp-pnp-js";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
@@ -47,7 +47,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         if (chart.showItemSelector) {
             items.push({
                 key: "pick-project",
-                name: RESOURCE_MANAGER.getResource("String_Select_Project_Name"),
+                name: __.getResource("String_Select_Project_Name"),
                 icon: "ProjectCollection",
                 onClick: e => {
                     e.preventDefault();
@@ -88,7 +88,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         let farItems = [
             {
                 key: "chart-width",
-                name: RESOURCE_MANAGER.getResource("String_Select_Width_Name"),
+                name: __.getResource("String_Select_Width_Name"),
                 icon: "FullWidthEdit",
                 onClick: e => {
                     e.preventDefault();
