@@ -1712,6 +1712,9 @@
   </data>
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
+  </data>  
+  <data name="ProjectResources_LoadingText" xml:space="preserve">
+    <value>Loading project resources...</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import __ from "../../Resources";
 import pnp from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import IProjectResourcesProps, { ProjectResourcesDefaultProps } from "./IProjectResourcesProps";
@@ -37,7 +38,11 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return (
+                <Spinner
+                    type={SpinnerType.large}
+                    label={__.getResource("ProjectResources_LoadingText")} />
+            );
         }
 
         return (
