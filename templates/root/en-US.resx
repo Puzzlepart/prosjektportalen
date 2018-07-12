@@ -162,6 +162,9 @@
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
+  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
+    <value>Project Resources</value>
+  </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
   </data>
@@ -446,6 +449,9 @@
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Project Item</value>
+  </data>
+  <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
+    <value>Project Resource</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
@@ -1215,6 +1221,12 @@
   <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
     <value>Height</value>
   </data>
+  <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
+    <value>Role</value>
+  </data>  
+  <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1676,6 +1688,12 @@
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>The height of the graph in pixels</value>
+  </data>  
+  <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
+    <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
@@ -2126,6 +2144,12 @@
   </data>
   <data name="WebPart_DeliveriesOverview_Title" xml:space="preserve">
     <value>Deliveries Overview</value>
+  </data>
+  <data name="WebPart_ProjectStats_Title" xml:space="preserve">
+    <value>Project Stats</value>
+  </data>
+  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
+    <value>Project Resources</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>

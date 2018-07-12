@@ -1,5 +1,4 @@
-<pnp:Files 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+<pnp:Files xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:File Src="SitePages\Home.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:PortfolioPage_Homepage_Title}" />
@@ -7,32 +6,27 @@
         <pnp:WebParts>
             <pnp:WebPart Title="ProjectList" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectList.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectList.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{resource:WebPart_NewProject_Title}" Order="0" Zone="RightColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/NewProjectLink.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/NewProjectLink.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{resource:WebPart_Announcements_Title}" Order="1" Zone="RightColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/Announcements.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/Announcements.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{resource:WebPart_Links_Title}" Order="2" Zone="RightColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/QuickLinks.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/QuickLinks.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
             <pnp:WebPart Title="{resource:WebPart_RecentProjects_Title}" Order="3" Zone="RightColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/LatestProjects.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/LatestProjects.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -44,8 +38,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="Erfaringslogg" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ExperienceLog.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ExperienceLog.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -57,8 +50,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="dynamicportfolio" Order="1" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DynamicPortfolio.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DynamicPortfolio.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -70,8 +62,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="Gevinstoversikt" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/BenefitsOverview.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/BenefitsOverview.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -83,8 +74,19 @@
         <pnp:WebParts>
             <pnp:WebPart Title="DeliveriesOverview" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DeliveriesOverview.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DeliveriesOverview.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
+    </pnp:File>
+    <pnp:File Src="SitePages\ProjectResources.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:Navigation_ProjectResources_Title}" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="ProjectResources" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectResources.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -96,8 +98,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="WebPropertyBagEditor" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/WebPropertyBagEditor.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/WebPropertyBagEditor.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -109,8 +110,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="NewProjectForm" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/NewProjectForm.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Resources/NewProjectForm.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -122,12 +122,11 @@
         <pnp:WebParts>
             <pnp:WebPart Title="ProjectStats" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectStats.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectStats.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
-    </pnp:File>    
+    </pnp:File>
     <pnp:File Src="SitePages\RiskOverview.aspx" Folder="SitePages" Level="Published" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_RiskOverview_Title}" />
@@ -135,8 +134,7 @@
         <pnp:WebParts>
             <pnp:WebPart Title="RiskMatrixSearch" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include 
-                        xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/RiskMatrixSearch.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/RiskMatrixSearch.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -241,9 +239,16 @@
     </pnp:File>
     <pnp:File Src="WebPartGallery\ProjectStats.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="ProjectStats" />
+            <pnp:Property Key="Title" Value="{resource:WebPart_ProjectStats_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
-            <pnp:Property Key="Group" Value="UD" />
+            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\ProjectResources.webpart" Folder="_catalogs/wp" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:WebPart_ProjectResources_Title}" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="SiteTemplates\FullTemplate.txt" Folder="SiteTemplates" Overwrite="true">

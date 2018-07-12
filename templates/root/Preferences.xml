@@ -8,6 +8,7 @@
         <pnp:Parameter Key="TermSetIdProjectServiceArea">{99af1a25-88c1-4781-a05c-8446928d3fdd}</pnp:Parameter>
         <pnp:Parameter Key="TermSetIdProjectType">{3930cddb-fa4d-496f-b314-03ecabb91de1}</pnp:Parameter>
         <pnp:Parameter Key="TermSetIdProjectPhase">{abcfc9d9-a263-4abb-8234-be973c46258a}</pnp:Parameter>
+        <pnp:Parameter Key="TermSetIdRole">{54da9f47-c64e-4a26-80f3-4d3c3fa1b7b2}</pnp:Parameter>
         <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="ScriptLoadTimeout">1000</pnp:Parameter>

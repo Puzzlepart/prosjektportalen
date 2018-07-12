@@ -161,6 +161,9 @@
   </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstoppfølging</value>
+  </data>  
+  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
+    <value>Prosjektressurser</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
@@ -446,6 +449,9 @@
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Prosjektelement</value>
+  </data>
+  <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
+    <value>Prosjektressurs</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind basehendelse</value>
@@ -1212,6 +1218,12 @@
   <data name="SiteFields_GtChrHeight_DisplayName" xml:space="preserve">
     <value>Høyde</value>
   </data>
+  <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
+    <value>Navn</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1677,6 +1689,12 @@
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>Høyden på diagrammet i piksler</value>
   </data>
+  <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
@@ -2126,6 +2144,12 @@
   </data>
   <data name="WebPart_DeliveriesOverview_Title" xml:space="preserve">
     <value>Leveranseoversikt</value>
+  </data>
+  <data name="WebPart_ProjectStats_Title" xml:space="preserve">
+    <value>Prosjektstatistikk</value>
+  </data>
+  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
+    <value>Prosjektressurser</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
