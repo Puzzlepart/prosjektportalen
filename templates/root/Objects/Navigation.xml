@@ -14,6 +14,7 @@
             <pnp:NavigationNode Title="{res:Navigation_ExperienceLog_Title}" Url="{site}/SitePages/ExperienceLog.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_DeliveriesOverview_Title}" Url="{site}/SitePages/DeliveriesOverview.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_RiskOverview_Title}" Url="{site}/SitePages/RiskOverview.aspx" />
+            <pnp:NavigationNode Title="{res:Navigation_ProjectResources_Title}" Url="{site}/SitePages/ProjectResources.aspx" />
             <pnp:NavigationNode Title="{res:Navigation_SiteContents_Title}" Url="{site}/_layouts/15/viewlsts.aspx" />
         </pnp:StructuralNavigation>
     </pnp:CurrentNavigation>
