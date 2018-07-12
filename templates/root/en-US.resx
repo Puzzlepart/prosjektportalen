@@ -447,6 +447,9 @@
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Project Item</value>
   </data>
+  <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
+    <value>Project Resource</value>
+  </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
   </data>
