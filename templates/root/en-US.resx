@@ -2574,9 +2574,6 @@
   <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all project deliveries</value>
   </data>
-  <data name="DeliveriesOverview_EmptyMessage" xml:space="preserve">
-    <value>No deliveries found</value>
-  </data>
   <data name="DiceCalculator_LoadFailed" xml:space="preserve">
     <value>An error occurred during loading. DICE is not properly configured.</value>
   </data>
