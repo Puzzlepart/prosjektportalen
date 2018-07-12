@@ -1,9 +1,7 @@
 import * as React from "react";
-// import RESOURCE_MANAGER from "../../Resources";
 import pnp from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import IProjectResourcesProps from "./IProjectResourcesProps";
+import IProjectResourcesProps, { ProjectResourcesDefaultProps } from "./IProjectResourcesProps";
 import IProjectResourcesState from "./IProjectResourcesState";
 import BaseWebPart from "../@BaseWebPart";
 import List from "../@Components/List";
@@ -14,46 +12,7 @@ import ProjectResource from "./ProjectResource";
  */
 export default class ProjectResources extends BaseWebPart<IProjectResourcesProps, IProjectResourcesState> {
     public static displayName = "ProjectResources";
-    protected _columns: Array<IColumn> = [{
-        key: "RefinableString71",
-        fieldName: "ResourceUser",
-        name: "Navn",
-        minWidth: 200,
-        maxWidth: 300,
-        isResizable: true,
-    },
-    {
-        key: "RefinableString72",
-        fieldName: "ResourceRole",
-        name: "Rolle",
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "GtStartDateOWSDATE",
-        fieldName: "StartDate",
-        name: "Startdato",
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "GtEndDateOWSDATE",
-        fieldName: "EndDate",
-        name: "Sluttdato",
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "RefinableString52",
-        fieldName: "ProjectPhase",
-        name: "Fase",
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    }];
+    public static defaultProps = ProjectResourcesDefaultProps;
 
     /**
      * Constructor
@@ -84,7 +43,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
         return (
             <List
                 items={this.state.items}
-                columns={this._columns} />
+                columns={this.props.columns} />
         );
     }
 
@@ -94,7 +53,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
             QueryTemplate: "ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* Path:{SiteCollection.URL}",
             RowLimit: 500,
             TrimDuplicates: false,
-            SelectProperties: ["Path", "SPWebUrl", "SiteTitle", "Title", "RefinableString71", "RefinableString72", "GtStartDateOWSDATE", "GtEndDateOWSDATE", "RefinableString52"],
+            SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
         });
         const items = searchResults.PrimarySearchResults.map(r => new ProjectResource(r));
         return items;
