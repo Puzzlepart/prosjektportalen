@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -65,7 +65,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } else if (subwebs == null) {
             return (
                 <div className="ms-font-xs">
-                    <Icon iconName="Error" style={{ color: "#000" }} />  {RESOURCE_MANAGER.getResource("WebPart_FailedMessage")}
+                    <Icon iconName="Error" style={{ color: "#000" }} />  {__.getResource("WebPart_FailedMessage")}
                 </div>
             );
         } else if (subwebs.length > 0) {
@@ -76,7 +76,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                             <li key={`Project_${index}`}>
                                 <div>
                                     <h5><a href={Url}>{Title}</a></h5>
-                                    <div className="ms-font-xs">{RESOURCE_MANAGER.getResource("String_Created")} {Util.dateFormat(Created)}</div>
+                                    <div className="ms-font-xs">{__.getResource("String_Created")} {Util.dateFormat(Created)}</div>
                                 </div>
                             </li>
                         ))}
@@ -86,7 +86,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         } else {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
-                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{__.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

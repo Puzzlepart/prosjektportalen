@@ -1,6 +1,6 @@
 //#region Imports
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { DialogFooter } from "office-ui-fabric-react/lib/Dialog";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
@@ -17,7 +17,7 @@ export const Footer = (props: IFooterProps) => {
     switch (props.currentView) {
         case View.Initial: {
             actions.push({
-                text: RESOURCE_MANAGER.getResource("String_Skip"),
+                text: __.getResource("String_Skip"),
                 disabled: props.isLoading,
                 onClick: () => {
                     props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
@@ -49,7 +49,7 @@ export const Footer = (props: IFooterProps) => {
                 );
             } else {
                 actions.push({
-                    text: RESOURCE_MANAGER.getResource("String_Yes"),
+                    text: __.getResource("String_Yes"),
                     disabled: props.isLoading,
                     onClick: async () => {
                         props.onChangeView(View.ChangingPhase);
@@ -62,7 +62,7 @@ export const Footer = (props: IFooterProps) => {
             break;
         case View.Summary: {
             actions.push({
-                text: RESOURCE_MANAGER.getResource("String_MoveOn"),
+                text: __.getResource("String_MoveOn"),
                 disabled: props.isLoading,
                 onClick: () => {
                     props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
@@ -78,7 +78,7 @@ export const Footer = (props: IFooterProps) => {
                 return <PrimaryButton key={`FooterAction_${index}`} { ...buttonProps } />;
             })}
             <DefaultButton
-                text={RESOURCE_MANAGER.getResource("String_Close")}
+                text={__.getResource("String_Close")}
                 disabled={props.isLoading}
                 onClick={props.onCloseDialog} />
         </DialogFooter>

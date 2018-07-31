@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../../Resources";
+import __ from "../../../../../Resources";
 import { PrimaryButton, IButtonProps } from "office-ui-fabric-react/lib/Button";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
@@ -54,15 +54,15 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
         const { comment } = this.state;
 
         const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
-        const statusNotRelevantTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty");
-        const statusNotRelevantTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointNotRelevantTooltip");
-        const statusStillOpenTooltipCommentEmpty = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty");
-        const statusStillOpenTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointStillOpenTooltip");
-        const statusDoneTooltip = RESOURCE_MANAGER.getResource("ProjectPhases_CheckpointDoneTooltip");
+        const statusNotRelevantTooltipCommentEmpty = __.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty");
+        const statusNotRelevantTooltip = __.getResource("ProjectPhases_CheckpointNotRelevantTooltip");
+        const statusStillOpenTooltipCommentEmpty = __.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty");
+        const statusStillOpenTooltip = __.getResource("ProjectPhases_CheckpointStillOpenTooltip");
+        const statusDoneTooltip = __.getResource("ProjectPhases_CheckpointDoneTooltip");
 
-        const statusNotRelevant = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_NotRelevant");
-        const statusStillOpen = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_StillOpen");
-        const statusClosed = RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Closed");
+        const statusNotRelevant = __.getResource("Choice_GtChecklistStatus_NotRelevant");
+        const statusStillOpen = __.getResource("Choice_GtChecklistStatus_StillOpen");
+        const statusClosed = __.getResource("Choice_GtChecklistStatus_Closed");
 
         const statusOptions: IButtonProps[] = [
             {

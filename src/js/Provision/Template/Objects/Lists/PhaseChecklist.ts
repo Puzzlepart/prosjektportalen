@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const PhaseChecklist: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_PhaseChecklist_Title"),
+    Title: __.getResource("Lists_PhaseChecklist_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -14,7 +14,7 @@ const PhaseChecklist: IList = {
         EnableVersioning: true,
     },
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectPhase", "GtChecklistStatus", "GtComment"],
         AdditionalSettings: {
             RowLimit: 50,
@@ -25,13 +25,13 @@ const PhaseChecklist: IList = {
             <Where>
                 <Neq>
                     <FieldRef Name="GtChecklistStatus" />
-                    <Value Type="Text">${RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived")}</Value>
+                    <Value Type="Text">${__.getResource("Choice_GtChecklistStatus_Archived")}</Value>
                 </Neq>
             </Where>`,
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_Archived_DisplayName"),
+        Title: __.getResource("View_Archived_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
         AdditionalSettings: {
             RowLimit: 50,
@@ -42,13 +42,13 @@ const PhaseChecklist: IList = {
             <Where>
                 <Eq>
                     <FieldRef Name="GtChecklistStatus" />
-                    <Value Type="Text">${RESOURCE_MANAGER.getResource("Choice_GtChecklistStatus_Archived")}</Value>
+                    <Value Type="Text">${__.getResource("Choice_GtChecklistStatus_Archived")}</Value>
                 </Eq>
             </Where>`,
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_GroupedStatus_DisplayName"),
+        Title: __.getResource("View_GroupedStatus_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectPhase", "GtComment"],
         AdditionalSettings: {
             RowLimit: 50,

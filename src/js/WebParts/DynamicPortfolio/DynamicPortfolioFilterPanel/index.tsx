@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import {
     Panel,
     PanelType,
@@ -18,7 +18,7 @@ const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpe
             isOpen={isOpen}
             isBlocking={true}
             onDismiss={onDismiss}
-            headerText={RESOURCE_MANAGER.getResource("String_Filters")}
+            headerText={__.getResource("String_Filters")}
             type={PanelType.smallFixedFar}>
             <div className="ms-Grid">
                 {filters

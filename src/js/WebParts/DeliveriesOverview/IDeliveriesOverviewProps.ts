@@ -1,96 +1,77 @@
-import RESOURCE_MANAGER from "../../Resources";
-import {
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
-} from "office-ui-fabric-react/lib/DetailsList";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import IGroupByOption from "../IGroupByOption";
-import IExcelExportConfig from "../IExcelExportConfig";
+import { IListProps } from "../@Components/List";
 
-export default interface IDeliveriesOverviewProps extends IBaseWebPartProps {
-    constrainMode?: ConstrainMode;
-    layoutMode?: DetailsListLayoutMode;
-    selectionMode?: SelectionMode;
-    groupByOptions?: IGroupByOption[];
-    showSearchBox?: boolean;
-    showCommandBar?: boolean;
-    showEmptyMessage?: boolean;
-    searchProperty?: string;
-    modalHeaderClassName?: string;
-    projectInfoFilterField?: string;
-    excelExportEnabled?: boolean;
-    excelExportConfig?: IExcelExportConfig;
+export default interface IDeliveriesOverviewProps extends IBaseWebPartProps, IListProps {
     dataSource?: string;
-    rowLimit?: number;
-    columns?: any[];
 }
 
 export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> = {
-    showSearchBox: false,
-    showEmptyMessage: false,
-    groupByOptions: [],
-    constrainMode: ConstrainMode.horizontalConstrained,
+    groupByOptions: [
+        { name: __.getResource("String_Project"), key: "SiteTitle" },
+        { name: __.getResource("SiteFields_GtProductStatus_DisplayName"), key: "ProductStatus" },
+    ],
     dataSource: "DELIVERIESOVERVIEW",
-    rowLimit: 100,
-    projectInfoFilterField: "GtPcPortfolioPage",
-    modalHeaderClassName: "ms-font-xxl",
-    layoutMode: DetailsListLayoutMode.fixedColumns,
-    selectionMode: SelectionMode.none,
     columns: [{
         key: "Title",
         fieldName: "Title",
-        name: RESOURCE_MANAGER.getResource("SiteFields_Title_DisplayName"),
+        name: __.getResource("SiteFields_Title_DisplayName"),
         minWidth: 220,
         isMultiline: true,
     },
     {
         key: "SiteTitle",
         fieldName: "SiteTitle",
-        name: RESOURCE_MANAGER.getResource("String_Project"),
+        name: __.getResource("String_Project"),
         minWidth: 220,
         isMultiline: true,
+        isResizable: true,
     },
     {
         key: "GtProductDescriptionOWSMTXT",
         fieldName: "ProductDescription",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductDescription_DisplayName"),
+        name: __.getResource("SiteFields_GtProductDescription_DisplayName"),
         minWidth: 220,
         isMultiline: true,
+        isResizable: true,
     },
     {
         key: "GtProductStartTimeOWSDATE",
         fieldName: "ProductStartTime",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStartTime_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStartTime_DisplayName"),
+        minWidth: 100,
         isMultiline: false,
+        isResizable: true,
     },
     {
         key: "GtProductEndTimeOWSDATE",
         fieldName: "ProductEndTime",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductEndTime_DisplayName"),
+        name: __.getResource("SiteFields_GtProductEndTime_DisplayName"),
+        minWidth: 100,
         isMultiline: false,
+        isResizable: true,
     },
     {
         key: "GtProductStatusOWSCHCS",
         fieldName: "ProductStatus",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatus_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStatus_DisplayName"),
+        minWidth: 100,
         isMultiline: false,
+        isResizable: true,
     },
     {
         key: "GtProductStatusCommentOWSMTXT",
         fieldName: "ProductStatusComment",
-        name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatusComment_DisplayName"),
+        name: __.getResource("SiteFields_GtProductStatusComment_DisplayName"),
         minWidth: 220,
         isMultiline: true,
-    }].map(col => ({
-        ...col,
         isResizable: true,
-    })),
+    }],
     excelExportEnabled: true,
     excelExportConfig: {
-        fileName: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportFileName"),
+        fileNamePrefix: __.getResource("DeliveriesOverview_ExcelExportFileNamePrefix"),
         sheetName: "Sheet A",
-        buttonLabel: RESOURCE_MANAGER.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
+        buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
 };

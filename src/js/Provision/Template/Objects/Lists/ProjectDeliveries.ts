@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 import { GtProductInteressent } from "./SiteFields";
 
 const ProjectDeliveries: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_ProjectDeliveries_Title"),
+    Title: __.getResource("Lists_ProjectDeliveries_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: true,
@@ -16,7 +16,7 @@ const ProjectDeliveries: IList = {
     },
     Fields: [GtProductInteressent],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllItems_DisplayName"),
+        Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["LinkTitle", "GtProductDescription", "GtProductStartTime", "GtProductEndTime", "GtProductStatus", "GtProductStatusComment", "GtProductPhase"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -25,7 +25,7 @@ const ProjectDeliveries: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_ProductionPhase_DisplayName"),
+        Title: __.getResource("View_ProductionPhase_DisplayName"),
         ViewFields: ["LinkTitle", "GtProductDescription", "GtProductStartTime", "GtProductEndTime", "GtProductStatus", "GtProductStatusComment"],
         AdditionalSettings: {
             RowLimit: 30,

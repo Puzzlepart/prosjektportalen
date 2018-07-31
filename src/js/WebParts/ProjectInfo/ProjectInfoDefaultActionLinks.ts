@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IModalLinkProps } from "../@Components/ModalLink";
 import {
     SetMetadataDefaultsForLibrary,
@@ -7,7 +7,7 @@ import {
 
 const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
-    label: RESOURCE_MANAGER.getResource("ProjectInfo_ViewProperties"),
+    label: __.getResource("ProjectInfo_ViewProperties"),
     icon: { iconName: "PreviewLink" },
     options: {
         HideContentTypeChoice: true,
@@ -19,7 +19,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=${_spPageContextInfo.pageListId}&ID=${_spPageContextInfo.pageItemId}&FileName=${_spPageContextInfo.serverRequestPath}`,
-    label: RESOURCE_MANAGER.getResource("ProjectInfo_ShowVersionHistory"),
+    label: __.getResource("ProjectInfo_ShowVersionHistory"),
     icon: { iconName: "History" },
     options: {
         HideRibbon: true,
@@ -30,7 +30,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
-    label: RESOURCE_MANAGER.getResource("ProjectInfo_EditProperties"),
+    label: __.getResource("ProjectInfo_EditProperties"),
     icon: { iconName: "EditMirrored" },
     options: {
         HideContentTypeChoice: true,
@@ -78,7 +78,7 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
 },
 {
     url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/15/prjsetng.aspx`,
-    label: RESOURCE_MANAGER.getResource("ProjectInfo_EditLogo"),
+    label: __.getResource("ProjectInfo_EditLogo"),
     icon: { iconName: "AppIconDefault" },
     showLabel: true,
     permissionKind: 31,

@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
+    <pnp:Preferences></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTFOLIOINSIGHTS-1044-PATCH" Version="0">
+            <pnp:Lists>
+                <pnp:ListInstance Title="Statistikkfelter" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false" RemoveExistingContentTypes="true">
+                    <pnp:ContentTypeBindings>
+                        <pnp:ContentTypeBinding ContentTypeID="0x0100A26931086AEA154693049BC467AA08F3" Default="true" />
+                    </pnp:ContentTypeBindings>
+                    <pnp:DataRows>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Fase</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">RefinableString52</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Tjenesteområde</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">RefinableString53</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Prosjekttype</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">RefinableString54</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Totalbudsjett for prosjektet</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtBudgetTotalOWSCURR</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">Number</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Prognose for prosjektet</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtProjectForecastOWSCURR</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">Number</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Kostnader påløpt totalt</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtCostsTotalOWSCURR</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">Number</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Status fremdrift</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtStatusTimeOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Status økonomi</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtStatusBudgetOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Status risiko</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtStatusRiskOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Status kvalitet</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtStatusBudgetOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">Status gevinstoppnåelse</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrManagedPropertyName">GtStatusGainAchievementOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrDataType">String</pnp:DataValue>
+                        </pnp:DataRow>
+                    </pnp:DataRows>
+                </pnp:ListInstance>
+                <pnp:ListInstance Title="Diagramkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" ContentTypesEnabled="true" RemoveExistingContentTypes="true">
+                    <pnp:ContentTypeBindings>
+                        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Default="true" />
+                        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D02" />
+                        <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03" />
+                    </pnp:ContentTypeBindings>
+                    <pnp:Views>
+                        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/Charts/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
+                            <Query>
+                                <OrderBy>
+                                    <FieldRef Name="GtChrOrder" />
+                                    <FieldRef Name="LinkTitle" />
+                                </OrderBy>
+                            </Query>
+                            <ViewFields>
+                                <FieldRef Name="GtChrOrder" />
+                                <FieldRef Name="ContentType" />
+                                <FieldRef Name="LinkTitle" />
+                                <FieldRef Name="GtChrSubTitle" />
+                                <FieldRef Name="GtChrHeight" />
+                                <FieldRef Name="GtChrFields" />
+                                <FieldRef Name="Modified" />
+                            </ViewFields>
+                            <RowLimit Paged="TRUE">30</RowLimit>
+                            <Aggregations Value="Off" />
+                            <JSLink>clienttemplates.js</JSLink>
+                        </View>
+                    </pnp:Views>
+                    <pnp:DataRows>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">10</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Prosjekter i ulike faser</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på faser</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">1</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">6</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">20</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Tjenesteområder</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Prosjekter fordelt på tjenesteområder</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">400</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">2</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">6</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">30</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Status fremdrift</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på fremdrift for prosjektene?</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">7</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">4</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">40</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Status økonomi</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på økonomi for prosjektene?</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">8</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">4</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D03</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">50</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Status risiko</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Hva er status på risiko for prosjektene?</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">300</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">9</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">4</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">4</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="ContentTypeId">0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrOrder">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="Title">Økonomioversikt</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrSubTitle">Prosjektets kostnader vs totalbudsjett</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrHeight">1000</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrFields">4,6</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrStacking">null</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowLegend">1</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrValueSuffix">kr</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrYAxisTitle">kroner</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrYMin"></pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrYMax"></pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrYTickInterval"></pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrShowPercentage">0</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthSm">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthMd">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthLg">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXl">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxl">12</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtChrWidthXxxl">12</pnp:DataValue>
+                        </pnp:DataRow>
+                    </pnp:DataRows>
+                </pnp:ListInstance>
+            </pnp:Lists>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

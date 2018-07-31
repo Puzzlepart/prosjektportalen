@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../../../Resources";
+import __ from "../../../../../Resources";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import CheckListItem from "./CheckListItem";
 import ISummaryViewProps from "./ISummaryViewProps";
@@ -8,7 +8,7 @@ import ISummaryViewProps from "./ISummaryViewProps";
  * Summary view
  */
 export const SummaryView = ({ activePhase }: ISummaryViewProps) => {
-    let listViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${RESOURCE_MANAGER.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${activePhase.Name}`;
+    let listViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource("DefaultView_PhaseChecklist_Url")}?FilterField1=GtProjectPhase&FilterValue1=${activePhase.Name}`;
     return (
         <div className="inner">
             <ul
@@ -21,7 +21,7 @@ export const SummaryView = ({ activePhase }: ISummaryViewProps) => {
                 ))}
             </ul>
             <MessageBar >
-                <div dangerouslySetInnerHTML={{ __html: String.format(RESOURCE_MANAGER.getResource("ProjectPhases_GoToChecklist2"), listViewUrl) }}></div>
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectPhases_GoToChecklist2"), listViewUrl) }}></div>
             </MessageBar>
         </div >
     );

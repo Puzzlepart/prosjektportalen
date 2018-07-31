@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import {
     Site,
     Web,
@@ -101,7 +101,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 hidden={isLoading}
                                 href={this.props.webUrl}
                                 iconProps={{ iconName: "Home" }}
-                                text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectLinkText")}
+                                text={__.getResource("ProjectInfo_ProjectLinkText")}
                                 style={{
                                     marginLeft: 0,
                                     marginTop: 20,
@@ -111,7 +111,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 hidden={isLoading}
                                 href={`${this.props.webUrl}/SitePages/ProjectStatus.aspx`}
                                 iconProps={{ iconName: "BarChart4" }}
-                                text={RESOURCE_MANAGER.getResource("ProjectInfo_ProjectStatusLinkText")}
+                                text={__.getResource("ProjectInfo_ProjectStatusLinkText")}
                                 style={{
                                     marginLeft: 0,
                                     marginTop: 20,
@@ -191,7 +191,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      *
      * @param {string} configList Configuration list
      */
-    private fetchData = (configList = RESOURCE_MANAGER.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
+    private fetchData = (configList = __.getResource("Lists_ProjectConfig_Title")) => new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
         const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
 
         const configPromise = rootWeb
@@ -204,7 +204,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
         const fieldsPromise = rootWeb
             .contentTypes
-            .getById(RESOURCE_MANAGER.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .usingCaching()
@@ -212,7 +212,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
         const itemPromise = new Web(this.props.webUrl)
             .lists
-            .getByTitle(RESOURCE_MANAGER.getResource("Lists_SitePages_Title"))
+            .getByTitle(__.getResource("Lists_SitePages_Title"))
             .items
             .getById(this.props.welcomePageId)
             .fieldValuesAsHTML

@@ -1,9 +1,9 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 import { GtProjectTaskComElement, GtProjectTaskRisk, GtProjectTaskProduct, GtProjectTaskChange, GtProjectTaskGain } from "./SiteFields";
 
 const Tasks: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+    Title: __.getResource("Lists_Tasks_Title"),
     Description: "",
     Template: 171,
     ContentTypesEnabled: true,
@@ -22,7 +22,7 @@ const Tasks: IList = {
         GtProjectTaskGain,
     ],
     Views: [{
-        Title: RESOURCE_MANAGER.getResource("View_AllTasks_DisplayName"),
+        Title: __.getResource("View_AllTasks_DisplayName"),
         ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -31,7 +31,7 @@ const Tasks: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_RelevantLinks_DisplayName"),
+        Title: __.getResource("View_RelevantLinks_DisplayName"),
         ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
         AdditionalSettings: {
             RowLimit: 30,
@@ -40,7 +40,7 @@ const Tasks: IList = {
         },
     },
     {
-        Title: RESOURCE_MANAGER.getResource("View_BenefitTasks_DisplayName"),
+        Title: __.getResource("View_BenefitTasks_DisplayName"),
         ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
         AdditionalSettings: {
             RowLimit: 30,

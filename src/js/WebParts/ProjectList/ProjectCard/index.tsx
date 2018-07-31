@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from "office-ui-fabric-react/lib/Image";
 import * as Util from "../../../Util";
@@ -27,7 +27,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
             onClickHref={props.onClickHref} >
             <DocumentCardPreview previewImages={[previewImage]} />
             <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
-            <DocumentCardLocation location={props.project.Phase || RESOURCE_MANAGER.getResource("String_NotSet")} />
+            <DocumentCardLocation location={props.project.Phase || __.getResource("String_NotSet")} />
             <DocumentCardActivity
                 activity={props.fields["GtProjectOwner"]}
                 people={[props.project.getOwner()]} />

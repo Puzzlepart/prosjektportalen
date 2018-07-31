@@ -1,6 +1,6 @@
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import {
     Spinner,
     SpinnerType,
@@ -43,7 +43,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
         new Site(_spPageContextInfo.siteAbsoluteUrl)
             .rootWeb
             .lists
-            .getByTitle(RESOURCE_MANAGER.getResource("Lists_Announcements_Title"))
+            .getByTitle(__.getResource("Lists_Announcements_Title"))
             .items
             .filter(itemsFilter)
             .top(itemsCount)
@@ -59,7 +59,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
     public render(): JSX.Element {
         return (
             <div>
-                {this._renderChrome(RESOURCE_MANAGER.getResource("WebPart_Announcements_Title"), this.state.elementToToggle, Announcements.displayName)}
+                {this._renderChrome(__.getResource("WebPart_Announcements_Title"), this.state.elementToToggle, Announcements.displayName)}
                 {this.renderItems(this.props, this.state)}
                 {this.renderModal(this.props, this.state)}
             </div>
@@ -87,7 +87,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                                     style={{ cursor: "pointer" }}
                                     onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                             </h5>
-                            <span className="ms-metadata">{RESOURCE_MANAGER.getResource("String_Published")} {Util.dateFormat(entry.Created)}</span>
+                            <span className="ms-metadata">{__.getResource("String_Published")} {Util.dateFormat(entry.Created)}</span>
                         </li>)}
                     </ul>
                 </div>
@@ -95,7 +95,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
         } else {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
-                    <MessageBar>{RESOURCE_MANAGER.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{__.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }

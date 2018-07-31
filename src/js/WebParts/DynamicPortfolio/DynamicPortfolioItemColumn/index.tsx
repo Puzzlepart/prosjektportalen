@@ -16,67 +16,74 @@ import {
  * @param {Function} titleOnClick Tile column on click
  */
 const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
-    const columnValue = item[column.key];
+    let colValue = item[column.key];
 
-    switch (column.key) {
-        case "Title": {
-            return (
-                <a
-                    href={item.Path}
-                    onClick={titleOnClick}>{columnValue}</a>
-            );
+    if (colValue) {
+        if (colValue !== "" && (column.key.indexOf("OWSNMBR") !== -1 || column.key.indexOf("OWSCURR") !== -1)) {
+            colValue = parseInt(colValue, 10);
         }
-        case "Path":
-        case "URL": {
-            return <a href={item.Path}>{columnValue}</a>;
-        }
-    }
-    switch (column.render) {
-        case "Date": {
-            return (
-                <span>
-                    {columnValue ? Util.dateFormat(columnValue, "LL") : null}
-                </span>
-            );
-        }
-        case "Note": {
-            return (
-                <span title={columnValue}>{columnValue}</span>
-            );
-        }
-        case "Currency": {
-            let currValue = Util.toCurrencyFormat(columnValue);
-            return (
-                <span title={currValue}>{currValue}</span>
-            );
-        }
-        case "Status": {
-            let fieldName = Util.cleanSearchPropName(column.fieldName);
-            if (configuration.statusFields.hasOwnProperty(fieldName)) {
-                const [statusProperties] = configuration.statusFields[fieldName].statuses.filter(({ statusValue }) => columnValue === statusValue);
-                if (statusProperties) {
-                    return (
-                        <span>
-                            <Icon iconName={statusProperties.statusIconName} style={{ color: statusProperties.statusColor }} />  {columnValue}
-                        </span>
-                    );
-                }
+        switch (column.key) {
+            case "Title": {
+                return (
+                    <a
+                        href={item.Path}
+                        onClick={titleOnClick}>{colValue}</a>
+                );
             }
-            return (
-                <span>{columnValue}</span>
-            );
+            case "Path":
+            case "URL": {
+                return <a href={item.Path}>{colValue}</a>;
+            }
+        }
+        switch (column.render) {
+            case "Date": {
+                return (
+                    <span>
+                        {colValue ? Util.dateFormat(colValue, "LL") : null}
+                    </span>
+                );
+            }
+            case "Note": {
+                return (
+                    <span title={colValue}>{colValue}</span>
+                );
+            }
+            case "Currency": {
+                let currValue = Util.toCurrencyFormat(colValue);
+                return (
+                    <span title={currValue}>{currValue}</span>
+                );
+            }
+            case "Status": {
+                let fieldName = Util.cleanSearchPropName(column.fieldName);
+                if (configuration.statusFields.hasOwnProperty(fieldName)) {
+                    const [statusProperties] = configuration.statusFields[fieldName].statuses.filter(({ statusValue }) => colValue === statusValue);
+                    if (statusProperties) {
+                        return (
+                            <span>
+                                <Icon iconName={statusProperties.statusIconName} style={{ color: statusProperties.statusColor }} />  {colValue}
+                            </span>
+                        );
+                    }
+                }
+                return (
+                    <span>{colValue}</span>
+                );
 
+            }
+            case "Default": {
+                return (
+                    <span title={colValue}>{colValue}</span>
+                );
+            }
+            default: {
+                return (
+                    <span title={colValue}>{colValue}</span>
+                );
+            }
         }
-        case "Default": {
-            return (
-                <span title={columnValue}>{columnValue}</span>
-            );
-        }
-        default: {
-            return (
-                <span title={columnValue}>{columnValue}</span>
-            );
-        }
+    } else {
+        return null;
     }
 };
 

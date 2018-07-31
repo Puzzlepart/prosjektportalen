@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IFile } from "sp-js-provisioning/lib/schema";
 
 const ProjectHome: IFile = {
@@ -13,7 +13,7 @@ const ProjectHome: IFile = {
     RemoveExistingWebParts: true,
     WebParts: [
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_ProjectPhases_Title"),
+            Title: __.getResource("WebPart_ProjectPhases_Title"),
             Zone: "LeftColumn",
             Order: 0,
             Contents: {
@@ -21,23 +21,23 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_Timeline_Title"),
+            Title: __.getResource("WebPart_Timeline_Title"),
             Zone: "LeftColumn",
             Order: 1,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_Timeline_Title"),
+                value: __.getResource("WebPart_Timeline_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Tasks_Url")}`,
+                value: `{site}/${__.getResource("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Tasks_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_Tasks_Url")}`,
             },
             {
                 name: "CurrentTaskListWebAddress",
@@ -52,7 +52,7 @@ const ProjectHome: IFile = {
             {
                 name: "ViewName",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_Timeline_ViewName"),
+                value: __.getResource("WebPart_Timeline_ViewName"),
             },
             {
                 name: "TimelineType",
@@ -64,29 +64,29 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
+            Title: __.getResource("WebPart_DocumentsCurrentPhase_Title"),
             Zone: "LeftColumn",
             Order: 2,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_DocumentsCurrentPhase_Title"),
+                value: __.getResource("WebPart_DocumentsCurrentPhase_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Documents_Url")}`,
+                value: `{site}/${__.getResource("Lists_Documents_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Documents_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_Documents_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_Documents_Title"),
+                List: __.getResource("Lists_Documents_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["DocIcon", "LinkFilename", "Modified", "Editor"],
@@ -100,29 +100,29 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"),
+            Title: __.getResource("Lists_BenefitsAnalysis_Title"),
             Zone: "LeftColumn",
             Order: 3,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"),
+                value: __.getResource("Lists_BenefitsAnalysis_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Url")}`,
+                value: `{site}/${__.getResource("Lists_BenefitsAnalysis_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_BenefitsAnalysis_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_BenefitsAnalysis_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_BenefitsAnalysis_Title"),
+                List: __.getResource("Lists_BenefitsAnalysis_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtRealizationTime"],
@@ -135,7 +135,7 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"),
+            Title: __.getResource("WebPart_ProjectInfo_Title"),
             Zone: "RightColumn",
             Order: 0,
             Contents: {
@@ -143,7 +143,7 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_SiteFeed_Title"),
+            Title: __.getResource("WebPart_SiteFeed_Title"),
             Zone: "RightColumn",
             Order: 1,
             Contents: {
@@ -151,29 +151,29 @@ const ProjectHome: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
+            Title: __.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
             Zone: "RightColumn",
             Order: 2,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
+                value: __.getResource("WebPart_UncertaintiesCurrentPhase_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Uncertainties_Url")}`,
+                value: `{site}/${__.getResource("Lists_Uncertainties_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Uncertainties_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_Uncertainties_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_Uncertainties_Title"),
+                List: __.getResource("Lists_Uncertainties_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtRiskProximity", "GtRiskFactor"],

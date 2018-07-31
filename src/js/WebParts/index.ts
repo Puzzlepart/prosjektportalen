@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../Resources";
+import __ from "../Resources";
 import ProjectList, { IProjectListProps } from "./ProjectList";
 import ProjectInfo, { IProjectInfoProps } from "./ProjectInfo";
 import ProjectPhases, { IProjectPhasesProps } from "./ProjectPhases";
@@ -17,6 +17,7 @@ import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix"
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
+import ProjectResources, { IProjectResourcesProps } from "./ProjectResources";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -35,11 +36,8 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
         dataSource: DataSource.Search,
-        groupByOptions: [
-            { name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" },
-        ],
-    },
-    ),
+        groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
+    }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog", {
         groupByOptions: [
@@ -51,19 +49,13 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
     new WebPartComponent<IOpportunityMatrixProps>(OpportunityMatrix, "pp-opportunityMatrix", { showEmptyMessage: true }),
-    new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesoverview", {
-        showEmptyMessage: true,
-        groupByOptions: [
-            { name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" },
-            { name: RESOURCE_MANAGER.getResource("SiteFields_GtProductStatus_DisplayName"), key: "ProductStatus" },
-        ],
-    },
-    ),
+    new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesoverview"),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
-        statsFieldsListName: RESOURCE_MANAGER.getResource("Lists_StatsFieldsConfig_Title"),
-        chartsConfigListName: RESOURCE_MANAGER.getResource("Lists_ChartsConfig_Title"),
+        statsFieldsListName: __.getResource("Lists_StatsFieldsConfig_Title"),
+        chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),
+    new WebPartComponent<IProjectResourcesProps>(ProjectResources, "pp-projectResources"),
 ];
 
 /**

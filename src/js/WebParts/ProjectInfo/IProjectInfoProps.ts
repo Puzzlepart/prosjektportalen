@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
@@ -37,10 +37,10 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
 }
 
 export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
-    chromeTitle: RESOURCE_MANAGER.getResource("WebPart_ProjectInfo_Title"),
-    missingPropertiesMessage: RESOURCE_MANAGER.getResource("ProjectInfo_MissingProperties"),
-    noPropertiesMessage: RESOURCE_MANAGER.getResource("ProjectInfo_NoProperties"),
-    loadingText: RESOURCE_MANAGER.getResource("ProjectInfo_LoadingText"),
+    chromeTitle: __.getResource("WebPart_ProjectInfo_Title"),
+    missingPropertiesMessage: __.getResource("ProjectInfo_MissingProperties"),
+    noPropertiesMessage: __.getResource("ProjectInfo_NoProperties"),
+    loadingText: __.getResource("ProjectInfo_LoadingText"),
     hideChrome: false,
     showActionLinks: true,
     showMissingPropsWarning: true,

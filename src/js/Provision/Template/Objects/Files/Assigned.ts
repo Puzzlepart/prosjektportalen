@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IFile } from "sp-js-provisioning/lib/schema";
 
 const Assigned: IFile = {
@@ -8,29 +8,29 @@ const Assigned: IFile = {
     Overwrite: true,
     WebParts: [
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_MyTasks_Title"),
+            Title: __.getResource("WebPart_MyTasks_Title"),
             Zone: "LeftColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_MyTasks_Title"),
+                value: __.getResource("WebPart_MyTasks_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_Tasks_Url")}`,
+                value: `{site}/${__.getResource("Lists_Tasks_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_Tasks_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_Tasks_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_Tasks_Title"),
+                List: __.getResource("Lists_Tasks_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["Checkmark", "LinkTitle", "GtProjectPhase", "StartDate", "DueDate"],
@@ -43,29 +43,29 @@ const Assigned: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_MyCommunicationElements_Title"),
+            Title: __.getResource("WebPart_MyCommunicationElements_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_MyCommunicationElements_Title"),
+                value: __.getResource("WebPart_MyCommunicationElements_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Url")}`,
+                value: `{site}/${__.getResource("Lists_CommunicationPlan_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_CommunicationPlan_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_CommunicationPlan_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_CommunicationPlan_Title"),
+                List: __.getResource("Lists_CommunicationPlan_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProjectPhase", "GtActionDate", "GtCommunicationTarget"],
@@ -78,29 +78,29 @@ const Assigned: IFile = {
             },
         },
         {
-            Title: RESOURCE_MANAGER.getResource("WebPart_MyProjectDeliveries_Title"),
+            Title: __.getResource("WebPart_MyProjectDeliveries_Title"),
             Zone: "RightColumn",
             Order: 0,
             PropertyOverrides: [{
                 name: "Title",
                 type: "string",
-                value: RESOURCE_MANAGER.getResource("WebPart_MyProjectDeliveries_Title"),
+                value: __.getResource("WebPart_MyProjectDeliveries_Title"),
             },
             {
                 name: "ListUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("Lists_ProjectDeliveries_Url")}`,
+                value: `{site}/${__.getResource("Lists_ProjectDeliveries_Url")}`,
             },
             {
                 name: "TitleUrl",
                 type: "string",
-                value: `{site}/${RESOURCE_MANAGER.getResource("DefaultView_ProjectDeliveries_Url")}`,
+                value: `{site}/${__.getResource("DefaultView_ProjectDeliveries_Url")}`,
             }],
             Contents: {
                 FileSrc: "{sitecollection}/Resources/ListViewWebPart.txt",
             },
             ListView: {
-                List: RESOURCE_MANAGER.getResource("Lists_ProjectDeliveries_Title"),
+                List: __.getResource("Lists_ProjectDeliveries_Title"),
                 View: {
                     Title: "",
                     ViewFields: ["LinkTitle", "GtProductPhase", "GtProductInteressent", "GtProductAcceptanceMethod", "GtProductAcceptanceDate"],

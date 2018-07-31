@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IFile } from "sp-js-provisioning/lib/schema";
 
 const ProjectStatus: IFile = {
@@ -7,7 +7,7 @@ const ProjectStatus: IFile = {
     Url: "ProjectStatus.aspx",
     Overwrite: true,
     Properties: {
-        Title: RESOURCE_MANAGER.getResource("Navigation_ProjectStatus_Title"),
+        Title: __.getResource("Navigation_ProjectStatus_Title"),
     },
 };
 

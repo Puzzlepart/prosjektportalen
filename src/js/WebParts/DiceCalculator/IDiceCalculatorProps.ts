@@ -1,3 +1,4 @@
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import DiceCalculatorElement from "./DiceCalculatorElement";
@@ -12,11 +13,45 @@ export default interface IDiceCalculatorProps extends IBaseWebPartProps {
 
 export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     choices: [
-        ["< 2 months", "2-4 months", "4-8 months", "8 months"],
-        ["Very Good", "Good - Very Good", "Good", "Average - Good", "Average", "Poor - Average", "Poor"],
-        ["Clearly, strongly communicate need", "Reasonably communicate need", "Seem to want success", "Neutral - Seem to want success", "Neutral", "Reluctant - Neutral", "Reluctant"],
-        ["Eager", "Willing - Eager", "Willing", "Reluctant - Willing", "Reluctant", "Strongly Reluctant - Reluctant", "Strongly Reluctant"],
-        ["<10% additional", "10-20% additional", "20-40% additional", ">40% additional"],
+        [
+            __.getResource("DiceCalculator_LessThanTwoMonths"),
+            __.getResource("DiceCalculator_TwoToFourMonths"),
+            __.getResource("DiceCalculator_FourToEightMonths"),
+            __.getResource("DiceCalculator_EightMonths"),
+        ],
+        [
+            __.getResource("DiceCalculator_VeryGood"),
+            __.getResource("DiceCalculator_GoodToVeryGood"),
+            __.getResource("DiceCalculator_AverageToGood"),
+            __.getResource("DiceCalculator_Good"),
+            __.getResource("DiceCalculator_Average"),
+            __.getResource("DiceCalculator_PoorToAverage"),
+            __.getResource("DiceCalculator_Poor"),
+        ],
+        [
+            __.getResource("DiceCalculator_ClearlyStronglyCommunicateNeed"),
+            __.getResource("DiceCalculator_ReasonablyCommunicateNeed"),
+            __.getResource("DiceCalculator_SeemToWantSuccess"),
+            __.getResource("DiceCalculator_NeutralSeemToWantSuccess"),
+            __.getResource("DiceCalculator_Neutral"),
+            __.getResource("DiceCalculator_ReluctantToNeutral"),
+            __.getResource("DiceCalculator_Reluctant"),
+        ],
+        [
+            __.getResource("DiceCalculator_Eager"),
+            __.getResource("DiceCalculator_WillingEager"),
+            __.getResource("DiceCalculator_Willing"),
+            __.getResource("DiceCalculator_ReluctantWilling"),
+            __.getResource("DiceCalculator_Reluctant"),
+            __.getResource("DiceCalculator_StronglyReluctantToReluctant"),
+            __.getResource("DiceCalculator_StronglyReluctant"),
+        ],
+        [
+            __.getResource("DiceCalculator_LessThan10Additional"),
+            __.getResource("DiceCalculator_10To20Additional"),
+            __.getResource("DiceCalculator_20To40Additional"),
+            __.getResource("DiceCalculator_Above40Additional"),
+        ],
     ],
     choicesScores: [
         [1, 2, 3, 4],
@@ -47,11 +82,11 @@ export const DiceCalculatorDefaultProps: Partial<IDiceCalculatorProps> = {
     }],
     diceListTitle: "Dice",
     elements: [
-        new DiceCalculatorElement("Duration (between learning milestones or till completion)", "DiceDuration"),
-        new DiceCalculatorElement("Team Performance Integrity", "DiceTPI"),
-        new DiceCalculatorElement("Commitment (Senior Mgmt)", "DiceCommSeniorMgmt"),
-        new DiceCalculatorElement("Commitment (Local)", "DiceCommLocal"),
-        new DiceCalculatorElement("Effort", "DiceEffort"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_Duration"), "DiceDuration"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_TeamPerformanceIntegrity"), "DiceTPI"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_CommitmentSeniorMgmt"), "DiceCommSeniorMgmt"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_CommitmentLocal"), "DiceCommLocal"),
+        new DiceCalculatorElement(__.getResource("DiceCalculator_Effort"), "DiceEffort"),
     ],
 };
 

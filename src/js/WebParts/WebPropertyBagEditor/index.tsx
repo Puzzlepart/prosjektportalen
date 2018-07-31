@@ -1,5 +1,5 @@
 import * as React from "react";
-import RESOURCE_MANAGER from "../../Resources";
+import __ from "../../Resources";
 import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
@@ -37,7 +37,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
             return <Spinner size={SpinnerSize.large} />;
         }
         if (Object.keys(this.state.settings).length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{RESOURCE_MANAGER.getResource("WebPropertyBagEditor_NoSettings")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("WebPropertyBagEditor_NoSettings")}</MessageBar>;
         }
         const items = Object.keys(this.state.settings).map(key => ({
             key,
@@ -58,7 +58,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                         <Spinner size={SpinnerSize.large} />
                         :
                         <PrimaryButton
-                            text={RESOURCE_MANAGER.getResource("String_SaveChanges")}
+                            text={__.getResource("String_SaveChanges")}
                             disabled={this.state.isSaving}
                             style={{ margin: 0 }}
                             iconProps={{ iconName: "SaveAll" }}
@@ -133,7 +133,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
                 isSaving: false,
                 statusMessage: {
                     messageBarType: MessageBarType.success,
-                    children: <span>{RESOURCE_MANAGER.getResource("String_ChangesWasSaved")}</span>,
+                    children: <span>{__.getResource("String_ChangesWasSaved")}</span>,
                 },
             }, () => {
                 window.setTimeout(() => {

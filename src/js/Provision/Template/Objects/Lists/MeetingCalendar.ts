@@ -1,8 +1,8 @@
-import RESOURCE_MANAGER from "../../../../Resources";
+import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
 const MeetingCalendar: IList = {
-    Title: RESOURCE_MANAGER.getResource("Lists_MeetingCalendar_Title"),
+    Title: __.getResource("Lists_MeetingCalendar_Title"),
     Description: "",
     Template: 106,
     ContentTypesEnabled: true,

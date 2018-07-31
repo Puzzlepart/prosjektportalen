@@ -1,4 +1,4 @@
-import RESOURCE_MANAGER from "../../../Resources";
+import __ from "../../../Resources";
 import IChecklistItem from "./IChecklistItem";
 import * as Util from "../../../Util";
 
@@ -58,9 +58,9 @@ export default class PhaseModel {
      */
     private initChecklist() {
         let stats = {};
-        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Closed")] = 0;
-        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
-        stats[RESOURCE_MANAGER.getResource("ProjectPhases_Stats_Open")] = 0;
+        stats[__.getResource("ProjectPhases_Stats_Closed")] = 0;
+        stats[__.getResource("ProjectPhases_Stats_NotRelevant")] = 0;
+        stats[__.getResource("ProjectPhases_Stats_Open")] = 0;
         this.Checklist = {
             stats,
             items: [],
