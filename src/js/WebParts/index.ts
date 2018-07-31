@@ -41,7 +41,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog", {
         groupByOptions: [
-            { name: RESOURCE_MANAGER.getResource("String_Project"), key: "SiteTitle" },
+            { name: __.getResource("String_Project"), key: "SiteTitle" },
         ],
     },
     ),
