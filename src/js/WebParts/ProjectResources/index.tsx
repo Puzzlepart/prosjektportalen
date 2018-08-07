@@ -57,12 +57,13 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
                 end_time: moment(alloc.end),
             };
         });
-        console.log(groups, items);
         return (
             <Timeline
                 groups={groups}
                 items={items}
                 stackItems={true}
+                canMove={false}
+                canChangeGroup={false}
                 minResizeWidth={150}
                 defaultTimeStart={moment()}
                 defaultTimeEnd={moment().add(1, "years")}/>
