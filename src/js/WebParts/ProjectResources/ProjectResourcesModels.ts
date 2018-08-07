@@ -1,3 +1,4 @@
+import * as moment from "moment";
 export class SpBaseItem {
     public webId: string;
     public id: number;
@@ -14,16 +15,17 @@ export class SpBaseItem {
 export class ProjectResourceAllocation extends SpBaseItem {
     public project: string;
     public resourceId: number;
-    public start: Date;
-    public end: Date;
+    public start: moment.Moment;
+    public end: moment.Moment;
     public load: number;
     public role: string;
     public userId: number;
+    public userName: string;
 
     /**
      * Creates a new ProjectResourceAllocation class
      */
-    constructor(base: SpBaseItem, project: string, resourceId: number, start: Date, end: Date, load: number) {
+    constructor(base: SpBaseItem, project: string, resourceId: number, start: moment.Moment, end: moment.Moment, load: number) {
         super(base);
         this.project = project;
         this.resourceId = resourceId;
@@ -40,7 +42,6 @@ export class ProjectResourceAllocation extends SpBaseItem {
 export class ProjectUser {
     public id: number;
     public name: string;
-    public ids: Array<{ project: { url: string, title: string }, id: number }>;
     public allocations: Array<ProjectResourceAllocation>;
 
     /**
