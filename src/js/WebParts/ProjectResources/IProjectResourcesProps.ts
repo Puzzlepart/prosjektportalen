@@ -1,62 +1,27 @@
-import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import { IListProps } from "../@Components/List";
 
-export default interface IProjectResourcesProps extends IBaseWebPartProps, IListProps { }
+export default interface IProjectResourcesProps extends IBaseWebPartProps {
+    searchConfiguration: any;
+ }
 
 export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
-    columns: [{
-        key: "SiteTitle",
-        fieldName: "SiteTitle",
-        name: __.getResource("String_Project"),
-        minWidth: 100,
-        maxWidth: 100,
-        isResizable: true,
+    searchConfiguration: {
+        Querytext: "*",
+        QueryTemplate: "(ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* OR ContentTypeId:0x010088578E7470CC4AA68D5663464831070210*) Path:{SiteCollection.URL}",
+        RowLimit: 500,
+        TrimDuplicates: false,
+        SelectProperties: [
+            "ContentTypeID",
+            "ListItemID",
+            "WebId",
+            "GtResourceLoadOWSNMBR",
+            "SiteTitle",
+            "GtStartDateOWSDATE",
+            "GtEndDateOWSDATE",
+            "RefinableString71",
+            "RefinableString72",
+            "RefinableString73",
+            "RefinableString52",
+        ],
     },
-    {
-        key: "RefinableString71",
-        fieldName: "ResourceUser",
-        name: __.getResource("SiteFields_GtResourceUser_DisplayName"),
-        minWidth: 200,
-        maxWidth: 300,
-        isResizable: true,
-    },
-    {
-        key: "RefinableString72",
-        fieldName: "ResourceRole",
-        name: __.getResource("SiteFields_GtResourceRole_DisplayName"),
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "GtStartDateOWSDATE",
-        fieldName: "StartDate",
-        name: __.getResource("SiteFields_GtStartDate_DisplayName"),
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "GtEndDateOWSDATE",
-        fieldName: "EndDate",
-        name: __.getResource("SiteFields_GtEndDate_DisplayName"),
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    },
-    {
-        key: "RefinableString52",
-        fieldName: "ProjectPhase",
-        name: __.getResource("SiteFields_GtProjectPhase_DisplayName"),
-        minWidth: 100,
-        maxWidth: 150,
-        isResizable: true,
-    }],
-    groupByOptions: [
-        { name: __.getResource("String_Project"), key: "SiteTitle" },
-        { name: __.getResource("SiteFields_GtProjectPhase_DisplayName"), key: "ProjectPhase" },
-        { name: __.getResource("SiteFields_GtResourceUser_DisplayName"), key: "ResourceUser" },
-        { name: __.getResource("SiteFields_GtResourceRole_DisplayName"), key: "ResourceRole" },
-    ],
 };
