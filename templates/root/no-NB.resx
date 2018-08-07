@@ -162,8 +162,8 @@
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstoppfølging</value>
   </data>  
-  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
-    <value>Prosjektressurser</value>
+  <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
@@ -2157,8 +2157,8 @@
   <data name="WebPart_ProjectStats_Title" xml:space="preserve">
     <value>Prosjektstatistikk</value>
   </data>
-  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
-    <value>Prosjektressurser</value>
+  <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>

@@ -79,14 +79,14 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\ProjectResources.aspx" Folder="SitePages" Level="Published" Overwrite="true">
+    <pnp:File Src="SitePages\ResourceAllocation.aspx" Folder="SitePages" Level="Published" Overwrite="true">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="{resource:Navigation_ProjectResources_Title}" />
+            <pnp:Property Key="Title" Value="{resource:Navigation_ResourceAllocation_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
-            <pnp:WebPart Title="ProjectResources" Order="0" Zone="LeftColumn">
+            <pnp:WebPart Title="ResourceAllocation" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
-                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ProjectResources.webpart" />
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ResourceAllocation.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -244,9 +244,9 @@
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
     </pnp:File>
-    <pnp:File Src="WebPartGallery\ProjectResources.webpart" Folder="_catalogs/wp" Overwrite="false">
+    <pnp:File Src="WebPartGallery\ResourceAllocation.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
-            <pnp:Property Key="Title" Value="{resource:WebPart_ProjectResources_Title}" />
+            <pnp:Property Key="Title" Value="{resource:WebPart_ResourceAllocation_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>
