@@ -1,4 +1,5 @@
 import * as React from "react";
+import __ from "../../../Resources";
 import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
 import { ProjectResourceAllocation } from "../ProjectResourcesModels";
 
@@ -49,9 +50,9 @@ export default class ResourceAllocationModal extends React.Component<IResourceAl
     protected _renderBody() {
         return (
             <div>
-                <p><b>Fra:</b> {this.props.allocation.start.fromNow()}</p>
-                <p><b>Til:</b> {this.props.allocation.end.fromNow()}</p>
-                <p><b>Prosjekt:</b> {this.props.allocation.project}</p>
+                <p><b>{__.getResource("String_From")}:</b> {this.props.allocation.start.format("LL")}</p>
+                <p><b>{__.getResource("String_To")}:</b> {this.props.allocation.end.format("LL")}</p>
+                <p><b>{__.getResource("String_Project")}:</b> {this.props.allocation.project}</p>
             </div>
         );
     }

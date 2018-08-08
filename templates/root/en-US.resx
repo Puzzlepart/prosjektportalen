@@ -2052,6 +2052,12 @@
   <data name="String_Not_Set" xml:space="preserve">
     <value>Not set</value>
   </data>
+  <data name="String_From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="String_To" xml:space="preserve">
+    <value>To</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
