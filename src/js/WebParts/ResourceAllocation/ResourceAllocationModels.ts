@@ -1,41 +1,80 @@
 import * as moment from "moment";
-export class SpBaseItem {
+
+export interface IProjectReference {
+    name: string;
+    url: string;
+}
+
+export class SPBaseItem {
+    public url: string;
     public webId: string;
-    public id: number;
+    public itemId: number;
 
     /**
-     * Creates a new SpBaseItem class
+     * Creates a new SPBaseItem class
      */
-    constructor(item: SpBaseItem) {
-        this.webId = item.webId;
-        this.id = item.id;
+    constructor(url: string, webId: string, itemId: number) {
+        this.url = url;
+        this.webId = webId;
+        this.itemId = itemId;
     }
 }
 
-export class ProjectResourceAllocation extends SpBaseItem {
-    public project: string;
-    public resourceId: number;
-    public start: moment.Moment;
-    public end: moment.Moment;
-    public load: number;
+export class ProjectResource extends SPBaseItem {
     public role: string;
-    public userId: number;
-    public userName: string;
+    public name: string;
+    public user: ProjectUser;
+
+     /**
+     * Creates a new ProjectResourceAllocation class
+     *
+     * @param {SPBaseItem} item Item base
+     * @param {string} role Role
+     * @param {string} name Name
+     */
+    constructor(item: SPBaseItem, role: string, name: string) {
+        super(item.url, item.webId, item.itemId);
+        this.role = role;
+        this.name = name;
+    }
+}
+
+export class ProjectResourceAllocation extends SPBaseItem {
+    public project: IProjectReference;
+    public resourceId: number;
+    public start_time: moment.Moment;
+    public end_time: moment.Moment;
+    public load: number;
+    public approved: boolean;
+    public resource: ProjectResource;
+    public user: ProjectUser;
 
     /**
      * Creates a new ProjectResourceAllocation class
+     *
+     * @param {SPBaseItem} item Item base
+     * @param {IProjectReference} project Project reference
+     * @param {number} resourceId Resource ID
+     * @param {moment.Moment} start_time Start time
+     * @param {moment.Moment} end_time End time
+     * @param {number} load Resource load in percent
+     * @param {boolean} approved Approved
      */
-    constructor(base: SpBaseItem, project: string, resourceId: number, start: moment.Moment, end: moment.Moment, load: number) {
-        super(base);
+    constructor(item: SPBaseItem, project: IProjectReference, resourceId: number, start_time: moment.Moment, end_time: moment.Moment, load: number, approved: boolean) {
+        super(item.url, item.webId, item.itemId);
         this.project = project;
         this.resourceId = resourceId;
-        this.start = start;
-        this.end = end;
+        this.start_time = start_time;
+        this.end_time = end_time;
         this.load = load;
+        this.approved = approved;
     }
 
-    public getTitle(): string {
-        return `${this.role} - ${this.load}% - ${this.project}`;
+    /**
+     * Returns a string representation of the class
+     */
+    public toString(): string {
+        return `${this.resource.role} - ${this.load}% - ${this.project.name}`;
     }
 }
 
@@ -46,6 +85,9 @@ export class ProjectUser {
 
     /**
      * Creates a new ProjectUser class
+     *
+     * @param {number} id ID
+     * @param {string} name Name
      */
     constructor(id: number, name: string) {
         this.id = id;

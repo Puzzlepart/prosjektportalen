@@ -19,7 +19,7 @@ const ResourceAllocation: IList = {
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["ID", "GtProjectResourceLookup", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtProjectPhase"],
+        ViewFields: ["ID", "GtProjectResourceLookup", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtApproved"],
         AdditionalSettings: {
             RowLimit: 100,
             Paged: true,

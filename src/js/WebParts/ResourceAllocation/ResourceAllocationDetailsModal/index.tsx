@@ -1,7 +1,6 @@
 import * as React from "react";
 import __ from "../../../Resources";
-import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
-import { ProjectResourceAllocation } from "../ResourceAllocationModels";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import IResourceAllocationDetailsModalProps from "./IResourceAllocationDetailsModalProps";
 
 export default class ResourceAllocationDetailsModal extends React.Component<IResourceAllocationDetailsModalProps, {}> {
@@ -40,9 +39,12 @@ export default class ResourceAllocationDetailsModal extends React.Component<IRes
      * Renders the modal header
      */
     protected _renderHeader() {
+        const { allocation } = this.props;
         return (
             <div>
-                <h3>{this.props.allocation.role} ({this.props.allocation.load}%)</h3>
+                <h3>
+                    <a href={allocation.url} target="_blank">{allocation.resource.role} ({allocation.load}%)</a>
+                </h3>
             </div>
         );
     }
@@ -51,11 +53,25 @@ export default class ResourceAllocationDetailsModal extends React.Component<IRes
      * Renders the modal body
      */
     protected _renderBody() {
+        const { allocation } = this.props;
         return (
             <div>
-                <p><b>{__.getResource("String_From")}:</b> {this.props.allocation.start.format("LL")}</p>
-                <p><b>{__.getResource("String_To")}:</b> {this.props.allocation.end.format("LL")}</p>
-                <p><b>{__.getResource("String_Project")}:</b> {this.props.allocation.project}</p>
+                <p>
+                    <b>{__.getResource("String_From")}:</b>&nbsp;
+                    <span>{allocation.start_time.format("LL")}</span>
+                </p>
+                <p>
+                    <b>{__.getResource("String_To")}:</b>&nbsp;
+                    <span>{allocation.end_time.format("LL")}</span>
+                </p>
+                <p>
+                    <b>{__.getResource("String_Project")}:</b>&nbsp;
+                    <a href={allocation.project.url} target="_blank"><span>{allocation.project.name}</span></a>
+                </p>
+                <p>
+                    <b>{__.getResource("String_Resource")}:</b>&nbsp;
+                    <a href={allocation.resource.url} target="_blank"><span>{allocation.user.name}</span></a>
+                </p>
             </div>
         );
     }

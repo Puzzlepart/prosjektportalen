@@ -1,7 +1,8 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
+import {SearchQuery} from "sp-pnp-js";
 
 export default interface IResourceAllocationProps extends IBaseWebPartProps {
-    searchConfiguration: any;
+    searchConfiguration: SearchQuery;
  }
 
 export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {
@@ -11,13 +12,16 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
         RowLimit: 500,
         TrimDuplicates: false,
         SelectProperties: [
+            "Path",
             "ContentTypeID",
             "ListItemID",
+            "SPWebUrl",
             "WebId",
             "GtResourceLoadOWSNMBR",
             "SiteTitle",
             "GtStartDateOWSDATE",
             "GtEndDateOWSDATE",
+            "GtApprovedOWSBOOL",
             "RefinableString71",
             "RefinableString72",
             "RefinableString73",
