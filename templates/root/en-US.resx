@@ -381,6 +381,9 @@
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Project Resources/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_ResourceAllocation_Url" xml:space="preserve">
+    <value>Lists/Resource Allocation/AllItems.aspx</value>
+  </data>
   <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
     <value>Project Status</value>
   </data>
