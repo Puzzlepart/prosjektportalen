@@ -1239,6 +1239,9 @@
   <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
     <value>Belastning</value>
   </data>
+  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
+    <value>Ressurs</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>

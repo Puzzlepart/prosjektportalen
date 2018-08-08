@@ -1242,6 +1242,9 @@
   <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
     <value>Load</value>
   </data>
+  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
+    <value>Resource</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
