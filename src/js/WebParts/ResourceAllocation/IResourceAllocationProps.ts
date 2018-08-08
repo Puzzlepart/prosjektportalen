@@ -1,10 +1,10 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
-export default interface IProjectResourcesProps extends IBaseWebPartProps {
+export default interface IResourceAllocationProps extends IBaseWebPartProps {
     searchConfiguration: any;
  }
 
-export const ProjectResourcesDefaultProps: Partial<IProjectResourcesProps> = {
+export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {
     searchConfiguration: {
         Querytext: "*",
         QueryTemplate: "(ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* OR ContentTypeId:0x010088578E7470CC4AA68D5663464831070210*) Path:{SiteCollection.URL}",

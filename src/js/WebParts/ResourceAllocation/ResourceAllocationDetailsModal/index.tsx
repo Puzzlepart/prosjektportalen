@@ -1,26 +1,26 @@
 import * as React from "react";
 import __ from "../../../Resources";
 import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
-import { ProjectResourceAllocation } from "../ProjectResourcesModels";
+import { ProjectResourceAllocation } from "../ResourceAllocationModels";
 
-export interface IResourceAllocationModalProps extends IModalProps {
+export interface IResourceAllocationDetailsModalProps extends IModalProps {
     allocation?: ProjectResourceAllocation;
 }
 
-export default class ResourceAllocationModal extends React.Component<IResourceAllocationModalProps, {}> {
-    public static displayName = "ResourceAllocationModal";
+export default class ResourceAllocationDetailsModal extends React.Component<IResourceAllocationDetailsModalProps, {}> {
+    public static displayName = "ResourceAllocationDetailsModal";
 
     /**
      * Constructor
      *
-     * @param {IResourceAllocationModalProps} props Props
+     * @param {IResourceAllocationDetailsModalProps} props Props
      */
-    constructor(props: IResourceAllocationModalProps) {
+    constructor(props: IResourceAllocationDetailsModalProps) {
         super(props);
     }
 
     /**
-     * Renders the <ResourceAllocationModal /> component
+     * Renders the <ResourceAllocationDetailsModal /> component
      */
     public render(): JSX.Element {
         if (this.props.allocation) {
@@ -39,6 +39,9 @@ export default class ResourceAllocationModal extends React.Component<IResourceAl
         return null;
     }
 
+    /***
+     * Renders the modal header
+     */
     protected _renderHeader() {
         return (
             <div>
@@ -47,6 +50,9 @@ export default class ResourceAllocationModal extends React.Component<IResourceAl
         );
     }
 
+    /**
+     * Renders the modal body
+     */
     protected _renderBody() {
         return (
             <div>

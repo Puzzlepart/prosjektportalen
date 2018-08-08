@@ -1,7 +1,7 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
-import { ProjectResourceAllocation, ProjectUser } from "./ProjectResourcesModels";
+import { ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
 
-export default interface IProjectResourcesState extends IBaseWebPartState {
+export default interface IResourceAllocationState extends IBaseWebPartState {
     users?: Array<ProjectUser>;
     allocations?: Array<ProjectResourceAllocation>;
     selectedAllocation?: ProjectResourceAllocation;

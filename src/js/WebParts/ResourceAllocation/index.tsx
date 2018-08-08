@@ -4,26 +4,26 @@ import __ from "../../Resources";
 import pnp from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import IProjectResourcesProps, { ProjectResourcesDefaultProps } from "./IProjectResourcesProps";
-import IProjectResourcesState from "./IProjectResourcesState";
-import { ProjectResourceAllocation, ProjectUser } from "./ProjectResourcesModels";
-import ResourceAllocationModal from "./ResourceAllocationModal";
+import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
+import IResourceAllocationState from "./IResourceAllocationState";
+import { ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
+import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
 
 /**
  * Project Resources
  */
-export default class ProjectResources extends BaseWebPart<IProjectResourcesProps, IProjectResourcesState> {
-    public static displayName = "ProjectResources";
-    public static defaultProps = ProjectResourcesDefaultProps;
+export default class ResourceAllocation extends BaseWebPart<IResourceAllocationProps, IResourceAllocationState> {
+    public static displayName = "ResourceAllocation";
+    public static defaultProps = ResourceAllocationDefaultProps;
 
     /**
      * Constructor
      *
-     * @param {IProjectResourcesProps} props Props
+     * @param {IResourceAllocationProps} props Props
      */
-    constructor(props: IProjectResourcesProps) {
+    constructor(props: IResourceAllocationProps) {
         super(props, { isLoading: true });
         moment.locale(__.getResource("MomentDate_Locale"));
     }
@@ -43,14 +43,14 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
     }
 
     /**
-     * Renders the <ProjectResources /> component
+     * Renders the <ResourceAllocation /> component
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
             return (
                 <Spinner
                     type={SpinnerType.large}
-                    label={__.getResource("ProjectResources_LoadingText")} />
+                    label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
 
@@ -77,7 +77,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
                     minResizeWidth={150}
                     defaultTimeStart={moment()}
                     defaultTimeEnd={moment().add(1, "years")} />
-                <ResourceAllocationModal allocation={this.state.selectedAllocation} onDismiss={this._onResourceAllocationModalDismiss} />
+                <ResourceAllocationDetailsModal allocation={this.state.selectedAllocation} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
             </div>
         );
     }
@@ -105,7 +105,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
     }
 
     @autobind
-    protected _onResourceAllocationModalDismiss() {
+    protected _onResourceAllocationDetailsModalDismiss() {
         this.setState({ selectedAllocation: null });
     }
 
@@ -113,7 +113,7 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
      * Fetch data, parses the data, and creates arrays for [users] and [allocations]
      */
     protected async _fetchData() {
-        const items = await this._searchItems();
+        const items = await this._searchItems(this.props.searchConfiguration);
         const itemsResources = items.filter(item => item.ctIndex === 9);
         const itemsAllocations = items.filter(item => item.ctIndex === 10 && item.resourceId);
         const allocations = itemsAllocations.map(allocation => new ProjectResourceAllocation(allocation.item, allocation.web.title, allocation.resourceId, allocation.start, allocation.end, allocation.load));
@@ -140,8 +140,8 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
     /**
      * Searches for items using {pnp.sp}
      */
-    protected async _searchItems() {
-        const { PrimarySearchResults } = await pnp.sp.search(this.props.searchConfiguration);
+    protected async _searchItems(searchConfiguration) {
+        const { PrimarySearchResults } = await pnp.sp.search(searchConfiguration);
         const itemsParsed = PrimarySearchResults.map((result: any) => ({
             web: { title: result.SiteTitle },
             item: { webId: result.WebId, id: parseInt(result.ListItemID, 10) },
@@ -157,4 +157,4 @@ export default class ProjectResources extends BaseWebPart<IProjectResourcesProps
     }
 }
 
-export { IProjectResourcesProps, IProjectResourcesState };
+export { IResourceAllocationProps, IResourceAllocationState };

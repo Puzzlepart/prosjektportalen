@@ -564,5 +564,5 @@
             <pnp:FieldRef ID="f5e3aede-8d38-4608-88fd-655908778bee" Name="{parameter:ProjectStatsFieldPrefix}ShowAverage" Hidden="true" />
             <pnp:FieldRef ID="9d2a7860-17b2-4919-8e9c-8596414519d3" Name="{parameter:ProjectStatsFieldPrefix}ShowPercentage" />
         </pnp:FieldRefs>
-    </pnp:ContentType> -->
+    </pnp:ContentType>
 </pnp:ContentTypes> 
