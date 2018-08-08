@@ -270,6 +270,9 @@
   <data name="Lists_ProjectResources_Title" xml:space="preserve">
     <value>Prosjektressurser</value>
   </data>
+  <data name="Lists_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
+  </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
   </data>

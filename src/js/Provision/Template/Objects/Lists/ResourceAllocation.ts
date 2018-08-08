@@ -3,7 +3,7 @@ import { IList } from "sp-js-provisioning/lib/schema";
 import { GtProjectResourceLookup } from "./SiteFields";
 
 const ResourceAllocation: IList = {
-    Title: "Ressursallokering",
+    Title: __.getResource("Lists_ResourceAllocation_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: false,
