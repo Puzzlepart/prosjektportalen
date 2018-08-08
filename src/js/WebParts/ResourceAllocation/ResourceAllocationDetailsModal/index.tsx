@@ -2,10 +2,7 @@ import * as React from "react";
 import __ from "../../../Resources";
 import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
 import { ProjectResourceAllocation } from "../ResourceAllocationModels";
-
-export interface IResourceAllocationDetailsModalProps extends IModalProps {
-    allocation?: ProjectResourceAllocation;
-}
+import IResourceAllocationDetailsModalProps from "./IResourceAllocationDetailsModalProps";
 
 export default class ResourceAllocationDetailsModal extends React.Component<IResourceAllocationDetailsModalProps, {}> {
     public static displayName = "ResourceAllocationDetailsModal";
