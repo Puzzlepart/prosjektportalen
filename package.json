@@ -92,7 +92,6 @@
         "react-highcharts": "^16.0.2",
         "react-scroll": "^1.7.9",
         "react-sticky": "^6.0.2",
-        "react-timelinejs": "^0.1.19",
         "regenerator-runtime": "^0.11.1",
         "require-uncached": "^1.0.3",
         "run-sequence": "^2.2.1",

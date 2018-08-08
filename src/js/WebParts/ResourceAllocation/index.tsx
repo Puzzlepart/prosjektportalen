@@ -1,3 +1,4 @@
+//#region Imports
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
 import __ from "../../Resources";
@@ -10,9 +11,10 @@ import { ProjectResource, ProjectResourceAllocation, ProjectUser } from "./Resou
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
+//#endregion
 
 /**
- * Project Resources
+ * Component: ResourceAllocation
  */
 export default class ResourceAllocation extends BaseWebPart<IResourceAllocationProps, IResourceAllocationState> {
     public static displayName = "ResourceAllocation";

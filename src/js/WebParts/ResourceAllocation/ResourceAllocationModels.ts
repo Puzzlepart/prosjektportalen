@@ -1,10 +1,19 @@
 import * as moment from "moment";
 
+
+
+/**
+ * Interface: IProjectReference
+ */
 export interface IProjectReference {
     name: string;
     url: string;
 }
 
+
+/**
+ * Class: SPBaseItem
+ */
 export class SPBaseItem {
     public url: string;
     public webId: string;
@@ -20,6 +29,9 @@ export class SPBaseItem {
     }
 }
 
+/**
+ * Class: ProjectResource
+ */
 export class ProjectResource extends SPBaseItem {
     public role: string;
     public name: string;
@@ -39,6 +51,9 @@ export class ProjectResource extends SPBaseItem {
     }
 }
 
+/**
+ * Class: ProjectResourceAllocation
+ */
 export class ProjectResourceAllocation extends SPBaseItem {
     public project: IProjectReference;
     public resourceId: number;
@@ -78,6 +93,9 @@ export class ProjectResourceAllocation extends SPBaseItem {
     }
 }
 
+/**
+ * Class: ProjectUser
+ */
 export class ProjectUser {
     public id: number;
     public name: string;
