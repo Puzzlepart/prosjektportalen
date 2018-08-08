@@ -10,6 +10,7 @@ import IResourceAllocationState from "./IResourceAllocationState";
 import { ProjectResource, ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
+import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
 //#endregion
@@ -27,7 +28,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * @param {IResourceAllocationProps} props Props
      */
     constructor(props: IResourceAllocationProps) {
-        super(props, { isLoading: true });
+        super(props, { isLoading: true, selected: {} });
         moment.locale(__.getResource("MomentDate_Locale"));
     }
 
@@ -68,10 +69,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 <ResourceAllocationCommandBar
                     users={this.state.users}
                     allocations={this.state.allocations}
-                    selectedUser={this.state.selectedUser}
-                    selectedProject={this.state.selectedProject}
-                    onUserSelected={this._onUserSelected}
-                    onProjectSelected={this._onProjectSelected} />
+                    selected={this.state.selected}
+                    onSelectionUpdate={this._onSelectionUpdate} />
                 <Timeline
                     groups={data.groups}
                     items={data.items}
@@ -86,7 +85,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         <TodayMarker />
                     </TimelineMarkers>
                 </Timeline>
-                <ResourceAllocationDetailsModal allocation={this.state.selectedAllocation} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
+                <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
             </div>
         );
     }
@@ -103,18 +102,24 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             .map(user => ({ id: user.id, title: user.name }))
             .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
             .filter(grp => {
-                if (this.state.selectedUser) {
-                    return grp.id === this.state.selectedUser.id;
+                if (this.state.selected.user) {
+                    return grp.id === this.state.selected.user.id;
                 }
                 return true;
             });
         const items = this.state.allocations
             .filter(alloc => {
                 let isValid = alloc.user && alloc.resource;
-                if (this.state.selectedProject) {
-                    return alloc.project.name === this.state.selectedProject && isValid;
+                if (!isValid) {
+                    return false;
                 }
-                return isValid;
+                if (this.state.selected.project) {
+                    return (alloc.project.name === this.state.selected.project);
+                }
+                if (this.state.selected.role) {
+                    return (alloc.resource.role === this.state.selected.role);
+                }
+                return true;
             })
             .map((alloc, idx) => {
                 return {
@@ -148,7 +153,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     }
 
     /**
-     * On timeline item click, sets {selectedAllocation} in component state
+     * On timeline item click, sets {allocationDisplay} in component state
      *
      * @param {React.MouseEvent} event Event
      * @param {any} item Item
@@ -156,27 +161,21 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     protected _onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, item: any) {
         event.preventDefault();
-        this.setState({ selectedAllocation: item });
+        this.setState({ allocationDisplay: item });
     }
 
     /**
-     * On dismiss ResourceAllocationDetailsModal, sets {selectedAllocation} to null in component state
+     * On dismiss ResourceAllocationDetailsModal, sets {allocationDisplay} to null in component state
      */
     @autobind
     protected _onResourceAllocationDetailsModalDismiss() {
-        this.setState({ selectedAllocation: null });
+        this.setState({ allocationDisplay: null });
     }
 
     @autobind
-    protected _onUserSelected(user: ProjectUser) {
+    protected _onSelectionUpdate(selected: IResourceAllocationCommandBarState) {
         event.preventDefault();
-        this.setState({ selectedUser: user });
-    }
-
-    @autobind
-    protected _onProjectSelected(project: string) {
-        event.preventDefault();
-        this.setState({ selectedProject: project });
+        this.setState({ selected: selected });
     }
 
     /**

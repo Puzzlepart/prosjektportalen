@@ -33,8 +33,7 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                     key: `Project_${idx}`,
                     name: project,
                     onClick: event => {
-                        this._onUserSelected(event, null);
-                        this._onProjectSelected(event, project);
+                        this._onSelectionUpdate(event, { project: project, user: null, role: null });
                     },
                 };
             })
@@ -45,17 +44,24 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                     key: `Resource_${idx}`,
                     name: user.name,
                     onClick: event => {
-                        this._onProjectSelected(event, null);
-                        this._onUserSelected(event, user);
+                        this._onSelectionUpdate(event, { project: null, user: user, role: null });
                     },
                 };
             })
             .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+        // const roleOptions = array_unique(props.allocations.filter(alloc => alloc.resource).map(alloc => alloc.resource.role))
+        //     .map((role, idx) => {
+        //         return {
+        //             key: `Role_${idx}`,
+        //             name: role,
+        //             onClick: event => {},
+        //         };
+        //     }).sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
 
         this._items = [
             {
                 key: "Project",
-                name: props.selectedProject ? props.selectedProject : __.getResource("String_Project"),
+                name: props.selected.project || __.getResource("String_Project"),
                 iconProps: { iconName: "ProjectCollection" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -65,7 +71,7 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                             key: `Project_All`,
                             name: "Alle",
                             iconProps: { iconName: "AllApps" },
-                            onClick: event => this._onProjectSelected(event, null),
+                            onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: null }),
                         },
                         ...projectOptions,
                     ],
@@ -73,7 +79,7 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
             },
             {
                 key: "Resource",
-                name: props.selectedUser ? props.selectedUser.name : __.getResource("String_Resource"),
+                name: props.selected.user ? props.selected.user.name : __.getResource("String_Resource"),
                 iconProps: { iconName: "TemporaryUser" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
@@ -83,12 +89,30 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                             key: `Resource_All`,
                             name: "Alle",
                             iconProps: { iconName: "AllApps" },
-                            onClick: event => this._onUserSelected(event, null),
+                            onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: null }),
                         },
                         ...resourceOptions,
                     ],
                 },
             },
+            // {
+            //     key: "Role",
+            //     name: props.selectedRole || "Rolle",
+            //     iconProps: { iconName: "Asterisk" },
+            //     itemType: ContextualMenuItemType.Header,
+            //     onClick: e => e.preventDefault(),
+            //     subMenuProps: {
+            //         items: [
+            //             {
+            //                 key: `Role_All`,
+            //                 name: "Alle",
+            //                 iconProps: { iconName: "AllApps" },
+            //                 onClick: event => this._onRoleSelected(event, null),
+            //             },
+            //             ...roleOptions,
+            //         ],
+            //     },
+            // },
         ];
         this._farItems = [];
     }
@@ -104,13 +128,8 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
         );
     }
 
-    protected _onUserSelected(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, user) {
+    protected _onSelectionUpdate(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, { project, user, role }) {
         event.preventDefault();
-        this.props.onUserSelected(user);
-    }
-
-    protected _onProjectSelected(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, project) {
-        event.preventDefault();
-        this.props.onProjectSelected(project);
+        this.props.onSelectionUpdate({ project, user, role });
     }
 }
