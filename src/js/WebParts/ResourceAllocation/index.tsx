@@ -9,6 +9,7 @@ import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IRes
 import IResourceAllocationState from "./IResourceAllocationState";
 import { ProjectResource, ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
+import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
 //#endregion
@@ -64,6 +65,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
 
         return (
             <div>
+                <ResourceAllocationCommandBar
+                    users={this.state.users}
+                    allocations={this.state.allocations}
+                    selectedUser={this.state.selectedUser}
+                    selectedProject={this.state.selectedProject}
+                    onUserSelected={this._onUserSelected}
+                    onProjectSelected={this._onProjectSelected} />
                 <Timeline
                     groups={data.groups}
                     items={data.items}
@@ -93,9 +101,21 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     protected _getTimelineData() {
         const groups = this.state.users
             .map(user => ({ id: user.id, title: user.name }))
-            .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0));
+            .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
+            .filter(grp => {
+                if (this.state.selectedUser) {
+                    return grp.id === this.state.selectedUser.id;
+                }
+                return true;
+            });
         const items = this.state.allocations
-            .filter(alloc => alloc.user)
+            .filter(alloc => {
+                let isValid = alloc.user && alloc.resource;
+                if (this.state.selectedProject) {
+                    return alloc.project.name === this.state.selectedProject && isValid;
+                }
+                return isValid;
+            })
             .map((alloc, idx) => {
                 return {
                     id: idx,
@@ -145,6 +165,18 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     protected _onResourceAllocationDetailsModalDismiss() {
         this.setState({ selectedAllocation: null });
+    }
+
+    @autobind
+    protected _onUserSelected(user: ProjectUser) {
+        event.preventDefault();
+        this.setState({ selectedUser: user });
+    }
+
+    @autobind
+    protected _onProjectSelected(project: string) {
+        event.preventDefault();
+        this.setState({ selectedProject: project });
     }
 
     /**
