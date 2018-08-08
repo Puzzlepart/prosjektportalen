@@ -161,7 +161,7 @@
   </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstoppfølging</value>
-  </data>  
+  </data>
   <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
     <value>Ressursallokering</value>
   </data>
@@ -266,7 +266,7 @@
   </data>
   <data name="Lists_DataSources_Title" xml:space="preserve">
     <value>Datakilder</value>
-  </data>  
+  </data>
   <data name="Lists_ProjectResources_Title" xml:space="preserve">
     <value>Prosjektressurser</value>
   </data>
@@ -374,7 +374,7 @@
   </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
-  </data>  
+  </data>
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Prosjektressurser/AllItems.aspx</value>
   </data>
@@ -1230,6 +1230,9 @@
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Navn</value>
   </data>
+  <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
+    <value>Belastning</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1699,6 +1702,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
@@ -2573,7 +2579,7 @@
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Gevinstoversikt</value>
-  </data>  
+  </data>
   <data name="BenefitsOverview_LoadingText" xml:space="preserve">
     <value>Laster gevinster og målinger...</value>
   </data>
@@ -2585,13 +2591,13 @@
   </data>
   <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjektleveranser</value>
-  </data>  
+  </data>
   <data name="DeliveriesOverview_LoadingText" xml:space="preserve">
     <value>Laster prosjektleveranser...</value>
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Erfaringslogg</value>
-  </data>  
+  </data>
   <data name="ExperienceLog_LoadingText" xml:space="preserve">
     <value>Laster loggelementer..</value>
   </data>

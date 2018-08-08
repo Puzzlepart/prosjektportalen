@@ -1233,6 +1233,9 @@
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
+    <value>Load</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1699,6 +1702,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
