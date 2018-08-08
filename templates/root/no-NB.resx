@@ -1722,8 +1722,8 @@
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>Ingen prosjekter funnet. Visningen bruker søk, så det kan ta noen minutter fra prosjekter er lagt til eller oppdatert til de vises her.</value>
   </data>
-  <data name="ProjectResources_LoadingText" xml:space="preserve">
-    <value>Laster prosjektressurser...</value>
+  <data name="ResourceAllocation_LoadingText" xml:space="preserve">
+    <value>Laster ressursallokering...</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
