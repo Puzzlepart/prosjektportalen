@@ -108,15 +108,14 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     protected _timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
-        let style: React.CSSProperties = props.style;
-        if (!item.approved) {
-            style.opacity = 0.3;
-        }
         return (
             <div
                 key={props.key}
                 className={props.className}
-                style={style}
+                style={{
+                    ...props.style,
+                    opacity: item.approved ? 1 : 0.3,
+                }}
                 title={itemContext.title}
                 onClick={event => this._onTimelineItemClick(event, item)}>
                 <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
@@ -133,7 +132,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * @param {any} item Item
      */
     @autobind
-    protected _onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, item) {
+    protected _onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, item: any) {
         event.preventDefault();
         this.setState({ selectedAllocation: item });
     }

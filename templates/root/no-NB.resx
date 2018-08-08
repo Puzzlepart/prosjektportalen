@@ -1244,6 +1244,9 @@
   </data>
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Ressurs</value>
+  </data>  
+  <data name="SiteFields_GtApproved_DisplayName" xml:space="preserve">
+    <value>Godkjent</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1717,6 +1720,9 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtApproved_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
