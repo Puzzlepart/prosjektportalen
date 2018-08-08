@@ -2058,6 +2058,9 @@
   <data name="String_To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="String_Resource" xml:space="preserve">
+    <value>Resource</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
