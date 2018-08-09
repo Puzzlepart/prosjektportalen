@@ -1,6 +1,24 @@
 import * as moment from "moment";
 
-
+export interface IParsedSearchResult {
+    web: {
+        title: string;
+        url: string;
+    };
+    item: {
+        url: string;
+        webId: string;
+        itemId: number;
+    };
+    ctIndex: number;
+    start: moment.Moment;
+    end: moment.Moment;
+    load?: any;
+    name: string;
+    role: string;
+    approved: boolean;
+    resourceId: number;
+}
 
 /**
  * Interface: IProjectReference
@@ -37,17 +55,48 @@ export class ProjectResource extends SPBaseItem {
     public name: string;
     public user: ProjectUser;
 
-     /**
-     * Creates a new ProjectResourceAllocation class
+    /**
+     * Creates a new ProjectResource class
      *
-     * @param {SPBaseItem} item Item base
-     * @param {string} role Role
-     * @param {string} name Name
+     * @param {IParsedSearchResult} searchResult Search result
      */
-    constructor(item: SPBaseItem, role: string, name: string) {
-        super(item.url, item.webId, item.itemId);
-        this.role = role;
-        this.name = name;
+    constructor(searchResult: IParsedSearchResult) {
+        super(searchResult.item.url, searchResult.item.webId, searchResult.item.itemId);
+        this.role = searchResult.role;
+        this.name = searchResult.name;
+    }
+}
+
+
+/**
+ * Class: ProjectResourceAvailability
+ */
+export class ProjectResourceAvailability {
+    public name: string;
+    public start_time: moment.Moment;
+    public end_time: moment.Moment;
+    public load: number;
+    public absence: string;
+    public user: ProjectUser;
+
+    /**
+     * Creates a new ProjectResourceAvailability class
+     *
+     * @param {any} spListItem SP list item
+     */
+    constructor(spListItem: any) {
+        this.name = spListItem.GtResourceUser.Title;
+        this.start_time = moment(new Date(spListItem.GtStartDate));
+        this.end_time = moment(new Date(spListItem.GtEndDate));
+        this.load = spListItem.GtResourceLoad * 100;
+        this.absence = spListItem.GtResourceAbsence;
+    }
+
+    /**
+     * Returns a string representation of the class
+     */
+    public toString(): string {
+        return `${this.absence} (${this.load}%)`;
     }
 }
 
@@ -67,22 +116,16 @@ export class ProjectResourceAllocation extends SPBaseItem {
     /**
      * Creates a new ProjectResourceAllocation class
      *
-     * @param {SPBaseItem} item Item base
-     * @param {IProjectReference} project Project reference
-     * @param {number} resourceId Resource ID
-     * @param {moment.Moment} start_time Start time
-     * @param {moment.Moment} end_time End time
-     * @param {number} load Resource load in percent
-     * @param {boolean} approved Approved
+     * @param {IParsedSearchResult} searchResult Search result
      */
-    constructor(item: SPBaseItem, project: IProjectReference, resourceId: number, start_time: moment.Moment, end_time: moment.Moment, load: number, approved: boolean) {
-        super(item.url, item.webId, item.itemId);
-        this.project = project;
-        this.resourceId = resourceId;
-        this.start_time = start_time;
-        this.end_time = end_time;
-        this.load = load;
-        this.approved = approved;
+    constructor(searchResult: IParsedSearchResult) {
+        super(searchResult.item.url, searchResult.item.webId, searchResult.item.itemId);
+        this.project = { name: searchResult.web.title, url: searchResult.web.url };
+        this.resourceId = searchResult.resourceId;
+        this.start_time = searchResult.start;
+        this.end_time = searchResult.end;
+        this.load = searchResult.load;
+        this.approved = searchResult.approved;
     }
 
     /**
@@ -100,16 +143,20 @@ export class ProjectUser {
     public id: number;
     public name: string;
     public allocations: Array<ProjectResourceAllocation>;
+    public availability: Array<ProjectResourceAvailability>;
 
     /**
      * Creates a new ProjectUser class
      *
      * @param {number} id ID
      * @param {string} name Name
+     * @param {Array<ProjectResourceAllocation>} allocations Allocations
+     * @param {Array<ProjectResourceAvailability>} availability Availability
      */
-    constructor(id: number, name: string) {
+    constructor(id: number, name: string, allocations = [], availability = []) {
         this.id = id;
         this.name = name;
-        this.allocations = [];
+        this.allocations = allocations;
+        this.availability = availability;
     }
 }

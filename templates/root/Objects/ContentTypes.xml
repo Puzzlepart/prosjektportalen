@@ -226,7 +226,6 @@
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" Required="true" />
             <pnp:FieldRef ID="028e49b1-b141-4d35-8998-a17d729960d4" Name="{parameter:GenericFieldPrefix}ResourceAbsence" Required="true" />
             <pnp:FieldRef ID="08ac9d56-f8eb-4a2c-868f-d39fc012fcd6" Name="{parameter:GenericFieldPrefix}ResourceLoad" Required="true" />
-            <pnp:FieldRef ID="fc73e672-5252-4483-bfaa-4d311a08193a" Name="{parameter:GenericFieldPrefix}Approved" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>

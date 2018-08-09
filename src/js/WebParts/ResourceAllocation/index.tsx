@@ -7,13 +7,15 @@ import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
 import IResourceAllocationState from "./IResourceAllocationState";
-import { ProjectResource, ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
+import { IParsedSearchResult, ProjectResource, ProjectResourceAllocation, ProjectResourceAvailability, ProjectUser } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
 import BaseWebPart from "../@BaseWebPart";
+import TimelineItemType from "./TimelineItemType";
 import * as moment from "moment";
 //#endregion
+
 
 /**
  * Component: ResourceAllocation
@@ -39,13 +41,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     public async componentDidMount(): Promise<void> {
         try {
-            const { users, allocations } = await this._fetchData();
+            const data = await this._fetchData();
             this.setState({
-                users,
-                allocations,
+                ...data,
                 isLoading: false,
             });
         } catch (err) {
+            console.log(err);
             this.setState({ isLoading: false });
         }
     }
@@ -107,7 +109,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 }
                 return true;
             });
-        const items = this.state.allocations
+        const itemsAllocations = this.state.allocations
             .filter(alloc => {
                 let isValid = alloc.user && alloc.resource;
                 if (!isValid) {
@@ -116,9 +118,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 if (this.state.selected.project) {
                     return (alloc.project.name === this.state.selected.project);
                 }
-                if (this.state.selected.role) {
-                    return (alloc.resource.role === this.state.selected.role);
-                }
                 return true;
             })
             .map((alloc, idx) => {
@@ -126,30 +125,66 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     id: idx,
                     title: alloc.toString(),
                     group: alloc.user.id,
+                    type: TimelineItemType.ALLOCATION,
                     ...alloc,
                 };
             });
-        return { groups, items };
+        const itemsAvailability = this.state.availability
+            .map((ava, idx) => {
+                return {
+                    id: (idx + itemsAllocations.length),
+                    title: ava.toString(),
+                    group: ava.user.id,
+                    type: TimelineItemType.AVAILABILITY,
+                    ...ava,
+                };
+            });
+        return {
+            groups,
+            items: [...itemsAllocations, ...itemsAvailability],
+        };
     }
 
     @autobind
     protected _timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
-        return (
-            <div
-                key={props.key}
-                className={props.className}
-                style={{
-                    ...props.style,
-                    opacity: item.approved ? 1 : 0.3,
-                }}
-                title={itemContext.title}
-                onClick={event => this._onTimelineItemClick(event, item)}>
-                <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
-                    {itemContext.title}
-                </div>
-            </div>
-        );
+        switch (item.type) {
+            case TimelineItemType.ALLOCATION: {
+                return (
+                    <div
+                        key={props.key}
+                        className={props.className}
+                        style={{
+                            ...props.style,
+                            opacity: item.approved ? 1 : 0.3,
+                        }}
+                        title={itemContext.title}
+                        onClick={event => this._onTimelineItemClick(event, item)}>
+                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
+                            {itemContext.title}
+                        </div>
+                    </div>
+                );
+            }
+            case TimelineItemType.AVAILABILITY: {
+                return (
+                    <div
+                        key={props.key}
+                        className={props.className}
+                        style={{
+                            ...props.style,
+                            backgroundColor: "#ff0000",
+                            border: "none",
+                            cursor: "text",
+                        }}
+                        title={itemContext.title}>
+                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
+                            {itemContext.title}
+                        </div>
+                    </div>
+                );
+            }
+        }
     }
 
     /**
@@ -183,10 +218,12 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     protected async _fetchData() {
         const items = await this._searchItems(this.props.searchConfiguration);
+        const itemsAvailability = await this._fetchAvailabilityItems();
         const itemsResources = items.filter(item => item.ctIndex === 9);
         const itemsAllocations = items.filter(item => item.ctIndex === 10 && item.resourceId);
-        const allocations = itemsAllocations.map(itemAlc => new ProjectResourceAllocation(itemAlc.item, { name: itemAlc.web.title, url: itemAlc.web.url }, itemAlc.resourceId, itemAlc.start, itemAlc.end, itemAlc.load, itemAlc.approved));
-        const resources = itemsResources.map(itemRes => new ProjectResource(itemRes.item, itemRes.role, itemRes.name));
+        const allocations = itemsAllocations.map(itemAlc => new ProjectResourceAllocation(itemAlc));
+        const resources = itemsResources.map(itemRes => new ProjectResource(itemRes));
+        const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
         let users: Array<ProjectUser> = [];
         let userId = 0;
         resources.forEach(resource => {
@@ -197,18 +234,25 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 userId++;
             }
             resource.user = user;
-            const allocationsForResource = allocations.filter(a => a.resourceId === resource.itemId && a.webId === resource.webId);
+            const allocationsForResource = allocations.filter(alc => alc.resourceId === resource.itemId && alc.webId === resource.webId);
             allocationsForResource.forEach(allocation => {
                 allocation.resource = resource;
                 allocation.user = user;
                 user.allocations.push(allocation);
             });
         });
-        return { users, allocations };
+        users.forEach(user => {
+            const availabilityForUser = availability.filter(ava => ava.name === user.name);
+            availabilityForUser.forEach(ava => {
+                ava.user = user;
+                user.availability.push(ava);
+            });
+        });
+        return { users, allocations, availability };
     }
 
     /**
-     * Searches for items using {pnp.sp}
+     * Searches for items using pnp.sp.search
      *
      * Calculates content type index
      *
@@ -217,7 +261,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      *
      * @param {SearchQuery} searchConfiguration Search configuration
      */
-    protected async _searchItems(searchConfiguration: SearchQuery) {
+    protected async _searchItems(searchConfiguration: SearchQuery): Promise<Array<IParsedSearchResult>> {
         const { PrimarySearchResults } = await pnp.sp.search(searchConfiguration);
         const itemsParsed = PrimarySearchResults.map((result: any) => ({
             web: { title: result.SiteTitle, url: result.SPWebUrl },
@@ -232,6 +276,18 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             resourceId: result.RefinableString73 && parseInt(result.RefinableString73, 10),
         }));
         return itemsParsed;
+    }
+
+    /**
+     * Fetches availability items from list on root
+     */
+    protected async _fetchAvailabilityItems(): Promise<Array<any>> {
+        const itemsAvailability = await pnp.sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
+            .items
+            .select("GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
+            .expand("GtResourceUser")
+            .get();
+        return itemsAvailability;
     }
 }
 
