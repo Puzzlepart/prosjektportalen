@@ -468,6 +468,9 @@
   <data name="ContentTypes_Ressursallokering_Name" xml:space="preserve">
     <value>Ressursallokering</value>
   </data>
+  <data name="ContentTypes_Ressursallokering_utenfor_prosjekt_Name" xml:space="preserve">
+    <value>Ressursallokering (utenfor prosjekt)</value>
+  </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind basehendelse</value>
   </data>
@@ -1247,6 +1250,9 @@
   </data>  
   <data name="SiteFields_GtApproved_DisplayName" xml:space="preserve">
     <value>Godkjent</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
+    <value>Fravær</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />

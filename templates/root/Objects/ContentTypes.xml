@@ -218,6 +218,17 @@
             <pnp:FieldRef ID="fc73e672-5252-4483-bfaa-4d311a08193a" Name="{parameter:GenericFieldPrefix}Approved" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070211" Name="{resource:ContentTypes_Ressursallokering_utenfor_prosjekt_Name}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="88d9b92c-efed-45d0-a586-86d9196b77d0" Name="{parameter:GenericFieldPrefix}ResourceUser" Required="true" />
+            <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="{parameter:GenericFieldPrefix}StartDate" Required="true" />
+            <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" Required="true" />
+            <pnp:FieldRef ID="028e49b1-b141-4d35-8998-a17d729960d4" Name="{parameter:GenericFieldPrefix}ResourceAbsence" Required="true" />
+            <pnp:FieldRef ID="08ac9d56-f8eb-4a2c-868f-d39fc012fcd6" Name="{parameter:GenericFieldPrefix}ResourceLoad" Required="true" />
+            <pnp:FieldRef ID="fc73e672-5252-4483-bfaa-4d311a08193a" Name="{parameter:GenericFieldPrefix}Approved" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Name="{resource:ContentTypes_Prosjektdokument_Name}" Description="{resource:ContentTypes_Prosjektdokument_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>

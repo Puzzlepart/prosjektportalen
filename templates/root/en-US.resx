@@ -468,6 +468,9 @@
   <data name="ContentTypes_Ressursallokering_Name" xml:space="preserve">
     <value>Resource Allocation</value>
   </data>
+  <data name="ContentTypes_Ressursallokering_utenfor_prosjekt_Name" xml:space="preserve">
+    <value>Resource Allocation (not project related)</value>
+  </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
   </data>
@@ -1250,6 +1253,9 @@
   </data>
   <data name="SiteFields_GtApproved_DisplayName" xml:space="preserve">
     <value>Approved</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
+    <value>Absence</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
