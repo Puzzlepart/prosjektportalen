@@ -10,9 +10,9 @@
         <property name="ExportMode" type="exportmode">All</property>
         <property name="Hidden" type="bool">False</property>
         <property name="Description" type="string" null="true" />
-        <property name="Content" type="string">&lt;div id="pp-projectResources"&gt;&lt;/div&gt;</property>
+        <property name="Content" type="string">&lt;div id="pp-resourceAllocation"&gt;&lt;/div&gt;</property>
         <property name="CatalogIconImageUrl" type="string" />
-        <property name="Title" type="string">ProjectResources</property>
+        <property name="Title" type="string">ResourceAllocation</property>
         <property name="AllowHide" type="bool">False</property>
         <property name="AllowMinimize" type="bool">False</property>
         <property name="AllowZoneChange" type="bool">True</property>

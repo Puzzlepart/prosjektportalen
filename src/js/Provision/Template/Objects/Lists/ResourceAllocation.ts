@@ -1,23 +1,25 @@
 import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
+import { GtProjectResourceLookup } from "./SiteFields";
 
-const ProjectResources: IList = {
-    Title: __.getResource("Lists_ProjectResources_Title"),
+const ResourceAllocation: IList = {
+    Title: __.getResource("Lists_ResourceAllocation_Title"),
     Description: "",
     Template: 100,
     ContentTypesEnabled: false,
     RemoveExistingContentTypes: true,
+    Fields: [GtProjectResourceLookup],
     FieldRefs: [{
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
         Required: false,
         Hidden: true,
     }],
     ContentTypeBindings: [{
-        ContentTypeID: "0x010088578E7470CC4AA68D5663464831070209",
+        ContentTypeID: "0x010088578E7470CC4AA68D5663464831070210",
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["ID", "GtResourceUser", "GtResourceRole", "Modified", "Editor"],
+        ViewFields: ["ID", "GtProjectResourceLookup", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtApproved", "Modified", "Editor"],
         AdditionalSettings: {
             RowLimit: 100,
             Paged: true,
@@ -26,4 +28,4 @@ const ProjectResources: IList = {
     }],
 };
 
-export default ProjectResources;
+export default ResourceAllocation;
