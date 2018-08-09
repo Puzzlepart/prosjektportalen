@@ -14,9 +14,7 @@ const ResourceAllocation: IList = {
         Required: false,
         Hidden: true,
     }],
-    ContentTypeBindings: [{
-        ContentTypeID: "0x010088578E7470CC4AA68D5663464831070210",
-    }],
+    ContentTypeBindings: [{ ContentTypeID: "0x010088578E7470CC4AA68D5663464831070210" }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
         ViewFields: ["ID", "GtProjectResourceLookup", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtApproved", "Modified", "Editor"],
