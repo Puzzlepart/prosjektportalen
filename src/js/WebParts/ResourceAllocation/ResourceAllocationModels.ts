@@ -1,16 +1,15 @@
 import * as moment from "moment";
 
-export interface IParsedSearchResult {
-    web: {
-        title: string;
-        url: string;
-    };
-    item: {
-        url: string;
-        webId: string;
-        itemId: number;
-    };
-    ctIndex: number;
+export interface ISPBaseItem {
+     url: string;
+     webId: string;
+     itemId: number;
+}
+
+export interface IParsedSearchResult extends ISPBaseItem {
+    contentTypeId: string;
+    webTitle: string;
+    webUrl: string;
     start: moment.Moment;
     end: moment.Moment;
     load?: any;
@@ -61,7 +60,7 @@ export class ProjectResource extends SPBaseItem {
      * @param {IParsedSearchResult} searchResult Search result
      */
     constructor(searchResult: IParsedSearchResult) {
-        super(searchResult.item.url, searchResult.item.webId, searchResult.item.itemId);
+        super(searchResult.url, searchResult.webId, searchResult.itemId);
         this.role = searchResult.role;
         this.name = searchResult.name;
     }
@@ -119,8 +118,8 @@ export class ProjectResourceAllocation extends SPBaseItem {
      * @param {IParsedSearchResult} searchResult Search result
      */
     constructor(searchResult: IParsedSearchResult) {
-        super(searchResult.item.url, searchResult.item.webId, searchResult.item.itemId);
-        this.project = { name: searchResult.web.title, url: searchResult.web.url };
+        super(searchResult.url, searchResult.webId, searchResult.itemId);
+        this.project = { name: searchResult.webTitle, url: searchResult.webUrl };
         this.resourceId = searchResult.resourceId;
         this.start_time = searchResult.start;
         this.end_time = searchResult.end;
@@ -132,7 +131,7 @@ export class ProjectResourceAllocation extends SPBaseItem {
      * Returns a string representation of the class
      */
     public toString(): string {
-        return `${this.resource.role} - ${this.load}% - ${this.project.name}`;
+        return `${this.resource.role} - ${this.project.name} (${this.load}%)`;
     }
 }
 

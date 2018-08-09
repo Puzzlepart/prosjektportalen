@@ -94,10 +94,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
 
     /**
      * Get data for the timeline
-     *
-     * Need to return {users} and {allocations} from state in the correct format
-     *
-     * Sorts groups alphabetically by title
      */
     protected _getTimelineData() {
         const groups = this.state.users
@@ -111,8 +107,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             });
         const itemsAllocations = this.state.allocations
             .filter(alloc => {
-                let isValid = alloc.user && alloc.resource;
-                if (!isValid) {
+                if (!(alloc.user && alloc.resource)) {
                     return false;
                 }
                 if (this.state.selected.project) {
@@ -217,10 +212,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetch data, parses the data, and creates arrays for [users] and [allocations]
      */
     protected async _fetchData() {
-        const items = await this._searchItems(this.props.searchConfiguration);
+        const { itemsAllocations, itemsResources } = await this._searchItems(this.props.searchConfiguration);
         const itemsAvailability = await this._fetchAvailabilityItems();
-        const itemsResources = items.filter(item => item.ctIndex === 9);
-        const itemsAllocations = items.filter(item => item.ctIndex === 10 && item.resourceId);
         const allocations = itemsAllocations.map(itemAlc => new ProjectResourceAllocation(itemAlc));
         const resources = itemsResources.map(itemRes => new ProjectResource(itemRes));
         const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
@@ -261,12 +254,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      *
      * @param {SearchQuery} searchConfiguration Search configuration
      */
-    protected async _searchItems(searchConfiguration: SearchQuery): Promise<Array<IParsedSearchResult>> {
+    protected async _searchItems(searchConfiguration: SearchQuery): Promise<{ itemsResources: Array<IParsedSearchResult>, itemsAllocations: Array<IParsedSearchResult> }> {
         const { PrimarySearchResults } = await pnp.sp.search(searchConfiguration);
         const itemsParsed = PrimarySearchResults.map((result: any) => ({
-            web: { title: result.SiteTitle, url: result.SPWebUrl },
-            item: { url: result.Path, webId: result.WebId, itemId: parseInt(result.ListItemID, 10) },
-            ctIndex: parseInt(result.ContentTypeID.split("0x010088578E7470CC4AA68D56634648310702")[1].substring(0, 2), 10),
+            url: result.Path,
+            webId: result.WebId,
+            itemId: parseInt(result.ListItemID, 10),
+            contentTypeId: result.ContentTypeID,
+            webTitle: result.SiteTitle,
+            webUrl: result.SPWebUrl,
             start: moment(new Date(result.GtStartDateOWSDATE)),
             end: moment(new Date(result.GtEndDateOWSDATE)),
             load: parseFloat(result.GtResourceLoadOWSNMBR) * 100,
@@ -275,7 +271,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             approved: result.GtApprovedOWSBOOL === "1",
             resourceId: result.RefinableString73 && parseInt(result.RefinableString73, 10),
         }));
-        return itemsParsed;
+        const itemsResources = itemsParsed.filter(item => item.contentTypeId.indexOf("0x010088578E7470CC4AA68D5663464831070209") !== -1);
+        const itemsAllocations = itemsParsed.filter(item => item.contentTypeId.indexOf("0x010088578E7470CC4AA68D5663464831070210") !== -1 && item.resourceId);
+        return { itemsResources, itemsAllocations };
     }
 
     /**
