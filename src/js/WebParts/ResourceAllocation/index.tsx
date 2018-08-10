@@ -47,7 +47,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 isLoading: false,
             });
         } catch (err) {
-            console.log(err);
             this.setState({ isLoading: false });
         }
     }
