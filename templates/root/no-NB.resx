@@ -414,6 +414,9 @@
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Uten ansvarlig</value>
   </data>
+  <data name="View_ProjectFields_DisplayName" xml:space="preserve">
+    <value>Prosjektfelter</value>
+  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
   </data>
@@ -548,9 +551,6 @@
   </data>
   <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
     <value>Prosjektfelt</value>
-  </data>
-  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
-    <value>Nøkkelverdipar</value>
   </data>
   <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
     <value>Tilbakemelding</value>
