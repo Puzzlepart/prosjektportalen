@@ -35,7 +35,6 @@ const Lists: IList[] = [
     BenefitsAnalysis,
     ChangeAnalysis,
     BenefitsFollowup,
-    ProjectResources,
     ResourceAllocation,
 ];
 

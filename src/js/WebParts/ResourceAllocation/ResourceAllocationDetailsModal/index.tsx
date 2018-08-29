@@ -3,7 +3,7 @@ import __ from "../../../Resources";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import IResourceAllocationDetailsModalProps from "./IResourceAllocationDetailsModalProps";
 
-export default class ResourceAllocationDetailsModal extends React.Component<IResourceAllocationDetailsModalProps, {}> {
+export default class ResourceAllocationDetailsModal extends React.PureComponent<IResourceAllocationDetailsModalProps, {}> {
     public static displayName = "ResourceAllocationDetailsModal";
 
     /**
