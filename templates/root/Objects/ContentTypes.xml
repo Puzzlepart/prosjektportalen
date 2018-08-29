@@ -210,7 +210,6 @@
             <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="{parameter:GenericFieldPrefix}StartDate" Required="true" />
             <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="{parameter:GenericFieldPrefix}EndDate" Required="true" />
             <pnp:FieldRef ID="08ac9d56-f8eb-4a2c-868f-d39fc012fcd6" Name="{parameter:GenericFieldPrefix}ResourceLoad" Required="true" />
-            <pnp:FieldRef ID="fc73e672-5252-4483-bfaa-4d311a08193a" Name="{parameter:GenericFieldPrefix}Approved" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070210" Name="{resource:ContentTypes_Ressursallokering_utenfor_prosjekt_Name}" Group="{resource:ContentTypes_Group}">

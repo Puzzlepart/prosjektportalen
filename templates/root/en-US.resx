@@ -1251,9 +1251,6 @@
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Resource</value>
   </data>
-  <data name="SiteFields_GtApproved_DisplayName" xml:space="preserve">
-    <value>Approved</value>
-  </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Absence</value>
   </data>
@@ -1726,9 +1723,6 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="SiteFields_GtApproved_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
