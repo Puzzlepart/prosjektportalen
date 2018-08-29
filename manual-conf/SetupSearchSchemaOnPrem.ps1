@@ -33,7 +33,6 @@ if ($SSA -ne $null) {
     Map-ManagedProperty -SSA $SSA -ManagedPropertyName "RefinableString70" -CrawledPropertyName "ows_GtGainsResponsible" 
     Map-ManagedProperty -SSA $SSA -ManagedPropertyName "RefinableString71" -CrawledPropertyName "ows_GtResourceUser" 
     Map-ManagedProperty -SSA $SSA -ManagedPropertyName "RefinableString72" -CrawledPropertyName "ows_GtResourceRole" 
-    Map-ManagedProperty -SSA $SSA -ManagedPropertyName "RefinableString73" -CrawledPropertyName "ows_GtProjectResourceLookup" 
 } else {
     Write-Error "Could not find Search Service Application with name $SSAName. Aborting."
 }
