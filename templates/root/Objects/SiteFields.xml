@@ -549,9 +549,6 @@
     </Field>
     <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="{resource:SiteFields_Group}" StaticName="{parameter:GenericFieldPrefix}ResourceUser" Name="{parameter:GenericFieldPrefix}ResourceUser" />
     <Field DisplayName="{resource:SiteFields_GtResourceLoad_DisplayName}" Description="{resource:SiteFields_GtResourceLoad_Description}" ID="{08ac9d56-f8eb-4a2c-868f-d39fc012fcd6}" Name="{parameter:GenericFieldPrefix}ResourceLoad" Type="Number" Group="{resource:SiteFields_Group}" Percentage="TRUE" StaticName="{parameter:GenericFieldPrefix}ResourceLoad" />
-    <Field DisplayName="{resource:SiteFields_GtApproved_DisplayName}" Description="{resource:SiteFields_GtApproved_Description}" Type="Boolean" Group="Prosjektportalenkolonner" ID="{fc73e672-5252-4483-bfaa-4d311a08193a}" StaticName="{parameter:GenericFieldPrefix}Approved" Name="{parameter:GenericFieldPrefix}Approved" CustomFormatter="">
-        <Default>0</Default>
-    </Field>
     <Field DisplayName="{resource:SiteFields_GtResourceAbsence_DisplayName}" FillInChoice="FALSE" Type="Choice" ID="{028e49b1-b141-4d35-8998-a17d729960d4}" Name="GtResourceAbsence" StaticName="GtResourceAbsence">
         <CHOICES>
             <CHOICE>Sykemelding</CHOICE>

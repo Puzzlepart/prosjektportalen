@@ -7,7 +7,7 @@ import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
 import IResourceAllocationState from "./IResourceAllocationState";
-import { IParsedSearchResult, ProjectResource, ProjectResourceAllocation, ProjectResourceAvailability, ProjectUser } from "./ResourceAllocationModels";
+import { ProjectResource, ProjectResourceAllocation, ProjectResourceAvailability, ProjectUser } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
@@ -42,10 +42,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     public async componentDidMount(): Promise<void> {
         try {
             const data = await this._fetchData();
-            this.setState({
-                ...data,
-                isLoading: false,
-            });
+            this.setState({ ...data, isLoading: false });
         } catch (err) {
             this.setState({ isLoading: false });
         }
@@ -148,10 +145,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     <div
                         key={props.key}
                         className={props.className}
-                        style={{
-                            ...props.style,
-                            opacity: item.approved ? 1 : 0.3,
-                        }}
+                        style={props.style}
                         title={itemContext.title}
                         onClick={event => this._onTimelineItemClick(event, item)}>
                         <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
@@ -211,14 +205,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetch data, parses the data, and creates arrays for [users] and [allocations]
      */
     protected async _fetchData() {
-        const { itemsAllocations, itemsResources } = await this._searchItems(this.props.searchConfiguration);
-        const itemsAvailability = await this._fetchAvailabilityItems();
-        const allocations = itemsAllocations.map(itemAlc => new ProjectResourceAllocation(itemAlc));
-        const resources = itemsResources.map(itemRes => new ProjectResource(itemRes));
-        const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
+        const [searchResult, itemsAvailability] = await Promise.all([this._searchAllocationItems(this.props.searchConfiguration), this._fetchAvailabilityItems()]);
         let users: Array<ProjectUser> = [];
         let userId = 0;
-        resources.forEach(resource => {
+        const allocations = searchResult.map(res => new ProjectResourceAllocation(res));
+        for (let i = 0; i < searchResult.length; i++) {
+            const result = searchResult[i];
+            const resource = new ProjectResource(result);
             let [user] = users.filter(r => r.name === resource.name);
             if (!user) {
                 user = new ProjectUser(userId, resource.name);
@@ -226,13 +219,11 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 userId++;
             }
             resource.user = user;
-            const allocationsForResource = allocations.filter(alc => alc.resourceId === resource.itemId && alc.webId === resource.webId);
-            allocationsForResource.forEach(allocation => {
-                allocation.resource = resource;
-                allocation.user = user;
-                user.allocations.push(allocation);
-            });
-        });
+            allocations[i].resource = resource;
+            allocations[i].user = user;
+            user.allocations.push(allocations[i]);
+        }
+        const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
         users.forEach(user => {
             const availabilityForUser = availability.filter(ava => ava.name === user.name);
             availabilityForUser.forEach(ava => {
@@ -244,35 +235,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     }
 
     /**
-     * Searches for items using pnp.sp.search
-     *
-     * Calculates content type index
-     *
-     * 9 = Project Resource
-     * 10 = Resource Allocation
+     * Searches for allocation items using pnp.sp.search
      *
      * @param {SearchQuery} searchConfiguration Search configuration
      */
-    protected async _searchItems(searchConfiguration: SearchQuery): Promise<{ itemsResources: Array<IParsedSearchResult>, itemsAllocations: Array<IParsedSearchResult> }> {
+    protected async _searchAllocationItems(searchConfiguration: SearchQuery): Promise<any> {
         const { PrimarySearchResults } = await pnp.sp.search(searchConfiguration);
-        const itemsParsed = PrimarySearchResults.map((result: any) => ({
-            url: result.Path,
-            webId: result.WebId,
-            itemId: parseInt(result.ListItemID, 10),
-            contentTypeId: result.ContentTypeID,
-            webTitle: result.SiteTitle,
-            webUrl: result.SPWebUrl,
-            start: moment(new Date(result.GtStartDateOWSDATE)),
-            end: moment(new Date(result.GtEndDateOWSDATE)),
-            load: parseFloat(result.GtResourceLoadOWSNMBR) * 100,
-            name: result.RefinableString71,
-            role: result.RefinableString72,
-            approved: result.GtApprovedOWSBOOL === "1",
-            resourceId: result.RefinableString73 && parseInt(result.RefinableString73, 10),
-        }));
-        const itemsResources = itemsParsed.filter(item => item.contentTypeId.indexOf("0x010088578E7470CC4AA68D5663464831070209") !== -1);
-        const itemsAllocations = itemsParsed.filter(item => item.contentTypeId.indexOf("0x010088578E7470CC4AA68D5663464831070210") !== -1 && item.resourceId);
-        return { itemsResources, itemsAllocations };
+        return PrimarySearchResults;
     }
 
     /**
