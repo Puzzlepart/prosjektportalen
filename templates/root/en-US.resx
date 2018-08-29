@@ -414,6 +414,9 @@
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Without responsible</value>
   </data>
+  <data name="View_ProjectFields_DisplayName" xml:space="preserve">
+    <value>Project Fields</value>
+  </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
   </data>
@@ -548,9 +551,6 @@
   </data>
   <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
     <value>Project Field</value>
-  </data>
-  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
-    <value>Project Key Value</value>
   </data>
   <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
     <value>Feedback</value>
@@ -1251,9 +1251,6 @@
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Resource</value>
   </data>
-  <data name="SiteFields_GtApproved_DisplayName" xml:space="preserve">
-    <value>Approved</value>
-  </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Absence</value>
   </data>
@@ -1726,9 +1723,6 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="SiteFields_GtApproved_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">

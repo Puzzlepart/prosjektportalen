@@ -1,69 +1,11 @@
 import * as moment from "moment";
 
-export interface ISPBaseItem {
-     url: string;
-     webId: string;
-     itemId: number;
-}
-
-export interface IParsedSearchResult extends ISPBaseItem {
-    contentTypeId: string;
-    webTitle: string;
-    webUrl: string;
-    start: moment.Moment;
-    end: moment.Moment;
-    load?: any;
-    name: string;
-    role: string;
-    approved: boolean;
-    resourceId: number;
-}
-
 /**
  * Interface: IProjectReference
  */
 export interface IProjectReference {
     name: string;
     url: string;
-}
-
-
-/**
- * Class: SPBaseItem
- */
-export class SPBaseItem {
-    public url: string;
-    public webId: string;
-    public itemId: number;
-
-    /**
-     * Creates a new SPBaseItem class
-     */
-    constructor(url: string, webId: string, itemId: number) {
-        this.url = url;
-        this.webId = webId;
-        this.itemId = itemId;
-    }
-}
-
-/**
- * Class: ProjectResource
- */
-export class ProjectResource extends SPBaseItem {
-    public role: string;
-    public name: string;
-    public user: ProjectUser;
-
-    /**
-     * Creates a new ProjectResource class
-     *
-     * @param {IParsedSearchResult} searchResult Search result
-     */
-    constructor(searchResult: IParsedSearchResult) {
-        super(searchResult.url, searchResult.webId, searchResult.itemId);
-        this.role = searchResult.role;
-        this.name = searchResult.name;
-    }
 }
 
 
@@ -100,15 +42,32 @@ export class ProjectResourceAvailability {
 }
 
 /**
+ * Class: ProjectResource
+ */
+export class ProjectResource {
+    public role: string;
+    public name: string;
+    public user: ProjectUser;
+
+    /**
+     * Creates a new ProjectResource class
+     *
+     * @param {IParsedSearchResult} searchResult Search result
+     */
+    constructor(searchResult: any) {
+        this.role = searchResult.RefinableString72;
+        this.name = searchResult.RefinableString71;
+    }
+}
+
+/**
  * Class: ProjectResourceAllocation
  */
-export class ProjectResourceAllocation extends SPBaseItem {
+export class ProjectResourceAllocation {
     public project: IProjectReference;
-    public resourceId: number;
     public start_time: moment.Moment;
     public end_time: moment.Moment;
     public load: number;
-    public approved: boolean;
     public resource: ProjectResource;
     public user: ProjectUser;
 
@@ -117,14 +76,11 @@ export class ProjectResourceAllocation extends SPBaseItem {
      *
      * @param {IParsedSearchResult} searchResult Search result
      */
-    constructor(searchResult: IParsedSearchResult) {
-        super(searchResult.url, searchResult.webId, searchResult.itemId);
-        this.project = { name: searchResult.webTitle, url: searchResult.webUrl };
-        this.resourceId = searchResult.resourceId;
-        this.start_time = searchResult.start;
-        this.end_time = searchResult.end;
-        this.load = searchResult.load;
-        this.approved = searchResult.approved;
+    constructor(searchResult: any) {
+        this.project = { name: searchResult.SiteTitle, url: searchResult.SPWebUrl };
+        this.start_time = moment(new Date(searchResult.GtStartDateOWSDATE));
+        this.end_time = moment(new Date(searchResult.GtEndDateOWSDATE));
+        this.load = parseFloat(searchResult.GtResourceLoadOWSNMBR) * 100;
     }
 
     /**
