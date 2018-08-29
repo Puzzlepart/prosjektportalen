@@ -35,9 +35,6 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
         this.setState({ data, isLoading: false });
     }
 
-    /**
-     * Calls _render with props and state to allow for ES6 destruction
-     */
     public render(): React.ReactElement<IProjectStatusProps> {
         const { isLoading, data } = this.state;
         if (isLoading) {
