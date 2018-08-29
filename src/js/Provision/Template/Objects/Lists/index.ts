@@ -15,7 +15,6 @@ import ProjectStatus from "./ProjectStatus";
 import BenefitsAnalysis from "./BenefitsAnalysis";
 import ChangeAnalysis from "./ChangeAnalysis";
 import BenefitsFollowup from "./BenefitsFollowup";
-import ProjectResources from "./ProjectResources";
 import ResourceAllocation from "./ResourceAllocation";
 
 const Lists: IList[] = [

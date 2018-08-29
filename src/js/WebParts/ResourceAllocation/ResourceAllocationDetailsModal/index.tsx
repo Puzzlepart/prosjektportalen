@@ -43,7 +43,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
         return (
             <div>
                 <h3>
-                    <a href={allocation.url} target="_blank">{allocation.resource.role} ({allocation.load}%)</a>
+                    {allocation.resource.role} ({allocation.load}%)
                 </h3>
             </div>
         );
@@ -70,7 +70,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                 </p>
                 <p>
                     <b>{__.getResource("String_Resource")}:</b>&nbsp;
-                    <a href={allocation.resource.url} target="_blank"><span>{allocation.user.name}</span></a>
+                    <span>{allocation.user.name}</span>
                 </p>
             </div>
         );
