@@ -1,10 +1,10 @@
 import { Web } from "sp-pnp-js";
-import { IProjectModel } from "../Model/ProjectModel";
+import { ProjectModel } from "../Model/ProjectModel";
 import IProgressCallback from "./IProgressCallback";
 import ITemplateFile from "./Template/ITemplateFile";
 
-export default interface IProvisionContext {
-    model: IProjectModel;
+interface IProvisionContext {
+    model: ProjectModel;
     progressCallbackFunc: IProgressCallback;
     rootWeb: Web;
     web?: Web;
@@ -13,3 +13,6 @@ export default interface IProvisionContext {
     template?: ITemplateFile;
     webProperties?: { pp_assetssiteurl: string, pp_datasourcesiteurl: string, pp_version: string };
 }
+
+export default IProvisionContext;
+

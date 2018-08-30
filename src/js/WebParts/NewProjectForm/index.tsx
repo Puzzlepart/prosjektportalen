@@ -1,6 +1,7 @@
 //#region Imports
 import * as React from "react";
 import __ from "../../Resources";
+import { ProjectModel } from "../../Model";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { PrimaryButton, DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
@@ -8,6 +9,7 @@ import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
+import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
@@ -25,7 +27,7 @@ import CreationModal from "./CreationModal";
 //#endregion
 
 /**
- * New Project Form
+ * Component NewProjectForm
  */
 export default class NewProjectForm extends React.Component<INewProjectFormProps, INewProjectFormState> {
     public static displayName = "NewProjectForm";
@@ -40,7 +42,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     constructor(props: INewProjectFormProps) {
         super(props);
         this.state = {
-            model: { Title: "", Description: "", Url: "", InheritPermissions: false },
+            isLoading: true,
+            model: new ProjectModel(),
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
         };
@@ -52,11 +55,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         model.IncludeContent = config.listData.filter(ld => ld.Default);
         model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
         model.InheritPermissions = config.inheritPermissions;
-        this.setState({
-            config,
-            model,
-            selectedTemplate: config.defaultTemplate,
-        });
+        this.setState({ isLoading: false, config, model, selectedTemplate: config.defaultTemplate });
     }
 
     public render(): React.ReactElement<INewProjectFormProps> {
@@ -75,15 +74,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         return (
                             <Dialog
                                 hidden={false}
-                                dialogContentProps={{
-                                    type: DialogType.largeHeader,
-                                    subText: this.props.subHeaderText,
-                                }}
-                                modalProps={{
-                                    isDarkOverlay: true,
-                                    isBlocking: true,
-                                    className: this.props.className,
-                                }}
+                                dialogContentProps={{ type: DialogType.largeHeader, subText: this.props.subHeaderText }}
+                                modalProps={{ isDarkOverlay: true, isBlocking: true, className: this.props.className }}
                                 title={this.props.headerText}
                                 onDismiss={this.props.onDialogDismiss}>
                                 {this._renderInner()}
@@ -125,6 +117,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * Render inner (form inputs, setting section and footer)
      */
     private _renderInner(): React.ReactElement<INewProjectFormProps> {
+        if (this.state.isLoading) {
+            return <Spinner />;
+        }
         return (
             <div>
                 {this._renderFormInputSection()}
@@ -152,8 +147,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 <div style={inputContainerStyle}>
                     <TextField
                         placeholder={__.getResource("NewProjectForm_TitlePlaceholder")}
+                        onChanged={newValue => this._onFormInputChange("Title", newValue)}
                         value={model.Title}
-                        onChanged={newValue => this._onFormChange("Title", newValue)}
                         errorMessage={errorMessages.Title} />
                 </div>
                 <div style={inputContainerStyle}>
@@ -161,14 +156,15 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         placeholder={__.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
-                        onChanged={newValue => this._onFormChange("Description", newValue)}
+                        onChanged={newValue => this._onFormInputChange("Description", newValue)}
+                        value={model.Description}
                         errorMessage={errorMessages.Description} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
                         placeholder={__.getResource("NewProjectForm_UrlPlaceholder")}
+                        onChanged={newValue => this._onFormInputChange("Url", newValue)}
                         value={model.Url}
-                        onChanged={newValue => this._onFormChange("Url", newValue)}
                         errorMessage={errorMessages.Url} />
                 </div>
                 {this.state.config && (
@@ -217,6 +213,42 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
+     *
+     */
+    @autobind
+    private _onFormInputChange(inputName: string, newValue: string) {
+        const prevModel = this.state.model;
+        let model: ProjectModel = { ...this.state.model };
+        model[inputName] = newValue;
+        switch (inputName) {
+            case "Title": {
+                model.Url = Util.cleanString(newValue, this.props.maxUrlLength);
+            }
+        }
+        this.setState({ model }, () => {
+            if (prevModel.Url !== model.Url) {
+                if (this.doesWebExistDelay) {
+                    clearTimeout(this.doesWebExistDelay);
+                    this.doesWebExistDelay = null;
+                }
+                this.doesWebExistDelay = setTimeout(async () => {
+                    try {
+                        const doesExist = await DoesWebExist(model.Url);
+                        const errorMessages = { ...this.state.errorMessages };
+                        if (doesExist) {
+                            errorMessages.Url = __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse");
+                        }
+                        const formValid = (model.Title.length >= this.props.titleMinLength) && !doesExist;
+                        this.setState({ errorMessages, formValid });
+                    } catch (err) {
+                        // Catch err
+                    }
+                }, this.props.doesWebExistDelayMs);
+            }
+        });
+    }
+
+    /**
      * Toggle content
      *
      * @param {ListConfig} lc List config
@@ -224,7 +256,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     @autobind
     private _onToggleListContent(lc: ListConfig, checked: boolean) {
-        this.setState(prevState => {
+        this.setState((prevState: INewProjectFormState) => {
             let { IncludeContent } = prevState.model;
             checked ? IncludeContent.push(lc) : IncludeContent.splice(IncludeContent.indexOf(lc), 1);
             return { model: { ...prevState.model, IncludeContent } };
@@ -239,76 +271,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     @autobind
     private _onToggleExtension(extension: Extension, checked: boolean) {
-        this.setState(prevState => {
+        this.setState((prevState: INewProjectFormState) => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
             return { model: { ...prevState.model, Extensions } };
         });
-    }
-
-    /**
-     * On form change
-     *
-     * @param {string} input Input (key) that was changed
-     * @param {string} newValue New value
-     */
-    private async _onFormChange(input: string, newValue: string) {
-        const { titleMinLength } = this.props;
-        switch (input) {
-            case "Title": {
-                const url = Util.cleanString(newValue, this.props.maxUrlLength);
-                if (this.doesWebExistDelay) {
-                    clearTimeout(this.doesWebExistDelay);
-                    this.doesWebExistDelay = null;
-                }
-                this.doesWebExistDelay = setTimeout(async () => {
-                    try {
-                        const doesExist = await DoesWebExist(url);
-                        this.setState(prevState => ({
-                            errorMessages: {
-                                ...prevState.errorMessages,
-                                Url: doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
-                            },
-                            formValid: (newValue.length >= titleMinLength) && !doesExist,
-                            model: { ...prevState.model, Title: newValue, Url: url },
-                        }));
-                    } catch (err) {
-                        throw err;
-                    }
-                }, 250);
-            }
-                break;
-            case "Url": {
-                if (this.doesWebExistDelay) {
-                    clearTimeout(this.doesWebExistDelay);
-                    this.doesWebExistDelay = null;
-                }
-                this.doesWebExistDelay = setTimeout(async () => {
-                    try {
-                        await this.doesWebExistDelay;
-                        const doesExist = await DoesWebExist(newValue);
-                        this.setState(prevState => ({
-                            errorMessages: {
-                                ...prevState.errorMessages,
-                                Url: doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null,
-                            },
-                            formValid: (prevState.model.Title.length >= titleMinLength) && !doesExist,
-                            model: { ...prevState.model, Url: newValue },
-                        }));
-                    } catch (err) {
-                        throw err;
-                    }
-                }, 250);
-            }
-                break;
-            case "Description": {
-                this.setState(prevState => ({
-                    formValid: (prevState.model.Title.length >= titleMinLength),
-                    model: { ...prevState.model, Description: newValue },
-                }));
-            }
-                break;
-        }
     }
 
     /**
