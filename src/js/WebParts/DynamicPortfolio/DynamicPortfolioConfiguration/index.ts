@@ -42,7 +42,7 @@ export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> 
         .items
         .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
         .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
-        .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpDisplayName", "GtDpGroupByLookup/GtDpDisplayName", "Author/Id")
+        .select("ID", "GtDpDisplayName", "GtDpSearchQuery", "GtDpIcon", "GtDpDefault", "GtDpFieldsLookup/GtDpOrder", "GtDpFieldsLookup/GtDpDisplayName", "GtDpRefinersLookup/GtDpOrder", "GtDpRefinersLookup/GtDpDisplayName", "GtDpGroupByLookup/GtDpDisplayName", "Author/Id")
         .orderBy(orderBy)
         .usingCaching()
         .get();
@@ -98,15 +98,22 @@ export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageCon
         } else {
             refinersLookupItems = view.GtDpRefinersLookup;
         }
+        const viewFields = fieldsLookupItems
+            .sort((a, b) => a.GtDpOrder - b.GtDpOrder)
+            .map(item => item.GtDpDisplayName);
+        const viewRefiners = refinersLookupItems
+            .sort((a, b) => a.GtDpOrder - b.GtDpOrder)
+            .map(item => item.GtDpDisplayName);
+        const viewGroupBy = view.GtDpGroupByLookup ? view.GtDpGroupByLookup.GtDpDisplayName : null;
         return {
             id: view.ID,
             name: view.GtDpDisplayName,
             queryTemplate: view.GtDpSearchQuery,
             iconName: view.GtDpIcon,
             default: view.GtDpDefault,
-            fields: fieldsLookupItems.map(item => item.GtDpDisplayName),
-            refiners: refinersLookupItems.map(item => item.GtDpDisplayName),
-            groupBy: view.GtDpGroupByLookup ? view.GtDpGroupByLookup.GtDpDisplayName : null,
+            fields: viewFields,
+            refiners: viewRefiners,
+            groupBy: viewGroupBy,
         };
     });
     return { columns, refiners, views, statusFields };
