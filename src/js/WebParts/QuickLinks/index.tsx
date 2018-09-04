@@ -1,18 +1,25 @@
+
+import __ from "../../Resources";
 import { Site } from "sp-pnp-js";
 import * as React from "react";
-import __ from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import IQuickLinksProps, { QuickLinksDefaultProps } from "./IQuickLinksProps";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
+import IQuickLinksProps from "./IQuickLinksProps";
 import IQuickLinksState from "./IQuickLinksState";
 import BaseWebPart from "../@BaseWebPart";
 
 /**
- * QuickLinks
+ * Component: QuickLinks
  */
 export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLinksState> {
     public static displayName = "QuickLinks";
-    public static defaultProps = QuickLinksDefaultProps;
+    public static defaultProps: Partial<IQuickLinksProps> = {
+        itemsCount: 10,
+        orderBy: "GtSortOrder",
+        orderAsc: true,
+        listClassName: "pp-simpleList spacing-m",
+    };
 
     /**
      * Constructor
@@ -29,6 +36,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
             .lists
             .getByTitle(__.getResource("Lists_QuickLinks_Title"))
             .items
+            .orderBy(this.props.orderBy, this.props.orderAsc)
             .top(this.props.itemsCount)
             .select("URL", "Comments")
             .get();
@@ -58,12 +66,12 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
             return <Spinner type={SpinnerType.large} />;
         } else if (links.length > 0) {
             return (
-                <div ref={elementToToggle => this.setState({ elementToToggle })}>
+                <div ref={this._containerRef}>
                     <ul className={listClassName}>
-                        {links.map(({ URL: { Url, Description }, Comments }, idx) => (
+                        {links.map((lnk, idx) => (
                             <li key={idx}>
-                                <h5><a href={Url}>{Description}</a></h5>
-                                <span className="ms-metadata">{Comments}</span>
+                                <h5><a href={lnk.URL.Url}>{lnk.URL.Description}</a></h5>
+                                <span className="ms-metadata">{lnk.Comments}</span>
                             </li>
                         ))}
                     </ul>
@@ -71,11 +79,16 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
             );
         } else {
             return (
-                <div ref={elementToToggle => this.setState({ elementToToggle })}>
+                <div ref={this._containerRef}>
                     <MessageBar>{__.getResource("WebPart_EmptyMessage")}</MessageBar>
                 </div>
             );
         }
+    }
+
+    @autobind
+    private _containerRef(div: HTMLDivElement) {
+        this.setState({ elementToToggle: div });
     }
 }
 
