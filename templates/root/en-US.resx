@@ -520,7 +520,7 @@
     <value>Statistics field</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
-    <value>Graph configuration base</value>
+    <value>Chart configuration base</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
     <value>Bar chart</value>
@@ -643,7 +643,7 @@
     <value>Create a new statistics field</value>
   </data>
   <data name="ContentTypes_Grafconfigurationelement_Description" xml:space = "preserve">
-    <value>Create a new graph configuration element</value>
+    <value>Create a new Chart configuration element</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Description" xml:space = "preserve">
     <value>Create a new bar chart</value>
@@ -2990,7 +2990,7 @@
     <value>Project Portal - Data fields for graphs</value>
   </data>
   <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
-    <value>Project Portal - Graph configuration</value>
+    <value>Project Portal - Chart configuration</value>
   </data>
   <data name="SiteSettings_Link_DataSources" xml:space="preserve">
     <value>Project Portal - Data Sources</value>
