@@ -27,7 +27,7 @@ import CreationModal from "./CreationModal";
 //#endregion
 
 /**
- * Component NewProjectForm
+ * Component: NewProjectForm
  */
 export default class NewProjectForm extends React.Component<INewProjectFormProps, INewProjectFormState> {
     public static displayName = "NewProjectForm";
@@ -235,9 +235,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     try {
                         const doesExist = await DoesWebExist(model.Url);
                         const errorMessages = { ...this.state.errorMessages };
-                        if (doesExist) {
-                            errorMessages.Url = __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse");
-                        }
+                        errorMessages.Url = doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null;
                         const formValid = (model.Title.length >= this.props.titleMinLength) && !doesExist;
                         this.setState({ errorMessages, formValid });
                     } catch (err) {
