@@ -46,7 +46,7 @@
             <pnp:DataValue FieldName="GtStSecOrder">50</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecIcon">Warning</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecViewQuery">
-                <![CDATA[<OrderBy><FieldRef Name="GtRiskFactor" Ascending="FALSE" /></OrderBy>]]>
+                <![CDATA[<OrderBy><FieldRef Name="GtRiskFactor" Ascending="FALSE" /></OrderBy><Where><Neq><FieldRef Name="GtRiskStatus" /><Value Type="Text">No longer relevant</Value></Neq></Where>]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecViewFields">ID,Title,GtRiskProximity,GtRiskAction,GtRiskStrategy,GtRiskFactor,GtRiskFactorPostAction</pnp:DataValue>
             <pnp:DataValue FieldName="GtStSecShowRiskMatrix">true</pnp:DataValue>
