@@ -15,7 +15,6 @@ import ProjectStatus from "./ProjectStatus";
 import BenefitsAnalysis from "./BenefitsAnalysis";
 import ChangeAnalysis from "./ChangeAnalysis";
 import BenefitsFollowup from "./BenefitsFollowup";
-import ResourceAllocation from "./ResourceAllocation";
 
 const Lists: IList[] = [
     SitePages,
@@ -34,7 +33,6 @@ const Lists: IList[] = [
     BenefitsAnalysis,
     ChangeAnalysis,
     BenefitsFollowup,
-    ResourceAllocation,
 ];
 
 export default Lists;
