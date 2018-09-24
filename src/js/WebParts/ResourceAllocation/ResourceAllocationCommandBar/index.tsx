@@ -37,68 +37,97 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
      * @param {IResourceAllocationCommandBarProps} props Props
      */
     protected _initItems(props: IResourceAllocationCommandBarProps) {
-        const projectOptions = array_unique(props.allocations.map(alloc => alloc.project.name))
-            .map((project, idx) => {
-                return {
-                    key: `Project_${idx}`,
-                    name: project,
-                    onClick: event => {
-                        this._onSelectionUpdate(event, { project: project, user: null, role: null });
-                    },
-                };
-            })
-            .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
-        const resourceOptions = props.users
-            .map((user, idx) => {
-                return {
-                    key: `Resource_${idx}`,
-                    name: user.name,
-                    onClick: event => {
-                        this._onSelectionUpdate(event, { project: null, user: user, role: null });
-                    },
-                };
-            })
-            .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+        const { projects, resources, roles } = this._getOptions();
 
         this._items = [
             {
                 key: "Project",
-                name: props.selected.project || __.getResource("String_Project"),
+                name: (props.selected && props.selected.project) || __.getResource("String_Project"),
                 iconProps: { iconName: "ProjectCollection" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
                 subMenuProps: {
                     items: [
                         {
-                            key: `Project_All`,
-                            name: "Alle",
+                            key: "Project_All",
+                            name: __.getResource("String_All"),
                             iconProps: { iconName: "AllApps" },
                             onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: null }),
                         },
-                        ...projectOptions,
+                        ...projects,
                     ],
                 },
             },
             {
                 key: "Resource",
-                name: props.selected.user ? props.selected.user.name : __.getResource("String_Resource"),
+                name: (props.selected && props.selected.user) ? props.selected.user.name : __.getResource("String_Resource"),
                 iconProps: { iconName: "TemporaryUser" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: e => e.preventDefault(),
                 subMenuProps: {
                     items: [
                         {
-                            key: `Resource_All`,
-                            name: "Alle",
+                            key: "Resource_All",
+                            name: __.getResource("String_All"),
                             iconProps: { iconName: "AllApps" },
                             onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: null }),
                         },
-                        ...resourceOptions,
+                        ...resources,
+                    ],
+                },
+            },
+            {
+                key: "Role",
+                name: (props.selected && props.selected.role) ? props.selected.role : __.getResource("String_Role"),
+                iconProps: { iconName: "Personalize" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                subMenuProps: {
+                    items: [
+                        {
+                            key: "Role_All",
+                            name: __.getResource("String_All"),
+                            iconProps: { iconName: "AllApps" },
+                            onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: null }),
+                        },
+                        ...roles,
                     ],
                 },
             },
         ];
         this._farItems = [];
+    }
+
+    protected _getOptions() {
+        const projects = array_unique(this.props.allocations.map(alloc => alloc.project.name))
+            .map((p, idx) => {
+                return {
+                    key: `Project_${idx}`,
+                    name: p,
+                    onClick: event => this._onSelectionUpdate(event, { project: p, user: null, role: null }),
+                };
+            })
+            .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+        const resources = this.props.users
+            .map((u, idx) => {
+                return {
+                    key: `Resource_${idx}`,
+                    name: u.name,
+                    onClick: event => this._onSelectionUpdate(event, { project: null, user: u, role: null }),
+                };
+            })
+            .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+        const roles = array_unique(this.props.allocations.map(alloc => alloc.resource.role))
+            .map((r, idx) => {
+                return {
+                    key: `Role_${idx}`,
+                    name: r,
+                    onClick: event => this._onSelectionUpdate(event, { project: null, user: null, role: r }),
+                };
+            })
+            .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
+
+        return { projects, resources, roles };
     }
 
     /**
@@ -114,6 +143,6 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
 
     protected _onSelectionUpdate(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>, { project, user, role }) {
         event.preventDefault();
-        this.props.onSelectionUpdate({ project, user });
+        this.props.onSelectionUpdate({ project, user, role });
     }
 }

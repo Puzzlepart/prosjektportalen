@@ -8,7 +8,7 @@ export default interface IResourceAllocationProps extends IBaseWebPartProps {
 export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {
     searchConfiguration: {
         Querytext: "*",
-        QueryTemplate: "(ContentTypeId:0x010088578E7470CC4AA68D5663464831070209*) Path:{SiteCollection.URL} LastModifiedTime>{Today-7}",
+        QueryTemplate: "(ContentTypeId:0x010088578E7470CC4AA68D5663464831070209*) Path:{SiteCollection.URL}",
         RowLimit: 500,
         TrimDuplicates: false,
         SelectProperties: [

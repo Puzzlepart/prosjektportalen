@@ -2076,6 +2076,12 @@
   <data name="String_Resource" xml:space="preserve">
     <value>Ressurs</value>
   </data>
+  <data name="String_Role" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="String_All" xml:space="preserve">
+    <value>Alle</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>

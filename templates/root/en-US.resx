@@ -1241,7 +1241,7 @@
   </data>
   <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
     <value>Role</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -1715,7 +1715,7 @@
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>The height of the graph in pixels</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1736,7 +1736,7 @@
   </data>
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
-  </data>  
+  </data>
   <data name="ResourceAllocation_LoadingText" xml:space="preserve">
     <value>Loading resource allocation...</value>
   </data>
@@ -2075,6 +2075,12 @@
   </data>
   <data name="String_Resource" xml:space="preserve">
     <value>Resource</value>
+  </data>
+  <data name="String_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="String_All" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>

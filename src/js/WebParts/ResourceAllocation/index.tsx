@@ -30,7 +30,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * @param {IResourceAllocationProps} props Props
      */
     constructor(props: IResourceAllocationProps) {
-        super(props, { isLoading: true, selected: {} });
+        super(props, { isLoading: true });
         moment.locale(__.getResource("MomentDate_Locale"));
     }
 
@@ -92,22 +92,34 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Get data for the timeline
      */
     protected _getTimelineData() {
-        const groups = this.state.users
+        const {
+            users,
+            allocations,
+            availability,
+            selected,
+        } = this.state;
+
+        const groups = users
             .map(user => ({ id: user.id, title: user.name }))
             .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
             .filter(grp => {
-                if (this.state.selected.user) {
-                    return grp.id === this.state.selected.user.id;
+                if (selected && selected.user) {
+                    return grp.id === selected.user.id;
                 }
                 return true;
             });
-        const itemsAllocations = this.state.allocations
+        const itemsAllocations = allocations
             .filter(alloc => {
                 if (!(alloc.user && alloc.resource)) {
                     return false;
                 }
-                if (this.state.selected.project) {
-                    return (alloc.project.name === this.state.selected.project);
+                if (selected) {
+                    if (selected.project) {
+                        return (alloc.project.name === selected.project);
+                    }
+                    if (selected.role) {
+                        return (alloc.resource.role === selected.role);
+                    }
                 }
                 return true;
             })
@@ -120,7 +132,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     ...alloc,
                 };
             });
-        const itemsAvailability = this.state.availability
+        const itemsAvailability = availability
             .map((ava, idx) => {
                 return {
                     id: (idx + itemsAllocations.length),
