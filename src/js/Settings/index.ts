@@ -1,6 +1,7 @@
-import { GetAllProperties, SetProperty } from "../Util/PropertyBag";
+import * as PropertyBagUtil from "../Util/PropertyBag";
 import { IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 
+export const CHOSEN_SETTINGS_PROPERTY_KEY = "pp_chosensettings";
 export const SETTINGS_PROPERTY_KEY = "pp_settings";
 export const SETTINGS_OPTIONS_PROPERTY_KEY = "pp_settings_options";
 
@@ -11,61 +12,81 @@ export interface ISetting {
 }
 
 
+/**
+ * Get settings and options
+ */
 export async function GetSettingsAndOptions(): Promise<{ settings: { [key: string]: string }, options: { [key: string]: string } }> {
-    const webProperties = await GetAllProperties();
-    let settingsJson, settingsOptionsJson;
+    const webPropertyBag = await PropertyBagUtil.GetAllProperties();
+    let options;
     try {
-        settingsJson = JSON.parse(webProperties[SETTINGS_PROPERTY_KEY]);
+        options = JSON.parse(webPropertyBag[SETTINGS_OPTIONS_PROPERTY_KEY]);
     } catch (err) {
-        settingsJson = {};
+        options = {};
     }
-    try {
-        settingsOptionsJson = JSON.parse(webProperties[SETTINGS_OPTIONS_PROPERTY_KEY]);
-    } catch (err) {
-        settingsOptionsJson = {};
-    }
-    return {
-        settings: settingsJson,
-        options: settingsOptionsJson,
-    };
+    const settings = await GetSettings(webPropertyBag);
+    return { settings, options };
 }
 
-export async function GetSettings(): Promise<{ [key: string]: string }> {
-    const webProperties = await GetAllProperties();
-    let settingsJson;
-    try {
-        settingsJson = JSON.parse(webProperties[SETTINGS_PROPERTY_KEY]);
-    } catch (err) {
-        settingsJson = {};
+/**
+ * Get setting
+ *
+ * @param {Object} webPropertyBag Web property bag
+ */
+export async function GetSettings(webPropertyBag?: { [key: string]: string }): Promise<{ [key: string]: string }> {
+    if (!webPropertyBag) {
+        webPropertyBag = await PropertyBagUtil.GetAllProperties();
     }
-    return settingsJson;
+    let settings, settingsJson, chosenSettingsJson;
+    try {
+        settingsJson = JSON.parse(webPropertyBag[SETTINGS_PROPERTY_KEY]);
+    } catch (err) {
+        settingsJson = null;
+    }
+    try {
+        chosenSettingsJson = JSON.parse(webPropertyBag[CHOSEN_SETTINGS_PROPERTY_KEY]);
+    } catch (err) {
+        chosenSettingsJson = null;
+    }
+    settings = chosenSettingsJson || settingsJson || {};
+    if (chosenSettingsJson && settingsJson) {
+        settings = Object.keys(settingsJson).reduce((obj, key) => {
+            if (!settings.hasOwnProperty(key)) {
+                obj[key] = settingsJson[key];
+            }
+            return obj;
+        }, settings);
+    }
+    return settings;
 }
 
-export async function GetSetting(settingKey: string, toLowerCase = false): Promise<string> {
-    const webProperties = await GetAllProperties();
-    let settingsJson;
-    try {
-        settingsJson = JSON.parse(webProperties[SETTINGS_PROPERTY_KEY]);
-    } catch (err) {
-        settingsJson = {};
-    }
-    if (settingsJson.hasOwnProperty(settingKey)) {
+/**
+ * Get setting
+ *
+ * @param {string} key Key of the setting
+ * @param {boolean} toLowerCase Return the value in lowercase
+ */
+export async function GetSetting(key: string, toLowerCase = false): Promise<string> {
+    const settings = await GetSettings();
+    if (settings.hasOwnProperty(key)) {
         if (toLowerCase) {
-            return settingsJson[settingKey].toLowerCase();
+            return settings[key].toLowerCase();
         }
-        return settingsJson[settingKey];
+        return settings[key];
     }
     return "";
 }
 
-
-
-export async function UpdateSettings(settings: { [key: string]: string }): Promise<void> {
-    let settingsString = "";
+/**
+ * Update settings
+ *
+ * @param {Object} settings Updated settings
+ */
+export async function UpdateSettings(settings: { [key: string]: string }): Promise<boolean> {
     try {
-        settingsString = JSON.stringify(settings);
+        const settingsString = JSON.stringify(settings);
+        await PropertyBagUtil.SetProperty(CHOSEN_SETTINGS_PROPERTY_KEY, settingsString);
+        return true;
     } catch (err) {
-        throw err;
+        return false;
     }
-    await SetProperty(SETTINGS_PROPERTY_KEY, settingsString);
 }

@@ -1,12 +1,10 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 
-export default interface IQuickLinksProps extends IBaseWebPartProps {
+interface IQuickLinksProps extends IBaseWebPartProps {
     itemsCount?: number;
+    orderBy?: string;
+    orderAsc?: boolean;
     listClassName?: string;
 }
 
-export const QuickLinksDefaultProps: Partial<IQuickLinksProps> = {
-    itemsCount: 10,
-    listClassName: "pp-simpleList spacing-m",
-};
-
+export default IQuickLinksProps;

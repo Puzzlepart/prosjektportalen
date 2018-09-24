@@ -33,7 +33,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
     }
 
     /**
-     * Renders the component
+     * Renders the <List /> component
      */
     public render(): React.ReactElement<IListProps> {
         let { items, columns, groups } = this._getFilteredData();
@@ -211,11 +211,18 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      * Get filtered data based on groupBy and searchTerm (search is case-insensitive)
      */
     private _getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
+        let items = [].concat(this.props.items).filter(itm => {
+            const matches = Object.keys(itm).filter(key => {
+                const value = itm[key];
+                return value && typeof value === "string" && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
+            }).length;
+            return matches > 0;
+        });
         let columns = [].concat(this.props.columns);
         let groups: IGroup[] = null;
         if (this.state.groupBy.key !== "NoGrouping") {
-            const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
-            const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
+            items = items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
+            const groupNames = items.map(g => g[this.state.groupBy.key]);
             groups = unique([].concat(groupNames)).map((name, idx) => ({
                 key: idx,
                 name: `${this.state.groupBy.name}: ${name}`,
@@ -226,18 +233,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 isDropEnabled: false,
             }));
         }
-        const filteredItems = this.props.items.filter(itm => {
-            const matches = Object.keys(itm).filter(key => {
-                const value = itm[key];
-                return value && typeof value === "string" && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
-            }).length;
-            return matches > 0;
-        });
-        return {
-            items: filteredItems,
-            columns: columns,
-            groups: groups,
-        };
+        return { items, columns, groups };
     }
 
     /**

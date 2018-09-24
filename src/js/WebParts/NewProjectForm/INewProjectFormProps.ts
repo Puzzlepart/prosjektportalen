@@ -1,13 +1,14 @@
 import __ from "../../Resources";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 
-export default interface INewProjectFormProps {
+interface INewProjectFormProps {
     className?: string;
     style?: React.CSSProperties;
     settingsClassName?: string;
     titleMinLength?: number;
     titleMaxLength?: number;
     maxUrlLength?: number;
+    doesWebExistDelayMs?: number;
     renderMode?: NewProjectFormRenderMode;
     onDialogDismiss?: (ev?: React.MouseEvent<HTMLButtonElement>) => any;
     headerText?: string;
@@ -22,9 +23,10 @@ export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     className: "pp-newProjectForm",
     settingsClassName: "advanced-settings",
     maxUrlLength: 18,
+    doesWebExistDelayMs: 200,
     renderMode: NewProjectFormRenderMode.Default,
     onDialogDismiss: () => {
-        //
+        // Empty
     },
     headerText: __.getResource("NewProjectForm_Title"),
     subHeaderText: __.getResource("NewProjectForm_SubText"),
@@ -32,3 +34,5 @@ export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     inputContainerStyle: { marginBottom: 5 },
     showSettings: true,
 };
+
+export default INewProjectFormProps;

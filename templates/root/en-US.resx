@@ -162,8 +162,8 @@
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
-  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
-    <value>Project Resources</value>
+  <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
+    <value>Resource Allocation</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
@@ -273,6 +273,9 @@
   <data name="Lists_ProjectResources_Title" xml:space="preserve">
     <value>Project Resources</value>
   </data>
+  <data name="Lists_ResourceAllocation_Title" xml:space="preserve">
+    <value>Resource Allocation</value>
+  </data>
   <data name="Lists_Announcements_Url" xml:space="preserve">
     <value>Lists/Announcements</value>
   </data>
@@ -378,6 +381,9 @@
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Project Resources/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_ResourceAllocation_Url" xml:space="preserve">
+    <value>Lists/Resource Allocation/AllItems.aspx</value>
+  </data>
   <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
     <value>Project Status</value>
   </data>
@@ -407,6 +413,9 @@
   </data>
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Without responsible</value>
+  </data>
+  <data name="View_ProjectFields_DisplayName" xml:space="preserve">
+    <value>Project Fields</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Project Portal Content Types</value>
@@ -459,6 +468,12 @@
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Project Resource</value>
   </data>
+  <data name="ContentTypes_Ressursallokering_Name" xml:space="preserve">
+    <value>Resource Allocation</value>
+  </data>
+  <data name="ContentTypes_Ressursallokering_utenfor_prosjekt_Name" xml:space="preserve">
+    <value>Resource Allocation (not project related)</value>
+  </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind base event</value>
   </data>
@@ -505,7 +520,7 @@
     <value>Statistics field</value>
   </data>
   <data name="ContentTypes_Grafkonfigurasjonelement_Name" xml:space="preserve">
-    <value>Graph configuration base</value>
+    <value>Chart configuration base</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Name" xml:space="preserve">
     <value>Bar chart</value>
@@ -536,9 +551,6 @@
   </data>
   <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
     <value>Project Field</value>
-  </data>
-  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
-    <value>Project Key Value</value>
   </data>
   <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
     <value>Feedback</value>
@@ -631,7 +643,7 @@
     <value>Create a new statistics field</value>
   </data>
   <data name="ContentTypes_Grafconfigurationelement_Description" xml:space = "preserve">
-    <value>Create a new graph configuration element</value>
+    <value>Create a new Chart configuration element</value>
   </data>
   <data name="ContentTypes_Stolpediagram_Description" xml:space = "preserve">
     <value>Create a new bar chart</value>
@@ -1233,6 +1245,15 @@
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
+    <value>Resource</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
+    <value>Absence</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1701,6 +1722,9 @@
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
   </data>
@@ -1713,8 +1737,8 @@
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
   </data>  
-  <data name="ProjectResources_LoadingText" xml:space="preserve">
-    <value>Loading project resources...</value>
+  <data name="ResourceAllocation_LoadingText" xml:space="preserve">
+    <value>Loading resource allocation...</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
@@ -2043,6 +2067,15 @@
   <data name="String_Not_Set" xml:space="preserve">
     <value>Not set</value>
   </data>
+  <data name="String_From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="String_To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="String_Resource" xml:space="preserve">
+    <value>Resource</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2157,8 +2190,8 @@
   <data name="WebPart_ProjectStats_Title" xml:space="preserve">
     <value>Project Stats</value>
   </data>
-  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
-    <value>Project Resources</value>
+  <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
+    <value>Project Allocation</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
@@ -2957,7 +2990,7 @@
     <value>Project Portal - Data fields for graphs</value>
   </data>
   <data name="SiteSettings_Link_ChartsConfig" xml:space="preserve">
-    <value>Project Portal - Graph configuration</value>
+    <value>Project Portal - Chart configuration</value>
   </data>
   <data name="SiteSettings_Link_DataSources" xml:space="preserve">
     <value>Project Portal - Data Sources</value>

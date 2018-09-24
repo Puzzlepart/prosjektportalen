@@ -1,6 +1,6 @@
 import * as React from "react";
 import __ from "../../Resources";
-import { Site, Logger, LogLevel } from "sp-pnp-js";
+import { Site } from "sp-pnp-js";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -14,8 +14,6 @@ import IProjectListProps, { ProjectListDefaultProps } from "./IProjectListProps"
 import IProjectListState, { IProjectListData } from "./IProjectListState";
 import BaseWebPart from "../@BaseWebPart";
 import { cleanString } from "../../Util";
-
-const LOG_TEMPLATE = "(ProjectList) {0}: {1}";
 
 /**
  * Project information
@@ -32,18 +30,9 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      */
     constructor(props: IProjectListProps) {
         super(props, { isLoading: true, searchTerm: "" });
-        this._onSearch = this._onSearch.bind(this);
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "constructor", "Initializing the <ProjectList /> component"),
-            level: LogLevel.Info,
-        });
     }
 
     public async componentDidMount() {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "componentDidMount", "<ProjectList /> mounted"),
-            level: LogLevel.Info,
-        });
         try {
             const data = await this.fetchData();
             this.setState({
@@ -56,11 +45,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     public render(): JSX.Element {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "render", "Rendering the <ProjectList /> component"),
-            level: LogLevel.Info,
-        });
-
         if (this.state.isLoading) {
             return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
         }
@@ -94,11 +78,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         if (projects.length === 0) {
             return <MessageBar>{this.props.emptyMessage}</MessageBar>;
         }
-
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "renderCards", `Rendering ${projects.length} <ProjectCard />`),
-            level: LogLevel.Info,
-        });
 
         return (
             <div className={`pp-cardContainer`}>
@@ -184,19 +163,9 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     @autobind
     private _onSearch(searchTerm: string) {
         if (this._searchTimeout) {
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "_onSearch", "Clearing timeout"),
-                data: { searchTerm },
-                level: LogLevel.Info,
-            });
             clearTimeout(this._searchTimeout);
         }
         this._searchTimeout = setTimeout(() => {
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "_onSearch", "Updating state"),
-                data: { searchTerm },
-                level: LogLevel.Info,
-            });
             this.setState({ searchTerm: searchTerm.toLowerCase() });
         }, this.props.searchTimeoutMs);
     }
@@ -205,10 +174,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      * Fetch data using sp-pnp-js search
      */
     private async fetchData(): Promise<IProjectListData> {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "fetchData", "Fetching data"),
-            level: LogLevel.Info,
-        });
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         try {
             const projectCt = rootWeb
@@ -228,14 +193,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 obj[fld.InternalName] = fld.Title;
                 return obj;
             }, {});
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "fetchData", `Retrieved ${projects.length} projects and ${Object.keys(fieldsMap).length} fields`),
-                level: LogLevel.Info,
-            });
-            return {
-                projects,
-                fields: fieldsMap,
-            };
+            return { projects, fields: fieldsMap };
         } catch (err) {
             throw err;
         }

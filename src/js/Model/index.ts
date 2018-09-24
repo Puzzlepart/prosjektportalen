@@ -1,7 +1,4 @@
-import {
-    ProjectModel,
-    IProjectModel,
-} from "./ProjectModel";
+import { ProjectModel } from "./ProjectModel";
 import IContentType from "./IContentType";
 
-export { ProjectModel, IProjectModel, IContentType };
+export { ProjectModel, IContentType };

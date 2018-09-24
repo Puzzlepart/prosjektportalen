@@ -161,9 +161,9 @@
   </data>
   <data name="Navigation_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstoppfølging</value>
-  </data>  
-  <data name="Navigation_ProjectResources_Title" xml:space="preserve">
-    <value>Prosjektressurser</value>
+  </data>
+  <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
@@ -266,9 +266,12 @@
   </data>
   <data name="Lists_DataSources_Title" xml:space="preserve">
     <value>Datakilder</value>
-  </data>  
+  </data>
   <data name="Lists_ProjectResources_Title" xml:space="preserve">
     <value>Prosjektressurser</value>
+  </data>
+  <data name="Lists_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
   </data>
   <data name="Lists_SitePages_Url" xml:space="preserve">
     <value>SitePages</value>
@@ -374,9 +377,12 @@
   </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
-  </data>  
+  </data>
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Prosjektressurser/AllItems.aspx</value>
+  </data>
+  <data name="DefaultView_ResourceAllocation_Url" xml:space="preserve">
+    <value>Lists/Ressursallokering/AllItems.aspx</value>
   </data>
   <data name="View_ProjectStatus_DisplayName" xml:space="preserve">
     <value>Prosjektstatus</value>
@@ -407,6 +413,9 @@
   </data>
   <data name="View_WithoutResponsible_DisplayName" xml:space="preserve">
     <value>Uten ansvarlig</value>
+  </data>
+  <data name="View_ProjectFields_DisplayName" xml:space="preserve">
+    <value>Prosjektfelter</value>
   </data>
   <data name="ContentTypes_Group" xml:space="preserve">
     <value>Prosjektportalen innholdstyper</value>
@@ -458,6 +467,12 @@
   </data>
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Prosjektressurs</value>
+  </data>
+  <data name="ContentTypes_Ressursallokering_Name" xml:space="preserve">
+    <value>Ressursallokering</value>
+  </data>
+  <data name="ContentTypes_Ressursallokering_utenfor_prosjekt_Name" xml:space="preserve">
+    <value>Ressursallokering (utenfor prosjekt)</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Name" xml:space="preserve">
     <value>Glittertind basehendelse</value>
@@ -536,9 +551,6 @@
   </data>
   <data name="ContentTypes_Project_Field_Name" xml:space="preserve">
     <value>Prosjektfelt</value>
-  </data>
-  <data name="ContentTypes_Project_Key_Value_Name" xml:space="preserve">
-    <value>Nøkkelverdipar</value>
   </data>
   <data name="ContentTypes_Tilbakemelding_Name" xml:space="preserve">
     <value>Tilbakemelding</value>
@@ -1230,6 +1242,15 @@
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Navn</value>
   </data>
+  <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
+    <value>Belastning</value>
+  </data>
+  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
+    <value>Ressurs</value>
+  </data>  
+  <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
+    <value>Fravær</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1701,6 +1722,9 @@
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
   </data>
@@ -1713,8 +1737,8 @@
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>Ingen prosjekter funnet. Visningen bruker søk, så det kan ta noen minutter fra prosjekter er lagt til eller oppdatert til de vises her.</value>
   </data>
-  <data name="ProjectResources_LoadingText" xml:space="preserve">
-    <value>Laster prosjektressurser...</value>
+  <data name="ResourceAllocation_LoadingText" xml:space="preserve">
+    <value>Laster ressursallokering...</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
@@ -2043,6 +2067,15 @@
   <data name="String_Not_Set" xml:space="preserve">
     <value>Ikke satt</value>
   </data>
+  <data name="String_From" xml:space="preserve">
+    <value>Fra</value>
+  </data>
+  <data name="String_To" xml:space="preserve">
+    <value>Til</value>
+  </data>
+  <data name="String_Resource" xml:space="preserve">
+    <value>Ressurs</value>
+  </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
   </data>
@@ -2157,8 +2190,8 @@
   <data name="WebPart_ProjectStats_Title" xml:space="preserve">
     <value>Prosjektstatistikk</value>
   </data>
-  <data name="WebPart_ProjectResources_Title" xml:space="preserve">
-    <value>Prosjektressurser</value>
+  <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
+    <value>Ressursallokering</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
@@ -2573,7 +2606,7 @@
   </data>
   <data name="BenefitsOverview_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Gevinstoversikt</value>
-  </data>  
+  </data>
   <data name="BenefitsOverview_LoadingText" xml:space="preserve">
     <value>Laster gevinster og målinger...</value>
   </data>
@@ -2585,13 +2618,13 @@
   </data>
   <data name="DeliveriesOverview_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjektleveranser</value>
-  </data>  
+  </data>
   <data name="DeliveriesOverview_LoadingText" xml:space="preserve">
     <value>Laster prosjektleveranser...</value>
   </data>
   <data name="ExperienceLog_ExcelExportFileNamePrefix" xml:space="preserve">
     <value>Erfaringslogg</value>
-  </data>  
+  </data>
   <data name="ExperienceLog_LoadingText" xml:space="preserve">
     <value>Laster loggelementer..</value>
   </data>

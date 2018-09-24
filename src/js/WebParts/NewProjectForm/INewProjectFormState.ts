@@ -1,12 +1,13 @@
-import { IProjectModel } from "../../Model";
+import { ProjectModel } from "../../Model";
 import INewProjectFormConfig from "./INewProjectFormConfig";
 import ITemplateFile from "../../Provision/Template/ITemplateFile";
 
 export enum ProvisionStatus { Idle, Creating, Error }
 
-export default interface INewProjectFormState {
-    model: IProjectModel;
-    errorMessages: any;
+interface INewProjectFormState {
+    isLoading: boolean;
+    model: ProjectModel;
+    errorMessages: { [key: string]: string };
     provisioning: {
         status: ProvisionStatus;
         step?: string;
@@ -19,3 +20,4 @@ export default interface INewProjectFormState {
     selectedTemplate?: ITemplateFile;
 }
 
+export default INewProjectFormState;

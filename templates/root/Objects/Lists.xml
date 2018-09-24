@@ -1,45 +1,23 @@
-<pnp:Lists 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Announcements.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Extensions.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/PhaseChecklist.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/QuickLinks.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Resources.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Stakeholders.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StandardTasks.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StandardDocuments.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ListContentConfig.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioFields.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioRefiners.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioViews.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectConfig.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectElements.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Feedback.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatusSections.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Log.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/SiteTemplates.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DataSources.xml" />        
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatsFieldsConfig.xml" />
-    <xi:include 
-        xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ChartsConfig.xml" />
+<pnp:Lists xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Announcements.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Extensions.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/PhaseChecklist.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/QuickLinks.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Resources.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Stakeholders.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StandardTasks.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StandardDocuments.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ListContentConfig.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioFields.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioRefiners.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DynamicPortfolioViews.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectConfig.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ProjectElements.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Feedback.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatusSections.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/Log.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/SiteTemplates.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/DataSources.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/StatsFieldsConfig.xml" />
+    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists/ChartsConfig.xml" />
 </pnp:Lists>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
     <pnp:Templates ID="CONTAINER-PP">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTFOLIOINSIGHTS-1033-PATCH" Version="0">
@@ -64,7 +64,7 @@
                         </pnp:DataRow>
                     </pnp:DataRows>
                 </pnp:ListInstance>
-                <pnp:ListInstance Title="Graph configuration" ContentTypesEnabled="true" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
+                <pnp:ListInstance Title="Chart configuration" ContentTypesEnabled="true" DocumentTemplate="" TemplateType="100" Url="Lists/ChartsConfig" Hidden="true" EnableAttachments="false" EnableFolderCreation="false" 
                     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
                     <pnp:ContentTypeBindings>
                         <pnp:ContentTypeBinding ContentTypeID="0x0100FAC6DE5CA35FAB46ABCF3CD575663D9D01" Default="true" />
