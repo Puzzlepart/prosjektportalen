@@ -529,31 +529,4 @@
     <Field DisplayName="{resource:SiteFields_GtChrYMin_DisplayName}" Description="{resource:SiteFields_GtChrYMin_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrYMin_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{9a731b59-52ed-4b93-ab7a-3fd56914d0a6}" StaticName="{parameter:ProjectStatsFieldPrefix}YMin" Name="{parameter:ProjectStatsFieldPrefix}YMin" />
     <Field DisplayName="{resource:SiteFields_GtChrYMax_DisplayName}" Description="{resource:SiteFields_GtChrYMax_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrYMax_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{f7fd2b80-26e4-472c-8629-02e898b2a19f}" StaticName="{parameter:ProjectStatsFieldPrefix}YMax" Name="{parameter:ProjectStatsFieldPrefix}YMax" />
     <Field DisplayName="{resource:SiteFields_GtChrYTickInterval_DisplayName}" Description="{resource:SiteFields_GtChrYTickInterval_Description}" Percentage="FALSE" Title="{resource:SiteFields_GtChrYTickInterval_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" ID="{60dac89b-70f5-4a49-87a9-b253bd5df7ca}" StaticName="{parameter:ProjectStatsFieldPrefix}YTickInterval" Name="{parameter:ProjectStatsFieldPrefix}YTickInterval" />
-    <Field DisplayName="{resource:SiteFields_GtResourceRole_DisplayName}" Description="{resource:SiteFields_GtResourceRole_Description}" ID="{3a0ae560-bd55-45d4-907f-5119bf0a83bb}" Type="TaxonomyFieldType" WebId="{siteid}" Group="{resource:SiteFields_Group}" StaticName="{parameter:GenericFieldPrefix}ResourceRole" Name="{parameter:GenericFieldPrefix}ResourceRole">
-        <Customization>
-            <ArrayOfProperty>
-                <Property>
-                    <Name>SspId</Name>
-                    <Value xmlns:q1="http://www.w3.org/2001/XMLSchema" p4:type="q1:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{sitecollectiontermstoreid}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                    </Value>
-                </Property>
-                <Property>
-                    <Name>TermSetId</Name>
-                    <Value xmlns:q2="http://www.w3.org/2001/XMLSchema" p4:type="q2:string" 
-                        xmlns:p4="http://www.w3.org/2001/XMLSchema-instance">{parameter:TermSetIdRole}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                    </Value>
-                </Property>
-            </ArrayOfProperty>
-        </Customization>
-    </Field>
-    <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="{resource:SiteFields_Group}" StaticName="{parameter:GenericFieldPrefix}ResourceUser" Name="{parameter:GenericFieldPrefix}ResourceUser" />
-    <Field DisplayName="{resource:SiteFields_GtResourceLoad_DisplayName}" Description="{resource:SiteFields_GtResourceLoad_Description}" ID="{08ac9d56-f8eb-4a2c-868f-d39fc012fcd6}" Name="{parameter:GenericFieldPrefix}ResourceLoad" Type="Number" Group="{resource:SiteFields_Group}" Percentage="TRUE" StaticName="{parameter:GenericFieldPrefix}ResourceLoad" />
-    <Field DisplayName="{resource:SiteFields_GtResourceAbsence_DisplayName}" FillInChoice="FALSE" Type="Choice" ID="{028e49b1-b141-4d35-8998-a17d729960d4}" Name="GtResourceAbsence" StaticName="GtResourceAbsence">
-        <CHOICES>
-            <CHOICE>Sykemelding</CHOICE>
-            <CHOICE>Kompetanseheving</CHOICE>
-            <CHOICE>Annet</CHOICE>
-        </CHOICES>
-    </Field>
 </pnp:SiteFields>
