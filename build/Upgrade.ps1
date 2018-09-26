@@ -41,7 +41,9 @@ Param(
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
-    [switch]$Force
+    [switch]$Force,
+    [Parameter(Mandatory = $false)]
+    [Hashtable]$Parameters
 )
 
 . ./SharedFunctions.ps1
@@ -117,7 +119,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     }
     
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         Connect-SharePoint $Url       
