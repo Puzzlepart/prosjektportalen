@@ -208,7 +208,6 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
             return SetItemFieldValueResult.OK;
         }
         case "TaxonomyFieldType": {
-            console.log(fieldType, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()));
             setTaxonomySingleValue(clientContext, list, item, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()), -1);
             return SetItemFieldValueResult.OK;
         }

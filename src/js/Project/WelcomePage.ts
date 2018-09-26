@@ -65,7 +65,7 @@ export const GetCurrentProjectPhase = () => new Promise<PhaseModel>((resolve, re
         ctx.executeQueryAsync(() => {
             let phaseFieldValue = welcomePage.get_item(Config.PROJECTPHASE_FIELD);
             if (phaseFieldValue) {
-                resolve(new PhaseModel(null).initSafe(phaseFieldValue));
+                resolve(new PhaseModel().initSafe(phaseFieldValue));
             } else {
                 resolve(null);
             }
