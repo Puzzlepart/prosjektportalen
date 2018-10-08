@@ -28,6 +28,7 @@
         "@types/mocha": "^5.2.2",
         "@types/sharepoint": "^2016.1.1",
         "@types/sinon": "^5.0.1",
+        "@types/html2canvas": "0.0.34",
         "@uifabric/icons": "^6.0.1",
         "ajv": "^6.5.1",
         "array-sort": "^1.0.0",
