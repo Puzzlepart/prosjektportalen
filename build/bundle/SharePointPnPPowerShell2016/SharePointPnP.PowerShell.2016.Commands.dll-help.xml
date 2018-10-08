@@ -1112,7 +1112,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         <command:parameter required="true" position="named">
           <maml:name>ContentType</maml:name>
           <maml:description>
-            <maml:para>The name of the content type, its ID or an actual content object referencing to the document set.</maml:para>
+            <maml:para>The name of the content type, its ID or an actual content object referencing to the document set</maml:para>
           </maml:description>
           <command:parameterValue required="true">ContentTypePipeBind</command:parameterValue>
         </command:parameter>
@@ -1136,7 +1136,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
       <command:parameter required="true" position="named">
         <maml:name>ContentType</maml:name>
         <maml:description>
-          <maml:para>The name of the content type, its ID or an actual content object referencing to the document set.</maml:para>
+          <maml:para>The name of the content type, its ID or an actual content object referencing to the document set</maml:para>
         </maml:description>
         <command:parameterValue required="true">ContentTypePipeBind</command:parameterValue>
         <dev:type>
@@ -2250,6 +2250,13 @@ PS:&gt; Add-PnPFieldFromXml -List "Demo List" -FieldXml $xml</dev:code>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>NewFileName</maml:name>
+          <maml:description>
+            <maml:para>Filename to give the file on SharePoint</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Checkout</maml:name>
           <maml:description>
             <maml:para>If versioning is enabled, this will check out the file first if it exists, upload the file, then check it in again.</maml:para>
@@ -2583,6 +2590,17 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <maml:uri />
         </dev:type>
       </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>NewFileName</maml:name>
+        <maml:description>
+          <maml:para>Filename to give the file on SharePoint</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="true" position="named">
         <maml:name>Path</maml:name>
         <maml:description>
@@ -2810,6 +2828,22 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <dev:code>PS:&gt; Add-PnPFile -FileName sample.docx -Folder "Documents" -Values @{Modified="1/1/2016"; Created="1/1/2017"; Editor=23}</dev:code>
         <maml:remarks>
           <maml:para>This will add a file sample.docx to the Documents folder and will set the Modified date to 1/1/2016, Created date to 1/1/2017 and the Modified By field to the user with ID 23. To find out about the proper user ID to relate to a specific user, use Get-PnPUser.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 7---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Add-PnPFile -FileName sample.docx -Folder "Documents" -NewFileName "differentname.docx"</dev:code>
+        <maml:remarks>
+          <maml:para>This will upload a local file sample.docx to the Documents folder giving it the filename differentname.docx on SharePoint</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -8584,7 +8618,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPRecycleBinItems | ? FileLeafName -like "*.docx" | Clear-PnpRecycleBinItem</dev:code>
+        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? FileLeafName -like "*.docx" | Clear-PnpRecycleBinItem</dev:code>
         <maml:remarks>
           <maml:para>Permanently deletes all the items in the first and second stage recycle bins of which the file names have the .docx extension</maml:para>
           <maml:para></maml:para>
@@ -19487,7 +19521,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchCrawlLog "https://&lt;tenant&gt;-my.sharepoint.com/personal"</dev:code>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -Filter "https://&lt;tenant&gt;-my.sharepoint.com/personal"</dev:code>
         <maml:remarks>
           <maml:para>Returns the last 100 crawl log entries for OneDrive content.</maml:para>
           <maml:para></maml:para>
@@ -21605,6 +21639,13 @@ Gets one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</ma
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>IncludeClassification</maml:name>
+          <maml:description>
+            <maml:para>Include Classification value of Office 365 Groups.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -21627,6 +21668,17 @@ Gets one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</ma
         <command:parameterValue required="false">UnifiedGroupPipeBind</command:parameterValue>
         <dev:type>
           <maml:name>UnifiedGroupPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>IncludeClassification</maml:name>
+        <maml:description>
+          <maml:para>Include Classification value of Office 365 Groups.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -34504,7 +34556,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPRecycleBinItems | ? FileLeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
+        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? FileLeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
         <maml:remarks>
           <maml:para>Restores all the items in the first and second stage recycle bins to their original location of which the filename ends with the .docx extension</maml:para>
           <maml:para></maml:para>

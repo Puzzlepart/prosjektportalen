@@ -2464,7 +2464,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         <command:parameter required="true" position="named">
           <maml:name>ContentType</maml:name>
           <maml:description>
-            <maml:para>The name of the content type, its ID or an actual content object referencing to the document set.</maml:para>
+            <maml:para>The name of the content type, its ID or an actual content object referencing to the document set</maml:para>
           </maml:description>
           <command:parameterValue required="true">ContentTypePipeBind</command:parameterValue>
         </command:parameter>
@@ -2488,7 +2488,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
       <command:parameter required="true" position="named">
         <maml:name>ContentType</maml:name>
         <maml:description>
-          <maml:para>The name of the content type, its ID or an actual content object referencing to the document set.</maml:para>
+          <maml:para>The name of the content type, its ID or an actual content object referencing to the document set</maml:para>
         </maml:description>
         <command:parameterValue required="true">ContentTypePipeBind</command:parameterValue>
         <dev:type>
@@ -3652,6 +3652,13 @@ PS:&gt; Add-PnPFieldFromXml -List "Demo List" -FieldXml $xml</dev:code>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>NewFileName</maml:name>
+          <maml:description>
+            <maml:para>Filename to give the file on SharePoint</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Checkout</maml:name>
           <maml:description>
             <maml:para>If versioning is enabled, this will check out the file first if it exists, upload the file, then check it in again.</maml:para>
@@ -3985,6 +3992,17 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <maml:uri />
         </dev:type>
       </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>NewFileName</maml:name>
+        <maml:description>
+          <maml:para>Filename to give the file on SharePoint</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="true" position="named">
         <maml:name>Path</maml:name>
         <maml:description>
@@ -4212,6 +4230,22 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <dev:code>PS:&gt; Add-PnPFile -FileName sample.docx -Folder "Documents" -Values @{Modified="1/1/2016"; Created="1/1/2017"; Editor=23}</dev:code>
         <maml:remarks>
           <maml:para>This will add a file sample.docx to the Documents folder and will set the Modified date to 1/1/2016, Created date to 1/1/2017 and the Modified By field to the user with ID 23. To find out about the proper user ID to relate to a specific user, use Get-PnPUser.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 7---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Add-PnPFile -FileName sample.docx -Folder "Documents" -NewFileName "differentname.docx"</dev:code>
+        <maml:remarks>
+          <maml:para>This will upload a local file sample.docx to the Documents folder giving it the filename differentname.docx on SharePoint</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -11732,7 +11766,7 @@ Undeclares a list item as a record</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPRecycleBinItems | ? FileLeafName -like "*.docx" | Clear-PnpRecycleBinItem</dev:code>
+        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? FileLeafName -like "*.docx" | Clear-PnpRecycleBinItem</dev:code>
         <maml:remarks>
           <maml:para>Permanently deletes all the items in the first and second stage recycle bins of which the file names have the .docx extension</maml:para>
           <maml:para></maml:para>
@@ -21222,6 +21256,118 @@ Retrieve all or a specific hubsite.</maml:para>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Get-PnPLabel</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+Gets the label/tag of the specfied list or library (if applicable)</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Get</command:verb>
+      <command:noun>PnPLabel</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-PnPLabel</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPLabel -List "Demo List"</dev:code>
+        <maml:remarks>
+          <maml:para>This gets the label which is set to a list or a library.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Get-PnPListInformationRightsManagement</command:name>
       <maml:description>
         <maml:para>Get the site closure status of the site which has a site policy applied</maml:para>
@@ -24967,7 +25113,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPSearchCrawlLog "https://&lt;tenant&gt;-my.sharepoint.com/personal"</dev:code>
+        <dev:code>PS:&gt; Get-PnPSearchCrawlLog -Filter "https://&lt;tenant&gt;-my.sharepoint.com/personal"</dev:code>
         <maml:remarks>
           <maml:para>Returns the last 100 crawl log entries for OneDrive content.</maml:para>
           <maml:para></maml:para>
@@ -28584,6 +28730,13 @@ Gets one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</ma
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>IncludeClassification</maml:name>
+          <maml:description>
+            <maml:para>Include Classification value of Office 365 Groups.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -28606,6 +28759,17 @@ Gets one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</ma
         <command:parameterValue required="false">UnifiedGroupPipeBind</command:parameterValue>
         <dev:type>
           <maml:name>UnifiedGroupPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>IncludeClassification</maml:name>
+        <maml:description>
+          <maml:para>Include Classification value of Office 365 Groups.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -36511,7 +36675,7 @@ BETA: This cmdlet is using early release APIs. Notice that functionality and par
         <command:parameter required="true" position="named">
           <maml:name>Alias</maml:name>
           <maml:description>
-            <maml:para>Specifies the alias of the new site collection</maml:para>
+            <maml:para>Specifies the alias of the new site collection which represents the part of the URL that will be assigned to the site behind 'https://tenant.sharepoint.com/sites/' or 'https://tenant.sharepoint.com/teams/' based on the managed path configuration in the SharePoint Online Admin portal</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -36615,7 +36779,7 @@ BETA: This cmdlet is using early release APIs. Notice that functionality and par
       <command:parameter required="true" position="named">
         <maml:name>Alias</maml:name>
         <maml:description>
-          <maml:para>Specifies the alias of the new site collection</maml:para>
+          <maml:para>Specifies the alias of the new site collection which represents the part of the URL that will be assigned to the site behind 'https://tenant.sharepoint.com/sites/' or 'https://tenant.sharepoint.com/teams/' based on the managed path configuration in the SharePoint Online Admin portal</maml:para>
         </maml:description>
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
@@ -36842,9 +37006,9 @@ BETA: This cmdlet is using early release APIs. Notice that functionality and par
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; New-PnPSite -Type TeamSite -Title Contoso -Alias contoso</dev:code>
+        <dev:code>PS:&gt; New-PnPSite -Type TeamSite -Title 'Team Contoso' -Alias contoso</dev:code>
         <maml:remarks>
-          <maml:para>This will create a new Modern Team Site collection with the title 'Contoso' and the url 'https://tenant.sharepoint.com/sites/contoso'.</maml:para>
+          <maml:para>This will create a new Modern Team Site collection with the title 'Team Contoso' and the url 'https://tenant.sharepoint.com/sites/contoso' or 'https://tenant.sharepoint.com/teams/contoso' based on the managed path configuration in the SharePoint Online Admin portal.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -36858,9 +37022,9 @@ BETA: This cmdlet is using early release APIs. Notice that functionality and par
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; New-PnPSite -Type TeamSite -Title Contoso -Alias contoso -IsPublic</dev:code>
+        <dev:code>PS:&gt; New-PnPSite -Type TeamSite -Title 'Team Contoso' -Alias contoso -IsPublic</dev:code>
         <maml:remarks>
-          <maml:para>This will create a new Modern Team Site collection with the title 'Contoso' and the url 'https://tenant.sharepoint.com/sites/contoso' and sets the site to public.</maml:para>
+          <maml:para>This will create a new Modern Team Site collection with the title 'Team Contoso' and the url 'https://tenant.sharepoint.com/sites/contoso' or 'https://tenant.sharepoint.com/teams/contoso' based on the managed path configuration in the SharePoint Online Admin portal and sets the site to public.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -46199,7 +46363,7 @@ PS:&gt; $subscriptions[0] | Remove-PnPWebhookSubscription -List MyList</dev:code
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPRecycleBinItems | ? FileLeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
+        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? FileLeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
         <maml:remarks>
           <maml:para>Restores all the items in the first and second stage recycle bins to their original location of which the filename ends with the .docx extension</maml:para>
           <maml:para></maml:para>
@@ -51204,6 +51368,222 @@ Sets hubsite properties</maml:para>
         <dev:code>Set-PnPList -Identity "Demo List" -EnableAttachments $true</dev:code>
         <maml:remarks>
           <maml:para>Turns on attachments on a list</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Set-PnPLabel</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+Sets a label/tag on the specified list or library</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Set</command:verb>
+      <command:noun>PnPLabel</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Set-PnPLabel</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Label</maml:name>
+          <maml:description>
+            <maml:para>The name of the label.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>SyncToItems</maml:name>
+          <maml:description>
+            <maml:para>Apply label to existing items in the library.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>BlockDeletion</maml:name>
+          <maml:description>
+            <maml:para>Block deletion of items in the library.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>BlockEdit</maml:name>
+          <maml:description>
+            <maml:para>Block edititing of items in the library.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Boolean</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>BlockDeletion</maml:name>
+        <maml:description>
+          <maml:para>Block deletion of items in the library.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>BlockEdit</maml:name>
+        <maml:description>
+          <maml:para>Block edititing of items in the library.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Label</maml:name>
+        <maml:description>
+          <maml:para>The name of the label.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>SyncToItems</maml:name>
+        <maml:description>
+          <maml:para>Apply label to existing items in the library.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Boolean</command:parameterValue>
+        <dev:type>
+          <maml:name>Boolean</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPLabel  -List "Demo List" -Label "Project Documentation"</dev:code>
+        <maml:remarks>
+          <maml:para>This sets an O365 label on the specified list or library. </maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPLabel  -List "Demo List" -Label "Project Documentation" -SyncToItems $true</dev:code>
+        <maml:remarks>
+          <maml:para>This sets an O365 label on the specified list or library and sets the label to all the items in the list and library as well.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPLabel  -List "Demo List" -Label "Project Documentation" -BlockDelete $true -BlockEdit $true</dev:code>
+        <maml:remarks>
+          <maml:para>This sets an O365 label on the specified list or library. Next, it also blocks the ability to either edit or delete the item. </maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
