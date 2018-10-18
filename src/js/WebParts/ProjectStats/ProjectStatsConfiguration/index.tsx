@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LogLevel, Logger } from "sp-pnp-js";
+import { LogLevel, Logger } from "@pnp/logging";
 import IProjectStatsConfigurationProps from "./IProjectStatsConfigurationProps";
 import IProjectStatsConfigurationState from "./IProjectStatsConfigurationState";
 import { Icon } from "office-ui-fabric-react/lib/Icon";

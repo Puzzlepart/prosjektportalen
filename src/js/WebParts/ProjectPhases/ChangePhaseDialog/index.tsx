@@ -1,7 +1,7 @@
 //#region Imports
 import __ from "../../../Resources";
 import * as React from "react";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { List } from "@pnp/sp";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { View } from "./Views";
 import { Body } from "./Body";

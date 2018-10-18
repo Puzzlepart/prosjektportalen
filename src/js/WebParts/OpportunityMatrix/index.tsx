@@ -1,5 +1,5 @@
 import * as React from "react";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { List } from "@pnp/sp";
 import __ from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";

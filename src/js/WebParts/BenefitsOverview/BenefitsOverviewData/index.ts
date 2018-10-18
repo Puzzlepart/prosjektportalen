@@ -1,6 +1,6 @@
 //#region Imports
 import __ from "../../../Resources";
-import pnp, { Site } from "sp-pnp-js";
+import pnp, { Site } from "@pnp/sp";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";
 import DataSource, { IDataSourceSearchCustom } from "../../DataSource";

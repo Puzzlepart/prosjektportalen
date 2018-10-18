@@ -1,4 +1,4 @@
-import { Logger, LogLevel } from "sp-pnp-js";
+import { Logger, LogLevel } from "@pnp/sp";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";
 import ITemplateFile from "./ITemplateFile";

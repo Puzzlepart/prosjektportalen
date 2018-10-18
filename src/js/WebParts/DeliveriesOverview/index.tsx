@@ -1,5 +1,5 @@
 import * as React from "react";
-import pnp, { Site } from "sp-pnp-js";
+import pnp, { Site } from "@pnp/sp";
 import __ from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import BaseWebPart from "../@BaseWebPart";

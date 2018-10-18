@@ -1,6 +1,6 @@
 import * as React from "react";
 import __ from "../../Resources";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { List } from "@pnp/sp";
 import { DetailsList, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { ActionButton } from "office-ui-fabric-react/lib/Button";

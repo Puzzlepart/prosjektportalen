@@ -1,4 +1,4 @@
-import { Logger, LogLevel } from "sp-pnp-js";
+import { Logger, LogLevel } from "@pnp/logging";
 import * as FormUtils from "./FormUtils";
 
 /**

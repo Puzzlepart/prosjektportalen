@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import {
     Site,
     Web,
-} from "sp-pnp-js";
+} from "@pnp/sp";
 import {
     Spinner,
     SpinnerType,
