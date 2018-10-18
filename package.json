@@ -97,7 +97,7 @@
         "require-uncached": "^1.0.3",
         "run-sequence": "^2.2.1",
         "sanitize-filename": "^1.6.1",
-        "sp-js-provisioning": "git+https://github.com/Puzzlepart/sp-js-provisioning.git#dev",
+        "sp-js-provisioning": "git+https://github.com/Puzzlepart/sp-js-provisioning.git#v0.8.7",
         "sp-pnp-js": "^3.0.9",
         "string-format": "^2.0.0",
         "truncate-html": "^1.0.0",
