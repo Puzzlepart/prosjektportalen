@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import { Web, Folder, FileAddResult, Logger, LogLevel } from "sp-pnp-js";
+import { Web, Folder, FileAddResult, Logger, LogLevel } from "@pnp/sp";
 import * as Util from "../../../Util";
 import IFile from "./IFile";
 import ListConfig from "../Config/ListConfig";

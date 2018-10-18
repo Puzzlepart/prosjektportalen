@@ -1,4 +1,4 @@
-import { LogLevel, Logger } from "sp-pnp-js";
+import { LogLevel, Logger } from "@pnp/logging";
 import StatsFieldConfiguration from "../StatsFieldConfiguration";
 import ProjectStatsChartDataItem from "./ProjectStatsChartDataItem";
 

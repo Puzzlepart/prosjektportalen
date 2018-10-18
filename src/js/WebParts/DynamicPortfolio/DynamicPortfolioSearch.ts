@@ -1,4 +1,4 @@
-import { sp } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
 import {
     IDynamicPortfolioConfiguration,
     IDynamicPortfolioViewConfig,

@@ -1,5 +1,5 @@
 import __ from "../../Resources";
-import { Site } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
 import DoesWebExist from "./DoesWebExist";
 import SetSharedNavigation from "./SetSharedNavigation";
 import IProvisionContext from "../IProvisionContext";

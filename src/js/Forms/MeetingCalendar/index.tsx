@@ -1,5 +1,5 @@
 import __ from "../../Resources";
-import * as pnp from "sp-pnp-js";
+import * as pnp from "@pnp/sp";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { IBaseFormModifications } from "../Base";

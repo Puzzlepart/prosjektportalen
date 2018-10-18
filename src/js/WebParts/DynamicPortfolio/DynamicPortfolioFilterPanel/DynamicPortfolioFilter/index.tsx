@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Util } from "sp-pnp-js";
+import { isArray } from "@pnp/common";
 import IDynamicPortfolioFilter from "./IDynamicPortfolioFilter";
 import DynamicPortfolioFilterItem from "../DynamicPortfolioFilterItem";
 import IDynamicPortfolioFilterItem from "../DynamicPortfolioFilterItem/IDynamicPortfolioFilterItem";
@@ -59,7 +59,7 @@ export default class DynamicPortfolioFilter extends React.PureComponent<IDynamic
         const { filter } = this.state;
         if (filter) {
             return filter.items.map((item, idx) => {
-                item.selected = item.defaultSelected || (Util.isArray(this.state.filter.selected) && Array.contains(this.state.filter.selected, item.value));
+                item.selected = item.defaultSelected || (isArray(this.state.filter.selected) && Array.contains(this.state.filter.selected, item.value));
                 return (
                     <DynamicPortfolioFilterItem
                         key={`DynamicPortfolioFilterItem_${idx}`}

@@ -1,7 +1,7 @@
 //#region Imports
 import __ from "../../Resources";
 import * as React from "react";
-import pnp, { List, Item } from "sp-pnp-js";
+import pnp, { List, Item } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";

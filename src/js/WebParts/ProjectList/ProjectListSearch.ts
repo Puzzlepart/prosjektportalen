@@ -1,5 +1,5 @@
 import __ from "../../Resources";
-import { sp, Site } from "sp-pnp-js";
+import { sp, Site } from "@pnp/sp";
 
 export interface IQueryResult {
     Title: string;

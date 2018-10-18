@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import { Web } from "sp-pnp-js";
+import { Web } from "@pnp/sp";
 import IDynamicPortfolioConfiguration, { IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig } from "./IDynamicPortfolioConfiguration";
 import { loadJsonConfiguration } from "../../../Util";
 

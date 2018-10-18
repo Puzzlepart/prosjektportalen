@@ -1,4 +1,4 @@
-import { Web } from "sp-pnp-js";
+import { Web } from "@pnp/sp";
 import { ProjectModel } from "../Model/ProjectModel";
 import IProgressCallback from "./IProgressCallback";
 import ITemplateFile from "./Template/ITemplateFile";

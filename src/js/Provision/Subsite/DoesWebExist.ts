@@ -1,4 +1,4 @@
-import { Web } from "sp-pnp-js";
+import { Web } from "@pnp/sp";
 
 /**
  * Checks if the web exists

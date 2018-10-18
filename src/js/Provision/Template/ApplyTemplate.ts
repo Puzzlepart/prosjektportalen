@@ -1,5 +1,5 @@
 import __ from "../../Resources";
-import { Logger, LogLevel } from "sp-pnp-js";
+import {  Logger, LogLevel } from "@pnp/logging";
 import { WebProvisioner } from "sp-js-provisioning/lib/webprovisioner";
 import IProvisionContext from "../IProvisionContext";
 import ProvisionError from "../ProvisionError";

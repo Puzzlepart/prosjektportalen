@@ -1,7 +1,7 @@
 import __ from "../../../../Resources";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
-import { Site, Web } from "sp-pnp-js";
+import { Site, Web } from "@pnp/sp";
 import SectionModel, { SectionType } from "../../Section/SectionModel";
 import JsPdfWithAutoTable from "./JsPdfWithAutoTable";
 import FONT_SIZE from "./FONT_SIZE";
