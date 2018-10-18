@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="Prosjektkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="Prosjektkonfigurasjon" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>

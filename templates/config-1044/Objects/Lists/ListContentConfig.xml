@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="Konfigurasjon for listeinnhold" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" EnableFolderCreation="false" ContentTypesEnabled="false" Hidden="true" 
+<pnp:ListInstance Title="Konfigurasjon for listeinnhold" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" EnableFolderCreation="false" ContentTypesEnabled="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows>
         <pnp:DataRow>
