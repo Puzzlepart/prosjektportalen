@@ -1,5 +1,6 @@
 import __ from "../../../Resources";
-import { Web, Folder, FileAddResult, Logger, LogLevel } from "@pnp/sp";
+import { Web, Folder, FileAddResult } from "@pnp/sp";
+import { Logger, LogLevel } from "@pnp/logging";
 import * as Util from "../../../Util";
 import IFile from "./IFile";
 import ListConfig from "../Config/ListConfig";
