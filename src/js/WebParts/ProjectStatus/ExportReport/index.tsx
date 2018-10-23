@@ -1,7 +1,7 @@
 import * as React from "react";
 import __ from "../../../Resources";
 import { sp, List } from "@pnp/sp";
-import {  Logger, LogLevel } from "@pnp/logging";
+import { Logger, LogLevel } from "@pnp/logging";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import * as sanitize from "sanitize-filename";
@@ -244,8 +244,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             const canvas = await html2canvas(document.getElementById("pp-projectstatus"));
             if (canvas.toBlob) {
                 canvas.toBlob(resolve);
-            } else if (canvas.msToBlob) {
-                const blob = canvas.msToBlob();
+            } else if (canvas["msToBlob"]) {
+                const blob = canvas["msToBlob"]();
                 resolve(blob);
             }
         });
