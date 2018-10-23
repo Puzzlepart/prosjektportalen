@@ -322,7 +322,7 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
                 resolve();
             });
         }, "sp.js");
-        window.setTimeout(loadTimeout, reject);
+        window.setTimeout(reject, loadTimeout);
     });
 };
 
