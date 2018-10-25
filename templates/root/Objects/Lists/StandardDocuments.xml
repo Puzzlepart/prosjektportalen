@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_Standarddocuments_Title}"  Description="" DocumentTemplate="" TemplateType="101" Url="StandardDocuments" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
+<pnp:ListInstance Title="{resource:Lists_Standarddocuments_Title}"  Description="" DocumentTemplate="" TemplateType="101" Url="StandardDocuments" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Default="true" />
