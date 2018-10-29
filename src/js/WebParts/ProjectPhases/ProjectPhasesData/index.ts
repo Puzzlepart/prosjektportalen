@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import pnp, { List } from "sp-pnp-js";
+import pnp, { List } from "@pnp/sp";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import * as Util from "../../../Util";
 import * as Project from "../../../Project";

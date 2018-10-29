@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LogLevel, Logger } from "sp-pnp-js";
+import { LogLevel, Logger } from "@pnp/logging";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
 import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";

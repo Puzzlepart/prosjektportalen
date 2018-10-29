@@ -1,4 +1,4 @@
-import { Site } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
 import * as React from "react";
 import __ from "../../Resources";
 import {

@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="Standardoppgaver" Description="" DocumentTemplate="" TemplateType="171" Url="Lists/StandardTasks" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="f9ce21f8-f437-4f7e-8bc6-946378c850f0" ContentTypesEnabled="true" EnableFolderCreation="false" 
+<pnp:ListInstance Title="Standardoppgaver" Description="" DocumentTemplate="" TemplateType="171" Url="Lists/StandardTasks" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" TemplateFeatureID="f9ce21f8-f437-4f7e-8bc6-946378c850f0" ContentTypesEnabled="true" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x010800233B015F95174C9A8EB505493841DE8D" Default="true" />

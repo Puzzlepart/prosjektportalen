@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sp } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { StickyContainer, Sticky } from "react-sticky";
 import Navigation from "./Navigation";

@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import { Logger, LogLevel } from "sp-pnp-js";
+import { Logger, LogLevel } from "@pnp/logging";
 import ListConfig from "../Config/ListConfig";
 import IProvisionContext from "../../IProvisionContext";
 import ProvisionError from "../../ProvisionError";

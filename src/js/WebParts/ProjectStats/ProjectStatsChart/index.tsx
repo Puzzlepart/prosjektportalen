@@ -1,7 +1,7 @@
 import * as React from "react";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { GetBreakpoint } from "../../../Util";
-import { LogLevel, Logger } from "sp-pnp-js";
+import { LogLevel, Logger } from "@pnp/logging";
 import IProjectStatsChartProps from "./IProjectStatsChartProps";
 import IProjectStatsChartState from "./IProjectStatsChartState";
 import ProjectStatsChartData from "./ProjectStatsChartData";

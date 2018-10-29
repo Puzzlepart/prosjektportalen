@@ -1,5 +1,6 @@
 import __ from "../Resources";
-import { Site, List, LogEntry, LogLevel } from "sp-pnp-js";
+import { Site, List } from "@pnp/sp";
+import { LogEntry, LogLevel } from "@pnp/logging";
 
 export interface ISpListLoggerEntry extends LogEntry {
     id?: string;

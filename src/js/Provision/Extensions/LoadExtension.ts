@@ -1,4 +1,5 @@
-import { Site, Logger, LogEntry, LogLevel } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
+import { Logger, LogLevel, LogEntry } from "@pnp/logging";
 import Extension from "./Extension";
 import ProvisionError from "../ProvisionError";
 import SpListLogger from "../../Util/SpListLogger";

@@ -1,6 +1,6 @@
 
 import __ from "../../Resources";
-import { Site } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
 import * as React from "react";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
