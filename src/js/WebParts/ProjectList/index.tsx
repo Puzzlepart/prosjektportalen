@@ -171,7 +171,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     /**
-     * Fetch data using sp-pnp-js search
+     * Fetch data using @pnp/sp search
      */
     private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;

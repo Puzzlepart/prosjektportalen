@@ -1,5 +1,5 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import {SearchQuery} from "sp-pnp-js";
+import {SearchQuery} from "@pnp/sp";
 
 export default interface IResourceAllocationProps extends IBaseWebPartProps {
     searchConfiguration: SearchQuery;

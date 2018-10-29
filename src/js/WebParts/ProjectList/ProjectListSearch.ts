@@ -14,7 +14,7 @@ export interface IQueryResult {
 }
 
 /**
- * Query the REST Search API using sp-pnp-js
+ * Query the REST Search API using @pnp/sp
  *
  * @param {string} dataSourceName Data source name
  * @param {number} rowLimit Row limit

@@ -92,7 +92,7 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
 }
 
 /**
- * Fetch data using sp-pnp-js and sp.taxonomy.js
+ * Fetch data using @pnp/sp and sp.taxonomy.js
  *
  * @param {List} phaseChecklist Phase checklist
  * @param {boolean} gatesEnabled Gates enabled

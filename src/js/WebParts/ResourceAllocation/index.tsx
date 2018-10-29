@@ -2,7 +2,7 @@
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
 import __ from "../../Resources";
-import pnp, { SearchQuery } from "sp-pnp-js";
+import pnp, { SearchQuery } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
