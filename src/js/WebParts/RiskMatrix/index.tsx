@@ -1,5 +1,5 @@
 import * as React from "react";
-import pnp, { Site, List } from "@pnp/sp";
+import { sp, Site, List } from "@pnp/sp";
 import __ from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -36,7 +36,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     constructor(props: IRiskMatrixProps) {
         super(props);
         this.state = this._getInitialState(props);
-        this._uncertaintiesList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
+        this._uncertaintiesList = sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
         this._dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
     }
 
@@ -126,9 +126,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         const { matrixCells } = this.state;
         const riskMatrixRows = matrixCells.map((rows, i) => {
             let cells = rows.map((c, j) => {
-                const cell = matrixCells[i][j],
-                    riskElements = this.getRiskElementsForCell(riskItems, cell),
-                    riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
+                const cell = matrixCells[i][j];
+                const riskElements = this.getRiskElementsForCell(riskItems, cell);
+                const riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell);
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (
@@ -179,28 +179,46 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     }
 
     /**
-     * Helper function to get risk elements for cell post action
+     * Get risk elements for cell post action
      *
      * @param {Array<RiskElementModel>} riskItems Risk items
      * @param {IMatrixCell} cell The cell
      */
     protected getRiskElementsPostActionForCell(riskItems: Array<RiskElementModel>, cell: IMatrixCell) {
-        if (this.state.postAction) {
-            const itemsForCell = riskItems.filter(risk => cell.probability === risk.probabilityPostAction && cell.consequence === risk.consequencePostAction);
-            return itemsForCell.map((risk, key) => <RiskElement key={`${risk.getKey("PostAction")}`} model={risk} style={{ opacity: this.state.postAction ? 0.5 : 1 }} />);
+        if (!this.state.postAction) {
+            return [];
         }
-        return [];
+        const itemsForCell = riskItems.filter(risk => cell.probability === risk.probabilityPostAction && cell.consequence === risk.consequencePostAction);
+        const riskElementsStyle: React.CSSProperties = {};
+        if (this.state.postAction && this.props.postActionShowOriginal) {
+            riskElementsStyle.opacity = 0.5;
+        }
+        const riskElements = itemsForCell.map(risk => {
+            return (
+                <RiskElement
+                    key={`${risk.getKey("PostAction")}`}
+                    model={risk}
+                    style={riskElementsStyle} />
+            );
+        });
+        return riskElements;
     }
 
     /**
-     * Helper function to get risk elements
+     * Get risk elements
      *
      * @param {Array<RiskElementModel>} riskItems Risk items
      * @param {IMatrixCell} cell The cell
      */
     protected getRiskElementsForCell(riskItems: Array<RiskElementModel>, cell: IMatrixCell) {
+        if (this.state.postAction && !this.props.postActionShowOriginal) {
+            return [];
+        }
         const itemsForCell = riskItems.filter(risk => cell.probability === risk.probability && cell.consequence === risk.consequence);
-        return itemsForCell.map((risk, key) => <RiskElement key={risk.getKey()} model={risk} />);
+        const riskElements = itemsForCell.map(risk => {
+            return <RiskElement key={risk.getKey()} model={risk} />;
+        });
+        return riskElements;
     }
 
     /**
@@ -307,7 +325,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     protected async _fetchFromDataSource(name: string): Promise<Array<any>> {
         const [dataSource] = await this._dataSourcesList.items.filter(`Title eq '${name}'`).get();
         if (dataSource) {
-            const searchResults = await pnp.sp.search({
+            const searchResults = await sp.search({
                 Querytext: "*",
                 RowLimit: this.props.rowLimit,
                 TrimDuplicates: false,
