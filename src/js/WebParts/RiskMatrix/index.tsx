@@ -80,13 +80,6 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             tableProps.className = "hide-labels";
         }
 
-        if (data.items.length === 0) {
-            if (this.props.showEmptyMessage) {
-                return <MessageBar>{__.getResource("RiskMatrix_EmptyMessage")}</MessageBar>;
-            }
-            return null;
-        }
-
         if (this.state.matrixCells) {
             const viewOptions = this._getViewOptions();
 
@@ -99,11 +92,19 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                             options={viewOptions}
                             onChanged={this._onViewChanged} />
                     </div>
-                    <table {...tableProps} ref={ele => this._tableElement = ele}>
-                        <tbody>
-                            {this.renderRows(data.items)}
-                        </tbody>
-                    </table>
+                    {data.items.length === 0
+                        ? (
+                            <div style={{ marginTop: 20 }}>
+                                <MessageBar>{__.getResource("RiskMatrix_EmptyMessage")}</MessageBar>
+                            </div>
+                        )
+                        : (
+                            <table {...tableProps} ref={ele => this._tableElement = ele}>
+                                <tbody>
+                                    {this.renderRows(data.items)}
+                                </tbody>
+                            </table>
+                        )}
                     <div>
                         <Toggle
                             onChanged={postAction => this.setState({ postAction })}
