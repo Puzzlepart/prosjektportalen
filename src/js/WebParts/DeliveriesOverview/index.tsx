@@ -1,5 +1,5 @@
 import * as React from "react";
-import pnp, { Site } from "@pnp/sp";
+import { sp, Site } from "@pnp/sp";
 import __ from "../../Resources";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import BaseWebPart from "../@BaseWebPart";
@@ -66,7 +66,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
         if (dataSource) {
             try {
-                const { PrimarySearchResults } = await pnp.sp.search({
+                const { PrimarySearchResults } = await sp.search({
                     Querytext: "*",
                     QueryTemplate: dataSource.GtDpSearchQuery,
                     RowLimit: 500,

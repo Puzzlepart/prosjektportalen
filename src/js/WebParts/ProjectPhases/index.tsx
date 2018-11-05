@@ -1,7 +1,7 @@
 //#region Imports
 import __ from "../../Resources";
 import * as React from "react";
-import pnp, { List, Item } from "@pnp/sp";
+import { sp, List, Item } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import ProjectPhase, { IProjectPhaseProps } from "./ProjectPhase";
@@ -37,8 +37,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         this._onRestartPhase = this._onRestartPhase.bind(this);
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
-        this.sitePagesLibrary = pnp.sp.web.lists.getById(_spPageContextInfo.pageListId);
-        this.phaseChecklist = pnp.sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
+        this.sitePagesLibrary = sp.web.lists.getById(_spPageContextInfo.pageListId);
+        this.phaseChecklist = sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
         this.welcomePage = this.sitePagesLibrary.items.getById(_spPageContextInfo.pageItemId);
     }
 

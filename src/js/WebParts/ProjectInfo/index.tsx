@@ -1,19 +1,10 @@
 import * as React from "react";
 import __ from "../../Resources";
-import {
-    Site,
-    Web,
-} from "@pnp/sp";
-import {
-    Spinner,
-    SpinnerType,
-} from "office-ui-fabric-react/lib/Spinner";
+import { Site, Web } from "@pnp/sp";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
-import {
-    MessageBar,
-    MessageBarType,
-} from "office-ui-fabric-react/lib/MessageBar";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { ModalLink } from "../@Components/ModalLink";
 import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
 import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
