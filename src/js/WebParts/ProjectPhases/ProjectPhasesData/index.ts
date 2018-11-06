@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import pnp, { List } from "@pnp/sp";
+import { sp, List } from "@pnp/sp";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import * as Util from "../../../Util";
 import * as Project from "../../../Project";
@@ -15,7 +15,7 @@ import IProjectPhasesData from "./IProjectPhasesData";
 async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const phaseField = pnp.sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
+        const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
         const { TermSetId } = await phaseField.select("TermSetId").get();
         let taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(jsomCtx.clientContext),
             termStore = taxSession.getDefaultSiteCollectionTermStore(),

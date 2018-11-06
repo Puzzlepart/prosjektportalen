@@ -20,15 +20,15 @@ namespace PP {
     async function initLogging(logLevelStr: string) {
         let logLevel = LogLevel.Off;
         switch (logLevelStr.toLowerCase()) {
-            case "Info": {
+            case "info": {
                 logLevel = LogLevel.Info;
             }
                 break;
-            case "Warning": {
+            case "warning": {
                 logLevel = LogLevel.Warning;
             }
                 break;
-            case "Error": {
+            case "error": {
                 logLevel = LogLevel.Error;
             }
                 break;

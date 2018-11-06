@@ -1,6 +1,6 @@
 import * as React from "react";
 import __ from "../../Resources";
-import pnp, { Site } from "@pnp/sp";
+import { sp, Site } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
 import IExperienceLogState from "./IExperienceLogState";
@@ -64,7 +64,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
         if (dataSource) {
             try {
-                const { PrimarySearchResults } = await pnp.sp.search({
+                const { PrimarySearchResults } = await sp.search({
                     Querytext: "*",
                     QueryTemplate: dataSource.GtDpSearchQuery,
                     RowLimit: 500,

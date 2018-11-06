@@ -7,4 +7,3 @@ export default interface IExportReportProps {
     reportsLibTitle?: string;
     maxReportHistory?: number;
 }
-

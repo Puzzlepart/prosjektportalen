@@ -1,7 +1,7 @@
 //#region Imports
 import __ from "../../../Resources";
 import * as React from "react";
-import pnp, { List } from "@pnp/sp";
+import { sp, List } from "@pnp/sp";
 import { Dialog, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { View } from "./Views";
 import { Body } from "./Body";
@@ -30,7 +30,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
             isLoading: false,
             currentView: View.Initial,
         };
-        this.phaseChecklist = pnp.sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
+        this.phaseChecklist = sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
         this.nextCheckPoint = this.nextCheckPoint.bind(this);
 
         if (props.activePhase) {
