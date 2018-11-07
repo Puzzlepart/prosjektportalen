@@ -547,13 +547,15 @@
             </ArrayOfProperty>
         </Customization>
     </Field>
-    <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="{resource:SiteFields_Group}" StaticName="{parameter:GenericFieldPrefix}ResourceUser" Name="{parameter:GenericFieldPrefix}ResourceUser" />
+    <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="{resource:SiteFields_Group}" StaticName="{parameter:GenericFieldPrefix}ResourceUser" Name="{parameter:GenericFieldPrefix}ResourceUser" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" />
     <Field DisplayName="{resource:SiteFields_GtResourceLoad_DisplayName}" Description="{resource:SiteFields_GtResourceLoad_Description}" ID="{08ac9d56-f8eb-4a2c-868f-d39fc012fcd6}" Name="{parameter:GenericFieldPrefix}ResourceLoad" Type="Number" Group="{resource:SiteFields_Group}" Percentage="TRUE" StaticName="{parameter:GenericFieldPrefix}ResourceLoad" />
-    <Field DisplayName="{resource:SiteFields_GtResourceAbsence_DisplayName}" FillInChoice="FALSE" Type="Choice" ID="{028e49b1-b141-4d35-8998-a17d729960d4}" Name="GtResourceAbsence" StaticName="GtResourceAbsence">
+    <Field DisplayName="{resource:SiteFields_GtResourceAbsence_DisplayName}" Description="{resource:SiteFields_GtResourceAbsence_Description}" FillInChoice="FALSE" Type="Choice" ID="{028e49b1-b141-4d35-8998-a17d729960d4}" Name="{parameter:GenericFieldPrefix}ResourceAbsence" StaticName="{parameter:GenericFieldPrefix}ResourceAbsence">
         <CHOICES>
-            <CHOICE>Sykemelding</CHOICE>
-            <CHOICE>Kompetanseheving</CHOICE>
-            <CHOICE>Annet</CHOICE>
+            <CHOICE>{resource:Choice_GtResourceAbsence_Leave}</CHOICE>
+            <CHOICE>{resource:Choice_GtResourceAbsence_SickLeave}</CHOICE>
+            <CHOICE>{resource:Choice_GtResourceAbsence_Competency}</CHOICE>
+            <CHOICE>{resource:Choice_GtResourceAbsence_OtherAssignments}</CHOICE>
+            <CHOICE>{resource:Choice_GtResourceAbsence_Other}</CHOICE>
         </CHOICES>
     </Field>
 </pnp:SiteFields>

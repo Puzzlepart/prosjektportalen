@@ -1717,13 +1717,16 @@
     <value>Høyden på diagrammet i piksler</value>
   </data>
   <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
-    <value></value>
+    <value>Hvilken rolle har personen?</value>
   </data>
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
+    <value>Hva er grunnen til fraværet?</value>
+  </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
-    <value></value>
+    <value>Hvor stor belastning har personen?</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
@@ -2558,6 +2561,21 @@
   </data>
   <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
     <value>I en fase</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
+    <value>Permisjon</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_SickLeave" xml:space="preserve">
+    <value>Sykemelding</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
+    <value>Kompetanseheving</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_OtherAssignments" xml:space="preserve">
+    <value>Andre arbeidsoppgaver</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Other" xml:space="preserve">
+    <value>Annet</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>
