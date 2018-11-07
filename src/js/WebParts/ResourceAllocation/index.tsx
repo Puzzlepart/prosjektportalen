@@ -81,7 +81,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         canMove={false}
                         canChangeGroup={false}
                         sidebarWidth={220}
-                        defaultTimeStart={moment()}
+                        defaultTimeStart={moment().subtract(1, "months")}
                         defaultTimeEnd={moment().add(1, "years")}>
                         <TimelineMarkers>
                             <TodayMarker />
@@ -158,6 +158,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     protected _timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
+        const itemOpacity = itemContext.load < 20 ? 0.2 : itemContext.load / 100;
+        const itemColor = itemContext.load < 30 ? "#000" : "#fff";
         switch (item.type) {
             case TimelineItemType.ALLOCATION: {
                 return (
@@ -167,7 +169,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         style={props.style}
                         title={itemContext.title}
                         onClick={event => this._onTimelineItemClick(event, item)}>
-                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
+                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}`, color: `${itemColor}`, backgroundColor: `rgb(26, 111, 179, ${itemOpacity})` }}>
                             {itemContext.title}
                         </div>
                     </div>
