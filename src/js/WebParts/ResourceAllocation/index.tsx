@@ -4,6 +4,7 @@ import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline"
 import __ from "../../Resources";
 import pnp, { SearchQuery } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
 import IResourceAllocationState from "./IResourceAllocationState";
@@ -59,33 +60,39 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
+        try {
+            const data = this._getTimelineData();
 
-        const data = this._getTimelineData();
-
-        return (
-            <div>
-                <ResourceAllocationCommandBar
-                    users={this.state.users}
-                    allocations={this.state.allocations}
-                    selected={this.state.selected}
-                    onSelectionUpdate={this._onSelectionUpdate} />
-                <Timeline
-                    groups={data.groups}
-                    items={data.items}
-                    itemRenderer={this._timelineItemRenderer}
-                    stackItems={true}
-                    canMove={false}
-                    canChangeGroup={false}
-                    sidebarWidth={220}
-                    defaultTimeStart={moment()}
-                    defaultTimeEnd={moment().add(1, "years")}>
-                    <TimelineMarkers>
-                        <TodayMarker />
-                    </TimelineMarkers>
-                </Timeline>
-                <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
-            </div>
-        );
+            if (data.groups.length === 0 || data.items.length === 0) {
+                return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
+            }
+            return (
+                <div>
+                    <ResourceAllocationCommandBar
+                        users={this.state.users}
+                        allocations={this.state.allocations}
+                        selected={this.state.selected}
+                        onSelectionUpdate={this._onSelectionUpdate} />
+                    <Timeline
+                        groups={data.groups}
+                        items={data.items}
+                        itemRenderer={this._timelineItemRenderer}
+                        stackItems={true}
+                        canMove={false}
+                        canChangeGroup={false}
+                        sidebarWidth={220}
+                        defaultTimeStart={moment()}
+                        defaultTimeEnd={moment().add(1, "years")}>
+                        <TimelineMarkers>
+                            <TodayMarker />
+                        </TimelineMarkers>
+                    </Timeline>
+                    <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
+                </div>
+            );
+        } catch {
+            return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
+        }
     }
 
     /**

@@ -1740,6 +1740,9 @@
   <data name="ResourceAllocation_LoadingText" xml:space="preserve">
     <value>Loading resource allocation...</value>
   </data>
+  <data name="ResourceAllocation_ErrorText" xml:space="preserve">
+    <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
+  </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
   </data>

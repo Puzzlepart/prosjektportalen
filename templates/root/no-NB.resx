@@ -1740,6 +1740,9 @@
   <data name="ResourceAllocation_LoadingText" xml:space="preserve">
     <value>Laster ressursallokering...</value>
   </data>
+  <data name="ResourceAllocation_ErrorText" xml:space="preserve">
+    <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
+  </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
   </data>
