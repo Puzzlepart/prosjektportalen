@@ -2828,6 +2828,9 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the selected view.</value>
+  </data>  
+  <data name="RiskMatrix_LoadingText" xml:space="preserve">
+    <value>Loading risk matrix...</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Very high</value>

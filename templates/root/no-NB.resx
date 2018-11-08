@@ -2837,6 +2837,9 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
+  </data>  
+  <data name="RiskMatrix_LoadingText" xml:space="preserve">
+    <value>Laster risikomatrise...</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Svært høy</value>
