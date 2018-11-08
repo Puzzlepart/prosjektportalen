@@ -1,6 +1,6 @@
-import * as React from "react";
-import { sp, Site, List } from "@pnp/sp";
 import __ from "../../Resources";
+import * as React from "react";
+import { sp, Site } from "@pnp/sp";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -17,6 +17,7 @@ import RiskElementModel from "./RiskElementModel";
 import IRiskMatrixData from "./IRiskMatrixData";
 import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
+import List from "../@Components/List";
 import { loadJsonConfiguration } from "../../Util";
 
 /**
@@ -26,8 +27,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     public static displayName = "RiskMatrix";
     public static defaultProps = RiskMatrixDefaultProps;
     private _tableElement: HTMLTableElement;
-    private _uncertaintiesList: List;
-    private _dataSourcesList: List;
+    private _uncertaintiesList;
+    private _dataSourcesList;
     /**
      * Constructor
      *
@@ -99,19 +100,34 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                             </div>
                         )
                         : (
-                            <table {...tableProps} ref={ele => this._tableElement = ele}>
-                                <tbody>
-                                    {this.renderRows(data.items)}
-                                </tbody>
-                            </table>
+                            <div>
+                                <table {...tableProps} ref={ele => this._tableElement = ele}>
+                                    <tbody>
+                                        {this.renderRows(data.items)}
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <Toggle
+                                        onChanged={postAction => this.setState({ postAction })}
+                                        label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                                        onText={__.getResource("String_Yes")}
+                                        offText={__.getResource("String_No")} />
+                                    <Dropdown
+                                        hidden={!this.props.dataSource}
+                                        options={[{ key: "0", text: "MV06" }]}
+                                        onChanged={opt => this.setState({ selectedProject: opt.text })} />
+                                </div>
+                                <div hidden={!this.props.dataSource}>
+                                    <List
+                                        items={data.items}
+                                        columns={this.props.columns}
+                                        showCommandBar={false}
+                                        groupByOptions={[]}
+                                        excelExportEnabled={false}
+                                        excelExportConfig={null} />
+                                </div>
+                            </div>
                         )}
-                    <div>
-                        <Toggle
-                            onChanged={postAction => this.setState({ postAction })}
-                            label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                            onText={__.getResource("String_Yes")}
-                            offText={__.getResource("String_No")} />
-                    </div>
                 </div>
             );
         }

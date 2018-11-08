@@ -9,5 +9,6 @@ export default interface IRiskMatrixState {
     postAction?: boolean;
     hideLabels?: boolean;
     selectedViewId?: string;
+    selectedProject?: string;
     matrixCells?: Array<IMatrixCell[]>;
 }
