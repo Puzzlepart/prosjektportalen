@@ -9,6 +9,7 @@ export default class RiskElementModel {
     public consequencePostAction: number;
     public url: string;
     public webId: string;
+    public webUrl: string;
     public siteTitle: string;
 
     constructor(id: string, title: string, probability: string, consequence: string, probabilityPostAction: string, consequencePostAction: string) {

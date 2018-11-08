@@ -137,6 +137,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                     <List
                                         items={items}
                                         columns={columns}
+                                        webUrlKey="webUrl"
+                                        pathKey="url"
                                         showCommandBar={false} />
                                 </div>
                             </div>
@@ -353,6 +355,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 risk.url = item.Path;
                 risk.webId = item.WebId;
                 risk.siteTitle = item.SiteTitle;
+                risk.webUrl = item.SPWebUrl;
                 return risk;
             });
         } else {
@@ -387,6 +390,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 SelectProperties: [
                     "ListItemID",
                     "Path",
+                    "SPWebUrl",
                     "WebId",
                     "Title",
                     "GtRiskProbabilityOWSNMBR",

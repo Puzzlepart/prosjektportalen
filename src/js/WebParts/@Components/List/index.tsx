@@ -15,6 +15,8 @@ import * as Util from "../../../Util";
 
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
+        pathKey: "Path",
+        webUrlKey: "SPWebUrl",
         defaultGroupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
     };
 
@@ -126,11 +128,12 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         let colValue = item[column.fieldName];
         switch (column.key) {
             case "Title": {
-                if (item.Path) {
+                const path = item[this.props.pathKey];
+                if (path) {
                     return (
                         <ModalLink
                             label={colValue}
-                            url={item.Path}
+                            url={path}
                             options={{ HideRibbon: true }} />
                     );
                 } else {
@@ -138,7 +141,11 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 }
             }
             case "SiteTitle": {
-                return <a href={item.SPWebUrl} onClick={() => this._openProject(item)}>{item.SiteTitle}</a>;
+                const webUrl = item[this.props.webUrlKey];
+                if (webUrl) {
+                    return <a href={webUrl} onClick={() => this._openProject(item)}>{colValue}</a>;
+                }
+                return colValue;
             }
             default: {
                 if (column.key.indexOf("OWSDATE") > -1) {

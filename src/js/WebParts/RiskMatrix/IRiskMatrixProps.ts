@@ -18,38 +18,38 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     columns: [
         {
-            key: "title",
+            key: "Title",
             fieldName: "title",
             name: __.getResource("SiteFields_Title_DisplayName"),
             minWidth: 220,
             isMultiline: true,
         },
         {
-            key: "probability",
+            key: "Probability",
             fieldName: "probability",
             name: __.getResource("SiteFields_GtRiskProbability_DisplayName"),
             minWidth: 100,
         },
         {
-            key: "consequence",
+            key: "Consequence",
             fieldName: "consequence",
             name: __.getResource("SiteFields_GtRiskConsequence_DisplayName"),
             minWidth: 100,
         },
         {
-            key: "probabilityPostAction",
+            key: "ProbabilityPostAction",
             fieldName: "probabilityPostAction",
             name: __.getResource("SiteFields_GtRiskProbabilityPostAction_DisplayName"),
             minWidth: 100,
         },
         {
-            key: "consequencePostAction",
+            key: "ConsequencePostAction",
             fieldName: "consequencePostAction",
             name: __.getResource("SiteFields_GtRiskConsequencePostAction_DisplayName"),
             minWidth: 100,
         },
         {
-            key: "siteTitle",
+            key: "SiteTitle",
             fieldName: "siteTitle",
             name: __.getResource("String_Project"),
             minWidth: 100,
