@@ -1,6 +1,6 @@
-import * as React from "react";
-import { sp, Site, List } from "@pnp/sp";
 import __ from "../../Resources";
+import * as React from "react";
+import { sp, Site } from "@pnp/sp";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
@@ -17,6 +17,7 @@ import RiskElementModel from "./RiskElementModel";
 import IRiskMatrixData from "./IRiskMatrixData";
 import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
+import List from "../@Components/List";
 import { loadJsonConfiguration } from "../../Util";
 
 /**
@@ -26,8 +27,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     public static displayName = "RiskMatrix";
     public static defaultProps = RiskMatrixDefaultProps;
     private _tableElement: HTMLTableElement;
-    private _uncertaintiesList: List;
-    private _dataSourcesList: List;
+    private _uncertaintiesList;
+    private _dataSourcesList;
+
     /**
      * Constructor
      *
@@ -63,14 +65,30 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Renders the <RiskMatrix /> component
      */
     public render(): React.ReactElement<IRiskMatrixProps> {
-        const { isLoading, data, selectedViewId, hideLabels } = this.state;
+        const {
+            id,
+            className,
+            loadingText,
+            showViewSelector,
+            dataSource,
+            columns,
+        } = this.props;
 
-        let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
+        const {
+            isLoading,
+            matrixCells,
+            selectedViewId,
+            hideLabels,
+        } = this.state;
+
+        let tableProps: React.HTMLAttributes<HTMLElement> = { id };
 
         if (isLoading) {
             return (
-                <div className={this.props.className}>
-                    <Spinner size={SpinnerSize.large} />
+                <div className={className}>
+                    <Spinner
+                        label={loadingText}
+                        size={SpinnerSize.large} />
                     <table {...tableProps} ref={ele => this._tableElement = ele}></table>
                 </div>
             );
@@ -80,42 +98,83 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             tableProps.className = "hide-labels";
         }
 
-        if (this.state.matrixCells) {
+        if (matrixCells) {
             const viewOptions = this._getViewOptions();
+            const items = this._getItems();
 
             return (
-                <div className={this.props.className}>
-                    <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
+                <div className={className}>
+                    <div hidden={!showViewSelector || viewOptions.length < 2}>
                         <Dropdown
                             label={__.getResource("RiskMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
                             onChanged={this._onViewChanged} />
                     </div>
-                    {data.items.length === 0
+                    {items.length === 0
                         ? (
                             <div style={{ marginTop: 20 }}>
                                 <MessageBar>{__.getResource("RiskMatrix_EmptyMessage")}</MessageBar>
                             </div>
                         )
                         : (
-                            <table {...tableProps} ref={ele => this._tableElement = ele}>
-                                <tbody>
-                                    {this.renderRows(data.items)}
-                                </tbody>
-                            </table>
+                            <div>
+                                <div>
+                                    <table {...tableProps} ref={ele => this._tableElement = ele}>
+                                        <tbody>
+                                            {this.renderRows(items)}
+                                        </tbody>
+                                    </table>
+                                    <Toggle
+                                        onChanged={postAction => this.setState({ postAction })}
+                                        label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
+                                        onText={__.getResource("String_Yes")}
+                                        offText={__.getResource("String_No")} />
+                                </div>
+                                <div hidden={!dataSource}>
+                                    <Dropdown
+                                        label={__.getResource("String_Select_Project_Name")}
+                                        defaultSelectedKey="AllProjects"
+                                        options={this._getProjectOptions()}
+                                        onChanged={opt => this.setState({ selectedProject: opt })} />
+                                    <List
+                                        items={items}
+                                        columns={columns}
+                                        webUrlKey="webUrl"
+                                        pathKey="url"
+                                        showCommandBar={false} />
+                                </div>
+                            </div>
                         )}
-                    <div>
-                        <Toggle
-                            onChanged={postAction => this.setState({ postAction })}
-                            label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
-                            onText={__.getResource("String_Yes")}
-                            offText={__.getResource("String_No")} />
-                    </div>
                 </div>
             );
         }
         return null;
+    }
+
+    /**
+     * Get project options
+     */
+    protected _getProjectOptions(): Array<IDropdownOption> {
+        const projectOptions = this.state.data.items
+            .map(i => i.siteTitle)
+            .filter((value, index, self) => self.indexOf(value) === index)
+            .map(p => ({ key: p, text: p }));
+        return [
+            { key: "AllProjects", text: __.getResource("String_AllProjects") },
+            ...projectOptions,
+        ];
+    }
+
+    /**
+     * Get items
+     */
+    protected _getItems() {
+        const { selectedProject, data } = this.state;
+        if (selectedProject && selectedProject.key !== "AllProjects") {
+            return data.items.filter(i => i.siteTitle === selectedProject.text);
+        }
+        return data.items;
     }
 
     /**
@@ -170,9 +229,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         if (props.data) {
             return {
                 isLoading: false,
-                data: {
-                    items: props.data ? this._mapSpListItems(props.data.items) : [],
-                },
+                data: { items: this._mapSpListItems(props.data.items) },
             };
         } else {
             return { isLoading: true };
@@ -299,6 +356,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 risk.url = item.Path;
                 risk.webId = item.WebId;
                 risk.siteTitle = item.SiteTitle;
+                risk.webUrl = item.SPWebUrl;
                 return risk;
             });
         } else {
@@ -333,6 +391,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 SelectProperties: [
                     "ListItemID",
                     "Path",
+                    "SPWebUrl",
                     "WebId",
                     "Title",
                     "GtRiskProbabilityOWSNMBR",
