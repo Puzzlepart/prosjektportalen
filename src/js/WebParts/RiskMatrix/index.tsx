@@ -68,6 +68,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         const {
             id,
             className,
+            loadingText,
             showViewSelector,
             dataSource,
             columns,
@@ -85,7 +86,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         if (isLoading) {
             return (
                 <div className={className}>
-                    <Spinner size={SpinnerSize.large} />
+                    <Spinner
+                        label={loadingText}
+                        size={SpinnerSize.large} />
                     <table {...tableProps} ref={ele => this._tableElement = ele}></table>
                 </div>
             );
@@ -226,9 +229,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         if (props.data) {
             return {
                 isLoading: false,
-                data: {
-                    items: props.data ? this._mapSpListItems(props.data.items) : [],
-                },
+                data: { items: this._mapSpListItems(props.data.items) },
             };
         } else {
             return { isLoading: true };

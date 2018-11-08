@@ -6,6 +6,7 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     data?: IRiskMatrixData;
     columns?: Array<IColumn>;
     contentTypeId?: string;
+    loadingText?: string;
     showEmptyMessage?: boolean;
     showViewSelector?: boolean;
     hideLabelsBreakpoint?: number;
@@ -17,6 +18,13 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     columns: [
+        {
+            key: "ID",
+            fieldName: "id",
+            name: "ID",
+            minWidth: 100,
+            maxWidth: 100,
+        },
         {
             key: "Title",
             fieldName: "title",
@@ -56,6 +64,7 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
         },
     ],
     contentTypeId: "0x010088578E7470CC4AA68D566346483107020101",
+    loadingText: __.getResource("RiskMatrix_LoadingText"),
     className: "risk-matrix-container",
     id: "risk-matrix",
     showEmptyMessage: false,
