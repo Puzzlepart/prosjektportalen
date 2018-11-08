@@ -15,7 +15,6 @@ import * as Util from "../../../Util";
 
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
-        groupByOptions: [],
         defaultGroupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
     };
 
@@ -65,7 +64,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         const items: Array<ICommandBarItemProps> = [];
         const farItems: Array<ICommandBarItemProps> = [];
 
-        if (this.props.groupByOptions.length > 0) {
+        if (this.props.groupByOptions && this.props.groupByOptions.length > 0) {
             const noGrouping = {
                 key: "NoGrouping",
                 name: __.getResource("String_NoGrouping"),

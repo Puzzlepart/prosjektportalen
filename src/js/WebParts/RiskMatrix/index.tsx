@@ -29,6 +29,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     private _tableElement: HTMLTableElement;
     private _uncertaintiesList;
     private _dataSourcesList;
+
     /**
      * Constructor
      *
@@ -64,13 +65,26 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Renders the <RiskMatrix /> component
      */
     public render(): React.ReactElement<IRiskMatrixProps> {
-        const { isLoading, data, selectedViewId, hideLabels } = this.state;
+        const {
+            id,
+            className,
+            showViewSelector,
+            dataSource,
+            columns,
+        } = this.props;
 
-        let tableProps: React.HTMLAttributes<HTMLElement> = { id: this.props.id };
+        const {
+            isLoading,
+            matrixCells,
+            selectedViewId,
+            hideLabels,
+        } = this.state;
+
+        let tableProps: React.HTMLAttributes<HTMLElement> = { id };
 
         if (isLoading) {
             return (
-                <div className={this.props.className}>
+                <div className={className}>
                     <Spinner size={SpinnerSize.large} />
                     <table {...tableProps} ref={ele => this._tableElement = ele}></table>
                 </div>
@@ -81,19 +95,20 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             tableProps.className = "hide-labels";
         }
 
-        if (this.state.matrixCells) {
+        if (matrixCells) {
             const viewOptions = this._getViewOptions();
+            const items = this._getItems();
 
             return (
-                <div className={this.props.className}>
-                    <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
+                <div className={className}>
+                    <div hidden={!showViewSelector || viewOptions.length < 2}>
                         <Dropdown
                             label={__.getResource("RiskMatrix_ViewSelectorLabel")}
                             defaultSelectedKey={selectedViewId}
                             options={viewOptions}
                             onChanged={this._onViewChanged} />
                     </div>
-                    {data.items.length === 0
+                    {items.length === 0
                         ? (
                             <div style={{ marginTop: 20 }}>
                                 <MessageBar>{__.getResource("RiskMatrix_EmptyMessage")}</MessageBar>
@@ -101,30 +116,28 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                         )
                         : (
                             <div>
-                                <table {...tableProps} ref={ele => this._tableElement = ele}>
-                                    <tbody>
-                                        {this.renderRows(data.items)}
-                                    </tbody>
-                                </table>
                                 <div>
+                                    <table {...tableProps} ref={ele => this._tableElement = ele}>
+                                        <tbody>
+                                            {this.renderRows(items)}
+                                        </tbody>
+                                    </table>
                                     <Toggle
                                         onChanged={postAction => this.setState({ postAction })}
                                         label={__.getResource("ProjectStatus_RiskShowPostActionLabel")}
                                         onText={__.getResource("String_Yes")}
                                         offText={__.getResource("String_No")} />
-                                    <Dropdown
-                                        hidden={!this.props.dataSource}
-                                        options={[{ key: "0", text: "MV06" }]}
-                                        onChanged={opt => this.setState({ selectedProject: opt.text })} />
                                 </div>
-                                <div hidden={!this.props.dataSource}>
+                                <div hidden={!dataSource}>
+                                    <Dropdown
+                                        label={__.getResource("String_Select_Project_Name")}
+                                        defaultSelectedKey="AllProjects"
+                                        options={this._getProjectOptions()}
+                                        onChanged={opt => this.setState({ selectedProject: opt })} />
                                     <List
-                                        items={data.items}
-                                        columns={this.props.columns}
-                                        showCommandBar={false}
-                                        groupByOptions={[]}
-                                        excelExportEnabled={false}
-                                        excelExportConfig={null} />
+                                        items={items}
+                                        columns={columns}
+                                        showCommandBar={false} />
                                 </div>
                             </div>
                         )}
@@ -132,6 +145,31 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             );
         }
         return null;
+    }
+
+    /**
+     * Get project options
+     */
+    protected _getProjectOptions(): Array<IDropdownOption> {
+        const projectOptions = this.state.data.items
+            .map(i => i.siteTitle)
+            .filter((value, index, self) => self.indexOf(value) === index)
+            .map(p => ({ key: p, text: p }));
+        return [
+            { key: "AllProjects", text: __.getResource("String_AllProjects") },
+            ...projectOptions,
+        ];
+    }
+
+    /**
+     * Get items
+     */
+    protected _getItems() {
+        const { selectedProject, data } = this.state;
+        if (selectedProject && selectedProject.key !== "AllProjects") {
+            return data.items.filter(i => i.siteTitle === selectedProject.text);
+        }
+        return data.items;
     }
 
     /**
