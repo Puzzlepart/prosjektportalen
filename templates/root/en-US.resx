@@ -1988,6 +1988,9 @@
   </data>
   <data name="String_Project" xml:space="preserve">
     <value>Project</value>
+  </data>  
+  <data name="String_AllProjects" xml:space="preserve">
+    <value>All projects</value>
   </data>
   <data name="String_AchievementOfObjectives" xml:space="preserve">
     <value>Achievement of objectives</value>
