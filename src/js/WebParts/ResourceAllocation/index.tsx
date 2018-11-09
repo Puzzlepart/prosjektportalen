@@ -223,13 +223,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetch data, parses the data, and creates arrays for [users] and [allocations]
      */
     protected async _fetchData() {
-        const [searchResult, itemsAvailability] = await Promise.all([this._searchAllocationItems(this.props.searchConfiguration), this._fetchAvailabilityItems()]);
+        const [searchResult, itemsAvailability] = await Promise.all([
+            this._searchAllocationItems(this.props.searchConfiguration),
+            this._fetchAvailabilityItems(),
+        ]);
         let users: Array<ProjectUser> = [];
         let userId = 0;
         const allocations = searchResult.map(res => new ProjectResourceAllocation(res));
         for (let i = 0; i < searchResult.length; i++) {
-            const result = searchResult[i];
-            const resource = new ProjectResource(result);
+            const resource = new ProjectResource(searchResult[i]);
             let [user] = users.filter(r => r.name === resource.name);
             if (!user) {
                 user = new ProjectUser(userId, resource.name);
@@ -242,6 +244,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             user.allocations.push(allocations[i]);
         }
         const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
+        for (let i = 0; i < itemsAvailability.length; i++) {
+            const ava = new ProjectResourceAvailability(itemsAvailability[i]);
+            let [user] = users.filter(r => r.name === ava.name);
+            if (!user) {
+                user = new ProjectUser(userId, ava.name);
+                users.push(user);
+                userId++;
+            }
+        }
         users.forEach(user => {
             const availabilityForUser = availability.filter(ava => ava.name === user.name);
             availabilityForUser.forEach(ava => {
