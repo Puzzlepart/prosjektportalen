@@ -80,7 +80,7 @@ export class ProjectResourceAllocation {
         this.project = { name: searchResult.SiteTitle, url: searchResult.SPWebUrl };
         this.start_time = moment(new Date(searchResult.GtStartDateOWSDATE));
         this.end_time = moment(new Date(searchResult.GtEndDateOWSDATE));
-        this.load = parseFloat(searchResult.GtResourceLoadOWSNMBR) * 100;
+        this.load = Math.round(parseFloat(searchResult.GtResourceLoadOWSNMBR) * 100);
     }
 
     /**
