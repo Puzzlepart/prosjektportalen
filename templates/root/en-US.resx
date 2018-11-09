@@ -1994,6 +1994,9 @@
   </data>
   <data name="String_Project" xml:space="preserve">
     <value>Project</value>
+  </data>  
+  <data name="String_AllProjects" xml:space="preserve">
+    <value>All projects</value>
   </data>
   <data name="String_AchievementOfObjectives" xml:space="preserve">
     <value>Achievement of objectives</value>
@@ -2852,6 +2855,9 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the selected view.</value>
+  </data>  
+  <data name="RiskMatrix_LoadingText" xml:space="preserve">
+    <value>Loading risk matrix...</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Very high</value>

@@ -14,6 +14,7 @@ module.exports = (devtool, exclude, env) => ({
             'core-js/fn/object/assign',
             'core-js/es6/promise',
             'whatwg-fetch',
+            '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
             './lib/index.js',
         ],

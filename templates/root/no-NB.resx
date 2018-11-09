@@ -1995,6 +1995,9 @@
   <data name="String_Project" xml:space="preserve">
     <value>Prosjekt</value>
   </data>
+  <data name="String_AllProjects" xml:space="preserve">
+    <value>Alle prosjekter</value>
+  </data>
   <data name="String_AchievementOfObjectives" xml:space="preserve">
     <value>Måloppnåelse</value>
   </data>
@@ -2861,6 +2864,9 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
+  </data>  
+  <data name="RiskMatrix_LoadingText" xml:space="preserve">
+    <value>Laster risikomatrise...</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Svært høy</value>
