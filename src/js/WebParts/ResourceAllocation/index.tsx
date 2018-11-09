@@ -245,10 +245,10 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         }
         const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
         for (let i = 0; i < itemsAvailability.length; i++) {
-            const ava = new ProjectResourceAvailability(itemsAvailability[i]);
-            let [user] = users.filter(r => r.name === ava.name);
+            const avaResource = new ProjectResourceAvailability(itemsAvailability[i]);
+            let [user] = users.filter(r => r.name === avaResource.name);
             if (!user) {
-                user = new ProjectUser(userId, ava.name);
+                user = new ProjectUser(userId, avaResource.name);
                 users.push(user);
                 userId++;
             }
