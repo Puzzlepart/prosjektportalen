@@ -43,7 +43,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
         return (
             <div>
                 <h3>
-                    {allocation.resource.role} ({allocation.load}%)
+                    {allocation.role} ({allocation.allocationPercentage}%)
                 </h3>
             </div>
         );

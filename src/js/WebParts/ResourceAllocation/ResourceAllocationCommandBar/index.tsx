@@ -98,8 +98,11 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
         this._farItems = [];
     }
 
+    /**
+     * Get options for projects, roles and resources
+     */
     protected _getOptions() {
-        const projects = array_unique(this.props.allocations.map(alloc => alloc.project.name))
+        const projects = array_unique(this.props.allocations.filter(alloc => alloc.project).map(alloc => alloc.project.name))
             .map((p, idx) => {
                 return {
                     key: `Project_${idx}`,
@@ -117,7 +120,7 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                 };
             })
             .sort((a, b) => (a.name < b.name) ? -1 : ((a.name > b.name) ? 1 : 0));
-        const roles = array_unique(this.props.allocations.map(alloc => alloc.resource.role))
+        const roles = array_unique(this.props.allocations.filter(alloc => alloc.role).map(alloc => alloc.role))
             .map((r, idx) => {
                 return {
                     key: `Role_${idx}`,

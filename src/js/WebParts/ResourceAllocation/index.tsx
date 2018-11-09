@@ -8,12 +8,11 @@ import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
 import IResourceAllocationState from "./IResourceAllocationState";
-import { ProjectResource, ProjectResourceAllocation, ProjectResourceAvailability, ProjectUser } from "./ResourceAllocationModels";
+import { ProjectUser, ProjectResourceAllocation, ProjectAllocationType } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
 import BaseWebPart from "../@BaseWebPart";
-import TimelineItemType from "./TimelineItemType";
 import * as moment from "moment";
 //#endregion
 
@@ -99,7 +98,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         const {
             users,
             allocations,
-            availability,
             selected,
         } = this.state;
 
@@ -112,9 +110,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 }
                 return true;
             });
-        const itemsAllocations = allocations
+        const items = allocations
             .filter(alloc => {
-                if (!(alloc.user && alloc.resource)) {
+                if (!(alloc.user)) {
                     return false;
                 }
                 if (selected) {
@@ -122,7 +120,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         return (alloc.project.name === selected.project);
                     }
                     if (selected.role) {
-                        return (alloc.resource.role === selected.role);
+                        return (alloc.role === selected.role);
                     }
                 }
                 return true;
@@ -132,54 +130,48 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     id: idx,
                     title: alloc.toString(),
                     group: alloc.user.id,
-                    type: TimelineItemType.ALLOCATION,
+                    type: alloc.type,
                     ...alloc,
                 };
             });
-        const itemsAvailability = availability
-            .map((ava, idx) => {
-                return {
-                    id: (idx + itemsAllocations.length),
-                    title: ava.toString(),
-                    group: ava.user.id,
-                    type: TimelineItemType.AVAILABILITY,
-                    ...ava,
-                };
-            });
-        return {
-            groups,
-            items: [...itemsAllocations, ...itemsAvailability],
-        };
+        return { groups, items };
     }
 
     @autobind
     protected _timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
-        const itemOpacity = itemContext.load < 20 ? 0.2 : itemContext.load / 100;
-        const itemColor = itemContext.load < 30 ? "#000" : "#fff";
+        const itemOpacity = item.allocationPercentage < 20 ? 0.2 : item.allocationPercentage / 100;
+        const itemColor = item.allocationPercentage < 30 ? "#000" : "#fff";
         switch (item.type) {
-            case TimelineItemType.ALLOCATION: {
-                return (
-                    <div
-                        key={props.key}
-                        className={props.className}
-                        style={props.style}
-                        title={itemContext.title}
-                        onClick={event => this._onTimelineItemClick(event, item)}>
-                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}`, color: `${itemColor}`, backgroundColor: `rgb(26, 111, 179, ${itemOpacity})` }}>
-                            {itemContext.title}
-                        </div>
-                    </div>
-                );
-            }
-            case TimelineItemType.AVAILABILITY: {
+            case ProjectAllocationType.ProjectAllocation: {
                 return (
                     <div
                         key={props.key}
                         className={props.className}
                         style={{
                             ...props.style,
-                            backgroundColor: "#ff0000",
+                            color: `${itemColor}`,
+                            backgroundColor: `rgb(26, 111, 179, ${itemOpacity})`,
+                            border: "none",
+                            cursor: "text",
+                        }}
+                        title={itemContext.title}
+                        onClick={event => this._onTimelineItemClick(event, item)}>
+                        <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
+                            {itemContext.title}
+                        </div>
+                    </div>
+                );
+            }
+            case ProjectAllocationType.Absence: {
+                return (
+                    <div
+                        key={props.key}
+                        className={props.className}
+                        style={{
+                            ...props.style,
+                            color: `${itemColor}`,
+                            backgroundColor: `rgb(205, 92, 92, ${itemOpacity})`,
                             border: "none",
                             cursor: "text",
                         }}
@@ -227,40 +219,37 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             this._searchAllocationItems(this.props.searchConfiguration),
             this._fetchAvailabilityItems(),
         ]);
+
+        // Mapping allocations and availability
+        const availability = itemsAvailability.map(item => {
+            const a = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence);
+            a.absence = item.GtResourceAbsence;
+            return a;
+        });
+        const allocations = [
+            ...availability,
+            ...searchResult.map(res => {
+                const a = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation);
+                a.project = { name: res.SiteTitle, url: res.SPWebUrl };
+                a.role = res.RefinableString72;
+                return a;
+            }),
+        ];
+
         let users: Array<ProjectUser> = [];
         let userId = 0;
-        const allocations = searchResult.map(res => new ProjectResourceAllocation(res));
-        for (let i = 0; i < searchResult.length; i++) {
-            const resource = new ProjectResource(searchResult[i]);
-            let [user] = users.filter(r => r.name === resource.name);
+        for (let i = 0; i < allocations.length; i++) {
+            let [user] = users.filter(r => r.name === allocations[i].name);
             if (!user) {
-                user = new ProjectUser(userId, resource.name);
+                user = new ProjectUser(userId, allocations[i].name);
                 users.push(user);
                 userId++;
             }
-            resource.user = user;
-            allocations[i].resource = resource;
             allocations[i].user = user;
             user.allocations.push(allocations[i]);
         }
-        const availability = itemsAvailability.map(itemAva => new ProjectResourceAvailability(itemAva));
-        for (let i = 0; i < itemsAvailability.length; i++) {
-            const avaResource = new ProjectResourceAvailability(itemsAvailability[i]);
-            let [user] = users.filter(r => r.name === avaResource.name);
-            if (!user) {
-                user = new ProjectUser(userId, avaResource.name);
-                users.push(user);
-                userId++;
-            }
-        }
-        users.forEach(user => {
-            const availabilityForUser = availability.filter(ava => ava.name === user.name);
-            availabilityForUser.forEach(ava => {
-                ava.user = user;
-                user.availability.push(ava);
-            });
-        });
-        return { users, allocations, availability };
+
+        return { users, allocations };
     }
 
     /**

@@ -8,86 +8,42 @@ export interface IProjectReference {
     url: string;
 }
 
+export enum ProjectAllocationType {
+    Absence,
+    ProjectAllocation,
+}
 
-/**
- * Class: ProjectResourceAvailability
- */
-export class ProjectResourceAvailability {
+export class ProjectResourceAllocation {
     public name: string;
     public start_time: moment.Moment;
     public end_time: moment.Moment;
-    public load: number;
+    public allocationPercentage: number;
+    public type: ProjectAllocationType;
+    public project: IProjectReference;
+    public role: string;
     public absence: string;
     public user: ProjectUser;
 
     /**
-     * Creates a new ProjectResourceAvailability class
-     *
-     * @param {any} spListItem SP list item
+     * Creates a new ProjectResourceAllocation2 class
      */
-    constructor(spListItem: any) {
-        this.name = spListItem.GtResourceUser.Title;
-        this.start_time = moment(new Date(spListItem.GtStartDate));
-        this.end_time = moment(new Date(spListItem.GtEndDate));
-        this.load = spListItem.GtResourceLoad * 100;
-        this.absence = spListItem.GtResourceAbsence;
+    constructor(name: string, start_time: string, end_time: string, allocationPercentage: string, type: ProjectAllocationType) {
+        this.name = name;
+        this.start_time = moment(new Date(start_time));
+        this.end_time = moment(new Date(end_time));
+        this.allocationPercentage = Math.round(parseFloat(allocationPercentage) * 100);
+        this.type = type;
     }
 
     /**
      * Returns a string representation of the class
      */
     public toString(): string {
-        return `${this.absence} (${this.load}%)`;
-    }
-}
-
-/**
- * Class: ProjectResource
- */
-export class ProjectResource {
-    public role: string;
-    public name: string;
-    public user: ProjectUser;
-
-    /**
-     * Creates a new ProjectResource class
-     *
-     * @param {IParsedSearchResult} searchResult Search result
-     */
-    constructor(searchResult: any) {
-        this.role = searchResult.RefinableString72;
-        this.name = searchResult.RefinableString71;
-    }
-}
-
-/**
- * Class: ProjectResourceAllocation
- */
-export class ProjectResourceAllocation {
-    public project: IProjectReference;
-    public start_time: moment.Moment;
-    public end_time: moment.Moment;
-    public load: number;
-    public resource: ProjectResource;
-    public user: ProjectUser;
-
-    /**
-     * Creates a new ProjectResourceAllocation class
-     *
-     * @param {IParsedSearchResult} searchResult Search result
-     */
-    constructor(searchResult: any) {
-        this.project = { name: searchResult.SiteTitle, url: searchResult.SPWebUrl };
-        this.start_time = moment(new Date(searchResult.GtStartDateOWSDATE));
-        this.end_time = moment(new Date(searchResult.GtEndDateOWSDATE));
-        this.load = Math.round(parseFloat(searchResult.GtResourceLoadOWSNMBR) * 100);
-    }
-
-    /**
-     * Returns a string representation of the class
-     */
-    public toString(): string {
-        return `${this.resource.role} - ${this.project.name} (${this.load}%)`;
+        if (this.type === ProjectAllocationType.ProjectAllocation) {
+            return `${this.role} - ${this.project.name} (${this.allocationPercentage}%)`;
+        } else {
+            return `${this.absence} (${this.allocationPercentage}%)`;
+        }
     }
 }
 
@@ -98,20 +54,16 @@ export class ProjectUser {
     public id: number;
     public name: string;
     public allocations: Array<ProjectResourceAllocation>;
-    public availability: Array<ProjectResourceAvailability>;
 
     /**
      * Creates a new ProjectUser class
      *
      * @param {number} id ID
      * @param {string} name Name
-     * @param {Array<ProjectResourceAllocation>} allocations Allocations
-     * @param {Array<ProjectResourceAvailability>} availability Availability
      */
-    constructor(id: number, name: string, allocations = [], availability = []) {
+    constructor(id: number, name: string) {
         this.id = id;
         this.name = name;
-        this.allocations = allocations;
-        this.availability = availability;
+        this.allocations = [];
     }
 }
