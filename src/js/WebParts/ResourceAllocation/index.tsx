@@ -2,7 +2,7 @@
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
 import __ from "../../Resources";
-import pnp, { SearchQuery } from "@pnp/sp";
+import { sp, SearchQuery } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -45,6 +45,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             const data = await this._fetchData();
             this.setState({ ...data, isLoading: false });
         } catch (err) {
+            console.log(err);
             this.setState({ isLoading: false });
         }
     }
@@ -60,39 +61,35 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
-        try {
-            const data = this._getTimelineData();
+        const data = this._getTimelineData();
 
-            if (data.groups.length === 0 || data.items.length === 0) {
-                return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
-            }
-            return (
-                <div>
-                    <ResourceAllocationCommandBar
-                        users={this.state.users}
-                        allocations={this.state.allocations}
-                        selected={this.state.selected}
-                        onSelectionUpdate={this._onSelectionUpdate} />
-                    <Timeline
-                        groups={data.groups}
-                        items={data.items}
-                        itemRenderer={this._timelineItemRenderer}
-                        stackItems={true}
-                        canMove={false}
-                        canChangeGroup={false}
-                        sidebarWidth={220}
-                        defaultTimeStart={moment().subtract(1, "months")}
-                        defaultTimeEnd={moment().add(1, "years")}>
-                        <TimelineMarkers>
-                            <TodayMarker />
-                        </TimelineMarkers>
-                    </Timeline>
-                    <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
-                </div>
-            );
-        } catch {
+        if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
+        return (
+            <div>
+                <ResourceAllocationCommandBar
+                    users={this.state.users}
+                    allocations={this.state.allocations}
+                    selected={this.state.selected}
+                    onSelectionUpdate={this._onSelectionUpdate} />
+                <Timeline
+                    groups={data.groups}
+                    items={data.items}
+                    itemRenderer={this._timelineItemRenderer}
+                    stackItems={true}
+                    canMove={false}
+                    canChangeGroup={false}
+                    sidebarWidth={220}
+                    defaultTimeStart={moment().subtract(1, "months")}
+                    defaultTimeEnd={moment().add(1, "years")}>
+                    <TimelineMarkers>
+                        <TodayMarker />
+                    </TimelineMarkers>
+                </Timeline>
+                <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
+            </div>
+        );
     }
 
     /**
@@ -256,12 +253,12 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     }
 
     /**
-     * Searches for allocation items using pnp.sp.search
+     * Searches for allocation items using sp.search
      *
      * @param {SearchQuery} searchConfiguration Search configuration
      */
     protected async _searchAllocationItems(searchConfiguration: SearchQuery): Promise<any> {
-        const { PrimarySearchResults } = await pnp.sp.search(searchConfiguration);
+        const { PrimarySearchResults } = await sp.search(searchConfiguration);
         return PrimarySearchResults;
     }
 
@@ -269,7 +266,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetches availability items from list on root
      */
     protected async _fetchAvailabilityItems(): Promise<Array<any>> {
-        const itemsAvailability = await pnp.sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
+        const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
             .items
             .select("GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
             .expand("GtResourceUser")
