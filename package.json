@@ -120,6 +120,7 @@
         "@pnp/common": "^1.2.3",
         "@pnp/logging": "^1.2.3",
         "@pnp/odata": "^1.2.3",
+        "@pnp/polyfill-ie11": "^1.0.0",
         "@pnp/sp": "^1.2.3"
     }
 }
