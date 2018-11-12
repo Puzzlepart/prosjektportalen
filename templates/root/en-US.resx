@@ -2572,7 +2572,7 @@
     <value>Sick leave</value>
   </data>
   <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
-    <value>Competence development<value>
+    <value>Competence development</value>
   </data>
   <data name="Choice_GtResourceAbsence_OtherAssignments" xml:space="preserve">
     <value>Other assignments</value>
