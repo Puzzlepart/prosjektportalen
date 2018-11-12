@@ -3,12 +3,12 @@ import {SearchQuery} from "@pnp/sp";
 
 export default interface IResourceAllocationProps extends IBaseWebPartProps {
     searchConfiguration: SearchQuery;
+    dataSource?: string;
  }
 
 export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {
     searchConfiguration: {
         Querytext: "*",
-        QueryTemplate: "(ContentTypeId:0x010088578E7470CC4AA68D5663464831070209*) Path:{SiteCollection.URL}",
         RowLimit: 500,
         TrimDuplicates: false,
         SelectProperties: [
@@ -24,4 +24,5 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
             "RefinableString52",
         ],
     },
+    dataSource: "RESOURCEALLOCATION",
 };

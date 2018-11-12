@@ -1,8 +1,8 @@
 //#region Imports
+import __ from "../../Resources";
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import __ from "../../Resources";
-import { sp, SearchQuery } from "@pnp/sp";
+import { sp, Site } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -41,7 +41,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     public async componentDidMount(): Promise<void> {
         try {
-            const data = await this._fetchData();
+            const data = await this.fetchData();
             this.setState({ ...data, isLoading: false });
         } catch (err) {
             console.log(err);
@@ -60,7 +60,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
-        const data = this._getTimelineData();
+        const data = this.getTimelineData();
 
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
@@ -71,11 +71,11 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     users={this.state.users}
                     allocations={this.state.allocations}
                     selected={this.state.selected}
-                    onSelectionUpdate={this._onSelectionUpdate} />
+                    onSelectionUpdate={this.onSelectionUpdate} />
                 <Timeline
                     groups={data.groups}
                     items={data.items}
-                    itemRenderer={this._timelineItemRenderer}
+                    itemRenderer={this.timelineItemRenderer}
                     stackItems={true}
                     canMove={false}
                     canChangeGroup={false}
@@ -86,7 +86,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         <TodayMarker />
                     </TimelineMarkers>
                 </Timeline>
-                <ResourceAllocationDetailsModal allocation={this.state.allocationDisplay} onDismiss={this._onResourceAllocationDetailsModalDismiss} />
+                <ResourceAllocationDetailsModal
+                    allocation={this.state.allocationDisplay}
+                    onDismiss={this.onResourceAllocationDetailsModalDismiss} />
             </div>
         );
     }
@@ -94,7 +96,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     /**
      * Get data for the timeline
      */
-    protected _getTimelineData() {
+    private getTimelineData() {
         const {
             users,
             allocations,
@@ -138,7 +140,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     }
 
     @autobind
-    protected _timelineItemRenderer({ item, itemContext, getItemProps }) {
+    private timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
         const itemOpacity = item.allocationPercentage < 20 ? 0.2 : item.allocationPercentage / 100;
         const itemColor = item.allocationPercentage < 30 ? "#000" : "#fff";
@@ -150,13 +152,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         className={props.className}
                         style={{
                             ...props.style,
-                            color: `${itemColor}`,
+                            color: itemColor,
                             backgroundColor: `rgb(26, 111, 179, ${itemOpacity})`,
                             border: "none",
                             cursor: "text",
                         }}
                         title={itemContext.title}
-                        onClick={event => this._onTimelineItemClick(event, item)}>
+                        onClick={event => this.onTimelineItemClick(event, item)}>
                         <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
                             {itemContext.title}
                         </div>
@@ -170,7 +172,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         className={props.className}
                         style={{
                             ...props.style,
-                            color: `${itemColor}`,
+                            color: itemColor,
                             backgroundColor: `rgb(205, 92, 92, ${itemOpacity})`,
                             border: "none",
                             cursor: "text",
@@ -192,7 +194,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * @param {any} item Item
      */
     @autobind
-    protected _onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, item: any) {
+    private onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, item: any) {
         event.preventDefault();
         this.setState({ allocationDisplay: item });
     }
@@ -201,12 +203,12 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * On dismiss ResourceAllocationDetailsModal, sets {allocationDisplay} to null in component state
      */
     @autobind
-    protected _onResourceAllocationDetailsModalDismiss() {
+    private onResourceAllocationDetailsModalDismiss() {
         this.setState({ allocationDisplay: null });
     }
 
     @autobind
-    protected _onSelectionUpdate(selected: IResourceAllocationCommandBarState) {
+    private onSelectionUpdate(selected: IResourceAllocationCommandBarState) {
         event.preventDefault();
         this.setState({ selected: selected });
     }
@@ -214,9 +216,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     /**
      * Fetch data, parses the data, and creates arrays for [users] and [allocations]
      */
-    protected async _fetchData() {
+    private async fetchData() {
         const [searchResult, itemsAvailability] = await Promise.all([
-            this._searchAllocationItems(this.props.searchConfiguration),
+            this._searchAllocationItems(),
             this._fetchAvailabilityItems(),
         ]);
 
@@ -254,18 +256,28 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
 
     /**
      * Searches for allocation items using sp.search
-     *
-     * @param {SearchQuery} searchConfiguration Search configuration
      */
-    protected async _searchAllocationItems(searchConfiguration: SearchQuery): Promise<any> {
-        const { PrimarySearchResults } = await sp.search(searchConfiguration);
-        return PrimarySearchResults;
+    private async _searchAllocationItems(): Promise<any> {
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
+        if (dataSource) {
+            try {
+                const searchSettings = { ...this.props.searchConfiguration, QueryTemplate: dataSource.GtDpSearchQuery };
+                const { PrimarySearchResults } = await sp.search(searchSettings);
+                console.log(searchSettings, PrimarySearchResults);
+                return PrimarySearchResults;
+            } catch (err) {
+                throw err;
+            }
+        } else {
+            return [];
+        }
     }
 
     /**
      * Fetches availability items from list on root
      */
-    protected async _fetchAvailabilityItems(): Promise<Array<any>> {
+    private async _fetchAvailabilityItems(): Promise<Array<any>> {
         const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
             .items
             .select("GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
