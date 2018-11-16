@@ -359,6 +359,34 @@
                                 <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
+                        <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
+                            <d3p1:Key>ows_GtStartDate</d3p1:Key>
+                            <d3p1:Value>
+                                <d5p1:Name>ows_GtStartDate</d5p1:Name>
+                                <d5p1:CategoryName>SharePoint</d5p1:CategoryName>
+                                <d5p1:IsImplicit>false</d5p1:IsImplicit>
+                                <d5p1:IsMappedToContents>true</d5p1:IsMappedToContents>
+                                <d5p1:IsNameEnum>false</d5p1:IsNameEnum>
+                                <d5p1:MappedManagedProperties />
+                                <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
+                                <d5p1:Samples />
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
+                            </d3p1:Value>
+                        </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
+                        <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
+                            <d3p1:Key>ows_GtEndDate</d3p1:Key>
+                            <d3p1:Value>
+                                <d5p1:Name>ows_GtEndDate</d5p1:Name>
+                                <d5p1:CategoryName>SharePoint</d5p1:CategoryName>
+                                <d5p1:IsImplicit>false</d5p1:IsImplicit>
+                                <d5p1:IsMappedToContents>true</d5p1:IsMappedToContents>
+                                <d5p1:IsNameEnum>false</d5p1:IsNameEnum>
+                                <d5p1:MappedManagedProperties />
+                                <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
+                                <d5p1:Samples />
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
+                            </d3p1:Value>
+                        </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                     </d5p1:dictionary>
                 </d3p1:Value>
             </d3p1:KeyValueOfguidCrawledPropertyInfoCollectionaSYUqUE_P>
