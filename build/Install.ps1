@@ -41,6 +41,8 @@ Param(
     [switch]$UseWebLogin,
     [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
     [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "Active SharePoint connection (Used by script)")]
+    [SharePointPnP.PowerShell.Commands.Base.SPOnlineConnection]$Connection,
     [Parameter(Mandatory = $false, HelpMessage = "PowerShell credential to authenticate with")]
     [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
@@ -121,7 +123,7 @@ function Start-Install() {
         Set-PnPTraceLog -Off
     }
     
-    $Connection = Connect-SharePoint -Url $Url
+    $Connection = Connect-SharePoint -Url $Url -Connection $Connection
     
     if ($null -eq $Connection) {
         Write-Host
@@ -144,7 +146,7 @@ function Start-Install() {
     # Installing root package if switch SkipRootPackage is not present
     if (-not $SkipRootPackage.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $Url
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
@@ -165,7 +167,7 @@ function Start-Install() {
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $AssetsUrl
+            $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "assets" -Localized
             Write-Host "DONE" -ForegroundColor Green
@@ -181,7 +183,7 @@ function Start-Install() {
     # Applies thirdparty template if switch SkipThirdParty is not present
     if (-not $SkipThirdParty.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $AssetsUrl
+            $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "thirdparty"
             Write-Host "DONE" -ForegroundColor Green
@@ -197,7 +199,7 @@ function Start-Install() {
     # Installing data package
     if (-not $SkipData.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $DataSourceSiteUrl
+            $Connection = Connect-SharePoint -Url $DataSourceSiteUrl -Connection $Connection
             Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "data" -Localized
             Write-Host "DONE" -ForegroundColor Green
@@ -213,7 +215,7 @@ function Start-Install() {
     # Installing config package
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $Url
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "config" -Localized
             Write-Host "DONE" -ForegroundColor Green
@@ -231,7 +233,7 @@ function Start-Install() {
         $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
         if ($extensionFiles.Length -gt 0) {
             try {
-                $Connection = Connect-SharePoint -Url $Url
+                $Connection = Connect-SharePoint -Url $Url -Connection $Connection
                 Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
                     $confirmation = "y"
@@ -255,7 +257,7 @@ function Start-Install() {
     }
 
     try {
-        $Connection = Connect-SharePoint -Url $Url
+        $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green

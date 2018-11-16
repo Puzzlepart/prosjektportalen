@@ -4,7 +4,8 @@ function Connect-SharePoint ([string]$Url, [SharePointPnP.PowerShell.Commands.Ba
 
     if ($null -ne $Connection -and $Connection.Url -eq $ConnectionUrl) {
         return $Connection
-    } else if ($null -ne $Connection -and $Connection.Url -ne $ConnectionUrl) {
+    }
+    if ($null -ne $Connection -and $Connection.Url -ne $ConnectionUrl) {
         return $Connection.CloneContext($ConnectionUrl)
     }
     try {
