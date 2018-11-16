@@ -102,9 +102,22 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
+    Write-Host "Note: The upgrade requires site collection admin  and term store admin permissions" -ForegroundColor Yellow
+    Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
     try {
+        if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
+            Connect-SharePoint $Url       
+            Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
+            $Language = Get-WebLanguage -ctx (Get-PnPContext)
+            $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/pre-*.pnp"
+            foreach ($pkg in $upgradePkgs) {
+                Apply-PnPProvisioningTemplate $pkg.FullName
+            }
+            Write-Host "DONE" -ForegroundColor Green
+            Disconnect-PnPOnline
+        }
         Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
         Connect-SharePoint $Url       
         Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
@@ -125,7 +138,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Connect-SharePoint $Url       
         Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
-        $upgradePkgs = Get-ChildItem "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp"
+        $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp" -Exclude "pre-*.pnp"
         foreach ($pkg in $upgradePkgs) {
             Apply-PnPProvisioningTemplate $pkg.FullName
         }
