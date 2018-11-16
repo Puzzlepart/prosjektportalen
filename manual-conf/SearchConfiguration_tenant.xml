@@ -19,7 +19,7 @@
     </SearchRankingModelConfigurationSettings>
     <SearchSchemaConfigurationSettings>
         <Aliases xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
-            <d3p1:LastItemName>GtProjectResourceLookup</d3p1:LastItemName>
+            <d3p1:LastItemName>GtEndDate</d3p1:LastItemName>
             <d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
                     <d4p1:Key>GtProjectOwner</d4p1:Key>
@@ -122,6 +122,22 @@
                     <d4p1:Value>
                         <d3p1:Name>GtProjectResourceLookup</d3p1:Name>
                         <d3p1:ManagedPid>1000000073</d3p1:ManagedPid>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                    <d4p1:Key>GtStartDate</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>GtStartDate</d3p1:Name>
+                        <d3p1:ManagedPid>1000000605</d3p1:ManagedPid>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                    <d4p1:Key>GtEndDate</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>GtEndDate</d3p1:Name>
+                        <d3p1:ManagedPid>1000000606</d3p1:ManagedPid>
                         <d3p1:SchemaId>69247</d3p1:SchemaId>
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
@@ -242,7 +258,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -256,7 +272,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -270,7 +286,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -284,7 +300,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -298,7 +314,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -312,7 +328,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -326,7 +342,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                         <d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
@@ -340,7 +356,7 @@
                                 <d5p1:MappedManagedProperties />
                                 <d5p1:Propset>00130329-0000-0130-c000-000000131346</d5p1:Propset>
                                 <d5p1:Samples />
-                                <d5p1:SchemaId>0</d5p1:SchemaId>
+                                <d5p1:SchemaId>69247</d5p1:SchemaId>
                             </d3p1:Value>
                         </d3p1:KeyValueOfstringCrawledPropertyInfoy6h3NzC8>
                     </d5p1:dictionary>
@@ -354,7 +370,7 @@
             <d3p1:TotalCount>0</d3p1:TotalCount>
         </ManagedProperties>
         <Mappings xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
-            <d3p1:LastItemName>00130329-0000-0130-c000-000000131346:ows_GtProjectResourceLookup-&gt;1000000073</d3p1:LastItemName>
+            <d3p1:LastItemName>00130329-0000-0130-c000-000000131346:ows_GtEndDate-&gt;1000000606</d3p1:LastItemName>
             <d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
                     <d4p1:Key>00130329-0000-0130-c000-000000131346:ows_GtProjectOwner-&gt;1000000050</d4p1:Key>
@@ -418,7 +434,7 @@
                         <d3p1:CrawledPropertyName>ows_GtStatusBudget</d3p1:CrawledPropertyName>
                         <d3p1:CrawledPropset>00130329-0000-0130-c000-000000131346</d3p1:CrawledPropset>
                         <d3p1:ManagedPid>1000000055</d3p1:ManagedPid>
-                        <d3p1:MappingOrder>200</d3p1:MappingOrder>
+                        <d3p1:MappingOrder>100</d3p1:MappingOrder>
                         <d3p1:SchemaId>69247</d3p1:SchemaId>
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
@@ -499,10 +515,32 @@
                         <d3p1:SchemaId>69247</d3p1:SchemaId>
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                    <d4p1:Key>00130329-0000-0130-c000-000000131346:ows_GtStartDate-&gt;1000000605</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>00130329-0000-0130-c000-000000131346:ows_GtStartDate-&gt;1000000605</d3p1:Name>
+                        <d3p1:CrawledPropertyName>ows_GtStartDate</d3p1:CrawledPropertyName>
+                        <d3p1:CrawledPropset>00130329-0000-0130-c000-000000131346</d3p1:CrawledPropset>
+                        <d3p1:ManagedPid>1000000605</d3p1:ManagedPid>
+                        <d3p1:MappingOrder>100</d3p1:MappingOrder>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                    <d4p1:Key>00130329-0000-0130-c000-000000131346:ows_GtEndDate-&gt;1000000606</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>00130329-0000-0130-c000-000000131346:ows_GtEndDate-&gt;1000000606</d3p1:Name>
+                        <d3p1:CrawledPropertyName>ows_GtEndDate</d3p1:CrawledPropertyName>
+                        <d3p1:CrawledPropset>00130329-0000-0130-c000-000000131346</d3p1:CrawledPropset>
+                        <d3p1:ManagedPid>1000000606</d3p1:ManagedPid>
+                        <d3p1:MappingOrder>100</d3p1:MappingOrder>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
             </d3p1:dictionary>
         </Mappings>
         <Overrides xmlns:d3p1="http://schemas.datacontract.org/2004/07/Microsoft.Office.Server.Search.Administration">
-            <d3p1:LastItemName>1000000051</d3p1:LastItemName>
+            <d3p1:LastItemName>1000000606</d3p1:LastItemName>
             <d3p1:dictionary xmlns:d4p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
                 <d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
                     <d4p1:Key>1000000073</d4p1:Key>
@@ -673,8 +711,35 @@
                         <d3p1:TokenNormalization>true</d3p1:TokenNormalization>
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                    <d4p1:Key>1000000605</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>1000000605</d3p1:Name>
+                        <d3p1:AliasesOverridden>false</d3p1:AliasesOverridden>
+                        <d3p1:EntityExtractorBitMap>0</d3p1:EntityExtractorBitMap>
+                        <d3p1:ExtraProperties i:nil="true" />
+                        <d3p1:ManagedPid>1000000605</d3p1:ManagedPid>
+                        <d3p1:MappingsOverridden>true</d3p1:MappingsOverridden>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                        <d3p1:TokenNormalization>true</d3p1:TokenNormalization>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                    <d4p1:Key>1000000606</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>1000000606</d3p1:Name>
+                        <d3p1:AliasesOverridden>false</d3p1:AliasesOverridden>
+                        <d3p1:EntityExtractorBitMap>0</d3p1:EntityExtractorBitMap>
+                        <d3p1:ExtraProperties i:nil="true" />
+                        <d3p1:ManagedPid>1000000606</d3p1:ManagedPid>
+                        <d3p1:MappingsOverridden>true</d3p1:MappingsOverridden>
+                        <d3p1:SchemaId>69247</d3p1:SchemaId>
+                        <d3p1:TokenNormalization>true</d3p1:TokenNormalization>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
             </d3p1:dictionary>
         </Overrides>
     </SearchSchemaConfigurationSettings>
     <SearchSubscriptionSettingsConfigurationSettings i:nil="true" />
+    <SearchTaxonomyConfigurationSettings i:nil="true" />
 </SearchConfigurationSettings>
