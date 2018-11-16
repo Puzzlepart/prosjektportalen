@@ -82,8 +82,9 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
+$Connection = $null
 try {
-    Connect-SharePoint -Url $Url
+    $Connection = Connect-SharePoint -Url $Url
 } catch {
     Write-Error $Error[0]
     Write-Error "An error occured connecting to $Url. Aborting."
@@ -108,7 +109,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     try {
         if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-            Connect-SharePoint $Url       
+            $Connection = Connect-SharePoint $Url
             Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
             $Language = Get-WebLanguage -ctx (Get-PnPContext)
             $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
@@ -116,13 +117,11 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 Apply-PnPProvisioningTemplate $pkg.FullName
             }
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
-        Connect-SharePoint $Url       
+        $Connection = Connect-SharePoint $Url
         Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     }
     catch {
         Write-Host
@@ -130,12 +129,11 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Write-Host $error[0] -ForegroundColor Red
         exit 1 
     }
-    
 
     .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-        Connect-SharePoint $Url       
+        $Connection = Connect-SharePoint $Url
         Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
         $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/*-$($Language).pnp" -Exclude "pre-*.pnp"
@@ -143,9 +141,9 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             Apply-PnPProvisioningTemplate $pkg.FullName
         }
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    
     Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
 }
+Disconnect-PnPOnline

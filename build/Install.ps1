@@ -83,7 +83,6 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
-
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
@@ -121,10 +120,21 @@ function Start-Install() {
     else {
         Set-PnPTraceLog -Off
     }
-  
+    
+    $Connection = Connect-SharePoint -Url $Url
+    
+    if ($null -eq $Connection) {
+        Write-Host
+        Write-Host "Error connecting to SharePoint $Url. Aborting" -ForegroundColor Red 
+        Write-Host $error[0] -ForegroundColor Red
+        exit 1 
+    }
+
+    # Ensuring default associated groups in the rare instance that they have not been created
+    Ensure-AssociatedGroups
+
     # Installing taxonomy if switch SkipTaxonomy is not present
     if (-not $SkipTaxonomy.IsPresent) {
-        Connect-SharePoint $Url  
         Write-Host "Installing taxonomy (term sets and initial terms)..." -ForegroundColor Green -NoNewLine
         $lcid = Get-TermStoreDefaultLanguage
         Apply-Template -Template "taxonomy-$($lcid)"
@@ -134,7 +144,7 @@ function Start-Install() {
     # Installing root package if switch SkipRootPackage is not present
     if (-not $SkipRootPackage.IsPresent) {
         try {
-            Connect-SharePoint $Url    
+            $Connection = Connect-SharePoint -Url $Url
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
@@ -143,7 +153,6 @@ function Start-Install() {
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
             }
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         catch {
             Write-Host
@@ -156,11 +165,10 @@ function Start-Install() {
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
         try {
-            Connect-SharePoint $AssetsUrl -UseWeb
+            $Connection = Connect-SharePoint -Url $AssetsUrl
             Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "assets" -Localized
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         catch {
             Write-Host
@@ -173,11 +181,10 @@ function Start-Install() {
     # Applies thirdparty template if switch SkipThirdParty is not present
     if (-not $SkipThirdParty.IsPresent) {
         try {
-            Connect-SharePoint $AssetsUrl -UseWeb
+            $Connection = Connect-SharePoint -Url $AssetsUrl
             Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
             Apply-Template -Template "thirdparty"
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         catch {
             Write-Host
@@ -190,11 +197,10 @@ function Start-Install() {
     # Installing data package
     if (-not $SkipData.IsPresent) {
         try {
-            Connect-SharePoint $DataSourceSiteUrl        
+            $Connection = Connect-SharePoint -Url $DataSourceSiteUrl
             Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "data" -Localized
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         catch {
             Write-Host
@@ -207,11 +213,10 @@ function Start-Install() {
     # Installing config package
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
-            Connect-SharePoint $Url
+            $Connection = Connect-SharePoint -Url $Url
             Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "config" -Localized
             Write-Host "DONE" -ForegroundColor Green
-            Disconnect-PnPOnline
         }
         catch {
             Write-Host
@@ -226,7 +231,7 @@ function Start-Install() {
         $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
         if ($extensionFiles.Length -gt 0) {
             try {
-                Connect-SharePoint $Url
+                $Connection = Connect-SharePoint -Url $Url
                 Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
                     $confirmation = "y"
@@ -239,7 +244,6 @@ function Start-Install() {
                         Write-Host "DONE" -ForegroundColor White
                     }
                 }
-                Disconnect-PnPOnline
             }
             catch {
                 Write-Host
@@ -251,11 +255,10 @@ function Start-Install() {
     }
 
     try {
-        Connect-SharePoint $Url    
+        $Connection = Connect-SharePoint -Url $Url
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     }
     catch {
         Write-Host
@@ -270,5 +273,4 @@ function Start-Install() {
     }
 }
 
-Ensure-AssociatedGroups
 Start-Install
