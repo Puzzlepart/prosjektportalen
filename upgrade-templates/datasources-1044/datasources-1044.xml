@@ -26,6 +26,10 @@
                             <pnp:DataValue FieldName="Title">DELIVERIESOVERVIEW</pnp:DataValue>
                             <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070205* Path:{SiteCollection.URL}</pnp:DataValue>
                         </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="Title">RESOURCEALLOCATION</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* Path:{SiteCollection.URL}</pnp:DataValue>
+                        </pnp:DataRow>
                     </pnp:DataRows>
                 </pnp:ListInstance>
             </pnp:Lists>
