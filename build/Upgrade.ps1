@@ -102,7 +102,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
-    Write-Host "Note: The upgrade requires site collection admin  and term store admin permissions" -ForegroundColor Yellow
+    Write-Host "Note: The upgrade requires site collection admin and term store admin permissions" -ForegroundColor Yellow
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 

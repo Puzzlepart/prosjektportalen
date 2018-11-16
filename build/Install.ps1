@@ -101,6 +101,8 @@ function Start-Install() {
         Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
         Write-Host "Environment:`t`t`t$Environment" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
+        Write-Host "Note: The install requires site collection admin and term store admin permissions" -ForegroundColor Yellow
+        Write-Host "" -ForegroundColor Green
         Write-Host "############################################################################" -ForegroundColor Green
     }
 
