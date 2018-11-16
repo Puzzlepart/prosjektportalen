@@ -111,7 +111,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             Connect-SharePoint $Url       
             Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
             $Language = Get-WebLanguage -ctx (Get-PnPContext)
-            $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/pre-*.pnp"
+            $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
             foreach ($pkg in $upgradePkgs) {
                 Apply-PnPProvisioningTemplate $pkg.FullName
             }
@@ -138,7 +138,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Connect-SharePoint $Url       
         Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
-        $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp" -Exclude "pre-*.pnp"
+        $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/*-$($Language).pnp" -Exclude "pre-*.pnp"
         foreach ($pkg in $upgradePkgs) {
             Apply-PnPProvisioningTemplate $pkg.FullName
         }
