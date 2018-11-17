@@ -264,7 +264,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             try {
                 const searchSettings = { ...this.props.searchConfiguration, QueryTemplate: dataSource.GtDpSearchQuery };
                 const { PrimarySearchResults } = await sp.search(searchSettings);
-                console.log(searchSettings, PrimarySearchResults);
                 return PrimarySearchResults;
             } catch (err) {
                 throw err;
