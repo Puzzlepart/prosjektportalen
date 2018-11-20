@@ -1254,6 +1254,9 @@
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Absence</value>
   </data>
+  <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
+    <value>Comment</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1727,6 +1730,9 @@
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
     <value>What is the reason for the absence?</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
+    <value>Further comments (if relevant)</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
@@ -2566,10 +2572,7 @@
     <value>In a phase</value>
   </data>
   <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
-    <value>Leave</value>
-  </data>
-  <data name="Choice_GtResourceAbsence_SickLeave" xml:space="preserve">
-    <value>Sick leave</value>
+    <value>Leave of absence</value>
   </data>
   <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
     <value>Competence development</value>

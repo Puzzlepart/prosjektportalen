@@ -1251,6 +1251,9 @@
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Fravær</value>
   </data>
+  <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1724,6 +1727,9 @@
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
     <value>Hva er grunnen til fraværet?</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
+    <value>Eventuelle kommentarer</value>
   </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
     <value>Hvor stor belastning har personen?</value>
@@ -2566,10 +2572,7 @@
     <value>I en fase</value>
   </data>
   <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
-    <value>Permisjon</value>
-  </data>
-  <data name="Choice_GtResourceAbsence_SickLeave" xml:space="preserve">
-    <value>Sykemelding</value>
+    <value>Fravær</value>
   </data>
   <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
     <value>Kompetanseheving</value>
