@@ -14,7 +14,7 @@ interface IItemRecord {
     ParentID?: number;
 }
 
-let ITEM_RECORDS: IItemRecord[] = [];
+let ITEM_RECORDS: IItemRecord[];
 
 /**
  * Copy a single list item to the destination web
@@ -67,7 +67,7 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
     Logger.log({ message: "(CopyItem) Copy of list items started.", data: { conf }, level: LogLevel.Info });
     let dataCtx: CopyContext;
     let listItems: SP.ListItem<any>[];
-
+    ITEM_RECORDS = [];
     try {
         dataCtx = await GetDataContext(conf, context.url);
         const listItemCollection = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
