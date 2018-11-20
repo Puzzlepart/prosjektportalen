@@ -16,6 +16,8 @@
                 <FieldRef Name="GtEndDate" />
                 <FieldRef Name="GtResourceAbsence" />
                 <FieldRef Name="GtResourceLoad" />
+                <FieldRef Name="GtResourceAbsenceComment" />
+                <FieldRef Name="Modified" />
               </ViewFields>
             <RowLimit Paged="TRUE">100</RowLimit>
             <Aggregations Value="Off" />

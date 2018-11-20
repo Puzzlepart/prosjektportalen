@@ -15,7 +15,7 @@ const ResourceAllocation: IList = {
     ContentTypeBindings: [{ ContentTypeID: "0x010088578E7470CC4AA68D5663464831070209" }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["GtResourceUser", "GtResourceRole", "GtStartDate", "GtEndDate", "GtResourceLoad", "Modified", "Editor"],
+        ViewFields: ["GtResourceUser", "GtResourceRole", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsenceComment", "Modified"],
         AdditionalSettings: {
             RowLimit: 100,
             Paged: true,
