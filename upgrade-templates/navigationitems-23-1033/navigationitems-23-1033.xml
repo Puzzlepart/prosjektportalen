@@ -2,7 +2,7 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
     <pnp:Templates ID="CONTAINER-PP">
-        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-NAVIGATION" Version="0">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-NAVIGATION-23" Version="0">
             <pnp:Navigation>
                 <pnp:CurrentNavigation NavigationType="StructuralLocal">
                     <pnp:StructuralNavigation RemoveExistingNodes="false">
