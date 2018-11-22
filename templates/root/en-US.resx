@@ -1241,18 +1241,21 @@
   </data>
   <data name="SiteFields_GtResourceRole_DisplayName" xml:space="preserve">
     <value>Role</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceUser_DisplayName" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
-    <value>Load</value>
+    <value>Allocation</value>
   </data>
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Resource</value>
   </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Absence</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
+    <value>Comment</value>
   </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
@@ -1715,7 +1718,7 @@
   </data>
   <data name="SiteFields_GtChrHeight_Description" xml:space="preserve">
     <value>The height of the graph in pixels</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
     <value></value>
   </data>
@@ -1724,6 +1727,12 @@
   </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
     <value></value>
+  </data>
+  <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
+    <value>What is the reason for the absence?</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
+    <value>Further comments (if relevant)</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Projects</value>
@@ -1736,9 +1745,12 @@
   </data>
   <data name="ProjectList_NoResults" xml:space="preserve">
     <value>No projects found. This view uses search, so it may take a few minutes from projects are added or updated until they appear here.</value>
-  </data>  
+  </data>
   <data name="ResourceAllocation_LoadingText" xml:space="preserve">
     <value>Loading resource allocation...</value>
+  </data>
+  <data name="ResourceAllocation_ErrorText" xml:space="preserve">
+    <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
@@ -2078,6 +2090,12 @@
   </data>
   <data name="String_Resource" xml:space="preserve">
     <value>Resource</value>
+  </data>
+  <data name="String_Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="String_All" xml:space="preserve">
+    <value>All</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
@@ -2552,6 +2570,18 @@
   </data>
   <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
     <value>In a phase</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
+    <value>Leave of absence</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
+    <value>Competence development</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_OtherAssignments" xml:space="preserve">
+    <value>Other assignments</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Other" xml:space="preserve">
+    <value>Other</value>
   </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Search all projects...</value>

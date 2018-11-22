@@ -17,6 +17,7 @@ import OpportunityMatrix, { IOpportunityMatrixProps } from "./OpportunityMatrix"
 import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
+import ResourceAllocation, { IResourceAllocationProps } from "./ResourceAllocation";
 import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
@@ -54,6 +55,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         statsFieldsListName: __.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),
+    new WebPartComponent<IResourceAllocationProps>(ResourceAllocation, "pp-resourceAllocation"),
 ];
 
 /**

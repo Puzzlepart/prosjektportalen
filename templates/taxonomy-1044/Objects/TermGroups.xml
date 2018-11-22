@@ -149,6 +149,70 @@
                     </pnp:Term>
                 </pnp:Terms>
             </pnp:TermSet>
+            <pnp:TermSet Name="Rolle" ID="54da9f47-c64e-4a26-80f3-4d3c3fa1b7b2" Description=" ">
+                <pnp:Terms>
+                    <pnp:Term Name="Prosjekteier" ID="aa39c7e0-33f1-40cf-8afd-ea5cc6881c03" SourceTermId="aa39c7e0-33f1-40cf-8afd-ea5cc6881c03">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Project Owner" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Prosjektleder" ID="50cd6c83-4799-4827-b385-bd47b038781e" SourceTermId="50cd6c83-4799-4827-b385-bd47b038781e">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Project Manager" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Innleid prosjektleder" ID="8f9c84e1-a5d0-4f26-8b55-60261456d0a8" SourceTermId="8f9c84e1-a5d0-4f26-8b55-60261456d0a8">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="External project manager" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Ass. Prosjektleder" ID="a588c673-eed6-4063-b0d0-852dde2b6cb9" SourceTermId="a588c673-eed6-4063-b0d0-852dde2b6cb9">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Ass. Project Manager" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Controller" ID="79b3a506-d83b-41ed-97a5-d501d4d266d6" SourceTermId="79b3a506-d83b-41ed-97a5-d501d4d266d6">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Controller" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Kvalitetsleder" ID="a764f681-abbc-4655-bdf2-6c03c763c744" SourceTermId="a764f681-abbc-4655-bdf2-6c03c763c744">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Quality Manager" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Brukerkoordinator" ID="6a7bb370-ccbc-40ea-81fb-02d0e11cb546" SourceTermId="6a7bb370-ccbc-40ea-81fb-02d0e11cb546">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="User coordinator" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Prosjektmedlem" ID="b2a11f01-3d52-485a-b561-d0c380d77d47" SourceTermId="b2a11f01-3d52-485a-b561-d0c380d77d47">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Project member" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="IT-støtte" ID="17189149-ffa3-4ab6-8b15-6115cb269ca1" SourceTermId="17189149-ffa3-4ab6-8b15-6115cb269ca1">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="IT-support" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Konsulent" ID="abcc2986-41a5-4699-94aa-a9dde9809ab7" SourceTermId="abcc2986-41a5-4699-94aa-a9dde9809ab7">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Consultant" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Rådgiver" ID="51a925e3-f902-45d5-9938-b4a7d68cd79b" SourceTermId="51a925e3-f902-45d5-9938-b4a7d68cd79b">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Advisor" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                    <pnp:Term Name="Kundeservice" ID="2735d5c0-d259-410b-a30a-f0d80ab5cac8" SourceTermId="2735d5c0-d259-410b-a30a-f0d80ab5cac8">
+                        <pnp:Labels>
+                            <pnp:Label Language="1033" Value="Customer service" IsDefaultForLanguage="true" />
+                        </pnp:Labels>
+                    </pnp:Term>
+                </pnp:Terms>
+            </pnp:TermSet>
         </pnp:TermSets>
     </pnp:TermGroup>
 </pnp:TermGroups>

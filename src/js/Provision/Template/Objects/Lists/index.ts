@@ -7,6 +7,7 @@ import CommunicationPlan from "./CommunicationPlan";
 import Milestones from "./Milestones";
 import ProjectLog from "./ProjectLog";
 import ProjectDeliveries from "./ProjectDeliveries";
+import ResourceAllocation from "./ResourceAllocation";
 import Uncertainties from "./Uncertainties";
 import Tasks from "./Tasks";
 import MeetingCalendar from "./MeetingCalendar";
@@ -25,6 +26,7 @@ const Lists: IList[] = [
     Milestones,
     ProjectLog,
     ProjectDeliveries,
+    ResourceAllocation,
     Uncertainties,
     Tasks,
     MeetingCalendar,

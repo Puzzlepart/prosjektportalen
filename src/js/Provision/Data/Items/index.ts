@@ -6,14 +6,15 @@ import ProvisionError from "../../ProvisionError";
 import { setItemFieldValue, SetItemFieldValueResult } from "../../../Util";
 import GetDataContext, { CopyContext } from "./GetDataContext";
 
-interface IRecord {
-    SourceId: number;
-    DestId: number;
-    DestItem: SP.ListItem<any>;
+interface IItemRecord {
+    Title: string;
+    SourceItemId: number;
+    DestinationItemId: number;
+    DestinationItem: SP.ListItem<any>;
     ParentID?: number;
 }
 
-let __RECORDS: IRecord[] = [];
+let ITEM_RECORDS: IItemRecord[];
 
 /**
  * Copy a single list item to the destination web
@@ -39,15 +40,16 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
             }
         });
         await dataCtx.loadAndExecuteQuery(dataCtx.Destination._, [destItem]);
-        const record: IRecord = {
-            SourceId: sourceItemId,
-            DestId: destItem.get_fieldValues()["ID"],
-            DestItem: destItem,
+        const record: IItemRecord = {
+            Title:  srcItem.get_fieldValues()["Title"],
+            SourceItemId: sourceItemId,
+            DestinationItemId: destItem.get_fieldValues()["ID"],
+            DestinationItem: destItem,
         };
         if (srcItem.get_fieldValues()["ParentID"]) {
             record.ParentID = parseInt(srcItem.get_fieldValues()["ParentID"].get_lookupValue(), 10);
         }
-        __RECORDS.push(record);
+        ITEM_RECORDS.push(record);
         Logger.log({ message: `(CopyItem) Copy of list item #${sourceItemId} done.`, data: {}, level: LogLevel.Info });
         return;
     } catch (err) {
@@ -65,7 +67,7 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
     Logger.log({ message: "(CopyItem) Copy of list items started.", data: { conf }, level: LogLevel.Info });
     let dataCtx: CopyContext;
     let listItems: SP.ListItem<any>[];
-
+    ITEM_RECORDS = [];
     try {
         dataCtx = await GetDataContext(conf, context.url);
         const listItemCollection = dataCtx.Source.list.getItems(dataCtx.CamlQuery);
@@ -96,14 +98,15 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
  * @param {CopyContext} dataCtx Data context
  */
 async function HandleItemsWithParent(dataCtx: CopyContext): Promise<void> {
-    const itemsWithParent = __RECORDS.filter(item => item.hasOwnProperty("ParentID"));
-    itemsWithParent.forEach(item => {
-        let [parent] = __RECORDS.filter(({ SourceId }) => SourceId === item.ParentID);
-        if (parent) {
-            item.DestItem.set_item("ParentID", parent.DestId);
-            item.DestItem.update();
-        }
-    });
+    ITEM_RECORDS
+        .filter(item => item.hasOwnProperty("ParentID"))
+        .forEach(item => {
+            let [parent] = ITEM_RECORDS.filter(record => record.SourceItemId === item.ParentID);
+            if (parent) {
+                item.DestinationItem.set_item("ParentID", parent.DestinationItemId);
+                item.DestinationItem.update();
+            }
+        });
     try {
         await dataCtx.loadAndExecuteQuery(dataCtx.Destination._);
     } catch (err) {
