@@ -7,10 +7,14 @@ export interface IGoToChecklistLinkProps {
     phase: PhaseModel;
 }
 
-const GoToChecklistLink = ({ phase }: IGoToChecklistLinkProps) => {
+function generateGoToChecklistLink(phase: PhaseModel) {
+    return `${phase.Checklist.defaultViewUrl}?useFiltersInViewXml=1&FilterField1=GtProjectPhase&FilterValue1=${phase.TaxonomyHiddenListId}&FilterType1=Counter&FilterLookupId1=1`;
+}
+
+const GoToChecklistLink = (props: IGoToChecklistLinkProps) => {
     return (
         <li>
-            <a href={`${phase.Checklist.defaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`}>
+            <a href={generateGoToChecklistLink(props.phase)}>
                 <Icon iconName="BulletedList" />
                 <span style={{ marginLeft: 5 }}>{__.getResource("ProjectPhases_GoToChecklist")}</span>
             </a>
