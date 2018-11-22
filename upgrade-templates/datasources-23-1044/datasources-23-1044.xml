@@ -2,7 +2,7 @@
 <pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Preferences></pnp:Preferences>
     <pnp:Templates ID="CONTAINER-PP">
-        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-DATASOURCES-1044" Version="0">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-ROOT-DATASOURCES-1044-23" Version="0">
             <pnp:Lists>
                 <pnp:ListInstance Title="Datakilder" Description="" Hidden="true" DocumentTemplate="" TemplateType="100" Url="Lists/DataSources" EnableFolderCreation="false" EnableAttachments="false">
                     <pnp:DataRows>
