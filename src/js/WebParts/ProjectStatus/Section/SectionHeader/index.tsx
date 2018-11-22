@@ -7,9 +7,9 @@ import ISectionHeaderProps from "./ISectionHeaderProps";
 const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: any) => {
     return (
         <div className="section-details ms-Grid-col ms-sm12 ms-md9 ms-lg9">
-            <h1>{name}</h1>
+            <h3>{name}</h3>
             <div hidden={!fieldName}>
-                <h3>{statusValue}</h3>
+                <h2>{statusValue}</h2>
                 <p>{Util.htmlDecode(statusComment)}</p>
             </div>
         </div>

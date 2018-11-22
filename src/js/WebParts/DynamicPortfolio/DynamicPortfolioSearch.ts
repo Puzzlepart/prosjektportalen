@@ -1,11 +1,11 @@
-import { sp } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
 import {
     IDynamicPortfolioConfiguration,
     IDynamicPortfolioViewConfig,
 } from "./DynamicPortfolioConfiguration";
 
 /**
- * Default Search Settings used for sp-pnp-js
+ * Default Search Settings used for @pnp/sp
  */
 export const DEFAULT_SEARCH_SETTINGS = { Querytext: "*", RowLimit: 500, TrimDuplicates: false };
 
@@ -15,7 +15,7 @@ export interface IProjectsQueryResponse {
 }
 
 /**
- * Query the REST Search API using sp-pnp-js
+ * Query the REST Search API using @pnp/sp
  *
  * @param {IDynamicPortfolioViewConfig} viewConfig View configuration
  * @param {IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration

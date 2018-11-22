@@ -15,7 +15,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     const previewImage = {
         previewImageSrc: props.project.Logo,
         previewIconProps: props.project.Logo ? null : fallbackIconProps,
-        imageFit: ImageFit.cover,
+        imageFit: ImageFit.contain,
         accentColor: Util.stringToColour(props.project.Phase),
         width: props.tileWidth,
         height: props.tileImageHeight,

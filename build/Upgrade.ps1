@@ -82,8 +82,9 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
+$Connection = $null
 try {
-    Connect-SharePoint -Url $Url
+    $Connection = Connect-SharePoint -Url $Url
 } catch {
     Write-Error $Error[0]
     Write-Error "An error occured connecting to $Url. Aborting."
@@ -102,14 +103,25 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
+    Write-Host "Note: The upgrade requires site collection admin and term store admin permissions" -ForegroundColor Yellow
+    Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
     try {
+        if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
+            $Connection = Connect-SharePoint $Url -Connection $Connection
+            Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
+            $Language = Get-WebLanguage -ctx (Get-PnPContext)
+            $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
+            foreach ($pkg in $upgradePkgs) {
+                Apply-PnPProvisioningTemplate $pkg.FullName
+            }
+            Write-Host "DONE" -ForegroundColor Green
+        }
         Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
-        Connect-SharePoint $Url       
+        $Connection = Connect-SharePoint $Url -Connection $Connection
         Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     }
     catch {
         Write-Host
@@ -117,22 +129,21 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Write-Host $error[0] -ForegroundColor Red
         exit 1 
     }
-    
 
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
+    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-        Connect-SharePoint $Url       
+        $Connection = Connect-SharePoint $Url -Connection $Connection
         Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
-        $upgradePkgs = Get-ChildItem "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/$($Language)/*.pnp"
+        $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/*-$($Language).pnp" -Exclude "pre-*.pnp"
         foreach ($pkg in $upgradePkgs) {
             Apply-PnPProvisioningTemplate $pkg.FullName
         }
         Write-Host "DONE" -ForegroundColor Green
-        Disconnect-PnPOnline
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    
     Write-Host "You're already on the same or newer version of Project Portal" -ForegroundColor Yellow
 }
+Disconnect-PnPOnline

@@ -60,10 +60,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      * @param {ISectionProps} param0 Props
      * @param {ISectionState} param1 State
      */
-    private renderHeader({ project, section }: ISectionProps, { listData }: ISectionState) {
+    private renderHeader({ section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
-        if (section.getType() === SectionType.ProjectPropertiesSection) {
-            fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3`;
+        if (section.getType() === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
+            fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3&HideWebPartMaintenancePageLink=1&HideRibbon=1`;
         }
         return (
             <SectionHeader
@@ -86,7 +86,8 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                     <div>
                         <RiskMatrix
                             data={{ items: listData.items }}
-                            showViewSelector={false} />
+                            showViewSelector={false}
+                            { ...this.props.riskMatrix } />
                         <OpportunityMatrix
                             data={{ items: listData.items }}
                             showViewSelector={false} />

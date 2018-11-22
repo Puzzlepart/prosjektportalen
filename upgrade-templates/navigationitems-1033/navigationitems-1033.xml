@@ -6,9 +6,7 @@
             <pnp:Navigation>
                 <pnp:CurrentNavigation NavigationType="StructuralLocal">
                     <pnp:StructuralNavigation RemoveExistingNodes="false">
-                        <pnp:NavigationNode Title="Portfolio Insight" Url="{site}/SitePages/ProjectStats.aspx" />
-                        <pnp:NavigationNode Title="Deliveries Overview" Url="{site}/SitePages/DeliveriesOverview.aspx" />
-                        <pnp:NavigationNode Title="Risk Overview" Url="{site}/SitePages/RiskOverview.aspx" />
+                        <pnp:NavigationNode Title="Resource allocation" Url="{site}/SitePages/ResourceAllocation.aspx" />
                     </pnp:StructuralNavigation>
                 </pnp:CurrentNavigation>
             </pnp:Navigation>

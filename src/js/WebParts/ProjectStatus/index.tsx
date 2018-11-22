@@ -1,5 +1,5 @@
 import * as React from "react";
-import { sp } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { StickyContainer, Sticky } from "react-sticky";
 import Navigation from "./Navigation";
@@ -44,7 +44,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                 <div className="ms-Grid">
                     <StickyContainer className="status-report-container">
                         <Sticky>
-                            {({ isSticky, wasSticky, style, distanceFromTop, distanceFromBottom, calculatedHeight }) => (
+                            {({ style }) => (
                                 <div
                                     id="status-navigation"
                                     className="navigation ms-Grid-row"
@@ -70,17 +70,17 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * Render sections
      */
     private renderSections() {
-        const { data } = this.state;
         return (
-            data.sections
+            this.state.data.sections
                 .filter(s => s.showAsSection)
                 .map((s, key) => (
                     <Section
                         key={key}
                         index={key}
                         section={s}
-                        project={data.project}
-                        fields={data.fields} />
+                        project={this.state.data.project}
+                        fields={this.state.data.fields}
+                        riskMatrix={this.props.riskMatrix} />
                 )));
     }
 

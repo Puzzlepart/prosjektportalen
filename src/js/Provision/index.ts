@@ -1,4 +1,4 @@
-import { Site } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
 import { CreateWeb, DoesWebExist } from "./Subsite";
 import { ProjectModel } from "../Model/ProjectModel";
 import { CopyDefaultData } from "./Data";

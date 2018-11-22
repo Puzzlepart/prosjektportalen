@@ -1,6 +1,7 @@
 import * as React from "react";
 import __ from "../../../Resources";
-import pnp, { List, Logger, LogLevel } from "sp-pnp-js";
+import { sp, List } from "@pnp/sp";
+import { Logger, LogLevel } from "@pnp/logging";
 import * as moment from "moment";
 import * as html2canvas from "html2canvas";
 import * as sanitize from "sanitize-filename";
@@ -34,7 +35,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             exportStatus: ExportReportStatus.IDLE,
             isLoading: true,
         };
-        this._reportsLib = pnp.sp.web.lists.getByTitle(props.reportsLibTitle);
+        this._reportsLib = sp.web.lists.getByTitle(props.reportsLibTitle);
         this._onExportClick = this._onExportClick.bind(this);
         this._onSelectedReportChanged = this._onSelectedReportChanged.bind(this);
         this._onSnapshotDialogDismiss = this._onSnapshotDialogDismiss.bind(this);
@@ -243,8 +244,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             const canvas = await html2canvas(document.getElementById("pp-projectstatus"));
             if (canvas.toBlob) {
                 canvas.toBlob(resolve);
-            } else if (canvas.msToBlob) {
-                const blob = canvas.msToBlob();
+            } else if (canvas["msToBlob"]) {
+                const blob = canvas["msToBlob"]();
                 resolve(blob);
             }
         });
@@ -287,7 +288,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * @param {boolean} shouldOverWrite Should overwrite
      */
     private async saveFileToLibrary(libServerRelativeUrl: string, fileName: string, title: string, blob: Blob, shouldOverWrite = true): Promise<IReport> {
-        const libRootFolder = pnp.sp.web.getFolderByServerRelativeUrl(libServerRelativeUrl);
+        const libRootFolder = sp.web.getFolderByServerRelativeUrl(libServerRelativeUrl);
         const fileAddResult = await libRootFolder.files.add(fileName, blob, shouldOverWrite);
         const { ID, FileLeafRef, EncodedAbsUrl } = await fileAddResult
             .file

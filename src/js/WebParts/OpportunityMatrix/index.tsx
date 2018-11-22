@@ -1,5 +1,5 @@
 import * as React from "react";
-import pnp, { List } from "sp-pnp-js";
+import { sp, List } from "@pnp/sp";
 import __ from "../../Resources";
 import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -34,7 +34,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
     constructor(props: IOpportunityMatrixProps) {
         super(props);
         this.state = { data: props.data };
-        this._pnpList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
+        this._pnpList = sp.web.lists.getByTitle(__.getResource("Lists_Uncertainties_Title"));
         this.onViewChanged = this.onViewChanged.bind(this);
         this.getViewOptions = this.getViewOptions.bind(this);
     }

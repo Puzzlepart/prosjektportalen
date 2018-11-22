@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_SiteTemplates_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="SiteTemplates" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="500" DraftVersionVisibility="0" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_SiteTemplates_Title}" Description="" DocumentTemplate="" TemplateType="101" Url="SiteTemplates" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x01010085DBEE57993FD8449F4D300C0A5CBF76" Default="true" />

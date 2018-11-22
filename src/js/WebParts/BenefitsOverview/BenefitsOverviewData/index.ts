@@ -1,6 +1,6 @@
 //#region Imports
 import __ from "../../../Resources";
-import pnp, { Site } from "sp-pnp-js";
+import { sp, Site } from "@pnp/sp";
 import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";
 import DataSource, { IDataSourceSearchCustom } from "../../DataSource";
@@ -92,8 +92,8 @@ export async function retrieveFromSource(dataSource: DataSource, customSearchSet
  * Fetches data from list(s)
  */
 async function retrieveDataList(): Promise<IBenefitsOverviewData> {
-    const gainsList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_BenefitsAnalysis_Title"));
-    const measuresList = pnp.sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
+    const gainsList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsAnalysis_Title"));
+    const measuresList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
     try {
         const fieldsMap = await fetchFieldsAsMap(gainsList);
         let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...Object.keys(fieldsMap)].join(",");
@@ -132,7 +132,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
     const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
     const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
     if (dataSource) {
-        const contentType = pnp.sp.site.rootWeb.contentTypes.getById(__.getResource("ContentTypes_Gevinst_ContentTypeId"));
+        const contentType = sp.site.rootWeb.contentTypes.getById(__.getResource("ContentTypes_Gevinst_ContentTypeId"));
         let searchSettings: { [key: string]: any } = {
             Querytext: "*",
             QueryTemplate: dataSource.GtDpSearchQuery,
@@ -163,7 +163,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
         try {
             const [fieldsMap, { PrimarySearchResults }]: [any, any] = await Promise.all([
                 fetchFieldsAsMap(contentType),
-                pnp.sp.search(searchSettings),
+                sp.search(searchSettings),
             ]);
             const gains = PrimarySearchResults
                 .filter(s => s.ContentTypeID.indexOf(__.getResource("ContentTypes_Gevinst_ContentTypeId")) !== -1)

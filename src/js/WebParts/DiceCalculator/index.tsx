@@ -1,6 +1,6 @@
 import * as React from "react";
 import __ from "../../Resources";
-import pnp, { List } from "sp-pnp-js";
+import { sp, List } from "@pnp/sp";
 import { DetailsList, SelectionMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { ActionButton } from "office-ui-fabric-react/lib/Button";
@@ -26,7 +26,7 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
             scoreSubmitted: false,
             elements: props.elements,
         });
-        this.diceList = pnp.sp.site.rootWeb.lists.getByTitle(this.props.diceListTitle);
+        this.diceList = sp.site.rootWeb.lists.getByTitle(this.props.diceListTitle);
         this._onRenderItemColumn = this._onRenderItemColumn.bind(this);
         this.saveScore = this.saveScore.bind(this);
         this.removeScore = this.removeScore.bind(this);

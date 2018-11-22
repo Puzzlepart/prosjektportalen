@@ -1251,6 +1251,9 @@
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Fravær</value>
   </data>
+  <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1717,13 +1720,19 @@
     <value>Høyden på diagrammet i piksler</value>
   </data>
   <data name="SiteFields_GtResourceRole_Description" xml:space="preserve">
-    <value></value>
+    <value>Hvilken rolle har personen?</value>
   </data>
   <data name="SiteFields_GtResourceUser_Description" xml:space="preserve">
     <value></value>
   </data>
+  <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
+    <value>Hva er grunnen til fraværet?</value>
+  </data>
+  <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
+    <value>Eventuelle kommentarer</value>
+  </data>
   <data name="SiteFields_GtResourceLoad_Description" xml:space="preserve">
-    <value></value>
+    <value>Hvor stor belastning har personen?</value>
   </data>
   <data name="ProjectList_Header" xml:space="preserve">
     <value>Prosjekter</value>
@@ -1739,6 +1748,9 @@
   </data>
   <data name="ResourceAllocation_LoadingText" xml:space="preserve">
     <value>Laster ressursallokering...</value>
+  </data>
+  <data name="ResourceAllocation_ErrorText" xml:space="preserve">
+    <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
@@ -1989,6 +2001,9 @@
   <data name="String_Project" xml:space="preserve">
     <value>Prosjekt</value>
   </data>
+  <data name="String_AllProjects" xml:space="preserve">
+    <value>Alle prosjekter</value>
+  </data>
   <data name="String_AchievementOfObjectives" xml:space="preserve">
     <value>Måloppnåelse</value>
   </data>
@@ -2075,6 +2090,12 @@
   </data>
   <data name="String_Resource" xml:space="preserve">
     <value>Ressurs</value>
+  </data>
+  <data name="String_Role" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="String_All" xml:space="preserve">
+    <value>Alle</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>
@@ -2550,6 +2571,18 @@
   <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
     <value>I en fase</value>
   </data>
+  <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
+    <value>Fravær</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Competency" xml:space="preserve">
+    <value>Kompetanseheving</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_OtherAssignments" xml:space="preserve">
+    <value>Andre arbeidsoppgaver</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Other" xml:space="preserve">
+    <value>Annet</value>
+  </data>
   <data name="DynamicPortfolio_SearchBox_Placeholder" xml:space="preserve">
     <value>Søk i alle prosjekter...</value>
   </data>
@@ -2834,6 +2867,9 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
+  </data>  
+  <data name="RiskMatrix_LoadingText" xml:space="preserve">
+    <value>Laster risikomatrise...</value>
   </data>
   <data name="OpportunityMatrix_Header_VeryHigh" xml:space="preserve">
     <value>Svært høy</value>

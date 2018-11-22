@@ -1,4 +1,4 @@
-import { Logger, LogLevel } from "sp-pnp-js";
+import {  Logger, LogLevel } from "@pnp/logging";
 import * as Util from "../../Util";
 import { CopyFiles } from "./Files";
 import { CopyItems } from "./Items";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import __ from "../../Resources";
-import { Site } from "sp-pnp-js";
+import { Site } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
@@ -171,7 +171,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
     }
 
     /**
-     * Fetch data using sp-pnp-js search
+     * Fetch data using @pnp/sp search
      */
     private async fetchData(): Promise<IProjectListData> {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;

@@ -1,4 +1,5 @@
-import pnp, { LogLevel, ConsoleListener } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
+import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { initializeIcons } from "@uifabric/icons";
 import { GetSettings } from "./Settings";
 import * as WebParts from "./WebParts";
@@ -14,11 +15,26 @@ namespace PP {
     /**
      * Sets up PnP logging
      *
-     * @param {string} logLevel Log level
+     * @param {string} logLevelStr Log level string
      */
-    async function initLogging(logLevel: string) {
-        pnp.log.activeLogLevel = LogLevel[logLevel];
-        pnp.log.subscribe(new ConsoleListener());
+    async function initLogging(logLevelStr: string) {
+        let logLevel = LogLevel.Off;
+        switch (logLevelStr.toLowerCase()) {
+            case "info": {
+                logLevel = LogLevel.Info;
+            }
+                break;
+            case "warning": {
+                logLevel = LogLevel.Warning;
+            }
+                break;
+            case "error": {
+                logLevel = LogLevel.Error;
+            }
+                break;
+        }
+        Logger.activeLogLevel = logLevel;
+        Logger.subscribe(new ConsoleListener());
     }
 
     /**
@@ -31,7 +47,7 @@ namespace PP {
         if (defaultCachingTimeoutSecondsStr) {
             defaultCachingTimeoutSeconds = parseInt(defaultCachingTimeoutSecondsStr, 10);
         }
-        pnp.setup({
+        sp.setup({
             sp: { headers: { Accept: "application/json; odata=verbose" } },
             defaultCachingStore: "session",
             defaultCachingTimeoutSeconds,
@@ -41,7 +57,6 @@ namespace PP {
     export async function initialize() {
         const settings = await GetSettings();
         initializeIcons();
-        await pnp.storage.session.deleteExpired();
         initLogging(settings.LOG_LEVEL);
         initPnp(settings.DEFAULT_CACHING_TIMEOUT_SECONDS);
         Forms.InitializeModifications();

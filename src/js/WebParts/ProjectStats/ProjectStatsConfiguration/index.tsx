@@ -1,13 +1,11 @@
 import * as React from "react";
-import { LogLevel, Logger } from "sp-pnp-js";
+import { LogLevel, Logger } from "@pnp/logging";
 import IProjectStatsConfigurationProps from "./IProjectStatsConfigurationProps";
 import IProjectStatsConfigurationState from "./IProjectStatsConfigurationState";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { DefaultButton } from "office-ui-fabric-react/lib/Button";
 
 export default class ProjectStatsConfiguration extends React.PureComponent<IProjectStatsConfigurationProps, IProjectStatsConfigurationState> {
-    private _content: HTMLDivElement;
-
     constructor(props: IProjectStatsConfigurationProps) {
         super(props);
         this.state = { isExpanded: false };
@@ -33,7 +31,7 @@ export default class ProjectStatsConfiguration extends React.PureComponent<IProj
                                 </span>
                             </div>
                         </div>
-                        <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }} hidden={!this.state.isExpanded} ref={ele => this._content = ele}>
+                        <div className="ms-Grid-col ms-sm12" style={{ marginTop: 25 }} hidden={!this.state.isExpanded}>
                             {this.props.contentTypes.map((contentType) => (
                                 <DefaultButton
                                     key={contentType.StringId}

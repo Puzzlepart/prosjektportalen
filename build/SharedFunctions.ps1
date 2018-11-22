@@ -1,12 +1,20 @@
 # Connect to SharePoint
-function Connect-SharePoint ($Url) {
+function Connect-SharePoint ([string]$Url, [SharePointPnP.PowerShell.Commands.Base.SPOnlineConnection]$Connection) {
+    $ConnectionUrl = $Url.TrimEnd("/")
+
+    if ($null -ne $Connection -and $Connection.Url -eq $ConnectionUrl) {
+        return $Connection
+    }
+    if ($null -ne $Connection -and $Connection.Url -ne $ConnectionUrl) {
+        return $Connection.CloneContext($ConnectionUrl)
+    }
     try {
         if ($UseWebLogin.IsPresent) {
-            Connect-PnPOnline $Url -UseWebLogin
+            return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
         } elseif ($CurrentCredentials.IsPresent) {
-            Connect-PnPOnline $Url -CurrentCredentials 
+            return Connect-PnPOnline $ConnectionUrl -CurrentCredentials -ReturnConnection
         } else {
-            Connect-PnPOnline $Url -Credentials $Credential
+            return Connect-PnPOnline $ConnectionUrl -Credentials $Credential -ReturnConnection
         }
     } catch {
         throw $error
@@ -14,8 +22,7 @@ function Connect-SharePoint ($Url) {
 }
 
 # Ensure assocated groups
-function Ensure-AssociatedGroups() {    
-    Connect-SharePoint $Url  
+function Ensure-AssociatedGroups() {
     $ascMemberGroup = Get-PnPGroup -AssociatedMemberGroup -ErrorAction SilentlyContinue
     $ascVisitorGroup = Get-PnPGroup -AssociatedVisitorGroup -ErrorAction SilentlyContinue
     $ascOwnerGroup = Get-PnPGroup -AssociatedOwnerGroup -ErrorAction SilentlyContinue

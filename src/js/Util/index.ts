@@ -1,6 +1,7 @@
 import __ from "../Resources";
 import * as moment from "moment";
-import { Logger, LogLevel, Web } from "sp-pnp-js";
+import { Web } from "@pnp/sp";
+import { Logger, LogLevel } from "@pnp/logging";
 import ExportToExcel from "./ExportToExcel";
 import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
@@ -320,7 +321,7 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
                 resolve();
             });
         }, "sp.js");
-        window.setTimeout(loadTimeout, reject);
+        window.setTimeout(reject, loadTimeout);
     });
 };
 

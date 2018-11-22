@@ -3,7 +3,8 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, LogLevel, Logger } from "sp-pnp-js";
+import { sp } from "@pnp/sp";
+import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import IProjectStatsProps, { ProjectStatsDefaultProps } from "./IProjectStatsProps";
@@ -161,14 +162,12 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         const statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
         const chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
         try {
-            const batch = sp.createBatch();
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().inBatch(batch).get(),
-                chartsConfigList.items.usingCaching().inBatch(batch).get(),
-                chartsConfigList.contentTypes.usingCaching().inBatch(batch).get(),
-                statsFieldsList.contentTypes.usingCaching().inBatch(batch).get(),
-                batch.execute(),
+                statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().get(),
+                chartsConfigList.items.usingCaching().get(),
+                chartsConfigList.contentTypes.usingCaching().get(),
+                statsFieldsList.contentTypes.usingCaching().get(),
             ]);
             const contentTypes: IContentType[] = [...chartsConfigListContentTypes, ...statsFieldsListContenTypes];
             if (!view) {

@@ -1,5 +1,5 @@
 import __ from "../../../Resources";
-import { sp, List } from "sp-pnp-js";
+import { sp, List } from "@pnp/sp";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import * as Util from "../../../Util";
 import { PROJECTPHASE_FIELD, GetCurrentProjectPhase, GetWelcomePageFieldValues } from "../../../Project";
@@ -20,8 +20,7 @@ async function getTaxonomyHiddenListItems(termSetId: string) {
 async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const rootWeb = sp.site.rootWeb;
-        const phaseField = rootWeb.fields.getByInternalNameOrTitle(PROJECTPHASE_FIELD);
+        const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
         const { TermSetId } = await phaseField.select("TermSetId").get();
         const taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(jsomCtx.clientContext);
         const termStore = taxSession.getDefaultSiteCollectionTermStore();
@@ -105,7 +104,7 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
 }
 
 /**
- * Fetch data using sp-pnp-js and sp.taxonomy.js
+ * Fetch data using @pnp/sp and sp.taxonomy.js
  *
  * @param {List} phaseChecklist Phase checklist
  * @param {boolean} gatesEnabled Gates enabled
