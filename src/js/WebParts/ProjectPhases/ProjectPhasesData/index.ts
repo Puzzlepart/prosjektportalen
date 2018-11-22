@@ -20,7 +20,7 @@ async function getTaxonomyHiddenListItems(termSetId: string) {
 async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]> {
     try {
         const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(Project.PROJECTPHASE_FIELD);
+        const phaseField = sp.site.rootWeb.fields.getByInternalNameOrTitle(PROJECTPHASE_FIELD);
         const { TermSetId } = await phaseField.select("TermSetId").get();
         const taxSession = SP.Taxonomy.TaxonomySession.getTaxonomySession(jsomCtx.clientContext);
         const termStore = taxSession.getDefaultSiteCollectionTermStore();
