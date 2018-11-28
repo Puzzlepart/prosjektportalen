@@ -42,7 +42,7 @@ Param(
     [Parameter(Mandatory = $false, HelpMessage = "Use the credentials of the current user to connect to SharePoint. Useful e.g. if you install directly from the server.")]
     [switch]$CurrentCredentials,
     [Parameter(Mandatory = $false, HelpMessage = "Active SharePoint connection (Used by script)")]
-    [SharePointPnP.PowerShell.Commands.Base.SPOnlineConnection]$Connection,
+    [Object]$Connection,
     [Parameter(Mandatory = $false, HelpMessage = "PowerShell credential to authenticate with")]
     [System.Management.Automation.PSCredential]$PSCredential,
     [Parameter(Mandatory = $false, HelpMessage = "Installation Environment. If SkipLoadingBundle is set, this will be ignored")]
