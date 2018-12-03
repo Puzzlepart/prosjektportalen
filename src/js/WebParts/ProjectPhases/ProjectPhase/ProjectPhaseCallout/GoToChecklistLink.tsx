@@ -8,7 +8,11 @@ export interface IGoToChecklistLinkProps {
 }
 
 function generateGoToChecklistLink(phase: PhaseModel) {
-    return `${phase.Checklist.defaultViewUrl}?useFiltersInViewXml=1&FilterField1=GtProjectPhase&FilterValue1=${phase.TaxonomyHiddenListId}&FilterType1=Counter&FilterLookupId1=1`;
+    if (phase.TaxonomyHiddenListId) {
+        return `${phase.Checklist.defaultViewUrl}?useFiltersInViewXml=1&FilterField1=GtProjectPhase&FilterValue1=${phase.TaxonomyHiddenListId}&FilterType1=Counter&FilterLookupId1=1`;
+    } else {
+        return `${phase.Checklist.defaultViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${encodeURIComponent(phase.Name)}`;
+    }
 }
 
 const GoToChecklistLink = (props: IGoToChecklistLinkProps) => {
