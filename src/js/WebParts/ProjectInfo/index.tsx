@@ -67,11 +67,13 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                                 <DefaultButton
                                     href={this.props.webUrl}
                                     iconProps={{ iconName: "Home" }}
+                                    target="_blank"
                                     text={__.getResource("ProjectInfo_ProjectLinkText")}
                                     style={{ marginRight: 10 }} />
                                 <DefaultButton
                                     href={`${this.props.webUrl}/SitePages/ProjectStatus.aspx`}
                                     iconProps={{ iconName: "BarChart4" }}
+                                    target="_blank"
                                     text={__.getResource("ProjectInfo_ProjectStatusLinkText")} />
                             </div>
                             {this.state.isLoading

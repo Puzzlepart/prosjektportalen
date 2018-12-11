@@ -31,7 +31,7 @@ async function fetchAvailablePhases(gatesEnabled: boolean): Promise<PhaseModel[]
         const phases = termsData
             .map(term => {
                 const model = new PhaseModel().initFromSpTaxonomyTerm(term, gatesEnabled);
-                const [thlItem] = thlItems.filter(i => i.CatchAllDataLabel.indexOf(model.Name) !== -1);
+                const [thlItem] = thlItems.filter(i => i.CatchAllDataLabel && i.CatchAllDataLabel.indexOf(model.Name) !== -1);
                 if (thlItem) {
                     model.TaxonomyHiddenListId = thlItem.ID;
                 }

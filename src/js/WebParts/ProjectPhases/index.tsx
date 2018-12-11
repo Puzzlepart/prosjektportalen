@@ -54,13 +54,21 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                 isLoading: false,
             });
         } catch (err) {
-            // catch err
+            this.setState({
+                isLoading: false,
+                error: err,
+            });
         }
     }
 
     public render(): JSX.Element {
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} label={__.getResource("ProjectPhases_LoadingText")} />;
+        }
+        if (this.state.error) {
+            return (<MessageBar messageBarType={MessageBarType.error}>
+                {this.state.error.message}
+            </MessageBar>);
         }
         return (
             <div>

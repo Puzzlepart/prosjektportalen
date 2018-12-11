@@ -1,5 +1,5 @@
 # Connect to SharePoint
-function Connect-SharePoint ([string]$Url, [SharePointPnP.PowerShell.Commands.Base.SPOnlineConnection]$Connection) {
+function Connect-SharePoint ([string]$Url, [Object]$Connection) {
     $ConnectionUrl = $Url.TrimEnd("/")
 
     if ($null -ne $Connection -and $Connection.Url -eq $ConnectionUrl) {
