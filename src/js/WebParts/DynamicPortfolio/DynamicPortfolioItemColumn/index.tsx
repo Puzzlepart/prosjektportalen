@@ -71,6 +71,12 @@ const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPo
                 );
 
             }
+            case "URL": {
+                let urlVals = colValue.split(",");
+                return (
+                    <a title={urlVals[1]} href={urlVals[0]}>{urlVals[0]}</a>
+                );
+            }
             case "Default": {
                 return (
                     <span title={colValue}>{colValue}</span>

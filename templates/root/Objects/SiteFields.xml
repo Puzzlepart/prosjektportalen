@@ -311,6 +311,7 @@
             <CHOICE>Date</CHOICE>
             <CHOICE>Currency</CHOICE>
             <CHOICE>Note</CHOICE>
+            <CHOICE>URL</CHOICE>
             <CHOICE>Status</CHOICE>
         </CHOICES>
     </Field>
