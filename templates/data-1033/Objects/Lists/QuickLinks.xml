@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="Lenker" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="URL">
         <pnp:DataRow>
             <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren | En felles prosjektmodell for offentlig sektor</pnp:DataValue>
         </pnp:DataRow>
