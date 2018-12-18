@@ -153,7 +153,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         style={{
                             ...props.style,
                             color: itemColor,
-                            backgroundColor: `rgb(26, 111, 179, ${itemOpacity})`,
+                            backgroundColor: "rgb(26, 111, 179)",
+                            opacity: itemOpacity,
                             border: "none",
                             cursor: "text",
                         }}
@@ -173,7 +174,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         style={{
                             ...props.style,
                             color: itemColor,
-                            backgroundColor: `rgb(205, 92, 92, ${itemOpacity})`,
+                            backgroundColor: "rgb(205, 92, 92)",
+                            opacity: itemOpacity,
                             border: "none",
                             cursor: "text",
                         }}
