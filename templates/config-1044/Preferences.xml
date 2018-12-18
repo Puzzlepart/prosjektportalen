@@ -1,6 +1,7 @@
 <pnp:Preferences 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Parameters>
+        <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
     </pnp:Parameters>
 </pnp:Preferences>
