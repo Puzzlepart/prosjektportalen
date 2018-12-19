@@ -12,12 +12,6 @@
             </Query>
             <ViewFields>
                 <FieldRef Name="LinkTitle" />
-                <FieldRef Name="GtProjectUrl" />
-                <FieldRef Name="GtProjectServiceArea" />
-                <FieldRef Name="GtProjectType" />
-                <FieldRef Name="GtProjectPhase" />
-                <FieldRef Name="GtStartDate" />
-                <FieldRef Name="GtEndDate" />
                 <FieldRef Name="Modified" />
             </ViewFields>
             <RowLimit Paged="TRUE">100</RowLimit>

@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_Stakeholders_Title}"  Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Stakeholders" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" 
+<pnp:ListInstance Title="{resource:Lists_Stakeholders_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Stakeholders" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x010088578E7470CC4AA68D5663464831070202" />
@@ -22,6 +22,16 @@
             <JSLink>hierarchytaskslist.js</JSLink>
         </View>
     </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="2847b3b0-ed22-4c47-b7c0-3ebfc83dae4a" Name="{parameter:GenericFieldPrefix}StakeholderGroup" />
+        <pnp:FieldRef ID="970ed1b2-9e71-45aa-8f8d-c391a15f067f" Name="{parameter:GenericFieldPrefix}StakeholderContext" />
+        <pnp:FieldRef ID="1150d6bd-c9ba-4014-bd74-7d559110841d" Name="{parameter:GenericFieldPrefix}StakeholderStrategy" />
+        <pnp:FieldRef ID="748ae9b5-223d-4daa-b8f8-dc14284b59db" Name="{parameter:GenericFieldPrefix}StakeholderInterest" />
+        <pnp:FieldRef ID="475d2ca1-5b8e-4479-96ae-81c0a89354f3" Name="{parameter:GenericFieldPrefix}StakeholderInfluence" />
+        <pnp:FieldRef ID="2bb7e155-3af4-4353-a460-8da404c4e748" Name="{parameter:GenericFieldPrefix}StakeholderInfluencePossibilty" />
+        <pnp:FieldRef ID="45d5b378-67ce-4f21-b622-fe54b27c83a6" Name="{parameter:GenericFieldPrefix}StakeholderActions" />
+    </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
             <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />
