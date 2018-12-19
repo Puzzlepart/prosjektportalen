@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="Datakilder" Description="" Hidden="true" DocumentTemplate="" TemplateType="100" Url="Lists/DataSources" EnableFolderCreation="false" EnableAttachments="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">PROJECTS</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* contentclass:STS_Web Path:{SiteCollection.URL}</pnp:DataValue>

@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="Statistics fields" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/StatsFieldsConfig" EnableAttachments="false" EnableFolderCreation="false" Hidden="true" ContentTypesEnabled="false"
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Phase</pnp:DataValue>
             <pnp:DataValue FieldName="GtChrManagedPropertyName">RefinableString52</pnp:DataValue>
