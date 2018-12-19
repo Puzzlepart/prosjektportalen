@@ -416,7 +416,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 isDropEnabled: false,
             }));
         }
-        let items = this.state.filteredItems ? this.state.filteredItems.filter(item => item[this.props.searchProperty].toString().toLowerCase().indexOf(this.state.searchTerm) !== -1) : [];
+        let items = this.state.filteredItems
+            ? this.state.filteredItems.filter(item => {
+                const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
+                return fieldNames.filter(fieldName => {
+                    return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                }).length > 0;
+            })
+            : [];
         return {
             items: items,
             columns: this.state.selectedColumns,
