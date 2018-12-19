@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="Feltkonfigurasjon for portefølje" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioFields" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpProperty">Title</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Tittel</pnp:DataValue>

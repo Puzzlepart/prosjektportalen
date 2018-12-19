@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="ProjectConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Project name in the financial system</pnp:DataValue>
             <pnp:DataValue FieldName="GtPcFrontpage">0</pnp:DataValue>
