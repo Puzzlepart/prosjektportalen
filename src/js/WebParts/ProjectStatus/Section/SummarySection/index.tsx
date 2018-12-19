@@ -10,7 +10,7 @@ import {
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
 } from "../../../../Project";
 
-const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl, style }: ISummarySectionProps) => {
+const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageContextInfo.webAbsoluteUrl, style, propertiesLabel }: ISummarySectionProps) => {
     return (
         <Element name="status-section" className="status-section section ms-Grid-row" style={style}>
             <div className="ms-Grid-col ms-sm12">
@@ -39,7 +39,7 @@ const SummarySection = ({ title, titleUrl, project, sections, webUrl = _spPageCo
                                         <Icon iconName="CustomList" />
                                     </div>
                                     <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
-                                        <h2>{__.getResource("ProjectStatus_Heading_ProjectMetadata")}</h2><h1></h1>
+                                        <h2>{propertiesLabel}</h2><h1></h1>
                                         <ProjectInfo
                                             hideChrome={true}
                                             webUrl={webUrl}
