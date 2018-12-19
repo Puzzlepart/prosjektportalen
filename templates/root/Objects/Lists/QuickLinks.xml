@@ -20,6 +20,6 @@
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-        <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="{parameter:GenericFieldPrefix}SortOrder" />
+        <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="GtSortOrder" />
     </pnp:FieldRefs>
 </pnp:ListInstance>

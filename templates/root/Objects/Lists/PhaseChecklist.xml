@@ -24,10 +24,10 @@
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
-        <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="{parameter:GenericFieldPrefix}ProjectPhase" />
-        <pnp:FieldRef ID="249527a3-c7f9-4ea5-9c33-f942c06c9215" Name="{parameter:GenericFieldPrefix}ChecklistStatus" />
-        <pnp:FieldRef ID="509a6bfe-004e-41f9-bd73-9a0e02d5c4a7" Name="{parameter:GenericFieldPrefix}Comment" />
-        <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="{parameter:GenericFieldPrefix}SortOrder" />
+        <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
+        <pnp:FieldRef ID="249527a3-c7f9-4ea5-9c33-f942c06c9215" Name="GtChecklistStatus" />
+        <pnp:FieldRef ID="509a6bfe-004e-41f9-bd73-9a0e02d5c4a7" Name="GtComment" />
+        <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="GtSortOrder" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">

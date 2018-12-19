@@ -26,15 +26,15 @@
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
-        <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="{parameter:DynamicPortfolioFieldPrefix}Order" />
-        <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="{parameter:DynamicPortfolioFieldPrefix}Property" Required="true" />
-        <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="{parameter:DynamicPortfolioFieldPrefix}DisplayName" Required="true" />
-        <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="{parameter:DynamicPortfolioFieldPrefix}ReadOnly" />
-        <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="{parameter:DynamicPortfolioFieldPrefix}Render" />
-        <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="{parameter:DynamicPortfolioFieldPrefix}MinWidth" />
-        <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="{parameter:DynamicPortfolioFieldPrefix}MaxWidth" />
-        <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="{parameter:DynamicPortfolioFieldPrefix}IsResizable" />
-        <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="{parameter:DynamicPortfolioFieldPrefix}GroupBy" />
+        <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+        <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
+        <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+        <pnp:FieldRef ID="6a664141-d681-46b8-a617-d138d8dee9f5" Name="GtDpReadOnly" />
+        <pnp:FieldRef ID="d633052d-4d8d-442b-b08d-3dabcfe6b51f" Name="GtDpRender" />
+        <pnp:FieldRef ID="d1ce219a-1590-42b6-aefb-debf4e373378" Name="GtDpMinWidth" />
+        <pnp:FieldRef ID="915edd68-78cd-48fb-8648-9ec38bc02d86" Name="GtDpMaxWidth" />
+        <pnp:FieldRef ID="bedf3697-fb30-4292-a2bc-40fecc8aa90e" Name="GtDpIsResizable" />
+        <pnp:FieldRef ID="d1269eee-7acf-42ae-be80-cfb010117463" Name="GtDpGroupBy" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
