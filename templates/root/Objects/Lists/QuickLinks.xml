@@ -1,5 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_QuickLinks_Title}" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
-    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+<pnp:ListInstance Title="{resource:Lists_QuickLinks_Title}" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="false" xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Views RemoveExistingViews="true">
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" OrderedView="TRUE" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/QuickLinks/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/links.png?rev=44">
             <Query>

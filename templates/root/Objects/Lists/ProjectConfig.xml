@@ -44,7 +44,6 @@
         </View>
     </pnp:Views>
     <pnp:FieldRefs>
-        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
         <pnp:FieldRef ID="1e99fca0-3e0f-4632-9dd1-901bd09a13bc" Name="GtPcProjectStatus" />
         <pnp:FieldRef ID="6c72e8a8-1bfa-4323-9103-8baa067bbfb3" Name="GtPcFrontpage" />
         <pnp:FieldRef ID="7441ace5-d9e4-4c1d-85fc-ce1614b056ca" Name="GtPcPortfolioPage" />
