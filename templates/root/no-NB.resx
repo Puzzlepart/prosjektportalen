@@ -1147,7 +1147,7 @@
     <value>Siste beslutningspunktstatus</value>
   </data>
   <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
-    <value>Prosjektprosessstatus</value>
+    <value>Prosjektprosesstatus</value>
   </data>
   <data name="SiteFields_GtRequestedPhase_DisplayName" xml:space="preserve">
     <value>Ønsket fase</value>
