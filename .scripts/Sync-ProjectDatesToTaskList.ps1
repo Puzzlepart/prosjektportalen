@@ -1,21 +1,24 @@
 ﻿Param(
     [Parameter(Mandatory = $true)]
     [string]$Url,
-    [Parameter(Mandatory = $true)]
-    [int]$IntervalHours,
     [Parameter(Mandatory = $false, HelpMessage = "Use current credentials?")]
     [switch]$CurrentCredentials,
+    [Parameter(Mandatory = $false, HelpMessage = "Use Web Login?")]
+    [switch]$UseWebLogin,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
     [string]$GenericCredential
 )
 
 if ($CurrentCredentials.IsPresent) {
     Connect-PnPOnline -Url $Url -CurrentCredentials
+} elseif ($UseWebLogin.IsPresent) {
+    Connect-PnPOnline -Url $Url -UseWebLogin
 } elseif ($GenericCredential -ne $null) {
     Connect-PnPOnline -Url $Url -Credentials $GenericCredential
 } else {
     Connect-PnPOnline -Url $Url
 }
+
 $ProjectList = Get-PnPList -Identity "Prosjektdatoer"
 if ($ProjectList -eq $null) {
     New-PnPList -Title "Prosjektdatoer" -Template TasksWithTimelineAndHierarchy -EnableVersioning
@@ -41,13 +44,11 @@ if ($ProjectList -eq $null) {
 
     $ProjectList.Update()
 
-    Execute-PnPQuery
+    Invoke-PnPQuery
 }
-$DateTimeFromWhenToUpdateProjects = (Get-Date).AddHours(-$IntervalHours).ToUniversalTime()
-$DateTimeFromWhenToUpdateProjectsFriendly = $DateTimeFromWhenToUpdateProjects.ToLocalTime().ToString()
 
-Write-Output "Updating webs modified after $DateTimeFromWhenToUpdateProjectsFriendly"
-Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromWhenToUpdateProjects} | % {
+Write-Output "Synchronizing webs to Lists/Prosjektdatoer"
+Get-PnPSubWebs | % {
     $ProjectWeb = Get-PnPWeb -Identity $_.Id
     $ProjectWebUniqueId = $ProjectWeb.Id
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
@@ -72,6 +73,6 @@ Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromW
     }
     $ProjectItem.Update()
 
-    Execute-PnPQuery
+    Invoke-PnPQuery
 }
 Disconnect-PnPOnline
