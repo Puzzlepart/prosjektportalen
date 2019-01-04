@@ -158,13 +158,12 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * @param {IDynamicPortfolioViewConfig} view View
      */
     private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
-        const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
         const statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
         const chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
         try {
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().get(),
+                statsFieldsList.items.select("ID", "Title", `GtChrManagedPropertyName`, `GtChrDataType`).usingCaching().get(),
                 chartsConfigList.items.usingCaching().get(),
                 chartsConfigList.contentTypes.usingCaching().get(),
                 statsFieldsList.contentTypes.usingCaching().get(),
@@ -186,7 +185,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 level: LogLevel.Info,
             });
 
-            const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`${fieldPrefix}ManagedPropertyName`], i[`${fieldPrefix}DataType`]));
+            const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`GtChrManagedPropertyName`], i[`GtChrDataType`]));
             const response = await sp.search({
                 Querytext: "*",
                 QueryTemplate: view.queryTemplate,
@@ -199,7 +198,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
-                let chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
+                let chartFields = fields.filter(f => spItem[`GtChrFieldsId`].results.indexOf(f.id) !== -1);
                 return new ChartConfiguration(spItem, chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
             const config: Partial<IProjectStatsState> = {

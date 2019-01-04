@@ -41,11 +41,10 @@ function GenerateData(benefits: BenefitEntry[], measures: MeasurementEntry[]): a
  * Fetches fields for a web, list or content type
  *
  * @param {any} spObject List or content type
- * @param {string} spFieldPrefix Field prefix
  */
-async function fetchFieldsAsMap(spObject: any, spFieldPrefix = "Gt") {
+async function fetchFieldsAsMap(spObject: any) {
     try {
-        const filterStr = `substringof('${spFieldPrefix}', InternalName) eq true`;
+        const filterStr = `substringof('Gt', InternalName) eq true`;
         const spFields: any[] = await spObject.fields.filter(filterStr).get();
         const spFieldsMap = spFields.reduce((obj, { InternalName, Title }) => {
             obj[InternalName] = Title;

@@ -27,7 +27,6 @@ export default class ChartConfiguration {
     public showAverage: boolean;
     public showPercentage: boolean;
     public showItemSelector: boolean;
-    private _fieldPrefix: string;
     private _pnpList: List;
     private _contentTypes: any[];
     private _statsFields: StatsFieldConfiguration[];
@@ -50,29 +49,28 @@ export default class ChartConfiguration {
      * @param {any[]} contentTypes Content types
      */
     constructor(spItem, pnpList: List, contentTypes) {
-        this._fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
         this._pnpList = pnpList;
         this._contentTypes = contentTypes;
         this.contentTypeId = spItem.ContentTypeId;
         this.id = spItem.ID;
         this.title = spItem.Title;
-        this.order = spItem[`${this._fieldPrefix}Order`];
-        this.subTitle = spItem[`${this._fieldPrefix}SubTitle`];
-        this.height = spItem[`${this._fieldPrefix}Height`];
+        this.order = spItem[`GtChrOrder`];
+        this.subTitle = spItem[`GtChrSubTitle`];
+        this.height = spItem[`GtChrHeight`];
         this.width = Object.keys(this._widthFields).reduce((obj, key) => {
-            obj[key] = spItem[`${this._fieldPrefix}${this._widthFields[key]}`];
+            obj[key] = spItem[`GtChr${this._widthFields[key]}`];
             return obj;
         }, {});
-        this.stacking = spItem[`${this._fieldPrefix}Stacking`];
-        this.yAxisTitle = spItem[`${this._fieldPrefix}YAxisTitle`];
-        this.yAxisMin = spItem[`${this._fieldPrefix}YMin`];
-        this.yAxisMax = spItem[`${this._fieldPrefix}YMax`];
-        this.yAxisTickInterval = spItem[`${this._fieldPrefix}YTickInterval`];
-        this.valueSuffix = spItem[`${this._fieldPrefix}ValueSuffix`];
-        this.showLegend = spItem[`${this._fieldPrefix}ShowLegend`];
-        this.showAverage = spItem[`${this._fieldPrefix}ShowAverage`];
-        this.showPercentage = spItem[`${this._fieldPrefix}ShowPercentage`];
-        this.showItemSelector = spItem[`${this._fieldPrefix}ShowItemSelector`];
+        this.stacking = spItem[`GtChrStacking`];
+        this.yAxisTitle = spItem[`GtChrYAxisTitle`];
+        this.yAxisMin = spItem[`GtChrYMin`];
+        this.yAxisMax = spItem[`GtChrYMax`];
+        this.yAxisTickInterval = spItem[`GtChrYTickInterval`];
+        this.valueSuffix = spItem[`GtChrValueSuffix`];
+        this.showLegend = spItem[`GtChrShowLegend`];
+        this.showAverage = spItem[`GtChrShowAverage`];
+        this.showPercentage = spItem[`GtChrShowPercentage`];
+        this.showItemSelector = spItem[`GtChrShowItemSelector`];
         this._setChartTypeFromContentType();
     }
 
@@ -116,7 +114,7 @@ export default class ChartConfiguration {
             level: LogLevel.Info,
         });
         this.width[breakpoint] = width;
-        const widthField = `${this._fieldPrefix}${this._widthFields[breakpoint]}`;
+        const widthField = `GtChr${this._widthFields[breakpoint]}`;
         let updateValues: any = {};
         updateValues[widthField] = width;
         this._updateItem(updateValues);
