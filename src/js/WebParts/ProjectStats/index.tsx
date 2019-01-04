@@ -17,7 +17,6 @@ import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import ProjectStatsConfiguration from "./ProjectStatsConfiguration";
 import BaseWebPart from "../@BaseWebPart";
-import Preferences from "../../Preferences";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
