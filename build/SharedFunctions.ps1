@@ -2,13 +2,15 @@
 function Connect-SharePoint ([string]$Url, [Object]$Connection) {
     $ConnectionUrl = $Url.TrimEnd("/")
 
-    if ($null -ne $Connection -and $Connection.Url -eq $ConnectionUrl) {
-        return $Connection
-    }
-    if ($null -ne $Connection -and $Connection.Url -ne $ConnectionUrl) {
-        return $Connection.CloneContext($ConnectionUrl)
-    }
     try {
+        if ($null -ne $Connection) {
+            if ($Connection.Url -eq $ConnectionUrl) {
+                return $Connection
+            }
+            if ($Connection.Url -ne $ConnectionUrl -and (Get-Member -InputObject $Connection -Name "CloneContext" -MemberType Method) -ne $null)
+                return $Connection.CloneContext($ConnectionUrl)
+            }
+        }
         if ($UseWebLogin.IsPresent) {
             return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
         } elseif ($CurrentCredentials.IsPresent) {
