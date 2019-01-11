@@ -156,7 +156,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                             backgroundColor: "rgb(26, 111, 179)",
                             opacity: itemOpacity,
                             border: "none",
-                            cursor: "text",
+                            cursor: "pointer",
                         }}
                         title={itemContext.title}
                         onClick={event => this.onTimelineItemClick(event, item)}>
@@ -177,7 +177,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                             backgroundColor: "rgb(205, 92, 92)",
                             opacity: itemOpacity,
                             border: "none",
-                            cursor: "text",
+                            cursor: "pointer",
                         }}
                         title={itemContext.title}>
                         <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
