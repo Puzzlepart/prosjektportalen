@@ -2,25 +2,21 @@
 function Connect-SharePoint ([string]$Url, [Object]$Connection) {
     $ConnectionUrl = $Url.TrimEnd("/")
 
-    try {
-        if ($null -ne $Connection) {
-            if ($Connection.Url -eq $ConnectionUrl) {
-                return $Connection
-            }
-            if ($Connection.Url -ne $ConnectionUrl -and (Get-Member -InputObject $Connection -Name "CloneContext" -MemberType Method) -ne $null) {
-                return $Connection.CloneContext($ConnectionUrl)
-            }
-        }
-        if ($UseWebLogin.IsPresent) {
-            return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
-        } elseif ($CurrentCredentials.IsPresent) {
-            return Connect-PnPOnline $ConnectionUrl -CurrentCredentials -ReturnConnection
-        } else {
-            return Connect-PnPOnline $ConnectionUrl -Credentials $Credential -ReturnConnection
-        }
-    } catch {
-        throw $error
-    }
+	if ($null -ne $Connection) {
+		if ($Connection.Url -eq $ConnectionUrl) {
+			return $Connection
+		}
+		if ($Connection.Url -ne $ConnectionUrl -and (Get-Member -InputObject $Connection -Name "CloneContext" -MemberType Method) -ne $null){
+			return $Connection.CloneContext($ConnectionUrl)
+		}
+	}
+	if ($UseWebLogin.IsPresent) {
+		return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
+	} elseif ($CurrentCredentials.IsPresent) {
+		return Connect-PnPOnline $ConnectionUrl -CurrentCredentials -ReturnConnection
+	} else {
+		return Connect-PnPOnline $ConnectionUrl -Credentials $Credential -ReturnConnection
+	}
 }
 
 # Ensure assocated groups
