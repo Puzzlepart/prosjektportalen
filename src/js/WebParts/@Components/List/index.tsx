@@ -151,7 +151,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 if (Array.isArray(colValue)) {
                     return (
                         <ul style={{ margin: 0, padding: 0 }}>
-                            {(colValue as string[]).map(v => <li>{v}</li>)}
+                            {(colValue as string[]).map((v, idx) => <li key={idx}>{v}</li>)}
                         </ul>
                     );
                 }
