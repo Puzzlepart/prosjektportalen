@@ -34,7 +34,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
     }
 
     /**
-     * Renders the <ProjectResources /> component
+     * Renders the <ExperienceLog /> component
      */
     public render(): JSX.Element {
         if (this.state.isLoading) {
@@ -60,16 +60,25 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * Fetch items
      */
     protected async _fetchItems() {
-        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-        if (dataSource) {
+        let queryTemplate: string;
+
+        if (this.props.queryTemplate) {
+            queryTemplate = this.props.queryTemplate;
+        } else if (this.props.dataSource) {
+            const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
+            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
+            queryTemplate = dataSource.GtDpSearchQuery;
+        }
+
+        if (queryTemplate) {
             try {
+                const selectProperties = ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)];
                 const { PrimarySearchResults } = await sp.search({
                     Querytext: "*",
-                    QueryTemplate: dataSource.GtDpSearchQuery,
+                    QueryTemplate: queryTemplate,
                     RowLimit: 500,
                     TrimDuplicates: false,
-                    SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
+                    SelectProperties: selectProperties,
                 });
                 return PrimarySearchResults.map(r => new LogElement(r));
             } catch (err) {

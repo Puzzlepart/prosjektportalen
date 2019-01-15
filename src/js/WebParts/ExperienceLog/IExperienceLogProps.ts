@@ -3,6 +3,7 @@ import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IListProps } from "../@Components/List";
 
 export default interface IExperienceLogProps extends IBaseWebPartProps, IListProps {
+    queryTemplate?: string;
     dataSource?: string;
 }
 
@@ -22,10 +23,17 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         isResizable: true,
     },
     {
+        key: "GtProjectLogTypeOWSCHCS",
+        fieldName: "LogType",
+        name: __.getResource("SiteFields_GtProjectLogType_DisplayName"),
+        minWidth: 100,
+        isResizable: true,
+    },
+    {
         key: "GtProjectLogDescriptionOWSMTXT",
         fieldName: "Description",
         name: __.getResource("SiteFields_GtProjectLogDescription_DisplayName"),
-        minWidth: 100,
+        minWidth: 250,
         isResizable: true,
     },
     {
@@ -39,14 +47,14 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         key: "GtProjectLogConsequenceOWSMTXT",
         fieldName: "Consequence",
         name: __.getResource("SiteFields_GtProjectLogConsequence_DisplayName"),
-        minWidth: 100,
+        minWidth: 250,
         isResizable: true,
     },
     {
         key: "GtProjectLogRecommendationOWSMTXT",
         fieldName: "Recommendation",
         name: __.getResource("SiteFields_GtProjectLogRecommendation_DisplayName"),
-        minWidth: 100,
+        minWidth: 250,
         isResizable: true,
     },
     {
@@ -56,7 +64,16 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
         minWidth: 100,
         isResizable: true,
     }],
-    groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
+    groupByOptions: [
+        {
+            key: "SiteTitle",
+            name: __.getResource("String_Project"),
+        },
+        {
+            key: "LogType",
+            name: __.getResource("SiteFields_GtProjectLogType_DisplayName"),
+        },
+    ],
     excelExportEnabled: true,
     excelExportConfig: {
         fileNamePrefix: __.getResource("ExperienceLog_ExcelExportFileNamePrefix"),
