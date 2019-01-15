@@ -2037,16 +2037,22 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Godkjenning</value>
   </data>
-  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Henter data...</value>
+  </data>  
+  <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
+    <value>Endre datautvalg</value>
   </data>
-  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+  <data name="String_ProjectStats_ShowChartSettings_Text" xml:space="preserve">
+    <value>Vis diagraminnstillinger</value>
+  </data>
+  <data name="String_ProjectStats_Error_Text" xml:space="preserve">
     <value>Det skjedde en feil under lasting av data.</value>
   </data>
-  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Charts_Text" xml:space="preserve">
     <value>Det er ikke konfigurert opp noen grafer.</value>
   </data>
-  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Data_Text" xml:space="preserve">
     <value>Ingen prosjekter funnet.</value>
   </data>
   <data name="String_Default_Toggle_On_Text" xml:space="preserve">
@@ -2096,6 +2102,9 @@
   </data>
   <data name="String_All" xml:space="preserve">
     <value>Alle</value>
+  </data>
+  <data name="String_New" xml:space="preserve">
+    <value>Ny</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>

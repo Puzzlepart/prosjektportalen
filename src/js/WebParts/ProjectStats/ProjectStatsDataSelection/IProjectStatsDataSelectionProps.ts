@@ -1,12 +1,9 @@
-import IDynamicPortfolioViewConfig from "../../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
 import { ProjectStatsChartData } from "../ProjectStatsChart";
+import { IModalProps } from "office-ui-fabric-react/lib/Modal";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 
-export default interface IProjectStatsDataSelectionProps {
+export default interface IProjectStatsDataSelectionProps extends IModalProps {
     data: ProjectStatsChartData;
-    views: IDynamicPortfolioViewConfig[];
-    selectedView: IDynamicPortfolioViewConfig;
     columns?: IColumn[];
     onUpdateSelection: (data: ProjectStatsChartData) => Promise<void>;
-    onViewChanged: (view: IDynamicPortfolioViewConfig) => Promise<void>;
 }

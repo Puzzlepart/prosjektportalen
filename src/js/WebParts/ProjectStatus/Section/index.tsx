@@ -19,19 +19,13 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     constructor(props: ISectionProps) {
         super(props);
-        this.state = {
-            isLoading: this.shouldFetchListData(props),
-            listData: null,
-        };
+        this.state = { isLoading: this.shouldFetchListData(props), listData: null };
     }
 
     public componentDidMount(): void {
         if (this.shouldFetchListData(this.props)) {
             this.fetchListData(this.props).then(listData => {
-                this.setState({
-                    listData,
-                    isLoading: false,
-                });
+                this.setState({ listData, isLoading: false });
             });
         }
     }
@@ -87,7 +81,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         <RiskMatrix
                             data={{ items: listData.items }}
                             showViewSelector={false}
-                            { ...this.props.riskMatrix } />
+                            {...this.props.riskMatrix} />
                         <OpportunityMatrix
                             data={{ items: listData.items }}
                             showViewSelector={false} />

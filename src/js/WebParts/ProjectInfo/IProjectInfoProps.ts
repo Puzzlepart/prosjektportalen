@@ -25,14 +25,8 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
     containerClassName?: string;
     innerClassName?: string;
     actionsClassName?: string;
-    errorIconProps?: {
-        iconName?: string;
-        style?: React.CSSProperties;
-    };
-    infoIconProps?: {
-        iconName?: string;
-        style?: React.CSSProperties;
-    };
+    errorIconProps?: { iconName?: string; style?: React.CSSProperties; };
+    infoIconProps?: { iconName?: string; style?: React.CSSProperties; };
     actionLinks?: IModalLinkProps[];
 }
 

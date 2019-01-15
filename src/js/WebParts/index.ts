@@ -47,6 +47,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesoverview"),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
+        viewSelectorEnabled: true,
         statsFieldsListName: __.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),

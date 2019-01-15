@@ -28,7 +28,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             level: LogLevel.Info,
         });
         return (
-            <div className="ms-Grid-row">
+            <div className="ms-Grid-row" hidden={this.props.hidden}>
                 <div className="ms-Grid-col ms-sm12">
                     <CommandBar items={this._getItems()} farItems={this._getFarItems()} />
                 </div>

@@ -15,9 +15,11 @@ import StatsFieldConfiguration from "./StatsFieldConfiguration";
 import { IContentType } from "../../Model";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
-import ProjectStatsConfiguration from "./ProjectStatsConfiguration";
 import BaseWebPart from "../@BaseWebPart";
 import Preferences from "../../Preferences";
+import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -34,14 +36,12 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * @param {IProjectStatsProps} props Props
      */
     constructor(props: IProjectStatsProps) {
-        super(props, { isLoading: true });
-        this._onDataSelectionUpdated = this._onDataSelectionUpdated.bind(this);
-        this._onViewChanged = this._onViewChanged.bind(this);
+        super(props, { isLoading: true, showChartSettings: props.showChartSettings });
     }
 
     public async componentDidMount() {
         try {
-            const config = await this._fetchData();
+            const config = await this.fetchData();
             Logger.log({
                 message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`),
                 level: LogLevel.Info,
@@ -67,29 +67,103 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public render(): React.ReactElement<IProjectStatsProps> {
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
-            return <Spinner label={__.getResource("String_Projectstats_Loading_Text")} type={SpinnerType.large} />;
+            return <Spinner label={__.getResource("String_ProjectStats_Loading_Text")} type={SpinnerType.large} />;
         }
         if (errorMessage) {
-            return <MessageBar messageBarType={MessageBarType.error}>{__.getResource("String_Projectstats_Error_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>{__.getResource("String_ProjectStats_Error_Text")}</MessageBar>;
         }
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."),
-            level: LogLevel.Info,
-        });
+        Logger.log({ message: String.format(LOG_TEMPLATE, "render", "Rendering component <ProjectStats />."), level: LogLevel.Info });
         return (
             <div className="ms-Grid">
-                <div className="ms-Grid-row" style={{ marginBottom: 25 }}>
-                    <ProjectStatsDataSelection
-                        data={data}
-                        views={this.state.views}
-                        selectedView={this.state.selectedView}
-                        onUpdateSelection={this._onDataSelectionUpdated}
-                        onViewChanged={this._onViewChanged} />
-                    <ProjectStatsConfiguration contentTypes={this.state.contentTypes} />
+                <div className="ms-Grid-row">
+                    {this.renderCommandBar()}
                 </div>
                 <div className="ms-Grid-row">
-                    {this._renderInner()}
+                    {this.renderInner()}
                 </div>
+                {this.state.showDataSelectionModal && (
+                    <ProjectStatsDataSelection
+                        data={data}
+                        onUpdateSelection={this.onDataSelectionUpdated}
+                        onDismiss={_ => this.setState({ showDataSelectionModal: false })} />
+                )}
+            </div>
+        );
+    }
+
+    /**
+    * Renders the command bar from office-ui-fabric-react
+    */
+    private renderCommandBar() {
+        const items: IContextualMenuItem[] = [];
+        const farItems: IContextualMenuItem[] = [];
+
+        items.push({
+            key: "NewItem",
+            name: __.getResource("String_New"),
+            iconProps: { iconName: "Add" },
+            itemType: ContextualMenuItemType.Header,
+            onClick: e => e.preventDefault(),
+            subMenuProps: {
+                items: this.state.contentTypes.map(({ Name, StringId, NewFormUrl }) => ({
+                    key: `ContentType_${StringId}`,
+                    name: Name,
+                    onClick: (e: any) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        let contentTypeNewFormUrl = `${NewFormUrl}?ContentTypeId=${StringId}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
+                        document.location.href = contentTypeNewFormUrl;
+                    },
+                })),
+            },
+        });
+
+        farItems.push({
+            key: "ShowChartSettings",
+            name: __.getResource("String_ProjectStats_ShowChartSettings_Text"),
+            iconProps: { iconName: "ContactCardSettings" },
+            checked: this.state.showChartSettings,
+            canCheck: true,
+            onClick: (e: any) => {
+                e.preventDefault();
+                this.setState({ showChartSettings: !this.state.showChartSettings });
+            },
+        });
+
+        farItems.push({
+            key: "EditDataSelection",
+            name: __.getResource("String_ProjectStats_EditDataSelection_Text"),
+            iconProps: { iconName: "ExploreData" },
+            onClick: (e: any) => {
+                e.preventDefault();
+                this.setState({ showDataSelectionModal: true });
+            },
+        });
+
+        if (this.props.viewSelectorEnabled) {
+            farItems.push({
+                key: "View",
+                name: this.state.currentView.name,
+                iconProps: { iconName: "List" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: e => e.preventDefault(),
+                subMenuProps: {
+                    items: this.state.views.map((qc, idx) => ({
+                        key: `View_${idx.toString()}`,
+                        name: qc.name,
+                        iconProps: { iconName: qc.iconName },
+                        onClick: (e: any) => {
+                            e.preventDefault();
+                            this.onViewChanged(qc);
+                        },
+                    })),
+                },
+            });
+        }
+
+        return (
+            <div className="ms-Grid-col ms-sm12">
+                <CommandBar items={items} farItems={farItems} />
             </div>
         );
     }
@@ -97,59 +171,62 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     /**
      * Render inner
      */
-    private _renderInner() {
+    private renderInner() {
         const { charts, data } = this.state;
         if (charts.length === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_Projectstats_No_Charts_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_ProjectStats_No_Charts_Text")}</MessageBar>;
         }
         if (data.getCount() === 0) {
-            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_Projectstats_No_Data_Text")}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.info}>{__.getResource("String_ProjectStats_No_Data_Text")}</MessageBar>;
         }
         return charts
             .sort((a, b) => a.order - b.order)
-            .map((c, i) => <ProjectStatsChart key={i} chart={c} />);
+            .map((c, i) => (
+                <ProjectStatsChart
+                    key={i}
+                    chart={c}
+                    showSettings={this.state.showChartSettings} />
+            ));
     }
 
     /**
      * On data selection updated
+     *
+     * @param {ProjectStatsChartData} data Data
      */
-    private async _onDataSelectionUpdated(data: ProjectStatsChartData): Promise<void> {
+    @autobind
+    private async onDataSelectionUpdated(data: ProjectStatsChartData): Promise<void> {
         Logger.log({
-            message: String.format(LOG_TEMPLATE, "_onDataSelectionUpdated", "Selection was updated."),
-            level: LogLevel.Info,
+            message: String.format(LOG_TEMPLATE, "_onDataSelectionUpdated", "Selection was updated."), level: LogLevel.Info,
         });
-        this.setState({
-            charts: this.state.charts.map(c => c.initOrUpdate(data)),
-        });
+        this.setState({ showDataSelectionModal: false, charts: this.state.charts.map(c => c.initOrUpdate(data)) });
     }
 
     /**
      * On view changed
+     *
+     * @param {IDynamicPortfolioViewConfig} view View
      */
-    private async _onViewChanged(view: IDynamicPortfolioViewConfig): Promise<void> {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "_onViewChanged", "View was updated."),
-            data: { view },
-            level: LogLevel.Info,
-        });
-        this.setState({ isLoading: true }, async () => {
-            try {
-                const { data } = await this._fetchData(view);
-                this.setState({
-                    isLoading: false,
-                    selectedView: view,
-                    data,
-                    charts: this.state.charts.map(c => c.initOrUpdate(data)),
-                });
-            } catch (errorMessage) {
-                Logger.log({
-                    message: String.format(LOG_TEMPLATE, "_onViewChanged", "Failed to fetch data."),
-                    data: errorMessage,
-                    level: LogLevel.Error,
-                });
-                this.setState({ errorMessage, isLoading: false });
-            }
-        });
+    @autobind
+    private async onViewChanged(view: IDynamicPortfolioViewConfig): Promise<void> {
+        Logger.log({ message: String.format(LOG_TEMPLATE, "_onViewChanged", "View was updated."), data: { view }, level: LogLevel.Info });
+        this.setState({ isLoading: true });
+        try {
+            const { data } = await this.fetchData(view);
+            this.setState({
+                isLoading: false,
+                currentView: view,
+                data,
+                charts: this.state.charts.map(c => c.initOrUpdate(data)),
+            });
+        } catch (errorMessage) {
+            Logger.log({
+                message: String.format(LOG_TEMPLATE, "_onViewChanged", "Failed to fetch data."),
+                data: errorMessage,
+                level: LogLevel.Error,
+            });
+            this.setState({ errorMessage, isLoading: false });
+        }
     }
 
     /**
@@ -157,7 +234,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      *
      * @param {IDynamicPortfolioViewConfig} view View
      */
-    private async _fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
+    private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
         const statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
         const chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
@@ -175,13 +252,13 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 if (!view) {
                     view = views[0];
                     Logger.log({
-                        message: String.format(LOG_TEMPLATE, "_fetchData", `No default view found. Using ${view.name}.`),
+                        message: String.format(LOG_TEMPLATE, "fetchData", `No default view found. Using ${view.name}.`),
                         level: LogLevel.Info,
                     });
                 }
             }
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "_fetchData", `Fetching view ${view.name}.`),
+                message: String.format(LOG_TEMPLATE, "fetchData", `Fetching view ${view.name}.`),
                 data: { queryTemplate: view.queryTemplate },
                 level: LogLevel.Info,
             });
@@ -207,7 +284,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 data,
                 views,
                 contentTypes,
-                selectedView: view,
+                currentView: view,
             };
             return config;
         } catch (err) {

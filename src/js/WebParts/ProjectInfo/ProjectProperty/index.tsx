@@ -19,9 +19,7 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
      */
     constructor(props: IProjectPropertyProps) {
         super(props);
-        this.state = {
-            truncate: true,
-        };
+        this.state = { truncate: true };
     }
 
     /**
@@ -48,14 +46,9 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
             valueClassName.push(`ms-font-${valueSize}`);
         }
 
-        /**
-         * Truncates Note and Text if truncateLength is specifed in properties
-         */
         this.shouldTruncate = truncateLength && truncate && Array.contains(["Note", "Text"], model.type);
         if (this.shouldTruncate) {
-            value = truncateHtml(model.value, truncateLength, {
-                ellipsis: "...",
-            });
+            value = truncateHtml(model.value, truncateLength, { ellipsis: "..." });
         }
 
         return (
@@ -66,15 +59,9 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
                 title={model.description}
                 style={style}>
                 <div className={labelClassName.join(" ")}>{model.displayName}</div>
-                <div
-                    className={valueClassName.join(" ")}
-                    dangerouslySetInnerHTML={{ __html: value }}></div>
+                <div className={valueClassName.join(" ")} style={{ wordBreak: "break-word" }} dangerouslySetInnerHTML={{ __html: value }}></div>
                 <div hidden={!this.shouldTruncate}>
-                    <a
-                        href="#"
-                        onClick={e => this.setState({
-                            truncate: false,
-                        })}>Vis mer</a>
+                    <a href="#" onClick={e => this.setState({ truncate: false })}>Vis mer</a>
                 </div>
             </div>
         );
