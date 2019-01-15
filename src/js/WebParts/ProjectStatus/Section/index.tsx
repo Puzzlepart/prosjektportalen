@@ -56,7 +56,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     private renderHeader({ section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
-        if (section.getType() === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
+        if (section.sectionType === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
             fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3&HideWebPartMaintenancePageLink=1&HideRibbon=1`;
         }
         return (
@@ -92,7 +92,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         id={section.getHtmlElementId("listview")}
                         listData={listData} />
                 )}
-                {section.getType() === SectionType.ProjectPropertiesSection && (
+                {section.sectionType === SectionType.ProjectPropertiesSection && (
                     <div
                         className="field-section"
                         style={{ marginTop: 20 }}>
