@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp } from "@pnp/sp";
+import { sp, List } from "@pnp/sp";
 import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
@@ -20,6 +20,7 @@ import Preferences from "../../Preferences";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
+import { getUrlHash, setUrlHash } from "../../Util";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -29,6 +30,8 @@ const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProjectStatsState> {
     public static displayName = "ProjectStats";
     public static defaultProps = ProjectStatsDefaultProps;
+    private statsFieldsList: List;
+    private chartsConfigList: List;
 
     /**
      * Constructor
@@ -37,26 +40,21 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
+        this.statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
+        this.chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
     }
 
     public async componentDidMount() {
         try {
             const config = await this.fetchData();
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`),
-                level: LogLevel.Info,
-            });
-            this.setState({
-                ...config,
-                isLoading: false,
-            });
+            Logger.log({ message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`), level: LogLevel.Info });
+            this.setState({ ...config, isLoading: false });
+            if (this.props.viewSelectorEnabled) {
+                setUrlHash({ viewId: this.state.currentView.id.toString() });
+            }
         } catch (err) {
             console.log(err);
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "componentDidMount", "Failed to fetch data."),
-                data: err,
-                level: LogLevel.Error,
-            });
+            Logger.log({ message: String.format(LOG_TEMPLATE, "componentDidMount", "Failed to fetch data."), level: LogLevel.Error });
             this.setState({ errorMessage: err, isLoading: false });
         }
     }
@@ -181,10 +179,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         }
         return charts
             .sort((a, b) => a.order - b.order)
-            .map((c, i) => (
+            .map((chart, idx) => (
                 <ProjectStatsChart
-                    key={i}
-                    chart={c}
+                    key={idx}
+                    chart={chart}
                     showSettings={this.state.showChartSettings} />
             ));
     }
@@ -196,9 +194,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     @autobind
     private async onDataSelectionUpdated(data: ProjectStatsChartData): Promise<void> {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "_onDataSelectionUpdated", "Selection was updated."), level: LogLevel.Info,
-        });
+        Logger.log({ message: String.format(LOG_TEMPLATE, "_onDataSelectionUpdated", "Selection was updated."), level: LogLevel.Info });
         this.setState({ showDataSelectionModal: false, charts: this.state.charts.map(c => c.initOrUpdate(data)) });
     }
 
@@ -213,18 +209,11 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         this.setState({ isLoading: true });
         try {
             const { data } = await this.fetchData(view);
-            this.setState({
-                isLoading: false,
-                currentView: view,
-                data,
-                charts: this.state.charts.map(c => c.initOrUpdate(data)),
-            });
+            const charts = this.state.charts.map(c => c.initOrUpdate(data));
+            this.setState({ isLoading: false, currentView: view, data, charts });
+            setUrlHash({ viewId: view.id.toString() });
         } catch (errorMessage) {
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "_onViewChanged", "Failed to fetch data."),
-                data: errorMessage,
-                level: LogLevel.Error,
-            });
+            Logger.log({ message: String.format(LOG_TEMPLATE, "_onViewChanged", "Failed to fetch data."), data: errorMessage, level: LogLevel.Error });
             this.setState({ errorMessage, isLoading: false });
         }
     }
@@ -235,38 +224,38 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * @param {IDynamicPortfolioViewConfig} view View
      */
     private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
+        let hashState = getUrlHash();
         const fieldPrefix = Preferences.getParameter("ProjectStatsFieldPrefix");
-        const statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-        const chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
         try {
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().get(),
-                chartsConfigList.items.usingCaching().get(),
-                chartsConfigList.contentTypes.usingCaching().get(),
-                statsFieldsList.contentTypes.usingCaching().get(),
+                this.statsFieldsList.items.select("ID", "Title", `${fieldPrefix}ManagedPropertyName`, `${fieldPrefix}DataType`).usingCaching().get(),
+                this.chartsConfigList.items.usingCaching().get(),
+                this.chartsConfigList.contentTypes.usingCaching().get(),
+                this.statsFieldsList.contentTypes.usingCaching().get(),
             ]);
             const contentTypes: IContentType[] = [...chartsConfigListContentTypes, ...statsFieldsListContenTypes];
-            if (!view) {
-                [view] = views.filter(v => v.default);
-                if (!view) {
-                    view = views[0];
-                    Logger.log({
-                        message: String.format(LOG_TEMPLATE, "fetchData", `No default view found. Using ${view.name}.`),
-                        level: LogLevel.Info,
-                    });
+            let currentView = view;
+            if (!currentView) {
+                let viewIdUrlParam = GetUrlKeyValue("viewId");
+                if (viewIdUrlParam && viewIdUrlParam !== "") {
+                    [currentView] = views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
+                } else if (hashState.viewId) {
+                    [currentView] = views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+                } else {
+                    [currentView] = views.filter(v => v.default);
+                    if (!currentView) {
+                        currentView = views[0];
+                        Logger.log({ message: String.format(LOG_TEMPLATE, "fetchData", `No default view found. Using ${currentView.name}.`), level: LogLevel.Info });
+                    }
                 }
             }
-            Logger.log({
-                message: String.format(LOG_TEMPLATE, "fetchData", `Fetching view ${view.name}.`),
-                data: { queryTemplate: view.queryTemplate },
-                level: LogLevel.Info,
-            });
+            Logger.log({ message: String.format(LOG_TEMPLATE, "fetchData", `Fetching view ${currentView.name}.`), data: { queryTemplate: currentView.queryTemplate }, level: LogLevel.Info });
 
             const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`${fieldPrefix}ManagedPropertyName`], i[`${fieldPrefix}DataType`]));
             const response = await sp.search({
                 Querytext: "*",
-                QueryTemplate: view.queryTemplate,
+                QueryTemplate: currentView.queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
                 SelectProperties: ["Title", "Path", ...fields.map(f => f.managedPropertyName)],
@@ -277,15 +266,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const data = new ProjectStatsChartData(items);
             const charts = chartsSpItems.map(spItem => {
                 let chartFields = fields.filter(f => spItem[`${fieldPrefix}FieldsId`].results.indexOf(f.id) !== -1);
-                return new ChartConfiguration(spItem, chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
+                return new ChartConfiguration(spItem, this.chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
-            const config: Partial<IProjectStatsState> = {
-                charts,
-                data,
-                views,
-                contentTypes,
-                currentView: view,
-            };
+            const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView };
             return config;
         } catch (err) {
             throw err;
