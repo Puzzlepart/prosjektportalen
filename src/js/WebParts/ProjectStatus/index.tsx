@@ -58,8 +58,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                             )}
                         </Sticky>
                         <SummarySection
-                            propertiesLabel={(this.props.propertiesLabel) ? this.props.propertiesLabel : __.getResource("ProjectStatus_Heading_ProjectMetadata") }
-                            project={data.project}
+                            propertiesLabel={(this.props.propertiesLabel) ? this.props.propertiesLabel : __.getResource("ProjectStatus_Heading_ProjectMetadata")}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections()}
                     </StickyContainer>

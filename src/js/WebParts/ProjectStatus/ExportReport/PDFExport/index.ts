@@ -36,7 +36,7 @@ export default class PDFExport {
             if (section.listTitle && section.showAsSection) {
                 await this.addPageWithList(section);
             }
-            if ((section.getType() === SectionType.ProjectPropertiesSection) && section.showAsSection) {
+            if ((section.sectionType === SectionType.ProjectPropertiesSection) && section.showAsSection) {
                 await this.addProjectPropertiesSection(section);
             }
             if (section.customComponent) {

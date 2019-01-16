@@ -2037,16 +2037,25 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Approval</value>
   </data>
-  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Fetching data...</value>
   </data>
-  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+  <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
+    <value>Edit data selection</value>
+  </data>
+  <data name="String_ProjectStats_ShowChartSettings_Text" xml:space="preserve">
+    <value>Show chart settings</value>
+  </data>
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="String_ProjectStats_Error_Text" xml:space="preserve">
     <value>An error occured while fetching data.</value>
   </data>
-  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Charts_Text" xml:space="preserve">
     <value>No graphs configured yet.</value>
   </data>
-  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Data_Text" xml:space="preserve">
     <value>No projects found.</value>
   </data>
   <data name="String_Default_Toggle_On_Text" xml:space="preserve">
@@ -2897,6 +2906,9 @@
   </data>
   <data name="String_StatusReport" xml:space="preserve">
     <value>Status Report</value>
+  </data>  
+  <data name="String_New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>

@@ -4,21 +4,23 @@ export default class LogElement {
     public SiteTitle: string;
     public SPWebUrl: string;
     public Description: string;
+    public LogType: string;
     public Responsible: string;
     public Consequence: string;
     public Recommendation: string;
-    public Actors: string;
+    public Actors: string[];
 
-    constructor(data) {
+    constructor(data: any) {
         this.Path = data.Path;
         this.Title = data.Title;
         this.SiteTitle = data.SiteTitle;
         this.SPWebUrl = data.SPWebUrl;
         this.Description = data.GtProjectLogDescriptionOWSMTXT;
+        this.LogType = data.GtProjectLogTypeOWSCHCS;
         this.Responsible = data.GtProjectLogResponsibleOWSCHCS;
         this.Consequence = data.GtProjectLogConsequenceOWSMTXT;
         this.Recommendation = data.GtProjectLogRecommendationOWSMTXT;
-        this.Actors = data.GtProjectLogActorsOWSCHCM ? data.GtProjectLogActorsOWSCHCM.split(";#").join(", ") : "";
+        this.Actors = data.GtProjectLogActorsOWSCHCM ? data.GtProjectLogActorsOWSCHCM.split(";#").filter((a: string) => a) : [];
     }
 }
 

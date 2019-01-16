@@ -10,6 +10,7 @@ export enum SectionType {
 }
 
 export default class SectionModel {
+    public sectionType: SectionType;
     public name: string;
     public iconName: string;
     public source: string;
@@ -28,7 +29,6 @@ export default class SectionModel {
     public statusValue: string;
     public statusComment?: string;
     public statusProperties?: IStatusProperties;
-    private contentTypeId: string;
 
     /**
      * Constructor
@@ -38,6 +38,7 @@ export default class SectionModel {
      * @param {IStatusFieldsConfig} statusFieldsConfig Status fields config
      */
     constructor(obj: any, project: any, statusFieldsConfig: IStatusFieldsConfig) {
+        this.sectionType = this.getSectionTypeFromContentType(obj.ContentTypeId);
         this.name = obj.Title;
         this.iconName = obj.GtStSecIcon;
         this.source = obj.GtStSecSource;
@@ -51,24 +52,21 @@ export default class SectionModel {
         this.showInStatusSection = obj.GtStSecShowInStatusSection;
         this.showAsSection = obj.GtStSecShowAsSection;
         this.customComponent = obj.GtStSecCustomComponent;
-        this.contentTypeId = obj.ContentTypeId;
         this.statusProperties = {};
 
-        if (this.getType() === SectionType.RiskSection) {
+        if (this.sectionType === SectionType.RiskSection) {
             this.listTitle = __.getResource("Lists_Uncertainties_Title");
             this.fieldName = "GtStatusRisk";
         }
-
         this.commentFieldName = `${this.fieldName}Comment`;
-
         if (this.fieldName) {
-            if (project.hasOwnProperty(this.fieldName)) {
+            if (project && project.hasOwnProperty(this.fieldName)) {
                 this.statusValue = project[this.fieldName];
             }
-            if (project.hasOwnProperty(this.commentFieldName)) {
+            if (project && project.hasOwnProperty(this.commentFieldName)) {
                 this.statusComment = project[this.commentFieldName];
             }
-            if (statusFieldsConfig.hasOwnProperty(this.fieldName)) {
+            if (statusFieldsConfig && statusFieldsConfig.hasOwnProperty(this.fieldName)) {
                 const [statusProperties] = statusFieldsConfig[this.fieldName].statuses.filter(({ statusValue }) => this.statusValue === statusValue);
                 if (statusProperties) {
                     this.statusProperties = statusProperties;
@@ -79,18 +77,20 @@ export default class SectionModel {
 
     /**
      * Get type
+     *
+     * @param {string} contentTypeId Content type id
      */
-    public getType(): SectionType {
-        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82802") !== -1) {
+    public getSectionTypeFromContentType(contentTypeId: string): SectionType {
+        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82802") !== -1) {
             return SectionType.StatusSection;
         }
-        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
+        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
             return SectionType.ProjectPropertiesSection;
         }
-        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
+        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
             return SectionType.RiskSection;
         }
-        if (this.contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82805") !== -1) {
+        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82805") !== -1) {
             return SectionType.ListSection;
         }
     }
@@ -107,6 +107,6 @@ export default class SectionModel {
      * Checks if section is valid
      */
     public isValid(): boolean {
-        return (this.statusValue !== "" && this.statusValue !== null) || this.getType() === SectionType.ListSection;
+        return (this.statusValue !== "" && this.statusValue !== null) || this.sectionType === SectionType.ListSection;
     }
 }

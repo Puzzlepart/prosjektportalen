@@ -109,10 +109,7 @@ export default class ChartConfiguration {
      * @param {number} width Width
      */
     public async setWidth(breakpoint: string, width: number): Promise<ChartConfiguration> {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "setWidth", `Setting width to ${width} for ${breakpoint}.`, this.title),
-            level: LogLevel.Info,
-        });
+        Logger.log({ message: String.format(LOG_TEMPLATE, "setWidth", `Setting width to ${width} for ${breakpoint}.`, this.title), level: LogLevel.Info });
         this.width[breakpoint] = width;
         const widthField = `GtChr${this._widthFields[breakpoint]}`;
         let updateValues: any = {};
@@ -125,10 +122,7 @@ export default class ChartConfiguration {
      * Generate Highcharts chart config
      */
     public getConfig() {
-        Logger.log({
-            message: String.format(LOG_TEMPLATE, "getConfig", "Generating chart config", this.title),
-            level: LogLevel.Info,
-        });
+        Logger.log({ message: String.format(LOG_TEMPLATE, "getConfig", "Generating chart config", this.title), level: LogLevel.Info });
         try {
             let chartConfig = {
                 ...this._getBase(),
@@ -166,7 +160,7 @@ export default class ChartConfiguration {
                             cursor: "pointer",
                             dataLabels: {
                                 enabled: true,
-                                format: this.showPercentage ?  "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.y:,.0f}",
+                                format: this.showPercentage ? "<b>{point.name}</b>: {point.percentage: .1f} %" : "<b>{point.name}</b>: {point.y:,.0f}",
                                 style: { color: "black" },
                             },
                         },

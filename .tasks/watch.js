@@ -37,7 +37,7 @@ gulp.task("watch", () => {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean", argv.minify ? "packageCodeMinify" : "packageCode", () => {
+            runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
                 if (!argv.skipUpload) {
                     uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
                 }

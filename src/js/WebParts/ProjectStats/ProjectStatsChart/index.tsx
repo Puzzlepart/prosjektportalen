@@ -1,5 +1,6 @@
 import * as React from "react";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { GetBreakpoint } from "../../../Util";
 import { LogLevel, Logger } from "@pnp/logging";
 import IProjectStatsChartProps from "./IProjectStatsChartProps";
@@ -29,12 +30,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
             data: { breakpoint },
             level: LogLevel.Info,
         });
-        this.state = {
-            chart: props.chart,
-            breakpoint,
-        };
-        this._onItemChanged = this._onItemChanged.bind(this);
-        this._onChangeWidth = this._onChangeWidth.bind(this);
+        this.state = { chart: props.chart, breakpoint };
     }
 
     /**
@@ -47,8 +43,8 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
             level: LogLevel.Info,
         });
 
-        let config;
-        let configError;
+        let config: any;
+        let configError: React.ReactNode;
 
         try {
             config = this.state.chart.getConfig();
@@ -65,9 +61,10 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
             <div className={`ms-Grid-col ${this._getLayoutClassNames()}`} style={{ marginTop: "75px" }}>
                 <div className="ms-Grid">
                     <ProjectStatsChartSettings
+                        hidden={!this.props.showSettings}
                         chart={this.state.chart}
-                        onItemChanged={this._onItemChanged}
-                        onWidthChanged={this._onChangeWidth} />
+                        onItemChanged={this.onItemChanged}
+                        onWidthChanged={this.onChangeWidth} />
                     <div className="ms-Grid-row">
                         <div className="ms-Grid-col ms-sm12">
                             {config ? (
@@ -101,7 +98,8 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
      *
      * @param {ProjectStatsChartDataItem} item Item
      */
-    private _onItemChanged(item: ProjectStatsChartDataItem): void {
+    @autobind
+    private onItemChanged(item: ProjectStatsChartDataItem): void {
         const { chart } = this.state;
         const chartElement = this._chartRef.getChart();
 
@@ -121,7 +119,8 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
      *
      * @param {React.MouseEvent} event Event
      */
-    private async _onChangeWidth(event: React.MouseEvent<any>): Promise<void> {
+    @autobind
+    private async onChangeWidth(event: React.MouseEvent<any>): Promise<void> {
         event.preventDefault();
         event.stopPropagation();
         const { chart, breakpoint } = this.state;

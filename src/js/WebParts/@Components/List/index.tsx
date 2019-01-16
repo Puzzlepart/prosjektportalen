@@ -148,6 +148,13 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 return colValue;
             }
             default: {
+                if (Array.isArray(colValue)) {
+                    return (
+                        <ul style={{ margin: 0, padding: 0 }}>
+                            {(colValue as string[]).map((v, idx) => <li key={idx}>{v}</li>)}
+                        </ul>
+                    );
+                }
                 if (column.key.indexOf("OWSDATE") > -1) {
                     return <span>{colValue ? Util.dateFormat(colValue, "LL") : null}</span>;
                 }
