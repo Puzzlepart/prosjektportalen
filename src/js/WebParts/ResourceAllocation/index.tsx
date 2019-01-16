@@ -154,7 +154,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             ...props.style,
             color: itemColor,
             border: "none",
-            cursor: "text",
         };
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
@@ -166,6 +165,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                             ...itemStyle,
                             background: "rgb(26, 111, 179)",
                             backgroundColor: `rgba(26, 111, 179, ${itemOpacity})`,
+                            cursor: "pointer",
                         }}
                         title={itemContext.title}
                         onClick={event => this.onTimelineItemClick(event, item)}>
@@ -184,6 +184,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                             ...itemStyle,
                             background: "rgb(205, 92, 92)",
                             backgroundColor: `rgba(205, 92, 92, ${itemOpacity})`,
+                            cursor: "text",
                         }}
                         title={itemContext.title}>
                         <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
