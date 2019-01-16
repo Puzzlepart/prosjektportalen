@@ -16,7 +16,6 @@ import { IContentType } from "../../Model";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
 import BaseWebPart from "../@BaseWebPart";
-import Preferences from "../../Preferences";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
