@@ -13,7 +13,7 @@ import {
  * @param {number} index Index
  * @param {IDynamicPortfolioColumnConfig} column Column
  * @param {IDynamicPortfolioConfiguration} configuration Configuration
- * @param {Function} titleOnClick Tile column on click
+ * @param {Function} titleOnClick Title column on click
  */
 const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
     let colValue = item[column.key];
