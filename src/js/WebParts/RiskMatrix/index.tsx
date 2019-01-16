@@ -357,6 +357,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 risk.webId = item.WebId;
                 risk.siteTitle = item.SiteTitle;
                 risk.webUrl = item.SPWebUrl;
+                risk.action = item.GtRiskActionOWSMTXT;
                 return risk;
             });
         } else {
@@ -398,6 +399,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                     "GtRiskConsequenceOWSNMBR",
                     "GtRiskProbabilityPostActionOWSNMBR",
                     "GtRiskConsequencePostActionOWSNMBR",
+                    "GtRiskActionOWSMTXT",
                     "SiteTitle",
                 ],
                 QueryTemplate: dataSource.GtDpSearchQuery,

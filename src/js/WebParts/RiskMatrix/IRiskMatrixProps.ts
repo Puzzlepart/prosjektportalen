@@ -33,6 +33,12 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
             isMultiline: true,
         },
         {
+            key: "SiteTitle",
+            fieldName: "siteTitle",
+            name: __.getResource("String_Project"),
+            minWidth: 200,
+        },
+        {
             key: "Probability",
             fieldName: "probability",
             name: __.getResource("SiteFields_GtRiskProbability_DisplayName"),
@@ -57,10 +63,11 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
             minWidth: 100,
         },
         {
-            key: "SiteTitle",
-            fieldName: "siteTitle",
-            name: __.getResource("String_Project"),
-            minWidth: 100,
+            key: "Action",
+            fieldName: "action",
+            name: __.getResource("SiteFields_GtRiskAction_DisplayName"),
+            minWidth: 300,
+            isMultiline: true,
         },
     ],
     contentTypeId: "0x010088578E7470CC4AA68D566346483107020101",
