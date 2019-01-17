@@ -46,6 +46,8 @@ Param(
     [Hashtable]$Parameters
 )
 
+$ErrorActionPreference = "Stop"
+
 . ./SharedFunctions.ps1
 
 # Loads bundle if switch SkipLoadingBundle is not present
@@ -107,30 +109,49 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "" -ForegroundColor Green
     Write-Host "############################################################################" -ForegroundColor Green
 
-    try {
-        if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-            $Connection = Connect-SharePoint $Url -Connection $Connection
-            Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
-            $Language = Get-WebLanguage -ctx (Get-PnPContext)
-            $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
-            foreach ($pkg in $upgradePkgs) {
-                Apply-PnPProvisioningTemplate $pkg.FullName
-            }
-            Write-Host "DONE" -ForegroundColor Green
+    if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
+        try {
+                $Connection = Connect-SharePoint $Url -Connection $Connection
+                Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
+                $Language = Get-WebLanguage -ctx (Get-PnPContext)
+                $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
+                foreach ($pkg in $upgradePkgs) {
+                    Apply-PnPProvisioningTemplate $pkg.FullName
+                }
+                Write-Host "DONE" -ForegroundColor Green
         }
-        Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
-        $Connection = Connect-SharePoint $Url -Connection $Connection
-        Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
-        Write-Host "DONE" -ForegroundColor Green
+        catch {
+            Write-Host
+            Write-Host "Error deploying pre-upgrade packages to $Url" -ForegroundColor Red 
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
+
+        # Removing custom actions with wrong internal-names from versions 2.2 and before
+        if ($CurrentVersion.Minor -lt 3) {
+            try {
+                Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
+                $Connection = Connect-SharePoint $Url -Connection $Connection
+                Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
+                Write-Host "DONE" -ForegroundColor Green
+            }
+            catch {
+                Write-Host
+                Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
+                Write-Host $error[0] -ForegroundColor Red
+                exit 1 
+            }
+        }
+    }
+    
+    try {
+        .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
     }
     catch {
         Write-Host
-        Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+        Write-Host "Error upgrading Project Portal. Aborting"
+        exit 1
     }
-
-    .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         $Connection = Connect-SharePoint $Url -Connection $Connection
