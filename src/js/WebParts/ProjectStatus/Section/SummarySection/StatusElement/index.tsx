@@ -6,6 +6,9 @@ import IStatusElementProps from "./IStatusElementProps";
  * Status element
  */
 const StatusElement = ({ section, scrollTo }: IStatusElementProps) => {
+    function statusContents() {
+        return {__html: (section.fieldName !== "GtOverallStatus" ? section.statusComment : section.statusValue)};
+    }
     return (
         <div className="status-element ms-Grid-row">
             <div className="status-icons ms-Grid-col ms-sm12 ms-md2 ms-lg2">
@@ -14,7 +17,7 @@ const StatusElement = ({ section, scrollTo }: IStatusElementProps) => {
             <div className="status-details ms-Grid-col ms-sm12 ms-md10 ms-lg8">
                 <h3>{section.name}</h3>
                 <h2>{section.fieldName !== "GtOverallStatus" ? section.statusValue : ""}</h2>
-                <p>{section.fieldName !== "GtOverallStatus" ? section.statusComment : section.statusValue}</p>
+                <p dangerouslySetInnerHTML={statusContents()} />
             </div>
         </div>
     );
