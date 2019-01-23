@@ -103,7 +103,7 @@ function Start-Install() {
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
         Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green
         Write-Host "Data Source URL:`t`t$DataSourceSiteUrl" -ForegroundColor Green
-        Write-Host "PnP Environment:`t`t`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
+        Write-Host "PnP Environment:`t`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Note: The install requires site collection admin and term store admin permissions" -ForegroundColor Yellow
         Write-Host "" -ForegroundColor Green
