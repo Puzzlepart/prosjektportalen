@@ -127,6 +127,7 @@ function Start-Install() {
     }
     
     $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+    $ProjectPortalContext = Get-PnPContext
     
     if ($null -eq $Connection) {
         Write-Host
@@ -149,7 +150,6 @@ function Start-Install() {
     # Installing root package if switch SkipRootPackage is not present
     if (-not $SkipRootPackage.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
@@ -218,7 +218,7 @@ function Start-Install() {
     # Installing config package
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
-            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+            Set-PnPContext $ProjectPortalContext
             Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "config" -Localized
             Write-Host "DONE" -ForegroundColor Green
@@ -236,7 +236,7 @@ function Start-Install() {
         $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
         if ($extensionFiles.Length -gt 0) {
             try {
-                $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+                Set-PnPContext $ProjectPortalContext
                 Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
                     $confirmation = "y"
@@ -260,7 +260,7 @@ function Start-Install() {
     }
 
     try {
-        $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+        Set-PnPContext $ProjectPortalContext
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green
