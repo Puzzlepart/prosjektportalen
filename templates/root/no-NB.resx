@@ -1942,10 +1942,10 @@
     <value>Finner ingen informasjon om prosjektet.</value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
-    <value>Gå til prosjektområde</value>
+    <value>Gå til område</value>
   </data>
   <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
-    <value>Gå til prosjektstatus</value>
+    <value>Gå til statusside</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>nb</value>

@@ -1942,10 +1942,10 @@
     <value>Found no information about the project.</value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
-    <value>Go to project site</value>
+    <value>Go to site</value>
   </data>
   <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
-    <value>Go to project status</value>
+    <value>Go to status page</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>en</value>
