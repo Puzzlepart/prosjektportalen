@@ -1,6 +1,6 @@
 import * as React from "react";
-import * as truncateHtml from "truncate-html";
-import IProjectPropertyProps, { ProjectPropertyDefaultProps } from "./IProjectPropertyProps";
+import TruncateMarkup from "react-truncate-markup";
+import IProjectPropertyProps from "./IProjectPropertyProps";
 import IProjectPropertyState from "./IProjectPropertyState";
 import ProjectPropertyModel from "./ProjectPropertyModel";
 
@@ -9,7 +9,6 @@ import ProjectPropertyModel from "./ProjectPropertyModel";
  */
 export default class ProjectProperty extends React.Component<IProjectPropertyProps, IProjectPropertyState> {
     public static displayName = "ProjectProperty";
-    public static defaultProps = ProjectPropertyDefaultProps;
     private shouldTruncate = false;
 
     /**
@@ -35,8 +34,7 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
      * @param {IProjectPropertyProps} param0 Props
      * @param {IProjectPropertyState} param1 State
      */
-    private _render({ model, style, labelSize, valueSize, truncateLength }: IProjectPropertyProps, { truncate }: IProjectPropertyState): JSX.Element {
-        let value = model.value;
+    private _render({ model, labelSize, valueSize, truncateLines: truncateLines }: IProjectPropertyProps, { truncate }: IProjectPropertyState): JSX.Element {
         let labelClassName = ["_label", "ms-fontWeight-semibold"];
         let valueClassName = ["_value"];
         if (labelSize) {
@@ -46,22 +44,23 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
             valueClassName.push(`ms-font-${valueSize}`);
         }
 
-        this.shouldTruncate = truncateLength && truncate && Array.contains(["Note", "Text"], model.type);
-        if (this.shouldTruncate) {
-            value = truncateHtml(model.value, truncateLength, { ellipsis: "..." });
-        }
-
+        this.shouldTruncate = truncateLines && truncate && Array.contains(["Note", "Text"], model.type);
         return (
             <div
-                className={`${model.internalName} prop`}
+                className={`${model.internalName} ${model.type} prop`}
                 data-type={model.type}
                 data-required={model.required}
-                title={model.description}
-                style={style}>
+                title={model.description}>
                 <div className={labelClassName.join(" ")}>{model.displayName}</div>
-                <div className={valueClassName.join(" ")} style={{ wordBreak: "break-word" }} dangerouslySetInnerHTML={{ __html: value }}></div>
+                <div className={valueClassName.join(" ")} style={{ wordBreak: "break-word" }}>
+                    {
+                        this.shouldTruncate ?
+                        <TruncateMarkup lines={truncateLines}> {model.value} </TruncateMarkup> :
+                        <div dangerouslySetInnerHTML={{ __html: model.value }}></div>
+                    }
+                </div>
                 <div hidden={!this.shouldTruncate}>
-                    <a href="#" onClick={e => this.setState({ truncate: false })}>Vis mer</a>
+                    <a href="javascript:void(0);return false;" onClick={e => this.setState({ truncate: false })}>Vis mer</a>
                 </div>
             </div>
         );

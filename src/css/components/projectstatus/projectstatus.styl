@@ -37,14 +37,26 @@
 
         .field-section {
             .field-section-row {
-                width: 100%;
+                width: 80%;
+                margin-left: 10%;
                 display: flex;
-                flex-wrap: nowrap;
-                justify-content: space-around;
+                flex-wrap: wrap;
+                justify-content: space-between;
 
                 .field-keyvalue {
-                    max-width: 250px;
-                    text-align: center;
+                    min-width: 130px;
+                    text-align: left;
+                    margin-bottom: 20px;
+
+                    .prop.Currency, .prop.Number, .prop.DateTime {
+                        width: 130px;    
+                    }
+                    .prop.Text {
+                        min-width: 200px;
+                    }
+                    .prop.Note {
+                        min-width: 400px;    
+                    }
                 }
             }
         }
