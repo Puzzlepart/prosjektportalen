@@ -55,6 +55,10 @@ if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
 }
 
+$LoadedPnPCommand = Get-Command Connect-PnPOnline
+$LoadedPnPCommandVersion = $LoadedPnPCommand.Version
+$LoadedPnPCommandSource = $LoadedPnPCommand.Source
+
 # Sets up PnP trace log
 if($Logging -eq "File") {
     $execDateTime = Get-Date -Format "yyyyMMdd_HHmmss"
@@ -100,10 +104,12 @@ $InstallVersion = ParseVersion -VersionString "{package-version}"
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
+    Write-Host "Prosjektportalen is maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
     Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
-    Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
+    Write-Host "PnP Environment:`t`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Note: The upgrade requires site collection admin and term store admin permissions" -ForegroundColor Yellow
     Write-Host "" -ForegroundColor Green
