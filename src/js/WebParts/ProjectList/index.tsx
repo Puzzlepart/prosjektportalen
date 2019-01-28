@@ -178,7 +178,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         try {
             const projectCt = rootWeb
                 .contentTypes
-                .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
+                .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"));
 
             const projectCtFieldsPromise = projectCt
                 .fields

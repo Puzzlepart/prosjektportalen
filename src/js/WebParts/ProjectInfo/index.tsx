@@ -163,7 +163,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
             const fieldsPromise = rootWeb
                 .contentTypes
-                .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+                .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")
                 .usingCaching()
