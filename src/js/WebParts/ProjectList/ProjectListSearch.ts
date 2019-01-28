@@ -28,7 +28,7 @@ export async function queryProjects(dataSourceName: string, rowLimit?: number, s
             const { PrimarySearchResults } = await sp.search({
                 Querytext: "*",
                 QueryTemplate: dataSource.GtDpSearchQuery,
-                SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "ViewsLifeTime", ...selectProperties],
+                SelectProperties: ["Title", "Path", "SiteLogo", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", ...selectProperties],
                 RowLimit: rowLimit,
                 TrimDuplicates: false,
             });
