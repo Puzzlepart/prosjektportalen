@@ -93,12 +93,14 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         if (this.state.isLoading) {
             return null;
         }
+        const propertiesToRender = this.state.properties.filter(p => !p.empty);
+        const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
         return (
             <div
                 className={this.props.innerClassName}
                 ref={elementToToggle => this.setState({ elementToToggle })}>
-                {this.renderProperties()}
-                {this.renderActionLinks()}
+                {this.renderProperties(propertiesToRender, hasMissingProps)}
+                {propertiesToRender.length > 0 && !hasMissingProps ? this.renderActionLinks() : <div></div>}
             </div>
         );
     }
@@ -106,14 +108,16 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     /**
      * Render properties
      */
-    private renderProperties(): JSX.Element {
-        const propertiesToRender = this.state.properties.filter(p => !p.empty);
-        const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
+    private renderProperties(propertiesToRender: ProjectPropertyModel[], hasMissingProps: boolean): JSX.Element {
         if (hasMissingProps && this.props.showMissingPropsWarning) {
-            return <MessageBar messageBarType={MessageBarType.error}>{this.props.missingPropertiesMessage}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>
+                { String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }
+            </MessageBar>;
         }
         if (propertiesToRender.length === 0) {
-            return <MessageBar>{this.props.noPropertiesMessage}</MessageBar>;
+            return <MessageBar>
+                { String.format(__.getResource("ProjectInfo_NoProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }
+            </MessageBar>;
         }
         return (
             <div>

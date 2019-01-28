@@ -10,15 +10,13 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     label: __.getResource("ProjectInfo_ViewProperties"),
     icon: { iconName: "PreviewLink" },
     options: {
-        HideContentTypeChoice: true,
-        HideWebPartMaintenancePageLink: true,
         HideRibbon: true,
     },
     reloadOnSubmit: false,
     showLabel: true,
 },
 {
-    url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=${_spPageContextInfo.pageListId}&ID=${_spPageContextInfo.pageItemId}&FileName=${_spPageContextInfo.serverRequestPath}`,
+    url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=Properties&ID=1`,
     label: __.getResource("ProjectInfo_ShowVersionHistory"),
     icon: { iconName: "History" },
     options: {
@@ -33,8 +31,6 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     label: __.getResource("ProjectInfo_EditProperties"),
     icon: { iconName: "EditMirrored" },
     options: {
-        HideContentTypeChoice: true,
-        HideWebPartMaintenancePageLink: true,
         HideRibbon: true,
         HideFormFields: "GtProjectPhase",
     },

@@ -9,8 +9,6 @@ import ProjectInfoDefaultActionLinks from "./ProjectInfoDefaultActionLinks";
 export default interface IProjectInfoProps extends IBaseWebPartProps {
     chromeTitle?: string;
     loadingText?: string;
-    missingPropertiesMessage?: string;
-    noPropertiesMessage?: string;
     showActionLinks?: boolean;
     showMissingPropsWarning?: boolean;
     filterField?: string;
@@ -31,8 +29,6 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
 
 export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     chromeTitle: __.getResource("WebPart_ProjectInfo_Title"),
-    missingPropertiesMessage: __.getResource("ProjectInfo_MissingProperties"),
-    noPropertiesMessage: __.getResource("ProjectInfo_NoProperties"),
     loadingText: __.getResource("ProjectInfo_LoadingText"),
     hideChrome: false,
     showActionLinks: true,

@@ -1762,7 +1762,7 @@
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>For &#229; legge til ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, legg de til i den&lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med annen farge i tabellen under.</value>
+    <value>For &#229; legge til ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, legg de til i den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med annen farge i tabellen under.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
@@ -1945,10 +1945,10 @@
     <value>Tittel, beskrivelse og logo</value>
   </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
-    <value>Viktig informasjon om prosjektet er ikke satt. Du bør sette disse egenskapene snarest.</value>
+    <value>Viktig informasjon om prosjektet er ikke satt. &lt;a href="{0}"&gt;Oppdater prosjektegenskapene her&lt;/a&gt;</value>
   </data>
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
-    <value>Finner ingen informasjon om prosjektet.</value>
+    <value>Finner ingen informasjon om prosjektet. &lt;a href="{0}"&gt;Oppdater prosjektegenskapene her&lt;/a&gt;</value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Gå til område</value>
