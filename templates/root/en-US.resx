@@ -465,6 +465,9 @@
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Project Item</value>
   </data>
+  <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
+    <value>Project Properties</value>
+  </data>
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Project Resource</value>
   </data>
@@ -599,6 +602,9 @@
   </data>
   <data name="ContentTypes_Prosjektforside_Description" xml:space="preserve">
     <value>Create a new Web Part page.</value>
+  </data>
+  <data name="ContentTypes_Prosjektegenskaper_Description" xml:space="preserve">
+    <value>Create a new project properties element.</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Description" xml:space="preserve">
     <value>Create a new meeting, deadline or other event.</value>

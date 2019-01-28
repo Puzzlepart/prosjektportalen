@@ -465,6 +465,9 @@
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Prosjektelement</value>
   </data>
+  <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
+    <value>Prosjektegenskaper</value>
+  </data>
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Prosjektressurs</value>
   </data>
@@ -599,6 +602,9 @@
   </data>
   <data name="ContentTypes_Prosjektforside_Description" xml:space="preserve">
     <value>Opprett en ny webdel-side.</value>
+  </data>
+  <data name="ContentTypes_Prosjektegenskaper_Description" xml:space="preserve">
+    <value>Opprett prosjektegenskaper-oppføring.</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Description" xml:space="preserve">
     <value>Opprett et nytt møte, en ny tidsfrist eller en annen hendelse.</value>
