@@ -167,9 +167,9 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
             const itemPromise = new Web(this.props.webUrl)
                 .lists
-                .getByTitle(__.getResource("Lists_SitePages_Title"))
+                .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
                 .items
-                .getById(this.props.welcomePageId)
+                .getById(1)
                 .fieldValuesAsHTML
                 .usingCaching()
                 .get();

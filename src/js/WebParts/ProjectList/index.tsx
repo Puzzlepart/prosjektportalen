@@ -179,15 +179,18 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
             const projectCt = rootWeb
                 .contentTypes
                 .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
+
             const projectCtFieldsPromise = projectCt
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")
                 .usingCaching()
                 .get();
+
             const [projectsQueryResult, projectCtFieldsArray] = await Promise.all([
                 queryProjects(this.props.dataSourceName, this.props.rowLimit, this.props.propertyClassNames),
                 projectCtFieldsPromise,
             ]);
+
             const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result));
             let fieldsMap = projectCtFieldsArray.reduce((obj, fld) => {
                 obj[fld.InternalName] = fld.Title;

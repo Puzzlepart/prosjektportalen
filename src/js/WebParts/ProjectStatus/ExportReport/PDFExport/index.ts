@@ -327,9 +327,9 @@ export default class PDFExport {
 
         const itemPromise = new Web(_spPageContextInfo.webAbsoluteUrl)
             .lists
-            .getByTitle(__.getResource("Lists_SitePages_Title"))
+            .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
             .items
-            .getById(3)
+            .getById(1)
             .fieldValuesAsText
             .get();
         try {

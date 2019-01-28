@@ -29,7 +29,7 @@ const LiteTemplate: Schema = {
             Overwrite: true,
             Properties: {
                 Title: "Hjemmeside",
-                ContentTypeId: "0x010109010058561F86D956412B9DD7957BBCD67AAE01",
+                ContentTypeId: "0x01010901",
             },
             RemoveExistingWebParts: true,
             WebParts: [

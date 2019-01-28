@@ -4,7 +4,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoversikt</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL}]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D566346483107021100* Path:{Site.URL}]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
@@ -15,7 +15,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljestatus</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL}]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D566346483107021100* Path:{Site.URL}]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">BarChart4</pnp:DataValue>
@@ -25,7 +25,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Porteføljeoppfølging</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR GtStatusQualityOWSCHCS:"Større avvik fra spesifikasjon" OR GtStatusGainAchievementOWSCHCS:"Forsinket" OR LastModifiedTime<{Today-60})]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D566346483107021100* Path:{Site.URL} (GtStatusRiskOWSCHCS:"Høy" OR GtStatusTimeOWSCHCS:"Etter plan" OR GtStatusTimeOWSCHCS:"Forsinket" OR GtStatusBudgetOWSCHCS:"Over budsjett" OR GtStatusBudgetOWSCHCS:"Vet ikke" OR GtStatusQualityOWSCHCS:"Større avvik fra spesifikasjon" OR GtStatusGainAchievementOWSCHCS:"Forsinket" OR LastModifiedTime<{Today-60})]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
@@ -35,7 +35,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Mine prosjekter</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010109010058561f86d956412b9dd7957bbcd67aae0100* Path:{Site.URL} (GtProjectManagerOWSUSER:{User.Name} OR GtProjectOwnerOWSUSER:{User.Name})]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D566346483107021100* Path:{Site.URL} (GtProjectManagerOWSUSER:{User.Name} OR GtProjectOwnerOWSUSER:{User.Name})]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>

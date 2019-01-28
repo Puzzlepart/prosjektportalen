@@ -168,6 +168,9 @@
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
   </data>
+  <data name="Lists_ProjectProperties_Title" xml:space="preserve">
+    <value>Properties</value>
+  </data>
   <data name="Lists_Announcements_Title" xml:space="preserve">
     <value>Kunngjøringer</value>
   </data>
@@ -661,7 +664,7 @@
     <value>Opprett et nytt sektordiagram</value>
   </data>
   <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
-    <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
+    <value>0x010088578E7470CC4AA68D5663464831070211</value>
   </data>
   <data name="ContentTypes_Gevinst_ContentTypeId" xml:space="preserve">
     <value>0x0100B384774BA4EBB842A5E402EBF4707367</value>

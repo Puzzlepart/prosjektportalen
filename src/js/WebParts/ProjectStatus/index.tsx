@@ -89,11 +89,11 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * Fetches required data
      */
     private async fetchData(): Promise<ProjectStatusData> {
-        const sitePagesLib = sp.web.lists.getById(_spPageContextInfo.pageListId);
+        const projectPropertiesList = sp.web.lists.getByTitle(__.getResource("Lists_ProjectProperties_Title"));
         const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
         const [project, spFields, spSections, exportType, statusFieldsConfig] = await Promise.all([
-            sitePagesLib.items.getById(this.props.welcomePageId).fieldValuesAsHTML.usingCaching().get(),
-            sitePagesLib.fields.usingCaching().get(),
+            projectPropertiesList.items.getById(1).fieldValuesAsHTML.usingCaching().get(),
+            projectPropertiesList.fields.usingCaching().get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).usingCaching().get(),
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
             loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
