@@ -93,6 +93,11 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         if (this.state.isLoading) {
             return null;
         }
+        if (this.state.error != null) {
+            return <MessageBar messageBarType={MessageBarType.error}>
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+            </MessageBar>;
+        }
         const propertiesToRender = this.state.properties.filter(p => !p.empty);
         const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
         return (
@@ -111,12 +116,12 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     private renderProperties(propertiesToRender: ProjectPropertyModel[], hasMissingProps: boolean): JSX.Element {
         if (hasMissingProps && this.props.showMissingPropsWarning) {
             return <MessageBar messageBarType={MessageBarType.error}>
-                { String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
             </MessageBar>;
         }
         if (propertiesToRender.length === 0) {
-            return <MessageBar>
-                { String.format(__.getResource("ProjectInfo_NoProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }
+            return <MessageBar messageBarType={MessageBarType.error}>
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
             </MessageBar>;
         }
         return (
