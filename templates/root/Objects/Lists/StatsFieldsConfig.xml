@@ -20,4 +20,9 @@
             <JSLink>clienttemplates.js</JSLink>
         </View>
     </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="7463d38f-5f51-4b25-a920-04ea1ec24a26" Name="GtChrDataType" Required="true" />
+        <pnp:FieldRef ID="35632a65-9b43-4320-9b5e-13ef6268957b" Name="GtChrManagedPropertyName" Required="true" />
+    </pnp:FieldRefs>
 </pnp:ListInstance>

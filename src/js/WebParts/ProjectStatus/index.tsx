@@ -1,4 +1,5 @@
 import * as React from "react";
+import __ from "../../Resources";
 import { sp } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { StickyContainer, Sticky } from "react-sticky";
@@ -57,7 +58,7 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                             )}
                         </Sticky>
                         <SummarySection
-                            project={data.project}
+                            propertiesLabel={(this.props.propertiesLabel) ? this.props.propertiesLabel : __.getResource("ProjectStatus_Heading_ProjectMetadata")}
                             sections={data.sections.filter(s => s.showInStatusSection)} />
                         {this.renderSections()}
                     </StickyContainer>

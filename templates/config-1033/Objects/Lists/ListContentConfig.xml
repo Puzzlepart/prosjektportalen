@@ -1,6 +1,6 @@
 <pnp:ListInstance Title="ListContentConfig" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ListContentConfig" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" EnableFolderCreation="false" ContentTypesEnabled="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
-    <pnp:DataRows>
+    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="GtLccLabel">
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtLccSourceUrl">{parameter:DataSourceSiteUrl}</pnp:DataValue>
             <pnp:DataValue FieldName="GtLccSourceList">Default Tasks</pnp:DataValue>

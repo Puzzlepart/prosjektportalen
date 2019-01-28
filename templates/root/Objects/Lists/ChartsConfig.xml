@@ -27,4 +27,23 @@
             <JSLink>clienttemplates.js</JSLink>
         </View>
     </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="89cb87dc-01b5-416d-b325-8cc79f52ae1f" Name="GtChrOrder" />
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+        <pnp:FieldRef ID="fca6d80c-225a-4bb0-a0b6-f4c004f8151c" Name="GtChrSubTitle" />
+        <pnp:FieldRef ID="75f699b2-7ec6-4442-956d-7b35f409b521" Name="GtChrFields" />
+        <pnp:FieldRef ID="69a75937-35ab-4b35-9081-c8f841460d44" Name="GtChrWidthSm" />
+        <pnp:FieldRef ID="d25031a3-9fbb-48b7-8c3a-554805fc4eb9" Name="GtChrWidthMd" />
+        <pnp:FieldRef ID="047c422a-fdcd-407c-839f-e96d7f639082" Name="GtChrWidthLg" />
+        <pnp:FieldRef ID="2a0d7d7e-44f4-40e5-a444-3df1e07ef71d" Name="GtChrWidthXl" />
+        <pnp:FieldRef ID="af569b60-0010-4108-9c92-cb03a90b7498" Name="GtChrWidthXxl" />
+        <pnp:FieldRef ID="41d29afe-b026-4417-9166-3e22dda59d78" Name="GtChrWidthXxxl" />
+        <pnp:FieldRef ID="ed4f667a-b106-4cc3-a773-bfefa2b69e14" Name="GtChrHeight"/>
+        <pnp:FieldRef ID="9c6285f2-0bf6-4092-8ca6-656859d797fd" Name="GtChrStacking" />
+        <pnp:FieldRef ID="c990240d-4c3b-4dfe-8abb-b6119b4b9856" Name="GtChrYAxisTitle" />
+        <pnp:FieldRef ID="9a731b59-52ed-4b93-ab7a-3fd56914d0a6" Name="GtChrYMin" />
+        <pnp:FieldRef ID="f7fd2b80-26e4-472c-8629-02e898b2a19f" Name="GtChrYMax" />
+        <pnp:FieldRef ID="60dac89b-70f5-4a49-87a9-b253bd5df7ca" Name="GtChrYTickInterval" />
+        <pnp:FieldRef ID="5b12b6c1-2db4-4280-a52f-d11f62068162" Name="GtChrValueSuffix" />
+    </pnp:FieldRefs>
 </pnp:ListInstance>

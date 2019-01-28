@@ -60,11 +60,12 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
-        const data = this.getTimelineData();
+        const data = this.getTimelineData(this.state);
 
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
+
         return (
             <div>
                 <ResourceAllocationCommandBar
@@ -72,6 +73,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     allocations={this.state.allocations}
                     selected={this.state.selected}
                     onSelectionUpdate={this.onSelectionUpdate} />
+                <MessageBar>
+                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                </MessageBar>
                 <Timeline
                     groups={data.groups}
                     items={data.items}
@@ -96,22 +100,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     /**
      * Get data for the timeline
      */
-    private getTimelineData() {
-        const {
-            users,
-            allocations,
-            selected,
-        } = this.state;
-
-        const groups = users
-            .map(user => ({ id: user.id, title: user.name }))
-            .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
-            .filter(grp => {
-                if (selected && selected.user) {
-                    return grp.id === selected.user.id;
-                }
-                return true;
-            });
+    private getTimelineData({ users, allocations, selected }: IResourceAllocationState) {
         const items = allocations
             .filter(alloc => {
                 if (!(alloc.user)) {
@@ -119,7 +108,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 }
                 if (selected) {
                     if (selected.project) {
-                        return (alloc.project.name === selected.project);
+                        return alloc.project && (alloc.project.name === selected.project);
                     }
                     if (selected.role) {
                         return (alloc.role === selected.role);
@@ -136,14 +125,36 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                     ...alloc,
                 };
             });
+
+        const groups = users
+            .map(user => ({ id: user.id, title: user.name }))
+            .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
+            .filter(grp => {
+                if (selected) {
+                    if (selected.user) {
+                        return grp.id === selected.user.id;
+                    }
+                    return items.filter(alloc => alloc.user.id === grp.id).length > 0;
+                }
+                return true;
+            });
+
         return { groups, items };
     }
 
+    /**
+     * Timeline item renderer
+     */
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
         const itemOpacity = item.allocationPercentage < 20 ? 0.2 : item.allocationPercentage / 100;
         const itemColor = item.allocationPercentage < 30 ? "#000" : "#fff";
+        const itemStyle = {
+            ...props.style,
+            color: itemColor,
+            border: "none",
+        };
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
                 return (
@@ -151,11 +162,10 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         key={props.key}
                         className={props.className}
                         style={{
-                            ...props.style,
-                            color: itemColor,
-                            backgroundColor: `rgb(26, 111, 179, ${itemOpacity})`,
-                            border: "none",
-                            cursor: "text",
+                            ...itemStyle,
+                            background: "rgb(26, 111, 179)",
+                            backgroundColor: `rgba(26, 111, 179, ${itemOpacity})`,
+                            cursor: "pointer",
                         }}
                         title={itemContext.title}
                         onClick={event => this.onTimelineItemClick(event, item)}>
@@ -171,10 +181,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         key={props.key}
                         className={props.className}
                         style={{
-                            ...props.style,
-                            color: itemColor,
-                            backgroundColor: `rgb(205, 92, 92, ${itemOpacity})`,
-                            border: "none",
+                            ...itemStyle,
+                            background: "rgb(205, 92, 92)",
+                            backgroundColor: `rgba(205, 92, 92, ${itemOpacity})`,
                             cursor: "text",
                         }}
                         title={itemContext.title}>
@@ -218,8 +227,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     private async fetchData() {
         const [searchResult, itemsAvailability] = await Promise.all([
-            this._searchAllocationItems(),
-            this._fetchAvailabilityItems(),
+            this.searchAllocationItems(),
+            this.fetchAvailabilityItems(),
         ]);
 
         // Mapping allocations and availability
@@ -257,12 +266,12 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     /**
      * Searches for allocation items using sp.search
      */
-    private async _searchAllocationItems(): Promise<any> {
+    private async searchAllocationItems(): Promise<any[]> {
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
         if (dataSource) {
             try {
-                const searchSettings = { ...this.props.searchConfiguration, QueryTemplate: dataSource.GtDpSearchQuery };
+                const searchSettings = { QueryTemplate: dataSource.GtDpSearchQuery, ...this.props.searchConfiguration };
                 const { PrimarySearchResults } = await sp.search(searchSettings);
                 return PrimarySearchResults;
             } catch (err) {
@@ -276,7 +285,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     /**
      * Fetches availability items from list on root
      */
-    private async _fetchAvailabilityItems(): Promise<Array<any>> {
+    private async fetchAvailabilityItems(): Promise<Array<any>> {
         const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
             .items
             .select("GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")

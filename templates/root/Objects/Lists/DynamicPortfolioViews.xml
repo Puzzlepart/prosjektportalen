@@ -28,6 +28,15 @@
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+        <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+        <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="GtDpSearchQuery" Required="true" />
+        <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+        <pnp:FieldRef ID="3ccd363c-36ba-49aa-bf1e-52a2eb27a876" Name="GtDpDefault" />
+        <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
+        <pnp:FieldRef ID="43c79736-a2b6-452c-9995-6b72bba0ec16" Name="GtDpFieldsLookup" />
+        <pnp:FieldRef ID="503e35fd-ccee-4d66-af88-e016eab2f80b" Name="GtDpRefinersLookup" />
+        <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="GtDpGroupByLookup" />
+        <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="GtDpPersonalView" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">

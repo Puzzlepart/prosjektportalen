@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_PhaseChecklist_Title}"  Description="" DocumentTemplate="" TemplateType="100" Url="Lists/PhaseChecklist" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" 
+<pnp:ListInstance Title="{resource:Lists_PhaseChecklist_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/PhaseChecklist" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x010088578E7470CC4AA68D5663464831070204" Default="true" />
@@ -22,6 +22,12 @@
             <JSLink>hierarchytaskslist.js</JSLink>
         </View>
     </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="325543a5-815d-485d-a9a5-e0773ad762e9" Name="GtProjectPhase" />
+        <pnp:FieldRef ID="249527a3-c7f9-4ea5-9c33-f942c06c9215" Name="GtChecklistStatus" />
+        <pnp:FieldRef ID="509a6bfe-004e-41f9-bd73-9a0e02d5c4a7" Name="GtComment" />
+        <pnp:FieldRef ID="0e82c395-9ed9-43f9-871a-208215b18558" Name="GtSortOrder" />
+    </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
             <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />

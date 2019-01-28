@@ -19,19 +19,13 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     constructor(props: ISectionProps) {
         super(props);
-        this.state = {
-            isLoading: this.shouldFetchListData(props),
-            listData: null,
-        };
+        this.state = { isLoading: this.shouldFetchListData(props), listData: null };
     }
 
     public componentDidMount(): void {
         if (this.shouldFetchListData(this.props)) {
             this.fetchListData(this.props).then(listData => {
-                this.setState({
-                    listData,
-                    isLoading: false,
-                });
+                this.setState({ listData, isLoading: false });
             });
         }
     }
@@ -62,7 +56,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      */
     private renderHeader({ section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
-        if (section.getType() === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
+        if (section.sectionType === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
             fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3&HideWebPartMaintenancePageLink=1&HideRibbon=1`;
         }
         return (
@@ -87,7 +81,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         <RiskMatrix
                             data={{ items: listData.items }}
                             showViewSelector={false}
-                            { ...this.props.riskMatrix } />
+                            {...this.props.riskMatrix} />
                         <OpportunityMatrix
                             data={{ items: listData.items }}
                             showViewSelector={false} />
@@ -98,7 +92,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                         id={section.getHtmlElementId("listview")}
                         listData={listData} />
                 )}
-                {section.getType() === SectionType.ProjectPropertiesSection && (
+                {section.sectionType === SectionType.ProjectPropertiesSection && (
                     <div
                         className="field-section"
                         style={{ marginTop: 20 }}>
@@ -117,9 +111,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                                                 internalName: vf,
                                                 displayName: field.Title,
                                                 value: project[vf],
+                                                type: field.TypeAsString,
                                             }}
                                             labelSize="m"
-                                            valueSize="l" />
+                                            valueSize="m" />
                                     </div>
                                 );
                             })}
@@ -139,7 +134,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     private renderCustomComponent(customComponentName: string): JSX.Element {
         let customComponent = GetWebPartComponentByName(customComponentName);
         if (customComponent) {
-            return customComponent.getComponent(false);
+            return customComponent.getComponent(false, { excelExportEnabled: false });
         }
         return null;
     }

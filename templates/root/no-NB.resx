@@ -1147,7 +1147,7 @@
     <value>Siste beslutningspunktstatus</value>
   </data>
   <data name="SiteFields_GtProjectProcessState_DisplayName" xml:space="preserve">
-    <value>Prosjektprosessstatus</value>
+    <value>Prosjektprosesstatus</value>
   </data>
   <data name="SiteFields_GtRequestedPhase_DisplayName" xml:space="preserve">
     <value>Ønsket fase</value>
@@ -1752,6 +1752,9 @@
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
+  <data name="ResourceAllocation_LinkText" xml:space="preserve">
+    <value>For &#229; legge til ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, legg de til i den&lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med annen farge i tabellen under.</value>
+  </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
   </data>
@@ -1939,10 +1942,10 @@
     <value>Finner ingen informasjon om prosjektet.</value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
-    <value>Gå til prosjektområde</value>
+    <value>Gå til område</value>
   </data>
   <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
-    <value>Gå til prosjektstatus</value>
+    <value>Gå til statusside</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>nb</value>
@@ -2037,16 +2040,22 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Godkjenning</value>
   </data>
-  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Henter data...</value>
+  </data>  
+  <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
+    <value>Endre datautvalg</value>
   </data>
-  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+  <data name="String_ProjectStats_ShowChartSettings_Text" xml:space="preserve">
+    <value>Vis diagraminnstillinger</value>
+  </data>
+  <data name="String_ProjectStats_Error_Text" xml:space="preserve">
     <value>Det skjedde en feil under lasting av data.</value>
   </data>
-  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Charts_Text" xml:space="preserve">
     <value>Det er ikke konfigurert opp noen grafer.</value>
   </data>
-  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Data_Text" xml:space="preserve">
     <value>Ingen prosjekter funnet.</value>
   </data>
   <data name="String_Default_Toggle_On_Text" xml:space="preserve">
@@ -2096,6 +2105,9 @@
   </data>
   <data name="String_All" xml:space="preserve">
     <value>Alle</value>
+  </data>
+  <data name="String_New" xml:space="preserve">
+    <value>Ny</value>
   </data>
   <data name="Project_WelcomePage" xml:space="preserve">
     <value>SitePages/ProjectHome.aspx</value>

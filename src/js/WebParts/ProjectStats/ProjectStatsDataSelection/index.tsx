@@ -1,14 +1,13 @@
 import * as React from "react";
-import {  Logger, LogLevel } from "@pnp/logging";
+import { Logger, LogLevel } from "@pnp/logging";
 import { ProjectStatsChartData, ProjectStatsChartDataItem } from "../ProjectStatsChart";
 import IProjectStatsDataSelectionProps from "./IProjectStatsDataSelectionProps";
 import IProjectStatsDataSelectionState from "./IProjectStatsDataSelectionState";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { DetailsList, DetailsListLayoutMode, Selection, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
 import { MarqueeSelection } from "office-ui-fabric-react/lib/MarqueeSelection";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import __ from "../../../Resources";
 
 export default class ProjectStatsDataSelection extends React.PureComponent<IProjectStatsDataSelectionProps, IProjectStatsDataSelectionState> {
@@ -18,20 +17,15 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
             fieldName: "name",
             name: "Tittel",
             minWidth: 100,
+            maxWidth: 300,
         }],
     };
-    private _selection: Selection;
+    private selection: Selection;
 
     constructor(props: IProjectStatsDataSelectionProps) {
         super(props);
-        this.state = {
-            isExpanded: false,
-            selection: [],
-        };
-        this._onToggle = this._onToggle.bind(this);
-        this._onSelectionChanged = this._onSelectionChanged.bind(this);
-        this._onUpdateSelection = this._onUpdateSelection.bind(this);
-        this._selection = new Selection({ onSelectionChanged: this._onSelectionChanged });
+        this.state = { isExpanded: false, selection: [] };
+        this.selection = new Selection({ onSelectionChanged: this.onSelectionChanged });
     }
 
     /**
@@ -39,79 +33,47 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
      */
     public render(): React.ReactElement<IProjectStatsDataSelectionProps> {
         return (
-            <div className={`ms-Grid-col ms-sm6`}>
-                <div className="ms-Grid">
+            <Modal
+                isOpen={true}
+                onDismiss={this.props.onDismiss}>
+                <div className="ms-Grid" style={{ padding: 40, width: 500 }}>
                     <div className="ms-Grid-row">
-                        <div className="ms-Grid-col ms-sm12">
-                            <div
-                                onClick={this._onToggle}
-                                className="ms-font-xl"
-                                style={{
-                                    cursor: "pointer",
-                                    position: "relative",
-                                }}>
-                                <span>{__.getResource("String_Select_Project_Name")}</span>
-                                <span style={{ position: "absolute", right: 25 }}><Icon iconName={this.state.isExpanded ? "ChevronDown" : "ChevronUp"} /></span>
+                        <div className="ms-Grid-col ms-sm12" style={{ marginBottom: 20 }}>
+                            <h2>{__.getResource("String_ProjectStats_EditDataSelection_Text")}</h2>
+                        </div>
+                        <div className="ms-Grid-col ms-sm12" hidden={this.props.data.getCount() === 0}>
+                            <MarqueeSelection selection={this.selection}>
+                                <DetailsList
+                                    items={this.props.data.getItems()}
+                                    columns={this.props.columns}
+                                    setKey="set"
+                                    layoutMode={DetailsListLayoutMode.fixedColumns}
+                                    selection={this.selection}
+                                    selectionPreservedOnEmptyClick={true}
+                                    selectionMode={SelectionMode.multiple}
+                                    compact={true} />
+                            </MarqueeSelection>
+                            <div hidden={this.state.selection.length === 0} style={{ marginTop: 25 }} >
+                                <PrimaryButton
+                                    style={{ width: "100%" }}
+                                    text={__.getResource("String_Button_Update_Selection")}
+                                    iconProps={{ iconName: "Refresh" }}
+                                    onClick={this.onUpdateSelection} />
                             </div>
                         </div>
-                        {this.state.isExpanded && (
-                            <div className="ms-Grid-row">
-                                <div className="ms-Grid-col ms-sm12" style={{ marginTop: 20, marginBottom: 20 }}>
-                                    <Dropdown
-                                        placeHolder={__.getResource("String_Select_View_Name")}
-                                        label={__.getResource("String_Select_View_Placeholder")}
-                                        defaultSelectedKey={this.props.views.indexOf(this.props.selectedView)}
-                                        options={this.props.views.map((view, i) => ({ key: i, text: view.name, data: view }))}
-                                        onChanged={opt => this.props.onViewChanged(opt.data)} />
-                                    <div className="ms-font-xs" style={{ marginTop: 20 }}>{__.getResource("String_Select_View_Description")}</div>
-                                </div>
-                                <div
-                                    className="ms-Grid-col ms-sm12"
-                                    style={{ marginTop: 20, marginBottom: 20 }}
-                                    hidden={this.state.selection.length === 0} >
-                                    <MessageBar>{String.format(__.getResource("String_Selection_Status_MessageBar_Text"), this.state.selection.length, this.props.data.getCount())}</MessageBar>
-                                </div>
-                                <div className="ms-Grid-col ms-sm12" hidden={this.props.data.getCount() === 0}>
-                                    <MarqueeSelection selection={this._selection}>
-                                        <DetailsList
-                                            items={this.props.data.getItems()}
-                                            columns={this.props.columns}
-                                            setKey="set"
-                                            layoutMode={DetailsListLayoutMode.fixedColumns}
-                                            selection={this._selection}
-                                            selectionPreservedOnEmptyClick={true}
-                                            selectionMode={SelectionMode.multiple}
-                                            compact={true} />
-                                    </MarqueeSelection>
-                                    <div hidden={this.state.selection.length === 0} style={{ marginTop: 25 }} >
-                                        <PrimaryButton
-                                            text={__.getResource("String_Button_Update_Selection")}
-                                            onClick={this._onUpdateSelection} />
-                                    </div>
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
-            </div>
+            </Modal>
         );
-    }
-
-    /**
-     * On toggle
-     */
-    private _onToggle() {
-        this.setState(prevState => ({ isExpanded: !prevState.isExpanded }), () => {
-            Logger.log({ message: `(ProjectStatsDataSelection) _onToggle`, data: { isExpanded: this.state.isExpanded }, level: LogLevel.Info });
-        });
     }
 
     /**
      * On selection changed
      */
-    private _onSelectionChanged() {
-        const selection = this._selection.getSelection();
-        Logger.log({ message: `(ProjectStatsDataSelection) _onSelectionChanged: ${selection.length} items selected`, level: LogLevel.Info });
+    @autobind
+    private onSelectionChanged() {
+        const selection = this.selection.getSelection();
+        Logger.log({ message: `(ProjectStatsDataSelection) onSelectionChanged: ${selection.length} items selected`, level: LogLevel.Info });
         this.setState({ selection: (selection as ProjectStatsChartDataItem[]) });
     }
 
@@ -120,7 +82,8 @@ export default class ProjectStatsDataSelection extends React.PureComponent<IProj
      *
      * @param {React.MouseEvent} event Event
      */
-    private _onUpdateSelection(event: React.MouseEvent<HTMLButtonElement>) {
+    @autobind
+    private onUpdateSelection(event: React.MouseEvent<HTMLButtonElement>) {
         Logger.log({ message: "(ProjectStatsDataSelection) _onUpdate", level: LogLevel.Info });
         event.preventDefault();
         event.stopPropagation();

@@ -5,11 +5,13 @@ import ChartConfiguration from "./ChartConfiguration";
 import { IContentType } from "../../Model";
 
 export default interface IProjectStatsState extends IBaseWebPartState {
+    showChartSettings?: boolean;
     charts?: ChartConfiguration[];
     data?: ProjectStatsChartData;
     contentTypes?: IContentType[];
     views?: IDynamicPortfolioViewConfig[];
-    selectedView?: IDynamicPortfolioViewConfig;
+    currentView?: IDynamicPortfolioViewConfig;
     selection?: ProjectStatsChartData;
     errorMessage?: any;
+    showDataSelectionModal?: boolean;
 }

@@ -7,6 +7,7 @@ export default interface IProjectStatusProps extends IBaseWebPartProps {
     sectionConfig?: IProjectStatusSectionConfig;
     welcomePageId?: number;
     riskMatrix?: IRiskMatrixProps;
+    propertiesLabel?: string;
 }
 
 export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {

@@ -1751,6 +1751,9 @@
   </data>
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
+  </data>  
+  <data name="ResourceAllocation_LinkText" xml:space="preserve">
+    <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with different colors in the table below.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>
@@ -1939,10 +1942,10 @@
     <value>Found no information about the project.</value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
-    <value>Go to project site</value>
+    <value>Go to site</value>
   </data>
   <data name="ProjectInfo_ProjectStatusLinkText" xml:space="preserve">
-    <value>Go to project status</value>
+    <value>Go to status page</value>
   </data>
   <data name="MomentDate_Locale" xml:space="preserve">
     <value>en</value>
@@ -2037,16 +2040,25 @@
   <data name="String_Approval" xml:space="preserve">
     <value>Approval</value>
   </data>
-  <data name="String_Projectstats_Loading_Text" xml:space="preserve">
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Fetching data...</value>
   </data>
-  <data name="String_Projectstats_Error_Text" xml:space="preserve">
+  <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
+    <value>Edit data selection</value>
+  </data>
+  <data name="String_ProjectStats_ShowChartSettings_Text" xml:space="preserve">
+    <value>Show chart settings</value>
+  </data>
+  <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
+    <value>Fetching data...</value>
+  </data>
+  <data name="String_ProjectStats_Error_Text" xml:space="preserve">
     <value>An error occured while fetching data.</value>
   </data>
-  <data name="String_Projectstats_No_Charts_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Charts_Text" xml:space="preserve">
     <value>No graphs configured yet.</value>
   </data>
-  <data name="String_Projectstats_No_Data_Text" xml:space="preserve">
+  <data name="String_ProjectStats_No_Data_Text" xml:space="preserve">
     <value>No projects found.</value>
   </data>
   <data name="String_Default_Toggle_On_Text" xml:space="preserve">
@@ -2616,6 +2628,9 @@
   <data name="DynamicPortfolio_LoadingText" xml:space="preserve">
     <value>Loading project portfolio...</value>
   </data>
+  <data name="DynamicPortfolio_LoadingViewText" xml:space="preserve">
+    <value>Loading view {0}...</value>
+  </data>
   <data name="DynamicPortfolio_CreateNewView" xml:space="preserve">
     <value>Create new view</value>
   </data>
@@ -2897,6 +2912,9 @@
   </data>
   <data name="String_StatusReport" xml:space="preserve">
     <value>Status Report</value>
+  </data>  
+  <data name="String_New" xml:space="preserve">
+    <value>New</value>
   </data>
   <data name="ProjectStatus_Heading_Status" xml:space="preserve">
     <value>Status</value>

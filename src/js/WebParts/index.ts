@@ -39,12 +39,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
-    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog", {
-        groupByOptions: [
-            { name: __.getResource("String_Project"), key: "SiteTitle" },
-        ],
-    },
-    ),
+    new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
     new WebPartComponent<IWebPropertyBagEditorProps>(WebPropertyBagEditor, "pp-webPropertyBagEditor"),
     new WebPartComponent<INewProjectFormProps>(NewProjectForm, "pp-newProjectForm", { style: { width: 500 } }),
     new WebPartComponent<IRiskMatrixProps>(RiskMatrix, "pp-riskMatrix", { showEmptyMessage: true }),
@@ -52,6 +47,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IDeliveriesOverviewProps>(DeliveriesOverview, "pp-deliveriesoverview"),
     new WebPartComponent<IDiceCalculatorProps>(DiceCalculator, "pp-diceCalculator", {}),
     new WebPartComponent<IProjectStatsProps>(ProjectStats, "pp-projectStats", {
+        viewSelectorEnabled: true,
         statsFieldsListName: __.getResource("Lists_StatsFieldsConfig_Title"),
         chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),

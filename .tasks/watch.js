@@ -37,18 +37,24 @@ gulp.task("watch", () => {
             clearTimeout(buildTimeout);
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean", argv.minify ? "packageCodeMinify" : "packageCode", () => {
-                uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
+            runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
+                if (!argv.skipUpload) {
+                    uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
+                }
             });
         }, 100);
     });
     watch(config.globs.styles).on("change", () => {
         runSequence("packageStyles", () => {
-            uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
+            if (!argv.skipUpload) {
+                uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
+            }
         });
     });
     watch(config.globs.resxJson).on("change", () => {
-        runSequence("buildJsonResources");
+        if (!argv.skipUpload) {
+            runSequence("buildJsonResources");
+        }
     });
 });
 

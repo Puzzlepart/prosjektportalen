@@ -2,23 +2,18 @@
 function Connect-SharePoint ([string]$Url, [Object]$Connection) {
     $ConnectionUrl = $Url.TrimEnd("/")
 
-    if ($null -ne $Connection -and $Connection.Url -eq $ConnectionUrl) {
-        return $Connection
-    }
-    if ($null -ne $Connection -and $Connection.Url -ne $ConnectionUrl) {
-        return $Connection.CloneContext($ConnectionUrl)
-    }
-    try {
-        if ($UseWebLogin.IsPresent) {
-            return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
-        } elseif ($CurrentCredentials.IsPresent) {
-            return Connect-PnPOnline $ConnectionUrl -CurrentCredentials -ReturnConnection
-        } else {
-            return Connect-PnPOnline $ConnectionUrl -Credentials $Credential -ReturnConnection
-        }
-    } catch {
-        throw $error
-    }
+	if ($null -ne $Connection) {
+		if ($Connection.Url -eq $ConnectionUrl) {
+			return $Connection
+		}
+	}
+	if ($UseWebLogin.IsPresent) {
+		return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
+	} elseif ($CurrentCredentials.IsPresent) {
+		return Connect-PnPOnline $ConnectionUrl -CurrentCredentials -ReturnConnection
+	} else {
+		return Connect-PnPOnline $ConnectionUrl -Credentials $Credential -ReturnConnection
+	}
 }
 
 # Ensure assocated groups
@@ -142,13 +137,6 @@ function ParseVersion($VersionString) {
     if($VersionString  -like "*.*.*") {
         return [Version]($VersionString)
     }
-}
-
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
 }
 
 function LoadBundle($Environment) {

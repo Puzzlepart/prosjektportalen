@@ -25,6 +25,12 @@
     </pnp:Views>
     <pnp:FieldRefs>
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+        <pnp:FieldRef ID="3e0e63c8-28d9-46fb-89ea-3e4525abe40b" Name="GtDpOrder" />
+        <pnp:FieldRef ID="14dfd5b2-cf1d-4735-9e1b-7fa0d3658430" Name="GtDpProperty" Required="true" />
+        <pnp:FieldRef ID="9788aee9-7b21-480f-85e9-cee535e8cc20" Name="GtDpDisplayName" Required="true" />
+        <pnp:FieldRef ID="6cad365d-6424-41ce-a164-6457ee69772d" Name="GtDpMultiple" />
+        <pnp:FieldRef ID="3b19f43d-fcd2-4801-b2dc-52a9b12863e7" Name="GtDpDefaultHidden" />
+        <pnp:FieldRef ID="b5fc712a-9908-4ba1-a8ac-7e51eca7a251" Name="GtDpIcon" />
     </pnp:FieldRefs>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">

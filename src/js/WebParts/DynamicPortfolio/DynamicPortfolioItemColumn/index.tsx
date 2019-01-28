@@ -13,7 +13,7 @@ import {
  * @param {number} index Index
  * @param {IDynamicPortfolioColumnConfig} column Column
  * @param {IDynamicPortfolioConfiguration} configuration Configuration
- * @param {Function} titleOnClick Tile column on click
+ * @param {Function} titleOnClick Title column on click
  */
 const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
     let colValue = item[column.key];
@@ -70,6 +70,12 @@ const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPo
                     <span>{colValue}</span>
                 );
 
+            }
+            case "URL": {
+                let urlVals = colValue.split(",");
+                return (
+                    <a title={urlVals[1]} href={urlVals[0]}>{urlVals[1]}</a>
+                );
             }
             case "Default": {
                 return (
