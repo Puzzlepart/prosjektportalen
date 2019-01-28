@@ -19,7 +19,6 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
     hideChrome?: boolean;
     webUrl?: string;
     rootSiteUrl?: string;
-    welcomePageId?: number;
     renderMode?: ProjectInfoRenderMode;
     modalOptions?: IProjectInfoModalOptions;
     containerClassName?: string;
@@ -40,7 +39,6 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     showMissingPropsWarning: true,
     webUrl: _spPageContextInfo.webAbsoluteUrl,
     rootSiteUrl: _spPageContextInfo.siteAbsoluteUrl,
-    welcomePageId: 3,
     renderMode: ProjectInfoRenderMode.Normal,
     containerClassName: "pp-projectInfo",
     innerClassName: "pp-projectInfoInner",

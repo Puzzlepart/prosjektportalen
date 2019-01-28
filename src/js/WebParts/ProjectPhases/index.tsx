@@ -1,4 +1,3 @@
-//#region Imports
 import __ from "../../Resources";
 import * as React from "react";
 import { sp, List, Item } from "@pnp/sp";
@@ -13,7 +12,6 @@ import { cleanString } from "../../Util";
 import IProjectPhasesProps, { ProjectPhasesDefaultProps } from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 import BaseWebPart from "../@BaseWebPart";
-//#endregion
 
 /**
  * Project Phases
@@ -22,7 +20,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public static displayName = "ProjectPhases";
     public static defaultProps = ProjectPhasesDefaultProps;
 
-    private projectProperiesList: List;
+    private projectPropertiesList: List;
     private phaseChecklist: List;
     private projectElement: Item;
 
@@ -37,9 +35,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         this._onRestartPhase = this._onRestartPhase.bind(this);
         this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
         this._onHideDialog = this._onHideDialog.bind(this);
-        this.projectProperiesList = sp.web.lists.getByTitle(__.getResource("Lists_ProjectProperties_Title"));
+        this.projectPropertiesList = sp.web.lists.getByTitle(__.getResource("Lists_ProjectProperties_Title"));
         this.phaseChecklist = sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
-        this.projectElement = this.projectProperiesList.items.getById(1);
+        this.projectElement = this.projectPropertiesList.items.getById(1);
     }
 
     public async componentDidMount() {

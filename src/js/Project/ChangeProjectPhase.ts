@@ -1,7 +1,7 @@
 import * as Util from "../Util";
 import __ from "../Resources";
 import {
-    UpdatePhaseWelcomePage,
+    UpdateProjectPhase,
     UpdateFrontpageListViews,
     SetMetadataDefaultsForLibrary,
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
@@ -24,7 +24,7 @@ async function ChangeProjectPhase(newPhase: any, useWaitDialog = true): Promise<
         waitDlg.start(300);
     }
     try {
-        await UpdatePhaseWelcomePage(newPhase.Name, newPhase.Id, PROJECTPHASE_FIELD);
+        await UpdateProjectPhase(newPhase.Name, newPhase.Id, PROJECTPHASE_FIELD);
         await Promise.all([
             UpdateFrontpageListViews(newPhase.Name),
             SetMetadataDefaultsForLibrary([{

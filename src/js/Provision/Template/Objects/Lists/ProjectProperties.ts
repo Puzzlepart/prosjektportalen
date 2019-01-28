@@ -7,7 +7,9 @@ const ProjectProperties: IList = {
     Template: 100,
     ContentTypesEnabled: false,
     RemoveExistingContentTypes: true,
-    AdditionalSettings: { EnableVersioning: true },
+    AdditionalSettings: {
+        EnableVersioning: true,
+     },
     FieldRefs: [{
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
         Required: false,
