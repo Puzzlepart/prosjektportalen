@@ -48,7 +48,7 @@ Param(
 
 $ErrorActionPreference = "Stop"
 
-. ./SharedFunctions.ps1
+. ./scripts/SharedFunctions.ps1
 
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
