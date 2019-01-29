@@ -15,7 +15,7 @@ const ProjectProperties: IList = {
         Required: false,
         Hidden: true,
     }],
-    ContentTypeBindings: [{ ContentTypeID: "0x010088578E7470CC4AA68D5663464831070211" }],
+    ContentTypeBindings: [{ ContentTypeID: __.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId") }],
 };
 
 export default ProjectProperties;

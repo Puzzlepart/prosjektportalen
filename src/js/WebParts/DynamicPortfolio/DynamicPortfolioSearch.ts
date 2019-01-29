@@ -1,4 +1,4 @@
-import { sp } from "@pnp/sp";
+import { sp, SearchResult } from "@pnp/sp";
 import {
     IDynamicPortfolioConfiguration,
     IDynamicPortfolioViewConfig,
@@ -10,7 +10,7 @@ import {
 export const DEFAULT_SEARCH_SETTINGS = { Querytext: "*", RowLimit: 500, TrimDuplicates: false };
 
 export interface IProjectsQueryResponse {
-    primarySearchResults: any[];
+    primarySearchResults: SearchResult[];
     refiners: any[];
 }
 
@@ -24,10 +24,11 @@ export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, con
     try {
         const searchResults = await sp.search({
             ...DEFAULT_SEARCH_SETTINGS,
-            SelectProperties: configuration.columns.map(f => f.fieldName),
+            SelectProperties: configuration.columns.map(f => f.fieldName).concat(["SiteTitle"]),
             Refiners: configuration.refiners.map(ref => ref.key).join(","),
             QueryTemplate: viewConfig.queryTemplate,
         });
+
         const refinementResults = searchResults.RawSearchResults.PrimaryQueryResult.RefinementResults;
         let refiners = [];
         if (refinementResults) {
@@ -37,7 +38,7 @@ export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, con
             }
         }
         return {
-            primarySearchResults: searchResults.PrimarySearchResults,
+            primarySearchResults: searchResults.PrimarySearchResults.map(res => ({ ...res, Title: res["SiteTitle"], Path: res.Path.split("/Lists")[0] })),
             refiners,
         };
     } catch (err) {
