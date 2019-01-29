@@ -95,7 +95,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         }
         if (this.state.error != null) {
             return <MessageBar messageBarType={MessageBarType.error}>
-                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
             </MessageBar>;
         }
         const propertiesToRender = this.state.properties.filter(p => !p.empty);
@@ -116,12 +116,12 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     private renderProperties(propertiesToRender: ProjectPropertyModel[], hasMissingProps: boolean): JSX.Element {
         if (hasMissingProps && this.props.showMissingPropsWarning) {
             return <MessageBar messageBarType={MessageBarType.error}>
-                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
             </MessageBar>;
         }
         if (propertiesToRender.length === 0) {
             return <MessageBar messageBarType={MessageBarType.error}>
-                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+            {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
             </MessageBar>;
         }
         return (

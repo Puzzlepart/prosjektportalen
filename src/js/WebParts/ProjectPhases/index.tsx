@@ -65,7 +65,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         }
         if (this.state.error) {
             return (<MessageBar messageBarType={MessageBarType.error}>
-                {__.getResource("ProjectInfo_MissingProperties")}
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
             </MessageBar>);
         }
         return (

@@ -1939,10 +1939,10 @@
     <value>Tittel, beskrivelse og logo</value>
   </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
-    <value>Viktig informasjon om prosjektet er ikke satt. &lt;a href="{0}"&gt;Oppdater prosjektegenskapene her&lt;/a&gt;</value>
+    <value>Viktig informasjon om prosjektet er ikke satt. </value>
   </data>
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
-    <value>Finner ingen informasjon om prosjektet. &lt;a href="{0}"&gt;Oppdater prosjektegenskapene her&lt;/a&gt;</value>
+    <value>Finner ingen informasjon om prosjektet. </value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Gå til område</value>

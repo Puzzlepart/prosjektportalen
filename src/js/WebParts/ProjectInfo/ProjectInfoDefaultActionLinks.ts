@@ -5,7 +5,7 @@ import {
     EnsureLocationBasedMetadataDefaultsReceiverForLibrary,
 } from "../../Project";
 
-const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
+export const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     url: `${_spPageContextInfo.webAbsoluteUrl}/Lists/Properties/DispForm.aspx?ID=1`,
     label: __.getResource("ProjectInfo_ViewProperties"),
     icon: { iconName: "PreviewLink" },
@@ -80,4 +80,45 @@ const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
     permissionKind: 31,
 }];
 
-export default ProjectInfoDefaultActionLinks;
+export const ProjectNewItemActionLink: IModalLinkProps = {
+    url: `${_spPageContextInfo.webAbsoluteUrl}/Lists/Properties/NewForm.aspx`,
+    label: __.getResource("ProjectInfo_EditProperties"),
+    options: {
+        HideRibbon: true,
+        HideFormFields: "GtProjectPhase",
+    },
+    onDialogReturnValueCallback: result => {
+        Promise.all([
+            SetMetadataDefaultsForLibrary([
+            {
+                fieldName: "GtProjectType",
+                fieldType: "TaxonomyMulti",
+            },
+            {
+                fieldName: "GtProjectServiceArea",
+                fieldType: "TaxonomyMulti",
+            },
+            {
+                fieldName: "GtProjectFinanceName",
+                fieldType: "Text",
+            },
+            {
+                fieldName: "GtProjectNumber",
+                fieldType: "Text",
+            },
+            {
+                fieldName: "GtArchiveReference",
+                fieldType: "Text",
+            }]),
+            EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
+        ])
+            .then(() => {
+                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+            })
+            .catch(() => {
+                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+            });
+    },
+    showLabel: true,
+    permissionKind: 31,
+};

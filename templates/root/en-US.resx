@@ -1939,10 +1939,10 @@
     <value>Title, description and logo</value>
   </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
-    <value>Important information about the project is not set. &lt;a href="{0}"&gt;Set project properties&lt;/a&gt;</value>
+    <value>Important information about the project is not set. </value>
   </data>
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
-    <value>Found no information about the project. &lt;a href="{0}"&gt;Set project properties&lt;/a&gt;</value>
+    <value>Found no information about the project. </value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Go to site</value>

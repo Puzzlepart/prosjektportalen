@@ -16,6 +16,7 @@ export default class ProjectListModel {
     public Type: string;
     public Manager: string;
     public Owner: string;
+    public LastModifiedTime: string;
     public RawObject: any;
 
     /**
@@ -25,16 +26,20 @@ export default class ProjectListModel {
         // Empty constructor
     }
 
-    public initFromSearchResponse(obj) {
-        this.RawObject = obj;
-        this.Title = obj.Title;
-        this.Url = obj.Path.split("/Lists")[0];
-        this.Logo = obj.SiteLogo ? obj.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
-        this.Phase = obj.RefinableString52;
-        this.ServiceArea = obj.RefinableString53;
-        this.Type = obj.RefinableString54;
-        this.Manager = obj.GtProjectManagerOWSUSER;
-        this.Owner = obj.GtProjectOwnerOWSUSER;
+    public initFromSearchResponse(projectSearchResult, webSearchResult) {
+        this.RawObject = projectSearchResult;
+        this.Title = projectSearchResult.SiteTitle;
+        this.Phase = projectSearchResult.RefinableString52;
+        this.ServiceArea = projectSearchResult.RefinableString53;
+        this.Type = projectSearchResult.RefinableString54;
+        this.Manager = projectSearchResult.GtProjectManagerOWSUSER;
+        this.Owner = projectSearchResult.GtProjectOwnerOWSUSER;
+        this.LastModifiedTime = projectSearchResult.LastModifiedTime;
+
+        this.Url = webSearchResult ? webSearchResult.Path : projectSearchResult.Path.split("/Lists")[0];
+        this.Title = webSearchResult ? webSearchResult.Title : projectSearchResult.SiteTitle;
+        this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
+
         return this;
     }
 
@@ -72,9 +77,5 @@ export default class ProjectListModel {
             return this.Phase.substring(0, 1).toUpperCase();
         }
         return null;
-    }
-
-    public getProjectUrl(): string {
-        return this.Url.split("/Lists")[0];
     }
 }

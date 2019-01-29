@@ -5,7 +5,7 @@ const ProjectProperties: IList = {
     Title: __.getResource("Lists_ProjectProperties_Title"),
     Description: "",
     Template: 100,
-    ContentTypesEnabled: false,
+    ContentTypesEnabled: true,
     RemoveExistingContentTypes: true,
     AdditionalSettings: {
         EnableVersioning: true,
