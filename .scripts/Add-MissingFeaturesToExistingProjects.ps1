@@ -93,7 +93,7 @@ function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
     }
 
     # Synchronize project properties if old Content Type
-    if ($ProjectPage.FieldValues.ContentTypeId.StringValue.StartsWith("0x010109010058561f86d956412b9dd7957bbcd67aae01")) {
+    if ($ProjectPage.FieldValues.ContentTypeId.StringValue.ToLower().StartsWith("0x010109010058561f86d956412b9dd7957bbcd67aae01")) {
         $FieldsToSync = Get-PnPField -List $TargetListName -Web $ProjectWeb | ? {$_.InternalName.IndexOf("Gt") -eq 0}
         $FieldsToSync | ? {$_.FieldTypeKind -ne "Invalid"} | % {
             $ProjectItem[$_.InternalName] = $ProjectPage[$_.InternalName]
