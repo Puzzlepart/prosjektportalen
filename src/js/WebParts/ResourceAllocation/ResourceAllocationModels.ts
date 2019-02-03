@@ -23,16 +23,20 @@ export class ProjectResourceAllocation {
     public role: string;
     public absence: string;
     public user: ProjectUser;
+    public workDescription: string;
+    public workComment: string;
 
     /**
      * Creates a new ProjectResourceAllocation2 class
      */
-    constructor(name: string, start_time: string, end_time: string, allocationPercentage: string, type: ProjectAllocationType) {
+    constructor(name: string, start_time: string, end_time: string, allocationPercentage: string, type: ProjectAllocationType, workDescription, workComment) {
         this.name = name;
         this.start_time = moment(new Date(start_time));
         this.end_time = moment(new Date(end_time));
         this.allocationPercentage = Math.round(parseFloat(allocationPercentage) * 100);
         this.type = type;
+        this.workDescription = workDescription !== "DispForm.aspx" ? workDescription : "";
+        this.workComment = workComment;
     }
 
     /**

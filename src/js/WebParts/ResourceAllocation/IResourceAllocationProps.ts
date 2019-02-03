@@ -17,7 +17,7 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
             "SPWebUrl",
             "WebId",
             "GtResourceLoadOWSNMBR",
-            "GtResourceAbsenceCommentOWSTXT",
+            "GtResourceAbsenceCommentOWSTEXT",
             "SiteTitle",
             "GtStartDateOWSDATE",
             "GtEndDateOWSDATE",

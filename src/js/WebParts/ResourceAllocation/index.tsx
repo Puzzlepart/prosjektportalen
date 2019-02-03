@@ -233,17 +233,17 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
 
         // Mapping allocations and availability
         const availability = itemsAvailability.map(item => {
-            const a = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence);
-            a.absence = item.GtResourceAbsence;
-            return a;
+            const portfolioAbsence = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence, item.Title, item.GtResourceAbsenceComment);
+            portfolioAbsence.absence = item.GtResourceAbsence;
+            return portfolioAbsence;
         });
         const allocations = [
             ...availability,
             ...searchResult.map(res => {
-                const a = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation);
-                a.project = { name: res.SiteTitle, url: res.SPWebUrl };
-                a.role = res.RefinableString72;
-                return a;
+                const projectAbsence = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation, res.Title, res.GtResourceAbsenceCommentOWSTEXT);
+                projectAbsence.project = { name: res.SiteTitle, url: res.SPWebUrl };
+                projectAbsence.role = res.RefinableString72;
+                return projectAbsence;
             }),
         ];
 
