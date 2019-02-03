@@ -1257,6 +1257,9 @@
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Comment</value>
   </data>
+  <data name="SiteFields_LinkTitleResourceAllocation_DisplayName" xml:space="preserve">
+    <value>Work description</value>
+  </data>
   <data name="SiteFields_GtBudgetTotal_Description" xml:space="preserve">
     <value />
   </data>
@@ -1753,7 +1756,7 @@
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
   </data>  
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with different colors in the table below.</value>
+    <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue color in the table below. Allocations from projects are green.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>

@@ -12,6 +12,7 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
         RowLimit: 500,
         TrimDuplicates: false,
         SelectProperties: [
+            "Title",
             "Path",
             "SPWebUrl",
             "WebId",
