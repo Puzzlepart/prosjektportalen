@@ -69,7 +69,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         return (
             <div>
                 <MessageBar>
-                    <div style={{maxWidth: 1000, padding: 10, marginBottom: 10}} dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                    <div style={{maxWidth: "100%", padding: 10, marginBottom: 10}} dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
                 <ResourceAllocationCommandBar
                     users={this.state.users}
