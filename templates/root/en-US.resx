@@ -1257,6 +1257,9 @@
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Comment</value>
   </data>
+  <data name="SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="SiteFields_LinkTitleResourceAllocation_DisplayName" xml:space="preserve">
     <value>Work description</value>
   </data>
@@ -2585,6 +2588,9 @@
   </data>
   <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
     <value>In a phase</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Linetasks" xml:space="preserve">
+    <value>Daily tasks</value>
   </data>
   <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
     <value>Leave of absence</value>

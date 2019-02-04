@@ -55,7 +55,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
     protected _renderBody() {
         const { allocation } = this.props;
         return (
-            <div>
+            <div className="allocation-modal">
                 <p>
                     <b>{__.getResource("String_From")}:</b>&nbsp;
                     <span>{allocation.start_time.format("LL")}</span>
@@ -76,7 +76,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                     <p>
                         <b>{__.getResource("SiteFields_LinkTitleResourceAllocation_DisplayName")}:</b>&nbsp;
                         <span>{allocation.workDescription}</span>
-                    </p>) : <p></p>}
+                    </p>) : <span />
                 }
             </div>
         );

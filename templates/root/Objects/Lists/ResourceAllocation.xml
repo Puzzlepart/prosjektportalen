@@ -26,7 +26,7 @@
         </View>
     </pnp:Views>
     <pnp:FieldRefs>
-        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="false" Hidden="false" />
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="false" Hidden="false" DisplayName="{resource:SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName}" />
         <pnp:FieldRef ID="88d9b92c-efed-45d0-a586-86d9196b77d0" Name="GtResourceUser" Required="true" />
         <pnp:FieldRef ID="e39c32db-a7da-4c93-9369-8aa5a7bde92d" Name="GtStartDate" Required="true" />
         <pnp:FieldRef ID="16623c2a-3fd1-41c2-87e7-958583dd88da" Name="GtEndDate" Required="true" />
@@ -35,6 +35,6 @@
         <pnp:FieldRef ID="1dd2e8f2-bf4f-4a66-b0dc-ad992d10eb64" Name="GtResourceAbsenceComment" Required="false" />
     </pnp:FieldRefs>
     <pnp:Fields>
-        <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" StaticName="Title" DisplayName="{resource:SiteFields_LinkTitleResourceAllocation_DisplayName}" />
+        <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" StaticName="Title" DisplayName="{resource:SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName}" />
     </pnp:Fields>
 </pnp:ListInstance>
