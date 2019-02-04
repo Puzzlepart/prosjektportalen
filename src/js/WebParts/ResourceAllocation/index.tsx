@@ -176,14 +176,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 );
             }
             case ProjectAllocationType.Absence: {
+                const portfolioColorRGB = item.absence === __.getResource("Choice_GtResourceAbsence_Leave") ? "205, 92, 92" : "26,111,179"; // Use red color if type=leave, else use blue portfolio color
                 return (
                     <div
                         key={props.key}
                         className={props.className}
                         style={{
                             ...itemStyle,
-                            background: "rgb(26,111,179)",
-                            backgroundColor: `rgba(26,111,179,${itemOpacity})`,
+                            background: `rgb(${portfolioColorRGB})`,
+                            backgroundColor: `rgba(${portfolioColorRGB},${itemOpacity})`,
                             cursor: "text",
                         }}
                         title={itemContext.title}>

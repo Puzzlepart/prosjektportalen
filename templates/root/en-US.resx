@@ -1756,7 +1756,7 @@
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
   </data>  
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue color in the table below. Allocations from projects are green.</value>
+    <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue color in the table below, and red for absence. Allocations from projects are green. The color density of an item is an indication of the allocation percentage.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Create new project</value>

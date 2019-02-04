@@ -8,6 +8,9 @@ const ResourceAllocation: IList = {
     ContentTypesEnabled: false,
     RemoveExistingContentTypes: true,
     AdditionalSettings: { EnableVersioning: true },
+    Fields: [
+        `<Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" StaticName="Title" DisplayName="${__.getResource("SiteFields_LinkTitleResourceAllocation_DisplayName")}" />`,
+    ],
     FieldRefs: [{
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
         DisplayName: __.getResource("SiteFields_LinkTitleResourceAllocation_DisplayName"),

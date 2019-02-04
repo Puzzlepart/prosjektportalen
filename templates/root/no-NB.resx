@@ -1756,7 +1756,7 @@
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>For &#229; legge til ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, legg de til i den&lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med blå farge i tabellen under. Oppføringer fra prosjektene vises med grønn farge.</value>
+    <value>For &#229; ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, bruk den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med bl&#229; farge i tabellen under, og r&#248;d for frav&#230;r. Oppføringer fra prosjektene vises med gr&#248;nn farge. Fargestyrken er en indikasjon på allokeringsprosent.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
