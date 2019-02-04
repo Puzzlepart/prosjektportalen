@@ -1258,7 +1258,7 @@
     <value>Beskrivelse</value>
   </data>
   <data name="SiteFields_LinkTitleResourceAllocation_DisplayName" xml:space="preserve">
-    <value>Arbeidsoppgave</value>
+    <value>Beskrivelse av arbeidsoppgaver</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
