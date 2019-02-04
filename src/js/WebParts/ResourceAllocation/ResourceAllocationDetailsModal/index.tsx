@@ -43,7 +43,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
         return (
             <div>
                 <h3>
-                    {allocation.role} ({allocation.allocationPercentage}%)
+                    {allocation.role || allocation.absence} ({allocation.allocationPercentage}%)
                 </h3>
             </div>
         );
@@ -56,6 +56,15 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
         const { allocation } = this.props;
         return (
             <div className="allocation-modal">
+                { allocation.workDescription &&
+                    <p>
+                        <span>{allocation.workDescription}</span>
+                    </p>
+                }
+                <p>
+                    <b>{__.getResource("String_Resource")}:</b>&nbsp;
+                    <span>{allocation.user.name}</span>
+                </p>
                 <p>
                     <b>{__.getResource("String_From")}:</b>&nbsp;
                     <span>{allocation.start_time.format("LL")}</span>
@@ -64,19 +73,11 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                     <b>{__.getResource("String_To")}:</b>&nbsp;
                     <span>{allocation.end_time.format("LL")}</span>
                 </p>
-                <p>
-                    <b>{__.getResource("String_Project")}:</b>&nbsp;
-                    <a href={allocation.project.url} target="_blank"><span>{allocation.project.name}</span></a>
-                </p>
-                <p>
-                    <b>{__.getResource("String_Resource")}:</b>&nbsp;
-                    <span>{allocation.user.name}</span>
-                </p>
-                {allocation.workDescription ? (
+                { allocation.project && allocation.project.url &&
                     <p>
-                        <b>{__.getResource("SiteFields_LinkTitleResourceAllocation_DisplayName")}:</b>&nbsp;
-                        <span>{allocation.workDescription}</span>
-                    </p>) : <span />
+                        <b>{__.getResource("String_Project")}:</b>&nbsp;
+                        <a href={allocation.project.url} target="_blank"><span>{allocation.project.name}</span></a>
+                    </p>
                 }
             </div>
         );
