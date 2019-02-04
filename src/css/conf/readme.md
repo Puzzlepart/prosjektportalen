@@ -1,1 +1,3 @@
-Generated .spcolor.styl files will reside here.
+# About this file #
+
+Auto-generated .spcolor.styl files will reside here.

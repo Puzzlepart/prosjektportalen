@@ -1257,6 +1257,12 @@
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Kommentar</value>
   </data>
+  <data name="SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName" xml:space="preserve">
+    <value>Beskrivelse</value>
+  </data>
+  <data name="SiteFields_LinkTitleResourceAllocation_DisplayName" xml:space="preserve">
+    <value>Beskrivelse av arbeidsoppgaver</value>
+  </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
   </data>
@@ -1756,7 +1762,7 @@
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>For &#229; legge til ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter, legg de til i den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med annen farge i tabellen under.</value>
+    <value>Ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter legges inn i den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med bl&#229; farge i tabellen under, og r&#248;d for frav&#230;r. Oppføringer fra prosjektene vises med gr&#248;nn farge. Fargestyrken er en indikasjon på allokeringsprosenten.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
@@ -2585,6 +2591,9 @@
   </data>
   <data name="Choice_GtProjectProcessState_InPhase" xml:space="preserve">
     <value>I en fase</value>
+  </data>
+  <data name="Choice_GtResourceAbsence_Linetasks" xml:space="preserve">
+    <value>Linjeoppgaver</value>
   </data>
   <data name="Choice_GtResourceAbsence_Leave" xml:space="preserve">
     <value>Fravær</value>

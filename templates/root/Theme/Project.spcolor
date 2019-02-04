@@ -9,9 +9,9 @@
     <s:color name="ErrorText" value="FF0000" />
     <s:color name="AccentText" value="339933" />
     <s:color name="SearchURL" value="358700" />
-    <s:color name="Hyperlink" value="339933" />
-    <s:color name="Hyperlinkfollowed" value="20AD95" />
-    <s:color name="HyperlinkActive" value="287A28" />
+    <s:color name="Hyperlink" value="143D14" />
+    <s:color name="Hyperlinkfollowed" value="143D14" />
+    <s:color name="HyperlinkActive" value="143D14" />
     <s:color name="CommandLinks" value="666666" />
     <s:color name="CommandLinksSecondary" value="262626" />
     <s:color name="CommandLinksHover" value="339933" />

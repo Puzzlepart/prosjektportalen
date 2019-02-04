@@ -148,12 +148,14 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
-        const itemOpacity = item.allocationPercentage < 20 ? 0.2 : item.allocationPercentage / 100;
-        const itemColor = item.allocationPercentage < 30 ? "#000" : "#fff";
+        const itemOpacity = item.allocationPercentage < 30 ? 0.3 : item.allocationPercentage / 100;
+        const itemColor = item.allocationPercentage < 40 ? "#000" : "#fff";
         const itemStyle = {
             ...props.style,
             color: itemColor,
             border: "none",
+            cursor: "pointer",
+            outline : "none",
         };
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
@@ -163,9 +165,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         className={props.className}
                         style={{
                             ...itemStyle,
-                            background: "rgb(26, 111, 179)",
-                            backgroundColor: `rgba(26, 111, 179, ${itemOpacity})`,
-                            cursor: "pointer",
+                            background: "rgb(51,153,51)",
+                            backgroundColor: `rgba(51,153,51,${itemOpacity})`,
                         }}
                         title={itemContext.title}
                         onClick={event => this.onTimelineItemClick(event, item)}>
@@ -176,17 +177,18 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                 );
             }
             case ProjectAllocationType.Absence: {
+                const portfolioColorRGB = item.absence === __.getResource("Choice_GtResourceAbsence_Leave") ? "205, 92, 92" : "26,111,179"; // Use red color if type=leave, else use blue portfolio color
                 return (
                     <div
                         key={props.key}
                         className={props.className}
                         style={{
                             ...itemStyle,
-                            background: "rgb(205, 92, 92)",
-                            backgroundColor: `rgba(205, 92, 92, ${itemOpacity})`,
-                            cursor: "text",
+                            background: `rgb(${portfolioColorRGB})`,
+                            backgroundColor: `rgba(${portfolioColorRGB},${itemOpacity})`,
                         }}
-                        title={itemContext.title}>
+                        title={itemContext.title}
+                        onClick={event => this.onTimelineItemClick(event, item)}>
                         <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
                             {itemContext.title}
                         </div>
@@ -233,17 +235,17 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
 
         // Mapping allocations and availability
         const availability = itemsAvailability.map(item => {
-            const a = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence);
-            a.absence = item.GtResourceAbsence;
-            return a;
+            const portfolioAbsence = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence, item.Title, item.GtResourceAbsenceComment);
+            portfolioAbsence.absence = item.GtResourceAbsence;
+            return portfolioAbsence;
         });
         const allocations = [
             ...availability,
             ...searchResult.map(res => {
-                const a = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation);
-                a.project = { name: res.SiteTitle, url: res.SPWebUrl };
-                a.role = res.RefinableString72;
-                return a;
+                const projectAbsence = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation, res.Title, res.GtResourceAbsenceCommentOWSTEXT);
+                projectAbsence.project = { name: res.SiteTitle, url: res.SPWebUrl };
+                projectAbsence.role = res.RefinableString72;
+                return projectAbsence;
             }),
         ];
 
@@ -288,7 +290,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     private async fetchAvailabilityItems(): Promise<Array<any>> {
         const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
             .items
-            .select("GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
+            .select("Title", "GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
             .expand("GtResourceUser")
             .get();
         return itemsAvailability;

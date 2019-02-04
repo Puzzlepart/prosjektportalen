@@ -1,6 +1,6 @@
 {
     "name": "prosjektportalen",
-    "version": "2.3.3",
+    "version": "2.3.4",
     "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
     "homepage": "https://github.com/Puzzlepart/prosjektportalen",
     "repository": {
@@ -84,6 +84,7 @@
         "jspdf-autotable": "^3.0.2",
         "merge2": "^1.2.3",
         "moment": "^2.24.0",
+        "natives": "^1.1.6",
         "object-assign": "^4.1.1",
         "object.omit": "^3.0.0",
         "office-ui-fabric-core": "^9.6.1",
