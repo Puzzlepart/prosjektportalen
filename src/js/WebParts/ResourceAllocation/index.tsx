@@ -149,12 +149,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
         const props = getItemProps(item.itemProps);
         const itemOpacity = item.allocationPercentage < 30 ? 0.3 : item.allocationPercentage / 100;
-        const itemColor = item.allocationPercentage < 30 ? "#000" : "#fff";
+        const itemColor = item.allocationPercentage < 40 ? "#000" : "#fff";
         const itemStyle = {
             ...props.style,
             color: itemColor,
             border: "none",
             cursor: "pointer",
+            outline : "none",
         };
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {

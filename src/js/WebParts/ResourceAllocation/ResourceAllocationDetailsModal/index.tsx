@@ -25,11 +25,11 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                     isOpen={true}
                     isBlocking={false}
                     onDismiss={this.props.onDismiss}>
-                    <div style={{ padding: 50 }}>
+                    <div style={{ padding: 50, maxWidth: 400 }}>
                         {this._renderHeader()}
                         {this._renderBody()}
                     </div>
-                </Modal>
+                </Modal >
             );
         }
         return null;
@@ -56,7 +56,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
         const { allocation } = this.props;
         return (
             <div className="allocation-modal">
-                { allocation.workDescription &&
+                {allocation.workDescription &&
                     <p>
                         <span>{allocation.workDescription}</span>
                     </p>
@@ -73,10 +73,10 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                     <b>{__.getResource("String_To")}:</b>&nbsp;
                     <span>{allocation.end_time.format("LL")}</span>
                 </p>
-                { allocation.project && allocation.project.url &&
+                {allocation.project && allocation.project.url &&
                     <p>
                         <b>{__.getResource("String_Project")}:</b>&nbsp;
-                        <a href={allocation.project.url} target="_blank"><span>{allocation.project.name}</span></a>
+                        <a href={allocation.project.url} style={{ outline: "none" }} target="_blank"><span>{allocation.project.name}</span></a>
                     </p>
                 }
             </div>
