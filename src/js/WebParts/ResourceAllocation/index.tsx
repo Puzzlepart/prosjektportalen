@@ -69,13 +69,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         return (
             <div>
                 <MessageBar>
-                    <div style={{maxWidth: "100%", padding: 10, marginBottom: 10}} dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
-                <ResourceAllocationCommandBar
-                    users={this.state.users}
-                    allocations={this.state.allocations}
-                    selected={this.state.selected}
-                    onSelectionUpdate={this.onSelectionUpdate} />
+                <div className="allocation-cmd-bar">
+                    <ResourceAllocationCommandBar
+                        users={this.state.users}
+                        allocations={this.state.allocations}
+                        selected={this.state.selected}
+                        onSelectionUpdate={this.onSelectionUpdate} />
+                </div>
                 <Timeline
                     groups={data.groups}
                     items={data.items}
@@ -155,7 +157,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
             color: itemColor,
             border: "none",
             cursor: "pointer",
-            outline : "none",
+            outline: "none",
         };
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
