@@ -72,6 +72,10 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                     <b>{__.getResource("String_Resource")}:</b>&nbsp;
                     <span>{allocation.user.name}</span>
                 </p>
+                <p>
+                    <b>{__.getResource("SiteFields_LinkTitleResourceAllocation_DisplayName")}:</b>&nbsp;
+                    <span>{allocation.workDescription}</span>
+                </p>
             </div>
         );
     }

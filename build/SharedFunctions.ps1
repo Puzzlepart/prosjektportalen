@@ -6,9 +6,6 @@ function Connect-SharePoint ([string]$Url, [Object]$Connection) {
 		if ($Connection.Url -eq $ConnectionUrl) {
 			return $Connection
 		}
-		if ($Connection.Url -ne $ConnectionUrl -and (Get-Member -InputObject $Connection -Name "CloneContext" -MemberType Method) -ne $null){
-			return $Connection.CloneContext($ConnectionUrl)
-		}
 	}
 	if ($UseWebLogin.IsPresent) {
 		return Connect-PnPOnline $ConnectionUrl -UseWebLogin -ReturnConnection
@@ -140,13 +137,6 @@ function ParseVersion($VersionString) {
     if($VersionString  -like "*.*.*") {
         return [Version]($VersionString)
     }
-}
-
-function Get-WebLanguage($ctx) {
-    $web = $ctx.Web
-    $ctx.Load($web)
-    $ctx.ExecuteQuery()
-    return $web.Language
 }
 
 function LoadBundle($Environment) {

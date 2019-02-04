@@ -111,9 +111,10 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                                                 internalName: vf,
                                                 displayName: field.Title,
                                                 value: project[vf],
+                                                type: field.TypeAsString,
                                             }}
                                             labelSize="m"
-                                            valueSize="l" />
+                                            valueSize="m" />
                                     </div>
                                 );
                             })}
@@ -133,7 +134,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     private renderCustomComponent(customComponentName: string): JSX.Element {
         let customComponent = GetWebPartComponentByName(customComponentName);
         if (customComponent) {
-            return customComponent.getComponent(false);
+            return customComponent.getComponent(false, { excelExportEnabled: false });
         }
         return null;
     }
