@@ -127,7 +127,6 @@ function Start-Install() {
     }
     
     $Connection = Connect-SharePoint -Url $Url -Connection $Connection
-    $ProjectPortalContext = Get-PnPContext
     
     if ($null -eq $Connection) {
         Write-Host
@@ -218,7 +217,7 @@ function Start-Install() {
     # Installing config package
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
-            Set-PnPContext $ProjectPortalContext
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
             Apply-Template -Template "config" -Localized
             Write-Host "DONE" -ForegroundColor Green
@@ -236,7 +235,7 @@ function Start-Install() {
         $extensionFiles = Get-ChildItem "$($ExtensionFolder)/*.pnp"
         if ($extensionFiles.Length -gt 0) {
             try {
-                Set-PnPContext $ProjectPortalContext
+                $Connection = Connect-SharePoint -Url $Url -Connection $Connection
                 Write-Host "Deploying extensions.." -ForegroundColor Green
                 foreach($extension in $extensionFiles) {
                     $confirmation = "y"
@@ -260,7 +259,7 @@ function Start-Install() {
     }
 
     try {
-        Set-PnPContext $ProjectPortalContext
+        $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
         Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green
