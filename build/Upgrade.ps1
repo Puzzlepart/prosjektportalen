@@ -159,11 +159,12 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     }
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
-        Set-PnPContext $ProjectPortalContext
-        Write-Host "Deploying upgrade packages.." -ForegroundColor Green -NoNewLine
+        $Connection = Connect-SharePoint $Url -Connection $Connection
+        Write-Host "Deploying upgrade packages.." -ForegroundColor Green
         $Language = Get-WebLanguage -ctx (Get-PnPContext)
         $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/*-$($Language).pnp" -Exclude "pre-*.pnp"
         foreach ($pkg in $upgradePkgs) {
+            Write-Host "Applying upgrade-package $($pkg.FullName)" 
             Apply-PnPProvisioningTemplate $pkg.FullName
         }
         Write-Host "DONE" -ForegroundColor Green
