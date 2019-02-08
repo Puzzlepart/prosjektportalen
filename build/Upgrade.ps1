@@ -110,7 +110,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
-    Write-Host "PnP Environment:`t`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
+    Write-Host "PnP Environment:`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Note: The upgrade requires site collection admin and term store admin permissions" -ForegroundColor Yellow
     Write-Host "" -ForegroundColor Green
