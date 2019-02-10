@@ -64,15 +64,21 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
     if ($null -eq $PropertiesList) {
         New-PnPList -Title $ListName -Template GenericList -EnableVersioning -Web $ProjectWeb -OnQuickLaunch:$false
         $PropertiesList = Get-PnPList -Identity $ListName -Web $ProjectWeb
-            
+        
         $ItemContentType = Get-PnPContentType -Identity "0x01" -InSiteHierarchy -Web $ProjectWeb
         $ProjectPropertiesContentType = Get-PnPContentType -Identity "0x010088578E7470CC4AA68D5663464831070211" -InSiteHierarchy -Web $ProjectWeb
         
         Add-PnPContentTypeToList -List $PropertiesList -ContentType $ProjectPropertiesContentType -DefaultContentType -Web $ProjectWeb
         Remove-PnPContentTypeFromList -List $PropertiesList -ContentType $ItemContentType -Web $ProjectWeb
-
+        
+        $PropertiesList.OnQuickLaunch = $false
+        $PropertiesList.Update()
+        Invoke-PnPQuery
         Write-Host "`tProject properties list created and configured" -ForegroundColor Green
 	} else {
+        $PropertiesList.OnQuickLaunch = $false
+        $PropertiesList.Update()
+        Invoke-PnPQuery
         Write-Host "`tProject properties list already exists" -ForegroundColor Green
     }
 }
@@ -127,13 +133,15 @@ $Webs | ForEach-Object {
 
     $Language = Get-WebLanguage -ctx (Get-PnPContext)
 
-    Write-Host  "Processing subweb $ProjectTitle with url $ProjectUrl and language $Language"
-    
-    Add-ResourceAllocationFeatures -ProjectWeb $ProjectWeb -Language $Language
-    Add-ProjectPropertiesList -ProjectWeb $ProjectWeb -Language $Language
-    
-    if ($PersistProjectProperties.IsPresent) {
-        Set-ProjectPropertiesFromProjectPage -ProjectWeb $ProjectWeb -Language $Language
+    if ($null -ne $ProjectWeb -and $null -ne $ProjectTitle -and $null -ne $ProjectUrl -and $null -ne $Language) {
+        Write-Host  "Processing subweb $ProjectTitle with url $ProjectUrl"
+        
+        Add-ResourceAllocationFeatures -ProjectWeb $ProjectWeb -Language $Language
+        Add-ProjectPropertiesList -ProjectWeb $ProjectWeb -Language $Language
+        
+        if ($PersistProjectProperties.IsPresent) {
+            Set-ProjectPropertiesFromProjectPage -ProjectWeb $ProjectWeb -Language $Language
+        }
     }
 }
 Disconnect-PnPOnline
