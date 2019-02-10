@@ -176,12 +176,12 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
                 $DataSource = ""
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211")
+                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
                 Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211")
+                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
