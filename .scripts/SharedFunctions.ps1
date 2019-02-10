@@ -140,7 +140,7 @@ function ParseVersion($VersionString) {
 }
 
 function LoadBundle($Environment) {
-    $BundlePath = "$PSScriptRoot\bundle\$Environment"
+    $BundlePath = "$PSScriptRoot\..\bundle\$Environment"
     Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.Taxonomy.dll" -ErrorAction SilentlyContinue
     Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.DocumentManagement.dll" -ErrorAction SilentlyContinue
     Add-Type -Path "$BundlePath\Microsoft.SharePoint.Client.WorkflowServices.dll" -ErrorAction SilentlyContinue
