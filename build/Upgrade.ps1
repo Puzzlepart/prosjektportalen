@@ -48,12 +48,16 @@ Param(
 
 $ErrorActionPreference = "Stop"
 
-. ./SharedFunctions.ps1
+. ./scripts/SharedFunctions.ps1
 
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
 }
+
+$LoadedPnPCommand = Get-Command Connect-PnPOnline
+$LoadedPnPCommandVersion = $LoadedPnPCommand.Version
+$LoadedPnPCommandSource = $LoadedPnPCommand.Source
 
 # Sets up PnP trace log
 if($Logging -eq "File") {
@@ -84,26 +88,29 @@ if (-not $DataSourceSiteUrl) {
     $DataSourceSiteUrl = $Url
 }
 
-$Connection = $null
-try {
-    $Connection = Connect-SharePoint -Url $Url
-} catch {
-    Write-Error $Error[0]
-    Write-Error "An error occured connecting to $Url. Aborting."
-    exit 1
-}
-$CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
+$Connection = Connect-SharePoint -Url $Url -Connection $Connection
+$ProjectPortalContext = Get-PnPContext
 
+if ($null -eq $Connection) {
+    Write-Host
+    Write-Host "Error connecting to SharePoint $Url. Aborting" -ForegroundColor Red 
+    Write-Host $error[0] -ForegroundColor Red
+    exit 1 
+}
+
+$CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'gulp release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
+    Write-Host "Prosjektportalen is maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+    Write-Host "" -ForegroundColor Green
     Write-Host "Upgrading Prosjektportalen from version $($CurrentVersion) to $($InstallVersion)" -ForegroundColor Green
-    Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Upgrade URL:`t`t$Url" -ForegroundColor Green
+    Write-Host "PnP Environment:`t$LoadedPnPCommandSource ($LoadedPnPCommandVersion)" -ForegroundColor Green
     Write-Host "" -ForegroundColor Green
     Write-Host "Note: The upgrade requires site collection admin and term store admin permissions" -ForegroundColor Yellow
     Write-Host "" -ForegroundColor Green
@@ -111,7 +118,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         try {
-                $Connection = Connect-SharePoint $Url -Connection $Connection
                 Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
                 $Language = Get-WebLanguage -ctx (Get-PnPContext)
                 $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
@@ -131,7 +137,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         if ($CurrentVersion.Minor -lt 3) {
             try {
                 Write-Host "Removing existing custom actions.. " -ForegroundColor Green -NoNewLine
-                $Connection = Connect-SharePoint $Url -Connection $Connection
                 Get-PnPCustomAction -Scope Web | ForEach-Object { Remove-PnPCustomAction -Identity $_.Id -Scope Web -Force }
                 Write-Host "DONE" -ForegroundColor Green
             }
@@ -161,6 +166,34 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         foreach ($pkg in $upgradePkgs) {
             Write-Host "Applying upgrade-package $($pkg.FullName)" 
             Apply-PnPProvisioningTemplate $pkg.FullName
+        }
+        Write-Host "DONE" -ForegroundColor Green
+
+        
+        # Replacing Content Type IDs in configurations  from versions 2.3 and before
+        if ($CurrentVersion.Minor -lt 4) {
+            try {
+                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
+                $DataSource = ""
+                Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
+                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211")
+                    $_["GtDpSearchQuery"] = $Query
+                    $_.Update()
+                }
+                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
+                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211")
+                    $_["GtDpSearchQuery"] = $Query
+                    $_.Update()
+                }
+                Invoke-PnPQuery
+                Write-Host "DONE" -ForegroundColor Green
+            }
+            catch {
+                Write-Host
+                Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
+                Write-Host $error[0] -ForegroundColor Red
+                exit 1 
+            }
         }
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green

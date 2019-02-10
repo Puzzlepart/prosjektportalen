@@ -93,12 +93,19 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         if (this.state.isLoading) {
             return null;
         }
+        if (this.state.error != null) {
+            return <MessageBar messageBarType={MessageBarType.error}>
+                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
+            </MessageBar>;
+        }
+        const propertiesToRender = this.state.properties.filter(p => !p.empty);
+        const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
         return (
             <div
                 className={this.props.innerClassName}
                 ref={elementToToggle => this.setState({ elementToToggle })}>
-                {this.renderProperties()}
-                {this.renderActionLinks()}
+                {this.renderProperties(propertiesToRender, hasMissingProps)}
+                {propertiesToRender.length > 0 && !hasMissingProps ? this.renderActionLinks() : <div></div>}
             </div>
         );
     }
@@ -106,14 +113,16 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     /**
      * Render properties
      */
-    private renderProperties(): JSX.Element {
-        const propertiesToRender = this.state.properties.filter(p => !p.empty);
-        const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
+    private renderProperties(propertiesToRender: ProjectPropertyModel[], hasMissingProps: boolean): JSX.Element {
         if (hasMissingProps && this.props.showMissingPropsWarning) {
-            return <MessageBar messageBarType={MessageBarType.error}>{this.props.missingPropertiesMessage}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>
+                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
+            </MessageBar>;
         }
         if (propertiesToRender.length === 0) {
-            return <MessageBar>{this.props.noPropertiesMessage}</MessageBar>;
+            return <MessageBar messageBarType={MessageBarType.error}>
+            {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
+            </MessageBar>;
         }
         return (
             <div>
@@ -159,7 +168,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
             const fieldsPromise = rootWeb
                 .contentTypes
-                .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+                .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")
                 .usingCaching()
@@ -167,9 +176,9 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
 
             const itemPromise = new Web(this.props.webUrl)
                 .lists
-                .getByTitle(__.getResource("Lists_SitePages_Title"))
+                .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
                 .items
-                .getById(this.props.welcomePageId)
+                .getById(1)
                 .fieldValuesAsHTML
                 .usingCaching()
                 .get();

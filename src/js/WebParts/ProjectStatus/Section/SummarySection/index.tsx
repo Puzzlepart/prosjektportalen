@@ -43,7 +43,7 @@ const SummarySectionProjectData = ({ propertiesLabel, webUrl }: ISummarySectionP
                             hideChrome={true}
                             webUrl={webUrl}
                             actionLinks={[{
-                                url: `${webUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
+                                url: `${webUrl}/Lists/Properties/DispForm.aspx?ID=1`,
                                 label: __.getResource("ProjectInfo_ViewProperties"),
                                 icon: { iconName: "PreviewLink" },
                                 options: {
@@ -55,7 +55,7 @@ const SummarySectionProjectData = ({ propertiesLabel, webUrl }: ISummarySectionP
                                 showLabel: true,
                             },
                             {
-                                url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
+                                url: `${_spPageContextInfo.webAbsoluteUrl}/Lists/Properties/EditForm.aspx?ID=1`,
                                 label: __.getResource("ProjectInfo_EditProperties"),
                                 icon: { iconName: "EditMirrored" },
                                 options: {

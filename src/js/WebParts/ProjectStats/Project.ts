@@ -2,6 +2,6 @@ import ProjectStatsChartDataItem from "./ProjectStatsChart/ProjectStatsChartData
 
 export default class Project extends ProjectStatsChartDataItem {
     constructor(data) {
-        super(data.Title, data);
+        super(data.SiteTitle, data);
     }
 }

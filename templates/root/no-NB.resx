@@ -168,6 +168,9 @@
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
   </data>
+  <data name="Lists_ProjectProperties_Title" xml:space="preserve">
+    <value>Properties</value>
+  </data>
   <data name="Lists_Announcements_Title" xml:space="preserve">
     <value>Kunngjøringer</value>
   </data>
@@ -459,11 +462,11 @@
   <data name="ContentTypes_Glittertind_nettdelside_Name" xml:space="preserve">
     <value>Glittertind nettdelside</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_Name" xml:space="preserve">
-    <value>Prosjektforside</value>
-  </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Prosjektelement</value>
+  </data>
+  <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
+    <value>Prosjektegenskaper</value>
   </data>
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Prosjektressurs</value>
@@ -597,8 +600,8 @@
   <data name="ContentTypes_Glittertind_nettdelside_Description" xml:space="preserve">
     <value>Opprett en ny webdel-side.</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_Description" xml:space="preserve">
-    <value>Opprett en ny webdel-side.</value>
+  <data name="ContentTypes_Prosjektegenskaper_Description" xml:space="preserve">
+    <value>Opprett prosjektegenskaper-oppføring.</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Description" xml:space="preserve">
     <value>Opprett et nytt møte, en ny tidsfrist eller en annen hendelse.</value>
@@ -654,8 +657,8 @@
   <data name="ContentTypes_Sektordiagram_Description" xml:space="preserve">
     <value>Opprett et nytt sektordiagram</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
-    <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
+  <data name="ContentTypes_Prosjektegenskaper_ContentTypeId" xml:space="preserve">
+    <value>0x010088578E7470CC4AA68D5663464831070211</value>
   </data>
   <data name="ContentTypes_Gevinst_ContentTypeId" xml:space="preserve">
     <value>0x0100B384774BA4EBB842A5E402EBF4707367</value>
@@ -1942,10 +1945,10 @@
     <value>Tittel, beskrivelse og logo</value>
   </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
-    <value>Viktig informasjon om prosjektet er ikke satt. Du bør sette disse egenskapene snarest.</value>
+    <value>Viktig informasjon om prosjektet er ikke satt. </value>
   </data>
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
-    <value>Finner ingen informasjon om prosjektet.</value>
+    <value>Finner ingen informasjon om prosjektet. </value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Gå til område</value>

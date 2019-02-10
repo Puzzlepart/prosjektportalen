@@ -61,12 +61,13 @@ Param(
     [Hashtable]$Parameters
 )
 
-. ./SharedFunctions.ps1
+. ./scripts/SharedFunctions.ps1
 
 # Loads bundle if switch SkipLoadingBundle is not present
 if (-not $SkipLoadingBundle.IsPresent) {
     LoadBundle -Environment $Environment
 }
+
 $LoadedPnPCommand = Get-Command Connect-PnPOnline
 $LoadedPnPCommandVersion = $LoadedPnPCommand.Version
 $LoadedPnPCommandSource = $LoadedPnPCommand.Source
@@ -97,8 +98,9 @@ function Start-Install() {
     if (-not $Upgrade.IsPresent) {
         Write-Host "############################################################################" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
+        Write-Host "Prosjektportalen is maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
+        Write-Host "" -ForegroundColor Green
         Write-Host "Installing Prosjektportalen ({package-version})" -ForegroundColor Green
-        Write-Host "Maintained by Puzzlepart @ https://github.com/Puzzlepart/prosjektportalen" -ForegroundColor Green
         Write-Host "" -ForegroundColor Green
         Write-Host "Installation URL:`t`t$Url" -ForegroundColor Green
         Write-Host "Assets URL:`t`t`t$AssetsUrl" -ForegroundColor Green

@@ -2,7 +2,7 @@ import { sp } from "@pnp/sp";
 import {  Logger, LogLevel } from "@pnp/logging";
 import * as Util from "../Util";
 import * as CONFIGURATION from "./Config";
-import { GetWelcomePageFieldValues } from "./WelcomePage";
+import { GetProjectPropertiesPageFieldValues } from "./ProjectProperties";
 
 export interface IIMetadataDefaultsField {
     fieldName: string;
@@ -95,7 +95,7 @@ function getFieldValueForType(value, fieldType): string {
  */
 export async function SetMetadataDefaultsForLibrary(fields: IIMetadataDefaultsField[], libTitle = CONFIGURATION.DOCUMENT_LIBRARY): Promise<void> {
     const docLib = sp.web.lists.getByTitle(libTitle);
-    const [wpFieldValues, { RootFolder }, docLibFields] = await Promise.all([GetWelcomePageFieldValues(), docLib.expand("RootFolder").get(), docLib.fields.select("InternalName").get()]);
+    const [wpFieldValues, { RootFolder }, docLibFields] = await Promise.all([GetProjectPropertiesPageFieldValues(), docLib.expand("RootFolder").get(), docLib.fields.select("InternalName").get()]);
     const docLibFieldsInternalNames = docLibFields.map(f => f.InternalName);
     const folderServerRelativeUrl = Util.encodeSpaces(RootFolder.ServerRelativeUrl);
     const defaultValues: IMetadataDefaultsDefaultValue[] = fields

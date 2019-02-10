@@ -18,6 +18,7 @@ import { default as ProjectStatusPage } from "../Objects/Files/ProjectStatus";
 import { default as NofilterPage } from "../Objects/Files/Nofilter";
 import { default as AssignedPage } from "../Objects/Files/Assigned";
 import { default as MoMPage } from "../Objects/Files/MoM";
+import ProjectProperties from "../Objects/Lists/ProjectProperties";
 
 
 const LiteTemplate: Schema = {
@@ -29,7 +30,7 @@ const LiteTemplate: Schema = {
             Overwrite: true,
             Properties: {
                 Title: "Hjemmeside",
-                ContentTypeId: "0x010109010058561F86D956412B9DD7957BBCD67AAE01",
+                ContentTypeId: "0x01010901",
             },
             RemoveExistingWebParts: true,
             WebParts: [
@@ -179,7 +180,7 @@ const LiteTemplate: Schema = {
         ProjectStatusPage,
     ],
     Lists: [
-        SitePages,
+        ProjectProperties,
         PhaseChecklist,
         Information,
         Stakeholders,

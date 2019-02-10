@@ -13,14 +13,16 @@ export function getQueryParams(): any {
  * @param {string} fieldName Field name
  */
 export function hideFormField(fieldName: string): void {
-    (document.querySelector(`input[id*='${fieldName}_'], select[id*='${fieldName}_'], div[id*='${fieldName}_']`) as any).parentNode.parentNode.style.display = "none";
+    const domElements = (document.querySelector(`input[id*='${fieldName}_'], select[id*='${fieldName}_'], div[id*='${fieldName}_']`) as any);
+    if (domElements) { domElements.parentNode.parentNode.style.display = "none"; }
 }
 
 /**
  * Hides content type choice
  */
 export function hideContentTypeChoice(): void {
-    (document.querySelector(`select[id*='ContentTypeChoice']`) as any).parentNode.parentNode.style.display = "none";
+    const domElement = (document.querySelector(`select[id*='ContentTypeChoice']`) as any);
+    if (domElement) { domElement.parentNode.parentNode.style.display = "none"; }
 }
 
 /**
