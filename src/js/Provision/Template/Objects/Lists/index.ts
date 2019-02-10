@@ -19,7 +19,6 @@ import ChangeAnalysis from "./ChangeAnalysis";
 import BenefitsFollowup from "./BenefitsFollowup";
 
 const Lists: IList[] = [
-    SitePages,
     PhaseChecklist,
     Information,
     Stakeholders,

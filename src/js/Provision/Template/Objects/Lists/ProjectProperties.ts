@@ -9,6 +9,7 @@ const ProjectProperties: IList = {
     RemoveExistingContentTypes: true,
     AdditionalSettings: {
         EnableVersioning: true,
+        OnQuickLaunch: false,
      },
     FieldRefs: [{
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",

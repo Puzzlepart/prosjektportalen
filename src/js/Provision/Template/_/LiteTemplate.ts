@@ -18,6 +18,7 @@ import { default as ProjectStatusPage } from "../Objects/Files/ProjectStatus";
 import { default as NofilterPage } from "../Objects/Files/Nofilter";
 import { default as AssignedPage } from "../Objects/Files/Assigned";
 import { default as MoMPage } from "../Objects/Files/MoM";
+import ProjectProperties from "../Objects/Lists/ProjectProperties";
 
 
 const LiteTemplate: Schema = {
@@ -179,7 +180,7 @@ const LiteTemplate: Schema = {
         ProjectStatusPage,
     ],
     Lists: [
-        SitePages,
+        ProjectProperties,
         PhaseChecklist,
         Information,
         Stakeholders,
