@@ -118,7 +118,9 @@ function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
     }
 }
 
-Get-PnPSubWebs | ForEach-Object {
+$RootWeb = Get-PnPWeb
+$Webs = Get-PnPProperty -ClientObject $RootWeb -Property "Webs"
+$Webs | ForEach-Object {
     $ProjectWeb = Get-PnPWeb -Identity $_.Id
     $ProjectUrl = $ProjectWeb.ServerRelativeUrl
     $ProjectTitle = $ProjectWeb.Title
