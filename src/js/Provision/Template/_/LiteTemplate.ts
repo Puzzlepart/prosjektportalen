@@ -1,7 +1,6 @@
 import __ from "../../../Resources";
 import { Schema } from "sp-js-provisioning/lib/schema";
 import { WebSettings, ComposedLook } from "../Objects";
-import SitePages from "../Objects/Lists/SitePages";
 import PhaseChecklist from "../Objects/Lists/PhaseChecklist";
 import Information from "../Objects/Lists/Information";
 import Stakeholders from "../Objects/Lists/Stakeholders";

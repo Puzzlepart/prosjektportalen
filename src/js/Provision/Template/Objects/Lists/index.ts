@@ -1,5 +1,4 @@
 import { IList } from "sp-js-provisioning/lib/schema";
-import SitePages from "./SitePages";
 import PhaseChecklist from "./PhaseChecklist";
 import Information from "./Information";
 import Stakeholders from "./Stakeholders";
