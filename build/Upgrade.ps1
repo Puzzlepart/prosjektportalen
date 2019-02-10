@@ -170,7 +170,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         Write-Host "DONE" -ForegroundColor Green
 
         
-        # Replacing Content Type IDs in configurations  from versions 2.3 and before
+        # Replacing Content Type IDs in configurations from versions 2.3 and before
         if ($CurrentVersion.Minor -lt 4) {
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
