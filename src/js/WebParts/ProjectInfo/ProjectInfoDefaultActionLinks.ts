@@ -35,39 +35,41 @@ export const ProjectInfoDefaultActionLinks: IModalLinkProps[] = [{
         HideFormFields: "GtProjectPhase",
     },
     onDialogReturnValueCallback: result => {
-        Promise.all([
-            SetMetadataDefaultsForLibrary([{
-                fieldName: "GtProjectPhase",
-                fieldType: "Taxonomy",
-            },
-            {
-                fieldName: "GtProjectType",
-                fieldType: "TaxonomyMulti",
-            },
-            {
-                fieldName: "GtProjectServiceArea",
-                fieldType: "TaxonomyMulti",
-            },
-            {
-                fieldName: "GtProjectFinanceName",
-                fieldType: "Text",
-            },
-            {
-                fieldName: "GtProjectNumber",
-                fieldType: "Text",
-            },
-            {
-                fieldName: "GtArchiveReference",
-                fieldType: "Text",
-            }]),
-            EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
-        ])
-            .then(() => {
-                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-            })
-            .catch(() => {
-                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-            });
+        if (result === SP.UI.DialogResult.OK) {
+            Promise.all([
+                SetMetadataDefaultsForLibrary([{
+                    fieldName: "GtProjectPhase",
+                    fieldType: "Taxonomy",
+                },
+                {
+                    fieldName: "GtProjectType",
+                    fieldType: "TaxonomyMulti",
+                },
+                {
+                    fieldName: "GtProjectServiceArea",
+                    fieldType: "TaxonomyMulti",
+                },
+                {
+                    fieldName: "GtProjectFinanceName",
+                    fieldType: "Text",
+                },
+                {
+                    fieldName: "GtProjectNumber",
+                    fieldType: "Text",
+                },
+                {
+                    fieldName: "GtArchiveReference",
+                    fieldType: "Text",
+                }]),
+                EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
+            ])
+                .then(() => {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+                })
+                .catch(() => {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+                });
+        }
     },
     showLabel: true,
     permissionKind: 31,
@@ -88,36 +90,38 @@ export const ProjectNewItemActionLink: IModalLinkProps = {
         HideFormFields: "GtProjectPhase",
     },
     onDialogReturnValueCallback: result => {
-        Promise.all([
-            SetMetadataDefaultsForLibrary([
-            {
-                fieldName: "GtProjectType",
-                fieldType: "TaxonomyMulti",
-            },
-            {
-                fieldName: "GtProjectServiceArea",
-                fieldType: "TaxonomyMulti",
-            },
-            {
-                fieldName: "GtProjectFinanceName",
-                fieldType: "Text",
-            },
-            {
-                fieldName: "GtProjectNumber",
-                fieldType: "Text",
-            },
-            {
-                fieldName: "GtArchiveReference",
-                fieldType: "Text",
-            }]),
-            EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
-        ])
-            .then(() => {
-                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-            })
-            .catch(() => {
-                SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-            });
+        if (result === SP.UI.DialogResult.OK) {
+            Promise.all([
+                SetMetadataDefaultsForLibrary([
+                    {
+                        fieldName: "GtProjectType",
+                        fieldType: "TaxonomyMulti",
+                    },
+                    {
+                        fieldName: "GtProjectServiceArea",
+                        fieldType: "TaxonomyMulti",
+                    },
+                    {
+                        fieldName: "GtProjectFinanceName",
+                        fieldType: "Text",
+                    },
+                    {
+                        fieldName: "GtProjectNumber",
+                        fieldType: "Text",
+                    },
+                    {
+                        fieldName: "GtArchiveReference",
+                        fieldType: "Text",
+                    }]),
+                EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
+            ])
+                .then(() => {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+                })
+                .catch(() => {
+                    SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
+                });
+        }
     },
     showLabel: true,
     permissionKind: 31,

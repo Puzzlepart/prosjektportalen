@@ -7,7 +7,7 @@ export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElemen
     title?: string;
     url: string;
     options?: IModalLinkOptions;
-    onDialogReturnValueCallback?: (result) => void;
+    onDialogReturnValueCallback?: SP.UI.DialogReturnValueCallback;
     reloadOnSubmit?: boolean;
     reloadOnCancel?: boolean;
     width?: number;
