@@ -14,18 +14,18 @@ const GetProjectPropertiesList = (ctx: SP.ClientContext): SP.List<any> => {
 };
 
 /**
- * Get welcome page list item
+ * Get Project Properties item - item with ID=1 in Properties-list
  *
  * @param {SP.ClientContext} ctx Client context
  * @param {boolean} loadClientObject Should the client object be loaded
  */
 const GetProjectPropertiesItem = (ctx: SP.ClientContext, loadClientObject = false): SP.ListItem<any> => {
     const projectPropertiesList = ctx.get_web().get_lists().getByTitle(__.getResource("Lists_ProjectProperties_Title"));
-    const welcomePage = projectPropertiesList.getItemById(1);
+    const projectPropsItem = projectPropertiesList.getItemById(1);
     if (loadClientObject) {
-        ctx.load(welcomePage);
+        ctx.load(projectPropsItem);
     }
-    return welcomePage;
+    return projectPropsItem;
 };
 
 /**
