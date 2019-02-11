@@ -50,8 +50,17 @@ function Add-ResourceAllocationFeatures($ProjectWeb, $Language) {
         $ResourceAllocation.OnQuickLaunch = $true
         $ResourceAllocation.Update()
         Invoke-PnPQuery
+
+        $ResourceAllocationLeftNav = Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq $ListName} 
+        if ($null -eq $ResourceAllocationLeftNav) {
+            Add-PnPNavigationNode -Location QuickLaunch -Title $ListName -Url "Lists/$ListName" -Web $ProjectWeb
+        }
         Write-Host "`tResource allocation list created and configured" -ForegroundColor Green
 	} else {
+        $ResourceAllocationLeftNav = Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq $ListName} 
+        if ($null -eq $ResourceAllocationLeftNav) {
+            Add-PnPNavigationNode -Location QuickLaunch -Title $ListName -Url "Lists/$ListName" -Web $ProjectWeb
+        }
         Write-Host "`tResource allocation list already exists" -ForegroundColor Green
     }
 }
@@ -70,15 +79,10 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
         
         Add-PnPContentTypeToList -List $PropertiesList -ContentType $ProjectPropertiesContentType -DefaultContentType -Web $ProjectWeb
         Remove-PnPContentTypeFromList -List $PropertiesList -ContentType $ItemContentType -Web $ProjectWeb
-        
-        $PropertiesList.OnQuickLaunch = $false
-        $PropertiesList.Update()
-        Invoke-PnPQuery
+        Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq "Siste" -or $_.Title -eq "Recent"} | Remove-PnPNavigationNode -Force -Web $ProjectWeb
         Write-Host "`tProject properties list created and configured" -ForegroundColor Green
 	} else {
-        $PropertiesList.OnQuickLaunch = $false
-        $PropertiesList.Update()
-        Invoke-PnPQuery
+        Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq "Siste" -or $_.Title -eq "Recent" -or $_.Title -eq "Properties"} | Remove-PnPNavigationNode -Force -Web $ProjectWeb
         Write-Host "`tProject properties list already exists" -ForegroundColor Green
     }
 }
