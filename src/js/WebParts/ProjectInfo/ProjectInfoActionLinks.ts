@@ -14,7 +14,7 @@ export const ProjectInfoActionLinks = (state: IProjectInfoState): IModalLinkProp
             showLabel: true,
         },
         state.hasPropertiesItem && {
-            url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=Properties&ID=1`,
+            url: `${_spPageContextInfo.webAbsoluteUrl}/_layouts/versions.aspx?list=${state.propertiesList.Id}&ID=1`,
             label: __.getResource("ProjectInfo_ShowVersionHistory"),
             icon: { iconName: "History" },
             options: { HideRibbon: true },

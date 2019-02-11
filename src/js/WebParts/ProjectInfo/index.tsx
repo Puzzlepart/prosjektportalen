@@ -174,31 +174,26 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .fieldValuesAsHTML
             .usingCaching()
             .get();
+        const listPromise = new Web(this.props.webUrl)
+            .lists
+            .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
+            .select("Id")
+            .usingCaching()
+            .get();
         try {
-            const [config, fields, item] = await Promise.all([configPromise, fieldsPromise, itemPromise]);
+            const [config, fields, item, propertiesList] = await Promise.all([configPromise, fieldsPromise, itemPromise, listPromise]);
             let itemFieldNames = Object.keys(item);
             const properties = itemFieldNames
                 .filter(fieldName => {
-                    /**
-                     * Checking if the field exist
-                     */
                     const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
                     if (!field) {
                         return false;
                     }
-
-                    /**
-                     * Checking configuration
-                     */
                     const [configItem] = config.filter(c => c.Title === field.Title);
                     if (!configItem) {
                         return false;
                     }
                     const shouldBeShown = configItem[this.props.filterField] === true;
-
-                    /**
-                     * Checking if the value is a string
-                     */
                     const valueIsString = typeof item[fieldName] === "string";
                     return (valueIsString && shouldBeShown);
                 })
@@ -207,7 +202,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                     value: item[fieldName],
                 }))
                 .map(({ field, value }) => new ProjectPropertyModel(field, value));
-            return { properties };
+            return { properties, propertiesList };
         } catch (error) {
             throw error;
         }
