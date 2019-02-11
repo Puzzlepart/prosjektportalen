@@ -8,13 +8,6 @@ var gulp = require("gulp"),
     pluginError = require('plugin-error'),
     config = require('./@configuration.js');
 
-gulp.task("packageCode", ["buildLib"], done => {
-    webpack(webpackConfig("source-map", [path.join(__dirname, "../", "node_modules")], "development"), err => {
-        if (err) throw new pluginError("packageCode", err);
-        done();
-    });
-});
-
 gulp.task("packageStyles", ["buildTheme"], done => {
     return gulp.src(config.globs.styles)
         .pipe(stylus(config.stylus))
@@ -23,6 +16,13 @@ gulp.task("packageStyles", ["buildTheme"], done => {
 
 gulp.task("package", ["copyAssetsToDist", "packageCode", "packageStyles"], done => {
     done();
+});
+
+gulp.task("packageCode", ["buildLib"], done => {
+    webpack(webpackConfig("source-map", [path.join(__dirname, "../", "node_modules")], "development"), err => {
+        if (err) throw new pluginError("packageCode", err);
+        done();
+    });
 });
 
 gulp.task("packageCodeMinify", ["buildLib"], done => {
