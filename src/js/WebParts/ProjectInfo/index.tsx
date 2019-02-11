@@ -7,6 +7,7 @@ import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { ModalLink } from "../@Components/ModalLink";
 import ProjectProperty, { ProjectPropertyModel } from "./ProjectProperty";
+import { ProjectInfoActionLinks } from "./ProjectInfoActionLinks";
 import IProjectInfoProps, { ProjectInfoDefaultProps } from "./IProjectInfoProps";
 import IProjectInfoState from "./IProjectInfoState";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
@@ -25,15 +26,15 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      * @param {IProjectInfoProps} props Props
      */
     constructor(props: IProjectInfoProps) {
-        super(props, { isLoading: true, properties: [] });
+        super(props, { isLoading: true, hasPropertiesItem: false, properties: [] });
     }
 
     public async componentDidMount() {
         try {
             const data = await this.fetchData();
-            this.setState({ ...data, isLoading: false });
+            this.setState({ ...data, hasPropertiesItem: true, isLoading: false });
         } catch (error) {
-            this.setState({ isLoading: false, error });
+            this.setState({ isLoading: false, hasPropertiesItem: false, error });
         }
     }
 
@@ -93,11 +94,6 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
         if (this.state.isLoading) {
             return null;
         }
-        if (this.state.error != null) {
-            return <MessageBar messageBarType={MessageBarType.error}>
-                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
-            </MessageBar>;
-        }
         const propertiesToRender = this.state.properties.filter(p => !p.empty);
         const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
         return (
@@ -105,7 +101,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
                 className={this.props.innerClassName}
                 ref={elementToToggle => this.setState({ elementToToggle })}>
                 {this.renderProperties(propertiesToRender, hasMissingProps)}
-                {propertiesToRender.length > 0 && !hasMissingProps ? this.renderActionLinks() : <div></div>}
+                {this.renderActionLinks()}
             </div>
         );
     }
@@ -116,12 +112,12 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     private renderProperties(propertiesToRender: ProjectPropertyModel[], hasMissingProps: boolean): JSX.Element {
         if (hasMissingProps && this.props.showMissingPropsWarning) {
             return <MessageBar messageBarType={MessageBarType.error}>
-                {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
+                {__.getResource("ProjectInfo_MissingProperties")}
             </MessageBar>;
         }
         if (propertiesToRender.length === 0) {
             return <MessageBar messageBarType={MessageBarType.error}>
-            {__.getResource("ProjectInfo_MissingProperties")}<ModalLink {...this.props.newProjectActionLink} />
+                {__.getResource("ProjectInfo_MissingProperties")}
             </MessageBar>;
         }
         return (
@@ -142,7 +138,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             <div
                 hidden={!this.props.showActionLinks}
                 className={this.props.actionsClassName}>
-                {this.props.actionLinks.map((props, idx) => (
+                {ProjectInfoActionLinks(this.state).map((props, idx) => (
                     <ModalLink key={idx} {...props} />
                 ))}
             </div>
@@ -154,79 +150,68 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
      *
      * @param {string} configList Configuration list
      */
-    private fetchData(configList = __.getResource("Lists_ProjectConfig_Title")) {
-        return new Promise<Partial<IProjectInfoState>>((resolve, reject) => {
-            const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
+    private async fetchData(configList: string = __.getResource("Lists_ProjectConfig_Title")): Promise<Partial<IProjectInfoState>> {
+        const rootWeb = new Site(this.props.rootSiteUrl).rootWeb;
+        const configPromise = rootWeb
+            .lists
+            .getByTitle(configList)
+            .items
+            .select("Title", this.props.filterField)
+            .usingCaching()
+            .get();
+        const fieldsPromise = rootWeb
+            .contentTypes
+            .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
+            .fields
+            .select("Title", "Description", "InternalName", "Required", "TypeAsString")
+            .usingCaching()
+            .get();
+        const itemPromise = new Web(this.props.webUrl)
+            .lists
+            .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
+            .items
+            .getById(1)
+            .fieldValuesAsHTML
+            .usingCaching()
+            .get();
+        try {
+            const [config, fields, item] = await Promise.all([configPromise, fieldsPromise, itemPromise]);
+            let itemFieldNames = Object.keys(item);
+            const properties = itemFieldNames
+                .filter(fieldName => {
+                    /**
+                     * Checking if the field exist
+                     */
+                    const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
+                    if (!field) {
+                        return false;
+                    }
 
-            const configPromise = rootWeb
-                .lists
-                .getByTitle(configList)
-                .items
-                .select("Title", this.props.filterField)
-                .usingCaching()
-                .get();
+                    /**
+                     * Checking configuration
+                     */
+                    const [configItem] = config.filter(c => c.Title === field.Title);
+                    if (!configItem) {
+                        return false;
+                    }
+                    const shouldBeShown = configItem[this.props.filterField] === true;
 
-            const fieldsPromise = rootWeb
-                .contentTypes
-                .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
-                .fields
-                .select("Title", "Description", "InternalName", "Required", "TypeAsString")
-                .usingCaching()
-                .get();
-
-            const itemPromise = new Web(this.props.webUrl)
-                .lists
-                .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
-                .items
-                .getById(1)
-                .fieldValuesAsHTML
-                .usingCaching()
-                .get();
-
-            Promise.all([configPromise, fieldsPromise, itemPromise])
-                .then(([config, fields, item]) => {
-                    let itemFieldNames = Object.keys(item);
-                    const properties = itemFieldNames
-                        .filter(fieldName => {
-                            /**
-                             * Checking if the field exist
-                             */
-                            const [field] = fields.filter(({ InternalName }) => InternalName === fieldName);
-                            if (!field) {
-                                return false;
-                            }
-
-                            /**
-                             * Checking configuration
-                             */
-                            const [configItem] = config.filter(c => c.Title === field.Title);
-                            if (!configItem) {
-                                return false;
-                            }
-                            const shouldBeShown = configItem[this.props.filterField] === true;
-
-                            /**
-                             * Checking if the value is a string
-                             */
-                            const valueIsString = typeof item[fieldName] === "string";
-                            return (valueIsString && shouldBeShown);
-                        })
-                        .map(fieldName => ({
-                            field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
-                            value: item[fieldName],
-                        }))
-                        .map(({ field, value }) => new ProjectPropertyModel(field, value));
-                    resolve({
-                        properties: properties,
-                    });
+                    /**
+                     * Checking if the value is a string
+                     */
+                    const valueIsString = typeof item[fieldName] === "string";
+                    return (valueIsString && shouldBeShown);
                 })
-                .catch(reject);
-        });
+                .map(fieldName => ({
+                    field: fields.filter(({ InternalName }) => InternalName === fieldName)[0],
+                    value: item[fieldName],
+                }))
+                .map(({ field, value }) => new ProjectPropertyModel(field, value));
+            return { properties };
+        } catch (error) {
+            throw error;
+        }
     }
 }
 
-export {
-    ProjectInfoRenderMode,
-    IProjectInfoProps,
-    IProjectInfoState,
-};
+export { ProjectInfoRenderMode, IProjectInfoProps, IProjectInfoState };

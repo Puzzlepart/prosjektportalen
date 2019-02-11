@@ -3,8 +3,6 @@ import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import ProjectInfoRenderMode from "./ProjectInfoRenderMode";
 import IProjectInfoModalOptions from "./IProjectInfoModalOptions";
-import { IModalLinkProps } from "../@Components/ModalLink";
-import {ProjectInfoDefaultActionLinks, ProjectNewItemActionLink} from "./ProjectInfoDefaultActionLinks";
 
 export default interface IProjectInfoProps extends IBaseWebPartProps {
     chromeTitle?: string;
@@ -24,8 +22,6 @@ export default interface IProjectInfoProps extends IBaseWebPartProps {
     actionsClassName?: string;
     errorIconProps?: { iconName?: string; style?: React.CSSProperties; };
     infoIconProps?: { iconName?: string; style?: React.CSSProperties; };
-    actionLinks?: IModalLinkProps[];
-    newProjectActionLink?: IModalLinkProps;
 }
 
 export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
@@ -40,6 +36,4 @@ export const ProjectInfoDefaultProps: Partial<IProjectInfoProps> = {
     containerClassName: "pp-projectInfo",
     innerClassName: "pp-projectInfoInner",
     actionsClassName: "pp-project-actions",
-    actionLinks: ProjectInfoDefaultActionLinks,
-    newProjectActionLink: ProjectNewItemActionLink,
 };
