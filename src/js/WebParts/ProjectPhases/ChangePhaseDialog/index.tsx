@@ -80,7 +80,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * Get dialog title
      */
     private _getDialogTitle = () => {
-        let titleResKey;
+        let titleResKey: string;
         switch (this.props.newPhase.Type) {
             case "Gate": titleResKey = "ProjectPhases_ChangeGate";
                 break;
@@ -95,7 +95,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      */
     private _getDialogSubText = () => {
         if (this.state.currentView === View.Confirm) {
-            let subTextResKey;
+            let subTextResKey: string;
             switch (this.props.newPhase.Type) {
                 case "Gate": subTextResKey = "ProjectPhases_ConfirmChangeGate";
                     break;
@@ -114,7 +114,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      * @param {string} commentsValue Comments value
      * @param {boolean} updateStatus Should status be updated
      */
-    private async nextCheckPoint(statusValue: string, commentsValue: string, updateStatus = true): Promise<void> {
+    private async nextCheckPoint(statusValue: string, commentsValue: string, updateStatus: boolean = true): Promise<void> {
         this.setState({ isLoading: true });
         const { activePhase, currentIdx } = this.state;
         let updatedValues: { [key: string]: string } = { GtComment: commentsValue };
@@ -154,11 +154,11 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     /**
      * Close dialog handler
      *
-     * @param {any} e Event
+     * @param {any} _event Event
      * @param {boolean} reload Should the page be reloaded
      */
-    private _onDismissDialog = (e, reload = false) => {
-        this.props.hideHandler(e);
+    private _onDismissDialog = (_event: any, reload: boolean = false) => {
+        this.props.hideHandler(_event);
         if (reload) {
             document.location.href = _spPageContextInfo.serverRequestPath;
         }

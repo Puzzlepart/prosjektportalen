@@ -2,6 +2,7 @@ import InitialView from "./InitialView";
 import SummaryView from "./SummaryView";
 import ChangingPhaseView from "./ChangingPhaseView";
 import GateApprovalView from "./GateApprovalView";
+import ErrorInformationView from "./ErrorInformationView";
 
 export enum View {
     Initial,
@@ -9,6 +10,7 @@ export enum View {
     Confirm,
     ChangingPhase,
     GateApproval,
+    ErrorInformation,
 }
 
 export {
@@ -16,4 +18,5 @@ export {
     SummaryView,
     ChangingPhaseView,
     GateApprovalView,
+    ErrorInformationView,
 };

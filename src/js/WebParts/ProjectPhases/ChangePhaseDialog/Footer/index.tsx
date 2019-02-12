@@ -11,50 +11,62 @@ import IFooterProps from "./IFooterProps";
 /**
  * Footer
  */
-export const Footer = (props: IFooterProps) => {
+export const Footer = ({ isLoading, currentView, gateApproval, activePhase, nextPhase, onChangeView, onChangePhaseDialogReturnCallback, onCloseDialog }: IFooterProps) => {
     let actions = [];
 
-    switch (props.currentView) {
+    switch (currentView) {
         case View.Initial: {
             actions.push({
                 text: __.getResource("String_Skip"),
-                disabled: props.isLoading,
+                disabled: isLoading,
                 onClick: () => {
-                    props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
+                    onChangeView(gateApproval ? View.GateApproval : View.Confirm);
                 },
             });
         }
             break;
         case View.Confirm: {
-            if (props.activePhase && props.activePhase.IsIncremental) {
+            if (activePhase && activePhase.IsIncremental) {
                 actions.push(
                     {
-                        text: props.activePhase.Name,
-                        disabled: props.isLoading,
+                        text: activePhase.Name,
+                        disabled: isLoading,
                         onClick: async () => {
-                            props.onChangeView(View.ChangingPhase);
-                            await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, props.activePhase.Name);
-                            props.onCloseDialog(null, true);
+                            onChangeView(View.ChangingPhase);
+                            try {
+                                await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, activePhase.Name);
+                                onCloseDialog(null, true);
+                            } catch (error) {
+                                onChangeView(View.ErrorInformation);
+                            }
                         },
                     },
                     {
-                        text: props.nextPhase.Name,
-                        disabled: props.isLoading,
+                        text: nextPhase.Name,
+                        disabled: isLoading,
                         onClick: async () => {
-                            props.onChangeView(View.ChangingPhase);
-                            await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, props.nextPhase.Name);
-                            props.onCloseDialog(null, true);
+                            onChangeView(View.ChangingPhase);
+                            try {
+                                await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial, nextPhase.Name);
+                                onCloseDialog(null, true);
+                            } catch (error) {
+                                onChangeView(View.ErrorInformation);
+                            }
                         },
                     },
                 );
             } else {
                 actions.push({
                     text: __.getResource("String_Yes"),
-                    disabled: props.isLoading,
+                    disabled: isLoading,
                     onClick: async () => {
-                        props.onChangeView(View.ChangingPhase);
-                        await props.onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial);
-                        props.onCloseDialog(null, true);
+                        onChangeView(View.ChangingPhase);
+                        try {
+                            await onChangePhaseDialogReturnCallback(ChangePhaseDialogResult.Initial);
+                            onCloseDialog(null, true);
+                        } catch (error) {
+                            onChangeView(View.ErrorInformation);
+                        }
                     },
                 });
             }
@@ -63,9 +75,9 @@ export const Footer = (props: IFooterProps) => {
         case View.Summary: {
             actions.push({
                 text: __.getResource("String_MoveOn"),
-                disabled: props.isLoading,
+                disabled: isLoading,
                 onClick: () => {
-                    props.onChangeView(props.gateApproval ? View.GateApproval : View.Confirm);
+                    onChangeView(gateApproval ? View.GateApproval : View.Confirm);
                 },
             });
         }
@@ -75,12 +87,12 @@ export const Footer = (props: IFooterProps) => {
     return (
         <DialogFooter>
             {actions.map((buttonProps, index) => {
-                return <PrimaryButton key={`FooterAction_${index}`} { ...buttonProps } />;
+                return <PrimaryButton key={`FooterAction_${index}`} {...buttonProps} />;
             })}
             <DefaultButton
                 text={__.getResource("String_Close")}
-                disabled={props.isLoading}
-                onClick={props.onCloseDialog} />
+                disabled={isLoading}
+                onClick={onCloseDialog} />
         </DialogFooter>
     );
 };

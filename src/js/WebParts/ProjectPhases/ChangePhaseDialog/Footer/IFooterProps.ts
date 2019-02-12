@@ -10,7 +10,7 @@ export default interface IFooterProps {
     isLoading: boolean;
     gateApproval: boolean;
     onChangePhaseDialogReturnCallback: (result: ChangePhaseDialogResult, requestedPhase?: string) => Promise<void>;
-    onCloseDialog: (e, reload?: boolean) => void;
+    onCloseDialog: (_event: any, reload?: boolean) => void;
     onChangeView: (view: View) => void;
 }
 

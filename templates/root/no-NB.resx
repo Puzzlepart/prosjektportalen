@@ -1929,6 +1929,9 @@
   <data name="ProjectPhases_NextPhase" xml:space="preserve">
     <value>Neste fase er {0}.</value>
   </data>
+  <data name="ProjectPhases_ChangePhaseErrorMessage" xml:space="preserve">
+    <value>Det skjedde en feil under endring av fase. Prøv igjen senere.</value>
+  </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Laster prosjektinformasjon...</value>
   </data>
