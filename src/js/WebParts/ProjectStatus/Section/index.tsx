@@ -57,7 +57,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     private renderHeader({ section }: ISectionProps, { listData }: ISectionState) {
         let fallbackNavigateUrl = listData ? listData.defaultViewUrl : null;
         if (section.sectionType === SectionType.ProjectPropertiesSection && fallbackNavigateUrl === null) {
-            fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/SitePages/Forms/DispForm.aspx?ID=3&HideWebPartMaintenancePageLink=1&HideRibbon=1`;
+            fallbackNavigateUrl = `${_spPageContextInfo.webServerRelativeUrl}/Lists/Properties/DispForm.aspx?ID=1&HideRibbon=1`;
         }
         return (
             <SectionHeader

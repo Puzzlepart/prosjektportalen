@@ -12,7 +12,7 @@ const CreationModal = (props: ICreationModalProps) => {
             isOpen={true}
             isBlocking={props.isBlocking}
             isDarkOverlay={props.isDarkOverlay}
-            containerClassName="pp-modal pp-creationModal"            >
+            containerClassName="pp-modal pp-creationModal">
             <div className="pp-modal-inner">
                 <div className="pp-creationModalHeader ms-font-xl">{props.title}</div>
                 <ProgressIndicator

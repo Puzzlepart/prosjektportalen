@@ -2,7 +2,7 @@
 import * as React from "react";
 import __ from "../../../../Resources";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { View, InitialView, SummaryView, ChangingPhaseView, GateApprovalView } from "../Views";
+import { View, InitialView, SummaryView, ChangingPhaseView, GateApprovalView, ErrorInformationView } from "../Views";
 import IBodyProps from "./IBodyProps";
 //#endregion
 
@@ -46,6 +46,9 @@ export const Body = (props: IBodyProps) => {
                 );
             }
             return <div className="inner"></div>;
+        }
+        case View.ErrorInformation: {
+            return <ErrorInformationView />;
         }
         default: {
             return <div className="inner"></div>;

@@ -1,4 +1,3 @@
-//#region Imports
 import __ from "../../Resources";
 import * as React from "react";
 import { sp, List, Item } from "@pnp/sp";
@@ -13,7 +12,6 @@ import { cleanString } from "../../Util";
 import IProjectPhasesProps, { ProjectPhasesDefaultProps } from "./IProjectPhasesProps";
 import IProjectPhasesState from "./IProjectPhasesState";
 import BaseWebPart from "../@BaseWebPart";
-//#endregion
 
 /**
  * Project Phases
@@ -22,9 +20,9 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     public static displayName = "ProjectPhases";
     public static defaultProps = ProjectPhasesDefaultProps;
 
-    private sitePagesLibrary: List;
+    private projectPropertiesList: List;
     private phaseChecklist: List;
-    private welcomePage: Item;
+    private projectElement: Item;
 
     /**
      * Constructor
@@ -33,13 +31,13 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      */
     constructor(props: IProjectPhasesProps) {
         super(props, { isLoading: true });
-        this._onChangePhase = this._onChangePhase.bind(this);
-        this._onRestartPhase = this._onRestartPhase.bind(this);
-        this._onChangePhaseDialogReturnCallback = this._onChangePhaseDialogReturnCallback.bind(this);
-        this._onHideDialog = this._onHideDialog.bind(this);
-        this.sitePagesLibrary = sp.web.lists.getById(_spPageContextInfo.pageListId);
+        this.onChangePhase = this.onChangePhase.bind(this);
+        this.onRestartPhase = this.onRestartPhase.bind(this);
+        this.onChangePhaseDialogReturnCallback = this.onChangePhaseDialogReturnCallback.bind(this);
+        this.onHideDialog = this.onHideDialog.bind(this);
+        this.projectPropertiesList = sp.web.lists.getByTitle(__.getResource("Lists_ProjectProperties_Title"));
         this.phaseChecklist = sp.web.lists.getByTitle(__.getResource("Lists_PhaseChecklist_Title"));
-        this.welcomePage = this.sitePagesLibrary.items.getById(_spPageContextInfo.pageItemId);
+        this.projectElement = this.projectPropertiesList.items.getById(1);
     }
 
     public async componentDidMount() {
@@ -67,7 +65,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
         }
         if (this.state.error) {
             return (<MessageBar messageBarType={MessageBarType.error}>
-                {this.state.error.message}
+                <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ProjectInfo_MissingProperties"), `../Lists/Properties/NewForm.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
             </MessageBar>);
         }
         return (
@@ -98,8 +96,8 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                         phaseIterations,
                         requestedPhase,
                         classList,
-                        onRestartPhaseHandler: this._onRestartPhase,
-                        onChangePhaseHandler: this._onChangePhase,
+                        onRestartPhaseHandler: this.onRestartPhase,
+                        onChangePhaseHandler: this.onChangePhase,
                         changePhaseEnabled: !Array.contains(classList, "selected"),
                         restartPhaseEnabled: false,
                     };
@@ -109,7 +107,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
                     if (activePhase) {
                         projectPhaseProps.restartPhaseEnabled = activePhase.Index - 1 === phase.Index && phase.IsIncremental;
                     }
-                    return <ProjectPhase key={`ProjectPhase_${index}`} { ...projectPhaseProps} />;
+                    return <ProjectPhase key={`ProjectPhase_${index}`} {...projectPhaseProps} />;
                 })}
             </ul>
         );
@@ -131,15 +129,15 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             activePhase,
             nextPhase,
             gateApproval: false,
-            onChangePhaseDialogReturnCallback: this._onChangePhaseDialogReturnCallback,
-            hideHandler: this._onHideDialog,
+            onChangePhaseDialogReturnCallback: this.onChangePhaseDialogReturnCallback,
+            hideHandler: this.onHideDialog,
         };
 
         if (activePhase) {
             changePhaseDialogProps.gateApproval = (activePhase.Type === "Gate" && (newPhase.Index === (activePhase.Index + 1)) || !!checklistItemsToArchive);
         }
 
-        return <ChangePhaseDialog { ...changePhaseDialogProps } />;
+        return <ChangePhaseDialog {...changePhaseDialogProps} />;
     }
 
     /**
@@ -160,7 +158,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      *
      * @param {PhaseModel} phase New phase
      */
-    private _onChangePhase(phase: PhaseModel) {
+    private onChangePhase(phase: PhaseModel) {
         this.setState({ newPhase: phase });
     }
 
@@ -169,7 +167,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      *
      * @param {PhaseModel} phase Phase to restart
      */
-    private _onRestartPhase(phase: PhaseModel) {
+    private onRestartPhase(phase: PhaseModel) {
         const { activePhase } = this.state.data;
         this.setState({
             newPhase: phase,
@@ -183,29 +181,33 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
      * @param {string} requestedPhase Requesed phase
      */
-    private async _onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase?: string) {
+    private async onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase?: string) {
         let { data, newPhase, checklistItemsToArchive } = this.state;
-        switch (changePhaseDialogResult) {
-            case ChangePhaseDialogResult.Rejected: {
-                const prevPhaseIndex = data.activePhase.Index - 1;
-                [newPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
-                await Project.ChangeProjectPhase(newPhase, false);
-            }
-                break;
-            default: {
-                await Project.ChangeProjectPhase(newPhase, false);
-                if (checklistItemsToArchive) {
-                    await this.restartIncrementalPhase(checklistItemsToArchive);
+        try {
+            switch (changePhaseDialogResult) {
+                case ChangePhaseDialogResult.Rejected: {
+                    const prevPhaseIndex = data.activePhase.Index - 1;
+                    [newPhase] = data.phases.filter(p => p.Index === prevPhaseIndex);
+                    await Project.ChangeProjectPhase(newPhase, false);
+                }
+                    break;
+                default: {
+                    await Project.ChangeProjectPhase(newPhase, false);
+                    if (checklistItemsToArchive) {
+                        await this.restartIncrementalPhase(checklistItemsToArchive);
+                    }
                 }
             }
+            await this.updateProjectProperties(newPhase, changePhaseDialogResult, requestedPhase);
+        } catch (error) {
+            throw error;
         }
-        await this.updateWelcomePage(newPhase, changePhaseDialogResult, requestedPhase);
     }
 
     /**
      * On hide dialog
      */
-    private _onHideDialog() {
+    private onHideDialog() {
         this.setState({ newPhase: null, checklistItemsToArchive: null });
     }
 
@@ -216,7 +218,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
     * @param {ChangePhaseDialogResult} changePhaseDialogResult Result from dialog
     * @param {string} requestedPhase Requesed phase
     */
-    private async updateWelcomePage(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "") {
+    private async updateProjectProperties(phase: PhaseModel, changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase: string = "") {
         const projectProcessState = phase.Type === "Gate"
             ? __.getResource("Choice_GtProjectProcessState_AtGate")
             : __.getResource("Choice_GtProjectProcessState_InPhase");
@@ -228,7 +230,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             valuesToUpdate.GtLastGateStatus = lastGateStatus;
         }
         valuesToUpdate.GtRequestedPhase = requestedPhase;
-        await this.welcomePage.update(valuesToUpdate);
+        await this.projectElement.update(valuesToUpdate);
     }
 
     /**
@@ -262,7 +264,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
             await this.phaseChecklist.items.add({ Title, GtProjectPhase, GtChecklistStatus: statusOpen }, listItemEntityTypeFullName);
         }
         const phaseIterations = this.state.data.phaseIterations || 1;
-        await this.welcomePage.update({ GtPhaseIterations: phaseIterations + 1 });
+        await this.projectElement.update({ GtPhaseIterations: phaseIterations + 1 });
     }
 
     /**

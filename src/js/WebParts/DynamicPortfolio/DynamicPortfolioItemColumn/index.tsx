@@ -27,7 +27,7 @@ const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPo
                 return (
                     <a
                         href={item.Path}
-                        onClick={titleOnClick}>{colValue}</a>
+                        onClick={titleOnClick}>{colValue && colValue !== "DispForm.aspx" ? colValue : item.SiteTitle}</a>
                 );
             }
             case "Path":

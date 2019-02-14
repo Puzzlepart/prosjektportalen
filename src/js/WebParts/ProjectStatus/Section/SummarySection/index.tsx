@@ -5,8 +5,6 @@ import { Element } from "react-scroll";
 import StatusElement from "./StatusElement";
 import ProjectInfo from "../../../ProjectInfo";
 import ISummarySectionProps, { ISummarySectionHeaderProps, ISummarySectionProjectDataProps, ISummarySectionStatusColumnsProps } from "./ISummarySectionProps";
-import { SetMetadataDefaultsForLibrary, EnsureLocationBasedMetadataDefaultsReceiverForLibrary } from "../../../../Project";
-
 
 const SummarySectionHeader = ({ title, titleUrl }: ISummarySectionHeaderProps) => {
     return (
@@ -42,67 +40,7 @@ const SummarySectionProjectData = ({ propertiesLabel, webUrl }: ISummarySectionP
                         <ProjectInfo
                             hideChrome={true}
                             webUrl={webUrl}
-                            actionLinks={[{
-                                url: `${webUrl}/SitePages/Forms/DispForm.aspx?ID=3`,
-                                label: __.getResource("ProjectInfo_ViewProperties"),
-                                icon: { iconName: "PreviewLink" },
-                                options: {
-                                    HideContentTypeChoice: true,
-                                    HideWebPartMaintenancePageLink: true,
-                                    HideRibbon: true,
-                                },
-                                reloadOnSubmit: false,
-                                showLabel: true,
-                            },
-                            {
-                                url: `${_spPageContextInfo.webAbsoluteUrl}/SitePages/Forms/EditForm.aspx?ID=3`,
-                                label: __.getResource("ProjectInfo_EditProperties"),
-                                icon: { iconName: "EditMirrored" },
-                                options: {
-                                    HideContentTypeChoice: true,
-                                    HideWebPartMaintenancePageLink: true,
-                                    HideRibbon: true,
-                                    HideFormFields: "GtProjectPhase",
-                                },
-                                onDialogReturnValueCallback: result => {
-                                    Promise.all([
-                                        SetMetadataDefaultsForLibrary([{
-                                            fieldName: "GtProjectPhase",
-                                            fieldType: "Taxonomy",
-                                        },
-                                        {
-                                            fieldName: "GtProjectType",
-                                            fieldType: "TaxonomyMulti",
-                                        },
-                                        {
-                                            fieldName: "GtProjectServiceArea",
-                                            fieldType: "TaxonomyMulti",
-                                        },
-                                        {
-                                            fieldName: "GtProjectFinanceName",
-                                            fieldType: "Text",
-                                        },
-                                        {
-                                            fieldName: "GtProjectNumber",
-                                            fieldType: "Text",
-                                        },
-                                        {
-                                            fieldName: "GtArchiveReference",
-                                            fieldType: "Text",
-                                        }]),
-                                        EnsureLocationBasedMetadataDefaultsReceiverForLibrary(),
-                                    ])
-                                        .then(() => {
-                                            SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-                                        })
-                                        .catch(() => {
-                                            SP.Utilities.HttpUtility.navigateTo(_spPageContextInfo.serverRequestPath);
-                                        });
-                                },
-                                showLabel: true,
-                                permissionKind: 31,
-                            }]}
-                            showActionLinks={true}
+                            showActionLinks={false}
                             showMissingPropsWarning={false}
                             filterField="GtPcProjectStatus"
                             labelSize="m"

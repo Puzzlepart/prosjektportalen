@@ -1,5 +1,4 @@
 import { IList } from "sp-js-provisioning/lib/schema";
-import SitePages from "./SitePages";
 import PhaseChecklist from "./PhaseChecklist";
 import Information from "./Information";
 import Stakeholders from "./Stakeholders";
@@ -7,6 +6,7 @@ import CommunicationPlan from "./CommunicationPlan";
 import Milestones from "./Milestones";
 import ProjectLog from "./ProjectLog";
 import ProjectDeliveries from "./ProjectDeliveries";
+import ProjectProperties from "./ProjectProperties";
 import ResourceAllocation from "./ResourceAllocation";
 import Uncertainties from "./Uncertainties";
 import Tasks from "./Tasks";
@@ -18,7 +18,6 @@ import ChangeAnalysis from "./ChangeAnalysis";
 import BenefitsFollowup from "./BenefitsFollowup";
 
 const Lists: IList[] = [
-    SitePages,
     PhaseChecklist,
     Information,
     Stakeholders,
@@ -26,6 +25,7 @@ const Lists: IList[] = [
     Milestones,
     ProjectLog,
     ProjectDeliveries,
+    ProjectProperties,
     ResourceAllocation,
     Uncertainties,
     Tasks,

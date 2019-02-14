@@ -320,16 +320,16 @@ export default class PDFExport {
         const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
         const fieldsPromise = rootWeb
             .contentTypes
-            .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"))
+            .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .get();
 
         const itemPromise = new Web(_spPageContextInfo.webAbsoluteUrl)
             .lists
-            .getByTitle(__.getResource("Lists_SitePages_Title"))
+            .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
             .items
-            .getById(3)
+            .getById(1)
             .fieldValuesAsText
             .get();
         try {

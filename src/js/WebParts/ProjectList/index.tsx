@@ -6,7 +6,7 @@ import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import { queryProjects } from "./ProjectListSearch";
+import { queryProjects, queryProjectWebs } from "./ProjectListSearch";
 import InjectedStyles from "./InjectedStyles";
 import ProjectCard from "./ProjectCard";
 import ProjectListModel from "./ProjectListModel";
@@ -178,17 +178,22 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         try {
             const projectCt = rootWeb
                 .contentTypes
-                .getById(__.getResource("ContentTypes_Prosjektforside_ContentTypeId"));
+                .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"));
+
             const projectCtFieldsPromise = projectCt
                 .fields
                 .select("Title", "Description", "InternalName", "Required", "TypeAsString")
                 .usingCaching()
                 .get();
-            const [projectsQueryResult, projectCtFieldsArray] = await Promise.all([
+
+            const [projectsQueryResult, projectWebsQueryResult, projectCtFieldsArray] = await Promise.all([
                 queryProjects(this.props.dataSourceName, this.props.rowLimit, this.props.propertyClassNames),
+                queryProjectWebs(this.props.dataSourceName, this.props.rowLimit),
                 projectCtFieldsPromise,
             ]);
-            const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result));
+
+            const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result, projectWebsQueryResult.find(web => web.Path.toLowerCase() === result.Path.split("/Lists")[0].toLowerCase())));
+
             let fieldsMap = projectCtFieldsArray.reduce((obj, fld) => {
                 obj[fld.InternalName] = fld.Title;
                 return obj;

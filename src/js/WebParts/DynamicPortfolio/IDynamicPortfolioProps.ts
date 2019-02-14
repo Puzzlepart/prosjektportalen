@@ -10,7 +10,6 @@ import IExcelExportConfig from "../IExcelExportConfig";
 
 export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     loadingText?: string;
-    searchProperty?: string;
     searchBoxLabelText?: string;
     showCountText?: string;
     showCountTextWithFilters?: string;
@@ -29,7 +28,6 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     loadingText: __.getResource("DynamicPortfolio_LoadingText"),
-    searchProperty: "Title",
     searchBoxLabelText: __.getResource("DynamicPortfolio_SearchBox_Placeholder"),
     showCountText: __.getResource("DynamicPortfolio_ShowCounts"),
     showCountTextWithFilters: __.getResource("DynamicPortfolio_ShowCountsWithFilters"),
@@ -46,6 +44,6 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
         buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
-    defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,
+    defaultSortFunction: (a, b) => a.SiteTitle > b.SiteTitle ? 1 : -1,
     viewSelectorEnabled: true,
 };

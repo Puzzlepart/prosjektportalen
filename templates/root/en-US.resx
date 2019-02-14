@@ -168,6 +168,9 @@
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
   </data>
+  <data name="Lists_ProjectProperties_Title" xml:space="preserve">
+    <value>Properties</value>
+  </data>
   <data name="Lists_Announcements_Title" xml:space="preserve">
     <value>Announcements</value>
   </data>
@@ -459,11 +462,11 @@
   <data name="ContentTypes_Glittertind_nettdelside_Name" xml:space="preserve">
     <value>Glittertind web part page</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_Name" xml:space="preserve">
-    <value>Project Frontpage</value>
-  </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
     <value>Project Item</value>
+  </data>
+  <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
+    <value>Project Properties</value>
   </data>
   <data name="ContentTypes_Prosjektressurs_Name" xml:space="preserve">
     <value>Project Resource</value>
@@ -597,8 +600,8 @@
   <data name="ContentTypes_Glittertind_nettdelside_Description" xml:space="preserve">
     <value>Create a new Web Part page.</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_Description" xml:space="preserve">
-    <value>Create a new Web Part page.</value>
+  <data name="ContentTypes_Prosjektegenskaper_Description" xml:space="preserve">
+    <value>Create a new project properties element.</value>
   </data>
   <data name="ContentTypes_Glittertind_basehendelse_Description" xml:space="preserve">
     <value>Create a new meeting, deadline or other event.</value>
@@ -654,8 +657,8 @@
   <data name="ContentTypes_Sektordiagram_Description" xml:space = "preserve">
     <value>Create a new pie chart</value>
   </data>
-  <data name="ContentTypes_Prosjektforside_ContentTypeId" xml:space="preserve">
-    <value>0x010109010058561F86D956412B9DD7957BBCD67AAE01</value>
+  <data name="ContentTypes_Prosjektegenskaper_ContentTypeId" xml:space="preserve">
+    <value>0x010088578E7470CC4AA68D5663464831070211</value>
   </data>
   <data name="ContentTypes_Gevinst_ContentTypeId" xml:space="preserve">
     <value>0x0100B384774BA4EBB842A5E402EBF4707367</value>
@@ -1926,6 +1929,9 @@
   <data name="ProjectPhases_NextPhase" xml:space="preserve">
     <value>Next phase is {0}.</value>
   </data>
+  <data name="ProjectPhases_ChangePhaseErrorMessage" xml:space="preserve">
+    <value>An error occurred while changing the phase. Try again later.</value>
+  </data>
   <data name="ProjectInfo_LoadingText" xml:space="preserve">
     <value>Loading project information...</value>
   </data>
@@ -1942,10 +1948,10 @@
     <value>Title, description and logo</value>
   </data>
   <data name="ProjectInfo_MissingProperties" xml:space="preserve">
-    <value>Important information about the project is not set. You should set these properties as soon as possible.</value>
+    <value>Important information about the project is not set. </value>
   </data>
   <data name="ProjectInfo_NoProperties" xml:space="preserve">
-    <value>Found no information about the project.</value>
+    <value>Found no information about the project. </value>
   </data>
   <data name="ProjectInfo_ProjectLinkText" xml:space="preserve">
     <value>Go to site</value>

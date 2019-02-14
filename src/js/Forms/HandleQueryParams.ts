@@ -12,7 +12,8 @@ export default function HandleQueryParams() {
     }
     if (HideWebPartMaintenancePageLink === "1") {
         Logger.log({ message: "(HandleQueryParams) HideWebPartMaintenancePageLink specified in URL, hiding WebPartMaintenancePageLink", level: LogLevel.Info, data: {} });
-        (document.querySelector("a[id*='WebPartMaintenancePageLink']") as any).parentNode.parentNode.parentNode.parentNode.style.display = "none";
+        const linkDomElement = (document.querySelector("a[id*='WebPartMaintenancePageLink']") as any);
+        if (linkDomElement) { linkDomElement.parentNode.parentNode.parentNode.parentNode.style.display = "none"; }
     }
     if (HideFormFields) {
         const fieldsArray = (HideFormFields as string).split(",");
@@ -21,6 +22,7 @@ export default function HandleQueryParams() {
     }
     if (HideViewSelector) {
         Logger.log({ message: "(HandleQueryParams) HideViewSelector specified in URL, hiding .ms-csrlistview-controldiv", level: LogLevel.Info, data: {} });
-        (document.querySelector(".ms-csrlistview-controldiv") as any).style.display = "none";
+        const divDomElement = (document.querySelector(".ms-csrlistview-controldiv") as any);
+        if (divDomElement) { divDomElement.style.display = "none"; }
     }
 }
