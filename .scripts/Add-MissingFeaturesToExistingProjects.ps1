@@ -25,8 +25,10 @@ if ($CurrentCredentials.IsPresent) {
 
 function Add-ResourceAllocationFeatures($ProjectWeb, $Language) {
     $ListName = "Ressursallokering"
+    $TitleName = "Beskrivelse av arbeidsoppgaver"
     if($Language -eq 1033) {
         $ListName = "Resource Allocation"
+        $TitleName = "Work description"
     }
     Write-Host "`tVerifying resource allocation list" -ForegroundColor Gray
     $ResourceAllocation = Get-PnPList -Identity $ListName -Web $ProjectWeb
@@ -40,7 +42,14 @@ function Add-ResourceAllocationFeatures($ProjectWeb, $Language) {
         Add-PnPContentTypeToList -List $ResourceAllocation -ContentType $ResourceAllocationContentType -DefaultContentType -Web $ProjectWeb
         Remove-PnPContentTypeFromList -List $ResourceAllocation -ContentType $ItemContentType -Web $ProjectWeb
 
-        $ViewFields = @("GtResourceUser", "GtResourceRole", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsenceComment", "Modified")
+        $title = Get-PnPField -List $ResourceAllocation -Identity "Title" -Web $ProjectWeb
+        if ($null -ne $title) {
+            $title.Required = $false
+            $title.Hidden = $false
+            $title.Title = $TitleName
+            $title.Update()
+        }
+        $ViewFields = @("LinkTitle", "GtResourceUser", "GtResourceRole", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsenceComment", "Modified")
         $DefaultView = $ResourceAllocation.DefaultView
         $DefaultView.ViewFields.RemoveAll()
         $ViewFields | % { $DefaultView.ViewFields.Add($_)}        
@@ -60,6 +69,15 @@ function Add-ResourceAllocationFeatures($ProjectWeb, $Language) {
         $ResourceAllocationLeftNav = Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq $ListName} 
         if ($null -eq $ResourceAllocationLeftNav) {
             Add-PnPNavigationNode -Location QuickLaunch -Title $ListName -Url "Lists/$ListName" -Web $ProjectWeb
+        }
+        $title = Get-PnPField -List $ResourceAllocation -Identity "Title" -Web $ProjectWeb
+        if ($null -ne $title) {
+            $title.Required = $false
+            $title.Hidden = $false
+            $title.Title = $TitleName
+            $title.Update()
+
+            Invoke-PnPQuery
         }
         Write-Host "`tResource allocation list already exists" -ForegroundColor Green
     }
