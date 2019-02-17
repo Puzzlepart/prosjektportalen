@@ -106,7 +106,7 @@
         "require-uncached": "^1.0.3",
         "run-sequence": "^2.2.1",
         "sanitize-filename": "^1.6.1",
-        "sp-js-provisioning": "git+https://github.com/Puzzlepart/sp-js-provisioning.git#v0.8.9",
+        "sp-js-provisioning": "git+https://github.com/Puzzlepart/sp-js-provisioning.git",
         "string-format": "^2.0.0",
         "tslint": "^5.12.1",
         "typedoc": "^0.14.2",
