@@ -107,13 +107,9 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
 
 function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
     $TargetListName = "Properties"
-    $SitePagesName = "Områdesider"
-    if ($Language -eq 1033) {
-        $SitePagesName = "Site Pages"
-    }
     
-    Write-Host "`tSynchronizing project properties list from old architecture ($SitePagesName)" -ForegroundColor Gray
-    $ProjectPage = Get-PnPListItem -List $SitePagesName -Id 3 -Web $ProjectWeb
+    Write-Host "`tSynchronizing project properties list from old architecture" -ForegroundColor Gray
+    $ProjectPage = Get-PnPListItem -List "SitePages" -Id 3 -Web $ProjectWeb
     $ProjectItem = Get-PnPListItem -List $TargetListName -Id 1 -Web $ProjectWeb -ErrorAction SilentlyContinue
 
     # Synchronize project properties if old Content Type
