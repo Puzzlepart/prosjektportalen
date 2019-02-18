@@ -23,7 +23,8 @@
         "@pnp/logging": "^1.2.9",
         "@pnp/odata": "^1.2.9",
         "@pnp/polyfill-ie11": "^1.0.1",
-        "@pnp/sp": "^1.2.9"
+        "@pnp/sp": "^1.2.9",
+        "office-ui-fabric-react": "^6.135.0"
     },
     "devDependencies": {
         "@types/chai": "3.4.34",
@@ -89,7 +90,6 @@
         "object-assign": "^4.1.1",
         "object.omit": "^3.0.0",
         "office-ui-fabric-core": "^9.6.1",
-        "office-ui-fabric-react": "^6.140.0",
         "path": "^0.12.7",
         "plugin-error": "^1.0.1",
         "prop-types": "^15.6.2",
