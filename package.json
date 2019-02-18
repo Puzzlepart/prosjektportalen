@@ -24,7 +24,7 @@
         "@pnp/odata": "^1.2.9",
         "@pnp/polyfill-ie11": "^1.0.1",
         "@pnp/sp": "^1.2.9",
-        "office-ui-fabric-react": "^6.135.0"
+        "office-ui-fabric-react": "^5.135.0"
     },
     "devDependencies": {
         "@types/chai": "3.4.34",
