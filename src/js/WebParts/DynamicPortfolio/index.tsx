@@ -2,7 +2,9 @@ import * as React from "react";
 import __ from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import { IGroup, DetailsList } from "office-ui-fabric-react/lib/DetailsList";
+import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
+import { Sticky } from "office-ui-fabric-react/lib/Sticky";
+import { IGroup, DetailsList, IDetailsHeaderProps } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
@@ -162,7 +164,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         let updatedState: Partial<IDynamicPortfolioState> = {
             selectedColumns,
             fieldNames,
-            items,
+            items: [
+                ...items,
+                ...items,
+                ...items,
+                ...items,
+                ...items,
+                ...items,
+                ...items,
+                ...items,
+            ],
             filters,
             currentView,
             configuration,
@@ -209,16 +220,21 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         return (
-            <DetailsList
-                items={data.items}
-                constrainMode={this.props.constrainMode}
-                layoutMode={this.props.layoutMode}
-                columns={data.columns}
-                groups={data.groups}
-                selectionMode={this.props.selectionMode}
-                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
-                onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
-            />
+            <ScrollablePane>
+                <DetailsList
+                    items={data.items}
+                    constrainMode={this.props.constrainMode}
+                    layoutMode={this.props.layoutMode}
+                    columns={data.columns}
+                    groups={data.groups}
+                    selectionMode={this.props.selectionMode}
+                    onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
+                    onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
+                    onRenderDetailsHeader={
+                        (detailsHeaderProps: IDetailsHeaderProps, defaultRender) => (
+                            <Sticky>{defaultRender(detailsHeaderProps)}</Sticky>
+                        )} />
+            </ScrollablePane>
         );
     }
 
@@ -416,16 +432,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 isDropEnabled: false,
             }));
         }
-        let items = this.state.filteredItems
-            ? this.state.filteredItems.filter(item => {
-                const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
-                return fieldNames.filter(fieldName => {
-                    return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
-                }).length > 0;
-            })
-            : [];
+        // let items = this.state.filteredItems
+        //     ? this.state.filteredItems.filter(item => {
+        //         const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
+        //         return fieldNames.filter(fieldName => {
+        //             return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
+        //         }).length > 0;
+        //     })
+        //     : [];
         return {
-            items: items,
+            items: this.state.items,
             columns: this.state.selectedColumns,
             groups: groups,
         };
@@ -609,7 +625,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         let updatedState: Partial<IDynamicPortfolioState> = {
             isChangingView: null,
-            items: response.primarySearchResults,
+            items: [
+                ...response.primarySearchResults,
+            ],
             filteredItems: response.primarySearchResults,
             filters: filters,
             currentView: viewConfig,
