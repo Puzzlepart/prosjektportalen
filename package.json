@@ -51,7 +51,7 @@
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1",
         "core-js": "^2.6.3",
-        "event-stream": "^3.3.4",
+        "event-stream": "3.3.4",
         "extend": "^3.0.1",
         "fancy-log": "^1.3.3",
         "file-saver": "^2.0.0",
