@@ -122,7 +122,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 $Language = Get-WebLanguage -ctx (Get-PnPContext)
                 $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
                 foreach ($pkg in $upgradePkgs) {
-                    Apply-PnPProvisioningTemplate $pkg.FullName
+                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
                 }
                 Write-Host "DONE" -ForegroundColor Green
         }
