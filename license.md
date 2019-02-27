@@ -2,7 +2,7 @@ Project portal for SharePoint is a free project management tool based
 on Prosjektveiviseren and is compatible with SharePoint Online and 
 SharePoint 2013 and 2016 on-premises.
 
-Copyright (c) 2017 Puzzlepart
+Copyright (c) 2019 Puzzlepart
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -107,21 +107,16 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
 
 function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
     $TargetListName = "Properties"
-    $SitePagesName = "Områdesider"
-    if ($Language -eq 1033) {
-        $SitePagesName = "Site Pages"
-    }
     
     Write-Host "`tSynchronizing project properties list from old architecture" -ForegroundColor Gray
-    $ProjectPage = Get-PnPListItem -List $SitePagesName -Id 3 -Web $ProjectWeb
+    $ProjectPage = Get-PnPListItem -List "SitePages" -Id 3 -Web $ProjectWeb
     $ProjectItem = Get-PnPListItem -List $TargetListName -Id 1 -Web $ProjectWeb -ErrorAction SilentlyContinue
 
-    if ($ProjectItem -eq $null) {
-        $ProjectItem = Add-PnPListItem -List $TargetListName -Web $ProjectWeb
-    }
-
     # Synchronize project properties if old Content Type
-    if ($ProjectPage.FieldValues.ContentTypeId.StringValue.ToLower().StartsWith("0x010109010058561f86d956412b9dd7957bbcd67aae01")) {
+    if ($ProjectPage -and $ProjectPage.FieldValues.ContentTypeId.StringValue.ToLower().StartsWith("0x010109010058561f86d956412b9dd7957bbcd67aae01")) {
+		if ($ProjectItem -eq $null) {
+			$ProjectItem = Add-PnPListItem -List $TargetListName -Web $ProjectWeb
+		}
         $FieldsToSync = Get-PnPField -List $TargetListName -Web $ProjectWeb | ? {$_.InternalName.IndexOf("Gt") -eq 0}
         $FieldsToSync | ? {$_.FieldTypeKind -ne "Invalid"} | % {
             $ProjectItem[$_.InternalName] = $ProjectPage[$_.InternalName]
