@@ -1,6 +1,6 @@
 {
     "name": "prosjektportalen",
-    "version": "2.3.5",
+    "version": "2.4.0",
     "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
     "homepage": "https://github.com/Puzzlepart/prosjektportalen",
     "repository": {
@@ -19,12 +19,13 @@
         "webpack-dev": "webpack --mode development"
     },
     "dependencies": {
-        "@pnp/common": "^1.2.8",
-        "@pnp/logging": "^1.2.8",
-        "@pnp/odata": "^1.2.8",
+        "@pnp/common": "^1.2.9",
+        "@pnp/logging": "^1.2.9",
+        "@pnp/odata": "^1.2.9",
         "@pnp/polyfill-ie11": "^1.0.1",
-        "@pnp/sp": "^1.2.8",
-        "react-sticky": "^6.0.3"
+        "react-sticky": "^6.0.3",
+        "@pnp/sp": "^1.2.9",
+        "office-ui-fabric-react": "^5.135.0"
     },
     "devDependencies": {
         "@types/chai": "3.4.34",
@@ -51,7 +52,7 @@
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1",
         "core-js": "^2.6.3",
-        "event-stream": "^3.3.4",
+        "event-stream": "3.3.4",
         "extend": "^3.0.1",
         "fancy-log": "^1.3.3",
         "file-saver": "^2.0.0",
@@ -90,7 +91,6 @@
         "object-assign": "^4.1.1",
         "object.omit": "^3.0.0",
         "office-ui-fabric-core": "^9.6.1",
-        "office-ui-fabric-react": "^6.136.0",
         "path": "^0.12.7",
         "plugin-error": "^1.0.1",
         "prop-types": "^15.6.2",

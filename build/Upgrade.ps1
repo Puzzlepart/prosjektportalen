@@ -90,6 +90,7 @@ if (-not $DataSourceSiteUrl) {
 
 $Connection = Connect-SharePoint -Url $Url -Connection $Connection
 $ProjectPortalContext = Get-PnPContext
+$Language = Get-WebLanguage -ctx $ProjectPortalContext
 
 if ($null -eq $Connection) {
     Write-Host
@@ -101,6 +102,7 @@ if ($null -eq $Connection) {
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'gulp release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
+$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -118,13 +120,16 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         try {
-                Write-Host "Deploying pre-upgrade packages.." -ForegroundColor Green -NoNewLine
-                $Language = Get-WebLanguage -ctx (Get-PnPContext)
-                $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/pre-*-$($Language).pnp"
-                foreach ($pkg in $upgradePkgs) {
-                    Apply-PnPProvisioningTemplate $pkg.FullName
+            if (Test-Path $UpgradeFolderPath -PathType Container) {
+                Write-Host "Installing pre-upgrade packages.." -ForegroundColor Green -NoNewLine
+                $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/pre-*-$($Language).pnp"
+                if ($null -ne $upgradePkgs) {
+                    foreach ($pkg in $upgradePkgs) {
+                        Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
+                    }
                 }
                 Write-Host "DONE" -ForegroundColor Green
+            }
         }
         catch {
             Write-Host
@@ -160,15 +165,17 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         $Connection = Connect-SharePoint $Url -Connection $Connection
-        Write-Host "Deploying upgrade packages.." -ForegroundColor Green
-        $Language = Get-WebLanguage -ctx (Get-PnPContext)
-        $upgradePkgs = Get-ChildItem -Path "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)/*-$($Language).pnp" -Exclude "pre-*.pnp"
-        foreach ($pkg in $upgradePkgs) {
-            Write-Host "Applying upgrade-package $($pkg.FullName)" 
-            Apply-PnPProvisioningTemplate $pkg.FullName
+        if (Test-Path $UpgradeFolderPath -PathType Container) {
+            Write-Host "Installing upgrade packages.." -ForegroundColor Green
+            $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/*-$($Language).pnp" -Exclude "pre-*.pnp"
+            if ($null -ne $upgradePkgs) {
+                foreach ($pkg in $upgradePkgs) {
+                    Write-Host "Applying upgrade-package $($pkg.FullName)" 
+                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
+                }
+            }
+            Write-Host "DONE" -ForegroundColor Green
         }
-        Write-Host "DONE" -ForegroundColor Green
-
         
         # Replacing Content Type IDs in configurations from versions 2.3 and before
         if ($CurrentVersion.Minor -lt 4) {
