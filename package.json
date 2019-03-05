@@ -23,6 +23,7 @@
         "@pnp/logging": "^1.2.9",
         "@pnp/odata": "^1.2.9",
         "@pnp/polyfill-ie11": "^1.0.1",
+        "react-sticky": "^6.0.3",
         "@pnp/sp": "^1.2.9",
         "office-ui-fabric-react": "^5.135.0"
     },
@@ -100,7 +101,6 @@
         "react-dom": "16.3.3",
         "react-highcharts": "^16.0.2",
         "react-scroll": "^1.7.10",
-        "react-sticky": "^6.0.3",
         "react-truncate-markup": "^3.0.0",
         "regenerator-runtime": "^0.11.1",
         "require-uncached": "^1.0.3",
