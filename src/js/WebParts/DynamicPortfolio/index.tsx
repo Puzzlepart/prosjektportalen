@@ -2,8 +2,8 @@ import * as React from "react";
 import __ from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
-import { Sticky } from "office-ui-fabric-react/lib/Sticky";
+import { ScrollablePane, ScrollbarVisibility } from "office-ui-fabric-react/lib/ScrollablePane";
+import { Sticky, StickyPositionType } from "office-ui-fabric-react/lib/Sticky";
 import { IGroup, DetailsList, IDetailsHeaderProps } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
@@ -64,18 +64,22 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const { isLoading, errorMessage, isChangingView } = this.state;
         if (errorMessage) {
             return (
-                <div>
+                <div style={{ height: "80vh" }}>
                     <MessageBar messageBarType={errorMessage.type}>{errorMessage.message}</MessageBar>
                 </div>
             );
         }
         if (isLoading) {
-            return <Spinner label={this.props.loadingText} type={SpinnerType.large} />;
+            return (
+                <div style={{ height: "80vh" }}>
+                    <Spinner label={this.props.loadingText} type={SpinnerType.large} />
+                </div>
+            );
         }
         if (isChangingView) {
             const loadingText = String.format(__.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
-                <div>
+                <div style={{ height: "80vh" }}>
                     {this.renderCommandBar()}
                     <div style={{ paddingTop: 20 }}>
                         <Spinner label={loadingText} type={SpinnerType.large} />
@@ -84,112 +88,19 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             );
         }
         return (
-            <div>
-                {this.renderCommandBar()}
-                <div>
-                    {this.renderSearchBox()}
-                    {this.renderStatusBar()}
-                    {this.renderItems()}
-                    {this.renderFilterPanel()}
-                    {this.renderProjectInfoModal()}
-                </div>
+            <div style={{ height: "80vh" }}>
+                <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto}>
+                    {this.renderCommandBar()}
+                    <div>
+                        {this.renderSearchBox()}
+                        {this.renderStatusBar()}
+                        {this.renderItems()}
+                        {this.renderFilterPanel()}
+                        {this.renderProjectInfoModal()}
+                    </div>
+                </ScrollablePane>
             </div>
         );
-    }
-
-    /**
-     * Fetch initial data
-     */
-    private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
-        let hashState = Util.getUrlHash();
-        const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const permissions = new SP.BasePermissions();
-        permissions.set(31);
-        const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
-        await ExecuteJsomQuery(jsomCtx);
-        const configuration = await DynamicPortfolioConfiguration.getConfig();
-
-        let currentView;
-
-        if (this.props.defaultView) {
-            currentView = this.props.defaultView;
-        } else {
-            let viewIdUrlParam = GetUrlKeyValue("viewId");
-            if (viewIdUrlParam !== "") {
-                [currentView] = configuration.views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
-                if (!currentView) {
-                    throw {
-                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
-                        type: MessageBarType.error,
-                    };
-                }
-            } else if (hashState.viewId) {
-                [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
-                if (!currentView) {
-                    throw {
-                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
-                        type: MessageBarType.error,
-                    };
-                }
-            } else {
-                [currentView] = configuration.views.filter(qc => qc.default);
-                if (!currentView) {
-                    throw {
-                        message: __.getResource("DynamicPortfolio_NoDefaultView"),
-                        type: MessageBarType.error,
-                    };
-                }
-            }
-        }
-        const fieldNames = configuration.columns.map(f => f.fieldName);
-        const response = await queryProjects(currentView, configuration);
-
-        // Populates DynamicPortfolioFieldSelector with items from this.configuration.columns
-        DynamicPortfolioFieldSelector.items = configuration.columns.map(col => ({
-            name: col.name,
-            value: col.fieldName,
-            defaultSelected: Array.contains(currentView.fields, col.name),
-            readOnly: col.readOnly,
-        }));
-
-        // Sort the columns as they are added to the view
-        let selectedColumns = currentView.fields.map(f => configuration.columns.filter(fc => fc.name === f)[0]);
-
-        // Get selected filters
-        let filters = this.getSelectedFiltersWithItems(response.refiners, configuration, currentView).concat([DynamicPortfolioFieldSelector]);
-
-        // Sorts items from response.primarySearchResults
-        let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
-
-        let updatedState: Partial<IDynamicPortfolioState> = {
-            selectedColumns,
-            fieldNames,
-            items: [
-                ...items,
-                ...items,
-                ...items,
-                ...items,
-                ...items,
-                ...items,
-                ...items,
-                ...items,
-            ],
-            filters,
-            currentView,
-            configuration,
-            canUserManageWeb: canUserManageWeb.get_value(),
-            filteredItems: items,
-        };
-
-        // Check if current view has group by set
-        if (currentView.groupBy) {
-            let [groupByColumn] = configuration.columns.filter(fc => fc.name === currentView.groupBy);
-            if (groupByColumn) {
-                updatedState.groupBy = groupByColumn;
-            }
-        }
-
-        return updatedState;
     }
 
     /**
@@ -220,21 +131,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         return (
-            <ScrollablePane>
-                <DetailsList
-                    items={data.items}
-                    constrainMode={this.props.constrainMode}
-                    layoutMode={this.props.layoutMode}
-                    columns={data.columns}
-                    groups={data.groups}
-                    selectionMode={this.props.selectionMode}
-                    onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
-                    onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
-                    onRenderDetailsHeader={
-                        (detailsHeaderProps: IDetailsHeaderProps, defaultRender) => (
-                            <Sticky>{defaultRender(detailsHeaderProps)}</Sticky>
-                        )} />
-            </ScrollablePane>
+            <DetailsList
+                items={data.items}
+                constrainMode={this.props.constrainMode}
+                layoutMode={this.props.layoutMode}
+                columns={data.columns}
+                groups={data.groups}
+                selectionMode={this.props.selectionMode}
+                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
+                onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
+                onRenderDetailsHeader={(detailsHeaderProps: IDetailsHeaderProps, defaultRender) => <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>} />
         );
     }
 
@@ -407,6 +313,92 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
+     * Fetch initial data
+     */
+    private async fetchInitialData(): Promise<Partial<IDynamicPortfolioState>> {
+        let hashState = Util.getUrlHash();
+        const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
+        const permissions = new SP.BasePermissions();
+        permissions.set(31);
+        const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
+        await ExecuteJsomQuery(jsomCtx);
+        const configuration = await DynamicPortfolioConfiguration.getConfig();
+
+        let currentView: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig;
+
+        if (this.props.defaultView) {
+            currentView = this.props.defaultView;
+        } else {
+            let viewIdUrlParam = GetUrlKeyValue("viewId");
+            if (viewIdUrlParam !== "") {
+                [currentView] = configuration.views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
+                if (!currentView) {
+                    throw {
+                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
+                        type: MessageBarType.error,
+                    };
+                }
+            } else if (hashState.viewId) {
+                [currentView] = configuration.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+                if (!currentView) {
+                    throw {
+                        message: __.getResource("DynamicPortfolio_ViewNotFound"),
+                        type: MessageBarType.error,
+                    };
+                }
+            } else {
+                [currentView] = configuration.views.filter(qc => qc.default);
+                if (!currentView) {
+                    throw {
+                        message: __.getResource("DynamicPortfolio_NoDefaultView"),
+                        type: MessageBarType.error,
+                    };
+                }
+            }
+        }
+        const fieldNames = configuration.columns.map(f => f.fieldName);
+        const response = await queryProjects(currentView, configuration);
+
+        // Populates DynamicPortfolioFieldSelector with items from this.configuration.columns
+        DynamicPortfolioFieldSelector.items = configuration.columns.map(col => ({
+            name: col.name,
+            value: col.fieldName,
+            defaultSelected: Array.contains(currentView.fields, col.name),
+            readOnly: col.readOnly,
+        }));
+
+        // Sort the columns as they are added to the view
+        let selectedColumns = currentView.fields.map(f => configuration.columns.filter(fc => fc.name === f)[0]);
+
+        // Get selected filters
+        let filters = this.getSelectedFiltersWithItems(response.refiners, configuration, currentView).concat([DynamicPortfolioFieldSelector]);
+
+        // Sorts items from response.primarySearchResults
+        let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
+
+        let updatedState: Partial<IDynamicPortfolioState> = {
+            selectedColumns,
+            fieldNames,
+            items,
+            filters,
+            currentView,
+            configuration,
+            canUserManageWeb: canUserManageWeb.get_value(),
+            filteredItems: items,
+        };
+
+        // Check if current view has group by set
+        if (currentView.groupBy) {
+            let [groupByColumn] = configuration.columns.filter(fc => fc.name === currentView.groupBy);
+            if (groupByColumn) {
+                updatedState.groupBy = groupByColumn;
+            }
+        }
+
+        return updatedState;
+    }
+
+    /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      */
     private getFilteredData() {
@@ -432,16 +424,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 isDropEnabled: false,
             }));
         }
-        // let items = this.state.filteredItems
-        //     ? this.state.filteredItems.filter(item => {
-        //         const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
-        //         return fieldNames.filter(fieldName => {
-        //             return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
-        //         }).length > 0;
-        //     })
-        //     : [];
+        let items = this.state.filteredItems
+            ? this.state.filteredItems.filter(item => {
+                const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
+                return fieldNames.filter(fieldName => {
+                    return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                }).length > 0;
+            })
+            : [];
         return {
-            items: this.state.items,
+            items,
             columns: this.state.selectedColumns,
             groups: groups,
         };
