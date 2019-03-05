@@ -2,7 +2,7 @@ import * as React from "react";
 import __ from "../../Resources";
 import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import { ScrollablePane, ScrollbarVisibility } from "office-ui-fabric-react/lib/ScrollablePane";
+import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
 import { Sticky, StickyPositionType } from "office-ui-fabric-react/lib/Sticky";
 import { IGroup, DetailsList, IDetailsHeaderProps } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
@@ -89,7 +89,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
         return (
             <div style={{ height: "80vh" }}>
-                <ScrollablePane scrollbarVisibility={ScrollbarVisibility.auto}>
+                <ScrollablePane>
                     {this.renderCommandBar()}
                     <div>
                         {this.renderSearchBox()}
