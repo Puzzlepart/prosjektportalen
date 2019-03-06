@@ -159,9 +159,9 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             .select("Title", this.props.filterField)
             .usingCaching()
             .get();
-        const fieldsPromise = rootWeb
-            .contentTypes
-            .getById(__.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId"))
+        const fieldsPromise = new Web(this.props.webUrl)
+            .lists
+            .getByTitle(__.getResource("Lists_ProjectProperties_Title"))
             .fields
             .select("Title", "Description", "InternalName", "Required", "TypeAsString")
             .usingCaching()
