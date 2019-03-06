@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_ProjectConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_ProjectConfig_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/ProjectConfig" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x0100FBC1CA649E569B48B3C9984EE6BA04A301" Default="true" />
@@ -7,38 +7,17 @@
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/ProjectConfig/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
             <Query>
                 <OrderBy>
-                    <FieldRef Name="ID" />
+                    <FieldRef Name="LinkTitle" />
                 </OrderBy>
             </Query>
             <ViewFields>
-                <FieldRef Name="Edit" />
-                <FieldRef Name="LinkTitle" />
-            </ViewFields>
-            <RowLimit Paged="TRUE">30</RowLimit>
-            <Aggregations Value="Off" />
-            <JSLink>clienttemplates.js</JSLink>
-        </View>
-        <View Type="HTML" DisplayName="{resource:View_ProjectFields_DisplayName}" Url="{site}/Lists/ProjectConfig/ProjectFields.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=44">
-            <Query>
-                <OrderBy>
-                    <FieldRef Name="ID" />
-                </OrderBy>
-                <Where>
-                    <Eq>
-                        <FieldRef Name="ContentType"/>
-                        <Value Type="Computed">{resource:ContentTypes_Project_Field_Name}</Value>
-                    </Eq>
-                </Where>
-            </Query>
-            <ViewFields>
-                <FieldRef Name="Edit" />
                 <FieldRef Name="LinkTitle" />
                 <FieldRef Name="GtPcFrontpage" />
                 <FieldRef Name="GtPcProjectStatus" />
                 <FieldRef Name="GtPcPortfolioPage" />
                 <FieldRef Name="Modified" />
             </ViewFields>
-            <RowLimit Paged="TRUE">30</RowLimit>
+            <RowLimit Paged="TRUE">100</RowLimit>
             <Aggregations Value="Off" />
             <JSLink>clienttemplates.js</JSLink>
         </View>
