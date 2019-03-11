@@ -36,7 +36,7 @@
             <pnp:Property Key="Title" Value="{resource:Navigation_ExperienceLog_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
-            <pnp:WebPart Title="Erfaringslogg" Order="0" Zone="LeftColumn">
+            <pnp:WebPart Title="ExperienceLog" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/ExperienceLog.webpart" />
                 </pnp:Contents>
@@ -48,7 +48,7 @@
             <pnp:Property Key="Title" Value="{resource:Navigation_Portfolio_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
-            <pnp:WebPart Title="dynamicportfolio" Order="1" Zone="LeftColumn">
+            <pnp:WebPart Title="DynamicPortfolio" Order="1" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/DynamicPortfolio.webpart" />
                 </pnp:Contents>
@@ -60,7 +60,7 @@
             <pnp:Property Key="Title" Value="{resource:Navigation_BenefitsOverview_Title}" />
         </pnp:Properties>
         <pnp:WebParts>
-            <pnp:WebPart Title="Gevinstoversikt" Order="0" Zone="LeftColumn">
+            <pnp:WebPart Title="BenefitsOverview" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/BenefitsOverview.webpart" />
                 </pnp:Contents>
