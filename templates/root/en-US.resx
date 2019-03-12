@@ -1255,7 +1255,7 @@
     <value>Resource</value>
   </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
-    <value>Absence</value>
+    <value>Allocation type</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Comment</value>
@@ -1738,7 +1738,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
-    <value>What is the reason for the absence?</value>
+    <value>What is the type of absence?</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
     <value>Further comments (if relevant)</value>

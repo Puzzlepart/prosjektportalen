@@ -1252,10 +1252,10 @@
     <value>Ressurs</value>
   </data>  
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
-    <value>Fravær</value>
+    <value>Allokeringstype</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
-    <value>Kommentar</value>
+    <value>Kommentar til allokering</value>
   </data>
   <data name="SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName" xml:space="preserve">
     <value>Beskrivelse</value>
@@ -1735,7 +1735,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
-    <value>Hva er grunnen til fraværet?</value>
+    <value>Hvilken type allokering eller fravær er dette?</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
     <value>Eventuelle kommentarer</value>
