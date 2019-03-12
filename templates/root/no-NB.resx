@@ -846,6 +846,9 @@
   <data name="SiteFields_GtProjectFinanceName_DisplayName" xml:space="preserve">
     <value>Prosjektnavn i økonomisystemet</value>
   </data>
+  <data name="SiteFields_GtProjectStatus_DisplayName" xml:space="preserve">
+    <value>Prosjektstatus</value>
+  </data>
   <data name="SiteFields_GtStakeholderInterest_DisplayName" xml:space="preserve">
     <value>Interesse</value>
   </data>
@@ -1250,7 +1253,7 @@
   </data>
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Ressurs</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Fravær</value>
   </data>
@@ -1420,6 +1423,9 @@
     <value />
   </data>
   <data name="SiteFields_GtProjectFinanceName_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SiteFields_GtProjectStatus_Description" xml:space="preserve">
     <value />
   </data>
   <data name="SiteFields_GtStakeholderInterest_Description" xml:space="preserve">
@@ -2054,7 +2060,7 @@
   </data>
   <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Henter data...</value>
-  </data>  
+  </data>
   <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
     <value>Endre datautvalg</value>
   </data>
@@ -2894,7 +2900,7 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
-  </data>  
+  </data>
   <data name="RiskMatrix_LoadingText" xml:space="preserve">
     <value>Laster risikomatrise...</value>
   </data>

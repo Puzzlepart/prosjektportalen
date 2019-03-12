@@ -258,6 +258,7 @@
             <pnp:FieldRef ID="13aa2254-728b-48bd-8d09-5aa5e20933e1" Name="GtLastGateStatus" />
             <pnp:FieldRef ID="469d8b96-f097-46de-b9b7-4630670c8ed4" Name="GtRequestedPhase" />
             <pnp:FieldRef ID="de171613-5f6d-4152-b547-79cf3776992b" Name="GtPhaseIterations" />
+            <pnp:FieldRef ID="18d92e18-10b6-42ea-815d-b12d7827564e" Name="GtProjectStatus" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
