@@ -2370,6 +2370,12 @@
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Forsinket</value>
   </data>
+    <data name="Choice_GtProjectStatus_Active" xml:space="preserve">
+    <value>Aktivt</value>
+  </data>
+    <data name="Choice_GtProjectStatus_Inactive" xml:space="preserve">
+    <value>Avsluttet</value>
+  </data>
   <data name="Choice_GtStakeholderInfluencePossibilty_Large" xml:space="preserve">
     <value>Stor</value>
   </data>
