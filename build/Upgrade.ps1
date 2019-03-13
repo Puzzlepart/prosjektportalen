@@ -205,20 +205,20 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         if ($CurrentVersion.Minor -lt 5) {
             $ProjectLifecycleFilter = ""
             switch ($Language){
-                "1033" { $ProjectLifecycleFilter = ' NOT GtProjectLifecycleStatus="Closed"' }
-                "1044" { $ProjectLifecycleFilter = ' NOT GtProjectLifecycleStatus="Avsluttet"' }
+                "1033" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatus="Closed"' }
+                "1044" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatus="Avsluttet"' }
             }
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     if ($_["Title"] -eq "PROJECTS") {
-                        $Query = $_["GtDpSearchQuery"].Insert(($_["GtDpSearchQuery"].Length), $ProjectLifecycleFilter)
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
                         $_["GtDpSearchQuery"] = $Query
                         $_.Update()
                     }
                 }
                 Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Insert(($_["GtDpSearchQuery"].Length), $ProjectLifecycleFilter)
+                    $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
