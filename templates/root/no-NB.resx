@@ -846,7 +846,7 @@
   <data name="SiteFields_GtProjectFinanceName_DisplayName" xml:space="preserve">
     <value>Prosjektnavn i økonomisystemet</value>
   </data>
-  <data name="SiteFields_GtProjectStatus_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtProjectLifecycleStatus_DisplayName" xml:space="preserve">
     <value>Prosjektstatus</value>
   </data>
   <data name="SiteFields_GtStakeholderInterest_DisplayName" xml:space="preserve">
@@ -1425,7 +1425,7 @@
   <data name="SiteFields_GtProjectFinanceName_Description" xml:space="preserve">
     <value />
   </data>
-  <data name="SiteFields_GtProjectStatus_Description" xml:space="preserve">
+  <data name="SiteFields_GtProjectLifecycleStatus_Description" xml:space="preserve">
     <value />
   </data>
   <data name="SiteFields_GtStakeholderInterest_Description" xml:space="preserve">
@@ -2370,10 +2370,10 @@
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Forsinket</value>
   </data>
-    <data name="Choice_GtProjectStatus_Active" xml:space="preserve">
+  <data name="Choice_GtProjectLifecycleStatus_Active" xml:space="preserve">
     <value>Aktivt</value>
   </data>
-    <data name="Choice_GtProjectStatus_Inactive" xml:space="preserve">
+  <data name="Choice_GtProjectLifecycleStatus_Closed" xml:space="preserve">
     <value>Avsluttet</value>
   </data>
   <data name="Choice_GtStakeholderInfluencePossibilty_Large" xml:space="preserve">

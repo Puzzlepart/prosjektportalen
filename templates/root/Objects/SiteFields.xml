@@ -231,11 +231,11 @@
     </Field>
     <Field ID="{970ed1b2-9e71-45aa-8f8d-c391a15f067f}" Name="GtStakeholderContext" DisplayName="{resource:SiteFields_GtStakeholderContext_DisplayName}" Type="Text" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStakeholderContext_Description}" StaticName="GtStakeholderContext"></Field>
     <Field ID="{983d5ab3-0a6c-4f6a-a7b5-d34d52d73676}" Name="GtProjectFinanceName" DisplayName="{resource:SiteFields_GtProjectFinanceName_DisplayName}" Type="Text" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectFinanceName_Description}" StaticName="GtProjectFinanceName"></Field>
-    <Field ID="{18d92e18-10b6-42ea-815d-b12d7827564e}" Name="GtProjectStatus" DisplayName="{resource:SiteFields_GtProjectStatus_DisplayName}" Type="Choice" Format="Dropdown" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectStatus_Description}" StaticName="GtProjectStatus">
-            <Default>{resource:Choice_GtProjectStatus_Active}</Default>
+    <Field ID="{18d92e18-10b6-42ea-815d-b12d7827564e}" Name="GtProjectLifecycleStatus" DisplayName="{resource:SiteFields_GtProjectLifecycleStatus_DisplayName}" Type="Choice" Format="Dropdown" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtProjectLifecycleStatus_Description}" StaticName="GtProjectLifecycleStatus">
+        <Default>{resource:Choice_GtProjectLifecycleStatus_Active}</Default>
         <CHOICES>
-            <CHOICE>{resource:Choice_GtProjectStatus_Active}</CHOICE>
-            <CHOICE>{resource:Choice_GtProjectStatus_Inactive}</CHOICE>
+            <CHOICE>{resource:Choice_GtProjectLifecycleStatus_Active}</CHOICE>
+            <CHOICE>{resource:Choice_GtProjectLifecycleStatus_Closed}</CHOICE>
         </CHOICES>
     </Field>
     <Field ID="{748ae9b5-223d-4daa-b8f8-dc14284b59db}" Name="GtStakeholderInterest" DisplayName="{resource:SiteFields_GtStakeholderInterest_DisplayName}" Type="Note" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtStakeholderInterest_Description}" AppendOnly="FALSE" StaticName="GtStakeholderInterest"></Field>
