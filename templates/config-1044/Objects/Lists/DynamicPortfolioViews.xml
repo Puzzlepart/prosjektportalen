@@ -42,5 +42,15 @@
             <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,17,8,9</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpDisplayName">Avsluttede prosjekter</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatus="Avsluttet" Path:{Site.URL}]]>
+            </pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Photo2Remove</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,17,8,9</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
+        </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
