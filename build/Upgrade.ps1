@@ -204,9 +204,16 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
         if ($CurrentVersion.Minor -lt 5) {
             $ProjectLifecycleFilter = ""
+            $ClosedProjectsDisplayName = ""
             switch ($Language){
-                "1033" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"' }
-                "1044" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"' }
+                "1033" { 
+                    $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"'
+                    $ClosedProjectsDisplayName = 'Closed Projects'
+                }
+                "1044" { 
+                    $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"'
+                    $ClosedProjectsDisplayName = 'Avsluttede prosjekter'
+                }
             }
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
@@ -218,7 +225,11 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                     }
                 }
                 Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
+                    if ($_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName) {
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
+                    } else {
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
+                    }
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
