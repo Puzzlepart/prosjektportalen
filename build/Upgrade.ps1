@@ -205,8 +205,8 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         if ($CurrentVersion.Minor -lt 5) {
             $ProjectLifecycleFilter = ""
             switch ($Language){
-                "1033" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatus="Closed"' }
-                "1044" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatus="Avsluttet"' }
+                "1033" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"' }
+                "1044" { $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"' }
             }
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
