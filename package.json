@@ -19,12 +19,12 @@
         "webpack-dev": "webpack --mode development"
     },
     "dependencies": {
-        "@pnp/common": "^1.2.9",
-        "@pnp/logging": "^1.2.9",
-        "@pnp/odata": "^1.2.9",
+        "@pnp/common": "^1.3.0",
+        "@pnp/logging": "^1.3.0",
+        "@pnp/odata": "^1.3.0",
         "@pnp/polyfill-ie11": "^1.0.1",
+        "@pnp/sp": "^1.3.0",
         "react-sticky": "^6.0.3",
-        "@pnp/sp": "^1.2.9",
         "office-ui-fabric-react": "^5.135.0"
     },
     "devDependencies": {
