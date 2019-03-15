@@ -181,7 +181,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         if ($CurrentVersion.Minor -lt 4) {
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
-                $DataSource = ""
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
                     $_["GtDpSearchQuery"] = $Query
@@ -202,6 +201,49 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 exit 1 
             }
         }
+
+        if ($CurrentVersion.Minor -lt 5) {
+            $ProjectLifecycleFilter = ""
+            $ClosedProjectsDisplayName = ""
+            switch ($Language){
+                "1033" { 
+                    $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"'
+                    $ClosedProjectsDisplayName = 'Closed Projects'
+                }
+                "1044" { 
+                    $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"'
+                    $ClosedProjectsDisplayName = 'Avsluttede prosjekter'
+                }
+            }
+            try {
+                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
+                Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
+                    if ($_["Title"] -eq "PROJECTS") {
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
+                        $_["GtDpSearchQuery"] = $Query
+                        $_.Update()
+                    }
+                }
+                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
+                    if ($_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName) {
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
+                    } else {
+                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
+                    }
+                    $_["GtDpSearchQuery"] = $Query
+                    $_.Update()
+                }
+                Invoke-PnPQuery
+                Write-Host "DONE" -ForegroundColor Green
+            }
+            catch {
+                Write-Host
+                Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
+                Write-Host $error[0] -ForegroundColor Red
+                exit 1 
+            }
+        }
+
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    

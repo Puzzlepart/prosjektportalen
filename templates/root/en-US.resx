@@ -849,6 +849,9 @@
   <data name="SiteFields_GtProjectFinanceName_DisplayName" xml:space="preserve">
     <value>Project name in the financial system</value>
   </data>
+  <data name="SiteFields_GtProjectLifecycleStatus_DisplayName" xml:space="preserve">
+    <value>Project status</value>
+  </data>
   <data name="SiteFields_GtStakeholderInterest_DisplayName" xml:space="preserve">
     <value>Interest</value>
   </data>
@@ -1422,6 +1425,9 @@
   <data name="SiteFields_GtProjectFinanceName_Description" xml:space="preserve">
     <value />
   </data>
+  <data name="SiteFields_GtProjectLifecycleStatus_Description" xml:space="preserve">
+    <value />
+  </data>
   <data name="SiteFields_GtStakeholderInterest_Description" xml:space="preserve">
     <value />
   </data>
@@ -1760,7 +1766,7 @@
   </data>
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
-  </data>  
+  </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
     <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue and red (absence) color in the table below. Project allocations are green. The color density of an item is an indication of the allocation percentage.</value>
   </data>
@@ -2015,7 +2021,7 @@
   </data>
   <data name="String_Project" xml:space="preserve">
     <value>Project</value>
-  </data>  
+  </data>
   <data name="String_AllProjects" xml:space="preserve">
     <value>All projects</value>
   </data>
@@ -2363,6 +2369,12 @@
   </data>
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Behind schedule</value>
+  </data>
+  <data name="Choice_GtProjectLifecycleStatus_Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Choice_GtProjectLifecycleStatus_Closed" xml:space="preserve">
+    <value>Closed</value>
   </data>
   <data name="Choice_GtStakeholderInfluencePossibilty_Large" xml:space="preserve">
     <value>Large</value>
@@ -2888,7 +2900,7 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>There's no relevant items in the selected view.</value>
-  </data>  
+  </data>
   <data name="RiskMatrix_LoadingText" xml:space="preserve">
     <value>Loading risk matrix...</value>
   </data>
@@ -2927,7 +2939,7 @@
   </data>
   <data name="String_StatusReport" xml:space="preserve">
     <value>Status Report</value>
-  </data>  
+  </data>
   <data name="String_New" xml:space="preserve">
     <value>New</value>
   </data>

@@ -3,7 +3,7 @@
     <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">PROJECTS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* Path:{SiteCollection.URL}</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet" Path:{SiteCollection.URL}</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">LESSONSLOG</pnp:DataValue>
