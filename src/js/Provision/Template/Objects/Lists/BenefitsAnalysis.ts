@@ -22,7 +22,7 @@ const BenefitsAnalysis: IList = {
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+        ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -31,7 +31,7 @@ const BenefitsAnalysis: IList = {
     },
     {
         Title: __.getResource("View_GroupedBenefitType_DisplayName"),
-        ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+        ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,

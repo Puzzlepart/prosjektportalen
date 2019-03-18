@@ -1,41 +1,14 @@
 //#region Imports
 import __ from "../../../Resources";
 import { sp, Site } from "@pnp/sp";
-import * as Util from "../../../Util";
 import { GenerateColumns } from "./BenefitsOverviewDataColumns";
 import DataSource, { IDataSourceSearchCustom } from "../../DataSource";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
-import MeasurementEntry from "./MeasurementEntry";
-import BenefitEntry from "./BenefitEntry";
+import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
+import { Benefit } from "./Benefit";
+import { BenefitMeasurement } from "./BenefitMeasurement";
+import { BenefitMeasurementIndicator } from "./BenefitMeasurementIndicator";
 //#endregion
-
-/**
- * Get measurements for the specified benefit entry
- *
- * @param {MeasurementEntry[]} measures Measures
- * @param {BenefitEntry} benefit Benefit
- */
-const GetBenefitMeasurements = (measures: MeasurementEntry[], benefit: BenefitEntry): MeasurementEntry[] => {
-    return measures
-        .filter(measure => (benefit.ID === measure.LookupId && benefit.WebUrl === measure.WebUrl))
-        .map(measure => {
-            measure.Percentage = Util.percentage(benefit.StartValue, measure.MeasurementValue, benefit.DesiredValue, false);
-            return measure;
-        });
-};
-
-/**
- * Generate benefit entries based on base data and relevant measures
- *
- * @param {BenefitEntry[]} benefits Benefits
- * @param {Measurement[]} measures Measure
- */
-function GenerateData(benefits: BenefitEntry[], measures: MeasurementEntry[]): any[] {
-    return benefits.map(bf => {
-        const relevantMeasures = GetBenefitMeasurements(measures, bf);
-        return bf.setMeasurementStats(relevantMeasures);
-    });
-}
 
 /**
  * Fetches fields for a web, list or content type
@@ -91,34 +64,35 @@ export async function retrieveFromSource(dataSource: DataSource, customSearchSet
  * Fetches data from list(s)
  */
 async function retrieveDataList(): Promise<IBenefitsOverviewData> {
-    const gainsList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsAnalysis_Title"));
-    const measuresList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
-    try {
-        const fieldsMap = await fetchFieldsAsMap(gainsList);
-        let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...Object.keys(fieldsMap)].join(",");
-        let [gains, measures] = await Promise.all([
-            gainsList
-                .items
-                .select(selectFields)
-                .expand("GtChangeLookup", "GtGainsResponsible")
-                .orderBy("Modified", false)
-                .get(),
-            measuresList
-                .items
-                .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
-                .orderBy("GtMeasurementDate", false)
-                .get(),
-        ]);
-        gains = gains.map(m => new BenefitEntry().init(DataSource.List, m));
-        measures = measures.map(m => new MeasurementEntry().init(DataSource.List, m));
-        const data: IBenefitsOverviewData = ({
-            items: GenerateData(gains, measures),
-            columns: GenerateColumns(fieldsMap, DataSource.List),
-        });
-        return data;
-    } catch (err) {
-        throw err;
-    }
+    // const gainsList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsAnalysis_Title"));
+    // const measuresList = sp.web.lists.getByTitle(__.getResource("Lists_BenefitsFollowup_Title"));
+    // try {
+    //     const fieldsMap = await fetchFieldsAsMap(gainsList);
+    //     let selectFields = ["ID", "Title", "GtChangeLookup/Title", "GtGainsResponsible/Title", ...Object.keys(fieldsMap)].join(",");
+    //     let [gains, measures] = await Promise.all([
+    //         gainsList
+    //             .items
+    //             .select(selectFields)
+    //             .expand("GtChangeLookup", "GtGainsResponsible")
+    //             .orderBy("Modified", false)
+    //             .get(),
+    //         measuresList
+    //             .items
+    //             .select("GtGainLookupId", "GtMeasurementValue", "GtMeasurementDate")
+    //             .orderBy("GtMeasurementDate", false)
+    //             .get(),
+    //     ]);
+    //     gains = gains.map(m => new BenefitEntry().init(DataSource.List, m));
+    //     measures = measures.map(m => new MeasurementEntry().init(DataSource.List, m));
+    //     const data: IBenefitsOverviewData = ({
+    //         items: GenerateData(gains, measures),
+    //         columns: GenerateColumns(fieldsMap, DataSource.List),
+    //     });
+    //     return data;
+    // } catch (err) {
+    //     throw err;
+    // }
+    return null;
 }
 
 /**
@@ -131,26 +105,32 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
     const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
     const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
     if (dataSource) {
-        const contentType = sp.site.rootWeb.contentTypes.getById(__.getResource("ContentTypes_Gevinst_ContentTypeId"));
         let searchSettings: { [key: string]: any } = {
             Querytext: "*",
             QueryTemplate: dataSource.GtDpSearchQuery,
             RowLimit: 500,
             SelectProperties: [
-                "ListItemID",
                 "Path",
-                "SPWebUrl",
-                "SiteTitle",
-                "ContentTypeID",
                 "Title",
-                "GtMeasurementValueOWSNMBR",
-                "GtMeasurementDateOWSDATE",
-                "RefinableString58",
-                "GtGainsResponsibleOWSUSER",
+                "ListItemId",
+                "SiteTitle",
+                "SiteId",
+                "ContentTypeID",
+                "GtDesiredValueOWSNMBR",
                 "GtMeasureIndicatorOWSTEXT",
                 "GtMeasurementUnitOWSCHCS",
                 "GtStartValueOWSNMBR",
-                "GtDesiredValueOWSNMBR",
+                "GtMeasurementValueOWSNMBR",
+                "GtMeasurementCommentOWSMTXT",
+                "GtMeasurementDateOWSDATE",
+                "GtGainsResponsibleOWSUSER",
+                "GtGainsTurnoverOWSMTXT",
+                "GtGainsTypeOWSCHCS",
+                "GtPrereqProfitAchievementOWSMTXT",
+                "GtRealizationTimeOWSDATE",
+                "GtGainLookupId",
+                "GtMeasureIndicatorLookupId",
+                "GtGainsResponsible",
             ],
             TrimDuplicates: false,
         };
@@ -160,19 +140,36 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
         }
 
         try {
-            const [fieldsMap, { PrimarySearchResults }]: [any, any] = await Promise.all([
-                fetchFieldsAsMap(contentType),
+            const [fieldsMap, searchResults]: [any, any] = await Promise.all([
+                fetchFieldsAsMap(sp.site.rootWeb),
                 sp.search(searchSettings),
             ]);
-            const gains = PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(__.getResource("ContentTypes_Gevinst_ContentTypeId")) !== -1)
-                .map(m => new BenefitEntry().init(DataSource.Search, m));
-            const measures = PrimarySearchResults
-                .filter(s => s.ContentTypeID.indexOf(__.getResource("ContentTypes_Gevinstoppfolging_ContentTypeId")) !== -1)
-                .sort(({ GtMeasurementDateOWSDATE: a }, { GtMeasurementDateOWSDATE: b }) => (new Date(a).getTime() > new Date(b).getTime()) ? -1 : 1)
-                .map(m => new MeasurementEntry().init(DataSource.Search, m));
+
+            const results = searchResults.PrimarySearchResults as IBenefitsSearchResult[];
+
+            const benefits = results
+                .filter(res => res.ContentTypeID.indexOf("0x0100B384774BA4EBB842A5E402EBF4707367") === 0)
+                .map(res => new Benefit(res));
+
+            const measurements = results
+                .filter(res => res.ContentTypeID.indexOf("0x01007A831AC68204F04AAA022CFF06C7BAA2") === 0)
+                .map(res => new BenefitMeasurement(res))
+                .sort((a, b) => b.date.getTime() - a.date.getTime());
+
+            const indicators = results
+                .filter(res => res.ContentTypeID.indexOf("0x0100FF4E12223AF44F519AF40C441D05DED0") === 0)
+                .map(res => {
+                    let _indicator = new BenefitMeasurementIndicator(res)
+                        .setMeasurements(measurements)
+                        .setBenefit(benefits);
+                    return _indicator;
+                })
+                .filter(i => i.benefit);
+
+            console.log(indicators);
+
             const data: IBenefitsOverviewData = ({
-                items: GenerateData(gains, measures),
+                items: indicators,
                 columns: GenerateColumns(fieldsMap, DataSource.Search),
             });
             return data;
@@ -186,8 +183,4 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
 
 
 
-export {
-    IBenefitsOverviewData,
-    MeasurementEntry,
-    BenefitEntry,
-};
+export { IBenefitsOverviewData };

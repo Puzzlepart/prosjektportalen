@@ -22,7 +22,7 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     dataSourceName: "BENEFITSOVERVIEW",
     dataSource: DataSource.List,
     groupByOptions: [],
-    searchProperty: "Title",
+    searchProperty: "title",
     showCommandBar: false,
     showSearchBox: false,
     modalHeaderClassName: "ms-font-xxl",
