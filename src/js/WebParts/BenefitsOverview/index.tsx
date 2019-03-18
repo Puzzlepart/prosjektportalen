@@ -8,7 +8,7 @@ import { ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMen
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import { _onRenderItemColumn } from "./BenefitsOverviewData/BenefitsOverviewDataColumns";
+import { onRenderItemColumn } from "./BenefitsOverviewData/BenefitsOverviewDataColumns";
 import * as Data from "./BenefitsOverviewData";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
@@ -68,7 +68,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                         groups={groups}
                         selectionMode={SelectionMode.none}
                         onRenderItemColumn={(item, index, column: any) => {
-                            return _onRenderItemColumn(item, index, column, (evt) => {
+                            return onRenderItemColumn(item, index, column, (evt) => {
                                 evt.preventDefault();
                                 this.setState({ showProjectInfo: item });
                             }, entry => this.setState({ showMeasurements: entry }));
@@ -101,8 +101,8 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             };
             const subItems = [{ ...noGrouping }, ...groupByOptions].map(item => ({
                 ...item,
-                onClick: e => {
-                    e.preventDefault();
+                onClick: (event: any) => {
+                    event.preventDefault();
                     this.setState({ groupBy: item });
                 },
             }));
@@ -133,13 +133,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         }
 
         if (items.length > 0 || farItems.length > 0) {
-            return (
-                <CommandBar
-                    hidden={!showCommandBar}
-                    items={items}
-                    farItems={farItems}
-                />
-            );
+            return <CommandBar hidden={!showCommandBar} items={items} farItems={farItems} />;
         }
         return null;
     }
@@ -154,7 +148,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.WebUrl}
+                    webUrl={showProjectInfo.path}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -166,10 +160,10 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                         isOpen: true,
                         isDarkOverlay: true,
                         isBlocking: false,
-                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        onDismiss: _event => this.setState({ showProjectInfo: null }),
                         headerClassName: modalHeaderClassName,
                         headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.SiteTitle,
+                        title: showProjectInfo.siteTitle,
                     }} />
             );
         }
@@ -187,29 +181,29 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 <Modal
                     isOpen={true}
                     isDarkOverlay={true}
-                    onDismiss={e => this.setState({ showMeasurements: null })}
+                    onDismiss={_event => this.setState({ showMeasurements: null })}
                     containerClassName={"pp-modal"}
                     isBlocking={false}>
                     <div style={{ padding: 50 }}>
-                        <h2 style={{ marginBottom: 20 }}>{showMeasurements.Title}</h2>
+                        <h2 style={{ marginBottom: 20 }}>{showMeasurements.title}</h2>
                         <DetailsList
-                            items={showMeasurements.Measurements}
+                            items={showMeasurements.measurements}
                             columns={[
                                 {
-                                    key: "MeasurementValue",
-                                    fieldName: "MeasurementValue",
+                                    key: "value",
+                                    fieldName: "value",
                                     name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                                     minWidth: 100,
                                 },
                                 {
-                                    key: "Percentage",
-                                    fieldName: "Percentage",
+                                    key: "achievement",
+                                    fieldName: "achievement",
                                     name: __.getResource("String_AchievementOfObjectives"),
                                     minWidth: 100,
                                 },
                                 {
-                                    key: "MeasurementDate",
-                                    fieldName: "MeasurementDate",
+                                    key: "date",
+                                    fieldName: "date",
                                     name: __.getResource("SiteFields_GtMeasurementDate_DisplayName"),
                                     minWidth: 150,
                                 },

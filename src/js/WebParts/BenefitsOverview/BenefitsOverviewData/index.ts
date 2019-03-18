@@ -166,12 +166,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
                 })
                 .filter(i => i.benefit);
 
-            console.log(indicators);
-
-            const data: IBenefitsOverviewData = ({
-                items: indicators,
-                columns: GenerateColumns(fieldsMap, DataSource.Search),
-            });
+            const data: IBenefitsOverviewData = ({ items: indicators, columns: GenerateColumns(fieldsMap, DataSource.Search) });
             return data;
         } catch (err) {
             throw err;

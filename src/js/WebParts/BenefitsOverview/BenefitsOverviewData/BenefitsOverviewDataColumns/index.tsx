@@ -6,6 +6,7 @@ import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import DataSource from "../../../DataSource";
 // import TrendIcon from "./TrendIcon";
 import * as objectGet from "object-get";
+import { BenefitMeasurementIndicator } from "../BenefitMeasurementIndicator";
 
 const Columns = (): any[] => {
     return [{
@@ -117,11 +118,11 @@ export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSo
  * @param {Function} _onSiteTitleClick On SiteTitle click event
  * @param {Function} showAllMeasurements On show all measurements
  */
-const _onRenderItemColumn = (item: any, _index: number, column: IColumn, _onSiteTitleClick: (e) => void, showAllMeasurements: (entry: any) => void): any => {
+const onRenderItemColumn = (item: BenefitMeasurementIndicator, _index: number, column: IColumn, _onSiteTitleClick: (_event) => void, showAllMeasurements: (item: BenefitMeasurementIndicator) => void): any => {
     if (column.key === "AllMeasurements") {
-        if (item.Measurements.length > 0) {
+        if (item.measurements.length > 0) {
             return (
-                <a href="#" onClick={e => showAllMeasurements(item)}>{__.getResource("BenefitsOverview_AllMeasurements")}</a>
+                <a href="#" onClick={_event => showAllMeasurements(item)}>{__.getResource("BenefitsOverview_AllMeasurements")}</a>
             );
         }
         return null;
@@ -129,4 +130,4 @@ const _onRenderItemColumn = (item: any, _index: number, column: IColumn, _onSite
     return objectGet(item, column.fieldName);
 };
 
-export { Columns, _onRenderItemColumn };
+export { Columns, onRenderItemColumn };
