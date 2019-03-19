@@ -25,14 +25,15 @@ export class BenefitMeasurementIndicator extends BenefitBase {
     }
 
     public setMeasurements(measurements: BenefitMeasurement[]): BenefitMeasurementIndicator {
-        this.measurements = measurements
-            .filter(m => m.indicatorId === this.id && m.siteId === this.siteId)
-            .map(m => m.calculcateAchievement(this));
+        let _measurements = measurements.filter(m => m.indicatorId === this.id && m.webId === this.webId);
+        _measurements = _measurements.map((m, i) => m.calculcateAchievement(this));
+        _measurements = _measurements.map((m, i) => m.setTrendIconProps(_measurements[i + 1]));
+        this.measurements = _measurements;
         return this;
     }
 
     public setBenefit(benefits: Benefit[]): BenefitMeasurementIndicator {
-        this.benefit = benefits.filter(b => b.id === this.benefitId && b.siteId === this.siteId)[0];
+        this.benefit = benefits.filter(b => b.id === this.benefitId && b.webId === this.webId)[0];
         return this;
     }
 }

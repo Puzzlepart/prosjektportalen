@@ -3,7 +3,7 @@ export interface IBenefitsSearchResult {
     Title: string;
     ListItemId: string;
     SiteTitle: string;
-    SiteId: string;
+    WebId: string;
     ContentTypeID: string;
     GtDesiredValueOWSNMBR: string;
     GtMeasureIndicatorOWSTEXT: string;

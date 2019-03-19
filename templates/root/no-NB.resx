@@ -945,9 +945,6 @@
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
   </data>
-  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
-    <value>Måleindikator</value>
-  </data>
   <data name="SiteFields_GtStartValue_DisplayName" xml:space="preserve">
     <value>Startverdi</value>
   </data>
@@ -2987,9 +2984,6 @@
   </data>
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
-  </data>
-  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
-    <value>Måloppnåelse, siste måling</value>
   </data>
   <data name="BenefitsOverview_LatestValue" xml:space="preserve">
     <value>Siste måling</value>

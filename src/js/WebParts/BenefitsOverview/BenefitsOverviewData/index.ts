@@ -94,7 +94,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
                 "Title",
                 "ListItemId",
                 "SiteTitle",
-                "SiteId",
+                "WebId",
                 "ContentTypeID",
                 "GtDesiredValueOWSNMBR",
                 "GtMeasureIndicatorOWSTEXT",

@@ -948,9 +948,6 @@
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Account Manager</value>
   </data>
-  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
-    <value>Measurement Indicator</value>
-  </data>
   <data name="SiteFields_GtStartValue_DisplayName" xml:space="preserve">
     <value>Initial value</value>
   </data>
@@ -2972,9 +2969,6 @@
   </data>
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Probability (P)]*[Consequence (C)]</value>
-  </data>
-  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
-    <value>Goal achievement, last measurement</value>
   </data>
   <data name="BenefitsOverview_LatestValue" xml:space="preserve">
     <value>Last measurement</value>
