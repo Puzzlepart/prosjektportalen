@@ -228,6 +228,9 @@
   <data name="Lists_ChangeAnalysis_Title" xml:space="preserve">
     <value>Endringsanalyse</value>
   </data>
+  <data name="Lists_MeasurementIndicators_Title" xml:space="preserve">
+    <value>Måleindikatorer</value>
+  </data>
   <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
     <value>Gevinstsoppfølging</value>
   </data>
@@ -378,6 +381,9 @@
   <data name="DefaultView_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Mleindikatorer/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
   </data>
@@ -491,6 +497,9 @@
   </data>
   <data name="ContentTypes_Endring_Name" xml:space="preserve">
     <value>Endring</value>
+  </data>
+  <data name="ContentTypes_Maaleindikator_Name" xml:space="preserve">
+    <value>Måleindikator</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
     <value>Gevinstoppfølging</value>
@@ -616,6 +625,9 @@
     <value>Opprett et nytt listeelement.</value>
   </data>
   <data name="ContentTypes_Endring_Description" xml:space="preserve">
+    <value>Opprett et nytt listeelement.</value>
+  </data>
+  <data name="ContentTypes_Maaleindikator_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
@@ -932,9 +944,6 @@
   </data>
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
-  </data>
-  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
-    <value>Måleindikator</value>
   </data>
   <data name="SiteFields_GtStartValue_DisplayName" xml:space="preserve">
     <value>Startverdi</value>
@@ -2975,9 +2984,6 @@
   </data>
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
-  </data>
-  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
-    <value>Måloppnåelse, siste måling</value>
   </data>
   <data name="BenefitsOverview_LatestValue" xml:space="preserve">
     <value>Siste måling</value>

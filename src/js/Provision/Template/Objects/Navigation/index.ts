@@ -61,6 +61,10 @@ const Navigation: INavigation = {
             Title: __.getResource("Lists_BenefitsAnalysis_Title"),
         },
         {
+            Url: __.getResource("DefaultView_MeasurementIndicators_Url"),
+            Title: __.getResource("Lists_MeasurementIndicators_Title"),
+        },
+        {
             Url: __.getResource("DefaultView_BenefitsFollowup_Url"),
             Title: __.getResource("Navigation_BenefitsFollowup_Title"),
         },
