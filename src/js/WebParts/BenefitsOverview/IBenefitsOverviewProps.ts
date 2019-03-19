@@ -1,13 +1,11 @@
 import __ from "../../Resources";
-import DataSource, { IDataSourceSearchCustom } from "../DataSource";
 import IGroupByOption from "../IGroupByOption";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import IExcelExportConfig from "../IExcelExportConfig";
 
 export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     dataSourceName?: string;
-    dataSource?: DataSource;
-    customSearchSettings?: IDataSourceSearchCustom;
+    queryTemplate?: string;
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
     showCommandBar?: boolean;
@@ -16,11 +14,10 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     projectInfoFilterField?: string;
     excelExportEnabled?: boolean;
     excelExportConfig?: IExcelExportConfig;
+    showSiteTitleColumn?: boolean;
 }
 
 export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
-    dataSourceName: "BENEFITSOVERVIEW",
-    dataSource: DataSource.List,
     groupByOptions: [],
     searchProperty: "title",
     showCommandBar: false,
@@ -34,4 +31,5 @@ export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
         buttonLabel: __.getResource("DynamicPortfolio_ExcelExportButtonLabel"),
         buttonIcon: "ExcelDocument",
     },
+    showSiteTitleColumn: true,
 };

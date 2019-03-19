@@ -2,7 +2,6 @@ import * as React from "react";
 import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import DataSource from "../../../DataSource";
 import * as objectGet from "object-get";
 import { BenefitMeasurementIndicator } from "../BenefitMeasurementIndicator";
 
@@ -88,11 +87,11 @@ export const GetColumnByKey = (key: string): IColumn => {
 /**
  * Generate columns based on data source and fields
  *
- * @param {DataSource} dataSource Data source
+ * @param {boolean} showSiteTitleColumn Show site title column
  */
-export function GenerateColumns(dataSource: DataSource): any[] {
+export function GenerateColumns(showSiteTitleColumn: boolean): any[] {
     let generatedColumns = Columns();
-    if (dataSource === DataSource.Search) {
+    if (showSiteTitleColumn) {
         generatedColumns.unshift({
             fieldName: "siteTitle",
             key: "siteTitle",

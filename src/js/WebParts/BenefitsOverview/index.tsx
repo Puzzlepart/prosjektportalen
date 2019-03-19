@@ -39,7 +39,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     }
 
     public async componentDidMount(): Promise<void> {
-        const data = await Data.retrieveFromSource(this.props.dataSource, this.props.customSearchSettings, this.props.dataSourceName);
+        const data = await Data.fetchData(this.props.queryTemplate, this.props.showSiteTitleColumn, this.props.dataSourceName);
         this.setState({ data: data, isLoading: false });
     }
 
