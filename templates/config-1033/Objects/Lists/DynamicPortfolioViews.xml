@@ -4,7 +4,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Portfolio Overview</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* Path:{Site.URL}]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL}]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">10</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDefault">1</pnp:DataValue>
@@ -15,7 +15,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Portfolio Status</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* Path:{Site.URL}]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL}]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">20</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">BarChart4</pnp:DataValue>
@@ -25,7 +25,7 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">Projects Requiring Review</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* Path:{Site.URL} (GtStatusRiskOWSCHCS:"High" OR GtStatusTimeOWSCHCS:"Behind schedule" OR GtStatusTimeOWSCHCS:"Minor delays" OR GtStatusBudgetOWSCHCS:"Over budget" OR GtStatusBudgetOWSCHCS:"Do not know" OR GtStatusQualityOWSCHCS:"Larger deviation(s) from specification" OR GtStatusGainAchievementOWSCHCS:"Behind schedule" OR LastModifiedTime<{Today-60})]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL} (GtStatusRiskOWSCHCS:"High" OR GtStatusTimeOWSCHCS:"Behind schedule" OR GtStatusTimeOWSCHCS:"Minor delays" OR GtStatusBudgetOWSCHCS:"Over budget" OR GtStatusBudgetOWSCHCS:"Do not know" OR GtStatusQualityOWSCHCS:"Larger deviation(s) from specification" OR GtStatusGainAchievementOWSCHCS:"Behind schedule" OR LastModifiedTime<{Today-60})]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">30</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Timer</pnp:DataValue>
@@ -35,10 +35,20 @@
         <pnp:DataRow>
             <pnp:DataValue FieldName="GtDpDisplayName">My Projects</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpSearchQuery">
-                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* Path:{Site.URL} (GtProjectManagerOWSUSER:{User.Name} OR GtProjectOwnerOWSUSER:{User.Name})]]>
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL} (GtProjectManagerOWSUSER:{User.Name} OR GtProjectOwnerOWSUSER:{User.Name})]]>
             </pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">40</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpIcon">Contact</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,17,8,9</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="GtDpDisplayName">Closed Projects</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">
+                <![CDATA[ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL}]]>
+            </pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpIcon">Photo2Remove</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpFieldsLookup">1,3,17,8,9</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRefinersLookup">2,3,5,4,1</pnp:DataValue>
         </pnp:DataRow>
