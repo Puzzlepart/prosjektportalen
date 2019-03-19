@@ -105,6 +105,117 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
     }
 }
 
+function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
+    $MeasurementIndicatorsListName = "Måleindikatorer"
+    $FollowUpListName = "Gevinstsoppfølging"
+    $LookupListName = "Gevinstanalyse og gevinstrealiseringsplan"
+    if($Language -eq 1033) {
+        $MeasurementIndicatorsListName = "Measurement Indicators"
+    }
+    Write-Host "`tVerifying Measurement Indicators list" -ForegroundColor Gray
+    $MeasurementIndicatorsList = Get-PnPList -Identity $MeasurementIndicatorsListName -Web $ProjectWeb
+    if ($null -eq $MeasurementIndicatorsList) {
+        New-PnPList -Title $ListName -Template GenericList -EnableVersioning -Web $ProjectWeb -OnQuickLaunch:$false
+
+    $MeasurementIndicatorsList = Get-PnPList -Identity $ListName -Web $ProjectWeb  
+    $FollowUpList = Get-PnPList -Identity $FollowUpListName -Web $ProjectWeb           
+    $MeasurementIndicatorsLookupList = Get-PnPList -Identity $LookupListName -Web $ProjectWeb
+
+    Write-Host "`t`tConfiguring content types" -ForegroundColor Gray
+    
+    $ItemContentType = Get-PnPContentType -Identity "0x01" -InSiteHierarchy -Web $ProjectWeb
+    $MeasurementIndicatorsContentType = Get-PnPContentType -Identity "0x0100FF4E12223AF44F519AF40C441D05DED0" -InSiteHierarchy -Web $ProjectWeb
+    
+    Add-PnPContentTypeToList -List $MeasurementIndicatorsList -ContentType $MeasurementIndicatorsContentType -DefaultContentType -Web $ProjectWeb
+    Remove-PnPContentTypeFromList -List $MeasurementIndicatorsList -ContentType $ItemContentType -Web $ProjectWeb
+
+    Write-Host "`t`tAdding lookup fields" -ForegroundColor Gray
+
+    Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Gevinst`" List=`"{$($MeasurementIndicatorsLookupList.Id.Guid)}`" ShowField=`"Title`" ID=`"{8d70fa93-b547-46f1-84e7-4982f8c9c675}`" StaticName=`"GtGainLookup`" Name=`"GtGainLookup`"  />" 2>&1>$null
+    Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Gevinst ID`" List=`"{$($MeasurementIndicatorsLookupList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"8d70fa93-b547-46f1-84e7-4982f8c9c675`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{c239539c-8672-46cc-be77-fb53322f71ae}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtGainLookup_ID`" Name=`"GtGainLookup_ID`" />" 2>&1>$null
+
+    Write-Host "`t`tUpdating default view" -ForegroundColor Gray
+
+    $ViewFields = @("GtGainLookup", "LinkTitle", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit")
+    $DefaultView = $MeasurementIndicatorsList.DefaultView
+    $DefaultView.ViewFields.RemoveAll()
+    $ViewFields | % { $DefaultView.ViewFields.Add($_)}        
+    $DefaultView.Update()
+    $DefaultView.Context.ExecuteQuery()
+    
+    Write-Host "`t`tUpdating list settings" -ForegroundColor Gray
+
+    $MeasurementIndicatorsList.ContentTypesEnabled = $false
+    $MeasurementIndicatorsList.OnQuickLaunch = $true
+    $MeasurementIndicatorsList.Update()
+    Invoke-PnPQuery
+
+    
+    Write-Host "`t`tAdding link to QuickLaunch" -ForegroundColor Gray
+
+    Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ? {$_.Title -eq "Siste" -or $_.Title -eq "Recent"} | Remove-PnPNavigationNode -Force -Web $ProjectWeb     
+
+    $MeasurementIndicatorsLeftNav = Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ? {$_.Title -eq $ListName} 
+    if ($null -eq $MeasurementIndicatorsLeftNav) {
+        Add-PnPNavigationNode -Location QuickLaunch -Title $ListName -Url $MeasurementIndicatorsList.RootFolder.ServerRelativeUrl -Web $ProjectWeb
+    }
+    Write-Host "`tMeasurement Indicators list created and configured" -ForegroundColor Green
+
+    
+    Write-Host "`t`tAdjusting follow up list" -ForegroundColor Gray
+
+    Write-Host "`t`tRemoving lookup fields" -ForegroundColor Gray
+
+    Remove-PnPField -Identity GtGainLookup_ID -List $FollowUpList -Web $ProjectWeb -Force 2>&1>$null
+    Remove-PnPField -Identity GtGainLookup -List $FollowUpList -Web $ProjectWeb -Force 2>&1>$null
+
+    Write-Host "`t`tAdding lookup fields" -ForegroundColor Gray
+
+    Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Måleindikator`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"Title`" ID=`"{92ae8541-f35e-4c05-8518-b9abce2d0860}`" StaticName=`"GtMeasureIndicatorLookup`" Name=`"GtMeasureIndicatorLookup`"  />" 2>&1>$null
+    Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Måleindikator ID`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"92ae8541-f35e-4c05-8518-b9abce2d0860`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{47159f20-afaf-4cfb-8c91-63b3a39ce1bc}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtMeasureIndicatorLookup_ID`" Name=`"GtMeasureIndicatorLookup_ID`" />" 2>&1>$null
+
+    Write-Host "`t`tUpdating default view" -ForegroundColor Gray
+
+    $ViewFields = @("GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment")
+    $DefaultView = $FollowUpList.DefaultView
+    $DefaultView.ViewFields.RemoveAll()
+    $ViewFields | % { $DefaultView.ViewFields.Add($_)}     
+    $DefaultView.ViewQuery = @"
+                                <GroupBy Collapse="TRUE" GroupLimit="30">
+                                    <FieldRef Name="GtMeasureIndicatorLookup" />
+                                </GroupBy>
+                                <OrderBy>
+                                    <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
+                                </OrderBy>
+"@
+    $DefaultView.Update()
+    $DefaultView.Context.ExecuteQuery()
+    
+    
+    $FollowUpList.Context.Load($FollowUpList.Views)
+    $FollowUpList.Context.ExecuteQuery()
+    $FlatView = $FollowUpList.Views | Where-Object { $_.Title -eq "Flat visning" }
+
+    Write-Host "`t`tUpdating flat view" -ForegroundColor Gray
+
+    $FlatView.ViewFields.RemoveAll()
+    $ViewFields | % { $FlatView.ViewFields.Add($_)}      
+    $FlatView.ViewQuery = @"
+                                <OrderBy>
+                                    <FieldRef Name="GtMeasureIndicatorLookup" />
+                                    <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
+                                </OrderBy>
+"@  
+    $FlatView.Update()
+    $FlatView.Context.ExecuteQuery()
+
+    Write-Host "`tFollow up list adjusted" -ForegroundColor Green
+	} else {
+        Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ?{$_.Title -eq "Siste" -or $_.Title -eq "Recent" -or $_.Title -eq "Properties"} | Remove-PnPNavigationNode -Force -Web $ProjectWeb
+        Write-Host "`tMeasurement Indicators list already exists" -ForegroundColor Green
+    }
+}
+
 function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
     $TargetListName = "Properties"
     
@@ -155,6 +266,7 @@ $Webs | ForEach-Object {
         
         Add-ResourceAllocationFeatures -ProjectWeb $ProjectWeb -Language $Language
         Add-ProjectPropertiesList -ProjectWeb $ProjectWeb -Language $Language
+        Add-MeasurementIndicatorsList -ProjectWeb $ProjectWeb -Language $Language
         
         if ($PersistProjectProperties.IsPresent) {
             Set-ProjectPropertiesFromProjectPage -ProjectWeb $ProjectWeb -Language $Language
