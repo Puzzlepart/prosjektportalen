@@ -9,26 +9,6 @@ import { Benefit } from "./Benefit";
 import { BenefitMeasurement } from "./BenefitMeasurement";
 import { BenefitMeasurementIndicator } from "./BenefitMeasurementIndicator";
 //#endregion
-
-/**
- * Fetches fields for a web, list or content type
- *
- * @param {any} spObject List or content type
- */
-async function fetchFieldsAsMap(spObject: any) {
-    try {
-        const filterStr = `substringof('Gt', InternalName) eq true`;
-        const spFields: any[] = await spObject.fields.filter(filterStr).get();
-        const spFieldsMap = spFields.reduce((obj, { InternalName, Title }) => {
-            obj[InternalName] = Title;
-            return obj;
-        }, {});
-        return spFieldsMap;
-    } catch (err) {
-        throw err;
-    }
-}
-
 /**
  * Fetches data based on selected data source (List or Search)
  *
@@ -140,12 +120,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
         }
 
         try {
-            const [fieldsMap, searchResults]: [any, any] = await Promise.all([
-                fetchFieldsAsMap(sp.site.rootWeb),
-                sp.search(searchSettings),
-            ]);
-
-            const results = searchResults.PrimarySearchResults as IBenefitsSearchResult[];
+            const results = (await sp.search(searchSettings)).PrimarySearchResults as IBenefitsSearchResult[];
 
             const benefits = results
                 .filter(res => res.ContentTypeID.indexOf("0x0100B384774BA4EBB842A5E402EBF4707367") === 0)
@@ -166,7 +141,7 @@ async function retrieveDataSearch(dataSourceName?: string, customSearchSettings?
                 })
                 .filter(i => i.benefit);
 
-            const data: IBenefitsOverviewData = ({ items: indicators, columns: GenerateColumns(fieldsMap, DataSource.Search) });
+            const data: IBenefitsOverviewData = ({ items: indicators, columns: GenerateColumns(DataSource.Search) });
             return data;
         } catch (err) {
             throw err;

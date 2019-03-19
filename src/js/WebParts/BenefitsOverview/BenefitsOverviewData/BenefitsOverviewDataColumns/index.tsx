@@ -1,12 +1,12 @@
 import * as React from "react";
 import __ from "../../../../Resources";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-// import { Icon } from "office-ui-fabric-react/lib/Icon";
-// import { ModalLink } from "../../../@Components";
 import DataSource from "../../../DataSource";
-// import TrendIcon from "./TrendIcon";
 import * as objectGet from "object-get";
 import { BenefitMeasurementIndicator } from "../BenefitMeasurementIndicator";
+// import { Icon } from "office-ui-fabric-react/lib/Icon";
+// import { ModalLink } from "../../../@Components";
+// import TrendIcon from "./TrendIcon";
 
 const Columns = (): any[] => {
     return [{
@@ -90,13 +90,10 @@ export const GetColumnByKey = (key: string): IColumn => {
 /**
  * Generate columns based on data source and fields
  *
- * @param {Object} fieldNamesMap Field names map, maps InternalName => Title
  * @param {DataSource} dataSource Data source
  */
-export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSource: DataSource): any[] => {
-    let generatedColumns = Columns().map(col => (Object.assign(col, {
-        name: col.hasOwnProperty("name") ? col.name : fieldNamesMap[col.key] || col.key,
-    })));
+export const GenerateColumns = (dataSource: DataSource): any[] => {
+    let generatedColumns = Columns();
     if (dataSource === DataSource.Search) {
         generatedColumns.unshift({
             fieldName: "siteTitle",
