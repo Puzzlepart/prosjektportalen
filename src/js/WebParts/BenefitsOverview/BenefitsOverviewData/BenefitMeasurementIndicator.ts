@@ -18,8 +18,8 @@ export class BenefitMeasurementIndicator extends BenefitBase {
     constructor(result: IBenefitsSearchResult) {
         super(result);
         this.indicator = result.GtMeasureIndicatorOWSTEXT;
-        this.startValue = parseInt(result.GtStartValueOWSNMBR, 10);
-        this.desiredValue = parseInt(result.GtDesiredValueOWSNMBR, 10);
+        this.startValue = parseInt(result.GtStartValueOWSNMBR, 10) || null;
+        this.desiredValue = parseInt(result.GtDesiredValueOWSNMBR, 10) || null;
         this.unit = result.GtMeasurementUnitOWSCHCS;
         this.benefitId = parseInt(result.GtGainLookupId, 10);
     }
