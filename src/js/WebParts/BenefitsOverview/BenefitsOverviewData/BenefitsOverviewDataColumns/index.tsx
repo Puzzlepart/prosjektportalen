@@ -124,8 +124,8 @@ export function onRenderItemColumn(item: BenefitMeasurementIndicator, _index: nu
             if (colValue) {
                 return (
                     <span>
+                        <span style={{ display: "inline-block", width: 20 }}>{trendIconProps && <Icon {...trendIconProps} />}</span>
                         <span>{colValue}</span>
-                        {trendIconProps && <Icon {...trendIconProps} />}
                     </span>
                 );
             }

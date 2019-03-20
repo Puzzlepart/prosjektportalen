@@ -47,6 +47,7 @@ export class BenefitMeasurement extends BenefitBase {
         let shouldIncrease = this.indicator.desiredValue > this.indicator.startValue;
         if (this.achievement >= 100) {
             this.trendIconProps = { iconName: "Trophy", style: { color: "gold" } };
+            return this;
         }
         if (prevMeasurement && prevMeasurement.value !== this.value) {
             let hasIncreased = this.value > prevMeasurement.value;
