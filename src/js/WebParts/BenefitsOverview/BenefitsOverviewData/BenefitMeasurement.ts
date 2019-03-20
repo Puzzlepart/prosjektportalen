@@ -28,12 +28,13 @@ export class BenefitMeasurement extends BenefitBase {
      * Calculate achievement
      *
      * @param {BenefitMeasurementIndicator} indicator Indicator
+     * @param {number} fractionDigits Fraction digits
      */
-    public calculcateAchievement(indicator: BenefitMeasurementIndicator): BenefitMeasurement {
+    public calculcateAchievement(indicator: BenefitMeasurementIndicator, fractionDigits: number = 2): BenefitMeasurement {
         this.indicator = indicator;
-        let achievement = Math.round(((this.value - this.indicator.startValue) / (this.indicator.desiredValue - this.indicator.startValue)) * 100);
+        let achievement = (((this.value - this.indicator.startValue) / (this.indicator.desiredValue - this.indicator.startValue)) * 100);
         this.achievement = achievement;
-        this.achievementStr = `${achievement}%`;
+        this.achievementStr = `${achievement.toFixed(fractionDigits)}%`;
         return this;
     }
 

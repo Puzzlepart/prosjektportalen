@@ -46,7 +46,7 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                 onDismiss={this.props.onDismiss}
                 containerClassName={"pp-modal"}
                 isBlocking={false}>
-                <div style={{ padding: 50 }}>
+                <div style={{ padding: 50, maxHeight: 600 }}>
                     <h2 style={{ marginBottom: 20 }}>{this.props.indicator.title}</h2>
                     <DetailsList
                         items={this.props.indicator.measurements}
@@ -66,8 +66,8 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                 if (colValue) {
                     return (
                         <span>
+                            <span style={{ display: "inline-block", width: 20 }}>{item.trendIconProps && <Icon {...item.trendIconProps} />}</span>
                             <span>{colValue}</span>
-                            {item.trendIconProps && <Icon {...item.trendIconProps} />}
                         </span>
                     );
                 }
