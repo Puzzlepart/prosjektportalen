@@ -20,7 +20,7 @@ export class BenefitMeasurement extends BenefitBase {
         super(result);
         this.date = new Date(result.GtMeasurementDateOWSDATE);
         this.dateStr = this.date.toLocaleDateString();
-        this.value = parseInt(result.GtMeasurementValueOWSNMBR, 10);
+        this.value = parseInt(result.GtMeasurementValueOWSNMBR, 10) || null;
         this.indicatorId = parseInt(result.GtMeasureIndicatorLookupId, 10);
     }
 
