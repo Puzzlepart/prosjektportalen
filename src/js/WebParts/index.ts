@@ -18,7 +18,6 @@ import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
 import ResourceAllocation, { IResourceAllocationProps } from "./ResourceAllocation";
-import DataSource from "./DataSource";
 import WebPartComponent from "./WebPartComponent";
 
 /**
@@ -33,10 +32,14 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8 }),
     new WebPartComponent<IQuickLinksProps>(QuickLinks, "pp-quicklinks"),
     new WebPartComponent<IDynamicPortfolioProps>(DynamicPortfolio, "pp-dynamicportfolio"),
-    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
+    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", {
+        queryTemplate: "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{Site.URL}",
+        showSiteTitleColumn: false,
+        showSearchBox: true,
+    }),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
-        dataSource: DataSource.Search,
-        groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
+        dataSourceName: "BENEFITSOVERVIEW",
+        groupByOptions: [{ name: __.getResource("String_Project"), key: "siteTitle" }],
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),

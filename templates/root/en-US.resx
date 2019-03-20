@@ -228,6 +228,9 @@
   <data name="Lists_ChangeAnalysis_Title" xml:space="preserve">
     <value>Change Analysis</value>
   </data>
+  <data name="Lists_MeasurementIndicators_Title" xml:space="preserve">
+    <value>Measurement Indicators</value>
+  </data>
   <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
     <value>Benefits Followup</value>
   </data>
@@ -378,6 +381,9 @@
   <data name="DefaultView_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Benefits Analysis/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Measurement Indicators/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Benefits Followup/AllItems.aspx</value>
   </data>
@@ -491,6 +497,9 @@
   </data>
   <data name="ContentTypes_Endring_Name" xml:space="preserve">
     <value>Change</value>
+  </data>
+  <data name="ContentTypes_Maaleindikator_Name" xml:space="preserve">
+    <value>Measurement Indicator</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
     <value>Benefit Followup</value>
@@ -616,6 +625,9 @@
     <value>Create a new list item.</value>
   </data>
   <data name="ContentTypes_Endring_Description" xml:space="preserve">
+    <value>Create a new list item.</value>
+  </data>
+  <data name="ContentTypes_Maaleindikator_Description" xml:space="preserve">
     <value>Create a new list item.</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
@@ -936,9 +948,6 @@
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Account Manager</value>
   </data>
-  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
-    <value>Measurement Indicator</value>
-  </data>
   <data name="SiteFields_GtStartValue_DisplayName" xml:space="preserve">
     <value>Initial value</value>
   </data>
@@ -1258,7 +1267,7 @@
     <value>Resource</value>
   </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
-    <value>Absence</value>
+    <value>Allocation type</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Comment</value>
@@ -1744,7 +1753,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
-    <value>What is the reason for the absence?</value>
+    <value>What is the type of absence?</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
     <value>Further comments (if relevant)</value>
@@ -2960,9 +2969,6 @@
   </data>
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Probability (P)]*[Consequence (C)]</value>
-  </data>
-  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
-    <value>Goal achievement, last measurement</value>
   </data>
   <data name="BenefitsOverview_LatestValue" xml:space="preserve">
     <value>Last measurement</value>

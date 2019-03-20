@@ -1,90 +1,76 @@
 import * as React from "react";
 import __ from "../../../../Resources";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { ModalLink } from "../../../@Components";
-import DataSource from "../../../DataSource";
-import BenefitEntry from "../BenefitEntry";
-import TrendIcon from "./TrendIcon";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import * as objectGet from "object-get";
+import { BenefitMeasurementIndicator } from "../BenefitMeasurementIndicator";
 
-const Columns = (): any[] => {
+export const Columns = (): any[] => {
     return [{
-        fieldName: "Title",
-        key: "Title",
+        key: "benefit.title",
+        fieldName: "benefit.title",
         name: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
         minWidth: 100,
         maxWidth: 180,
         isMultiline: true,
     },
     {
-        fieldName: "Responsible",
-        key: "GtGainsResponsible",
+        key: "title",
+        fieldName: "title",
+        name: __.getResource("SiteFields_GtMeasureIndicatorLookup_DisplayName"),
         minWidth: 50,
         maxWidth: 180,
     },
     {
-        fieldName: "MeasureIndicator",
-        key: "GtMeasureIndicator",
+        key: "benefit.responsible",
+        fieldName: "benefit.responsible",
+        name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"),
         minWidth: 50,
         maxWidth: 180,
         isMultiline: true,
     },
     {
-        fieldName: "MeasurementUnit",
-        key: "GtMeasurementUnit",
+        key: "unit",
+        fieldName: "unit",
+        name: __.getResource("SiteFields_GtMeasurementUnit_DisplayName"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        fieldName: "StartValue",
-        key: "GtStartValue",
+        key: "startValue",
+        fieldName: "startValue",
+        name: __.getResource("SiteFields_GtStartValue_DisplayName"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        fieldName: "DesiredValue",
-        key: "GtDesiredValue",
+        key: "desiredValue",
+        fieldName: "desiredValue",
+        name: __.getResource("SiteFields_GtDesiredValue_DisplayName"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        fieldName: "PreviousValue",
-        key: "PreviousValue",
-        name: __.getResource("BenefitsOverview_PreviousValue"),
-        minWidth: 50,
-        maxWidth: 80,
-    },
-    {
-        fieldName: "PreviousPercentage",
-        key: "PreviousPercentage",
-        name: __.getResource("BenefitsOverview_PreviousPercentage"),
-        minWidth: 50,
-        maxWidth: 80,
-    },
-    {
-        fieldName: "LatestValue",
-        key: "LatestValue",
+        key: "measurements[0].value",
+        fieldName: "measurements[0].value",
         name: __.getResource("BenefitsOverview_LatestValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        fieldName: "LatestPercentage",
-        key: "LatestPercentage",
-        name: __.getResource("BenefitsOverview_LatestPercentage"),
+        key: "measurements[0].achievementStr",
+        fieldName: "measurements[0].achievementStr",
+        name: __.getResource("String_AchievementOfObjectives"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        fieldName: "AllMeasurements",
-        key: "AllMeasurements",
+        fieldName: "allMeasurements",
+        key: "allMeasurements",
         name: "",
         minWidth: 50,
         maxWidth: 80,
-    }].map(col => ({
-        ...col,
-        isResizable: true,
-    }));
+    }].map(col => ({ ...col, isResizable: true }));
 };
 
 /**
@@ -101,27 +87,21 @@ export const GetColumnByKey = (key: string): IColumn => {
 /**
  * Generate columns based on data source and fields
  *
- * @param {Object} fieldNamesMap Field names map, maps InternalName => Title
- * @param {DataSource} dataSource Data source
+ * @param {boolean} showSiteTitleColumn Show site title column
  */
-export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSource: DataSource): any[] => {
-    let generatedColumns = Columns().map(col => (Object.assign(col, {
-        name: col.hasOwnProperty("name") ? col.name : (fieldNamesMap[col.key] || col.key),
-    })));
-    switch (dataSource) {
-        case DataSource.Search: {
-            /* Adding Site Title for data souce Search */
-            generatedColumns.unshift({
-                fieldName: "SiteTitle",
-                key: "SiteTitle",
-                name: __.getResource("String_Project"),
-                minWidth: 100,
-                maxWidth: 180,
-            });
-        }
+export function GenerateColumns(showSiteTitleColumn: boolean): any[] {
+    let generatedColumns = Columns();
+    if (showSiteTitleColumn) {
+        generatedColumns.unshift({
+            fieldName: "siteTitle",
+            key: "siteTitle",
+            name: __.getResource("String_Project"),
+            minWidth: 100,
+            maxWidth: 180,
+        });
     }
     return generatedColumns;
-};
+}
 
 /**
  * On render item column
@@ -129,106 +109,36 @@ export const GenerateColumns = (fieldNamesMap: { [key: string]: string }, dataSo
  * @param {BenefitEntry} item The item
  * @param {index} index The index
  * @param {IColumn} column The column
- * @param {Function} onSiteTitleClick On SiteTitle click event
- * @param {Function} showAllMeasurements On show all measurements
+ * @param {Function} openProjectInfoCallback On SiteTitle click event
+ * @param {Function} openMeasurementsCallback On show all measurements
  */
-const _onRenderItemColumn = (item: BenefitEntry, index: number, column: IColumn, onSiteTitleClick: (e) => void, showAllMeasurements: (entry: BenefitEntry) => void): any => {
-    const colValue = item[column.fieldName];
-    const { LatestValue, PreviousValue, LatestPercentage, ValueShouldIncrease } = item;
+export function onRenderItemColumn(item: BenefitMeasurementIndicator, _index: number, column: IColumn, openProjectInfoCallback: (event: React.MouseEvent<any>) => void, openMeasurementsCallback: (item: BenefitMeasurementIndicator) => void): any {
+    const colValue = objectGet(item, column.fieldName);
 
     switch (column.key) {
-        case "Title": {
-            return (
-                <ModalLink
-                    label={colValue}
-                    url={item.DisplayFormUrl}
-                    options={{ HideRibbon: true }} />
-            );
+        case "siteTitle": {
+            return <a href={item.webUrl} onClick={openProjectInfoCallback}>{colValue}</a>;
         }
-        case "SiteTitle": {
-            let { SiteTitle: Title } = item;
-            return (
-                <a href={item.DisplayFormUrl} onClick={onSiteTitleClick}>{Title}</a>
-            );
-        }
-        case "PreviousPercentage": {
-            let { PreviousPercentage } = item;
-            if (PreviousPercentage && PreviousPercentage >= 100) {
+        case "measurements[0].achievementStr": {
+            const trendIconProps = objectGet(item, "measurements[0].trendIconProps");
+            if (colValue) {
                 return (
-                    <div>
-                        <span>{PreviousPercentage}%</span>
-                        <span><Icon iconName="Trophy" style={{ color: "gold" }} /></span>
-                    </div>
-                );
-            } else if (PreviousPercentage || PreviousPercentage === 0) {
-                return (
-                    <div>
-                        <span>{PreviousPercentage}%</span>
-                    </div>
-                );
-            } else {
-                return null;
-            }
-        }
-        case "PreviousValue": {
-            if (PreviousValue || PreviousValue === 0) {
-                return (
-                    <div>
-                        <span>{PreviousValue}</span>
-                    </div>
-                );
-            } else {
-                return null;
-            }
-        }
-        case "LatestPercentage": {
-            if (LatestPercentage || LatestPercentage === 0) {
-                return (
-                    <div style={{ position: "relative" }}>
-                        <span>{LatestPercentage}%</span>
-                        <span>
-                            <TrendIcon
-                                latestVal={LatestValue}
-                                latestPercentage={LatestPercentage}
-                                prevVal={PreviousValue}
-                                shouldIncrease={ValueShouldIncrease} />
-                        </span>
-                    </div>
-                );
-            } else {
-                return null;
-            }
-        }
-        case "LatestValue": {
-            if (LatestValue || LatestValue === 0) {
-                return (
-                    <div>
-                        <span>{LatestValue}</span>
-                        <span>
-                            <TrendIcon
-                                latestVal={LatestValue}
-                                latestPercentage={LatestPercentage}
-                                prevVal={PreviousValue}
-                                shouldIncrease={ValueShouldIncrease} />
-                        </span>
-                    </div>
-                );
-            } else {
-                return null;
-            }
-        }
-        case "AllMeasurements": {
-            if (item.Measurements.length > 0) {
-                return (
-                    <a href="#" onClick={e => showAllMeasurements(item)}>{__.getResource("BenefitsOverview_AllMeasurements")}</a>
+                    <span>
+                        <span>{colValue}</span>
+                        {trendIconProps && <Icon {...trendIconProps} />}
+                    </span>
                 );
             }
             return null;
         }
-        default: {
-            return colValue;
+        case "allMeasurements": {
+            if (item.measurements.length > 0) {
+                return (
+                    <a href="#" onClick={_ => openMeasurementsCallback(item)}>{__.getResource("BenefitsOverview_AllMeasurements")}</a>
+                );
+            }
+            return null;
         }
     }
-};
-
-export { Columns, _onRenderItemColumn };
+    return colValue;
+}
