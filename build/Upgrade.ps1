@@ -100,7 +100,7 @@ if ($null -eq $Connection) {
 }
 
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
-# {package-version} will be replaced with the actual version by 'gulp release'
+# {package-version} will be replaced with the actual version by 'npm run-script release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
 $UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)"
 
