@@ -21,13 +21,13 @@ export default class ToggleSection extends React.Component<IToggleSectionProps, 
     constructor(props: IToggleSectionProps) {
         super(props);
         this.state = { isExpanded: false };
-        this._onToggle = this._onToggle.bind(this);
+        this.onToggle = this.onToggle.bind(this);
     }
 
     public render() {
         return (
             <div hidden={this.props.hidden}>
-                <div onClick={this._onToggle} className={this.props.headerClassName}>
+                <div onClick={this.onToggle} className={this.props.headerClassName}>
                     <span>{this.props.title}</span>
                     <span className={this.state.isExpanded ? "ChevronUp" : "ChevronDown"}>
                         <Icon iconName={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} />
@@ -57,7 +57,7 @@ export default class ToggleSection extends React.Component<IToggleSectionProps, 
     /**
      * On toggle
      */
-    private _onToggle() {
+    private onToggle() {
         this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
     }
 }
