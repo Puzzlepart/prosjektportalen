@@ -90,13 +90,16 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurementIndicator, _index: number, column: IColumn) {
-        if (column.data && column.data.onCustomRender) {
-            return column.data.onCustomRender(item, column, {
+        const onCustomRender = objectGet(column, "data.onCustomRender");
+        const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
+
+        if (typeof onCustomRender === "function") {
+            return onCustomRender(item, column, {
                 siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ showProjectInfo: _item }),
                 allMeasurements: (_item: BenefitMeasurementIndicator) => this.setState({ showMeasurements: _item }),
             });
         }
-        return objectGet(item, column.fieldName);
+        return objectGet(item, fieldNameDisplay || column.fieldName);
     }
 
 

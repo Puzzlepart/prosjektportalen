@@ -41,7 +41,7 @@ const Columns: IColumn[] = [{
     name: __.getResource("SiteFields_GtStartValue_DisplayName"),
     minWidth: 50,
     maxWidth: 80,
-    data: { onCustomRender: (item: BenefitMeasurementIndicator) => objectGet(item, "startValueDisplay") },
+    data: { fieldNameDisplay: "startValueDisplay" },
 },
 {
     key: "desiredValue",
@@ -49,7 +49,7 @@ const Columns: IColumn[] = [{
     name: __.getResource("SiteFields_GtDesiredValue_DisplayName"),
     minWidth: 50,
     maxWidth: 80,
-    data: { onCustomRender: (item: BenefitMeasurementIndicator) => objectGet(item, "desiredValueDisplay") },
+    data: { fieldNameDisplay: "desiredValueDisplay" },
 },
 {
     key: "measurements[0].value",
@@ -57,7 +57,7 @@ const Columns: IColumn[] = [{
     name: __.getResource("BenefitsOverview_LatestValue"),
     minWidth: 50,
     maxWidth: 80,
-    data: { onCustomRender: (item: BenefitMeasurementIndicator) => objectGet(item, "measurements[0].valueDisplay") },
+    data: { fieldNameDisplay: "measurements[0].valueDisplay" },
 },
 {
     key: "measurements[0].achievement",

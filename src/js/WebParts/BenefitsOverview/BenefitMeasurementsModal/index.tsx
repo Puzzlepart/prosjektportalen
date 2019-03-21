@@ -22,11 +22,7 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                 name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                 minWidth: 100,
                 maxWidth: 100,
-                data: {
-                    onCustomRender: (item: BenefitMeasurementIndicator) => {
-                        return objectGet(item, "valueDisplay");
-                    },
-                },
+                data: { fieldNameDisplay: "valueDisplay" },
             },
             {
                 key: "achievement",
@@ -80,9 +76,12 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurement, _index: number, column: IColumn) {
-        if (column.data && column.data.customRender) {
-            return column.data.onCustomRender(item, column);
+        const onCustomRender = objectGet(column, "data.onCustomRender");
+        const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
+
+        if (typeof onCustomRender === "function") {
+            return onCustomRender(item, column);
         }
-        return objectGet(item, column.fieldName);
+        return objectGet(item, fieldNameDisplay || column.fieldName);
     }
 }
