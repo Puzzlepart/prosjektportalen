@@ -19,6 +19,7 @@ import { BenefitMeasurementIndicator } from "./BenefitsOverviewData/BenefitMeasu
 import BenefitMeasurementsModal from "./BenefitMeasurementsModal";
 import * as objectGet from "object-get";
 import { GetColumns } from "./BenefitsOverviewColumns";
+import { BenefitsOverviewCustomRenderFunction } from "./BenefitsOverviewCustomRenderFunction";
 //#endregion
 
 /**
@@ -86,13 +87,13 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurementIndicator, _index: number, column: IColumn) {
-        const onCustomRender = objectGet(column, "data.onCustomRender");
+        const onCustomRender: BenefitsOverviewCustomRenderFunction = objectGet(column, "data.onCustomRender");
         const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
 
         if (typeof onCustomRender === "function") {
             return onCustomRender(item, column, {
-                siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ selectedProject: _item }),
-                allMeasurements: (_item: BenefitMeasurementIndicator) => this.setState({ showMeasurements: _item }),
+                siteTitle: (_item) => this.setState({ selectedProject: _item }),
+                allMeasurements: (_item) => this.setState({ showMeasurements: _item as BenefitMeasurementIndicator }),
             });
         }
         return objectGet(item, fieldNameDisplay || column.fieldName);
