@@ -23,11 +23,11 @@ export class BenefitMeasurementIndicator extends BenefitBase {
     constructor(result: IBenefitsSearchResult, fractionDigits: number = 2) {
         super(result);
         this.indicator = result.GtMeasureIndicatorOWSTEXT;
-        this.startValue = !isNaN(parseInt(result.GtStartValueOWSNMBR, 10)) ? parseInt(result.GtStartValueOWSNMBR, 10) : null;
+        this.startValue = !isNaN(parseFloat(result.GtStartValueOWSNMBR)) ? parseFloat(result.GtStartValueOWSNMBR) : null;
         if (this.startValue !== null) {
             this.startValueDisplay = this.startValue.toFixed(fractionDigits);
         }
-        this.desiredValue = !isNaN(parseInt(result.GtDesiredValueOWSNMBR, 10)) ? parseInt(result.GtDesiredValueOWSNMBR, 10) : null;
+        this.desiredValue = !isNaN(parseFloat(result.GtDesiredValueOWSNMBR)) ? parseFloat(result.GtDesiredValueOWSNMBR) : null;
         if (this.desiredValue !== null) {
             this.desiredValueDisplay = this.desiredValue.toFixed(fractionDigits);
         }
