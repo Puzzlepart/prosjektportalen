@@ -7,6 +7,7 @@ export default interface IProjectStatusProps extends IBaseWebPartProps {
     sectionConfig?: IProjectStatusSectionConfig;
     riskMatrix?: IRiskMatrixProps;
     propertiesLabel?: string;
+    showActionLinks: boolean;
 }
 
 export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {
@@ -14,4 +15,5 @@ export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {
         listTitle: __.getResource("Lists_StatusSections_Title"),
         orderBy: "GtStSecOrder",
     },
+    showActionLinks: true,
 };
