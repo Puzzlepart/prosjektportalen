@@ -2,7 +2,7 @@
 import __ from "../../Resources";
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import { sp, Site } from "@pnp/sp";
+import { sp, Site, Web } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -14,6 +14,7 @@ import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
+import DataSource from "../DataSource";
 //#endregion
 
 
@@ -272,10 +273,20 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     private async searchAllocationItems(): Promise<any[]> {
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-        if (dataSource) {
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
+
+        let queryTemplate = "";
+        if (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) {
+            queryTemplate = this.props.queryTemplate;
+        } else {
+            if (dataSource) {
+                queryTemplate = dataSource.GtDpSearchQuery;
+            }
+        }
+
+        if (queryTemplate !== "") {
             try {
-                const searchSettings = { QueryTemplate: dataSource.GtDpSearchQuery, ...this.props.searchConfiguration };
+                const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
                 const { PrimarySearchResults } = await sp.search(searchSettings);
                 return PrimarySearchResults;
             } catch (err) {
@@ -290,7 +301,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetches availability items from list on root
      */
     private async fetchAvailabilityItems(): Promise<Array<any>> {
-        const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
+        let itemsAvailabilityList;
+        if (this.props.dataSource && this.props.dataSource === DataSource.SearchCustom) {
+            if (this.props.projectRoot && this.props.projectRoot !== "") {
+                itemsAvailabilityList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
+            }
+        } else {
+            itemsAvailabilityList = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
+        }
+        const itemsAvailability = await itemsAvailabilityList
             .items
             .select("Title", "GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
             .expand("GtResourceUser")

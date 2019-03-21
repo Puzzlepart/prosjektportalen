@@ -1,9 +1,13 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import {SearchQuery} from "@pnp/sp";
+import DataSource from "../DataSource";
 
 export default interface IResourceAllocationProps extends IBaseWebPartProps {
     searchConfiguration: SearchQuery;
-    dataSource?: string;
+    dataSource?: DataSource;
+    dataSourceName?: string;
+    projectRoot?: string;
+    queryTemplate?: string;
  }
 
 export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {
@@ -26,5 +30,5 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
             "RefinableString52",
         ],
     },
-    dataSource: "RESOURCEALLOCATION",
+    dataSourceName: "RESOURCEALLOCATION",
 };
