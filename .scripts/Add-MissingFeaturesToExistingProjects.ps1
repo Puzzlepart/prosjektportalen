@@ -109,12 +109,16 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
     $MeasurementIndicatorsListName = "Måleindikatorer"
     $FollowUpListName = "Gevinstsoppfølging"
     $BenefitsListName = "Gevinstanalyse og gevinstrealiseringsplan"
+    $GainLookupDisplayName = "Gevinst"
+    $MeasureIndicatorLookupDisplayName = "Måleindikator"
     $GroupedBenefitTypeViewName = "Pr gevinsttype"
     $FlatViewName = "Flat visning"
     if ($Language -eq 1033) {
         $MeasurementIndicatorsListName = "Measurement Indicators"
         $FollowUpListName = "Benefits Followup"
         $BenefitsListName = "Benefits Analysis"
+        $GainLookupDisplayName = "Gain"
+        $MeasureIndicatorLookupDisplayName = "Measurement Indicator"
         $GroupedBenefitTypeViewName = "Grouped by Benefit Type"
         $FlatViewName = "Flat"
     }
@@ -137,8 +141,8 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
     
         Write-Host "`t`tAdding lookup fields" -ForegroundColor Gray
     
-        Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Gevinst`" List=`"{$($BenefitsList.Id.Guid)}`" ShowField=`"Title`" ID=`"{74dca594-ff7a-42e3-9e83-58cd692bcc98}`" StaticName=`"GtGainLookup`" Name=`"GtGainLookup`"  />" 2>&1>$null
-        Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Gevinst ID`" List=`"{$($BenefitsList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"74dca594-ff7a-42e3-9e83-58cd692bcc98`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{d52b5544-acd1-4c14-96bc-017045c8de68}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtGainLookup_ID`" Name=`"GtGainLookup_ID`" />" 2>&1>$null
+        Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"$GainLookupDisplayName`" List=`"{$($BenefitsList.Id.Guid)}`" ShowField=`"Title`" ID=`"{74dca594-ff7a-42e3-9e83-58cd692bcc98}`" StaticName=`"GtGainLookup`" Name=`"GtGainLookup`"  />" 2>&1>$null
+        Add-PnPFieldFromXml -List $MeasurementIndicatorsList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"$($GainLookupDisplayName):ID`" List=`"{$($BenefitsList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"74dca594-ff7a-42e3-9e83-58cd692bcc98`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{d52b5544-acd1-4c14-96bc-017045c8de68}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtGainLookup_ID`" Name=`"GtGainLookup_ID`" />" 2>&1>$null
     
         Write-Host "`t`tUpdating default view" -ForegroundColor Gray
     
@@ -188,9 +192,12 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
         Write-Host "`tAdjusting $FollowUpListName list" -ForegroundColor Gray
     
         Write-Host "`t`tAdding lookup fields" -ForegroundColor Gray
+
+        $DesiredValueField = Get-PnPField -Identity "GtDesiredValue"
     
-        Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Måleindikator`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"Title`" ID=`"{26c0f80a-5c65-45a9-b362-4cd2749bd02f}`" StaticName=`"GtMeasureIndicatorLookup`" Name=`"GtMeasureIndicatorLookup`"  />" 2>&1>$null
-        Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"Måleindikator ID`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"26c0f80a-5c65-45a9-b362-4cd2749bd02f`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{92fad9e3-1410-4cbb-bb61-594a5e61e988}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtMeasureIndicatorLookup_ID`" Name=`"GtMeasureIndicatorLookup_ID`" />" 2>&1>$null
+        Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"$MeasureIndicatorLookupDisplayName`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"Title`" ID=`"{26c0f80a-5c65-45a9-b362-4cd2749bd02f}`" StaticName=`"GtMeasureIndicatorLookup`" Name=`"GtMeasureIndicatorLookup`"  />" 2>&1>$null
+        Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"$($MeasureIndicatorLookupDisplayName):ID`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"ID`" FieldRef=`"26c0f80a-5c65-45a9-b362-4cd2749bd02f`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{92fad9e3-1410-4cbb-bb61-594a5e61e988}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtMeasureIndicatorLookup_ID`" Name=`"GtMeasureIndicatorLookup_ID`" />" 2>&1>$null
+        Add-PnPFieldFromXml -List $FollowUpList -Web $ProjectWeb -FieldXml "<Field Type=`"Lookup`" DisplayName=`"$($MeasureIndicatorLookupDisplayName):$($DesiredValueField.Title)`" List=`"{$($MeasurementIndicatorsList.Id.Guid)}`" ShowField=`"GtDesiredValue`" FieldRef=`"26c0f80a-5c65-45a9-b362-4cd2749bd02f`" ReadOnly=`"TRUE`" UnlimitedLengthInDocumentLibrary=`"FALSE`" ID=`"{a5b7b23e-5cfd-4168-9123-f1ce10775792}`" ShowInDisplayForm=`"FALSE`" StaticName=`"GtMeasureIndicatorLookup_GtDesiredValue`" Name=`"GtMeasureIndicatorLookup_GtDesiredValue`" />" 2>&1>$null
     
         Write-Host "`t`tUpdating item lookups" -ForegroundColor Gray
     
@@ -208,7 +215,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
     
         Write-Host "`t`tUpdating default view" -ForegroundColor Gray
     
-        $ViewFields = @("GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment")
+        $ViewFields = @("GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment")
         $DefaultView = $FollowUpList.DefaultView
         $DefaultView.ViewFields.RemoveAll()
         $ViewFields | % { $DefaultView.ViewFields.Add($_)}     
