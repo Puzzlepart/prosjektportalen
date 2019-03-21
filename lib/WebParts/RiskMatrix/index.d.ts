@@ -101,8 +101,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     /**
     * Fetch data from data source
     *
-    * @param {string} name Data source name
+    * @param {string} queryTemplate Search query
     */
-    protected searchItems(name: string): Promise<Array<any>>;
+    protected searchItems(queryTemplate: string): Promise<Array<any>>;
 }
 export { IRiskMatrixProps, IRiskMatrixState, };
