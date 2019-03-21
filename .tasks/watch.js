@@ -21,7 +21,7 @@ gulp.task("watch", (done) => {
         let env = require("./@env.js");
         settings = env[envKey];
     } catch (error) {
-        throw "[gulp watch] requires .tasks/@env.json";
+        throw "[gulp watch] requires .tasks/@env.js";
     }
 
     if (!settings) {
@@ -51,7 +51,7 @@ gulp.task("watch", (done) => {
 
 function uploadFileToSp(glob, settings, folder) {
     gulp.src(glob)
-        .pipe(plumber({ errorHandler: (err) => this.emit("end") }))
+        .pipe(plumber({ errorHandler: () => this.emit("end") }))
         .pipe(spsave({ folder: folder, siteUrl: settings.siteUrl }, { username: settings.username, password: settings.password }))
         .pipe(livereload());
 }
