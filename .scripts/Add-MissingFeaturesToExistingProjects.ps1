@@ -169,7 +169,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
         if ($null -eq $MeasurementIndicatorsLeftNav) {
             Add-PnPNavigationNode -Location QuickLaunch -Title $MeasurementIndicatorsListName -Url $MeasurementIndicatorsList.RootFolder.ServerRelativeUrl -Web $ProjectWeb
         }
-        Write-Host "`t$MeasurementIndicatorsListName list created and configured" -ForegroundColor Green
+        Write-Host "`tList $MeasurementIndicatorsListName created and configured" -ForegroundColor Green
         #endregion
     
         #region Copying measurement indicators
@@ -185,7 +185,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             }
             $MeasurementIndicatorsListItemsMap[$_["ID"]] = $newItem["ID"]
         }    
-        Write-Host "`tDone creating items in $MeasurementIndicatorsListName list" -ForegroundColor Green
+        Write-Host "`tDone creating items in list $MeasurementIndicatorsListName" -ForegroundColor Green
         #endregion
     
         #region Adjusting follow up list
@@ -247,8 +247,22 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
 "@  
         $FlatView.Update()
         $FlatView.Context.ExecuteQuery()
+
+        if($Language -eq 1044) {  
+            $NewFollowUpListName = "Gevinstoppfølging"   
+            $FollowUpList = Get-PnPList -Identity $FollowUpListName -Web $ProjectWeb 
+            Write-Host "`t`tRenaming list to $NewFollowUpListName" -ForegroundColor Gray
+            Set-PnPList -Identity $FollowUpList -Web $ProjectWeb -Title $NewFollowUpListName
+            Write-Host "`t`tUpdating link in QuickLaunch" -ForegroundColor Gray
+            $NavigationNode = Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ? {$_.Title -eq $FollowUpListName }
+            if ($null -ne $NavigationNode) {
+                $NavigationNode.Title = $NewFollowUpListName
+                $NavigationNode.Update()
+                $NavigationNode.Context.ExecuteQuery()
+            }
+        }
     
-        Write-Host "`t$FollowUpListName adjusted" -ForegroundColor Green
+        Write-Host "`tList $FollowUpListName adjusted" -ForegroundColor Green
         #endregion
     
         #region Adjusting benefits list
@@ -275,7 +289,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
         $GroupedView.Update()
         $GroupedView.Context.ExecuteQuery()
     
-        Write-Host "`t$BenefitsListName adjusted" -ForegroundColor Green
+        Write-Host "`tList $BenefitsListName adjusted" -ForegroundColor Green
         #endregion
     }
     else {
