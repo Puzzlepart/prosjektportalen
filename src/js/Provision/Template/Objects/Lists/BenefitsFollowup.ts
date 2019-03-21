@@ -26,7 +26,7 @@ const BenefitsFollowup: IList = {
     ],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -40,7 +40,7 @@ const BenefitsFollowup: IList = {
     },
     {
         Title: __.getResource("View_Flat_DisplayName"),
-        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
