@@ -16,22 +16,22 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
     public static defaultProps: Partial<IBenefitMeasurementsModalProps> = {
         columns: [
             {
-                key: "value",
-                fieldName: "value",
+                key: "valueDisplay",
+                fieldName: "valueDisplay",
                 name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                 minWidth: 100,
                 maxWidth: 100,
             },
             {
-                key: "achievementStr",
-                fieldName: "achievementStr",
+                key: "achievementDisplay",
+                fieldName: "achievementDisplay",
                 name: __.getResource("String_AchievementOfObjectives"),
                 minWidth: 100,
                 maxWidth: 100,
             },
             {
-                key: "dateStr",
-                fieldName: "dateStr",
+                key: "dateDisplay",
+                fieldName: "dateDisplay",
                 name: __.getResource("SiteFields_GtMeasurementDate_DisplayName"),
                 minWidth: 150,
             },
@@ -62,7 +62,7 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
         const colValue = item[column.fieldName];
 
         switch (column.key) {
-            case "achievementStr": {
+            case "achievementDisplay": {
                 if (colValue) {
                     return (
                         <span>

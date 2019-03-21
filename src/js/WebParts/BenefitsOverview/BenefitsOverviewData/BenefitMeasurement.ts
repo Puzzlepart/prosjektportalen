@@ -5,22 +5,29 @@ import { IIconProps } from "office-ui-fabric-react/lib/Icon";
 
 export class BenefitMeasurement extends BenefitBase {
     public date: Date;
-    public dateStr: string;
+    public dateDisplay: string;
     public value: number;
+    public valueDisplay: string;
     public achievement: number;
-    public achievementStr: string;
+    public achievementDisplay: string;
     public trendIconProps: IIconProps;
     public indicatorId: number;
     private indicator: BenefitMeasurementIndicator;
 
     /**
+     * Creates a new instance of BenefitMeasurement
      *
+     * @param {IBenefitsSearchResult} result Search result
+     * @param {number} fractionDigits Fraction digits for valueDisplay
      */
-    constructor(result: IBenefitsSearchResult) {
+    constructor(result: IBenefitsSearchResult, fractionDigits: number = 2) {
         super(result);
         this.date = new Date(result.GtMeasurementDateOWSDATE);
-        this.dateStr = this.date.toLocaleDateString();
-        this.value = parseInt(result.GtMeasurementValueOWSNMBR, 10) || null;
+        this.dateDisplay = this.date.toLocaleDateString();
+        this.value = !isNaN(parseInt(result.GtMeasurementValueOWSNMBR, 10)) ? parseInt(result.GtMeasurementValueOWSNMBR, 10) : null;
+        if (this.value !== null) {
+            this.valueDisplay = this.value.toFixed(fractionDigits);
+        }
         this.indicatorId = parseInt(result.GtMeasureIndicatorLookupId, 10);
     }
 
@@ -28,13 +35,13 @@ export class BenefitMeasurement extends BenefitBase {
      * Calculate achievement
      *
      * @param {BenefitMeasurementIndicator} indicator Indicator
-     * @param {number} fractionDigits Fraction digits
+     * @param {number} fractionDigits Fraction digits used for achievementDisplay
      */
     public calculcateAchievement(indicator: BenefitMeasurementIndicator, fractionDigits: number = 2): BenefitMeasurement {
         this.indicator = indicator;
         let achievement = (((this.value - this.indicator.startValue) / (this.indicator.desiredValue - this.indicator.startValue)) * 100);
         this.achievement = achievement;
-        this.achievementStr = `${achievement.toFixed(fractionDigits)}%`;
+        this.achievementDisplay = `${achievement.toFixed(fractionDigits)}%`;
         return this;
     }
 

@@ -37,29 +37,29 @@ export const Columns = (): any[] => {
         maxWidth: 80,
     },
     {
-        key: "startValue",
-        fieldName: "startValue",
+        key: "startValueDisplay",
+        fieldName: "startValueDisplay",
         name: __.getResource("SiteFields_GtStartValue_DisplayName"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        key: "desiredValue",
-        fieldName: "desiredValue",
+        key: "desiredValueDisplay",
+        fieldName: "desiredValueDisplay",
         name: __.getResource("SiteFields_GtDesiredValue_DisplayName"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        key: "measurements[0].value",
-        fieldName: "measurements[0].value",
+        key: "measurements[0].valueDisplay",
+        fieldName: "measurements[0].valueDisplay",
         name: __.getResource("BenefitsOverview_LatestValue"),
         minWidth: 50,
         maxWidth: 80,
     },
     {
-        key: "measurements[0].achievementStr",
-        fieldName: "measurements[0].achievementStr",
+        key: "measurements[0].achievementDisplay",
+        fieldName: "measurements[0].achievementDisplay",
         name: __.getResource("String_AchievementOfObjectives"),
         minWidth: 50,
         maxWidth: 80,
@@ -119,7 +119,7 @@ export function onRenderItemColumn(item: BenefitMeasurementIndicator, _index: nu
         case "siteTitle": {
             return <a href={item.webUrl} onClick={openProjectInfoCallback}>{colValue}</a>;
         }
-        case "measurements[0].achievementStr": {
+        case "measurements[0].achievementDisplay": {
             const trendIconProps = objectGet(item, "measurements[0].trendIconProps");
             if (colValue) {
                 return (
