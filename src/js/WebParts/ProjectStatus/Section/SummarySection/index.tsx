@@ -27,7 +27,7 @@ const SummarySectionHeader = ({ title, titleUrl }: ISummarySectionHeaderProps) =
     );
 };
 
-const SummarySectionProjectData = ({ propertiesLabel, webUrl }: ISummarySectionProjectDataProps) => {
+const SummarySectionProjectData = ({ propertiesLabel, webUrl, showActionLinks }: ISummarySectionProjectDataProps) => {
     return (
         <div className="ms-Grid-col ms-lg12 ms-xl4 status-project-data">
             <div className="status-elements">
@@ -40,7 +40,7 @@ const SummarySectionProjectData = ({ propertiesLabel, webUrl }: ISummarySectionP
                         <ProjectInfo
                             hideChrome={true}
                             webUrl={webUrl}
-                            showActionLinks={false}
+                            showActionLinks={showActionLinks}
                             showMissingPropsWarning={false}
                             filterField="GtPcProjectStatus"
                             labelSize="m"
@@ -81,14 +81,14 @@ export const SummarySectionStatusColumns = ({ sections }: ISummarySectionStatusC
     );
 };
 
-const SummarySection = ({ title, titleUrl, sections, webUrl = _spPageContextInfo.webAbsoluteUrl, style, propertiesLabel }: ISummarySectionProps) => {
+const SummarySection = ({ title, titleUrl, sections, webUrl = _spPageContextInfo.webAbsoluteUrl, style, propertiesLabel, showActionLinks }: ISummarySectionProps) => {
     return (
         <Element name="status-section" className="status-section section ms-Grid-row" style={style}>
             <div className="ms-Grid-col ms-sm12">
                 <div className="ms-Grid">
                     <SummarySectionHeader title={title} titleUrl={titleUrl} />
                     <div className="ms-Grid-row">
-                        <SummarySectionProjectData propertiesLabel={propertiesLabel} webUrl={webUrl} />
+                        <SummarySectionProjectData propertiesLabel={propertiesLabel} webUrl={webUrl} showActionLinks={showActionLinks} />
                         <SummarySectionStatusColumns sections={sections} />
                     </div>
                 </div>
