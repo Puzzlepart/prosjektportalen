@@ -259,18 +259,9 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
         $ViewFields = @("LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime")
         $DefaultView = $BenefitsList.DefaultView
         $DefaultView.ViewFields.RemoveAll()
-        $ViewFields | % { $DefaultView.ViewFields.Add($_)}     
-        $DefaultView.ViewQuery = @"
-                                    <GroupBy Collapse="TRUE" GroupLimit="30">
-                                        <FieldRef Name="GtMeasureIndicatorLookup" />
-                                    </GroupBy>
-                                    <OrderBy>
-                                        <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
-                                    </OrderBy>
-"@
+        $ViewFields | % { $DefaultView.ViewFields.Add($_)}   
         $DefaultView.Update()
-        $DefaultView.Context.ExecuteQuery()
-        
+        $DefaultView.Context.ExecuteQuery()        
         
         $BenefitsList.Context.Load($BenefitsList.Views)
         $BenefitsList.Context.ExecuteQuery()
@@ -278,7 +269,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
     
         Write-Host "`t`tUpdating grouped view" -ForegroundColor Gray
     
-        $ViewFields = @("GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime")
+        $ViewFields = @("LinkTitle", "GtChangeLookup", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime")
         $GroupedView.ViewFields.RemoveAll()
         $ViewFields | % { $GroupedView.ViewFields.Add($_)}     
         $GroupedView.Update()
