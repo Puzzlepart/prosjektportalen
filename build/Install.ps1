@@ -148,26 +148,6 @@ function Start-Install() {
         Write-Host "DONE" -ForegroundColor Green
     }
 
-    # Installing root package if switch SkipRootPackage is not present
-    if (-not $SkipRootPackage.IsPresent) {
-        try {
-            if (-not $Upgrade.IsPresent) {
-                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
-            } else {
-                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
-            }
-            Write-Host "DONE" -ForegroundColor Green
-        }
-        catch {
-            Write-Host
-            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
-        }
-    }  
-
     # Applies assets template if switch SkipAssets is not present
     if (-not $SkipAssets.IsPresent) {
         try {
@@ -199,6 +179,26 @@ function Start-Install() {
             exit 1 
         }
     }
+    
+    # Installing root package if switch SkipRootPackage is not present
+    if (-not $SkipRootPackage.IsPresent) {
+        try {
+            if (-not $Upgrade.IsPresent) {
+                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
+            } else {
+                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
+            }
+            Write-Host "DONE" -ForegroundColor Green
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing root-package to $Url" -ForegroundColor Red
+            Write-Host $error[0] -ForegroundColor Red
+            exit 1 
+        }
+    }  
 
     # Installing data package
     if (-not $SkipData.IsPresent) {
