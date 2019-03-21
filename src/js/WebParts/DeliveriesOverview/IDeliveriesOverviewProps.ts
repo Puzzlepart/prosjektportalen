@@ -1,9 +1,12 @@
 import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IListProps } from "../@Components/List";
+import DataSource from "../DataSource";
 
 export default interface IDeliveriesOverviewProps extends IBaseWebPartProps, IListProps {
-    dataSource?: string;
+    dataSourceName?: string;
+    dataSource?: DataSource;
+    queryTemplate?: string;
 }
 
 export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> = {
@@ -11,7 +14,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         { name: __.getResource("String_Project"), key: "SiteTitle" },
         { name: __.getResource("SiteFields_GtProductStatus_DisplayName"), key: "ProductStatus" },
     ],
-    dataSource: "DELIVERIESOVERVIEW",
+    dataSourceName: "DELIVERIESOVERVIEW",
     columns: [{
         key: "Title",
         fieldName: "Title",

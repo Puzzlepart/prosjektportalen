@@ -7,6 +7,7 @@ import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDel
 import IDeliveriesOverviewState from "./IDeliveriesOverviewState";
 import List from "../@Components/List";
 import DeliveryElement from "./DeliveryElement";
+import DataSource from "../DataSource";
 
 /**
  * Deliveries Overview SPA
@@ -63,22 +64,35 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      */
     protected async _fetchItems() {
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-        if (dataSource) {
-            try {
-                const { PrimarySearchResults } = await sp.search({
-                    Querytext: "*",
-                    QueryTemplate: dataSource.GtDpSearchQuery,
-                    RowLimit: 500,
-                    TrimDuplicates: false,
-                    SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
-                });
-                return PrimarySearchResults.map(r => new DeliveryElement(r));
-            } catch (err) {
-                throw err;
-            }
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
+
+        let queryTemplate = "";
+        if (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) {
+            queryTemplate = this.props.queryTemplate;
         } else {
+            if (dataSource) {
+                queryTemplate = dataSource.GtDpSearchQuery;
+            }
+        }
+        if (queryTemplate === "") {
             return [];
+        } else {
+            return this._search(queryTemplate);
+        }
+    }
+
+    private async _search(queryTemplate: string) {
+        try {
+            const { PrimarySearchResults } = await sp.search({
+                Querytext: "*",
+                QueryTemplate: queryTemplate,
+                RowLimit: 500,
+                TrimDuplicates: false,
+                SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
+            });
+            return PrimarySearchResults.map(r => new DeliveryElement(r));
+        } catch (err) {
+            throw err;
         }
     }
 }

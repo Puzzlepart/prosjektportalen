@@ -24,5 +24,6 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
      * Fetch items
      */
     protected _fetchItems(): Promise<DeliveryElement[]>;
+    private _search;
 }
 export { IDeliveriesOverviewProps, IDeliveriesOverviewState, };
