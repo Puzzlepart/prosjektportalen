@@ -1,7 +1,6 @@
 //#region Imports
 import __ from "../../../Resources";
 import { sp, SearchQuery, Site } from "@pnp/sp";
-import { GenerateColumns } from "./BenefitsOverviewDataColumns";
 import IBenefitsOverviewData from "./IBenefitsOverviewData";
 import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
 import { Benefit } from "./Benefit";
@@ -13,10 +12,9 @@ import { BenefitMeasurementIndicator } from "./BenefitMeasurementIndicator";
  * Fetches data based on selected data source (List or Search)
  *
  * @param {string} queryTemplate Query template
- * @param {boolean} showSiteTitleColumn Show site title column
  * @param {string} dataSourceName Data source name
  */
-export async function fetchData(queryTemplate?: string, showSiteTitleColumn?: boolean, dataSourceName?: string): Promise<IBenefitsOverviewData> {
+export async function fetchData(queryTemplate?: string, dataSourceName?: string): Promise<BenefitMeasurementIndicator[]> {
     try {
         let searchSettings: SearchQuery = {
             Querytext: "*",
@@ -70,8 +68,7 @@ export async function fetchData(queryTemplate?: string, showSiteTitleColumn?: bo
                     return _indicator;
                 })
                 .filter(i => i.benefit);
-            const data: IBenefitsOverviewData = ({ items: indicators, columns: GenerateColumns(showSiteTitleColumn) });
-            return data;
+            return indicators;
         } catch (err) {
             throw err;
         }

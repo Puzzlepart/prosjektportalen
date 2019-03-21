@@ -8,7 +8,6 @@ import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
-import { onRenderItemColumn } from "./BenefitsOverviewData/BenefitsOverviewDataColumns";
 import * as Data from "./BenefitsOverviewData";
 import IBenefitsOverviewProps, { BenefitsOverviewDefaultProps } from "./IBenefitsOverviewProps";
 import IBenefitsOverviewState from "./IBenefitsOverviewState";
@@ -17,6 +16,8 @@ import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
 import * as Util from "../../Util";
 import { BenefitMeasurementIndicator } from "./BenefitsOverviewData/BenefitMeasurementIndicator";
 import BenefitMeasurementsModal from "./BenefitMeasurementsModal";
+import * as objectGet from "object-get";
+import { GetColumns } from "./BenefitsOverviewColumns";
 
 /**
  * Benefits Overview
@@ -39,8 +40,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     }
 
     public async componentDidMount(): Promise<void> {
-        const data = await Data.fetchData(this.props.queryTemplate, this.props.showSiteTitleColumn, this.props.dataSourceName);
-        this.setState({ data: data, isLoading: false });
+        const items = await Data.fetchData(this.props.queryTemplate, this.props.dataSourceName);
+        this.setState({
+            data: { items, columns: GetColumns(this.props.showSiteTitleColumn) },
+            isLoading: false,
+        });
     }
 
     /**
@@ -85,14 +89,14 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     }
 
     @autobind
-    private onRenderItemColumn(item: BenefitMeasurementIndicator, index: number, column: IColumn) {
-        let _openProjectInfoCallback = (event: React.MouseEvent<any>) => {
-            event.preventDefault();
-            this.setState({ showProjectInfo: item });
-        };
-        let _openMeasurementsCallback = (_item: BenefitMeasurementIndicator) => { this.setState({ showMeasurements: _item }); };
-
-        return onRenderItemColumn(item, index, column, _openProjectInfoCallback, _openMeasurementsCallback);
+    private onRenderItemColumn(item: BenefitMeasurementIndicator, _index: number, column: IColumn) {
+        if (column.data && column.data.onCustomRender) {
+            return column.data.onCustomRender(item, column, {
+                siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ showProjectInfo: _item }),
+                allMeasurements: (_item: BenefitMeasurementIndicator) => this.setState({ showMeasurements: _item }),
+            });
+        }
+        return objectGet(item, column.fieldName);
     }
 
 
@@ -145,7 +149,11 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         }
 
         if (items.length > 0 || farItems.length > 0) {
-            return <CommandBar hidden={!showCommandBar} items={items} farItems={farItems} />;
+            return (
+                <div hidden={!showCommandBar}>
+                    <CommandBar items={items} farItems={farItems} />
+                </div>
+            );
         }
         return null;
     }
@@ -204,12 +212,8 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 isDropEnabled: false,
             }));
         }
-        const filteredItems = data.items.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1);
-        return {
-            items: filteredItems,
-            columns: columns,
-            groups: groups,
-        };
+        const items = data.items.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1);
+        return { items, columns, groups };
     }
 
     /**
@@ -226,14 +230,9 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
         }
-        let items = data.items.concat([]).sort((a, b) => {
-            let firstValue = a[column.fieldName];
-            let secondValue = b[column.fieldName];
-            if (isSortedDescending) {
-                return firstValue > secondValue ? -1 : 1;
-            } else {
-                return firstValue > secondValue ? 1 : -1;
-            }
+        console.log(column.fieldName, isSortedDescending, column.isSorted);
+        let items = data.items.concat([]).sort(({ [column.fieldName]: a }, { [column.fieldName]: b }) => {
+            return isSortedDescending ? (a > b ? -1 : 1) : (a > b ? 1 : -1);
         });
         let columns = data.columns.map(_column => {
             _column.isSorted = (_column.key === column.key);

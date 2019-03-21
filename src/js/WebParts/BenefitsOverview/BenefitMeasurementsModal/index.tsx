@@ -6,6 +6,7 @@ import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { BenefitMeasurementIndicator } from "../BenefitsOverviewData/BenefitMeasurementIndicator";
 import { BenefitMeasurement } from "../BenefitsOverviewData/BenefitMeasurement";
+import * as objectGet from "object-get";
 
 export interface IBenefitMeasurementsModalProps extends IModalProps {
     indicator: BenefitMeasurementIndicator;
@@ -16,18 +17,38 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
     public static defaultProps: Partial<IBenefitMeasurementsModalProps> = {
         columns: [
             {
-                key: "valueDisplay",
-                fieldName: "valueDisplay",
+                key: "value",
+                fieldName: "value",
                 name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
                 minWidth: 100,
                 maxWidth: 100,
+                data: {
+                    onCustomRender: (item: BenefitMeasurementIndicator) => {
+                        return objectGet(item, "valueDisplay");
+                    },
+                },
             },
             {
-                key: "achievementDisplay",
-                fieldName: "achievementDisplay",
+                key: "achievement",
+                fieldName: "achievement",
                 name: __.getResource("String_AchievementOfObjectives"),
                 minWidth: 100,
                 maxWidth: 100,
+                data: {
+                    onCustomRender: (item: BenefitMeasurementIndicator) => {
+                        const colValue = objectGet(item, "achievementDisplay");
+                        const trendIconProps = objectGet(item, "trendIconProps");
+                        if (colValue) {
+                            return (
+                                <span>
+                                    <span style={{ display: "inline-block", width: 20 }}>{trendIconProps && <Icon {...trendIconProps} />}</span>
+                                    <span>{colValue}</span>
+                                </span>
+                            );
+                        }
+                        return null;
+                    },
+                },
             },
             {
                 key: "dateDisplay",
@@ -59,21 +80,9 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurement, _index: number, column: IColumn) {
-        const colValue = item[column.fieldName];
-
-        switch (column.key) {
-            case "achievementDisplay": {
-                if (colValue) {
-                    return (
-                        <span>
-                            <span style={{ display: "inline-block", width: 20 }}>{item.trendIconProps && <Icon {...item.trendIconProps} />}</span>
-                            <span>{colValue}</span>
-                        </span>
-                    );
-                }
-                return null;
-            }
+        if (column.data && column.data.customRender) {
+            return column.data.onCustomRender(item, column);
         }
-        return colValue;
+        return objectGet(item, column.fieldName);
     }
 }
