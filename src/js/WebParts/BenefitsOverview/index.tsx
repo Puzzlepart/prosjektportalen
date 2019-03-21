@@ -1,3 +1,4 @@
+//#region Imports
 import * as React from "react";
 import __ from "../../Resources";
 import * as unique from "array-unique";
@@ -18,6 +19,7 @@ import { BenefitMeasurementIndicator } from "./BenefitsOverviewData/BenefitMeasu
 import BenefitMeasurementsModal from "./BenefitMeasurementsModal";
 import * as objectGet from "object-get";
 import { GetColumns } from "./BenefitsOverviewColumns";
+//#endregion
 
 /**
  * Benefits Overview
@@ -41,10 +43,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     public async componentDidMount(): Promise<void> {
         const items = await Data.fetchData(this.props.queryTemplate, this.props.dataSourceName);
-        this.setState({
-            data: { items, columns: GetColumns(this.props.showSiteTitleColumn) },
-            isLoading: false,
-        });
+        this.setState({ data: { items, columns: GetColumns(this.props.showSiteTitleColumn) }, isLoading: false });
     }
 
     /**
@@ -63,25 +62,22 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
             return (
                 <div style={{ width: "100%" }}>
                     {this.renderCommandBar(this.props, this.state)}
-                    <div hidden={!this.props.showSearchBox}>
+                    <div hidden={!this.props.showSearchBox} style={{ margin: "5px 0 5px 0" }}>
                         <SearchBox
                             onChange={st => this.setState({ searchTerm: st.toLowerCase() })}
                             placeholder={__.getResource("BenefitsOverview_SearchBox_Placeholder")} />
                     </div>
-                    <DetailsList
-                        items={items}
-                        columns={columns}
-                        groups={groups}
-                        selectionMode={SelectionMode.none}
-                        onRenderItemColumn={this.onRenderItemColumn}
-                        onColumnHeaderClick={(column, evt) => this.onColumnClick(column, evt)}
-                    />
-                    {this.state.showMeasurements && (
-                        <BenefitMeasurementsModal
-                            indicator={this.state.showMeasurements}
-                            onDismiss={_ => this.setState({ showMeasurements: null })} />
-                    )}
-                    {this.renderProjectInfoModal(this.props, this.state)}
+                    <div>
+                        <DetailsList
+                            items={items}
+                            columns={columns}
+                            groups={groups}
+                            selectionMode={SelectionMode.none}
+                            onRenderItemColumn={this.onRenderItemColumn}
+                            onColumnHeaderClick={this.onColumnHeaderClick} />
+                    </div>
+                    {this.state.showMeasurements && <BenefitMeasurementsModal indicator={this.state.showMeasurements} onDismiss={_ => this.setState({ showMeasurements: null })} />}
+                    {this.state.selectedProject && this.renderProjectInfoModal(this.props, this.state)}
                 </div>
             );
         }
@@ -95,7 +91,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
         if (typeof onCustomRender === "function") {
             return onCustomRender(item, column, {
-                siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ showProjectInfo: _item }),
+                siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ selectedProject: _item }),
                 allMeasurements: (_item: BenefitMeasurementIndicator) => this.setState({ showMeasurements: _item }),
             });
         }
@@ -167,30 +163,27 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      * @param {IBenefitsOverviewProps} param0 Props
      * @param {IBenefitsOverviewState} param1 State
      */
-    private renderProjectInfoModal = ({ modalHeaderClassName, projectInfoFilterField }: IBenefitsOverviewProps, { showProjectInfo }: IBenefitsOverviewState) => {
-        if (showProjectInfo) {
-            return (
-                <ProjectInfo
-                    webUrl={showProjectInfo.webUrl}
-                    hideChrome={true}
-                    showActionLinks={false}
-                    showMissingPropsWarning={false}
-                    filterField={projectInfoFilterField}
-                    labelSize="l"
-                    valueSize="m"
-                    renderMode={ProjectInfoRenderMode.Modal}
-                    modalOptions={{
-                        isOpen: true,
-                        isDarkOverlay: true,
-                        isBlocking: false,
-                        onDismiss: _event => this.setState({ showProjectInfo: null }),
-                        headerClassName: modalHeaderClassName,
-                        headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.siteTitle,
-                    }} />
-            );
-        }
-        return null;
+    private renderProjectInfoModal({ modalHeaderClassName, projectInfoFilterField }: IBenefitsOverviewProps, { selectedProject }: IBenefitsOverviewState) {
+        return (
+            <ProjectInfo
+                webUrl={selectedProject.webUrl}
+                hideChrome={true}
+                showActionLinks={false}
+                showMissingPropsWarning={false}
+                filterField={projectInfoFilterField}
+                labelSize="l"
+                valueSize="m"
+                renderMode={ProjectInfoRenderMode.Modal}
+                modalOptions={{
+                    isOpen: true,
+                    isDarkOverlay: true,
+                    isBlocking: false,
+                    onDismiss: _event => this.setState({ selectedProject: null }),
+                    headerClassName: modalHeaderClassName,
+                    headerStyle: { marginBottom: 20 },
+                    title: selectedProject.siteTitle,
+                }} />
+        );
     }
 
     /**
@@ -199,14 +192,14 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      * @param {IBenefitsOverviewProps} param0 Props
      * @param {IBenefitsOverviewState} param1 State
      */
-    private getFilteredData({ searchProperty }: IBenefitsOverviewProps, { groupBy, data, searchTerm }: IBenefitsOverviewState): { items: any[], columns: any[], groups: IGroup[] } {
+    private getFilteredData({ }: IBenefitsOverviewProps, { groupBy, data, searchTerm }: IBenefitsOverviewState): { items: BenefitMeasurementIndicator[], columns: IColumn[], groups: IGroup[] } {
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
         if (groupBy.key !== "NoGrouping") {
-            const groupItems = data.items.sort((a, b) => a[groupBy.key] > b[groupBy.key] ? -1 : 1);
-            const groupNames = groupItems.map(g => g[groupBy.key]);
-            groups = unique([].concat(groupNames)).map((name, idx) => ({
-                key: idx,
+            const itemsSortedByGroupBy = data.items.sort((a, b) => objectGet(a, groupBy.key) > objectGet(b, groupBy.key) ? -1 : 1);
+            const groupNames: string[] = itemsSortedByGroupBy.map(g => objectGet(g, groupBy.key));
+            groups = (unique([].concat(groupNames)) as string[]).map((name, idx) => ({
+                key: `Group_${idx}`,
                 name: `${groupBy.name}: ${name}`,
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
@@ -215,7 +208,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 isDropEnabled: false,
             }));
         }
-        const items = data.items.filter(item => item[searchProperty].toLowerCase().indexOf(searchTerm) !== -1);
+        const items = data.items.filter(item => item.title.toLowerCase().indexOf(searchTerm) !== -1);
         return { items, columns, groups };
     }
 
@@ -226,16 +219,17 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      * @param {IColumn} column Column
      */
     @autobind
-    private onColumnClick(_event: React.MouseEvent<any>, column: IColumn): any {
+    private onColumnHeaderClick(_event: React.MouseEvent<any>, column: IColumn): any {
         const { data } = this.state;
 
         let isSortedDescending = column.isSortedDescending;
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending;
         }
-        console.log(column.fieldName, isSortedDescending, column.isSorted);
-        let items = data.items.concat([]).sort(({ [column.fieldName]: a }, { [column.fieldName]: b }) => {
-            return isSortedDescending ? (a > b ? -1 : 1) : (a > b ? 1 : -1);
+        let items = data.items.concat([]).sort((a, b) => {
+            let aValue = objectGet(a, column.fieldName);
+            let bValue = objectGet(b, column.fieldName);
+            return isSortedDescending ? (aValue > bValue ? -1 : 1) : (aValue > bValue ? 1 : -1);
         });
         let columns = data.columns.map(_column => {
             _column.isSorted = (_column.key === column.key);

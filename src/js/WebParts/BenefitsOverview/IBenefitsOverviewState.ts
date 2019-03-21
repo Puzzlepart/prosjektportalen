@@ -8,7 +8,7 @@ export default interface IBenefitsOverviewState extends IBaseWebPartState {
     data?: IBenefitsOverviewData;
     searchTerm: string;
     groupBy: IGroupByOption;
-    showProjectInfo?: BenefitMeasurementIndicator;
+    selectedProject?: BenefitMeasurementIndicator;
     showMeasurements?: BenefitMeasurementIndicator;
     excelExportStatus?: ExcelExportStatus;
 }
