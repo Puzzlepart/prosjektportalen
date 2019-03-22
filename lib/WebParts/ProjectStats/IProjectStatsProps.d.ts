@@ -4,5 +4,6 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     statsFieldsListName: string;
     chartsConfigListName: string;
     showChartSettings?: boolean;
+    projectRoot?: string;
 }
 export declare const ProjectStatsDefaultProps: Partial<IProjectStatsProps>;
