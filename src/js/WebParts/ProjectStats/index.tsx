@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, List } from "@pnp/sp";
+import { sp, List, Web } from "@pnp/sp";
 import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
@@ -39,8 +39,13 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        this.statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-        this.chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
+        if (this.props.projectRoot) {
+            this.statsFieldsList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
+            this.chartsConfigList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
+        } else {
+            this.statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
+            this.chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
+        }
     }
 
     public async componentDidMount() {
@@ -251,6 +256,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             Logger.log({ message: String.format(LOG_TEMPLATE, "fetchData", `Fetching view ${currentView.name}.`), data: { queryTemplate: currentView.queryTemplate }, level: LogLevel.Info });
 
             const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`GtChrManagedPropertyName`], i[`GtChrDataType`]));
+
             const response = await sp.search({
                 Querytext: "*",
                 QueryTemplate: currentView.queryTemplate,
