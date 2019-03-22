@@ -276,10 +276,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
 
-        let queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : "";
-        if (dataSource) {
-            queryTemplate = dataSource.GtDpSearchQuery;
-        }
+        const query = dataSource ? dataSource.GtDpSearchQuery : "";
+        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
+
         if (queryTemplate !== "") {
             try {
                 const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };

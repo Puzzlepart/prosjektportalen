@@ -65,10 +65,10 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
     protected async _fetchItems() {
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
-        let queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : "";
-        if (dataSource) {
-            queryTemplate = dataSource.GtDpSearchQuery;
-        }
+
+        const query = dataSource ? dataSource.GtDpSearchQuery : "";
+        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
+
         if (queryTemplate !== "") {
             return this._search(queryTemplate);
         } else {
