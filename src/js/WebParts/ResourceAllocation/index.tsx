@@ -66,11 +66,15 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
+        let url = "..";
+        if (this.props.projectRoot) {
+            url = this.props.projectRoot;
+        }
 
         return (
             <div>
                 <MessageBar>
-                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${url}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
                 <div className="allocation-cmd-bar">
                     <ResourceAllocationCommandBar
