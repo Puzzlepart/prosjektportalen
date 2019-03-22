@@ -39,13 +39,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        if (this.props.projectRoot) {
-            this.statsFieldsList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-            this.chartsConfigList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
-        } else {
-            this.statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-            this.chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
-        }
+        const web = this.props.projectRoot ? new Web(this.props.projectRoot) : sp.web;
+        this.statsFieldsList = web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
+        this.chartsConfigList = web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
     }
 
     public async componentDidMount() {
@@ -229,9 +225,10 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         let hashState = getUrlHash();
+        const configWebUrl = this.props.projectRoot ? this.props.projectRoot : _spPageContextInfo.siteAbsoluteUrl;
         try {
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
-                DynamicPortfolioConfiguration.getConfig(),
+                DynamicPortfolioConfiguration.getConfig("GtDpOrder", configWebUrl),
                 this.statsFieldsList.items.select("ID", "Title", `GtChrManagedPropertyName`, `GtChrDataType`).usingCaching().get(),
                 this.chartsConfigList.items.usingCaching().get(),
                 this.chartsConfigList.contentTypes.usingCaching().get(),

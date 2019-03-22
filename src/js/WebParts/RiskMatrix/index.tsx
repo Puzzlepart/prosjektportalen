@@ -348,15 +348,11 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
         if (!data) {
             data = { items: [], views: null };
         }
-
         let selectedView;
-        let queryTemplate = "";
-        if (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) {
-            queryTemplate = this.props.queryTemplate;
-        } else {
-            if (dataSource) {
-                queryTemplate = dataSource.GtDpSearchQuery;
-            }
+
+        let queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : "";
+        if (dataSource) {
+            queryTemplate = dataSource.GtDpSearchQuery;
         }
 
         if (queryTemplate !== "") {

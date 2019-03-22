@@ -66,10 +66,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
-        let url = "..";
-        if (this.props.projectRoot) {
-            url = this.props.projectRoot;
-        }
+        const url = this.props.projectRoot ? this.props.projectRoot : "..";
 
         return (
             <div>
@@ -279,15 +276,10 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
 
-        let queryTemplate = "";
-        if (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) {
-            queryTemplate = this.props.queryTemplate;
-        } else {
-            if (dataSource) {
-                queryTemplate = dataSource.GtDpSearchQuery;
-            }
+        let queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : "";
+        if (dataSource) {
+            queryTemplate = dataSource.GtDpSearchQuery;
         }
-
         if (queryTemplate !== "") {
             try {
                 const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
@@ -305,14 +297,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetches availability items from list on root
      */
     private async fetchAvailabilityItems(): Promise<Array<any>> {
-        let itemsAvailabilityList;
-        if (this.props.dataSource && this.props.dataSource === DataSource.SearchCustom) {
-            if (this.props.projectRoot && this.props.projectRoot !== "") {
-                itemsAvailabilityList = new Web(this.props.projectRoot).lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
-            }
-        } else {
-            itemsAvailabilityList = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
-        }
+        const web = this.props.projectRoot ? new Web(this.props.projectRoot) : sp.web;
+        const itemsAvailabilityList = web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
         const itemsAvailability = await itemsAvailabilityList
             .items
             .select("Title", "GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")

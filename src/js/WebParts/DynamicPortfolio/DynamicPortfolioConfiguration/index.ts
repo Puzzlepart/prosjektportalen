@@ -54,7 +54,7 @@ export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> 
  * @param {string} orderBy Order by property
  * @param {string} configWebUrl URL for config lists
  */
-export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
+export async function getConfig(orderBy: string, configWebUrl: string): Promise<IDynamicPortfolioConfiguration> {
     const configWeb = new Web(configWebUrl);
     const [dpFields, dpRefiners, dpViews, statusFields] = await Promise.all([
         getFieldsConfig(orderBy, configWeb),

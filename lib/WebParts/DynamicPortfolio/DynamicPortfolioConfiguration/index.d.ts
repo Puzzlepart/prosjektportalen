@@ -27,5 +27,5 @@ export declare function getViewsConfig(orderBy: string, configWeb: Web): Promise
  * @param {string} orderBy Order by property
  * @param {string} configWebUrl URL for config lists
  */
-export declare function getConfig(orderBy?: string, configWebUrl?: string): Promise<IDynamicPortfolioConfiguration>;
+export declare function getConfig(orderBy: string, configWebUrl: string): Promise<IDynamicPortfolioConfiguration>;
 export { IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig, IDynamicPortfolioColumnConfig, IDynamicPortfolioRefinerConfig, IStatusFieldsConfig, };
