@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, List, Web } from "@pnp/sp";
+import { sp, List } from "@pnp/sp";
 import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
@@ -39,14 +39,14 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        const web = this.props.projectRoot ? new Web(this.props.projectRoot) : sp.web;
-        this.statsFieldsList = web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-        this.chartsConfigList = web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
+        this.statsFieldsList = sp.web.lists.getByTitle(this.props.statsFieldsListName);
+        this.chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
     }
 
     public async componentDidMount() {
         try {
             const config = await this.fetchData();
+            console.log(config);
             Logger.log({ message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`), level: LogLevel.Info });
             this.setState({ ...config, isLoading: false });
             if (this.props.viewSelectorEnabled) {
@@ -63,6 +63,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * Renders the <ProjectStats /> component
      */
     public render(): React.ReactElement<IProjectStatsProps> {
+        const renderCommanBar = false;
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
             return <Spinner label={__.getResource("String_ProjectStats_Loading_Text")} type={SpinnerType.large} />;
@@ -74,7 +75,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         return (
             <div className="ms-Grid">
                 <div className="ms-Grid-row">
-                    {this.renderCommandBar()}
+                    {renderCommanBar &&
+                        this.renderCommandBar()}
                 </div>
                 <div className="ms-Grid-row">
                     {this.renderInner()}
@@ -225,11 +227,11 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         let hashState = getUrlHash();
-        const configWebUrl = this.props.projectRoot ? this.props.projectRoot : _spPageContextInfo.siteAbsoluteUrl;
+        const configWebUrl = _spPageContextInfo.siteAbsoluteUrl;
         try {
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig("GtDpOrder", configWebUrl),
-                this.statsFieldsList.items.select("ID", "Title", `GtChrManagedPropertyName`, `GtChrDataType`).usingCaching().get(),
+                this.statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").usingCaching().get(),
                 this.chartsConfigList.items.usingCaching().get(),
                 this.chartsConfigList.contentTypes.usingCaching().get(),
                 this.statsFieldsList.contentTypes.usingCaching().get(),
@@ -275,6 +277,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             throw err;
         }
     }
+
 }
 
 export { IProjectStatsProps, IProjectStatsState };
