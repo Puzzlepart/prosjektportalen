@@ -37,6 +37,7 @@
         "@types/react-dom": "16.0.5",
         "@types/sharepoint": "^2016.1.2",
         "@types/sinon": "^5.0.1",
+        "@uifabric/icons": "^6.5.0",
         "ajv": "~5.2.2",
         "array-sort": "^1.0.0",
         "array-unique": "^0.3.2",
