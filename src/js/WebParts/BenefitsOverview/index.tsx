@@ -19,6 +19,7 @@ import { BenefitMeasurementIndicator } from "./BenefitsOverviewData/BenefitMeasu
 import BenefitMeasurementsModal from "./BenefitMeasurementsModal";
 import * as objectGet from "object-get";
 import { GetColumns } from "./BenefitsOverviewColumns";
+import { BenefitsOverviewCustomRenderFunction } from "./BenefitsOverviewCustomRenderFunction";
 //#endregion
 
 /**
@@ -86,13 +87,13 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurementIndicator, _index: number, column: IColumn) {
-        const onCustomRender = objectGet(column, "data.onCustomRender");
+        const onCustomRender: BenefitsOverviewCustomRenderFunction = objectGet(column, "data.onCustomRender");
         const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
 
         if (typeof onCustomRender === "function") {
             return onCustomRender(item, column, {
-                siteTitle: (_item: BenefitMeasurementIndicator) => this.setState({ selectedProject: _item }),
-                allMeasurements: (_item: BenefitMeasurementIndicator) => this.setState({ showMeasurements: _item }),
+                siteTitle: (_item) => this.setState({ selectedProject: _item }),
+                allMeasurements: (_item) => this.setState({ showMeasurements: _item as BenefitMeasurementIndicator }),
             });
         }
         return objectGet(item, fieldNameDisplay || column.fieldName);
@@ -215,7 +216,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
     /**
      * Sorting on column click
      *
-     * @param {React.MouseEvent} event Event
+     * @param {React.MouseEvent} _event Event
      * @param {IColumn} column Column
      */
     @autobind
@@ -246,16 +247,18 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      */
     private async exportToExcel() {
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
+        const fileName = String.format(this.props.excelExportConfig.fileName, __.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const sheets = [];
         let { items, columns } = this.getFilteredData(this.props, this.state);
-        const sheet = {
+        let _columns = columns.filter(column => column.name);
+        sheets.push({
             name: this.props.excelExportConfig.sheetName,
             data: [
-                columns.map(column => column.name),
-                ...items.map(item => columns.map(column => item[column.fieldName])),
+                _columns.map(column => column.name),
+                ...items.map(item => _columns.map(column => objectGet(item, column.fieldName))),
             ],
-        };
-        const fileName = String.format(this.props.excelExportConfig.fileName, __.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
-        await ExportToExcel({ sheets: [sheet], fileName });
+        });
+        await ExportToExcel({ sheets, fileName });
         this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }
 }

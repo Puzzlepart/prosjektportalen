@@ -1,12 +1,13 @@
 import * as React from "react";
 import __ from "../../../Resources";
 import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
-import { DetailsList, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IColumn, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { BenefitMeasurementIndicator } from "../BenefitsOverviewData/BenefitMeasurementIndicator";
 import { BenefitMeasurement } from "../BenefitsOverviewData/BenefitMeasurement";
 import * as objectGet from "object-get";
+import { BenefitsOverviewCustomRenderFunction } from "../BenefitsOverviewCustomRenderFunction";
 
 export interface IBenefitMeasurementsModalProps extends IModalProps {
     indicator: BenefitMeasurementIndicator;
@@ -68,7 +69,8 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                     <DetailsList
                         items={this.props.indicator.measurements}
                         columns={this.props.columns}
-                        onRenderItemColumn={this.onRenderItemColumn} />
+                        onRenderItemColumn={this.onRenderItemColumn}
+                        selectionMode={SelectionMode.none} />
                 </div>
             </Modal>
         );
@@ -76,7 +78,7 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurement, _index: number, column: IColumn) {
-        const onCustomRender = objectGet(column, "data.onCustomRender");
+        const onCustomRender: BenefitsOverviewCustomRenderFunction = objectGet(column, "data.onCustomRender");
         const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
 
         if (typeof onCustomRender === "function") {

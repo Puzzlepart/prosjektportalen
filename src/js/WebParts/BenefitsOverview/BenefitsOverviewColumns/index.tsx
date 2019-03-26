@@ -14,19 +14,19 @@ const Columns: IColumn[] = [{
     isMultiline: true,
 },
 {
-    key: "title",
-    fieldName: "title",
-    name: __.getResource("SiteFields_GtMeasureIndicatorLookup_DisplayName"),
-    minWidth: 50,
-    maxWidth: 180,
-},
-{
     key: "benefit.responsible",
     fieldName: "benefit.responsible",
     name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"),
     minWidth: 50,
     maxWidth: 180,
     isMultiline: true,
+},
+{
+    key: "title",
+    fieldName: "title",
+    name: __.getResource("SiteFields_GtMeasureIndicatorLookup_DisplayName"),
+    minWidth: 50,
+    maxWidth: 180,
 },
 {
     key: "unit",
