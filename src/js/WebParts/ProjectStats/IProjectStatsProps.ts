@@ -1,6 +1,7 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import __ from "../../Resources";
 import DataSource from "../DataSource";
+import { Web } from "@pnp/sp";
 
 export default interface IProjectStatsProps extends IBaseWebPartProps {
     viewSelectorEnabled: boolean;
@@ -8,6 +9,7 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     chartsConfigListName: string;
     showChartSettings?: boolean;
     dataSource?: DataSource;
+    rootWeb?: Web;
 }
 
 export const ProjectStatsDefaultProps: Partial<IProjectStatsProps> = {
