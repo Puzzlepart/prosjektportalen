@@ -1,6 +1,5 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import __ from "../../Resources";
-import DataSource from "../DataSource";
 import { Web } from "@pnp/sp";
 
 export default interface IProjectStatsProps extends IBaseWebPartProps {
@@ -9,7 +8,7 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     chartsConfigListName?: string;
     showChartSettings?: boolean;
     useProgramEditForm?: boolean;
-    dataSource?: DataSource;
+    queryTemplate?: string;
     rootWeb?: Web;
     renderCommandBar?: boolean;
 }

@@ -258,9 +258,11 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
 
             const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`GtChrManagedPropertyName`], i[`GtChrDataType`]));
 
+            const queryTemplate = this.props.viewSelectorEnabled ? currentView.queryTemplate : this.props.queryTemplate;
+
             const response = await sp.search({
                 Querytext: "*",
-                QueryTemplate: currentView.queryTemplate,
+                QueryTemplate: queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
                 SelectProperties: ["Title", "Path", "SiteTitle", ...fields.map(f => f.managedPropertyName)],
