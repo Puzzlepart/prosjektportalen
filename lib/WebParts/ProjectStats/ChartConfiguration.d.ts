@@ -24,7 +24,6 @@ export default class ChartConfiguration {
     showPercentage: boolean;
     showItemSelector: boolean;
     private _pnpList;
-    private _contentTypes;
     private _statsFields;
     private _data;
     private _widthFields;
@@ -66,7 +65,7 @@ export default class ChartConfiguration {
     /**
      * Get edit form url
      */
-    getEditFormUrl(): string;
+    getEditFormUrl(listUrl: string): string;
     /**
      * Get Y axis
      */
