@@ -64,7 +64,6 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * Renders the <ProjectStats /> component
      */
     public render(): React.ReactElement<IProjectStatsProps> {
-        const renderCommanBar = false;
         const { isLoading, errorMessage, data } = this.state;
         if (isLoading) {
             return <Spinner label={__.getResource("String_ProjectStats_Loading_Text")} type={SpinnerType.large} />;
@@ -76,7 +75,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         return (
             <div className="ms-Grid">
                 <div className="ms-Grid-row">
-                    {renderCommanBar &&
+                    {this.props.renderCommanBar &&
                         this.renderCommandBar()}
                 </div>
                 <div className="ms-Grid-row">

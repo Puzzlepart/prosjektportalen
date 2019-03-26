@@ -66,7 +66,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
                 },
             });
         }
-
+        const editFormUrl = this.props.useProgramEditForm ? chart.getEditFormUrl().replace("ChartsConfig", "ProgramChartsConfig") : chart.getEditFormUrl();
         items.push({
             key: "edit-chart",
             name: "Rediger",
@@ -74,7 +74,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             onClick: e => {
                 e.preventDefault();
                 e.stopPropagation();
-                document.location.href = chart.getEditFormUrl();
+                document.location.href = editFormUrl;
             },
         });
 
