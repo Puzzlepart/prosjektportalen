@@ -263,7 +263,7 @@ function Start-Install() {
     try {
         $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries"
+        Apply-Template -Template "root" -Localized -Handlers "CustomActions,PropertyBagEntries"
         Write-Host "DONE" -ForegroundColor Green
     }
     catch {
