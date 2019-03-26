@@ -9,6 +9,6 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     useProgramEditForm?: boolean;
     dataSource?: DataSource;
     rootWeb?: Web;
-    renderCommanBar?: boolean;
+    renderCommandBar?: boolean;
 }
 export declare const ProjectStatsDefaultProps: Partial<IProjectStatsProps>;

@@ -75,7 +75,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         return (
             <div className="ms-Grid">
                 <div className="ms-Grid-row">
-                    {this.props.renderCommanBar &&
+                    {this.props.renderCommandBar &&
                         this.renderCommandBar()}
                 </div>
                 <div className="ms-Grid-row">
@@ -185,7 +185,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 <ProjectStatsChart
                     key={idx}
                     chart={chart}
-                    showSettings={this.state.showChartSettings} />
+                    showSettings={this.state.showChartSettings}
+                    useProgramEditForm={this.props.useProgramEditForm}
+                    />
             ));
     }
 
