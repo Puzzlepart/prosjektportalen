@@ -35,11 +35,28 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", {
         queryTemplate: "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{Site.URL}",
         showSiteTitleColumn: false,
-        showSearchBox: true,
+        groupByOptions: [
+            {
+                name: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"), key: "benefit.title",
+            },
+            {
+                name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"), key: "benefit.responsible",
+            },
+        ],
     }),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
         dataSourceName: "BENEFITSOVERVIEW",
-        groupByOptions: [{ name: __.getResource("String_Project"), key: "siteTitle" }],
+        groupByOptions: [
+            {
+                name: __.getResource("String_Project"), key: "siteTitle",
+            },
+            {
+                name: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"), key: "benefit.title",
+            },
+            {
+                name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"), key: "benefit.responsible",
+            },
+        ],
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),

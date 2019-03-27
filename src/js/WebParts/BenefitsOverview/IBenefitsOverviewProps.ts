@@ -9,7 +9,6 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
     groupByOptions?: IGroupByOption[];
     showSearchBox?: boolean;
     showCommandBar?: boolean;
-    searchProperty?: string;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
     excelExportEnabled?: boolean;
@@ -19,9 +18,8 @@ export default interface IBenefitsOverviewProps extends IBaseWebPartProps {
 
 export const BenefitsOverviewDefaultProps: Partial<IBenefitsOverviewProps> = {
     groupByOptions: [],
-    searchProperty: "title",
-    showCommandBar: false,
-    showSearchBox: false,
+    showCommandBar: true,
+    showSearchBox: true,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
     excelExportEnabled: true,
