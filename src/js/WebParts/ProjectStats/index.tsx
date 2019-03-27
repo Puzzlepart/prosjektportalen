@@ -47,7 +47,6 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     public async componentDidMount() {
         try {
             const config = await this.fetchData();
-            console.log(config);
             Logger.log({ message: String.format(LOG_TEMPLATE, "componentDidMount", `Successfully fetched chart config for ${config.charts.length} charts.`), level: LogLevel.Info });
             this.setState({ ...config, isLoading: false });
             if (this.props.viewSelectorEnabled) {
