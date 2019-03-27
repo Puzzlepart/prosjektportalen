@@ -52,6 +52,6 @@ module.exports = {
     ],
     thirdPartyLibs: [
         "xlsx/dist/xlsx.full.min.js",
-        "file-saver/FileSaver.min.js",
+        "file-saver/dist/FileSaver.min.js",
     ],
 }

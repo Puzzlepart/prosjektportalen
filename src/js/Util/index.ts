@@ -16,20 +16,20 @@ declare var MSOWebPartPageFormName: string;
  * @param {string} input Input
  */
 export function htmlDecode(input: string): string {
-    const e = document.createElement("div");
-    e.innerHTML = input;
-    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+    const element = document.createElement("div");
+    element.innerHTML = input;
+    return element.childNodes.length === 0 ? "" : element.childNodes[0].nodeValue;
 }
 
 /**
- * Formats a date using moment.js (defaults for dFormat and locale are set in resources)
+ * Formats a date using moment.js (defaults for format and locale are set in the resource files)
  *
  * @param {string} date Date
- * @param {string} dFormat Date format
+ * @param {string} format Date format
  * @param {string} locale Date locale
  */
-export function dateFormat(date: string, dFormat = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
-    return moment(new Date(date).toISOString()).locale(locale).format(dFormat);
+export function dateFormat(date: string, format = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
+    return moment(new Date(date).toISOString()).locale(locale).format(format);
 }
 
 /**

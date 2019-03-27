@@ -232,7 +232,7 @@
     <value>Måleindikatorer</value>
   </data>
   <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
-    <value>Gevinstsoppfølging</value>
+    <value>Gevinstoppfølging</value>
   </data>
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
     <value>Prosjektstatusrapporter</value>
@@ -337,7 +337,7 @@
     <value>Lists/Endringsanalyse</value>
   </data>
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
-    <value>Lists/Gevinstsoppflging</value>
+    <value>Lists/Gevinstoppflging</value>
   </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Lists/Prosjektstatusrapporter</value>
@@ -385,7 +385,7 @@
     <value>Lists/Mleindikatorer/AllItems.aspx</value>
   </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
-    <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
+    <value>Lists/Gevinstoppflging/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Prosjektressurser/AllItems.aspx</value>

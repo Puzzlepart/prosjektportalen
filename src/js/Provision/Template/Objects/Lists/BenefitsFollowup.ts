@@ -1,6 +1,6 @@
 import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
-import { GtMeasureIndicatorLookup, GtMeasureIndicatorLookup_ID } from "./SiteFields";
+import { GtMeasureIndicatorLookup, GtMeasureIndicatorLookup_ID, GtMeasureIndicatorLookup_GtDesiredValue } from "./SiteFields";
 
 const BenefitsFollowup: IList = {
     Title: __.getResource("Lists_BenefitsFollowup_Title"),
@@ -22,10 +22,11 @@ const BenefitsFollowup: IList = {
     Fields: [
         GtMeasureIndicatorLookup,
         GtMeasureIndicatorLookup_ID,
+        GtMeasureIndicatorLookup_GtDesiredValue,
     ],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -39,7 +40,7 @@ const BenefitsFollowup: IList = {
     },
     {
         Title: __.getResource("View_Flat_DisplayName"),
-        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,

@@ -39,8 +39,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        this.statsFieldsList = sp.web.lists.getByTitle(__.getResource("Lists_StatsFieldsConfig_Title"));
-        this.chartsConfigList = sp.web.lists.getByTitle(__.getResource("Lists_ChartsConfig_Title"));
+        this.statsFieldsList = sp.web.lists.getByTitle(this.props.statsFieldsListName);
+        this.chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
     }
 
     public async componentDidMount() {
