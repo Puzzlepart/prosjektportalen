@@ -2,7 +2,6 @@ import * as React from "react";
 import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
 export default class ProjectStatsChartSettings extends React.Component<ProjectStatsChartSettingsProps, ProjectStatsChartSettingsState> {
-    static defaultProps: Partial<ProjectStatsChartSettingsProps>;
     /**
      * Constructor
      *

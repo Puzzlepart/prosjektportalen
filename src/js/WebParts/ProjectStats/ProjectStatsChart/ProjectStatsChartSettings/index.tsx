@@ -1,14 +1,13 @@
 import * as React from "react";
 import { LogLevel, Logger } from "@pnp/logging";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
-import ProjectStatsChartSettingsProps, { ProjectStatsChartSettingsDefaultProps } from "./ProjectStatsChartSettingsProps";
+import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
 import __ from "../../../../Resources";
 
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
 export default class ProjectStatsChartSettings extends React.Component<ProjectStatsChartSettingsProps, ProjectStatsChartSettingsState> {
-    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = ProjectStatsChartSettingsDefaultProps;
 
     /**
      * Constructor
@@ -30,7 +29,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         return (
             <div className="ms-Grid-row" hidden={this.props.hidden}>
                 <div className="ms-Grid-col ms-sm12">
-                    {this.props.showCommandBar &&
+                    {this.props.renderCommandBar &&
                     <CommandBar items={this._getItems()} farItems={this._getFarItems()} />}
                 </div>
             </div>

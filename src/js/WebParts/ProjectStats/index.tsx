@@ -186,6 +186,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                     key={idx}
                     chart={chart}
                     showSettings={this.state.showChartSettings}
+                    renderCommandBar={this.props.renderCommandBar}
                     listServerRelativeUrl={this.state.chartsConfigListProperties.RootFolder.ServerRelativeUrl} />
             ));
     }
