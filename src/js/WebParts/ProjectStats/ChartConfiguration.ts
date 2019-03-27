@@ -179,8 +179,7 @@ export default class ChartConfiguration {
      * Get edit form url
      */
     public getEditFormUrl(listUrl: string): string {
-        // let [contentType] = this._contentTypes.filter(ct => ct.StringId.indexOf(this.contentTypeId) !== -1);
-        return `${listUrl}/EditForm.aspx?ID=${this.id}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
+        return `${window.location.protocol}//${window.location.hostname}${listUrl}/EditForm.aspx?ID=${this.id}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
     }
 
     /**

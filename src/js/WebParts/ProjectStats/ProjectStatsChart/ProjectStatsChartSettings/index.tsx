@@ -1,14 +1,14 @@
 import * as React from "react";
 import { LogLevel, Logger } from "@pnp/logging";
 import { CommandBar, ICommandBarItemProps } from "office-ui-fabric-react/lib/CommandBar";
-import ProjectStatsChartSettingsProps from "./ProjectStatsChartSettingsProps";
+import ProjectStatsChartSettingsProps, { ProjectStatsChartSettingsDefaultProps } from "./ProjectStatsChartSettingsProps";
 import ProjectStatsChartSettingsState from "./ProjectStatsChartSettingsState";
 import __ from "../../../../Resources";
 
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
 export default class ProjectStatsChartSettings extends React.Component<ProjectStatsChartSettingsProps, ProjectStatsChartSettingsState> {
-    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = {};
+    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = ProjectStatsChartSettingsDefaultProps;
 
     /**
      * Constructor
@@ -30,7 +30,8 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
         return (
             <div className="ms-Grid-row" hidden={this.props.hidden}>
                 <div className="ms-Grid-col ms-sm12">
-                    <CommandBar items={this._getItems()} farItems={this._getFarItems()} />
+                    {this.props.showCommandBar &&
+                    <CommandBar items={this._getItems()} farItems={this._getFarItems()} />}
                 </div>
             </div>
         );
@@ -66,7 +67,6 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
                 },
             });
         }
-        const listUrl = this.props.useProgramEditForm ? "Lists/ProgramChartsConfig" : "Lists/ChartsConfig";
         items.push({
             key: "edit-chart",
             name: "Rediger",
@@ -74,7 +74,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             onClick: e => {
                 e.preventDefault();
                 e.stopPropagation();
-                document.location.href = `${_spPageContextInfo.siteAbsoluteUrl}/${chart.getEditFormUrl(listUrl)}`;
+                document.location.href = chart.getEditFormUrl(this.props.listServerRelativeUrl);
             },
         });
 

@@ -5,7 +5,6 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     statsFieldsListName?: string;
     chartsConfigListName?: string;
     showChartSettings?: boolean;
-    useProgramEditForm?: boolean;
     queryTemplate?: string;
     rootWeb?: Web;
     renderCommandBar?: boolean;

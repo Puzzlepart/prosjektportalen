@@ -186,8 +186,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                     key={idx}
                     chart={chart}
                     showSettings={this.state.showChartSettings}
-                    useProgramEditForm={this.props.useProgramEditForm}
-                    />
+                    listServerRelativeUrl={this.state.chartsConfigListProperties.RootFolder.ServerRelativeUrl} />
             ));
     }
 
@@ -231,10 +230,11 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         let hashState = getUrlHash();
         const configWebUrl = _spPageContextInfo.siteAbsoluteUrl;
         try {
-            const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
+            const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListProperties, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig("GtDpOrder", configWebUrl),
                 this.statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").usingCaching().get(),
                 this.chartsConfigList.items.usingCaching().get(),
+                this.chartsConfigList.select("RootFolder/ServerRelativeUrl").expand("RootFolder").usingCaching().get(),
                 this.chartsConfigList.contentTypes.usingCaching().get(),
                 this.statsFieldsList.contentTypes.usingCaching().get(),
             ]);
@@ -275,7 +275,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 let chartFields = fields.filter(f => spItem[`GtChrFieldsId`].results.indexOf(f.id) !== -1);
                 return new ChartConfiguration(spItem, this.chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
-            const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView };
+            const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView, chartsConfigListProperties };
             return config;
         } catch (err) {
             throw err;
