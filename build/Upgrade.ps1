@@ -38,6 +38,8 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package (main installation package)? Only to be done if you're sure you only need new assets files.")]
+    [switch]$SkipRootPackage,
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
@@ -155,7 +157,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     }
     
     try {
-        .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -Logging $Logging -Parameters $Parameters
+        .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -SkipRootPackage:$SkipRootPackage -Logging $Logging -Parameters $Parameters
     }
     catch {
         Write-Host
