@@ -322,7 +322,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         permissions.set(31);
         const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
         await ExecuteJsomQuery(jsomCtx);
-        const configuration = await DynamicPortfolioConfiguration.getConfig("GtDpOrder", _spPageContextInfo.webAbsoluteUrl);
+        const configuration = await DynamicPortfolioConfiguration.getConfig();
 
         let currentView: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig;
 
