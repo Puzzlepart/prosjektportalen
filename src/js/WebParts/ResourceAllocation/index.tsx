@@ -2,7 +2,7 @@
 import __ from "../../Resources";
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import { sp, Site } from "@pnp/sp";
+import { sp, Site, Web } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -66,11 +66,10 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
-        const root = this.props.rootWeb ? "../.." : "..";
         return (
             <div>
                 <MessageBar>
-                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${root}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${_spPageContextInfo.siteAbsoluteUrl}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
                 <div className="allocation-cmd-bar">
                     <ResourceAllocationCommandBar
@@ -295,7 +294,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetches availability items from list on root
      */
     private async fetchAvailabilityItems(): Promise<Array<any>> {
-        const web = this.props.rootWeb ? this.props.rootWeb : sp.web;
+        const web = new Web(_spPageContextInfo.siteAbsoluteUrl);
         const itemsAvailabilityList = web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
         const itemsAvailability = await itemsAvailabilityList
             .items

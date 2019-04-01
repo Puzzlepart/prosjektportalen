@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, List } from "@pnp/sp";
+import { sp, List, Web } from "@pnp/sp";
 import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
@@ -39,7 +39,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        const web = this.props.rootWeb ? this.props.rootWeb : sp.web;
+        const web = new Web(_spPageContextInfo.siteAbsoluteUrl);
         this.statsFieldsList = web.lists.getByTitle(this.props.statsFieldsListName);
         this.chartsConfigList = web.lists.getByTitle(this.props.chartsConfigListName);
     }
