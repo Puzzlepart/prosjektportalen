@@ -228,10 +228,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         let hashState = getUrlHash();
-        const configWebUrl = _spPageContextInfo.siteAbsoluteUrl;
         try {
             const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListProperties, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
-                DynamicPortfolioConfiguration.getConfig("GtDpOrder", configWebUrl),
+                DynamicPortfolioConfiguration.getConfig(),
                 this.statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").usingCaching().get(),
                 this.chartsConfigList.items.usingCaching().get(),
                 this.chartsConfigList.select("RootFolder/ServerRelativeUrl").expand("RootFolder").usingCaching().get(),
