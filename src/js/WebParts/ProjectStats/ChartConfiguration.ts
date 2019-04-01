@@ -28,7 +28,6 @@ export default class ChartConfiguration {
     public showPercentage: boolean;
     public showItemSelector: boolean;
     private _pnpList: List;
-    // private _contentTypes: any[];
     private _statsFields: StatsFieldConfiguration[];
     private _data: ProjectStatsChartData;
     private _widthFields = {
@@ -50,7 +49,6 @@ export default class ChartConfiguration {
      */
     constructor(spItem, pnpList: List, contentTypes) {
         this._pnpList = pnpList;
-        // this._contentTypes = contentTypes;
         this.contentTypeId = spItem.ContentTypeId;
         this.id = spItem.ID;
         this.title = spItem.Title;
