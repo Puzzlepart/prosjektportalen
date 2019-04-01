@@ -65,10 +65,12 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
                 .forEach(res => {
                     let _benfitIds = res.GtGainLookupId.split(";").map(str => parseInt(str, 10));
                     _benfitIds.forEach(_benfitId => {
-                        let _indicator = new BenefitMeasurementIndicator(res).setMeasurements(measurements);
+                        let _indicator = new BenefitMeasurementIndicator(res);
                         let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
                         if (_benefit) {
-                            _indicator = _indicator.setBenefit(_benefit);
+                            _indicator = _indicator
+                                .setMeasurements(measurements)
+                                .setBenefit(_benefit);
                             indicators.push(_indicator);
                         }
                     });
