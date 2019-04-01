@@ -425,6 +425,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="a1a56abd-5b3d-45d2-8617-32b2f8b195de" Name="GtGainsType" />
             <pnp:FieldRef ID="de5cf8b7-6823-4dac-b4a7-916c53bd3376" Name="GtPrereqProfitAchievement" />
@@ -439,6 +440,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x01004D8897A0212F9A40A4C2209D89E5AD4C" Name="{resource:ContentTypes_Endring_Name}" Description="{resource:ContentTypes_Endring_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="68a5a2da-048c-4d2d-8ba4-5a8b32b60120" Name="GtProcess" />
             <pnp:FieldRef ID="1fb52a28-81c4-405f-8da6-883c29b6b856" Name="GtChallengeDescription" />
@@ -446,6 +448,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x0100FF4E12223AF44F519AF40C441D05DED0" Name="{resource:ContentTypes_Maaleindikator_Name}" Description="{resource:ContentTypes_Maaleindikator_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" Required="true" />
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
             <pnp:FieldRef ID="c5fc8781-7fbd-43a2-a215-c8c959bbab69" Name="GtStartValue" Required="true" />
             <pnp:FieldRef ID="8b399cb6-c53e-432c-8ffa-b48e2bfbbf71" Name="GtDesiredValue" Required="true" />

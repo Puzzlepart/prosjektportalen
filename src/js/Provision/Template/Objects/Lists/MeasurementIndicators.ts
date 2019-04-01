@@ -20,11 +20,13 @@ const MeasurementIndicators: IList = {
     ],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["GtGainLookup", "LinkTitle", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit"],
+        ViewFields: ["GtOrder", "GtGainLookup", "LinkTitle", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
-            ViewQuery: "",
+            ViewQuery: `<OrderBy>
+              <FieldRef Name="GtOrder" />
+            </OrderBy>`,
         },
     }],
 };
