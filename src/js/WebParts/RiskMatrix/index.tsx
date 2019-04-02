@@ -19,6 +19,7 @@ import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
 import List from "../@Components/List";
 import { loadJsonConfiguration } from "../../Util";
+import DataSource from "../DataSource";
 
 /**
  * Risk Matrix
@@ -70,7 +71,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             className,
             loadingText,
             showViewSelector,
-            dataSource,
+            dataSourceName,
             columns,
         } = this.props;
 
@@ -131,7 +132,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         onText={__.getResource("String_Yes")}
                                         offText={__.getResource("String_No")} />
                                 </div>
-                                <div hidden={!dataSource}>
+                                <div hidden={!dataSourceName}>
                                     <Dropdown
                                         label={__.getResource("String_Select_Project_Name")}
                                         defaultSelectedKey="AllProjects"
@@ -339,18 +340,20 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      * Fetch data
      */
     protected async fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
-        const { dataSource, viewName } = this.props;
+        const { dataSourceName, viewName } = this.props;
+        const [dataSource] = await this.dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
 
         let data = { ...this.state.data };
 
         if (!data) {
             data = { items: [], views: null };
         }
-
         let selectedView;
+        const query = dataSource ? dataSource.GtDpSearchQuery : "";
+        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
 
-        if (this.props.dataSource) {
-            const spSearchItems = await this.searchItems(dataSource);
+        if (queryTemplate !== "") {
+            const spSearchItems = await this.searchItems(queryTemplate);
             data.items = spSearchItems.map(item => {
                 const risk = new RiskElementModel(item.ListItemID, item.Title, item.GtRiskProbabilityOWSNMBR, item.GtRiskConsequenceOWSNMBR, item.GtRiskProbabilityPostActionOWSNMBR, item.GtRiskConsequencePostActionOWSNMBR);
                 risk.url = item.Path;
@@ -373,41 +376,35 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             const spListItems = await this.uncertaintiesList.getItemsByCAMLQuery(camlQuery);
             data.items = this.mapSpItems(spListItems);
         }
-
         return { data, selectedViewId: selectedView ? selectedView.Id : null };
     }
 
     /**
     * Fetch data from data source
     *
-    * @param {string} name Data source name
+    * @param {string} queryTemplate Search query
     */
-    protected async searchItems(name: string): Promise<Array<any>> {
-        const [dataSource] = await this.dataSourcesList.items.filter(`Title eq '${name}'`).get();
-        if (dataSource) {
-            const searchResults = await sp.search({
-                Querytext: "*",
-                RowLimit: this.props.rowLimit,
-                TrimDuplicates: false,
-                SelectProperties: [
-                    "ListItemID",
-                    "Path",
-                    "SPWebUrl",
-                    "WebId",
-                    "Title",
-                    "GtRiskProbabilityOWSNMBR",
-                    "GtRiskConsequenceOWSNMBR",
-                    "GtRiskProbabilityPostActionOWSNMBR",
-                    "GtRiskConsequencePostActionOWSNMBR",
-                    "GtRiskActionOWSMTXT",
-                    "SiteTitle",
-                ],
-                QueryTemplate: dataSource.GtDpSearchQuery,
-            });
-            return searchResults.PrimarySearchResults;
-        } else {
-            return [];
-        }
+    protected async searchItems(queryTemplate: string): Promise<Array<any>> {
+        const searchResults = await sp.search({
+            Querytext: "*",
+            RowLimit: this.props.rowLimit,
+            TrimDuplicates: false,
+            SelectProperties: [
+                "ListItemID",
+                "Path",
+                "SPWebUrl",
+                "WebId",
+                "Title",
+                "GtRiskProbabilityOWSNMBR",
+                "GtRiskConsequenceOWSNMBR",
+                "GtRiskProbabilityPostActionOWSNMBR",
+                "GtRiskConsequencePostActionOWSNMBR",
+                "GtRiskActionOWSMTXT",
+                "SiteTitle",
+            ],
+            QueryTemplate: queryTemplate,
+        });
+        return searchResults.PrimarySearchResults;
     }
 }
 
