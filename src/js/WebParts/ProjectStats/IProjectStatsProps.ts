@@ -1,6 +1,5 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import __ from "../../Resources";
-import { Web } from "@pnp/sp";
 
 export default interface IProjectStatsProps extends IBaseWebPartProps {
     viewSelectorEnabled: boolean;
@@ -8,7 +7,6 @@ export default interface IProjectStatsProps extends IBaseWebPartProps {
     chartsConfigListName?: string;
     showChartSettings?: boolean;
     queryTemplate?: string;
-    rootWeb?: Web;
     renderCommandBar?: boolean;
 }
 
