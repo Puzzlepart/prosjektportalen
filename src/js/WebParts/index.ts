@@ -32,18 +32,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8 }),
     new WebPartComponent<IQuickLinksProps>(QuickLinks, "pp-quicklinks"),
     new WebPartComponent<IDynamicPortfolioProps>(DynamicPortfolio, "pp-dynamicportfolio"),
-    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", {
-        queryTemplate: "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{Site.URL}",
-        showSiteTitleColumn: false,
-        groupByOptions: [
-            {
-                name: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"), key: "benefit.title",
-            },
-            {
-                name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"), key: "benefit.responsible",
-            },
-        ],
-    }),
+    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", {}),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
         dataSourceName: "BENEFITSOVERVIEW",
         groupByOptions: [
@@ -57,6 +46,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
                 name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"), key: "benefit.responsible",
             },
         ],
+        showSiteTitleColumn: true,
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
