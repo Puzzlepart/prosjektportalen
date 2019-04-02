@@ -59,15 +59,22 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
                 .filter(res => res.ContentTypeID.indexOf("0x01007A831AC68204F04AAA022CFF06C7BAA2") === 0)
                 .map(res => new BenefitMeasurement(res))
                 .sort((a, b) => b.date.getTime() - a.date.getTime());
-            const indicators = results
+            let indicators = [];
+            results
                 .filter(res => res.ContentTypeID.indexOf("0x0100FF4E12223AF44F519AF40C441D05DED0") === 0)
-                .map(res => {
-                    let _indicator = new BenefitMeasurementIndicator(res)
-                        .setMeasurements(measurements)
-                        .setBenefit(benefits);
-                    return _indicator;
-                })
-                .filter(i => i.benefit);
+                .forEach(res => {
+                    let _benfitIds = res.GtGainLookupId.split(";").map(str => parseInt(str, 10));
+                    _benfitIds.forEach(_benfitId => {
+                        let _indicator = new BenefitMeasurementIndicator(res);
+                        let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
+                        if (_benefit) {
+                            _indicator = _indicator
+                                .setMeasurements(measurements)
+                                .setBenefit(_benefit);
+                            indicators.push(_indicator);
+                        }
+                    });
+                });
             return indicators;
         } catch (err) {
             throw err;

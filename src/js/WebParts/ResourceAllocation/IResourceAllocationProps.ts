@@ -1,5 +1,5 @@
 import { IBaseWebPartProps } from "../@BaseWebPart";
-import {SearchQuery, Web} from "@pnp/sp";
+import { SearchQuery } from "@pnp/sp";
 import DataSource from "../DataSource";
 
 export default interface IResourceAllocationProps extends IBaseWebPartProps {
@@ -7,7 +7,6 @@ export default interface IResourceAllocationProps extends IBaseWebPartProps {
     dataSource?: DataSource;
     dataSourceName?: string;
     queryTemplate?: string;
-    rootWeb?: Web;
  }
 
 export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> = {

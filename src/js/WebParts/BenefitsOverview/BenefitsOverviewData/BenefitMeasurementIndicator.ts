@@ -10,7 +10,6 @@ export class BenefitMeasurementIndicator extends BenefitBase {
     public startValueDisplay: string;
     public desiredValueDisplay: string;
     public unit: string;
-    public benefitId: number;
     public measurements: BenefitMeasurement[];
     public benefit: Benefit;
 
@@ -32,7 +31,6 @@ export class BenefitMeasurementIndicator extends BenefitBase {
             this.desiredValueDisplay = this.desiredValue.toFixed(fractionDigits);
         }
         this.unit = result.GtMeasurementUnitOWSCHCS;
-        this.benefitId = parseInt(result.GtGainLookupId, 10);
     }
 
     /**
@@ -51,10 +49,10 @@ export class BenefitMeasurementIndicator extends BenefitBase {
     /**
      * Set benefit
      *
-     * @param {Benefit[]} benefits Benefits
+     * @param {Benefit} benefit Benefit
      */
-    public setBenefit(benefits: Benefit[]): BenefitMeasurementIndicator {
-        this.benefit = benefits.filter(b => b.id === this.benefitId && b.webId === this.webId)[0];
+    public setBenefit(benefit: Benefit): BenefitMeasurementIndicator {
+        this.benefit = benefit;
         return this;
     }
 }
