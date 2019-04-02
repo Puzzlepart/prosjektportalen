@@ -3,7 +3,7 @@ import __ from "../../Resources";
 import { SortAlphabetically } from "../../Util";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, List } from "@pnp/sp";
+import { sp, List, Web } from "@pnp/sp";
 import { LogLevel, Logger } from "@pnp/logging";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
@@ -39,8 +39,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      */
     constructor(props: IProjectStatsProps) {
         super(props, { isLoading: true, showChartSettings: props.showChartSettings });
-        this.statsFieldsList = sp.web.lists.getByTitle(this.props.statsFieldsListName);
-        this.chartsConfigList = sp.web.lists.getByTitle(this.props.chartsConfigListName);
+        const web = new Web(_spPageContextInfo.siteAbsoluteUrl);
+        this.statsFieldsList = web.lists.getByTitle(this.props.statsFieldsListName);
+        this.chartsConfigList = web.lists.getByTitle(this.props.chartsConfigListName);
     }
 
     public async componentDidMount() {
@@ -73,7 +74,8 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
         return (
             <div className="ms-Grid">
                 <div className="ms-Grid-row">
-                    {this.renderCommandBar()}
+                    {this.props.renderCommandBar &&
+                        this.renderCommandBar()}
                 </div>
                 <div className="ms-Grid-row">
                     {this.renderInner()}
@@ -182,7 +184,9 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 <ProjectStatsChart
                     key={idx}
                     chart={chart}
-                    showSettings={this.state.showChartSettings} />
+                    showSettings={this.state.showChartSettings}
+                    renderCommandBar={this.props.renderCommandBar}
+                    listServerRelativeUrl={this.state.chartsConfigListProperties.RootFolder.ServerRelativeUrl} />
             ));
     }
 
@@ -225,10 +229,11 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     private async fetchData(view?: IDynamicPortfolioViewConfig): Promise<Partial<IProjectStatsState>> {
         let hashState = getUrlHash();
         try {
-            const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
+            const [{ views }, fieldsSpItems, chartsSpItems, chartsConfigListProperties, chartsConfigListContentTypes, statsFieldsListContenTypes] = await Promise.all([
                 DynamicPortfolioConfiguration.getConfig(),
-                this.statsFieldsList.items.select("ID", "Title", `GtChrManagedPropertyName`, `GtChrDataType`).usingCaching().get(),
+                this.statsFieldsList.items.select("ID", "Title", "GtChrManagedPropertyName", "GtChrDataType").usingCaching().get(),
                 this.chartsConfigList.items.usingCaching().get(),
+                this.chartsConfigList.select("RootFolder/ServerRelativeUrl").expand("RootFolder").usingCaching().get(),
                 this.chartsConfigList.contentTypes.usingCaching().get(),
                 this.statsFieldsList.contentTypes.usingCaching().get(),
             ]);
@@ -251,9 +256,12 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             Logger.log({ message: String.format(LOG_TEMPLATE, "fetchData", `Fetching view ${currentView.name}.`), data: { queryTemplate: currentView.queryTemplate }, level: LogLevel.Info });
 
             const fields = fieldsSpItems.map(i => new StatsFieldConfiguration(i.ID, i.Title, i[`GtChrManagedPropertyName`], i[`GtChrDataType`]));
+
+            const queryTemplate = this.props.viewSelectorEnabled ? currentView.queryTemplate : this.props.queryTemplate;
+
             const response = await sp.search({
                 Querytext: "*",
-                QueryTemplate: currentView.queryTemplate,
+                QueryTemplate: queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
                 SelectProperties: ["Title", "Path", "SiteTitle", ...fields.map(f => f.managedPropertyName)],
@@ -266,12 +274,13 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 let chartFields = fields.filter(f => spItem[`GtChrFieldsId`].results.indexOf(f.id) !== -1);
                 return new ChartConfiguration(spItem, this.chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields);
             });
-            const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView };
+            const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView, chartsConfigListProperties };
             return config;
         } catch (err) {
             throw err;
         }
     }
+
 }
 
 export { IProjectStatsProps, IProjectStatsState };

@@ -28,7 +28,6 @@ export default class ChartConfiguration {
     public showPercentage: boolean;
     public showItemSelector: boolean;
     private _pnpList: List;
-    private _contentTypes: any[];
     private _statsFields: StatsFieldConfiguration[];
     private _data: ProjectStatsChartData;
     private _widthFields = {
@@ -50,7 +49,6 @@ export default class ChartConfiguration {
      */
     constructor(spItem, pnpList: List, contentTypes) {
         this._pnpList = pnpList;
-        this._contentTypes = contentTypes;
         this.contentTypeId = spItem.ContentTypeId;
         this.id = spItem.ID;
         this.title = spItem.Title;
@@ -178,9 +176,8 @@ export default class ChartConfiguration {
     /**
      * Get edit form url
      */
-    public getEditFormUrl(): string {
-        let [contentType] = this._contentTypes.filter(ct => ct.StringId.indexOf(this.contentTypeId) !== -1);
-        return `${contentType.EditFormUrl}?ID=${this.id}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
+    public getEditFormUrl(listUrl: string): string {
+        return `${window.location.protocol}//${window.location.hostname}${listUrl}/EditForm.aspx?ID=${this.id}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`;
     }
 
     /**

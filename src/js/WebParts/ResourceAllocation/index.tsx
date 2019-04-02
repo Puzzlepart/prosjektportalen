@@ -2,7 +2,7 @@
 import __ from "../../Resources";
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import { sp, Site } from "@pnp/sp";
+import { sp, Site, Web } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -14,6 +14,7 @@ import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
 import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
+import DataSource from "../DataSource";
 //#endregion
 
 
@@ -65,11 +66,10 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         if (data.groups.length === 0 || data.items.length === 0) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
-
         return (
             <div>
                 <MessageBar>
-                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `../Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${_spPageContextInfo.siteAbsoluteUrl}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
                 <div className="allocation-cmd-bar">
                     <ResourceAllocationCommandBar
@@ -272,10 +272,14 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     private async searchAllocationItems(): Promise<any[]> {
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-        if (dataSource) {
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
+
+        const query = dataSource ? dataSource.GtDpSearchQuery : "";
+        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
+
+        if (queryTemplate !== "") {
             try {
-                const searchSettings = { QueryTemplate: dataSource.GtDpSearchQuery, ...this.props.searchConfiguration };
+                const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
                 const { PrimarySearchResults } = await sp.search(searchSettings);
                 return PrimarySearchResults;
             } catch (err) {
@@ -290,7 +294,9 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * Fetches availability items from list on root
      */
     private async fetchAvailabilityItems(): Promise<Array<any>> {
-        const itemsAvailability = await sp.web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"))
+        const web = new Web(_spPageContextInfo.siteAbsoluteUrl);
+        const itemsAvailabilityList = web.lists.getByTitle(__.getResource("Lists_ResourceAllocation_Title"));
+        const itemsAvailability = await itemsAvailabilityList
             .items
             .select("Title", "GtResourceUser/Title", "GtStartDate", "GtEndDate", "GtResourceLoad", "GtResourceAbsence")
             .expand("GtResourceUser")
