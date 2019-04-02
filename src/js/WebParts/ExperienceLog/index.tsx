@@ -7,6 +7,7 @@ import IExperienceLogState from "./IExperienceLogState";
 import BaseWebPart from "../@BaseWebPart";
 import List from "../@Components/List";
 import LogElement from "./LogElement";
+import DataSource from "../DataSource";
 
 /**
  * Experience Log
@@ -60,17 +61,13 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * Fetch items
      */
     protected async _fetchItems() {
-        let queryTemplate: string;
+        const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
+        const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
 
-        if (this.props.queryTemplate) {
-            queryTemplate = this.props.queryTemplate;
-        } else if (this.props.dataSource) {
-            const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-            queryTemplate = dataSource.GtDpSearchQuery;
-        }
+        const query = dataSource ? dataSource.GtDpSearchQuery : "";
+        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
 
-        if (queryTemplate) {
+        if (queryTemplate !== "") {
             try {
                 const selectProperties = ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)];
                 const { PrimarySearchResults } = await sp.search({
