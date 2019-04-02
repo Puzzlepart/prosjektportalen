@@ -134,7 +134,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     private renderCustomComponent(customComponentName: string): JSX.Element {
         let customComponent = GetWebPartComponentByName(customComponentName);
         if (customComponent) {
-            return customComponent.getComponent(false, { excelExportEnabled: false });
+            return customComponent.getComponent(false, { excelExportEnabled: false, showCommandBar: false, showSearchBox: false });
         }
         return null;
     }
