@@ -1779,6 +1779,9 @@
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
+  <data name="TasksOverview_ErrorText" xml:space="preserve">
+    <value>Kunne ikke laste oppgaveoversikt.</value>
+  </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
     <value>Ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter legges inn i den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med bl&#229; og r&#248;d (frav&#230;r) farge i tabellen under. Prosjektallokeringer vises med gr&#248;nn farge. Fargestyrken til allokeringen baserer seg på allokeringsprosenten.</value>
   </data>
@@ -1862,6 +1865,9 @@
   </data>
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Laster prosjektets faser...</value>
+  </data>
+  <data name="TasksOverview_LoadingText" xml:space="preserve">
+    <value>Laster oppgaveoversikt...</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>

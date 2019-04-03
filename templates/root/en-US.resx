@@ -1776,6 +1776,9 @@
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
   </data>
+  <data name="TasksOverview_ErrorText" xml:space="preserve">
+    <value>Could not load tasks overview module.</value>
+  </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
     <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue and red (absence) color in the table below. Project allocations are green. The color density of an item is an indication of the allocation percentage.</value>
   </data>
@@ -1859,6 +1862,9 @@
   </data>
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Loading project phases...</value>
+  </data>
+  <data name="TasksOverview_LoadingText" xml:space="preserve">
+    <value>Loading tasks overview...</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
