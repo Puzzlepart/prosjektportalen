@@ -1,5 +1,9 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
+import { TaskModel } from "./TaskModel";
+import ITasksOverviewData from "./ITasksOverviewData";
 
 export default interface ITasksOverviewState extends IBaseWebPartState {
-    tasks?: any[];
+    activeFilters: { [key: string]: string[] };
+    data?: ITasksOverviewData;
+    selectedTask?: TaskModel;
 }

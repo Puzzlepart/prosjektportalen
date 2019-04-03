@@ -26,8 +26,8 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
                     isBlocking={false}
                     onDismiss={this.props.onDismiss}>
                     <div style={{ padding: 50, maxWidth: 400 }}>
-                        {this._renderHeader()}
-                        {this._renderBody()}
+                        {this.renderHeader()}
+                        {this.renderBody()}
                     </div>
                 </Modal >
             );
@@ -38,12 +38,11 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
     /***
      * Renders the modal header
      */
-    protected _renderHeader() {
+    protected renderHeader() {
+        const { task } = this.props;
         return (
             <div>
-                {/* <h3>
-                    {allocation.role || allocation.absence} ({allocation.allocationPercentage}%)
-                </h3> */}
+                <h3>{task.title}</h3>
             </div>
         );
     }
@@ -51,32 +50,50 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
     /**
      * Renders the modal body
      */
-    protected _renderBody() {
+    protected renderBody() {
+        const { task } = this.props;
+        const { item } = task;
         return (
             <div>
-                {/* {allocation.workDescription &&
+                {item.RefinableString52 &&
                     <p>
-                        <span>{allocation.workDescription}</span>
+                        <b>Fase:</b>&nbsp;
+                        <span>{item.RefinableString52}</span>
+                    </p>
+                }
+                {item.AssignedTo &&
+                    <p>
+                        <b>Tilordnet til:</b>&nbsp;
+                        <span>{item.AssignedTo}</span>
+                    </p>
+                }
+                {item.StatusOWSCHCS &&
+                    <p>
+                        <b>Status:</b>&nbsp;
+                        <span>{item.StatusOWSCHCS}</span>
+                    </p>
+                }
+                {item.PercentCompleteOWSNMBR &&
+                    <p>
+                        <b>% fullført:</b>&nbsp;
+                        <span>{Math.round(parseFloat(item.PercentCompleteOWSNMBR) * 100)}%</span>
                     </p>
                 }
                 <p>
-                    <b>{__.getResource("String_Resource")}:</b>&nbsp;
-                    <span>{allocation.user.name}</span>
+                    <b>Startdato:</b>&nbsp;
+                    <span>{task.start_time.format("LL")}</span>
                 </p>
                 <p>
-                    <b>{__.getResource("String_From")}:</b>&nbsp;
-                    <span>{allocation.start_time.format("LL")}</span>
+                    <b>Forfallsdato:</b>&nbsp;
+                    <span>{task.end_time.format("LL")}</span>
                 </p>
                 <p>
-                    <b>{__.getResource("String_To")}:</b>&nbsp;
-                    <span>{allocation.end_time.format("LL")}</span>
+                    <b>{__.getResource("String_Project")}:</b>&nbsp;
+                    <a href={item.SPWebUrl} style={{ outline: "none" }} target="_blank"><span>{item.SiteTitle}</span></a>
                 </p>
-                {allocation.project && allocation.project.url &&
-                    <p>
-                        <b>{__.getResource("String_Project")}:</b>&nbsp;
-                        <a href={allocation.project.url} style={{ outline: "none" }} target="_blank"><span>{allocation.project.name}</span></a>
-                    </p>
-                } */}
+                <p style={{ marginTop: 20 }}>
+                    <a href={item.Path} style={{ outline: "none" }} target="_blank"><span>Gå til elementet (åpnes i ny fane)</span></a>
+                </p>
             </div>
         );
     }

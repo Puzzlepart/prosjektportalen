@@ -54,7 +54,7 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
      * Render filter items
      */
     private renderItems() {
-        return this.state.items.map((props, key) => <FilterItem key={key} {...props} onChanged={(event, checked) => this.onChanged(props, checked)} />);
+        return this.state.items.map((props, key) => <FilterItem key={key} {...props} onChanged={(_event, checked) => this.onChanged(props, checked)} />);
     }
 
     /**

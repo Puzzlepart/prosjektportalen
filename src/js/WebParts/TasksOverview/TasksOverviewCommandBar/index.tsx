@@ -2,15 +2,17 @@
 import * as React from "react";
 import __ from "../../../Resources";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
+import { IContextualMenuItem, ContextualMenuItemType } from "office-ui-fabric-react/lib/ContextualMenu";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ITasksOverviewCommandBarProps from "./ITasksOverviewCommandBarProps";
-// import * as array_unique from "array-unique";
+import ITasksOverviewCommandBarState from "./ITasksOverviewCommandBarState";
+import FilterPanel from "../../@Components/FilterPanel";
 //#endregion
 
-export default class TasksOverviewCommandBar extends React.Component<ITasksOverviewCommandBarProps, {}> {
+export default class TasksOverviewCommandBar extends React.Component<ITasksOverviewCommandBarProps, ITasksOverviewCommandBarState> {
     public static displayName = "TasksOverviewCommandBar";
-    protected _items: IContextualMenuItem[];
-    protected _farItems: IContextualMenuItem[];
+    protected items: IContextualMenuItem[];
+    protected farItems: IContextualMenuItem[];
 
     /**
      * Constructor
@@ -19,39 +21,56 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
      */
     constructor(props: ITasksOverviewCommandBarProps) {
         super(props);
-        this._initItems(props);
+        this.state = {};
     }
 
     /**
-     * Component will update
-     *
-     * @param {ITasksOverviewCommandBarProps} newProps New props
+     * Get far items
      */
-    public componentWillUpdate(newProps: ITasksOverviewCommandBarProps) {
-        this._initItems(newProps);
+    protected getFarItems(): IContextualMenuItem[] {
+        return [{
+            key: "Filter",
+            name: "Filter",
+            iconOnly: true,
+            iconProps: { iconName: "Filter" },
+            itemType: ContextualMenuItemType.Header,
+            onClick: this.onOpenFilerPanel,
+        }];
+    }
+
+    @autobind
+    protected onOpenFilerPanel(event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.setState((prevState: ITasksOverviewCommandBarState) => ({ isFilterPanelOpen: !prevState.isFilterPanelOpen }));
+    }
+
+    @autobind
+    protected onDismissFilterPanel() {
+        this.setState({ isFilterPanelOpen: false });
     }
 
     /**
-     * Initialize command bar items
-     *
-     * @param {ITasksOverviewCommandBarProps} props Props
+     * Get far items
      */
-    protected _initItems(props: ITasksOverviewCommandBarProps) {
-        this._items = [];
-        this._farItems = [];
-    }
-
-    /**
-     * Get options for projects, roles and resources
-     */
-    protected _getOptions() {
-        return {};
+    protected getItems(): IContextualMenuItem[] {
+        return [];
     }
 
     /**
      * Renders the <TasksOverviewCommandBar /> component
      */
     public render(): JSX.Element {
-        return <CommandBar items={this._items} farItems={this._farItems} />;
+        return (
+            <div>
+                <CommandBar items={this.getItems()} farItems={this.getFarItems()} />
+                <FilterPanel
+                    isOpen={this.state.isFilterPanelOpen}
+                    isLightDismiss={true}
+                    onDismiss={this.onDismissFilterPanel}
+                    filters={this.props.filters}
+                    onFilterChange={this.props.onFilterChange} />
+            </div>
+        );
     }
 }
