@@ -1,12 +1,10 @@
 import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { IListProps } from "../@Components/List";
-import DataSource from "../DataSource";
 
 export default interface IExperienceLogProps extends IBaseWebPartProps, IListProps {
     queryTemplate?: string;
     dataSourceName?: string;
-    dataSource?: DataSource;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
