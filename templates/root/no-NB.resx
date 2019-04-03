@@ -147,6 +147,9 @@
   <data name="Navigation_RiskOverview_Title" xml:space="preserve">
     <value>Risikooversikt</value>
   </data>
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
+  </data>
   <data name="Navigation_PortfolioStats_Title" xml:space="preserve">
     <value>Porteføljeinnsikt</value>
   </data>
@@ -2252,6 +2255,9 @@
   </data>
   <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
     <value>Ressursallokering</value>
+  </data>
+  <data name="WebPart_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
   </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
