@@ -9,6 +9,7 @@ var gulp = require("gulp"),
     livereload = require("gulp-livereload"),
     config = require("./@configuration.js");
 
+let buildTimeout;
 
 gulp.task("watch", (done) => {
     const argv = require("yargs").argv;
@@ -29,18 +30,30 @@ gulp.task("watch", (done) => {
     }
 
     watch(config.globs.js).on("change", () => {
-        runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
-            if (!argv.skipUpload) {
-                uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
-            }
-        });
+        if (buildTimeout) {
+            clearTimeout(buildTimeout);
+            buildTimeout = null;
+        }
+        buildTimeout = setTimeout(() => {
+            runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
+                if (!argv.skipUpload) {
+                    uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
+                }
+            });
+        }, 500);
     });
-    watch(config.globs.styles).on("change", () => {
-        runSequence("packageStyles", () => {
-            if (!argv.skipUpload) {
-                uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
-            }
-        });
+    watch(["./src/**/components/*.styl"]).on("change", () => {
+        if (buildTimeout) {
+            clearTimeout(buildTimeout);
+            buildTimeout = null;
+        }
+        buildTimeout = setTimeout(() => {
+            runSequence("packageStyles", () => {
+                if (!argv.skipUpload) {
+                    uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
+                }
+            });
+        }, 500);
     });
     watch(config.globs.resxJson).on("change", () => {
         if (!argv.skipUpload) {

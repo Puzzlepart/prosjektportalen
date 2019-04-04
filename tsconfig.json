@@ -32,7 +32,10 @@
         "experimentalDecorators": true
     },
     "include": [
-        "src/**/*",
-        "node_modules/**/*"
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "lib"
     ]
 }
