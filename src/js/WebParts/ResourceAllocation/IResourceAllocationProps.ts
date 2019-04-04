@@ -33,20 +33,20 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
     dataSourceName: "RESOURCEALLOCATION",
     filterColumns: [
         {
-            key: "Project",
-            fieldName: "Project",
+            key: "project.name",
+            fieldName: "project.name",
             name: __.getResource("String_Project"),
             minWidth: 0,
         },
         {
-            key: "Resource",
-            fieldName: "Resource",
+            key: "user.name",
+            fieldName: "user.name",
             name: __.getResource("String_Resource"),
             minWidth: 0,
         },
         {
-            key: "Role",
-            fieldName: "Role",
+            key: "role",
+            fieldName: "role",
             name: __.getResource("String_Role"),
             minWidth: 0,
         },

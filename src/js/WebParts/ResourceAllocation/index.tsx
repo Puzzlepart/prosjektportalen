@@ -17,7 +17,7 @@ import { IFilterItemProps, IFilterProps } from "../@Components/FilterPanel";
 import { HeaderLabelFormats } from "./HeaderLabelFormats";
 import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
 import DataSourceService from "../../Services/DataSourceService";
-import { getObjectValue } from ".../../Helpers";
+import { getObjectValue } from "../../Helpers";
 //#endregion
 
 
@@ -47,9 +47,8 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         try {
             const data = await this.fetchData();
             this.setState({ ...data, isLoading: false });
-        } catch (err) {
-            console.log(err);
-            this.setState({ isLoading: false });
+        } catch (error) {
+            this.setState({ error, isLoading: false });
         }
     }
 
@@ -64,11 +63,12 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                     label={__.getResource("ResourceAllocation_LoadingText")} />
             );
         }
-        const data = this.getTimelineData(this.state);
-
-        if (data.groups.length === 0 || data.items.length === 0) {
+        if (this.state.error) {
             return <MessageBar>{__.getResource("ResourceAllocation_ErrorText")}</MessageBar>;
         }
+
+        const data = this.getTimelineData(this.state);
+
         return (
             <div>
                 <ResourceAllocationCommandBar filters={this.getFilters()} onFilterChange={this.onFilterChange} />
@@ -121,7 +121,6 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
      * Get filter items for column
      *
      * @param {IColumn} column Column
-     * @param {ITasksOverviewData} data Data
      */
     private getFilterItems(column: IColumn) {
         let values = this.state.allocations.map(alloc => getObjectValue<string>(alloc, column.fieldName, ""));
@@ -132,56 +131,43 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
 
     /**
      * Get filters
-     *
-     * @param {ITasksOverviewData} data Data
      */
     private getFilters(): IFilterProps[] {
         return this.props.filterColumns.map(column => ({ column, items: this.getFilterItems(column) }));
     }
 
     /**
+    * Get filtered allocations
+    *
+    * @param {ProjectResourceAllocation[]} allocations Allocations
+    * @param {Object} activeFilters Active filters
+    */
+    private getFilteredAllocations(allocations: ProjectResourceAllocation[], activeFilters: { [fieldName: string]: string[] }): ProjectResourceAllocation[] {
+        allocations = Object.keys(activeFilters).reduce((_allocations, fieldName) => {
+            return _allocations.filter(_alloc => {
+                return activeFilters[fieldName].filter(_filterValue => {
+                    return getObjectValue(_alloc, fieldName, "").indexOf(_filterValue) !== -1;
+                }).length > 0;
+            });
+        }, allocations);
+        return allocations;
+    }
+
+    /**
      * Get data for the timeline
      */
     private getTimelineData({ users, allocations, activeFilters }: IResourceAllocationState) {
-        console.log(activeFilters);
-        const items = allocations
-            .filter(alloc => {
-                if (!(alloc.user)) {
-                    return false;
-                }
-                // if (selected) {
-                //     if (selected.project) {
-                //         return alloc.project && (alloc.project.name === selected.project);
-                //     }
-                //     if (selected.role) {
-                //         return (alloc.role === selected.role);
-                //     }
-                // }
-                return true;
-            })
-            .map((alloc, idx) => {
-                return {
-                    id: idx,
-                    title: alloc.toString(),
-                    group: alloc.user.id,
-                    type: alloc.type,
-                    ...alloc,
-                };
-            });
-
-        const groups = users
-            .map(user => ({ id: user.id, title: user.name }))
-            .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
-            .filter((_grp) => {
-                // if (selected) {
-                //     if (selected.user) {
-                //         return grp.id === selected.user.id;
-                //     }
-                //     return items.filter(alloc => alloc.user.id === grp.id).length > 0;
-                // }
-                return true;
-            });
-
+        allocations = this.getFilteredAllocations(allocations, activeFilters);
+        const items = allocations.map((alloc, idx) => ({
+            id: idx,
+            title: alloc.toString(),
+            group: getObjectValue<number>(alloc, "user.id", -1),
+            type: alloc.type,
+            ...alloc,
+        }));
+        let groups = users.map(user => ({ id: user.id, title: user.name }));
+        groups = groups.sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0));
+        groups = groups.filter(grp => allocations.filter(alloc => getObjectValue<number>(alloc, "user.id", -1) === grp.id).length > 0);
         return { groups, items };
     }
 
@@ -190,7 +176,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
      */
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
-        const itemOpacity = item.allocationPercentage < 30 ? 0.3 : item.allocationPercentage / 100;
+        const itemOpacity = item.allocationPercentage < 30 ? 0.3 : (item.allocationPercentage / 100);
         const itemColor = item.allocationPercentage < 40 ? "#000" : "#fff";
         const props = getItemProps({
             style: {
@@ -220,7 +206,8 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 );
             }
             case ProjectAllocationType.Absence: {
-                const portfolioColorRGB = item.absence === __.getResource("Choice_GtResourceAbsence_Leave") ? "205, 92, 92" : "26,111,179"; // Use red color if type=leave, else use blue portfolio color
+                const isLeave = item.absence === __.getResource("Choice_GtResourceAbsence_Leave");
+                const portfolioColorRGB = isLeave ? "205, 92, 92" : "26,111,179"; // Use red color if type=leave, else use blue portfolio color
                 return (
                     <div
                         key={props.key}
@@ -270,21 +257,34 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
             this.fetchAvailabilityItems(),
         ]);
 
-        // Mapping allocations and availability
-        const availability = itemsAvailability.map(item => {
-            const portfolioAbsence = new ProjectResourceAllocation(item.GtResourceUser.Title, item.GtStartDate, item.GtEndDate, item.GtResourceLoad, ProjectAllocationType.Absence, item.Title, item.GtResourceAbsenceComment);
+        const portfolioAbsenceItems = itemsAvailability.map(item => {
+            const portfolioAbsence = new ProjectResourceAllocation(
+                item.GtResourceUser.Title,
+                item.GtStartDate,
+                item.GtEndDate,
+                item.GtResourceLoad,
+                ProjectAllocationType.Absence,
+                item.Title,
+                item.GtResourceAbsenceComment,
+            );
             portfolioAbsence.absence = item.GtResourceAbsence;
             return portfolioAbsence;
         });
-        const allocations = [
-            ...availability,
-            ...searchResult.map(res => {
-                const projectAllocation = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation, res.Title, res.GtResourceAbsenceCommentOWSTEXT);
-                projectAllocation.project = { name: res.SiteTitle, url: res.SPWebUrl };
-                projectAllocation.role = res.RefinableString72;
-                return projectAllocation;
-            }),
-        ];
+        const projectAllocations = searchResult.map(res => {
+            const projectAllocation = new ProjectResourceAllocation(
+                res.RefinableString71, res.GtStartDateOWSDATE,
+                res.GtEndDateOWSDATE,
+                res.GtResourceLoadOWSNMBR,
+                ProjectAllocationType.ProjectAllocation,
+                res.Title,
+                res.GtResourceAbsenceCommentOWSTEXT,
+            );
+            projectAllocation.project = { name: res.SiteTitle, url: res.SPWebUrl };
+            projectAllocation.role = res.RefinableString72;
+            return projectAllocation;
+        });
+
+        const allocations = [].concat(portfolioAbsenceItems, projectAllocations);
 
         let users: Array<ProjectUser> = [];
         let userId = 0;
@@ -306,7 +306,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
      * Searches for allocation items using sp.search
      */
     private async searchAllocationItems(): Promise<any[]> {
-        let queryTemplate;
+        let queryTemplate: string;
         if (this.props.queryTemplate) {
             queryTemplate = this.props.queryTemplate;
         } else {
@@ -321,7 +321,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 throw err;
             }
         } else {
-            return [];
+            throw null;
         }
     }
 
