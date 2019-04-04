@@ -19,7 +19,6 @@ import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
 import List from "../@Components/List";
 import { loadJsonConfiguration } from "../../Util";
-import DataSource from "../DataSource";
 
 /**
  * Risk Matrix
@@ -341,18 +340,20 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
      */
     protected async fetchData(): Promise<{ data: IRiskMatrixData, selectedViewId?: string }> {
         const { dataSourceName, viewName } = this.props;
-        const [dataSource] = await this.dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
-
         let data = { ...this.state.data };
-
         if (!data) {
             data = { items: [], views: null };
         }
         let selectedView;
-        const query = dataSource ? dataSource.GtDpSearchQuery : "";
-        const queryTemplate = (this.props.dataSource === DataSource.SearchCustom && this.props.queryTemplate) ? this.props.queryTemplate : query;
+        let queryTemplate;
+        if (this.props.queryTemplate) {
+            queryTemplate = this.props.queryTemplate;
+        } else {
+            const [dataSource] = await this.dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
+            queryTemplate = dataSource.GtDpSearchQuery;
+        }
 
-        if (queryTemplate !== "") {
+        if (queryTemplate) {
             const spSearchItems = await this.searchItems(queryTemplate);
             data.items = spSearchItems.map(item => {
                 const risk = new RiskElementModel(item.ListItemID, item.Title, item.GtRiskProbabilityOWSNMBR, item.GtRiskConsequenceOWSNMBR, item.GtRiskProbabilityPostActionOWSNMBR, item.GtRiskConsequencePostActionOWSNMBR);

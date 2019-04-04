@@ -1,7 +1,6 @@
 import __ from "../../Resources";
 import IRiskMatrixData from "./IRiskMatrixData";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import DataSource from "../DataSource";
 
 export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLElement> {
     data?: IRiskMatrixData;
@@ -11,7 +10,6 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     showEmptyMessage?: boolean;
     showViewSelector?: boolean;
     hideLabelsBreakpoint?: number;
-    dataSource?: DataSource;
     dataSourceName?: string;
     queryTemplate?: string;
     viewName?: string;

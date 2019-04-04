@@ -4,11 +4,11 @@ import { IListProps } from "../@Components/List";
 
 export default interface IExperienceLogProps extends IBaseWebPartProps, IListProps {
     queryTemplate?: string;
-    dataSource?: string;
+    dataSourceName?: string;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
-    dataSource: "LESSONSLOG",
+    dataSourceName: "LESSONSLOG",
     columns: [{
         key: "Title",
         fieldName: "Title",
