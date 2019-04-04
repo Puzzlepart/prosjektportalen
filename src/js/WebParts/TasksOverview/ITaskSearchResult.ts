@@ -7,7 +7,7 @@ export interface ITaskSearchResult {
     StatusOWSCHCS: string;
     PriorityOWSCHCS: string;
     PercentCompleteOWSNMBR: string;
-    RefinableString52: string;
+    GtProjectPhase: string;
     AssignedTo: string;
     Created: string;
     DueDateOWSDATE: string;

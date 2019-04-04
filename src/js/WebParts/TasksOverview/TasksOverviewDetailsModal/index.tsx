@@ -1,5 +1,5 @@
-import * as React from "react";
 import __ from "../../../Resources";
+import * as React from "react";
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import ITasksOverviewDetailsModalProps from "./ITasksOverviewDetailsModalProps";
 
@@ -25,9 +25,10 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
                     isOpen={true}
                     isBlocking={false}
                     onDismiss={this.props.onDismiss}>
-                    <div style={{ padding: 50, maxWidth: 400 }}>
+                    <div className="pp-task-overview-details-modal">
                         {this.renderHeader()}
                         {this.renderBody()}
+                        <div className="pp-task-overview-details-modal-close-btn" onClick={_event => this.props.onDismiss()}>x</div>
                     </div>
                 </Modal >
             );
@@ -41,7 +42,7 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
     protected renderHeader() {
         const { task } = this.props;
         return (
-            <div>
+            <div className="pp-task-overview-details-modal-header">
                 <h3>{task.title}</h3>
             </div>
         );
@@ -54,46 +55,38 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
         const { task } = this.props;
         const { item } = task;
         return (
-            <div>
-                {item.RefinableString52 &&
-                    <p>
-                        <b>Fase:</b>&nbsp;
-                        <span>{item.RefinableString52}</span>
-                    </p>
-                }
-                {item.AssignedTo &&
-                    <p>
-                        <b>Tilordnet til:</b>&nbsp;
-                        <span>{item.AssignedTo}</span>
-                    </p>
-                }
-                {item.StatusOWSCHCS &&
-                    <p>
-                        <b>Status:</b>&nbsp;
+            <div className="pp-task-overview-details-modal-body">
+                <div hidden={!item.GtProjectPhase}>
+                    <b>{__.getResource("SiteFields_GtProjectPhase_DisplayName")}:</b>&nbsp;
+                    <span>{item.GtProjectPhase}</span>
+                </div>
+                <div hidden={!item.AssignedTo}>
+                    <b>{__.getResource("SiteFields_AssignedTo_DisplayName")}:</b>&nbsp;
+                    <span>{item.AssignedTo}</span>
+                </div>
+                <div hidden={!item.StatusOWSCHCS}>
+                    <b>{__.getResource("SiteFields_Status_DisplayName")}:</b>&nbsp;
                         <span>{item.StatusOWSCHCS}</span>
-                    </p>
-                }
-                {item.PercentCompleteOWSNMBR &&
-                    <p>
-                        <b>% fullført:</b>&nbsp;
+                </div>
+                <div hidden={!item.PercentCompleteOWSNMBR}>
+                    <b>{__.getResource("SiteFields_PercentComplete_DisplayName")}:</b>&nbsp;
                         <span>{Math.round(parseFloat(item.PercentCompleteOWSNMBR) * 100)}%</span>
-                    </p>
-                }
-                <p>
-                    <b>Startdato:</b>&nbsp;
+                </div>
+                <div>
+                    <b>{__.getResource("SiteFields_StartDate_DisplayName")}:</b>&nbsp;
                     <span>{task.start_time.format("LL")}</span>
-                </p>
-                <p>
-                    <b>Forfallsdato:</b>&nbsp;
+                </div>
+                <div>
+                    <b>{__.getResource("SiteFields_DueDate_DisplayName")}:</b>&nbsp;
                     <span>{task.end_time.format("LL")}</span>
-                </p>
-                <p>
+                </div>
+                <div>
                     <b>{__.getResource("String_Project")}:</b>&nbsp;
-                    <a href={item.SPWebUrl} style={{ outline: "none" }} target="_blank"><span>{item.SiteTitle}</span></a>
-                </p>
-                <p style={{ marginTop: 20 }}>
-                    <a href={item.Path} style={{ outline: "none" }} target="_blank"><span>Gå til elementet (åpnes i ny fane)</span></a>
-                </p>
+                    <a href={item.SPWebUrl}target="_blank"><span>{item.SiteTitle}</span></a>
+                </div>
+                <div style={{ marginTop: 20 }}>
+                    <a href={item.Path} target="_blank"><span>{__.getResource("ItemLink_Label_NewTab")}</span></a>
+                </div>
             </div>
         );
     }

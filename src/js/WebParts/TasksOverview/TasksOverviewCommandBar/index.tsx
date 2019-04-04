@@ -7,6 +7,7 @@ import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ITasksOverviewCommandBarProps from "./ITasksOverviewCommandBarProps";
 import ITasksOverviewCommandBarState from "./ITasksOverviewCommandBarState";
 import FilterPanel from "../../@Components/FilterPanel";
+import getObjectValue from "../../../Helpers";
 //#endregion
 
 export default class TasksOverviewCommandBar extends React.Component<ITasksOverviewCommandBarProps, ITasksOverviewCommandBarState> {
@@ -21,7 +22,32 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
      */
     constructor(props: ITasksOverviewCommandBarProps) {
         super(props);
-        this.state = {};
+        this.state = { isFilterPanelOpen: false };
+    }
+
+    /**
+     * Get items
+     */
+    protected getItems(): IContextualMenuItem[] {
+        const subItems = this.props.groupByOptions.map(gb => ({
+            key: gb.fieldName,
+            fieldName: gb.fieldName,
+            name: gb.name,
+            onClick: (event: React.MouseEvent<any>) => {
+                event.preventDefault();
+                this.props.onGroupByChanged(gb);
+            },
+        }));
+        return [
+            {
+                key: "Group",
+                name: getObjectValue(this.props, "groupBy.name", ""),
+                iconProps: { iconName: "GroupedList" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: event => event.preventDefault(),
+                subMenuProps: { items: subItems },
+            },
+        ];
     }
 
     /**
@@ -48,13 +74,6 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
     @autobind
     protected onDismissFilterPanel() {
         this.setState({ isFilterPanelOpen: false });
-    }
-
-    /**
-     * Get far items
-     */
-    protected getItems(): IContextualMenuItem[] {
-        return [];
     }
 
     /**

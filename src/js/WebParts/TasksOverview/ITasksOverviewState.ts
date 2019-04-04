@@ -1,9 +1,11 @@
 import { IBaseWebPartState } from "../@BaseWebPart";
 import { TaskModel } from "./TaskModel";
-import ITasksOverviewData from "./ITasksOverviewData";
+import { ITaskSearchResult } from "./ITaskSearchResult";
 
 export default interface ITasksOverviewState extends IBaseWebPartState {
     activeFilters: { [fieldName: string]: string[] };
-    data?: ITasksOverviewData;
+    searchTerm?: string;
+    groupBy: { fieldName: string, name: string };
+    items?: ITaskSearchResult[];
     selectedTask?: TaskModel;
 }

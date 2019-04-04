@@ -2,13 +2,15 @@
 import __ from "../../Resources";
 import * as React from "react";
 import * as moment from "moment";
+import { SearchQuery } from "@pnp/sp";
+import { LogLevel, Logger } from "@pnp/logging";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import ITasksOverviewProps, { TasksOverviewDefaultProps } from "./ITasksOverviewProps";
 import ITasksOverviewState from "./ITasksOverviewState";
-import BaseWebPart from "../@BaseWebPart";
 import TasksOverviewCommandBar from "./TasksOverviewCommandBar";
 import TasksOverviewDetailsModal from "./TasksOverviewDetailsModal";
 import SearchService from "../../Services/SearchService";
@@ -17,18 +19,22 @@ import { TaskModel } from "./TaskModel";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { ITaskSearchResult } from "./ITaskSearchResult";
 import { IFilterItemProps } from "../@Components/FilterPanel/FilterItem";
-import ITasksOverviewData from "./ITasksOverviewData";
 import { IFilterProps } from "../@Components/FilterPanel/Filter";
 import getObjectValue from "../../Helpers";
+import ITasksOverviewData from "./ITasksOverviewData";
+import TaskOverviewItem from "./TaskOverviewItem";
 //#endregion
 
+
+const LOG_TEMPLATE = "(TasksOverview) {0}: {1}";
 
 /**
  * Component: TasksOverview
  */
-export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITasksOverviewState> {
+export default class TasksOverview extends React.Component<ITasksOverviewProps, ITasksOverviewState> {
     public static displayName = "TasksOverview";
     public static defaultProps = TasksOverviewDefaultProps;
+    private searchDelay: number;
 
     /**
      * Constructor
@@ -36,18 +42,24 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
      * @param {ITasksOverviewProps} props Props
      */
     constructor(props: ITasksOverviewProps) {
-        super(props, { activeFilters: {}, isLoading: true });
+        super(props);
+        this.state = {
+            activeFilters: {},
+            searchTerm: "",
+            groupBy: props.groupByOptions[0],
+            isLoading: true,
+        };
     }
 
     /**
      * Component did mount
      *
-     * Fetching required data, and updating state
+     * Fetching items using [sp.search]
      */
     public async componentDidMount(): Promise<void> {
         try {
-            const data = await this.fetchData();
-            this.setState({ data, isLoading: false });
+            const items = await this.fetchItems(this.props.dataSourceName, this.props.searchQuery);
+            this.setState({ items, isLoading: false });
         } catch (err) {
             this.setState({ isLoading: false });
         }
@@ -60,30 +72,75 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
         if (this.state.isLoading) {
             return <Spinner type={SpinnerType.large} label={__.getResource("TasksOverview_LoadingText")} />;
         }
-        if (!this.state.data) {
+        if (!this.state.items) {
             return <MessageBar>{__.getResource("TasksOverview_ErrorText")}</MessageBar>;
         }
 
-        const filteredData = this.getFilteredData();
+        const data = this.getData(this.state.items);
+        const filteredData = this.getFilteredData(data);
 
         return (
             <div>
-                <TasksOverviewCommandBar filters={this.getFilters()} onFilterChange={this.onFilterChange} />
+                <TasksOverviewCommandBar
+                    filters={this.getFilters(data)}
+                    groupByOptions={this.props.groupByOptions}
+                    groupBy={this.state.groupBy}
+                    onFilterChange={this.onFilterChange}
+                    onGroupByChanged={this.onGroupByChanged} />
+                <SearchBox
+                    labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
+                    onChanged={this.onSearch} />
                 <Timeline
-                    groups={filteredData.projects}
+                    groups={filteredData.groups}
                     items={filteredData.tasks}
+                    stickyHeader={true}
                     stackItems={true}
                     canMove={false}
                     canChangeGroup={false}
                     sidebarWidth={220}
+                    headerLabelGroupHeight={0}
+                    lineHeight={48}
+                    itemHeightRatio={0.8}
                     defaultTimeStart={moment().add(...this.props.defaultTimeStart)}
                     defaultTimeEnd={moment().add(...this.props.defaultTimeEnd)}
-                    itemRenderer={this.timelineItemRenderer}                >
+                    headerLabelFormats={{
+                        yearShort: "YY",
+                        yearLong: "YYYY",
+                        monthShort: "MM/YY",
+                        monthMedium: "MM/YYYY",
+                        monthMediumLong: "MMM YYYY",
+                        monthLong: "MMMM YYYY",
+                        dayShort: "L",
+                        dayLong: "dddd, LL",
+                        hourShort: "HH",
+                        hourMedium: "HH:00",
+                        hourMediumLong: "L, HH:00",
+                        hourLong: "dddd, LL, HH:00",
+                        time: "LLL",
+                    }}
+                    subHeaderLabelFormats={{
+                        yearShort: "YY",
+                        yearLong: "YYYY",
+                        monthShort: "MM YYYY",
+                        monthMedium: "MMM YYYY",
+                        monthLong: "MMMM YYYY",
+                        dayShort: "D",
+                        dayMedium: "dd D",
+                        dayMediumLong: "ddd, Do",
+                        dayLong: "dddd, Do",
+                        hourShort: "HH",
+                        hourLong: "HH:00",
+                        minuteShort: "mm",
+                        minuteLong: "HH:mm",
+                    }}
+                    itemRenderer={this.timelineItemRenderer}>
                     <TimelineMarkers>
                         <TodayMarker />
                     </TimelineMarkers>
                 </Timeline>
-                <TasksOverviewDetailsModal task={this.state.selectedTask} onDismiss={this.onTasksOverviewDetailsModalDismiss} />
+                <TasksOverviewDetailsModal
+                    task={this.state.selectedTask}
+                    onDismiss={this.onTasksOverviewDetailsModalDismiss} />
             </div>
         );
     }
@@ -93,25 +150,13 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
    */
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
-        const props = getItemProps(item.itemProps);
-        const itemStyle = {
-            ...props.style,
-            border: "none",
-            cursor: "pointer",
-            outline: "none",
-            background: "rgb(51,153,51)",
-        };
+        const htmlProps = getItemProps(item.itemProps);
         return (
-            <div
-                key={props.key}
-                className={props.className}
-                style={itemStyle}
-                title={itemContext.title}
-                onClick={event => this.onTimelineItemClick(event, item)}>
-                <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
-                    {itemContext.title}
-                </div>
-            </div>
+            <TaskOverviewItem
+                itemProps={htmlProps}
+                item={item}
+                itemContext={itemContext}
+                onItemClick={this.onTimelineItemClick} />
         );
     }
 
@@ -124,35 +169,50 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
         this.setState({ selectedTask: null });
     }
 
-
-
     /**
      * Get filter items for column
      *
      * @param {IColumn} column Column
+     * @param {ITasksOverviewData} data Data
      */
-    private getFilterItems(column: IColumn) {
+    private getFilterItems(column: IColumn, data: ITasksOverviewData) {
         let values = [];
-        getObjectValue<TaskModel[]>(this.state, "data.tasks", []).forEach(task => {
+        data.tasks.forEach(task => {
             let value = getObjectValue<string>(task, `item.${column.fieldName}`, "").split(";");
             values.push(...value);
         });
         let valuesUnique = values.filter((value, index, self) => value && self.indexOf(value) === index);
-        let valuesSorted = valuesUnique.sort((a, b) => a < b ? -1 : (a > b ? 1 : 0));
-        return valuesSorted.map(value => ({
-            name: value,
-            value,
-            selected: getObjectValue<string[]>(this.state, `activeFilters.${column.fieldName}`, []).indexOf(value) !== -1,
-        })) as IFilterItemProps[];
+        let valuesSorted = this.sortItems(valuesUnique, column.fieldName);
+        return valuesSorted.map(value => ({ name: value, value })) as IFilterItemProps[];
     }
 
     /**
      * Get filters
+     *
+     * @param {ITasksOverviewData} data Data
      */
-    private getFilters(): IFilterProps[] {
+    private getFilters(data: ITasksOverviewData): IFilterProps[] {
         return this.props.filterColumns.map(column => {
-            return { column, items: this.getFilterItems(column) };
+            return { column, items: this.getFilterItems(column, data) };
         });
+    }
+
+    /**
+     * On search
+     *
+     * @param {string} searchTerm Search term
+     * @param {number} delayMs Delay in ms
+     */
+    @autobind
+    private onSearch(searchTerm: string, delayMs: number = 500): void {
+        searchTerm = searchTerm.toLowerCase();
+        if (this.searchDelay) {
+            clearTimeout(this.searchDelay);
+        }
+        this.searchDelay = window.setTimeout(() => {
+            Logger.log({ message: String.format(LOG_TEMPLATE, "onSearch", `Updating search term to ${searchTerm}`), level: LogLevel.Info });
+            this.setState({ searchTerm });
+        }, delayMs);
     }
 
     /**
@@ -169,7 +229,19 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
         } else {
             delete activeFilters[column.fieldName];
         }
+        Logger.log({ message: String.format(LOG_TEMPLATE, "onFilterChange", `Filter changed for ${column.fieldName}`), data: activeFilters, level: LogLevel.Info });
         this.setState({ activeFilters });
+    }
+
+    /**
+    * On group by changed
+    *
+    * @param {Object} groupBy Group by
+    */
+    @autobind
+    private onGroupByChanged(groupBy: { fieldName: string, name: string }) {
+        Logger.log({ message: String.format(LOG_TEMPLATE, "onGroupByChanged", `Group by changed to ${groupBy.fieldName}`), level: LogLevel.Info });
+        this.setState({ groupBy });
     }
 
     /**
@@ -177,59 +249,94 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
     *
     * @param {TaskModel[]} tasks Tasks
     * @param {Object} activeFilters Active filters
+    * @param {string} searchTerm Search term
     */
-    private getFilteredTasks(tasks: TaskModel[], activeFilters: { [fieldName: string]: string[] }) {
-        return Object.keys(activeFilters).reduce((_tasks, fieldName) => {
+    private getFilteredTasks(tasks: TaskModel[], activeFilters: { [fieldName: string]: string[] }, searchTerm: string): TaskModel[] {
+        Logger.log({ message: String.format(LOG_TEMPLATE, "getFilteredTasks", "Get filtered tasks"), level: LogLevel.Info });
+        tasks = Object.keys(activeFilters).reduce((_tasks, fieldName) => {
             return _tasks.filter(_task => {
                 return activeFilters[fieldName].filter(_filterValue => {
                     return getObjectValue(_task, `item.${fieldName}`, "").indexOf(_filterValue) !== -1;
                 }).length > 0;
             });
         }, tasks);
+        tasks = tasks.filter(_task => _task.title.toLowerCase().indexOf(searchTerm) !== -1);
+        return tasks;
     }
 
     /**
-     * Get data for the timeline filtered by [activeFilters]
-     */
-    private getFilteredData() {
-        let { data, activeFilters } = ({ ...this.state } as ITasksOverviewState);
-        let tasks = this.getFilteredTasks(data.tasks, activeFilters);
-        let projects = data.projects.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
-        return { projects, tasks };
-    }
-
-    /**
-     * On timeline item click, sets {allocationDisplay} in component state
+     * Sort items, either alphabetically or by a custom sort specified by [customSorts] in props
      *
-     * @param {React.MouseEvent} event Event
+     * @param {string[]} items Items
+     * @param {string} fieldName Field name
+     */
+    private sortItems(items: string[], fieldName: string): string[] {
+        const customSort = getObjectValue<string[]>(this.props, `customSorts.${fieldName}`, null);
+        if (customSort) {
+            items = [...customSort, ""].filter(i => items.indexOf(i) !== -1);
+        } else {
+            items = items.sort((a, b) => a < b ? -1 : (a > b ? 1 : 0));
+        }
+        return items;
+    }
+
+    /**
+     * Get data
+     *
+     * @param {ITaskSearchResult[]} items Items
+     */
+    private getData(items: ITaskSearchResult[]): ITasksOverviewData {
+        Logger.log({ message: String.format(LOG_TEMPLATE, "getData", "Getting data"), level: LogLevel.Info });
+        const groupByValues = items.map(task => getObjectValue(task, this.state.groupBy.fieldName, ""));
+        const groupByValuesUnique = groupByValues.filter((value, index, self) => self.indexOf(value) === index);
+        const groupByValuesSorted = this.sortItems(groupByValuesUnique, this.state.groupBy.fieldName);
+        const groups: { id: number, title: string }[] = groupByValuesSorted.map((title, id) => ({ id, title }));
+        let tasks = items
+            .map((task, id) => {
+                const [group] = groups.filter(grp => grp.title === getObjectValue(task, this.state.groupBy.fieldName, ""));
+                return group ? new TaskModel(id, group.id, task.Title, task.StartDateOWSDATE, task.DueDateOWSDATE, task) : null;
+            })
+            .filter(task => task && task.start_time && task.end_time);
+        return { groups, tasks };
+    }
+
+    /**
+     * Get data for the timeline filtered by [activeFilters] and [searchTerm]
+     *
+     * @param {ITasksOverviewData} data Data
+     */
+    private getFilteredData(data: ITasksOverviewData) {
+        Logger.log({ message: String.format(LOG_TEMPLATE, "getFilteredData", "Getting filtered data"), level: LogLevel.Info });
+        let { activeFilters, searchTerm } = ({ ...this.state } as ITasksOverviewState);
+        let tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm);
+        let groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
+        return { groups, tasks };
+    }
+
+    /**
+     * On timeline item click, sets [selectedTask] in component [state]
+     *
      * @param {TaskModel} task Task
      */
     @autobind
-    private onTimelineItemClick(event: React.MouseEvent<HTMLDivElement>, task: TaskModel) {
-        event.preventDefault();
+    private onTimelineItemClick(task: TaskModel) {
         this.setState({ selectedTask: task });
     }
 
     /**
-     * Fetch data
+     * Fetch items
+     *
+     * @param {string} dataSourceName Data source name
+     * @param {SearchQuery} searchQuery Search confog
      */
-    private async fetchData(): Promise<ITasksOverviewData> {
-        const queryTemplate = await DataSourceService.getSourceByName(this.props.dataSourceName);
+    private async fetchItems(dataSourceName: string, searchQuery: SearchQuery): Promise<ITaskSearchResult[]> {
+        const queryTemplate = await DataSourceService.getSourceByName(dataSourceName);
         if (queryTemplate) {
             try {
-                const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
-                const items = await SearchService.search<ITaskSearchResult[]>(searchSettings);
-                const projects: { id: number, title: string }[] = items
-                    .map(task => task.SiteTitle)
-                    .filter((value, index, self) => self.indexOf(value) === index)
-                    .map((title, id) => ({ id, title }));
-                let tasks = items
-                    .map((task, id) => {
-                        const [group] = projects.filter(grp => grp.title === task.SiteTitle);
-                        return new TaskModel(id, group.id, task.Title, task.StartDateOWSDATE, task.DueDateOWSDATE, task);
-                    })
-                    .filter((task) => task.start_time && task.end_time);
-                return { projects, tasks };
+                const _searchQuery = { QueryTemplate: queryTemplate, ...searchQuery };
+                const items = await SearchService.search<ITaskSearchResult[]>(_searchQuery);
+                Logger.log({ message: String.format(LOG_TEMPLATE, "fetchItems", `Successfully fetched ${items.length} items`), level: LogLevel.Info });
+                return items;
             } catch (err) {
                 return null;
             }

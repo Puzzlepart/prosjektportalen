@@ -699,6 +699,21 @@
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Start Time</value>
   </data>
+  <data name="SiteFields_StartDate_DisplayName" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="SiteFields_DueDate_DisplayName" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="SiteFields_PercentComplete_DisplayName" xml:space="preserve">
+    <value>% complete</value>
+  </data>
+  <data name="SiteFields_Status_DisplayName" xml:space="preserve">
+    <value>Task Status</value>
+  </data>
+  <data name="SiteFields_AssignedTo_DisplayName" xml:space="preserve">
+    <value>Assigned To</value>
+  </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
   </data>
@@ -1763,6 +1778,9 @@
   </data>
   <data name="ProjectList_SearchBoxPrompt" xml:space="preserve">
     <value>Search in projects..</value>
+  </data>
+  <data name="TasksOverview_SearchBoxPrompt" xml:space="preserve">
+    <value>Search tasks..</value>
   </data>
   <data name="ProjectList_LoadingText" xml:space="preserve">
     <value>Loading projects...</value>
@@ -3105,5 +3123,8 @@
   </data>
   <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
     <value>This is a simplified version that does not contain lists for benefit work.</value>
+  </data>
+  <data name="ItemLink_Label_NewTab" xml:space="preserve">
+    <value>Navigate to item (opens in a new tab)</value>
   </data>
 </root>

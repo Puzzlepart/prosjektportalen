@@ -1,16 +1,20 @@
+import __ from "../../Resources";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import { SearchQuery } from "@pnp/sp";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+
 export default interface ITasksOverviewProps extends IBaseWebPartProps {
-    searchConfiguration?: SearchQuery;
+    searchQuery?: SearchQuery;
     dataSourceName?: string;
     filterColumns?: IColumn[];
     defaultTimeStart?: any[];
     defaultTimeEnd?: any[];
+    groupByOptions?: { fieldName: string, name: string }[];
+    customSorts?: { [fieldName: string]: string[] };
 }
 
 export const TasksOverviewDefaultProps: Partial<ITasksOverviewProps> = {
-    searchConfiguration: {
+    searchQuery: {
         Querytext: "*",
         RowLimit: 500,
         TrimDuplicates: false,
@@ -23,7 +27,7 @@ export const TasksOverviewDefaultProps: Partial<ITasksOverviewProps> = {
             "StatusOWSCHCS",
             "PriorityOWSCHCS",
             "PercentCompleteOWSNMBR",
-            "RefinableString52",
+            "GtProjectPhase",
             "AssignedTo",
             "Created",
             "DueDateOWSDATE",
@@ -36,28 +40,47 @@ export const TasksOverviewDefaultProps: Partial<ITasksOverviewProps> = {
         {
             key: "SiteTitle",
             fieldName: "SiteTitle",
-            name: "Prosjekt",
+            name: __.getResource("String_Project"),
             minWidth: 0,
         },
         {
-            key: "RefinableString52",
-            fieldName: "RefinableString52",
-            name: "Fase",
+            key: "GtProjectPhase",
+            fieldName: "GtProjectPhase",
+            name: __.getResource("SiteFields_GtProjectPhase_DisplayName"),
             minWidth: 0,
         },
         {
             key: "StatusOWSCHCS",
             fieldName: "StatusOWSCHCS",
-            name: "Status",
+            name: __.getResource("SiteFields_Status_DisplayName"),
             minWidth: 0,
         },
         {
             key: "AssignedTo",
             fieldName: "AssignedTo",
-            name: "Tilordnet til",
+            name: __.getResource("SiteFields_AssignedTo_DisplayName"),
             minWidth: 0,
         },
     ],
     defaultTimeStart: [-1, "months"],
     defaultTimeEnd: [6, "months"],
+    groupByOptions: [
+        {
+            fieldName: "SiteTitle",
+            name: __.getResource("String_Project"),
+        },
+        {
+            fieldName: "GtProjectPhase",
+            name: __.getResource("SiteFields_GtProjectPhase_DisplayName"),
+        },
+        {
+            fieldName: "StatusOWSCHCS",
+            name: __.getResource("SiteFields_Status_DisplayName"),
+        },
+        {
+            fieldName: "AssignedTo",
+            name: __.getResource("SiteFields_AssignedTo_DisplayName"),
+        },
+    ],
+    customSorts: { GtProjectPhase: ["Ingen fase", "Flere faser", "Konsept", "Planlegge", "Gjennomføre", "Avslutte", "Realisere"] },
 };

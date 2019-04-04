@@ -27,7 +27,7 @@
         </pnp:DataRow>
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">TASKS</pnp:DataValue>
-            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL}</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL} LastModifiedTime>{TODAY-365}</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
