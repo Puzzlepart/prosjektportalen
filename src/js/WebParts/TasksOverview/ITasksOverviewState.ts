@@ -3,7 +3,7 @@ import { TaskModel } from "./TaskModel";
 import ITasksOverviewData from "./ITasksOverviewData";
 
 export default interface ITasksOverviewState extends IBaseWebPartState {
-    activeFilters: { [key: string]: string[] };
+    activeFilters: { [fieldName: string]: string[] };
     data?: ITasksOverviewData;
     selectedTask?: TaskModel;
 }

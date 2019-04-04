@@ -99,12 +99,13 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
             border: "none",
             cursor: "pointer",
             outline: "none",
+            background: "rgb(51,153,51)",
         };
         return (
             <div
                 key={props.key}
                 className={props.className}
-                style={{ ...itemStyle, background: "rgb(51,153,51)" }}
+                style={itemStyle}
                 title={itemContext.title}
                 onClick={event => this.onTimelineItemClick(event, item)}>
                 <div className="rct-item-content" style={{ maxHeight: `${itemContext.dimensions.height}` }}>
@@ -177,18 +178,14 @@ export default class TasksOverview extends BaseWebPart<ITasksOverviewProps, ITas
     * @param {TaskModel[]} tasks Tasks
     * @param {Object} activeFilters Active filters
     */
-    private getFilteredTasks(tasks: TaskModel[], activeFilters: { [key: string]: string[] }) {
-        const activeFiltersKeys = Object.keys(activeFilters);
-        if (activeFiltersKeys.length > 0) {
-            tasks = activeFiltersKeys.reduce((_tasks, key) => {
-                return _tasks.filter(_task => {
-                    return activeFilters[key].filter(_filterValue => {
-                        return getObjectValue(_task, `item.${key}`, "").indexOf(_filterValue) !== -1;
-                    }).length > 0;
-                });
-            }, tasks);
-        }
-        return tasks;
+    private getFilteredTasks(tasks: TaskModel[], activeFilters: { [fieldName: string]: string[] }) {
+        return Object.keys(activeFilters).reduce((_tasks, fieldName) => {
+            return _tasks.filter(_task => {
+                return activeFilters[fieldName].filter(_filterValue => {
+                    return getObjectValue(_task, `item.${fieldName}`, "").indexOf(_filterValue) !== -1;
+                }).length > 0;
+            });
+        }, tasks);
     }
 
     /**
