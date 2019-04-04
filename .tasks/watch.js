@@ -42,7 +42,7 @@ gulp.task("watch", (done) => {
             });
         }, 500);
     });
-    watch(config.globs.styles).on("change", () => {
+    watch(["./src/**/components/*.styl"]).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
             buildTimeout = null;
