@@ -31,7 +31,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     constructor(props: IResourceAllocationProps) {
         super(props, { isLoading: true });
-        moment.locale(__.getResource("MomentDate_Locale"));
     }
 
     /**

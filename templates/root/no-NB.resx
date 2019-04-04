@@ -1886,6 +1886,9 @@
   </data>
   <data name="TasksOverview_LoadingText" xml:space="preserve">
     <value>Laster oppgaveoversikt...</value>
+  </data>  
+  <data name="TasksOverview_InfoText" xml:space="preserve">
+    <value>Kun oppgaver som har satt både Startdato og Forfallsdato vises i denne oversikten. Klikk på elementet for å se flere detaljer om oppgaven.</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>

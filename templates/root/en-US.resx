@@ -1884,6 +1884,9 @@
   <data name="TasksOverview_LoadingText" xml:space="preserve">
     <value>Loading tasks overview...</value>
   </data>
+  <data name="TasksOverview_InfoText" xml:space="preserve">
+    <value>Only tasks that have set both Start date and Due date are shown in this overview. Click on the item to see more details about the task.</value>
+  </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
   </data>

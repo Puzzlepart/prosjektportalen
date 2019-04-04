@@ -90,6 +90,9 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                 <SearchBox
                     labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
                     onChanged={this.onSearch} />
+                <MessageBar>
+                    <div dangerouslySetInnerHTML={{ __html: __.getResource("TasksOverview_InfoText") }}></div>
+                </MessageBar>
                 <Timeline
                     groups={filteredData.groups}
                     items={filteredData.tasks}
@@ -141,7 +144,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                 <TasksOverviewDetailsModal
                     task={this.state.selectedTask}
                     onDismiss={this.onTasksOverviewDetailsModalDismiss} />
-            </div>
+            </div >
         );
     }
 
