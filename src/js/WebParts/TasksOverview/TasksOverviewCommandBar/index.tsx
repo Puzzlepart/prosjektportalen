@@ -7,7 +7,7 @@ import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import ITasksOverviewCommandBarProps from "./ITasksOverviewCommandBarProps";
 import ITasksOverviewCommandBarState from "./ITasksOverviewCommandBarState";
 import FilterPanel from "../../@Components/FilterPanel";
-import getObjectValue from "../../../Helpers";
+import { getObjectValue } from "../../../Helpers";
 //#endregion
 
 export default class TasksOverviewCommandBar extends React.Component<ITasksOverviewCommandBarProps, ITasksOverviewCommandBarState> {

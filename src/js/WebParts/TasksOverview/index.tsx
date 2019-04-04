@@ -20,7 +20,7 @@ import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { ITaskSearchResult } from "./ITaskSearchResult";
 import { IFilterItemProps } from "../@Components/FilterPanel/FilterItem";
 import { IFilterProps } from "../@Components/FilterPanel/Filter";
-import getObjectValue from "../../Helpers";
+import { getObjectValue } from "../../Helpers";
 import ITasksOverviewData from "./ITasksOverviewData";
 import TaskOverviewItem from "./TaskOverviewItem";
 import { HeaderLabelFormats } from "./HeaderLabelFormats";
