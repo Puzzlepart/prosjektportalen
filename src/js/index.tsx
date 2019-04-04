@@ -1,3 +1,5 @@
+//#region Imports
+import __ from "./Resources";
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { initializeIcons } from "@uifabric/icons";
@@ -5,15 +7,11 @@ import { GetSettings } from "./Settings";
 import * as WebParts from "./WebParts";
 import * as Forms from "./Forms";
 import StampVersion from "./Util/StampVersion";
-import { IModalProps } from "office-ui-fabric-react/lib/Modal";
+import * as moment from "moment";
+//#endregion
 
-/**
- * For reasoning behind override, see https://github.com/OfficeDev/office-ui-fabric-react/issues/7874
- *
- */
-declare module "office-ui-fabric-react/lib/Modal" {
-    const Modal: React.StatelessComponent<IModalProps>;
-}
+moment.locale(__.getResource("MomentDate_Locale"));
+
 
 /** If the script was loaded using SP.SOD, we'll set the SOD to loaded */
 if (window["_v_dictSod"]) {
