@@ -23,6 +23,8 @@ import { IFilterProps } from "../@Components/FilterPanel/Filter";
 import getObjectValue from "../../Helpers";
 import ITasksOverviewData from "./ITasksOverviewData";
 import TaskOverviewItem from "./TaskOverviewItem";
+import { HeaderLabelFormats } from "./HeaderLabelFormats";
+import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
 //#endregion
 
 
@@ -106,36 +108,8 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                     itemHeightRatio={0.8}
                     defaultTimeStart={moment().add(...this.props.defaultTimeStart)}
                     defaultTimeEnd={moment().add(...this.props.defaultTimeEnd)}
-                    headerLabelFormats={{
-                        yearShort: "YY",
-                        yearLong: "YYYY",
-                        monthShort: "MM/YY",
-                        monthMedium: "MM/YYYY",
-                        monthMediumLong: "MMM YYYY",
-                        monthLong: "MMMM YYYY",
-                        dayShort: "L",
-                        dayLong: "dddd, LL",
-                        hourShort: "HH",
-                        hourMedium: "HH:00",
-                        hourMediumLong: "L, HH:00",
-                        hourLong: "dddd, LL, HH:00",
-                        time: "LLL",
-                    }}
-                    subHeaderLabelFormats={{
-                        yearShort: "YY",
-                        yearLong: "YYYY",
-                        monthShort: "MM YYYY",
-                        monthMedium: "MMM YYYY",
-                        monthLong: "MMMM YYYY",
-                        dayShort: "D",
-                        dayMedium: "dd D",
-                        dayMediumLong: "ddd, Do",
-                        dayLong: "dddd, Do",
-                        hourShort: "HH",
-                        hourLong: "HH:00",
-                        minuteShort: "mm",
-                        minuteLong: "HH:mm",
-                    }}
+                    headerLabelFormats={HeaderLabelFormats}
+                    subHeaderLabelFormats={SubHeaderLabelFormats}
                     itemRenderer={this.timelineItemRenderer}>
                     <TimelineMarkers>
                         <TodayMarker />
@@ -274,7 +248,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
      * @param {string} fieldName Field name
      */
     private sortItems(items: string[], fieldName: string): string[] {
-        const customSort = getObjectValue<string[]>(this.props, `customSorts.${fieldName}`, null);
+        const customSort = getObjectValue<string[]>(this, `props.customSorts.${fieldName}`, null);
         if (customSort) {
             items = [...customSort, ""].filter(i => items.indexOf(i) !== -1);
         } else {
@@ -284,22 +258,31 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     }
 
     /**
+    * Get groups
+    *
+    * @param {string[]} items Items
+    */
+    private getGroups(items: ITaskSearchResult[]): { id: number, title: string }[] {
+        const groupByValues = items.map(task => getObjectValue(task, this.state.groupBy.fieldName, ""));
+        const groupByValuesUnique = groupByValues.filter((value, index, self) => self.indexOf(value) === index && value.indexOf(";") === -1);
+        const groupByValuesSorted = this.sortItems(groupByValuesUnique, this.state.groupBy.fieldName);
+        const groups: { id: number, title: string }[] = groupByValuesSorted.map((title, id) => ({ id, title }));
+        return groups;
+    }
+
+    /**
      * Get data
      *
      * @param {ITaskSearchResult[]} items Items
      */
     private getData(items: ITaskSearchResult[]): ITasksOverviewData {
         Logger.log({ message: String.format(LOG_TEMPLATE, "getData", "Getting data"), level: LogLevel.Info });
-        const groupByValues = items.map(task => getObjectValue(task, this.state.groupBy.fieldName, ""));
-        const groupByValuesUnique = groupByValues.filter((value, index, self) => self.indexOf(value) === index);
-        const groupByValuesSorted = this.sortItems(groupByValuesUnique, this.state.groupBy.fieldName);
-        const groups: { id: number, title: string }[] = groupByValuesSorted.map((title, id) => ({ id, title }));
-        let tasks = items
-            .map((task, id) => {
-                const [group] = groups.filter(grp => grp.title === getObjectValue(task, this.state.groupBy.fieldName, ""));
-                return group ? new TaskModel(id, group.id, task.Title, task.StartDateOWSDATE, task.DueDateOWSDATE, task) : null;
-            })
-            .filter(task => task && task.start_time && task.end_time);
+        const groups = this.getGroups(items);
+        let tasks = items.map((task, id) => {
+            const [group] = groups.filter(grp => grp.title === getObjectValue(task, this.state.groupBy.fieldName, ""));
+            return group ? new TaskModel(id, group.id, task.Title, task.StartDateOWSDATE, task.DueDateOWSDATE, task) : null;
+        });
+        tasks = tasks.filter(task => task && task.start_time && task.end_time);
         return { groups, tasks };
     }
 
@@ -341,9 +324,11 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                 Logger.log({ message: String.format(LOG_TEMPLATE, "fetchItems", `Successfully fetched ${items.length} items`), level: LogLevel.Info });
                 return items;
             } catch (err) {
+                Logger.log({ message: String.format(LOG_TEMPLATE, "fetchItems", `An error occured retrieving items.`), level: LogLevel.Warning });
                 return null;
             }
         } else {
+            Logger.log({ message: String.format(LOG_TEMPLATE, "fetchItems", `Data source with name ${dataSourceName} not found.`), level: LogLevel.Warning });
             return null;
         }
     }
