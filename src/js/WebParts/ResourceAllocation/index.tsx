@@ -13,11 +13,11 @@ import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
 import * as moment from "moment";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import getObjectValue from "src/js/Helpers";
 import { IFilterItemProps, IFilterProps } from "../@Components/FilterPanel";
 import { HeaderLabelFormats } from "./HeaderLabelFormats";
 import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
-import DataSourceService from "src/js/Services/DataSourceService";
+import DataSourceService from "../../Services/DataSourceService";
+import { getObjectValue } from ".../../Helpers";
 //#endregion
 
 
@@ -279,10 +279,10 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         const allocations = [
             ...availability,
             ...searchResult.map(res => {
-                const projectAbsence = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation, res.Title, res.GtResourceAbsenceCommentOWSTEXT);
-                projectAbsence.project = { name: res.SiteTitle, url: res.SPWebUrl };
-                projectAbsence.role = res.RefinableString72;
-                return projectAbsence;
+                const projectAllocation = new ProjectResourceAllocation(res.RefinableString71, res.GtStartDateOWSDATE, res.GtEndDateOWSDATE, res.GtResourceLoadOWSNMBR, ProjectAllocationType.ProjectAllocation, res.Title, res.GtResourceAbsenceCommentOWSTEXT);
+                projectAllocation.project = { name: res.SiteTitle, url: res.SPWebUrl };
+                projectAllocation.role = res.RefinableString72;
+                return projectAllocation;
             }),
         ];
 
