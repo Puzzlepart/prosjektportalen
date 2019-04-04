@@ -2,7 +2,7 @@
 import __ from "../../Resources";
 import * as React from "react";
 import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import { sp, Site, Web } from "@pnp/sp";
+import { sp, Web } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
@@ -11,16 +11,20 @@ import IResourceAllocationState from "./IResourceAllocationState";
 import { ProjectUser, ProjectResourceAllocation, ProjectAllocationType } from "./ResourceAllocationModels";
 import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
 import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
-import IResourceAllocationCommandBarState from "./ResourceAllocationCommandBar/IResourceAllocationCommandBarState";
-import BaseWebPart from "../@BaseWebPart";
 import * as moment from "moment";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import getObjectValue from "src/js/Helpers";
+import { IFilterItemProps, IFilterProps } from "../@Components/FilterPanel";
+import { HeaderLabelFormats } from "./HeaderLabelFormats";
+import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
+import DataSourceService from "src/js/Services/DataSourceService";
 //#endregion
 
 
 /**
  * Component: ResourceAllocation
  */
-export default class ResourceAllocation extends BaseWebPart<IResourceAllocationProps, IResourceAllocationState> {
+export default class ResourceAllocation extends React.Component<IResourceAllocationProps, IResourceAllocationState> {
     public static displayName = "ResourceAllocation";
     public static defaultProps = ResourceAllocationDefaultProps;
 
@@ -30,8 +34,8 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      * @param {IResourceAllocationProps} props Props
      */
     constructor(props: IResourceAllocationProps) {
-        super(props, { isLoading: true });
-        moment.locale(__.getResource("MomentDate_Locale"));
+        super(props);
+        this.state = { isLoading: true, activeFilters: {} };
     }
 
     /**
@@ -67,26 +71,24 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         }
         return (
             <div>
+                <ResourceAllocationCommandBar filters={this.getFilters()} onFilterChange={this.onFilterChange} />
                 <MessageBar>
                     <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${_spPageContextInfo.siteAbsoluteUrl}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
-                <div className="allocation-cmd-bar">
-                    <ResourceAllocationCommandBar
-                        users={this.state.users}
-                        allocations={this.state.allocations}
-                        selected={this.state.selected}
-                        onSelectionUpdate={this.onSelectionUpdate} />
-                </div>
                 <Timeline
                     groups={data.groups}
                     items={data.items}
                     itemRenderer={this.timelineItemRenderer}
+                    stickyHeader={true}
                     stackItems={true}
                     canMove={false}
                     canChangeGroup={false}
                     sidebarWidth={220}
+                    headerLabelGroupHeight={0}
                     defaultTimeStart={moment().subtract(1, "months")}
-                    defaultTimeEnd={moment().add(1, "years")}>
+                    defaultTimeEnd={moment().add(1, "years")}
+                    headerLabelFormats={HeaderLabelFormats}
+                    subHeaderLabelFormats={SubHeaderLabelFormats}>
                     <TimelineMarkers>
                         <TodayMarker />
                     </TimelineMarkers>
@@ -99,22 +101,62 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     }
 
     /**
+     * On filter change
+     *
+     * @param {IColumn} column Column
+     * @param {IFilterItemProps[]} selectedItems Selected items
+     */
+    @autobind
+    private onFilterChange(column: IColumn, selectedItems: IFilterItemProps[]): void {
+        const { activeFilters } = ({ ...this.state } as IResourceAllocationState);
+        if (selectedItems.length > 0) {
+            activeFilters[column.fieldName] = selectedItems.map(i => i.value);
+        } else {
+            delete activeFilters[column.fieldName];
+        }
+        this.setState({ activeFilters });
+    }
+
+    /**
+     * Get filter items for column
+     *
+     * @param {IColumn} column Column
+     * @param {ITasksOverviewData} data Data
+     */
+    private getFilterItems(column: IColumn) {
+        let values = this.state.allocations.map(alloc => getObjectValue<string>(alloc, column.fieldName, ""));
+        let valuesUnique = values.filter((value, index, self) => value && self.indexOf(value) === index);
+        let valuesSorted = valuesUnique.sort((a, b) => a < b ? -1 : (a > b ? 1 : 0));
+        return valuesSorted.map(value => ({ name: value, value })) as IFilterItemProps[];
+    }
+
+    /**
+     * Get filters
+     *
+     * @param {ITasksOverviewData} data Data
+     */
+    private getFilters(): IFilterProps[] {
+        return this.props.filterColumns.map(column => ({ column, items: this.getFilterItems(column) }));
+    }
+
+    /**
      * Get data for the timeline
      */
-    private getTimelineData({ users, allocations, selected }: IResourceAllocationState) {
+    private getTimelineData({ users, allocations, activeFilters }: IResourceAllocationState) {
+        console.log(activeFilters);
         const items = allocations
             .filter(alloc => {
                 if (!(alloc.user)) {
                     return false;
                 }
-                if (selected) {
-                    if (selected.project) {
-                        return alloc.project && (alloc.project.name === selected.project);
-                    }
-                    if (selected.role) {
-                        return (alloc.role === selected.role);
-                    }
-                }
+                // if (selected) {
+                //     if (selected.project) {
+                //         return alloc.project && (alloc.project.name === selected.project);
+                //     }
+                //     if (selected.role) {
+                //         return (alloc.role === selected.role);
+                //     }
+                // }
                 return true;
             })
             .map((alloc, idx) => {
@@ -130,13 +172,13 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         const groups = users
             .map(user => ({ id: user.id, title: user.name }))
             .sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0))
-            .filter(grp => {
-                if (selected) {
-                    if (selected.user) {
-                        return grp.id === selected.user.id;
-                    }
-                    return items.filter(alloc => alloc.user.id === grp.id).length > 0;
-                }
+            .filter((_grp) => {
+                // if (selected) {
+                //     if (selected.user) {
+                //         return grp.id === selected.user.id;
+                //     }
+                //     return items.filter(alloc => alloc.user.id === grp.id).length > 0;
+                // }
                 return true;
             });
 
@@ -148,16 +190,16 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
      */
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
-        const props = getItemProps(item.itemProps);
         const itemOpacity = item.allocationPercentage < 30 ? 0.3 : item.allocationPercentage / 100;
         const itemColor = item.allocationPercentage < 40 ? "#000" : "#fff";
-        const itemStyle = {
-            ...props.style,
-            color: itemColor,
-            border: "none",
-            cursor: "pointer",
-            outline: "none",
-        };
+        const props = getItemProps({
+            style: {
+                color: itemColor,
+                border: "none",
+                cursor: "pointer",
+                outline: "none",
+            },
+        });
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
                 return (
@@ -165,7 +207,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         key={props.key}
                         className={props.className}
                         style={{
-                            ...itemStyle,
+                            ...props.style,
                             background: "rgb(51,153,51)",
                             backgroundColor: `rgba(51,153,51,${itemOpacity})`,
                         }}
@@ -184,7 +226,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
                         key={props.key}
                         className={props.className}
                         style={{
-                            ...itemStyle,
+                            ...props.style,
                             background: `rgb(${portfolioColorRGB})`,
                             backgroundColor: `rgba(${portfolioColorRGB},${itemOpacity})`,
                         }}
@@ -217,12 +259,6 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
     @autobind
     private onResourceAllocationDetailsModalDismiss() {
         this.setState({ allocationDisplay: null });
-    }
-
-    @autobind
-    private onSelectionUpdate(selected: IResourceAllocationCommandBarState) {
-        event.preventDefault();
-        this.setState({ selected: selected });
     }
 
     /**
@@ -274,9 +310,7 @@ export default class ResourceAllocation extends BaseWebPart<IResourceAllocationP
         if (this.props.queryTemplate) {
             queryTemplate = this.props.queryTemplate;
         } else {
-            const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
-            queryTemplate = dataSource.GtDpSearchQuery;
+            queryTemplate = await DataSourceService.getSourceByName(this.props.dataSourceName);
         }
         if (queryTemplate) {
             try {
