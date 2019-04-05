@@ -16,6 +16,7 @@
         "release": "gulp clean && gulp packageProd && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "postversion": "npm run release",
         "watch": "gulp watch",
+        "watch-minify": "gulp watch --minify",
         "webpack-dev": "webpack --mode development"
     },
     "dependencies": {
