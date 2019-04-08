@@ -70,11 +70,11 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         const data = this.getTimelineData(this.state);
 
         return (
-            <div>
-                <ResourceAllocationCommandBar filters={this.getFilters()} onFilterChange={this.onFilterChange} />
+            <>
                 <MessageBar>
                     <div dangerouslySetInnerHTML={{ __html: String.format(__.getResource("ResourceAllocation_LinkText"), `${_spPageContextInfo.siteAbsoluteUrl}/Lists/ResourceAllocation/AllItems.aspx?Source=${encodeURIComponent(window.location.href)}`) }}></div>
                 </MessageBar>
+                <ResourceAllocationCommandBar filters={this.getFilters()} onFilterChange={this.onFilterChange} />
                 <Timeline
                     groups={data.groups}
                     items={data.items}
@@ -96,7 +96,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 <ResourceAllocationDetailsModal
                     allocation={this.state.allocationDisplay}
                     onDismiss={this.onResourceAllocationDetailsModalDismiss} />
-            </div>
+            </>
         );
     }
 
