@@ -34,7 +34,7 @@ export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, con
             refiners = refiners["results"];
         }
         return {
-            primarySearchResults: items.map(res => ({ ...res, Title: res["SiteTitle"], Path: res.Path.split("/Lists")[0] })),
+            primarySearchResults: items.map(res => ({ ...res, Title: res["Title"] && res["Title"] !== "DispForm.aspx" ? res["Title"] : res["SiteTitle"], Path: res.Path.split("/Lists")[0] })),
             refiners,
         };
     } catch (err) {
