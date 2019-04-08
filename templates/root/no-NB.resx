@@ -147,6 +147,9 @@
   <data name="Navigation_RiskOverview_Title" xml:space="preserve">
     <value>Risikooversikt</value>
   </data>
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
+  </data>
   <data name="Navigation_PortfolioStats_Title" xml:space="preserve">
     <value>Porteføljeinnsikt</value>
   </data>
@@ -164,6 +167,9 @@
   </data>
   <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
     <value>Ressursallokering</value>
+  </data>  
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Områdesider</value>
@@ -228,8 +234,11 @@
   <data name="Lists_ChangeAnalysis_Title" xml:space="preserve">
     <value>Endringsanalyse</value>
   </data>
+  <data name="Lists_MeasurementIndicators_Title" xml:space="preserve">
+    <value>Måleindikatorer</value>
+  </data>
   <data name="Lists_BenefitsFollowup_Title" xml:space="preserve">
-    <value>Gevinstsoppfølging</value>
+    <value>Gevinstoppfølging</value>
   </data>
   <data name="Lists_ProjectStatus_Title" xml:space="preserve">
     <value>Prosjektstatusrapporter</value>
@@ -334,7 +343,7 @@
     <value>Lists/Endringsanalyse</value>
   </data>
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
-    <value>Lists/Gevinstsoppflging</value>
+    <value>Lists/Gevinstoppflging</value>
   </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Lists/Prosjektstatusrapporter</value>
@@ -378,8 +387,11 @@
   <data name="DefaultView_BenefitsAnalysis_Url" xml:space="preserve">
     <value>Lists/Gevinstanalyse og gevinstrealiseringsplan/AllItems.aspx</value>
   </data>
+  <data name="DefaultView_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Mleindikatorer/AllItems.aspx</value>
+  </data>
   <data name="DefaultView_BenefitsFollowup_Url" xml:space="preserve">
-    <value>Lists/Gevinstsoppflging/AllItems.aspx</value>
+    <value>Lists/Gevinstoppflging/AllItems.aspx</value>
   </data>
   <data name="DefaultView_ProjectResources_Url" xml:space="preserve">
     <value>Lists/Prosjektressurser/AllItems.aspx</value>
@@ -491,6 +503,9 @@
   </data>
   <data name="ContentTypes_Endring_Name" xml:space="preserve">
     <value>Endring</value>
+  </data>
+  <data name="ContentTypes_Maaleindikator_Name" xml:space="preserve">
+    <value>Måleindikator</value>
   </data>
   <data name="ContentTypes_Gevinstoppfolging_Name" xml:space="preserve">
     <value>Gevinstoppfølging</value>
@@ -618,6 +633,9 @@
   <data name="ContentTypes_Endring_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
+  <data name="ContentTypes_Maaleindikator_Description" xml:space="preserve">
+    <value>Opprett et nytt listeelement.</value>
+  </data>
   <data name="ContentTypes_Gevinstoppfolging_Description" xml:space="preserve">
     <value>Opprett et nytt listeelement.</value>
   </data>
@@ -686,6 +704,21 @@
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Starttidspunkt</value>
+  </data>
+  <data name="SiteFields_StartDate_DisplayName" xml:space="preserve">
+    <value>Startdato</value>
+  </data>
+  <data name="SiteFields_DueDate_DisplayName" xml:space="preserve">
+    <value>Forfallsdato</value>
+  </data>
+  <data name="SiteFields_PercentComplete_DisplayName" xml:space="preserve">
+    <value>% fullført</value>
+  </data>
+  <data name="SiteFields_Status_DisplayName" xml:space="preserve">
+    <value>Oppgavestatus</value>
+  </data>
+  <data name="SiteFields_AssignedTo_DisplayName" xml:space="preserve">
+    <value>Tilordnet til</value>
   </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Dato og tittel</value>
@@ -846,6 +879,9 @@
   <data name="SiteFields_GtProjectFinanceName_DisplayName" xml:space="preserve">
     <value>Prosjektnavn i økonomisystemet</value>
   </data>
+  <data name="SiteFields_GtProjectLifecycleStatus_DisplayName" xml:space="preserve">
+    <value>Prosjektstatus</value>
+  </data>
   <data name="SiteFields_GtStakeholderInterest_DisplayName" xml:space="preserve">
     <value>Interesse</value>
   </data>
@@ -929,9 +965,6 @@
   </data>
   <data name="SiteFields_GtGainsResponsible_DisplayName" xml:space="preserve">
     <value>Gevinstansvarlig</value>
-  </data>
-  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
-    <value>Måleindikator</value>
   </data>
   <data name="SiteFields_GtStartValue_DisplayName" xml:space="preserve">
     <value>Startverdi</value>
@@ -1250,12 +1283,12 @@
   </data>
   <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
     <value>Ressurs</value>
-  </data>  
+  </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
-    <value>Fravær</value>
+    <value>Allokeringstype</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
-    <value>Kommentar</value>
+    <value>Kommentar til allokering</value>
   </data>
   <data name="SiteFields_LinkTitleResourceAllocationPortfolio_DisplayName" xml:space="preserve">
     <value>Beskrivelse</value>
@@ -1420,6 +1453,9 @@
     <value />
   </data>
   <data name="SiteFields_GtProjectFinanceName_Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SiteFields_GtProjectLifecycleStatus_Description" xml:space="preserve">
     <value />
   </data>
   <data name="SiteFields_GtStakeholderInterest_Description" xml:space="preserve">
@@ -1735,7 +1771,7 @@
     <value></value>
   </data>
   <data name="SiteFields_GtResourceAbsence_Description" xml:space="preserve">
-    <value>Hva er grunnen til fraværet?</value>
+    <value>Hvilken type allokering eller fravær er dette?</value>
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_Description" xml:space="preserve">
     <value>Eventuelle kommentarer</value>
@@ -1748,6 +1784,9 @@
   </data>
   <data name="ProjectList_SearchBoxPrompt" xml:space="preserve">
     <value>Søk i prosjekter..</value>
+  </data>  
+  <data name="TasksOverview_SearchBoxPrompt" xml:space="preserve">
+    <value>Søk i oppgaver..</value>
   </data>
   <data name="ProjectList_LoadingText" xml:space="preserve">
     <value>Laster prosjekter...</value>
@@ -1761,8 +1800,11 @@
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Kunne ikke laste ressursallokeringsvisning. Har du lagt inn ressurser med roller og allokering i prosjektene dine?</value>
   </data>
+  <data name="TasksOverview_ErrorText" xml:space="preserve">
+    <value>Kunne ikke laste oppgaveoversikt.</value>
+  </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
-    <value>Ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter legges inn i den &lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med bl&#229; og r&#248;d (frav&#230;r) farge i tabellen under. Prosjektallokeringer vises med gr&#248;nn farge. Fargestyrken til allokeringen baserer seg på allokeringsprosenten.</value>
+    <value>Ressursallokering eller frav&#230;r som gjelder p&#229; tvers av prosjekter legges inn i den&lt;A HREF=&quot;{0}&quot;&gt;sentrale ressursallokeringslisten&lt;/A&gt;. Disse oppf&#248;ringene vil vises med bl&#229; og r&#248;d (frav&#230;r) farge i tabellen under. Prosjektallokeringer vises med gr&#248;nn farge. Fargestyrken til allokeringen baserer seg på allokeringsprosenten.</value>
   </data>
   <data name="NewProjectForm_Header" xml:space="preserve">
     <value>Opprett nytt prosjekt</value>
@@ -1844,6 +1886,12 @@
   </data>
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Laster prosjektets faser...</value>
+  </data>
+  <data name="TasksOverview_LoadingText" xml:space="preserve">
+    <value>Laster oppgaveoversikt...</value>
+  </data>  
+  <data name="TasksOverview_InfoText" xml:space="preserve">
+    <value>Kun oppgaver som har satt både Startdato og Forfallsdato vises i denne oversikten. Klikk på elementet for å se flere detaljer om oppgaven.</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>
@@ -2054,7 +2102,7 @@
   </data>
   <data name="String_ProjectStats_Loading_Text" xml:space="preserve">
     <value>Henter data...</value>
-  </data>  
+  </data>
   <data name="String_ProjectStats_EditDataSelection_Text" xml:space="preserve">
     <value>Endre datautvalg</value>
   </data>
@@ -2238,6 +2286,9 @@
   <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
     <value>Ressursallokering</value>
   </data>
+  <data name="WebPart_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
@@ -2363,6 +2414,12 @@
   </data>
   <data name="Choice_GtStatusTime_Delayed" xml:space="preserve">
     <value>Forsinket</value>
+  </data>
+  <data name="Choice_GtProjectLifecycleStatus_Active" xml:space="preserve">
+    <value>Aktivt</value>
+  </data>
+  <data name="Choice_GtProjectLifecycleStatus_Closed" xml:space="preserve">
+    <value>Avsluttet</value>
   </data>
   <data name="Choice_GtStakeholderInfluencePossibilty_Large" xml:space="preserve">
     <value>Stor</value>
@@ -2894,7 +2951,7 @@
   </data>
   <data name="RiskMatrix_EmptyMessage" xml:space="preserve">
     <value>Det finnes ingen Risiko-elementer i den angitte visningen.</value>
-  </data>  
+  </data>
   <data name="RiskMatrix_LoadingText" xml:space="preserve">
     <value>Laster risikomatrise...</value>
   </data>
@@ -2963,9 +3020,6 @@
   </data>
   <data name="SiteFields_GtRiskFactor_Formula" xml:space="preserve">
     <value>=[Sannsynlighet (S)]*[Konsekvens (K)]</value>
-  </data>
-  <data name="BenefitsOverview_LatestPercentage" xml:space="preserve">
-    <value>Måloppnåelse, siste måling</value>
   </data>
   <data name="BenefitsOverview_LatestValue" xml:space="preserve">
     <value>Siste måling</value>
@@ -3086,5 +3140,8 @@
   </data>
   <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
     <value>Dette er en forenklet versjon som ikke inneholder listene for gevinstarbeid.</value>
+  </data>
+  <data name="ItemLink_Label_NewTab" xml:space="preserve">
+    <value>Gå til elementet (åpnes i ny fane)</value>
   </data>
 </root>

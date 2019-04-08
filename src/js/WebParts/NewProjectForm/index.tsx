@@ -9,7 +9,6 @@ import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
 import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
-import { Spinner } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
@@ -32,7 +31,7 @@ import CreationModal from "./CreationModal";
 export default class NewProjectForm extends React.Component<INewProjectFormProps, INewProjectFormState> {
     public static displayName = "NewProjectForm";
     public static defaultProps = NewProjectFormDefaultProps;
-    private doesWebExistDelay;
+    private doesWebExistDelay: any;
 
     /**
      * Constructor
@@ -44,6 +43,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         this.state = {
             isLoading: true,
             model: new ProjectModel(),
+            config: { templates: [] },
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
         };
@@ -66,7 +66,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         return (
                             <div className={this.props.className} style={this.props.style}>
                                 <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
-                                {this._renderInner()}
+                                {this.renderInner()}
                             </div>
                         );
                     }
@@ -78,7 +78,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 modalProps={{ isDarkOverlay: true, isBlocking: true, className: this.props.className }}
                                 title={this.props.headerText}
                                 onDismiss={this.props.onDialogDismiss}>
-                                {this._renderInner()}
+                                {this.renderInner()}
                             </Dialog >
                         );
                     }
@@ -116,22 +116,19 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Render inner (form inputs, setting section and footer)
      */
-    private _renderInner(): React.ReactElement<INewProjectFormProps> {
-        if (this.state.isLoading) {
-            return <Spinner />;
-        }
+    private renderInner(): React.ReactElement<INewProjectFormProps> {
         return (
             <div>
-                {this._renderFormInputSection()}
-                {(this.state.config && this.state.config.showSettings) && (
+                {this.renderFormInputSection()}
+                {(this.state.config.showSettings && !this.state.isLoading) && (
                     <NewProjectFormSettingsSection
                         className={this.props.settingsClassName}
                         listData={this.state.config.listData}
                         extensions={this.state.config.extensions}
-                        toggleListContentHandler={this._onToggleListContent}
-                        toggleExtensionHandler={this._onToggleExtension} />
+                        toggleListContentHandler={this.onToggleListContent}
+                        toggleExtensionHandler={this.onToggleExtension} />
                 )}
-                {this._renderFooter()}
+                {this.renderFooter()}
             </div>
         );
     }
@@ -139,38 +136,40 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Render form input section
      */
-    private _renderFormInputSection(): React.ReactElement<INewProjectFormProps> {
+    private renderFormInputSection(): React.ReactElement<INewProjectFormProps> {
         const { inputContainerStyle } = this.props;
         const { errorMessages, model, selectedTemplate, config } = this.state;
         return (
             <section>
                 <div style={inputContainerStyle}>
                     <TextField
+                        autoComplete="off"
                         placeholder={__.getResource("NewProjectForm_TitlePlaceholder")}
-                        onChanged={newValue => this._onFormInputChange("Title", newValue)}
+                        onChanged={newValue => this.onFormInputChange("Title", newValue)}
                         value={model.Title}
                         errorMessage={errorMessages.Title} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
+                        autoComplete="off"
                         placeholder={__.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
-                        onChanged={newValue => this._onFormInputChange("Description", newValue)}
+                        onChanged={newValue => this.onFormInputChange("Description", newValue)}
                         value={model.Description}
                         errorMessage={errorMessages.Description} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
+                        autoComplete="off"
                         placeholder={__.getResource("NewProjectForm_UrlPlaceholder")}
-                        onChanged={newValue => this._onFormInputChange("Url", newValue)}
+                        onChanged={newValue => this.onFormInputChange("Url", newValue)}
                         value={model.Url}
                         errorMessage={errorMessages.Url} />
                 </div>
-                {this.state.config && (
-                    <div style={inputContainerStyle} hidden={config.templates.length < 2}>
+                {(config.templates && config.templates.length > 1 && config.siteTemplateSelectorEnabled) && (
+                    <div style={inputContainerStyle}>
                         <Dropdown
-                            disabled={!config.siteTemplateSelectorEnabled}
                             defaultSelectedKey={config.defaultTemplate ? config.defaultTemplate.FileRef : ""}
                             options={config.templates.map(t => ({ key: t.FileRef, text: t.Title, data: t }))}
                             onChanged={opt => this.setState({ selectedTemplate: opt.data })} />
@@ -186,14 +185,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     /**
      * Render footer
      */
-    private _renderFooter(): React.ReactElement<INewProjectFormProps> {
+    private renderFooter(): React.ReactElement<INewProjectFormProps> {
         switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
                     <div style={{ paddingTop: 15 }}>
                         <div style={{ float: "right" }}>
                             <PrimaryButton
-                                onClick={this._onSubmitForm}
+                                onClick={this.onSubmitForm}
                                 disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
                         </div>
                     </div>
@@ -203,7 +202,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 return (
                     <DialogFooter>
                         <PrimaryButton
-                            onClick={this._onSubmitForm}
+                            onClick={this.onSubmitForm}
                             disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
                         <DefaultButton onClick={this.props.onDialogDismiss}>{__.getResource("String_Close")}</DefaultButton>
                     </DialogFooter>
@@ -216,7 +215,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      *
      */
     @autobind
-    private _onFormInputChange(inputName: string, newValue: string) {
+    private onFormInputChange(inputName: string, newValue: string) {
         const prevModel = this.state.model;
         let model: ProjectModel = { ...this.state.model };
         model[inputName] = newValue;
@@ -253,7 +252,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {boolean} checked Is checked
      */
     @autobind
-    private _onToggleListContent(lc: ListConfig, checked: boolean) {
+    private onToggleListContent(lc: ListConfig, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let { IncludeContent } = prevState.model;
             checked ? IncludeContent.push(lc) : IncludeContent.splice(IncludeContent.indexOf(lc), 1);
@@ -268,7 +267,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {boolean} checked Is checked
      */
     @autobind
-    private _onToggleExtension(extension: Extension, checked: boolean) {
+    private onToggleExtension(extension: Extension, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
@@ -280,7 +279,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * Submits the form
      */
     @autobind
-    private async _onSubmitForm() {
+    private async onSubmitForm() {
         this.setState({ provisioning: { status: ProvisionStatus.Creating } });
         try {
             const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {

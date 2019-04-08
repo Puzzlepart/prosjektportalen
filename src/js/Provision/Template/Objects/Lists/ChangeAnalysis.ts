@@ -1,7 +1,7 @@
 import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
 
-const ChangeAnalysis: IList =   {
+const ChangeAnalysis: IList = {
     Title: __.getResource("Lists_ChangeAnalysis_Title"),
     Description: "",
     Template: 100,
@@ -20,18 +20,18 @@ const ChangeAnalysis: IList =   {
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtProcess", "GtChallengeDescription"],
+        ViewFields: ["GtOrder", "LinkTitle", "GtProcess", "GtChallengeDescription"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
             ViewQuery: `<OrderBy>
-              <FieldRef Name="ID" />
+              <FieldRef Name="GtOrder" />
             </OrderBy>`,
         },
     },
     {
         Title: __.getResource("View_GroupedProcess_DisplayName"),
-        ViewFields: ["GtChallengeDescription", "LinkTitle"],
+        ViewFields: ["GtOrder", "GtChallengeDescription", "LinkTitle"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -39,7 +39,7 @@ const ChangeAnalysis: IList =   {
               <FieldRef Name="GtProcess" Ascending="FALSE" />
             </GroupBy>
             <OrderBy>
-              <FieldRef Name="ID" />
+              <FieldRef Name="GtOrder" />
             </OrderBy>`,
         },
     }],

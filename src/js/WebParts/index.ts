@@ -18,7 +18,7 @@ import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
 import ResourceAllocation, { IResourceAllocationProps } from "./ResourceAllocation";
-import DataSource from "./DataSource";
+import TasksOverview, { ITasksOverviewProps } from "./TasksOverview";
 import WebPartComponent from "./WebPartComponent";
 
 /**
@@ -33,10 +33,21 @@ const WebPartComponents: WebPartComponent<any>[] = [
     new WebPartComponent<ILatestProjectsProps>(LatestProjects, "pp-latestprojects", { itemsCount: 8 }),
     new WebPartComponent<IQuickLinksProps>(QuickLinks, "pp-quicklinks"),
     new WebPartComponent<IDynamicPortfolioProps>(DynamicPortfolio, "pp-dynamicportfolio"),
-    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", { showSearchBox: true }),
+    new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview", {}),
     new WebPartComponent<IBenefitsOverviewProps>(BenefitsOverview, "pp-benefitsoverview-search", {
-        dataSource: DataSource.Search,
-        groupByOptions: [{ name: __.getResource("String_Project"), key: "SiteTitle" }],
+        dataSourceName: "BENEFITSOVERVIEW",
+        groupByOptions: [
+            {
+                name: __.getResource("String_Project"), key: "siteTitle",
+            },
+            {
+                name: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"), key: "benefit.title",
+            },
+            {
+                name: __.getResource("SiteFields_GtGainsResponsible_DisplayName"), key: "benefit.responsible",
+            },
+        ],
+        showSiteTitleColumn: true,
     }),
     new WebPartComponent<IProjectStatusProps>(ProjectStatus, "pp-projectstatus"),
     new WebPartComponent<IExperienceLogProps>(ExperienceLog, "pp-experiencelog"),
@@ -52,6 +63,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),
     new WebPartComponent<IResourceAllocationProps>(ResourceAllocation, "pp-resourceAllocation"),
+    new WebPartComponent<ITasksOverviewProps>(TasksOverview, "pp-tasksOverview"),
 ];
 
 /**
@@ -88,4 +100,5 @@ export {
     RiskMatrix,
     DiceCalculator,
     ProjectStats,
+    TasksOverview,
 };

@@ -22,16 +22,18 @@ const BenefitsAnalysis: IList = {
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+        ViewFields: ["GtOrder", "LinkTitle", "GtChangeLookup", "GtGainsType", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
-            ViewQuery: "",
+            ViewQuery: `<OrderBy>
+            <FieldRef Name="GtOrder" />
+          </OrderBy>`,
         },
     },
     {
         Title: __.getResource("View_GroupedBenefitType_DisplayName"),
-        ViewFields: ["GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtMeasureIndicator", "GtStartValue", "GtDesiredValue", "GtMeasurementUnit", "GtRealizationTime"],
+        ViewFields: ["GtOrder", "GtChangeLookup", "Title", "GtGainsTurnover", "GtGainsResponsible", "GtRealizationTime"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
@@ -39,7 +41,7 @@ const BenefitsAnalysis: IList = {
               <FieldRef Name="GtGainsType" Ascending="FALSE" />
             </GroupBy>
             <OrderBy>
-              <FieldRef Name="ID" />
+              <FieldRef Name="GtOrder" />
             </OrderBy>`,
         },
     }],

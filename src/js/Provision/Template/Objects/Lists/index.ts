@@ -15,6 +15,7 @@ import Documents from "./Documents";
 import ProjectStatus from "./ProjectStatus";
 import BenefitsAnalysis from "./BenefitsAnalysis";
 import ChangeAnalysis from "./ChangeAnalysis";
+import MeasurementIndicators from "./MeasurementIndicators";
 import BenefitsFollowup from "./BenefitsFollowup";
 
 const Lists: IList[] = [
@@ -34,6 +35,7 @@ const Lists: IList[] = [
     ProjectStatus,
     BenefitsAnalysis,
     ChangeAnalysis,
+    MeasurementIndicators,
     BenefitsFollowup,
 ];
 

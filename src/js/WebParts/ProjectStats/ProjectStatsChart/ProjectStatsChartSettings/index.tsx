@@ -8,7 +8,6 @@ import __ from "../../../../Resources";
 const LOG_TEMPLATE = "(ProjectStatsChartSettings) {0}: {1}";
 
 export default class ProjectStatsChartSettings extends React.Component<ProjectStatsChartSettingsProps, ProjectStatsChartSettingsState> {
-    public static defaultProps: Partial<ProjectStatsChartSettingsProps> = {};
 
     /**
      * Constructor
@@ -28,7 +27,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             level: LogLevel.Info,
         });
         return (
-            <div className="ms-Grid-row" hidden={this.props.hidden}>
+            <div className="ms-Grid-row" hidden={this.props.hidden || !this.props.renderCommandBar}>
                 <div className="ms-Grid-col ms-sm12">
                     <CommandBar items={this._getItems()} farItems={this._getFarItems()} />
                 </div>
@@ -66,7 +65,6 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
                 },
             });
         }
-
         items.push({
             key: "edit-chart",
             name: "Rediger",
@@ -74,7 +72,7 @@ export default class ProjectStatsChartSettings extends React.Component<ProjectSt
             onClick: e => {
                 e.preventDefault();
                 e.stopPropagation();
-                document.location.href = chart.getEditFormUrl();
+                document.location.href = chart.getEditFormUrl(this.props.listServerRelativeUrl);
             },
         });
 

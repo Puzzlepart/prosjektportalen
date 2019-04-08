@@ -1,6 +1,6 @@
 import __ from "../../../../Resources";
 import { IList } from "sp-js-provisioning/lib/schema";
-import { GtGainLookup, GtMeasureIndicatorLookup, GtGainLookup_ID } from "./SiteFields";
+import { GtMeasureIndicatorLookup, GtMeasureIndicatorLookup_ID, GtMeasureIndicatorLookup_GtDesiredValue } from "./SiteFields";
 
 const BenefitsFollowup: IList = {
     Title: __.getResource("Lists_BenefitsFollowup_Title"),
@@ -20,18 +20,18 @@ const BenefitsFollowup: IList = {
         Hidden: true,
     }],
     Fields: [
-        GtGainLookup,
         GtMeasureIndicatorLookup,
-        GtGainLookup_ID,
+        GtMeasureIndicatorLookup_ID,
+        GtMeasureIndicatorLookup_GtDesiredValue,
     ],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),
-        ViewFields: ["GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
             ViewQuery: `<GroupBy Collapse="TRUE" GroupLimit="30">
-                            <FieldRef Name="GtGainLookup" />
+                            <FieldRef Name="GtMeasureIndicatorLookup" />
                         </GroupBy>
                         <OrderBy>
                             <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
@@ -40,12 +40,12 @@ const BenefitsFollowup: IList = {
     },
     {
         Title: __.getResource("View_Flat_DisplayName"),
-        ViewFields: ["GtGainLookup", "GtMeasurementDate", "GtMeasurementValue", "GtMeasureIndicatorLookup", "GtMeasurementComment"],
+        ViewFields: ["GtMeasureIndicatorLookup", "GtMeasureIndicatorLookup_GtDesiredValue", "GtMeasurementDate", "GtMeasurementValue", "GtMeasurementComment"],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
             ViewQuery: `<OrderBy>
-                            <FieldRef Name="GtGainLookup" />
+                            <FieldRef Name="GtMeasureIndicatorLookup" />
                             <FieldRef Name="GtMeasurementDate" Ascending="FALSE" />
                         </OrderBy>`,
         },

@@ -1,0 +1,63 @@
+#pp-tasksOverview {
+    .pp-task-overview-item {
+        background: rgb(203, 237, 203) !important;
+        border: none !important;
+        color: rgb(68, 68, 68) !important;
+        cursor: pointer;
+        .pp-task-overview-item-content {
+            width: 100%;
+            .pp-task-overview-item-date, .pp-task-overview-item-title {
+                width: 100%;
+                font-family: "Segoe UI";
+                font-size: 8pt;
+                white-space: nowrap;
+                overflow: hidden;
+                padding: 3px 0 0 6px;
+                text-align: left;
+                vertical-align: middle;
+                outline-style: none;
+                line-height: initial;
+            }
+        }
+    }
+    .react-calendar-timeline {
+        .rct-sidebar {
+            font-size: 12px;
+        }
+        .rct-sidebar-header {
+            background: #fff;
+        }
+        .rct-header .rct-label {
+            text-transform: inherit;
+            background: #fff;
+        }
+    }
+}
+
+.pp-task-overview-details-modal {
+    padding: 50px;
+    max-width: 400px;
+    position relative;
+
+    .pp-task-overview-details-modal-header {
+        margin: 0 0 20px 0;
+    }
+
+    .pp-task-overview-details-modal-body {
+        a, a:visited {
+            outline: none;
+            text-decoration: none;
+        }
+        >div {
+            margin: 8px 0 0 0;
+        }
+    }
+
+    .pp-task-overview-details-modal-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+}

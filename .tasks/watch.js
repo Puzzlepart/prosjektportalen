@@ -7,26 +7,23 @@ var gulp = require("gulp"),
     spsave = require("gulp-spsave"),
     runSequence = require("run-sequence"),
     livereload = require("gulp-livereload"),
-    config = require("./@configuration.js"),
-    env = require("./@env.js");
+    config = require("./@configuration.js");
 
 let buildTimeout;
 
-function __startWatch(packageCodeFunc) {
-
-}
-
-gulp.task("watchTests", () => {
-    __startWatch("test");
-});
-
-gulp.task("watch", () => {
+gulp.task("watch", (done) => {
     const argv = require("yargs").argv;
     livereload.listen({ start: true });
 
     let envKey = argv.env || "default";
+    let settings;
 
-    let settings = env[envKey];
+    try {
+        let env = require("./@env.js");
+        settings = env[envKey];
+    } catch (error) {
+        throw "[gulp watch] requires .tasks/@env.js";
+    }
 
     if (!settings) {
         throw format("Environment {0} not found.", envKey);
@@ -35,6 +32,7 @@ gulp.task("watch", () => {
     watch(config.globs.js).on("change", () => {
         if (buildTimeout) {
             clearTimeout(buildTimeout);
+            buildTimeout = null;
         }
         buildTimeout = setTimeout(() => {
             runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
@@ -42,14 +40,20 @@ gulp.task("watch", () => {
                     uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
                 }
             });
-        }, 100);
+        }, 500);
     });
-    watch(config.globs.styles).on("change", () => {
-        runSequence("packageStyles", () => {
-            if (!argv.skipUpload) {
-                uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
-            }
-        });
+    watch(["./src/**/components/*.styl"]).on("change", () => {
+        if (buildTimeout) {
+            clearTimeout(buildTimeout);
+            buildTimeout = null;
+        }
+        buildTimeout = setTimeout(() => {
+            runSequence("packageStyles", () => {
+                if (!argv.skipUpload) {
+                    uploadFileToSp(path.join(config.paths.dist, "css", "*.css"), settings, path.join(config.paths.spAssetsFolder, "css"));
+                }
+            });
+        }, 500);
     });
     watch(config.globs.resxJson).on("change", () => {
         if (!argv.skipUpload) {
@@ -60,7 +64,7 @@ gulp.task("watch", () => {
 
 function uploadFileToSp(glob, settings, folder) {
     gulp.src(glob)
-        .pipe(plumber({ errorHandler: (err) => this.emit("end") }))
+        .pipe(plumber({ errorHandler: () => this.emit("end") }))
         .pipe(spsave({ folder: folder, siteUrl: settings.siteUrl }, { username: settings.username, password: settings.password }))
         .pipe(livereload());
 }

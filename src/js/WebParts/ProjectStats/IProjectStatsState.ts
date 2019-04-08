@@ -12,6 +12,7 @@ export default interface IProjectStatsState extends IBaseWebPartState {
     views?: IDynamicPortfolioViewConfig[];
     currentView?: IDynamicPortfolioViewConfig;
     selection?: ProjectStatsChartData;
+    chartsConfigListProperties?: { RootFolder: { ServerRelativeUrl: string } };
     errorMessage?: any;
     showDataSelectionModal?: boolean;
 }

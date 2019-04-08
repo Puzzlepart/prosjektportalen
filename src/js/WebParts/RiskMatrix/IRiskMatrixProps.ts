@@ -10,13 +10,15 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     showEmptyMessage?: boolean;
     showViewSelector?: boolean;
     hideLabelsBreakpoint?: number;
-    dataSource?: string;
+    dataSourceName?: string;
+    queryTemplate?: string;
     viewName?: string;
     rowLimit?: number;
     postActionShowOriginal?: boolean;
 }
 
 export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
+    dataSourceName: "RISKOVERVIEW",
     columns: [
         {
             key: "ID",

@@ -1,9 +1,7 @@
-import { ProjectResourceAllocation, ProjectUser } from "../ResourceAllocationModels";
-import IResourceAllocationCommandBarState from "./IResourceAllocationCommandBarState";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { IFilterProps, IFilterItemProps } from "../../@Components/FilterPanel";
 
 export default interface IResourceAllocationCommandBarProps {
-    users: Array<ProjectUser>;
-    allocations: Array<ProjectResourceAllocation>;
-    selected: IResourceAllocationCommandBarState;
-    onSelectionUpdate: (selection: IResourceAllocationCommandBarState) => void;
+    filters: IFilterProps[];
+    onFilterChange: (column: IColumn, selectedItems: IFilterItemProps[]) => void;
 }

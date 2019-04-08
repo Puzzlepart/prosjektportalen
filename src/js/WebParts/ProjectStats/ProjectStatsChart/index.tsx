@@ -64,7 +64,10 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
                         hidden={!this.props.showSettings}
                         chart={this.state.chart}
                         onItemChanged={this.onItemChanged}
-                        onWidthChanged={this.onChangeWidth} />
+                        onWidthChanged={this.onChangeWidth}
+                        listServerRelativeUrl={this.props.listServerRelativeUrl}
+                        renderCommandBar={this.props.renderCommandBar}
+                    />
                     <div className="ms-Grid-row">
                         <div className="ms-Grid-col ms-sm12">
                             {config ? (

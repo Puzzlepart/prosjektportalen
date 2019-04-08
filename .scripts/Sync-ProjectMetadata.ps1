@@ -39,7 +39,7 @@ Get-PnPSubWebs | ? {$_.LastItemModifiedDate.ToUniversalTime() -ge $DateTimeFromW
 
     Write-Output  "Processing subweb $ProjectTitle"
 
-    $ProjectPage = Get-PnPListItem -List "Områdesider" -Id 3 -Web $ProjectWeb
+    $ProjectPage = Get-PnPListItem -List "Properties" -Id 1 -Web $ProjectWeb
     $ProjectItem = Get-PnPListItem -List "Prosjekter" -Query "<View><Query><Where><Eq><FieldRef Name='ProjectWebUniqueId'/><Value Type='Text'>$ProjectWebUniqueId</Value></Eq></Where></Query></View>"
 
     if ($ProjectItem -eq $null) {
