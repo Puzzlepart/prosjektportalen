@@ -320,7 +320,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
         if (queryTemplate) {
             try {
                 const _searchQuery = { QueryTemplate: queryTemplate, ...searchQuery };
-                const items = await SearchService.search<ITaskSearchResult[]>(_searchQuery);
+                const { items } = await SearchService.search<ITaskSearchResult[]>(_searchQuery);
                 Logger.log({ message: String.format(LOG_TEMPLATE, "fetchItems", `Successfully fetched ${items.length} items`), level: LogLevel.Info });
                 return items;
             } catch (err) {

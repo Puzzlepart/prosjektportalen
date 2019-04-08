@@ -219,6 +219,9 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             }
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
+                if((Get-PnPListItem -List "Lists/DataSources" | Where-Object { $_["Title"] -eq "TASKS" }) -ne $null) {
+                    Add-PnPListItem -List "Lists/DataSources" -Values @{ Title="TASKS"; GtDpSearchQuery="ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL} LastModifiedTime>{TODAY-365}" }
+                }
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     if ($_["Title"] -eq "PROJECTS") {
                         $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
@@ -230,7 +233,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                         $_["GtDpSearchQuery"] = $Query
                         $_.Update()
                     }
-
                 }
                 Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
                     if ($_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName) {

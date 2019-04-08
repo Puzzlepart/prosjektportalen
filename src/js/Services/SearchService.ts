@@ -6,7 +6,7 @@ export default new class SearchService {
      *
      * @param {SearchQuery} query Query
      */
-    public async search<T>(query: SearchQuery): Promise<T> {
+    public async search<T>(query: SearchQuery): Promise<{ items: T, RawSearchResults: any }> {
         let _query = { ...query };
         let results: any[] = [];
         let response = await sp.search(_query);
@@ -15,6 +15,6 @@ export default new class SearchService {
             response = await sp.search({ ..._query, StartRow: results.length });
             results.push(...response.PrimarySearchResults);
         }
-        return (results as any) as T;
+        return { items: (results as any) as T, RawSearchResults: response.RawSearchResults };
     }
 };
