@@ -79,42 +79,46 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
         }
 
         const data = this.getData(this.state.items);
-        const filteredData = this.getFilteredData(data);
+        const { groups, tasks, visibleTimeStart, visibleTimeEnd } = this.getFilteredData(data);
 
         return (
             <div>
+                <MessageBar>
+                    <div dangerouslySetInnerHTML={{ __html: __.getResource("TasksOverview_InfoText") }}></div>
+                </MessageBar>
                 <TasksOverviewCommandBar
+                    visibleTime={{ visibleTimeStart, visibleTimeEnd }}
                     filters={this.getFilters(data)}
                     groupByOptions={this.props.groupByOptions}
                     groupBy={this.state.groupBy}
                     onFilterChange={this.onFilterChange}
-                    onGroupByChanged={this.onGroupByChanged} />
+                    onGroupByChanged={this.onGroupByChanged}
+                    onIntervalChange={this.onIntervalChange} />
                 <SearchBox
                     labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
                     onChanged={this.onSearch} />
-                <MessageBar>
-                    <div dangerouslySetInnerHTML={{ __html: __.getResource("TasksOverview_InfoText") }}></div>
-                </MessageBar>
-                <Timeline
-                    groups={filteredData.groups}
-                    items={filteredData.tasks}
-                    stickyHeader={true}
-                    stackItems={true}
-                    canMove={false}
-                    canChangeGroup={false}
-                    sidebarWidth={220}
-                    headerLabelGroupHeight={0}
-                    lineHeight={48}
-                    itemHeightRatio={0.8}
-                    defaultTimeStart={moment().add(...this.props.defaultTimeStart)}
-                    defaultTimeEnd={moment().add(...this.props.defaultTimeEnd)}
-                    headerLabelFormats={HeaderLabelFormats}
-                    subHeaderLabelFormats={SubHeaderLabelFormats}
-                    itemRenderer={this.timelineItemRenderer}>
-                    <TimelineMarkers>
-                        <TodayMarker />
-                    </TimelineMarkers>
-                </Timeline>
+                <div style={{ margin: "10px 0 0 0" }}>
+                    <Timeline
+                        groups={groups}
+                        items={tasks}
+                        stickyHeader={true}
+                        stackItems={true}
+                        canMove={false}
+                        canChangeGroup={false}
+                        sidebarWidth={220}
+                        headerLabelGroupHeight={0}
+                        lineHeight={48}
+                        itemHeightRatio={0.8}
+                        visibleTimeStart={visibleTimeStart.toDate().getTime()}
+                        visibleTimeEnd={visibleTimeEnd.toDate().getTime()}
+                        headerLabelFormats={HeaderLabelFormats}
+                        subHeaderLabelFormats={SubHeaderLabelFormats}
+                        itemRenderer={this.timelineItemRenderer}>
+                        <TimelineMarkers>
+                            <TodayMarker />
+                        </TimelineMarkers>
+                    </Timeline>
+                </div>
                 <TasksOverviewDetailsModal
                     task={this.state.selectedTask}
                     onDismiss={this.onTasksOverviewDetailsModalDismiss} />
@@ -222,6 +226,17 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     }
 
     /**
+    * On interval change
+    *
+    * @param {moment.Moment} visibleTimeStart Visible time start
+    * @param {moment.Moment} visibleTimeEnd Visible time end
+    */
+    @autobind
+    private onIntervalChange(visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) {
+        this.setState({ visibleTimeStart, visibleTimeEnd });
+    }
+
+    /**
     * Get filtered tasks
     *
     * @param {TaskModel[]} tasks Tasks
@@ -287,16 +302,18 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     }
 
     /**
-     * Get data for the timeline filtered by [activeFilters] and [searchTerm]
+     * Get data and visible dates for the timeline filtered by [activeFilters] and [searchTerm]
      *
      * @param {ITasksOverviewData} data Data
      */
     private getFilteredData(data: ITasksOverviewData) {
         Logger.log({ message: String.format(LOG_TEMPLATE, "getFilteredData", "Getting filtered data"), level: LogLevel.Info });
-        let { activeFilters, searchTerm } = ({ ...this.state } as ITasksOverviewState);
+        let { activeFilters, searchTerm, visibleTimeStart, visibleTimeEnd } = ({ ...this.state } as ITasksOverviewState);
         let tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm);
         let groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
-        return { groups, tasks };
+        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment).startOf("month");
+        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment).endOf("month");
+        return { groups, tasks, visibleTimeStart, visibleTimeEnd };
     }
 
     /**
