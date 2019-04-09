@@ -103,7 +103,7 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
      */
     public render(): JSX.Element {
         return (
-            <div>
+            <div style={{ marginTop: 10 }}>
                 <CommandBar items={this.getItems()} farItems={this.getFarItems()} />
                 <FilterPanel
                     isOpen={this.state.isFilterPanelOpen}
