@@ -15,7 +15,7 @@ export interface IProjectsQueryResponse {
 
 /**
  * Query the REST Search API using @pnp/sp
- * 
+ *
  *
  * @param {IDynamicPortfolioViewConfig} viewConfig View configuration
  * @param {IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration

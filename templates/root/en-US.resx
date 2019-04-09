@@ -1890,6 +1890,24 @@
   <data name="TasksOverview_InfoText" xml:space="preserve">
     <value>Only tasks that have set both Start date and Due date are shown in this overview. Click on the item to see more details about the task.</value>
   </data>
+  <data name="TasksOverview_IsDynamicLabel" xml:space="preserve">
+    <value>Dynamic interval</value>
+  </data>
+  <data name="TasksOverview_IsDynamicDescription" xml:space="preserve">
+    <value>If the interval is set to dynamic, the interval will be set according to the tasks in the view</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeStartLabel" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeEndLabel" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="TasksOverview_OnSetIntervalButtonText" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="TasksOverview_DateIntervalText" xml:space="preserve">
+    <value>Date Interval</value>
+  </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
   </data>
@@ -3132,5 +3150,32 @@
   </data>
   <data name="ItemLink_Label_NewTab" xml:space="preserve">
     <value>Navigate to item (opens in a new tab)</value>
+  </data>  
+  <data name="DayPickerStrings_Months" xml:space="preserve">
+    <value>January,February,March,April,May,June,July,August,September,October,November,December</value>
+  </data>
+  <data name="DayPickerStrings_ShortMonths" xml:space="preserve">
+    <value>Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec</value>
+  </data>
+  <data name="DayPickerStrings_Days" xml:space="preserve">
+    <value>Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday</value>
+  </data>
+  <data name="DayPickerStrings_ShortDays" xml:space="preserve">
+    <value>S,M,T,W,T,F,S</value>
+  </data>
+  <data name="DayPickerStrings_GoToToday" xml:space="preserve">
+    <value>Go to today</value>
+  </data>
+  <data name="DayPickerStrings_PrevMonthAriaLabel" xml:space="preserve">
+    <value>Go to previous month</value>
+  </data>
+  <data name="DayPickerStrings_NextMonthAriaLabel" xml:space="preserve">
+    <value>Go to next month</value>
+  </data>
+  <data name="DayPickerStrings_PrevYearAriaLabel" xml:space="preserve">
+    <value>Go to previous year</value>
+  </data>
+  <data name="DayPickerStrings_NextYearAriaLabel" xml:space="preserve">
+    <value>Go to next year</value>
   </data>
 </root>
