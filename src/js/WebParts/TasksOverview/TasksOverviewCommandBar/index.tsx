@@ -8,6 +8,7 @@ import ITasksOverviewCommandBarProps from "./ITasksOverviewCommandBarProps";
 import ITasksOverviewCommandBarState from "./ITasksOverviewCommandBarState";
 import FilterPanel from "../../@Components/FilterPanel";
 import { getObjectValue } from "../../../Helpers";
+import TaskOverviewDateIntervalPanel from "../TaskOverviewDateIntervalPanel";
 //#endregion
 
 export default class TasksOverviewCommandBar extends React.Component<ITasksOverviewCommandBarProps, ITasksOverviewCommandBarState> {
@@ -22,20 +23,20 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
      */
     constructor(props: ITasksOverviewCommandBarProps) {
         super(props);
-        this.state = { isFilterPanelOpen: false };
+        this.state = {};
     }
 
     /**
      * Get items
      */
     protected getItems(): IContextualMenuItem[] {
-        const subItems = this.props.groupByOptions.map(gb => ({
-            key: gb.fieldName,
-            fieldName: gb.fieldName,
-            name: gb.name,
+        const subItems = this.props.groupByOptions.map(({ fieldName, name }) => ({
+            key: fieldName,
+            fieldName,
+            name,
             onClick: (event: React.MouseEvent<any>) => {
                 event.preventDefault();
-                this.props.onGroupByChanged(gb);
+                this.props.onGroupByChanged({ fieldName, name });
             },
         }));
         return [
@@ -54,14 +55,24 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
      * Get far items
      */
     protected getFarItems(): IContextualMenuItem[] {
-        return [{
-            key: "Filter",
-            name: "Filter",
-            iconOnly: true,
-            iconProps: { iconName: "Filter" },
-            itemType: ContextualMenuItemType.Header,
-            onClick: this.onOpenFilerPanel,
-        }];
+        return [
+            {
+                key: "DateInterval",
+                name: "DateInterval",
+                iconOnly: true,
+                iconProps: { iconName: "EventDate" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: this.onOpenDateIntervalPanel,
+            },
+            {
+                key: "Filter",
+                name: "Filter",
+                iconOnly: true,
+                iconProps: { iconName: "Filter" },
+                itemType: ContextualMenuItemType.Header,
+                onClick: this.onOpenFilerPanel,
+            },
+        ];
     }
 
     @autobind
@@ -72,8 +83,20 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
     }
 
     @autobind
+    protected onOpenDateIntervalPanel(event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.setState((prevState: ITasksOverviewCommandBarState) => ({ isDateIntervalPanelOpen: !prevState.isDateIntervalPanelOpen }));
+    }
+
+    @autobind
     protected onDismissFilterPanel() {
         this.setState({ isFilterPanelOpen: false });
+    }
+
+    @autobind
+    protected onDismissDateIntervalPanel() {
+        this.setState({ isDateIntervalPanelOpen: false });
     }
 
     /**
@@ -89,6 +112,14 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
                     onDismiss={this.onDismissFilterPanel}
                     filters={this.props.filters}
                     onFilterChange={this.props.onFilterChange} />
+                <TaskOverviewDateIntervalPanel
+                    isOpen={this.state.isDateIntervalPanelOpen}
+                    isLightDismiss={true}
+                    onDismiss={this.onDismissDateIntervalPanel}
+                    headerText="Datointervall"
+                    defaultVisibleTimeStart={this.props.visibleTime.visibleTimeStart}
+                    defaultVisibleTimeEnd={this.props.visibleTime.visibleTimeEnd}
+                    onChange={this.props.onVisibleTimeChange}  />
             </div>
         );
     }
