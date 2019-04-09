@@ -1,5 +1,6 @@
+import __ from "../../../Resources";
 import * as React from "react";
-import * as moment from "moment";
+import moment from "moment";
 import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { DatePicker, IDatePickerProps, DayOfWeek, IDatePickerStrings } from "office-ui-fabric-react/lib/DatePicker";
@@ -10,15 +11,15 @@ import { ITaskOverviewDateIntervalPanelState } from "./ITaskOverviewDateInterval
 import { dateFormat } from "../../../Util";
 
 const DayPickerStrings: IDatePickerStrings = {
-    months: ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"],
-    shortMonths: ["Jan", "Feb", "Mar", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Des"],
-    days: ["Søndag", "Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag"],
-    shortDays: ["S", "M", "T", "W", "T", "F", "S"],
-    goToToday: "I dag",
-    prevMonthAriaLabel: "Gå til forrige måned",
-    nextMonthAriaLabel: "Gå til neste måned",
-    prevYearAriaLabel: "Gå til forrige år",
-    nextYearAriaLabel: "Gå til neste år",
+    months: __.getResource("DayPickerStrings_Months").split(","),
+    shortMonths: __.getResource("DayPickerStrings_ShortMonths").split(","),
+    days: __.getResource("DayPickerStrings_Days").split(","),
+    shortDays: __.getResource("DayPickerStrings_ShortDays").split(","),
+    goToToday: __.getResource("DayPickerStrings_GoToToday"),
+    prevMonthAriaLabel: __.getResource("DayPickerStrings_PrevMonthAriaLabel"),
+    nextMonthAriaLabel: __.getResource("DayPickerStrings_NextMonthAriaLabel"),
+    prevYearAriaLabel: __.getResource("DayPickerStrings_PrevYearAriaLabel"),
+    nextYearAriaLabel: __.getResource("DayPickerStrings_NextYearAriaLabel"),
 };
 
 export default class TaskOverviewDateIntervalPanel extends React.Component<ITaskOverviewDateIntervalPanelProps, ITaskOverviewDateIntervalPanelState> {
