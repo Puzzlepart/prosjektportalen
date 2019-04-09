@@ -58,24 +58,20 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
         return [
             {
                 key: "DateInterval",
-                name: "Datointervall",
+                name: __.getResource("TasksOverview_DateIntervalText"),
                 iconProps: { iconName: "EventDate" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: this.onOpenDateIntervalPanel,
             },
             {
-                key: "Divider0",
-                itemType: ContextualMenuItemType.Divider,
-            },
-            {
                 key: "Filter",
-                name: "Filter",
+                name: null,
                 iconOnly: true,
                 iconProps: { iconName: "Filter" },
                 itemType: ContextualMenuItemType.Header,
                 onClick: this.onOpenFilerPanel,
             },
-        ];
+        ] as IContextualMenuItem[];
     }
 
     @autobind
@@ -119,7 +115,7 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
                     isOpen={this.state.isDateIntervalPanelOpen}
                     isLightDismiss={true}
                     onDismiss={this.onDismissDateIntervalPanel}
-                    headerText="Datointervall"
+                    headerText={__.getResource("TasksOverview_DateIntervalText")}
                     defaultVisibleTimeStart={this.props.visibleTime.visibleTimeStart}
                     defaultVisibleTimeEnd={this.props.visibleTime.visibleTimeEnd}
                     onChange={this.props.onIntervalChange} />

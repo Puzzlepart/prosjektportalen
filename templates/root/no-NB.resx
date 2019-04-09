@@ -1893,6 +1893,24 @@
   <data name="TasksOverview_InfoText" xml:space="preserve">
     <value>Kun oppgaver som har satt både Startdato og Forfallsdato vises i denne oversikten. Klikk på elementet for å se flere detaljer om oppgaven.</value>
   </data>
+  <data name="TasksOverview_IsDynamicLabel" xml:space="preserve">
+    <value>Dynamisk intervall</value>
+  </data>
+  <data name="TasksOverview_IsDynamicDescription" xml:space="preserve">
+    <value>Om intervallet settes til dynamisk, vil intervallet settes ut ifra oppgavene i visningen.</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeStartLabel" xml:space="preserve">
+    <value>Fra</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeEndLabel" xml:space="preserve">
+    <value>Til</value>
+  </data>
+  <data name="TasksOverview_OnSetIntervalButtonText" xml:space="preserve">
+    <value>Sett</value>
+  </data>
+  <data name="TasksOverview_DateIntervalText" xml:space="preserve">
+    <value>Datointervall</value>
+  </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>
   </data>

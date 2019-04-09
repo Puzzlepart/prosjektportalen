@@ -9,6 +9,6 @@ export default interface ITasksOverviewCommandBarProps {
     groupByOptions: { fieldName: string, name: string }[];
     groupBy: { fieldName: string, name: string };
     onFilterChange: (column: IColumn, selectedItems: IFilterItemProps[]) => void;
-    onIntervalChange: (isDynamic: boolean, visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) => void;
+    onIntervalChange: (visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) => void;
     onGroupByChanged: (groupBy: { fieldName: string, name: string }) => void;
 }

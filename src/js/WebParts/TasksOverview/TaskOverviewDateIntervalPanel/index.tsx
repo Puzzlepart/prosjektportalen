@@ -1,6 +1,6 @@
 import __ from "../../../Resources";
 import * as React from "react";
-import moment from "moment";
+import * as moment from "moment";
 import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { DatePicker, IDatePickerProps, DayOfWeek, IDatePickerStrings } from "office-ui-fabric-react/lib/DatePicker";
@@ -46,17 +46,17 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
                 type={this.props.type}>
                 <div>
                     <Toggle
-                        label="Dynamisk intervall"
+                        label={__.getResource("TasksOverview_IsDynamicLabel")}
                         defaultChecked={this.state.isDynamicInterval}
                         onChanged={isDynamicInterval => this.setState({ isDynamicInterval })} />
-                    <p className="ms-font-xs">Om intervallet settes til <i>dynamisk</i>, vil intervallet settes ut ifra oppgavene i visningen.</p>
+                    <p className="ms-font-xs">{__.getResource("TasksOverview_IsDynamicDescription")}</p>
                 </div>
                 <div style={{ marginTop: 15 }}>
                     <DatePicker
                         {...this.datePickerProps}
                         ref="visibleTimeStart"
-                        placeholder="Fra"
-                        ariaLabel="Fra"
+                        placeholder={__.getResource("TasksOverview_VisibleTimeStartLabel")}
+                        ariaLabel={__.getResource("TasksOverview_VisibleTimeStartLabel")}
                         disabled={this.state.isDynamicInterval}
                         value={this.props.defaultVisibleTimeStart.toDate()} />
                 </div>
@@ -64,14 +64,14 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
                     <DatePicker
                         {...this.datePickerProps}
                         ref="defaultVisibleTimeEnd"
-                        placeholder="Til"
-                        ariaLabel="Til"
+                        placeholder={__.getResource("TasksOverview_VisibleTimeEndLabel")}
+                        ariaLabel={__.getResource("TasksOverview_VisibleTimeEndLabel")}
                         disabled={this.state.isDynamicInterval}
                         value={this.props.defaultVisibleTimeEnd.toDate()} />
                 </div>
                 <div style={{ marginTop: 15 }}>
                     <PrimaryButton
-                        text="Sett"
+                        text={__.getResource("TasksOverview_OnSetIntervalButtonText")}
                         onClick={this.onSetInterval} />
                 </div>
             </Panel>
@@ -80,8 +80,12 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
 
     @autobind
     private onSetInterval() {
-        const visibleTimeStart = moment((this.refs["visibleTimeStart"] as DatePicker).state.selectedDate);
-        const visibleTimeEnd = moment((this.refs["defaultVisibleTimeEnd"] as DatePicker).state.selectedDate);
-        this.props.onChange(this.state.isDynamicInterval, visibleTimeStart, visibleTimeEnd);
+        let visibleTimeStart = null;
+        let visibleTimeEnd = null;
+        if (!this.state.isDynamicInterval) {
+            visibleTimeStart = moment((this.refs["visibleTimeStart"] as DatePicker).state.selectedDate);
+            visibleTimeEnd = moment((this.refs["defaultVisibleTimeEnd"] as DatePicker).state.selectedDate);
+        }
+        this.props.onChange(visibleTimeStart, visibleTimeEnd);
     }
 }

@@ -1,4 +1,4 @@
-import moment from "moment";
+import * as moment from "moment";
 import { IBaseWebPartState } from "../@BaseWebPart";
 import { TaskModel } from "./TaskModel";
 import { ITaskSearchResult } from "./ITaskSearchResult";

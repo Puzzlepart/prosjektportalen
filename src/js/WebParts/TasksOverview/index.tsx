@@ -83,6 +83,9 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
 
         return (
             <div>
+                <MessageBar>
+                    <div dangerouslySetInnerHTML={{ __html: __.getResource("TasksOverview_InfoText") }}></div>
+                </MessageBar>
                 <TasksOverviewCommandBar
                     visibleTime={{ visibleTimeStart, visibleTimeEnd }}
                     filters={this.getFilters(data)}
@@ -94,9 +97,6 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                 <SearchBox
                     labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
                     onChanged={this.onSearch} />
-                <MessageBar>
-                    <div dangerouslySetInnerHTML={{ __html: __.getResource("TasksOverview_InfoText") }}></div>
-                </MessageBar>
                 <Timeline
                     groups={groups}
                     items={tasks}
@@ -226,17 +226,12 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     /**
     * On interval change
     *
-    * @param {boolean} isDynamicInterval Is dynamic interval
     * @param {moment.Moment} visibleTimeStart Visible time start
     * @param {moment.Moment} visibleTimeEnd Visible time end
     */
     @autobind
-    private onIntervalChange(isDynamicInterval: boolean, visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) {
-        if (isDynamicInterval) {
-            this.setState({ visibleTimeStart: null, visibleTimeEnd: null });
-        } else {
-            this.setState({ visibleTimeStart, visibleTimeEnd });
-        }
+    private onIntervalChange(visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) {
+        this.setState({ visibleTimeStart, visibleTimeEnd });
     }
 
     /**

@@ -1890,6 +1890,24 @@
   <data name="TasksOverview_InfoText" xml:space="preserve">
     <value>Only tasks that have set both Start date and Due date are shown in this overview. Click on the item to see more details about the task.</value>
   </data>
+  <data name="TasksOverview_IsDynamicLabel" xml:space="preserve">
+    <value>Dynamic interval</value>
+  </data>
+  <data name="TasksOverview_IsDynamicDescription" xml:space="preserve">
+    <value>If the interval is set to dynamic, the interval will be set according to the tasks in the view</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeStartLabel" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeEndLabel" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="TasksOverview_OnSetIntervalButtonText" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="TasksOverview_DateIntervalText" xml:space="preserve">
+    <value>Date Interval</value>
+  </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
   </data>
