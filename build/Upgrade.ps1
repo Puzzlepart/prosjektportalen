@@ -219,7 +219,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             }
             try {
                 Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
-                if((Get-PnPListItem -List "Lists/DataSources" | Where-Object { $_["Title"] -eq "TASKS" }) -ne $null) {
+                if((Get-PnPListItem -List "Lists/DataSources" | Where-Object { $_["Title"] -eq "TASKS" }) -eq $null) {
                     Add-PnPListItem -List "Lists/DataSources" -Values @{ Title="TASKS"; GtDpSearchQuery="ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL} LastModifiedTime>{TODAY-365}" }
                 }
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {

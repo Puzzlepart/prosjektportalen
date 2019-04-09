@@ -167,6 +167,9 @@
   </data>
   <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
     <value>Ressursallokering</value>
+  </data>  
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>Oppgaveoversikt</value>
   </data>
   <data name="Navigation_TasksOverview_Title" xml:space="preserve">
     <value>Oppgaveoversikt</value>
@@ -1784,6 +1787,9 @@
   </data>
   <data name="ProjectList_SearchBoxPrompt" xml:space="preserve">
     <value>Søk i prosjekter..</value>
+  </data>  
+  <data name="TasksOverview_SearchBoxPrompt" xml:space="preserve">
+    <value>Søk i oppgaver..</value>
   </data>
   <data name="TasksOverview_SearchBoxPrompt" xml:space="preserve">
     <value>Søk i oppgaver..</value>
@@ -1889,27 +1895,9 @@
   </data>
   <data name="TasksOverview_LoadingText" xml:space="preserve">
     <value>Laster oppgaveoversikt...</value>
-  </data>
+  </data>  
   <data name="TasksOverview_InfoText" xml:space="preserve">
     <value>Kun oppgaver som har satt både Startdato og Forfallsdato vises i denne oversikten. Klikk på elementet for å se flere detaljer om oppgaven.</value>
-  </data>
-  <data name="TasksOverview_IsDynamicLabel" xml:space="preserve">
-    <value>Dynamisk intervall</value>
-  </data>
-  <data name="TasksOverview_IsDynamicDescription" xml:space="preserve">
-    <value>Om intervallet settes til dynamisk, vil intervallet settes ut ifra oppgavene i visningen.</value>
-  </data>
-  <data name="TasksOverview_VisibleTimeStartLabel" xml:space="preserve">
-    <value>Fra</value>
-  </data>
-  <data name="TasksOverview_VisibleTimeEndLabel" xml:space="preserve">
-    <value>Til</value>
-  </data>
-  <data name="TasksOverview_OnSetIntervalButtonText" xml:space="preserve">
-    <value>Sett</value>
-  </data>
-  <data name="TasksOverview_DateIntervalText" xml:space="preserve">
-    <value>Datointervall</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Endre til denne fasen</value>
@@ -3161,32 +3149,5 @@
   </data>
   <data name="ItemLink_Label_NewTab" xml:space="preserve">
     <value>Gå til elementet (åpnes i ny fane)</value>
-  </data>
-  <data name="DayPickerStrings_Months" xml:space="preserve">
-    <value>Januar,Februar,Mars,April,Mai,Juni,Juli,August,September,Oktober,November,Desember</value>
-  </data>
-  <data name="DayPickerStrings_ShortMonths" xml:space="preserve">
-    <value>Jan,Feb,Mar,Apr,Mai,Jun,Jul,Aug,Sep,Okt,Nov,Des</value>
-  </data>
-  <data name="DayPickerStrings_Days" xml:space="preserve">
-    <value>Søndag,Mandag,Tirsdag,Onsdag,Torsdag,Fredag,Lørdag</value>
-  </data>
-  <data name="DayPickerStrings_ShortDays" xml:space="preserve">
-    <value>S,M,T,O,T,F,L</value>
-  </data>
-  <data name="DayPickerStrings_GoToToday" xml:space="preserve">
-    <value>I dag</value>
-  </data>
-  <data name="DayPickerStrings_PrevMonthAriaLabel" xml:space="preserve">
-    <value>Gå til forrige måned</value>
-  </data>
-  <data name="DayPickerStrings_NextMonthAriaLabel" xml:space="preserve">
-    <value>Gå til neste måned</value>
-  </data>
-  <data name="DayPickerStrings_PrevYearAriaLabel" xml:space="preserve">
-    <value>Gå til forrige år</value>
-  </data>
-  <data name="DayPickerStrings_NextYearAriaLabel" xml:space="preserve">
-    <value>Gå til neste år</value>
   </data>
 </root>
