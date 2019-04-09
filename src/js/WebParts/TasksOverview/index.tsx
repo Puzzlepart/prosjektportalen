@@ -90,7 +90,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                     groupBy={this.state.groupBy}
                     onFilterChange={this.onFilterChange}
                     onGroupByChanged={this.onGroupByChanged}
-                    onVisibleTimeChange={this.onVisibleTimeChange} />
+                    onIntervalChange={this.onIntervalChange} />
                 <SearchBox
                     labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
                     onChanged={this.onSearch} />
@@ -224,14 +224,19 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     }
 
     /**
-    * On visible time changed
+    * On interval change
     *
+    * @param {boolean} isDynamicInterval Is dynamic interval
     * @param {moment.Moment} visibleTimeStart Visible time start
     * @param {moment.Moment} visibleTimeEnd Visible time end
     */
     @autobind
-    private onVisibleTimeChange(visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) {
-        console.log(visibleTimeStart, visibleTimeEnd);
+    private onIntervalChange(isDynamicInterval: boolean, visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) {
+        if (isDynamicInterval) {
+            this.setState({ visibleTimeStart: null, visibleTimeEnd: null });
+        } else {
+            this.setState({ visibleTimeStart, visibleTimeEnd });
+        }
     }
 
     /**
@@ -306,11 +311,11 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
      */
     private getFilteredData(data: ITasksOverviewData) {
         Logger.log({ message: String.format(LOG_TEMPLATE, "getFilteredData", "Getting filtered data"), level: LogLevel.Info });
-        let { activeFilters, searchTerm } = ({ ...this.state } as ITasksOverviewState);
+        let { activeFilters, searchTerm, visibleTimeStart, visibleTimeEnd } = ({ ...this.state } as ITasksOverviewState);
         let tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm);
         let groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
-        let visibleTimeStart = (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment);
-        let visibleTimeEnd = (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment);
+        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment);
+        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment);
         return { groups, tasks, visibleTimeStart, visibleTimeEnd };
     }
 
