@@ -97,26 +97,28 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                 <SearchBox
                     labelText={__.getResource("TasksOverview_SearchBoxPrompt")}
                     onChanged={this.onSearch} />
-                <Timeline
-                    groups={groups}
-                    items={tasks}
-                    stickyHeader={true}
-                    stackItems={true}
-                    canMove={false}
-                    canChangeGroup={false}
-                    sidebarWidth={220}
-                    headerLabelGroupHeight={0}
-                    lineHeight={48}
-                    itemHeightRatio={0.8}
-                    visibleTimeStart={visibleTimeStart.toDate().getTime()}
-                    visibleTimeEnd={visibleTimeEnd.toDate().getTime()}
-                    headerLabelFormats={HeaderLabelFormats}
-                    subHeaderLabelFormats={SubHeaderLabelFormats}
-                    itemRenderer={this.timelineItemRenderer}>
-                    <TimelineMarkers>
-                        <TodayMarker />
-                    </TimelineMarkers>
-                </Timeline>
+                <div style={{ margin: "10px 0 0 0" }}>
+                    <Timeline
+                        groups={groups}
+                        items={tasks}
+                        stickyHeader={true}
+                        stackItems={true}
+                        canMove={false}
+                        canChangeGroup={false}
+                        sidebarWidth={220}
+                        headerLabelGroupHeight={0}
+                        lineHeight={48}
+                        itemHeightRatio={0.8}
+                        visibleTimeStart={visibleTimeStart.toDate().getTime()}
+                        visibleTimeEnd={visibleTimeEnd.toDate().getTime()}
+                        headerLabelFormats={HeaderLabelFormats}
+                        subHeaderLabelFormats={SubHeaderLabelFormats}
+                        itemRenderer={this.timelineItemRenderer}>
+                        <TimelineMarkers>
+                            <TodayMarker />
+                        </TimelineMarkers>
+                    </Timeline>
+                </div>
                 <TasksOverviewDetailsModal
                     task={this.state.selectedTask}
                     onDismiss={this.onTasksOverviewDetailsModalDismiss} />
@@ -309,8 +311,8 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
         let { activeFilters, searchTerm, visibleTimeStart, visibleTimeEnd } = ({ ...this.state } as ITasksOverviewState);
         let tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm);
         let groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
-        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment);
-        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment);
+        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment).startOf("month");
+        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment).endOf("month");
         return { groups, tasks, visibleTimeStart, visibleTimeEnd };
     }
 
