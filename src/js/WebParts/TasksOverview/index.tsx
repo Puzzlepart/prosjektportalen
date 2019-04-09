@@ -311,8 +311,8 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
         let { activeFilters, searchTerm, visibleTimeStart, visibleTimeEnd } = ({ ...this.state } as ITasksOverviewState);
         let tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm);
         let groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0);
-        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b) as moment.Moment).startOf("month");
-        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b) as moment.Moment).endOf("month");
+        visibleTimeStart = visibleTimeStart || (tasks.map(t => t.start_time).reduce((a, b) => a < b ? a : b, moment()) as moment.Moment).startOf("month");
+        visibleTimeEnd = visibleTimeEnd || (tasks.map(t => t.end_time).reduce((a, b) => a > b ? a : b, moment()) as moment.Moment).endOf("month");
         return { groups, tasks, visibleTimeStart, visibleTimeEnd };
     }
 
