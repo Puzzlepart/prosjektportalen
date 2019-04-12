@@ -179,11 +179,11 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             Write-Host "DONE" -ForegroundColor Green
         }
 
-        if ($CurrentVersion.Minor -lt 5) {                
+        if ($CurrentVersion.Minor -lt 5) {
+            Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
             # Replacing Content Type IDs in configurations from versions 2.3 and before
             if ($CurrentVersion.Minor -lt 4) {
                 try {
-                    Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
                     Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                         $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
                         $_["GtDpSearchQuery"] = $Query
@@ -217,7 +217,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 }
             }
             try {
-                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     if ($_["Title"] -eq "PROJECTS") {
                         $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
