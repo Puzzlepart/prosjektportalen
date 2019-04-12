@@ -183,6 +183,7 @@ function Start-Install() {
     # Installing root package if switch SkipRootPackage is not present
     if (-not $SkipRootPackage.IsPresent) {
         try {
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
