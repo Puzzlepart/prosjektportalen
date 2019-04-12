@@ -104,7 +104,7 @@ if ($null -eq $Connection) {
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'npm run-script release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
-$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)"
+$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
