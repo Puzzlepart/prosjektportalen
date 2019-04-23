@@ -9,6 +9,7 @@ formModifications[__.getResource("Lists_MeetingCalendar_Url")] = require("./Meet
 formModifications[__.getResource("Lists_PhaseChecklist_Url")] = require("./PhaseChecklist").default;
 formModifications[__.getResource("Lists_ChangeAnalysis_Url")] = require("./ChangeAnalysis").default;
 formModifications[__.getResource("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
+formModifications[__.getResource("Lists_MeasurementIndicators_Url")] = require("./MeasurementIndicators").default;
 
 
 /**
