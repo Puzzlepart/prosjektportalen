@@ -2331,6 +2331,15 @@
   <data name="MeasurementIndicators_NextStep_LinkText" xml:space="preserve">
     <value>Benefits followup</value>
   </data>
+  <data name="BenefitsOverview_NextStep_Title" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="BenefitsOverview_NextStep_Text" xml:space="preserve">
+    <value>To see progress after you have registered benefit measurements, have a look at the</value>
+  </data>
+  <data name="BenefitsOverview_NextStep_LinkText" xml:space="preserve">
+    <value>Benefits overview</value>
+  </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
     <value>Project Portal Home</value>
   </data>
