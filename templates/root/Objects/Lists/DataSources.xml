@@ -22,4 +22,34 @@
         <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
         <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="GtDpSearchQuery" />
     </pnp:FieldRefs>
+    <pnp:DataRows UpdateBehavior="Skip" KeyColumn="Title">
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">PROJECTS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet" NOT GtProjectLifecycleStatusOWSCHCS="Closed" Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">LESSONSLOG</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578e7470cc4aa68d5663464831070206* GtProjectLogExperienceOWSBOOL=1 Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">BENEFITSOVERVIEW</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">RISKOVERVIEW</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D566346483107020101* GtShowInPortfolioOWSBOOL=1 Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">DELIVERIESOVERVIEW</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070205* Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">RESOURCEALLOCATION</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070209* Path:{SiteCollection.URL}</pnp:DataValue>
+        </pnp:DataRow>
+        <pnp:DataRow>
+            <pnp:DataValue FieldName="Title">TASKS</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpSearchQuery">ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL} LastModifiedTime>{TODAY-365}</pnp:DataValue>
+        </pnp:DataRow>
+    </pnp:DataRows>
 </pnp:ListInstance>

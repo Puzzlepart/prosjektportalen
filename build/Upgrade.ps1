@@ -104,7 +104,7 @@ if ($null -eq $Connection) {
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'npm run-script release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
-$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)"
+$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -178,33 +178,32 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             }
             Write-Host "DONE" -ForegroundColor Green
         }
-        
-        # Replacing Content Type IDs in configurations from versions 2.3 and before
-        if ($CurrentVersion.Minor -lt 4) {
-            try {
-                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
-                Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
-                    $_["GtDpSearchQuery"] = $Query
-                    $_.Update()
-                }
-                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
-                    $_["GtDpSearchQuery"] = $Query
-                    $_.Update()
-                }
-                Invoke-PnPQuery
-                Write-Host "DONE" -ForegroundColor Green
-            }
-            catch {
-                Write-Host
-                Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
-            }
-        }
 
         if ($CurrentVersion.Minor -lt 5) {
+            Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
+            # Replacing Content Type IDs in configurations from versions 2.3 and before
+            if ($CurrentVersion.Minor -lt 4) {
+                try {
+                    Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
+                        $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
+                        $_["GtDpSearchQuery"] = $Query
+                        $_.Update()
+                    }
+                    Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
+                        $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
+                        $_["GtDpSearchQuery"] = $Query
+                        $_.Update()
+                    }
+                    Invoke-PnPQuery
+                    Write-Host "DONE" -ForegroundColor Green
+                }
+                catch {
+                    Write-Host
+                    Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
+                    Write-Host $error[0] -ForegroundColor Red
+                    exit 1 
+                }
+            }
             $ProjectLifecycleFilter = ""
             $ClosedProjectsDisplayName = ""
             switch ($Language){
@@ -218,10 +217,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 }
             }
             try {
-                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
-                if((Get-PnPListItem -List "Lists/DataSources" | Where-Object { $_["Title"] -eq "TASKS" }) -eq $null) {
-                    Add-PnPListItem -List "Lists/DataSources" -Values @{ Title="TASKS"; GtDpSearchQuery="ContentTypeId:0x010800233B015F95174C9A8EB505493841DE8D* Path:{SiteCollection.URL} LastModifiedTime>{TODAY-365}" }
-                }
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     if ($_["Title"] -eq "PROJECTS") {
                         $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
@@ -234,12 +229,18 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                         $_.Update()
                     }
                 }
-                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    if ($_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName) {
-                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
-                    } else {
-                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
-                    }
+                $ClosedProjects = Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName}
+                if ($null -ne $ClosedProjects) {
+                    $Query = $ClosedProjects["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
+                    $ClosedProjects["GtDpSearchQuery"] = $Query
+                    $ClosedProjects.Update()
+                } else {
+                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ Title=$ClosedProjectsDisplayName; GtDpSearchQuery=($ProjectLifecycleFilter.Replace(" NOT ", " ") + " Path:{SiteCollection.URL}") }
+                }
+                
+
+                Get-PnPListItem -List "Lists/DynamicPortfolioViews" |  Where-Object {$_["GtDpDisplayName"] -ne $ClosedProjectsDisplayName} | ForEach-Object {
+                    $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
@@ -253,7 +254,6 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 exit 1 
             }
         }
-
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    
