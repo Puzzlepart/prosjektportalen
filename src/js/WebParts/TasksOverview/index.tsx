@@ -25,6 +25,7 @@ import ITasksOverviewData from "./ITasksOverviewData";
 import TaskOverviewItem from "./TaskOverviewItem";
 import { HeaderLabelFormats } from "./HeaderLabelFormats";
 import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
+import { TaskOverviewItemType } from "./TaskOverviewItem/TaskOverviewItemType";
 //#endregion
 
 
@@ -50,6 +51,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
             searchTerm: "",
             groupBy: props.groupByOptions[0],
             isLoading: true,
+            itemType: TaskOverviewItemType.Normal,
         };
     }
 
@@ -71,14 +73,16 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
      * Renders the <TasksOverview /> component
      */
     public render(): JSX.Element {
-        if (this.state.isLoading) {
+        const { isLoading, items, groupBy, itemType, selectedTask } = this.state;
+
+        if (isLoading) {
             return <Spinner type={SpinnerType.large} label={__.getResource("TasksOverview_LoadingText")} />;
         }
-        if (!this.state.items) {
+        if (!items) {
             return <MessageBar>{__.getResource("TasksOverview_ErrorText")}</MessageBar>;
         }
 
-        const data = this.getData(this.state.items);
+        const data = this.getData(items);
         const { groups, tasks, visibleTimeStart, visibleTimeEnd } = this.getFilteredData(data);
 
         return (
@@ -90,7 +94,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                     visibleTime={{ visibleTimeStart, visibleTimeEnd }}
                     filters={this.getFilters(data)}
                     groupByOptions={this.props.groupByOptions}
-                    groupBy={this.state.groupBy}
+                    groupBy={groupBy}
                     onFilterChange={this.onFilterChange}
                     onGroupByChanged={this.onGroupByChanged}
                     onIntervalChange={this.onIntervalChange} />
@@ -99,6 +103,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                     onChanged={this.onSearch} />
                 <div style={{ margin: "10px 0 0 0" }}>
                     <Timeline
+                        key={`Timeline_${itemType}`}
                         groups={groups}
                         items={tasks}
                         stickyHeader={true}
@@ -107,7 +112,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                         canChangeGroup={false}
                         sidebarWidth={220}
                         headerLabelGroupHeight={0}
-                        lineHeight={48}
+                        lineHeight={itemType === TaskOverviewItemType.DatesOnly ? 28 : 48}
                         itemHeightRatio={0.8}
                         visibleTimeStart={visibleTimeStart.toDate().getTime()}
                         visibleTimeEnd={visibleTimeEnd.toDate().getTime()}
@@ -119,9 +124,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
                         </TimelineMarkers>
                     </Timeline>
                 </div>
-                <TasksOverviewDetailsModal
-                    task={this.state.selectedTask}
-                    onDismiss={this.onTasksOverviewDetailsModalDismiss} />
+                <TasksOverviewDetailsModal task={selectedTask} onDismiss={this.onTasksOverviewDetailsModalDismiss} />
             </div >
         );
     }
@@ -131,12 +134,13 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
    */
     @autobind
     private timelineItemRenderer({ item, itemContext, getItemProps }) {
-        const htmlProps = getItemProps(item.itemProps);
+        const itemProps = getItemProps(item.itemProps);
         return (
             <TaskOverviewItem
-                itemProps={htmlProps}
+                itemProps={itemProps}
                 item={item}
                 itemContext={itemContext}
+                type={this.state.itemType}
                 onItemClick={this.onTimelineItemClick} />
         );
     }
@@ -222,7 +226,8 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
     @autobind
     private onGroupByChanged(groupBy: { fieldName: string, name: string }) {
         Logger.log({ message: String.format(LOG_TEMPLATE, "onGroupByChanged", `Group by changed to ${groupBy.fieldName}`), level: LogLevel.Info });
-        this.setState({ groupBy });
+        const itemType = (groupBy && groupBy.fieldName === "Title") ? TaskOverviewItemType.DatesOnly : TaskOverviewItemType.Normal;
+        this.setState({ groupBy, itemType });
     }
 
     /**
