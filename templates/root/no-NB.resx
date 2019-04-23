@@ -2331,6 +2331,15 @@
   <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>oppgavelisten</value>
   </data>
+  <data name="MeasurementIndicators_NextStep_Title" xml:space="preserve">
+    <value>Neste steg</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Text" xml:space="preserve">
+    <value>Etter at målingsindikatorene er definert kan målinger registreres i</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_LinkText" xml:space="preserve">
+    <value>Gevinstoppfølging</value>
+  </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
     <value>Prosjektportalen hjem</value>
   </data>
