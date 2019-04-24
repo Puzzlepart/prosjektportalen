@@ -20,7 +20,7 @@ const _: IBaseFormModifications = {
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render((<div>
            <ChromeTitle title={__.getResource("MeasurementIndicators_NextStep_Title")} />
-           <p>​​{__.getResource("MeasurementIndicators_NextStep_Text")} <a href={`../../${__.getResource("DefaultView_MeasurementIndicators_Url")}`}>{__.getResource("MeasurementIndicators_NextStep_LinkText")}</a>​.</p>
+           <p>​​{__.getResource("MeasurementIndicators_NextStep_Text")}.</p>
         </div>), container);
     },
 };

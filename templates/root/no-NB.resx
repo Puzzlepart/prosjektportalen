@@ -348,6 +348,12 @@
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstoppflging</value>
   </data>
+  <data name="Lists_BenefitsFollowup_WrongSpelling_Url" xml:space="preserve">
+    <value>Lists/Gevinstsoppflging</value>
+  </data>
+  <data name="Lists_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Mleindikatorer</value>
+  </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Lists/Prosjektstatusrapporter</value>
   </data>
@@ -2335,18 +2341,15 @@
     <value>Neste steg</value>
   </data>
   <data name="MeasurementIndicators_NextStep_Text" xml:space="preserve">
-    <value>Etter at målingsindikatorene er definert kan målinger registreres i</value>
+    <value>Etter at måleindikatorene er definert kan målinger registreres i Gevinstoppfølging</value>
   </data>
-  <data name="MeasurementIndicators_NextStep_LinkText" xml:space="preserve">
-    <value>Gevinstoppfølging</value>
-  </data>
-  <data name="BenefitsOverview_NextStep_Title" xml:space="preserve">
+  <data name="BenefitsFollowUp_NextStep_Title" xml:space="preserve">
     <value>Neste steg</value>
   </data>
-  <data name="BenefitsOverview_NextStep_Text" xml:space="preserve">
+  <data name="BenefitsFollowUp_NextStep_Text" xml:space="preserve">
     <value>For å følge opp måloppnåelse etter at gevinstmålinger er registrert, se</value>
   </data>
-  <data name="BenefitsOverview_NextStep_LinkText" xml:space="preserve">
+  <data name="BenefitsFollowUp_NextStep_LinkText" xml:space="preserve">
     <value>Gevinstoversikten</value>
   </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">

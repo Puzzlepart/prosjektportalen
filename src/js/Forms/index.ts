@@ -11,7 +11,7 @@ formModifications[__.getResource("Lists_ChangeAnalysis_Url")] = require("./Chang
 formModifications[__.getResource("Lists_BenefitsAnalysis_Url")] = require("./BenefitsAnalysis").default;
 formModifications[__.getResource("Lists_MeasurementIndicators_Url")] = require("./MeasurementIndicators").default;
 formModifications[__.getResource("Lists_BenefitsFollowup_Url")] = require("./BenefitsFollowup").default;
-
+formModifications[__.getResource("Lists_BenefitsFollowup_WrongSpelling_Url")] = require("./BenefitsFollowup").default;
 
 /**
  * Initialize form modifications and web parts

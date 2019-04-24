@@ -20,7 +20,7 @@ const _: IBaseFormModifications = {
         const container = FormUtil.insertFormContainer(id);
         ReactDOM.render((<div>
            <ChromeTitle title={__.getResource("BenefitsFollowUp_NextStep_Title")} />
-           <p>​​{__.getResource("BenefitsFollowUp_NextStep_Text")} <a href={`../../${__.getResource("DefaultView_BenefitsFollowUp_Url")}`}>{__.getResource("BenefitsFollowUp_NextStep_LinkText")}</a>​.</p>
+           <p>​​{__.getResource("BenefitsFollowUp_NextStep_Text")} <a href={`../../SitePages/BenefitsOverview.aspx`}>{__.getResource("BenefitsFollowUp_NextStep_LinkText")}</a>​.</p>
         </div>), container);
     },
 };
