@@ -1,12 +1,6 @@
 import * as React from "react";
-import { TaskModel } from "../TaskModel";
-
-export interface ITaskOverviewItemProps {
-    item: TaskModel;
-    itemContext: any;
-    onItemClick: (item: TaskModel) => void;
-    itemProps: React.HTMLProps<HTMLDivElement>;
-}
+import { ITaskOverviewItemProps } from "./ITaskOverviewItemProps";
+import { TaskOverviewItemType } from "./TaskOverviewItemType";
 
 export default class TaskOverviewItem extends React.PureComponent<ITaskOverviewItemProps, {}> {
     public render(): React.ReactElement<ITaskOverviewItemProps> {
@@ -16,7 +10,7 @@ export default class TaskOverviewItem extends React.PureComponent<ITaskOverviewI
                 title={this.props.item.title}
                 onClick={_ => this.props.onItemClick(this.props.item)}>
                 <div className="pp-task-overview-item-content rct-item-content">
-                    <div className="pp-task-overview-item-title">
+                    <div className="pp-task-overview-item-title" hidden={this.props.type === TaskOverviewItemType.DatesOnly}>
                         {this.props.item.title}
                     </div>
                     <div className="pp-task-overview-item-date">

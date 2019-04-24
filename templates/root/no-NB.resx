@@ -348,6 +348,12 @@
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Gevinstoppflging</value>
   </data>
+  <data name="Lists_BenefitsFollowup_WrongSpelling_Url" xml:space="preserve">
+    <value>Lists/Gevinstsoppflging</value>
+  </data>
+  <data name="Lists_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Mleindikatorer</value>
+  </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Lists/Prosjektstatusrapporter</value>
   </data>
@@ -2331,6 +2337,21 @@
   <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>oppgavelisten</value>
   </data>
+  <data name="MeasurementIndicators_NextStep_Title" xml:space="preserve">
+    <value>Neste steg</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Text" xml:space="preserve">
+    <value>Etter at måleindikatorene er definert kan målinger registreres i Gevinstoppfølging</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Title" xml:space="preserve">
+    <value>Neste steg</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Text" xml:space="preserve">
+    <value>For å følge opp måloppnåelse etter at gevinstmålinger er registrert, se</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_LinkText" xml:space="preserve">
+    <value>Gevinstoversikten</value>
+  </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
     <value>Prosjektportalen hjem</value>
   </data>
@@ -3056,6 +3077,9 @@
   </data>
   <data name="BenefitsOverview_AllMeasurements" xml:space="preserve">
     <value>Vis alle målinger</value>
+  </data>
+  <data name="Lists_Tasks_Fields_Title_DisplayName" xml:space="preserve">
+    <value>Oppgavenavn</value>
   </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Gevinst</value>

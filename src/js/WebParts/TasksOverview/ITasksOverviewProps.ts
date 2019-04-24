@@ -7,8 +7,6 @@ export default interface ITasksOverviewProps extends IBaseWebPartProps {
     searchQuery?: SearchQuery;
     dataSourceName?: string;
     filterColumns?: IColumn[];
-    defaultTimeStart?: any[];
-    defaultTimeEnd?: any[];
     groupByOptions?: { fieldName: string, name: string }[];
     customSorts?: { [fieldName: string]: string[] };
 }
@@ -62,12 +60,14 @@ export const TasksOverviewDefaultProps: Partial<ITasksOverviewProps> = {
             minWidth: 0,
         },
     ],
-    defaultTimeStart: [-1, "months"],
-    defaultTimeEnd: [6, "months"],
     groupByOptions: [
         {
             fieldName: "SiteTitle",
             name: __.getResource("String_Project"),
+        },
+        {
+            fieldName: "Title",
+            name: __.getResource("Lists_Tasks_Fields_Title_DisplayName"),
         },
         {
             fieldName: "GtProjectPhase",
