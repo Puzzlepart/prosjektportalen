@@ -6,18 +6,22 @@ import * as FormUtil from "../FormUtils";
 import { ChromeTitle } from "../../WebParts/@Components";
 
 const _: IBaseFormModifications = {
+    NewForm: () => {
+        //
+    },
+    EditForm: () => {
+        //
+    },
+    DispForm: () => {
+        //
+    },
     AllItems: () => {
         const id = "pp-next-step";
         const container = FormUtil.insertFormContainer(id);
-        ReactDOM.render(<div>
-            <ChromeTitle title={__.getResource("BenefitAnalysis_NextStep_Title")} />
-            <p>
-                {__.getResource("BenefitAnalysis_NextStep_Text")}
-                <a href={`../../${__.getResource("DefaultView_Tasks_Url")}`}>
-                    {__.getResource("BenefitAnalysis_NextStep_LinkText")}
-                </a>​.
-            </p>
-        </div>, container);
+        ReactDOM.render((<div>
+           <ChromeTitle title={__.getResource("MeasurementIndicators_NextStep_Title")} />
+           <p>​​{__.getResource("MeasurementIndicators_NextStep_Text")}.</p>
+        </div>), container);
     },
 };
 

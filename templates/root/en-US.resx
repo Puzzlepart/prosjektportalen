@@ -342,6 +342,12 @@
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Benefits Followup</value>
   </data>
+  <data name="Lists_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Measurement Indicators</value>
+  </data>
+  <data name="Lists_BenefitsFollowup_WrongSpelling_Url" xml:space="preserve">
+    <value>Lists/MeasurementIndicators</value>
+  </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Project status reports</value>
   </data>
@@ -2321,6 +2327,24 @@
   </data>
   <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>the task list</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Title" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Text" xml:space="preserve">
+    <value>After you have defined the measurement indicators, you can register new measurements in</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_LinkText" xml:space="preserve">
+    <value>Benefits followup</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Title" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Text" xml:space="preserve">
+    <value>To see progress after you have registered benefit measurements, have a look at the</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_LinkText" xml:space="preserve">
+    <value>Benefits overview</value>
   </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
     <value>Project Portal Home</value>
