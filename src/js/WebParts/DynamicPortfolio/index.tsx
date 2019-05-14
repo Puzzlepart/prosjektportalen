@@ -322,7 +322,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         permissions.set(31);
         const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
         await ExecuteJsomQuery(jsomCtx);
-        const configuration = await DynamicPortfolioConfiguration.getConfig();
+        const configuration = await DynamicPortfolioConfiguration.getConfig(this.props.viewConfigList);
 
         let currentView: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig;
 
@@ -357,7 +357,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }
         }
         const fieldNames = configuration.columns.map(f => f.fieldName);
-        const response = await queryProjects(currentView, configuration);
+        const response = await queryProjects(this.props.queryText, currentView, configuration);
 
         // Populates DynamicPortfolioFieldSelector with items from this.configuration.columns
         DynamicPortfolioFieldSelector.items = configuration.columns.map(col => ({
@@ -606,7 +606,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState({ isChangingView: viewConfig });
-        const response = await queryProjects(viewConfig, this.state.configuration);
+        const response = await queryProjects(this.props.queryText, viewConfig, this.state.configuration);
         DynamicPortfolioFieldSelector.items = this.state.configuration.columns.map(col => ({
             name: col.name,
             value: col.fieldName,

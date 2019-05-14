@@ -7,8 +7,8 @@ export interface ISummarySectionHeaderProps {
 
 export interface ISummarySectionProjectDataProps {
     webUrl?: string;
-    propertiesLabel: string;
-    showActionLinks: boolean;
+    propertiesLabel?: string;
+    showActionLinks?: boolean;
 }
 
 export interface ISummarySectionStatusColumnsProps {
