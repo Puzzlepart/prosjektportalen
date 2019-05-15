@@ -49,5 +49,4 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     defaultSortFunction: (a, b) => a.SiteTitle > b.SiteTitle ? 1 : -1,
     viewConfigList: __.getResource("Lists_DynamicPortfolioViews_Title"),
     viewSelectorEnabled: true,
-    queryText: "*",
 };
