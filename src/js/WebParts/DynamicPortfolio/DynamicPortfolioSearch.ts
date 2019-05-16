@@ -3,11 +3,6 @@ import { IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from "./D
 import SearchService from "../../Services/SearchService";
 import { getObjectValue } from "../../Helpers";
 
-/**
- * Default Search Settings used for @pnp/sp
- */
-export const DEFAULT_SEARCH_SETTINGS = { Querytext: "*", RowLimit: 500, TrimDuplicates: false };
-
 export interface IProjectsQueryResponse {
     primarySearchResults: SearchResult[];
     refiners: any[];
@@ -16,19 +11,21 @@ export interface IProjectsQueryResponse {
 /**
  * Query the REST Search API using @pnp/sp
  *
- *
+ * @param {string} queryText Query text
  * @param {IDynamicPortfolioViewConfig} viewConfig View configuration
  * @param {IDynamicPortfolioConfiguration} configuration DynamicPortfolioConfiguration
  */
-export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, configuration: IDynamicPortfolioConfiguration): Promise<IProjectsQueryResponse> {
+export async function queryProjects(queryText: string, viewConfig: IDynamicPortfolioViewConfig, configuration: IDynamicPortfolioConfiguration): Promise<IProjectsQueryResponse> {
     try {
-        const { items, RawSearchResults } = await SearchService.search<any[]>({
-            ...DEFAULT_SEARCH_SETTINGS,
+        const query = {
+            Querytext: "*",
             SelectProperties: configuration.columns.map(f => f.fieldName).concat(["SiteTitle"]),
             Refiners: configuration.refiners.map(ref => ref.key).join(","),
-            QueryTemplate: viewConfig.queryTemplate,
-        });
-
+            QueryTemplate: [queryText, viewConfig.queryTemplate].filter(q => q).join(" "),
+            RowLimit: 500,
+             TrimDuplicates: false,
+        };
+        const { items, RawSearchResults } = await SearchService.search<any[]>(query);
         let refiners = getObjectValue(RawSearchResults, "PrimaryQueryResult.RefinementResults.Refiners", []);
         if (refiners["results"]) {
             refiners = refiners["results"];
@@ -38,6 +35,7 @@ export async function queryProjects(viewConfig: IDynamicPortfolioViewConfig, con
             refiners,
         };
     } catch (err) {
+        console.log(err);
         throw err;
     }
 }
