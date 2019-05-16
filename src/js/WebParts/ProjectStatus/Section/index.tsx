@@ -76,22 +76,26 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
     private renderInner({ project, fields, section }: ISectionProps, { listData }: ISectionState) {
         return (
             <div id={section.getHtmlElementId("inner")}>
-                {section.showRiskMatrix && (
-                    <div>
-                        <RiskMatrix
-                            data={{ items: listData.items }}
-                            showViewSelector={false}
-                            {...this.props.riskMatrix} />
-                        <OpportunityMatrix
-                            data={{ items: listData.items }}
-                            showViewSelector={false} />
-                    </div>
-                )}
-                {section.listTitle && (
-                    <SectionList
-                        id={section.getHtmlElementId("listview")}
-                        listData={listData} />
-                )}
+                {section.showRiskMatrix
+                    ? (
+                        <div>
+                            <RiskMatrix
+                                data={{ items: listData.items }}
+                                showViewSelector={false}
+                                {...this.props.riskMatrix} />
+                            <OpportunityMatrix
+                                data={{ items: listData.items }}
+                                showViewSelector={false} />
+                        </div>
+                    )
+                    : (
+                        section.listTitle && (
+                            <SectionList
+                                id={section.getHtmlElementId("listview")}
+                                listData={listData} />
+                        )
+                    )
+                }
                 {section.sectionType === SectionType.ProjectPropertiesSection && (
                     <div
                         className="field-section"
