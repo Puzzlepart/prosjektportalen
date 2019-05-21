@@ -15,6 +15,7 @@ const gulp = require("gulp"),
     git = require("./utils/git.js"),
     file = require("./utils/file.js"),
     format = require("string-format"),
+    bom = require('gulp-bom'),
     pkg = require("../package.json");
 
 //#region Helpers
@@ -68,6 +69,7 @@ gulp.task("stampVersionToScripts", done => {
         es.concat(src.pipe(flatmap((stream, file) => {
             return stream
                 .pipe(replaceVersionToken(hash))
+                .pipe(bom())
                 .pipe(gulp.dest(config.paths.dist))
         }))).on("end", done);
     });
