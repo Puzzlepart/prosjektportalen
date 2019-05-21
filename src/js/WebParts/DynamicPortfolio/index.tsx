@@ -251,7 +251,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     onClick: e => {
                         e.preventDefault();
                         SP.UI.ModalDialog.showModalDialog({
-                            url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
+                            url: `${_spPageContextInfo.siteAbsoluteUrl}/${this.props.newViewUrl}`,
                             title: __.getResource("DynamicPortfolio_CreateNewView"),
                         });
                     },
