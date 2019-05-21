@@ -2,7 +2,7 @@
 const gulp = require("gulp"),
     path = require("path"),
     es = require("event-stream"),
-    format = require("string-format"),
+    bom = require('gulp-bom'),
     config = require("./@configuration.js");
 
 gulp.task("copyReleaseFiles", ["copyBuildFiles", "copyManualConfig", "copyScripts", "copyLicense"], done => {
@@ -18,7 +18,9 @@ gulp.task("copyBuildFiles", () => {
 });
 
 gulp.task("copyScripts", () => {
-    return gulp.src(config.globs.scripts).pipe(gulp.dest(path.join(config.paths.dist, "scripts")))
+    return gulp.src(config.globs.scripts, { removeBOM: false })
+        .pipe(bom())
+        .pipe(gulp.dest(path.join(config.paths.dist, "scripts")))
 });
 
 gulp.task("copyManualConfig", () => {
