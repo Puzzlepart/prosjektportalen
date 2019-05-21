@@ -23,7 +23,10 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     excelExportConfig?: IExcelExportConfig;
     defaultSortFunction?: (a, b) => 1 | -1;
     defaultView?: IDynamicPortfolioViewConfig;
+    viewConfigList?: string;
     viewSelectorEnabled?: boolean;
+    queryText?: string;
+    newViewUrl?: string;
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
@@ -45,5 +48,7 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
         buttonIcon: "ExcelDocument",
     },
     defaultSortFunction: (a, b) => a.SiteTitle > b.SiteTitle ? 1 : -1,
+    viewConfigList: __.getResource("Lists_DynamicPortfolioViews_Title"),
     viewSelectorEnabled: true,
+    newViewUrl: "Lists/DynamicPortfolioViews/NewForm.aspx",
 };
