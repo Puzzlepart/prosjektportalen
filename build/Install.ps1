@@ -61,6 +61,9 @@ Param(
     [Hashtable]$Parameters
 )
 
+# Fix encoding issues of scripts
+Get-ChildItem .\scripts\* -Recurse *.ps1 | % { $content=$_ | Get-Content; Set-Content -PassThru $_.FullName $content -Encoding UTF8 -Force} > $null
+
 . ./scripts/SharedFunctions.ps1
 
 # Loads bundle if switch SkipLoadingBundle is not present
