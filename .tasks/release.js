@@ -2,7 +2,6 @@
 var gulp = require("gulp"),
     zip = require("gulp-zip"),
     format = require("string-format"),
-    runSequence = require("run-sequence"),
     git = require("./utils/git.js"),
     pkg = require("../package.json"),
     bom = require('gulp-bom'),
@@ -28,7 +27,6 @@ function getReleasePackageName() {
 gulp.task("zipReleasePackage", done => {
     getReleasePackageName().then(releasePkgName => {
         gulp.src(format("{0}/**/*", config.paths.dist))
-            .pipe(bom())
             .pipe(zip(releasePkgName))
             .pipe(gulp.dest(config.paths.release))
             .on('end', done);
