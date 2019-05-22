@@ -207,15 +207,15 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                     exit 1 
                 }
             }
-            $ProjectLifecycleFilter = ""
-            $ClosedProjectsDisplayName = ""
             switch ($Language){
                 "1033" { 
                     $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"'
+                    $ClosedProjectLifecycleQuery = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL}'
                     $ClosedProjectsDisplayName = 'Closed Projects'
                 }
                 "1044" { 
                     $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"'
+                    $ClosedProjectLifecycleQuery = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatusOWSCHCS="Avsluttet" Path:{Site.URL}'
                     $ClosedProjectsDisplayName = 'Avsluttede prosjekter'
                 }
             }
@@ -227,26 +227,25 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                         $_.Update()
                     }
                     if ($_["Title"] -eq "BENEFITSOVERVIEW") {
-                        $Query = "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{SiteCollection.URL}"
+                        $Query = "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{Site.URL}"
                         $_["GtDpSearchQuery"] = $Query
                         $_.Update()
                     }
                 }
-                $ClosedProjects = Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName}
-                if ($null -ne $ClosedProjects) {
-                    $Query = $ClosedProjects["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
-                    $ClosedProjects["GtDpSearchQuery"] = $Query
-                    $ClosedProjects.Update()
-                } else {
-                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ Title=$ClosedProjectsDisplayName; GtDpSearchQuery=($ProjectLifecycleFilter.Replace(" NOT ", " ") + " Path:{SiteCollection.URL}") }
-                }
                 
-
-                Get-PnPListItem -List "Lists/DynamicPortfolioViews" |  Where-Object {$_["GtDpDisplayName"] -ne $ClosedProjectsDisplayName} | ForEach-Object {
+                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -ne $ClosedProjectsDisplayName} | ForEach-Object {
                     $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
+
+                $ClosedProjects = Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName -or $_["Title"] -eq $ClosedProjectsDisplayName}
+                if ($null -ne $ClosedProjects) {
+                    Set-PnPListItem -List "Lists/DynamicPortfolioViews" -Identity $ClosedProjects -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery }
+                } else {
+                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery }
+                }
+
                 Invoke-PnPQuery
                 Write-Host "DONE" -ForegroundColor Green
             }
