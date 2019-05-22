@@ -177,7 +177,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             #region Copying measurement indicators
             Write-Host "`tCreating items in $MeasurementIndicatorsListName list" -ForegroundColor Gray
             $MeasurementIndicatorsListItemsMap = @{}
-            $(Get-PnPListItem -List $BenefitsList -Web $ProjectWeb) | ForEach-Object {
+            $(Get-PnPListItem -List $BenefitsList -Web $ProjectWeb) | Where-Object {$_["GtMeasureIndicator"] -ne $null} | ForEach-Object {
                 $newItem = Add-PnPListItem -List $MeasurementIndicatorsList -Web $ProjectWeb -Values @{
                     Title             = $_["GtMeasureIndicator"];
                     GtGainLookup      = "$($_["ID"])";
