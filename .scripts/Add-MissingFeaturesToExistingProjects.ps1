@@ -106,11 +106,12 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
 }
 
 function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
-    $MeasurementIndicatorsListName = "Måleindikatorer"
-    $FollowUpListName = "Gevinstsoppfølging"
+    $MeasurementIndicatorsListName = [uri]::UnescapeDataString("M%C3%A5leindikatorer")
+    $FollowUpListName = [uri]::UnescapeDataString("Gevinstsoppf%C3%B8lging")
+    $NewFollowUpListName = [uri]::UnescapeDataString("Gevinstoppf%C3%B8lging")
     $BenefitsListName = "Gevinstanalyse og gevinstrealiseringsplan"
     $GainLookupDisplayName = "Gevinst"
-    $MeasureIndicatorLookupDisplayName = "Måleindikator"
+    $MeasureIndicatorLookupDisplayName = [uri]::UnescapeDataString("M%C3%A5leindikator")
     $GroupedBenefitTypeViewName = "Pr gevinsttype"
     $FlatViewName = "Flat visning"
     if ($Language -eq 1033) {
@@ -249,8 +250,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             $FlatView.Update()
             $FlatView.Context.ExecuteQuery()
 
-            if($Language -eq 1044) {  
-                $NewFollowUpListName = "Gevinstoppfølging"   
+            if($Language -eq 1044) {
                 $FollowUpList = Get-PnPList -Identity $FollowUpListName -Web $ProjectWeb 
                 if ($null -ne $FollowUpList) {
                     Write-Host "`t`tRenaming list to $NewFollowUpListName" -ForegroundColor Gray
