@@ -106,11 +106,12 @@ function Add-ProjectPropertiesList($ProjectWeb, $Language) {
 }
 
 function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
-    $MeasurementIndicatorsListName = "Måleindikatorer"
-    $FollowUpListName = "Gevinstsoppfølging"
+    $MeasurementIndicatorsListName = [uri]::UnescapeDataString("M%C3%A5leindikatorer")
+    $FollowUpListName = [uri]::UnescapeDataString("Gevinstsoppf%C3%B8lging")
+    $NewFollowUpListName = [uri]::UnescapeDataString("Gevinstoppf%C3%B8lging")
     $BenefitsListName = "Gevinstanalyse og gevinstrealiseringsplan"
     $GainLookupDisplayName = "Gevinst"
-    $MeasureIndicatorLookupDisplayName = "Måleindikator"
+    $MeasureIndicatorLookupDisplayName = [uri]::UnescapeDataString("M%C3%A5leindikator")
     $GroupedBenefitTypeViewName = "Pr gevinsttype"
     $FlatViewName = "Flat visning"
     if ($Language -eq 1033) {
@@ -249,8 +250,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             $FlatView.Update()
             $FlatView.Context.ExecuteQuery()
 
-            if($Language -eq 1044) {  
-                $NewFollowUpListName = "Gevinstoppfølging"   
+            if($Language -eq 1044) {
                 $FollowUpList = Get-PnPList -Identity $FollowUpListName -Web $ProjectWeb 
                 if ($null -ne $FollowUpList) {
                     Write-Host "`t`tRenaming list to $NewFollowUpListName" -ForegroundColor Gray
@@ -290,35 +290,42 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             $GroupedView.ViewFields.RemoveAll()
             $ViewFields | % { $GroupedView.ViewFields.Add($_)}     
             $GroupedView.Update()
-            $GroupedView.Context.ExecuteQuery()
-        
+            $GroupedView.Context.ExecuteQuery()				
+					
+			Write-Host "`t`tHiding old measurements columns" -ForegroundColor Gray
+			$BenefitsList = Get-PnPList -Identity $BenefitsListName -Web $ProjectWeb
+			if ($null -ne $BenefitsList) {
+				$GtStartValue = Get-PnPField -List $BenefitsList -Identity "GtStartValue" -Web $ProjectWeb
+				$GtStartValue.Hidden = $true
+				$GtStartValue.Update()
+				$GtStartValue.Context.ExecuteQuery()
+				
+				$GtDesiredValue = Get-PnPField -List $BenefitsList -Identity "GtDesiredValue" -Web $ProjectWeb
+				$GtDesiredValue.Hidden = $true
+				$GtDesiredValue.Update()
+				$GtDesiredValue.Context.ExecuteQuery()
+				
+				$GtMeasurementUnit = Get-PnPField -List $BenefitsList -Identity "GtMeasurementUnit" -Web $ProjectWeb
+				$GtMeasurementUnit.Hidden = $true
+				$GtMeasurementUnit.Update()
+				$GtMeasurementUnit.Context.ExecuteQuery()
+				
+				$GtMeasurementUnit = Get-PnPField -List $BenefitsList -Identity "GtMeasureIndicator" -Web $ProjectWeb
+				$GtMeasurementUnit.Hidden = $true
+				$GtMeasurementUnit.Update()
+				$GtMeasurementUnit.Context.ExecuteQuery()
+			}
+			
             Write-Host "`tList $BenefitsListName adjusted" -ForegroundColor Green
         } 
         else {
-            Write-Host "`tBenefit management lists not found - configuration skipped"
+            Write-Host "`tBenefit management lists not found - configuration skipped" -ForegroundColor Yellow
         }
         #endregion
     }
     else {
         Get-PnPNavigationNode -Location QuickLaunch -Web $ProjectWeb | ? {$_.Title -eq "Siste" -or $_.Title -eq "Recent" -or $_.Title -eq "Properties"} | Remove-PnPNavigationNode -Force -Web $ProjectWeb
         Write-Host "`tMeasurement Indicators list already exists" -ForegroundColor Green
-    }
-    
-    Write-Host "`tAdjusting $BenefitsListName" -ForegroundColor Gray
-    $BenefitsList = Get-PnPList -Identity $BenefitsListName -Web $ProjectWeb
-    if ($null -ne $BenefitsList) {
-        $GtStartValue = Get-PnPField -List $BenefitsList -Identity "GtStartValue" -Web $ProjectWeb
-        $GtStartValue.Hidden = $true
-        $GtStartValue.Update()
-        $GtStartValue.Context.ExecuteQuery()
-        $GtDesiredValue = Get-PnPField -List $BenefitsList -Identity "GtDesiredValue" -Web $ProjectWeb
-        $GtDesiredValue.Hidden = $true
-        $GtDesiredValue.Update()
-        $GtDesiredValue.Context.ExecuteQuery()
-        $GtMeasurementUnit = Get-PnPField -List $BenefitsList -Identity "GtMeasurementUnit" -Web $ProjectWeb
-        $GtMeasurementUnit.Hidden = $true
-        $GtMeasurementUnit.Update()
-        $GtMeasurementUnit.Context.ExecuteQuery()
     }
 }
 
