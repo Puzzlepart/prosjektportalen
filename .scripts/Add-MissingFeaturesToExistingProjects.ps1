@@ -290,8 +290,7 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             $GroupedView.ViewFields.RemoveAll()
             $ViewFields | % { $GroupedView.ViewFields.Add($_)}     
             $GroupedView.Update()
-            $GroupedView.Context.ExecuteQuery()
-				
+            $GroupedView.Context.ExecuteQuery()				
 					
 			Write-Host "`t`tHiding old measurements columns" -ForegroundColor Gray
 			$BenefitsList = Get-PnPList -Identity $BenefitsListName -Web $ProjectWeb
@@ -315,8 +314,6 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
 				$GtMeasurementUnit.Hidden = $true
 				$GtMeasurementUnit.Update()
 				$GtMeasurementUnit.Context.ExecuteQuery()
-				
-				
 			}
 			
             Write-Host "`tList $BenefitsListName adjusted" -ForegroundColor Green
