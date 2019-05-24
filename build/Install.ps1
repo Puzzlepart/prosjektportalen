@@ -188,13 +188,12 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
-                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
+                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
             } else {
-                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
+                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green
                 Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
             }
-            Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
@@ -208,9 +207,8 @@ function Start-Install() {
     if (-not $SkipData.IsPresent) {
         try {
             $Connection = Connect-SharePoint -Url $DataSourceSiteUrl -Connection $Connection
-            Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green
             Apply-Template -Template "data" -Localized
-            Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
@@ -224,9 +222,8 @@ function Start-Install() {
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
-            Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
+            Write-Host "Deploying default config.." -ForegroundColor Green
             Apply-Template -Template "config" -Localized
-            Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
