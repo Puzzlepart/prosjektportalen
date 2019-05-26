@@ -1287,9 +1287,6 @@
   <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
     <value>Allocation</value>
   </data>
-  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
-    <value>Resource</value>
-  </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Allocation type</value>
   </data>
