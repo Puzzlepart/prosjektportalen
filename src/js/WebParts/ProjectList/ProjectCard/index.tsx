@@ -45,6 +45,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
                         },
                     },
                     ]}
+                views={props.project.Views}
             />
         </DocumentCard>
     );

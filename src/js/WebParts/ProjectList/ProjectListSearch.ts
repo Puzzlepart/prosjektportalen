@@ -44,7 +44,7 @@ export async function queryProjectWebs(dataSourceName: string, rowLimit?: number
             const { PrimarySearchResults } = await sp.search({
                 Querytext: "*",
                 QueryTemplate: dataSourceWithWebs,
-                SelectProperties: ["Title", "Path", "SiteLogo"],
+                SelectProperties: ["Title", "Path", "SiteLogo", "ViewsLifeTime"],
                 RowLimit: rowLimit,
                 TrimDuplicates: false,
             });

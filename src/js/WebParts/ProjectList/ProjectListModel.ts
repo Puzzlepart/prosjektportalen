@@ -16,6 +16,7 @@ export default class ProjectListModel {
     public Type: string;
     public Manager: string;
     public Owner: string;
+    public Views: number;
     public LastModifiedTime: string;
     public RawObject: any;
 
@@ -39,6 +40,7 @@ export default class ProjectListModel {
         this.Url = webSearchResult ? webSearchResult.Path : projectSearchResult.Path.split("/Lists")[0];
         this.Title = webSearchResult ? webSearchResult.Title : projectSearchResult.SiteTitle;
         this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
+        this.Views = webSearchResult && webSearchResult.ViewsLifeTime;
 
         return this;
     }
