@@ -31,7 +31,11 @@ export async function queryProjects(queryText: string, viewConfig: IDynamicPortf
             refiners = refiners["results"];
         }
         return {
-            primarySearchResults: items.map(res => ({ ...res, Title: res["SiteTitle"], Path: res.Path.split("/Lists")[0] })),
+            primarySearchResults: items.map(res => (
+                { ...res,
+                    Title: res.Title === "DispForm.aspx" ? res.SiteTitle :  res.Title,
+                    Path: res.Path.indexOf("/Lists/Properties/") > -1 ? res.Path.split("/Lists")[0] : res.Path,
+                })),
             refiners,
         };
     } catch (err) {
