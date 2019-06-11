@@ -95,6 +95,8 @@ if (-not $DataSourceSiteUrl) {
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
 
+$MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
+
 # Start installation
 function Start-Install() {
     # Prints header
@@ -156,7 +158,7 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "assets" -Localized
+            Apply-Template -Template "assets" -Localized -Parameters $MergedParameters
             Write-Host "DONE" -ForegroundColor Green
         }
         catch {
@@ -172,7 +174,7 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "thirdparty"
+            Apply-Template -Template "thirdparty" -Parameters $MergedParameters
             Write-Host "DONE" -ForegroundColor Green
         }
         catch {
@@ -189,10 +191,10 @@ function Start-Install() {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
                 Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $MergedParameters
             } else {
                 Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $MergedParameters
             }
         }
         catch {
@@ -208,7 +210,7 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $DataSourceSiteUrl -Connection $Connection
             Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green
-            Apply-Template -Template "data" -Localized
+            Apply-Template -Template "data" -Localized -Parameters $MergedParameters
         }
         catch {
             Write-Host
@@ -223,7 +225,7 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             Write-Host "Deploying default config.." -ForegroundColor Green
-            Apply-Template -Template "config" -Localized
+            Apply-Template -Template "config" -Localized -Parameters $MergedParameters
         }
         catch {
             Write-Host
@@ -264,7 +266,7 @@ function Start-Install() {
     try {
         $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized -Handlers "CustomActions,PropertyBagEntries"
+        Apply-Template -Template "root" -Localized -Handlers "CustomActions,PropertyBagEntries" -Parameters $MergedParameters
         Write-Host "DONE" -ForegroundColor Green
     }
     catch {

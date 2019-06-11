@@ -102,7 +102,6 @@ function Apply-Template([string]$Template, [switch]$Localized, [OfficeDevPnP.Cor
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"
     }
-    $MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
     if ($ExcludeHandlers -ne $null) {
         Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -ExcludeHandlers $ExcludeHandlers
     } else {
