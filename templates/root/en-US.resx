@@ -966,6 +966,9 @@
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Prerequisites for Benefit Achievement</value>
   </data>
+  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
+    <value>Measurement indicator</value>
+  </data>
   <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
     <value>Benefit Conversion</value>
   </data>
