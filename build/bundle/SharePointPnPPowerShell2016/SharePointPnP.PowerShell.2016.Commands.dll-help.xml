@@ -869,16 +869,16 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
           <command:parameterValue required="true">ListPipeBind</command:parameterValue>
         </command:parameter>
         <command:parameter required="true" position="named">
-          <maml:name>Query</maml:name>
-          <maml:description>
-            <maml:para>The CAML query to execute against the list</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="true" position="named">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Filename of the .PNP Open XML site template to read from, optionally including full path.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Query</maml:name>
+          <maml:description>
+            <maml:para>The CAML query to execute against the list. Defaults to all items.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -971,12 +971,12 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
           <maml:uri />
         </dev:type>
       </command:parameter>
-      <command:parameter required="true" position="named">
+      <command:parameter required="false" position="named">
         <maml:name>Query</maml:name>
         <maml:description>
-          <maml:para>The CAML query to execute against the list</maml:para>
+          <maml:para>The CAML query to execute against the list. Defaults to all items.</maml:para>
         </maml:description>
-        <command:parameterValue required="true">String</command:parameterValue>
+        <command:parameterValue required="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
           <maml:uri />
@@ -1564,7 +1564,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         <command:parameter required="true" position="named">
           <maml:name>Type</maml:name>
           <maml:description>
-            <maml:para>The type of the field like Choice, Note, MultiChoice</maml:para>
+            <maml:para>The type of the field like Choice, Note, MultiChoice. For a complete list of field types visit https://docs.microsoft.com/dotnet/api/microsoft.sharepoint.client.fieldtype</maml:para>
           </maml:description>
           <command:parameterValue required="true">FieldType</command:parameterValue>
         </command:parameter>
@@ -1651,7 +1651,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         <command:parameter required="true" position="named">
           <maml:name>Type</maml:name>
           <maml:description>
-            <maml:para>The type of the field like Choice, Note, MultiChoice</maml:para>
+            <maml:para>The type of the field like Choice, Note, MultiChoice. For a complete list of field types visit https://docs.microsoft.com/dotnet/api/microsoft.sharepoint.client.fieldtype</maml:para>
           </maml:description>
           <command:parameterValue required="true">FieldType</command:parameterValue>
         </command:parameter>
@@ -1672,7 +1672,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
         <command:parameter required="false" position="named">
           <maml:name>Formula</maml:name>
           <maml:description>
-            <maml:para>Specify the formula. Only avialable if the field type is Calculated</maml:para>
+            <maml:para>Specify the formula. Only available if the field type is Calculated</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -1806,7 +1806,7 @@ Add-PnPCustomAction -Name 'GetItemsCount' -Title 'Invoke GetItemsCount Action' -
       <command:parameter required="true" position="named">
         <maml:name>Type</maml:name>
         <maml:description>
-          <maml:para>The type of the field like Choice, Note, MultiChoice</maml:para>
+          <maml:para>The type of the field like Choice, Note, MultiChoice. For a complete list of field types visit https://docs.microsoft.com/dotnet/api/microsoft.sharepoint.client.fieldtype</maml:para>
         </maml:description>
         <command:parameterValue required="true">FieldType</command:parameterValue>
         <dev:type>
@@ -2336,7 +2336,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNo" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -2475,7 +2475,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNo" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -2687,7 +2687,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNo" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -2779,7 +2779,7 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         </maml:introduction>
         <dev:code>PS:&gt; Add-PnPFile -Path .\sample.doc -Folder "Shared Documents" -Values @{Modified="1/1/2016"}</dev:code>
         <maml:remarks>
-          <maml:para>This will upload the file sample.doc to the Shared Documnets folder. After uploading it will set the Modified date to 1/1/2016.</maml:para>
+          <maml:para>This will upload the file sample.doc to the Shared Documents folder. After uploading it will set the Modified date to 1/1/2016.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -2884,6 +2884,65 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="true" position="1">
+          <maml:name>SourceUrl</maml:name>
+          <maml:description>
+            <maml:para>The file to add to the in-memory template, specifying its url in the current connected Web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="3">
+          <maml:name>Container</maml:name>
+          <maml:description>
+            <maml:para>The target Container for the file to add to the in-memory template, optional argument.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="4">
+          <maml:name>FileLevel</maml:name>
+          <maml:description>
+            <maml:para>The level of the files to add. Defaults to Published</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">FileLevel</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="4">
+          <maml:name>TemplateProviderExtensions</maml:name>
+          <maml:description>
+            <maml:para>Allows you to specify ITemplateProviderExtension to execute while loading the template.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ITemplateProviderExtension[]</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="5">
+          <maml:name>FileOverwrite</maml:name>
+          <maml:description>
+            <maml:para>Set to overwrite in site, Defaults to true</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Add-PnPFileToProvisioningTemplate</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Filename of the .PNP Open XML site template to read from, optionally including full path.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="1">
           <maml:name>Source</maml:name>
           <maml:description>
             <maml:para>The file to add to the in-memory template, optionally including full path.</maml:para>
@@ -2924,6 +2983,20 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
             <maml:para>Set to overwrite in site, Defaults to true</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -2994,6 +3067,17 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <maml:uri />
         </dev:type>
       </command:parameter>
+      <command:parameter required="true" position="1">
+        <maml:name>SourceUrl</maml:name>
+        <maml:description>
+          <maml:para>The file to add to the in-memory template, specifying its url in the current connected Web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="4">
         <maml:name>TemplateProviderExtensions</maml:name>
         <maml:description>
@@ -3002,6 +3086,28 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <command:parameterValue required="false">ITemplateProviderExtension[]</command:parameterValue>
         <dev:type>
           <maml:name>ITemplateProviderExtension[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -3074,6 +3180,22 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <dev:code>PS:&gt; Add-PnPFileToProvisioningTemplate -Path template.pnp -Source $sourceFilePath -Folder $targetFolder -Container $container</dev:code>
         <maml:remarks>
           <maml:para>Adds a file to a PnP Site Template with a custom container for the file</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Add-PnPFileToProvisioningTemplate -Path template.pnp -SourceUrl "Shared%20Documents/ProjectStatus.docs"</dev:code>
+        <maml:remarks>
+          <maml:para>Adds a file to a PnP Provisioning Template retrieved from the currently connected site. The url can be server relative or web relative. If specifying a server relative url has to start with the current site url.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -3424,6 +3546,13 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The list object or name where to set the indexed property</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -3448,6 +3577,17 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The list object or name where to set the indexed property</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -4077,7 +4217,7 @@ Hyperlink or Picture: -Values @{"Hyperlink" = "https://github.com/OfficeDev/, Of
     <command:details>
       <command:name>Add-PnPListItem</command:name>
       <maml:description>
-        <maml:para>Adds an item to a list</maml:para>
+        <maml:para>Adds an item to the list and sets the creation time to the current date and time. The author is set to the current authenticated user executing the cmdlet. In order to set the author to a different user, please refer to Set-PnPListItem.</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -4134,7 +4274,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNo" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -4236,7 +4376,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNo" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"Person" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -5584,7 +5724,7 @@ PS:&gt; Add-PnPRoleDefinition -RoleName "AddOnly" -Clone $roleDefinition -Exclud
       <dev:version />
     </command:details>
     <maml:description>
-      <maml:para>This command allows adding one to many users as site collection administrators to the site collection in the current context. It does not replace or remove exisitng site collection administrators.</maml:para>
+      <maml:para>This command allows adding one to many users as site collection administrators to the site collection in the current context. It does not replace or remove existing site collection administrators.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -5592,7 +5732,7 @@ PS:&gt; Add-PnPRoleDefinition -RoleName "AddOnly" -Clone $roleDefinition -Exclud
         <command:parameter required="true" position="named">
           <maml:name>Owners</maml:name>
           <maml:description>
-            <maml:para>Specifies owner(s) to add as site collection adminstrators. They will be added as additional site collection administrators to the site in the current context. Existing administrators will stay. Can be both users and groups.</maml:para>
+            <maml:para>Specifies owner(s) to add as site collection administrators. They will be added as additional site collection administrators to the site in the current context. Existing administrators will stay. Can be both users and groups.</maml:para>
           </maml:description>
           <command:parameterValue required="true">UserPipeBind</command:parameterValue>
         </command:parameter>
@@ -5609,7 +5749,7 @@ PS:&gt; Add-PnPRoleDefinition -RoleName "AddOnly" -Clone $roleDefinition -Exclud
       <command:parameter required="true" position="named">
         <maml:name>Owners</maml:name>
         <maml:description>
-          <maml:para>Specifies owner(s) to add as site collection adminstrators. They will be added as additional site collection administrators to the site in the current context. Existing administrators will stay. Can be both users and groups.</maml:para>
+          <maml:para>Specifies owner(s) to add as site collection administrators. They will be added as additional site collection administrators to the site in the current context. Existing administrators will stay. Can be both users and groups.</maml:para>
         </maml:description>
         <command:parameterValue required="true">UserPipeBind</command:parameterValue>
         <dev:type>
@@ -5956,7 +6096,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <command:parameter required="true" position="named">
           <maml:name>TermSetPath</maml:name>
           <maml:description>
-            <maml:para>The path to the term that this needs be be bound</maml:para>
+            <maml:para>The path to the term that this needs to be bound</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -6171,7 +6311,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
       <command:parameter required="true" position="named">
         <maml:name>TermSetPath</maml:name>
         <maml:description>
-          <maml:para>The path to the term that this needs be be bound</maml:para>
+          <maml:para>The path to the term that this needs to be bound</maml:para>
         </maml:description>
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
@@ -7345,7 +7485,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <command:parameter required="false" position="named">
           <maml:name>DoNotPublish</maml:name>
           <maml:description>
-            <maml:para>Overrides the default behaviour, which is to publish workflow definitions.</maml:para>
+            <maml:para>Overrides the default behavior, which is to publish workflow definitions.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -7380,7 +7520,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
       <command:parameter required="false" position="named">
         <maml:name>DoNotPublish</maml:name>
         <maml:description>
-          <maml:para>Overrides the default behaviour, which is to publish workflow definitions.</maml:para>
+          <maml:para>Overrides the default behavior, which is to publish workflow definitions.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -7808,108 +7948,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <command:parameter required="false" position="named">
           <maml:name>Handlers</maml:name>
           <maml:description>
-            <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">Handlers</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ExcludeHandlers</maml:name>
-          <maml:description>
-            <maml:para>Allows you to run all handlers, excluding the ones specified.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">Handlers</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ExtensibilityHandlers</maml:name>
-          <maml:description>
-            <maml:para>Allows you to specify ExtensbilityHandlers to execute while applying a template</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ExtensibilityHandler[]</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>TemplateProviderExtensions</maml:name>
-          <maml:description>
-            <maml:para>Allows you to specify ITemplateProviderExtension to execute while applying a template.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ITemplateProviderExtension[]</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Web</maml:name>
-          <maml:description>
-            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Connection</maml:name>
-          <maml:description>
-            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Apply-PnPProvisioningTemplate</maml:name>
-        <command:parameter required="false" position="named">
-          <maml:name>GalleryTemplateId</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">Guid</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ResourceFolder</maml:name>
-          <maml:description>
-            <maml:para>Root folder where resources/files that are being referenced in the template are located. If not specified the same folder as where the provisioning template is located will be used.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>OverwriteSystemPropertyBagValues</maml:name>
-          <maml:description>
-            <maml:para>Specify this parameter if you want to overwrite and/or create properties that are known to be system entries (starting with vti_, dlc_, etc.)</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>IgnoreDuplicateDataRowErrors</maml:name>
-          <maml:description>
-            <maml:para>Ignore duplicate data row errors when the data row in the template already exists.</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ProvisionContentTypesToSubWebs</maml:name>
-          <maml:description>
-            <maml:para>If set content types will be provisioned if the target web is a subweb.</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ProvisionFieldsToSubWebs</maml:name>
-          <maml:description>
-            <maml:para>If set fields will be provisioned if the target web is a subweb.</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>ClearNavigation</maml:name>
-          <maml:description>
-            <maml:para>Override the RemoveExistingNodes attribute in the Navigation elements of the template. If you specify this value the navigation nodes will always be removed before adding the nodes in the template</maml:para>
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Parameters</maml:name>
-          <maml:description>
-            <maml:para>Allows you to specify parameters that can be referred to in the template by means of the {parameter:&lt;Key&gt;} token. See examples on how to use this parameter.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">Hashtable</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Handlers</maml:name>
-          <maml:description>
-            <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying.</maml:para>
+            <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying. Visit https://docs.microsoft.com/dotnet/api/officedevpnp.core.framework.provisioning.model.handlers for possible values.</maml:para>
           </maml:description>
           <command:parameterValue required="true">Handlers</command:parameterValue>
         </command:parameter>
@@ -8010,7 +8049,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <command:parameter required="false" position="named">
           <maml:name>Handlers</maml:name>
           <maml:description>
-            <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying.</maml:para>
+            <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying. Visit https://docs.microsoft.com/dotnet/api/officedevpnp.core.framework.provisioning.model.handlers for possible values.</maml:para>
           </maml:description>
           <command:parameterValue required="true">Handlers</command:parameterValue>
         </command:parameter>
@@ -8086,20 +8125,9 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="named">
-        <maml:name>GalleryTemplateId</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">Guid</command:parameterValue>
-        <dev:type>
-          <maml:name>Guid</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
         <maml:name>Handlers</maml:name>
         <maml:description>
-          <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying.</maml:para>
+          <maml:para>Allows you to only process a specific part of the template. Notice that this might fail, as some of the handlers require other artifacts in place if they are not part of what your applying. Visit https://docs.microsoft.com/dotnet/api/officedevpnp.core.framework.provisioning.model.handlers for possible values.</maml:para>
         </maml:description>
         <command:parameterValue required="false">Handlers</command:parameterValue>
         <dev:type>
@@ -8262,7 +8290,7 @@ Connect-PnPOnline -Url https://tenant.sharepoint.com/sites/mydemosite</dev:code>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Apply-PnPSPnPProvisioningTemplateiteTemplate -Path template.xml -ResourceFolder c:\provisioning\resources</dev:code>
+        <dev:code>PS:&gt; Apply-PnPProvisioningTemplate -Path template.xml -ResourceFolder c:\provisioning\resources</dev:code>
         <maml:remarks>
           <maml:para>Applies a site template in XML format to the current web. Any resources like files that are referenced in the template will be retrieved from the folder as specified with the ResourceFolder parameter.</maml:para>
           <maml:para></maml:para>
@@ -8346,7 +8374,7 @@ For instance with the example above, specifying {parameter:ListTitle} in your te
         </maml:introduction>
         <dev:code>
 PS:&gt; $handler1 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler1
-PS:&gt; $handler2 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler1
+PS:&gt; $handler2 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler2
 PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandlers $handler1,$handler2</dev:code>
         <maml:remarks>
           <maml:para>This will create two new ExtensibilityHandler objects that are run while provisioning the template</maml:para>
@@ -8476,6 +8504,171 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <dev:code>PS:&gt; Set-PnPSitePolicy -Name "Contoso HBI"</dev:code>
         <maml:remarks>
           <maml:para>This applies a site policy with the name "Contoso HBI" to the current site. The policy needs to be available in the site.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Clear-PnPDefaultColumnValues</command:name>
+      <maml:description>
+        <maml:para>Clear default column values for a document library</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Clear</command:verb>
+      <command:noun>PnPDefaultColumnValues</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>Clear default column values for a document library, per folder, or for the root folder if the folder parameter has not been specified.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Clear-PnPDefaultColumnValues</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Field</maml:name>
+          <maml:description>
+            <maml:para>The internal name, id or a reference to a field</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">FieldPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The ID, Name or Url of the list.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Folder</maml:name>
+          <maml:description>
+            <maml:para>A library relative folder path, if not specified it will set the default column values on the root folder of the library ('/')</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>Field</maml:name>
+        <maml:description>
+          <maml:para>The internal name, id or a reference to a field</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">FieldPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>FieldPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Folder</maml:name>
+        <maml:description>
+          <maml:para>A library relative folder path, if not specified it will set the default column values on the root folder of the library ('/')</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The ID, Name or Url of the list.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Clear-PnPDefaultColumnValues -List Documents -Field MyField</dev:code>
+        <maml:remarks>
+          <maml:para>Clears the default value for the field MyField on a library</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Clear-PnPDefaultColumnValues -List Documents -Field MyField -Folder A</dev:code>
+        <maml:remarks>
+          <maml:para>Clears the default value for the field MyField on the folder A on a library</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -8724,6 +8917,13 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>Kerberos</maml:name>
+          <maml:description>
+            <maml:para>Authenticate using Kerberos to an on-premises ADFS instance.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>LoginProviderName</maml:name>
           <maml:description>
             <maml:para>The name of the ADFS trusted login provider</maml:para>
@@ -8754,7 +8954,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameter required="false" position="named">
           <maml:name>RequestTimeout</maml:name>
           <maml:description>
-            <maml:para>The request timeout. Default is 180000</maml:para>
+            <maml:para>The request timeout. Default is 1800000</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
@@ -8855,7 +9055,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameter required="false" position="named">
           <maml:name>RequestTimeout</maml:name>
           <maml:description>
-            <maml:para>The request timeout. Default is 180000</maml:para>
+            <maml:para>The request timeout. Default is 1800000</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
@@ -8956,7 +9156,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameter required="false" position="named">
           <maml:name>RequestTimeout</maml:name>
           <maml:description>
-            <maml:para>The request timeout. Default is 180000</maml:para>
+            <maml:para>The request timeout. Default is 1800000</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
@@ -9064,7 +9264,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameter required="false" position="named">
           <maml:name>RequestTimeout</maml:name>
           <maml:description>
-            <maml:para>The request timeout. Default is 180000</maml:para>
+            <maml:para>The request timeout. Default is 1800000</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
@@ -9179,7 +9379,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         <command:parameter required="false" position="named">
           <maml:name>RequestTimeout</maml:name>
           <maml:description>
-            <maml:para>The request timeout. Default is 180000</maml:para>
+            <maml:para>The request timeout. Default is 1800000</maml:para>
           </maml:description>
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
@@ -9379,6 +9579,17 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="named">
+        <maml:name>Kerberos</maml:name>
+        <maml:description>
+          <maml:para>Authenticate using Kerberos to an on-premises ADFS instance.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
         <maml:name>LoginProviderName</maml:name>
         <maml:description>
           <maml:para>The name of the ADFS trusted login provider</maml:para>
@@ -9425,7 +9636,7 @@ PS:&gt; Apply-PnPProvisioningTemplate -Path NewTemplate.xml -ExtensibilityHandle
       <command:parameter required="false" position="named">
         <maml:name>RequestTimeout</maml:name>
         <maml:description>
-          <maml:para>The request timeout. Default is 180000</maml:para>
+          <maml:para>The request timeout. Default is 1800000</maml:para>
         </maml:description>
         <command:parameterValue required="false">Int32</command:parameterValue>
         <dev:type>
@@ -9735,7 +9946,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
         <command:parameter required="true" position="named">
           <maml:name>AADDomain</maml:name>
           <maml:description>
-            <maml:para>The AAD where the O365 app is registred. Eg.: contoso.com, or contoso.onmicrosoft.com.</maml:para>
+            <maml:para>The AAD where the O365 app is registered. Eg.: contoso.com, or contoso.onmicrosoft.com.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -9745,7 +9956,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
       <command:parameter required="true" position="named">
         <maml:name>AADDomain</maml:name>
         <maml:description>
-          <maml:para>The AAD where the O365 app is registred. Eg.: contoso.com, or contoso.onmicrosoft.com.</maml:para>
+          <maml:para>The AAD where the O365 app is registered. Eg.: contoso.com, or contoso.onmicrosoft.com.</maml:para>
         </maml:description>
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
@@ -10151,7 +10362,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
     <command:details>
       <command:name>Copy-PnPFile</command:name>
       <maml:description>
-        <maml:para>Copies a file or folder to a different location</maml:para>
+        <maml:para>Copies a file or folder to a different location, currently there is a 200MB file size limit for the file to be copied.</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -10180,7 +10391,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
         <command:parameter required="false" position="named">
           <maml:name>OverwriteIfAlreadyExists</maml:name>
           <maml:description>
-            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If ommitted, the copy operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
+            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If omitted, the copy operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -10229,7 +10440,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
       <command:parameter required="false" position="named">
         <maml:name>OverwriteIfAlreadyExists</maml:name>
         <maml:description>
-          <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If ommitted, the copy operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
+          <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If omitted, the copy operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -10503,7 +10714,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
       <dev:version />
     </command:details>
     <maml:description>
-      <maml:para>Deactives a feature that was active on a site</maml:para>
+      <maml:para>Deactivates a feature that was active on a site</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -10813,6 +11024,22 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Disable-PnPPowerShellTelemetry -Force</dev:code>
+        <maml:remarks>
+          <maml:para>Will disable telemetry tracking without prompting.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -10825,7 +11052,7 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
     <command:details>
       <command:name>Disable-PnPResponsiveUI</command:name>
       <maml:description>
-        <maml:para>Deactive the PnP Response UI add-on</maml:para>
+        <maml:para>Deactivate the PnP Response UI add-on</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -11332,6 +11559,22 @@ PS:&gt; Connect-PnPOnline -Url https://yourserver -ClientId &lt;id&gt; -HighTrus
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Enable-PnPPowerShellTelemetry -Force</dev:code>
+        <maml:remarks>
+          <maml:para>Will enable telemetry tracking without prompting.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -11618,6 +11861,13 @@ PS:&gt; Get-PnPProperty -ClientObject $list -Property Views</dev:code>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>Lcid</maml:name>
+          <maml:description>
+            <maml:para>Specify the language code for the exported terms</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Int32</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>IncludeID</maml:name>
           <maml:description>
             <maml:para>If specified will include the ids of the taxonomy items in the output. Format: &lt;label&gt;;#&lt;guid&gt;</maml:para>
@@ -11703,6 +11953,17 @@ PS:&gt; Get-PnPProperty -ClientObject $list -Property Views</dev:code>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
           <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Lcid</maml:name>
+        <maml:description>
+          <maml:para>Specify the language code for the exported terms</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Int32</command:parameterValue>
+        <dev:type>
+          <maml:name>Int32</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -11803,6 +12064,22 @@ PS:&gt; Get-PnPProperty -ClientObject $list -Property Views</dev:code>
         <dev:code>PS:&gt; Export-PnPTaxonomy -Path c:\output.txt -TermSet f6f43025-7242-4f7a-b739-41fa32847254</dev:code>
         <maml:remarks>
           <maml:para>Exports the term set with the specified id</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Export-PnPTaxonomy -Path c:\output.txt -TermSet f6f43025-7242-4f7a-b739-41fa32847254 -Lcid 1044</dev:code>
+        <maml:remarks>
+          <maml:para>Exports the term set with the specified id using Norwegian labels</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -13650,7 +13927,7 @@ PS:&gt; Get-PnPContentType
     <command:details>
       <command:name>Get-PnPException</command:name>
       <maml:description>
-        <maml:para>Returns the last exception that occured</maml:para>
+        <maml:para>Returns the last exception that occurred</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -14188,7 +14465,7 @@ PS:&gt; Get-PnPContentType
         <command:parameter required="false" position="named">
           <maml:name>ThrowExceptionIfFileNotFound</maml:name>
           <maml:description>
-            <maml:para>If provided in combination with -AsListItem, a Sytem.ArgumentException will be thrown if the file specified in the -Url argument does not exist. Otherwise it will return nothing instead.</maml:para>
+            <maml:para>If provided in combination with -AsListItem, a System.ArgumentException will be thrown if the file specified in the -Url argument does not exist. Otherwise it will return nothing instead.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -14361,7 +14638,7 @@ PS:&gt; Get-PnPContentType
       <command:parameter required="false" position="named">
         <maml:name>ThrowExceptionIfFileNotFound</maml:name>
         <maml:description>
-          <maml:para>If provided in combination with -AsListItem, a Sytem.ArgumentException will be thrown if the file specified in the -Url argument does not exist. Otherwise it will return nothing instead.</maml:para>
+          <maml:para>If provided in combination with -AsListItem, a System.ArgumentException will be thrown if the file specified in the -Url argument does not exist. Otherwise it will return nothing instead.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -15405,7 +15682,7 @@ PS:&gt; Get-PnPContentType
     <command:details>
       <command:name>Get-PnPHealthScore</command:name>
       <maml:description>
-        <maml:para>Retrieves the healthscore</maml:para>
+        <maml:para>Retrieves the healthscore value.</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -15415,7 +15692,7 @@ PS:&gt; Get-PnPContentType
       <dev:version />
     </command:details>
     <maml:description>
-      <maml:para>Retrieves the current health score value of the server which is a value between 0 and 10. Lower is better.</maml:para>
+      <maml:para>Retrieves the current X-SharePointHealthScore value of the server, or CPU, on which your SharePoint instance runs. X-SharePointHealthScore is a value between 0 and 10, where 0 indicates the server is idle and 10 indicates the server is very busy. For more information visit https://docs.microsoft.com/office365/enterprise/diagnosing-performance-issues-with-sharepoint-online and https://docs.microsoft.com/openspecs/sharepoint_protocols/ms-wsshp/c60ddeb6-4113-4a73-9e97-26b5c3907d33.</maml:para>
     </maml:description>
     <command:syntax />
     <command:parameters />
@@ -15583,6 +15860,13 @@ PS:&gt; Get-PnPContentType
       <command:syntaxItem>
         <maml:name>Get-PnPIndexedPropertyKeys</maml:name>
         <command:parameter required="false" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The list object or name from where to get the indexed properties</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -15599,6 +15883,17 @@ PS:&gt; Get-PnPContentType
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The list object or name from where to get the indexed properties</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Connection</maml:name>
         <maml:description>
@@ -16548,7 +16843,7 @@ PS:&gt; Get-PnPContentType
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPListItem -List Tasks -Id 1</dev:code>
         <maml:remarks>
-          <maml:para>Retrieves the list item with ID 1 from from the Tasks list</maml:para>
+          <maml:para>Retrieves the list item with ID 1 from the Tasks list</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -16564,7 +16859,7 @@ PS:&gt; Get-PnPContentType
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPListItem -List Tasks -UniqueId bd6c5b3b-d960-4ee7-a02c-85dc6cd78cc3</dev:code>
         <maml:remarks>
-          <maml:para>Retrieves the list item with unique id bd6c5b3b-d960-4ee7-a02c-85dc6cd78cc3 from from the tasks lists</maml:para>
+          <maml:para>Retrieves the list item with unique id bd6c5b3b-d960-4ee7-a02c-85dc6cd78cc3 from the tasks lists</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -16999,7 +17294,7 @@ Returns the manual record declaration settings for a list</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPNavigationNode -QuickLaunch</dev:code>
+        <dev:code>PS:&gt; Get-PnPNavigationNode -Location QuickLaunch</dev:code>
         <maml:remarks>
           <maml:para>Returns all navigation nodes in the quicklaunch navigation</maml:para>
           <maml:para></maml:para>
@@ -17015,7 +17310,7 @@ Returns the manual record declaration settings for a list</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPNavigationNode -TopNavigationBar</dev:code>
+        <dev:code>PS:&gt; Get-PnPNavigationNode -Location TopNavigationBar</dev:code>
         <maml:remarks>
           <maml:para>Returns all navigation nodes in the top navigation bar</maml:para>
           <maml:para></maml:para>
@@ -17807,6 +18102,20 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>IncludeHiddenLists</maml:name>
+          <maml:description>
+            <maml:para>If specified hidden lists will be included in the template</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>IncludeAllClientSidePages</maml:name>
+          <maml:description>
+            <maml:para>If specified all client side pages will be included</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>SkipVersionCheck</maml:name>
           <maml:description>
             <maml:para>During extraction the version of the server will be checked for certain actions. If you specify this switch, this check will be skipped.</maml:para>
@@ -17830,7 +18139,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>Handlers</maml:name>
           <maml:description>
-            <maml:para>Allows you to only process a specific type of artifact in the site. Notice that this might result in a non-working template, as some of the handlers require other artifacts in place if they are not part of what your extracting.</maml:para>
+            <maml:para>Allows you to only process a specific type of artifact in the site. Notice that this might result in a non-working template, as some of the handlers require other artifacts in place if they are not part of what your extracting. For possible values for this parameter visit https://docs.microsoft.com/dotnet/api/officedevpnp.core.framework.provisioning.model.handlers</maml:para>
           </maml:description>
           <command:parameterValue required="true">Handlers</command:parameterValue>
         </command:parameter>
@@ -17844,7 +18153,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>ExtensibilityHandlers</maml:name>
           <maml:description>
-            <maml:para>Allows you to specify ExtensbilityHandlers to execute while extracting a template.</maml:para>
+            <maml:para>Allows you to specify ExtensibilityHandlers to execute while extracting a template.</maml:para>
           </maml:description>
           <command:parameterValue required="true">ExtensibilityHandler[]</command:parameterValue>
         </command:parameter>
@@ -17910,6 +18219,13 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
             <maml:para>Specify whether or not content types issued from a content hub should be exported. By default, these content types are included.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ListsToExtract</maml:name>
+          <maml:description>
+            <maml:para>Specify the lists to extract, either providing their ID or their Title.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>Out</maml:name>
@@ -17989,7 +18305,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>ExtensibilityHandlers</maml:name>
         <maml:description>
-          <maml:para>Allows you to specify ExtensbilityHandlers to execute while extracting a template.</maml:para>
+          <maml:para>Allows you to specify ExtensibilityHandlers to execute while extracting a template.</maml:para>
         </maml:description>
         <command:parameterValue required="false">ExtensibilityHandler[]</command:parameterValue>
         <dev:type>
@@ -18011,7 +18327,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Handlers</maml:name>
         <maml:description>
-          <maml:para>Allows you to only process a specific type of artifact in the site. Notice that this might result in a non-working template, as some of the handlers require other artifacts in place if they are not part of what your extracting.</maml:para>
+          <maml:para>Allows you to only process a specific type of artifact in the site. Notice that this might result in a non-working template, as some of the handlers require other artifacts in place if they are not part of what your extracting. For possible values for this parameter visit https://docs.microsoft.com/dotnet/api/officedevpnp.core.framework.provisioning.model.handlers</maml:para>
         </maml:description>
         <command:parameterValue required="false">Handlers</command:parameterValue>
         <dev:type>
@@ -18020,9 +18336,31 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="named">
+        <maml:name>IncludeAllClientSidePages</maml:name>
+        <maml:description>
+          <maml:para>If specified all client side pages will be included</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
         <maml:name>IncludeAllTermGroups</maml:name>
         <maml:description>
           <maml:para>If specified, all term groups will be included. Overrides IncludeSiteCollectionTermGroup.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>IncludeHiddenLists</maml:name>
+        <maml:description>
+          <maml:para>If specified hidden lists will be included in the template</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -18082,6 +18420,17 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
           <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ListsToExtract</maml:name>
+        <maml:description>
+          <maml:para>Specify the lists to extract, either providing their ID or their Title.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -18371,7 +18720,7 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         </maml:introduction>
         <dev:code>
 PS:&gt; $handler1 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler1
-PS:&gt; $handler2 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler1
+PS:&gt; $handler2 = New-PnPExtensibilityHandlerObject -Assembly Contoso.Core.Handlers -Type Contoso.Core.Handlers.MyExtensibilityHandler2
 PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers $handler1,$handler2</dev:code>
         <maml:remarks>
           <maml:para>This will create two new ExtensibilityHandler objects that are run during extraction of the template</maml:para>
@@ -18386,7 +18735,7 @@ PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers 
       <command:example>
         <maml:title>------------------EXAMPLE 9---------------------</maml:title>
         <maml:introduction>
-          <maml:para>Only supported on SP2016 and SP Online</maml:para>
+          <maml:para>Only supported on SP2016, SP2019 and SP Online</maml:para>
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPProvisioningTemplate -Out template.pnp -PersistMultiLanguageResources</dev:code>
         <maml:remarks>
@@ -18402,7 +18751,7 @@ PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers 
       <command:example>
         <maml:title>------------------EXAMPLE 10---------------------</maml:title>
         <maml:introduction>
-          <maml:para>Only supported on SP2016 and SP Online</maml:para>
+          <maml:para>Only supported on SP2016, SP2019 and SP Online</maml:para>
         </maml:introduction>
         <dev:code>PS:&gt; Get-PnPProvisioningTemplate -Out template.pnp -PersistMultiLanguageResources -ResourceFilePrefix MyResources</dev:code>
         <maml:remarks>
@@ -18463,6 +18812,22 @@ PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers 
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 14---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPProvisioningTemplate -Out template.pnp -ListsToExtract "Title of List One","95c4efd6-08f4-4c67-94ae-49d696ba1298","Title of List Three"</dev:code>
+        <maml:remarks>
+          <maml:para>Extracts a provisioning template in Office Open XML from the current web, including only the lists specified by title or ID.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -18472,238 +18837,6 @@ PS:&gt; Get-PnPProvisioningTemplate -Out NewTemplate.xml -ExtensibilityHandlers 
       <maml:navigationLink>
         <maml:linkText>Encoding:</maml:linkText>
         <maml:uri>https://msdn.microsoft.com/en-us/library/system.text.encoding_properties.aspx</maml:uri>
-      </maml:navigationLink>
-    </maml:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-    <command:details>
-      <command:name>Get-PnPProvisioningTemplateFromGallery</command:name>
-      <maml:description>
-        <maml:para>Retrieves or searches provisioning templates from the PnP Template Gallery</maml:para>
-      </maml:description>
-      <maml:copyright>
-        <maml:para />
-      </maml:copyright>
-      <command:verb>Get</command:verb>
-      <command:noun>PnPProvisioningTemplateFromGallery</command:noun>
-      <dev:version />
-    </command:details>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-PnPProvisioningTemplateFromGallery</maml:name>
-        <command:parameter required="false" position="named">
-          <maml:name>Identity</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">Guid</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Path</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Force</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-PnPProvisioningTemplateFromGallery</maml:name>
-        <command:parameter required="false" position="named">
-          <maml:name>Search</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>TargetPlatform</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">TargetPlatform</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>TargetScope</maml:name>
-          <maml:description>
-            <maml:para />
-          </maml:description>
-          <command:parameterValue required="true">TargetScope</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" position="named">
-        <maml:name>Force</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>Identity</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">Guid</command:parameterValue>
-        <dev:type>
-          <maml:name>Guid</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>Path</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>Search</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>TargetPlatform</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">TargetPlatform</command:parameterValue>
-        <dev:type>
-          <maml:name>TargetPlatform</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>TargetScope</maml:name>
-        <maml:description>
-          <maml:para />
-        </maml:description>
-        <command:parameterValue required="false">TargetScope</command:parameterValue>
-        <dev:type>
-          <maml:name>TargetScope</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-    </command:parameters>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name></maml:name>
-          <maml:uri />
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-        </dev:type>
-      </command:returnValue>
-    </command:returnValues>
-    <command:examples>
-      <command:example>
-        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>Get-PnPProvisioningTemplateFromGallery</dev:code>
-        <maml:remarks>
-          <maml:para>Retrieves all templates from the gallery</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>Get-PnPProvisioningTemplateFromGallery -Search "Data"</dev:code>
-        <maml:remarks>
-          <maml:para>Searches for a templates containing the word 'Data' in the Display Name</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>Get-PnPProvisioningTemplateFromGallery -Identity ae925674-8aa6-438b-acd0-d2699a022edd</dev:code>
-        <maml:remarks>
-          <maml:para>Retrieves a template with the specified ID</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>$template = Get-PnPProvisioningTemplateFromGallery -Identity ae925674-8aa6-438b-acd0-d2699a022edd
-Apply-PnPProvisioningTemplate -InputInstance $template</dev:code>
-        <maml:remarks>
-          <maml:para>Retrieves a template with the specified ID and applies it to the site.</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 5---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>$template = Get-PnPProvisioningTemplateFromGallery -Identity ae925674-8aa6-438b-acd0-d2699a022edd -Path c:\temp</dev:code>
-        <maml:remarks>
-          <maml:para>Retrieves a template with the specified ID and saves the template to the specified path</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-    </command:examples>
-    <maml:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
-        <maml:uri>http://aka.ms/sppnp</maml:uri>
       </maml:navigationLink>
     </maml:relatedLinks>
   </command:command>
@@ -19781,6 +19914,22 @@ Returns entries from the SharePoint search crawl log</maml:para>
           </command:commandLine>
         </command:commandLines>
       </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPSite -Includes RootWeb,ServerRelativeUrl</dev:code>
+        <maml:remarks>
+          <maml:para>Gets the current site specifying to include RootWeb and ServerRelativeUrl properties. For the full list of properties see https://docs.microsoft.com/previous-versions/office/sharepoint-server/ee538579(v%3doffice.15)</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
     </command:examples>
     <maml:relatedLinks>
       <maml:navigationLink>
@@ -19885,7 +20034,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
     <command:details>
       <command:name>Get-PnPSiteCollectionAdmin</command:name>
       <maml:description>
-        <maml:para>Returns the current site collection administrators of the site colleciton in the current context</maml:para>
+        <maml:para>Returns the current site collection administrators of the site collection in the current context</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -20487,7 +20636,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>Type</maml:name>
           <maml:description>
-            <maml:para>The object type of the credential to return from the Credential Manager. Possible valus are 'O365', 'OnPrem' or 'PSCredential'</maml:para>
+            <maml:para>The object type of the credential to return from the Credential Manager. Possible values are 'O365', 'OnPrem' or 'PSCredential'</maml:para>
           </maml:description>
           <command:parameterValue required="true">CredentialType</command:parameterValue>
         </command:parameter>
@@ -20508,7 +20657,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Type</maml:name>
         <maml:description>
-          <maml:para>The object type of the credential to return from the Credential Manager. Possible valus are 'O365', 'OnPrem' or 'PSCredential'</maml:para>
+          <maml:para>The object type of the credential to return from the Credential Manager. Possible values are 'O365', 'OnPrem' or 'PSCredential'</maml:para>
         </maml:description>
         <command:parameterValue required="false">CredentialType</command:parameterValue>
         <dev:type>
@@ -20588,7 +20737,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>Recurse</maml:name>
           <maml:description>
-            <maml:para>If provided, recursion through all subsites and their childs will take place to return them as well</maml:para>
+            <maml:para>If provided, recursion through all subsites and their children will take place to return them as well</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -20648,7 +20797,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Recurse</maml:name>
         <maml:description>
-          <maml:para>If provided, recursion through all subsites and their childs will take place to return them as well</maml:para>
+          <maml:para>If provided, recursion through all subsites and their children will take place to return them as well</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -20915,222 +21064,6 @@ Returns entries from the SharePoint search crawl log</maml:para>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
-      <command:name>Get-PnPTenantSequence</command:name>
-      <maml:description>
-        <maml:para>Returns one ore more provisioning sequence object(s) from a tenant template</maml:para>
-      </maml:description>
-      <maml:copyright>
-        <maml:para />
-      </maml:copyright>
-      <command:verb>Get</command:verb>
-      <command:noun>PnPTenantSequence</command:noun>
-      <dev:version />
-    </command:details>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-PnPTenantSequence</maml:name>
-        <command:parameter required="true" position="named">
-          <maml:name>Template</maml:name>
-          <maml:description>
-            <maml:para>The hierarchy to retrieve the sequence from</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ProvisioningHierarchy</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Identity</maml:name>
-          <maml:description>
-            <maml:para>Optional Id of the sequence</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ProvisioningSequencePipeBind</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" position="named">
-        <maml:name>Identity</maml:name>
-        <maml:description>
-          <maml:para>Optional Id of the sequence</maml:para>
-        </maml:description>
-        <command:parameterValue required="false">ProvisioningSequencePipeBind</command:parameterValue>
-        <dev:type>
-          <maml:name>ProvisioningSequencePipeBind</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="true" position="named">
-        <maml:name>Template</maml:name>
-        <maml:description>
-          <maml:para>The hierarchy to retrieve the sequence from</maml:para>
-        </maml:description>
-        <command:parameterValue required="true">ProvisioningHierarchy</command:parameterValue>
-        <dev:type>
-          <maml:name>ProvisioningHierarchy</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-    </command:parameters>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name></maml:name>
-          <maml:uri />
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-        </dev:type>
-      </command:returnValue>
-    </command:returnValues>
-    <command:examples>
-      <command:example>
-        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPTenantSequence -Template $myhierarchy</dev:code>
-        <maml:remarks>
-          <maml:para>Returns all sequences from the specified tenant template</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPTenantSequence -Template $myhierarchy -Identity "mysequence"</dev:code>
-        <maml:remarks>
-          <maml:para>Returns the specified sequence from the specified tenant template</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-    </command:examples>
-    <maml:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
-        <maml:uri>http://aka.ms/sppnp</maml:uri>
-      </maml:navigationLink>
-    </maml:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-    <command:details>
-      <command:name>Get-PnPTenantSequenceSite</command:name>
-      <maml:description>
-        <maml:para>Returns one ore more sites from a tenant template</maml:para>
-      </maml:description>
-      <maml:copyright>
-        <maml:para />
-      </maml:copyright>
-      <command:verb>Get</command:verb>
-      <command:noun>PnPTenantSequenceSite</command:noun>
-      <dev:version />
-    </command:details>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-PnPTenantSequenceSite</maml:name>
-        <command:parameter required="true" position="named">
-          <maml:name>Sequence</maml:name>
-          <maml:description>
-            <maml:para>The sequence to retrieve the site from</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ProvisioningSequence</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Identity</maml:name>
-          <maml:description>
-            <maml:para>Optional Id of the site</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ProvisioningSitePipeBind</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="false" position="named">
-        <maml:name>Identity</maml:name>
-        <maml:description>
-          <maml:para>Optional Id of the site</maml:para>
-        </maml:description>
-        <command:parameterValue required="false">ProvisioningSitePipeBind</command:parameterValue>
-        <dev:type>
-          <maml:name>ProvisioningSitePipeBind</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="true" position="named">
-        <maml:name>Sequence</maml:name>
-        <maml:description>
-          <maml:para>The sequence to retrieve the site from</maml:para>
-        </maml:description>
-        <command:parameterValue required="true">ProvisioningSequence</command:parameterValue>
-        <dev:type>
-          <maml:name>ProvisioningSequence</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-    </command:parameters>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name></maml:name>
-          <maml:uri />
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-        </dev:type>
-      </command:returnValue>
-    </command:returnValues>
-    <command:examples>
-      <command:example>
-        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPTenantSequenceSite -Sequence $mysequence</dev:code>
-        <maml:remarks>
-          <maml:para>Returns all sites from the specified sequence</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-      <command:example>
-        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPTenantSequenceSite -Sequence $mysequence -Identity 8058ea99-af7b-4bb7-b12a-78f93398041e</dev:code>
-        <maml:remarks>
-          <maml:para>Returns the specified site from the specified sequence</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-    </command:examples>
-    <maml:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
-        <maml:uri>http://aka.ms/sppnp</maml:uri>
-      </maml:navigationLink>
-    </maml:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-    <command:details>
       <command:name>Get-PnPTerm</command:name>
       <maml:description>
         <maml:para>Returns a taxonomy term</maml:para>
@@ -21231,7 +21164,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>Recursive</maml:name>
           <maml:description>
-            <maml:para>Find the first term recursivly matching the label in a term hierarchy.</maml:para>
+            <maml:para>Find the first term recursively matching the label in a term hierarchy.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -21288,7 +21221,7 @@ Returns entries from the SharePoint search crawl log</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>Recursive</maml:name>
         <maml:description>
-          <maml:para>Find the first term recursivly matching the label in a term hierarchy.</maml:para>
+          <maml:para>Find the first term recursively matching the label in a term hierarchy.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -24365,9 +24298,9 @@ The first data row must contain the Term Set Name, Term Set Description, and LCI
 
 It is recommended that a fixed GUID be used as the termSetId, to allow the term set to be easily updated (so do not pass Guid.Empty).
 
-In contrast to the web interface import, this is not a one-off import but runs synchronisation logic allowing updating of an existing Term Set. When synchronising, any existing terms are matched (with Term Description and Available for Tagging updated as necessary), any new terms are added in the correct place in the hierarchy, and (if synchroniseDeletions is set) any terms not in the imported file are removed.
+In contrast to the web interface import, this is not a one-off import but runs synchronization logic allowing updating of an existing Term Set. When synchronizing, any existing terms are matched (with Term Description and Available for Tagging updated as necessary), any new terms are added in the correct place in the hierarchy, and (if synchronizeDeletions is set) any terms not in the imported file are removed.
 
-The import file also supports an expanded syntax for the Term Set Name and term names (Level 1 Term, Level 2 Term, etc). These columns support values with the format 'Name | GUID', with the name and GUID separated by a pipe character (note that the pipe character is invalid to use within a taxomony item name). This expanded syntax is not required, but can be used to ensure all terms have fixed IDs.</maml:para>
+The import file also supports an expanded syntax for the Term Set Name and term names (Level 1 Term, Level 2 Term, etc). These columns support values with the format 'Name | GUID', with the name and GUID separated by a pipe character (note that the pipe character is invalid to use within a taxonomy item name). This expanded syntax is not required, but can be used to ensure all terms have fixed IDs.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -24883,6 +24816,225 @@ The import file also supports an expanded syntax for the Term Set Name and term 
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Invoke-PnPSPRestMethod</command:name>
+      <maml:description>
+        <maml:para>* Supported in: SharePoint Online.
+
+Invokes a REST request towards a SharePoint site</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Invoke</command:verb>
+      <command:noun>PnPSPRestMethod</command:noun>
+      <dev:version />
+    </command:details>
+    <maml:description>
+      <maml:para>Invokes a REST request towards a SharePoint site</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Invoke-PnPSPRestMethod</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Url</maml:name>
+          <maml:description>
+            <maml:para>The url to execute.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Content</maml:name>
+          <maml:description>
+            <maml:para>A string or object to send</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">Object</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>ContentType</maml:name>
+          <maml:description>
+            <maml:para>The content type of the object to send. Defaults to 'application/json'</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Method</maml:name>
+          <maml:description>
+            <maml:para>The Http method to execute. Defaults to GET.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">HttpRequestMethod</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Content</maml:name>
+        <maml:description>
+          <maml:para>A string or object to send</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>ContentType</maml:name>
+        <maml:description>
+          <maml:para>The content type of the object to send. Defaults to 'application/json'</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Method</maml:name>
+        <maml:description>
+          <maml:para>The Http method to execute. Defaults to GET.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">HttpRequestMethod</command:parameterValue>
+        <dev:type>
+          <maml:name>HttpRequestMethod</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Url</maml:name>
+        <maml:description>
+          <maml:para>The url to execute.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Invoke-PnPSPRestMethod -Url /_api/web</dev:code>
+        <maml:remarks>
+          <maml:para>This example executes a GET request towards the current site collection and returns the properties of the current web</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; $output = Invoke-PnPSPRestMethod -Url '/_api/web/lists?$select=Id,Title'
+PS:&gt; $output.value</dev:code>
+        <maml:remarks>
+          <maml:para>This example executes a GET request towards the current site collection and returns the id and title of all the lists and outputs them to the console. Notice the use of single quotes. If you want to use double quotes (") then you will have to escape the $ character with a backtick: `$</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; $item = @{Title="Test"}
+PS:&gt; Invoke-PnPSPRestMethod -Method Post -Url "/_api/web/lists/GetByTitle('Test')/items" -Content $item</dev:code>
+        <maml:remarks>
+          <maml:para>This example creates a new item in the list 'Test' and sets the title field to 'Test'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; $item = "{'Title':'Test'}"
+PS:&gt; Invoke-PnPSPRestMethod -Method Post -Url "/_api/web/lists/GetByTitle('Test')/items" -Content $item</dev:code>
+        <maml:remarks>
+          <maml:para>This example creates a new item in the list 'Test' and sets the title field to 'Test'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 5---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; $item = "{ '__metadata': { 'type': 'SP.Data.TestListItem' }, 'Title': 'Test'}"
+PS:&gt; Invoke-PnPSPRestMethod -Method Post -Url "/_api/web/lists/GetByTitle('Test')/items" -Content $item -ContentType "application/json;odata=verbose"</dev:code>
+        <maml:remarks>
+          <maml:para>This example creates a new item in the list 'Test' and sets the title field to 'Test'</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Invoke-PnPWebAction</command:name>
       <maml:description>
         <maml:para>Executes operations on web, lists and list items.</maml:para>
@@ -25299,7 +25451,7 @@ The import file also supports an expanded syntax for the Term Set Name and term 
     <command:details>
       <command:name>Measure-PnPList</command:name>
       <maml:description>
-        <maml:para>* Supported in: SharePoint Online, SharePoint 2016.
+        <maml:para>* Supported in: SharePoint Online, SharePoint 2016, SharePoint 2019.
 
 Returns statistics on the list object</maml:para>
       </maml:description>
@@ -25481,7 +25633,7 @@ Returns statistics on the list object</maml:para>
     <command:details>
       <command:name>Measure-PnPWeb</command:name>
       <maml:description>
-        <maml:para>* Supported in: SharePoint Online, SharePoint 2016.
+        <maml:para>* Supported in: SharePoint Online, SharePoint 2016, SharePoint 2019.
 
 Returns statistics on the web object</maml:para>
       </maml:description>
@@ -25870,7 +26022,7 @@ Returns statistics on the web object</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>OverwriteIfAlreadyExists</maml:name>
           <maml:description>
-            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If ommitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
+            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If omitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -25915,7 +26067,7 @@ Returns statistics on the web object</maml:para>
         <command:parameter required="false" position="named">
           <maml:name>OverwriteIfAlreadyExists</maml:name>
           <maml:description>
-            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If ommitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
+            <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If omitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -25957,7 +26109,7 @@ Returns statistics on the web object</maml:para>
       <command:parameter required="false" position="named">
         <maml:name>OverwriteIfAlreadyExists</maml:name>
         <maml:description>
-          <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If ommitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
+          <maml:para>If provided, if a file already exists at the TargetUrl, it will be overwritten. If omitted, the move operation will be canceled if the file already exists at the TargetUrl location.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -26918,9 +27070,16 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="6">
-          <maml:name>Out</maml:name>
+          <maml:name>OutPfx</maml:name>
           <maml:description>
             <maml:para>Filename to write to, optionally including full path (.pfx)</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="6">
+          <maml:name>OutCert</maml:name>
+          <maml:description>
+            <maml:para>Filename to write to, optionally including full path (.cer)</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -27008,7 +27167,18 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         </dev:type>
       </command:parameter>
       <command:parameter required="false" position="6">
-        <maml:name>Out</maml:name>
+        <maml:name>OutCert</maml:name>
+        <maml:description>
+          <maml:para>Filename to write to, optionally including full path (.cer)</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="6">
+        <maml:name>OutPfx</maml:name>
         <maml:description>
           <maml:para>Filename to write to, optionally including full path (.pfx)</maml:para>
         </maml:description>
@@ -27058,9 +27228,9 @@ PrivateKey contains the PEM encoded private key of the certificate.</maml:para>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; New-PnPAzureCertificate</dev:code>
+        <dev:code>PS:&gt; New-PnPAzureCertificate -OutPfx pnp.pfx -OutCert pnp.cer</dev:code>
         <maml:remarks>
-          <maml:para>This will generate a default self-signed certificate named "pnp.contoso.com" valid for 10 years.</maml:para>
+          <maml:para>This will generate a default self-signed certificate named "pnp.contoso.com" valid for 10 years and output a pfx and cer file.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -27161,6 +27331,13 @@ Creates a new Office 365 Group (aka Unified Group)</maml:para>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>CreateTeam</maml:name>
+          <maml:description>
+            <maml:para>Creates a MS Teams team associated with created group.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Force</maml:name>
           <maml:description>
             <maml:para>Specifying the Force parameter will skip the confirmation question.</maml:para>
@@ -27170,6 +27347,17 @@ Creates a new Office 365 Group (aka Unified Group)</maml:para>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>CreateTeam</maml:name>
+        <maml:description>
+          <maml:para>Creates a MS Teams team associated with created group.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="true" position="named">
         <maml:name>Description</maml:name>
         <maml:description>
@@ -27831,13 +28019,6 @@ Online site collection fails if a deleted site with the same URL exists in the R
           <command:parameterValue required="true">Int32</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
-          <maml:name>Description</maml:name>
-          <maml:description>
-            <maml:para>Specifies the description of the new site collection</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">String</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
           <maml:name>Lcid</maml:name>
           <maml:description>
             <maml:para>Specifies the language of this site collection. For more information, see Locale IDs Assigned by Microsoft: https://msdn.microsoft.com/en-us/library/microsoft.sharepoint.splanguage.lcid.aspx. To get the list of supported languages use: (Get-PnPWeb -Includes RegionalSettings.InstalledLanguages).RegionalSettings.InstalledLanguages </maml:para>
@@ -27903,17 +28084,6 @@ Online site collection fails if a deleted site with the same URL exists in the R
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" position="named">
-        <maml:name>Description</maml:name>
-        <maml:description>
-          <maml:para>Specifies the description of the new site collection</maml:para>
-        </maml:description>
-        <command:parameterValue required="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Force</maml:name>
         <maml:description>
@@ -28530,7 +28700,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <command:parameter required="true" position="named">
           <maml:name>TermGroup</maml:name>
           <maml:description>
-            <maml:para>Name, id or actualy termgroup to create the termset in.</maml:para>
+            <maml:para>Name, id or actually termgroup to create the termset in.</maml:para>
           </maml:description>
           <command:parameterValue required="true">Id, Title or TermGroup</command:parameterValue>
         </command:parameter>
@@ -28727,7 +28897,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
       <command:parameter required="true" position="named">
         <maml:name>TermGroup</maml:name>
         <maml:description>
-          <maml:para>Name, id or actualy termgroup to create the termset in.</maml:para>
+          <maml:para>Name, id or actually termgroup to create the termset in.</maml:para>
         </maml:description>
         <command:parameterValue required="true">Id, Title or TermGroup</command:parameterValue>
         <dev:type>
@@ -29126,7 +29296,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
     <command:details>
       <command:name>Read-PnPProvisioningTemplate</command:name>
       <maml:description>
-        <maml:para>Loads/Reads a PnP file from the file system</maml:para>
+        <maml:para>Loads/Reads a PnP file from the file system or a string</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -29142,6 +29312,23 @@ Online site collection fails if a deleted site with the same URL exists in the R
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Filename to read from, optionally including full path.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>TemplateProviderExtensions</maml:name>
+          <maml:description>
+            <maml:para>Allows you to specify ITemplateProviderExtension to execute while loading the template.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ITemplateProviderExtension[]</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Read-PnPProvisioningTemplate</maml:name>
+        <command:parameter required="true" position="1">
+          <maml:name>Xml</maml:name>
+          <maml:description>
+            <maml:para>Variable to read from, containing the valid XML of a provisioning template.</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
@@ -29174,6 +29361,17 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <command:parameterValue required="false">ITemplateProviderExtension[]</command:parameterValue>
         <dev:type>
           <maml:name>ITemplateProviderExtension[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="1">
+        <maml:name>Xml</maml:name>
+        <maml:description>
+          <maml:para>Variable to read from, containing the valid XML of a provisioning template.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -29213,7 +29411,23 @@ Online site collection fails if a deleted site with the same URL exists in the R
         </maml:introduction>
         <dev:code>PS:&gt; Read-PnPProvisioningTemplate -Path template.pnp -TemplateProviderExtensions $extensions</dev:code>
         <maml:remarks>
-          <maml:para>Loads a PnP file from the file system using some custom template provider extenions while loading the file.</maml:para>
+          <maml:para>Loads a PnP file from the file system using some custom template provider extensions while loading the file.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Read-PnPProvisioningTemplate -Xml $xml</dev:code>
+        <maml:remarks>
+          <maml:para>Reads a PnP Provisioning template from a string containing the XML of a provisioning template</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -29864,6 +30078,13 @@ Online site collection fails if a deleted site with the same URL exists in the R
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>The list object or name from where to remove the indexed properties</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">ListPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
           <maml:name>Web</maml:name>
           <maml:description>
             <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
@@ -29888,6 +30109,17 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <command:parameterValue required="true">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>The list object or name from where to remove the indexed properties</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">ListPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>ListPipeBind</maml:name>
           <maml:uri />
         </dev:type>
       </command:parameter>
@@ -31782,7 +32014,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
         <command:parameter required="true" position="named">
           <maml:name>All</maml:name>
           <maml:description>
-            <maml:para>Specifying the All parameter will remove all the nodes from specifed Location.</maml:para>
+            <maml:para>Specifying the All parameter will remove all the nodes from specified Location.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -31813,7 +32045,7 @@ Online site collection fails if a deleted site with the same URL exists in the R
       <command:parameter required="true" position="named">
         <maml:name>All</maml:name>
         <maml:description>
-          <maml:para>Specifying the All parameter will remove all the nodes from specifed Location.</maml:para>
+          <maml:para>Specifying the All parameter will remove all the nodes from specified Location.</maml:para>
         </maml:description>
         <command:parameterValue required="true">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -31948,9 +32180,9 @@ PS:&gt;$nodes | Select-Object -First 1 | Remove-PnPNavigationNode -Force</dev:co
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Remove-PnPNavigationNode -Location QuickLaunch -All</dev:code>
+        <dev:code>PS:&gt; Get-PnPNavigationNode -Location QuickLaunch | Remove-PnPNavigationNode -Force</dev:code>
         <maml:remarks>
-          <maml:para>Will remove all the navigation nodes from the quick launch bar in the current web.</maml:para>
+          <maml:para>Will remove all the navigation nodes from the quick launch bar without prompting for a confirmation in the current web.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -32385,6 +32617,224 @@ PS:&gt;$nodes | Select-Object -First 1 | Remove-PnPNavigationNode -Force</dev:co
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Remove-PnPSearchConfiguration</command:name>
+      <maml:description>
+        <maml:para>Remove the search configuration</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Remove</command:verb>
+      <command:noun>PnPSearchConfiguration</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Remove-PnPSearchConfiguration</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Configuration</maml:name>
+          <maml:description>
+            <maml:para>Search configuration string</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Scope</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">SearchConfigurationScope</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Remove-PnPSearchConfiguration</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>Path</maml:name>
+          <maml:description>
+            <maml:para>Path to a search configuration</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Scope</maml:name>
+          <maml:description>
+            <maml:para />
+          </maml:description>
+          <command:parameterValue required="true">SearchConfigurationScope</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" position="named">
+        <maml:name>Configuration</maml:name>
+        <maml:description>
+          <maml:para>Search configuration string</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>Path</maml:name>
+        <maml:description>
+          <maml:para>Path to a search configuration</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Scope</maml:name>
+        <maml:description>
+          <maml:para />
+        </maml:description>
+        <command:parameterValue required="false">SearchConfigurationScope</command:parameterValue>
+        <dev:type>
+          <maml:name>SearchConfigurationScope</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Remove-PnPSearchConfiguration -Configuration $config</dev:code>
+        <maml:remarks>
+          <maml:para>Remove the search configuration for the current web (does not remove managed property mappings)</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Remove-PnPSearchConfiguration -Configuration $config -Scope Site</dev:code>
+        <maml:remarks>
+          <maml:para>Remove the search configuration for the current site collection (does not remove managed property mappings)</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Remove-PnPSearchConfiguration -Configuration $config -Scope Subscription</dev:code>
+        <maml:remarks>
+          <maml:para>Remove the search configuration for the current tenant (does not remove managed property mappings)</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 4---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Remove-PnPSearchConfiguration -Path searchconfig.xml -Scope Subscription</dev:code>
+        <maml:remarks>
+          <maml:para>Reads the search configuration from the specified XML file and remove it for the current tenant (does not remove managed property mappings)</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Remove-PnPSiteCollectionAdmin</command:name>
       <maml:description>
         <maml:para>Removes one or more users as site collection administrators from the site collection in the current context</maml:para>
@@ -32405,7 +32855,7 @@ PS:&gt;$nodes | Select-Object -First 1 | Remove-PnPNavigationNode -Force</dev:co
         <command:parameter required="true" position="named">
           <maml:name>Owners</maml:name>
           <maml:description>
-            <maml:para>Specifies owner(s) to remove as site collection adminstrators. Can be both users and groups.</maml:para>
+            <maml:para>Specifies owner(s) to remove as site collection administrators. Can be both users and groups.</maml:para>
           </maml:description>
           <command:parameterValue required="true">UserPipeBind</command:parameterValue>
         </command:parameter>
@@ -32422,7 +32872,7 @@ PS:&gt;$nodes | Select-Object -First 1 | Remove-PnPNavigationNode -Force</dev:co
       <command:parameter required="true" position="named">
         <maml:name>Owners</maml:name>
         <maml:description>
-          <maml:para>Specifies owner(s) to remove as site collection adminstrators. Can be both users and groups.</maml:para>
+          <maml:para>Specifies owner(s) to remove as site collection administrators. Can be both users and groups.</maml:para>
         </maml:description>
         <command:parameterValue required="true">UserPipeBind</command:parameterValue>
         <dev:type>
@@ -32831,7 +33281,7 @@ PS:&gt;$nodes | Select-Object -First 1 | Remove-PnPNavigationNode -Force</dev:co
       <maml:description>
         <maml:para>* Supported in: SharePoint Online.
 
-Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups</maml:para>
+Removes one Office 365 Group (aka Unified Group)</maml:para>
       </maml:description>
       <maml:copyright>
         <maml:para />
@@ -32846,7 +33296,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <command:parameter required="true" position="named">
           <maml:name>Identity</maml:name>
           <maml:description>
-            <maml:para>The Identity of the Office 365 Group.</maml:para>
+            <maml:para>The Identity of the Office 365 Group</maml:para>
           </maml:description>
           <command:parameterValue required="true">UnifiedGroupPipeBind</command:parameterValue>
         </command:parameter>
@@ -32856,7 +33306,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
       <command:parameter required="true" position="named">
         <maml:name>Identity</maml:name>
         <maml:description>
-          <maml:para>The Identity of the Office 365 Group.</maml:para>
+          <maml:para>The Identity of the Office 365 Group</maml:para>
         </maml:description>
         <command:parameterValue required="true">UnifiedGroupPipeBind</command:parameterValue>
         <dev:type>
@@ -32884,7 +33334,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         </maml:introduction>
         <dev:code>PS:&gt; Remove-PnPUnifiedGroup -Identity $groupId</dev:code>
         <maml:remarks>
-          <maml:para>Removes an Office 365 Groups based on its ID</maml:para>
+          <maml:para>Removes an Office 365 Group based on its ID</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -32900,7 +33350,23 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         </maml:introduction>
         <dev:code>PS:&gt; Remove-PnPUnifiedGroup -Identity $group</dev:code>
         <maml:remarks>
-          <maml:para>Removes the provided Office 365 Groups</maml:para>
+          <maml:para>Removes the provided Office 365 Group</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Get-PnPUnifiedGroup | ? Visibility -eq "Public" | Remove-PnPUnifiedGroup</dev:code>
+        <maml:remarks>
+          <maml:para>Removes all the public Office 365 Groups</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -34209,7 +34675,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <command:parameter required="false" position="named">
           <maml:name>OverwriteIfAlreadyExists</maml:name>
           <maml:description>
-            <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If ommitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
+            <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If omitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -34254,7 +34720,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <command:parameter required="false" position="named">
           <maml:name>OverwriteIfAlreadyExists</maml:name>
           <maml:description>
-            <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If ommitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
+            <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If omitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
           </maml:description>
           <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         </command:parameter>
@@ -34296,7 +34762,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
       <command:parameter required="false" position="named">
         <maml:name>OverwriteIfAlreadyExists</maml:name>
         <maml:description>
-          <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If ommitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
+          <maml:para>If provided, if a file already exist with the provided TargetFileName, it will be overwritten. If omitted, the rename operation will be canceled if a file already exists with the TargetFileName file name.</maml:para>
         </maml:description>
         <command:parameterValue required="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -35052,7 +35518,7 @@ Removes one Office 365 Group (aka Unified Group) or a list of Office 365 Groups<
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? FileLeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
+        <dev:code>PS:&gt; Get-PnPRecycleBinItem | ? -Property LeafName -like "*.docx" | Restore-PnpRecycleBinItem</dev:code>
         <maml:remarks>
           <maml:para>Restores all the items in the first and second stage recycle bins to their original location of which the filename ends with the .docx extension</maml:para>
           <maml:para></maml:para>
@@ -36499,9 +36965,9 @@ PS:&gt; Get-PnPList # returns the lists from site A</dev:code>
         <maml:introduction>
           <maml:para />
         </maml:introduction>
-        <dev:code>PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyTextField -Value "DefaultValue"</dev:code>
+        <dev:code>PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyTextField -Value "DefaultValue" -Folder "My folder"</dev:code>
         <maml:remarks>
-          <maml:para>Sets a default value for the MyTextField text field on a library to a value of "DefaultValue"</maml:para>
+          <maml:para>Sets a default value for the MyTextField text field on the folder "My folder" in a library to a value of "DefaultValue"</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -36907,7 +37373,7 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
         <command:parameter required="false" position="named">
           <maml:name>List</maml:name>
           <maml:description>
-            <maml:para>The list object, name or id where to update the field. If omited the field will be updated on the web.</maml:para>
+            <maml:para>The list object, name or id where to update the field. If omitted the field will be updated on the web.</maml:para>
           </maml:description>
           <command:parameterValue required="true">ListPipeBind</command:parameterValue>
         </command:parameter>
@@ -36949,7 +37415,7 @@ PS:&gt; Set-PnPDefaultColumnValues -List Documents -Field MyMultiPeopleField -Va
       <command:parameter required="false" position="named">
         <maml:name>List</maml:name>
         <maml:description>
-          <maml:para>The list object, name or id where to update the field. If omited the field will be updated on the web.</maml:para>
+          <maml:para>The list object, name or id where to update the field. If omitted the field will be updated on the web.</maml:para>
         </maml:description>
         <command:parameterValue required="false">ListPipeBind</command:parameterValue>
         <dev:type>
@@ -39419,7 +39885,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNoField" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"PersonField" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"PersonField" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -39514,7 +39980,7 @@ Multi value lookup (id of lookup values as string): -Values @{"MultiLookupField"
 
 Yes/No: -Values @{"YesNoField" = $false}
 
-Person/Group (id of user/group in Site User Info List or email of the user, seperate multiple values with a comma): -Values @{"PersonField" = "user1@domain.com","21"}
+Person/Group (id of user/group in Site User Info List or email of the user, separate multiple values with a comma): -Values @{"PersonField" = "user1@domain.com","21"}
 
 Managed Metadata (single value with path to term): -Values @{"MetadataField" = "CORPORATE|DEPARTMENTS|FINANCE"}
 
@@ -42447,9 +42913,27 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
           </maml:description>
           <command:parameterValue required="true">String</command:parameterValue>
         </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>CreateTeam</maml:name>
+          <maml:description>
+            <maml:para>Creates a MS Teams team associated with created group.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>CreateTeam</maml:name>
+        <maml:description>
+          <maml:para>Creates a MS Teams team associated with created group.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="false" position="named">
         <maml:name>Description</maml:name>
         <maml:description>
@@ -42611,7 +43095,7 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
         </maml:introduction>
         <dev:code>PS:&gt; Set-PnPUnifiedGroup -Identity $group -Owners demo@contoso.com</dev:code>
         <maml:remarks>
-          <maml:para>Adds demo@contoso.com as an additional owner to the group.</maml:para>
+          <maml:para>Sets demo@contoso.com as owner of the group.</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -42642,7 +43126,7 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
       <dev:version />
     </command:details>
     <maml:description>
-      <maml:para>Sets one or more properties of an existing view.</maml:para>
+      <maml:para>Sets one or more properties of an existing view, see here https://docs.microsoft.com/previous-versions/office/sharepoint-server/ee543328(v=office.15) for the list of view properties.</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -42654,12 +43138,19 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
           </maml:description>
           <command:parameterValue required="true">ViewPipeBind</command:parameterValue>
         </command:parameter>
-        <command:parameter required="true" position="named">
+        <command:parameter required="false" position="named">
           <maml:name>Values</maml:name>
           <maml:description>
             <maml:para>Hashtable of properties to update on the view. Use the syntax @{property1="value";property2="value"}.</maml:para>
           </maml:description>
           <command:parameterValue required="true">Hashtable</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Fields</maml:name>
+          <maml:description>
+            <maml:para>An array of fields to use in the view. Notice that specifying this value will remove the existing fields</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String[]</command:parameterValue>
         </command:parameter>
         <command:parameter required="false" position="named">
           <maml:name>List</maml:name>
@@ -42685,6 +43176,17 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Fields</maml:name>
+        <maml:description>
+          <maml:para>An array of fields to use in the view. Notice that specifying this value will remove the existing fields</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
       <command:parameter required="true" position="named">
         <maml:name>Identity</maml:name>
         <maml:description>
@@ -42707,12 +43209,12 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
           <maml:uri />
         </dev:type>
       </command:parameter>
-      <command:parameter required="true" position="named">
+      <command:parameter required="false" position="named">
         <maml:name>Values</maml:name>
         <maml:description>
           <maml:para>Hashtable of properties to update on the view. Use the syntax @{property1="value";property2="value"}.</maml:para>
         </maml:description>
-        <command:parameterValue required="true">Hashtable</command:parameterValue>
+        <command:parameterValue required="false">Hashtable</command:parameterValue>
         <dev:type>
           <maml:name>Hashtable</maml:name>
           <maml:uri />
@@ -42777,6 +43279,22 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
         <dev:code>PS:&gt; Get-PnPList -Identity "Tasks" | Get-PnPView | Set-PnPView -Values @{JSLink="hierarchytaskslist.js|customrendering.js"}</dev:code>
         <maml:remarks>
           <maml:para>Updates all views on list "Tasks" to use hierarchytaskslist.js and customrendering.js for the JSLink</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 3---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Set-PnPView -List "Documents" -Identity "Corporate Documents" -Fields "Title","Created"</dev:code>
+        <maml:remarks>
+          <maml:para>Updates the Corporate Documents view on the Documents library to have two fields</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
@@ -44772,98 +45290,6 @@ Sets Office 365 Group (aka Unified Group) properties</maml:para>
         <dev:code>PS:&gt; Submit-PnPSearchQuery -Query "Title:Intranet*" -Refiners "contentclass,FileType(filter=6/0/*)"</dev:code>
         <maml:remarks>
           <maml:para>Returns absolutely all items indexed by SharePoint Search of which the title starts with the word Intranet, and return refiners for contentclass and FileType managed properties</maml:para>
-          <maml:para></maml:para>
-        </maml:remarks>
-        <command:commandLines>
-          <command:commandLine>
-            <command:commandText />
-          </command:commandLine>
-        </command:commandLines>
-      </command:example>
-    </command:examples>
-    <maml:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
-        <maml:uri>http://aka.ms/sppnp</maml:uri>
-      </maml:navigationLink>
-    </maml:relatedLinks>
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
-    <command:details>
-      <command:name>Test-PnPTenantTemplate</command:name>
-      <maml:description>
-        <maml:para>Tests a tenant template for invalid references</maml:para>
-      </maml:description>
-      <maml:copyright>
-        <maml:para />
-      </maml:copyright>
-      <command:verb>Test</command:verb>
-      <command:noun>PnPTenantTemplate</command:noun>
-      <dev:version />
-    </command:details>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Test-PnPTenantTemplate</maml:name>
-        <command:parameter required="true" position="named">
-          <maml:name>Template</maml:name>
-          <maml:description>
-            <maml:para>The in-memory template to test</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">ProvisioningHierarchy</command:parameterValue>
-        </command:parameter>
-        <command:parameter required="false" position="named">
-          <maml:name>Connection</maml:name>
-          <maml:description>
-            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
-          </maml:description>
-          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" position="named">
-        <maml:name>Template</maml:name>
-        <maml:description>
-          <maml:para>The in-memory template to test</maml:para>
-        </maml:description>
-        <command:parameterValue required="true">ProvisioningHierarchy</command:parameterValue>
-        <dev:type>
-          <maml:name>ProvisioningHierarchy</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-      <command:parameter required="false" position="named">
-        <maml:name>Connection</maml:name>
-        <maml:description>
-          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
-        <dev:type>
-          <maml:name>SPOnlineConnection</maml:name>
-          <maml:uri />
-        </dev:type>
-      </command:parameter>
-    </command:parameters>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name></maml:name>
-          <maml:uri />
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-        </dev:type>
-      </command:returnValue>
-    </command:returnValues>
-    <command:examples>
-      <command:example>
-        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
-        <maml:introduction>
-          <maml:para />
-        </maml:introduction>
-        <dev:code>PS:&gt; Test-PnPTenantTemplate -Template $myTemplate</dev:code>
-        <maml:remarks>
-          <maml:para>Checks for valid template references</maml:para>
           <maml:para></maml:para>
         </maml:remarks>
         <command:commandLines>
