@@ -14,7 +14,7 @@ export class Benefit extends BenefitBase {
         super(result);
         this.type = result.GtGainsTypeOWSCHCS;
         this.turnover = result.GtGainsTurnoverOWSMTXT;
-        this.responsible = result.GtGainsResponsible;
+        this.responsible = result.GtGainsResponsible || result.RefinableString70;
         this.realizationTime = new Date(result.GtRealizationTimeOWSDATE);
     }
 }
