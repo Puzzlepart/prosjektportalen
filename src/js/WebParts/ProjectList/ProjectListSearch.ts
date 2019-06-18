@@ -40,11 +40,15 @@ export async function queryProjectWebs(dataSourceName: string, rowLimit?: number
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
         if (dataSource) {
-            const dataSourceWithWebs = dataSource.GtDpSearchQuery.toString().toUpperCase().replace("CONTENTTYPEID:" + __.getResource("ContentTypes_Prosjektegenskaper_ContentTypeId").toUpperCase() + "*", "contentclass:STS_Web");
+            let dataSourceWithWebs = "contentclass:STS_Web";
+            const pathMatch = dataSource.GtDpSearchQuery.toString().toUpperCase().match("PATH:.+ ");
+            if (pathMatch && pathMatch.length > 0) {
+                dataSourceWithWebs = `contentclass:STS_Web ${pathMatch[0]}`;
+            }
             const { PrimarySearchResults } = await sp.search({
                 Querytext: "*",
                 QueryTemplate: dataSourceWithWebs,
-                SelectProperties: ["Title", "Path", "SiteLogo"],
+                SelectProperties: ["Title", "Path", "SiteLogo", "ViewsLifeTime"],
                 RowLimit: rowLimit,
                 TrimDuplicates: false,
             });

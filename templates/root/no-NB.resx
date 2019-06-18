@@ -966,6 +966,9 @@
   <data name="SiteFields_GtGainsType_DisplayName" xml:space="preserve">
     <value>Gevinsttype</value>
   </data>
+  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
+    <value>Måleindikator</value>
+  </data>
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Forutsetninger for gevinstoppnåelse</value>
   </data>

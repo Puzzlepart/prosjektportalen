@@ -62,14 +62,6 @@
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
                 <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
-                    <d4p1:Key>GtGainLookupId</d4p1:Key>
-                    <d4p1:Value>
-                        <d3p1:Name>GtGainLookupId</d3p1:Name>
-                        <d3p1:ManagedPid>1000000058</d3p1:ManagedPid>
-                        <d3p1:SchemaId>0</d3p1:SchemaId>
-                    </d4p1:Value>
-                </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
-                <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
                     <d4p1:Key>GtStatusBudget</d4p1:Key>
                     <d4p1:Value>
                         <d3p1:Name>GtStatusBudget</d3p1:Name>
@@ -90,6 +82,22 @@
                     <d4p1:Value>
                         <d3p1:Name>GtStatusTime</d3p1:Name>
                         <d3p1:ManagedPid>1000000057</d3p1:ManagedPid>
+                        <d3p1:SchemaId>0</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                    <d4p1:Key>GtGainLookupId</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>GtGainLookupId</d3p1:Name>
+                        <d3p1:ManagedPid>1000000058</d3p1:ManagedPid>
+                        <d3p1:SchemaId>0</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
+                    <d4p1:Key>GtMeasureIndicatorLookupId</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>GtMeasureIndicatorLookupId</d3p1:Name>
+                        <d3p1:ManagedPid>1000000059</d3p1:ManagedPid>
                         <d3p1:SchemaId>0</d3p1:SchemaId>
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringAliasInfoy6h3NzC8>
@@ -500,6 +508,17 @@
                     </d4p1:Value>
                 </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
                 <d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                    <d4p1:Key>00130329-0000-0130-c000-000000131346:ows_GtMeasureIndicatorLookup_ID-&gt;1000000059</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>00130329-0000-0130-c000-000000131346:ows_GtMeasureIndicatorLookup_ID-&gt;1000000059</d3p1:Name>
+                        <d3p1:CrawledPropertyName>ows_GtMeasureIndicatorLookup_ID</d3p1:CrawledPropertyName>
+                        <d3p1:CrawledPropset>00130329-0000-0130-c000-000000131346</d3p1:CrawledPropset>
+                        <d3p1:ManagedPid>1000000059</d3p1:ManagedPid>
+                        <d3p1:MappingOrder>100</d3p1:MappingOrder>
+                        <d3p1:SchemaId>0</d3p1:SchemaId>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringMappingInfoy6h3NzC8>
                     <d4p1:Key>00130329-0000-0130-c000-000000131346:ows_GtGainsResponsible-&gt;1000000070</d4p1:Key>
                     <d4p1:Value>
                         <d3p1:Name>00130329-0000-0130-c000-000000131346:ows_GtGainsResponsible-&gt;1000000070</d3p1:Name>
@@ -656,6 +675,19 @@
                         <d3p1:EntityExtractorBitMap>0</d3p1:EntityExtractorBitMap>
                         <d3p1:ExtraProperties i:nil="true" />
                         <d3p1:ManagedPid>1000000071</d3p1:ManagedPid>
+                        <d3p1:MappingsOverridden>true</d3p1:MappingsOverridden>
+                        <d3p1:SchemaId>0</d3p1:SchemaId>
+                        <d3p1:TokenNormalization>true</d3p1:TokenNormalization>
+                    </d4p1:Value>
+                </d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                <d4p1:KeyValueOfstringOverrideInfoy6h3NzC8>
+                    <d4p1:Key>1000000059</d4p1:Key>
+                    <d4p1:Value>
+                        <d3p1:Name>1000000059</d3p1:Name>
+                        <d3p1:AliasesOverridden>false</d3p1:AliasesOverridden>
+                        <d3p1:EntityExtractorBitMap>0</d3p1:EntityExtractorBitMap>
+                        <d3p1:ExtraProperties i:nil="true" />
+                        <d3p1:ManagedPid>1000000059</d3p1:ManagedPid>
                         <d3p1:MappingsOverridden>true</d3p1:MappingsOverridden>
                         <d3p1:SchemaId>0</d3p1:SchemaId>
                         <d3p1:TokenNormalization>true</d3p1:TokenNormalization>

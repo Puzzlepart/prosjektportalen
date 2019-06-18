@@ -1,6 +1,6 @@
 {
     "name": "prosjektportalen",
-    "version": "2.5.9",
+    "version": "2.5.10",
     "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
     "homepage": "https://github.com/Puzzlepart/prosjektportalen",
     "repository": {
@@ -20,12 +20,12 @@
         "watch-minify": "gulp watch --minify"
     },
     "dependencies": {
-        "@pnp/common": "^1.3.1",
-        "@pnp/logging": "^1.3.1",
-        "@pnp/odata": "^1.3.1",
+        "@pnp/common": "^1.3.3",
+        "@pnp/logging": "^1.3.3",
+        "@pnp/odata": "^1.3.3",
         "@pnp/polyfill-ie11": "^1.0.1",
-        "@pnp/sp": "^1.3.1",
-        "@uifabric/icons": "^6.5.0",
+        "@pnp/sp": "^1.3.3",
+        "@uifabric/icons": "^6.5.2",
         "object-get": "^2.1.0",
         "office-ui-fabric-react": "^5.135.0",
         "react-sticky": "^6.0.3"
@@ -44,7 +44,7 @@
         "@types/react-dom": "16.0.5",
         "@types/sharepoint": "^2016.1.2",
         "@types/sinon": "^5.0.1",
-        "@uifabric/icons": "^6.5.0",
+        "@uifabric/icons": "^6.5.2",
         "ajv": "~5.2.2",
         "array-sort": "^1.0.0",
         "array-unique": "^0.3.2",

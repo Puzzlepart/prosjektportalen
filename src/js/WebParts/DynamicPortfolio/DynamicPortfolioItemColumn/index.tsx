@@ -45,7 +45,7 @@ const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPo
             }
             case "Note": {
                 return (
-                    <span title={colValue}>{colValue}</span>
+                    <span dangerouslySetInnerHTML={{ __html: colValue }}></span>
                 );
             }
             case "Currency": {
