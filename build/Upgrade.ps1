@@ -107,7 +107,6 @@ if ($null -eq $Connection) {
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'npm run-script release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
-$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -125,16 +124,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         try {
-            if (Test-Path $UpgradeFolderPath -PathType Container) {
-                Write-Host "Installing pre-upgrade packages.." -ForegroundColor Green -NoNewLine
-                $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/pre-*-$($Language).pnp"
-                if ($null -ne $upgradePkgs) {
-                    foreach ($pkg in $upgradePkgs) {
-                        Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
-                    }
-                }
-                Write-Host "DONE" -ForegroundColor Green
-            }
+            Install-UpgradePackages -CurrentVersion $CurrentVersion -InstallVersion $InstallVersion -Language $Language -Pre
         }
         catch {
             Write-Host
@@ -170,17 +160,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         $Connection = Connect-SharePoint $Url -Connection $Connection
-        if (Test-Path $UpgradeFolderPath -PathType Container) {
-            Write-Host "Installing upgrade packages.." -ForegroundColor Green
-            $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/*-$($Language).pnp" -Exclude "pre-*.pnp"
-            if ($null -ne $upgradePkgs) {
-                foreach ($pkg in $upgradePkgs) {
-                    Write-Host "Applying upgrade-package $($pkg.FullName)" 
-                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
-                }
-            }
-            Write-Host "DONE" -ForegroundColor Green
-        }
+        Install-UpgradePackages -CurrentVersion $CurrentVersion -InstallVersion $InstallVersion -Language $Language
 
         if ($CurrentVersion.Minor -lt 5) {
             Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine

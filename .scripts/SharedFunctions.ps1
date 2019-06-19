@@ -109,6 +109,30 @@ function Apply-Template([string]$Template, [switch]$Localized, [OfficeDevPnP.Cor
     }
 }
 
+function Install-UpgradePackages([Version]$CurrentVersion, [Version]$InstallVersion, $Language, [switch]$Pre) {
+    $CurrentMinorVersion = $CurrentVersion.Minor
+    $InstallMinorVersion = $InstallVersion.Minor
+
+    Write-Host "Installing upgrade packages.." -ForegroundColor Green
+    while ($CurrentMinorVersion -lt $InstallMinorVersion) {
+        $UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentMinorVersion)"
+        if (Test-Path $UpgradeFolderPath -PathType Container) {
+            $PrePostPath = "$UpgradeFolderPath/*-$($Language).pnp"
+            if ($Pre.IsPresent) {
+                $PrePostPath = "$UpgradeFolderPath/pre-*-$($Language).pnp"
+            }
+            $upgradePkgs = Get-ChildItem -Path $PrePostPath
+            if ($null -ne $upgradePkgs) {
+                foreach ($pkg in $upgradePkgs) {
+                    Write-Host "`tApplying upgrade package " $pkg.Name -ForegroundColor Green
+                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
+                }
+            }
+        }
+        $CurrentMinorVersion = $CurrentMinorVersion + 1
+    }
+}
+
 # Aim at using relative urls for referencing scripts, images etc.
 function Get-SecondaryUrlAsParam ([string]$RootUrl, $SecondaryUrl) {
     $RootUri = New-Object -TypeName System.Uri -ArgumentList $RootUrl
