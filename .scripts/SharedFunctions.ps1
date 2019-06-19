@@ -124,7 +124,7 @@ function Install-UpgradePackages([Version]$CurrentVersion, [Version]$InstallVers
             $upgradePkgs = Get-ChildItem -Path $PrePostPath
             if ($null -ne $upgradePkgs) {
                 foreach ($pkg in $upgradePkgs) {
-                    Write-Host "`tApplying upgrade package " $pkg.Name -ForegroundColor Green
+                    Write-Host "Applying upgrade package " $pkg.Name -ForegroundColor Green
                     Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
                 }
             }

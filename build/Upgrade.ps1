@@ -223,7 +223,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 if ($null -ne $ClosedProjects) {
                     Set-PnPListItem -List "Lists/DynamicPortfolioViews" -Identity $ClosedProjects -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery }
                 } else {
-                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery }
+                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery } | out-null
                 }
 
                 Invoke-PnPQuery
