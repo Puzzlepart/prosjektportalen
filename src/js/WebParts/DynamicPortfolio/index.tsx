@@ -140,8 +140,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 selectionMode={this.props.selectionMode}
                 onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(_event, col) => this._onColumnSort(col)}
-                onRenderDetailsHeader={(detailsHeaderProps: IDetailsHeaderProps, defaultRender) => <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>} />
+                onRenderDetailsHeader={this.onRenderDetailsHeader} />
         );
+    }
+
+    private onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps, defaultRender) {
+        return <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>;
     }
 
     /**

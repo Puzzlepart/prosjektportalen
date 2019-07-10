@@ -3,7 +3,7 @@ import __ from "../../../Resources";
 import { sp, List } from "@pnp/sp";
 import { Logger, LogLevel } from "@pnp/logging";
 import * as moment from "moment";
-import * as html2canvas from "html2canvas";
+import html2canvas from "html2canvas";
 import * as sanitize from "sanitize-filename";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
