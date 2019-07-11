@@ -42,6 +42,9 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
                 "GtGainLookupId",
                 "GtMeasureIndicatorLookupId",
                 "GtGainsResponsible",
+                "RefinableString58",
+                "RefinableString59",
+                "RefinableString70",
             ],
             TrimDuplicates: false,
         };
@@ -61,19 +64,22 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
                 .sort((a, b) => b.date.getTime() - a.date.getTime());
             let indicators = [];
             results
-                .filter(res => res.ContentTypeID.indexOf("0x0100FF4E12223AF44F519AF40C441D05DED0") === 0 && res.GtGainLookupId !== null)
+                .filter(res => res.ContentTypeID.indexOf("0x0100FF4E12223AF44F519AF40C441D05DED0") === 0)
                 .forEach(res => {
-                    let _benfitIds = res.GtGainLookupId.split(";").map(str => parseInt(str, 10));
-                    _benfitIds.forEach(_benfitId => {
-                        let _indicator = new BenefitMeasurementIndicator(res);
-                        let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
-                        if (_benefit) {
-                            _indicator = _indicator
-                                .setMeasurements(measurements)
-                                .setBenefit(_benefit);
-                            indicators.push(_indicator);
-                        }
-                    });
+                    let _benefitLookupId = res.GtGainLookupId || res.RefinableString58;
+                    if (_benefitLookupId) {
+                        let _benfitIds = _benefitLookupId.split(";").map(str => parseInt(str, 10));
+                        _benfitIds.forEach(_benfitId => {
+                            let _indicator = new BenefitMeasurementIndicator(res);
+                            let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
+                            if (_benefit) {
+                                _indicator = _indicator
+                                    .setMeasurements(measurements)
+                                    .setBenefit(_benefit);
+                                indicators.push(_indicator);
+                            }
+                        });
+                    }
                 });
             return indicators;
         } catch (err) {

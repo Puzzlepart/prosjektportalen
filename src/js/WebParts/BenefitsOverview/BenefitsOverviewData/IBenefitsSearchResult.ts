@@ -17,6 +17,9 @@ export interface IBenefitsSearchResult {
     GtPrereqProfitAchievementOWSMTXT: string;
     GtRealizationTimeOWSDATE: string;
     GtGainLookupId: string;
+    RefinableString58: string; // Fallback for GtGainLookupId if alias is not set correctly
     GtMeasureIndicatorLookupId: string;
+    RefinableString59: string; // Fallback for GtMeasureIndicatorLookupId if alias is not set correctly
     GtGainsResponsible: string;
+    RefinableString70: string; // Fallback for GtGainsResponsible if alias is not set correctly
 }

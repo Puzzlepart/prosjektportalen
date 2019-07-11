@@ -11,17 +11,6 @@ import GetBreakpoint from "./GetBreakpoint";
 declare var MSOWebPartPageFormName: string;
 
 /**
- * HTML decodes the string
- *
- * @param {string} input Input
- */
-export function htmlDecode(input: string): string {
-    const element = document.createElement("div");
-    element.innerHTML = input;
-    return element.childNodes.length === 0 ? "" : element.childNodes[0].nodeValue;
-}
-
-/**
  * Formats a date using moment.js (defaults for format and locale are set in the resource files)
  *
  * @param {string | Date} date Date

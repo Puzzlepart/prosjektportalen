@@ -3,7 +3,7 @@ import * as array_unique from "array-unique";
 import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { DetailsList, IColumn, IDetailsHeaderProps, IGroup } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, IGroup } from "office-ui-fabric-react/lib/DetailsList";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
@@ -46,6 +46,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     public async componentDidMount() {
+        let stickyAbove = document.querySelector("[class*='stickyAbove-']");
+        if (stickyAbove != null) {
+            stickyAbove.addEventListener("scroll", this.handleStickyScroll);
+        }
         try {
             const data = await this.fetchInitialData();
             await this.updateState({ ...data, isLoading: false });
@@ -64,14 +68,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const { isLoading, errorMessage, isChangingView } = this.state;
         if (errorMessage) {
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <MessageBar messageBarType={errorMessage.type}>{errorMessage.message}</MessageBar>
                 </div>
             );
         }
         if (isLoading) {
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <Spinner label={this.props.loadingText} type={SpinnerType.large} />
                 </div>
             );
@@ -79,7 +83,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (isChangingView) {
             const loadingText = String.format(__.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     {this.renderCommandBar()}
                     <div style={{ paddingTop: 20 }}>
                         <Spinner label={loadingText} type={SpinnerType.large} />
@@ -87,17 +91,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 </div>
             );
         }
+
         return (
-            <div style={{ height: "80vh" }}>
+            <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                 <ScrollablePane>
                     {this.renderCommandBar()}
-                    <div>
-                        {this.renderSearchBox()}
-                        {this.renderStatusBar()}
-                        {this.renderItems()}
-                        {this.renderFilterPanel()}
-                        {this.renderProjectInfoModal()}
-                    </div>
+                    {this.renderSearchBox()}
+                    {this.renderStatusBar()}
+                    {this.renderItems()}
+                    {this.renderFilterPanel()}
+                    {this.renderProjectInfoModal()}
                 </ScrollablePane>
             </div>
         );
@@ -133,15 +136,19 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         return (
             <DetailsList
                 items={data.items}
-                constrainMode={this.props.constrainMode}
-                layoutMode={this.props.layoutMode}
+                constrainMode={ConstrainMode.unconstrained}
+                layoutMode={DetailsListLayoutMode.fixedColumns}
                 columns={data.columns}
                 groups={data.groups}
-                selectionMode={this.props.selectionMode}
+                selectionMode={SelectionMode.none}
                 onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(_event, col) => this._onColumnSort(col)}
-                onRenderDetailsHeader={(detailsHeaderProps: IDetailsHeaderProps, defaultRender) => <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>} />
+                onRenderDetailsHeader={this.onRenderDetailsHeader} />
         );
+    }
+
+    private onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps, defaultRender) {
+        return <Sticky stickyPosition={StickyPositionType.Both}>{defaultRender(detailsHeaderProps)}</Sticky>;
     }
 
     /**
@@ -638,6 +645,30 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         await this.updateState(updatedState);
         if (this.props.viewSelectorEnabled) {
             Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
+        }
+    }
+
+    /**
+     * Handle container scroll
+     *
+     * @param {any} event Event
+     */
+    private handleContainerScroll(event: any) {
+        let stickyAbove = document.querySelector("[class*='stickyAbove-']");
+        if (stickyAbove != null) {
+            stickyAbove.scrollLeft = event.target.scrollLeft;
+        }
+    }
+
+    /**
+     * Handle sticky scroll
+     *
+     * @param {any} event Event
+     */
+    private handleStickyScroll(event: any) {
+        let detailsList = document.querySelector("[class*='ms-DetailsList']");
+        if (detailsList) {
+            detailsList.scrollLeft = event.target.scrollLeft;
         }
     }
 }
