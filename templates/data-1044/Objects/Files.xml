@@ -3,43 +3,43 @@
     <pnp:File Src="StandardDocuments\Gevinstrealiseringsplan.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Gevinstrealiseringsplan" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Flere faser', 'TermGuid':'777cc6ac-4639-4633-85b9-f1ef61197c4d'}" /> 
+            <pnp:Property Key="GtProjectPhase" Value="Flere faser|777cc6ac-4639-4633-85b9-f1ef61197c4d" /> 
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Gevinstverktøy.xlsx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Gevinstverktøy" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Realisere', 'TermGuid':'b7ba84f0-70b9-45c4-8c50-8f73bf15bbec'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Realisere|b7ba84f0-70b9-45c4-8c50-8f73bf15bbec" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Mandat for konseptfasen.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Mandat for konseptfasen" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Konsept', 'TermGuid':'99e85650-33de-4af4-b8db-edffbc8a310b'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Konsept|99e85650-33de-4af4-b8db-edffbc8a310b" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Prosjektbegrunnelse.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Prosjektbegrunnelse" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Flere faser', 'TermGuid':'777cc6ac-4639-4633-85b9-f1ef61197c4d'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Flere faser|777cc6ac-4639-4633-85b9-f1ef61197c4d" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Prosjektforslag.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Prosjektforslag" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Planlegge', 'TermGuid':'cda4f1e1-3488-4e57-8a04-6973df239689'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Planlegge|cda4f1e1-3488-4e57-8a04-6973df239689" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Sluttrapport.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Sluttrapport" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Avslutte', 'TermGuid':'30e03c52-8c3e-4cfe-9b18-ca71593ce130'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Avslutte|30e03c52-8c3e-4cfe-9b18-ca71593ce130" />
         </pnp:Properties>
     </pnp:File>
     <pnp:File Src="StandardDocuments\Styringsdokument.docx" Folder="StandardDocuments" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="Styringsdokument" />
-            <pnp:Property Key="GtProjectPhase" Value="{'WssId':-1, 'Label':'Gjennomføre', 'TermGuid':'99d7765a-c786-4792-a1a1-866ef0f982b9'}" />
+            <pnp:Property Key="GtProjectPhase" Value="Gjennomføre|99d7765a-c786-4792-a1a1-866ef0f982b9" />
         </pnp:Properties>
     </pnp:File>
 </pnp:Files>
