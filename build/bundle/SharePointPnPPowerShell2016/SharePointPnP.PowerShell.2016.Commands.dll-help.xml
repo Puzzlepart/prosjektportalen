@@ -11832,6 +11832,204 @@ PS:&gt; Get-PnPProperty -ClientObject $list -Property Views</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
     <command:details>
+      <command:name>Export-PnPListToProvisioningTemplate</command:name>
+      <maml:description>
+        <maml:para>Exports one or more lists to provisioning template</maml:para>
+      </maml:description>
+      <maml:copyright>
+        <maml:para />
+      </maml:copyright>
+      <command:verb>Export</command:verb>
+      <command:noun>PnPListToProvisioningTemplate</command:noun>
+      <dev:version />
+    </command:details>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Export-PnPListToProvisioningTemplate</maml:name>
+        <command:parameter required="true" position="named">
+          <maml:name>List</maml:name>
+          <maml:description>
+            <maml:para>Specify the lists to extract, either providing their ID or their Title.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Force</maml:name>
+          <maml:description>
+            <maml:para>Overwrites the output file if it exists.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>OutputInstance</maml:name>
+          <maml:description>
+            <maml:para>Returns the template as an in-memory object, which is an instance of the ProvisioningTemplate type of the PnP Core Component. It cannot be used together with the -Out parameter.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Out</maml:name>
+          <maml:description>
+            <maml:para>Filename to write to, optionally including full path</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">String</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="1">
+          <maml:name>Schema</maml:name>
+          <maml:description>
+            <maml:para>The schema of the output to use, defaults to the latest schema</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">XMLPnPSchemaVersion</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Web</maml:name>
+          <maml:description>
+            <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">WebPipeBind</command:parameterValue>
+        </command:parameter>
+        <command:parameter required="false" position="named">
+          <maml:name>Connection</maml:name>
+          <maml:description>
+            <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true">SPOnlineConnection</command:parameterValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named">
+        <maml:name>Force</maml:name>
+        <maml:description>
+          <maml:para>Overwrites the output file if it exists.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="true" position="named">
+        <maml:name>List</maml:name>
+        <maml:description>
+          <maml:para>Specify the lists to extract, either providing their ID or their Title.</maml:para>
+        </maml:description>
+        <command:parameterValue required="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Out</maml:name>
+        <maml:description>
+          <maml:para>Filename to write to, optionally including full path</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>OutputInstance</maml:name>
+        <maml:description>
+          <maml:para>Returns the template as an in-memory object, which is an instance of the ProvisioningTemplate type of the PnP Core Component. It cannot be used together with the -Out parameter.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SwitchParameter</command:parameterValue>
+        <dev:type>
+          <maml:name>SwitchParameter</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="1">
+        <maml:name>Schema</maml:name>
+        <maml:description>
+          <maml:para>The schema of the output to use, defaults to the latest schema</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">XMLPnPSchemaVersion</command:parameterValue>
+        <dev:type>
+          <maml:name>XMLPnPSchemaVersion</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Connection</maml:name>
+        <maml:description>
+          <maml:para>Optional connection to be used by the cmdlet. Retrieve the value for this parameter by either specifying -ReturnConnection on Connect-PnPOnline or by executing Get-PnPConnection.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">SPOnlineConnection</command:parameterValue>
+        <dev:type>
+          <maml:name>SPOnlineConnection</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+      <command:parameter required="false" position="named">
+        <maml:name>Web</maml:name>
+        <maml:description>
+          <maml:para>This parameter allows you to optionally apply the cmdlet action to a subweb within the current web. In most situations this parameter is not required and you can connect to the subweb using Connect-PnPOnline instead. Specify the GUID, server relative url (i.e. /sites/team1) or web instance of the web to apply the command to. Omit this parameter to use the current web.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false">WebPipeBind</command:parameterValue>
+        <dev:type>
+          <maml:name>WebPipeBind</maml:name>
+          <maml:uri />
+        </dev:type>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name></maml:name>
+          <maml:uri />
+          <maml:description>
+            <maml:para></maml:para>
+          </maml:description>
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title>------------------EXAMPLE 1---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Export-PnPProvisioningTemplate -Out template.xml -List "Documents"</dev:code>
+        <maml:remarks>
+          <maml:para>Extracts a list to a new provisioning template including the list specified by title or ID.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+      <command:example>
+        <maml:title>------------------EXAMPLE 2---------------------</maml:title>
+        <maml:introduction>
+          <maml:para />
+        </maml:introduction>
+        <dev:code>PS:&gt; Export-PnPProvisioningTemplate -Out template.pnp -List "Documents","Events"</dev:code>
+        <maml:remarks>
+          <maml:para>Extracts a list to a new provisioning template Office Open XML file, including the lists specified by title or ID.</maml:para>
+          <maml:para></maml:para>
+        </maml:remarks>
+        <command:commandLines>
+          <command:commandLine>
+            <command:commandText />
+          </command:commandLine>
+        </command:commandLines>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>SharePoint Developer Patterns and Practices:</maml:linkText>
+        <maml:uri>http://aka.ms/sppnp</maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
       <command:name>Export-PnPTaxonomy</command:name>
       <maml:description>
         <maml:para>Exports a taxonomy to either the output or to a file.</maml:para>
