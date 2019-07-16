@@ -3,7 +3,7 @@ import __ from "../../../Resources";
 import { sp, List } from "@pnp/sp";
 import { Logger, LogLevel } from "@pnp/logging";
 import * as moment from "moment";
-import html2canvas from "html2canvas";
+import * as html2canvas  from "html2canvas";
 import * as sanitize from "sanitize-filename";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
@@ -219,21 +219,26 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
 
     private async startExport() {
-        Logger.log({ message: "(startExport) Starting export", data: { exportType: this.props.exportType }, level: LogLevel.Info });
-        this.setState({ exportStatus: ExportReportStatus.IS_EXPORTING });
-        let blob: Blob;
-        switch (this.props.exportType) {
-            case "pdf": blob = await this.saveAsPdf();
-                break;
-            case "png": blob = await this.saveAsPng();
-                break;
+        try {
+            Logger.log({ message: "(startExport) Starting export", data: { exportType: this.props.exportType }, level: LogLevel.Info });
+            this.setState({ exportStatus: ExportReportStatus.IS_EXPORTING });
+            let blob: Blob;
+            switch (this.props.exportType) {
+                case "pdf": blob = await this.saveAsPdf();
+                    break;
+                case "png": blob = await this.saveAsPng();
+                    break;
+            }
+            const report = await this.saveReportToLibrary(blob, this.props.exportType);
+            Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
+            this.setState({
+                reports: [report, ...this.state.reports],
+                exportStatus: ExportReportStatus.HAS_EXPORTED,
+            });
+        } catch (e) {
+            Logger.log({ message: "(startExport) Export failed", data: { exportType: this.props.exportType, error: e }, level: LogLevel.Warning });
+            this.setState({ exportStatus: ExportReportStatus.IDLE });
         }
-        const report = await this.saveReportToLibrary(blob, this.props.exportType);
-        Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
-        this.setState({
-            reports: [report, ...this.state.reports],
-            exportStatus: ExportReportStatus.HAS_EXPORTED,
-        });
     }
 
     /**
@@ -241,12 +246,18 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveAsPng() {
         return new Promise<Blob>(async (resolve, reject) => {
-            const canvas = await html2canvas(document.getElementById("pp-projectstatus"));
-            if (canvas.toBlob) {
-                canvas.toBlob(resolve);
-            } else if (canvas["msToBlob"]) {
-                const blob = canvas["msToBlob"]();
-                resolve(blob);
+            try {
+                (window as any).html2canvas = html2canvas;
+                const canvas = await (window as any).html2canvas(document.getElementById("pp-projectstatus"));
+                if (canvas.toBlob) {
+                    canvas.toBlob(resolve);
+                } else if (canvas["msToBlob"]) {
+                    const blob = canvas["msToBlob"]();
+                    resolve(blob);
+                }
+            } catch (e) {
+                console.log(e);
+                reject(e);
             }
         });
     }
