@@ -11,7 +11,7 @@ var gulp = require("gulp"),
 
 let buildTimeout;
 
-gulp.task("watch", (done) => {
+gulp.task("watch", ["buildJsonResources", "buildJsonPreferences"], (done) => {
     const argv = require("yargs").argv;
     livereload.listen({ start: true });
 
@@ -35,7 +35,7 @@ gulp.task("watch", (done) => {
             buildTimeout = null;
         }
         buildTimeout = setTimeout(() => {
-            runSequence("clean", "buildJsonResources", argv.minify ? "packageCodeMinify" : "packageCode", () => {
+            runSequence("clean", argv.minify ? "packageCodeMinify" : "packageCode", () => {
                 if (!argv.skipUpload) {
                     uploadFileToSp(path.join(config.paths.dist, "js", "*.js"), settings, path.join(config.paths.spAssetsFolder, "js"));
                 }
