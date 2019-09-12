@@ -1,0 +1,29 @@
+<pnp:ListInstance Title="Prosjekttyper" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Prosjekttyper" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" TemplateFeatureID="00bfea71-de22-43b2-a848-c05709900100" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/Lists/Prosjekttyper/DispForm.aspx" DefaultEditFormUrl="{site}/Lists/Prosjekttyper/EditForm.aspx" DefaultNewFormUrl="{site}/Lists/Prosjekttyper/NewForm.aspx" ImageUrl="/_layouts/15/images/itgen.png?rev=47" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="" 
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2019/03/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x01" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x0120" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View Name="{0C2F2E5B-5081-4F7B-99B9-F080FA03AE64}" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle elementer" Url="{site}/Lists/Prosjekttyper/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=47">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="ID" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="LinkTitle" />
+                <FieldRef Name="GtTemplateLookup" />
+                <FieldRef Name="GtExtensionsLookup" />
+                <FieldRef Name="GtListContentsLookup" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:Fields>
+        <Field Type="Lookup" DisplayName="Mal" Required="FALSE" EnforceUniqueValues="FALSE" List="{listid:Områdemaler}" ShowField="Title" UnlimitedLengthInDocumentLibrary="FALSE" RelationshipDeleteBehavior="None" ID="{028318a6-d098-40e7-891f-973b31666078}" SourceID="{{listid:Prosjekttyper}}" StaticName="GtTemplateLookup" Name="GtTemplateLookup" ColName="int1" RowOrdinal="0" Group="" Version="1" />
+        <Field Type="LookupMulti" DisplayName="Utvidelser" Required="FALSE" EnforceUniqueValues="FALSE" List="{listid:Utvidelser}" ShowField="Title" Mult="TRUE" Sortable="FALSE" UnlimitedLengthInDocumentLibrary="FALSE" RelationshipDeleteBehavior="None" ID="{0c4a402d-07eb-49b1-809b-783b94263e57}" SourceID="{{listid:Prosjekttyper}}" StaticName="GtExtensionsLookup" Name="GtExtensionsLookup" ColName="int2" RowOrdinal="0" Group="" Version="1" />
+        <Field Type="LookupMulti" DisplayName="Listeinnhold" Required="FALSE" EnforceUniqueValues="FALSE" List="{listid:Konfigurasjon for listeinnhold}" ShowField="GtLccLabel" Mult="TRUE" Sortable="FALSE" UnlimitedLengthInDocumentLibrary="FALSE" RelationshipDeleteBehavior="None" ID="{e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f}" SourceID="{{listid:Prosjekttyper}}" StaticName="GtListContentsLookup" Name="GtListContentsLookup" ColName="int3" RowOrdinal="0" Group="" Version="2" />
+    </pnp:Fields>
+</pnp:ListInstance>
