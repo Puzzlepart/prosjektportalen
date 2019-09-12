@@ -32,6 +32,13 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     toggleOptionHandler={this.props.toggleListContentHandler}
                     hidden={this.props.listData.length === 0} />
                 <ToggleSection
+                    title={"Prosjekttype"}
+                    options={this.props.listProjectTypes}
+                    optLabelProp="Title"
+                    optDefaultCheckedProp="ListContentsLookup"
+                    toggleOptionHandler={this.props.toggleListProjectTypeContent}
+                    hidden={this.props.listProjectTypes.length === 0} />
+                <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.extensions}
                     optLabelProp="Title"

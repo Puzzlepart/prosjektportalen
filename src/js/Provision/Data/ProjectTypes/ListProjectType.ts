@@ -1,11 +1,8 @@
 export default class ListProjectType {
-    public SourceUrl: string;
-    public SourceList: string;
-    public DestinationList: string;
-    public DestinationLibrary: string;
-    public Fields: string[];
-    public Label: string;
-    public Default: boolean;
+    public LinkTitle: string;
+    public TemplateLookup: string;
+    public ExtensionsLookup: string;
+    public ListContentsLookup: string;
 
     /**
      * Constructor
@@ -14,12 +11,9 @@ export default class ListProjectType {
      * @param {string} fieldPrefix Prefix for fields
      */
     constructor(item, fieldPrefix: string) {
-        this.SourceUrl = item[`${fieldPrefix}SourceUrl`];
-        this.SourceList = item[`${fieldPrefix}SourceList`];
-        this.DestinationList = item[`${fieldPrefix}DestinationList`];
-        this.DestinationLibrary = item[`${fieldPrefix}DestinationLibrary`];
-        this.Fields = item[`${fieldPrefix}Fields`].split(",");
-        this.Label = item[`${fieldPrefix}Label`];
-        this.Default = item[`${fieldPrefix}Default`];
+        this.LinkTitle = item[`LinkTitle`];
+        this.TemplateLookup = item[`${fieldPrefix}TemplateLookup`];
+        this.ExtensionsLookup = item[`${fieldPrefix}ExtensionsLookup`];
+        this.ListContentsLookup = item[`${fieldPrefix}ListContentsLookup`];
     }
 }

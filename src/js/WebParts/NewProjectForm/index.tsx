@@ -14,7 +14,9 @@ import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExt
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
 import Extension from "../../Provision/Extensions/Extension";
 import ListConfig from "../../Provision/Data/Config/ListConfig";
+import ListProjectType from "../../Provision/Data/ProjectTypes/ListProjectType";
 import * as ListDataConfig from "../../Provision/Data/Config";
+import * as ListDataProjectType from "../../Provision/Data/ProjectTypes";
 import * as Util from "../../Util";
 import { GetSetting } from "../../Settings";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
@@ -53,6 +55,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         const config = await this.getRequiredConfig();
         let model = this.state.model;
         model.IncludeContent = config.listData.filter(ld => ld.Default);
+        model.IncludeProjectTypes = config.listProjectTypes.filter(pd => pd.ListContentsLookup);
         model.Extensions = config.extensions.filter(ext => ext.IsEnabled);
         model.InheritPermissions = config.inheritPermissions;
         this.setState({ isLoading: false, config, model, selectedTemplate: config.defaultTemplate });
@@ -124,8 +127,20 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <NewProjectFormSettingsSection
                         className={this.props.settingsClassName}
                         listData={this.state.config.listData}
+                        listProjectTypes={this.state.config.listProjectTypes}
                         extensions={this.state.config.extensions}
                         toggleListContentHandler={this.onToggleListContent}
+                        toggleListProjectTypeContent={this.onToggleListProjectTypeContent}
+                        toggleExtensionHandler={this.onToggleExtension} />
+                )}
+                {(this.state.config.showProjectTypes && !this.state.isLoading) && (
+                    <NewProjectFormSettingsSection
+                        className={this.props.settingsClassName}
+                        listData={this.state.config.listData}
+                        listProjectTypes={this.state.config.listProjectTypes}
+                        extensions={this.state.config.extensions}
+                        toggleListContentHandler={this.onToggleListContent}
+                        toggleListProjectTypeContent={this.onToggleListProjectTypeContent}
                         toggleExtensionHandler={this.onToggleExtension} />
                 )}
                 {this.renderFooter()}
@@ -261,6 +276,21 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     /**
+     * Toggle content
+     *
+     * @param {ListProjectType} pt List projectType
+     * @param {boolean} checked Is checked
+     */
+    @autobind
+    private onToggleListProjectTypeContent(pt: ListProjectType, checked: boolean) {
+        this.setState((prevState: INewProjectFormState) => {
+            let { IncludeProjectTypes } = prevState.model;
+            checked ? IncludeProjectTypes.push(pt) : IncludeProjectTypes.splice(IncludeProjectTypes.indexOf(pt), 1);
+            return { model: { ...prevState.model, IncludeProjectTypes } };
+        });
+    }
+
+    /**
      * Toggle extension
      *
      * @param {Extension} extension Extension
@@ -297,8 +327,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @returns {INewProjectFormConfig} An object of interface INewProjectFormConfig
      */
     private async getRequiredConfig(): Promise<INewProjectFormConfig> {
-        const [listData, extensions, templates, inheritPermissionsString, siteTemplateSelectorEnabledString] = await Promise.all([
+        const [listData, listProjectTypes, extensions, templates, inheritPermissionsString, siteTemplateSelectorEnabledString] = await Promise.all([
             ListDataConfig.RetrieveConfig(),
+            ListDataProjectType.RetrieveProjectTypes(),
             GetSelectableExtensions(),
             GetSelectableTemplates(),
             GetSetting("PROJECT_INHERIT_PERMISSIONS", true),
@@ -306,13 +337,17 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         ]);
         let defaultTemplate;
         const listDataKeys = Object.keys(listData);
+        const listProjectTypesKeys = Object.keys(listProjectTypes);
         const showSettings = this.props.showSettings && listDataKeys.length > 0;
+        const showProjectTypes = this.props.showProjectTypes && listProjectTypesKeys.length > 0;
         if (templates.length > 0) {
             [defaultTemplate] = templates.filter(t => t.GtIsDefault);
         }
         return {
             showSettings,
+            showProjectTypes,
             listData,
+            listProjectTypes,
             extensions,
             templates,
             defaultTemplate,
