@@ -3,7 +3,7 @@ import { Site } from "@pnp/sp";
 import ListProjectType from "./ListProjectType";
 
 /**
- * Retrieve list content configuration fron list
+ * Retrieve list protjecttypes from list
  */
 export async function RetrieveProjectTypes(): Promise<ListProjectType[]> {
     const list = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle("Prosjekttyper");

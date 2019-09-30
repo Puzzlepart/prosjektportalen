@@ -133,16 +133,6 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         toggleListProjectTypeContent={this.onToggleListProjectTypeContent}
                         toggleExtensionHandler={this.onToggleExtension} />
                 )}
-                {(this.state.config.showProjectTypes && !this.state.isLoading) && (
-                    <NewProjectFormSettingsSection
-                        className={this.props.settingsClassName}
-                        listData={this.state.config.listData}
-                        listProjectTypes={this.state.config.listProjectTypes}
-                        extensions={this.state.config.extensions}
-                        toggleListContentHandler={this.onToggleListContent}
-                        toggleListProjectTypeContent={this.onToggleListProjectTypeContent}
-                        toggleExtensionHandler={this.onToggleExtension} />
-                )}
                 {this.renderFooter()}
             </div>
         );

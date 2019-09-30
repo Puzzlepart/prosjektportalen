@@ -4,12 +4,15 @@ import __ from "../../../Resources";
 import INewProjectFormSettingsSectionProps from "./INewProjectFormSettingsSectionProps";
 import INewProjectFormSettingsSectionState from "./INewProjectFormSettingsSectionState";
 import ToggleSection from "./ToggleSection";
+import { Dropdown, DropdownMenuItemType } from "office-ui-fabric-react/lib/Dropdown";
 //#endregion
 
 export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
     public static defaultProps = {
         toggleSectionClassName: "ms-font-l toggle-section",
     };
+
+
 
     /**
     * Constructor
@@ -31,11 +34,18 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     optDefaultCheckedProp="Default"
                     toggleOptionHandler={this.props.toggleListContentHandler}
                     hidden={this.props.listData.length === 0} />
+                <Dropdown
+                    placeholder="Velg et prosjekt"
+                    label="Prosjekttype"
+                    options={[
+                        { key: "firstOpt", text: this.props.listProjectTypes[0].Title.toString() },
+                    ]}
+                    hidden={this.props.listProjectTypes.length === 0}/>
                 <ToggleSection
                     title={"Prosjekttype"}
                     options={this.props.listProjectTypes}
                     optLabelProp="Title"
-                    optDefaultCheckedProp="ListContentsLookup"
+                    optDefaultCheckedProp="Title"
                     toggleOptionHandler={this.props.toggleListProjectTypeContent}
                     hidden={this.props.listProjectTypes.length === 0} />
                 <ToggleSection

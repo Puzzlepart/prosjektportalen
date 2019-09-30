@@ -1,5 +1,5 @@
 export default class ListProjectType {
-    public LinkTitle: string;
+    public Title: string;
     public TemplateLookup: string;
     public ExtensionsLookup: string;
     public ListContentsLookup: string;
@@ -11,7 +11,7 @@ export default class ListProjectType {
      * @param {string} fieldPrefix Prefix for fields
      */
     constructor(item, fieldPrefix: string) {
-        this.LinkTitle = item[`LinkTitle`];
+        this.Title = item[`Title`];
         this.TemplateLookup = item[`${fieldPrefix}TemplateLookup`];
         this.ExtensionsLookup = item[`${fieldPrefix}ExtensionsLookup`];
         this.ListContentsLookup = item[`${fieldPrefix}ListContentsLookup`];
