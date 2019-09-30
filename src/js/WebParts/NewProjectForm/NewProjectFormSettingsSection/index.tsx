@@ -16,10 +16,14 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     * Constructor
     *
     * @param {INewProjectFormSettingsSectionProps} props Props
+    * @param {ListProjectType} pt
     */
     constructor(props: INewProjectFormSettingsSectionProps) {
         super(props);
         this.state = {};
+        console.log("Amount of List configs: " + this.props.listData.length);
+        console.log("Amount of Projecttypes: " + this.props.projectTypes.length);
+        console.log("Amount of Extensions: " + this.props.extensions.length);
     }
 
     public render() {
@@ -31,7 +35,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
                     toggleOptionHandler={this.props.onListContentChanged}
-                    hidden={this.props.listData.length === 0} />
+                    hidden={this.props.listData.length === 0 || this.props.projectTypes.length !== 0} />
                 <DropdownSection
                     title={"Prosjekttype"}
                     placeholder={"Velg et prosjekt"}
