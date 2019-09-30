@@ -9,9 +9,7 @@ import IToggleSectionState from "./IToggleSectionState";
 
 
 export default class ToggleSection extends React.Component<IToggleSectionProps, IToggleSectionState> {
-    public static defaultProps = {
-        headerClassName: "ms-font-l toggle-section",
-    };
+    public static defaultProps = { headerClassName: "ms-font-l settings-section" };
 
     /**
     * Constructor

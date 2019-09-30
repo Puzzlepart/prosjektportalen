@@ -8,9 +8,9 @@ export default interface INewProjectFormSettingsSectionProps {
     className: string;
     toggleSectionClassName?: string;
     listData: ListConfig[];
-    listProjectTypes: ListProjectType[];
+    projectTypes: ListProjectType[];
     extensions: Extension[];
     toggleListContentHandler: (lc: ListConfig, checked: boolean) => void;
-    toggleListProjectTypeContent: (pt: ListProjectType, checked: boolean) => void;
+    onProjectTypeChanged: (pt: ListProjectType) => void;
     toggleExtensionHandler: (extension: Extension, checked: boolean) => void;
 }
