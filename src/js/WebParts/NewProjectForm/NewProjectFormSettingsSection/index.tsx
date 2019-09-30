@@ -4,15 +4,13 @@ import __ from "../../../Resources";
 import INewProjectFormSettingsSectionProps from "./INewProjectFormSettingsSectionProps";
 import INewProjectFormSettingsSectionState from "./INewProjectFormSettingsSectionState";
 import ToggleSection from "./ToggleSection";
-import { Dropdown, DropdownMenuItemType } from "office-ui-fabric-react/lib/Dropdown";
+import DropdownSection from "./DropdownSection";
 //#endregion
 
 export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
     public static defaultProps = {
-        toggleSectionClassName: "ms-font-l toggle-section",
+        toggleSectionClassName: "ms-font-l settings-section",
     };
-
-
 
     /**
     * Constructor
@@ -34,20 +32,12 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     optDefaultCheckedProp="Default"
                     toggleOptionHandler={this.props.toggleListContentHandler}
                     hidden={this.props.listData.length === 0} />
-                <Dropdown
-                    placeholder="Velg et prosjekt"
-                    label="Prosjekttype"
-                    options={[
-                        { key: "firstOpt", text: this.props.listProjectTypes[0].Title.toString() },
-                    ]}
-                    hidden={this.props.listProjectTypes.length === 0}/>
-                <ToggleSection
+                <DropdownSection
                     title={"Prosjekttype"}
-                    options={this.props.listProjectTypes}
-                    optLabelProp="Title"
-                    optDefaultCheckedProp="Title"
-                    toggleOptionHandler={this.props.toggleListProjectTypeContent}
-                    hidden={this.props.listProjectTypes.length === 0} />
+                    placeholder={"Velg et prosjekt"}
+                    options={this.props.projectTypes.map(t => ({ key: t.Title, text: t.Title, data: t }))}
+                    onChanged={option => this.props.onProjectTypeChanged(option.data)}
+                    hidden={this.props.projectTypes.length === 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.extensions}
