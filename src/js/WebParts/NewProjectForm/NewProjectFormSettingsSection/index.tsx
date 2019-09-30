@@ -30,7 +30,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     options={this.props.listData}
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
-                    toggleOptionHandler={this.props.toggleListContentHandler}
+                    toggleOptionHandler={this.props.onListContentChanged}
                     hidden={this.props.listData.length === 0} />
                 <DropdownSection
                     title={"Prosjekttype"}
@@ -43,7 +43,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     options={this.props.extensions}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"
-                    toggleOptionHandler={this.props.toggleExtensionHandler}
+                    toggleOptionHandler={this.props.onExtensionsChanged}
                     hidden={this.props.extensions.length === 0} />
             </div>
         );

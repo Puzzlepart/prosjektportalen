@@ -10,7 +10,7 @@ export default interface INewProjectFormSettingsSectionProps {
     listData: ListConfig[];
     projectTypes: ListProjectType[];
     extensions: Extension[];
-    toggleListContentHandler: (lc: ListConfig, checked: boolean) => void;
+    onListContentChanged: (lc: ListConfig, checked: boolean) => void;
     onProjectTypeChanged: (pt: ListProjectType) => void;
-    toggleExtensionHandler: (extension: Extension, checked: boolean) => void;
+    onExtensionsChanged: (extension: Extension, checked: boolean) => void;
 }

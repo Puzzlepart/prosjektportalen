@@ -129,8 +129,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         listData={this.state.config.listData}
                         projectTypes={this.state.config.listProjectTypes}
                         extensions={this.state.config.extensions}
-                        toggleListContentHandler={this.onToggleListContent}
-                        toggleExtensionHandler={this.onToggleExtension}
+                        onListContentChanged={this.onListContentChanged}
+                        onExtensionsChanged={this.onExtensionsChanged}
                         onProjectTypeChanged={this.onProjectTypeChanged} />
                 )}
                 {this.renderFooter()}
@@ -257,7 +257,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {boolean} checked Is checked
      */
     @autobind
-    private onToggleListContent(lc: ListConfig, checked: boolean) {
+    private onListContentChanged(lc: ListConfig, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let { IncludeContent } = prevState.model;
             checked ? IncludeContent.push(lc) : IncludeContent.splice(IncludeContent.indexOf(lc), 1);
@@ -282,7 +282,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {boolean} checked Is checked
      */
     @autobind
-    private onToggleExtension(extension: Extension, checked: boolean) {
+    private onExtensionsChanged(extension: Extension, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let { Extensions } = prevState.model;
             checked ? Extensions.push(extension) : Extensions.splice(Extensions.indexOf(extension), 1);
