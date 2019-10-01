@@ -25,9 +25,9 @@ export default class DropdownSection extends React.Component<IDropdownSectionPro
     public render() {
         return (
             <div hidden={this.props.hidden}>
-                <div onClick={this.onToggle} className={this.props.headerClassName}>
+                <div style={{ paddingTop: 8, paddingBottom: 8 }} onClick={this.onToggle} className={this.props.headerClassName}>
                     <span>{this.props.title}</span>
-                    <span className={this.state.isExpanded ? "ChevronUp" : "ChevronDown"}>
+                    <span style={{ paddingLeft: 8 }}className={this.state.isExpanded ? "ChevronUp" : "ChevronDown"}>
                         <Icon iconName={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} />
                     </span>
                 </div>

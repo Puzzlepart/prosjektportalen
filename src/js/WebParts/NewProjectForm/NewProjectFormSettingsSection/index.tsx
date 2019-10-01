@@ -16,6 +16,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     * Constructor
     *
     * @param {INewProjectFormSettingsSectionProps} props Props
+    * @param {ListProjectType} pt
     */
     constructor(props: INewProjectFormSettingsSectionProps) {
         super(props);
