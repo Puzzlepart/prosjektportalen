@@ -1,15 +1,15 @@
 import __ from "../../../Resources";
 import { Site } from "@pnp/sp";
-import ListProjectType from "./ListProjectType";
+import ProjectType from "./ProjectType";
 
 /**
- * Retrieve list protjecttypes from list
+ * Retrieve project types from list
  */
-export async function RetrieveProjectTypes(): Promise<ListProjectType[]> {
+export async function RetrieveProjectTypes(): Promise<ProjectType[]> {
     const list = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle("Prosjekttyper");
-    const projectTypeItems = await list.items.get();
-    return projectTypeItems.map(item => new ListProjectType(item, "Gt"));
+    const projectTypeItems = await list.items.select("Title", "GtTemplateLookupId", "GtExtensionsLookupId", "GtListContentsLookupId").get();
+    return projectTypeItems.map(item => new ProjectType(item));
 }
 
-export { ListProjectType };
+export { ProjectType };
 

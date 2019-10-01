@@ -38,7 +38,7 @@ export default class ToggleSection extends React.Component<IToggleSectionProps, 
                                 <Toggle
                                     defaultChecked={opt[this.props.optDefaultCheckedProp] === true}
                                     label={opt[this.props.optLabelProp]}
-                                    onChanged={checked => this.props.toggleOptionHandler(opt, checked)}
+                                    onChanged={checked => this.props.onChanged(opt, checked)}
                                     onText={__.getResource("String_Yes")}
                                     offText={__.getResource("String_No")} />
                                 <div className="ms-font-xs" style={{ paddingTop: 10, paddingBottom: 10 }} hidden={!opt.Comments}>

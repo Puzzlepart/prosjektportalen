@@ -67,7 +67,7 @@ async function ProvisionFolderHierarchy(destLibServerRelUrl: string, rootFolderS
  * @param {IProvisionContext} context Provisioning context
  */
 function ReplaceTokensInFilename(filename: string, context: IProvisionContext): string {
-    const tokensMap = { "{projectname}": context.model.Title };
+    const tokensMap = { "{projectname}": context.model.title };
     const newFilename = Object.keys(tokensMap).reduce((name, token) => name.replace(new RegExp(token, "g"), tokensMap[token]), filename);
     Logger.log({
         message: String.format(LOG_TEMPLATE, "ReplaceTokensInFilename", "Replaced tokens in filename"),

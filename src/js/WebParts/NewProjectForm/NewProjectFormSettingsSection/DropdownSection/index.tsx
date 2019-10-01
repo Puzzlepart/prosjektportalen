@@ -4,7 +4,7 @@ import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import IDropdownSectionProps from "./IDropdownSectionProps";
 import IDropdownSectionState from "./IDropdownSectionState";
-import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
+import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 //#endregion
 
 
@@ -48,3 +48,5 @@ export default class DropdownSection extends React.Component<IDropdownSectionPro
         this.setState(prevState => ({ isExpanded: !prevState.isExpanded }));
     }
 }
+
+export { IDropdownOption, IDropdownSectionProps };

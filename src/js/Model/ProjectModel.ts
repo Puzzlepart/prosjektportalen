@@ -1,20 +1,24 @@
 import Extension from "../Provision/Extensions/Extension";
 import ListConfig from "../Provision/Data/Config/ListConfig";
-import ListProjectType from "../Provision/Data/ProjectTypes/ListProjectType";
+import ProjectType from "../Provision/Data/ProjectTypes/ProjectType";
 
 export class ProjectModel {
-    public Title?: string;
-    public Url?: string;
-    public Description?: string;
-    public InheritPermissions?: boolean;
-    public IncludeContent?: ListConfig[];
-    public IncludeProjectTypes?: ListProjectType[];
-    public Extensions?: Extension[];
+    public title?: string;
+    public url?: string;
+    public description?: string;
+    public inheritPermissions?: boolean;
+    public includeContent?: ListConfig[];
+    public extensions?: Extension[];
+    public projectType?: ProjectType;
 
     constructor() {
-        this.Title = "";
-        this.Url = "";
-        this.Description = "";
-        this.InheritPermissions = false;
+        this.title = "";
+        this.url = "";
+        this.description = "";
+        this.inheritPermissions = false;
+    }
+
+    public clone(): ProjectModel {
+        return Object.assign(Object.create(this), this);
     }
 }

@@ -33,7 +33,7 @@ export default async function ProvisionWeb(model: ProjectModel, progressCallback
     } catch (err) {
         await new SpListLogger().log({
             ...err,
-            url: model.Url,
+            url: model.url,
             level: LogLevel.Error,
         });
         throw err;

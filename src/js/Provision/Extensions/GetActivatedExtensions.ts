@@ -11,7 +11,7 @@ import LoadExtension from "./LoadExtension";
 export default async function GetActivatedExtensions(context: IProvisionContext): Promise<Extension[]> {
     const extensionLib = context.rootWeb.lists.getByTitle(__.getResource("Lists_Extensions_Title"));
     try {
-        const files = await extensionLib.items.select("Title", "Comments", "LinkFilename", "FileRef", "GtIsEnabled").filter("GtIsEnabled eq 1 and GtShowInNewForm ne 1").orderBy("GtOrder").get();
+        const files = await extensionLib.items.select("Id", "Title", "Comments", "LinkFilename", "FileRef", "GtIsEnabled").filter("GtIsEnabled eq 1 and GtShowInNewForm ne 1").orderBy("GtOrder").get();
         const extensions: Extension[] = await Promise.all(files.map(file => LoadExtension(file)));
         if (extensions && extensions.length) {
             const validExtensions = extensions.filter(ext => ext.IsValid);

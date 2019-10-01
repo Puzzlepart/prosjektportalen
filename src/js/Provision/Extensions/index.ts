@@ -13,7 +13,7 @@ import ProvisionError from "../ProvisionError";
 export async function ApplyExtensions(context: IProvisionContext): Promise<void> {
     try {
         const activatedExtensions = await GetActivatedExtensions(context);
-        const extensions = [...activatedExtensions, ...context.model.Extensions];
+        const extensions = [...activatedExtensions, ...context.model.extensions];
         if (extensions.length > 0) {
             context.progressCallbackFunc(__.getResource("ProvisionWeb_ApplyingExtensions"), "");
             for (let i = 0; i < extensions.length; i++) {
