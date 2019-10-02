@@ -27,7 +27,7 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
         return (
             <div className={this.props.className}>
                 <DropdownSection
-                    title={"Prosjekttype"}
+                    title={__.getResource("NewProjectForm_ShowProjecttypesSettings")}
                     placeholder={"Velg et prosjekt"}
                     options={this._projectTypeOptions}
                     onChanged={option => this.props.onProjectTypeChanged(option.data)}
