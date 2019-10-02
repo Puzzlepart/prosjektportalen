@@ -16,11 +16,11 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     * Constructor
     *
     * @param {INewProjectFormSettingsSectionProps} props Props
-    * @param {ListProjectType} pt
     */
     constructor(props: INewProjectFormSettingsSectionProps) {
         super(props);
         this.state = {};
+        console.log("this.props.model.projectType: " + (this.props.model.projectType !== null));
     }
 
     public render() {
@@ -38,14 +38,14 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
                     onChanged={this.props.onListContentChanged}
-                    hidden={this.props.config.listData.length === 0 || !!this.props.model.projectType} />
+                    hidden={this.props.config.listData.length === 0 || this.props.model.projectType !== null} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.config.extensions}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"
                     onChanged={this.props.onExtensionsChanged}
-                    hidden={this.props.config.extensions.length === 0 || !!this.props.model.projectType} />
+                    hidden={this.props.config.extensions.length === 0 || this.props.model.projectType !== null} />
             </div>
         );
     }
