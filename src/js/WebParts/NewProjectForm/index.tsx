@@ -149,7 +149,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <TextField
                         autoComplete="off"
                         placeholder={__.getResource("NewProjectForm_TitlePlaceholder")}
-                        onChanged={newValue => this.onFormInputChange("Title", newValue)}
+                        onChanged={newValue => this.onFormInputChange("title", newValue)}
                         value={model.title}
                         errorMessage={errorMessages.Title} />
                 </div>
@@ -159,7 +159,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         placeholder={__.getResource("NewProjectForm_DescriptionPlaceholder")}
                         multiline
                         autoAdjustHeight
-                        onChanged={newValue => this.onFormInputChange("Description", newValue)}
+                        onChanged={newValue => this.onFormInputChange("description", newValue)}
                         value={model.description}
                         errorMessage={errorMessages.Description} />
                 </div>
@@ -167,7 +167,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     <TextField
                         autoComplete="off"
                         placeholder={__.getResource("NewProjectForm_UrlPlaceholder")}
-                        onChanged={newValue => this.onFormInputChange("Url", newValue)}
+                        onChanged={newValue => this.onFormInputChange("url", newValue)}
                         value={model.url}
                         errorMessage={errorMessages.Url} />
                 </div>
@@ -219,12 +219,12 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      *
      */
     @autobind
-    private onFormInputChange(inputName: string, newValue: string) {
+    private onFormInputChange(inputName: "title" | "description" | "url", newValue: string) {
         const prevModel = this.state.model;
         let model = this.state.model.clone();
         model[inputName] = newValue;
         switch (inputName) {
-            case "Title": {
+            case "title": {
                 model.url = Util.cleanString(newValue, this.props.maxUrlLength);
             }
         }
