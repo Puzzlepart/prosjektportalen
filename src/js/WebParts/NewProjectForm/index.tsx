@@ -287,6 +287,8 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             selectedTemplate = this.state.config.templates.filter(t => t.Id === projectType.templateId)[0];
         }
 
+        console.log(projectType);
+
         this.setState({ model, selectedTemplate });
     }
 
