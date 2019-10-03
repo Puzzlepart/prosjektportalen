@@ -1170,6 +1170,15 @@
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Label</value>
   </data>
+  <data name="SiteFields_GtTemplateLookup_DisplayName" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="SiteFields_GtExtensionsLookup_DisplayName" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="SiteFields_GtListContentsLookup_DisplayName" xml:space="preserve">
+    <value>List contents</value>
+  </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
     <value>ShowOnProjectStatus</value>
   </data>

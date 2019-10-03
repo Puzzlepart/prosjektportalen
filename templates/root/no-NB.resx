@@ -1173,6 +1173,15 @@
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Tekst</value>
   </data>
+  <data name="SiteFields_GtTemplateLookup_DisplayName" xml:space="preserve">
+    <value>Mal</value>
+  </data>
+  <data name="SiteFields_GtExtensionsLookup_DisplayName" xml:space="preserve">
+    <value>Utvidelser</value>
+  </data>
+  <data name="SiteFields_GtListContentsLookup_DisplayName" xml:space="preserve">
+    <value>Listeinnhold</value>
+  </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
     <value>Vis på prosjektstatus-siden</value>
   </data>

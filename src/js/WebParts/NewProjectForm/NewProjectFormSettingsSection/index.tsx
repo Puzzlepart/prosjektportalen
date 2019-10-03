@@ -21,6 +21,9 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
         super(props);
         this.state = {};
         console.log("this.props.model.projectType: " + (this.props.model.projectType !== null));
+        console.log("Projecttype amount: " + this.props.config.projectTypes.length);
+        console.log("List Content amount: " + this.props.config.listData.length);
+        console.log("Extensions amount: " + this.props.config.extensions.length);
     }
 
     public render() {
