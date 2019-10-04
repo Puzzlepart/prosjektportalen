@@ -1,1 +1,34 @@
-Empty file
+<pnp:ListInstance Title="{resource:Lists_ProjectTypes_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Projecttypes" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" EnableFolderCreation="false" EnableAttachments="false" Hidden="true"
+    xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBinding ContentTypeID="0x0100C894FB09B1DE1844A94790E45FF41AB0" Default="true" />
+    </pnp:ContentTypeBindings>
+    <pnp:Views>
+        <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Projecttypes/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/generic.png?rev=47">
+            <Query>
+                <OrderBy>
+                    <FieldRef Name="ID" />
+                </OrderBy>
+            </Query>
+            <ViewFields>
+                <FieldRef Name="Title" />
+                <FieldRef Name="GtTemplateLookup" />
+                <FieldRef Name="GtExtensionsLookup" />
+                <FieldRef Name="GtListContentsLookup" />
+            </ViewFields>
+            <RowLimit Paged="TRUE">30</RowLimit>
+            <JSLink>clienttemplates.js</JSLink>
+        </View>
+    </pnp:Views>
+    <pnp:FieldRefs>
+        <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true"/>
+        <pnp:FieldRef ID="028318a6-d098-40e7-891f-973b31666078" Name="GtTemplateLookup" Required="true"/>
+        <pnp:FieldRef ID="0c4a402d-07eb-49b1-809b-783b94263e57" Name="GtExtensionsLookup"/>
+        <pnp:FieldRef ID="e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f" Name="GtListContentsLookup"/>
+    </pnp:FieldRefs>
+    <pnp:Fields>
+        <Field ID="{028318a6-d098-40e7-891f-973b31666078}" Type="Lookup" Name="GtTemplateLookup" StaticName="GtTemplateLookup" DisplayName="{resource:SiteFields_GtTemplateLookup_DisplayName}" />
+        <Field ID="{0c4a402d-07eb-49b1-809b-783b94263e57}" Type="LookupMulti" Name="GtExtensionsLookup" StaticName="GtExtensionsLookup" DisplayName="{resource:SiteFields_GtExtensionsLookup_DisplayName}" />
+        <Field ID="{e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f}" Type="LookupMulti" Name="GtListContentsLookup" StaticName="GtListContentsLookup" DisplayName="{resource:SiteFields_GtListContentsLookup_DisplayName}" />
+    </pnp:Fields>
+</pnp:ListInstance>

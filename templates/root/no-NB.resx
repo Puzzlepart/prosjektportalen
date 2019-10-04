@@ -186,6 +186,9 @@
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Utvidelser</value>
   </data>
+  <data name="Lists_ProjectTypes_Title" xml:space="preserve">
+    <value>Prosjekttyper</value>
+  </data>
   <data name="Lists_SiteTemplates_Title" xml:space="preserve">
     <value>Områdemaler</value>
   </data>
@@ -572,6 +575,9 @@
   </data>
   <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
     <value>Listeinnehold</value>
+  </data>
+  <data name="ContentTypes_Projecttype_Name" xml:space="preserve">
+    <value>Prosjekttype</value>
   </data>
   <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
     <value>Prosjektkonfigurasjonsbase</value>
@@ -1166,6 +1172,15 @@
   </data>
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Tekst</value>
+  </data>
+  <data name="SiteFields_GtTemplateLookup_DisplayName" xml:space="preserve">
+    <value>Mal</value>
+  </data>
+  <data name="SiteFields_GtExtensionsLookup_DisplayName" xml:space="preserve">
+    <value>Utvidelser</value>
+  </data>
+  <data name="SiteFields_GtListContentsLookup_DisplayName" xml:space="preserve">
+    <value>Listeinnhold</value>
   </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
     <value>Vis på prosjektstatus-siden</value>
@@ -1838,6 +1853,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Standard listeinnhold</value>
+  </data>
+  <data name="NewProjectForm_ShowProjecttypesSettings" xml:space="preserve">
+    <value>Prosjekttyper</value>
   </data>
   <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
     <value>Utvidelser</value>
@@ -3137,6 +3155,9 @@
   </data>
   <data name="SiteSettings_Link_ListContent" xml:space="preserve">
     <value>Prosjektportalen - Listeinnhold</value>
+  </data>
+  <data name="SiteSettings_Link_Projecttypes" xml:space="preserve">
+    <value>Prosjektportalen - Prosjekttyper</value>
   </data>
   <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
     <value>Prosjektportalen - Porteføljeoversikt (Felter)</value>
