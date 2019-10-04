@@ -26,9 +26,4 @@
         <pnp:FieldRef ID="0c4a402d-07eb-49b1-809b-783b94263e57" Name="GtExtensionsLookup"/>
         <pnp:FieldRef ID="e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f" Name="GtListContentsLookup"/>
     </pnp:FieldRefs>
-    <pnp:Fields>
-        <Field ID="{028318a6-d098-40e7-891f-973b31666078}" Type="Lookup" Name="GtTemplateLookup" StaticName="GtTemplateLookup" DisplayName="{resource:SiteFields_GtTemplateLookup_DisplayName}" />
-        <Field ID="{0c4a402d-07eb-49b1-809b-783b94263e57}" Type="LookupMulti" Name="GtExtensionsLookup" StaticName="GtExtensionsLookup" DisplayName="{resource:SiteFields_GtExtensionsLookup_DisplayName}" />
-        <Field ID="{e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f}" Type="LookupMulti" Name="GtListContentsLookup" StaticName="GtListContentsLookup" DisplayName="{resource:SiteFields_GtListContentsLookup_DisplayName}" />
-    </pnp:Fields>
 </pnp:ListInstance>
