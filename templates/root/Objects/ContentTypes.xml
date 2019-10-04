@@ -410,6 +410,14 @@
             <pnp:FieldRef ID="19c0c03c-678a-4c2a-ab9b-cb9ffd903012" Name="GtLccDefault"/>
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x0100C894FB09B1DE1844A94790E45FF41AB0" Name="{resource:ContentTypes_Projecttype_Name}" Description="" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true"/>
+            <pnp:FieldRef ID="028318a6-d098-40e7-891f-973b31666078" Name="GtTemplateLookup" Required="true"/>
+            <pnp:FieldRef ID="0c4a402d-07eb-49b1-809b-783b94263e57" Name="GtExtensionsLookup"/>
+            <pnp:FieldRef ID="e7fc0405-5571-4c04-ae46-1ce8d5c7ba9f" Name="GtListContentsLookup"/>
+        </pnp:FieldRefs>
+    </pnp:ContentType>
     <pnp:ContentType ID="0x0100FBC1CA649E569B48B3C9984EE6BA04A3" Name="{resource:ContentTypes_Project_Config_Base_Name}" Description="" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
@@ -423,6 +431,10 @@
             <pnp:FieldRef ID="7441ace5-d9e4-4c1d-85fc-ce1614b056ca" Name="GtPcPortfolioPage" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+
+
+    
+
     <pnp:ContentType ID="0x0100B384774BA4EBB842A5E402EBF4707367" Name="{resource:ContentTypes_Gevinst_Name}" Description="{resource:ContentTypes_Gevinst_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="203516f7-17e1-4b92-9f1d-2b453ce125dc" Name="GtOrder" />

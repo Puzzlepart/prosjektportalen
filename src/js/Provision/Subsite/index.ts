@@ -24,13 +24,13 @@ async function CreateWeb(context: IProvisionContext): Promise<IProvisionContext>
     context.progressCallbackFunc(__.getResource("ProvisionWeb_CreatingWeb"), "");
     const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
     try {
-        const createWebResult = await rootWeb.webs.add(context.model.Title, context.model.Url.toLowerCase(), context.model.Description, "STS#0", _spPageContextInfo.webLanguage, context.model.InheritPermissions);
+        const createWebResult = await rootWeb.webs.add(context.model.title, context.model.url.toLowerCase(), context.model.description, "STS#0", _spPageContextInfo.webLanguage, context.model.inheritPermissions);
         await SetSharedNavigation(createWebResult.data.Url);
         return {
             ...context,
             web: createWebResult.web,
             url: createWebResult.data.Url,
-            redirectUrl: GetRedirectUrl(createWebResult.data.Url, context.model.InheritPermissions),
+            redirectUrl: GetRedirectUrl(createWebResult.data.Url, context.model.inheritPermissions),
         };
     } catch (err) {
         throw new ProvisionError(err, "CreateWeb");

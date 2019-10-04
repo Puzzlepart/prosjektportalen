@@ -180,6 +180,9 @@
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Extensions</value>
   </data>
+  <data name="Lists_ProjectTypes_Title" xml:space="preserve">
+    <value>Projecttypes</value>
+  </data>
   <data name="Lists_SiteTemplates_Title" xml:space="preserve">
     <value>Site Templates</value>
   </data>
@@ -566,6 +569,9 @@
   </data>
   <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
     <value>List Content Config</value>
+  </data>
+  <data name="ContentTypes_Projecttype_Name" xml:space="preserve">
+    <value>Projecttype</value>
   </data>
   <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
     <value>Project Config Base</value>
@@ -1163,6 +1169,15 @@
   </data>
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Label</value>
+  </data>
+  <data name="SiteFields_GtTemplateLookup_DisplayName" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="SiteFields_GtExtensionsLookup_DisplayName" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="SiteFields_GtListContentsLookup_DisplayName" xml:space="preserve">
+    <value>List contents</value>
   </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
     <value>ShowOnProjectStatus</value>
@@ -1829,6 +1844,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Default list content</value>
+  </data>
+  <data name="NewProjectForm_ShowProjecttypesSettings" xml:space="preserve">
+    <value>Projecttypes</value>
   </data>
   <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
     <value>Extensions</value>
@@ -3123,6 +3141,9 @@
   </data>
   <data name="SiteSettings_Link_ListContent" xml:space="preserve">
     <value>Project Portal - List Content</value>
+  </data>
+  <data name="SiteSettings_Link_Projecttypes" xml:space="preserve">
+    <value>Project Portal - Projecttypes</value>
   </data>
   <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
     <value>Project Portal - Portfolio Overview (Fields)</value>

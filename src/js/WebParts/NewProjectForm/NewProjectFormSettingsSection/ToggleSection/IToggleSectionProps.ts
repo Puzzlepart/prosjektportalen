@@ -1,7 +1,7 @@
-export default  interface IToggleSectionProps extends React.HTMLAttributes<HTMLElement> {
+export default  interface IToggleSectionProps extends React.HTMLAttributes<HTMLDivElement> {
     headerClassName?: string;
     options: any[];
     optLabelProp: string;
     optDefaultCheckedProp: string;
-    toggleOptionHandler: (opt, checked: boolean) => void;
+    onChanged: (opt: any, checked: boolean) => void;
 }
