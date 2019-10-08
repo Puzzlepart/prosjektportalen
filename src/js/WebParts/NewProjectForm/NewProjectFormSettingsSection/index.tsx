@@ -4,11 +4,12 @@ import __ from "../../../Resources";
 import INewProjectFormSettingsSectionProps from "./INewProjectFormSettingsSectionProps";
 import INewProjectFormSettingsSectionState from "./INewProjectFormSettingsSectionState";
 import ToggleSection from "./ToggleSection";
+import DropdownSection, { IDropdownOption } from "./DropdownSection";
 //#endregion
 
 export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
     public static defaultProps = {
-        toggleSectionClassName: "ms-font-l toggle-section",
+        toggleSectionClassName: "ms-font-l settings-section",
     };
 
     /**
@@ -24,22 +25,38 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
     public render() {
         return (
             <div className={this.props.className}>
+                <DropdownSection
+                    title={__.getResource("NewProjectForm_ShowProjecttypesSettings")}
+                    placeholder={"Velg et prosjekt"}
+                    options={this._projectTypeOptions}
+                    onChanged={option => this.props.onProjectTypeChanged(option.data)}
+                    hidden={this.props.config.projectTypes.length === 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowListContentSettings")}
-                    options={this.props.listData}
+                    options={this.props.config.listData}
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
-                    toggleOptionHandler={this.props.toggleListContentHandler}
-                    hidden={this.props.listData.length === 0} />
+                    onChanged={this.props.onListContentChanged}
+                    hidden={this.props.config.listData.length === 0 || this.props.config.projectTypes.length !== 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
-                    options={this.props.extensions}
+                    options={this.props.config.extensions}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"
-                    toggleOptionHandler={this.props.toggleExtensionHandler}
-                    hidden={this.props.extensions.length === 0} />
+                    onChanged={this.props.onExtensionsChanged}
+                    hidden={this.props.config.extensions.length === 0 || this.props.config.projectTypes.length !== 0} />
             </div>
         );
+    }
+
+    private get _projectTypeOptions(): IDropdownOption[] {
+        return [
+            {
+                key: null,
+                text: "",
+            },
+            ...this.props.config.projectTypes.map(t => ({ key: t.title, text: t.title, data: t })),
+        ];
     }
 }
 

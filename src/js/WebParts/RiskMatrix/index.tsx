@@ -70,6 +70,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             className,
             loadingText,
             showViewSelector,
+            showProjectSelector,
             dataSourceName,
             columns,
         } = this.props;
@@ -132,11 +133,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         offText={__.getResource("String_No")} />
                                 </div>
                                 <div hidden={!dataSourceName}>
-                                    <Dropdown
-                                        label={__.getResource("String_Select_Project_Name")}
-                                        defaultSelectedKey="AllProjects"
-                                        options={this.getProjectOptions()}
-                                        onChanged={opt => this.setState({ selectedProject: opt })} />
+                                    <div hidden={!showProjectSelector}>
+                                        <Dropdown
+                                            label={__.getResource("String_Select_Project_Name")}
+                                            defaultSelectedKey="AllProjects"
+                                            options={this.getProjectOptions()}
+                                            onChanged={opt => this.setState({ selectedProject: opt })} />
+                                    </div>
                                     <List
                                         items={items}
                                         columns={columns}
