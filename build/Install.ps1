@@ -137,9 +137,7 @@ function Start-Install() {
     
     if ($null -eq $Connection) {
         Write-Host
-        Write-Host "Error connecting to SharePoint $Url. Aborting" -ForegroundColor Red 
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+        throw "Error connecting to SharePoint $Url. Aborting"
     }
 
     # Ensuring default associated groups in the rare instance that they have not been created
@@ -164,8 +162,7 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -180,8 +177,7 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing thirdparty template to $AssetsUrl" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
     
@@ -200,8 +196,7 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }  
 
@@ -215,8 +210,7 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -230,8 +224,7 @@ function Start-Install() {
         catch {
             Write-Host
             Write-Host "Error installing default config to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -257,8 +250,7 @@ function Start-Install() {
             catch {
                 Write-Host
                 Write-Host "Error installing extensions to $Url" -ForegroundColor Red
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                throw $error[0]
             }
         }
     }
@@ -272,8 +264,7 @@ function Start-Install() {
     catch {
         Write-Host
         Write-Host "Error updating web property bag for $Url" -ForegroundColor Red
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+        throw $error[0]
     }
 
     $sw.Stop()
