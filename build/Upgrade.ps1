@@ -129,8 +129,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
         catch {
             Write-Host
             Write-Host "Error deploying pre-upgrade packages to $Url" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
 
         # Removing custom actions with wrong internal-names from versions 2.2 and before
@@ -142,9 +141,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             }
             catch {
                 Write-Host
-                Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red
             }
         }
     }
@@ -154,8 +151,8 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     }
     catch {
         Write-Host
-        Write-Host "Error upgrading Project Portal. Aborting"
-        exit 1
+        Write-Host "Error upgrading Project Portal. Aborting" -ForegroundColor Red
+        throw $error[0]
     }
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
@@ -183,8 +180,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                 catch {
                     Write-Host
                     Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
-                    Write-Host $error[0] -ForegroundColor Red
-                    exit 1 
+                    throw $error[0]
                 }
             }
             switch ($Language){
@@ -232,8 +228,7 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             catch {
                 Write-Host
                 Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                throw $error[0]
             }
         }
     } 
