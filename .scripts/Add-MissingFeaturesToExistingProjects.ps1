@@ -374,7 +374,9 @@ $Webs | ForEach-Object {
 
     $Language = Get-WebLanguage -ctx (Get-PnPContext)
 
-    if ($null -ne $ProjectWeb -and $null -ne $ProjectTitle -and $null -ne $ProjectUrl -and $null -ne $Language) {
+    $ProjectPage = Get-PnPListItem -List "SitePages" -Id 3 -Web $ProjectWeb -ErrorAction SilentlyContinue
+
+    if ($null -ne $ProjectWeb -and $null -ne $ProjectTitle -and $null -ne $ProjectUrl -and $null -ne $Language -and $null -ne $ProjectPage) {
         Write-Host  "Processing subweb $ProjectTitle with url $ProjectUrl"
         
         Add-ResourceAllocationFeatures -ProjectWeb $ProjectWeb -Language $Language
@@ -385,6 +387,8 @@ $Webs | ForEach-Object {
         }
         
         Add-MeasurementIndicatorsList -ProjectWeb $ProjectWeb -Language $Language
+    } else {
+        Write-Host  "Skipping subweb $ProjectTitle with url $ProjectUrl (most likely not a PP site)" -ForegroundColor Yellow
     }
 }
 Disconnect-PnPOnline
