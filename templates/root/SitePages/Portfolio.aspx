@@ -29,11 +29,5 @@
         #s4-workspace {
             height: auto !important;  
         }
-        .ms-ScrollablePane div[class*='contentContainer'] {
-            bottom: 25px !important;
-        }
-        div[class*='stickyAbove'] {
-            overflow: hidden !important;  
-        }
     </style>
 </asp:Content>
