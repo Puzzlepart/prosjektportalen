@@ -29,8 +29,5 @@
         #s4-workspace {
             height: auto !important;  
         }
-        div[class*='stickyAbove'] {
-            overflow: hidden !important;  
-        }
     </style>
 </asp:Content>

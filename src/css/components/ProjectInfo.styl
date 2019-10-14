@@ -1,9 +1,10 @@
 .pp-projectInfo {
     .pp-projectInfoInner {
         .prop {
-            margin-bottom: 5px;    
+            margin-bottom: 5px;
         }
     }
+
     .pp-project-actions {
         > a {
             display: block;
@@ -15,4 +16,9 @@
 #pp-dynamicportfolio {
     height: calc(100vh - 195px);
     width: calc(100vw - 240px);
+
+    div[class*='stickyAbove'] {
+        overflow: hidden;
+        overflow-x: hidden;
     }
+}
