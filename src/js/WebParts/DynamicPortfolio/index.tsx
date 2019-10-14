@@ -68,14 +68,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const { isLoading, errorMessage, isChangingView } = this.state;
         if (errorMessage) {
             return (
-                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <MessageBar messageBarType={errorMessage.type}>{errorMessage.message}</MessageBar>
                 </div>
             );
         }
         if (isLoading) {
             return (
-                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <Spinner label={this.props.loadingText} type={SpinnerType.large} />
                 </div>
             );
@@ -83,7 +83,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (isChangingView) {
             const loadingText = String.format(__.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
-                <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     {this.renderCommandBar()}
                     <div style={{ paddingTop: 20 }}>
                         <Spinner label={loadingText} type={SpinnerType.large} />
@@ -93,7 +93,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         return (
-            <div style={{ height: "80vh", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
+            <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                 <ScrollablePane>
                     {this.renderCommandBar()}
                     {this.renderSearchBox()}
