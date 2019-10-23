@@ -487,7 +487,10 @@
     <value>Glittertind nettdelside</value>
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
-    <value>Prosjektelement</value>
+    <value>Prosjektelement porteføljenivå</value>
+  </data>
+  <data name="ContentTypes_ProsjektelementDeprecated_Name" xml:space="preserve">
+    <value>Prosjektelement (Deprecated)</value>
   </data>
   <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
     <value>Prosjektegenskaper</value>

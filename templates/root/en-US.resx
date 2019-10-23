@@ -481,7 +481,10 @@
     <value>Glittertind web part page</value>
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
-    <value>Project Item</value>
+    <value>Project Item Portfolio level</value>
+  </data>
+  <data name="ContentTypes_ProsjektelementDeprecated_Name" xml:space="preserve">
+    <value>Project Item (Deprecated)</value>
   </data>
   <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
     <value>Project Properties</value>

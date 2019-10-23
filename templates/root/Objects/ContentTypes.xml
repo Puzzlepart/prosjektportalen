@@ -225,6 +225,7 @@
             <pnp:FieldRef ID="18d92e18-10b6-42ea-815d-b12d7827564e" Name="GtProjectLifecycleStatus" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070208" Name="{resource:ContentTypes_ProsjektelementDeprecated_Name}" Hidden="true" />
     <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107021101" Name="{resource:ContentTypes_Prosjektelement_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
