@@ -234,8 +234,6 @@
             <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="GtProjectPhaseChoice" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070208" Name="{resource:ContentTypes_Prosjektelement_Name} (Deprecated)" Group="{resource:ContentTypes_Group}" Hidden="true">
-    </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Name="{resource:ContentTypes_Prosjektdokument_Name}" Description="{resource:ContentTypes_Prosjektdokument_Description}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
