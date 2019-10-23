@@ -166,15 +166,6 @@
             <pnp:FieldRef ID="a3038ecc-69db-4179-b23b-5fdb0535b38c" Name="GtProjectInfoDescription" Required="true" />
         </pnp:FieldRefs>
     </pnp:ContentType>
-    <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107021101" Name="{resource:ContentTypes_Prosjektelement_Name}" Group="{resource:ContentTypes_Group}">
-        <pnp:FieldRefs>
-            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
-            <pnp:FieldRef ID="83315d18-b8b5-4b60-b1eb-0617e1a1b2d9" Name="ProjectWebUniqueId" />
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
-            <pnp:FieldRef ID="7b200383-c491-4e5d-8f83-c66231e7a52c" Name="GtProjectUrl" Hidden="false" />
-            <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="GtProjectPhaseChoice" />
-        </pnp:FieldRefs>
-    </pnp:ContentType>
     <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070209" Name="{resource:ContentTypes_Ressursallokering_Name}" Group="{resource:ContentTypes_Group}">
         <pnp:FieldRefs>
             <pnp:FieldRef ID="88d9b92c-efed-45d0-a586-86d9196b77d0" Name="GtResourceUser" Required="true" />
@@ -233,6 +224,17 @@
             <pnp:FieldRef ID="de171613-5f6d-4152-b547-79cf3776992b" Name="GtPhaseIterations" />
             <pnp:FieldRef ID="18d92e18-10b6-42ea-815d-b12d7827564e" Name="GtProjectLifecycleStatus" />
         </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D566346483107021101" Name="{resource:ContentTypes_Prosjektelement_Name}" Group="{resource:ContentTypes_Group}">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="c042a256-787d-4a6f-8a8a-cf6ab767f12d" Name="ContentType" Hidden="true" />
+            <pnp:FieldRef ID="83315d18-b8b5-4b60-b1eb-0617e1a1b2d9" Name="ProjectWebUniqueId" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
+            <pnp:FieldRef ID="7b200383-c491-4e5d-8f83-c66231e7a52c" Name="GtProjectUrl" Hidden="false" />
+            <pnp:FieldRef ID="aa889e95-d364-4a65-9d18-5c62715f5e3b" Name="GtProjectPhaseChoice" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
+    <pnp:ContentType ID="0x010088578E7470CC4AA68D5663464831070208" Name="{resource:ContentTypes_Prosjektelement_Name} (Deprecated)" Group="{resource:ContentTypes_Group}" Hidden="true">
     </pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C" Name="{resource:ContentTypes_Glittertind_dokument_Name}" Description="{resource:ContentTypes_Glittertind_dokument_Description}" Group="{resource:ContentTypes_Group}"></pnp:ContentType>
     <pnp:ContentType ID="0x010100293FDE3FCADA480B9A77BBDAD7DFA28C01" Name="{resource:ContentTypes_Prosjektdokument_Name}" Description="{resource:ContentTypes_Prosjektdokument_Description}" Group="{resource:ContentTypes_Group}">
