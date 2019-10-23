@@ -212,8 +212,8 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
         
             Write-Host "`t`tRemoving lookup fields" -ForegroundColor Gray
         
-            Remove-PnPField -Identity GtGainLookup_ID -List $FollowUpList -Web $ProjectWeb -Force 2>&1>$null
-            Remove-PnPField -Identity GtGainLookup -List $FollowUpList -Web $ProjectWeb -Force 2>&1>$null
+            Remove-PnPField -Identity GtGainLookup_ID -List $FollowUpList -Web $ProjectWeb -Force -ErrorAction SilentlyContinue 2>&1>$null
+            Remove-PnPField -Identity GtGainLookup -List $FollowUpList -Web $ProjectWeb -Force -ErrorAction SilentlyContinue 2>&1>$null
         
             Write-Host "`t`tUpdating default view" -ForegroundColor Gray
         
