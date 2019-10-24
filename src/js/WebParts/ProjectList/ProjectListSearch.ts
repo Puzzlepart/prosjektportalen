@@ -41,9 +41,9 @@ export async function queryProjectWebs(dataSourceName: string, rowLimit?: number
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
         if (dataSource) {
             let dataSourceWithWebs = "contentclass:STS_Web";
-            const pathMatch = dataSource.GtDpSearchQuery.toString().toUpperCase().match("PATH:.+ ");
+            const pathMatch = dataSource.GtDpSearchQuery.toString().toUpperCase().match("PATH:.+");
             if (pathMatch && pathMatch.length > 0) {
-                dataSourceWithWebs = `contentclass:STS_Web ${pathMatch[0]}`;
+                dataSourceWithWebs = `contentclass:STS_Web ${pathMatch.toString().split(" ")[0]}`;
             }
             const { PrimarySearchResults } = await sp.search({
                 Querytext: "*",
