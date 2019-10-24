@@ -14,7 +14,7 @@ import IProjectListProps, { ProjectListDefaultProps } from "./IProjectListProps"
 import IProjectListState, { IProjectListData } from "./IProjectListState";
 import BaseWebPart from "../@BaseWebPart";
 import { cleanString } from "../../Util";
-import { GetProperty } from "src/js/Util/PropertyBag";
+import { GetProperty } from "../../Util/PropertyBag";
 
 /**
  * Project information
