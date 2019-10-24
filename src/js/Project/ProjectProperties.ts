@@ -21,13 +21,11 @@ const GetProjectPropertiesList = (ctx: SP.ClientContext): SP.List<any> => {
  */
 const GetProjectPropertiesItem = (ctx: SP.ClientContext, loadClientObject: boolean = false): SP.ListItem<any> => {
     const projectPropertiesList = ctx.get_web().get_lists().getByTitle(__.getResource("Lists_ProjectProperties_Title"));
-    const camlQuery = new SP.CamlQuery();
-    camlQuery.set_viewXml("<View><RowLimit Paged='False'>1</RowLimit></View>");
-    const projectPropertiesListItems = projectPropertiesList.getItems(camlQuery);
+    const projectPropsItem = projectPropertiesList.getItemById(1);
     if (loadClientObject) {
-        ctx.load(projectPropertiesListItems);
+        ctx.load(projectPropsItem);
     }
-    return projectPropertiesListItems.itemAt(0);
+    return projectPropsItem;
 };
 
 /**
