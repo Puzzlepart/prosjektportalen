@@ -357,7 +357,7 @@ function Set-ProjectPropertiesFromProjectPage($ProjectWeb, $Language) {
             }
         }
         $ProjectItem.Update()
-
+        $ProjectItem.Context.ExecuteQuery()
         Invoke-PnPQuery
         Write-Host "`tProject properties synchronized" -ForegroundColor Green
     } else {
