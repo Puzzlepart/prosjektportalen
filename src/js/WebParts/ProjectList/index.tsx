@@ -14,6 +14,7 @@ import IProjectListProps, { ProjectListDefaultProps } from "./IProjectListProps"
 import IProjectListState, { IProjectListData } from "./IProjectListState";
 import BaseWebPart from "../@BaseWebPart";
 import { cleanString } from "../../Util";
+import { GetProperty } from "src/js/Util/PropertyBag";
 
 /**
  * Project information
@@ -192,12 +193,16 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 projectCtFieldsPromise,
             ]);
 
-            const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result, projectWebsQueryResult.find(web => web.Path.toLowerCase() === result.Path.split("/Lists")[0].toLowerCase())));
+            const assetsUrl = await GetProperty("pp_assetssiteurl");
+            const fallbackLogoUrl = `${assetsUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`;
+
+            const projects = projectsQueryResult.map(result => new ProjectListModel().initFromSearchResponse(result, projectWebsQueryResult.find(web => web.Path.toLowerCase() === result.Path.split("/Lists")[0].toLowerCase()), fallbackLogoUrl));
 
             let fieldsMap = projectCtFieldsArray.reduce((obj, fld) => {
                 obj[fld.InternalName] = fld.Title;
                 return obj;
             }, {});
+
             return { projects, fields: fieldsMap };
         } catch (err) {
             throw err;

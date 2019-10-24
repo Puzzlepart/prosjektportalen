@@ -27,7 +27,7 @@ export default class ProjectListModel {
         // Empty constructor
     }
 
-    public initFromSearchResponse(projectSearchResult, webSearchResult) {
+    public initFromSearchResponse(projectSearchResult, webSearchResult, fallbackLogo) {
         this.RawObject = projectSearchResult;
         this.Title = projectSearchResult.SiteTitle;
         this.Phase = projectSearchResult.RefinableString52;
@@ -39,7 +39,7 @@ export default class ProjectListModel {
 
         this.Url = webSearchResult ? webSearchResult.Path : projectSearchResult.Path.split("/Lists")[0];
         this.Title = webSearchResult ? webSearchResult.Title : projectSearchResult.SiteTitle;
-        this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : "";
+        this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : fallbackLogo;
         this.Views = webSearchResult && webSearchResult.ViewsLifeTime;
 
         return this;
