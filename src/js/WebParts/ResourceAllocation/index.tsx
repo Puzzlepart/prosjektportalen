@@ -161,13 +161,12 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         const items = allocations.map((alloc, idx) => ({
             id: idx,
             title: alloc.toString(),
-            group: getObjectValue<number>(alloc, "user.id", -1),
+            group: alloc.user.id,
             type: alloc.type,
             ...alloc,
         }));
         let groups = users.map(user => ({ id: user.id, title: user.name }));
         groups = groups.sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0));
-        groups = groups.filter(grp => allocations.filter(alloc => getObjectValue<number>(alloc, "user.id", -1) === grp.id).length > 0);
         return { groups, items };
     }
 
