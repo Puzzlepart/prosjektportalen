@@ -145,6 +145,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         columns={columns}
                                         webUrlKey="webUrl"
                                         pathKey="url"
+                                        siteTitleKey="siteTitle"
                                         showCommandBar={false} />
                                 </div>
                             </div>
