@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_Announcements_Title}" Description="" TemplateType="104" Url="Lists/Announcements" EnableFolderCreation="false" EnableAttachments="false" 
+<pnp:ListInstance Title="{resource:Lists_Announcements_Title}" Description="" TemplateType="104" Url="Lists/Announcements" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" EnableFolderCreation="false" EnableAttachments="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">

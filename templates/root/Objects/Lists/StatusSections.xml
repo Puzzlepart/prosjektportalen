@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_StatusSections_Title}" TemplateType="100" Url="Lists/StatusSections" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_StatusSections_Title}" TemplateType="100" Url="Lists/StatusSections" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x01004CEFE616A94A3A48A27D9DEBDF5EC82803" Default="true" />
