@@ -1546,7 +1546,7 @@
     <value> Hvordan skal gevinsten realiseres?</value>
   </data>
   <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
-    <value>Ansvarlig for realisering av gevinst</value>
+    <value>Gevinstansvarlig er overordnet ansvarlig for realisering av prosjektets gevinster. Gevinsteier har ansvaret for realisering av en enkelt gevinst. Les mer: https://www.prosjektveiviseren.no/roller/gevinstansvarlig</value>
   </data>
   <data name="SiteFields_GtMeasureIndicator_Description" xml:space="preserve">
     <value>Hvordan skal gevinsten måles, eks: papirforbruk pr måned</value>
@@ -3104,6 +3104,12 @@
   </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Gevinst</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_DisplayName" xml:space="preserve">
+    <value>Gevinsteier</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_Description" xml:space="preserve">
+    <value>Gevinsteier har ansvaret for realisering av gevinsten. Les mer: https://www.prosjektveiviseren.no/roller/gevinstansvarlig</value>
   </data>
   <data name="Lists_Log_Fields_LogLevel_DisplayName" xml:space="preserve">
     <value>Loggnivå</value>

@@ -19,6 +19,11 @@ const BenefitsAnalysis: IList = {
         ID: "fa564e0f-0c70-4ab9-b863-0177e6ddd247",
         Required: true,
         DisplayName: __.getResource("Lists_BenefitsAnalysis_Fields_Title_DisplayName"),
+    },
+    {
+        ID: "fcf9c850-8267-4452-8366-74b7a76da177",
+        Required: true,
+        DisplayName: __.getResource("Lists_BenefitsAnalysis_Fields_BenefitOwner_DisplayName"),
     }],
     Views: [{
         Title: __.getResource("View_AllItems_DisplayName"),

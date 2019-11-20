@@ -3087,6 +3087,12 @@
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
   </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_DisplayName" xml:space="preserve">
+    <value>Benefit owner</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_Description" xml:space="preserve">
+    <value>The benefit owner is the person responsible for the realization of the benefit</value>
+  </data>
   <data name="Lists_Log_Fields_LogLevel_DisplayName" xml:space="preserve">
     <value>Log Level</value>
   </data>
