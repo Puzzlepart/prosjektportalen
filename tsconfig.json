@@ -24,7 +24,7 @@
             "office-ui-fabric-react-overrides"
         ],
         "noImplicitAny": false,
-        "allowUnreachableCode": false,
+        "allowUnreachableCode": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
         "noImplicitThis": true,

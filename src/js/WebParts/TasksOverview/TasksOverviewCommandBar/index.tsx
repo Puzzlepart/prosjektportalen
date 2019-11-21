@@ -113,7 +113,6 @@ export default class TasksOverviewCommandBar extends React.Component<ITasksOverv
                     onFilterChange={this.props.onFilterChange} />
                 <TaskOverviewDateIntervalPanel
                     isOpen={this.state.isDateIntervalPanelOpen}
-                    isLightDismiss={true}
                     onDismiss={this.onDismissDateIntervalPanel}
                     headerText={__.getResource("TasksOverview_DateIntervalText")}
                     defaultVisibleTimeStart={this.props.visibleTime.visibleTimeStart}

@@ -1,7 +1,9 @@
 import * as moment from "moment";
-import { IPanelProps } from "office-ui-fabric-react/lib/Panel";
 
-export interface ITaskOverviewDateIntervalPanelProps extends IPanelProps {
+export interface ITaskOverviewDateIntervalPanelProps {
+    isOpen: boolean;
+    headerText: string;
+    onDismiss: () => void;
     defaultVisibleTimeStart: moment.Moment;
     defaultVisibleTimeEnd: moment.Moment;
     onChange: (visibleTimeStart: moment.Moment, visibleTimeEnd: moment.Moment) => void;

@@ -39,11 +39,10 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
             <Panel
                 isOpen={this.props.isOpen}
                 isHiddenOnDismiss={true}
-                isLightDismiss={this.props.isLightDismiss}
-                isBlocking={this.props.isBlocking}
+                isLightDismiss={true}
+                isBlocking={false}
                 onDismiss={this.props.onDismiss}
-                headerText={this.props.headerText}
-                type={this.props.type}>
+                headerText={this.props.headerText} >
                 <div>
                     <Toggle
                         label={__.getResource("TasksOverview_IsDynamicLabel")}
@@ -54,7 +53,7 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
                 <div style={{ marginTop: 15 }}>
                     <DatePicker
                         {...this.datePickerProps}
-                        ref="visibleTimeStart"
+                        onSelectDate={date => this.setState({ visibleTimeStart: moment(date) })}
                         placeholder={__.getResource("TasksOverview_VisibleTimeStartLabel")}
                         ariaLabel={__.getResource("TasksOverview_VisibleTimeStartLabel")}
                         disabled={this.state.isDynamicInterval}
@@ -63,7 +62,7 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
                 <div style={{ marginTop: 15 }}>
                     <DatePicker
                         {...this.datePickerProps}
-                        ref="defaultVisibleTimeEnd"
+                        onSelectDate={date => this.setState({ visibleTimeEnd: moment(date) })}
                         placeholder={__.getResource("TasksOverview_VisibleTimeEndLabel")}
                         ariaLabel={__.getResource("TasksOverview_VisibleTimeEndLabel")}
                         disabled={this.state.isDynamicInterval}
@@ -83,8 +82,8 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
         let visibleTimeStart = null;
         let visibleTimeEnd = null;
         if (!this.state.isDynamicInterval) {
-            visibleTimeStart = moment((this.refs["visibleTimeStart"] as DatePicker).state.selectedDate);
-            visibleTimeEnd = moment((this.refs["defaultVisibleTimeEnd"] as DatePicker).state.selectedDate);
+            visibleTimeStart = this.state.visibleTimeStart;
+            visibleTimeEnd = this.state.visibleTimeEnd;
         }
         this.props.onChange(visibleTimeStart, visibleTimeEnd);
     }

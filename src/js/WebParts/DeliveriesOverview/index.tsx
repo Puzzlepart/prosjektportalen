@@ -1,12 +1,13 @@
-import * as React from "react";
-import { sp, Site } from "@pnp/sp";
-import __ from "../../Resources";
+import { Site } from "@pnp/sp";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import * as React from "react";
+import SearchService from "../../Services/SearchService";
+import __ from "../../Resources";
 import BaseWebPart from "../@BaseWebPart";
-import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDeliveriesOverviewProps";
-import IDeliveriesOverviewState from "./IDeliveriesOverviewState";
 import List from "../@Components/List";
 import DeliveryElement from "./DeliveryElement";
+import IDeliveriesOverviewProps, { DeliveriesOverviewDefaultProps } from "./IDeliveriesOverviewProps";
+import IDeliveriesOverviewState from "./IDeliveriesOverviewState";
 
 /**
  * Deliveries Overview SPA
@@ -79,21 +80,19 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
 
     private async _search(queryTemplate: string) {
         try {
-            const { PrimarySearchResults } = await sp.search({
+            const { items } = await SearchService.search({
                 Querytext: "*",
                 QueryTemplate: queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
                 SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
             });
-            return PrimarySearchResults.map(r => new DeliveryElement(r));
+            return items.map(r => new DeliveryElement(r));
         } catch (err) {
             throw err;
         }
     }
 }
 
-export {
-    IDeliveriesOverviewProps,
-    IDeliveriesOverviewState,
-};
+export { IDeliveriesOverviewProps, IDeliveriesOverviewState };
+

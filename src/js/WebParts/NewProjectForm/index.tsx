@@ -1,4 +1,3 @@
-//#region Imports
 import { DefaultButton, PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
 import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
@@ -7,7 +6,6 @@ import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { TextField } from "office-ui-fabric-react/lib/TextField";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
-import ITemplateFile from "src/js/Provision/Template/ITemplateFile";
 import { ProjectModel } from "../../Model";
 import ProvisionWeb, { DoesWebExist } from "../../Provision";
 import { RetrieveListContentConfig } from "../../Provision/Data/Config";
@@ -17,6 +15,7 @@ import ProjectType from "../../Provision/Data/ProjectTypes/ProjectType";
 import Extension from "../../Provision/Extensions/Extension";
 import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
 import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
+import ITemplateFile from "../../Provision/Template/ITemplateFile";
 import __ from "../../Resources";
 import { GetSetting } from "../../Settings";
 import * as Util from "../../Util";
@@ -26,10 +25,9 @@ import INewProjectFormProps, { NewProjectFormDefaultProps } from "./INewProjectF
 import INewProjectFormState, { ProvisionStatus } from "./INewProjectFormState";
 import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
 import NewProjectFormSettingsSection from "./NewProjectFormSettingsSection";
-//#endregion
 
 /**
- * Component: NewProjectForm
+ * @class NewProjectForm
  */
 export default class NewProjectForm extends React.Component<INewProjectFormProps, INewProjectFormState> {
     public static displayName = "NewProjectForm";

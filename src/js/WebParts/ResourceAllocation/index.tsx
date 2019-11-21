@@ -1,28 +1,29 @@
 //#region Imports
-import __ from "../../Resources";
-import * as React from "react";
-import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
-import { sp, Web } from "@pnp/sp";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
-import IResourceAllocationState from "./IResourceAllocationState";
-import { ProjectUser, ProjectResourceAllocation, ProjectAllocationType } from "./ResourceAllocationModels";
-import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
-import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
+import { Web } from "@pnp/sp";
 import * as moment from "moment";
 import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
+import * as React from "react";
+import Timeline, { TimelineMarkers, TodayMarker } from "react-calendar-timeline";
+import { getObjectValue } from "../../Helpers";
+import __ from "../../Resources";
+import DataSourceService from "../../Services/DataSourceService";
+import SearchService from "../../Services/SearchService";
 import { IFilterItemProps, IFilterProps } from "../@Components/FilterPanel";
 import { HeaderLabelFormats } from "./HeaderLabelFormats";
+import IResourceAllocationProps, { ResourceAllocationDefaultProps } from "./IResourceAllocationProps";
+import IResourceAllocationState from "./IResourceAllocationState";
+import ResourceAllocationCommandBar from "./ResourceAllocationCommandBar";
+import ResourceAllocationDetailsModal from "./ResourceAllocationDetailsModal";
+import { ProjectAllocationType, ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
 import { SubHeaderLabelFormats } from "./SubHeaderLabelFormats";
-import DataSourceService from "../../Services/DataSourceService";
-import { getObjectValue } from "../../Helpers";
 //#endregion
 
 
 /**
- * Component: ResourceAllocation
+ * @class ResourceAllocation
  */
 export default class ResourceAllocation extends React.Component<IResourceAllocationProps, IResourceAllocationState> {
     public static displayName = "ResourceAllocation";
@@ -302,7 +303,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
     }
 
     /**
-     * Searches for allocation items using sp.search
+     * Searches for allocation items
      */
     private async searchAllocationItems(): Promise<any[]> {
         let queryTemplate: string;
@@ -314,8 +315,8 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         if (queryTemplate) {
             try {
                 const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
-                const { PrimarySearchResults } = await sp.search(searchSettings);
-                return PrimarySearchResults;
+                const { items } = await SearchService.search(searchSettings);
+                return items;
             } catch (err) {
                 throw err;
             }
@@ -340,3 +341,4 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
 }
 
 export { IResourceAllocationProps, IResourceAllocationState };
+

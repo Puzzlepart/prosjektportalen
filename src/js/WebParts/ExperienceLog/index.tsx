@@ -1,11 +1,12 @@
+import { Site } from "@pnp/sp";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import * as React from "react";
 import __ from "../../Resources";
-import { sp, Site } from "@pnp/sp";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
-import IExperienceLogState from "./IExperienceLogState";
+import SearchService from "../../Services/SearchService";
 import BaseWebPart from "../@BaseWebPart";
 import List from "../@Components/List";
+import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
+import IExperienceLogState from "./IExperienceLogState";
 import LogElement from "./LogElement";
 
 /**
@@ -71,14 +72,14 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         if (queryTemplate) {
             try {
                 const selectProperties = ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)];
-                const { PrimarySearchResults } = await sp.search({
+                const { items } = await SearchService.search({
                     Querytext: "*",
                     QueryTemplate: queryTemplate,
                     RowLimit: 500,
                     TrimDuplicates: false,
                     SelectProperties: selectProperties,
                 });
-                return PrimarySearchResults.map(r => new LogElement(r));
+                return items.map(r => new LogElement(r));
             } catch (err) {
                 throw err;
             }
@@ -88,7 +89,5 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
     }
 }
 
-export {
-    IExperienceLogProps,
-    IExperienceLogState,
-};
+export { IExperienceLogProps, IExperienceLogState };
+

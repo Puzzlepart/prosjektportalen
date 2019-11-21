@@ -57,8 +57,6 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
 
     /**
      * Component did mount
-     *
-     * Fetching items using [sp.search]
      */
     public async componentDidMount(): Promise<void> {
         try {
