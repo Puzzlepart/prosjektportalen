@@ -8,7 +8,6 @@ import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-import SnapshotDialog from "./SnapshotDialog";
 import IExportReportProps from "./IExportReportProps";
 import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
@@ -37,7 +36,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this._reportsLib = sp.web.lists.getByTitle(props.reportsLibTitle);
         this._onExportClick = this._onExportClick.bind(this);
         this._onSelectedReportChanged = this._onSelectedReportChanged.bind(this);
-        this._onSnapshotDialogDismiss = this._onSnapshotDialogDismiss.bind(this);
         this._onRenderReportOption = this._onRenderReportOption.bind(this);
     }
 
@@ -51,7 +49,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     public render(): React.ReactElement<IExportReportProps> {
         const { exportType } = this.props;
-        const { selectedReport, exportStatus, isLoading } = this.state;
+        const { exportStatus, isLoading } = this.state;
         if (isLoading) {
             return <Spinner size={SpinnerSize.medium} />;
         }
@@ -70,11 +68,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                             options={this.getReportOptions()}
                             onChanged={this._onSelectedReportChanged}
                             onRenderOption={this._onRenderReportOption} />
-                        {selectedReport && (
-                            <SnapshotDialog
-                                report={selectedReport.data}
-                                onDismiss={this._onSnapshotDialogDismiss} />
-                        )}
                     </div>
                 </div>
             </div>
@@ -206,16 +199,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * @param {IDropdownOption} opt Option
      */
     private _onSelectedReportChanged(opt: IDropdownOption): void {
-        this.setState({ selectedReport: opt });
+        window.open(opt.data.EncodedAbsUrl, "_blank");
     }
-
-    /**
-     * On <SnapshotDialog /> dismiss
-     */
-    private _onSnapshotDialogDismiss(): void {
-        this.setState({ selectedReport: null });
-    }
-
 
     private async startExport() {
         try {
