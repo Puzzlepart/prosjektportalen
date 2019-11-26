@@ -43,7 +43,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_Portfolio_Title}" />
         </pnp:Properties>
