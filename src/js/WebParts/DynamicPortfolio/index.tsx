@@ -148,7 +148,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     private onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps, defaultRender) {
-        return <Sticky stickyPosition={StickyPositionType.Both}>{defaultRender(detailsHeaderProps)}</Sticky>;
+        return <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>;
     }
 
     /**

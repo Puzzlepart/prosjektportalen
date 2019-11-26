@@ -20,4 +20,33 @@
     .allocation-cmd-bar {
         max-width: 100%;    
     }
+} 
+
+.pp-projectInfo {
+    .pp-projectInfoInner {
+        .prop {
+            margin-bottom: 5px;
+        }
+    }
+
+    .pp-project-actions {
+        > a {
+            display: block;
+            margin-top: 10px;
+        }
+    }
+}
+
+#pp-dynamicportfolio {
+    height: calc(100vh - 195px);
+    width: calc(100vw - 255px);
+
+    div[class*='stickyAbove'] {
+        overflow: hidden;
+        overflow-x: hidden;
+    }
+
+    .ms-DetailsHeader {
+        z-index: 2;
+    }
 }
