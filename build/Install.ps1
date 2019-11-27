@@ -31,8 +31,8 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,    
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package?")]
-    [switch]$SkipRootPackage,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing Fields, ContentTypes and Lists from the root/main installation package? Can be useful for patch-upgrades")]
+    [switch]$SkipFieldsContentTypesAndLists,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
@@ -181,16 +181,20 @@ function Start-Install() {
         }
     }
     
-    # Installing root package if switch SkipRootPackage is not present
-    if (-not $SkipRootPackage.IsPresent) {
+    # Installing full root package if switch SkipFieldsContentTypesAndLists is not present
+    if (-not $SkipFieldsContentTypesAndLists.IsPresent) {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
-                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $MergedParameters
+                Write-Host "Deploying root-package with fields, content types and lists...." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -Handlers "Fields,ContentTypes,Lists" -Parameters $MergedParameters
+                Write-Host "Deploying root-package with files, features and settings..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "Fields,ContentTypes,Lists,PropertyBagEntries" -Parameters $MergedParameters
             } else {
-                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $MergedParameters
+                Write-Host "Deploying root-package with fields, content types, lists and files..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -Handlers "Fields,ContentTypes,Lists" -Parameters $MergedParameters                
+                Write-Host "Deploying root-package with files, features and settings..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "Fields,ContentTypes,Lists,PropertyBagEntries,Navigation" -Parameters $MergedParameters
             }
         }
         catch {
@@ -198,7 +202,18 @@ function Start-Install() {
             Write-Host "Error installing root-package to $Url" -ForegroundColor Red
             throw $error[0]
         }
-    }  
+    } else {
+        try {
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+            Write-Host "Deploying only files from root-package..." -ForegroundColor Green
+            Apply-Template -Template "root" -Localized -Handlers "CustomActions,Files" -Parameters $MergedParameters
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing files from root-package to $Url" -ForegroundColor Red
+            throw $error[0]
+        }
+    }
 
     # Installing data package
     if (-not $SkipData.IsPresent) {
@@ -258,7 +273,7 @@ function Start-Install() {
     try {
         $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized -Handlers "CustomActions,PropertyBagEntries" -Parameters $MergedParameters
+        Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries" -Parameters $MergedParameters
         Write-Host "DONE" -ForegroundColor Green
     }
     catch {
