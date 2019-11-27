@@ -1543,7 +1543,7 @@
     <value />
   </data>
   <data name="SiteFields_GtGainsTurnover_Description" xml:space="preserve">
-    <value> Hvordan skal gevinsten realiseres?</value>
+    <value>Hvordan skal gevinsten realiseres?</value>
   </data>
   <data name="SiteFields_GtGainsResponsible_Description" xml:space="preserve">
     <value>Gevinstansvarlig er overordnet ansvarlig for realisering av prosjektets gevinster. Gevinsteier har ansvaret for realisering av en enkelt gevinst. Les mer: https://www.prosjektveiviseren.no/roller/gevinstansvarlig</value>
