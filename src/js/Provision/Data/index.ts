@@ -31,7 +31,7 @@ async function Copy(context: IProvisionContext, conf: ListConfig): Promise<void>
  * @param {IProvisionContext} context Provisioning context
  */
 async function CopyDefaultData(context: IProvisionContext): Promise<void> {
-    const { IncludeContent } = context.model;
+    const { includeContent: IncludeContent } = context.model;
     Logger.log({ message: "(CopyDefaultData) Starting copy of default data.", data: { IncludeContent }, level: LogLevel.Info });
     try {
         for (let i = 0; i < IncludeContent.length; i++) {

@@ -19,7 +19,7 @@ const GetProjectPropertiesList = (ctx: SP.ClientContext): SP.List<any> => {
  * @param {SP.ClientContext} ctx Client context
  * @param {boolean} loadClientObject Should the client object be loaded
  */
-const GetProjectPropertiesItem = (ctx: SP.ClientContext, loadClientObject = false): SP.ListItem<any> => {
+const GetProjectPropertiesItem = (ctx: SP.ClientContext, loadClientObject: boolean = false): SP.ListItem<any> => {
     const projectPropertiesList = ctx.get_web().get_lists().getByTitle(__.getResource("Lists_ProjectProperties_Title"));
     const projectPropsItem = projectPropertiesList.getItemById(1);
     if (loadClientObject) {

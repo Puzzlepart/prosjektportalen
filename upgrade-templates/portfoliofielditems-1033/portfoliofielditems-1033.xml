@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<pnp:Provisioning xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
+    <pnp:Preferences></pnp:Preferences>
+    <pnp:Templates ID="CONTAINER-PP">
+        <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTFOLIOFIELDITEMS-1033-PATCH" Version="0">
+            <pnp:Lists>
+                <pnp:ListInstance Title="DynamicPortfolioFields" TemplateType="100" Url="Lists/DynamicPortfolioFields" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" EnableFolderCreation="false" EnableAttachments="false" Hidden="true">
+                    <pnp:DataRows UpdateBehavior="Skip" KeyColumn="GtDpDisplayName">
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusTimeOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Status progress</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusTimeCommentOWSMTXT</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Comment on status progress</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">101</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusBudgetOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Status economy</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">110</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusBudgetCommentOWSMTXT</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Comment on status economy</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">111</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusQualityOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Status quality</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">120</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusQualityCommentOWSMTXT</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Comment on status quality</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">121</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusRiskOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Status risk</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">130</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusRiskCommentOWSMTXT</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Comment on status risk</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">131</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusGainAchievementOWSCHCS</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Status benefits achievement</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">140</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Status</pnp:DataValue>
+                        </pnp:DataRow>
+                        <pnp:DataRow>
+                            <pnp:DataValue FieldName="GtDpProperty">GtStatusGainAchievementCommentOWSMTXT</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpDisplayName">Comment on status benefits achievement</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpOrder">141</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpRender">Note</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMinWidth">100</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpMaxWidth">200</pnp:DataValue>
+                            <pnp:DataValue FieldName="GtDpIsResizable">1</pnp:DataValue>
+                        </pnp:DataRow>
+                    </pnp:DataRows>
+                </pnp:ListInstance>
+            </pnp:Lists>
+        </pnp:ProvisioningTemplate>
+    </pnp:Templates>
+</pnp:Provisioning>

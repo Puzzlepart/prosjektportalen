@@ -1,25 +1,25 @@
+import { Logger, LogLevel } from "@pnp/logging";
+import { List, Web } from "@pnp/sp";
+import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
+import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import * as React from "react";
+import { IContentType } from "../../Model";
 import __ from "../../Resources";
-import { SortAlphabetically } from "../../Util";
+import SearchService from "../../Services/SearchService";
+import { getUrlHash, setUrlHash, SortAlphabetically } from "../../Util";
+import BaseWebPart from "../@BaseWebPart";
 import * as DynamicPortfolioConfiguration from "../DynamicPortfolio/DynamicPortfolioConfiguration";
 import IDynamicPortfolioViewConfig from "../DynamicPortfolio/DynamicPortfolioConfiguration/IDynamicPortfolioViewConfig";
-import { sp, List, Web } from "@pnp/sp";
-import { LogLevel, Logger } from "@pnp/logging";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import ChartConfiguration from "./ChartConfiguration";
 import IProjectStatsProps, { ProjectStatsDefaultProps } from "./IProjectStatsProps";
 import IProjectStatsState from "./IProjectStatsState";
 import Project from "./Project";
-import ChartConfiguration from "./ChartConfiguration";
-import StatsFieldConfiguration from "./StatsFieldConfiguration";
-import { IContentType } from "../../Model";
 import ProjectStatsChart, { ProjectStatsChartData } from "./ProjectStatsChart";
 import ProjectStatsDataSelection from "./ProjectStatsDataSelection";
-import BaseWebPart from "../@BaseWebPart";
-import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import { getUrlHash, setUrlHash } from "../../Util";
+import StatsFieldConfiguration from "./StatsFieldConfiguration";
 
 const LOG_TEMPLATE = "(ProjectStats) {0}: {1}";
 
@@ -259,14 +259,14 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
 
             const queryTemplate = this.props.viewSelectorEnabled ? currentView.queryTemplate : this.props.queryTemplate;
 
-            const response = await sp.search({
+            let { items } = await SearchService.search<any[]>({
                 Querytext: "*",
                 QueryTemplate: queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
                 SelectProperties: ["Title", "Path", "SiteTitle", ...fields.map(f => f.managedPropertyName)],
             });
-            const items = response.PrimarySearchResults
+            items = items
                 .map(searchRes => new Project(searchRes))
                 .sort((a, b) => SortAlphabetically(a, b, "name"));
             const data = new ProjectStatsChartData(items);
@@ -284,3 +284,4 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
 }
 
 export { IProjectStatsProps, IProjectStatsState };
+

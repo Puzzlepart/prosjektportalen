@@ -1,6 +1,6 @@
 import __ from "../../../../Resources";
 import * as moment from "moment";
-import * as html2canvas from "html2canvas";
+import html2canvas from "html2canvas";
 import { Site, Web } from "@pnp/sp";
 import SectionModel, { SectionType } from "../../Section/SectionModel";
 import JsPdfWithAutoTable from "./JsPdfWithAutoTable";

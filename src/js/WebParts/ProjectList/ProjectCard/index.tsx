@@ -11,10 +11,8 @@ import IProjectCardProps from "./IProjectCardProps";
  * @param {IProjectCardProps} props Props
  */
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
-    const fallbackIconProps = { iconName: "History", styles: { root: { fontSize: 50, color: "rgb(51, 51, 51)", opacity: 0.5 } } };
     const previewImage = {
         previewImageSrc: props.project.Logo,
-        previewIconProps: props.project.Logo ? null : fallbackIconProps,
         imageFit: ImageFit.contain,
         accentColor: Util.stringToColour(props.project.Phase),
         width: props.tileWidth,
@@ -45,6 +43,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
                         },
                     },
                     ]}
+                views={props.project.Views}
             />
         </DocumentCard>
     );

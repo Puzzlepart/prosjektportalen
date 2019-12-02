@@ -1,7 +1,7 @@
 <pnp:ListInstance Title="{resource:Lists_ProjectElements_Title}" Description="" TemplateType="100" Url="Lists/Projects" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
-        <pnp:ContentTypeBinding ContentTypeID="0x010088578E7470CC4AA68D5663464831070208" Default="true" />
+        <pnp:ContentTypeBinding ContentTypeID="0x010088578E7470CC4AA68D566346483107021101" Default="true" />
     </pnp:ContentTypeBindings>
     <pnp:Views RemoveExistingViews="false">
         <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="{resource:View_AllItems_DisplayName}" Url="{site}/Lists/Projects/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" >

@@ -1,7 +1,6 @@
 import * as React from "react";
 import __ from "../../../../Resources";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as Util from "../../../../Util";
 import ISectionHeaderProps from "./ISectionHeaderProps";
 
 const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: any) => {
@@ -10,7 +9,7 @@ const SectionHeaderDetails = ({ name, fieldName, statusValue, statusComment }: a
             <h3>{name}</h3>
             <div hidden={!fieldName}>
                 <h2>{statusValue}</h2>
-                <p>{Util.htmlDecode(statusComment)}</p>
+                <p dangerouslySetInnerHTML={{__html: statusComment }}></p>
             </div>
         </div>
     );

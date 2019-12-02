@@ -31,8 +31,8 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,    
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package?")]
-    [switch]$SkipRootPackage,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing Fields, ContentTypes and Lists from the root/main installation package? Can be useful for patch-upgrades")]
+    [switch]$SkipFieldsContentTypesAndLists,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to handle PnP libraries and PnP PowerShell without using bundled files?")]
     [switch]$SkipLoadingBundle,
     [Parameter(Mandatory = $false, HelpMessage = "Stored credential from Windows Credential Manager")]
@@ -60,6 +60,9 @@ Param(
     [Parameter(Mandatory = $false)]
     [Hashtable]$Parameters
 )
+
+# Fix encoding issues of scripts
+Get-ChildItem .\scripts\* -Recurse *.ps1 | % { $content=$_ | Get-Content; Set-Content -PassThru $_.FullName $content -Encoding UTF8 -Force} > $null
 
 . ./scripts/SharedFunctions.ps1
 
@@ -91,6 +94,8 @@ if (-not $DataSourceSiteUrl) {
 
 $AssetsUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $AssetsUrl
 $DataSourceUrlParam = Get-SecondaryUrlAsParam -RootUrl $Url -SecondaryUrl $DataSourceSiteUrl
+
+$MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
 
 # Start installation
 function Start-Install() {
@@ -132,9 +137,7 @@ function Start-Install() {
     
     if ($null -eq $Connection) {
         Write-Host
-        Write-Host "Error connecting to SharePoint $Url. Aborting" -ForegroundColor Red 
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+        throw "Error connecting to SharePoint $Url. Aborting"
     }
 
     # Ensuring default associated groups in the rare instance that they have not been created
@@ -153,14 +156,13 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying required scripts, styling, config and images.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "assets" -Localized
+            Apply-Template -Template "assets" -Localized -Parameters $MergedParameters
             Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
             Write-Host "Error installing assets template to $AssetsUrl" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -169,50 +171,61 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $AssetsUrl -Connection $Connection
             Write-Host "Deploying third party scripts.. " -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "thirdparty"
+            Apply-Template -Template "thirdparty" -Parameters $MergedParameters
             Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
             Write-Host "Error installing thirdparty template to $AssetsUrl" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
     
-    # Installing root package if switch SkipRootPackage is not present
-    if (-not $SkipRootPackage.IsPresent) {
+    # Installing full root package if switch SkipFieldsContentTypesAndLists is not present
+    if (-not $SkipFieldsContentTypesAndLists.IsPresent) {
         try {
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
-                Write-Host "Deploying root-package with fields, content types, lists, navigation and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries" -Parameters $Parameters
+                Write-Host "Deploying root-package with fields, content types and lists...." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -Handlers "Fields,ContentTypes,Lists" -Parameters $MergedParameters
+                Write-Host "Deploying root-package with files, features and settings..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "Fields,ContentTypes,Lists,PropertyBagEntries" -Parameters $MergedParameters
             } else {
-                Write-Host "Deploying root-package with fields, content types, lists and pages..." -ForegroundColor Green -NoNewLine
-                Apply-Template -Template "root" -Localized -ExcludeHandlers "PropertyBagEntries,Navigation" -Parameters $Parameters
+                Write-Host "Deploying root-package with fields, content types, lists and files..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -Handlers "Fields,ContentTypes,Lists" -Parameters $MergedParameters                
+                Write-Host "Deploying root-package with files, features and settings..." -ForegroundColor Green
+                Apply-Template -Template "root" -Localized -ExcludeHandlers "Fields,ContentTypes,Lists,PropertyBagEntries,Navigation" -Parameters $MergedParameters
             }
-            Write-Host "DONE" -ForegroundColor Green
         }
         catch {
             Write-Host
             Write-Host "Error installing root-package to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
-    }  
+    } else {
+        try {
+            $Connection = Connect-SharePoint -Url $Url -Connection $Connection
+            Write-Host "Deploying only files from root-package..." -ForegroundColor Green
+            Apply-Template -Template "root" -Localized -Handlers "CustomActions,Files" -Parameters $MergedParameters
+        }
+        catch {
+            Write-Host
+            Write-Host "Error installing files from root-package to $Url" -ForegroundColor Red
+            throw $error[0]
+        }
+    }
 
     # Installing data package
     if (-not $SkipData.IsPresent) {
         try {
             $Connection = Connect-SharePoint -Url $DataSourceSiteUrl -Connection $Connection
-            Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "data" -Localized
-            Write-Host "DONE" -ForegroundColor Green
+            Write-Host "Deploying documents, tasks and phase checklist.." -ForegroundColor Green
+            Apply-Template -Template "data" -Localized -Parameters $MergedParameters
         }
         catch {
             Write-Host
             Write-Host "Error installing standard data to $DataSourceSiteUrl" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -220,15 +233,13 @@ function Start-Install() {
     if (-not $SkipDefaultConfig.IsPresent) {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
-            Write-Host "Deploying default config.." -ForegroundColor Green -NoNewLine
-            Apply-Template -Template "config" -Localized
-            Write-Host "DONE" -ForegroundColor Green
+            Write-Host "Deploying default config.." -ForegroundColor Green
+            Apply-Template -Template "config" -Localized -Parameters $MergedParameters
         }
         catch {
             Write-Host
             Write-Host "Error installing default config to $Url" -ForegroundColor Red
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
     }
 
@@ -254,8 +265,7 @@ function Start-Install() {
             catch {
                 Write-Host
                 Write-Host "Error installing extensions to $Url" -ForegroundColor Red
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                throw $error[0]
             }
         }
     }
@@ -263,14 +273,13 @@ function Start-Install() {
     try {
         $Connection = Connect-SharePoint -Url $Url -Connection $Connection
         Write-Host "Updating web property bag..." -ForegroundColor Green -NoNewLine
-        Apply-Template -Template "root" -Localized -Handlers "CustomActions,PropertyBagEntries"
+        Apply-Template -Template "root" -Localized -Handlers "PropertyBagEntries" -Parameters $MergedParameters
         Write-Host "DONE" -ForegroundColor Green
     }
     catch {
         Write-Host
         Write-Host "Error updating web property bag for $Url" -ForegroundColor Red
-        Write-Host $error[0] -ForegroundColor Red
-        exit 1 
+        throw $error[0]
     }
 
     $sw.Stop()

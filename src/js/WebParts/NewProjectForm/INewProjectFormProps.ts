@@ -16,6 +16,7 @@ interface INewProjectFormProps {
     creationModalTitle?: string;
     inputContainerStyle?: React.CSSProperties;
     showSettings?: boolean;
+    showProjectTypes?: boolean;
 }
 
 export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
@@ -33,6 +34,7 @@ export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     creationModalTitle: __.getResource("CreationModal_Title"),
     inputContainerStyle: { marginBottom: 5 },
     showSettings: true,
+    showProjectTypes: true,
 };
 
 export default INewProjectFormProps;

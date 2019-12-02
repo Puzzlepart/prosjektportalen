@@ -1,27 +1,27 @@
-import * as React from "react";
-import __ from "../../Resources";
-import * as array_unique from "array-unique";
 import * as array_sort from "array-sort";
-import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
-import { Sticky, StickyPositionType } from "office-ui-fabric-react/lib/Sticky";
-import { IGroup, DetailsList, IDetailsHeaderProps } from "office-ui-fabric-react/lib/DetailsList";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import * as array_unique from "array-unique";
+import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
 import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { DetailsList, ConstrainMode, SelectionMode, DetailsListLayoutMode, IColumn, IDetailsHeaderProps, IGroup } from "office-ui-fabric-react/lib/DetailsList";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
+import { ScrollablePane } from "office-ui-fabric-react/lib/ScrollablePane";
+import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
+import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { Sticky, StickyPositionType } from "office-ui-fabric-react/lib/Sticky";
+import * as React from "react";
+import __ from "../../Resources";
 import * as Util from "../../Util";
 import ExportToExcel, { ExcelExportStatus } from "../../Util/ExportToExcel";
+import BaseWebPart from "../@BaseWebPart";
+import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
+import * as DynamicPortfolioConfiguration from "./DynamicPortfolioConfiguration";
 import DynamicPortfolioFieldSelector from "./DynamicPortfolioFieldSelector";
 import DynamicPortfolioFilterPanel, { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
-import * as DynamicPortfolioConfiguration from "./DynamicPortfolioConfiguration";
-import { queryProjects } from "./DynamicPortfolioSearch";
 import DynamicPortfolioItemColumn from "./DynamicPortfolioItemColumn";
-import ProjectInfo, { ProjectInfoRenderMode } from "../ProjectInfo";
+import { queryProjects } from "./DynamicPortfolioSearch";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
-import BaseWebPart from "../@BaseWebPart";
-import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
 
 /**
  * Dynamic Portfolio
@@ -46,6 +46,10 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     public async componentDidMount() {
+        let stickyAbove = document.querySelector("[class*='stickyAbove-']");
+        if (stickyAbove != null) {
+            stickyAbove.addEventListener("scroll", this.handleStickyScroll);
+        }
         try {
             const data = await this.fetchInitialData();
             await this.updateState({ ...data, isLoading: false });
@@ -64,14 +68,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         const { isLoading, errorMessage, isChangingView } = this.state;
         if (errorMessage) {
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <MessageBar messageBarType={errorMessage.type}>{errorMessage.message}</MessageBar>
                 </div>
             );
         }
         if (isLoading) {
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     <Spinner label={this.props.loadingText} type={SpinnerType.large} />
                 </div>
             );
@@ -79,7 +83,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (isChangingView) {
             const loadingText = String.format(__.getResource("DynamicPortfolio_LoadingViewText"), isChangingView.name);
             return (
-                <div style={{ height: "80vh" }}>
+                <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                     {this.renderCommandBar()}
                     <div style={{ paddingTop: 20 }}>
                         <Spinner label={loadingText} type={SpinnerType.large} />
@@ -87,17 +91,16 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 </div>
             );
         }
+
         return (
-            <div style={{ height: "80vh" }}>
+            <div style={{ height: "100%", position: "relative", maxHeight: "inherit" }} onScroll={this.handleContainerScroll}>
                 <ScrollablePane>
                     {this.renderCommandBar()}
-                    <div>
-                        {this.renderSearchBox()}
-                        {this.renderStatusBar()}
-                        {this.renderItems()}
-                        {this.renderFilterPanel()}
-                        {this.renderProjectInfoModal()}
-                    </div>
+                    {this.renderSearchBox()}
+                    {this.renderStatusBar()}
+                    {this.renderItems()}
+                    {this.renderFilterPanel()}
+                    {this.renderProjectInfoModal()}
                 </ScrollablePane>
             </div>
         );
@@ -133,15 +136,19 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         return (
             <DetailsList
                 items={data.items}
-                constrainMode={this.props.constrainMode}
-                layoutMode={this.props.layoutMode}
+                constrainMode={ConstrainMode.unconstrained}
+                layoutMode={DetailsListLayoutMode.fixedColumns}
                 columns={data.columns}
                 groups={data.groups}
-                selectionMode={this.props.selectionMode}
+                selectionMode={SelectionMode.none}
                 onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
-                onColumnHeaderClick={(col, evt) => this._onColumnSort(col, evt)}
-                onRenderDetailsHeader={(detailsHeaderProps: IDetailsHeaderProps, defaultRender) => <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>} />
+                onColumnHeaderClick={(_event, col) => this._onColumnSort(col)}
+                onRenderDetailsHeader={this.onRenderDetailsHeader} />
         );
+    }
+
+    private onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps, defaultRender) {
+        return <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>;
     }
 
     /**
@@ -198,7 +205,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             const groupByColumns = this.state.configuration.columns.filter(col => col.groupBy).map((col, idx) => ({
                 key: `GroupByCol_${idx.toString()}`,
                 name: col.name,
-                onClick: e => {
+                onClick: (e: { preventDefault: () => void; }) => {
                     e.preventDefault();
                     this.setState({ groupBy: col });
                 },
@@ -251,7 +258,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                     onClick: e => {
                         e.preventDefault();
                         SP.UI.ModalDialog.showModalDialog({
-                            url: `${_spPageContextInfo.siteAbsoluteUrl}/Lists/DynamicPortfolioViews/NewForm.aspx`,
+                            url: `${_spPageContextInfo.siteAbsoluteUrl}/${this.props.newViewUrl}`,
                             title: __.getResource("DynamicPortfolio_CreateNewView"),
                         });
                     },
@@ -268,7 +275,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         key: `View_${idx.toString()}`,
                         name: qc.name,
                         iconProps: { iconName: qc.iconName },
-                        onClick: e => {
+                        onClick: (e: { preventDefault: () => void; }) => {
                             e.preventDefault();
                             this._onChangeView(qc);
                         },
@@ -322,7 +329,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         permissions.set(31);
         const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
         await ExecuteJsomQuery(jsomCtx);
-        const configuration = await DynamicPortfolioConfiguration.getConfig();
+        const configuration = await DynamicPortfolioConfiguration.getConfig(this.props.viewConfigList);
 
         let currentView: DynamicPortfolioConfiguration.IDynamicPortfolioViewConfig;
 
@@ -357,7 +364,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             }
         }
         const fieldNames = configuration.columns.map(f => f.fieldName);
-        const response = await queryProjects(currentView, configuration);
+        const response = await queryProjects(this.props.queryText, currentView, configuration);
 
         // Populates DynamicPortfolioFieldSelector with items from this.configuration.columns
         DynamicPortfolioFieldSelector.items = configuration.columns.map(col => ({
@@ -413,8 +420,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
             }
             const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map(g => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
-            groups = array_unique([].concat(groupNames)).sort((a, b) => a > b ? 1 : -1).map((name, idx) => ({
+            const groupNames = groupItems.map((g: { [x: string]: any; }) => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
+            groups = array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
                 key: idx,
                 name: `${this.state.groupBy.name}: ${name}`,
                 startIndex: groupNames.indexOf(name, 0),
@@ -474,12 +481,12 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
             .map(ref => {
                 let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
-                let items = entries.results
-                    .map(entry => ({
+                let items = (entries.results || entries)
+                    .map((entry: { RefinementName: any; RefinementValue: any; }) => ({
                         name: entry.RefinementName,
                         value: entry.RefinementValue,
                     }))
-                    .sort((a, b) => a.value > b.value ? 1 : -1);
+                    .sort((a: { value: number; }, b: { value: number; }) => a.value > b.value ? 1 : -1);
                 return {
                     ...ref,
                     items,
@@ -526,7 +533,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         filterKeys.forEach(filterKey => {
                             let values = item[filterKey].split(";");
                             if (values.length > 1) {
-                                let matches = values.filter(value => Array.contains(currentFilters[filterKey], value));
+                                let matches = values.filter((value: any) => Array.contains(currentFilters[filterKey], value));
                                 if (matches.length === 0) {
                                     shouldInclude = false;
                                 }
@@ -560,7 +567,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      * @param {any} event Event
      * @param {any} column The column config
      */
-    private _onColumnSort = (evt, column): void => {
+    private _onColumnSort = (column: IColumn): void => {
         const {
             filteredItems,
             selectedColumns,
@@ -590,7 +597,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     * @param {any} event Event
     * @param {any} item The item
     */
-    private _onOpenProjectModal = (evt, item) => {
+    private _onOpenProjectModal = (evt: { preventDefault: () => void; }, item: any) => {
         evt.preventDefault();
         this.setState({ showProjectInfo: item });
     }
@@ -606,7 +613,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState({ isChangingView: viewConfig });
-        const response = await queryProjects(viewConfig, this.state.configuration);
+        const response = await queryProjects(this.props.queryText, viewConfig, this.state.configuration);
         DynamicPortfolioFieldSelector.items = this.state.configuration.columns.map(col => ({
             name: col.name,
             value: col.fieldName,
@@ -640,9 +647,31 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
         }
     }
+
+    /**
+     * Handle container scroll
+     *
+     * @param {any} event Event
+     */
+    private handleContainerScroll(event: any) {
+        let stickyAbove = document.querySelector("[class*='stickyAbove-']");
+        if (stickyAbove != null) {
+            stickyAbove.scrollLeft = event.target.scrollLeft;
+        }
+    }
+
+    /**
+     * Handle sticky scroll
+     *
+     * @param {any} event Event
+     */
+    private handleStickyScroll(event: any) {
+        let detailsList = document.querySelector("[class*='ms-DetailsList']");
+        if (detailsList) {
+            detailsList.scrollLeft = event.target.scrollLeft;
+        }
+    }
 }
 
-export {
-    IDynamicPortfolioProps,
-    IDynamicPortfolioState,
-};
+export { IDynamicPortfolioProps, IDynamicPortfolioState };
+

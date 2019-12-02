@@ -3,13 +3,11 @@ import __ from "../../../Resources";
 import { sp, List } from "@pnp/sp";
 import { Logger, LogLevel } from "@pnp/logging";
 import * as moment from "moment";
-import * as html2canvas from "html2canvas";
-import * as sanitize from "sanitize-filename";
+import * as html2canvas  from "html2canvas";
 import { Icon } from "office-ui-fabric-react/lib/Icon";
 import { PrimaryButton } from "office-ui-fabric-react/lib/Button";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
-import SnapshotDialog from "./SnapshotDialog";
 import IExportReportProps from "./IExportReportProps";
 import IExportReportState from "./IExportReportState";
 import ExportReportStatus from "./ExportReportStatus";
@@ -38,7 +36,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         this._reportsLib = sp.web.lists.getByTitle(props.reportsLibTitle);
         this._onExportClick = this._onExportClick.bind(this);
         this._onSelectedReportChanged = this._onSelectedReportChanged.bind(this);
-        this._onSnapshotDialogDismiss = this._onSnapshotDialogDismiss.bind(this);
         this._onRenderReportOption = this._onRenderReportOption.bind(this);
     }
 
@@ -52,7 +49,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
 
     public render(): React.ReactElement<IExportReportProps> {
         const { exportType } = this.props;
-        const { selectedReport, exportStatus, isLoading } = this.state;
+        const { exportStatus, isLoading } = this.state;
         if (isLoading) {
             return <Spinner size={SpinnerSize.medium} />;
         }
@@ -71,11 +68,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                             options={this.getReportOptions()}
                             onChanged={this._onSelectedReportChanged}
                             onRenderOption={this._onRenderReportOption} />
-                        {selectedReport && (
-                            <SnapshotDialog
-                                report={selectedReport.data}
-                                onDismiss={this._onSnapshotDialogDismiss} />
-                        )}
                     </div>
                 </div>
             </div>
@@ -207,33 +199,30 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * @param {IDropdownOption} opt Option
      */
     private _onSelectedReportChanged(opt: IDropdownOption): void {
-        this.setState({ selectedReport: opt });
+        window.open(opt.data.EncodedAbsUrl, "_blank");
     }
-
-    /**
-     * On <SnapshotDialog /> dismiss
-     */
-    private _onSnapshotDialogDismiss(): void {
-        this.setState({ selectedReport: null });
-    }
-
 
     private async startExport() {
-        Logger.log({ message: "(startExport) Starting export", data: { exportType: this.props.exportType }, level: LogLevel.Info });
-        this.setState({ exportStatus: ExportReportStatus.IS_EXPORTING });
-        let blob: Blob;
-        switch (this.props.exportType) {
-            case "pdf": blob = await this.saveAsPdf();
-                break;
-            case "png": blob = await this.saveAsPng();
-                break;
+        try {
+            Logger.log({ message: "(startExport) Starting export", data: { exportType: this.props.exportType }, level: LogLevel.Info });
+            this.setState({ exportStatus: ExportReportStatus.IS_EXPORTING });
+            let blob: Blob;
+            switch (this.props.exportType) {
+                case "pdf": blob = await this.saveAsPdf();
+                    break;
+                case "png": blob = await this.saveAsPng();
+                    break;
+            }
+            const report = await this.saveReportToLibrary(blob, this.props.exportType);
+            Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
+            this.setState({
+                reports: [report, ...this.state.reports],
+                exportStatus: ExportReportStatus.HAS_EXPORTED,
+            });
+        } catch (e) {
+            Logger.log({ message: "(startExport) Export failed", data: { exportType: this.props.exportType, error: e }, level: LogLevel.Warning });
+            this.setState({ exportStatus: ExportReportStatus.IDLE });
         }
-        const report = await this.saveReportToLibrary(blob, this.props.exportType);
-        Logger.log({ message: "(startExport) Export done", data: { exportType: this.props.exportType }, level: LogLevel.Info });
-        this.setState({
-            reports: [report, ...this.state.reports],
-            exportStatus: ExportReportStatus.HAS_EXPORTED,
-        });
     }
 
     /**
@@ -241,12 +230,18 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveAsPng() {
         return new Promise<Blob>(async (resolve, reject) => {
-            const canvas = await html2canvas(document.getElementById("pp-projectstatus"));
-            if (canvas.toBlob) {
-                canvas.toBlob(resolve);
-            } else if (canvas["msToBlob"]) {
-                const blob = canvas["msToBlob"]();
-                resolve(blob);
+            try {
+                (window as any).html2canvas = html2canvas;
+                const canvas = await (window as any).html2canvas(document.getElementById("pp-projectstatus"));
+                if (canvas.toBlob) {
+                    canvas.toBlob(resolve);
+                } else if (canvas["msToBlob"]) {
+                    const blob = canvas["msToBlob"]();
+                    resolve(blob);
+                }
+            } catch (e) {
+                console.log(e);
+                reject(e);
             }
         });
     }
@@ -269,7 +264,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveReportToLibrary(reportBlob: Blob, fileExtension: string): Promise<IReport> {
         const dtFormatted = moment(new Date()).format("YYYY-MM-D-HHmm");
-        const fileName = `${dtFormatted}-${sanitize(_spPageContextInfo.webTitle)}.${fileExtension}`;
+        const fileName = `${dtFormatted}-${_spPageContextInfo.webTitle}.${fileExtension}`;
         const fileTitle = `${dtFormatted} ${_spPageContextInfo.webTitle}`;
         const libServerRelativeUrl = `${_spPageContextInfo.webServerRelativeUrl}/${this.props.reportsLibTitle}`;
         Logger.log({ message: `(saveReportToLibrary) Saving report as ${fileExtension}`, data: { fileName, fileTitle, libServerRelativeUrl }, level: LogLevel.Info });

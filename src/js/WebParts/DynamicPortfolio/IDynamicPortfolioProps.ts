@@ -1,9 +1,4 @@
 import __ from "../../Resources";
-import {
-    SelectionMode,
-    ConstrainMode,
-    DetailsListLayoutMode,
-} from "office-ui-fabric-react/lib/DetailsList";
 import { IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
 import { IBaseWebPartProps } from "../@BaseWebPart";
 import IExcelExportConfig from "../IExcelExportConfig";
@@ -16,14 +11,14 @@ export default interface IDynamicPortfolioProps extends IBaseWebPartProps {
     showGroupBy?: boolean;
     modalHeaderClassName?: string;
     projectInfoFilterField?: string;
-    constrainMode?: ConstrainMode;
-    layoutMode?: DetailsListLayoutMode;
-    selectionMode?: SelectionMode;
     excelExportEnabled?: boolean;
     excelExportConfig?: IExcelExportConfig;
     defaultSortFunction?: (a, b) => 1 | -1;
     defaultView?: IDynamicPortfolioViewConfig;
+    viewConfigList?: string;
     viewSelectorEnabled?: boolean;
+    queryText?: string;
+    newViewUrl?: string;
 }
 
 export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
@@ -34,9 +29,6 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
     showGroupBy: true,
     modalHeaderClassName: "ms-font-xxl",
     projectInfoFilterField: "GtPcPortfolioPage",
-    constrainMode: ConstrainMode.horizontalConstrained,
-    layoutMode: DetailsListLayoutMode.fixedColumns,
-    selectionMode: SelectionMode.none,
     excelExportEnabled: true,
     excelExportConfig: {
         fileName: __.getResource("DynamicPortfolio_ExcelExportFileName"),
@@ -45,5 +37,7 @@ export const DynamicPortfolioDefaultProps: Partial<IDynamicPortfolioProps> = {
         buttonIcon: "ExcelDocument",
     },
     defaultSortFunction: (a, b) => a.SiteTitle > b.SiteTitle ? 1 : -1,
+    viewConfigList: __.getResource("Lists_DynamicPortfolioViews_Title"),
     viewSelectorEnabled: true,
+    newViewUrl: "Lists/DynamicPortfolioViews/NewForm.aspx",
 };

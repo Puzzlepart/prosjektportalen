@@ -43,7 +43,7 @@
             </pnp:WebPart>
         </pnp:WebParts>
     </pnp:File>
-    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+    <pnp:File Src="SitePages\Portfolio.aspx" Folder="SitePages" Level="Published" Overwrite="true">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:Navigation_Portfolio_Title}" />
         </pnp:Properties>
@@ -135,6 +135,18 @@
             <pnp:WebPart Title="RiskMatrixSearch" Order="0" Zone="LeftColumn">
                 <pnp:Contents>
                     <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/RiskMatrixSearch.webpart" />
+                </pnp:Contents>
+            </pnp:WebPart>
+        </pnp:WebParts>
+    </pnp:File>
+    <pnp:File Src="SitePages\TasksOverview.aspx" Folder="SitePages" Level="Published" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:Navigation_TasksOverview_Title}" />
+        </pnp:Properties>
+        <pnp:WebParts>
+            <pnp:WebPart Title="RiskMatrixSearch" Order="0" Zone="LeftColumn">
+                <pnp:Contents>
+                    <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="WebPartGallery/TasksOverview.webpart" />
                 </pnp:Contents>
             </pnp:WebPart>
         </pnp:WebParts>
@@ -247,6 +259,13 @@
     <pnp:File Src="WebPartGallery\ResourceAllocation.webpart" Folder="_catalogs/wp" Overwrite="false">
         <pnp:Properties>
             <pnp:Property Key="Title" Value="{resource:WebPart_ResourceAllocation_Title}" />
+            <pnp:Property Key="WebPartDescription" Value="" />
+            <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
+        </pnp:Properties>
+    </pnp:File>
+    <pnp:File Src="WebPartGallery\TasksOverview.webpart" Folder="_catalogs/wp" Overwrite="false">
+        <pnp:Properties>
+            <pnp:Property Key="Title" Value="{resource:WebPart_TasksOverview_Title}" />
             <pnp:Property Key="WebPartDescription" Value="" />
             <pnp:Property Key="Group" Value="{resource:WebPart_Group}" />
         </pnp:Properties>

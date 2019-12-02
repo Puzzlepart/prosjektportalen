@@ -5,7 +5,7 @@
 <%@ Register Tagprefix="WebPartPages" Namespace="Microsoft.SharePoint.WebPartPages" Assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PlaceHolderPageTitle" runat="server">
-    <SharePoint:FieldValue ID="PageTitle" FieldName="Title" runat="server" /> - 
+    <SharePoint:FieldValue ID="PageTitle" FieldName="Title" runat="server" /> -
     <SharePoint:ProjectProperty Property="Title" runat="server"/>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="PlaceHolderPageImage" runat="server"><img src="/_layouts/15/images/blank.gif?rev=23" width='1' height='1' alt="" /></asp:Content>
@@ -25,4 +25,9 @@
             </div>
         </div>
     </div>
+    <style type="text/css">
+        #s4-workspace {
+            overflow: hidden;
+        }
+    </style>
 </asp:Content>

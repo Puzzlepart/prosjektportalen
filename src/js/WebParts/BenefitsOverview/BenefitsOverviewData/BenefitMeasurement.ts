@@ -29,7 +29,7 @@ export class BenefitMeasurement extends BenefitBase {
         if (this.value !== null) {
             this.valueDisplay = this.value.toFixed(fractionDigits);
         }
-        this.indicatorId = parseInt(result.GtMeasureIndicatorLookupId, 10);
+        this.indicatorId = parseInt(result.GtMeasureIndicatorLookupId || result.RefinableString59, 10);
     }
 
     /**

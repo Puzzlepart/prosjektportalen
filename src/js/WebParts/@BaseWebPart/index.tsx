@@ -1,7 +1,10 @@
+//#region Imports
+import __ from "../../Resources";
 import * as React from "react";
 import ChromeTitle from "../@Components/ChromeTitle";
 import IBaseWebPartProps from "./IBaseWebPartProps";
 import IBaseWebPartState from "./IBaseWebPartState";
+//#endregion
 
 export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWebPartState> extends React.PureComponent<P, S> {
     /**
@@ -51,8 +54,5 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
     }
 }
 
-export {
-    IBaseWebPartProps,
-    IBaseWebPartState,
-};
+export { IBaseWebPartProps, IBaseWebPartState };
 

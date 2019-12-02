@@ -102,11 +102,34 @@ function Apply-Template([string]$Template, [switch]$Localized, [OfficeDevPnP.Cor
     if ($Localized.IsPresent) {
         $Template = "$($Template)-$($Language)"
     }
-    $MergedParameters = (@{"AssetsSiteUrl" = $AssetsUrlParam; "DataSourceSiteUrl" = $DataSourceUrlParam;},$Parameters | Merge-Hashtables)
     if ($ExcludeHandlers -ne $null) {
         Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -ExcludeHandlers $ExcludeHandlers
     } else {
         Apply-PnPProvisioningTemplate ".\templates\$($Template).pnp" -Parameters $MergedParameters -Handlers $Handlers
+    }
+}
+
+function Install-UpgradePackages([Version]$CurrentVersion, [Version]$InstallVersion, $Language, [switch]$Pre) {
+    $CurrentMinorVersion = $CurrentVersion.Minor
+    $InstallMinorVersion = $InstallVersion.Minor
+
+    Write-Host "Installing upgrade packages.." -ForegroundColor Green
+    while ($CurrentMinorVersion -lt $InstallMinorVersion) {
+        $UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentMinorVersion)"
+        if (Test-Path $UpgradeFolderPath -PathType Container) {
+            $PrePostPath = "$UpgradeFolderPath/*-$($Language).pnp"
+            if ($Pre.IsPresent) {
+                $PrePostPath = "$UpgradeFolderPath/pre-*-$($Language).pnp"
+            }
+            $upgradePkgs = Get-ChildItem -Path $PrePostPath
+            if ($null -ne $upgradePkgs) {
+                foreach ($pkg in $upgradePkgs) {
+                    Write-Host "Applying upgrade package " $pkg.Name -ForegroundColor Green
+                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
+                }
+            }
+        }
+        $CurrentMinorVersion = $CurrentMinorVersion + 1
     }
 }
 

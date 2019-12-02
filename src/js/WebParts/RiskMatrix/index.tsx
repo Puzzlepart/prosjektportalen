@@ -1,27 +1,30 @@
-import __ from "../../Resources";
-import * as React from "react";
-import { sp, Site } from "@pnp/sp";
-import { Toggle } from "office-ui-fabric-react/lib/Toggle";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
+//#region Imports
+import { Site, sp } from "@pnp/sp";
 import { Dropdown, IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
+import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
 import { Spinner, SpinnerSize } from "office-ui-fabric-react/lib/Spinner";
+import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import RiskMatrixCells from "./RiskMatrixCells";
-import MatrixCellType from "../../Model/MatrixCellType";
+import * as React from "react";
 import IMatrixCell from "../../Model/IMatrixCell";
-import MatrixRow from "./MatrixRow";
-import MatrixHeaderCell from "./MatrixHeaderCell";
-import MatrixCell from "./MatrixCell";
-import RiskElement from "./RiskElement";
-import RiskElementModel from "./RiskElementModel";
+import MatrixCellType from "../../Model/MatrixCellType";
+import __ from "../../Resources";
+import SearchService from "../../Services/SearchService";
+import { loadJsonConfiguration } from "../../Util";
+import List from "../@Components/List";
 import IRiskMatrixData from "./IRiskMatrixData";
 import IRiskMatrixProps, { RiskMatrixDefaultProps } from "./IRiskMatrixProps";
 import IRiskMatrixState from "./IRiskMatrixState";
-import List from "../@Components/List";
-import { loadJsonConfiguration } from "../../Util";
+import MatrixCell from "./MatrixCell";
+import MatrixHeaderCell from "./MatrixHeaderCell";
+import MatrixRow from "./MatrixRow";
+import RiskElement from "./RiskElement";
+import RiskElementModel from "./RiskElementModel";
+import RiskMatrixCells from "./RiskMatrixCells";
+//#endregion
 
 /**
- * Risk Matrix
+ * @class RiskMatrix
  */
 export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskMatrixState> {
     public static displayName = "RiskMatrix";
@@ -70,6 +73,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             className,
             loadingText,
             showViewSelector,
+            showProjectSelector,
             dataSourceName,
             columns,
         } = this.props;
@@ -132,16 +136,19 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         offText={__.getResource("String_No")} />
                                 </div>
                                 <div hidden={!dataSourceName}>
-                                    <Dropdown
-                                        label={__.getResource("String_Select_Project_Name")}
-                                        defaultSelectedKey="AllProjects"
-                                        options={this.getProjectOptions()}
-                                        onChanged={opt => this.setState({ selectedProject: opt })} />
+                                    <div hidden={!showProjectSelector}>
+                                        <Dropdown
+                                            label={__.getResource("String_Select_Project_Name")}
+                                            defaultSelectedKey="AllProjects"
+                                            options={this.getProjectOptions()}
+                                            onChanged={opt => this.setState({ selectedProject: opt })} />
+                                    </div>
                                     <List
                                         items={items}
                                         columns={columns}
                                         webUrlKey="webUrl"
                                         pathKey="url"
+                                        siteTitleKey="siteTitle"
                                         showCommandBar={false} />
                                 </div>
                             </div>
@@ -386,7 +393,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     * @param {string} queryTemplate Search query
     */
     protected async searchItems(queryTemplate: string): Promise<Array<any>> {
-        const searchResults = await sp.search({
+        const { items } = await SearchService.search({
             Querytext: "*",
             RowLimit: this.props.rowLimit,
             TrimDuplicates: false,
@@ -405,11 +412,9 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             ],
             QueryTemplate: queryTemplate,
         });
-        return searchResults.PrimarySearchResults;
+        return items;
     }
 }
 
-export {
-    IRiskMatrixProps,
-    IRiskMatrixState,
-};
+export { IRiskMatrixProps, IRiskMatrixState };
+

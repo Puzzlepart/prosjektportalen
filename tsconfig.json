@@ -8,7 +8,9 @@
         "removeComments": false,
         "baseUrl": ".",
         "paths": {
-            "model": ["src/js/Model"]
+            "model": [
+                "src/js/Model"
+            ]
         },
         "typeRoots": [
             "./node_modules/@types",
@@ -18,10 +20,11 @@
             "sharepoint",
             "node",
             "react",
-            "webpack-variables"
+            "webpack-variables",
+            "office-ui-fabric-react-overrides"
         ],
         "noImplicitAny": false,
-        "allowUnreachableCode": false,
+        "allowUnreachableCode": true,
         "forceConsistentCasingInFileNames": true,
         "moduleResolution": "node",
         "noImplicitThis": true,
@@ -32,7 +35,10 @@
         "experimentalDecorators": true
     },
     "include": [
-        "src/**/*",
-        "node_modules/**/*"
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "lib"
     ]
 }

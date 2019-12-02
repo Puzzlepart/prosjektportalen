@@ -147,14 +147,14 @@
   <data name="Navigation_RiskOverview_Title" xml:space="preserve">
     <value>Risk Overview</value>
   </data>
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>Tasks Overview</value>
+  </data>
   <data name="Navigation_PortfolioStats_Title" xml:space="preserve">
     <value>Portfolio Insight</value>
   </data>
   <data name="Navigation_ProjectStatus_Title" xml:space="preserve">
     <value>Project Status</value>
-  </data>
-  <data name="Navigation_RiskOverview_Title" xml:space="preserve">
-    <value>Risk Overview</value>
   </data>
   <data name="Navigation_NoPhaseProjectItems_Url" xml:space="preserve">
     <value>_layouts/15/osssearchresults.aspx?k=owstaxIdGtProjectPhase%3A%22No%20phase%22</value>
@@ -164,6 +164,9 @@
   </data>
   <data name="Navigation_ResourceAllocation_Title" xml:space="preserve">
     <value>Resource Allocation</value>
+  </data>
+  <data name="Navigation_TasksOverview_Title" xml:space="preserve">
+    <value>TasksOverview</value>
   </data>
   <data name="Lists_SitePages_Title" xml:space="preserve">
     <value>Site Pages</value>
@@ -176,6 +179,9 @@
   </data>
   <data name="Lists_Extensions_Title" xml:space="preserve">
     <value>Extensions</value>
+  </data>
+  <data name="Lists_ProjectTypes_Title" xml:space="preserve">
+    <value>Projecttypes</value>
   </data>
   <data name="Lists_SiteTemplates_Title" xml:space="preserve">
     <value>Site Templates</value>
@@ -339,6 +345,12 @@
   <data name="Lists_BenefitsFollowup_Url" xml:space="preserve">
     <value>Lists/Benefits Followup</value>
   </data>
+  <data name="Lists_MeasurementIndicators_Url" xml:space="preserve">
+    <value>Lists/Measurement Indicators</value>
+  </data>
+  <data name="Lists_BenefitsFollowup_WrongSpelling_Url" xml:space="preserve">
+    <value>Lists/MeasurementIndicators</value>
+  </data>
   <data name="Lists_ProjectStatus_Url" xml:space="preserve">
     <value>Project status reports</value>
   </data>
@@ -469,7 +481,10 @@
     <value>Glittertind web part page</value>
   </data>
   <data name="ContentTypes_Prosjektelement_Name" xml:space="preserve">
-    <value>Project Item</value>
+    <value>Project Item Portfolio level</value>
+  </data>
+  <data name="ContentTypes_ProsjektelementDeprecated_Name" xml:space="preserve">
+    <value>Project Item (Deprecated)</value>
   </data>
   <data name="ContentTypes_Prosjektegenskaper_Name" xml:space="preserve">
     <value>Project Properties</value>
@@ -557,6 +572,9 @@
   </data>
   <data name="ContentTypes_List_Content_Config_Name" xml:space="preserve">
     <value>List Content Config</value>
+  </data>
+  <data name="ContentTypes_Projecttype_Name" xml:space="preserve">
+    <value>Projecttype</value>
   </data>
   <data name="ContentTypes_Project_Config_Base_Name" xml:space="preserve">
     <value>Project Config Base</value>
@@ -698,6 +716,21 @@
   </data>
   <data name="SiteFields_EventDate_DisplayName" xml:space="preserve">
     <value>Start Time</value>
+  </data>
+  <data name="SiteFields_StartDate_DisplayName" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="SiteFields_DueDate_DisplayName" xml:space="preserve">
+    <value>Due Date</value>
+  </data>
+  <data name="SiteFields_PercentComplete_DisplayName" xml:space="preserve">
+    <value>% complete</value>
+  </data>
+  <data name="SiteFields_Status_DisplayName" xml:space="preserve">
+    <value>Task Status</value>
+  </data>
+  <data name="SiteFields_AssignedTo_DisplayName" xml:space="preserve">
+    <value>Assigned To</value>
   </data>
   <data name="SiteFields_GtProjectEventDateAndTitle_DisplayName" xml:space="preserve">
     <value>Date and title</value>
@@ -942,6 +975,9 @@
   <data name="SiteFields_GtPrereqProfitAchievement_DisplayName" xml:space="preserve">
     <value>Prerequisites for Benefit Achievement</value>
   </data>
+  <data name="SiteFields_GtMeasureIndicator_DisplayName" xml:space="preserve">
+    <value>Measurement indicator</value>
+  </data>
   <data name="SiteFields_GtGainsTurnover_DisplayName" xml:space="preserve">
     <value>Benefit Conversion</value>
   </data>
@@ -1137,6 +1173,15 @@
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Label</value>
   </data>
+  <data name="SiteFields_GtTemplateLookup_DisplayName" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="SiteFields_GtExtensionsLookup_DisplayName" xml:space="preserve">
+    <value>Extensions</value>
+  </data>
+  <data name="SiteFields_GtListContentsLookup_DisplayName" xml:space="preserve">
+    <value>List contents</value>
+  </data>
   <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
     <value>ShowOnProjectStatus</value>
   </data>
@@ -1262,9 +1307,6 @@
   </data>
   <data name="SiteFields_GtResourceLoad_DisplayName" xml:space="preserve">
     <value>Allocation</value>
-  </data>
-  <data name="SiteFields_GtProjectResourceLookup_DisplayName" xml:space="preserve">
-    <value>Resource</value>
   </data>
   <data name="SiteFields_GtResourceAbsence_DisplayName" xml:space="preserve">
     <value>Allocation type</value>
@@ -1764,6 +1806,9 @@
   <data name="ProjectList_SearchBoxPrompt" xml:space="preserve">
     <value>Search in projects..</value>
   </data>
+  <data name="TasksOverview_SearchBoxPrompt" xml:space="preserve">
+    <value>Search tasks..</value>
+  </data>
   <data name="ProjectList_LoadingText" xml:space="preserve">
     <value>Loading projects...</value>
   </data>
@@ -1775,6 +1820,9 @@
   </data>
   <data name="ResourceAllocation_ErrorText" xml:space="preserve">
     <value>Could not load resource allocation module. Have you added resources with roles and allocations to your projects?</value>
+  </data>
+  <data name="TasksOverview_ErrorText" xml:space="preserve">
+    <value>Could not load tasks overview module.</value>
   </data>
   <data name="ResourceAllocation_LinkText" xml:space="preserve">
     <value>To add allocations or absence not related to a single project, add them to the &lt;A HREF=&quot;{0}&quot;&gt;central resource allocation list&lt;/A&gt;. These items will appear with a blue and red (absence) color in the table below. Project allocations are green. The color density of an item is an indication of the allocation percentage.</value>
@@ -1799,6 +1847,9 @@
   </data>
   <data name="NewProjectForm_ShowListContentSettings" xml:space="preserve">
     <value>Default list content</value>
+  </data>
+  <data name="NewProjectForm_ShowProjecttypesSettings" xml:space="preserve">
+    <value>Projecttypes</value>
   </data>
   <data name="NewProjectForm_ShowExtensionSettings" xml:space="preserve">
     <value>Extensions</value>
@@ -1859,6 +1910,30 @@
   </data>
   <data name="ProjectPhases_LoadingText" xml:space="preserve">
     <value>Loading project phases...</value>
+  </data>
+  <data name="TasksOverview_LoadingText" xml:space="preserve">
+    <value>Loading tasks overview...</value>
+  </data>
+  <data name="TasksOverview_InfoText" xml:space="preserve">
+    <value>Only tasks that have set both Start date and Due date are shown in this overview. Click on the item to see more details about the task.</value>
+  </data>
+  <data name="TasksOverview_IsDynamicLabel" xml:space="preserve">
+    <value>Dynamic interval</value>
+  </data>
+  <data name="TasksOverview_IsDynamicDescription" xml:space="preserve">
+    <value>If the interval is set to dynamic, the interval will be set according to the tasks in the view</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeStartLabel" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="TasksOverview_VisibleTimeEndLabel" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="TasksOverview_OnSetIntervalButtonText" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="TasksOverview_DateIntervalText" xml:space="preserve">
+    <value>Date Interval</value>
   </data>
   <data name="ProjectPhases_ChangePhase" xml:space="preserve">
     <value>Change to this phase</value>
@@ -2253,6 +2328,9 @@
   <data name="WebPart_ResourceAllocation_Title" xml:space="preserve">
     <value>Project Allocation</value>
   </data>
+  <data name="WebPart_TasksOverview_Title" xml:space="preserve">
+    <value>Tasks Allocation</value>
+  </data>
   <data name="ChangeAnalysis_NextStep_Title" xml:space="preserve">
     <value>Next step</value>
   </data>
@@ -2270,6 +2348,24 @@
   </data>
   <data name="BenefitAnalysis_NextStep_LinkText" xml:space="preserve">
     <value>the task list</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Title" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_Text" xml:space="preserve">
+    <value>After you have defined the measurement indicators, you can register new measurements in</value>
+  </data>
+  <data name="MeasurementIndicators_NextStep_LinkText" xml:space="preserve">
+    <value>Benefits followup</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Title" xml:space="preserve">
+    <value>Next step</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_Text" xml:space="preserve">
+    <value>To see progress after you have registered benefit measurements, have a look at the</value>
+  </data>
+  <data name="BenefitsFollowUp_NextStep_LinkText" xml:space="preserve">
+    <value>Benefits overview</value>
   </data>
   <data name="PortfolioPage_Homepage_Title" xml:space="preserve">
     <value>Project Portal Home</value>
@@ -2985,8 +3081,17 @@
   <data name="BenefitsOverview_LoadingText" xml:space="preserve">
     <value>Loading benefits and measurements...</value>
   </data>
+  <data name="Lists_Tasks_Fields_Title_DisplayName" xml:space="preserve">
+    <value>Task Name</value>
+  </data>
   <data name="Lists_BenefitsAnalysis_Fields_Title_DisplayName" xml:space="preserve">
     <value>Benefit</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_DisplayName" xml:space="preserve">
+    <value>Benefit owner</value>
+  </data>
+  <data name="Lists_BenefitsAnalysis_Fields_BenefitOwner_Description" xml:space="preserve">
+    <value>The benefit owner is the person responsible for the realization of the benefit</value>
   </data>
   <data name="Lists_Log_Fields_LogLevel_DisplayName" xml:space="preserve">
     <value>Log Level</value>
@@ -3046,6 +3151,9 @@
   <data name="SiteSettings_Link_ListContent" xml:space="preserve">
     <value>Project Portal - List Content</value>
   </data>
+  <data name="SiteSettings_Link_Projecttypes" xml:space="preserve">
+    <value>Project Portal - Projecttypes</value>
+  </data>
   <data name="SiteSettings_Link_PortfolioOverviewFields" xml:space="preserve">
     <value>Project Portal - Portfolio Overview (Fields)</value>
   </data>
@@ -3096,5 +3204,35 @@
   </data>
   <data name="SiteTemplates_LiteTemplate_Comments" xml:space="preserve">
     <value>This is a simplified version that does not contain lists for benefit work.</value>
+  </data>
+  <data name="ItemLink_Label_NewTab" xml:space="preserve">
+    <value>Navigate to item (opens in a new tab)</value>
+  </data>  
+  <data name="DayPickerStrings_Months" xml:space="preserve">
+    <value>January,February,March,April,May,June,July,August,September,October,November,December</value>
+  </data>
+  <data name="DayPickerStrings_ShortMonths" xml:space="preserve">
+    <value>Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec</value>
+  </data>
+  <data name="DayPickerStrings_Days" xml:space="preserve">
+    <value>Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday</value>
+  </data>
+  <data name="DayPickerStrings_ShortDays" xml:space="preserve">
+    <value>S,M,T,W,T,F,S</value>
+  </data>
+  <data name="DayPickerStrings_GoToToday" xml:space="preserve">
+    <value>Go to today</value>
+  </data>
+  <data name="DayPickerStrings_PrevMonthAriaLabel" xml:space="preserve">
+    <value>Go to previous month</value>
+  </data>
+  <data name="DayPickerStrings_NextMonthAriaLabel" xml:space="preserve">
+    <value>Go to next month</value>
+  </data>
+  <data name="DayPickerStrings_PrevYearAriaLabel" xml:space="preserve">
+    <value>Go to previous year</value>
+  </data>
+  <data name="DayPickerStrings_NextYearAriaLabel" xml:space="preserve">
+    <value>Go to next year</value>
   </data>
 </root>

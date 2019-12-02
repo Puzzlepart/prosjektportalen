@@ -18,6 +18,7 @@ import DiceCalculator, { IDiceCalculatorProps } from "./DiceCalculator";
 import ProjectStats, { IProjectStatsProps } from "./ProjectStats";
 import DeliveriesOverview, { IDeliveriesOverviewProps } from "./DeliveriesOverview";
 import ResourceAllocation, { IResourceAllocationProps } from "./ResourceAllocation";
+import TasksOverview, { ITasksOverviewProps } from "./TasksOverview";
 import WebPartComponent from "./WebPartComponent";
 
 /**
@@ -62,6 +63,7 @@ const WebPartComponents: WebPartComponent<any>[] = [
         chartsConfigListName: __.getResource("Lists_ChartsConfig_Title"),
     }),
     new WebPartComponent<IResourceAllocationProps>(ResourceAllocation, "pp-resourceAllocation"),
+    new WebPartComponent<ITasksOverviewProps>(TasksOverview, "pp-tasksOverview"),
 ];
 
 /**
@@ -98,4 +100,5 @@ export {
     RiskMatrix,
     DiceCalculator,
     ProjectStats,
+    TasksOverview,
 };

@@ -34,11 +34,12 @@ export function getRefinersConfig(orderBy: string, configWeb: Web): Promise<any[
 /**
  * Get view config from list
  *
+ * @param {string} viewConfigList Views config list
  * @param {string} orderBy Order by property
  * @param {Web} configWeb Config web
  */
-export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> {
-    return configWeb.lists.getByTitle(__.getResource("Lists_DynamicPortfolioViews_Title"))
+export function getViewsConfig(viewConfigList: string, orderBy: string, configWeb: Web): Promise<any[]> {
+    return configWeb.lists.getByTitle(viewConfigList)
         .items
         .filter(`((GtDpPersonalView eq 0) or (GtDpPersonalView eq 1 and Author/Id eq ${_spPageContextInfo.userId}))`)
         .expand("GtDpFieldsLookup", "GtDpRefinersLookup", "GtDpGroupByLookup", "Author")
@@ -51,15 +52,16 @@ export function getViewsConfig(orderBy: string, configWeb: Web): Promise<any[]> 
 /**
  * Get config from lists
  *
+ * @param {string} viewConfigList Views config list
  * @param {string} orderBy Order by property
  * @param {string} configWebUrl URL for config lists
  */
-export async function getConfig(orderBy = "GtDpOrder", configWebUrl = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
+export async function getConfig(viewConfigList: string = __.getResource("Lists_DynamicPortfolioViews_Title"), orderBy: string = "GtDpOrder", configWebUrl: string = _spPageContextInfo.siteAbsoluteUrl): Promise<IDynamicPortfolioConfiguration> {
     const configWeb = new Web(configWebUrl);
     const [dpFields, dpRefiners, dpViews, statusFields] = await Promise.all([
         getFieldsConfig(orderBy, configWeb),
         getRefinersConfig(orderBy, configWeb),
-        getViewsConfig(orderBy, configWeb),
+        getViewsConfig(viewConfigList, orderBy, configWeb),
         loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
     ]);
     const columns = dpFields.map(fld => {

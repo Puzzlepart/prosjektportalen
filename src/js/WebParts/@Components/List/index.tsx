@@ -17,6 +17,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
         pathKey: "Path",
         webUrlKey: "SPWebUrl",
+        siteTitleKey: "SiteTitle",
         defaultGroupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
     };
 
@@ -198,7 +199,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo.SPWebUrl}
+                    webUrl={showProjectInfo[this.props.webUrlKey]}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -213,7 +214,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                         onDismiss: this._dismissProjectInfoModal,
                         headerClassName: "ms-font-xxl",
                         headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.SiteTitle,
+                        title: showProjectInfo[this.props.siteTitleKey],
                     }} />
             );
         }

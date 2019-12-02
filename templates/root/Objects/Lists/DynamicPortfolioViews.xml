@@ -1,4 +1,4 @@
-<pnp:ListInstance Title="{resource:Lists_DynamicPortfolioViews_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioViews" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
+<pnp:ListInstance Title="{resource:Lists_DynamicPortfolioViews_Title}" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/DynamicPortfolioViews" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableFolderCreation="false" EnableAttachments="false" Hidden="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x0100B98DDFB576777B409846155F0D450EB403" Default="true" />
@@ -38,6 +38,9 @@
         <pnp:FieldRef ID="0d7a146d-b41e-4357-82c3-76fb49eac011" Name="GtDpGroupByLookup" />
         <pnp:FieldRef ID="9f4ee969-ea00-4cc1-a466-a05c7db4156d" Name="GtDpPersonalView" />
     </pnp:FieldRefs>
+    <pnp:FieldDefaults>
+        <pnp:FieldDefault FieldName="GtDpSearchQuery">ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS:{resource:Choice_GtProjectLifecycleStatus_Closed} Path:{Site.URL}</pnp:FieldDefault>
+    </pnp:FieldDefaults>
     <pnp:Security>
         <pnp:BreakRoleInheritance CopyRoleAssignments="false" ClearSubscopes="false">
             <pnp:RoleAssignment Principal="{associatedownergroup}" RoleDefinition="{resource:RoleDefinition_FullControl}" />

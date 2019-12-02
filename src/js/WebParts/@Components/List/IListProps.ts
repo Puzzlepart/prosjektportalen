@@ -7,6 +7,7 @@ export default interface IListProps {
     columns?: Array<IColumn>;
     pathKey?: string;
     webUrlKey?: string;
+    siteTitleKey?: string;
     showSearchBox?: boolean;
     showCommandBar?: boolean;
     defaultGroupBy?: IGroupByOption;

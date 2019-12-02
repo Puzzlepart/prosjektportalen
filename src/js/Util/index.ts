@@ -11,25 +11,17 @@ import GetBreakpoint from "./GetBreakpoint";
 declare var MSOWebPartPageFormName: string;
 
 /**
- * HTML decodes the string
- *
- * @param {string} input Input
- */
-export function htmlDecode(input: string): string {
-    const element = document.createElement("div");
-    element.innerHTML = input;
-    return element.childNodes.length === 0 ? "" : element.childNodes[0].nodeValue;
-}
-
-/**
  * Formats a date using moment.js (defaults for format and locale are set in the resource files)
  *
- * @param {string} date Date
+ * @param {string | Date} date Date
  * @param {string} format Date format
  * @param {string} locale Date locale
  */
-export function dateFormat(date: string, format = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
-    return moment(new Date(date).toISOString()).locale(locale).format(format);
+export function dateFormat(date: string | Date, format = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
+    if (typeof date === "string") {
+        return moment(new Date(date as string).toISOString()).locale(locale).format(format);
+    }
+    return moment((date as Date).toISOString()).locale(locale).format(format);
 }
 
 /**

@@ -2,9 +2,9 @@
 var gulp = require("gulp"),
     zip = require("gulp-zip"),
     format = require("string-format"),
-    runSequence = require("run-sequence"),
     git = require("./utils/git.js"),
     pkg = require("../package.json"),
+    bom = require('gulp-bom'),
     config = require('./@configuration.js');
 
 function getReleasePackageName() {

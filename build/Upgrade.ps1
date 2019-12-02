@@ -38,8 +38,8 @@ Param(
     [switch]$SkipAssets,
     [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing third party scripts (in case you already have installed third party scripts previously)?")]
     [switch]$SkipThirdParty,
-    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing root package (main installation package)? Only to be done if you're sure you only need new assets files.")]
-    [switch]$SkipRootPackage,
+    [Parameter(Mandatory = $false, HelpMessage = "Do you want to skip installing Fields, ContentTypes and Lists from the root/main installation package? Can be useful for patch-upgrades")]
+    [switch]$SkipFieldsContentTypesAndLists,
     [ValidateSet('None','File','Host')]
     [string]$Logging = "File",
     [Parameter(Mandatory = $false, HelpMessage = "Use Force if you want to install packages even if version check fails")]
@@ -49,6 +49,9 @@ Param(
 )
 
 $ErrorActionPreference = "Stop"
+
+# Fix encoding issues of scripts
+Get-ChildItem .\scripts\* -Recurse *.ps1 | % { $content=$_ | Get-Content; Set-Content -PassThru $_.FullName $content -Encoding UTF8 -Force} > $null
 
 . ./scripts/SharedFunctions.ps1
 
@@ -104,7 +107,6 @@ if ($null -eq $Connection) {
 $CurrentVersion = ParseVersion -VersionString (Get-PnPPropertyBag -Key pp_version)
 # {package-version} will be replaced with the actual version by 'npm run-script release'
 $InstallVersion = ParseVersion -VersionString "{package-version}"
-$UpgradeFolderPath = "./@upgrade/$($CurrentVersion.Major).$($CurrentVersion.Minor)_$($InstallVersion.Major).$($InstallVersion.Minor)"
 
 if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
     Write-Host "############################################################################" -ForegroundColor Green
@@ -122,22 +124,12 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         try {
-            if (Test-Path $UpgradeFolderPath -PathType Container) {
-                Write-Host "Installing pre-upgrade packages.." -ForegroundColor Green -NoNewLine
-                $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/pre-*-$($Language).pnp"
-                if ($null -ne $upgradePkgs) {
-                    foreach ($pkg in $upgradePkgs) {
-                        Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
-                    }
-                }
-                Write-Host "DONE" -ForegroundColor Green
-            }
+            Install-UpgradePackages -CurrentVersion $CurrentVersion -InstallVersion $InstallVersion -Language $Language -Pre
         }
         catch {
             Write-Host
             Write-Host "Error deploying pre-upgrade packages to $Url" -ForegroundColor Red 
-            Write-Host $error[0] -ForegroundColor Red
-            exit 1 
+            throw $error[0]
         }
 
         # Removing custom actions with wrong internal-names from versions 2.2 and before
@@ -149,76 +141,61 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
             }
             catch {
                 Write-Host
-                Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                Write-Host "Error removing existing custom actions from $Url" -ForegroundColor Red
             }
         }
     }
     
     try {
-        .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -SkipRootPackage:$SkipRootPackage -Logging $Logging -Parameters $Parameters
+        .\Install.ps1 -Url $Url -AssetsUrl $AssetsUrl -DataSourceSiteUrl $DataSourceSiteUrl -Environment $Environment -Upgrade -SkipData -SkipDefaultConfig -SkipTaxonomy -PSCredential $Credential -Connection $Connection -UseWebLogin:$UseWebLogin -CurrentCredentials:$CurrentCredentials -SkipLoadingBundle -SkipAssets:$SkipAssets -SkipThirdParty:$SkipThirdParty -SkipFieldsContentTypesAndLists:$SkipFieldsContentTypesAndLists -Logging $Logging -Parameters $Parameters
     }
     catch {
         Write-Host
-        Write-Host "Error upgrading Project Portal. Aborting"
-        exit 1
+        Write-Host "Error upgrading Project Portal. Aborting" -ForegroundColor Red
+        throw $error[0]
     }
 
     if ($InstallVersion.Major -gt $CurrentVersion.Major -or $InstallVersion.Minor -gt $CurrentVersion.Minor) {
         $Connection = Connect-SharePoint $Url -Connection $Connection
-        if (Test-Path $UpgradeFolderPath -PathType Container) {
-            Write-Host "Installing upgrade packages.." -ForegroundColor Green
-            $upgradePkgs = Get-ChildItem -Path "$UpgradeFolderPath/*-$($Language).pnp" -Exclude "pre-*.pnp"
-            if ($null -ne $upgradePkgs) {
-                foreach ($pkg in $upgradePkgs) {
-                    Write-Host "Applying upgrade-package $($pkg.FullName)" 
-                    Apply-PnPProvisioningTemplate $pkg.FullName -ErrorAction SilentlyContinue
-                }
-            }
-            Write-Host "DONE" -ForegroundColor Green
-        }
-        
-        # Replacing Content Type IDs in configurations from versions 2.3 and before
-        if ($CurrentVersion.Minor -lt 4) {
-            try {
-                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
-                Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
-                    $_["GtDpSearchQuery"] = $Query
-                    $_.Update()
-                }
-                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
-                    $_["GtDpSearchQuery"] = $Query
-                    $_.Update()
-                }
-                Invoke-PnPQuery
-                Write-Host "DONE" -ForegroundColor Green
-            }
-            catch {
-                Write-Host
-                Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
-            }
-        }
+        Install-UpgradePackages -CurrentVersion $CurrentVersion -InstallVersion $InstallVersion -Language $Language
 
         if ($CurrentVersion.Minor -lt 5) {
-            $ProjectLifecycleFilter = ""
-            $ClosedProjectsDisplayName = ""
+            Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
+            # Replacing Content Type IDs in configurations from versions 2.3 and before
+            if ($CurrentVersion.Minor -lt 4) {
+                try {
+                    Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
+                        $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
+                        $_["GtDpSearchQuery"] = $Query
+                        $_.Update()
+                    }
+                    Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
+                        $Query = $_["GtDpSearchQuery"].Replace("0x010109010058561f86d956412b9dd7957bbcd67aae0100", "0x010088578E7470CC4AA68D5663464831070211").Replace(" contentclass:STS_Web", "")
+                        $_["GtDpSearchQuery"] = $Query
+                        $_.Update()
+                    }
+                    Invoke-PnPQuery
+                    Write-Host "DONE" -ForegroundColor Green
+                }
+                catch {
+                    Write-Host
+                    Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
+                    throw $error[0]
+                }
+            }
             switch ($Language){
                 "1033" { 
                     $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Closed"'
+                    $ClosedProjectLifecycleQuery = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatusOWSCHCS="Closed" Path:{Site.URL}'
                     $ClosedProjectsDisplayName = 'Closed Projects'
                 }
                 "1044" { 
                     $ProjectLifecycleFilter = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* NOT GtProjectLifecycleStatusOWSCHCS="Avsluttet"'
+                    $ClosedProjectLifecycleQuery = 'ContentTypeId:0x010088578E7470CC4AA68D5663464831070211* GtProjectLifecycleStatusOWSCHCS="Avsluttet" Path:{Site.URL}'
                     $ClosedProjectsDisplayName = 'Avsluttede prosjekter'
                 }
             }
             try {
-                Write-Host "Applying additional upgrade steps... " -ForegroundColor Green -NoNewLine
                 Get-PnPListItem -List "Lists/DataSources" | ForEach-Object {
                     if ($_["Title"] -eq "PROJECTS") {
                         $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
@@ -226,32 +203,34 @@ if ($InstallVersion -gt $CurrentVersion -or $Force.IsPresent) {
                         $_.Update()
                     }
                     if ($_["Title"] -eq "BENEFITSOVERVIEW") {
-                        $Query = "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR 0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{SiteCollection.URL}"
+                        $Query = "(ContentTypeID:0x0100B384774BA4EBB842A5E402EBF4707367* OR ContentTypeID:0x01007A831AC68204F04AAA022CFF06C7BAA2* OR ContentTypeID:0x0100FF4E12223AF44F519AF40C441D05DED0*) Path:{Site.URL}"
                         $_["GtDpSearchQuery"] = $Query
                         $_.Update()
                     }
-
                 }
-                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | ForEach-Object {
-                    if ($_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName) {
-                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter.Replace(" NOT ", " "))
-                    } else {
-                        $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
-                    }
+                
+                Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -ne $ClosedProjectsDisplayName} | ForEach-Object {
+                    $Query = $_["GtDpSearchQuery"].Replace("ContentTypeId:0x010088578E7470CC4AA68D5663464831070211*", $ProjectLifecycleFilter)
                     $_["GtDpSearchQuery"] = $Query
                     $_.Update()
                 }
+
+                $ClosedProjects = Get-PnPListItem -List "Lists/DynamicPortfolioViews" | Where-Object {$_["GtDpDisplayName"] -eq $ClosedProjectsDisplayName -or $_["Title"] -eq $ClosedProjectsDisplayName}
+                if ($null -ne $ClosedProjects) {
+                    Set-PnPListItem -List "Lists/DynamicPortfolioViews" -Identity $ClosedProjects -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery }
+                } else {
+                    Add-PnPListItem -List "Lists/DynamicPortfolioViews" -Values @{ GtDpDisplayName=$ClosedProjectsDisplayName; GtDpIcon="CircleStop";GtDpOrder=50;GtDpFieldsLookup=1,3,17,8,9;GtDpRefinersLookup=2,3,5,4,1;GtDpSearchQuery=$ClosedProjectLifecycleQuery } | out-null
+                }
+
                 Invoke-PnPQuery
                 Write-Host "DONE" -ForegroundColor Green
             }
             catch {
                 Write-Host
                 Write-Host "Error applying additional upgrade steps to $Url" -ForegroundColor Red 
-                Write-Host $error[0] -ForegroundColor Red
-                exit 1 
+                throw $error[0]
             }
         }
-
     } 
     Write-Host "No additional upgrade steps required. Upgrade complete." -ForegroundColor Green
 } else {    

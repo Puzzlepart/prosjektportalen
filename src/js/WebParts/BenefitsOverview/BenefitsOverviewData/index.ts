@@ -1,11 +1,12 @@
 //#region Imports
+import { SearchQuery, Site } from "@pnp/sp";
 import __ from "../../../Resources";
-import { sp, SearchQuery, Site } from "@pnp/sp";
-import IBenefitsOverviewData from "./IBenefitsOverviewData";
-import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
+import SearchService from "../../../Services/SearchService";
 import { Benefit } from "./Benefit";
 import { BenefitMeasurement } from "./BenefitMeasurement";
 import { BenefitMeasurementIndicator } from "./BenefitMeasurementIndicator";
+import IBenefitsOverviewData from "./IBenefitsOverviewData";
+import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
 //#endregion
 
 /**
@@ -42,6 +43,9 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
                 "GtGainLookupId",
                 "GtMeasureIndicatorLookupId",
                 "GtGainsResponsible",
+                "RefinableString58",
+                "RefinableString59",
+                "RefinableString70",
             ],
             TrimDuplicates: false,
         };
@@ -51,29 +55,32 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
             searchSettings.QueryTemplate = dataSource.GtDpSearchQuery;
         }
         try {
-            const results = (await sp.search(searchSettings)).PrimarySearchResults as IBenefitsSearchResult[];
-            const benefits = results
+            const { items } = await SearchService.search<IBenefitsSearchResult[]>(searchSettings);
+            const benefits = items
                 .filter(res => res.ContentTypeID.indexOf("0x0100B384774BA4EBB842A5E402EBF4707367") === 0)
                 .map(res => new Benefit(res));
-            const measurements = results
+            const measurements = items
                 .filter(res => res.ContentTypeID.indexOf("0x01007A831AC68204F04AAA022CFF06C7BAA2") === 0)
                 .map(res => new BenefitMeasurement(res))
                 .sort((a, b) => b.date.getTime() - a.date.getTime());
             let indicators = [];
-            results
+            items
                 .filter(res => res.ContentTypeID.indexOf("0x0100FF4E12223AF44F519AF40C441D05DED0") === 0)
                 .forEach(res => {
-                    let _benfitIds = res.GtGainLookupId.split(";").map(str => parseInt(str, 10));
-                    _benfitIds.forEach(_benfitId => {
-                        let _indicator = new BenefitMeasurementIndicator(res);
-                        let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
-                        if (_benefit) {
-                            _indicator = _indicator
-                                .setMeasurements(measurements)
-                                .setBenefit(_benefit);
-                            indicators.push(_indicator);
-                        }
-                    });
+                    let _benefitLookupId = res.GtGainLookupId || res.RefinableString58;
+                    if (_benefitLookupId) {
+                        let _benfitIds = _benefitLookupId.split(";").map(str => parseInt(str, 10));
+                        _benfitIds.forEach(_benfitId => {
+                            let _indicator = new BenefitMeasurementIndicator(res);
+                            let [_benefit] = benefits.filter(b => b.id === _benfitId && b.webId === _indicator.webId);
+                            if (_benefit) {
+                                _indicator = _indicator
+                                    .setMeasurements(measurements)
+                                    .setBenefit(_benefit);
+                                indicators.push(_indicator);
+                            }
+                        });
+                    }
                 });
             return indicators;
         } catch (err) {
@@ -87,3 +94,4 @@ export async function fetchData(queryTemplate?: string, dataSourceName?: string)
 
 
 export { IBenefitsOverviewData };
+
