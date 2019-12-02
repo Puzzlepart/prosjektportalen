@@ -151,7 +151,14 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 }).length > 0;
             });
         }, allocations);
-        return allocations;
+
+        if (Object.keys(activeFilters).length === 1 && Object.keys(activeFilters)[0] === "user.name") {
+            return allocations;
+        } else {
+            const users = allocations.map(alloc => alloc.name);
+            const additionalAllocations = Object.keys(activeFilters).length > 0 ? this.state.portfolioAbsenceItems.filter(item => users.includes(item.name)) : [];
+            return allocations.concat(additionalAllocations);
+        }
     }
 
     /**
@@ -166,7 +173,8 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
             type: alloc.type,
             ...alloc,
         }));
-        let groups = users.map(user => ({ id: user.id, title: user.name }));
+        const allocatedUsers = allocations.map(alloc => alloc.name);
+        let groups = users.filter(user => allocatedUsers.includes(user.name)).map(user => ({ id: user.id, title: user.name }));
         groups = groups.sort((a, b) => (a.title < b.title) ? -1 : ((a.title > b.title) ? 1 : 0));
         return { groups, items };
     }
@@ -299,7 +307,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
             user.allocations.push(allocations[i]);
         }
 
-        return { users, allocations };
+        return { users, allocations, portfolioAbsenceItems };
     }
 
     /**
