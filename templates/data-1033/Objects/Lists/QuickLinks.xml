@@ -1,8 +1,9 @@
-<pnp:ListInstance Title="Lenker" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
+<pnp:ListInstance Title="Quick Links" Description="" DocumentTemplate="" TemplateType="103" Url="Lists/QuickLinks" ContentTypesEnabled="true" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="URL">
         <pnp:DataRow>
-            <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren | En felles prosjektmodell for offentlig sektor</pnp:DataValue>
+            <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren (Norwegian)</pnp:DataValue>
+            <pnp:DataValue FieldName="URL">https://www.axelos.com/best-practice-solutions/prince2/what-is-prince2, What is PRINCE2? | Axelos</pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>

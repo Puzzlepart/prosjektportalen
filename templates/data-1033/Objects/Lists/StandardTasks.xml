@@ -1,9 +1,9 @@
-<pnp:ListInstance Title="Standardoppgaver" Description="" DocumentTemplate="" TemplateType="171" Url="Lists/StandardTasks" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" TemplateFeatureID="f9ce21f8-f437-4f7e-8bc6-946378c850f0" ContentTypesEnabled="true" EnableFolderCreation="false" 
+<pnp:ListInstance Title="Default Tasks" Description="" DocumentTemplate="" TemplateType="171" Url="Lists/StandardTasks" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" TemplateFeatureID="f9ce21f8-f437-4f7e-8bc6-946378c850f0" ContentTypesEnabled="true" EnableFolderCreation="false" 
     xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:ContentTypeBindings>
         <pnp:ContentTypeBinding ContentTypeID="0x010800233B015F95174C9A8EB505493841DE8D" Default="true" />
     </pnp:ContentTypeBindings>
-    <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="Title">
+    <pnp:DataRows UpdateBehavior="Skip" KeyColumn="Title">
         <pnp:DataRow>
             <pnp:DataValue FieldName="Title">Beslutte utredning av idéen og utforme et førsteutkast til prosjektmandat</pnp:DataValue>
             <pnp:DataValue FieldName="GtProjectPhase">Ingen fase|6edb42ac-9aaf-4f07-9cf5-5dfdf9ab0c32</pnp:DataValue>
