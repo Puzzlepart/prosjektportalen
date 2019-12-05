@@ -186,6 +186,11 @@ function Start-Install() {
         try {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
+                # Removing Home.aspx if english install, to avoid conflict with existing page
+                $Language = Get-WebLanguage -ctx (Get-PnPContext -Connection $Connection)
+                if ($Language -eq 1033) {
+                    Remove-PnPFile -SiteRelativeUrl "SitePages/Home.aspx"  -Recycle -Connection $Connection
+                }
                 Write-Host "Deploying root-package with fields, content types and lists...." -ForegroundColor Green
                 Apply-Template -Template "root" -Localized -Handlers "Fields,ContentTypes,Lists" -Parameters $MergedParameters
                 Write-Host "Deploying root-package with files, features and settings..." -ForegroundColor Green
