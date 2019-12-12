@@ -257,16 +257,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     private onListContentChanged(lc: ListConfig, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let model = prevState.model.clone();
-            if (checked && !model.projectType) {
+            if (checked) {
                 model.includeContent.push(lc);
-            } else if (!checked && !model.projectType) {
+            } else {
                 model.includeContent.splice(model.includeContent.indexOf(lc), 1);
             }
-
-            model.includeContent.forEach((element, index) => {
-                console.log("[" + index + "]: " + element.Label);
-            });
-
             return { model };
         });
     }
@@ -292,9 +287,6 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
 
         model.includeContent.forEach((element, index) => {
             console.log("[" + index + "]: " + element.Label);
-
-            model.includeContent.push(element);
-
         });
 
         this.setState({ model, selectedTemplate });

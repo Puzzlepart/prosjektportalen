@@ -23,22 +23,33 @@ export default class ToggleSection extends React.Component<IToggleSectionProps, 
     }
 
     public render() {
+        const {
+            hidden,
+            title,
+            options,
+            optLabelProp,
+            onChanged,
+            headerClassName,
+            selected,
+        } = this.props;
+        const { isExpanded } = this.state;
+
         return (
-            <div hidden={this.props.hidden}>
-                <div onClick={this.onToggle} className={this.props.headerClassName}>
-                    <span>{this.props.title}</span>
-                    <span className={this.state.isExpanded ? "ChevronUp" : "ChevronDown"}>
-                        <Icon iconName={this.state.isExpanded ? "ChevronUp" : "ChevronDown"} />
+            <div hidden={hidden}>
+                <div onClick={this.onToggle} className={headerClassName}>
+                    <span>{title}</span>
+                    <span className={isExpanded ? "ChevronUp" : "ChevronDown"}>
+                        <Icon iconName={isExpanded ? "ChevronUp" : "ChevronDown"} />
                     </span>
                 </div>
-                <section hidden={!this.state.isExpanded}>
-                    {this.props.options.map((opt, index) => {
+                <section hidden={!isExpanded}>
+                    {options.map((opt, index) => {
                         return (
                             <div key={index}>
                                 <Toggle
-                                    defaultChecked={opt[this.props.optDefaultCheckedProp] === true}
-                                    label={opt[this.props.optLabelProp]}
-                                    onChanged={checked => this.props.onChanged(opt, checked)}
+                                    checked={selected.indexOf(opt.Id) !== -1}
+                                    label={opt[optLabelProp]}
+                                    onChanged={checked => onChanged(opt, checked)}
                                     onText={__.getResource("String_Yes")}
                                     offText={__.getResource("String_No")} />
                                 <div className="ms-font-xs" style={{ paddingTop: 10, paddingBottom: 10 }} hidden={!opt.Comments}>

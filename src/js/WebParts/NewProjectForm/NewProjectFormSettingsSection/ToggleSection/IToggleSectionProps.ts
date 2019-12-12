@@ -4,4 +4,5 @@ export default  interface IToggleSectionProps extends React.HTMLAttributes<HTMLD
     optLabelProp: string;
     optDefaultCheckedProp: string;
     onChanged: (opt: any, checked: boolean) => void;
+    selected?: number[];
 }
