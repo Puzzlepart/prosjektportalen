@@ -257,11 +257,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     private onListContentChanged(lc: ListConfig, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
             let model = prevState.model.clone();
-            if (checked) {
+            if (checked && !model.projectType) {
                 model.includeContent.push(lc);
-            } else {
+            } else if (!checked && !model.projectType) {
                 model.includeContent.splice(model.includeContent.indexOf(lc), 1);
             }
+
+            model.includeContent.forEach((element, index) => {
+                console.log("[" + index + "]: " + element.Label);
+            });
+
             return { model };
         });
     }
@@ -285,7 +290,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             selectedTemplate = this.state.config.templates.filter(t => t.Id === projectType.templateId)[0];
         }
 
+        model.includeContent.forEach((element, index) => {
+            console.log("[" + index + "]: " + element.Label);
+
+            model.includeContent.push(element);
+
+        });
+
         this.setState({ model, selectedTemplate });
+
+        console.log("Amount of includedContent for selected Projecttype: " + model.includeContent.length);
     }
 
     /**

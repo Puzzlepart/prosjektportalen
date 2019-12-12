@@ -37,14 +37,14 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
                     onChanged={this.props.onListContentChanged}
-                    hidden={this.props.config.listData.length === 0 || this.props.config.projectTypes.length !== 0} />
+                    hidden={this.props.config.listData.length === 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.config.extensions}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"
                     onChanged={this.props.onExtensionsChanged}
-                    hidden={this.props.config.extensions.length === 0 || this.props.config.projectTypes.length !== 0} />
+                    hidden={this.props.config.extensions.length === 0} />
             </div>
         );
     }
