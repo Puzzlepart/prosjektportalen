@@ -284,14 +284,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             model.extensions = this.state.config.extensions.filter(l => projectType.extensionIds.indexOf(l.Id) !== -1);
             selectedTemplate = this.state.config.templates.filter(t => t.Id === projectType.templateId)[0];
         }
-
-        model.includeContent.forEach((element, index) => {
-            console.log("[" + index + "]: " + element.Label);
-        });
-
         this.setState({ model, selectedTemplate });
-
-        console.log("Amount of includedContent for selected Projecttype: " + model.includeContent.length);
     }
 
     /**
