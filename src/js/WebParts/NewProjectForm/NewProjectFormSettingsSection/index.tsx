@@ -8,9 +8,7 @@ import DropdownSection, { IDropdownOption } from "./DropdownSection";
 //#endregion
 
 export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
-    public static defaultProps = {
-        toggleSectionClassName: "ms-font-l settings-section",
-    };
+    public static defaultProps = { toggleSectionClassName: "ms-font-l settings-section" };
 
     /**
     * Constructor
@@ -27,24 +25,25 @@ export default class NewProjectFormSettingsSection extends React.Component<INewP
             <div className={this.props.className}>
                 <DropdownSection
                     title={__.getResource("NewProjectForm_ShowProjecttypesSettings")}
-                    placeholder={"Velg et prosjekt"}
                     options={this._projectTypeOptions}
                     onChanged={option => this.props.onProjectTypeChanged(option.data)}
                     hidden={this.props.config.projectTypes.length === 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowListContentSettings")}
                     options={this.props.config.listData}
+                    selected={this.props.model.includeContent.map(ic => ic.Id)}
                     optLabelProp="Label"
                     optDefaultCheckedProp="Default"
                     onChanged={this.props.onListContentChanged}
-                    hidden={this.props.config.listData.length === 0 || this.props.config.projectTypes.length !== 0} />
+                    hidden={this.props.config.listData.length === 0} />
                 <ToggleSection
                     title={__.getResource("NewProjectForm_ShowExtensionSettings")}
                     options={this.props.config.extensions}
+                    selected={this.props.model.extensions.map(ic => ic.Id)}
                     optLabelProp="Title"
                     optDefaultCheckedProp="IsEnabled"
                     onChanged={this.props.onExtensionsChanged}
-                    hidden={this.props.config.extensions.length === 0 || this.props.config.projectTypes.length !== 0} />
+                    hidden={this.props.config.extensions.length === 0} />
             </div>
         );
     }
