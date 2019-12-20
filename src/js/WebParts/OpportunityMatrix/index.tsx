@@ -89,6 +89,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
 
             return (
                 <div className={this.props.className}>
+                    <h3>{__.getResource("OpportunityMatrix_Header_Text")}</h3>
                     <div hidden={!this.props.showViewSelector || viewOptions.length < 2}>
                         <Dropdown
                             label={__.getResource("OpportunityMatrix_ViewSelectorLabel")}

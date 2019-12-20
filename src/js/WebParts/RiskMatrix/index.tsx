@@ -108,6 +108,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
 
             return (
                 <div className={className}>
+                    <h3>{__.getResource("RiskMatrix_Header_Text")}</h3>
                     <div hidden={!showViewSelector || viewOptions.length < 2}>
                         <Dropdown
                             label={__.getResource("RiskMatrix_ViewSelectorLabel")}

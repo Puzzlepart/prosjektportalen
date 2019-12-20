@@ -3000,6 +3000,9 @@
   <data name="RiskMatrix_Header_VeryLow" xml:space="preserve">
     <value>Very low</value>
   </data>
+  <data name="RiskMatrix_Header_Text" xml:space="preserve">
+    <value>Risk matrix</value>
+  </data>
   <data name="RiskMatrix_ViewSelectorLabel" xml:space="preserve">
     <value>Pick a view:</value>
   </data>
@@ -3038,6 +3041,9 @@
   </data>
   <data name="OpportunityMatrix_Header_Large" xml:space="preserve">
     <value>Large</value>
+  </data>  
+  <data name="OpportunityMatrix_Header_Text" xml:space="preserve">
+    <value>Opportunity matrix</value>
   </data>
   <data name="String_NavigateToList" xml:space="preserve">
     <value>Navigate to the list</value>
