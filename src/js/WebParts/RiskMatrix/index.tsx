@@ -145,7 +145,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                     </div>
                                     <List
                                         items={items}
-                                        columns={columns}
+                                        columns={this.props.showProjectColumn ? columns : columns.filter(c => c.key !== "SiteTitle")}
                                         webUrlKey="webUrl"
                                         pathKey="url"
                                         siteTitleKey="siteTitle"

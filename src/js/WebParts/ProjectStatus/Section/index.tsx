@@ -83,6 +83,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
                                 data={{ items: listData.items }}
                                 showViewSelector={false}
                                 showProjectSelector={false}
+                                showProjectColumn={false}
                                 {...this.props.riskMatrix} />
                             <OpportunityMatrix
                                 data={{ items: listData.items }}
