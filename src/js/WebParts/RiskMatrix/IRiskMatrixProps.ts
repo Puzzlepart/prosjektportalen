@@ -82,5 +82,5 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     showProjectSelector: true,
     hideLabelsBreakpoint: 900,
     rowLimit: 500,
-    postActionShowOriginal: true,
+    postActionShowOriginal: false,
 };
