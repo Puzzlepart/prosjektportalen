@@ -13,13 +13,14 @@ export default class RiskElementModel {
     public webUrl: string;
     public siteTitle: string;
 
-    constructor(id: string, title: string, probability: string, consequence: string, probabilityPostAction: string, consequencePostAction: string) {
+    constructor(id: string, title: string, probability: string, consequence: string, probabilityPostAction: string, consequencePostAction: string, action?: string) {
         this.id = id;
         this.title = title;
         this.probability = parseInt(probability, 10);
         this.consequence = parseInt(consequence, 10);
         this.probabilityPostAction = parseInt(probabilityPostAction, 10);
         this.consequencePostAction = parseInt(consequencePostAction, 10);
+        this.action = action;
         const listDefaultViewUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource("DefaultView_Uncertainties_Url")}`;
         this.url = `${listDefaultViewUrl.replace("AllItems", "DispForm")}?ID=${this.id}`;
     }

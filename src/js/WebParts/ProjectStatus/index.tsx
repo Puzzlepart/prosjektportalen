@@ -71,7 +71,6 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * Render sections
      */
     private renderSections() {
-        console.log(this.state.data.sections);
         return (
             this.state.data.sections
                 .filter(s => s.showAsSection)
@@ -99,7 +98,6 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
             GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
             loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
         ]);
-        console.log(spSections);
         const sections = spSections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid());
         return { project, fields: spFields, sections, exportType };
     }
