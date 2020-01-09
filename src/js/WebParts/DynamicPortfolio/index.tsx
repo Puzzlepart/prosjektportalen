@@ -22,6 +22,7 @@ import DynamicPortfolioItemColumn from "./DynamicPortfolioItemColumn";
 import { queryProjects } from "./DynamicPortfolioSearch";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
+import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
 
 /**
  * Dynamic Portfolio
@@ -148,7 +149,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     private onRenderDetailsHeader(detailsHeaderProps: IDetailsHeaderProps, defaultRender) {
-        return <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender(detailsHeaderProps)}</Sticky>;
+        return <Sticky stickyPosition={StickyPositionType.Header}>{defaultRender({
+            ...detailsHeaderProps,
+            onRenderColumnHeaderTooltip: (tooltipHostProps) => {
+                return (
+                    <TooltipHost {...tooltipHostProps} />
+                );
+            },
+        })}</Sticky>;
     }
 
     /**

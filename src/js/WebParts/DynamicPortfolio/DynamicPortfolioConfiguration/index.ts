@@ -75,6 +75,7 @@ export async function getConfig(viewConfigList: string = __.getResource("Lists_D
             maxWidth: fld.GtDpMaxWidth,
             isResizable: fld.GtDpIsResizable,
             groupBy: fld.GtDpGroupBy,
+            ariaLabel: fld.GtDpDisplayName,
         };
     });
     const refiners = dpRefiners.map(ref => {
