@@ -391,6 +391,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         // Sorts items from response.primarySearchResults
         let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
 
+        items = this.convertUTCDates(items);
+
         let updatedState: Partial<IDynamicPortfolioState> = {
             selectedColumns,
             fieldNames,
@@ -411,6 +413,24 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         return updatedState;
+    }
+
+    /**
+     * Workaround for custom date fields being saved in UTC, resulting in date being displayed one day in the past
+     */
+    private convertUTCDates(items) {
+        return items.map(item => {
+            const fieldNames = Object.keys(item);
+            fieldNames.forEach(field => {
+                if (field.toLowerCase().includes("date")) {
+                    let dateObj = new Date(item[field]);
+                    let date = dateObj.getDate();
+                    dateObj.setDate(date + 1);
+                    item[field] = dateObj.toLocaleDateString();
+                }
+            });
+            return item;
+        });
     }
 
     /**
