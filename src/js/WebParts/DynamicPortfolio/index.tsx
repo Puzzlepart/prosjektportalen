@@ -423,9 +423,23 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             const fieldNames = Object.keys(item);
             fieldNames.forEach(field => {
                 if (field.toLowerCase().includes("date") && item[field]!) {
-                    let dateObj = new Date(item[field]);
-                    let date = dateObj.getDate();
-                    dateObj.setDate(date + 1);
+                    Date.prototype.toISOString = function () { // Required in order to convert to correct time zone and a string that can be sorted
+                        const tzo = -this.getTimezoneOffset(),
+                            dif = tzo >= 0 ? "+" : "-",
+                            pad = function (num) {
+                                let norm = Math.floor(Math.abs(num));
+                                return (norm < 10 ? "0" : "") + norm;
+                            };
+                        return this.getFullYear() +
+                            "-" + pad(this.getMonth() + 1) +
+                            "-" + pad(this.getDate()) +
+                            "T" + pad(this.getHours()) +
+                            ":" + pad(this.getMinutes()) +
+                            ":" + pad(this.getSeconds()) +
+                            dif + pad(tzo / 60) +
+                            ":" + pad(tzo % 60);
+                    };
+                    let dateObj = new Date(`${item[field]} UTC`);
                     item[field] = dateObj.toISOString();
                 }
             });
