@@ -422,11 +422,11 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         return items.map(item => {
             const fieldNames = Object.keys(item);
             fieldNames.forEach(field => {
-                if (field.toLowerCase().includes("date")) {
+                if (field.toLowerCase().includes("date") && item[field]!) {
                     let dateObj = new Date(item[field]);
                     let date = dateObj.getDate();
                     dateObj.setDate(date + 1);
-                    item[field] = dateObj.toLocaleDateString();
+                    item[field] = dateObj.toISOString();
                 }
             });
             return item;
