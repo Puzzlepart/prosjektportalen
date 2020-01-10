@@ -39,13 +39,13 @@
             <pnp:DataValue FieldName="GtDpGroupBy">1</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="GtDpProperty">GtStartDateOWSDATE</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableDate05</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Startdato</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">50</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
         </pnp:DataRow>
         <pnp:DataRow>
-            <pnp:DataValue FieldName="GtDpProperty">GtEndDateOWSDATE</pnp:DataValue>
+            <pnp:DataValue FieldName="GtDpProperty">RefinableDate06</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpDisplayName">Sluttdato</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpOrder">60</pnp:DataValue>
             <pnp:DataValue FieldName="GtDpRender">Date</pnp:DataValue>
