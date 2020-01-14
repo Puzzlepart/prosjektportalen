@@ -187,7 +187,7 @@ function Start-Install() {
             $Connection = Connect-SharePoint -Url $Url -Connection $Connection
             if (-not $Upgrade.IsPresent) {
                 # Removing Home.aspx if english install, to avoid conflict with existing page
-                $Language = Get-WebLanguage -ctx (Get-PnPContext -Connection $Connection)
+                $Language = Get-WebLanguage -ctx (Get-PnPContext)
                 if ($Language -eq 1033) {
                     Remove-PnPFile -SiteRelativeUrl "SitePages/Home.aspx"  -Recycle -Connection $Connection
                 }
