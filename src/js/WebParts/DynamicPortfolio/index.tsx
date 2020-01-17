@@ -427,7 +427,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
                 isCollapsed: false,
-                isShowingAll: true,
+                isShowingAll: false,
                 isDropEnabled: false,
             }));
         }
