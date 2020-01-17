@@ -631,6 +631,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             filters: filters,
             currentView: viewConfig,
             selectedColumns: this.state.configuration.columns.filter(fc => Array.contains(viewConfig.fields, fc.name)),
+            searchTerm: this.state.searchTerm,
             groupBy: null,
         };
 
@@ -641,8 +642,14 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 updatedState.groupBy = groupByColumn;
             }
         }
-
         await this.updateState(updatedState);
+
+        // Check if the searchbar had searchterm on new view
+        if (updatedState.searchTerm) {
+            document.querySelectorAll('input[id^="SearchBox"].ms-SearchBox-field')[0].attributes[4].value = this.state.searchTerm;
+            // TODO: Make the search value stay when use clicks the search bar after view change, right now it dissapears
+        }
+
         if (this.props.viewSelectorEnabled) {
             Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
         }
