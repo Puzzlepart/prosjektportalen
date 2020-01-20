@@ -322,7 +322,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         let searchTerm = newValue.toLowerCase();
                         this.setState({ searchTerm });
                     }}
-                    placeholder={this.props.searchBoxLabelText} />
+                    placeholder={this.props.searchBoxLabelText}
+                    value={this.state.searchTerm} />
             </div>
         );
     }
@@ -685,6 +686,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         }
 
         await this.updateState(updatedState);
+
         if (this.props.viewSelectorEnabled) {
             Util.setUrlHash({ viewId: this.state.currentView.id.toString() });
         }
