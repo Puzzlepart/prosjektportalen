@@ -60,11 +60,11 @@ const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPo
                 if (configuration.statusFields.hasOwnProperty(fieldName)) {
                     const [statusProperties] = configuration.statusFields[fieldName].statuses.filter(({ statusValue }) => colValue === statusValue);
                     if (statusProperties) {
-                        const statusComment: string = `${item[`${fieldName}CommentOWSMTXT`]}`;
+                        const statusComment: string = item[`${fieldName}CommentOWSMTXT`] ? `${colValue}: ${item[`${fieldName}CommentOWSMTXT`]}` : colValue;
                         const TooltipWrapper = ({ condition, wrapper, children }): JSX.Element => condition ? wrapper(children) : children;
                         return (
                             <TooltipWrapper
-                                condition={statusComment !== "" && statusComment !== null && statusComment !== undefined}
+                                condition={statusComment}
                                 wrapper={(children: JSX.Element) => (
                                     <TooltipHost content={statusComment} calloutProps={{ gapSpace: 0 }}>
                                         {children}
