@@ -413,37 +413,42 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         return updatedState;
     }
+
+    /**
+     * Create groups
+     */
+    private createGroups(groupBy) {
+        const itemsSort: any = { props: [groupBy], opts: {} };
+        if (this.state.currentSort) {
+            itemsSort.props.push(this.state.currentSort.fieldName);
+            itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
+        }
+        const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
+        const groupNames = groupItems.map((g: { [x: string]: any; }) => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
+        return array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
+            key: idx,
+            name: `${this.state.groupBy.name}: ${name}`,
+            startIndex: groupNames.indexOf(name, 0),
+            count: [].concat(groupNames).filter(n => n === name).length,
+            isCollapsed: false,
+            isShowingAll: false,
+            isDropEnabled: false,
+        }));
+    }
+
     /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      */
     private getFilteredData() {
         let groups: IGroup[] = null;
         if (this.state.groupBy) {
-            const itemsSort: any = {
-                props: [this.state.groupBy.fieldName],
-                opts: {},
-            };
-            if (this.state.currentSort) {
-                itemsSort.props.push(this.state.currentSort.fieldName);
-                itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
-            }
-            const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map((g: { [x: string]: any; }) => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
-            groups = array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
-                key: idx,
-                name: `${this.state.groupBy.name}: ${name}`,
-                startIndex: groupNames.indexOf(name, 0),
-                count: [].concat(groupNames).filter(n => n === name).length,
-                isCollapsed: false,
-                isShowingAll: false,
-                isDropEnabled: false,
-            }));
+            groups = this.createGroups(this.state.groupBy.fieldName);
         }
         let items = this.state.filteredItems
             ? this.state.filteredItems.filter(item => {
                 const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
                 return fieldNames.filter(fieldName => {
-                    return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                    return item[fieldName] && typeof item[fieldName] === "string" && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
                 }).length > 0;
             })
             : [];
