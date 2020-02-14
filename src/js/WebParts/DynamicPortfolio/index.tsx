@@ -392,8 +392,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         // Sorts items from response.primarySearchResults
         let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
 
-        items = this.convertUTCDates(items);
-
         let updatedState: Partial<IDynamicPortfolioState> = {
             selectedColumns,
             fieldNames,
@@ -415,39 +413,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
         return updatedState;
     }
-
-    /**
-     * Workaround for custom date fields being saved in UTC, resulting in date being displayed one day in the past
-     */
-    private convertUTCDates(items) {
-        return items.map(item => {
-            const fieldNames = Object.keys(item);
-            fieldNames.forEach(field => {
-                if (field.toLowerCase().includes("date") && item[field]!) {
-                    Date.prototype.toISOString = function () { // Required in order to convert to correct time zone and a string that can be sorted
-                        const tzo = -this.getTimezoneOffset(),
-                            dif = tzo >= 0 ? "+" : "-",
-                            pad = function (num) {
-                                let norm = Math.floor(Math.abs(num));
-                                return (norm < 10 ? "0" : "") + norm;
-                            };
-                        return this.getFullYear() +
-                            "-" + pad(this.getMonth() + 1) +
-                            "-" + pad(this.getDate()) +
-                            "T" + pad(this.getHours()) +
-                            ":" + pad(this.getMinutes()) +
-                            ":" + pad(this.getSeconds()) +
-                            dif + pad(tzo / 60) +
-                            ":" + pad(tzo % 60);
-                    };
-                    let dateObj = new Date(`${item[field]} UTC`);
-                    item[field] = dateObj.toISOString();
-                }
-            });
-            return item;
-        });
-    }
-
     /**
      * Get filtered data based on groupBy and searchTerm. Search is case-insensitive.
      */
