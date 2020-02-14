@@ -11,14 +11,13 @@ import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
  * Render item column
  *
  * @param {any} item The item
- * @param {number} index Index
+ * @param {number} _index Index
  * @param {IDynamicPortfolioColumnConfig} column Column
  * @param {IDynamicPortfolioConfiguration} configuration Configuration
  * @param {Function} titleOnClick Title column on click
  */
-const DynamicPortfolioItemColumn = (item: any, index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
+const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
     let colValue = item[column.key];
-
     if (colValue) {
         if (colValue !== "" && (column.key.indexOf("OWSNMBR") !== -1 || column.key.indexOf("OWSCURR") !== -1)) {
             colValue = parseInt(colValue, 10);

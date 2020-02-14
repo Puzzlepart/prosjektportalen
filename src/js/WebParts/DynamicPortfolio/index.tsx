@@ -23,6 +23,7 @@ import { queryProjects } from "./DynamicPortfolioSearch";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
 import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
+import { IDynamicPortfolioColumnConfig } from "./DynamicPortfolioConfiguration";
 
 /**
  * Dynamic Portfolio
@@ -392,8 +393,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         // Sorts items from response.primarySearchResults
         let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
 
-        items = this.convertUTCDates(items);
-
         let updatedState: Partial<IDynamicPortfolioState> = {
             selectedColumns,
             fieldNames,
@@ -417,35 +416,27 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     /**
-     * Workaround for custom date fields being saved in UTC, resulting in date being displayed one day in the past
+     * Create groups
+     *
+     * @param {IDynamicPortfolioColumnConfig} groupBy Group by
      */
-    private convertUTCDates(items) {
-        return items.map(item => {
-            const fieldNames = Object.keys(item);
-            fieldNames.forEach(field => {
-                if (field.toLowerCase().includes("date") && item[field]!) {
-                    Date.prototype.toISOString = function () { // Required in order to convert to correct time zone and a string that can be sorted
-                        const tzo = -this.getTimezoneOffset(),
-                            dif = tzo >= 0 ? "+" : "-",
-                            pad = function (num) {
-                                let norm = Math.floor(Math.abs(num));
-                                return (norm < 10 ? "0" : "") + norm;
-                            };
-                        return this.getFullYear() +
-                            "-" + pad(this.getMonth() + 1) +
-                            "-" + pad(this.getDate()) +
-                            "T" + pad(this.getHours()) +
-                            ":" + pad(this.getMinutes()) +
-                            ":" + pad(this.getSeconds()) +
-                            dif + pad(tzo / 60) +
-                            ":" + pad(tzo % 60);
-                    };
-                    let dateObj = new Date(`${item[field]} UTC`);
-                    item[field] = dateObj.toISOString();
-                }
-            });
-            return item;
-        });
+    private createGroups(groupBy: IDynamicPortfolioColumnConfig) {
+        const itemsSort: any = { props: [groupBy.fieldName], opts: {} };
+        if (this.state.currentSort) {
+            itemsSort.props.push(this.state.currentSort.fieldName);
+            itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
+        }
+        const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
+        const groupNames = groupItems.map((g: { [x: string]: any; }) => g[groupBy.fieldName] ? g[groupBy.fieldName] : __.getResource("String_NotSet"));
+        return array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
+            key: idx,
+            name: `${groupBy.name}: ${name}`,
+            startIndex: groupNames.indexOf(name, 0),
+            count: [].concat(groupNames).filter(n => n === name).length,
+            isCollapsed: false,
+            isShowingAll: false,
+            isDropEnabled: false,
+        }));
     }
 
     /**
@@ -454,31 +445,13 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private getFilteredData() {
         let groups: IGroup[] = null;
         if (this.state.groupBy) {
-            const itemsSort: any = {
-                props: [this.state.groupBy.fieldName],
-                opts: {},
-            };
-            if (this.state.currentSort) {
-                itemsSort.props.push(this.state.currentSort.fieldName);
-                itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
-            }
-            const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-            const groupNames = groupItems.map((g: { [x: string]: any; }) => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
-            groups = array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
-                key: idx,
-                name: `${this.state.groupBy.name}: ${name}`,
-                startIndex: groupNames.indexOf(name, 0),
-                count: [].concat(groupNames).filter(n => n === name).length,
-                isCollapsed: false,
-                isShowingAll: false,
-                isDropEnabled: false,
-            }));
+            groups = this.createGroups(this.state.groupBy);
         }
         let items = this.state.filteredItems
             ? this.state.filteredItems.filter(item => {
                 const fieldNames = this.state.selectedColumns.map(col => col.fieldName);
                 return fieldNames.filter(fieldName => {
-                    return item[fieldName] && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
+                    return item[fieldName] && typeof item[fieldName] === "string" && item[fieldName].toLowerCase().indexOf(this.state.searchTerm) !== -1;
                 }).length > 0;
             })
             : [];

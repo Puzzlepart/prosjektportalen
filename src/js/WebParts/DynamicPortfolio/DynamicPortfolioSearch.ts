@@ -1,11 +1,41 @@
-import { SearchResult } from "@pnp/sp";
-import { IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
-import SearchService from "../../Services/SearchService";
+import { TypedHash } from "@pnp/common";
 import { getObjectValue } from "../../Helpers";
+import SearchService from "../../Services/SearchService";
+import { IDynamicPortfolioColumnConfig, IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
 
 export interface IProjectsQueryResponse {
-    primarySearchResults: SearchResult[];
+    primarySearchResults: TypedHash<any>[];
     refiners: any[];
+}
+
+/**
+ * Transform result based on type
+ *
+ * @param {TypedHash<any>} res Result
+ * @param {IDynamicPortfolioColumnConfig[]} columns Column configuration
+ */
+export function transformResult(res: TypedHash<any>, columns: IDynamicPortfolioColumnConfig[]) {
+    let result = Object.keys(res).reduce((obj: TypedHash<any>, key: string) => {
+        let value = res[key];
+        let [col] = columns.filter(c => c.fieldName === key);
+        if (col) {
+            switch (col.render) {
+                case "Date": {
+                    obj[key] = value && new Date(value);
+                }
+                    break;
+                default: {
+                    obj[key] = value;
+                }
+            }
+        } else {
+            obj[key] = value;
+        }
+        return obj;
+    }, { ...res });
+    result.Title = res.Title === "DispForm.aspx" ? res.SiteTitle : res.Title;
+    result.Path = res.Path.indexOf("/Lists/Properties/") > -1 ? res.Path.split("/Lists")[0] : res.Path;
+    return result;
 }
 
 /**
@@ -19,27 +49,19 @@ export async function queryProjects(queryText: string, viewConfig: IDynamicPortf
     try {
         const query = {
             Querytext: "*",
-            SelectProperties: configuration.columns.map(f => f.fieldName).concat(["SiteTitle"]),
+            SelectProperties: ["SiteTitle", ...configuration.columns.map(f => f.fieldName)],
             Refiners: configuration.refiners.map(ref => ref.key).join(","),
             QueryTemplate: [queryText, viewConfig.queryTemplate].filter(q => q).join(" "),
             RowLimit: 500,
-             TrimDuplicates: false,
+            TrimDuplicates: false,
         };
-        const { items, RawSearchResults } = await SearchService.search<any[]>(query);
-        let refiners = getObjectValue(RawSearchResults, "PrimaryQueryResult.RefinementResults.Refiners", []);
-        if (refiners["results"]) {
-            refiners = refiners["results"];
-        }
+        const { items, RawSearchResults } = await SearchService.search<TypedHash<any>[]>(query);
+        let refiners = getObjectValue(RawSearchResults, "PrimaryQueryResult.RefinementResults.Refiners.results", []);
         return {
-            primarySearchResults: items.map(res => (
-                { ...res,
-                    Title: res.Title === "DispForm.aspx" ? res.SiteTitle :  res.Title,
-                    Path: res.Path.indexOf("/Lists/Properties/") > -1 ? res.Path.split("/Lists")[0] : res.Path,
-                })),
+            primarySearchResults: items.map(res => transformResult(res, configuration.columns)),
             refiners,
         };
     } catch (err) {
-        console.log(err);
         throw err;
     }
 }
