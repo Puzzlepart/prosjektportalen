@@ -23,6 +23,7 @@ import { queryProjects } from "./DynamicPortfolioSearch";
 import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamicPortfolioProps";
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
 import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
+import { IDynamicPortfolioColumnConfig } from "./DynamicPortfolioConfiguration";
 
 /**
  * Dynamic Portfolio
@@ -416,18 +417,20 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
     /**
      * Create groups
+     *
+     * @param {IDynamicPortfolioColumnConfig} groupBy Group by
      */
-    private createGroups(groupBy) {
-        const itemsSort: any = { props: [groupBy], opts: {} };
+    private createGroups(groupBy: IDynamicPortfolioColumnConfig) {
+        const itemsSort: any = { props: [groupBy.fieldName], opts: {} };
         if (this.state.currentSort) {
             itemsSort.props.push(this.state.currentSort.fieldName);
             itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
         }
         const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-        const groupNames = groupItems.map((g: { [x: string]: any; }) => g[this.state.groupBy.fieldName] ? g[this.state.groupBy.fieldName] : __.getResource("String_NotSet"));
+        const groupNames = groupItems.map((g: { [x: string]: any; }) => g[groupBy.fieldName] ? g[groupBy.fieldName] : __.getResource("String_NotSet"));
         return array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
             key: idx,
-            name: `${this.state.groupBy.name}: ${name}`,
+            name: `${groupBy.name}: ${name}`,
             startIndex: groupNames.indexOf(name, 0),
             count: [].concat(groupNames).filter(n => n === name).length,
             isCollapsed: false,
@@ -442,7 +445,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     private getFilteredData() {
         let groups: IGroup[] = null;
         if (this.state.groupBy) {
-            groups = this.createGroups(this.state.groupBy.fieldName);
+            groups = this.createGroups(this.state.groupBy);
         }
         let items = this.state.filteredItems
             ? this.state.filteredItems.filter(item => {

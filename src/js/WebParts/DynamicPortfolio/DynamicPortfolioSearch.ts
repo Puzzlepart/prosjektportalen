@@ -21,7 +21,7 @@ export function transformResult(res: TypedHash<any>, columns: IDynamicPortfolioC
         if (col) {
             switch (col.render) {
                 case "Date": {
-                    obj[key] = new Date(value);
+                    obj[key] = value && new Date(value);
                 }
                     break;
                 default: {
