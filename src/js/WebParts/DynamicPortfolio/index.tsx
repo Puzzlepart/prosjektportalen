@@ -426,17 +426,22 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             itemsSort.props.push(this.state.currentSort.fieldName);
             itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending;
         }
-        const groupItems = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
-        const groupNames = groupItems.map((g: { [x: string]: any; }) => g[groupBy.fieldName] ? g[groupBy.fieldName] : __.getResource("String_NotSet"));
-        return array_unique([].concat(groupNames)).sort((a: number, b: number) => a > b ? 1 : -1).map((name: any, idx: any) => ({
-            key: idx,
-            name: `${groupBy.name}: ${name}`,
-            startIndex: groupNames.indexOf(name, 0),
-            count: [].concat(groupNames).filter(n => n === name).length,
-            isCollapsed: false,
-            isShowingAll: false,
-            isDropEnabled: false,
-        }));
+        const itemsSorted = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts);
+        const groupNames = itemsSorted.map((g: { [x: string]: any; }) => g[groupBy.fieldName] ? g[groupBy.fieldName] : __.getResource("String_NotSet"));
+        return array_unique([].concat(groupNames))
+            .sort((a: number, b: number) => a > b ? 1 : -1)
+            .map((name: any, idx: any) => {
+                const count = [].concat(groupNames).filter(n => n === name).length;
+                return {
+                    key: idx,
+                    name: `${groupBy.name}: ${name}`,
+                    startIndex: groupNames.indexOf(name, 0),
+                    count,
+                    isCollapsed: false,
+                    isShowingAll: count === itemsSorted.length,
+                    isDropEnabled: false,
+                };
+            });
     }
 
     /**

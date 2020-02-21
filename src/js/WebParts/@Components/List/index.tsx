@@ -144,7 +144,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
             case "SiteTitle": {
                 const webUrl = item[this.props.webUrlKey];
                 if (webUrl) {
-                    return <a href={webUrl} onClick={(e) => {e.preventDefault(); this._openProject(item); }}>{colValue}</a>;
+                    return <a href={webUrl} onClick={(e) => { e.preventDefault(); this._openProject(item); }}>{colValue}</a>;
                 }
                 return colValue;
             }
@@ -236,16 +236,19 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         let groups: IGroup[] = null;
         if (this.state.groupBy.key !== "NoGrouping") {
             items = items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
-            const groupNames = items.map(g => g[this.state.groupBy.key]);
-            groups = unique([].concat(groupNames)).map((name, idx) => ({
-                key: idx,
-                name: `${this.state.groupBy.name}: ${name}`,
-                startIndex: groupNames.indexOf(name, 0),
-                count: [].concat(groupNames).filter(n => n === name).length,
-                isCollapsed: false,
-                isShowingAll: true,
-                isDropEnabled: false,
-            }));
+            const groupNames = items.map(g => g[this.state.groupBy.key] as string);
+            groups = (unique([].concat(groupNames)) as string[]).map((name, idx) => {
+                const count = [].concat(groupNames).filter(n => n === name).length;
+                return {
+                    key: `Group_${idx}`,
+                    name: `${this.state.groupBy.name}: ${name}`,
+                    startIndex: groupNames.indexOf(name, 0),
+                    count,
+                    isCollapsed: false,
+                    isShowingAll: count === items.length,
+                    isDropEnabled: false,
+                };
+            });
         }
         return { items, columns, groups };
     }
