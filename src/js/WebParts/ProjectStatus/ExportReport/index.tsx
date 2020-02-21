@@ -233,7 +233,10 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
         return new Promise<Blob>(async (resolve, reject) => {
             try {
                 (window as any).html2canvas = html2canvas;
-                const canvas = await (window as any).html2canvas(document.getElementById("pp-projectstatus"));
+                let ppElement = document.getElementById("pp-projectstatus");
+                ppElement.style.fontFamily = '"Segoe UI","Segoe UI","Segoe",Tahoma,Helvetica,Arial,Roboto,"Helvetica Neue",sans-serif';
+                ppElement.style.fontFeatureSettings = "normal";
+                const canvas = await (window as any).html2canvas(ppElement);
                 if (canvas.toBlob) {
                     canvas.toBlob(resolve);
                 } else if (canvas["msToBlob"]) {
