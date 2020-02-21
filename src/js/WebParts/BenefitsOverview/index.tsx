@@ -197,17 +197,20 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
         let columns = [].concat(data.columns);
         let groups: IGroup[] = null;
         if (groupBy.key !== "NoGrouping") {
-            const itemsSortedByGroupBy = data.items.sort((a, b) => objectGet(a, groupBy.key) > objectGet(b, groupBy.key) ? -1 : 1);
-            const groupNames: string[] = itemsSortedByGroupBy.map(g => objectGet(g, groupBy.key));
-            groups = (unique([].concat(groupNames)) as string[]).map((name, idx) => ({
-                key: `Group_${idx}`,
-                name: `${groupBy.name}: ${name}`,
-                startIndex: groupNames.indexOf(name, 0),
-                count: [].concat(groupNames).filter(n => n === name).length,
-                isCollapsed: false,
-                isShowingAll: false,
-                isDropEnabled: false,
-            }));
+            let itemsSorted = data.items.sort((a, b) => objectGet(a, groupBy.key) > objectGet(b, groupBy.key) ? -1 : 1);
+            const groupNames = itemsSorted.map(g => g[groupBy.key] as string);
+            groups = (unique([].concat(groupNames)) as string[]).map((name, idx) => {
+                const count = [].concat(groupNames).filter(n => n === name).length;
+                return {
+                    key: `Group_${idx}`,
+                    name: `${groupBy.name}: ${name}`,
+                    startIndex: groupNames.indexOf(name, 0),
+                    count,
+                    isCollapsed: false,
+                    isShowingAll: count === items.length,
+                    isDropEnabled: false,
+                };
+            });
         }
         const items = data.items.filter(item => item.title.toLowerCase().indexOf(searchTerm) !== -1);
         return { items, columns, groups };
