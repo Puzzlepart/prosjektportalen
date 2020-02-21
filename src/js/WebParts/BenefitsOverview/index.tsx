@@ -205,7 +205,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                 startIndex: groupNames.indexOf(name, 0),
                 count: [].concat(groupNames).filter(n => n === name).length,
                 isCollapsed: false,
-                isShowingAll: true,
+                isShowingAll: false,
                 isDropEnabled: false,
             }));
         }
