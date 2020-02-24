@@ -191,7 +191,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     private async _onExportClick(e): Promise<void> {
         window.scrollTo(0, 0);
         e.preventDefault();
-        setTimeout(() => { this.startExport(); }, 250);
+        setTimeout(this.startExport.bind(this), 250);
     }
 
     /**
