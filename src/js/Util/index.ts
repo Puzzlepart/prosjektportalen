@@ -15,10 +15,16 @@ declare var MSOWebPartPageFormName: string;
  *
  * @param {string | Date} date Date
  * @param {string} format Date format
+ * @param {boolean} addTzOffset Add timezone offset to the date
+ * @param {string} locale Locale
  */
-export function formatDate(date: string | Date, format: string = __.getResource("MomentDate_DefaultFormat")): string {
+export function formatDate(date: string | Date, format: string = __.getResource("MomentDate_DefaultFormat"), addTzOffset: boolean = true, locale: string = __.getResource("MomentDate_Locale")): string {
     let _date = (typeof date === "string") ? new Date(date) : date;
-    return moment(_date).add(-_date.getTimezoneOffset(), "minutes").format(format);
+    let m = moment(_date);
+    if (addTzOffset) {
+        m = m.add(-_date.getTimezoneOffset(), "minutes");
+    }
+    return m.locale(locale).format(format);
 }
 
 /**
@@ -90,7 +96,7 @@ export function cleanSearchPropName(searchProp: string): string {
  * @param {string} email Email adress
  * @param {string} size Size S/M/L
  */
-export function userPhoto(email: string, size = "L"): string {
+export function userPhoto(email: string, size: string = "L"): string {
     return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
 }
 
@@ -122,7 +128,7 @@ export function stringToColour(str: string): string {
  * @param {boolean} reloadWhenDone Reload page when done
  * @param {boolean} removeUrlParams Remove url params
  */
-export function userMessage(title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void {
+export function userMessage(title: string, message: string, color: string, duration: number = 10000, reloadWhenDone: boolean = false, removeUrlParams: boolean = false): void {
     const status = SP.UI.Status.addStatus(title, message);
     SP.UI.Status.setStatusPriColor(status, color);
     if (duration !== -1) {
@@ -143,7 +149,7 @@ export function userMessage(title: string, message: string, color: string, durat
  * @param {number} targetValue The target value, i.e. equal to 100%
  * @param {boolean} addPrefix Add prefix (%)
  */
-export function percentage(startValue: number, partValue: number, targetValue: number, addPrefix = true): any {
+export function percentage(startValue: number, partValue: number, targetValue: number, addPrefix: boolean = true): any {
     let value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100);
     if (addPrefix) {
         return `${value}%`;
@@ -252,7 +258,7 @@ export interface ISafeTerm {
  *
  * @param {any} term Term
  */
-export function getSafeTerm(term): ISafeTerm {
+export function getSafeTerm(term: any): ISafeTerm {
     if (term === null) {
         return null;
     }
@@ -281,7 +287,7 @@ export function getSafeTerm(term): ISafeTerm {
  * @param {any} termGuid Term GUID
  * @param {number} wssId Term WSS ID
  */
-export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid, wssId = -1) {
+export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid: any, wssId: number = -1) {
     const field = list.get_fields().getByInternalNameOrTitle(fieldName);
     const taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField);
     const taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
@@ -297,7 +303,7 @@ export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, ite
  *
  * @param {number} loadTimeout Loading timeout (ms)
  */
-export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
+export const ensureTaxonomy = (loadTimeout: number = 10000): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
         let scriptbase = `${_spPageContextInfo.siteAbsoluteUrl}/_layouts/15`,
             sodKey = "_v_dictSod";
@@ -320,7 +326,7 @@ export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
  * @param {string[]} parts Parts to include in the key
  * @param {boolean} addWebPrefix Should web prefix be added
  */
-export function generateStorageKey(parts: string[], addWebPrefix = true) {
+export function generateStorageKey(parts: string[], addWebPrefix: boolean = true) {
     if (addWebPrefix) {
         const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
         parts.unshift(webPrefix);
@@ -334,7 +340,7 @@ export function generateStorageKey(parts: string[], addWebPrefix = true) {
  * @param {string} val The value
  * @param {string} prefix Currency prefix
  */
-export function toCurrencyFormat(val: string, prefix = __.getResource("CurrencySymbol")): string {
+export function toCurrencyFormat(val: string, prefix: string = __.getResource("CurrencySymbol")): string {
     let str = parseInt(val, 10).toString().split(".");
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
@@ -399,7 +405,7 @@ export async function getJsomContext(url: string): Promise<IJsomContext> {
  *
  * @param {string} hash URL hash
  */
-export function getUrlHash(hash = document.location.hash.substring(1)): { [key: string]: string } {
+export function getUrlHash(hash: string = document.location.hash.substring(1)): { [key: string]: string } {
     let hashObject: { [key: string]: string } = {};
     hash.split("&").map(str => {
         const [key, value] = str.split("=");
@@ -426,7 +432,7 @@ export function setUrlHash(hashObject: { [key: string]: string }): void {
  * @param {string} serverRequestPath Server request path
  * @param {string} webServerRelativeUrl Web server relative url
  */
-export function getUrlParts(serverRequestPath = _spPageContextInfo.serverRequestPath, webServerRelativeUrl = _spPageContextInfo.webServerRelativeUrl): string[] {
+export function getUrlParts(serverRequestPath: string = _spPageContextInfo.serverRequestPath, webServerRelativeUrl: string = _spPageContextInfo.webServerRelativeUrl): string[] {
     return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
 }
 

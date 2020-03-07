@@ -87,7 +87,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                                     style={{ cursor: "pointer" }}
                                     onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                             </h5>
-                            <span className="ms-metadata">{__.getResource("String_Published")} {Util.formatDate(entry.Created)}</span>
+                            <span className="ms-metadata">{__.getResource("String_Published")} {Util.formatDate(entry.Created, undefined, false)}</span>
                         </li>)}
                     </ul>
                 </div>
@@ -122,7 +122,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                             <span>{showAnnouncement.Title}</span>
                         </div>
                         <div className="ms-font-xs" style={{ marginTop: 20 }}>
-                            Publisert {Util.formatDate(showAnnouncement.Created)}
+                            Publisert {Util.formatDate(showAnnouncement.Created, undefined, false)}
                         </div>
                         <div className={modalBodyClassName} dangerouslySetInnerHTML={{ __html: showAnnouncement.Body }}></div>
                     </div>
