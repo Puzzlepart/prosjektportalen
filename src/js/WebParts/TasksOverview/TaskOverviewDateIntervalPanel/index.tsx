@@ -8,7 +8,7 @@ import { Toggle } from "office-ui-fabric-react/lib/Toggle";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { ITaskOverviewDateIntervalPanelProps } from "./ITaskOverviewDateIntervalPanelProps";
 import { ITaskOverviewDateIntervalPanelState } from "./ITaskOverviewDateIntervalPanelState";
-import { dateFormat } from "../../../Util";
+import { formatDate } from "../../../Util";
 
 const DayPickerStrings: IDatePickerStrings = {
     months: __.getResource("DayPickerStrings_Months").split(","),
@@ -26,7 +26,7 @@ export default class TaskOverviewDateIntervalPanel extends React.Component<ITask
     private datePickerProps: IDatePickerProps = {
         firstDayOfWeek: DayOfWeek.Monday,
         strings: DayPickerStrings,
-        formatDate: date => dateFormat(date, "LL"),
+        formatDate: date => formatDate(date, "LL"),
     };
 
     constructor(props: ITaskOverviewDateIntervalPanelProps) {

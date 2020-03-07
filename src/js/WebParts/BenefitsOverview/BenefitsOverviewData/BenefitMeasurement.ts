@@ -2,7 +2,7 @@ import { BenefitBase } from "./BenefitBase";
 import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
 import { BenefitMeasurementIndicator } from "./BenefitMeasurementIndicator";
 import { IIconProps } from "office-ui-fabric-react/lib/Icon";
-import { dateFormat } from "../../../Util";
+import { formatDate } from "../../../Util";
 
 export class BenefitMeasurement extends BenefitBase {
     public date: Date;
@@ -24,7 +24,7 @@ export class BenefitMeasurement extends BenefitBase {
     constructor(result: IBenefitsSearchResult, fractionDigits: number = 2) {
         super(result);
         this.date = new Date(result.GtMeasurementDateOWSDATE);
-        this.dateDisplay = dateFormat(result.GtMeasurementDateOWSDATE, "LL");
+        this.dateDisplay = formatDate(result.GtMeasurementDateOWSDATE, "LL");
         this.value = !isNaN(parseFloat(result.GtMeasurementValueOWSNMBR)) ? parseFloat(result.GtMeasurementValueOWSNMBR) : null;
         if (this.value !== null) {
             this.valueDisplay = this.value.toFixed(fractionDigits);

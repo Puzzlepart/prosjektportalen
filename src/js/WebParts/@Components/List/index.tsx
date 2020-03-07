@@ -157,7 +157,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                     );
                 }
                 if (column.key.indexOf("OWSDATE") > -1) {
-                    return <span>{colValue ? Util.dateFormat(colValue, "LL") : null}</span>;
+                    return <span>{colValue ? Util.formatDate(colValue, "LL") : null}</span>;
                 }
                 return colValue;
             }
@@ -267,7 +267,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 ...items.map(item => columns.map(col => item[col.fieldName])),
             ],
         };
-        const fileName = String.format("{0}-{1}.xlsx", excelExportConfig.fileNamePrefix, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format("{0}-{1}.xlsx", excelExportConfig.fileNamePrefix, Util.formatDate(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         await ExportToExcel({ sheets: [sheet], fileName });
         this.setState({ excelExportStatus: ExcelExportStatus.Idle });
     }

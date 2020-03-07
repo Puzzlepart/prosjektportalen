@@ -480,7 +480,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 ...data.items.map(item => data.columns.map(col => item[col.fieldName])),
             ],
         };
-        const fileName = String.format(this.props.excelExportConfig.fileName, this.state.currentView.name, Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format(this.props.excelExportConfig.fileName, this.state.currentView.name, Util.formatDate(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         await ExportToExcel({
             sheets: [sheet],
             fileName,

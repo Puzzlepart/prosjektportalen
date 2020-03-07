@@ -39,7 +39,7 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
             case "Date": {
                 return (
                     <span>
-                        {colValue ? Util.dateFormat(colValue, "LL") : null}
+                        {colValue ? Util.formatDate(colValue, "LL") : null}
                     </span>
                 );
             }
@@ -50,9 +50,7 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
             }
             case "Currency": {
                 let currValue = Util.toCurrencyFormat(colValue);
-                return (
-                    <span title={currValue}>{currValue}</span>
-                );
+                return <span title={currValue}>{currValue}</span>;
             }
             case "Status": {
                 let fieldName = Util.cleanSearchPropName(column.fieldName);
