@@ -6,8 +6,11 @@ dependencies:
   '@pnp/sp': 1.3.7_d9c0b0ddb647151ddcd5389b095b3b0d
   '@uifabric/icons': 6.5.5_12ca6beb53d2d8ad03a024f5a9577535
   html2canvas: 1.0.0-rc.5
+  moment: 2.24.0
   object-get: 2.1.0
   office-ui-fabric-react: 6.210.4_12ca6beb53d2d8ad03a024f5a9577535
+  react: 16.7.0
+  react-dom: 16.7.0_react@16.7.0
   react-sticky: 6.0.3_react-dom@16.7.0+react@16.7.0
 devDependencies:
   '@babel/core': 7.7.2
@@ -70,7 +73,6 @@ devDependencies:
   jspdf: 1.5.3
   jspdf-autotable: 3.2.11_jspdf@1.5.3
   merge2: 1.3.0
-  moment: 2.24.0
   natives: 1.1.6
   object-assign: 4.1.1
   object.omit: 3.0.0
@@ -80,9 +82,7 @@ devDependencies:
   prop-types: 15.7.2
   querystring: 0.2.0
   raw-loader: 1.0.0_webpack@3.12.0
-  react: 16.7.0
   react-calendar-timeline: 0.19.0_3dc96b7d3aa369e6ce98d26a23387ae5
-  react-dom: 16.7.0_react@16.7.0
   react-highcharts: 16.1.0_react-dom@16.7.0+react@16.7.0
   react-scroll: 1.7.14_react-dom@16.7.0+react@16.7.0
   react-truncate-markup: 3.0.1_prop-types@15.7.2+react@16.7.0
@@ -6317,7 +6317,6 @@ packages:
     resolution:
       integrity: sha512-2IUgKDhc3J7Uug+FxMXuqIyYzH7gJjXECKe/w43IGgQHTSj3InJi+yAA7T24L9bQMRKiUEHxEX37G5JpVUGLcQ==
   /moment/2.24.0:
-    dev: true
     resolution:
       integrity: sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
   /ms/2.0.0:
@@ -9647,7 +9646,7 @@ specifiers:
   '@pnp/common': 1.3.7
   '@pnp/logging': 1.3.7
   '@pnp/odata': 1.3.7
-  '@pnp/polyfill-ie11': ^1.0.1
+  '@pnp/polyfill-ie11': ^1.0.2
   '@pnp/sp': 1.3.7
   '@types/chai': 3.4.34
   '@types/es6-promise': 0.0.33
@@ -9657,9 +9656,9 @@ specifiers:
   '@types/node': ^11.11.3
   '@types/react': 16.7.22
   '@types/react-dom': 16.8.0
-  '@types/sharepoint': ^2016.1.2
+  '@types/sharepoint': ^2016.1.8
   '@types/sinon': ^5.0.1
-  '@uifabric/icons': ^6.5.2
+  '@uifabric/icons': ^7.3.0
   ajv: ~5.2.2
   array-sort: ^1.0.0
   array-unique: ^0.3.2
@@ -9701,7 +9700,7 @@ specifiers:
   gulp-watch: ^5.0.1
   gulp-xml2json: ^0.1.5
   gulp-zip: ^4.2.0
-  html2canvas: ^1.0.0-alpha.12
+  html2canvas: ^1.0.0-rc.5
   interactjs: ^1.3.4
   jsdom: ^11.11.0
   jsom-ctx: ^1.0.8
@@ -9714,8 +9713,8 @@ specifiers:
   object-assign: ^4.1.1
   object-get: ^2.1.0
   object.omit: ^3.0.0
-  office-ui-fabric-core: ^9.6.1
-  office-ui-fabric-react: ^6.210.4
+  office-ui-fabric-core: ^11.0.0
+  office-ui-fabric-react: ^6.211.3
   path: ^0.12.7
   plugin-error: ^1.0.1
   prop-types: ^15.6.2
