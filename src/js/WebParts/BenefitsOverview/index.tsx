@@ -250,7 +250,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
      */
     private async exportToExcel() {
         this.setState({ excelExportStatus: ExcelExportStatus.Exporting });
-        const fileName = String.format(this.props.excelExportConfig.fileName, __.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.dateFormat(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
+        const fileName = String.format(this.props.excelExportConfig.fileName, __.getResource("BenefitsOverview_ExcelExportFileNamePrefix"), Util.formatDate(new Date().toISOString(), "YYYY-MM-DD-HH-mm"));
         const sheets = [];
         let { items, columns } = this.getFilteredData(this.props, this.state);
         let _columns = columns.filter(column => column.name);

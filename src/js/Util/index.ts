@@ -15,13 +15,10 @@ declare var MSOWebPartPageFormName: string;
  *
  * @param {string | Date} date Date
  * @param {string} format Date format
- * @param {string} locale Date locale
  */
-export function dateFormat(date: string | Date, format = __.getResource("MomentDate_DefaultFormat"), locale = __.getResource("MomentDate_Locale")): string {
-    if (typeof date === "string") {
-        return moment(new Date(date as string).toISOString()).locale(locale).format(format);
-    }
-    return moment((date as Date).toISOString()).locale(locale).format(format);
+export function formatDate(date: string | Date, format: string = __.getResource("MomentDate_DefaultFormat")): string {
+    let _date = (typeof date === "string") ? new Date(date) : date;
+    return moment(_date).add(-_date.getTimezoneOffset(), "minutes").format(format);
 }
 
 /**
