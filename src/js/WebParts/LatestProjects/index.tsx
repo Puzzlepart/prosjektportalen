@@ -76,7 +76,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                             <li key={`Project_${index}`}>
                                 <div>
                                     <h5><a href={Url}>{Title}</a></h5>
-                                    <div className="ms-font-xs">{__.getResource("String_Created")} {Util.formatDate(Created)}</div>
+                                    <div className="ms-font-xs">{__.getResource("String_Created")} {Util.formatDate(Created, undefined, false)}</div>
                                 </div>
                             </li>
                         ))}
