@@ -394,7 +394,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
     * @param {string} queryTemplate Search query
     */
     protected async searchItems(queryTemplate: string): Promise<Array<any>> {
-        const { items } = await SearchService.search({
+        const { items }: any = await SearchService.search({
             Querytext: "*",
             RowLimit: this.props.rowLimit,
             TrimDuplicates: false,

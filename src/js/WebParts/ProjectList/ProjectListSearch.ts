@@ -14,7 +14,7 @@ export async function queryProjects(dataSourceName: string, rowLimit?: number, s
         const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
         const [dataSource] = await dataSourcesList.items.filter(`Title eq '${dataSourceName}'`).get();
         if (dataSource) {
-            const { items } = await SearchService.search({
+            const { items }: any = await SearchService.search({
                 Querytext: "*",
                 QueryTemplate: dataSource.GtDpSearchQuery,
                 SelectProperties: ["Path", "SiteTitle", "RefinableString52", "RefinableString53", "RefinableString54", "GtProjectManagerOWSUSER", "GtProjectOwnerOWSUSER", "LastModifiedTime", ...selectProperties],
@@ -43,7 +43,7 @@ export async function queryProjectWebs(dataSourceName: string, rowLimit?: number
         if (dataSource) {
             let pathMatches = dataSource.GtDpSearchQuery.toString().split(" ").filter((substr) => { return substr.toLowerCase().indexOf("path:") === 0; });
             const dataSourceWithWebs = `contentclass:STS_Web ${pathMatches.join(" ")}`;
-            const { items } = await SearchService.search({
+            const { items }: any = await SearchService.search({
                 Querytext: "*",
                 QueryTemplate: dataSourceWithWebs,
                 SelectProperties: ["Title", "Path", "SiteLogo", "ViewsLifeTime"],

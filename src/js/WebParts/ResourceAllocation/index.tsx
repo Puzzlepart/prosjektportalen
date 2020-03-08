@@ -323,7 +323,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
         if (queryTemplate) {
             try {
                 const searchSettings = { QueryTemplate: queryTemplate, ...this.props.searchConfiguration };
-                const { items } = await SearchService.search(searchSettings);
+                const { items }: any = await SearchService.search(searchSettings);
                 return items;
             } catch (err) {
                 throw err;
