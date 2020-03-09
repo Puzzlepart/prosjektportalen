@@ -21,11 +21,11 @@
         "watch-minify": "gulp watch --minify"
     },
     "dependencies": {
-        "@pnp/common": "1.3.7",
-        "@pnp/logging": "1.3.7",
-        "@pnp/odata": "1.3.7",
+        "@pnp/common": "1.3.10",
+        "@pnp/logging": "1.3.10",
+        "@pnp/odata": "1.3.10",
         "@pnp/polyfill-ie11": "^1.0.2",
-        "@pnp/sp": "1.3.7",
+        "@pnp/sp": "1.3.10",
         "@uifabric/icons": "^7.3.0",
         "html2canvas": "^1.0.0-rc.5",
         "moment": "^2.24.0",

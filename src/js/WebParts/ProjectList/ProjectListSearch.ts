@@ -43,7 +43,7 @@ export async function queryProjectWebs(dataSourceName: string, rowLimit?: number
         if (dataSource) {
             let pathMatches = dataSource.GtDpSearchQuery.toString().split(" ").filter((substr) => { return substr.toLowerCase().indexOf("path:") === 0; });
             const dataSourceWithWebs = `contentclass:STS_Web ${pathMatches.join(" ")}`;
-            const { items }: any = await SearchService.search({
+            const { items } = await SearchService.search<any[]>({
                 Querytext: "*",
                 QueryTemplate: dataSourceWithWebs,
                 SelectProperties: ["Title", "Path", "SiteLogo", "ViewsLifeTime"],
