@@ -80,7 +80,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
 
     private async _search(queryTemplate: string) {
         try {
-            const { items }: any = await SearchService.search({
+            const { items } = await SearchService.search<any[]>({
                 Querytext: "*",
                 QueryTemplate: queryTemplate,
                 RowLimit: 500,
