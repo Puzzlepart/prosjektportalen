@@ -72,7 +72,7 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
         if (queryTemplate) {
             try {
                 const selectProperties = ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)];
-                const { items }: any = await SearchService.search({
+                const { items } = await SearchService.search<any[]>({
                     Querytext: "*",
                     QueryTemplate: queryTemplate,
                     RowLimit: 500,
