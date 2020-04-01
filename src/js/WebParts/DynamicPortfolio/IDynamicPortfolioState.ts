@@ -31,4 +31,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
     canUserManageWeb?: boolean;
+    truncVal?: string;
 }

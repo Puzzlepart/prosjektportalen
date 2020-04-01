@@ -24,6 +24,7 @@ import IDynamicPortfolioProps, { DynamicPortfolioDefaultProps } from "./IDynamic
 import IDynamicPortfolioState from "./IDynamicPortfolioState";
 import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
 import { IDynamicPortfolioColumnConfig } from "./DynamicPortfolioConfiguration";
+import { GetSetting } from "../../Settings";
 
 /**
  * Dynamic Portfolio
@@ -31,7 +32,6 @@ import { IDynamicPortfolioColumnConfig } from "./DynamicPortfolioConfiguration";
 export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps, IDynamicPortfolioState> {
     public static displayName = "DynamicPortfolio";
     public static defaultProps = DynamicPortfolioDefaultProps;
-
     /**
      * Constructor
      *
@@ -48,6 +48,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
     }
 
     public async componentDidMount() {
+        this.setState({truncVal: await GetSetting("PROJECTSTATUS_NOTE_TRUNCATING_VALUE")});
         let stickyAbove = document.querySelector("[class*='stickyAbove-']");
         if (stickyAbove != null) {
             stickyAbove.addEventListener("scroll", this.handleStickyScroll);
@@ -143,7 +144,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 columns={data.columns}
                 groups={data.groups}
                 selectionMode={SelectionMode.none}
-                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, evt => this._onOpenProjectModal(evt, item))}
+                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, this.state.truncVal, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(_event, col) => this._onColumnSort(col)}
                 onRenderDetailsHeader={this.onRenderDetailsHeader} />
         );
@@ -632,7 +633,6 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (this.state.currentView.id === viewConfig.id) {
             return;
         }
-
         await this.updateState({ isChangingView: viewConfig });
         const response = await queryProjects(this.props.queryText, viewConfig, this.state.configuration);
         DynamicPortfolioFieldSelector.items = this.state.configuration.columns.map(col => ({

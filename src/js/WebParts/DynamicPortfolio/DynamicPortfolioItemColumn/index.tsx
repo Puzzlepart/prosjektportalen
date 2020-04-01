@@ -16,7 +16,7 @@ import { TooltipHost } from "office-ui-fabric-react/lib/Tooltip";
  * @param {IDynamicPortfolioConfiguration} configuration Configuration
  * @param {Function} titleOnClick Title column on click
  */
-const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, titleOnClick: (evt: any) => void): JSX.Element => {
+const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicPortfolioColumnConfig, configuration: IDynamicPortfolioConfiguration, truncVal: string, titleOnClick: (evt: any) => void): JSX.Element => {
     let colValue = item[column.key];
     if (colValue) {
         if (colValue !== "" && (column.key.indexOf("OWSNMBR") !== -1 || column.key.indexOf("OWSCURR") !== -1)) {
@@ -44,10 +44,15 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
                 );
             }
             case "Note": {
+                if (truncVal.toString() === "0") {
+                return <span dangerouslySetInnerHTML={{ __html: colValue }}></span>;
+            } else {
                 return (
-                    <span dangerouslySetInnerHTML={{ __html: colValue }}></span>
+                <TooltipHost content={colValue}>
+                <span>{colValue.slice(0, truncVal) + "..."}</span>
+                </TooltipHost>
                 );
-            }
+            }}
             case "Currency": {
                 let currValue = Util.toCurrencyFormat(colValue);
                 return <span title={currValue}>{currValue}</span>;
