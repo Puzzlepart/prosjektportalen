@@ -44,7 +44,7 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
                 );
             }
             case "Note": {
-                if (truncVal.toString() === "0") {
+            if (truncVal.toString() === "0" || !truncVal) {
                 return <span dangerouslySetInnerHTML={{ __html: colValue }}></span>;
             } else {
                 return (
