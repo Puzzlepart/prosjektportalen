@@ -1,12 +1,9 @@
+import { TypedHash } from "@pnp/common";
 import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
-import { IBaseWebPartState } from "../@BaseWebPart";
-import { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
-import {
-    IDynamicPortfolioViewConfig,
-    IDynamicPortfolioColumnConfig,
-    IDynamicPortfolioConfiguration,
-} from "./DynamicPortfolioConfiguration";
 import { ExcelExportStatus } from "../../Util/ExportToExcel";
+import { IBaseWebPartState } from "../@BaseWebPart";
+import { IDynamicPortfolioColumnConfig, IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
+import { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
 
 export interface IDynamicPortfolioErrorMessage {
     message: string;
@@ -31,4 +28,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
     canUserManageWeb?: boolean;
+    settings?: TypedHash<string>;
 }
