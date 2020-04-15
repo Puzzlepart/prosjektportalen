@@ -193,6 +193,11 @@ function Add-MeasurementIndicatorsList($ProjectWeb, $Language) {
             #region Adjusting follow up list
             Write-Host "`tAdjusting $FollowUpListName list" -ForegroundColor Gray
         
+            Write-Host "`t`tRemoving old lookup fields" -ForegroundColor Gray
+            Remove-PnPField -Identity "GtMeasureIndicatorLookup_ID" -List $FollowUpList -Web $ProjectWeb -Force -ErrorAction SilentlyContinue 2>&1>$null
+            Remove-PnPField -Identity "GtMeasureIndicatorLookup_GtDesiredValue" -List $FollowUpList -Web $ProjectWeb -Force -ErrorAction SilentlyContinue 2>&1>$null
+            Remove-PnPField -Identity "GtMeasureIndicatorLookup" -List $FollowUpList -Web $ProjectWeb -Force -ErrorAction SilentlyContinue 2>&1>$null
+            
             Write-Host "`t`tAdding lookup fields" -ForegroundColor Gray
 
             $DesiredValueField = Get-PnPField -Identity "GtDesiredValue"
