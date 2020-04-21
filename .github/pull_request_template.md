@@ -9,11 +9,6 @@ Please describe your pull request.
 
 ### How to test
 
-=======
-Please describe your pull request.
-
-### How to test
-
 Please describe how to test your changes.
 
 ### Relevant issues (if applicable)
