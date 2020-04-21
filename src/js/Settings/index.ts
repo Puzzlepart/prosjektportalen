@@ -65,7 +65,7 @@ export async function GetSettings(webPropertyBag?: { [key: string]: string }): P
  * @param {string} key Key of the setting
  * @param {boolean} toLowerCase Return the value in lowercase
  */
-export async function GetSetting(key: string, toLowerCase = false): Promise<string> {
+export async function GetSetting(key: string, toLowerCase: boolean = false): Promise<string> {
     const settings = await GetSettings();
     if (settings.hasOwnProperty(key)) {
         if (toLowerCase) {
