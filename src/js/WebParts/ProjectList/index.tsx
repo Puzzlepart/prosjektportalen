@@ -149,15 +149,18 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
      */
     private getFilteredData(): IProjectListData {
         const { data, searchTerm } = this.state;
-        const projects = data.projects
+        let projects = data.projects
             .filter(project => {
                 const matches = Object.keys(project).filter(key => {
                     const value = project[key];
                     return value && typeof value === "string" && value.toLowerCase().indexOf(searchTerm) !== -1;
                 }).length;
                 return matches > 0;
-            })
-            .sort((a, b) => a.Title > b.Title ? 1 : -1);
+            });
+        projects = this.props.projectInfoSortByField ?
+            projects.sort((a, b) => a.RawObject[this.props.projectInfoSortByField] > b.RawObject[this.props.projectInfoSortByField] ? 1 : -1)
+            : projects.sort((a, b) => a.Title > b.Title ? 1 : -1);
+        console.log(projects);
         return { ...data, projects };
     }
 
@@ -188,7 +191,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 .get();
 
             const [projectsQueryResult, projectWebsQueryResult, projectCtFieldsArray] = await Promise.all([
-                queryProjects(this.props.dataSourceName, this.props.rowLimit, this.props.propertyClassNames),
+                queryProjects(this.props.dataSourceName, this.props.rowLimit, [this.props.projectInfoSortByField, ...this.props.propertyClassNames]),
                 queryProjectWebs(this.props.dataSourceName, this.props.rowLimit),
                 projectCtFieldsPromise,
             ]);
