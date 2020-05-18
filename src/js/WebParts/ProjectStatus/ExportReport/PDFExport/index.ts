@@ -344,18 +344,18 @@ export default class PDFExport {
      * @param {any} canvas The canvas
      */
     private addImageToCanvas(canvas): void {
-        const imgData = canvas.toDataURL("image/svg");
+        const imgData = canvas.toDataURL("image/png");
         const imgWidth = this.IMAGE_WIDTH;
         const pageHeight = this.jspdf.pageHeight;
         const imgHeight = canvas.height * imgWidth / canvas.width;
         let heightLeft = imgHeight;
         let position = 30;
-        this.jspdf.addImage(imgData, "SVG", this.MARGIN_LEFT, position, imgWidth, imgHeight);
+        this.jspdf.addImage(imgData, "PNG", this.MARGIN_LEFT, position, imgWidth, imgHeight);
         heightLeft -= pageHeight;
         while (heightLeft >= 0) {
             position = heightLeft - imgHeight;
             this.jspdf.addPage();
-            this.jspdf.addImage(imgData, "SVG", 0, position, imgWidth, imgHeight);
+            this.jspdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
         }
     }
