@@ -1,6 +1,6 @@
 import __ from "../../../../Resources";
 import * as moment from "moment";
-import html2canvas from "html2canvas";
+import * as html2canvas from "html2canvas";
 import { Site, Web } from "@pnp/sp";
 import SectionModel, { SectionType } from "../../Section/SectionModel";
 import JsPdfWithAutoTable from "./JsPdfWithAutoTable";
@@ -15,7 +15,7 @@ export default class PDFExport {
     private readonly IMAGE_WIDTH = 270;
     private sections: SectionModel[];
 
-    public constructor(sections: SectionModel[], layout: string = "l", font: string = "Segoe UI") {
+    public constructor(sections: SectionModel[], layout: string = "l", font: string = "Helvetica") {
         this.jspdf = new JsPdfWithAutoTable(layout);
         this.jspdf.setFont(font);
         this.sections = sections;
@@ -87,13 +87,10 @@ export default class PDFExport {
             const settings = {
                 startY: 30,
                 styles: {
-                    columnWidth: "auto",
+                    cellWidth: "auto",
                     fontSize: FONT_SIZE.xsmall,
                     overflow: "linebreak",
                     tableWidth: "auto",
-                },
-                createdCell: (cell, element) => {
-                    element.column.widthStyle = 40;
                 },
             };
             this.jspdf.autoTable(data.columns, data.items, settings);
@@ -107,9 +104,10 @@ export default class PDFExport {
      * @param {string} pageTitle Page title
      */
     public async addPageWithImage(imageId: string, pageTitle: string) {
+        let html2canvasR = html2canvas as any as (element: HTMLElement, options?: Partial<html2canvas.Options>) => Promise<HTMLCanvasElement>;
         const imageElement = document.getElementById(imageId);
         if (imageElement !== null) {
-            const imageCanvas = await html2canvas(imageElement);
+            const imageCanvas = await html2canvasR(imageElement);
             this.jspdf.addPage();
             this.addPageTitle(pageTitle, 15, this.MARGIN_LEFT);
             this.addImageToCanvas(imageCanvas);
@@ -167,13 +165,13 @@ export default class PDFExport {
             theme: "plain",
             startY: yPosition,
             styles: {
-                columnWidth: "auto",
+                cellWidth: "auto",
                 fontSize: FONT_SIZE.small,
                 overflow: "linebreak",
                 tableWidth: tableWidth,
             },
             columnStyles: {
-                Comment: { columnWidth: tableWidth },
+                Comment: { cellWidth: tableWidth },
             },
         };
         let item = {};
@@ -184,15 +182,15 @@ export default class PDFExport {
                 theme: "plain",
                 startY: this.jspdf.autoTable.previous.finalY - 8,
                 styles: {
-                    columnWidth: "auto",
+                    cellWidth: "auto",
                     fontSize: FONT_SIZE.small,
                     overflow: "linebreak",
                     tableWidth: tableWidth,
                 },
                 columnStyles: {
-                    Comment: { columnWidth: tableWidth },
+                    Comment: { cellWidth: tableWidth },
                 },
-                drawHeaderCell: (cell, data) => {
+                willDrawCell: (cell, data) => {
                     return false;
                 },
             };
@@ -346,7 +344,7 @@ export default class PDFExport {
      * @param {any} canvas The canvas
      */
     private addImageToCanvas(canvas): void {
-        const imgData = canvas.toDataURL("image/jpeg");
+        const imgData = canvas.toDataURL("image/png");
         const imgWidth = this.IMAGE_WIDTH;
         const pageHeight = this.jspdf.pageHeight;
         const imgHeight = canvas.height * imgWidth / canvas.width;
