@@ -265,8 +265,8 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private async saveReportToLibrary(reportBlob: Blob, fileExtension: string): Promise<IReport> {
         const dtFormatted = moment(new Date()).format("YYYY-MM-D-HHmm");
-        const fileName = `${dtFormatted}-${_spPageContextInfo.webTitle}.${fileExtension}`;
-        const fileTitle = `${dtFormatted} ${_spPageContextInfo.webTitle}`;
+        const fileName = `${dtFormatted}-${(_spPageContextInfo.webTitle).replace(/\/|\\/g, "-")}.${fileExtension}`;
+        const fileTitle = `${dtFormatted} ${(_spPageContextInfo.webTitle).replace(/\/|\\/g, "-")}`;
         const libServerRelativeUrl = `${_spPageContextInfo.webServerRelativeUrl}/${this.props.reportsLibTitle}`;
         Logger.log({ message: `(saveReportToLibrary) Saving report as ${fileExtension}`, data: { fileName, fileTitle, libServerRelativeUrl }, level: LogLevel.Info });
         const report = await this.saveFileToLibrary(libServerRelativeUrl, fileName, fileTitle, reportBlob);
