@@ -160,7 +160,6 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         projects = this.props.projectInfoSortByField ?
             projects.sort((a, b) => a.RawObject[this.props.projectInfoSortByField] > b.RawObject[this.props.projectInfoSortByField] ? 1 : -1)
             : projects.sort((a, b) => a.Title > b.Title ? 1 : -1);
-        console.log(projects);
         return { ...data, projects };
     }
 
