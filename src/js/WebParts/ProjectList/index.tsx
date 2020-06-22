@@ -190,7 +190,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                 .get();
 
             const [projectsQueryResult, projectWebsQueryResult, projectCtFieldsArray] = await Promise.all([
-                queryProjects(this.props.dataSourceName, this.props.rowLimit, [this.props.projectInfoSortByField, ...this.props.propertyClassNames]),
+                queryProjects(this.props.dataSourceName, this.props.rowLimit, [this.props.projectInfoSortByField, ...this.props.propertyClassNames].filter(e => e.length !== 0)),
                 queryProjectWebs(this.props.dataSourceName, this.props.rowLimit),
                 projectCtFieldsPromise,
             ]);
