@@ -5,9 +5,6 @@ import IExcelExportConfig from "../../IExcelExportConfig";
 export default interface IListProps {
     items?: Array<any>;
     columns?: Array<IColumn>;
-    pathKey?: string;
-    webUrlKey?: string;
-    siteTitleKey?: string;
     showSearchBox?: boolean;
     showCommandBar?: boolean;
     defaultGroupBy?: IGroupByOption;

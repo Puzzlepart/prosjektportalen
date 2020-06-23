@@ -15,9 +15,6 @@ import * as Util from "../../../Util";
 
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
-        pathKey: "Path",
-        webUrlKey: "SPWebUrl",
-        siteTitleKey: "SiteTitle",
         defaultGroupBy: { key: "NoGrouping", name: __.getResource("String_NoGrouping") },
     };
 
@@ -129,7 +126,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         let colValue = item[column.fieldName];
         switch (column.key) {
             case "Title": {
-                const path = item[this.props.pathKey];
+                const path = item.Path;
                 if (path) {
                     return (
                         <ModalLink
@@ -142,7 +139,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                 }
             }
             case "SiteTitle": {
-                const webUrl = item[this.props.webUrlKey];
+                const webUrl = item.SPWebUrl;
                 if (webUrl) {
                     return <a href={webUrl} onClick={(e) => { e.preventDefault(); this._openProject(item); }}>{colValue}</a>;
                 }
@@ -199,7 +196,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
         if (showProjectInfo) {
             return (
                 <ProjectInfo
-                    webUrl={showProjectInfo[this.props.webUrlKey]}
+                    webUrl={showProjectInfo.SPWebUrl}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -214,7 +211,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                         onDismiss: this._dismissProjectInfoModal,
                         headerClassName: "ms-font-xxl",
                         headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo[this.props.siteTitleKey],
+                        title: showProjectInfo.SiteTitle,
                     }} />
             );
         }
