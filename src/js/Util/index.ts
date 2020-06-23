@@ -7,6 +7,7 @@ import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 import { GetProperty } from "./PropertyBag";
 import GetBreakpoint from "./GetBreakpoint";
+import { url } from "inspector";
 
 declare var MSOWebPartPageFormName: string;
 
@@ -40,7 +41,9 @@ export function inEditMode(): boolean {
  * @param {string} absUrl Absolute URL
  */
 export function makeUrlRelativeToSite(absUrl: string): string {
-    return absUrl.replace(document.location.protocol + "//" + document.location.hostname, "");
+    let urlParser = document.createElement("a")
+    urlParser.href = absUrl
+    return urlParser.pathname
 }
 
 /**
