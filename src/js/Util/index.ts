@@ -7,7 +7,6 @@ import WaitDialog from "./WaitDialog";
 import StampVersion from "./StampVersion";
 import { GetProperty } from "./PropertyBag";
 import GetBreakpoint from "./GetBreakpoint";
-import { url } from "inspector";
 
 declare var MSOWebPartPageFormName: string;
 
