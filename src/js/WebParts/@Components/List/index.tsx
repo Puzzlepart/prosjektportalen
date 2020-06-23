@@ -136,11 +136,17 @@ export default class List extends React.PureComponent<IListProps, IListState> {
             case "SiteTitle": {
                 const webUrl = item.SPWebUrl
                 if (webUrl) {
+                    var project = {
+                        title: item.SiteTitle,
+                        url: makeUrlRelativeToSite(item.SPWebUrl)
+                    }
                     return (
-                        <a href={webUrl} onClick={(e) => {
-                            e.preventDefault()
-                            this._openProject(item)
-                        }}>{colValue}</a>
+                        <a
+                            href={webUrl}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                this._showProjectInformation(project)
+                            }}>{colValue}</a>
                     )
                 }
                 return colValue
@@ -166,8 +172,8 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      *
      * @param {any} project The project
      */
-    private _openProject(project: any) {
-        this.setState({ showProjectInfo: project })
+    private _showProjectInformation(project: any) {
+        this.setState({ selectedProject: project })
     }
 
     /**
@@ -175,7 +181,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      */
     @autobind
     private _dismissProjectInfoModal() {
-        this.setState({ showProjectInfo: null })
+        this.setState({ selectedProject: null })
     }
 
     /**
@@ -192,12 +198,11 @@ export default class List extends React.PureComponent<IListProps, IListState> {
      * Renders the Project Info modal
      */
     private _renderProjectInfoModal() {
-        const { showProjectInfo } = this.state
-        if (showProjectInfo) {
-            const webUrl = makeUrlRelativeToSite(showProjectInfo.SPWebUrl)
+        const { selectedProject } = this.state
+        if (selectedProject) {
             return (
                 <ProjectInfo
-                    webUrl={webUrl}
+                    webUrl={selectedProject.url}
                     hideChrome={true}
                     showActionLinks={false}
                     showMissingPropsWarning={false}
@@ -212,7 +217,7 @@ export default class List extends React.PureComponent<IListProps, IListState> {
                         onDismiss: this._dismissProjectInfoModal,
                         headerClassName: "ms-font-xxl",
                         headerStyle: { marginBottom: 20 },
-                        title: showProjectInfo.SiteTitle,
+                        title: selectedProject.title,
                     }} />
             )
         }
