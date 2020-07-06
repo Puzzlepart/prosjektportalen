@@ -1,12 +1,12 @@
-import * as React from "react";
-import * as array_sort from "array-sort";
+import * as React from 'react'
+import * as array_sort from 'array-sort'
 import {
     DetailsList,
     IColumn,
     SelectionMode,
-} from "office-ui-fabric-react/lib/DetailsList";
-import ISectionListProps from "./ISectionListProps";
-import ISectionListState from "./ISectionListState";
+} from 'office-ui-fabric-react/lib/DetailsList'
+import ISectionListProps from './ISectionListProps'
+import ISectionListState from './ISectionListState'
 
 /**
  * Section List
@@ -18,17 +18,17 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListProps} props Props
      */
     constructor(props: ISectionListProps) {
-        super(props);
+        super(props)
         this.state = {
             listData: props.listData,
-        };
+        }
     }
 
     /**
      * Calls _render with props and state to allow for ES6 destruction
      */
     public render(): JSX.Element {
-        return this._render(this.props, this.state);
+        return this._render(this.props, this.state)
     }
 
     /**
@@ -39,7 +39,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      */
     public _render({ id }: ISectionListProps, { listData }: ISectionListState): JSX.Element {
         if (!listData || listData.items.length === 0) {
-            return null;
+            return null
         }
 
         return (
@@ -49,7 +49,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
                     onRenderItemColumn={(item, index, col) => this._onRenderItemColumn(item, index, col, this.props, this.state)}
                     onColumnHeaderClick={(e, col) => this._onColumnSort(e, col, this.props, this.state)} />
             </div >
-        );
+        )
     }
 
     /**
@@ -62,28 +62,28 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListState} param4 State
      */
     private _onRenderItemColumn = (item, index: number, column: IColumn, { }: ISectionListProps, { listData }: ISectionListState): JSX.Element => {
-        const colValue = item[column.fieldName];
+        const colValue = item[column.fieldName]
 
         switch (column.fieldName) {
-            case "Title": {
-                let defaultDisplayFormUrl = `${listData.defaultDisplayFormUrl}?ID=${item.ID}`;
-                column.isMultiline = true;
+            case 'Title': {
+                const defaultDisplayFormUrl = `${listData.defaultDisplayFormUrl}?ID=${item.ID}`
+                column.isMultiline = true
                 return (
                     <a
                         href={defaultDisplayFormUrl}
                         onClick={e => {
-                            e.preventDefault();
-                            SP.UI.ModalDialog.ShowPopupDialog(defaultDisplayFormUrl);
+                            e.preventDefault()
+                            SP.UI.ModalDialog.ShowPopupDialog(defaultDisplayFormUrl)
                         }}>
                         <span>{colValue}</span>
                     </a>
-                );
+                )
             }
         }
 
         return (
             <span dangerouslySetInnerHTML={{ __html: colValue }}></span>
-        );
+        )
     }
 
     /**
@@ -95,26 +95,26 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
      * @param {ISectionListState} param3 State
      */
     private _onColumnSort = (event, column: IColumn, { }: ISectionListProps, { listData }: ISectionListState): void => {
-        if (column.data.type === "datetime") {
-            return;
+        if (column.data.type === 'datetime') {
+            return
         }
-        let isSortedDescending = column.isSortedDescending;
+        let isSortedDescending = column.isSortedDescending
         if (column.isSorted) {
-            isSortedDescending = !isSortedDescending;
+            isSortedDescending = !isSortedDescending
         }
-        const items = array_sort(listData.items, [column.fieldName], { reverse: !isSortedDescending });
+        const items = array_sort(listData.items, [column.fieldName], { reverse: !isSortedDescending })
         this.setState({
             listData: {
                 ...listData,
                 items,
                 columns: listData.columns.map(col => {
-                    col.isSorted = (col.key === column.key);
+                    col.isSorted = (col.key === column.key)
                     if (col.isSorted) {
-                        col.isSortedDescending = isSortedDescending;
+                        col.isSortedDescending = isSortedDescending
                     }
-                    return col;
+                    return col
                 }),
             },
-        });
+        })
     }
 }

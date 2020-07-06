@@ -1,5 +1,5 @@
-import * as moment from "moment";
-import { ITaskSearchResult } from "./ITaskSearchResult";
+import * as moment from 'moment'
+import { ITaskSearchResult } from './ITaskSearchResult'
 
 export class TaskModel {
     public start_time: moment.Moment;
@@ -20,8 +20,8 @@ export class TaskModel {
         public canResize: boolean = false,
         public canChangeGroup: boolean = false,
     ) {
-        this.start_time = start_time ? moment(new Date(start_time)) : null;
-        this.end_time = end_time ? moment(new Date(end_time)) : null;
-        this.itemProps = { className: "pp-task-overview-item" };
+        this.start_time = start_time ? moment(new Date(start_time)) : null
+        this.end_time = end_time ? moment(new Date(end_time)) : null
+        this.itemProps = { className: 'pp-task-overview-item' }
     }
 }

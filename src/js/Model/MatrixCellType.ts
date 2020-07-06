@@ -3,4 +3,4 @@ enum MatrixCellType {
     Cell,
 }
 
-export default MatrixCellType;
+export default MatrixCellType

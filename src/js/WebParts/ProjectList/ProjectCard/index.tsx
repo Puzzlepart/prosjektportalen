@@ -1,9 +1,9 @@
-import * as React from "react";
-import __ from "../../../Resources";
-import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType } from "office-ui-fabric-react/lib/DocumentCard";
-import { ImageFit } from "office-ui-fabric-react/lib/Image";
-import * as Util from "../../../Util";
-import IProjectCardProps from "./IProjectCardProps";
+import * as React from 'react'
+import __ from '../../../Resources'
+import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType } from 'office-ui-fabric-react/lib/DocumentCard'
+import { ImageFit } from 'office-ui-fabric-react/lib/Image'
+import * as Util from '../../../Util'
+import IProjectCardProps from './IProjectCardProps'
 
 /**
  * Project Card
@@ -17,7 +17,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
         accentColor: Util.stringToColour(props.project.Phase),
         width: props.tileWidth,
         height: props.tileImageHeight,
-    };
+    }
     return (
         <DocumentCard
             className={props.className}
@@ -25,28 +25,28 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
             onClickHref={props.onClickHref} >
             <DocumentCardPreview previewImages={[previewImage]} />
             <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
-            <DocumentCardLocation location={props.project.Phase || __.getResource("String_NotSet")} />
+            <DocumentCardLocation location={props.project.Phase || __.getResource('String_NotSet')} />
             <DocumentCardActivity
-                activity={props.fields["GtProjectOwner"]}
+                activity={props.fields['GtProjectOwner']}
                 people={[props.project.getOwner()]} />
             <DocumentCardActivity
-                activity={props.fields["GtProjectManager"]}
+                activity={props.fields['GtProjectManager']}
                 people={[props.project.getManager()]} />
             <DocumentCardActions
                 actions={
                     [{
-                        iconProps: { iconName: "AlignCenter" },
+                        iconProps: { iconName: 'AlignCenter' },
                         onClick: e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            props.showProjectInfo(e);
+                            e.preventDefault()
+                            e.stopPropagation()
+                            props.showProjectInfo(e)
                         },
                     },
                     ]}
                 views={props.project.Views}
             />
         </DocumentCard>
-    );
-};
+    )
+}
 
-export default ProjectCard;
+export default ProjectCard

@@ -1,11 +1,11 @@
-import * as React from "react";
-import __ from "../../../Resources";
+import * as React from 'react'
+import __ from '../../../Resources'
 import {
     Panel,
     PanelType,
-} from "office-ui-fabric-react/lib/Panel";
-import DynamicPortfolioFilter, { IDynamicPortfolioFilter } from "./DynamicPortfolioFilter";
-import DynamicPortfolioFilterPanelProps from "./DynamicPortfolioFilterPanelProps";
+} from 'office-ui-fabric-react/lib/Panel'
+import DynamicPortfolioFilter, { IDynamicPortfolioFilter } from './DynamicPortfolioFilter'
+import DynamicPortfolioFilterPanelProps from './DynamicPortfolioFilterPanelProps'
 
 /**
  * DynamicPortfolioFilter Panel
@@ -18,9 +18,9 @@ const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpe
             isOpen={isOpen}
             isBlocking={true}
             onDismiss={onDismiss}
-            headerText={__.getResource("String_Filters")}
+            headerText={__.getResource('String_Filters')}
             type={PanelType.smallFixedFar}>
-            <div className="ms-Grid">
+            <div className='ms-Grid'>
                 {filters
                     .filter(filter => filter.items.length > 1)
                     .map((filter, idx) => (
@@ -30,9 +30,9 @@ const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpe
                             onFilterChange={onFilterChange} />
                     ))}
             </div>
-        </Panel>);
-};
+        </Panel>)
+}
 
-export default DynamicPortfolioFilterPanel;
-export { IDynamicPortfolioFilter };
+export default DynamicPortfolioFilterPanel
+export { IDynamicPortfolioFilter }
 

@@ -1,4 +1,4 @@
-import IDynamicPortfolioFilter from "./IDynamicPortfolioFilter";
+import IDynamicPortfolioFilter from './IDynamicPortfolioFilter'
 
 export default interface IDynamicPortfolioFilterState {
     isCollapsed: boolean;

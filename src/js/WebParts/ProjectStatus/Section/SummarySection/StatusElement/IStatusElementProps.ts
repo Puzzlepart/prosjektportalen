@@ -1,4 +1,4 @@
-import SectionModel from "../../SectionModel";
+import SectionModel from '../../SectionModel'
 
 export default interface IStatusElementProps {
     section: SectionModel;

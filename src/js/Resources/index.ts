@@ -1,7 +1,7 @@
 export default new class Resources {
     private _res = {
-        1033: require("./en-US.json"),
-        1044: require("./no-NB.json"),
+        1033: require('./en-US.json'),
+        1044: require('./no-NB.json'),
     };
 
     /**
@@ -11,8 +11,8 @@ export default new class Resources {
      * @param {number} language Language
      */
     public getResource(resKey: string, lcid = _spPageContextInfo.webLanguage): string {
-        const dict = this.getResources(lcid);
-        return dict ? dict[resKey] : "";
+        const dict = this.getResources(lcid)
+        return dict ? dict[resKey] : ''
     }
 
     /**
@@ -21,8 +21,8 @@ export default new class Resources {
      * @param {number} language Language
      */
     public getResources(lcid = _spPageContextInfo.webLanguage): string {
-        const dict = this._res[lcid];
-        return dict;
+        const dict = this._res[lcid]
+        return dict
     }
-};
+}
 

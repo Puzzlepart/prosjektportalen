@@ -1,5 +1,5 @@
-import { BenefitBase } from "./BenefitsOverviewData/BenefitBase";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { BenefitBase } from './BenefitsOverviewData/BenefitBase'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 
 export type BenefitsOverviewCustomRenderFunctionCallback = (item: BenefitBase) => any;
 

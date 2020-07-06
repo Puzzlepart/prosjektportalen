@@ -1,5 +1,5 @@
-import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
-import { BenefitBase } from "./BenefitBase";
+import { IBenefitsSearchResult } from './IBenefitsSearchResult'
+import { BenefitBase } from './BenefitBase'
 
 export class Benefit extends BenefitBase {
     public type: string;
@@ -11,10 +11,10 @@ export class Benefit extends BenefitBase {
      *
      */
     constructor(result: IBenefitsSearchResult) {
-        super(result);
-        this.type = result.GtGainsTypeOWSCHCS;
-        this.turnover = result.GtGainsTurnoverOWSMTXT;
-        this.responsible = result.GtGainsResponsible || result.RefinableString70;
-        this.realizationTime = new Date(result.GtRealizationTimeOWSDATE);
+        super(result)
+        this.type = result.GtGainsTypeOWSCHCS
+        this.turnover = result.GtGainsTurnoverOWSMTXT
+        this.responsible = result.GtGainsResponsible || result.RefinableString70
+        this.realizationTime = new Date(result.GtRealizationTimeOWSDATE)
     }
 }

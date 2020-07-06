@@ -1,10 +1,10 @@
-import {  Logger, LogLevel } from "@pnp/logging";
-import * as Util from "../../Util";
-import { CopyFiles } from "./Files";
-import { CopyItems } from "./Items";
-import { ListConfig } from "./Config";
-import ProvisionError from "../ProvisionError";
-import IProvisionContext from "../IProvisionContext";
+import {  Logger, LogLevel } from '@pnp/logging'
+import * as Util from '../../Util'
+import { CopyFiles } from './Files'
+import { CopyItems } from './Items'
+import { ListConfig } from './Config'
+import ProvisionError from '../ProvisionError'
+import IProvisionContext from '../IProvisionContext'
 
 /**
  * Copies list content (items or files) from source to destination for the specified list
@@ -13,15 +13,15 @@ import IProvisionContext from "../IProvisionContext";
  * @param {ListConfig} conf List configuration
  */
 async function Copy(context: IProvisionContext, conf: ListConfig): Promise<void> {
-    await Util.ensureTaxonomy();
+    await Util.ensureTaxonomy()
     try {
         if (conf.DestinationLibrary) {
-            await CopyFiles(context, conf);
+            await CopyFiles(context, conf)
         } else {
-            await CopyItems(context, conf);
+            await CopyItems(context, conf)
         }
     } catch (err) {
-        throw err;
+        throw err
     }
 }
 
@@ -31,15 +31,15 @@ async function Copy(context: IProvisionContext, conf: ListConfig): Promise<void>
  * @param {IProvisionContext} context Provisioning context
  */
 async function CopyDefaultData(context: IProvisionContext): Promise<void> {
-    const { includeContent: IncludeContent } = context.model;
-    Logger.log({ message: "(CopyDefaultData) Starting copy of default data.", data: { IncludeContent }, level: LogLevel.Info });
+    const { includeContent: IncludeContent } = context.model
+    Logger.log({ message: '(CopyDefaultData) Starting copy of default data.', data: { IncludeContent }, level: LogLevel.Info })
     try {
         for (let i = 0; i < IncludeContent.length; i++) {
-            await Copy(context, IncludeContent[i]);
+            await Copy(context, IncludeContent[i])
         }
     } catch (err) {
-        throw new ProvisionError(err, "CopyDefaultData");
+        throw new ProvisionError(err, 'CopyDefaultData')
     }
 }
 
-export { CopyDefaultData };
+export { CopyDefaultData }

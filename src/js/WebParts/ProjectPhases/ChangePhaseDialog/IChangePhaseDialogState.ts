@@ -1,5 +1,5 @@
-import { PhaseModel } from "../ProjectPhasesData";
-import { View } from "./Views";
+import { PhaseModel } from '../ProjectPhasesData'
+import { View } from './Views'
 
 export default interface IChangePhaseDialogState {
     activePhase?: PhaseModel;

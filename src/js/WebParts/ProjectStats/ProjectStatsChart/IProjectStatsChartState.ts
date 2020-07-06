@@ -1,4 +1,4 @@
-import ChartConfiguration from "../ChartConfiguration";
+import ChartConfiguration from '../ChartConfiguration'
 
 export default interface IProjectStatsChartState {
     breakpoint: string;

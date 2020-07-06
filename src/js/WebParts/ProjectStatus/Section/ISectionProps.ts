@@ -1,5 +1,5 @@
-import SectionModel from "./SectionModel";
-import IRiskMatrixProps from "../../RiskMatrix/IRiskMatrixProps";
+import SectionModel from './SectionModel'
+import IRiskMatrixProps from '../../RiskMatrix/IRiskMatrixProps'
 
 export default interface ISectionProps {
     index: number;

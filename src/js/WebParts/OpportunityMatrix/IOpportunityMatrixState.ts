@@ -1,5 +1,5 @@
-import IMatrixCell from "../../Model/IMatrixCell";
-import IOpportunityMatrixData from "./IOpportunityMatrixData";
+import IMatrixCell from '../../Model/IMatrixCell'
+import IOpportunityMatrixData from './IOpportunityMatrixData'
 
 export default interface IOpportunityMatrixState {
     data?: IOpportunityMatrixData;

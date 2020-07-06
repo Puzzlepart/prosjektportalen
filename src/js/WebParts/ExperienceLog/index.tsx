@@ -1,19 +1,19 @@
-import { Site } from "@pnp/sp";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import * as React from "react";
-import __ from "../../Resources";
-import SearchService from "../../Services/SearchService";
-import BaseWebPart from "../@BaseWebPart";
-import List from "../@Components/List";
-import IExperienceLogProps, { ExperienceLogDefaultProps } from "./IExperienceLogProps";
-import IExperienceLogState from "./IExperienceLogState";
-import LogElement from "./LogElement";
+import { Site } from '@pnp/sp'
+import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
+import * as React from 'react'
+import __ from '../../Resources'
+import SearchService from '../../Services/SearchService'
+import BaseWebPart from '../@BaseWebPart'
+import List from '../@Components/List'
+import IExperienceLogProps, { ExperienceLogDefaultProps } from './IExperienceLogProps'
+import IExperienceLogState from './IExperienceLogState'
+import LogElement from './LogElement'
 
 /**
  * Experience Log
  */
 export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExperienceLogState> {
-    public static displayName = "ExperienceLog";
+    public static displayName = 'ExperienceLog';
     public static defaultProps = ExperienceLogDefaultProps;
 
     /**
@@ -22,15 +22,15 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
      * @param {IExperienceLogProps} props Props
      */
     constructor(props: IExperienceLogProps) {
-        super(props, { isLoading: true });
+        super(props, { isLoading: true })
     }
 
     public async componentDidMount(): Promise<void> {
         try {
-            const items = await this._fetchItems();
-            this.setState({ items, isLoading: false });
+            const items = await this._fetchItems()
+            this.setState({ items, isLoading: false })
         } catch (err) {
-            this.setState({ items: [], isLoading: false });
+            this.setState({ items: [], isLoading: false })
         }
     }
 
@@ -42,8 +42,8 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
             return (
                 <Spinner
                     type={SpinnerType.large}
-                    label={__.getResource("ExperienceLog_LoadingText")} />
-            );
+                    label={__.getResource('ExperienceLog_LoadingText')} />
+            )
         }
 
         return (
@@ -54,40 +54,40 @@ export default class ExperienceLog extends BaseWebPart<IExperienceLogProps, IExp
                 groupByOptions={this.props.groupByOptions}
                 excelExportEnabled={this.props.excelExportEnabled}
                 excelExportConfig={this.props.excelExportConfig} />
-        );
+        )
     }
 
     /**
      * Fetch items
      */
     protected async _fetchItems() {
-        let queryTemplate;
+        let queryTemplate
         if (this.props.queryTemplate) {
-            queryTemplate = this.props.queryTemplate;
+            queryTemplate = this.props.queryTemplate
         } else {
-            const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource("Lists_DataSources_Title"));
-            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get();
-            queryTemplate = dataSource.GtDpSearchQuery;
+            const dataSourcesList = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb.lists.getByTitle(__.getResource('Lists_DataSources_Title'))
+            const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSourceName}'`).get()
+            queryTemplate = dataSource.GtDpSearchQuery
         }
         if (queryTemplate) {
             try {
-                const selectProperties = ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)];
+                const selectProperties = ['Path', 'SPWebUrl', ...this.props.columns.map(col => col.key)]
                 const { items } = await SearchService.search<any[]>({
-                    Querytext: "*",
+                    Querytext: '*',
                     QueryTemplate: queryTemplate,
                     RowLimit: 500,
                     TrimDuplicates: false,
                     SelectProperties: selectProperties,
-                });
-                return items.map(r => new LogElement(r));
+                })
+                return items.map(r => new LogElement(r))
             } catch (err) {
-                throw err;
+                throw err
             }
         } else {
-            return [];
+            return []
         }
     }
 }
 
-export { IExperienceLogProps, IExperienceLogState };
+export { IExperienceLogProps, IExperienceLogState }
 

@@ -1,4 +1,4 @@
-import SectionModel from "../SectionModel";
+import SectionModel from '../SectionModel'
 
 export default interface ISectionHeaderProps extends React.HTMLAttributes<HTMLElement> {
     section: SectionModel;

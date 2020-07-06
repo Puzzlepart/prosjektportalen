@@ -7,6 +7,6 @@ export interface IStatusProperties {
 
 export default interface IStatusFieldsConfig {
     [key: string]: {
-        statuses: IStatusProperties[],
+        statuses: IStatusProperties[];
     };
 }

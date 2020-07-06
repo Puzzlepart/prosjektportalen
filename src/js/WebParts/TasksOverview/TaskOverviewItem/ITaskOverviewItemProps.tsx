@@ -1,5 +1,5 @@
-import { TaskModel } from "../TaskModel";
-import { TaskOverviewItemType } from "./TaskOverviewItemType";
+import { TaskModel } from '../TaskModel'
+import { TaskOverviewItemType } from './TaskOverviewItemType'
 
 export interface ITaskOverviewItemProps {
     item: TaskModel;

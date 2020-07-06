@@ -1,5 +1,5 @@
-import __ from "../../Resources";
-import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
+import __ from '../../Resources'
+import NewProjectFormRenderMode from './NewProjectFormRenderMode'
 
 interface INewProjectFormProps {
     className?: string;
@@ -21,20 +21,20 @@ interface INewProjectFormProps {
 
 export const NewProjectFormDefaultProps: Partial<INewProjectFormProps> = {
     titleMinLength: 4,
-    className: "pp-newProjectForm",
-    settingsClassName: "advanced-settings",
+    className: 'pp-newProjectForm',
+    settingsClassName: 'advanced-settings',
     maxUrlLength: 18,
     doesWebExistDelayMs: 200,
     renderMode: NewProjectFormRenderMode.Default,
     onDialogDismiss: () => {
         // Empty
     },
-    headerText: __.getResource("NewProjectForm_Title"),
-    subHeaderText: __.getResource("NewProjectForm_SubText"),
-    creationModalTitle: __.getResource("CreationModal_Title"),
+    headerText: __.getResource('NewProjectForm_Title'),
+    subHeaderText: __.getResource('NewProjectForm_SubText'),
+    creationModalTitle: __.getResource('CreationModal_Title'),
     inputContainerStyle: { marginBottom: 5 },
     showSettings: true,
     showProjectTypes: true,
-};
+}
 
-export default INewProjectFormProps;
+export default INewProjectFormProps

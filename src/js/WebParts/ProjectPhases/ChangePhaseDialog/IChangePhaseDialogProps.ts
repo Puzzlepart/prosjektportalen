@@ -1,5 +1,5 @@
-import ChangePhaseDialogResult from "./ChangePhaseDialogResult";
-import { PhaseModel } from "../ProjectPhasesData";
+import ChangePhaseDialogResult from './ChangePhaseDialogResult'
+import { PhaseModel } from '../ProjectPhasesData'
 
 export default interface IChangePhaseDialogProps {
     newPhase: PhaseModel;

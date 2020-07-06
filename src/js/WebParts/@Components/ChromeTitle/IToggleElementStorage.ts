@@ -1,4 +1,4 @@
 export default interface IToggleElementStorage {
     key: string;
-    type: "localStorage" | "sessionStorage";
+    type: 'localStorage' | 'sessionStorage';
 }

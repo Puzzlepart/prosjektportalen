@@ -1,9 +1,9 @@
-import * as React from "react";
-import __ from "../../../../../Resources";
-import { PrimaryButton, IButtonProps } from "office-ui-fabric-react/lib/Button";
-import { TextField } from "office-ui-fabric-react/lib/TextField";
-import IInitialViewProps, { InitialViewDefaultProps } from "./IInitialViewProps";
-import IInitialViewState from "./IInitialViewState";
+import * as React from 'react'
+import __ from '../../../../../Resources'
+import { PrimaryButton, IButtonProps } from 'office-ui-fabric-react/lib/Button'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import IInitialViewProps, { InitialViewDefaultProps } from './IInitialViewProps'
+import IInitialViewState from './IInitialViewState'
 
 /**
  * Initial view
@@ -17,17 +17,17 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
      * @param {IInitialViewProps} props Props
      */
     constructor(props: IInitialViewProps) {
-        super(props);
+        super(props)
         this.state = {
-            comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || "") : "",
-        };
-        this._onNextCheckPoint = this._onNextCheckPoint.bind(this);
-        this._onCommentUpdate = this._onCommentUpdate.bind(this);
+            comment: props.currentChecklistItem ? (props.currentChecklistItem.GtComment || '') : '',
+        }
+        this._onNextCheckPoint = this._onNextCheckPoint.bind(this)
+        this._onCommentUpdate = this._onCommentUpdate.bind(this)
     }
 
     public render(): JSX.Element {
         if (!this.props.currentChecklistItem) {
-            return null;
+            return null
         }
         return (
             <div className={this.props.className}>
@@ -43,26 +43,26 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                 </div>
                 {this.renderStatusOptions()}
             </div>
-        );
+        )
     }
 
     /**
      * Render status options
      */
     private renderStatusOptions() {
-        const { isLoading, commentMinLength } = this.props;
-        const { comment } = this.state;
+        const { isLoading, commentMinLength } = this.props
+        const { comment } = this.state
 
-        const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment);
-        const statusNotRelevantTooltipCommentEmpty = __.getResource("ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty");
-        const statusNotRelevantTooltip = __.getResource("ProjectPhases_CheckpointNotRelevantTooltip");
-        const statusStillOpenTooltipCommentEmpty = __.getResource("ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty");
-        const statusStillOpenTooltip = __.getResource("ProjectPhases_CheckpointStillOpenTooltip");
-        const statusDoneTooltip = __.getResource("ProjectPhases_CheckpointDoneTooltip");
+        const isCommentValid = (comment.length >= commentMinLength) && /\S/.test(comment)
+        const statusNotRelevantTooltipCommentEmpty = __.getResource('ProjectPhases_CheckpointNotRelevantTooltip_CommentEmpty')
+        const statusNotRelevantTooltip = __.getResource('ProjectPhases_CheckpointNotRelevantTooltip')
+        const statusStillOpenTooltipCommentEmpty = __.getResource('ProjectPhases_CheckpointStillOpenTooltip_CommentEmpty')
+        const statusStillOpenTooltip = __.getResource('ProjectPhases_CheckpointStillOpenTooltip')
+        const statusDoneTooltip = __.getResource('ProjectPhases_CheckpointDoneTooltip')
 
-        const statusNotRelevant = __.getResource("Choice_GtChecklistStatus_NotRelevant");
-        const statusStillOpen = __.getResource("Choice_GtChecklistStatus_StillOpen");
-        const statusClosed = __.getResource("Choice_GtChecklistStatus_Closed");
+        const statusNotRelevant = __.getResource('Choice_GtChecklistStatus_NotRelevant')
+        const statusStillOpen = __.getResource('Choice_GtChecklistStatus_StillOpen')
+        const statusClosed = __.getResource('Choice_GtChecklistStatus_Closed')
 
         const statusOptions: IButtonProps[] = [
             {
@@ -82,7 +82,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                 disabled: isLoading,
                 title: statusDoneTooltip,
                 onClick: () => this._onNextCheckPoint(statusClosed, comment),
-            }];
+            }]
         return (
             <div style={{ marginTop: 20, marginBottom: 25 }}>
                 {statusOptions.map((statusOpt, key) => (
@@ -91,7 +91,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                     </span>
                 ))}
             </div>
-        );
+        )
     }
 
     /**
@@ -102,8 +102,8 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     * @param {boolean} updateStatus Update status
     */
     private _onNextCheckPoint(status: string, comment: string, updateStatus = true) {
-        this.props.nextCheckPointAction(status, comment, true);
-        this.setState({ comment: "" });
+        this.props.nextCheckPointAction(status, comment, true)
+        this.setState({ comment: '' })
     }
 
     /**
@@ -112,6 +112,6 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     * @param {string} newValue New value
     */
     private _onCommentUpdate(newValue: string) {
-        this.setState({ comment: newValue });
+        this.setState({ comment: newValue })
     }
 }

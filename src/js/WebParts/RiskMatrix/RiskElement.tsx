@@ -1,13 +1,13 @@
-import * as React from "react";
-import { ModalLink } from "../@Components";
-import RiskElementModel from "./RiskElementModel";
+import * as React from 'react'
+import { ModalLink } from '../@Components'
+import RiskElementModel from './RiskElementModel'
 
 export interface IRiskElementProps extends React.HTMLProps<HTMLDivElement> {
     model: RiskElementModel;
 }
 
 export default class RiskMatrix extends React.Component<IRiskElementProps, {}> {
-    public static defaultProps = { className: "risk-matrix-element" };
+    public static defaultProps = { className: 'risk-matrix-element' };
 
     public render(): React.ReactElement<IRiskElementProps> {
         return (
@@ -21,15 +21,15 @@ export default class RiskMatrix extends React.Component<IRiskElementProps, {}> {
                     url={this.props.model.url}
                     options={{ HideRibbon: true }} />
             </div>
-        );
+        )
     }
 
     protected _getTooltip() {
-        let tooltip = "";
+        let tooltip = ''
         if (this.props.model.siteTitle) {
-            tooltip += `${this.props.model.siteTitle}: `;
+            tooltip += `${this.props.model.siteTitle}: `
         }
-        tooltip += this.props.model.title;
-        return tooltip;
+        tooltip += this.props.model.title
+        return tooltip
     }
 }

@@ -1,6 +1,6 @@
-import * as Util from "../../../Util";
-import __ from "../../../Resources";
-import IStatusFieldsConfig, { IStatusProperties } from "../../../Model/Config/IStatusFieldsConfig";
+import * as Util from '../../../Util'
+import __ from '../../../Resources'
+import IStatusFieldsConfig, { IStatusProperties } from '../../../Model/Config/IStatusFieldsConfig'
 
 export enum SectionType {
     StatusSection,
@@ -38,38 +38,38 @@ export default class SectionModel {
      * @param {IStatusFieldsConfig} statusFieldsConfig Status fields config
      */
     constructor(obj: any, project: any, statusFieldsConfig: IStatusFieldsConfig) {
-        this.sectionType = this.getSectionTypeFromContentType(obj.ContentTypeId);
-        this.name = obj.Title;
-        this.iconName = obj.GtStSecIcon;
-        this.source = obj.GtStSecSource;
-        this.listTitle = obj.GtStSecList;
-        this.viewQuery = obj.GtStSecViewQuery;
-        this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(",") : [];
-        this.rowLimit = obj.GtStSecRowLimit;
-        this.fieldName = obj.GtStSecFieldName;
-        this.showRiskMatrix = obj.GtStSecShowRiskMatrix;
-        this.showInNavbar = obj.GtStSecShowInNavbar;
-        this.showInStatusSection = obj.GtStSecShowInStatusSection;
-        this.showAsSection = obj.GtStSecShowAsSection;
-        this.customComponent = obj.GtStSecCustomComponent;
-        this.statusProperties = {};
+        this.sectionType = this.getSectionTypeFromContentType(obj.ContentTypeId)
+        this.name = obj.Title
+        this.iconName = obj.GtStSecIcon
+        this.source = obj.GtStSecSource
+        this.listTitle = obj.GtStSecList
+        this.viewQuery = obj.GtStSecViewQuery
+        this.viewFields = obj.GtStSecViewFields ? obj.GtStSecViewFields.split(',') : []
+        this.rowLimit = obj.GtStSecRowLimit
+        this.fieldName = obj.GtStSecFieldName
+        this.showRiskMatrix = obj.GtStSecShowRiskMatrix
+        this.showInNavbar = obj.GtStSecShowInNavbar
+        this.showInStatusSection = obj.GtStSecShowInStatusSection
+        this.showAsSection = obj.GtStSecShowAsSection
+        this.customComponent = obj.GtStSecCustomComponent
+        this.statusProperties = {}
 
         if (this.sectionType === SectionType.RiskSection) {
-            this.listTitle = __.getResource("Lists_Uncertainties_Title");
-            this.fieldName = "GtStatusRisk";
+            this.listTitle = __.getResource('Lists_Uncertainties_Title')
+            this.fieldName = 'GtStatusRisk'
         }
-        this.commentFieldName = `${this.fieldName}Comment`;
+        this.commentFieldName = `${this.fieldName}Comment`
         if (this.fieldName) {
             if (project && project.hasOwnProperty(this.fieldName)) {
-                this.statusValue = project[this.fieldName];
+                this.statusValue = project[this.fieldName]
             }
             if (project && project.hasOwnProperty(this.commentFieldName)) {
-                this.statusComment = project[this.commentFieldName];
+                this.statusComment = project[this.commentFieldName]
             }
             if (statusFieldsConfig && statusFieldsConfig.hasOwnProperty(this.fieldName)) {
-                const [statusProperties] = statusFieldsConfig[this.fieldName].statuses.filter(({ statusValue }) => this.statusValue === statusValue);
+                const [statusProperties] = statusFieldsConfig[this.fieldName].statuses.filter(({ statusValue }) => this.statusValue === statusValue)
                 if (statusProperties) {
-                    this.statusProperties = statusProperties;
+                    this.statusProperties = statusProperties
                 }
             }
         }
@@ -81,25 +81,25 @@ export default class SectionModel {
      * @param {string} contentTypeId Content type id
      */
     public getSectionTypeFromContentType(contentTypeId: string): SectionType {
-        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82802") !== -1) {
-            return SectionType.StatusSection;
+        if (contentTypeId.indexOf('0x01004CEFE616A94A3A48A27D9DEBDF5EC82802') !== -1) {
+            return SectionType.StatusSection
         }
-        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82803") !== -1) {
-            return SectionType.ProjectPropertiesSection;
+        if (contentTypeId.indexOf('0x01004CEFE616A94A3A48A27D9DEBDF5EC82803') !== -1) {
+            return SectionType.ProjectPropertiesSection
         }
-        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82804") !== -1) {
-            return SectionType.RiskSection;
+        if (contentTypeId.indexOf('0x01004CEFE616A94A3A48A27D9DEBDF5EC82804') !== -1) {
+            return SectionType.RiskSection
         }
-        if (contentTypeId.indexOf("0x01004CEFE616A94A3A48A27D9DEBDF5EC82805") !== -1) {
-            return SectionType.ListSection;
+        if (contentTypeId.indexOf('0x01004CEFE616A94A3A48A27D9DEBDF5EC82805') !== -1) {
+            return SectionType.ListSection
         }
     }
 
     public getHtmlElementId(element?: string): string {
         if (element) {
-            return `section-${Util.cleanString(this.name)}-${element}`;
+            return `section-${Util.cleanString(this.name)}-${element}`
         } else {
-            return `section-${Util.cleanString(this.name)}`;
+            return `section-${Util.cleanString(this.name)}`
         }
     }
 
@@ -107,6 +107,6 @@ export default class SectionModel {
      * Checks if section is valid
      */
     public isValid(): boolean {
-        return (this.statusValue !== "" && this.statusValue !== null) || this.sectionType === SectionType.ListSection;
+        return (this.statusValue !== '' && this.statusValue !== null) || this.sectionType === SectionType.ListSection
     }
 }

@@ -1,7 +1,7 @@
-import __ from "../../Resources";
-import { IBaseWebPartProps } from "../@BaseWebPart";
-import IProjectStatusSectionConfig from "./IProjectStatusSectionConfig";
-import IRiskMatrixProps from "../RiskMatrix/IRiskMatrixProps";
+import __ from '../../Resources'
+import { IBaseWebPartProps } from '../@BaseWebPart'
+import IProjectStatusSectionConfig from './IProjectStatusSectionConfig'
+import IRiskMatrixProps from '../RiskMatrix/IRiskMatrixProps'
 
 export default interface IProjectStatusProps extends IBaseWebPartProps {
     sectionConfig?: IProjectStatusSectionConfig;
@@ -12,8 +12,8 @@ export default interface IProjectStatusProps extends IBaseWebPartProps {
 
 export const ProjectStatusDefaultProps: Partial<IProjectStatusProps> = {
     sectionConfig: {
-        listTitle: __.getResource("Lists_StatusSections_Title"),
-        orderBy: "GtStSecOrder",
+        listTitle: __.getResource('Lists_StatusSections_Title'),
+        orderBy: 'GtStSecOrder',
     },
     showActionLinks: true,
-};
+}

@@ -1,4 +1,4 @@
-import { IBaseWebPartProps } from "../@BaseWebPart";
+import { IBaseWebPartProps } from '../@BaseWebPart'
 
 interface IQuickLinksProps extends IBaseWebPartProps {
     itemsCount?: number;
@@ -7,4 +7,4 @@ interface IQuickLinksProps extends IBaseWebPartProps {
     listClassName?: string;
 }
 
-export default IQuickLinksProps;
+export default IQuickLinksProps

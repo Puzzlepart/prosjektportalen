@@ -1,24 +1,24 @@
 
-import __ from "../../Resources";
-import { Site } from "@pnp/sp";
-import * as React from "react";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import IQuickLinksProps from "./IQuickLinksProps";
-import IQuickLinksState from "./IQuickLinksState";
-import BaseWebPart from "../@BaseWebPart";
+import __ from '../../Resources'
+import { Site } from '@pnp/sp'
+import * as React from 'react'
+import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
+import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import IQuickLinksProps from './IQuickLinksProps'
+import IQuickLinksState from './IQuickLinksState'
+import BaseWebPart from '../@BaseWebPart'
 
 /**
  * Component: QuickLinks
  */
 export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLinksState> {
-    public static displayName = "QuickLinks";
+    public static displayName = 'QuickLinks';
     public static defaultProps: Partial<IQuickLinksProps> = {
         itemsCount: 10,
-        orderBy: "GtSortOrder",
+        orderBy: 'GtSortOrder',
         orderAsc: true,
-        listClassName: "pp-simpleList spacing-m",
+        listClassName: 'pp-simpleList spacing-m',
     };
 
     /**
@@ -27,20 +27,20 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
      * @param {IQuickLinksProps} props Props
      */
     constructor(props: IQuickLinksProps) {
-        super(props, { isLoading: true });
+        super(props, { isLoading: true })
     }
 
     public async componentDidMount() {
-        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb;
+        const rootWeb = new Site(_spPageContextInfo.siteAbsoluteUrl).rootWeb
         const links = await rootWeb
             .lists
-            .getByTitle(__.getResource("Lists_QuickLinks_Title"))
+            .getByTitle(__.getResource('Lists_QuickLinks_Title'))
             .items
             .orderBy(this.props.orderBy, this.props.orderAsc)
             .top(this.props.itemsCount)
-            .select("URL", "Comments")
-            .get();
-        this.setState({ links: links, isLoading: false });
+            .select('URL', 'Comments')
+            .get()
+        this.setState({ links: links, isLoading: false })
     }
 
     /**
@@ -49,10 +49,10 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     public render(): JSX.Element {
         return (
             <div>
-                {this._renderChrome(__.getResource("WebPart_Links_Title"), this.state.elementToToggle, QuickLinks.displayName)}
+                {this._renderChrome(__.getResource('WebPart_Links_Title'), this.state.elementToToggle, QuickLinks.displayName)}
                 {this.renderItems(this.props, this.state)}
             </div>
-        );
+        )
     }
 
     /**
@@ -63,36 +63,36 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
     */
     private renderItems = ({ listClassName }: IQuickLinksProps, { isLoading, links }: IQuickLinksState) => {
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return <Spinner type={SpinnerType.large} />
         } else if (links.length > 0) {
             return (
                 <div ref={this._containerRef}>
                     <ul className={listClassName}>
                         {links.map((lnk, idx) => (
                             <li key={idx}>
-                                <h5><a href={lnk.URL.Url} target="_blank">{lnk.URL.Description}</a></h5>
-                                <span className="ms-metadata">{lnk.Comments}</span>
+                                <h5><a href={lnk.URL.Url} target='_blank'>{lnk.URL.Description}</a></h5>
+                                <span className='ms-metadata'>{lnk.Comments}</span>
                             </li>
                         ))}
                     </ul>
                 </div>
-            );
+            )
         } else {
             return (
                 <div ref={this._containerRef}>
-                    <MessageBar>{__.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{__.getResource('WebPart_EmptyMessage')}</MessageBar>
                 </div>
-            );
+            )
         }
     }
 
     @autobind
     private _containerRef(div: HTMLDivElement) {
-        this.setState({ elementToToggle: div });
+        this.setState({ elementToToggle: div })
     }
 }
 
 export {
     IQuickLinksProps,
     IQuickLinksState,
-};
+}

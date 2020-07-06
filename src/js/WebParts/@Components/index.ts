@@ -1,5 +1,5 @@
-import ChromeTitle from "./ChromeTitle";
-import ModalLink from "./ModalLink";
+import ChromeTitle from './ChromeTitle'
+import ModalLink from './ModalLink'
 
 
-export { ChromeTitle, ModalLink };
+export { ChromeTitle, ModalLink }

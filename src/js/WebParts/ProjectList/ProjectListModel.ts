@@ -1,5 +1,5 @@
-import __ from "../../Resources";
-import * as Util from "../../Util";
+import __ from '../../Resources'
+import * as Util from '../../Util'
 
 export interface IUserDetails {
     name: string;
@@ -28,47 +28,47 @@ export default class ProjectListModel {
     }
 
     public initFromSearchResponse(projectSearchResult, webSearchResult, fallbackLogo) {
-        this.RawObject = projectSearchResult;
-        this.Title = projectSearchResult.SiteTitle;
-        this.Phase = projectSearchResult.RefinableString52;
-        this.ServiceArea = projectSearchResult.RefinableString53;
-        this.Type = projectSearchResult.RefinableString54;
-        this.Manager = projectSearchResult.GtProjectManagerOWSUSER;
-        this.Owner = projectSearchResult.GtProjectOwnerOWSUSER;
-        this.LastModifiedTime = projectSearchResult.LastModifiedTime;
+        this.RawObject = projectSearchResult
+        this.Title = projectSearchResult.SiteTitle
+        this.Phase = projectSearchResult.RefinableString52
+        this.ServiceArea = projectSearchResult.RefinableString53
+        this.Type = projectSearchResult.RefinableString54
+        this.Manager = projectSearchResult.GtProjectManagerOWSUSER
+        this.Owner = projectSearchResult.GtProjectOwnerOWSUSER
+        this.LastModifiedTime = projectSearchResult.LastModifiedTime
 
-        this.Url = webSearchResult ? webSearchResult.Path : projectSearchResult.Path.split("/Lists")[0];
-        this.Title = webSearchResult ? webSearchResult.Title : projectSearchResult.SiteTitle;
-        this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace("ICO-Site-Project-11", "ICO-Global-Project-11") : fallbackLogo;
-        this.Views = webSearchResult && webSearchResult.ViewsLifeTime;
+        this.Url = webSearchResult ? webSearchResult.Path : projectSearchResult.Path.split('/Lists')[0]
+        this.Title = webSearchResult ? webSearchResult.Title : projectSearchResult.SiteTitle
+        this.Logo = webSearchResult && webSearchResult.SiteLogo ? webSearchResult.SiteLogo.replace('ICO-Site-Project-11', 'ICO-Global-Project-11') : fallbackLogo
+        this.Views = webSearchResult && webSearchResult.ViewsLifeTime
 
-        return this;
+        return this
     }
 
     /**
     * Get manager (GtProjectManagerOWSUSER)
     */
     public getManager(): IUserDetails {
-        let email = "";
-        let name = __.getResource("String_NotSet");
+        let email = ''
+        let name = __.getResource('String_NotSet')
         if (this.Manager) {
-            [email, name] = this.Manager.split(" | ");
+            [email, name] = this.Manager.split(' | ')
         }
-        const profileImageSrc = Util.userPhoto(email);
-        return { name, email, profileImageSrc };
+        const profileImageSrc = Util.userPhoto(email)
+        return { name, email, profileImageSrc }
     }
 
     /**
      * Get owner (GtProjectOwnerOWSUSER)
      */
     public getOwner(): IUserDetails {
-        let email = "";
-        let name = __.getResource("String_NotSet");
+        let email = ''
+        let name = __.getResource('String_NotSet')
         if (this.Owner) {
-            [email, name] = this.Owner.split(" | ");
+            [email, name] = this.Owner.split(' | ')
         }
-        const profileImageSrc = Util.userPhoto(email);
-        return { name, email, profileImageSrc };
+        const profileImageSrc = Util.userPhoto(email)
+        return { name, email, profileImageSrc }
     }
 
     /**
@@ -76,8 +76,8 @@ export default class ProjectListModel {
      */
     public getPhaseLetter(): string {
         if (this.Phase) {
-            return this.Phase.substring(0, 1).toUpperCase();
+            return this.Phase.substring(0, 1).toUpperCase()
         }
-        return null;
+        return null
     }
 }

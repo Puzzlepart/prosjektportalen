@@ -1,9 +1,9 @@
-import { TypedHash } from "@pnp/common";
-import { MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
-import { ExcelExportStatus } from "../../Util/ExportToExcel";
-import { IBaseWebPartState } from "../@BaseWebPart";
-import { IDynamicPortfolioColumnConfig, IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from "./DynamicPortfolioConfiguration";
-import { IDynamicPortfolioFilter } from "./DynamicPortfolioFilterPanel";
+import { TypedHash } from '@pnp/common'
+import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { ExcelExportStatus } from '../../Util/ExportToExcel'
+import { IBaseWebPartState } from '../@BaseWebPart'
+import { IDynamicPortfolioColumnConfig, IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from './DynamicPortfolioConfiguration'
+import { IDynamicPortfolioFilter } from './DynamicPortfolioFilterPanel'
 
 export interface IDynamicPortfolioErrorMessage {
     message: string;
@@ -24,7 +24,7 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     errorMessage?: IDynamicPortfolioErrorMessage;
     showFilterPanel?: boolean;
     groupBy?: IDynamicPortfolioColumnConfig;
-    currentSort?: { fieldName: string, isSortedDescending: boolean };
+    currentSort?: { fieldName: string; isSortedDescending: boolean };
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
     canUserManageWeb?: boolean;

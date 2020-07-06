@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment'
 
 /**
  * Interface: IProjectReference
@@ -36,10 +36,10 @@ export class ProjectResourceAllocation {
         public workComment: string,
     ) {
 
-        this.start_time = moment(new Date(start_time));
-        this.end_time = moment(new Date(end_time));
-        this.allocationPercentage = Math.round(parseFloat(allocationPercentage) * 100);
-        this.workDescription = workDescription !== "DispForm.aspx" ? workDescription : "";
+        this.start_time = moment(new Date(start_time))
+        this.end_time = moment(new Date(end_time))
+        this.allocationPercentage = Math.round(parseFloat(allocationPercentage) * 100)
+        this.workDescription = workDescription !== 'DispForm.aspx' ? workDescription : ''
     }
 
     /**
@@ -47,9 +47,9 @@ export class ProjectResourceAllocation {
      */
     public toString(): string {
         if (this.type === ProjectAllocationType.ProjectAllocation) {
-            return `${this.role} - ${this.project.name} (${this.allocationPercentage}%)`;
+            return `${this.role} - ${this.project.name} (${this.allocationPercentage}%)`
         } else {
-            return `${this.absence} (${this.allocationPercentage}%)`;
+            return `${this.absence} (${this.allocationPercentage}%)`
         }
     }
 }
@@ -69,8 +69,8 @@ export class ProjectUser {
      * @param {string} name Name
      */
     constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name;
-        this.allocations = [];
+        this.id = id
+        this.name = name
+        this.allocations = []
     }
 }

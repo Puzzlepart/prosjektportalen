@@ -1,14 +1,14 @@
-import { IBaseFormModifications } from "../Base";
+import { IBaseFormModifications } from '../Base'
 
 const _: IBaseFormModifications = {
     NewForm: () => {
-        const select = document.querySelectorAll("select");
+        const select = document.querySelectorAll('select')
         select.forEach(ele => {
-            const options = ele.querySelectorAll("option");
+            const options = ele.querySelectorAll('option')
             if (options.length === 0) {
-                (ele.parentNode.parentNode.parentNode as any).style.display = "none";
+                (ele.parentNode.parentNode.parentNode as any).style.display = 'none'
             }
-        });
+        })
     },
     EditForm: () => {
         // EditForm
@@ -16,6 +16,6 @@ const _: IBaseFormModifications = {
     DispForm: () => {
         // DispForm
     },
-};
+}
 
-export default _;
+export default _

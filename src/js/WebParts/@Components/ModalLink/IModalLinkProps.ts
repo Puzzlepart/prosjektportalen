@@ -1,5 +1,5 @@
-import IModalLinkIconProps from "./IModalLinkIconProps";
-import IModalLinkOptions from "./IModalLinkOptions";
+import IModalLinkIconProps from './IModalLinkIconProps'
+import IModalLinkOptions from './IModalLinkOptions'
 
 export default interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
     label?: string;
@@ -21,6 +21,6 @@ export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {
     showLabel: true,
     reloadOnSubmit: false,
     reloadOnCancel: false,
-    className: "",
-};
+    className: '',
+}
 

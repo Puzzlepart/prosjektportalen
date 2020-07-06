@@ -1,4 +1,4 @@
-import { PhaseModel } from "../ProjectPhasesData";
+import { PhaseModel } from '../ProjectPhasesData'
 
 export default interface IProjectPhaseProps {
     phase: PhaseModel;

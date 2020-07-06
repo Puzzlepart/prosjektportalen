@@ -3,4 +3,4 @@ interface IGroupByOption {
     name: string;
 }
 
-export default IGroupByOption;
+export default IGroupByOption

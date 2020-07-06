@@ -1,6 +1,6 @@
-import { ProjectStatsChartData } from "../ProjectStatsChart";
-import { IModalProps } from "office-ui-fabric-react/lib/Modal";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { ProjectStatsChartData } from '../ProjectStatsChart'
+import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 
 export default interface IProjectStatsDataSelectionProps extends IModalProps {
     data: ProjectStatsChartData;

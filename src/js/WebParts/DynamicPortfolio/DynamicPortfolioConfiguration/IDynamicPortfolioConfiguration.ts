@@ -1,7 +1,7 @@
-import IDynamicPortfolioColumnConfig from "./IDynamicPortfolioColumnConfig";
-import IDynamicPortfolioRefinerConfig from "./IDynamicPortfolioRefinerConfig";
-import IDynamicPortfolioViewConfig from "./IDynamicPortfolioViewConfig";
-import IStatusFieldsConfig from "../../../Model/Config/IStatusFieldsConfig";
+import IDynamicPortfolioColumnConfig from './IDynamicPortfolioColumnConfig'
+import IDynamicPortfolioRefinerConfig from './IDynamicPortfolioRefinerConfig'
+import IDynamicPortfolioViewConfig from './IDynamicPortfolioViewConfig'
+import IStatusFieldsConfig from '../../../Model/Config/IStatusFieldsConfig'
 
 export default interface IDynamicPortfolioConfiguration {
     columns: IDynamicPortfolioColumnConfig[];
@@ -15,4 +15,4 @@ export {
     IDynamicPortfolioRefinerConfig,
     IDynamicPortfolioViewConfig,
     IStatusFieldsConfig,
-};
+}

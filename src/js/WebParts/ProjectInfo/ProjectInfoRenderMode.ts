@@ -3,5 +3,5 @@ enum ProjectInfoRenderMode {
     Modal,
 }
 
-export default ProjectInfoRenderMode;
+export default ProjectInfoRenderMode
 

@@ -1,10 +1,10 @@
-import { IFile } from "sp-js-provisioning/lib/schema";
-import  ProjectHome  from "./ProjectHome";
-import BenefitsOverview  from "./BenefitsOverview";
-import ProjectStatus from "./ProjectStatus";
-import Nofilter from "./Nofilter";
-import Assigned  from "./Assigned";
-import MoM from "./MoM";
+import { IFile } from 'sp-js-provisioning/lib/schema'
+import  ProjectHome  from './ProjectHome'
+import BenefitsOverview  from './BenefitsOverview'
+import ProjectStatus from './ProjectStatus'
+import Nofilter from './Nofilter'
+import Assigned  from './Assigned'
+import MoM from './MoM'
 
 const Files: IFile[] = [
     ProjectHome,
@@ -13,6 +13,6 @@ const Files: IFile[] = [
     MoM,
     BenefitsOverview,
     ProjectStatus,
-];
+]
 
-export default Files;
+export default Files

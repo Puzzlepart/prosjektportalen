@@ -3,5 +3,5 @@ enum ModalLinkIconPosition {
     Right,
 }
 
-export default ModalLinkIconPosition;
+export default ModalLinkIconPosition
 

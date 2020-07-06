@@ -1,4 +1,4 @@
-import SectionModel from "../Section/SectionModel";
+import SectionModel from '../Section/SectionModel'
 
 export default interface INavigationProps {
     sections: SectionModel[];
