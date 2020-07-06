@@ -11,6 +11,7 @@
     "author": "@tarjeieo, @olemp",
     "main": "lib/index.js",
     "scripts": {
+        "version2": "tsc --version",
         "buildPnpTemplateFiles": "gulp copyPnpTemplates && gulp localizePnpTemplates && gulp copyResourcesToAssetsTemplate && npm run buildSiteTemplates && gulp copyThirdPartyLibsToTemplate && gulp stampVersionToTemplates",
         "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
         "release": "gulp clean && gulp packageProd && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
@@ -115,7 +116,7 @@
         "string-format": "^2.0.0",
         "stylus": "^0.54.5",
         "typedoc": "^0.14.2",
-        "typescript": "^3.8.3",
+        "typescript": "3.4.5",
         "uuid": "^3.3.2",
         "webpack": "^3.12.0",
         "whatwg-fetch": "^3.0.0",
