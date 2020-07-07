@@ -9,18 +9,38 @@
     [string]$GenericCredential
 )
 
-if ($CurrentCredentials.IsPresent) {
-    Connect-PnPOnline -Url $Url -CurrentCredentials
-} elseif ($UseWebLogin.IsPresent) {
-    Connect-PnPOnline -Url $Url -UseWebLogin
-} elseif ($GenericCredential -ne $null) {
-    Connect-PnPOnline -Url $Url -Credentials $GenericCredential
-} else {
-    Connect-PnPOnline -Url $Url
+function Connect-SP($Url) {
+    if ($CurrentCredentials.IsPresent) {
+        Connect-PnPOnline -Url $Url -CurrentCredentials
+    }
+    elseif ($UseWebLogin.IsPresent) {
+        Connect-PnPOnline -Url $Url -UseWebLogin
+    }
+    elseif ($GenericCredential -ne $null) {
+        Connect-PnPOnline -Url $Url -Credentials $GenericCredential
+    }
+    else {
+        Connect-PnPOnline -Url $Url
+    }
 }
 
-foreach($web in (Get-PnPSubwebs)) {
-    Add-PnPUserToGroup -LoginName "" -Identity $web.Assoc
-}
+Connect-SP $Url
 
-Disconnect-PnPOnline
+$LoginName = Get-PnPUser | Where-Object { $_.LoginName -like "*spo-grid-all-users*" } | Select-Object -ExpandProperty LoginName
+if ($null -eq $LoginName) {
+    Write-Host "Cannot find user principal. Please ensure user 'Everyone but external users'." -ForegroundColor Yellow
+    exit 0
+}
+$Ctx = Get-PnPContext
+$Webs = (Get-PnPWeb).Webs
+$Ctx.Load($Webs)
+$Ctx.ExecuteQuery()
+
+foreach ($Web in $Webs) {
+    Connect-SP $Web.Url
+    Write-Host "Adding Everyone but external users to AssociatedVisitorGroup for $($web.Title)"
+    New-PnPUser -LoginName $LoginName -ErrorAction SilentlyContinue | Out-Null
+    $Group = Get-PnPGroup -AssociatedVisitorGroup
+    Add-PnPUserToGroup -LoginName $LoginName -Identity $Group -Web $Web -ErrorAction SilentlyContinue
+    Disconnect-PnPOnline
+}
