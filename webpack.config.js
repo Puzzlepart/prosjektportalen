@@ -2,12 +2,12 @@
 const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
-
 const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
-module.exports = (devtool, exclude, env) => ({
-    devtool,
+module.exports = () => ({
+    mode: process.env.NODE_ENV || 'development',
+    stats: 'minimal',
     entry: {
         main: [
             'core-js/es6/map',
@@ -17,7 +17,7 @@ module.exports = (devtool, exclude, env) => ({
             'whatwg-fetch',
             '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
-            './lib/index.js',
+            './src/js/index.tsx',
         ],
     },
     output: {
@@ -26,44 +26,38 @@ module.exports = (devtool, exclude, env) => ({
         libraryTarget: 'umd',
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.json', '.txt'],
+        extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.json'],
         alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['react', 'env', 'es2015'],
-                    plugins: [
-                        require('babel-plugin-transform-class-properties'),
-                        require('babel-plugin-transform-object-assign'),
-                    ]
-                }
-            },
-            exclude: exclude
-        },
-        {
-            test: /\.txt$/,
-            use: 'raw-loader'
-        },
-        {
-            test: /\.json$/,
-            loader: 'json-loader'
-        }
+        rules: [
+            {
+                test: /\.ts(x?)$/,
+                exclude: /(node_modules)/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env']
+                        }
+                    },
+                    {
+                        loader: 'ts-loader'
+                    }
+                ]
+            }
         ]
     },
     plugins: [
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version),
             'process.env': {
-                NODE_ENV: JSON.stringify(env)
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
-        .concat(env === 'production' ? [
+        .concat(process.env.NODE_ENV === 'production' ? [
             new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
