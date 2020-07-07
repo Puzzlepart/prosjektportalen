@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 
 gulp.task('watchUpload', () => {
     livereload.listen({ start: true })
-    watch(config.paths.dist).on('change', (glob) => {
+    watch(config.dist.js).on('change', (glob) => {
         uploadFileToSp(
             glob,
             require('./@env.js').default,

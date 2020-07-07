@@ -18,6 +18,9 @@ module.exports = {
         scripts: "./.scripts",
         spAssetsFolder: "siteassets/pp",
     },
+    dist: {
+        js: "./dist/js/**/*.js",
+    },
     globs: {
         build: "./build/**/*",
         manualConf: "./manual-conf/**/*",
@@ -35,10 +38,6 @@ module.exports = {
     },
     assets: {
         fileTypes: ["png", "md"],
-    },
-    stylus: {
-        compress: false,
-        use: [autoprefixer('last 5 versions')]
     },
     versionToken: "{package-version}",
     availableLanguages: [1033, 1044],

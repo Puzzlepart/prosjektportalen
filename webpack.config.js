@@ -60,11 +60,12 @@ module.exports = () => ({
             },
             {
                 test: /\.ts(x?)$/,
-                exclude: /(node_modules(?!\/sp-js-provisioning\/)|bower_components)/,
+                exclude: /(node_modules)/,
                 use: [
                     {
                         loader: 'awesome-typescript-loader',
                         options: {
+                            useCache: true,
                             useBabel: true,
                             babelOptions: {
                                 babelrc: false,
