@@ -2,11 +2,25 @@
 const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
+const { CheckerPlugin } = require('awesome-typescript-loader')
 const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
+const env = [
+    '@babel/preset-env',
+    {
+        corejs: { version: 3 },
+        useBuiltIns: 'entry',
+        targets: {
+            'chrome': '58',
+            'ie': '11'
+        },
+        modules: 'commonjs',
+    }]
+
 module.exports = () => ({
     stats: 'minimal',
+    devtool: 'source-map',
     entry: {
         main: [
             'core-js/es6/map',
@@ -35,23 +49,36 @@ module.exports = () => ({
                 loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
             },
             {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [env]
+                    }
+                },
+                include: [path.resolve(__dirname, 'node_modules/sp-js-provisioning')]
+            },
+            {
                 test: /\.ts(x?)$/,
-                exclude: /(node_modules)/,
+                exclude: /(node_modules(?!\/sp-js-provisioning\/)|bower_components)/,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: 'awesome-typescript-loader',
                         options: {
-                            presets: ['@babel/preset-env']
+                            useBabel: true,
+                            babelOptions: {
+                                babelrc: false,
+                                presets: [env]
+                            },
+                            babelCore: '@babel/core'
                         }
-                    },
-                    {
-                        loader: 'ts-loader'
                     }
                 ]
             }
         ]
     },
     plugins: [
+        new CheckerPlugin(),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version),
             'process.env': {
