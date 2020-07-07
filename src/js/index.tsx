@@ -9,7 +9,7 @@ import * as WebParts from './WebParts'
 import * as Forms from './Forms'
 import StampVersion from './Util/StampVersion'
 import * as moment from 'moment'
-import('../css')
+require('../css')
 //#endregion
 
 moment.locale(__.getResource('MomentDate_Locale'))
@@ -27,7 +27,7 @@ namespace PP {
      * @param {string} logLevelStr Log level string
      */
     function initLogging(logLevelStr: string) {
-        let logLevel
+        let logLevel: LogLevel
         switch (logLevelStr.toLowerCase()) {
             case 'info': logLevel = LogLevel.Info
                 break

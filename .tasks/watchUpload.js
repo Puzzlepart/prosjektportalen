@@ -11,13 +11,10 @@ var gulp = require('gulp'),
 gulp.task('watchUpload', () => {
     livereload.listen({ start: true })
     watch(config.paths.dist).on('change', (glob) => {
-        let dest
-        if (glob.indexOf('/js') !== -1) dest = path.join(config.paths.spAssetsFolder, 'js')
-        if (glob.indexOf('/css') !== -1) dest = path.join(config.paths.spAssetsFolder, 'css')
         uploadFileToSp(
             glob,
             require('./@env.js').default,
-            dest,
+            path.join(config.paths.spAssetsFolder, 'js'),
         )
     })
 })
