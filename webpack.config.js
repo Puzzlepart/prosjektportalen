@@ -6,17 +6,22 @@ const { CheckerPlugin } = require('awesome-typescript-loader')
 const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
-const env = [
-    '@babel/preset-env',
-    {
-        corejs: { version: 3 },
-        useBuiltIns: 'entry',
-        targets: {
-            'chrome': '58',
-            'ie': '11'
-        },
-        modules: 'commonjs',
-    }]
+/**
+ * Presets for @babel
+ */
+const presets = {
+    env: [
+        '@babel/preset-env',
+        {
+            corejs: { version: 3 },
+            useBuiltIns: 'entry',
+            targets: {
+                'chrome': '58',
+                'ie': '11'
+            },
+            modules: 'commonjs',
+        }]
+}
 
 module.exports = () => ({
     stats: 'minimal',
@@ -53,7 +58,7 @@ module.exports = () => ({
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: [env]
+                        presets: [presets.env]
                     }
                 },
                 include: [path.resolve(__dirname, 'node_modules/sp-js-provisioning')]
@@ -69,7 +74,7 @@ module.exports = () => ({
                             useBabel: true,
                             babelOptions: {
                                 babelrc: false,
-                                presets: [env]
+                                presets: [presets.env]
                             },
                             babelCore: '@babel/core'
                         }
