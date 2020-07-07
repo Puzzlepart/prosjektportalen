@@ -9,6 +9,7 @@ import * as WebParts from './WebParts'
 import * as Forms from './Forms'
 import StampVersion from './Util/StampVersion'
 import * as moment from 'moment'
+import('../css')
 //#endregion
 
 moment.locale(__.getResource('MomentDate_Locale'))

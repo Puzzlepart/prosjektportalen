@@ -26,11 +26,15 @@ module.exports = () => ({
         libraryTarget: 'umd',
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.css', '.scss', '.json'],
+        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json'],
         alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
         rules: [
+            {
+                test: /\.styl$/,
+                loader: 'css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
+            },
             {
                 test: /\.ts(x?)$/,
                 exclude: /(node_modules)/,
