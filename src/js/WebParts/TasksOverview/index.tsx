@@ -311,6 +311,7 @@ export default class TasksOverview extends React.Component<ITasksOverviewProps, 
      */
     private getFilteredData(data: ITasksOverviewData) {
         Logger.log({ message: String.format(LOG_TEMPLATE, 'getFilteredData', 'Getting filtered data'), level: LogLevel.Info })
+        // eslint-disable-next-line prefer-const
         let { activeFilters, searchTerm, visibleTimeStart, visibleTimeEnd } = ({ ...this.state } as ITasksOverviewState)
         const tasks = this.getFilteredTasks(data.tasks, activeFilters, searchTerm)
         const groups = data.groups.filter(grp => tasks.filter(item => item.group === grp.id).length > 0)

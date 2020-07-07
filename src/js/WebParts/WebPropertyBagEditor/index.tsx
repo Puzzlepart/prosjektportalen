@@ -133,7 +133,7 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
      * On save changes
      */
     @autobind
-    private async _onSaveChanges() {
+    private _onSaveChanges() {
         const { settings } = this.state
         this.setState({ isSaving: true }, async () => {
             await UpdateSettings(settings)
@@ -149,7 +149,4 @@ export default class WebPropertyBagEditor extends BaseWebPart<IWebPropertyBagEdi
     }
 }
 
-export {
-    IWebPropertyBagEditorProps,
-    IWebPropertyBagEditorState,
-}
+export { IWebPropertyBagEditorProps, IWebPropertyBagEditorState }

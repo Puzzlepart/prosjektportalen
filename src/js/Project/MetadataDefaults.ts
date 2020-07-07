@@ -27,7 +27,7 @@ const UpdateClientLocationBasedDefaults = (folderServerRelativeUrl: string, cont
             Logger.log({ message: `(UpdateClientLocationBasedDefaults) Updated client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Info })
             resolve()
         })
-        .catch(reason => {
+        .catch(() => {
             Logger.log({ message: `(UpdateClientLocationBasedDefaults) Failed to update client_LocationBasedDefaults.html for ${CONFIGURATION.DOCUMENT_LIBRARY}`, data: { contents }, level: LogLevel.Error })
             reject()
         })
@@ -53,6 +53,7 @@ const GenerateMetadataDefaults = (folderServerRelativeUrl: string, defaultValues
  * @param {string} fieldType Text, Taxonomy or TaxonomyMulti
  */
 function getFieldValueForType(value, fieldType): string {
+    // eslint-disable-next-line default-case
     switch (fieldType) {
         case 'Text': {
             if (value) {
@@ -99,7 +100,7 @@ export async function SetMetadataDefaultsForLibrary(fields: IIMetadataDefaultsFi
     const docLibFieldsInternalNames = docLibFields.map(f => f.InternalName)
     const folderServerRelativeUrl = Util.encodeSpaces(RootFolder.ServerRelativeUrl)
     const defaultValues: IMetadataDefaultsDefaultValue[] = fields
-        .filter(({ fieldName, fieldType }) => {
+        .filter(({ fieldName }) => {
             const docLibHasField = Array.contains(docLibFieldsInternalNames, fieldName)
             return docLibHasField
         })

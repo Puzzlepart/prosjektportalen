@@ -1,1 +1,1 @@
-export default type IBaseWebPartProps = React.HTMLAttributes<HTMLElement>
+export type IBaseWebPartProps = React.HTMLAttributes<HTMLElement>

@@ -7,9 +7,8 @@ import {
  * Sets shared navigation for the specified web
  *
  * @param {string} url Url
- * @param {boolean} useShared Use shared navigation
  */
-export default async function SetSharedNavigation(url: string, useShared = true): Promise<void> {
+export default async function SetSharedNavigation(url: string): Promise<void> {
     try {
         const jsomCtx = await CreateJsomContext(url)
         jsomCtx.web.get_navigation().set_useShared(true)

@@ -60,8 +60,10 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     }
 
     public render(): React.ReactElement<INewProjectFormProps> {
+        // eslint-disable-next-line default-case
         switch (this.state.provisioning.status) {
             case ProvisionStatus.Idle: {
+                // eslint-disable-next-line default-case
                 switch (this.props.renderMode) {
                     case NewProjectFormRenderMode.Default: {
                         return (
@@ -188,6 +190,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * Render footer
      */
     private renderFooter(): React.ReactElement<INewProjectFormProps> {
+        // eslint-disable-next-line default-case
         switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
@@ -221,6 +224,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
         const prevModel = this.state.model
         const model = this.state.model.clone()
         model[inputName] = newValue
+        // eslint-disable-next-line default-case
         switch (inputName) {
             case 'title': {
                 model.url = Util.cleanString(newValue, this.props.maxUrlLength)
@@ -316,7 +320,9 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {
                 this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } })
             }, this.state.selectedTemplate)
-            document.location.href = redirectUrl
+            // eslint-disable-next-line no-console
+            console.log(redirectUrl)
+            // document.location.href = redirectUrl
         } catch {
             this.setState({ provisioning: { status: ProvisionStatus.Error } })
         }

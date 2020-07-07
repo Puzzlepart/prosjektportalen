@@ -47,7 +47,7 @@ async function ProvisionFolderHierarchy(destLibServerRelUrl: string, rootFolderS
             .sort()
             .reduce((chain: Promise<any>, folder) => {
                 const folderServerRelUrl = `${destLibServerRelUrl}/${folder.replace(rootFolderServerRelUrl, '')}`
-                return chain.then(_ => destLibRootFolder.folders.add(folderServerRelUrl))
+                return chain.then(() => destLibRootFolder.folders.add(folderServerRelUrl))
             }, Promise.resolve())
         Logger.log({
             message: String.format(LOG_TEMPLATE, 'ProvisionFolderHierarchy', 'Folder hierarchy created'),

@@ -17,6 +17,28 @@ interface IItemRecord {
 let ITEM_RECORDS: IItemRecord[]
 
 /**
+ * Handle list items with parent
+ *
+ * @param {CopyContext} dataCtx Data context
+ */
+async function HandleItemsWithParent(dataCtx: CopyContext): Promise<void> {
+    ITEM_RECORDS
+        .filter(item => item.hasOwnProperty('ParentID'))
+        .forEach(item => {
+            const [parent] = ITEM_RECORDS.filter(record => record.SourceItemId === item.ParentID)
+            if (parent) {
+                item.DestinationItem.set_item('ParentID', parent.DestinationItemId)
+                item.DestinationItem.update()
+            }
+        })
+    try {
+        await dataCtx.loadAndExecuteQuery(dataCtx.Destination._)
+    } catch (err) {
+        throw new ProvisionError(err, 'HandleItemsWithParent')
+    }
+}
+
+/**
  * Copy a single list item to the destination web
  *
  * @param {SP.ListItem} srcItem The source item
@@ -33,6 +55,7 @@ export async function CopyItem(srcItem: SP.ListItem, fields: string[], dataCtx: 
             const fieldType = dataCtx.listFieldsMap[fieldName]
             Logger.log({ message: `(CopyItem) Setting value for field ${fieldName} (${fieldType})`, level: LogLevel.Info })
             const result = setItemFieldValue(fieldName, destItem, fieldValue, fieldType, dataCtx.Destination._, dataCtx.Destination.list)
+            // eslint-disable-next-line default-case
             switch (result) {
                 case SetItemFieldValueResult.FieldTypeNotSupported: {
                     Logger.log({ message: `(CopyItem) Field type ${fieldType} is not supported`, data: {}, level: LogLevel.Warning })
@@ -84,32 +107,10 @@ export async function CopyItems(context: IProvisionContext, conf: ListConfig): P
     }
     try {
         context.progressCallbackFunc(__.getResource('ProvisionWeb_CopyListContent'), String.format(__.getResource('ProvisionWeb_CopyItems'), listItems.length, conf.SourceList, conf.DestinationList))
-        await listItems.reduce((chain: Promise<any>, srcItem) => chain.then(_ => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
+        await listItems.reduce((chain: Promise<any>, srcItem) => chain.then(() => CopyItem(srcItem, conf.Fields, dataCtx)), Promise.resolve())
         await HandleItemsWithParent(dataCtx)
         Logger.log({ message: '(CopyItems) Copy of list items done.', data: { conf }, level: LogLevel.Info })
     } catch (err) {
         throw err
-    }
-}
-
-/**
- * Handle list items with parent
- *
- * @param {CopyContext} dataCtx Data context
- */
-async function HandleItemsWithParent(dataCtx: CopyContext): Promise<void> {
-    ITEM_RECORDS
-        .filter(item => item.hasOwnProperty('ParentID'))
-        .forEach(item => {
-            const [parent] = ITEM_RECORDS.filter(record => record.SourceItemId === item.ParentID)
-            if (parent) {
-                item.DestinationItem.set_item('ParentID', parent.DestinationItemId)
-                item.DestinationItem.update()
-            }
-        })
-    try {
-        await dataCtx.loadAndExecuteQuery(dataCtx.Destination._)
-    } catch (err) {
-        throw new ProvisionError(err, 'HandleItemsWithParent')
     }
 }

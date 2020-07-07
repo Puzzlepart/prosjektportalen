@@ -47,9 +47,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
 
     public async componentDidMount() {
         let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>('risk-matrix-cells')
-        if (matrixCells == null || !matrixCells.length) {
-            matrixCells = RiskMatrixCells
-        }
+        if (matrixCells === null || !matrixCells.length) matrixCells = RiskMatrixCells
         if (this.state.data) {
             this.setState({ matrixCells })
         } else {
@@ -183,6 +181,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 const cell = matrixCells[i][j]
                 const riskElements = this.getRiskElementsForCell(riskItems, cell)
                 const riskElementsPostAction = this.getRiskElementsPostActionForCell(riskItems, cell)
+                // eslint-disable-next-line default-case
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (

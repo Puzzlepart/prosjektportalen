@@ -28,7 +28,7 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
                     <div className='pp-task-overview-details-modal'>
                         {this.renderHeader()}
                         {this.renderBody()}
-                        <div className='pp-task-overview-details-modal-close-btn' onClick={_event => this.props.onDismiss()}>x</div>
+                        <div className='pp-task-overview-details-modal-close-btn' onClick={() => this.props.onDismiss()}>x</div>
                     </div>
                 </Modal >
             )
@@ -82,10 +82,10 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
                 </div>
                 <div>
                     <b>{__.getResource('String_Project')}:</b>&nbsp;
-                    <a href={item.SPWebUrl}target='_blank'><span>{item.SiteTitle}</span></a>
+                    <a href={item.SPWebUrl} rel='noopener noreferrer' target='_blank'><span>{item.SiteTitle}</span></a>
                 </div>
                 <div style={{ marginTop: 20 }}>
-                    <a href={item.Path} target='_blank'><span>{__.getResource('ItemLink_Label_NewTab')}</span></a>
+                    <a href={item.Path} rel='noopener noreferrer' target='_blank'><span>{__.getResource('ItemLink_Label_NewTab')}</span></a>
                 </div>
             </div>
         )

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 //#region Imports
 import __ from './Resources'
 import { sp } from '@pnp/sp'
@@ -24,21 +25,16 @@ namespace PP {
      *
      * @param {string} logLevelStr Log level string
      */
-    async function initLogging(logLevelStr: string) {
-        let logLevel = LogLevel.Off
+    function initLogging(logLevelStr: string) {
+        let logLevel
         switch (logLevelStr.toLowerCase()) {
-            case 'info': {
-                logLevel = LogLevel.Info
-            }
+            case 'info': logLevel = LogLevel.Info
                 break
-            case 'warning': {
-                logLevel = LogLevel.Warning
-            }
+            case 'warning': logLevel = LogLevel.Warning
                 break
-            case 'error': {
-                logLevel = LogLevel.Error
-            }
+            case 'error': logLevel = LogLevel.Error
                 break
+            default: logLevel = LogLevel.Off
         }
         Logger.activeLogLevel = logLevel
         Logger.subscribe(new ConsoleListener())

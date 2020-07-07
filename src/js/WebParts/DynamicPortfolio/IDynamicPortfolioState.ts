@@ -1,5 +1,5 @@
-import { TypedHash } from '@pnp/common'
 import { MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
+import { ISettings } from '../../Settings'
 import { ExcelExportStatus } from '../../Util/ExportToExcel'
 import { IBaseWebPartState } from '../@BaseWebPart'
 import { IDynamicPortfolioColumnConfig, IDynamicPortfolioConfiguration, IDynamicPortfolioViewConfig } from './DynamicPortfolioConfiguration'
@@ -28,5 +28,5 @@ export default interface IDynamicPortfolioState extends IBaseWebPartState {
     showProjectInfo?: any;
     excelExportStatus?: ExcelExportStatus;
     canUserManageWeb?: boolean;
-    settings?: TypedHash<string>;
+    settings?: ISettings;
 }

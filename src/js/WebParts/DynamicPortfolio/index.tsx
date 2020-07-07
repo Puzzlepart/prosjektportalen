@@ -1,5 +1,5 @@
-import * as array_sort from 'array-sort'
-import * as array_unique from 'array-unique'
+import * as arraySort from 'array-sort'
+import * as arrayUniq from 'array-unique'
 import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx'
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar'
 import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
@@ -49,7 +49,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
 
     public async componentDidMount() {
         const stickyAbove = document.querySelector('[class*=\'stickyAbove-\']')
-        if (stickyAbove != null) {
+        if (stickyAbove !== null) {
             stickyAbove.addEventListener('scroll', this.handleStickyScroll)
         }
         try {
@@ -124,6 +124,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             return null
         }
         const { currentFilters } = this.state
+        // eslint-disable-next-line prefer-spread
         const currentFiltersStr = [].concat.apply([], Object.keys(currentFilters).map(key => currentFilters[key])).join(', ')
         let statusText = String.format(this.props.showCountText, data.items.length, this.state.items.length)
         if (currentFiltersStr) {
@@ -150,7 +151,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                 columns={data.columns}
                 groups={data.groups}
                 selectionMode={SelectionMode.none}
-                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, this.state.settings.PROJECTSTATUS_NOTE_TRUNCATE_VALUE, evt => this._onOpenProjectModal(evt, item))}
+                onRenderItemColumn={(item, index, column: any) => DynamicPortfolioItemColumn(item, index, column, this.state.configuration, this.state.settings.PROJECTSTATUS_NOTE_TRUNCATING_VALUE, evt => this._onOpenProjectModal(evt, item))}
                 onColumnHeaderClick={(_event, col) => this._onColumnSort(col)}
                 onRenderDetailsHeader={this.onRenderDetailsHeader} />
         )
@@ -200,7 +201,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         isOpen: this.state.showProjectInfo,
                         isDarkOverlay: true,
                         isBlocking: false,
-                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        onDismiss: () => this.setState({ showProjectInfo: null }),
                         headerClassName: this.props.modalHeaderClassName,
                         headerStyle: { marginBottom: 20 },
                         title: this.state.showProjectInfo.Title,
@@ -433,9 +434,9 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
             itemsSort.props.push(this.state.currentSort.fieldName)
             itemsSort.opts.reverse = !this.state.currentSort.isSortedDescending
         }
-        const itemsSorted = array_sort(this.state.filteredItems, itemsSort.props, itemsSort.opts)
+        const itemsSorted = arraySort(this.state.filteredItems, itemsSort.props, itemsSort.opts)
         const groupNames = itemsSorted.map((g: { [x: string]: any }) => g[groupBy.fieldName] ? g[groupBy.fieldName] : __.getResource('String_NotSet'))
-        return array_unique([].concat(groupNames))
+        return arrayUniq([].concat(groupNames))
             .sort((a: number, b: number) => a > b ? 1 : -1)
             .map((name: any, idx: any) => {
                 const count = [].concat(groupNames).filter(n => n === name).length
@@ -553,8 +554,8 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
                         delete currentFilters[filter.key]
                     }
                 }
-                let filterKeys = Object.keys(currentFilters),
-                    tempItems = []
+                const filterKeys = Object.keys(currentFilters)
+                let tempItems = []
                 if (filterKeys.length > 0) {
                     items.forEach(item => {
                         let shouldInclude = true
@@ -605,7 +606,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending
         }
-        const items = array_sort(filteredItems, [column.fieldName], { reverse: !isSortedDescending })
+        const items = arraySort(filteredItems, [column.fieldName], { reverse: !isSortedDescending })
         this.setState({
             currentSort: { fieldName: column.fieldName, isSortedDescending: isSortedDescending },
             filteredItems: items,
@@ -683,7 +684,7 @@ export default class DynamicPortfolio extends BaseWebPart<IDynamicPortfolioProps
      */
     private handleContainerScroll(event: any) {
         const stickyAbove = document.querySelector('[class*=\'stickyAbove-\']')
-        if (stickyAbove != null) {
+        if (stickyAbove !== null) {
             stickyAbove.scrollLeft = event.target.scrollLeft
         }
     }

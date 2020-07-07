@@ -8,7 +8,7 @@ export default class TaskOverviewItem extends React.PureComponent<ITaskOverviewI
             <div
                 {...this.props.itemProps}
                 title={this.props.item.title}
-                onClick={_ => this.props.onItemClick(this.props.item)}>
+                onClick={() => this.props.onItemClick(this.props.item)}>
                 <div className='pp-task-overview-item-content rct-item-content'>
                     <div className='pp-task-overview-item-title' hidden={this.props.type === TaskOverviewItemType.DatesOnly}>
                         {this.props.item.title}

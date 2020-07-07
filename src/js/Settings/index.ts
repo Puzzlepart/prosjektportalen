@@ -11,32 +11,27 @@ export interface ISetting {
     options?: IDropdownOption[];
 }
 
-
-/**
- * Get settings and options
- */
-export async function GetSettingsAndOptions(): Promise<{ settings: { [key: string]: string }; options: { [key: string]: string } }> {
-    const webPropertyBag = await PropertyBagUtil.GetAllProperties()
-    let options
-    try {
-        options = JSON.parse(webPropertyBag[SETTINGS_OPTIONS_PROPERTY_KEY])
-    } catch (err) {
-        options = {}
-    }
-    const settings = await GetSettings(webPropertyBag)
-    return { settings, options }
+export interface ISettings {
+    PROJECTSTATUS_EXPORT_TYPE: 'PNG' | 'PDF';
+    LOG_LEVEL: 'Off'|'Info'|'Warning'|'Error';
+    PROJECTPHASES_FORCED_ORDER: 'On' | 'Off';
+    PROJECT_INHERIT_PERMISSIONS: 'On' | 'Off';
+    SITE_TEMPLATE_SELECTOR_ENABLED: 'On' | 'Off';
+    DEFAULT_CACHING_TIMEOUT_SECONDS: string;
+    ADD_EVERYONE_VISITORS: 'On' | 'Off';
+    PROJECTSTATUS_NOTE_TRUNCATING_VALUE: '0' | '32' | '64' | '128' | '256' | '512';
 }
 
 /**
- * Get setting
+ * Get settings
  *
  * @param {Object} webPropertyBag Web property bag
  */
-export async function GetSettings(webPropertyBag?: { [key: string]: string }): Promise<{ [key: string]: string }> {
-    if (!webPropertyBag) {
-        webPropertyBag = await PropertyBagUtil.GetAllProperties()
-    }
-    let settings, settingsJson, chosenSettingsJson
+export async function GetSettings(webPropertyBag?: { [key: string]: string }): Promise<ISettings> {
+    if (!webPropertyBag) webPropertyBag = await PropertyBagUtil.GetAllProperties()
+    let settings: ISettings
+    let settingsJson: any
+    let chosenSettingsJson: any
     try {
         settingsJson = JSON.parse(webPropertyBag[SETTINGS_PROPERTY_KEY])
     } catch (err) {
@@ -59,6 +54,22 @@ export async function GetSettings(webPropertyBag?: { [key: string]: string }): P
     return settings
 }
 
+
+/**
+ * Get settings and options
+ */
+export async function GetSettingsAndOptions(): Promise<{ settings: ISettings; options: { [key: string]: string } }> {
+    const webPropertyBag = await PropertyBagUtil.GetAllProperties()
+    let options
+    try {
+        options = JSON.parse(webPropertyBag[SETTINGS_OPTIONS_PROPERTY_KEY])
+    } catch (err) {
+        options = {}
+    }
+    const settings = await GetSettings(webPropertyBag)
+    return { settings, options }
+}
+
 /**
  * Get setting
  *
@@ -79,9 +90,9 @@ export async function GetSetting(key: string, toLowerCase = false): Promise<stri
 /**
  * Update settings
  *
- * @param {Object} settings Updated settings
+ * @param {ISettings} settings Updated settings
  */
-export async function UpdateSettings(settings: { [key: string]: string }): Promise<boolean> {
+export async function UpdateSettings(settings: ISettings): Promise<boolean> {
     try {
         const settingsString = JSON.stringify(settings)
         await PropertyBagUtil.SetProperty(CHOSEN_SETTINGS_PROPERTY_KEY, settingsString)

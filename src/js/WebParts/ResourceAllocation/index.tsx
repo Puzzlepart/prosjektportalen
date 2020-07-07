@@ -194,6 +194,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 outline: 'none',
             },
         })
+        // eslint-disable-next-line default-case
         switch (item.type) {
             case ProjectAllocationType.ProjectAllocation: {
                 return (

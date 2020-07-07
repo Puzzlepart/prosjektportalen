@@ -17,7 +17,7 @@ const LogElement = ({ data }) => {
     )
 }
 
-const RelatedLogElements = ({ logElements }) => {
+const RelatedLogElements = ({ logElements }: { logElements: any[] }) => {
     return (
         <div
             className='container'
@@ -26,7 +26,7 @@ const RelatedLogElements = ({ logElements }) => {
             <ul
                 className='pp-simpleList'
                 style={{ width: '300px' }}>
-                {logElements.map(e => <LogElement data={e} />)}
+                {logElements.map((data, idx) => <LogElement key={idx} data={data} />)}
             </ul>
         </div>
     )

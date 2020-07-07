@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import * as moment from 'moment'
 import { ITaskSearchResult } from './ITaskSearchResult'
 
