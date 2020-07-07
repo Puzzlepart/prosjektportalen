@@ -6,7 +6,6 @@ const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
 module.exports = () => ({
-    mode: process.env.NODE_ENV || 'development',
     stats: 'minimal',
     entry: {
         main: [
@@ -61,8 +60,4 @@ module.exports = () => ({
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
-        .concat(process.env.NODE_ENV === 'production' ? [
-            new webpack.optimize.UglifyJsPlugin(),
-            new webpack.optimize.AggressiveMergingPlugin()
-        ] : [])
 })

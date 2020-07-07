@@ -12,10 +12,10 @@
     "main": "lib/index.js",
     "scripts": {
         "prewatch": "gulp buildJsonResources && gulp buildJsonPreferences",
-        "watch": "concurrently \"webpack --watch\" \"gulp watchUpload\"",
+        "watch": "concurrently \"webpack --mode development --watch\" \"gulp watchUpload\"",
         "buildPnpTemplateFiles": "gulp copyPnpTemplates && gulp localizePnpTemplates && gulp copyResourcesToAssetsTemplate && npm run buildSiteTemplates && gulp copyThirdPartyLibsToTemplate && gulp stampVersionToTemplates",
         "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
-        "release": "gulp clean && webpack && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
+        "release": "gulp clean && webpack --mode production && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "postversion": "npm run release",
         "lint": "eslint --ext .ts,.tsx ./src/js --color --fix"
     },
