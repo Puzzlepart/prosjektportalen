@@ -1,11 +1,11 @@
-import * as React from "react";
+import * as React from 'react'
 
 export interface IMatrixCellProps extends React.HTMLProps<HTMLElement> {
     containerClassName?: string;
 }
 
 export default class MatrixCell extends React.Component<IMatrixCellProps, {}> {
-    public static defaultProps = { containerClassName: "cell-container" };
+    public static defaultProps = { containerClassName: 'cell-container' };
 
     public render(): React.ReactElement<IMatrixCellProps> {
         return (
@@ -14,6 +14,6 @@ export default class MatrixCell extends React.Component<IMatrixCellProps, {}> {
                     {this.props.children}
                 </div>
             </td>
-        );
+        )
     }
 }

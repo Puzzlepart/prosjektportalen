@@ -6,4 +6,4 @@ enum FONT_SIZE {
     xsmall = 8,
 }
 
-export default FONT_SIZE;
+export default FONT_SIZE

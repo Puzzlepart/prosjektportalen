@@ -1,5 +1,5 @@
-import { Schema } from "sp-js-provisioning/lib/schema";
-import { Files, Lists, Navigation, WebSettings, ComposedLook } from "../Objects";
+import { Schema } from 'sp-js-provisioning/lib/schema'
+import { Files, Lists, Navigation, WebSettings, ComposedLook } from '../Objects'
 
 const FullTemplate: Schema = {
     Files,
@@ -8,11 +8,11 @@ const FullTemplate: Schema = {
     WebSettings,
     ComposedLook,
     Features: [{
-        id: "87294c72-f260-42f3-a41b-981a2ffce37a",
+        id: '87294c72-f260-42f3-a41b-981a2ffce37a',
         deactivate: true,
         force: true,
     }],
-};
+}
 
-export default FullTemplate;
+export default FullTemplate
 

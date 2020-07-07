@@ -7,4 +7,4 @@ interface IExcelExportConfig {
     buttonIcon: string;
 }
 
-export default IExcelExportConfig;
+export default IExcelExportConfig

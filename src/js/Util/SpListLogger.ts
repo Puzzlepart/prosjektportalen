@@ -1,6 +1,6 @@
-import __ from "../Resources";
-import { Site, List } from "@pnp/sp";
-import { LogEntry, LogLevel } from "@pnp/logging";
+import __ from '../Resources'
+import { Site, List } from '@pnp/sp'
+import { LogEntry, LogLevel } from '@pnp/logging'
 
 export interface ISpListLoggerEntry extends LogEntry {
     id?: string;
@@ -25,10 +25,10 @@ export default class SpListLogger {
      * @param {string} listName List name
      * @param {string} siteUrl Site URL (defaults to _spPageContextInfo.siteAbsoluteUrl)
      */
-    constructor(listName = __.getResource("Lists_Log_Title"), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
-        this._listName = listName;
-        this._siteUrl = siteUrl;
-        this._pnpList = new Site(this._siteUrl).rootWeb.lists.getByTitle(this._listName);
+    constructor(listName = __.getResource('Lists_Log_Title'), siteUrl = _spPageContextInfo.siteAbsoluteUrl) {
+        this._listName = listName
+        this._siteUrl = siteUrl
+        this._pnpList = new Site(this._siteUrl).rootWeb.lists.getByTitle(this._listName)
     }
 
     /**
@@ -45,7 +45,7 @@ export default class SpListLogger {
             LogURL: entry.url,
             Created: entry.created,
             LogLevel: this.getLogLevelString(entry),
-        });
+        })
     }
 
     /**
@@ -56,19 +56,19 @@ export default class SpListLogger {
     private getLogLevelString(entry: ISpListLoggerEntry): string {
         switch (entry.level) {
             case LogLevel.Error: {
-                return __.getResource("String_LogLevel_Error");
+                return __.getResource('String_LogLevel_Error')
             }
             case LogLevel.Info: {
-                return __.getResource("String_LogLevel_Info");
+                return __.getResource('String_LogLevel_Info')
             }
             case LogLevel.Warning: {
-                return __.getResource("String_LogLevel_Warning");
+                return __.getResource('String_LogLevel_Warning')
             }
             default: {
-                return "";
+                return ''
             }
         }
     }
 }
 
-export { LogLevel };
+export { LogLevel }

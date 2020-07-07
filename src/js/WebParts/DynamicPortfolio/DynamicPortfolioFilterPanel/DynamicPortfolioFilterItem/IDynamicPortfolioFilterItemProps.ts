@@ -1,5 +1,5 @@
-import IDynamicPortfolioFilter from "../DynamicPortfolioFilter/IDynamicPortfolioFilter";
-import IDynamicPortfolioFilterItem from "./IDynamicPortfolioFilterItem";
+import IDynamicPortfolioFilter from '../DynamicPortfolioFilter/IDynamicPortfolioFilter'
+import IDynamicPortfolioFilterItem from './IDynamicPortfolioFilterItem'
 
 export default interface IDynamicPortfolioFilterItemProps extends React.HTMLAttributes<HTMLElement> {
     filter: IDynamicPortfolioFilter;
@@ -7,5 +7,5 @@ export default interface IDynamicPortfolioFilterItemProps extends React.HTMLAttr
     onChanged: (item: any, checked: boolean) => void;
 }
 
-export { IDynamicPortfolioFilter };
+export { IDynamicPortfolioFilter }
 

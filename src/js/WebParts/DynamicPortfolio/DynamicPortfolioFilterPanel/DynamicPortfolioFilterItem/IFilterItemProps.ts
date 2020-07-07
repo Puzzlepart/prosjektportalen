@@ -1,5 +1,5 @@
-import IDynamicPortfolioFilter from "../DynamicPortfolioFilter/IDynamicPortfolioFilter";
-import IDynamicPortfolioFilterItem from "./IDynamicPortfolioFilterItem";
+import IDynamicPortfolioFilter from '../DynamicPortfolioFilter/IDynamicPortfolioFilter'
+import IDynamicPortfolioFilterItem from './IDynamicPortfolioFilterItem'
 
 export default interface IDynamicPortfolioFilterItemProps {
     filter: IDynamicPortfolioFilter;
@@ -10,5 +10,5 @@ export default interface IDynamicPortfolioFilterItemProps {
     onChange: (item: any, checked: boolean) => void;
 }
 
-export { IDynamicPortfolioFilter };
+export { IDynamicPortfolioFilter }
 

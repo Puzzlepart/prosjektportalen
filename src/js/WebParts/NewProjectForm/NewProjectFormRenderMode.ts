@@ -3,4 +3,4 @@ enum NewProjectFormRenderMode {
     Dialog,
 }
 
-export default NewProjectFormRenderMode;
+export default NewProjectFormRenderMode

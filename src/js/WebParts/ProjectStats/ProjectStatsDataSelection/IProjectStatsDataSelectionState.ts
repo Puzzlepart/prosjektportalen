@@ -1,4 +1,4 @@
-import { ProjectStatsChartDataItem } from "../ProjectStatsChart";
+import { ProjectStatsChartDataItem } from '../ProjectStatsChart'
 
 export default interface IProjectStatsDataSelectionState {
     isExpanded: boolean;

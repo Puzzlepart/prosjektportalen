@@ -1,10 +1,10 @@
-import * as React from "react";
-import __ from "../../../Resources";
-import { Modal } from "office-ui-fabric-react/lib/Modal";
-import IResourceAllocationDetailsModalProps from "./IResourceAllocationDetailsModalProps";
+import * as React from 'react'
+import __ from '../../../Resources'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import IResourceAllocationDetailsModalProps from './IResourceAllocationDetailsModalProps'
 
 export default class ResourceAllocationDetailsModal extends React.PureComponent<IResourceAllocationDetailsModalProps, {}> {
-    public static displayName = "ResourceAllocationDetailsModal";
+    public static displayName = 'ResourceAllocationDetailsModal';
 
     /**
      * Constructor
@@ -12,7 +12,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
      * @param {IResourceAllocationDetailsModalProps} props Props
      */
     constructor(props: IResourceAllocationDetailsModalProps) {
-        super(props);
+        super(props)
     }
 
     /**
@@ -30,56 +30,56 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                         {this._renderBody()}
                     </div>
                 </Modal >
-            );
+            )
         }
-        return null;
+        return null
     }
 
     /***
      * Renders the modal header
      */
     protected _renderHeader() {
-        const { allocation } = this.props;
+        const { allocation } = this.props
         return (
             <div>
                 <h3>
                     {allocation.role || allocation.absence} ({allocation.allocationPercentage}%)
                 </h3>
             </div>
-        );
+        )
     }
 
     /**
      * Renders the modal body
      */
     protected _renderBody() {
-        const { allocation } = this.props;
+        const { allocation } = this.props
         return (
-            <div className="allocation-modal">
+            <div className='allocation-modal'>
                 {allocation.workDescription &&
                     <p>
                         <span>{allocation.workDescription}</span>
                     </p>
                 }
                 <p>
-                    <b>{__.getResource("String_Resource")}:</b>&nbsp;
+                    <b>{__.getResource('String_Resource')}:</b>&nbsp;
                     <span>{allocation.user.name}</span>
                 </p>
                 <p>
-                    <b>{__.getResource("String_From")}:</b>&nbsp;
-                    <span>{allocation.start_time.format("LL")}</span>
+                    <b>{__.getResource('String_From')}:</b>&nbsp;
+                    <span>{allocation.start_time.format('LL')}</span>
                 </p>
                 <p>
-                    <b>{__.getResource("String_To")}:</b>&nbsp;
-                    <span>{allocation.end_time.format("LL")}</span>
+                    <b>{__.getResource('String_To')}:</b>&nbsp;
+                    <span>{allocation.end_time.format('LL')}</span>
                 </p>
                 {allocation.project && allocation.project.url &&
                     <p>
-                        <b>{__.getResource("String_Project")}:</b>&nbsp;
-                        <a href={allocation.project.url} style={{ outline: "none" }} target="_blank"><span>{allocation.project.name}</span></a>
+                        <b>{__.getResource('String_Project')}:</b>&nbsp;
+                        <a href={allocation.project.url} style={{ outline: 'none' }} rel='noopener noreferrer' target='_blank'><span>{allocation.project.name}</span></a>
                     </p>
                 }
             </div>
-        );
+        )
     }
 }

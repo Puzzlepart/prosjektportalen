@@ -1,5 +1,5 @@
-import IGroupByOption from "../../IGroupByOption";
-import { ExcelExportStatus } from "../../../Util/ExportToExcel";
+import IGroupByOption from '../../IGroupByOption'
+import { ExcelExportStatus } from '../../../Util/ExportToExcel'
 
 export default interface IListState {
     showProjectInfo?: any;

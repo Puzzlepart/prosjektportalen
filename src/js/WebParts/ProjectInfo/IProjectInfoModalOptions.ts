@@ -1,5 +1,5 @@
-import * as React from "react";
-import { IModalProps } from "office-ui-fabric-react/lib/Modal";
+import * as React from 'react'
+import { IModalProps } from 'office-ui-fabric-react/lib/Modal'
 
 
 interface IProjectInfoModalOptions extends IModalProps {
@@ -8,4 +8,4 @@ interface IProjectInfoModalOptions extends IModalProps {
     title?: string;
 }
 
-export default IProjectInfoModalOptions;
+export default IProjectInfoModalOptions

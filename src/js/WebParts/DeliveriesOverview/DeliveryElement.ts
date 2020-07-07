@@ -10,15 +10,15 @@ export default class DeliveryElement {
     public ProductStatusComment: string;
 
     constructor(data) {
-        this.Path = data.Path;
-        this.Title = data.Title;
-        this.SiteTitle = data.SiteTitle;
-        this.SPWebUrl = data.SPWebUrl;
-        this.ProductDescription = data.GtProductDescriptionOWSMTXT;
-        this.ProductStartTime = data.GtProductStartTimeOWSDATE;
-        this.ProductEndTime = data.GtProductEndTimeOWSDATE;
-        this.ProductStatus = data.GtProductStatusOWSCHCS;
-        this.ProductStatusComment = data.GtProductStatusCommentOWSMTXT;
+        this.Path = data.Path
+        this.Title = data.Title
+        this.SiteTitle = data.SiteTitle
+        this.SPWebUrl = data.SPWebUrl
+        this.ProductDescription = data.GtProductDescriptionOWSMTXT
+        this.ProductStartTime = data.GtProductStartTimeOWSDATE
+        this.ProductEndTime = data.GtProductEndTimeOWSDATE
+        this.ProductStatus = data.GtProductStatusOWSCHCS
+        this.ProductStatusComment = data.GtProductStatusCommentOWSMTXT
     }
 }
 

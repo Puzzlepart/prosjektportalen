@@ -1,1 +1,1 @@
-export default interface IBaseWebPartProps extends React.HTMLAttributes<HTMLElement> {}
+export type IBaseWebPartProps = React.HTMLAttributes<HTMLElement>

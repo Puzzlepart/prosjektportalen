@@ -1,4 +1,4 @@
-import ISectionListData from "./ISectionListData";
+import ISectionListData from './ISectionListData'
 
 export default interface ISectionState {
     isLoading?: boolean;

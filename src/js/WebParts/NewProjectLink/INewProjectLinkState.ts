@@ -1,5 +1,5 @@
-import { ISecuredWebPartState } from "../@SecuredWebPart";
-import ListConfig from "../../Provision/Data/Config/ListConfig";
+import { ISecuredWebPartState } from '../@SecuredWebPart'
+import ListConfig from '../../Provision/Data/Config/ListConfig'
 
 export default interface INewProjectLinkState extends ISecuredWebPartState {
     showDialog?: boolean;

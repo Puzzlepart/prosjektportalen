@@ -1,6 +1,6 @@
-import IMatrixCell from "../../Model/IMatrixCell";
-import IRiskMatrixData from "./IRiskMatrixData";
-import { IDropdownOption } from "office-ui-fabric-react/lib/Dropdown";
+import IMatrixCell from '../../Model/IMatrixCell'
+import IRiskMatrixData from './IRiskMatrixData'
+import { IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
 
 export default interface IRiskMatrixState {
     isLoading?: boolean;

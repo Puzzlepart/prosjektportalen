@@ -1,5 +1,5 @@
-import __ from "../../Resources";
-import { IBaseWebPartProps } from "../@BaseWebPart";
+import __ from '../../Resources'
+import { IBaseWebPartProps } from '../@BaseWebPart'
 
 export default interface ILatestProjectsProps extends IBaseWebPartProps {
     chromeTitle?: string;
@@ -9,8 +9,8 @@ export default interface ILatestProjectsProps extends IBaseWebPartProps {
 }
 
 export const LatestProjectsDefaultProps: Partial<ILatestProjectsProps> = {
-    chromeTitle: __.getResource("WebPart_RecentProjects_Title"),
+    chromeTitle: __.getResource('WebPart_RecentProjects_Title'),
     itemsCount: 5,
-    listClassName: "pp-simpleList spacing-m",
-    loadingText: __.getResource("LatestProjects_LoadingText"),
-};
+    listClassName: 'pp-simpleList spacing-m',
+    loadingText: __.getResource('LatestProjects_LoadingText'),
+}

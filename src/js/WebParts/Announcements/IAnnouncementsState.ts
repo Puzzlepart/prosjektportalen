@@ -1,4 +1,4 @@
-import { IBaseWebPartState } from "../@BaseWebPart";
+import { IBaseWebPartState } from '../@BaseWebPart'
 
 export default interface IAnnouncementsState extends IBaseWebPartState {
     entries?: any[];

@@ -1,6 +1,6 @@
-import { TaskModel } from "./TaskModel";
+import { TaskModel } from './TaskModel'
 
 export default interface ITasksOverviewData {
-    groups?: { id: number, title: string }[];
+    groups?: { id: number; title: string }[];
     tasks?: TaskModel[];
 }

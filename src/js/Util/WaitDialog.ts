@@ -1,4 +1,5 @@
-const uuidV1 = require("uuid/v1");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const uuidV1 = require('uuid/v1')
 
 export default class WaitDialog {
     private title: string;
@@ -12,10 +13,10 @@ export default class WaitDialog {
     };
 
     constructor(title, message, height, width) {
-        this.title = `<span id="${this.ids.title}">${title}</span>`;
-        this.message = `<span id="${this.ids.message}">${message}</span>`;
-        this.height = height;
-        this.width = width;
+        this.title = `<span id="${this.ids.title}">${title}</span>`
+        this.message = `<span id="${this.ids.message}">${message}</span>`
+        this.height = height
+        this.width = width
     }
 
     /**
@@ -25,15 +26,15 @@ export default class WaitDialog {
     */
     public start(delay = 0) {
         window.setTimeout(() => {
-            this.instance = SP.UI.ModalDialog.showWaitScreenWithNoClose(this.title, this.message, this.height, this.width);
-        }, delay);
+            this.instance = SP.UI.ModalDialog.showWaitScreenWithNoClose(this.title, this.message, this.height, this.width)
+        }, delay)
     }
 
     /**
      * Closes the wait dialog instance
      */
     public end() {
-        this.instance.close(null);
+        this.instance.close(null)
     }
 
     /**
@@ -43,22 +44,22 @@ export default class WaitDialog {
      * @param message Message
      */
     public update(title?, message?): void {
-        if (title.indexOf(",") !== -1) {
-            [title, message] = title.split(",");
+        if (title.indexOf(',') !== -1) {
+            [title, message] = title.split(',')
         }
         if (title) {
-            this.updateTitle(title);
+            this.updateTitle(title)
         }
         if (message) {
-            this.updateMessage(message);
+            this.updateMessage(message)
         }
     }
 
     public updateTitle(title: string): void {
-        document.getElementById(this.ids.title).innerHTML = title;
+        document.getElementById(this.ids.title).innerHTML = title
     }
 
     public updateMessage(message: string): void {
-        document.getElementById(this.ids.message).innerHTML = message;
+        document.getElementById(this.ids.message).innerHTML = message
     }
 }

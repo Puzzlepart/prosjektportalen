@@ -1,5 +1,5 @@
-import { IBaseWebPartState } from "../@BaseWebPart";
-import ProjectListModel from "./ProjectListModel";
+import { IBaseWebPartState } from '../@BaseWebPart'
+import ProjectListModel from './ProjectListModel'
 
 export interface IProjectListData {
     projects?: ProjectListModel[];

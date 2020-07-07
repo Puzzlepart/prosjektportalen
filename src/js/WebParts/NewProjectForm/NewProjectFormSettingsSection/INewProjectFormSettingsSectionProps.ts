@@ -1,9 +1,9 @@
 //#region Imports
-import ListConfig from "../../../Provision/Data/Config/ListConfig";
-import ProjectType from "../../../Provision/Data/ProjectTypes/ProjectType";
-import Extension from "../../../Provision/Extensions/Extension";
-import INewProjectFormConfig from "../INewProjectFormConfig";
-import { ProjectModel } from "model";
+import ListConfig from '../../../Provision/Data/Config/ListConfig'
+import ProjectType from '../../../Provision/Data/ProjectTypes/ProjectType'
+import Extension from '../../../Provision/Extensions/Extension'
+import INewProjectFormConfig from '../INewProjectFormConfig'
+import { ProjectModel } from 'model'
 //#endregion
 
 export default interface INewProjectFormSettingsSectionProps {

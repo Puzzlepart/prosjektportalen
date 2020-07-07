@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment'
 
 export interface ITaskOverviewDateIntervalPanelProps {
     isOpen: boolean;

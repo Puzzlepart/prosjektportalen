@@ -40,10 +40,6 @@ module.exports = {
         compress: false,
         use: [autoprefixer('last 5 versions')]
     },
-    lint: {
-        formatter: "prose",
-        emitError: true
-    },
     versionToken: "{package-version}",
     availableLanguages: [1033, 1044],
     siteTemplates: [

@@ -1,25 +1,25 @@
-import * as React from "react";
-import __ from "../../Resources";
-import { sp } from "@pnp/sp";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { StickyContainer, Sticky } from "react-sticky";
-import Navigation from "./Navigation";
-import Section from "./Section";
-import SummarySection from "./Section/SummarySection";
-import ProjectStatusData from "./ProjectStatusData";
-import IProjectStatusState from "./IProjectStatusState";
-import IProjectStatusProps, { ProjectStatusDefaultProps } from "./IProjectStatusProps";
-import SectionModel from "./Section/SectionModel";
-import BaseWebPart from "../@BaseWebPart";
-import { GetSetting } from "../../Settings";
-import { loadJsonConfiguration } from "../../Util";
-import IStatusFieldsConfig from "../../Model/Config/IStatusFieldsConfig";
+import * as React from 'react'
+import __ from '../../Resources'
+import { sp } from '@pnp/sp'
+import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
+import { StickyContainer, Sticky } from 'react-sticky'
+import Navigation from './Navigation'
+import Section from './Section'
+import SummarySection from './Section/SummarySection'
+import ProjectStatusData from './ProjectStatusData'
+import IProjectStatusState from './IProjectStatusState'
+import IProjectStatusProps, { ProjectStatusDefaultProps } from './IProjectStatusProps'
+import SectionModel from './Section/SectionModel'
+import BaseWebPart from '../@BaseWebPart'
+import { GetSetting } from '../../Settings'
+import { loadJsonConfiguration } from '../../Util'
+import IStatusFieldsConfig from '../../Model/Config/IStatusFieldsConfig'
 
 /**
  * Project Status
  */
 export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IProjectStatusState> {
-    public static displayName = "ProjectStatus";
+    public static displayName = 'ProjectStatus';
     public static defaultProps = ProjectStatusDefaultProps;
 
     /**
@@ -28,27 +28,27 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
      * @param {IProjectStatusProps} props Props
      */
     constructor(props: IProjectStatusProps) {
-        super(props, { isLoading: true });
+        super(props, { isLoading: true })
     }
 
     public async componentDidMount(): Promise<void> {
-        const data = await this.fetchData();
-        this.setState({ data, isLoading: false });
+        const data = await this.fetchData()
+        this.setState({ data, isLoading: false })
     }
 
     public render(): React.ReactElement<IProjectStatusProps> {
-        const { isLoading, data } = this.state;
+        const { isLoading, data } = this.state
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} />;
+            return <Spinner type={SpinnerType.large} />
         } else {
             return (
-                <div className="ms-Grid">
-                    <StickyContainer className="status-report-container">
+                <div className='ms-Grid'>
+                    <StickyContainer className='status-report-container'>
                         <Sticky>
                             {({ style }) => (
                                 <div
-                                    id="status-navigation"
-                                    className="navigation ms-Grid-row"
+                                    id='status-navigation'
+                                    className='navigation ms-Grid-row'
                                     style={{ ...style, height: 100 }}>
                                     <Navigation
                                         project={data.project}
@@ -58,12 +58,12 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                             )}
                         </Sticky>
                         <SummarySection
-                            propertiesLabel={(this.props.propertiesLabel) ? this.props.propertiesLabel : __.getResource("ProjectStatus_Heading_ProjectMetadata")}
+                            propertiesLabel={(this.props.propertiesLabel) ? this.props.propertiesLabel : __.getResource('ProjectStatus_Heading_ProjectMetadata')}
                             sections={data.sections.filter(s => s.showInStatusSection)} showActionLinks={this.props.showActionLinks} />
                         {this.renderSections()}
                     </StickyContainer>
                 </div>
-            );
+            )
         }
     }
 
@@ -82,25 +82,25 @@ export default class ProjectStatus extends BaseWebPart<IProjectStatusProps, IPro
                         project={this.state.data.project}
                         fields={this.state.data.fields}
                         riskMatrix={this.props.riskMatrix} />
-                )));
+                )))
     }
 
     /**
      * Fetches required data
      */
     private async fetchData(): Promise<ProjectStatusData> {
-        const projectPropertiesList = sp.web.lists.getByTitle(__.getResource("Lists_ProjectProperties_Title"));
-        const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle);
+        const projectPropertiesList = sp.web.lists.getByTitle(__.getResource('Lists_ProjectProperties_Title'))
+        const configList = sp.site.rootWeb.lists.getByTitle(this.props.sectionConfig.listTitle)
         const [project, spFields, spSections, exportType, statusFieldsConfig] = await Promise.all([
             projectPropertiesList.items.getById(1).fieldValuesAsHTML.usingCaching().get(),
             projectPropertiesList.fields.usingCaching().get(),
             configList.items.orderBy(this.props.sectionConfig.orderBy).usingCaching().get(),
-            GetSetting("PROJECTSTATUS_EXPORT_TYPE", true),
-            loadJsonConfiguration<IStatusFieldsConfig>("status-fields"),
-        ]);
-        const sections = spSections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid());
-        return { project, fields: spFields, sections, exportType };
+            GetSetting('PROJECTSTATUS_EXPORT_TYPE', true),
+            loadJsonConfiguration<IStatusFieldsConfig>('status-fields'),
+        ])
+        const sections = spSections.map(s => new SectionModel(s, project, statusFieldsConfig)).filter(s => s.isValid())
+        return { project, fields: spFields, sections, exportType }
     }
 }
 
-export { IProjectStatusProps, IProjectStatusState };
+export { IProjectStatusProps, IProjectStatusState }

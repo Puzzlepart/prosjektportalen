@@ -9,4 +9,4 @@ export interface IDataSourceSearchCustom {
     QueryTemplate: string;
 }
 
-export default DataSource;
+export default DataSource

@@ -2,4 +2,4 @@ export interface IChromeTitleState {
     isCollapsed: boolean;
 }
 
-export default IChromeTitleState;
+export default IChromeTitleState

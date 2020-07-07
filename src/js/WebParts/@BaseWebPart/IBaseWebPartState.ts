@@ -1,4 +1,4 @@
-export default interface IBaseWebPartState {
+export interface IBaseWebPartState {
     isLoading?: boolean;
     error?: any;
 }

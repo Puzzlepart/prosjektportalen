@@ -1,6 +1,6 @@
-import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
-import { View } from "../Views";
-import { PhaseModel } from "../../ProjectPhasesData";
+import ChangePhaseDialogResult from '../ChangePhaseDialogResult'
+import { View } from '../Views'
+import { PhaseModel } from '../../ProjectPhasesData'
 
 export default interface IFooterProps {
     newPhase: PhaseModel;

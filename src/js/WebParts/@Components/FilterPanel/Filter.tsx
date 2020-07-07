@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import { IFilterItemProps, FilterItem } from "./FilterItem";
+import * as React from 'react'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import { IFilterItemProps, FilterItem } from './FilterItem'
 
 export interface IFilterProps {
     column: IColumn;
@@ -17,8 +17,8 @@ export interface IFilterState {
 
 export class Filter extends React.Component<IFilterProps, IFilterState> {
     constructor(props: IFilterProps) {
-        super(props);
-        this.state = { isCollapsed: false, items: props.items };
+        super(props)
+        this.state = { isCollapsed: false, items: props.items }
     }
 
     /**
@@ -26,20 +26,20 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
      */
     public render(): React.ReactElement<IFilterProps> {
         return (
-            <div style={{ margin: "20px 0 0 0" }}>
-                <div style={{ position: "relative", color: "#666", height: 20, padding: "6px 0", cursor: "pointer" }} onClick={this.onToggleSectionContent}>
+            <div style={{ margin: '20px 0 0 0' }}>
+                <div style={{ position: 'relative', color: '#666', height: 20, padding: '6px 0', cursor: 'pointer' }} onClick={this.onToggleSectionContent}>
                     <span style={{ fontSize: 14, fontWeight: 400 }}>{this.props.column.name}</span>
-                    <span style={{ fontSize: 14, position: "absolute", right: 0 }}>
-                        <Icon iconName={this.state.isCollapsed ? "ChevronUp" : "ChevronDown"} />
+                    <span style={{ fontSize: 14, position: 'absolute', right: 0 }}>
+                        <Icon iconName={this.state.isCollapsed ? 'ChevronUp' : 'ChevronDown'} />
                     </span>
                 </div>
                 <div hidden={this.state.isCollapsed}>
-                    <ul style={{ fontSize: 12, listStyleType: "none", margin: "4px 0 0 0", padding: 0 }}>
+                    <ul style={{ fontSize: 12, listStyleType: 'none', margin: '4px 0 0 0', padding: 0 }}>
                         {this.renderItems()}
                     </ul>
                 </div>
             </div>
-        );
+        )
     }
 
     /**
@@ -47,14 +47,14 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
      */
     @autobind
     private onToggleSectionContent() {
-        this.setState((prevState: IFilterState) => ({ isCollapsed: !prevState.isCollapsed }));
+        this.setState((prevState: IFilterState) => ({ isCollapsed: !prevState.isCollapsed }))
     }
 
     /**
      * Render filter items
      */
     private renderItems() {
-        return this.state.items.map((props, key) => <FilterItem key={key} {...props} onChanged={(_event, checked) => this.onChanged(props, checked)} />);
+        return this.state.items.map((props, key) => <FilterItem key={key} {...props} onChanged={(_event, checked) => this.onChanged(props, checked)} />)
     }
 
     /**
@@ -65,10 +65,10 @@ export class Filter extends React.Component<IFilterProps, IFilterState> {
      */
     @autobind
     private onChanged(item: IFilterItemProps, checked: boolean) {
-        const { items } = this.state;
-        items.filter(_item => _item.value === item.value)[0].selected = checked;
-        this.setState({ items });
-        const selectedItems = items.filter(i => i.selected);
-        this.props.onFilterChange(this.props.column, selectedItems);
+        const { items } = this.state
+        items.filter(_item => _item.value === item.value)[0].selected = checked
+        this.setState({ items })
+        const selectedItems = items.filter(i => i.selected)
+        this.props.onFilterChange(this.props.column, selectedItems)
     }
 }

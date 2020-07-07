@@ -10,9 +10,9 @@ export default class ProjectType {
      * @param {any} item SharePoint list item
      */
     constructor(item: any) {
-        this.title = item.Title;
-        this.templateId = item.GtTemplateLookupId;
-        this.extensionIds = item.GtExtensionsLookupId.results;
-        this.listContentIds = item.GtListContentsLookupId.results;
+        this.title = item.Title
+        this.templateId = item.GtTemplateLookupId
+        this.extensionIds = item.GtExtensionsLookupId.results
+        this.listContentIds = item.GtListContentsLookupId.results
     }
 }

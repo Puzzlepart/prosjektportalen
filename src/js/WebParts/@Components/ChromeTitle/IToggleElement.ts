@@ -1,4 +1,4 @@
-import IToggleElementStorage from "./IToggleElementStorage";
+import IToggleElementStorage from './IToggleElementStorage'
 
 export default interface IToggleElement {
     element: HTMLElement;

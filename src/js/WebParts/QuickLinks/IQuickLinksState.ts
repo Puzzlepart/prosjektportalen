@@ -1,4 +1,4 @@
-import { IBaseWebPartState } from "../@BaseWebPart";
+import { IBaseWebPartState } from '../@BaseWebPart'
 
 export default interface IQuickLinksState extends IBaseWebPartState {
     links?: any[];

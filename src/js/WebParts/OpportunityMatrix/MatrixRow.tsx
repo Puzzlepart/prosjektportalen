@@ -1,12 +1,12 @@
-import * as React from "react";
+import * as React from 'react'
 
 const MatrixRow = ({ cells }) => {
     return (
-        <tr className="opportunity-matrix-row">
+        <tr className='opportunity-matrix-row'>
             {cells}
         </tr>
-    );
-};
+    )
+}
 
-export default MatrixRow;
+export default MatrixRow
 

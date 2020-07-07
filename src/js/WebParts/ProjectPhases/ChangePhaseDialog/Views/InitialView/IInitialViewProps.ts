@@ -1,5 +1,5 @@
-import __ from "../../../../../Resources";
-import IChecklistItem from "../../../ProjectPhasesData/IChecklistItem";
+import __ from '../../../../../Resources'
+import IChecklistItem from '../../../ProjectPhasesData/IChecklistItem'
 
 export default interface IInitialViewProps {
     className?: string;
@@ -12,7 +12,7 @@ export default interface IInitialViewProps {
 }
 
 export const InitialViewDefaultProps: Partial<IInitialViewProps> = {
-    className: "inner",
+    className: 'inner',
     commentMinLength: 4,
-    commentLabel: __.getResource("String_Comment"),
-};
+    commentLabel: __.getResource('String_Comment'),
+}

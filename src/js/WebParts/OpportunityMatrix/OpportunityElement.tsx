@@ -1,6 +1,6 @@
-import * as React from "react";
-import __ from "../../Resources";
-import { ModalLink } from "../@Components";
+import * as React from 'react'
+import __ from '../../Resources'
+import { ModalLink } from '../@Components'
 
 export interface IOpportunityElementProps {
     item: any;
@@ -8,10 +8,10 @@ export interface IOpportunityElementProps {
 }
 
 const OpportunityElement = ({ item: { ID, Title }, style }: IOpportunityElementProps) => {
-    let dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource("DefaultView_Uncertainties_Url").replace("AllItems", "DispForm")}?ID=${ID}`;
+    const dispFormUrl = `${_spPageContextInfo.webAbsoluteUrl}/${__.getResource('DefaultView_Uncertainties_Url').replace('AllItems', 'DispForm')}?ID=${ID}`
     return (
         <div
-            className="opportunity-matrix-element"
+            className='opportunity-matrix-element'
             title={Title}
             style={style}>
             <ModalLink
@@ -19,7 +19,7 @@ const OpportunityElement = ({ item: { ID, Title }, style }: IOpportunityElementP
                 url={dispFormUrl}
                 options={{ HideRibbon: true }} />
         </div>
-    );
-};
+    )
+}
 
-export default OpportunityElement;
+export default OpportunityElement
