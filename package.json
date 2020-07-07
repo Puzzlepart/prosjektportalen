@@ -32,7 +32,8 @@
         "office-ui-fabric-react": "6.211.6",
         "react": "16.13.0",
         "react-dom": "16.13.0",
-        "react-sticky": "6.0.3"
+        "react-sticky": "6.0.3",
+        "style-loader": "1.2.1"
     },
     "devDependencies": {
         "@babel/compat-data": "7.8.0",

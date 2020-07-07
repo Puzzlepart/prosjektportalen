@@ -9,16 +9,14 @@ import * as WebParts from './WebParts'
 import * as Forms from './Forms'
 import StampVersion from './Util/StampVersion'
 import * as moment from 'moment'
-require('../css')
+import '../css'
 //#endregion
 
 moment.locale(__.getResource('MomentDate_Locale'))
 
 
 /** If the script was loaded using SP.SOD, we'll set the SOD to loaded */
-if (window['_v_dictSod']) {
-    window['_v_dictSod']['pp.main.js'].loaded = true
-}
+if (window['_v_dictSod']) window['_v_dictSod']['pp.main.js'].loaded = true
 
 namespace PP {
     /**
