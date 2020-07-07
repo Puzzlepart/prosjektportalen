@@ -82,6 +82,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      */
     private renderExportAction(exportStatus: ExportReportStatus, exportType: string): React.ReactElement<any> {
         const exportTypeContext: IExportTypeContext = this.getExportTypeContext(exportType)
+        // eslint-disable-next-line default-case
         switch (exportStatus) {
             case ExportReportStatus.IS_EXPORTING: {
                 return (
@@ -141,6 +142,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
      * @param {string} exportType Export type (PDF/PNG)
      */
     private getExportTypeContext(exportType: string): IExportTypeContext {
+        // eslint-disable-next-line default-case
         switch (exportType) {
             case 'pdf': {
                 return {
@@ -188,7 +190,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * On export click
      */
-    private async _onExportClick(e): Promise<void> {
+    private _onExportClick(e) {
         window.scrollTo(0, 0)
         e.preventDefault()
         setTimeout(this.startExport.bind(this), 250)
@@ -208,6 +210,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
             Logger.log({ message: '(startExport) Starting export', data: { exportType: this.props.exportType }, level: LogLevel.Info })
             this.setState({ exportStatus: ExportReportStatus.IS_EXPORTING })
             let blob: Blob
+            // eslint-disable-next-line default-case
             switch (this.props.exportType) {
                 case 'pdf': blob = await this.saveAsPdf()
                     break
@@ -229,7 +232,7 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
     /**
      * Save report as PNG
      */
-    private async saveAsPng() {
+    private saveAsPng() {
         return new Promise<Blob>(async (resolve, reject) => {
             try {
                 (window as any).html2canvas = html2canvas
@@ -241,7 +244,6 @@ export default class ExportReport extends React.Component<IExportReportProps, IE
                     resolve(blob)
                 }
             } catch (e) {
-                console.log(e)
                 reject(e)
             }
         })

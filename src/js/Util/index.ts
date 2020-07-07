@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import __ from '../Resources'
 import * as moment from 'moment'
 import { Web } from '@pnp/sp'
@@ -204,6 +205,7 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
             return SetItemFieldValueResult.OK
         }
         case 'TaxonomyFieldType': {
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
             setTaxonomySingleValue(clientContext, list, item, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()), -1)
             return SetItemFieldValueResult.OK
         }
@@ -356,7 +358,7 @@ export function toCurrencyFormat(val: string, prefix: string = __.getResource('C
  *
  * @param {string} url The URL
  */
-export const getClientContext = (url: string) => new Promise<SP.ClientContext>((resolve, reject) => {
+export const getClientContext = (url: string) => new Promise<SP.ClientContext>(resolve => {
     SP.SOD.executeFunc('sp.js', 'SP.ClientContext', () => {
         const clientContext = new SP.ClientContext(url)
         resolve(clientContext)
@@ -442,7 +444,7 @@ export function getUrlParts(serverRequestPath: string = _spPageContextInfo.serve
  * @param {string} filename Filename
  */
 export function loadLibrary(filename: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>(resolve => {
         GetProperty('pp_assetssiteurl').then(assetsUrl => {
             SP.SOD.registerSod(filename, `${assetsUrl}/SiteAssets/pp/libs/${filename}`)
             SP.SOD.executeFunc(filename, null, resolve)

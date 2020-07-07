@@ -1,16 +1,13 @@
 import { Site } from '@pnp/sp'
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
 import * as React from 'react'
 import __ from '../../Resources'
-import {
-    Spinner,
-    SpinnerType,
-} from 'office-ui-fabric-react/lib/Spinner'
-import { Modal } from 'office-ui-fabric-react/lib/Modal'
-import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
 import * as Util from '../../Util'
+import BaseWebPart from '../@BaseWebPart'
 import IAnnouncementsProps, { AnnouncementsDefaultProps } from './IAnnouncementsProps'
 import IAnnouncementsState from './IAnnouncementsState'
-import BaseWebPart from '../@BaseWebPart'
 
 /**
  * Announcements
@@ -85,7 +82,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                             <h5>
                                 <a
                                     style={{ cursor: 'pointer' }}
-                                    onClick={e => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
+                                    onClick={() => this.setState({ showAnnouncement: entry })}>{entry.Title}</a>
                             </h5>
                             <span className='ms-metadata'>{__.getResource('String_Published')} {Util.formatDate(entry.Created, undefined, false)}</span>
                         </li>)}
@@ -113,7 +110,7 @@ export default class Announcements extends BaseWebPart<IAnnouncementsProps, IAnn
                 <Modal
                     isOpen={showAnnouncement}
                     isDarkOverlay={true}
-                    onDismiss={e => this.setState({ showAnnouncement: null })}
+                    onDismiss={() => this.setState({ showAnnouncement: null })}
                     containerClassName={modalContainerClassName}
                     isBlocking={false}
                 >

@@ -22,6 +22,7 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
         if (colValue !== '' && (column.key.indexOf('OWSNMBR') !== -1 || column.key.indexOf('OWSCURR') !== -1)) {
             colValue = parseInt(colValue, 10)
         }
+        // eslint-disable-next-line default-case
         switch (column.key) {
             case 'Title': {
                 return (

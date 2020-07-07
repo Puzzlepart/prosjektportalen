@@ -190,9 +190,7 @@ export default class PDFExport {
                 columnStyles: {
                     Comment: { cellWidth: tableWidth },
                 },
-                willDrawCell: (cell, data) => {
-                    return false
-                },
+                willDrawCell: () => false
             }
             const commentColumn = this.createColumn('Comment', 'Comment')
             item['Comment'] = comment

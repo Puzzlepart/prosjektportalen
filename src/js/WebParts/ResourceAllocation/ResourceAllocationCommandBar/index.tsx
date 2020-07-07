@@ -1,12 +1,11 @@
 //#region Imports
-import * as React from 'react'
-import __ from '../../../Resources'
 import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar'
 import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
 import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import * as React from 'react'
+import FilterPanel from '../../@Components/FilterPanel'
 import IResourceAllocationCommandBarProps from './IResourceAllocationCommandBarProps'
 import IResourceAllocationCommandBarState from './IResourceAllocationCommandBarState'
-import FilterPanel from '../../@Components/FilterPanel'
 //#endregion
 
 export default class ResourceAllocationCommandBar extends React.Component<IResourceAllocationCommandBarProps, IResourceAllocationCommandBarState> {

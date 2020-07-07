@@ -27,13 +27,13 @@ export enum ExcelExportStatus {
 
 export default async function ExportToExcel({ sheets, fileName, options = { type: 'binary', bookType: 'xlsx' } }: IExcelExportSettings): Promise<void> {
     await loadLibraries(['FileSaver.min.js', 'xlsx.full.min.js'])
-    const workBook = (<any>window).XLSX.utils.book_new()
+    const workBook = (window as any).XLSX.utils.book_new()
     sheets.forEach((s, index) => {
-        const sheet = (<any>window).XLSX.utils.aoa_to_sheet(s.data);
-        (<any>window).XLSX.utils.book_append_sheet(workBook, sheet, s.name || `Sheet${index + 1}`)
+        const sheet = (window as any).XLSX.utils.aoa_to_sheet(s.data);
+        (window as any).XLSX.utils.book_append_sheet(workBook, sheet, s.name || `Sheet${index + 1}`)
     })
-    const wbout = (<any>window).XLSX.write(workBook, options);
-    (<any>window).saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), fileName)
+    const wbout = (window as any).XLSX.write(workBook, options);
+    (window as any).saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), fileName)
     return
 }
 

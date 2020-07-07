@@ -1,10 +1,9 @@
-import * as React from 'react'
-import __ from '../../../../Resources'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import * as React from 'react'
 import { Element } from 'react-scroll'
-import StatusElement from './StatusElement'
 import ProjectInfo from '../../../ProjectInfo'
 import ISummarySectionProps, { ISummarySectionHeaderProps, ISummarySectionProjectDataProps, ISummarySectionStatusColumnsProps } from './ISummarySectionProps'
+import StatusElement from './StatusElement'
 
 const SummarySectionHeader = ({ title, titleUrl }: ISummarySectionHeaderProps) => {
     return (

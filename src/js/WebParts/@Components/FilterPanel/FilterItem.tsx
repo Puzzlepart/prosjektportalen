@@ -8,9 +8,7 @@ export interface IFilterItemProps {
     onChanged?: (event: React.FormEvent<HTMLElement | HTMLInputElement>, checked: boolean) => void;
 }
 
-export interface IFilterItemState { }
-
-export class FilterItem extends React.Component<IFilterItemProps, IFilterItemState> {
+export class FilterItem extends React.Component<IFilterItemProps, {}> {
     constructor(props: IFilterItemProps) {
         super(props)
         this.state = {}

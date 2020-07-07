@@ -1,10 +1,6 @@
+import * as arraySort from 'array-sort'
+import { DetailsList, IColumn, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
 import * as React from 'react'
-import * as array_sort from 'array-sort'
-import {
-    DetailsList,
-    IColumn,
-    SelectionMode,
-} from 'office-ui-fabric-react/lib/DetailsList'
 import ISectionListProps from './ISectionListProps'
 import ISectionListState from './ISectionListState'
 
@@ -64,6 +60,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
     private _onRenderItemColumn = (item, index: number, column: IColumn, { }: ISectionListProps, { listData }: ISectionListState): JSX.Element => {
         const colValue = item[column.fieldName]
 
+        // eslint-disable-next-line default-case
         switch (column.fieldName) {
             case 'Title': {
                 const defaultDisplayFormUrl = `${listData.defaultDisplayFormUrl}?ID=${item.ID}`
@@ -102,7 +99,7 @@ export default class SectionList extends React.Component<ISectionListProps, ISec
         if (column.isSorted) {
             isSortedDescending = !isSortedDescending
         }
-        const items = array_sort(listData.items, [column.fieldName], { reverse: !isSortedDescending })
+        const items = arraySort(listData.items, [column.fieldName], { reverse: !isSortedDescending })
         this.setState({
             listData: {
                 ...listData,

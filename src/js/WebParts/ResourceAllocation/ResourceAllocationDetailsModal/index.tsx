@@ -76,7 +76,7 @@ export default class ResourceAllocationDetailsModal extends React.PureComponent<
                 {allocation.project && allocation.project.url &&
                     <p>
                         <b>{__.getResource('String_Project')}:</b>&nbsp;
-                        <a href={allocation.project.url} style={{ outline: 'none' }} target='_blank'><span>{allocation.project.name}</span></a>
+                        <a href={allocation.project.url} style={{ outline: 'none' }} rel='noopener noreferrer' target='_blank'><span>{allocation.project.name}</span></a>
                     </p>
                 }
             </div>

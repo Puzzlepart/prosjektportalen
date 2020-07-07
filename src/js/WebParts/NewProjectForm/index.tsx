@@ -320,9 +320,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {
                 this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } })
             }, this.state.selectedTemplate)
-            // eslint-disable-next-line no-console
-            console.log(redirectUrl)
-            // document.location.href = redirectUrl
+            document.location.href = redirectUrl
         } catch {
             this.setState({ provisioning: { status: ProvisionStatus.Error } })
         }

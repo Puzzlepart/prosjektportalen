@@ -91,7 +91,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                         tileWidth={this.props.tileWidth}
                         tileImageHeight={this.props.tileImageHeight}
                         onClickHref={project.Url}
-                        showProjectInfo={e => this.setState({ showProjectInfo: project })} />
+                        showProjectInfo={() => this.setState({ showProjectInfo: project })} />
                 ))}
             </div>
         )
@@ -116,7 +116,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
                         isOpen: this.state.showProjectInfo !== null,
                         isDarkOverlay: true,
                         isBlocking: false,
-                        onDismiss: e => this.setState({ showProjectInfo: null }),
+                        onDismiss: () => this.setState({ showProjectInfo: null }),
                         headerClassName: this.props.modalHeaderClassName,
                         headerStyle: { marginBottom: 20 },
                         title: this.state.showProjectInfo.Title,

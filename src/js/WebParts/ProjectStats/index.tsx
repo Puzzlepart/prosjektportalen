@@ -53,7 +53,6 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 setUrlHash({ viewId: this.state.currentView.id.toString() })
             }
         } catch (err) {
-            console.log(err)
             Logger.log({ message: String.format(LOG_TEMPLATE, 'componentDidMount', 'Failed to fetch data.'), level: LogLevel.Error })
             this.setState({ errorMessage: err, isLoading: false })
         }
@@ -84,7 +83,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                     <ProjectStatsDataSelection
                         data={data}
                         onUpdateSelection={this.onDataSelectionUpdated}
-                        onDismiss={_ => this.setState({ showDataSelectionModal: false })} />
+                        onDismiss={() => this.setState({ showDataSelectionModal: false })} />
                 )}
             </div>
         )
@@ -196,7 +195,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
      * @param {ProjectStatsChartData} data Data
      */
     @autobind
-    private async onDataSelectionUpdated(data: ProjectStatsChartData): Promise<void> {
+    private onDataSelectionUpdated(data: ProjectStatsChartData): void {
         Logger.log({ message: String.format(LOG_TEMPLATE, '_onDataSelectionUpdated', 'Selection was updated.'), level: LogLevel.Info })
         this.setState({ showDataSelectionModal: false, charts: this.state.charts.map(c => c.initOrUpdate(data)) })
     }
@@ -272,7 +271,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
             const data = new ProjectStatsChartData(items)
             const charts = chartsSpItems.map(spItem => {
                 const chartFields = fields.filter(f => spItem['GtChrFieldsId'].results.indexOf(f.id) !== -1)
-                return new ChartConfiguration(spItem, this.chartsConfigList, chartsConfigListContentTypes).initOrUpdate(data, chartFields)
+                return new ChartConfiguration(spItem, this.chartsConfigList).initOrUpdate(data, chartFields)
             })
             const config: Partial<IProjectStatsState> = { charts, data, views, contentTypes, currentView, chartsConfigListProperties }
             return config

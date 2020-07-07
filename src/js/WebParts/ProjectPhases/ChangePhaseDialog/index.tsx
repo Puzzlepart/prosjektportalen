@@ -81,6 +81,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
      */
     private _getDialogTitle = () => {
         let titleResKey: string
+        // eslint-disable-next-line default-case
         switch (this.props.newPhase.Type) {
             case 'Gate': titleResKey = 'ProjectPhases_ChangeGate'
                 break
@@ -96,6 +97,7 @@ export default class ChangePhaseDialog extends React.Component<IChangePhaseDialo
     private _getDialogSubText = () => {
         if (this.state.currentView === View.Confirm) {
             let subTextResKey: string
+            // eslint-disable-next-line default-case
             switch (this.props.newPhase.Type) {
                 case 'Gate': subTextResKey = 'ProjectPhases_ConfirmChangeGate'
                     break

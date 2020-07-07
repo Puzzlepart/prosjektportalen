@@ -11,6 +11,7 @@ export interface IChangePhaseLinkProps {
 
 const ChangePhaseLink = ({ phase, changePhaseEnabled, onChangePhaseHandler }: IChangePhaseLinkProps) => {
     let linkTextResourceKey
+    // eslint-disable-next-line default-case
     switch (phase.Type) {
         case 'Gate': linkTextResourceKey = 'ProjectPhases_ChangeGate'
             break

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const uuidV1 = require('uuid/v1')
 
 export default class WaitDialog {

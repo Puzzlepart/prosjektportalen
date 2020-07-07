@@ -14,6 +14,7 @@ import IFooterProps from './IFooterProps'
 export const Footer = ({ isLoading, currentView, gateApproval, activePhase, nextPhase, onChangeView, onChangePhaseDialogReturnCallback, onCloseDialog }: IFooterProps) => {
     const actions = []
 
+    // eslint-disable-next-line default-case
     switch (currentView) {
         case View.Initial: {
             actions.push({

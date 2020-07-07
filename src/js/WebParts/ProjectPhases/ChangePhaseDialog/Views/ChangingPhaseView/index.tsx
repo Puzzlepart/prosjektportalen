@@ -22,6 +22,7 @@ export default class ChangingPhaseView extends React.Component<IChangingPhaseVie
 
     public render(): JSX.Element {
         let progressResKey
+        // eslint-disable-next-line default-case
         switch (this.props.newPhase.Type) {
             case 'Gate': progressResKey = 'ProjectPhases_ChangingGate'
                 break

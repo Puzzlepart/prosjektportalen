@@ -106,6 +106,7 @@ export default class ProjectStatsChart extends React.Component<IProjectStatsChar
         const { chart } = this.state
         const chartElement = this._chartRef.getChart()
 
+        // eslint-disable-next-line default-case
         switch (chart.type) {
             case 'pie': {
                 const data = chart.getStatsFields().map(sf => item.getValue(sf))

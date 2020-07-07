@@ -5,5 +5,5 @@ import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
 export default interface IProjectStatsDataSelectionProps extends IModalProps {
     data: ProjectStatsChartData;
     columns?: IColumn[];
-    onUpdateSelection: (data: ProjectStatsChartData) => Promise<void>;
+    onUpdateSelection: (data: ProjectStatsChartData) => void;
 }

@@ -70,7 +70,7 @@ export default class QuickLinks extends BaseWebPart<IQuickLinksProps, IQuickLink
                     <ul className={listClassName}>
                         {links.map((lnk, idx) => (
                             <li key={idx}>
-                                <h5><a href={lnk.URL.Url} target='_blank'>{lnk.URL.Description}</a></h5>
+                                <h5><a href={lnk.URL.Url} rel='noopener noreferrer' target='_blank'>{lnk.URL.Description}</a></h5>
                                 <span className='ms-metadata'>{lnk.Comments}</span>
                             </li>
                         ))}

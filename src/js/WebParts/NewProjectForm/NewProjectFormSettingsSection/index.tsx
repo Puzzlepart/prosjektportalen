@@ -2,12 +2,11 @@
 import * as React from 'react'
 import __ from '../../../Resources'
 import INewProjectFormSettingsSectionProps from './INewProjectFormSettingsSectionProps'
-import INewProjectFormSettingsSectionState from './INewProjectFormSettingsSectionState'
 import ToggleSection from './ToggleSection'
 import DropdownSection, { IDropdownOption } from './DropdownSection'
 //#endregion
 
-export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, INewProjectFormSettingsSectionState> {
+export default class NewProjectFormSettingsSection extends React.Component<INewProjectFormSettingsSectionProps, {}> {
     public static defaultProps = { toggleSectionClassName: 'ms-font-l settings-section' };
 
     /**

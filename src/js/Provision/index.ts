@@ -31,7 +31,7 @@ export default async function ProvisionWeb(model: ProjectModel, progressCallback
         await ApplyTemplate(context)
         await ApplyExtensions(context)
         await CopyDefaultData(context)
-        if (settings.ADD_EVERYONE_VISITORS === 'On') {
+        if (settings.ADD_EVERYONE_VISITORS && settings.ADD_EVERYONE_VISITORS === 'On') {
             try {
                 await context.web.createDefaultAssociatedGroups()
                 const { data } = await context.web.ensureUser(`c:0-.f|rolemanager|spo-grid-all-users/${_spPageContextInfo.siteSubscriptionId}`)

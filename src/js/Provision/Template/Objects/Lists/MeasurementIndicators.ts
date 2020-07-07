@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import __ from '../../../../Resources'
 import { IList } from 'sp-js-provisioning/lib/schema'
 import { GtGainLookup, GtGainLookup_ID } from './SiteFields'

@@ -182,6 +182,7 @@ export default class ProjectPhases extends BaseWebPart<IProjectPhasesProps, IPro
      * @param {string} requestedPhase Requesed phase
      */
     private async onChangePhaseDialogReturnCallback(changePhaseDialogResult: ChangePhaseDialogResult, requestedPhase?: string) {
+        // eslint-disable-next-line prefer-const
         let { data, newPhase, checklistItemsToArchive } = this.state
         try {
             switch (changePhaseDialogResult) {

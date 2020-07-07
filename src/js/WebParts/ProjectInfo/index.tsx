@@ -39,6 +39,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
     }
 
     public render(): JSX.Element {
+        // eslint-disable-next-line default-case
         switch (this.props.renderMode) {
             case ProjectInfoRenderMode.Normal: {
                 return (
@@ -124,7 +125,7 @@ export default class ProjectInfo extends BaseWebPart<IProjectInfoProps, IProject
             <div>
                 {propertiesToRender.map((model, key) => {
                     const props = { key, model, labelSize: this.props.labelSize, valueSize: this.props.valueSize }
-                    return <ProjectProperty {...props} />
+                    return <ProjectProperty key={key} {...props} />
                 })}
             </div>
         )

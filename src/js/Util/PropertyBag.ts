@@ -58,6 +58,7 @@ export async function UpdatePropertyArray(key: string, valueToAdd: string, delim
     try {
         const array = await GetPropertyAsArray(key, delimiter, url)
         array.push(valueToAdd)
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
         await SetProperty(key, array.join(delimiter), url)
         return true
     } catch (err) {

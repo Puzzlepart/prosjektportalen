@@ -41,7 +41,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
 
     public async componentDidMount() {
         let matrixCells = await loadJsonConfiguration<Array<IMatrixCell[]>>('opportunity-matrix-cells')
-        if (matrixCells == null || !matrixCells.length) {
+        if (matrixCells === null || !matrixCells.length) {
             matrixCells = OpportunityMatrixCells
         }
         if (this.state.data) {
@@ -127,6 +127,7 @@ export default class OpportunityMatrix extends React.Component<IOpportunityMatri
                 const cell = this.state.matrixCells[i][j],
                     opportunityElements = this.getOpportunityElementsForCell(opportunityItems, cell),
                     opportunityElementsPostAction = this.getOpportunityElementsPostActionForCell(opportunityItems, cell)
+                // eslint-disable-next-line default-case
                 switch (cell.cellType) {
                     case MatrixCellType.Cell: {
                         return (

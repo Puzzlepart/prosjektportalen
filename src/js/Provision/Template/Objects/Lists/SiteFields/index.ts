@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import __ from '../../../../../Resources'
 
 export const GtCommunicationTarget = `<Field Type="LookupMulti" DisplayName="${__.getResource('SiteFields_GtCommunicationTarget_DisplayName')}" List="{listid:${__.getResource('Lists_Stakeholders_Title')}}" ShowField="Title" ID="{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}" StaticName="GtCommunicationTarget" Name="GtCommunicationTarget" Mult="TRUE" />`

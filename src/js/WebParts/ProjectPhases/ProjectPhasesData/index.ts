@@ -84,6 +84,7 @@ function mergePhasesWithChecklistItems(phases: PhaseModel[], checklistItemsWithP
     const mergedPhases = phases.map(phase => {
         const checklistItemsForPhase = checklistItemsWithPhase.filter(item => item.GtProjectPhase.TermGuid === phase.Id)
         checklistItemsForPhase.forEach(({ GtChecklistStatus }) => {
+            // eslint-disable-next-line default-case
             switch (GtChecklistStatus) {
                 case __.getResource('Choice_GtChecklistStatus_Open'):
                     phase.Checklist.stats[__.getResource('ProjectPhases_Stats_Open')] += 1

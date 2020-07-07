@@ -2,21 +2,20 @@
 import * as React from 'react'
 import __ from '../../../../../Resources'
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar'
-import IErrorInformationViewProps from './IErrorInformationViewProps'
 //#endregion
 
 /**
  * Changing phase view
  */
-export default class ErrorInformationView extends React.Component<IErrorInformationViewProps, {}> {
+export default class ErrorInformationView extends React.Component<{}, {}> {
     public static displayName = 'ErrorInformationView';
 
     /**
      * Constructor
      *
-     * @param {IErrorInformationViewProps} props Props
+     * @param {{}} props Props
      */
-    constructor(props: IErrorInformationViewProps) {
+    constructor(props: {}) {
         super(props)
     }
 

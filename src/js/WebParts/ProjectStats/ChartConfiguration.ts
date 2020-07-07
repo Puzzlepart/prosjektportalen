@@ -1,9 +1,9 @@
+import { Logger, LogLevel } from '@pnp/logging'
 import { List } from '@pnp/sp'
-import { LogLevel, Logger } from '@pnp/logging'
-import { ProjectStatsChartData } from './ProjectStatsChart'
-import StatsFieldConfiguration from './StatsFieldConfiguration'
 import Preferences from '../../Preferences'
 import __ from '../../Resources'
+import { ProjectStatsChartData } from './ProjectStatsChart'
+import StatsFieldConfiguration from './StatsFieldConfiguration'
 
 const LOG_TEMPLATE = '(ChartConfiguration) {0}: {1} ({2})'
 
@@ -45,9 +45,8 @@ export default class ChartConfiguration {
      *
      * @param {any} spItem SharePoint item
      * @param {List} pnpList PnP list
-     * @param {any[]} contentTypes Content types
      */
-    constructor(spItem, pnpList: List, contentTypes) {
+    constructor(spItem, pnpList: List) {
         this._pnpList = pnpList
         this.contentTypeId = spItem.ContentTypeId
         this.id = spItem.ID
@@ -106,7 +105,7 @@ export default class ChartConfiguration {
      * @param {string} breakpoint Breakpoint
      * @param {number} width Width
      */
-    public async setWidth(breakpoint: string, width: number): Promise<ChartConfiguration> {
+    public setWidth(breakpoint: string, width: number): ChartConfiguration {
         Logger.log({ message: String.format(LOG_TEMPLATE, 'setWidth', `Setting width to ${width} for ${breakpoint}.`, this.title), level: LogLevel.Info })
         this.width[breakpoint] = width
         const widthField = `GtChr${this._widthFields[breakpoint]}`
@@ -126,6 +125,7 @@ export default class ChartConfiguration {
                 ...this._getBase(),
                 series: this._generateSeries(),
             }
+            // eslint-disable-next-line default-case
             switch (this.type) {
                 case 'bar': {
                     chartConfig.xAxis = this._getXAxis()
@@ -209,6 +209,7 @@ export default class ChartConfiguration {
             case 'bar': {
                 if (this._statsFields.length === 1) {
                     const [field] = this._statsFields
+                    // eslint-disable-next-line default-case
                     switch (field.dataType) {
                         case 'string': {
                             return {
@@ -239,6 +240,7 @@ export default class ChartConfiguration {
      */
     private _getLegend() {
         if (this.showLegend) {
+            // eslint-disable-next-line default-case
             switch (this.type) {
                 case 'bar': {
                     return { layout: 'vertical' }
@@ -273,6 +275,7 @@ export default class ChartConfiguration {
             data: { statsFields: this._statsFields },
             level: LogLevel.Info,
         })
+        // eslint-disable-next-line default-case
         switch (this.type) {
             case 'column': {
                 return this._statsFields.map(sf => {
@@ -285,6 +288,7 @@ export default class ChartConfiguration {
             case 'bar': {
                 if (this._statsFields.length === 1) {
                     const [field] = this._statsFields
+                    // eslint-disable-next-line default-case
                     switch (field.dataType) {
                         case 'string': {
                             return [{
@@ -304,6 +308,7 @@ export default class ChartConfiguration {
             case 'pie': {
                 if (this._statsFields.length === 1) {
                     const [field] = this._statsFields
+                    // eslint-disable-next-line default-case
                     switch (field.dataType) {
                         case 'number': {
                             return ([{
@@ -317,7 +322,7 @@ export default class ChartConfiguration {
                         case 'string': {
                             return ([{
                                 colorByPoint: true,
-                                data: this._data.getValuesUnique(field).map((value, index) => ({
+                                data: this._data.getValuesUnique(field).map(value => ({
                                     name: value || __.getResource('String_Not_Set'),
                                     y: this.showPercentage ? (this._data.getItemsWithStringValue(field, value).length / this._data.getCount()) * 100 : this._data.getItemsWithStringValue(field, value).length,
                                 })),

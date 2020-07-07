@@ -4,6 +4,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon'
 import { PhaseModel } from '../../ProjectPhasesData'
 
 const GetStatusIcon = (index: number) => {
+    // eslint-disable-next-line default-case
     switch (index) {
         case 0:
             return 'CheckMark'

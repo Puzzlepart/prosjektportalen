@@ -77,7 +77,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                             onRenderItemColumn={this.onRenderItemColumn}
                             onColumnHeaderClick={this.onColumnHeaderClick} />
                     </div>
-                    {this.state.showMeasurements && <BenefitMeasurementsModal indicator={this.state.showMeasurements} onDismiss={_ => this.setState({ showMeasurements: null })} />}
+                    {this.state.showMeasurements && <BenefitMeasurementsModal indicator={this.state.showMeasurements} onDismiss={() => this.setState({ showMeasurements: null })} />}
                     {this.state.selectedProject && this.renderProjectInfoModal(this.props, this.state)}
                 </div>
             )
@@ -179,7 +179,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     isOpen: true,
                     isDarkOverlay: true,
                     isBlocking: false,
-                    onDismiss: _event => this.setState({ selectedProject: null }),
+                    onDismiss: () => this.setState({ selectedProject: null }),
                     headerClassName: modalHeaderClassName,
                     headerStyle: { marginBottom: 20 },
                     title: selectedProject.siteTitle,
@@ -207,7 +207,7 @@ export default class BenefitsOverview extends BaseWebPart<IBenefitsOverviewProps
                     startIndex: groupNames.indexOf(name, 0),
                     count,
                     isCollapsed: false,
-                    isShowingAll: count === items.length,
+                    isShowingAll: count === itemsSorted.length,
                     isDropEnabled: false,
                 }
             })

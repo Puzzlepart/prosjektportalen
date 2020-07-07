@@ -71,6 +71,7 @@ export default class GateApprovalView extends React.Component<IGateApprovalViewP
      * Get loading text based on this.state.review
      */
     private getLoadingText(): string {
+        // eslint-disable-next-line default-case
         switch (this.state.review) {
             case ChangePhaseDialogResult.Approved: {
                 return __.getResource('ProjectPhases_ApprovingPhaseChange')
