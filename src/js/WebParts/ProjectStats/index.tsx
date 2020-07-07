@@ -6,7 +6,7 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
 import { autobind } from 'office-ui-fabric-react/lib/Utilities'
 import * as React from 'react'
-import { IContentType } from '../../Model'
+import { ISPContentType } from '../../Model'
 import __ from '../../Resources'
 import SearchService from '../../Services/SearchService'
 import { getUrlHash, setUrlHash, SortAlphabetically } from '../../Util'
@@ -236,7 +236,7 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
                 this.chartsConfigList.contentTypes.usingCaching().get(),
                 this.statsFieldsList.contentTypes.usingCaching().get(),
             ])
-            const contentTypes: IContentType[] = [...chartsConfigListContentTypes, ...statsFieldsListContenTypes]
+            const contentTypes: ISPContentType[] = [...chartsConfigListContentTypes, ...statsFieldsListContenTypes]
             let currentView = view
             if (!currentView) {
                 const viewIdUrlParam = GetUrlKeyValue('viewId')

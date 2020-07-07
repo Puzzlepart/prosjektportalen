@@ -1,4 +1,4 @@
-export default interface IContentType {
+export interface ISPContentType {
     Description: string;
     DisplayFormTemplateName: string;
     DisplayFormUrl: string;
