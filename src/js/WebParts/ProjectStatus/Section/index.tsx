@@ -151,7 +151,7 @@ export default class Section extends React.PureComponent<ISectionProps, ISection
      * @param {ISectionProps} param0 Props
      */
     private shouldFetchListData = ({ section }: ISectionProps): boolean => {
-        return (section.listTitle != null)
+        return (section.listTitle !== null)
     }
 
     /**

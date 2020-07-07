@@ -62,7 +62,7 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
 
         if (isLoading) {
             return <Spinner type={SpinnerType.large} label={this.props.loadingText} />
-        } else if (subwebs == null) {
+        } else if (subwebs === null) {
             return (
                 <div className='ms-font-xs'>
                     <Icon iconName='Error' style={{ color: '#000' }} />  {__.getResource('WebPart_FailedMessage')}

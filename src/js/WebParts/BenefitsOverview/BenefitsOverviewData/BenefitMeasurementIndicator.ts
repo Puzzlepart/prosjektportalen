@@ -40,7 +40,7 @@ export class BenefitMeasurementIndicator extends BenefitBase {
      */
     public setMeasurements(measurements: BenefitMeasurement[]): BenefitMeasurementIndicator {
         let _measurements = measurements.filter(m => m.indicatorId === this.id && m.webId === this.webId)
-        _measurements = _measurements.map((m, i) => m.calculcateAchievement(this))
+        _measurements = _measurements.map(m => m.calculcateAchievement(this))
         _measurements = _measurements.map((m, i) => m.setTrendIconProps(_measurements[i + 1]))
         this.measurements = _measurements
         return this

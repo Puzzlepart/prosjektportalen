@@ -5,7 +5,7 @@ import IStatusElementProps from './IStatusElementProps'
 /**
  * Status element
  */
-const StatusElement = ({ section, scrollTo }: IStatusElementProps) => {
+const StatusElement = ({ section }: IStatusElementProps) => {
     function statusContents() {
         return {__html: (section.fieldName !== 'GtOverallStatus' ? section.statusComment : section.statusValue)}
     }

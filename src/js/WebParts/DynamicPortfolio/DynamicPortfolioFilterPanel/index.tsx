@@ -12,7 +12,7 @@ import DynamicPortfolioFilterPanelProps from './DynamicPortfolioFilterPanelProps
  *
  * @param {DynamicPortfolioFilterPanelProps} props Props
  */
-const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpen, showIcons }: DynamicPortfolioFilterPanelProps) => {
+const DynamicPortfolioFilterPanel = ({ filters, onFilterChange, onDismiss, isOpen }: DynamicPortfolioFilterPanelProps) => {
     return (
         <Panel
             isOpen={isOpen}

@@ -90,7 +90,11 @@ const Columns: IColumn[] = [{
     data: {
         onCustomRender: (item: BenefitMeasurementIndicator, column: IColumn, callbacks: { [key: string]: (item: BenefitMeasurementIndicator) => void }) => {
             if (item.measurements.length > 0) {
-                return <a href='#' onClick={_ => callbacks[column.fieldName](item)}>{__.getResource('BenefitsOverview_AllMeasurements')}</a>
+                return (
+                    <a
+                        href='#'
+                        onClick={() => callbacks[column.fieldName](item)}>{__.getResource('BenefitsOverview_AllMeasurements')}</a>
+                )
             }
             return null
         },
@@ -116,7 +120,7 @@ export function GetColumns(showSiteTitleColumn: boolean): any[] {
             data: {
                 onCustomRender: (item: BenefitMeasurementIndicator, column: IColumn, callbacks: { [key: string]: (item: BenefitMeasurementIndicator) => void }) => {
                     const colValue = objectGet(item, column.fieldName)
-                    return <a href='#' onClick={_ => callbacks[column.fieldName](item)}>{colValue}</a>
+                    return <a href='#' onClick={() => callbacks[column.fieldName](item)}>{colValue}</a>
                 },
             },
         })

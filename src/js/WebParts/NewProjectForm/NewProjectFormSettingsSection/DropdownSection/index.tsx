@@ -1,10 +1,9 @@
 //#region Imports
-import * as React from 'react'
-import __ from '../../../../Resources'
+import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
 import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import * as React from 'react'
 import IDropdownSectionProps from './IDropdownSectionProps'
 import IDropdownSectionState from './IDropdownSectionState'
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown'
 //#endregion
 
 

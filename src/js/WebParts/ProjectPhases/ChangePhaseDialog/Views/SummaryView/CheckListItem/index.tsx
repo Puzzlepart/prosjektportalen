@@ -42,7 +42,7 @@ export default class CheckListItem extends React.PureComponent<IChecklistItemPro
         return (
             <li>
                 <div className='ms-Grid' style={style}>
-                    <div className='ms-Grid-row' onClick={e => {
+                    <div className='ms-Grid-row' onClick={() => {
                         if (hasComment) {
                             this.setState({ showComment: !this.state.showComment })
                         }

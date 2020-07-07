@@ -126,7 +126,7 @@ export default class ProjectStatsChartData {
         return this._items
             .filter(i => i.hasValue(field))
             .map(i => i.getValue(field))
-            .reduce((prev, curr, index) => prev += curr, 0)
+            .reduce((prev, curr) => prev += curr, 0)
     }
 
     /**

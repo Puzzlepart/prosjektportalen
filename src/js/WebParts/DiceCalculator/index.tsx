@@ -39,7 +39,7 @@ export default class DiceCalculator extends BaseWebPart<IDiceCalculatorProps, ID
             this.setState((prevState: IDiceCalculatorState) => ({
                 scoreSubmitted,
                 scoreId: diceScore ? diceScore.ID : -1,
-                elements: prevState.elements.map((ele, i) => {
+                elements: prevState.elements.map(ele => {
                     const [fieldNameTxt, fieldNameScore] = ele.fieldNames
                     if (scoreSubmitted) {
                         return {

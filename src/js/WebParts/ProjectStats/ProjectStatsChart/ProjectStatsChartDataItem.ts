@@ -16,7 +16,7 @@ export default class ProjectStatsChartDataItem {
      */
     public hasValue(field: StatsFieldConfiguration): boolean {
         const rawValue = this.data[field.managedPropertyName]
-        return rawValue != null
+        return rawValue !== null
     }
 
     /**

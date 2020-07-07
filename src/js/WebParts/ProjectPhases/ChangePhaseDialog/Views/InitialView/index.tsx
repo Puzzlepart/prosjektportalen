@@ -75,7 +75,7 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
                 text: statusStillOpen,
                 disabled: (isLoading || !isCommentValid),
                 title: !isCommentValid ? statusStillOpenTooltipCommentEmpty : statusStillOpenTooltip,
-                onClick: () => this._onNextCheckPoint(statusStillOpen, comment, false),
+                onClick: () => this._onNextCheckPoint(statusStillOpen, comment),
             },
             {
                 text: statusClosed,
@@ -99,9 +99,8 @@ export default class InitialView extends React.Component<IInitialViewProps, IIni
     *
     * @param {string} status Status value
     * @param {string} comment Comment value
-    * @param {boolean} updateStatus Update status
     */
-    private _onNextCheckPoint(status: string, comment: string, updateStatus = true) {
+    private _onNextCheckPoint(status: string, comment: string) {
         this.props.nextCheckPointAction(status, comment, true)
         this.setState({ comment: '' })
     }

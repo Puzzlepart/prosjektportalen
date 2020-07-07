@@ -60,7 +60,7 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
                     }
                 </div>
                 <div hidden={!this.shouldTruncate}>
-                    <a href='javascript:void(0);return false;' onClick={e => this.setState({ truncate: false })}>Vis mer</a>
+                    <a href='javascript:void(0);return false;' onClick={() => this.setState({ truncate: false })}>Vis mer</a>
                 </div>
             </div>
         )
