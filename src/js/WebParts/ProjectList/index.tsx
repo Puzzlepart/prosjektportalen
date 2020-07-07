@@ -20,9 +20,9 @@ import { GetProperty } from '../../Util/PropertyBag'
  * Project information
  */
 export default class ProjectList extends BaseWebPart<IProjectListProps, IProjectListState> {
-    public static displayName = 'ProjectList';
-    public static defaultProps = ProjectListDefaultProps;
-    private _searchTimeout;
+    public static displayName = 'ProjectList'
+    public static defaultProps = ProjectListDefaultProps
+    private _searchTimeout: number
 
     /**
      * Constructor
@@ -168,7 +168,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         if (this._searchTimeout) {
             clearTimeout(this._searchTimeout)
         }
-        this._searchTimeout = setTimeout(() => {
+        this._searchTimeout = window.setTimeout(() => {
             this.setState({ searchTerm: searchTerm.toLowerCase() })
         }, this.props.searchTimeoutMs)
     }
