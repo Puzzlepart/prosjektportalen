@@ -1,9 +1,10 @@
-var path = require("path"),
-    webpack = require('webpack'),
-    pkg = require("./package.json");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+const webpack = require('webpack')
+const pkg = require('./package.json')
 
-const libBasePath = path.join(__dirname, "lib");
-const distBasePath = path.join(__dirname, "dist/js");
+const libBasePath = path.join(__dirname, 'lib')
+const distBasePath = path.join(__dirname, 'dist/js')
 
 module.exports = (devtool, exclude, env) => ({
     devtool,
@@ -21,8 +22,8 @@ module.exports = (devtool, exclude, env) => ({
     },
     output: {
         path: distBasePath,
-        filename: "pp.[name].js",
-        libraryTarget: "umd",
+        filename: 'pp.[name].js',
+        libraryTarget: 'umd',
     },
     resolve: {
         extensions: ['.jsx', '.js', '.json', '.txt'],
@@ -34,10 +35,10 @@ module.exports = (devtool, exclude, env) => ({
             use: {
                 loader: 'babel-loader',
                 options: {
-                    presets: ["react", "env", "es2015"],
+                    presets: ['react', 'env', 'es2015'],
                     plugins: [
-                        require("babel-plugin-transform-class-properties"),
-                        require("babel-plugin-transform-object-assign"),
+                        require('babel-plugin-transform-class-properties'),
+                        require('babel-plugin-transform-object-assign'),
                     ]
                 }
             },
@@ -49,7 +50,7 @@ module.exports = (devtool, exclude, env) => ({
         },
         {
             test: /\.json$/,
-            loader: "json-loader"
+            loader: 'json-loader'
         }
         ]
     },
@@ -62,8 +63,8 @@ module.exports = (devtool, exclude, env) => ({
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
-        .concat(env === "production" ? [
+        .concat(env === 'production' ? [
             new webpack.optimize.UglifyJsPlugin(),
             new webpack.optimize.AggressiveMergingPlugin()
         ] : [])
-});
+})
