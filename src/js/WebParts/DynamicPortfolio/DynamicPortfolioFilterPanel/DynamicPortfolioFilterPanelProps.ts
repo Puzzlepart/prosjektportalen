@@ -1,4 +1,4 @@
-import IDynamicPortfolioFilter from "./DynamicPortfolioFilter/IDynamicPortfolioFilter";
+import IDynamicPortfolioFilter from './DynamicPortfolioFilter/IDynamicPortfolioFilter'
 
 interface DynamicPortfolioFilterPanelProps {
     filters: IDynamicPortfolioFilter[];
@@ -8,4 +8,4 @@ interface DynamicPortfolioFilterPanelProps {
     showIcons?: boolean;
 }
 
-export default DynamicPortfolioFilterPanelProps;
+export default DynamicPortfolioFilterPanelProps

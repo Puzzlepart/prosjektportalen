@@ -6,4 +6,4 @@ interface ICreationModalProps {
     progressDescription: string;
 }
 
-export default ICreationModalProps;
+export default ICreationModalProps

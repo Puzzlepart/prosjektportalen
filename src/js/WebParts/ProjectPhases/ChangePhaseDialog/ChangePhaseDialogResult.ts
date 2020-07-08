@@ -5,4 +5,4 @@ enum ChangePhaseDialogResult {
     Rejected,
 }
 
-export default ChangePhaseDialogResult;
+export default ChangePhaseDialogResult

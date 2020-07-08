@@ -1,7 +1,7 @@
-import { BenefitBase } from "./BenefitBase";
-import { BenefitMeasurement } from "./BenefitMeasurement";
-import { Benefit } from "./Benefit";
-import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
+import { BenefitBase } from './BenefitBase'
+import { BenefitMeasurement } from './BenefitMeasurement'
+import { Benefit } from './Benefit'
+import { IBenefitsSearchResult } from './IBenefitsSearchResult'
 
 export class BenefitMeasurementIndicator extends BenefitBase {
     public indicator: string;
@@ -19,18 +19,18 @@ export class BenefitMeasurementIndicator extends BenefitBase {
      * @param {IBenefitsSearchResult} result Search result
      * @param {number} fractionDigits Fraction digits for valueDisplay
      */
-    constructor(result: IBenefitsSearchResult, fractionDigits: number = 2) {
-        super(result);
-        this.indicator = result.GtMeasureIndicatorOWSTEXT;
-        this.startValue = !isNaN(parseFloat(result.GtStartValueOWSNMBR)) ? parseFloat(result.GtStartValueOWSNMBR) : null;
+    constructor(result: IBenefitsSearchResult, fractionDigits = 2) {
+        super(result)
+        this.indicator = result.GtMeasureIndicatorOWSTEXT
+        this.startValue = !isNaN(parseFloat(result.GtStartValueOWSNMBR)) ? parseFloat(result.GtStartValueOWSNMBR) : null
         if (this.startValue !== null) {
-            this.startValueDisplay = this.startValue.toFixed(fractionDigits);
+            this.startValueDisplay = this.startValue.toFixed(fractionDigits)
         }
-        this.desiredValue = !isNaN(parseFloat(result.GtDesiredValueOWSNMBR)) ? parseFloat(result.GtDesiredValueOWSNMBR) : null;
+        this.desiredValue = !isNaN(parseFloat(result.GtDesiredValueOWSNMBR)) ? parseFloat(result.GtDesiredValueOWSNMBR) : null
         if (this.desiredValue !== null) {
-            this.desiredValueDisplay = this.desiredValue.toFixed(fractionDigits);
+            this.desiredValueDisplay = this.desiredValue.toFixed(fractionDigits)
         }
-        this.unit = result.GtMeasurementUnitOWSCHCS;
+        this.unit = result.GtMeasurementUnitOWSCHCS
     }
 
     /**
@@ -39,11 +39,11 @@ export class BenefitMeasurementIndicator extends BenefitBase {
      * @param {BenefitMeasurement[]} measurements Measurements
      */
     public setMeasurements(measurements: BenefitMeasurement[]): BenefitMeasurementIndicator {
-        let _measurements = measurements.filter(m => m.indicatorId === this.id && m.webId === this.webId);
-        _measurements = _measurements.map((m, i) => m.calculcateAchievement(this));
-        _measurements = _measurements.map((m, i) => m.setTrendIconProps(_measurements[i + 1]));
-        this.measurements = _measurements;
-        return this;
+        let _measurements = measurements.filter(m => m.indicatorId === this.id && m.webId === this.webId)
+        _measurements = _measurements.map(m => m.calculcateAchievement(this))
+        _measurements = _measurements.map((m, i) => m.setTrendIconProps(_measurements[i + 1]))
+        this.measurements = _measurements
+        return this
     }
 
     /**
@@ -52,7 +52,7 @@ export class BenefitMeasurementIndicator extends BenefitBase {
      * @param {Benefit} benefit Benefit
      */
     public setBenefit(benefit: Benefit): BenefitMeasurementIndicator {
-        this.benefit = benefit;
-        return this;
+        this.benefit = benefit
+        return this
     }
 }

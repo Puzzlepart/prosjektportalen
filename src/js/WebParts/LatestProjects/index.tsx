@@ -1,18 +1,18 @@
 //#region Imports
-import * as React from "react";
-import __ from "../../Resources";
-import { CreateJsomContext, ExecuteJsomQuery } from "jsom-ctx";
-import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import * as Util from "../../Util";
-import ILatestProjectsProps, { LatestProjectsDefaultProps } from "./ILatestProjectsProps";
-import ILatestProjectsState from "./ILatestProjectsState";
-import BaseWebPart from "../@BaseWebPart";
+import * as React from 'react'
+import __ from '../../Resources'
+import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx'
+import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner'
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import * as Util from '../../Util'
+import ILatestProjectsProps, { LatestProjectsDefaultProps } from './ILatestProjectsProps'
+import ILatestProjectsState from './ILatestProjectsState'
+import BaseWebPart from '../@BaseWebPart'
 //#endregion
 
 export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, ILatestProjectsState> {
-    public static displayName = "LatestProjects";
+    public static displayName = 'LatestProjects';
     public static defaultProps = LatestProjectsDefaultProps;
 
     private reloadInterval: number;
@@ -26,20 +26,20 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
         super(props, {
             isLoading: true,
             subwebs: null,
-        });
+        })
     }
 
     public async componentDidMount() {
         try {
-            const subwebs = await this.fetchSubwebsForCurrentUser();
-            this.setState({ subwebs, isLoading: false });
+            const subwebs = await this.fetchSubwebsForCurrentUser()
+            this.setState({ subwebs, isLoading: false })
         } catch (err) {
-            this.setState({ isLoading: false });
+            this.setState({ isLoading: false })
         }
     }
 
     public componentWillUnmount(): void {
-        window.clearInterval(this.reloadInterval);
+        window.clearInterval(this.reloadInterval)
     }
 
     /**
@@ -51,23 +51,23 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                 {this._renderChrome(this.props.chromeTitle, this.state.elementToToggle, LatestProjects.displayName)}
                 {this.renderItems()}
             </div>
-        );
+        )
     }
 
     /**
      * Render items
      */
     private renderItems() {
-        const { isLoading, subwebs } = this.state;
+        const { isLoading, subwebs } = this.state
 
         if (isLoading) {
-            return <Spinner type={SpinnerType.large} label={this.props.loadingText} />;
-        } else if (subwebs == null) {
+            return <Spinner type={SpinnerType.large} label={this.props.loadingText} />
+        } else if (subwebs === null) {
             return (
-                <div className="ms-font-xs">
-                    <Icon iconName="Error" style={{ color: "#000" }} />  {__.getResource("WebPart_FailedMessage")}
+                <div className='ms-font-xs'>
+                    <Icon iconName='Error' style={{ color: '#000' }} />  {__.getResource('WebPart_FailedMessage')}
                 </div>
-            );
+            )
         } else if (subwebs.length > 0) {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
@@ -76,19 +76,19 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                             <li key={`Project_${index}`}>
                                 <div>
                                     <h5><a href={Url}>{Title}</a></h5>
-                                    <div className="ms-font-xs">{__.getResource("String_Created")} {Util.formatDate(Created, undefined, false)}</div>
+                                    <div className='ms-font-xs'>{__.getResource('String_Created')} {Util.formatDate(Created, undefined, false)}</div>
                                 </div>
                             </li>
                         ))}
                     </ul>
                 </div>
-            );
+            )
         } else {
             return (
                 <div ref={elementToToggle => this.setState({ elementToToggle })}>
-                    <MessageBar>{__.getResource("WebPart_EmptyMessage")}</MessageBar>
+                    <MessageBar>{__.getResource('WebPart_EmptyMessage')}</MessageBar>
                 </div>
-            );
+            )
         }
     }
 
@@ -96,9 +96,9 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
      * Fetch subwebs for current user using JSOM
      */
     private async fetchSubwebsForCurrentUser(): Promise<any> {
-        const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl);
-        const webCollection: SP.WebCollection = await jsomCtx.web.getSubwebsForCurrentUser(null);
-        await ExecuteJsomQuery(jsomCtx, [{ clientObject: webCollection }]);
+        const jsomCtx = await CreateJsomContext(_spPageContextInfo.webAbsoluteUrl)
+        const webCollection: SP.WebCollection = await jsomCtx.web.getSubwebsForCurrentUser(null)
+        await ExecuteJsomQuery(jsomCtx, [{ clientObject: webCollection }])
         const subwebs = webCollection.get_data()
             .map(web => ({
                 Title: web.get_title(),
@@ -106,22 +106,22 @@ export default class LatestProjects extends BaseWebPart<ILatestProjectsProps, IL
                 Created: web.get_created(),
             }))
             .sort((a, b) => {
-                const aCreatedTime = a.Created.getTime();
-                const bCreatedTime = b.Created.getTime();
+                const aCreatedTime = a.Created.getTime()
+                const bCreatedTime = b.Created.getTime()
                 if (aCreatedTime < bCreatedTime) {
-                    return 1;
+                    return 1
                 }
                 if (aCreatedTime > bCreatedTime) {
-                    return -1;
+                    return -1
                 }
-                return 0;
+                return 0
             })
-            .splice(0, this.props.itemsCount);
-        return subwebs;
+            .splice(0, this.props.itemsCount)
+        return subwebs
     }
 }
 
 export {
     ILatestProjectsProps,
     ILatestProjectsState,
-};
+}

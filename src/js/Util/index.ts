@@ -1,14 +1,15 @@
-import __ from "../Resources";
-import * as moment from "moment";
-import { Web } from "@pnp/sp";
-import { Logger, LogLevel } from "@pnp/logging";
-import ExportToExcel from "./ExportToExcel";
-import WaitDialog from "./WaitDialog";
-import StampVersion from "./StampVersion";
-import { GetProperty } from "./PropertyBag";
-import GetBreakpoint from "./GetBreakpoint";
+/* eslint-disable @typescript-eslint/camelcase */
+import __ from '../Resources'
+import * as moment from 'moment'
+import { Web } from '@pnp/sp'
+import { Logger, LogLevel } from '@pnp/logging'
+import ExportToExcel from './ExportToExcel'
+import WaitDialog from './WaitDialog'
+import StampVersion from './StampVersion'
+import { GetProperty } from './PropertyBag'
+import GetBreakpoint from './GetBreakpoint'
 
-declare var MSOWebPartPageFormName: string;
+declare let MSOWebPartPageFormName: string
 
 /**
  * Formats a date using moment.js (defaults for format and locale are set in the resource files)
@@ -18,20 +19,20 @@ declare var MSOWebPartPageFormName: string;
  * @param {boolean} addTzOffset Add timezone offset to the date
  * @param {string} locale Locale
  */
-export function formatDate(date: string | Date, format: string = __.getResource("MomentDate_DefaultFormat"), addTzOffset: boolean = true, locale: string = __.getResource("MomentDate_Locale")): string {
-    let _date = (typeof date === "string") ? new Date(date) : date;
-    let m = moment(_date);
+export function formatDate(date: string | Date, format: string = __.getResource('MomentDate_DefaultFormat'), addTzOffset = true, locale: string = __.getResource('MomentDate_Locale')): string {
+    const _date = (typeof date === 'string') ? new Date(date) : date
+    let m = moment(_date)
     if (addTzOffset) {
-        m = m.add(-_date.getTimezoneOffset(), "minutes");
+        m = m.add(-_date.getTimezoneOffset(), 'minutes')
     }
-    return m.locale(locale).format(format);
+    return m.locale(locale).format(format)
 }
 
 /**
  * Is the page in edit mode
  */
 export function inEditMode(): boolean {
-    return document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value === "1";
+    return document.forms[MSOWebPartPageFormName].MSOLayout_InDesignMode.value === '1'
 }
 
 /**
@@ -40,7 +41,7 @@ export function inEditMode(): boolean {
  * @param {string} absUrl Absolute URL
  */
 export function makeUrlRelativeToSite(absUrl: string): string {
-    return absUrl.replace(document.location.protocol + "//" + document.location.hostname, "");
+    return absUrl.replace(document.location.protocol + '//' + document.location.hostname, '')
 }
 
 /**
@@ -49,18 +50,18 @@ export function makeUrlRelativeToSite(absUrl: string): string {
  * @param {string} relUrl Absolute URL
  */
 export function makeUrlAbsolute(relUrl: string): string {
-    const rootSite = document.location.protocol + "//" + document.location.hostname;
+    const rootSite = document.location.protocol + '//' + document.location.hostname
     if (!relUrl) {
-        return rootSite;
+        return rootSite
     }
-    if (relUrl.startsWith("http")) {
-        return relUrl;
+    if (relUrl.startsWith('http')) {
+        return relUrl
     }
-    let properRelativeUrl = relUrl;
-    if (!relUrl.startsWith("/")) {
-        properRelativeUrl = "/" + relUrl;
+    let properRelativeUrl = relUrl
+    if (!relUrl.startsWith('/')) {
+        properRelativeUrl = '/' + relUrl
     }
-    return rootSite + properRelativeUrl;
+    return rootSite + properRelativeUrl
 }
 
 /**
@@ -72,12 +73,12 @@ export function cleanString(str: string, length?: number): string {
     str = str
         .trim()
         .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/å/g, "a")
-        .replace(/æ/g, "ae")
-        .replace(/ø/g, "o")
-        .replace(/[^a-z0-9-]/gi, "");
-    return str.substring(0, length ? length : Math.min(80, str.length));
+        .replace(/ /g, '-')
+        .replace(/å/g, 'a')
+        .replace(/æ/g, 'ae')
+        .replace(/ø/g, 'o')
+        .replace(/[^a-z0-9-]/gi, '')
+    return str.substring(0, length ? length : Math.min(80, str.length))
 }
 
 /**
@@ -86,7 +87,7 @@ export function cleanString(str: string, length?: number): string {
  * @param {string} searchProp Search property name
  */
 export function cleanSearchPropName(searchProp: string): string {
-    return searchProp.match(/(.*?)OWS*/)[1];
+    return searchProp.match(/(.*?)OWS*/)[1]
 }
 
 
@@ -96,8 +97,8 @@ export function cleanSearchPropName(searchProp: string): string {
  * @param {string} email Email adress
  * @param {string} size Size S/M/L
  */
-export function userPhoto(email: string, size: string = "L"): string {
-    return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`;
+export function userPhoto(email: string, size = 'L'): string {
+    return `${_spPageContextInfo.siteAbsoluteUrl}/${_spPageContextInfo.layoutsUrl}/userphoto.aspx?size=${size}&accountname=${email}`
 }
 
 /**
@@ -106,16 +107,16 @@ export function userPhoto(email: string, size: string = "L"): string {
  * @param {string} str The string
  */
 export function stringToColour(str: string): string {
-    let hash = 0;
+    let hash = 0
     for (let i = 0; i < str.length; i++) {
-        hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        hash = str.charCodeAt(i) + ((hash << 5) - hash)
     }
-    let colour = "#";
+    let colour = '#'
     for (let i = 0; i < 3; i++) {
-        let value = (hash >> (i * 8)) & 0xFF;
-        colour += ("00" + value.toString(16)).substr(-2);
+        const value = (hash >> (i * 8)) & 0xFF
+        colour += ('00' + value.toString(16)).substr(-2)
     }
-    return colour;
+    return colour
 }
 
 /**
@@ -128,16 +129,16 @@ export function stringToColour(str: string): string {
  * @param {boolean} reloadWhenDone Reload page when done
  * @param {boolean} removeUrlParams Remove url params
  */
-export function userMessage(title: string, message: string, color: string, duration: number = 10000, reloadWhenDone: boolean = false, removeUrlParams: boolean = false): void {
-    const status = SP.UI.Status.addStatus(title, message);
-    SP.UI.Status.setStatusPriColor(status, color);
+export function userMessage(title: string, message: string, color: string, duration = 10000, reloadWhenDone = false, removeUrlParams = false): void {
+    const status = SP.UI.Status.addStatus(title, message)
+    SP.UI.Status.setStatusPriColor(status, color)
     if (duration !== -1) {
         window.setTimeout(() => {
-            SP.UI.Status.removeStatus(status);
+            SP.UI.Status.removeStatus(status)
             if (reloadWhenDone) {
-                document.location.href = removeUrlParams ? document.location.href.replace(document.location.search, "") : document.location.href;
+                document.location.href = removeUrlParams ? document.location.href.replace(document.location.search, '') : document.location.href
             }
-        }, duration);
+        }, duration)
     }
 }
 
@@ -149,12 +150,12 @@ export function userMessage(title: string, message: string, color: string, durat
  * @param {number} targetValue The target value, i.e. equal to 100%
  * @param {boolean} addPrefix Add prefix (%)
  */
-export function percentage(startValue: number, partValue: number, targetValue: number, addPrefix: boolean = true): any {
-    let value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100);
+export function percentage(startValue: number, partValue: number, targetValue: number, addPrefix = true): any {
+    const value = Math.round(((partValue - startValue) / (targetValue - startValue)) * 100)
     if (addPrefix) {
-        return `${value}%`;
+        return `${value}%`
     } else {
-        return value;
+        return value
     }
 }
 
@@ -164,7 +165,7 @@ export function percentage(startValue: number, partValue: number, targetValue: n
  * @param {string} str The string
  */
 export function encodeSpaces(str: string): string {
-    return str.replace(/ /g, "%20");
+    return str.replace(/ /g, '%20')
 }
 
 export enum SetItemFieldValueResult {
@@ -187,52 +188,53 @@ export enum SetItemFieldValueResult {
  */
 export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldValue: any, fieldType: string, clientContext: SP.ClientContext, list: SP.List): SetItemFieldValueResult {
     if (fieldValue === null) {
-        return SetItemFieldValueResult.ValueNull;
+        return SetItemFieldValueResult.ValueNull
     }
     switch (fieldType) {
-        case "Text":
-        case "Note":
-        case "Choice":
-        case "MultiChoice":
-        case "Number":
-        case "User":
-        case "UserMulti":
-        case "Boolean":
-        case "Currency": {
-            item.set_item(fieldName, fieldValue);
-            item.update();
-            return SetItemFieldValueResult.OK;
+        case 'Text':
+        case 'Note':
+        case 'Choice':
+        case 'MultiChoice':
+        case 'Number':
+        case 'User':
+        case 'UserMulti':
+        case 'Boolean':
+        case 'Currency': {
+            item.set_item(fieldName, fieldValue)
+            item.update()
+            return SetItemFieldValueResult.OK
         }
-        case "TaxonomyFieldType": {
-            setTaxonomySingleValue(clientContext, list, item, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()), -1);
-            return SetItemFieldValueResult.OK;
+        case 'TaxonomyFieldType': {
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            setTaxonomySingleValue(clientContext, list, item, fieldName, (fieldValue.Label || fieldValue.get_label()), (fieldValue.TermGuid || fieldValue.get_termGuid()), -1)
+            return SetItemFieldValueResult.OK
         }
-        case "TaxonomyFieldTypeMulti": {
-            const taxonomyFieldValues = (fieldValue as SP.Taxonomy.TaxonomyFieldValueCollection).get_data();
-            const listField = list.get_fields().getByInternalNameOrTitle(fieldName);
-            const taxField: any = clientContext.castTo(listField, SP.Taxonomy.TaxonomyField);
-            const taxMulti = new SP.Taxonomy.TaxonomyFieldValueCollection(clientContext, taxonomyFieldValues.map(t => `-1;#${t.get_label()}|${t.get_termGuid()}`).join(";#"), taxField);
-            taxField.setFieldValueByValueCollection(item, taxMulti);
-            return SetItemFieldValueResult.OK;
+        case 'TaxonomyFieldTypeMulti': {
+            const taxonomyFieldValues = (fieldValue as SP.Taxonomy.TaxonomyFieldValueCollection).get_data()
+            const listField = list.get_fields().getByInternalNameOrTitle(fieldName)
+            const taxField: any = clientContext.castTo(listField, SP.Taxonomy.TaxonomyField)
+            const taxMulti = new SP.Taxonomy.TaxonomyFieldValueCollection(clientContext, taxonomyFieldValues.map(t => `-1;#${t.get_label()}|${t.get_termGuid()}`).join(';#'), taxField)
+            taxField.setFieldValueByValueCollection(item, taxMulti)
+            return SetItemFieldValueResult.OK
         }
-        case "URL": {
-            const webServerUrl = _spPageContextInfo.siteAbsoluteUrl.replace(_spPageContextInfo.siteServerRelativeUrl, "");
-            const ctxRelativeUrl = clientContext.get_url().replace(webServerUrl, "");
-            let url = fieldValue.get_url().replace("{webRelativeUrl}", ctxRelativeUrl).replace(/([^:]\/)\/+/g, "$1");
-            let fieldUrlValue = new SP.FieldUrlValue();
-            fieldUrlValue.set_url(url);
-            fieldUrlValue.set_description(fieldValue.get_description());
-            item.set_item(fieldName, fieldUrlValue);
-            item.update();
-            return SetItemFieldValueResult.OK;
+        case 'URL': {
+            const webServerUrl = _spPageContextInfo.siteAbsoluteUrl.replace(_spPageContextInfo.siteServerRelativeUrl, '')
+            const ctxRelativeUrl = clientContext.get_url().replace(webServerUrl, '')
+            const url = fieldValue.get_url().replace('{webRelativeUrl}', ctxRelativeUrl).replace(/([^:]\/)\/+/g, '$1')
+            const fieldUrlValue = new SP.FieldUrlValue()
+            fieldUrlValue.set_url(url)
+            fieldUrlValue.set_description(fieldValue.get_description())
+            item.set_item(fieldName, fieldUrlValue)
+            item.update()
+            return SetItemFieldValueResult.OK
         }
-        case "DateTime": {
-            item.set_item(fieldName, fieldValue.toISOString());
-            item.update();
-            return SetItemFieldValueResult.OK;
+        case 'DateTime': {
+            item.set_item(fieldName, fieldValue.toISOString())
+            item.update()
+            return SetItemFieldValueResult.OK
         }
         default: {
-            return SetItemFieldValueResult.FieldTypeNotSupported;
+            return SetItemFieldValueResult.FieldTypeNotSupported
         }
     }
 }
@@ -241,7 +243,7 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
  * Relods the page
  */
 export function reloadPage(): void {
-    document.location.href = _spPageContextInfo.serverRequestPath;
+    document.location.href = _spPageContextInfo.serverRequestPath
 }
 
 export interface ISafeTerm {
@@ -260,20 +262,20 @@ export interface ISafeTerm {
  */
 export function getSafeTerm(term: any): ISafeTerm {
     if (term === null) {
-        return null;
+        return null
     }
     if (term !== undefined) {
         if (term.Label === undefined && term.TermGuid === undefined && term.WssId === undefined && term.get_label !== undefined) {
-            term.Label = term.get_label();
-            term.TermGuid = term.get_termGuid();
-            term.WssId = term.get_wssId();
+            term.Label = term.get_label()
+            term.TermGuid = term.get_termGuid()
+            term.WssId = term.get_wssId()
         } else if (term.get_label === undefined && term.get_termGuid === undefined && term.get_wssId === undefined) {
-            term.get_label = () => term.Label;
-            term.get_termGuid = () => term.TermGuid;
-            term.get_wssId = () => term.WssId;
+            term.get_label = () => term.Label
+            term.get_termGuid = () => term.TermGuid
+            term.get_wssId = () => term.WssId
         }
     }
-    return term;
+    return term
 }
 
 /**
@@ -287,15 +289,15 @@ export function getSafeTerm(term: any): ISafeTerm {
  * @param {any} termGuid Term GUID
  * @param {number} wssId Term WSS ID
  */
-export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid: any, wssId: number = -1) {
-    const field = list.get_fields().getByInternalNameOrTitle(fieldName);
-    const taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField);
-    const taxSingle = new SP.Taxonomy.TaxonomyFieldValue();
-    taxSingle.set_label(label);
-    taxSingle.set_termGuid(termGuid);
-    taxSingle.set_wssId(wssId);
-    taxField.setFieldValueByValue(item, taxSingle);
-    item.update();
+export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, item: SP.ListItem, fieldName: string, label: string, termGuid: any, wssId = -1) {
+    const field = list.get_fields().getByInternalNameOrTitle(fieldName)
+    const taxField: any = ctx.castTo(field, SP.Taxonomy.TaxonomyField)
+    const taxSingle = new SP.Taxonomy.TaxonomyFieldValue()
+    taxSingle.set_label(label)
+    taxSingle.set_termGuid(termGuid)
+    taxSingle.set_wssId(wssId)
+    taxField.setFieldValueByValue(item, taxSingle)
+    item.update()
 }
 
 /**
@@ -303,22 +305,22 @@ export function setTaxonomySingleValue(ctx: SP.ClientContext, list: SP.List, ite
  *
  * @param {number} loadTimeout Loading timeout (ms)
  */
-export const ensureTaxonomy = (loadTimeout: number = 10000): Promise<void> => {
+export const ensureTaxonomy = (loadTimeout = 10000): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
-        let scriptbase = `${_spPageContextInfo.siteAbsoluteUrl}/_layouts/15`,
-            sodKey = "_v_dictSod";
-        if (!window[sodKey]["sp.taxonomy.js"]) {
-            SP.SOD.registerSod("sp.taxonomy.js", `${scriptbase}/sp.taxonomy.js`);
+        const scriptbase = `${_spPageContextInfo.siteAbsoluteUrl}/_layouts/15`,
+            sodKey = '_v_dictSod'
+        if (!window[sodKey]['sp.taxonomy.js']) {
+            SP.SOD.registerSod('sp.taxonomy.js', `${scriptbase}/sp.taxonomy.js`)
         }
         SP.SOD.executeOrDelayUntilScriptLoaded(() => {
-            SP.SOD.executeFunc("sp.taxonomy.js", "SP.Taxonomy", () => {
-                SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs("sp.taxonomy.js");
-                resolve();
-            });
-        }, "sp.js");
-        window.setTimeout(reject, loadTimeout);
-    });
-};
+            SP.SOD.executeFunc('sp.taxonomy.js', 'SP.Taxonomy', () => {
+                SP.SOD.notifyScriptLoadedAndExecuteWaitingJobs('sp.taxonomy.js')
+                resolve()
+            })
+        }, 'sp.js')
+        window.setTimeout(reject, loadTimeout)
+    })
+}
 
 /**
  * Generate storage key with or without web prefix (_spPageContextInfo.webServerRelativeUrl)
@@ -326,12 +328,12 @@ export const ensureTaxonomy = (loadTimeout: number = 10000): Promise<void> => {
  * @param {string[]} parts Parts to include in the key
  * @param {boolean} addWebPrefix Should web prefix be added
  */
-export function generateStorageKey(parts: string[], addWebPrefix: boolean = true) {
+export function generateStorageKey(parts: string[], addWebPrefix = true) {
     if (addWebPrefix) {
-        const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, "");
-        parts.unshift(webPrefix);
+        const webPrefix = _spPageContextInfo.webServerRelativeUrl.replace(/[^\w\s]/gi, '')
+        parts.unshift(webPrefix)
     }
-    return parts.join("_");
+    return parts.join('_')
 }
 
 /**
@@ -340,15 +342,15 @@ export function generateStorageKey(parts: string[], addWebPrefix: boolean = true
  * @param {string} val The value
  * @param {string} prefix Currency prefix
  */
-export function toCurrencyFormat(val: string, prefix: string = __.getResource("CurrencySymbol")): string {
-    let str = parseInt(val, 10).toString().split(".");
+export function toCurrencyFormat(val: string, prefix: string = __.getResource('CurrencySymbol')): string {
+    const str = parseInt(val, 10).toString().split('.')
     if (str[0].length >= 5) {
-        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1 ");
+        str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1 ')
     }
     if (str[1] && str[1].length >= 5) {
-        str[1] = str[1].replace(/(\d{3})/g, "$1 ");
+        str[1] = str[1].replace(/(\d{3})/g, '$1 ')
     }
-    return prefix + str.join(" ");
+    return prefix + str.join(' ')
 }
 
 /**
@@ -356,12 +358,12 @@ export function toCurrencyFormat(val: string, prefix: string = __.getResource("C
  *
  * @param {string} url The URL
  */
-export const getClientContext = (url: string) => new Promise<SP.ClientContext>((resolve, reject) => {
-    SP.SOD.executeFunc("sp.js", "SP.ClientContext", () => {
-        const clientContext = new SP.ClientContext(url);
-        resolve(clientContext);
-    });
-});
+export const getClientContext = (url: string) => new Promise<SP.ClientContext>(resolve => {
+    SP.SOD.executeFunc('sp.js', 'SP.ClientContext', () => {
+        const clientContext = new SP.ClientContext(url)
+        resolve(clientContext)
+    })
+})
 
 /**
  * Executes a JSOM query using SP.ClientContext.executeQueryAsync. Allows for async-await
@@ -370,14 +372,14 @@ export const getClientContext = (url: string) => new Promise<SP.ClientContext>((
  * @param {SP.ClientObject[]} clientObjects Client objects to load
  */
 export function executeJsom(ctx: SP.ClientContext, clientObjects: SP.ClientObject[] = []) {
-    return new Promise<{ sender, args, url }>((resolve, reject) => {
-        clientObjects.forEach(clientObj => ctx.load(clientObj));
+    return new Promise<{ sender; args; url }>((resolve, reject) => {
+        clientObjects.forEach(clientObj => ctx.load(clientObj))
         ctx.executeQueryAsync((sender, args) => {
-            resolve({ sender, args, url: ctx.get_url() });
+            resolve({ sender, args, url: ctx.get_url() })
         }, (sender, args) => {
-            reject({ sender, args, url: ctx.get_url() });
-        });
-    });
+            reject({ sender, args, url: ctx.get_url() })
+        })
+    })
 }
 
 export interface IJsomContext {
@@ -393,11 +395,11 @@ export interface IJsomContext {
  * @param {string} url The URL
  */
 export async function getJsomContext(url: string): Promise<IJsomContext> {
-    const ctx = await getClientContext(url);
-    const web = ctx.get_web();
-    const propertyBag = web.get_allProperties();
-    const lists = web.get_lists();
-    return { ctx, web, propertyBag, lists };
+    const ctx = await getClientContext(url)
+    const web = ctx.get_web()
+    const propertyBag = web.get_allProperties()
+    const lists = web.get_lists()
+    return { ctx, web, propertyBag, lists }
 }
 
 /**
@@ -406,12 +408,12 @@ export async function getJsomContext(url: string): Promise<IJsomContext> {
  * @param {string} hash URL hash
  */
 export function getUrlHash(hash: string = document.location.hash.substring(1)): { [key: string]: string } {
-    let hashObject: { [key: string]: string } = {};
-    hash.split("&").map(str => {
-        const [key, value] = str.split("=");
-        hashObject[key] = value;
-    });
-    return hashObject;
+    const hashObject: { [key: string]: string } = {}
+    hash.split('&').map(str => {
+        const [key, value] = str.split('=')
+        hashObject[key] = value
+    })
+    return hashObject
 }
 
 /**
@@ -420,10 +422,10 @@ export function getUrlHash(hash: string = document.location.hash.substring(1)): 
  * @param {Object} hashObject Hash object
  */
 export function setUrlHash(hashObject: { [key: string]: string }): void {
-    let hash = "#";
-    let hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`);
-    hash += hashParts.join("&");
-    document.location.hash = hash;
+    let hash = '#'
+    const hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`)
+    hash += hashParts.join('&')
+    document.location.hash = hash
 }
 
 /**
@@ -433,7 +435,7 @@ export function setUrlHash(hashObject: { [key: string]: string }): void {
  * @param {string} webServerRelativeUrl Web server relative url
  */
 export function getUrlParts(serverRequestPath: string = _spPageContextInfo.serverRequestPath, webServerRelativeUrl: string = _spPageContextInfo.webServerRelativeUrl): string[] {
-    return serverRequestPath.replace(".aspx", "").replace(webServerRelativeUrl, "").split("/");
+    return serverRequestPath.replace('.aspx', '').replace(webServerRelativeUrl, '').split('/')
 }
 
 /**
@@ -442,12 +444,12 @@ export function getUrlParts(serverRequestPath: string = _spPageContextInfo.serve
  * @param {string} filename Filename
  */
 export function loadLibrary(filename: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-        GetProperty("pp_assetssiteurl").then(assetsUrl => {
-            SP.SOD.registerSod(filename, `${assetsUrl}/SiteAssets/pp/libs/${filename}`);
-            SP.SOD.executeFunc(filename, null, resolve);
-        });
-    });
+    return new Promise<void>(resolve => {
+        GetProperty('pp_assetssiteurl').then(assetsUrl => {
+            SP.SOD.registerSod(filename, `${assetsUrl}/SiteAssets/pp/libs/${filename}`)
+            SP.SOD.executeFunc(filename, null, resolve)
+        })
+    })
 }
 
 /**
@@ -457,7 +459,7 @@ export function loadLibrary(filename: string): Promise<void> {
  */
 export async function loadLibraries(filenames: string[]): Promise<void> {
     for (let i = 0; i < filenames.length; i++) {
-        await loadLibrary(filenames[i]);
+        await loadLibrary(filenames[i])
     }
 }
 
@@ -467,15 +469,15 @@ export async function loadLibraries(filenames: string[]): Promise<void> {
  * @param {string} name Config name
  */
 export async function loadJsonConfiguration<T>(name: string): Promise<T> {
-    const assetsUrl = await GetProperty("pp_assetssiteurl");
-    const assetsWeb = new Web(makeUrlAbsolute(assetsUrl));
-    const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`;
+    const assetsUrl = await GetProperty('pp_assetssiteurl')
+    const assetsWeb = new Web(makeUrlAbsolute(assetsUrl))
+    const fileServerRelativeUrl = `${assetsUrl}/SiteAssets/pp/config/${name}.txt`
     try {
-        const json = await assetsWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON();
-        return json;
+        const json = await assetsWeb.getFileByServerRelativeUrl(fileServerRelativeUrl).usingCaching().getJSON()
+        return json
     } catch (err) {
-        Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error);
-        return null;
+        Logger.write(`[loadJsonConfiguration] Failed to load JSON from ${fileServerRelativeUrl}`, LogLevel.Error)
+        return null
     }
 }
 
@@ -483,9 +485,9 @@ export async function loadJsonConfiguration<T>(name: string): Promise<T> {
  * Sort an array alphabetically
  */
 export function SortAlphabetically(a, b, prop: string): number {
-    if (a[prop] < b[prop]) { return -1; }
-    if (a[prop] > b[prop]) { return 1; }
-    return 0;
+    if (a[prop] < b[prop]) { return -1 }
+    if (a[prop] > b[prop]) { return 1 }
+    return 0
 }
 
 
@@ -494,4 +496,4 @@ export {
     WaitDialog,
     StampVersion,
     GetBreakpoint,
-};
+}

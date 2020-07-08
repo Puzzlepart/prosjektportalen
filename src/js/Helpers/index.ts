@@ -1,4 +1,4 @@
-import * as objectGet from "object-get";
+import * as objectGet from 'object-get'
 
 /**
  * Get object value by expression
@@ -8,5 +8,5 @@ import * as objectGet from "object-get";
  * @param {T} fallback Fallback (defaults to null)
  */
 export function getObjectValue<T>(object: any, expression: string, fallback: T = null): T {
-    return objectGet(object, expression) || fallback;
+    return objectGet(object, expression) || fallback
 }

@@ -10,3 +10,5 @@ src/css/conf/Project.spcolor.styl
 npm-debug.log
 src/js/Resources/*.json
 src/js/Preferences/Preferences.json
+package-lock.json
+.awcache

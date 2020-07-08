@@ -1,15 +1,15 @@
-import __ from "../../../../Resources";
-import { IList } from "sp-js-provisioning/lib/schema";
-import { GtProjectTaskComElement, GtProjectTaskRisk, GtProjectTaskProduct, GtProjectTaskChange, GtProjectTaskGain } from "./SiteFields";
+import __ from '../../../../Resources'
+import { IList } from 'sp-js-provisioning/lib/schema'
+import { GtProjectTaskComElement, GtProjectTaskRisk, GtProjectTaskProduct, GtProjectTaskChange, GtProjectTaskGain } from './SiteFields'
 
 const Tasks: IList = {
-    Title: __.getResource("Lists_Tasks_Title"),
-    Description: "",
+    Title: __.getResource('Lists_Tasks_Title'),
+    Description: '',
     Template: 171,
     ContentTypesEnabled: true,
     RemoveExistingContentTypes: true,
     ContentTypeBindings: [{
-        ContentTypeID: "0x010800233B015F95174C9A8EB505493841DE8D",
+        ContentTypeID: '0x010800233B015F95174C9A8EB505493841DE8D',
     }],
     AdditionalSettings: {
         EnableVersioning: true,
@@ -22,32 +22,32 @@ const Tasks: IList = {
         GtProjectTaskGain,
     ],
     Views: [{
-        Title: __.getResource("View_AllTasks_DisplayName"),
-        ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor"],
+        Title: __.getResource('View_AllTasks_DisplayName'),
+        ViewFields: ['Checkmark', 'LinkTitle', 'StartDate', 'DueDate', 'AssignedTo', 'GtProjectPhase', 'Modified', 'Editor'],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
-            ViewQuery: "",
+            ViewQuery: '',
         },
     },
     {
-        Title: __.getResource("View_RelevantLinks_DisplayName"),
-        ViewFields: ["LinkTitle", "GtProjectTaskChange", "GtProjectTaskGain", "GtProjectTaskComElement", "GtProjectTaskProduct", "GtProjectTaskRisk"],
+        Title: __.getResource('View_RelevantLinks_DisplayName'),
+        ViewFields: ['LinkTitle', 'GtProjectTaskChange', 'GtProjectTaskGain', 'GtProjectTaskComElement', 'GtProjectTaskProduct', 'GtProjectTaskRisk'],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
-            ViewQuery: "",
+            ViewQuery: '',
         },
     },
     {
-        Title: __.getResource("View_BenefitTasks_DisplayName"),
-        ViewFields: ["Checkmark", "LinkTitle", "StartDate", "DueDate", "AssignedTo", "GtProjectPhase", "Modified", "Editor", "GtProjectTaskGain"],
+        Title: __.getResource('View_BenefitTasks_DisplayName'),
+        ViewFields: ['Checkmark', 'LinkTitle', 'StartDate', 'DueDate', 'AssignedTo', 'GtProjectPhase', 'Modified', 'Editor', 'GtProjectTaskGain'],
         AdditionalSettings: {
             RowLimit: 30,
             Paged: true,
-            ViewQuery: `<Where><IsNotNull><FieldRef Name="GtProjectTaskGain" /></IsNotNull></Where>`,
+            ViewQuery: '<Where><IsNotNull><FieldRef Name="GtProjectTaskGain" /></IsNotNull></Where>',
         },
     }],
-};
+}
 
-export default Tasks;
+export default Tasks

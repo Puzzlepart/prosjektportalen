@@ -1,12 +1,31 @@
-var path = require("path"),
-    webpack = require('webpack'),
-    pkg = require("./package.json");
+/* eslint-disable @typescript-eslint/no-var-requires */
+const path = require('path')
+const webpack = require('webpack')
+const pkg = require('./package.json')
+const { CheckerPlugin } = require('awesome-typescript-loader')
+const libBasePath = path.join(__dirname, 'lib')
+const distBasePath = path.join(__dirname, 'dist/js')
 
-const libBasePath = path.join(__dirname, "lib");
-const distBasePath = path.join(__dirname, "dist/js");
+/**
+ * Presets for @babel
+ */
+const presets = {
+    env: [
+        '@babel/preset-env',
+        {
+            corejs: { version: 3 },
+            useBuiltIns: 'entry',
+            targets: {
+                'chrome': '58',
+                'ie': '11'
+            },
+            modules: 'commonjs',
+        }]
+}
 
-module.exports = (devtool, exclude, env) => ({
-    devtool,
+module.exports = () => ({
+    stats: 'minimal',
+    devtool: 'source-map',
     entry: {
         main: [
             'core-js/es6/map',
@@ -16,54 +35,62 @@ module.exports = (devtool, exclude, env) => ({
             'whatwg-fetch',
             '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
-            './lib/index.js',
+            './src/js/index.tsx',
         ],
     },
     output: {
         path: distBasePath,
-        filename: "pp.[name].js",
-        libraryTarget: "umd",
+        filename: 'pp.[name].js',
+        libraryTarget: 'umd',
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.json', '.txt'],
+        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json'],
         alias: { model: path.resolve(libBasePath, 'Model/index.js') }
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ["react", "env", "es2015"],
-                    plugins: [
-                        require("babel-plugin-transform-class-properties"),
-                        require("babel-plugin-transform-object-assign"),
-                    ]
-                }
+        rules: [
+            {
+                test: /\.styl$/,
+                loader: 'style-loader!css-loader!stylus-loader?paths=node_modules/bootstrap-stylus/stylus/'
             },
-            exclude: exclude
-        },
-        {
-            test: /\.txt$/,
-            use: 'raw-loader'
-        },
-        {
-            test: /\.json$/,
-            loader: "json-loader"
-        }
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [presets.env]
+                    }
+                },
+                include: [path.resolve(__dirname, 'node_modules/sp-js-provisioning')]
+            },
+            {
+                test: /\.ts(x?)$/,
+                exclude: /(node_modules)/,
+                use: [
+                    {
+                        loader: 'awesome-typescript-loader',
+                        options: {
+                            useCache: true,
+                            useBabel: true,
+                            babelOptions: {
+                                babelrc: false,
+                                presets: [presets.env]
+                            },
+                            babelCore: '@babel/core'
+                        }
+                    }
+                ]
+            }
         ]
     },
     plugins: [
+        new CheckerPlugin(),
         new webpack.DefinePlugin({
             __VERSION: JSON.stringify(pkg.version),
             'process.env': {
-                NODE_ENV: JSON.stringify(env)
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV)
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
-        .concat(env === "production" ? [
-            new webpack.optimize.UglifyJsPlugin(),
-            new webpack.optimize.AggressiveMergingPlugin()
-        ] : [])
-});
+})

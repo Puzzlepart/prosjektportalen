@@ -1,19 +1,19 @@
-import __ from "../../../../Resources";
-import { IFile } from "sp-js-provisioning/lib/schema";
+import __ from '../../../../Resources'
+import { IFile } from 'sp-js-provisioning/lib/schema'
 
 const BenefitsOverview: IFile = {
-    Folder: "SitePages",
-    Src: "{sitecollection}/Resources/SitePage_OneColumn.txt",
-    Url: "BenefitsOverview.aspx",
+    Folder: 'SitePages',
+    Src: '{sitecollection}/Resources/SitePage_OneColumn.txt',
+    Url: 'BenefitsOverview.aspx',
     Overwrite: true,
     Properties: {
-        Title: "Gevinstoversikt",
+        Title: 'Gevinstoversikt',
     },
     RemoveExistingWebParts: true,
     WebParts: [
         {
-            Title: "Gevinstoversikt",
-            Zone: "LeftColumn",
+            Title: 'Gevinstoversikt',
+            Zone: 'LeftColumn',
             Order: 0,
             Contents: {
                 Xml: `<webParts>
@@ -25,7 +25,7 @@ const BenefitsOverview: IFile = {
         </metaData>
         <data>
             <properties>
-                <property name="Title" type="string">${__.getResource("WebPart_BenefitsOverview_Title")}</property>
+                <property name="Title" type="string">${__.getResource('WebPart_BenefitsOverview_Title')}</property>
                 <property name="ChromeType" type="chrometype">Default</property>
                 <property name="ChromeState" type="chromestate">Normal</property>
                 <property name="Content" type="string">&lt;div id="pp-benefitsoverview"&gt;&lt;/div&gt;</property>
@@ -36,6 +36,6 @@ const BenefitsOverview: IFile = {
             },
         },
     ],
-};
+}
 
-export default BenefitsOverview;
+export default BenefitsOverview

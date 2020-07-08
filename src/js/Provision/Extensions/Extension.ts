@@ -1,4 +1,4 @@
-import { Schema } from "sp-js-provisioning/lib/schema";
+import { Schema } from 'sp-js-provisioning/lib/schema'
 
 export default class Extension {
     public Id?: number;
@@ -11,11 +11,11 @@ export default class Extension {
     public Schema?: Schema;
 
     constructor(id: number, title: string, comments: string, filename: string, fileRef: string, isEnabled: boolean) {
-        this.Id = id;
-        this.Title = title;
-        this.Comments = comments;
-        this.Filename = filename;
-        this.FileRef = fileRef;
-        this.IsEnabled = isEnabled;
+        this.Id = id
+        this.Title = title
+        this.Comments = comments
+        this.Filename = filename
+        this.FileRef = fileRef
+        this.IsEnabled = isEnabled
     }
 }

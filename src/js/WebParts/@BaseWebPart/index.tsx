@@ -1,9 +1,8 @@
 //#region Imports
-import __ from "../../Resources";
-import * as React from "react";
-import ChromeTitle from "../@Components/ChromeTitle";
-import IBaseWebPartProps from "./IBaseWebPartProps";
-import IBaseWebPartState from "./IBaseWebPartState";
+import * as React from 'react'
+import ChromeTitle from '../@Components/ChromeTitle'
+import { IBaseWebPartProps } from './IBaseWebPartProps'
+import { IBaseWebPartState } from './IBaseWebPartState'
 //#endregion
 
 export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWebPartState> extends React.PureComponent<P, S> {
@@ -14,8 +13,8 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
      * @param {S} initialState State
      */
     constructor(props: P, initialState: S) {
-        super(props);
-        this.state = initialState;
+        super(props)
+        this.state = initialState
     }
 
     /**
@@ -23,10 +22,12 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
      *
      * @param {S} updatedState Updated state
      */
-    public async updateState(updatedState: S): Promise<void> {
-        this.setState(updatedState, () => {
-            return;
-        });
+    public updateState(updatedState: S): Promise<void> {
+        return new Promise(resolve => {
+            this.setState(updatedState, () => {
+                resolve()
+            })
+        })
     }
 
     /**
@@ -45,14 +46,14 @@ export default class BaseWebPart<P extends IBaseWebPartProps, S extends IBaseWeb
                     element,
                     storage: {
                         key: key,
-                        type: "localStorage",
+                        type: 'localStorage',
                     },
                 }}
                 hidden={hideChrome}
             />
-        );
+        )
     }
 }
 
-export { IBaseWebPartProps, IBaseWebPartState };
+export { IBaseWebPartProps, IBaseWebPartState }
 

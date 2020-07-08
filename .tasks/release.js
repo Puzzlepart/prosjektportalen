@@ -14,9 +14,7 @@ function getReleasePackageName() {
                 let releasePackageName = format("{0}-{1}.{2}.zip", pkg.name, pkg.version, hash);
 
                 // If we're not on the master branch, we'll include th branch name
-                if (branch !== "master") {
-                    releasePackageName = format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, branch, hash);
-                }
+                if (branch !== "master") releasePackageName = format("{0}-{1}.{2}.{3}.zip", pkg.name, pkg.version, branch, hash);
 
                 resolve(releasePackageName);
             });

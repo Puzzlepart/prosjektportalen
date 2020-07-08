@@ -1,13 +1,13 @@
-import * as React from "react";
-import __ from "../../../Resources";
-import { Modal, IModalProps } from "office-ui-fabric-react/lib/Modal";
-import { DetailsList, IColumn, SelectionMode } from "office-ui-fabric-react/lib/DetailsList";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import { BenefitMeasurementIndicator } from "../BenefitsOverviewData/BenefitMeasurementIndicator";
-import { BenefitMeasurement } from "../BenefitsOverviewData/BenefitMeasurement";
-import * as objectGet from "object-get";
-import { BenefitsOverviewCustomRenderFunction } from "../BenefitsOverviewCustomRenderFunction";
+import * as React from 'react'
+import __ from '../../../Resources'
+import { Modal, IModalProps } from 'office-ui-fabric-react/lib/Modal'
+import { DetailsList, IColumn, SelectionMode } from 'office-ui-fabric-react/lib/DetailsList'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import { BenefitMeasurementIndicator } from '../BenefitsOverviewData/BenefitMeasurementIndicator'
+import { BenefitMeasurement } from '../BenefitsOverviewData/BenefitMeasurement'
+import * as objectGet from 'object-get'
+import { BenefitsOverviewCustomRenderFunction } from '../BenefitsOverviewCustomRenderFunction'
 
 export interface IBenefitMeasurementsModalProps extends IModalProps {
     indicator: BenefitMeasurementIndicator;
@@ -18,39 +18,39 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
     public static defaultProps: Partial<IBenefitMeasurementsModalProps> = {
         columns: [
             {
-                key: "value",
-                fieldName: "value",
-                name: __.getResource("SiteFields_GtMeasurementValue_DisplayName"),
+                key: 'value',
+                fieldName: 'value',
+                name: __.getResource('SiteFields_GtMeasurementValue_DisplayName'),
                 minWidth: 100,
                 maxWidth: 100,
-                data: { fieldNameDisplay: "valueDisplay" },
+                data: { fieldNameDisplay: 'valueDisplay' },
             },
             {
-                key: "achievement",
-                fieldName: "achievement",
-                name: __.getResource("String_AchievementOfObjectives"),
+                key: 'achievement',
+                fieldName: 'achievement',
+                name: __.getResource('String_AchievementOfObjectives'),
                 minWidth: 100,
                 maxWidth: 100,
                 data: {
                     onCustomRender: (item: BenefitMeasurementIndicator) => {
-                        const colValue = objectGet(item, "achievementDisplay");
-                        const trendIconProps = objectGet(item, "trendIconProps");
+                        const colValue = objectGet(item, 'achievementDisplay')
+                        const trendIconProps = objectGet(item, 'trendIconProps')
                         if (colValue) {
                             return (
                                 <span>
-                                    <span style={{ display: "inline-block", width: 20 }}>{trendIconProps && <Icon {...trendIconProps} />}</span>
+                                    <span style={{ display: 'inline-block', width: 20 }}>{trendIconProps && <Icon {...trendIconProps} />}</span>
                                     <span>{colValue}</span>
                                 </span>
-                            );
+                            )
                         }
-                        return null;
+                        return null
                     },
                 },
             },
             {
-                key: "dateDisplay",
-                fieldName: "dateDisplay",
-                name: __.getResource("SiteFields_GtMeasurementDate_DisplayName"),
+                key: 'dateDisplay',
+                fieldName: 'dateDisplay',
+                name: __.getResource('SiteFields_GtMeasurementDate_DisplayName'),
                 minWidth: 150,
             },
         ],
@@ -62,7 +62,7 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                 isOpen={true}
                 isDarkOverlay={true}
                 onDismiss={this.props.onDismiss}
-                containerClassName={"pp-modal"}
+                containerClassName={'pp-modal'}
                 isBlocking={false}>
                 <div style={{ padding: 50, maxHeight: 600 }}>
                     <h2 style={{ marginBottom: 20 }}>{this.props.indicator.title}</h2>
@@ -73,17 +73,17 @@ export default class BenefitMeasurementsModal extends React.PureComponent<IBenef
                         selectionMode={SelectionMode.none} />
                 </div>
             </Modal>
-        );
+        )
     }
 
     @autobind
     private onRenderItemColumn(item: BenefitMeasurement, _index: number, column: IColumn) {
-        const onCustomRender: BenefitsOverviewCustomRenderFunction = objectGet(column, "data.onCustomRender");
-        const fieldNameDisplay: string = objectGet(column, "data.fieldNameDisplay");
+        const onCustomRender: BenefitsOverviewCustomRenderFunction = objectGet(column, 'data.onCustomRender')
+        const fieldNameDisplay: string = objectGet(column, 'data.fieldNameDisplay')
 
-        if (typeof onCustomRender === "function") {
-            return onCustomRender(item, column);
+        if (typeof onCustomRender === 'function') {
+            return onCustomRender(item, column)
         }
-        return objectGet(item, fieldNameDisplay || column.fieldName);
+        return objectGet(item, fieldNameDisplay || column.fieldName)
     }
 }

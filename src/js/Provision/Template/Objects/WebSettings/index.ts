@@ -1,7 +1,7 @@
-import { IWebSettings } from "sp-js-provisioning/lib/schema";
+import { IWebSettings } from 'sp-js-provisioning/lib/schema'
 
 const WebSettings: IWebSettings = {
-    WelcomePage: "SitePages/ProjectHome.aspx",
-};
+    WelcomePage: 'SitePages/ProjectHome.aspx',
+}
 
-export default WebSettings;
+export default WebSettings

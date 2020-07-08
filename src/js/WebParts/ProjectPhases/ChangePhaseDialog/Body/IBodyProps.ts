@@ -1,7 +1,7 @@
-import { View } from "../Views";
-import ChangePhaseDialogResult from "../ChangePhaseDialogResult";
-import { PhaseModel } from "../../ProjectPhasesData";
-import IChecklistItem from "../../ProjectPhasesData/IChecklistItem";
+import { View } from '../Views'
+import ChangePhaseDialogResult from '../ChangePhaseDialogResult'
+import { PhaseModel } from '../../ProjectPhasesData'
+import IChecklistItem from '../../ProjectPhasesData/IChecklistItem'
 
 export default interface IBodyProps {
     newPhase: PhaseModel;

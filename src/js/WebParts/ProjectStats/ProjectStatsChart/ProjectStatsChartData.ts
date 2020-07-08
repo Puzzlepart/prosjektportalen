@@ -1,9 +1,9 @@
-import { LogLevel, Logger } from "@pnp/logging";
-import StatsFieldConfiguration from "../StatsFieldConfiguration";
-import ProjectStatsChartDataItem from "./ProjectStatsChartDataItem";
+import { LogLevel, Logger } from '@pnp/logging'
+import StatsFieldConfiguration from '../StatsFieldConfiguration'
+import ProjectStatsChartDataItem from './ProjectStatsChartDataItem'
 
 
-const LOG_TEMPLATE = "(ProjectStatsChartData) {0}: {1}";
+const LOG_TEMPLATE = '(ProjectStatsChartData) {0}: {1}'
 
 export default class ProjectStatsChartData {
     private _items: Array<ProjectStatsChartDataItem>;
@@ -14,14 +14,14 @@ export default class ProjectStatsChartData {
      * @param {Array<ProjectStatsChartDataItem>} items ITems
      */
     constructor(items: Array<ProjectStatsChartDataItem>) {
-        this._items = items;
+        this._items = items
     }
 
     /**
      * Get items
      */
     public getItems(): Array<ProjectStatsChartDataItem> {
-        return this._items;
+        return this._items
     }
 
     /**
@@ -30,13 +30,13 @@ export default class ProjectStatsChartData {
     * @param {StatsFieldConfiguration} field Field
      */
     public getItemsWithNonZeroValue(field: StatsFieldConfiguration): Array<ProjectStatsChartDataItem> {
-        if (field.dataType === "string") {
+        if (field.dataType === 'string') {
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "getItemsWithNonZeroValue", `Data type '${field.dataType}' not supported.`),
+                message: String.format(LOG_TEMPLATE, 'getItemsWithNonZeroValue', `Data type '${field.dataType}' not supported.`),
                 level: LogLevel.Error,
-            });
+            })
         }
-        return this._items.filter(i => i.getValue(field) !== 0);
+        return this._items.filter(i => i.getValue(field) !== 0)
     }
 
     /**
@@ -46,13 +46,13 @@ export default class ProjectStatsChartData {
     * @param {string} value Value
     */
     public getItemsWithStringValue(field: StatsFieldConfiguration, value: string): Array<ProjectStatsChartDataItem> {
-        if (field.dataType !== "string") {
+        if (field.dataType !== 'string') {
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "getItemsWithStringValue", `Data type '${field.dataType}' not supported.`),
+                message: String.format(LOG_TEMPLATE, 'getItemsWithStringValue', `Data type '${field.dataType}' not supported.`),
                 level: LogLevel.Error,
-            });
+            })
         }
-        return this._items.filter(i => i.getValue(field) === value);
+        return this._items.filter(i => i.getValue(field) === value)
     }
 
     /**
@@ -61,14 +61,14 @@ export default class ProjectStatsChartData {
      * @param {number} index Index
      */
     public getItem(index: number): ProjectStatsChartDataItem {
-        return this._items[index];
+        return this._items[index]
     }
 
     /**
      * Get count
      */
     public getCount(): number {
-        return this._items.length;
+        return this._items.length
     }
 
     /**
@@ -77,7 +77,7 @@ export default class ProjectStatsChartData {
     * @param {StatsFieldConfiguration} field Field
     */
     public getAverage(field: StatsFieldConfiguration) {
-        return (this.getTotal(field) / this.getCount());
+        return (this.getTotal(field) / this.getCount())
     }
 
     /**
@@ -86,7 +86,7 @@ export default class ProjectStatsChartData {
     * @param {StatsFieldConfiguration} field Field
     */
     public getValues(field: StatsFieldConfiguration) {
-        return this._items.map(i => i.getValue(field));
+        return this._items.map(i => i.getValue(field))
     }
 
     /**
@@ -95,20 +95,20 @@ export default class ProjectStatsChartData {
     * @param {StatsFieldConfiguration} field Field
     */
     public getValuesUnique(field: StatsFieldConfiguration): Array<string> {
-        if (field.dataType !== "string") {
+        if (field.dataType !== 'string') {
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "getValuesUnique", `Data type '${field.dataType}' not supported.`),
+                message: String.format(LOG_TEMPLATE, 'getValuesUnique', `Data type '${field.dataType}' not supported.`),
                 level: LogLevel.Error,
-            });
+            })
         }
-        return this.getValues(field).filter((value, index, self) => self.indexOf(value) === index);
+        return this.getValues(field).filter((value, index, self) => self.indexOf(value) === index)
     }
 
     /**
      * Get names
      */
     public getNames() {
-        return this._items.map(i => i.name);
+        return this._items.map(i => i.name)
     }
 
     /**
@@ -117,16 +117,16 @@ export default class ProjectStatsChartData {
      * @param {StatsFieldConfiguration} field Field
      */
     public getTotal(field: StatsFieldConfiguration) {
-        if (field.dataType !== "number") {
+        if (field.dataType !== 'number') {
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "getTotal", `Data type '${field.dataType}' not supported.`),
+                message: String.format(LOG_TEMPLATE, 'getTotal', `Data type '${field.dataType}' not supported.`),
                 level: LogLevel.Error,
-            });
+            })
         }
         return this._items
             .filter(i => i.hasValue(field))
             .map(i => i.getValue(field))
-            .reduce((prev, curr, index) => prev += curr, 0);
+            .reduce((prev, curr) => prev += curr, 0)
     }
 
     /**
@@ -136,12 +136,12 @@ export default class ProjectStatsChartData {
      * @param {number} index Index
      */
     public getPercentage(field: StatsFieldConfiguration, index: number) {
-        if (field.dataType !== "number") {
+        if (field.dataType !== 'number') {
             Logger.log({
-                message: String.format(LOG_TEMPLATE, "getPercentage", `Data type '${field.dataType}' not supported.`),
+                message: String.format(LOG_TEMPLATE, 'getPercentage', `Data type '${field.dataType}' not supported.`),
                 level: LogLevel.Error,
-            });
+            })
         }
-        return ((this._items[index].getValue(field) / this.getTotal(field)) * 100);
+        return ((this._items[index].getValue(field) / this.getTotal(field)) * 100)
     }
 }

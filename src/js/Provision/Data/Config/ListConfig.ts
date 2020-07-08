@@ -14,13 +14,13 @@ export default class ListConfig {
      * @param {any} item SharePoint list item
      */
     constructor(item: any) {
-        this.Id = item.Id;
-        this.SourceUrl = item.GtLccSourceUrl;
-        this.SourceList = item.GtLccSourceList;
-        this.DestinationList = item.GtLccDestinationList;
-        this.DestinationLibrary = item.GtLccDestinationLibrary;
-        this.Fields = item.GtLccFields.split(",");
-        this.Label = item.GtLccLabel;
-        this.Default = item.GtLccDefault;
+        this.Id = item.Id
+        this.SourceUrl = item.GtLccSourceUrl
+        this.SourceList = item.GtLccSourceList
+        this.DestinationList = item.GtLccDestinationList
+        this.DestinationLibrary = item.GtLccDestinationLibrary
+        this.Fields = item.GtLccFields.split(',')
+        this.Label = item.GtLccLabel
+        this.Default = item.GtLccDefault
     }
 }

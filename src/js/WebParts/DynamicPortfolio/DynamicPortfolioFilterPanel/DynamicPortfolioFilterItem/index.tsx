@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Checkbox } from "office-ui-fabric-react/lib/Checkbox";
-import IDynamicPortfolioFilterItemProps from "./IDynamicPortfolioFilterItemProps";
+import * as React from 'react'
+import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox'
+import IDynamicPortfolioFilterItemProps from './IDynamicPortfolioFilterItemProps'
 
 /**
  * DynamicPortfolioFilter Item
@@ -20,7 +20,7 @@ const DynamicPortfolioFilterItem = (props: IDynamicPortfolioFilterItemProps) => 
                     onChange={(e, checked) => props.onChanged(props.item, checked)} />
             </div>
         </li>
-    );
-};
+    )
+}
 
-export default DynamicPortfolioFilterItem;
+export default DynamicPortfolioFilterItem

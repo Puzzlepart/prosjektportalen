@@ -1,17 +1,17 @@
 //#region Imports
-import * as React from "react";
-import { ActionButton } from "office-ui-fabric-react/lib/Button";
-import INewProjectLinkProps, { NewProjectLinkDefaultProps } from "./INewProjectLinkProps";
-import INewProjectLinkState from "./INewProjectLinkState";
-import SecuredWebPart from "../@SecuredWebPart";
-import NewProjectForm, { NewProjectFormRenderMode } from "../NewProjectForm";
+import * as React from 'react'
+import { ActionButton } from 'office-ui-fabric-react/lib/Button'
+import INewProjectLinkProps, { NewProjectLinkDefaultProps } from './INewProjectLinkProps'
+import INewProjectLinkState from './INewProjectLinkState'
+import SecuredWebPart from '../@SecuredWebPart'
+import NewProjectForm, { NewProjectFormRenderMode } from '../NewProjectForm'
 //#endregion
 
 /**
  * New Project link
  */
 export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps, INewProjectLinkState> {
-    public static displayName = "NewProjectLink";
+    public static displayName = 'NewProjectLink';
     public static defaultProps = NewProjectLinkDefaultProps;
 
     /**
@@ -20,16 +20,16 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
      * @param {INewProjectLinkProps} props Props
      */
     constructor(props: INewProjectLinkProps) {
-        super(props, { listDataConfig: {} });
-        this._onDialogDismiss = this._onDialogDismiss.bind(this);
-        this._onOpenDialog = this._onOpenDialog.bind(this);
+        super(props, { listDataConfig: {} })
+        this._onDialogDismiss = this._onDialogDismiss.bind(this)
+        this._onOpenDialog = this._onOpenDialog.bind(this)
     }
 
     /**
      * Component did mount
      */
     public async componentDidMount(): Promise<void> {
-        await this.onInit();
+        await this.onInit()
     }
 
     public render(): JSX.Element {
@@ -43,7 +43,7 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
                     onClick={this._onOpenDialog} />
                 {this.renderDialog()}
             </div>
-        );
+        )
     }
 
     /**
@@ -58,21 +58,21 @@ export default class NewProjectLink extends SecuredWebPart<INewProjectLinkProps,
                     headerText={this.props.dlgHeaderText}
                     subHeaderText={this.props.dlgSubHeaderText}
                     creationModalTitle={this.props.creationModalTitle} />
-            );
+            )
         }
-        return null;
+        return null
     }
 
     private _onOpenDialog() {
-        this.setState({ showDialog: true });
+        this.setState({ showDialog: true })
     }
 
     private _onDialogDismiss() {
-        this.setState({ showDialog: false });
+        this.setState({ showDialog: false })
     }
 }
 
 export {
     INewProjectLinkProps,
     INewProjectLinkState,
-};
+}

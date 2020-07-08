@@ -1,5 +1,5 @@
-import { IBaseWebPartState } from "../@BaseWebPart";
-import { ProjectResourceAllocation, ProjectUser } from "./ResourceAllocationModels";
+import { IBaseWebPartState } from '../@BaseWebPart'
+import { ProjectResourceAllocation, ProjectUser } from './ResourceAllocationModels'
 
 export default interface IResourceAllocationState extends IBaseWebPartState {
     activeFilters: { [fieldName: string]: string[] };

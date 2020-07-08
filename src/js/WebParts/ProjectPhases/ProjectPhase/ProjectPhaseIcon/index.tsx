@@ -1,6 +1,6 @@
-import * as React from "react";
-import IProjectPhaseIconProps from "./IProjectPhaseIconProps";
-import ProjectPhaseIterations from "./ProjectPhaseIterations";
+import * as React from 'react'
+import IProjectPhaseIconProps from './IProjectPhaseIconProps'
+import ProjectPhaseIterations from './ProjectPhaseIterations'
 
 /**
  * Project Phase Icon
@@ -8,19 +8,19 @@ import ProjectPhaseIterations from "./ProjectPhaseIterations";
  * @param {IProjectPhaseIconProps} param0 Props
  */
 const ProjectPhaseIcon = (props: IProjectPhaseIconProps) => {
-    const isGate = props.phase.Type === "Gate";
+    const isGate = props.phase.Type === 'Gate'
     return (
-        <a href="#" style={{ position: "relative" }}>
-            <div className={["phaseIcon", ...props.classList].join(" ")}>
-                <span className={"phaseLetter"}>{props.phase.PhaseLetter}</span>
-                <span className={"phaseText"} hidden={isGate || !props.phase.ShowPhaseText}>{props.phase.Name}</span>
-                <span className={"phaseSubText"}></span>
+        <a href='#' style={{ position: 'relative' }}>
+            <div className={['phaseIcon', ...props.classList].join(' ')}>
+                <span className={'phaseLetter'}>{props.phase.PhaseLetter}</span>
+                <span className={'phaseText'} hidden={isGate || !props.phase.ShowPhaseText}>{props.phase.Name}</span>
+                <span className={'phaseSubText'}></span>
             </div>
             <ProjectPhaseIterations phase={props.phase} phaseIterations={props.phaseIterations} />
         </a>
-    );
-};
+    )
+}
 
-export default ProjectPhaseIcon;
-export { IProjectPhaseIconProps };
+export default ProjectPhaseIcon
+export { IProjectPhaseIconProps }
 

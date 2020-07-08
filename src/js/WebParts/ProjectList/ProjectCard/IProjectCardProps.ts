@@ -1,4 +1,4 @@
-import ProjectListModel from "../ProjectListModel";
+import ProjectListModel from '../ProjectListModel'
 
 interface IProjectCardProps {
     project: ProjectListModel;
@@ -10,4 +10,4 @@ interface IProjectCardProps {
     showProjectInfo: (evt: any) => void;
 }
 
-export default IProjectCardProps;
+export default IProjectCardProps

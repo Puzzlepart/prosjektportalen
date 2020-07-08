@@ -4,4 +4,4 @@ enum ExportReportStatus {
     HAS_EXPORTED,
 }
 
-export default ExportReportStatus;
+export default ExportReportStatus

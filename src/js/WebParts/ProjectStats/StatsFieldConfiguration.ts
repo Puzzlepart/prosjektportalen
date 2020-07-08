@@ -13,9 +13,9 @@ export default class StatsFieldConfiguration {
      * @param {string} dataType Data type
      */
     constructor(id: number, title: string, managedPropertyName: string, dataType: string) {
-        this.id = id;
-        this.title = title;
-        this.managedPropertyName = managedPropertyName;
-        this.dataType = dataType.toLowerCase();
+        this.id = id
+        this.title = title
+        this.managedPropertyName = managedPropertyName
+        this.dataType = dataType.toLowerCase()
     }
 }

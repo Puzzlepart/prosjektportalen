@@ -1,8 +1,8 @@
-import * as React from "react";
-import { Panel, IPanelProps } from "office-ui-fabric-react/lib/Panel";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import { IFilterProps, Filter } from "./Filter";
-import { IFilterItemProps } from "./FilterItem";
+import * as React from 'react'
+import { Panel, IPanelProps } from 'office-ui-fabric-react/lib/Panel'
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import { IFilterProps, Filter } from './Filter'
+import { IFilterItemProps } from './FilterItem'
 
 export interface IFilterPanelProps extends IPanelProps {
     filters: IFilterProps[];
@@ -17,8 +17,8 @@ export default class FilterPanel extends React.Component<IFilterPanelProps, IFil
     public static defaultProps: Partial<IFilterPanelProps> = {};
 
     constructor(props: IFilterPanelProps) {
-        super(props);
-        this.state = { filters: props.filters };
+        super(props)
+        this.state = { filters: props.filters }
     }
 
     /**
@@ -38,7 +38,7 @@ export default class FilterPanel extends React.Component<IFilterPanelProps, IFil
                     {this.renderFilters()}
                 </div>
             </Panel>
-        );
+        )
     }
 
     /**
@@ -47,8 +47,8 @@ export default class FilterPanel extends React.Component<IFilterPanelProps, IFil
     private renderFilters() {
         return this.props.filters
             .filter(props => props.items.length > 1)
-            .map((props, key) => <Filter key={key} {...props} onFilterChange={this.props.onFilterChange} />);
+            .map((props, key) => <Filter key={key} {...props} onFilterChange={this.props.onFilterChange} />)
     }
 }
 
-export { IFilterProps, IFilterItemProps };
+export { IFilterProps, IFilterItemProps }

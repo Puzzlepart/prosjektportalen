@@ -12,9 +12,9 @@ export default class DiceCalculatorElement {
      * @param {number} score Score
      */
     constructor(elements: string, fieldName: string, score = 0) {
-        this.elements = elements;
-        this.selection = "";
-        this.score = score;
-        this.fieldNames = [fieldName, `${fieldName}Score`];
+        this.elements = elements
+        this.selection = ''
+        this.score = score
+        this.fieldNames = [fieldName, `${fieldName}Score`]
     }
 }

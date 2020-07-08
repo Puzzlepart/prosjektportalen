@@ -1,6 +1,6 @@
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import IGroupByOption from "../../IGroupByOption";
-import IExcelExportConfig from "../../IExcelExportConfig";
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList'
+import IGroupByOption from '../../IGroupByOption'
+import IExcelExportConfig from '../../IExcelExportConfig'
 
 export default interface IListProps {
     items?: Array<any>;

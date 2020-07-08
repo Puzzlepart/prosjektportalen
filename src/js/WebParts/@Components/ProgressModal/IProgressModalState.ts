@@ -2,4 +2,4 @@ interface IProgressModalState {
     percentComplete: number;
 }
 
-export default IProgressModalState;
+export default IProgressModalState

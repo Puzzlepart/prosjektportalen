@@ -1,16 +1,15 @@
 //#region Imports
-import * as React from "react";
-import __ from "../../../Resources";
-import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { ContextualMenuItemType, IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import IResourceAllocationCommandBarProps from "./IResourceAllocationCommandBarProps";
-import IResourceAllocationCommandBarState from "./IResourceAllocationCommandBarState";
-import FilterPanel from "../../@Components/FilterPanel";
+import { CommandBar } from 'office-ui-fabric-react/lib/CommandBar'
+import { ContextualMenuItemType, IContextualMenuItem } from 'office-ui-fabric-react/lib/ContextualMenu'
+import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import * as React from 'react'
+import FilterPanel from '../../@Components/FilterPanel'
+import IResourceAllocationCommandBarProps from './IResourceAllocationCommandBarProps'
+import IResourceAllocationCommandBarState from './IResourceAllocationCommandBarState'
 //#endregion
 
 export default class ResourceAllocationCommandBar extends React.Component<IResourceAllocationCommandBarProps, IResourceAllocationCommandBarState> {
-    public static displayName = "ResourceAllocationCommandBar";
+    public static displayName = 'ResourceAllocationCommandBar';
 
     /**
      * Constructor
@@ -18,15 +17,15 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
      * @param {IResourceAllocationCommandBarProps} props Props
      */
     constructor(props: IResourceAllocationCommandBarProps) {
-        super(props);
-        this.state = { isFilterPanelOpen: false };
+        super(props)
+        this.state = { isFilterPanelOpen: false }
     }
 
     /**
      * Get items
      */
     protected getItems(): IContextualMenuItem[] {
-        return [];
+        return []
     }
 
     /**
@@ -34,25 +33,25 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
      */
     protected getFarItems(): IContextualMenuItem[] {
         return [{
-            key: "Filter",
-            name: "Filter",
+            key: 'Filter',
+            name: 'Filter',
             iconOnly: true,
-            iconProps: { iconName: "Filter" },
+            iconProps: { iconName: 'Filter' },
             itemType: ContextualMenuItemType.Header,
             onClick: this.onOpenFilerPanel,
-        }];
+        }]
     }
 
     @autobind
     protected onOpenFilerPanel(event?: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>) {
-        event.preventDefault();
-        event.stopPropagation();
-        this.setState((prevState: IResourceAllocationCommandBarState) => ({ isFilterPanelOpen: !prevState.isFilterPanelOpen }));
+        event.preventDefault()
+        event.stopPropagation()
+        this.setState((prevState: IResourceAllocationCommandBarState) => ({ isFilterPanelOpen: !prevState.isFilterPanelOpen }))
     }
 
     @autobind
     protected onDismissFilterPanel() {
-        this.setState({ isFilterPanelOpen: false });
+        this.setState({ isFilterPanelOpen: false })
     }
 
     /**
@@ -69,6 +68,6 @@ export default class ResourceAllocationCommandBar extends React.Component<IResou
                     filters={this.props.filters}
                     onFilterChange={this.props.onFilterChange} />
             </div>
-        );
+        )
     }
 }

@@ -1,36 +1,36 @@
-import { DefaultButton, PrimaryButton } from "office-ui-fabric-react/lib/Button";
-import { Dialog, DialogFooter, DialogType } from "office-ui-fabric-react/lib/Dialog";
-import { Dropdown } from "office-ui-fabric-react/lib/Dropdown";
-import { MessageBar } from "office-ui-fabric-react/lib/MessageBar";
-import { Modal } from "office-ui-fabric-react/lib/Modal";
-import { TextField } from "office-ui-fabric-react/lib/TextField";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
-import * as React from "react";
-import { ProjectModel } from "../../Model";
-import ProvisionWeb, { DoesWebExist } from "../../Provision";
-import { RetrieveListContentConfig } from "../../Provision/Data/Config";
-import ListConfig from "../../Provision/Data/Config/ListConfig";
-import { RetrieveProjectTypes } from "../../Provision/Data/ProjectTypes";
-import ProjectType from "../../Provision/Data/ProjectTypes/ProjectType";
-import Extension from "../../Provision/Extensions/Extension";
-import GetSelectableExtensions from "../../Provision/Extensions/GetSelectableExtensions";
-import GetSelectableTemplates from "../../Provision/Template/GetSelectableTemplates";
-import ITemplateFile from "../../Provision/Template/ITemplateFile";
-import __ from "../../Resources";
-import { GetSetting } from "../../Settings";
-import * as Util from "../../Util";
-import CreationModal from "./CreationModal";
-import INewProjectFormConfig from "./INewProjectFormConfig";
-import INewProjectFormProps, { NewProjectFormDefaultProps } from "./INewProjectFormProps";
-import INewProjectFormState, { ProvisionStatus } from "./INewProjectFormState";
-import NewProjectFormRenderMode from "./NewProjectFormRenderMode";
-import NewProjectFormSettingsSection from "./NewProjectFormSettingsSection";
+import { DefaultButton, PrimaryButton } from 'office-ui-fabric-react/lib/Button'
+import { Dialog, DialogFooter, DialogType } from 'office-ui-fabric-react/lib/Dialog'
+import { Dropdown } from 'office-ui-fabric-react/lib/Dropdown'
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar'
+import { Modal } from 'office-ui-fabric-react/lib/Modal'
+import { TextField } from 'office-ui-fabric-react/lib/TextField'
+import { autobind } from 'office-ui-fabric-react/lib/Utilities'
+import * as React from 'react'
+import { ProjectModel } from '../../Model'
+import ProvisionWeb, { DoesWebExist } from '../../Provision'
+import { RetrieveListContentConfig } from '../../Provision/Data/Config'
+import ListConfig from '../../Provision/Data/Config/ListConfig'
+import { RetrieveProjectTypes } from '../../Provision/Data/ProjectTypes'
+import ProjectType from '../../Provision/Data/ProjectTypes/ProjectType'
+import Extension from '../../Provision/Extensions/Extension'
+import GetSelectableExtensions from '../../Provision/Extensions/GetSelectableExtensions'
+import GetSelectableTemplates from '../../Provision/Template/GetSelectableTemplates'
+import ITemplateFile from '../../Provision/Template/ITemplateFile'
+import __ from '../../Resources'
+import { GetSetting } from '../../Settings'
+import * as Util from '../../Util'
+import CreationModal from './CreationModal'
+import INewProjectFormConfig from './INewProjectFormConfig'
+import INewProjectFormProps, { NewProjectFormDefaultProps } from './INewProjectFormProps'
+import INewProjectFormState, { ProvisionStatus } from './INewProjectFormState'
+import NewProjectFormRenderMode from './NewProjectFormRenderMode'
+import NewProjectFormSettingsSection from './NewProjectFormSettingsSection'
 
 /**
  * @class NewProjectForm
  */
 export default class NewProjectForm extends React.Component<INewProjectFormProps, INewProjectFormState> {
-    public static displayName = "NewProjectForm";
+    public static displayName = 'NewProjectForm';
     public static defaultProps = NewProjectFormDefaultProps;
     private doesWebExistDelay: any;
 
@@ -40,36 +40,38 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      * @param {INewProjectFormProps} props Props
      */
     constructor(props: INewProjectFormProps) {
-        super(props);
+        super(props)
         this.state = {
             isLoading: true,
             model: new ProjectModel(),
             config: { templates: [] },
             errorMessages: {},
             provisioning: { status: ProvisionStatus.Idle },
-        };
+        }
     }
 
     public async componentDidMount() {
-        const config = await this.getRequiredConfig();
-        let model = this.state.model;
-        model.includeContent = config.listData.filter(ld => ld.Default);
-        model.extensions = config.extensions.filter(ext => ext.IsEnabled);
-        model.inheritPermissions = config.inheritPermissions;
-        this.setState({ isLoading: false, config, model, selectedTemplate: config.defaultTemplate });
+        const config = await this.getRequiredConfig()
+        const model = this.state.model
+        model.includeContent = config.listData.filter(ld => ld.Default)
+        model.extensions = config.extensions.filter(ext => ext.IsEnabled)
+        model.inheritPermissions = config.inheritPermissions
+        this.setState({ isLoading: false, config, model, selectedTemplate: config.defaultTemplate })
     }
 
     public render(): React.ReactElement<INewProjectFormProps> {
+        // eslint-disable-next-line default-case
         switch (this.state.provisioning.status) {
             case ProvisionStatus.Idle: {
+                // eslint-disable-next-line default-case
                 switch (this.props.renderMode) {
                     case NewProjectFormRenderMode.Default: {
                         return (
                             <div className={this.props.className} style={this.props.style}>
-                                <div className="ms-font-l" style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
+                                <div className='ms-font-l' style={{ paddingBottom: 15 }}>{this.props.subHeaderText}</div>
                                 {this.renderInner()}
                             </div>
-                        );
+                        )
                     }
                     case NewProjectFormRenderMode.Dialog: {
                         return (
@@ -81,11 +83,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                                 onDismiss={this.props.onDialogDismiss}>
                                 {this.renderInner()}
                             </Dialog >
-                        );
+                        )
                     }
                 }
             }
-                break;
+                break
             case ProvisionStatus.Creating: {
                 return (
                     <CreationModal
@@ -94,7 +96,7 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         isDarkOverlay={true}
                         progressLabel={this.state.provisioning.step}
                         progressDescription={this.state.provisioning.progress} />
-                );
+                )
             }
             case ProvisionStatus.Error: {
                 return (
@@ -103,13 +105,13 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                         isBlocking={false}
                         isDarkOverlay={true}
                         onDismiss={this.props.onDialogDismiss}
-                        containerClassName="pp-modal" >
+                        containerClassName='pp-modal' >
                         <div style={{ padding: 50 }}>
-                            <div style={{ marginBottom: 25 }} className="ms-font-xl">{__.getResource("ProvisionWeb_Failed")}</div>
-                            <div className="ms-font-m">{__.getResource("String_ContactAdmin")}</div>
+                            <div style={{ marginBottom: 25 }} className='ms-font-xl'>{__.getResource('ProvisionWeb_Failed')}</div>
+                            <div className='ms-font-m'>{__.getResource('String_ContactAdmin')}</div>
                         </div>
                     </Modal>
-                );
+                )
             }
         }
     }
@@ -132,47 +134,47 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                 )}
                 {this.renderFooter()}
             </div>
-        );
+        )
     }
 
     /**
      * Render form input section
      */
     private renderFormInputSection(): React.ReactElement<INewProjectFormProps> {
-        const { inputContainerStyle } = this.props;
-        const { errorMessages, model, selectedTemplate, config } = this.state;
+        const { inputContainerStyle } = this.props
+        const { errorMessages, model, selectedTemplate, config } = this.state
         return (
             <section>
                 <div style={inputContainerStyle}>
                     <TextField
-                        autoComplete="off"
-                        placeholder={__.getResource("NewProjectForm_TitlePlaceholder")}
-                        onChanged={newValue => this.onFormInputChange("title", newValue)}
+                        autoComplete='off'
+                        placeholder={__.getResource('NewProjectForm_TitlePlaceholder')}
+                        onChanged={newValue => this.onFormInputChange('title', newValue)}
                         value={model.title}
                         errorMessage={errorMessages.Title} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
-                        autoComplete="off"
-                        placeholder={__.getResource("NewProjectForm_DescriptionPlaceholder")}
+                        autoComplete='off'
+                        placeholder={__.getResource('NewProjectForm_DescriptionPlaceholder')}
                         multiline
                         autoAdjustHeight
-                        onChanged={newValue => this.onFormInputChange("description", newValue)}
+                        onChanged={newValue => this.onFormInputChange('description', newValue)}
                         value={model.description}
                         errorMessage={errorMessages.Description} />
                 </div>
                 <div style={inputContainerStyle}>
                     <TextField
-                        autoComplete="off"
-                        placeholder={__.getResource("NewProjectForm_UrlPlaceholder")}
-                        onChanged={newValue => this.onFormInputChange("url", newValue)}
+                        autoComplete='off'
+                        placeholder={__.getResource('NewProjectForm_UrlPlaceholder')}
+                        onChanged={newValue => this.onFormInputChange('url', newValue)}
                         value={model.url}
                         errorMessage={errorMessages.Url} />
                 </div>
                 {(config.templates && config.templates.length > 1 && config.siteTemplateSelectorEnabled) && (
                     <div style={inputContainerStyle}>
                         <Dropdown
-                            defaultSelectedKey={config.defaultTemplate ? config.defaultTemplate.FileRef : ""}
+                            defaultSelectedKey={config.defaultTemplate ? config.defaultTemplate.FileRef : ''}
                             options={config.templates.map(t => ({ key: t.FileRef, text: t.Title, data: t }))}
                             onChanged={opt => this.setState({ selectedTemplate: opt.data })} />
                         <div style={{ marginTop: 10 }} hidden={!selectedTemplate.Comments || !config.siteTemplateSelectorEnabled}>
@@ -181,34 +183,35 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
                     </div>
                 )}
             </section >
-        );
+        )
     }
 
     /**
      * Render footer
      */
     private renderFooter(): React.ReactElement<INewProjectFormProps> {
+        // eslint-disable-next-line default-case
         switch (this.props.renderMode) {
             case NewProjectFormRenderMode.Default: {
                 return (
                     <div style={{ paddingTop: 15 }}>
-                        <div style={{ float: "right" }}>
+                        <div style={{ float: 'right' }}>
                             <PrimaryButton
                                 onClick={this.onSubmitForm}
-                                disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
+                                disabled={!this.state.formValid}>{__.getResource('String_Create')}</PrimaryButton>
                         </div>
                     </div>
-                );
+                )
             }
             case NewProjectFormRenderMode.Dialog: {
                 return (
                     <DialogFooter>
                         <PrimaryButton
                             onClick={this.onSubmitForm}
-                            disabled={!this.state.formValid}>{__.getResource("String_Create")}</PrimaryButton>
-                        <DefaultButton onClick={this.props.onDialogDismiss}>{__.getResource("String_Close")}</DefaultButton>
+                            disabled={!this.state.formValid}>{__.getResource('String_Create')}</PrimaryButton>
+                        <DefaultButton onClick={this.props.onDialogDismiss}>{__.getResource('String_Close')}</DefaultButton>
                     </DialogFooter>
-                );
+                )
             }
         }
     }
@@ -217,34 +220,35 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      *
      */
     @autobind
-    private onFormInputChange(inputName: "title" | "description" | "url", newValue: string) {
-        const prevModel = this.state.model;
-        let model = this.state.model.clone();
-        model[inputName] = newValue;
+    private onFormInputChange(inputName: 'title' | 'description' | 'url', newValue: string) {
+        const prevModel = this.state.model
+        const model = this.state.model.clone()
+        model[inputName] = newValue
+        // eslint-disable-next-line default-case
         switch (inputName) {
-            case "title": {
-                model.url = Util.cleanString(newValue, this.props.maxUrlLength);
+            case 'title': {
+                model.url = Util.cleanString(newValue, this.props.maxUrlLength)
             }
         }
         this.setState({ model }, () => {
             if (prevModel.url !== model.url) {
                 if (this.doesWebExistDelay) {
-                    clearTimeout(this.doesWebExistDelay);
-                    this.doesWebExistDelay = null;
+                    clearTimeout(this.doesWebExistDelay)
+                    this.doesWebExistDelay = null
                 }
                 this.doesWebExistDelay = setTimeout(async () => {
                     try {
-                        const doesExist = await DoesWebExist(model.url);
-                        const errorMessages = { ...this.state.errorMessages };
-                        errorMessages.Url = doesExist ? __.getResource("NewProjectForm_UrlPlaceholderAlreadyInUse") : null;
-                        const formValid = (model.title.length >= this.props.titleMinLength) && !doesExist;
-                        this.setState({ errorMessages, formValid });
+                        const doesExist = await DoesWebExist(model.url)
+                        const errorMessages = { ...this.state.errorMessages }
+                        errorMessages.Url = doesExist ? __.getResource('NewProjectForm_UrlPlaceholderAlreadyInUse') : null
+                        const formValid = (model.title.length >= this.props.titleMinLength) && !doesExist
+                        this.setState({ errorMessages, formValid })
                     } catch (err) {
                         // Catch err
                     }
-                }, this.props.doesWebExistDelayMs);
+                }, this.props.doesWebExistDelayMs)
             }
-        });
+        })
     }
 
     /**
@@ -256,14 +260,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     @autobind
     private onListContentChanged(lc: ListConfig, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
-            let model = prevState.model.clone();
+            const model = prevState.model.clone()
             if (checked) {
-                model.includeContent.push(lc);
+                model.includeContent.push(lc)
             } else {
-                model.includeContent.splice(model.includeContent.indexOf(lc), 1);
+                model.includeContent.splice(model.includeContent.indexOf(lc), 1)
             }
-            return { model };
-        });
+            return { model }
+        })
     }
 
     /**
@@ -273,18 +277,18 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     @autobind
     private onProjectTypeChanged(projectType: ProjectType) {
-        let model = this.state.model.clone();
-        model.projectType = projectType;
-        model.includeContent = this.state.config.listData.filter(ld => ld.Default);
-        model.extensions = this.state.config.extensions.filter(ext => ext.IsEnabled);
-        let selectedTemplate = this.state.config.defaultTemplate;
+        const model = this.state.model.clone()
+        model.projectType = projectType
+        model.includeContent = this.state.config.listData.filter(ld => ld.Default)
+        model.extensions = this.state.config.extensions.filter(ext => ext.IsEnabled)
+        let selectedTemplate = this.state.config.defaultTemplate
 
         if (projectType) {
-            model.includeContent = this.state.config.listData.filter(l => projectType.listContentIds.indexOf(l.Id) !== -1);
-            model.extensions = this.state.config.extensions.filter(l => projectType.extensionIds.indexOf(l.Id) !== -1);
-            selectedTemplate = this.state.config.templates.filter(t => t.Id === projectType.templateId)[0];
+            model.includeContent = this.state.config.listData.filter(l => projectType.listContentIds.indexOf(l.Id) !== -1)
+            model.extensions = this.state.config.extensions.filter(l => projectType.extensionIds.indexOf(l.Id) !== -1)
+            selectedTemplate = this.state.config.templates.filter(t => t.Id === projectType.templateId)[0]
         }
-        this.setState({ model, selectedTemplate });
+        this.setState({ model, selectedTemplate })
     }
 
     /**
@@ -296,14 +300,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
     @autobind
     private onExtensionsChanged(extension: Extension, checked: boolean) {
         this.setState((prevState: INewProjectFormState) => {
-            let model = prevState.model.clone();
+            const model = prevState.model.clone()
             if (checked) {
-                model.extensions.push(extension);
+                model.extensions.push(extension)
             } else {
-                model.extensions.splice(model.extensions.indexOf(extension), 1);
+                model.extensions.splice(model.extensions.indexOf(extension), 1)
             }
-            return { model };
-        });
+            return { model }
+        })
     }
 
     /**
@@ -311,14 +315,14 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
      */
     @autobind
     private async onSubmitForm() {
-        this.setState({ provisioning: { status: ProvisionStatus.Creating } });
+        this.setState({ provisioning: { status: ProvisionStatus.Creating } })
         try {
             const redirectUrl = await ProvisionWeb(this.state.model, (step, progress) => {
-                this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } });
-            }, this.state.selectedTemplate);
-            document.location.href = redirectUrl;
+                this.setState({ provisioning: { status: ProvisionStatus.Creating, step, progress } })
+            }, this.state.selectedTemplate)
+            document.location.href = redirectUrl
         } catch {
-            this.setState({ provisioning: { status: ProvisionStatus.Error } });
+            this.setState({ provisioning: { status: ProvisionStatus.Error } })
         }
     }
 
@@ -333,16 +337,16 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             RetrieveProjectTypes(),
             GetSelectableExtensions(),
             GetSelectableTemplates(),
-            GetSetting("PROJECT_INHERIT_PERMISSIONS", true),
-            GetSetting("SITE_TEMPLATE_SELECTOR_ENABLED", true),
-        ]);
-        let defaultTemplate: ITemplateFile;
-        const listDataKeys = Object.keys(listData);
-        const listProjectTypesKeys = Object.keys(listProjectTypes);
-        const showSettings = this.props.showSettings && listDataKeys.length > 0;
-        const showProjectTypes = this.props.showProjectTypes && listProjectTypesKeys.length > 0;
+            GetSetting('PROJECT_INHERIT_PERMISSIONS', true),
+            GetSetting('SITE_TEMPLATE_SELECTOR_ENABLED', true),
+        ])
+        let defaultTemplate: ITemplateFile
+        const listDataKeys = Object.keys(listData)
+        const listProjectTypesKeys = Object.keys(listProjectTypes)
+        const showSettings = this.props.showSettings && listDataKeys.length > 0
+        const showProjectTypes = this.props.showProjectTypes && listProjectTypesKeys.length > 0
         if (templates.length > 0) {
-            [defaultTemplate] = templates.filter(t => t.GtIsDefault);
+            [defaultTemplate] = templates.filter(t => t.GtIsDefault)
         }
         return {
             showSettings,
@@ -352,11 +356,11 @@ export default class NewProjectForm extends React.Component<INewProjectFormProps
             extensions,
             templates,
             defaultTemplate,
-            inheritPermissions: inheritPermissionsString === "on",
-            siteTemplateSelectorEnabled: siteTemplateSelectorEnabledString === "on",
-        };
+            inheritPermissions: inheritPermissionsString === 'on',
+            siteTemplateSelectorEnabled: siteTemplateSelectorEnabledString === 'on',
+        }
     }
 }
 
-export { NewProjectFormRenderMode, INewProjectFormProps, INewProjectFormState };
+export { NewProjectFormRenderMode, INewProjectFormProps, INewProjectFormState }
 

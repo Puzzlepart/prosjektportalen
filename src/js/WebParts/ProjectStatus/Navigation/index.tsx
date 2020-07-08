@@ -1,18 +1,18 @@
-import * as React from "react";
-import __ from "../../../Resources";
-import { Icon } from "office-ui-fabric-react/lib/Icon";
-import { Link } from "react-scroll";
-import ExportReport from "../ExportReport";
-import INavigationProps from "./INavigationProps";
+import * as React from 'react'
+import __ from '../../../Resources'
+import { Icon } from 'office-ui-fabric-react/lib/Icon'
+import { Link } from 'react-scroll'
+import ExportReport from '../ExportReport'
+import INavigationProps from './INavigationProps'
 
 const Navigation = ({ project, sections, exportType }: INavigationProps) => {
     return (
-        <div className="ms-Grid nav-status-container">
-            <div className="nav-details ms-Grid-row">
-                <div className="ms-Grid-col ms-md6">
-                    <h2 className="status-page-header">{`${__.getResource("String_StatusReport")}: ${_spPageContextInfo.webTitle}`}</h2>
+        <div className='ms-Grid nav-status-container'>
+            <div className='nav-details ms-Grid-row'>
+                <div className='ms-Grid-col ms-md6'>
+                    <h2 className='status-page-header'>{`${__.getResource('String_StatusReport')}: ${_spPageContextInfo.webTitle}`}</h2>
                 </div>
-                <div className=" ms-Grid-col ms-md6">
+                <div className=' ms-Grid-col ms-md6'>
                     <ExportReport
                         exportType={exportType}
                         project={project}
@@ -20,13 +20,13 @@ const Navigation = ({ project, sections, exportType }: INavigationProps) => {
                 </div>
             </div>
             <div
-                className="nav-links"
+                className='nav-links'
                 hidden={sections.length === 0}>
                 {sections.map((section, key) => (
                     <Link
                         key={key}
-                        className="nav-link"
-                        activeClass="active"
+                        className='nav-link'
+                        activeClass='active'
                         to={`section-${key}`}
                         offset={-100}
                         spy={true}
@@ -38,7 +38,7 @@ const Navigation = ({ project, sections, exportType }: INavigationProps) => {
                 ))}
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Navigation;
+export default Navigation

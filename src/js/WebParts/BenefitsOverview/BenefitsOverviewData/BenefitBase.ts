@@ -1,4 +1,4 @@
-import { IBenefitsSearchResult } from "./IBenefitsSearchResult";
+import { IBenefitsSearchResult } from './IBenefitsSearchResult'
 
 export class BenefitBase {
     public path: string;
@@ -9,11 +9,11 @@ export class BenefitBase {
     public webId: string;
 
     constructor(result: IBenefitsSearchResult) {
-        this.path = result.Path;
-        this.webUrl = this.path.split("/Lists/")[0];
-        this.title = result.Title !== "DispForm.aspx" ? result.Title : "";
-        this.siteTitle = result.SiteTitle;
-        this.id = parseInt(result.ListItemId, 10);
-        this.webId = result.WebId;
+        this.path = result.Path
+        this.webUrl = this.path.split('/Lists/')[0]
+        this.title = result.Title !== 'DispForm.aspx' ? result.Title : ''
+        this.siteTitle = result.SiteTitle
+        this.id = parseInt(result.ListItemId, 10)
+        this.webId = result.WebId
     }
 }

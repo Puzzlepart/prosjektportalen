@@ -1,4 +1,4 @@
-import * as PropertyBag from "./PropertyBag";
+import * as PropertyBag from './PropertyBag'
 
 /**
  * Stamps version in the specified container
@@ -8,10 +8,10 @@ import * as PropertyBag from "./PropertyBag";
  * @param {string} prefix Prefix
  * @param {number} spacingBottom Spacing bottom in px
  */
-export default async function StampVersion(containerId: string, versionKey: string, prefix = "v", spacingBottom = 20): Promise<void> {
-    const versionString = await PropertyBag.GetProperty(versionKey, _spPageContextInfo.webAbsoluteUrl);
-    const container = document.getElementById(containerId);
+export default async function StampVersion(containerId: string, versionKey: string, prefix = 'v', spacingBottom = 20): Promise<void> {
+    const versionString = await PropertyBag.GetProperty(versionKey, _spPageContextInfo.webAbsoluteUrl)
+    const container = document.getElementById(containerId)
     if (container) {
-        container.innerHTML += `<div class='ms-metadata' style='font-size: 10px; position: fixed; bottom: ${spacingBottom}px; left 15px;'>${prefix}${versionString}</div>`;
+        container.innerHTML += `<div class='ms-metadata' style='font-size: 10px; position: fixed; bottom: ${spacingBottom}px; left 15px;'>${prefix}${versionString}</div>`
     }
 }

@@ -1,4 +1,4 @@
-import IToggleElement from "./IToggleElement";
+import IToggleElement from './IToggleElement'
 
 export default interface IChromeTitleProps extends React.HTMLAttributes<HTMLElement> {
     title: string;

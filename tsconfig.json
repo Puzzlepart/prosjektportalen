@@ -20,8 +20,7 @@
             "sharepoint",
             "node",
             "react",
-            "webpack-variables",
-            "office-ui-fabric-react-overrides"
+            "webpack-variables"
         ],
         "noImplicitAny": false,
         "allowUnreachableCode": true,
