@@ -12,3 +12,4 @@ src/js/Resources/*.json
 src/js/Preferences/Preferences.json
 package-lock.json
 .awcache
+.DS_Store
