@@ -17,8 +17,9 @@
         "release": "webpack --mode production && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "lint": "eslint --ext .ts,.tsx ./src/js --color --fix",
         "postversion": "npm run release",
-        "prerelease": "gulp clean && gulp buildTheme && gulp buildJsonResources && gulp buildJsonPreferences",
-        "prewatch": "gulp buildJsonResources && gulp buildJsonPreferences"
+        "prerelease": "npm run buildAssets",
+        "prewatch": "npm run buildAssets",
+        "buildAssets": "gulp clean && gulp buildTheme && gulp buildJsonResources && gulp buildJsonPreferences"
     },
     "dependencies": {
         "@pnp/common": "1.3.11",
