@@ -1,7 +1,4 @@
 'use strict';
-var autoprefixer = require('autoprefixer-stylus'),
-    pkg = require("../package.json");
-
 module.exports = {
     paths: {
         license: "license.md",
@@ -18,18 +15,11 @@ module.exports = {
         scripts: "./.scripts",
         spAssetsFolder: "siteassets/pp",
     },
-    dist: {
-        js: "./dist/js/**/*.js",
-    },
     globs: {
         build: "./build/**/*",
         manualConf: "./manual-conf/**/*",
         scripts: "./.scripts/**/*",
         js: "./src/js/**/*.ts*",
-        styles: "./src/**/*.styl",
-        stylesMain: ["./src/*/pp.main.styl"],
-        lib: ["./lib/**/*.js", "./lib/**/**/*.js"],
-        test: ["./lib/js/_tests/**/*.js"],
         templates: "./templates/**/*",
         theme: "./templates/root/Theme/Project.spcolor",
         resxJson: "./src/js/**/*.json",

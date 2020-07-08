@@ -1,16 +1,16 @@
 'use strict'
-var gulp = require('gulp'),
-    path = require('path'),
-    plumber = require('gulp-plumber'),
-    watch = require('gulp-watch'),
-    spsave = require('gulp-spsave'),
-    livereload = require('gulp-livereload'),
-    config = require('./@configuration.js')
+const gulp = require('gulp')
+const path = require('path')
+const plumber = require('gulp-plumber')
+const watch = require('gulp-watch')
+const spsave = require('gulp-spsave')
+const livereload = require('gulp-livereload')
+const config = require('./@configuration.js')
 
 
 gulp.task('watchUpload', () => {
     livereload.listen({ start: true })
-    watch(config.dist.js).on('change', (glob) => {
+    watch(config.paths.dist).on('change', (glob) => {
         uploadFileToSp(
             glob,
             require('./@env.js').default,
