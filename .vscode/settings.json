@@ -1,5 +1,10 @@
 {
     "files.exclude": {
+        "node_modules": true,
+        "lib": true,
+        "dist": true,
+        "_templates": true,
+        ".awcache": true
     },
     "files.associations": {
         "**/webparts/**/*.txt": "xml",
