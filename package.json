@@ -1,6 +1,6 @@
 {
     "name": "prosjektportalen",
-    "version": "2.6.11",
+    "version": "2.6.12",
     "description": "Prosjektportalen er et prosjektstyringsverktøy for SharePoint basert på prosjektveiviseren",
     "homepage": "https://github.com/Puzzlepart/prosjektportalen",
     "repository": {
@@ -14,9 +14,10 @@
         "watch": "concurrently \"webpack --mode development --watch\" \"gulp watchUpload\"",
         "buildPnpTemplateFiles": "gulp copyPnpTemplates && gulp localizePnpTemplates && gulp copyResourcesToAssetsTemplate && npm run buildSiteTemplates && gulp copyThirdPartyLibsToTemplate && gulp stampVersionToTemplates",
         "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
-        "release": "gulp clean && webpack --mode production && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
+        "release": "webpack --mode production && npm run buildPnpTemplateFiles && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "lint": "eslint --ext .ts,.tsx ./src/js --color --fix",
         "postversion": "npm run release",
+        "prerelease": "gulp clean && gulp buildTheme && gulp buildJsonResources && gulp buildJsonPreferences",
         "prewatch": "gulp buildJsonResources && gulp buildJsonPreferences"
     },
     "dependencies": {
