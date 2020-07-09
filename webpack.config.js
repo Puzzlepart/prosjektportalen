@@ -28,10 +28,7 @@ module.exports = () => ({
     devtool: 'source-map',
     entry: {
         main: [
-            'core-js/es6/map',
-            'core-js/es6/set',
-            'core-js/fn/object/assign',
-            'core-js/es6/promise',
+            'core-js/stable',
             'whatwg-fetch',
             '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
