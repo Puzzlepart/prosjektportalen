@@ -40,7 +40,10 @@ gulp.task('buildPnpTemplateFiles', done => {
 gulp.task('buildLib', ['copyResourcesToLib'], () => {
     const project = typescript.createProject('tsconfig.json', { declaration: true })
     const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()))
-    return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))])
+    return merge([
+        built.dts.pipe(gulp.dest(config.paths.lib)),
+        built.js.pipe(gulp.dest(config.paths.lib))
+    ])
 })
 
 gulp.task('buildAssets', done => {

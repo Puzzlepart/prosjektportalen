@@ -3,9 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
 const { CheckerPlugin } = require('awesome-typescript-loader')
-const LiveReloadPlugin = require('webpack-livereload-plugin')
-const libBasePath = path.join(__dirname, 'lib')
-const distBasePath = path.join(__dirname, 'dist/js')
+const dest = path.join(__dirname, 'dist/js')
 
 /**
  * Presets for @babel
@@ -24,9 +22,8 @@ const presets = {
         }]
 }
 
-module.exports = () => ({
-    stats: 'minimal',
-    devtool: 'source-map',
+module.exports = {
+    devtol: 'none',
     entry: {
         main: [
             'core-js/stable',
@@ -36,20 +33,13 @@ module.exports = () => ({
             './src/js/index.tsx',
         ],
     },
-    devServer: {
-        open: false,
-        disableHostCheck: true,
-        compress: true,
-        port: 9001,
-    },
     output: {
-        path: distBasePath,
+        path: dest,
         filename: 'pp.[name].js',
         libraryTarget: 'umd',
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json'],
-        alias: { model: path.resolve(libBasePath, 'Model/index.js') }
+        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json']
     },
     module: {
         rules: [
@@ -96,6 +86,5 @@ module.exports = () => ({
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
-        new LiveReloadPlugin({})
     ]
-})
+}

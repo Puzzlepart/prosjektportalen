@@ -11,7 +11,7 @@
     "author": "@tarjeieo, @olemp",
     "main": "lib/index.js",
     "scripts": {
-        "watch": "webpack-dev-server --mode development",
+        "watch": "webpack-dev-server --config webpack.config.dev.js",
         "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
         "release": "webpack --mode production && gulp buildPnpTemplateFiles && npm run buildSiteTemplates && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "lint": "eslint --ext .ts,.tsx ./src/js --color --fix",
@@ -105,6 +105,7 @@
         "webpack-cli": "3.3.12",
         "webpack-dev-server": "^3.11.0",
         "webpack-livereload-plugin": "^2.3.0",
+        "webpack-merge": "^5.0.9",
         "whatwg-fetch": "3.1.1",
         "xlsx": "0.16.3",
         "yargs": "15.4.0"
