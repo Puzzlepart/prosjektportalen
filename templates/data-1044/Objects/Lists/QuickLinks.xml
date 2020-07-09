@@ -3,6 +3,7 @@
     <pnp:DataRows UpdateBehavior="Overwrite" KeyColumn="URL">
         <pnp:DataRow>
             <pnp:DataValue FieldName="URL">https://www.prosjektveiviseren.no/,Prosjektveiviseren | En felles prosjektmodell for offentlig sektor - Difi</pnp:DataValue>
+            <pnp:DataValue FieldName="Comments"></pnp:DataValue>
         </pnp:DataRow>
     </pnp:DataRows>
 </pnp:ListInstance>
