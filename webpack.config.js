@@ -37,9 +37,8 @@ module.exports = () => ({
         ],
     },
     devServer: {
+        open: true,
         disableHostCheck: true,
-        contentBasePublicPath: '/',
-        contentBase: distBasePath,
         compress: true,
         port: 9001,
     },
