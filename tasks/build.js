@@ -57,35 +57,9 @@ gulp.task('buildAssets', done => {
     )
 })
 
-// gulp.task('buildJsonResources', () => {
-//     return gulp.src(config.globs.resx)
-//         .pipe(resx2())
-//         .pipe(rename({ extname: '.json' }))
-//         .pipe(gulp.dest(path.join(config.paths.source, 'js', 'Resources')))
-// })
-
-
 gulp.task('buildJsonResources', function () {
-    gulp.src(config.globs.resx) //Pipe one or more files at a time
-        .pipe(resxConverter.convert({
-            //Include this for JSON
-            json: {},
-            //Include this for TypeScript
-            typescript: {
-                //Disables support for culture names in file name (ex: File.en-US.resx or File.en.resx).
-                //Default: false
-                culturesDisabled: false,
-                //Sets the namespace to be used.
-                //Default: Resx
-                namespace: 'Resx',
-                //Enables converting to .ts files.
-                //Default: false
-                source: true,
-                //Enables converting to .d.ts files
-                //Default: false
-                declaration: false
-            },
-        }))
+    gulp.src(config.globs.resx)
+        .pipe(resxConverter.convert({ json: {} }))
         .pipe(gulp.dest(path.join(config.paths.source, 'js', 'Resources')))
 });
 
@@ -107,7 +81,7 @@ gulp.task('buildTheme', () => {
 gulp.task('stampVersionToTemplates', done => {
     const src = gulp.src(path.join(config.paths.templatesTemp, '**', '*.xml'))
     git.hash(hash => {
-        es.concat(src.pipe(flatmap((stream, file) => {
+        es.concat(src.pipe(flatmap(stream => {
             return stream
                 .pipe(replaceVersionToken(hash))
                 .pipe(gulp.dest(config.paths.templatesTemp))
