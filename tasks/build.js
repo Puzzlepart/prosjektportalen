@@ -19,6 +19,7 @@ const bom = require('gulp-bom')
 const pkg = require('../package.json')
 const sequence = require('run-sequence')
 const argv = require('yargs').argv
+const resxConverter = require('gulp-resx-convert');
 
 //#region Helpers
 function replaceVersionToken(hash) {
@@ -56,12 +57,37 @@ gulp.task('buildAssets', done => {
     )
 })
 
-gulp.task('buildJsonResources', () => {
-    return gulp.src(config.globs.resx)
-        .pipe(resx2())
-        .pipe(rename({ extname: '.json' }))
+// gulp.task('buildJsonResources', () => {
+//     return gulp.src(config.globs.resx)
+//         .pipe(resx2())
+//         .pipe(rename({ extname: '.json' }))
+//         .pipe(gulp.dest(path.join(config.paths.source, 'js', 'Resources')))
+// })
+
+
+gulp.task('buildJsonResources', function () {
+    gulp.src(config.globs.resx) //Pipe one or more files at a time
+        .pipe(resxConverter.convert({
+            //Include this for JSON
+            json: {},
+            //Include this for TypeScript
+            typescript: {
+                //Disables support for culture names in file name (ex: File.en-US.resx or File.en.resx).
+                //Default: false
+                culturesDisabled: false,
+                //Sets the namespace to be used.
+                //Default: Resx
+                namespace: 'Resx',
+                //Enables converting to .ts files.
+                //Default: false
+                source: true,
+                //Enables converting to .d.ts files
+                //Default: false
+                declaration: false
+            },
+        }))
         .pipe(gulp.dest(path.join(config.paths.source, 'js', 'Resources')))
-})
+});
 
 gulp.task('buildJsonPreferences', () => {
     return gulp.src(config.globs.preferences)
