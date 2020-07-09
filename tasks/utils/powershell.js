@@ -4,7 +4,7 @@ const path = require('path')
 const format = require('string-format')
 const config = require('../@configuration.js')
 
-const exports = module.exports = {}
+var exports = module.exports = {}
 
 exports.execute = (file, args) => {
     return new Promise((resolve, reject) => {

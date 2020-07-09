@@ -1,13 +1,13 @@
-'use strict';
-var fs = require('fs');
+'use strict'
+const fs = require('fs')
 
-var exports = module.exports = {};
+var exports = module.exports = {}
 
 exports.write = (path, contents) => {
     return new Promise((resolve, reject) => {
         fs.writeFile(path, contents, err => {
-            if (err) reject(err);
-            resolve();
-        });
-    });
-};
+            if (err) reject(err)
+            resolve()
+        })
+    })
+}

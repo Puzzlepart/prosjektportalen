@@ -23,7 +23,7 @@ const presets = {
 }
 
 module.exports = {
-    devtol: 'none',
+    devtool: 'none',
     entry: {
         main: [
             'core-js/stable',

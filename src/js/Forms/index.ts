@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 import __ from '../Resources'
 import * as Util from '../Util'
 import { IBaseFormModifications } from './Base'
@@ -16,7 +17,7 @@ formModifications[__.getResource('Lists_BenefitsFollowup_WrongSpelling_Url')] = 
 /**
  * Initialize form modifications and web parts
  */
-export const InitializeModifications = () => {
+export const initializeFormModifications = (): void => {
     const urlParts = Util.getUrlParts()
     const [list] = Object.keys(formModifications).filter(key => _spPageContextInfo.serverRequestPath.indexOf(key) !== -1)
     if (list) {

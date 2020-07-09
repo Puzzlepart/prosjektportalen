@@ -1,17 +1,16 @@
-'use strict';
-var gulp = require("gulp"),
-    exec = require('child_process').exec;
+'use strict'
+const exec = require('child_process').exec
 
-var exports = module.exports = {};
+var exports = module.exports = {}
 
 exports.hash = function (cb) {
     exec('git rev-parse --short=8 HEAD', function (err, stdout, stderr) {
-        cb(stdout.trim());
-    });
-};
+        cb(stdout.trim())
+    })
+}
 
 exports.branch = function (cb) {
     exec('git rev-parse --abbrev-ref HEAD', function (err, stdout, stderr) {
-        cb(stdout.trim());
-    });
-};
+        cb(stdout.trim())
+    })
+}
