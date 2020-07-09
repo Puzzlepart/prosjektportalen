@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
 const { CheckerPlugin } = require('awesome-typescript-loader')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
 const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
@@ -34,6 +35,13 @@ module.exports = () => ({
             'regenerator-runtime/runtime',
             './src/js/index.tsx',
         ],
+    },
+    devServer: {
+        disableHostCheck: true,
+        contentBasePublicPath: '/',
+        contentBase: distBasePath,
+        compress: true,
+        port: 9001,
     },
     output: {
         path: distBasePath,
@@ -89,5 +97,6 @@ module.exports = () => ({
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+        new LiveReloadPlugin({})
     ]
 })
