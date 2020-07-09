@@ -33,7 +33,7 @@ export default class ProjectList extends BaseWebPart<IProjectListProps, IProject
         super(props, { isLoading: true, searchTerm: '' })
     }
 
-    public async componentDidMount() {
+    public async componentDidMount(): Promise<void> {
         try {
             const data = await this.fetchData()
             this.setState({
