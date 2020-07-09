@@ -37,7 +37,7 @@ module.exports = () => ({
         ],
     },
     devServer: {
-        open: true,
+        open: false,
         disableHostCheck: true,
         compress: true,
         port: 9001,
