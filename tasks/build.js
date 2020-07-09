@@ -19,6 +19,7 @@ const bom = require('gulp-bom')
 const pkg = require('../package.json')
 const sequence = require('run-sequence')
 const argv = require('yargs').argv
+const resxConverter = require('gulp-resx-convert');
 
 //#region Helpers
 function replaceVersionToken(hash) {
@@ -56,12 +57,11 @@ gulp.task('buildAssets', done => {
     )
 })
 
-gulp.task('buildJsonResources', () => {
-    return gulp.src(config.globs.resx)
-        .pipe(resx2())
-        .pipe(rename({ extname: '.json' }))
+gulp.task('buildJsonResources', function () {
+    gulp.src(config.globs.resx)
+        .pipe(resxConverter.convert({ json: {} }))
         .pipe(gulp.dest(path.join(config.paths.source, 'js', 'Resources')))
-})
+});
 
 gulp.task('buildJsonPreferences', () => {
     return gulp.src(config.globs.preferences)
@@ -81,7 +81,7 @@ gulp.task('buildTheme', () => {
 gulp.task('stampVersionToTemplates', done => {
     const src = gulp.src(path.join(config.paths.templatesTemp, '**', '*.xml'))
     git.hash(hash => {
-        es.concat(src.pipe(flatmap((stream, file) => {
+        es.concat(src.pipe(flatmap(stream => {
             return stream
                 .pipe(replaceVersionToken(hash))
                 .pipe(gulp.dest(config.paths.templatesTemp))
