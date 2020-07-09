@@ -15,14 +15,15 @@ const presets = {
             corejs: { version: 3 },
             useBuiltIns: 'entry',
             targets: {
-                'chrome': '58',
-                'ie': '11'
+                chrome: '58',
+                ie: '11'
             },
             modules: 'commonjs',
         }]
 }
 
 module.exports = {
+    stats: 'errors-only',
     devtool: 'none',
     entry: {
         main: [

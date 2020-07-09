@@ -12,8 +12,9 @@
     "main": "lib/index.js",
     "scripts": {
         "watch": "webpack-dev-server --config webpack.config.dev.js",
+        "build": "webpack --mode production",
         "buildSiteTemplates": "gulp buildSiteTemplates --lcid 1044 && gulp buildSiteTemplates --lcid 1033",
-        "release": "webpack --mode production && gulp buildPnpTemplateFiles && npm run buildSiteTemplates && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
+        "release": "npm run build && gulp buildPnpTemplateFiles && npm run buildSiteTemplates && gulp convertPnpTemplates && gulp copyReleaseFiles && gulp stampVersionToScripts && gulp zipReleasePackage",
         "lint": "eslint --ext .ts,.tsx ./src/js --color --fix",
         "postversion": "npm run release",
         "prerelease": "gulp buildAssets",
