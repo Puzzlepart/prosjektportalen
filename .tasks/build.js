@@ -18,6 +18,7 @@ const format = require('string-format')
 const bom = require('gulp-bom')
 const pkg = require('../package.json')
 const sequence = require('run-sequence')
+const argv = require('yargs').argv
 
 //#region Helpers
 function replaceVersionToken(hash) {
@@ -125,7 +126,6 @@ function _buildSiteTemplate(lcid) {
 }
 
 gulp.task('buildSiteTemplates', ['buildLib'], done => {
-    const argv = require('yargs').argv
     if (argv.lcid) {
         _buildSiteTemplate(argv.lcid).then(() => {
             done()
