@@ -1,7 +1,9 @@
 <pnp:CustomActions xmlns:pnp="http://schemas.dev.office.com/PnP/2018/01/ProvisioningSchema">
     <pnp:SiteCustomActions>
         <pnp:CustomAction Name="pp.main.js" Location="ScriptLink" Sequence="1" ScriptBlock="
-            SP.SOD.registerSod('pp.main.js', '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?v={package-version}');
+            var url = '{parameter:AssetsSiteUrl}/siteassets/pp/js/pp.main.js?v={package-version}';
+            if(GetUrlKeyValue('debug')) url = GetUrlKeyValue('debug') + '/pp.main.js';
+            SP.SOD.registerSod('pp.main.js', url);
             EnsureScriptFunc('pp.main.js', null, function () {
                 window.setTimeout(function () {
                     var shouldRenderWps = document.querySelectorAll('div[id*=\'pp-\']').length > 0;

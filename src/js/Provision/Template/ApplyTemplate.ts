@@ -18,7 +18,6 @@ export default async function ApplyTemplate(context: IProvisionContext): Promise
             ...context.template.Schema,
             WebSettings: {
                 ...context.template.Schema.WebSettings,
-                AlternateCssUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/css/pp.main.css`,
                 SiteLogoUrl: `${context.webProperties.pp_assetssiteurl}/SiteAssets/pp/img/ICO-Site-Project-11.png`,
             },
             PropertyBagEntries: [{

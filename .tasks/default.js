@@ -1,7 +1,4 @@
-'use strict';
-var gulp = require("gulp"),
-    runSequence = require("run-sequence");
+'use strict'
+var gulp = require('gulp')
 
-gulp.task("default", ["release"], (done) => {
-    done();
-});
+gulp.task('default', ['release'], done => done())

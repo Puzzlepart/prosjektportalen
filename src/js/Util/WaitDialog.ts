@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const uuidV1 = require('uuid/v1')
+import { v4 as uuidv4 } from 'uuid';
 
 export default class WaitDialog {
     private title: string;
@@ -8,8 +8,8 @@ export default class WaitDialog {
     private width: number;
     private instance: any;
     private ids = {
-        title: `${uuidV1()}`,
-        message: `${uuidV1()}`,
+        title: `${uuidv4()}`,
+        message: `${uuidv4()}`,
     };
 
     constructor(title, message, height, width) {

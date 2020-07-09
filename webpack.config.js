@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
 const { CheckerPlugin } = require('awesome-typescript-loader')
+const LiveReloadPlugin = require('webpack-livereload-plugin')
 const libBasePath = path.join(__dirname, 'lib')
 const distBasePath = path.join(__dirname, 'dist/js')
 
@@ -28,15 +29,19 @@ module.exports = () => ({
     devtool: 'source-map',
     entry: {
         main: [
-            'core-js/es6/map',
-            'core-js/es6/set',
-            'core-js/fn/object/assign',
-            'core-js/es6/promise',
+            'core-js/stable',
             'whatwg-fetch',
             '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
             './src/js/index.tsx',
         ],
+    },
+    devServer: {
+        disableHostCheck: true,
+        contentBasePublicPath: '/',
+        contentBase: distBasePath,
+        compress: true,
+        port: 9001,
     },
     output: {
         path: distBasePath,
@@ -92,5 +97,6 @@ module.exports = () => ({
             }
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
+        new LiveReloadPlugin({})
     ]
 })
