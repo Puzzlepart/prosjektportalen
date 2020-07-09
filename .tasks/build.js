@@ -17,7 +17,8 @@ const file = require('./utils/file.js')
 const format = require('string-format')
 const bom = require('gulp-bom')
 const pkg = require('../package.json')
-const sequence = require('run-sequence');
+const sequence = require('run-sequence')
+const argv = require('yargs').argv
 
 //#region Helpers
 function replaceVersionToken(hash) {
@@ -40,6 +41,16 @@ gulp.task('buildLib', ['copyResourcesToLib'], () => {
     const project = typescript.createProject('tsconfig.json', { declaration: true })
     const built = gulp.src(config.globs.js).pipe(project(typescript.reporter.fullReporter()))
     return merge([built.dts.pipe(gulp.dest(config.paths.lib)), built.js.pipe(gulp.dest(config.paths.lib))])
+})
+
+gulp.task('buildAssets', done => {
+    sequence(
+        'clean',
+        'buildTheme',
+        'buildJsonResources',
+        'buildJsonPreferences',
+        done
+    )
 })
 
 gulp.task('buildJsonResources', () => {
@@ -115,7 +126,6 @@ function _buildSiteTemplate(lcid) {
 }
 
 gulp.task('buildSiteTemplates', ['buildLib'], done => {
-    const argv = require('yargs').argv
     if (argv.lcid) {
         _buildSiteTemplate(argv.lcid).then(() => {
             done()
