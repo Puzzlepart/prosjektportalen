@@ -69,7 +69,7 @@
         "gulp-plumber": "1.2.1",
         "gulp-rename": "2.0.0",
         "gulp-replace": "1.0.0",
-        "gulp-resx2": "1.1.0",
+        "gulp-resx-convert": "^2.0.2",
         "gulp-spcolor-stylus": "1.0.1",
         "gulp-spsave": "3.1.1",
         "gulp-typescript": "5.0.1",
