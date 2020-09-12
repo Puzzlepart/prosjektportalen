@@ -14,7 +14,7 @@ const ProjectPhaseIcon = (props: IProjectPhaseIconProps) => {
             <div className={['phaseIcon', ...props.classList].join(' ')}>
                 <span className={'phaseLetter'}>{props.phase.PhaseLetter}</span>
                 <span className={'phaseText'} hidden={isGate || !props.phase.ShowPhaseText}>{props.phase.Name}</span>
-                <span className={'phaseSubText'}></span>
+                <span className={'phaseSubText'}>{props.phase.PhaseSubText}</span>
             </div>
             <ProjectPhaseIterations phase={props.phase} phaseIterations={props.phaseIterations} />
         </a>

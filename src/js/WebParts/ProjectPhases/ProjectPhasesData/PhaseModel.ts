@@ -13,7 +13,7 @@ export default class PhaseModel {
     public ShowPhaseText?: boolean;
     public IsIncremental?: boolean;
     public Type: string;
-    public SubText: string;
+    public PhaseSubText: string;
     public PhaseLetter: string;
     public Checklist: { stats: { [key: string]: number }; items: IChecklistItem[]; defaultViewUrl: string };
 
@@ -39,7 +39,7 @@ export default class PhaseModel {
         this.ShowOnFrontpage = properties.ShowOnFrontpage !== 'false'
         this.ShowPhaseText = properties.ShowPhaseText !== 'false'
         this.IsIncremental = properties.IsIncremental === 'true' && gatesEnabled
-        this.SubText = properties.PhaseSubText
+        this.PhaseSubText = properties.PhaseSubText
         this.PhaseLetter = properties.PhaseLetter || this.Name[0]
         this.initChecklist()
         return this
