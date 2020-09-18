@@ -316,6 +316,8 @@
         <CHOICES>
             <CHOICE>Default</CHOICE>
             <CHOICE>Date</CHOICE>
+            <CHOICE>CalculatedPercentage</CHOICE>
+            <CHOICE>CalculatedFloat</CHOICE>
             <CHOICE>Currency</CHOICE>
             <CHOICE>Note</CHOICE>
             <CHOICE>URL</CHOICE>
