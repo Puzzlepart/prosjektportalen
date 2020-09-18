@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Ability to add and show subtext underneath each phase in the phase selector webpart for every project #764
   - This is configured in the Termstore, check the wikipage: [How to configure the phase term set](https://github.com/Puzzlepart/prosjektportalen/wiki/How-to-configure-the-phase-term-set) after 2.7 has released
+- Possibility to show and add float and percentage formatted values in the dynamic portfolio view for crawled properties
 
 ### Fixed
 
