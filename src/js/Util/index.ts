@@ -375,7 +375,7 @@ export function toPercentageFormat(val: string): string {
 }
 
 /**
- * Formats a string (containing a float value) to float
+ * Formats a string (containing a float value) to float with two decimals
  *
  * @param {string} val The value
  */
