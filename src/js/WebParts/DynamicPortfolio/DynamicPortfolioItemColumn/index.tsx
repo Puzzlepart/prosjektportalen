@@ -55,6 +55,14 @@ const DynamicPortfolioItemColumn = (item: any, _index: number, column: IDynamicP
                     )
                 }
             }
+            case 'CalculatedPercentage': {
+                const currValue = Util.toPercentageFormat(colValue)
+                return <span title={currValue}>{currValue}</span>
+            }
+            case 'CalculatedFloat': {
+                const currValue = Util.toFloatFormat(colValue)
+                return <span title={currValue}>{currValue}</span>
+            }
             case 'Currency': {
                 const currValue = Util.toCurrencyFormat(colValue)
                 return <span title={currValue}>{currValue}</span>

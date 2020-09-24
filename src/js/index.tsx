@@ -5,8 +5,8 @@ import { sp } from '@pnp/sp'
 import { Logger, LogLevel, ConsoleListener } from '@pnp/logging'
 import { initializeIcons } from '@uifabric/icons'
 import { GetSettings } from './Settings'
-import * as WebParts from './WebParts'
-import * as Forms from './Forms'
+import { renderWebPartsOnPage } from './WebParts'
+import { initializeFormModifications } from './Forms'
 import StampVersion from './Util/StampVersion'
 import * as moment from 'moment'
 import '../css'
@@ -56,13 +56,13 @@ namespace PP {
         })
     }
 
-    export async function initialize() {
+    export async function initialize(): Promise<void> {
         const settings = await GetSettings()
         initializeIcons()
         initLogging(settings.LOG_LEVEL)
         initPnp(settings.DEFAULT_CACHING_TIMEOUT_SECONDS)
-        Forms.InitializeModifications()
-        WebParts.RenderWebPartsOnPage()
+        initializeFormModifications()
+        renderWebPartsOnPage()
         StampVersion('startNavigation', 'pp_version', 'v', 40)
     }
 }

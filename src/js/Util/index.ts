@@ -199,6 +199,16 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
         case 'User':
         case 'UserMulti':
         case 'Boolean':
+        case 'CalculatedFloat': {
+            item.set_item(fieldName, fieldValue.toString())
+            item.update()
+            return SetItemFieldValueResult.OK
+        }
+        case 'CalculatedPercentage': {
+            item.set_item(fieldName, fieldValue.toString())
+            item.update()
+            return SetItemFieldValueResult.OK
+        }
         case 'Currency': {
             item.set_item(fieldName, fieldValue)
             item.update()
@@ -351,6 +361,28 @@ export function toCurrencyFormat(val: string, prefix: string = __.getResource('C
         str[1] = str[1].replace(/(\d{3})/g, '$1 ')
     }
     return prefix + str.join(' ')
+}
+
+/**
+ * Formats a string (containing a float value) to percentage
+ *
+ * @param {string} val The value
+ */
+export function toPercentageFormat(val: string): string {
+    var number = val.split('#')[1];
+    var num = parseFloat(number);
+    return (num * 100).toFixed(2).toString() + "%" ;
+}
+
+/**
+ * Formats a string (containing a float value) to float with two decimals
+ *
+ * @param {string} val The value
+ */
+export function toFloatFormat(val: string): string {
+    var number = val.split('#')[1];
+    var num = parseFloat(number);
+    return (num).toFixed(2).toString();
 }
 
 /**

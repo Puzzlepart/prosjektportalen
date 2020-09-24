@@ -3,8 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 const pkg = require('./package.json')
 const { CheckerPlugin } = require('awesome-typescript-loader')
-const libBasePath = path.join(__dirname, 'lib')
-const distBasePath = path.join(__dirname, 'dist/js')
+const dest = path.join(__dirname, 'dist/js')
 
 /**
  * Presets for @babel
@@ -16,22 +15,19 @@ const presets = {
             corejs: { version: 3 },
             useBuiltIns: 'entry',
             targets: {
-                'chrome': '58',
-                'ie': '11'
+                chrome: '58',
+                ie: '11'
             },
             modules: 'commonjs',
         }]
 }
 
-module.exports = () => ({
-    stats: 'minimal',
-    devtool: 'source-map',
+module.exports = {
+    stats: 'errors-only',
+    devtool: 'none',
     entry: {
         main: [
-            'core-js/es6/map',
-            'core-js/es6/set',
-            'core-js/fn/object/assign',
-            'core-js/es6/promise',
+            'core-js/stable',
             'whatwg-fetch',
             '@pnp/polyfill-ie11',
             'regenerator-runtime/runtime',
@@ -39,13 +35,12 @@ module.exports = () => ({
         ],
     },
     output: {
-        path: distBasePath,
+        path: dest,
         filename: 'pp.[name].js',
         libraryTarget: 'umd',
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json'],
-        alias: { model: path.resolve(libBasePath, 'Model/index.js') }
+        extensions: ['.ts', '.tsx', '.js', '.css', '.styl', '.json']
     },
     module: {
         rules: [
@@ -93,4 +88,4 @@ module.exports = () => ({
         }),
         new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en|nb/),
     ]
-})
+}

@@ -79,7 +79,7 @@ export const GetWebPartComponentByName = (name: string): WebPartComponent<any> =
 /**
  * Render the webparts
  */
-export const RenderWebPartsOnPage = () => {
+export const renderWebPartsOnPage = (): void => {
     WebPartComponents.forEach(wpc => wpc.renderOnPage())
 }
 

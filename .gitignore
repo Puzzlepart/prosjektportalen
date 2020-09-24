@@ -4,11 +4,13 @@ lib/
 docs/
 release/
 _templates/
-@env.js
 src/css/conf/Default.spcolor.styl
 src/css/conf/Project.spcolor.styl
 npm-debug.log
 src/js/Resources/*.json
 src/js/Preferences/Preferences.json
 package-lock.json
+package.*.json
 .awcache
+.DS_Store
+tasks/@watch.json

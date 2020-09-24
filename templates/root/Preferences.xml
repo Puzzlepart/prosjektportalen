@@ -8,7 +8,7 @@
         <pnp:Parameter Key="TermSetIdRole">{54da9f47-c64e-4a26-80f3-4d3c3fa1b7b2}</pnp:Parameter>
         <pnp:Parameter Key="AssetsSiteUrl">{sitecollection}</pnp:Parameter>
         <pnp:Parameter Key="DataSourceSiteUrl">{sitecollection}</pnp:Parameter>
-        <pnp:Parameter Key="ScriptLoadTimeout">1000</pnp:Parameter>
+        <pnp:Parameter Key="ScriptLoadTimeout">100000</pnp:Parameter>
         <pnp:Parameter Key="DefaultSettings">{"ADD_EVERYONE_VISITORS":"Off","PROJECTSTATUS_EXPORT_TYPE":"PNG","LOG_LEVEL":"Error","PROJECTPHASES_FORCED_ORDER":"Off","PROJECT_INHERIT_PERMISSIONS":"Off","SITE_TEMPLATE_SELECTOR_ENABLED":"Off","DEFAULT_CACHING_TIMEOUT_SECONDS":"30", "PROJECTSTATUS_NOTE_TRUNCATING_VALUE":"128"}</pnp:Parameter>
         <pnp:Parameter Key="SettingsOptions">{"ADD_EVERYONE_VISITORS":["On","Off"],"PROJECTSTATUS_EXPORT_TYPE":["PNG","PDF"],"LOG_LEVEL":["Off","Info","Warning","Error"],"PROJECTPHASES_FORCED_ORDER":["On","Off"],"PROJECT_INHERIT_PERMISSIONS":["On","Off"],"SITE_TEMPLATE_SELECTOR_ENABLED":["On","Off"], "PROJECTSTATUS_NOTE_TRUNCATING_VALUE":["0", "32", "64", "128", "256", "512"]}</pnp:Parameter>
     </pnp:Parameters>

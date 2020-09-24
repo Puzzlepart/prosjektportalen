@@ -1,7 +1,7 @@
-'use strict';
-var fs = require('fs')
-var format = require('string-format')
-var load = ['./.tasks']
+'use strict'
+const fs = require('fs')
+const format = require('string-format')
+const load = ['./tasks']
 
 load.forEach(path => {
     fs.readdirSync(path).forEach(function (file) {
