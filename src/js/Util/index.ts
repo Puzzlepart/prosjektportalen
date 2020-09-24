@@ -199,12 +199,12 @@ export function setItemFieldValue(fieldName: string, item: SP.ListItem, fieldVal
         case 'User':
         case 'UserMulti':
         case 'Boolean':
-        case 'Float': {
+        case 'CalculatedFloat': {
             item.set_item(fieldName, fieldValue.toString())
             item.update()
             return SetItemFieldValueResult.OK
         }
-        case 'Percentage': {
+        case 'CalculatedPercentage': {
             item.set_item(fieldName, fieldValue.toString())
             item.update()
             return SetItemFieldValueResult.OK
