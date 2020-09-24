@@ -1,4 +1,4 @@
-# Prosjektportalen for SharePoint
+# Prosjektportalen for SharePoint  [![version](https://img.shields.io/badge/version-2.7.0-yellow.svg)](https://semver.org)
 
 Prosjektportalen for SharePoint er et prosjektstyringsverktøy for SharePoint basert på [Prosjektveiviseren](http://prosjektveiviseren.no).
 
