@@ -19,7 +19,6 @@ export const TasksOverviewDefaultProps: Partial<ITasksOverviewProps> = {
         SelectProperties: [
             'Title',
             'Path',
-            'SPWebUrl',
             'WebId',
             'SiteTitle',
             'StatusOWSCHCS',

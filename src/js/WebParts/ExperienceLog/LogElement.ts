@@ -2,7 +2,7 @@ export default class LogElement {
     public Path: string;
     public Title: string;
     public SiteTitle: string;
-    public SPWebUrl: string;
+    public SiteUrl: string;
     public Description: string;
     public LogType: string;
     public Responsible: string;
@@ -14,7 +14,7 @@ export default class LogElement {
         this.Path = data.Path
         this.Title = data.Title
         this.SiteTitle = data.SiteTitle
-        this.SPWebUrl = data.SPWebUrl
+        this.SiteUrl = data.Path.split('/Lists/')[0]
         this.Description = data.GtProjectLogDescriptionOWSMTXT
         this.LogType = data.GtProjectLogTypeOWSCHCS
         this.Responsible = data.GtProjectLogResponsibleOWSCHCS
