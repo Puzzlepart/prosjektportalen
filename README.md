@@ -1,4 +1,4 @@
-# Prosjektportalen for SharePoint
+# Prosjektportalen for SharePoint  [![version](https://img.shields.io/badge/version-2.7.0-yellow.svg)](https://semver.org)
 
 Prosjektportalen for SharePoint er et prosjektstyringsverktøy for SharePoint basert på [Prosjektveiviseren](http://prosjektveiviseren.no).
 
@@ -19,6 +19,23 @@ Siste versjon av Prosjektportalen kan lastes ned [herfra](https://github.com/Puz
 ## Kontakt
 
 Har du spørsmål vedrørende Prosjektportalen, behov for bistand til installasjon av løsningen eller ønsker om muligheter for videreutvikling og spesialtilpasninger, ta kontakt med [prosjektportalen@puzzlepart.com](mailto:prosjektportalen@puzzlepart.com). For tekniske spørsmål, ta kontakt med [Tarjei Ormestøyl](mailto:tarjeieo@puzzlepart.com) eller [Ole Martin Pettersen](mailto:olemp@puzzlepart.com). Vi gjør oppmerksom på at eventuell bistand vil være en fakturerbar tjeneste.
+
+## Nettleserstøtte
+
+Vi gjør vårt beste for å støtte alle nettlesere, men følger retningslinjer fra Microsoft og Office 365. Noen eldre nettlesere har dårligere støtte enn andre. Se følgende tabell:
+
+| Nettleser | Støtte |
+| --- | --- |
+| Edge (Chromium) | :smile: Støttet |
+| Edge (Classic) | :slightly_smiling_face: Grunnleggende støttet* |
+| Chrome | :smile: Støttet |
+| Safari | :smile: Støttet |
+| Firefox | :smile: Støttet |
+| Opera | :smile: Støttet |
+| Internet Explorer 11 | :slightly_smiling_face: Grunnleggende støttet* |
+| Internet Explorer 10 og eldre | :expressionless: Ikke støttet |
+
+ * _Grunnleggende støttet betyr at det meste vil fungere, men en kan risikere at noe funksjonalitet ikke virker_
 
 ## Maintainers
 

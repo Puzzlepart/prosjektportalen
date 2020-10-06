@@ -3,12 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## 2.7 - TBA
+## 2.7.0 - 24.09.2020
 
 ### Added
 
 - Ability to add and show subtext underneath each phase in the phase selector webpart for every project #764
-  - This is configured in the Termstore, check the wikipage: [How to configure the phase term set](https://github.com/Puzzlepart/prosjektportalen/wiki/How-to-configure-the-phase-term-set) after 2.7 has released
+  - This is configured in the Termstore, check the wikipage: [How to configure the phase term set](https://github.com/Puzzlepart/prosjektportalen/wiki/How-to-configure-the-phase-term-set)
 - Possibility to show and add float and percentage formatted values in the dynamic portfolio view for crawled properties
 
 ### Fixed
