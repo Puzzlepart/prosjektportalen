@@ -2,7 +2,7 @@ export default class DeliveryElement {
     public Path: string;
     public Title: string;
     public SiteTitle: string;
-    public SPWebUrl: string;
+    public SiteUrl: string;
     public ProductDescription: string;
     public ProductStartTime: string;
     public ProductEndTime: string;
@@ -13,7 +13,7 @@ export default class DeliveryElement {
         this.Path = data.Path
         this.Title = data.Title
         this.SiteTitle = data.SiteTitle
-        this.SPWebUrl = data.SPWebUrl
+        this.SiteUrl = data.Path.split('/Lists/')[0]
         this.ProductDescription = data.GtProductDescriptionOWSMTXT
         this.ProductStartTime = data.GtProductStartTimeOWSDATE
         this.ProductEndTime = data.GtProductEndTimeOWSDATE

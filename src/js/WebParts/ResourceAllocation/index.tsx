@@ -288,7 +288,7 @@ export default class ResourceAllocation extends React.Component<IResourceAllocat
                 res.Title,
                 res.GtResourceAbsenceCommentOWSTEXT,
             )
-            projectAllocation.project = { name: res.SiteTitle, url: res.SPWebUrl }
+            projectAllocation.project = { name: res.SiteTitle, url: res.Path.split('/Lists/')[0] }
             projectAllocation.role = res.RefinableString72
             return projectAllocation
         })

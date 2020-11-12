@@ -82,7 +82,7 @@ export default class TasksOverviewDetailsModal extends React.PureComponent<ITask
                 </div>
                 <div>
                     <b>{__.getResource('String_Project')}:</b>&nbsp;
-                    <a href={item.SPWebUrl} rel='noopener noreferrer' target='_blank'><span>{item.SiteTitle}</span></a>
+                    <a href={item.Path.split('/Lists/')[0]} rel='noopener noreferrer' target='_blank'><span>{item.SiteTitle}</span></a>
                 </div>
                 <div style={{ marginTop: 20 }}>
                     <a href={item.Path} rel='noopener noreferrer' target='_blank'><span>{__.getResource('ItemLink_Label_NewTab')}</span></a>

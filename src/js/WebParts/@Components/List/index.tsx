@@ -16,7 +16,7 @@ import * as Util from '../../../Util'
 export default class List extends React.PureComponent<IListProps, IListState> {
     public static defaultProps: Partial<IListProps> = {
         pathKey: 'Path',
-        webUrlKey: 'SPWebUrl',
+        webUrlKey: 'SiteUrl',
         siteTitleKey: 'SiteTitle',
         defaultGroupBy: { key: 'NoGrouping', name: __.getResource('String_NoGrouping') },
     };

@@ -85,7 +85,7 @@ export default class DeliveriesOverview extends BaseWebPart<IDeliveriesOverviewP
                 QueryTemplate: queryTemplate,
                 RowLimit: 500,
                 TrimDuplicates: false,
-                SelectProperties: ['Path', 'SPWebUrl', ...this.props.columns.map(col => col.key)],
+                SelectProperties: ['Path', ...this.props.columns.map(col => col.key)],
             })
             return items.map(r => new DeliveryElement(r))
         } catch (err) {

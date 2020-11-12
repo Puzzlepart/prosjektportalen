@@ -18,7 +18,6 @@ export const ResourceAllocationDefaultProps: Partial<IResourceAllocationProps> =
         SelectProperties: [
             'Title',
             'Path',
-            'SPWebUrl',
             'WebId',
             'GtResourceLoadOWSNMBR',
             'GtResourceAbsenceCommentOWSTEXT',

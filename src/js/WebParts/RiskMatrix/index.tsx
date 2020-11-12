@@ -367,7 +367,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                 risk.url = item.Path
                 risk.webId = item.WebId
                 risk.siteTitle = item.SiteTitle
-                risk.webUrl = item.SPWebUrl
+                risk.webUrl = item.Path.split('/Lists/')[0]
                 risk.action = item.GtRiskActionOWSMTXT
                 return risk
             })
@@ -400,7 +400,6 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             SelectProperties: [
                 'ListItemID',
                 'Path',
-                'SPWebUrl',
                 'WebId',
                 'Title',
                 'GtRiskProbabilityOWSNMBR',

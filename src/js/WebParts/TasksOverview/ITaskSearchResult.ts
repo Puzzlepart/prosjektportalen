@@ -1,7 +1,6 @@
 export interface ITaskSearchResult {
     Title: string;
     Path: string;
-    SPWebUrl: string;
     WebId: string;
     SiteTitle: string;
     StatusOWSCHCS: string;
