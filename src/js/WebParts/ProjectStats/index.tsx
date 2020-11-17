@@ -93,28 +93,23 @@ export default class ProjectStats extends BaseWebPart<IProjectStatsProps, IProje
     * Renders the command bar from office-ui-fabric-react
     */
     private renderCommandBar() {
-        const items: IContextualMenuItem[] = []
         const farItems: IContextualMenuItem[] = []
 
-        items.push({
-            key: 'NewItem',
-            name: __.getResource('String_New'),
-            iconProps: { iconName: 'Add' },
-            itemType: ContextualMenuItemType.Header,
-            onClick: e => e.preventDefault(),
-            subMenuProps: {
-                items: this.state.contentTypes.map(({ Name, StringId, NewFormUrl }) => ({
-                    key: `ContentType_${StringId}`,
-                    name: Name,
-                    onClick: (e: any) => {
-                        e.preventDefault()
-                        e.stopPropagation()
-                        const contentTypeNewFormUrl = `${NewFormUrl}?ContentTypeId=${StringId}&Source=${encodeURIComponent(_spPageContextInfo.serverRequestPath)}`
-                        document.location.href = contentTypeNewFormUrl
-                    },
-                })),
-            },
-        })
+        const items: IContextualMenuItem[] = [
+            {
+                key: 'NewItem',
+                name: __.getResource('String_New'),
+                iconProps: { iconName: 'Add' },
+                itemType: ContextualMenuItemType.Header,
+                subMenuProps: {
+                    items: this.state.contentTypes.map(ct => ({
+                        key: ct.StringId,
+                        name: ct.Name,
+                        href: `${this.props.newFormUrl}?ContentTypeId=${ct.StringId}&Source=${encodeURIComponent(document.location.href)}`,
+                    })),
+                },
+            }
+        ]
 
         farItems.push({
             key: 'ShowChartSettings',
