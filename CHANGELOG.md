@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Stopped using SPWebUrl managed property, which has a bug in SharePoint on-premises #766
+- Issue creating new diagrams from ProjectStats page #774
 
 ## 2.7.0 - 24.09.2020
 
