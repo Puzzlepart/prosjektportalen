@@ -72,7 +72,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             loadingText,
             showViewSelector,
             showProjectSelector,
-            showProjectList,
+            showUncertaintiesList,
             showToggle,
             dataSourceName,
             columns,
@@ -146,7 +146,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                             options={this.getProjectOptions()}
                                             onChanged={opt => this.setState({ selectedProject: opt })} />
                                     </div>
-                                    <div hidden={!showProjectList}>
+                                    <div hidden={!showUncertaintiesList}>
                                     <List
                                         items={items}
                                         columns={this.props.showProjectColumn ? columns : columns.filter(c => c.key !== 'SiteTitle')}

@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## 2.7.1 - TBA
 
+### Added
+
+- Added ability to hide list and RiskShowPostAction in RiskMatrix webpart #777
+
 ### Fixed
 
 - Stopped using SPWebUrl managed property, which has a bug in SharePoint on-premises #766
