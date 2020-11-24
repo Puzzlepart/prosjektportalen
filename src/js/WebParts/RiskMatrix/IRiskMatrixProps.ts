@@ -11,6 +11,8 @@ export default interface IRiskMatrixProps extends React.HTMLAttributes<HTMLEleme
     showViewSelector?: boolean;
     showProjectSelector?: boolean;
     showProjectColumn?: boolean;
+    showProjectList?: boolean;
+    showToggle?: boolean;
     hideLabelsBreakpoint?: number;
     dataSourceName?: string;
     queryTemplate?: string;
@@ -82,6 +84,8 @@ export const RiskMatrixDefaultProps: Partial<IRiskMatrixProps> = {
     showViewSelector: true,
     showProjectSelector: true,
     showProjectColumn: true,
+    showProjectList: true,
+    showToggle: true,
     hideLabelsBreakpoint: 900,
     rowLimit: 500,
     postActionShowOriginal: false,

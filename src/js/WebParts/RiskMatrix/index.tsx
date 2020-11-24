@@ -72,6 +72,8 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
             loadingText,
             showViewSelector,
             showProjectSelector,
+            showProjectList,
+            showToggle,
             dataSourceName,
             columns,
         } = this.props
@@ -128,11 +130,13 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                             {this.renderRows(items)}
                                         </tbody>
                                     </table>
+                                    <div hidden={!showToggle}>
                                     <Toggle
                                         onChanged={postAction => this.setState({ postAction })}
                                         label={__.getResource('ProjectStatus_RiskShowPostActionLabel')}
                                         onText={__.getResource('String_Yes')}
                                         offText={__.getResource('String_No')} />
+                                        </div>
                                 </div>
                                 <div hidden={!dataSourceName}>
                                     <div hidden={!showProjectSelector}>
@@ -142,6 +146,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                             options={this.getProjectOptions()}
                                             onChanged={opt => this.setState({ selectedProject: opt })} />
                                     </div>
+                                    <div hidden={!showProjectList}>
                                     <List
                                         items={items}
                                         columns={this.props.showProjectColumn ? columns : columns.filter(c => c.key !== 'SiteTitle')}
@@ -149,6 +154,7 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         pathKey='url'
                                         siteTitleKey='siteTitle'
                                         showCommandBar={false} />
+                                        </div>
                                 </div>
                             </div>
                         )}
