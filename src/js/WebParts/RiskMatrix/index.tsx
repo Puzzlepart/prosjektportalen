@@ -131,12 +131,12 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                         </tbody>
                                     </table>
                                     <div hidden={!showToggle}>
-                                    <Toggle
-                                        onChanged={postAction => this.setState({ postAction })}
-                                        label={__.getResource('ProjectStatus_RiskShowPostActionLabel')}
-                                        onText={__.getResource('String_Yes')}
-                                        offText={__.getResource('String_No')} />
-                                        </div>
+                                        <Toggle
+                                            onChanged={postAction => this.setState({ postAction })}
+                                            label={__.getResource('ProjectStatus_RiskShowPostActionLabel')}
+                                            onText={__.getResource('String_Yes')}
+                                            offText={__.getResource('String_No')} />
+                                    </div>
                                 </div>
                                 <div hidden={!dataSourceName}>
                                     <div hidden={!showProjectSelector}>
@@ -147,14 +147,14 @@ export default class RiskMatrix extends React.Component<IRiskMatrixProps, IRiskM
                                             onChanged={opt => this.setState({ selectedProject: opt })} />
                                     </div>
                                     <div hidden={!showUncertaintiesList}>
-                                    <List
-                                        items={items}
-                                        columns={this.props.showProjectColumn ? columns : columns.filter(c => c.key !== 'SiteTitle')}
-                                        webUrlKey='webUrl'
-                                        pathKey='url'
-                                        siteTitleKey='siteTitle'
-                                        showCommandBar={false} />
-                                        </div>
+                                        <List
+                                            items={items}
+                                            columns={this.props.showProjectColumn ? columns : columns.filter(c => c.key !== 'SiteTitle')}
+                                            webUrlKey='webUrl'
+                                            pathKey='url'
+                                            siteTitleKey='siteTitle'
+                                            showCommandBar={false} />
+                                    </div>
                                 </div>
                             </div>
                         )}
