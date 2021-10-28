@@ -1,35 +1,40 @@
 {
-    "version": "0.1.0",
+    "version": "2.0.0",
     "command": "gulp",
-    "isShellCommand": true,
     "args": [
         "--no-color"
     ],
-    "showOutput": "always",
     "tasks": [
         {
-            "taskName": "default",
-            "args": [],
-            "isBuildCommand": true,
-            "showOutput": "always"
+            "label": "default",
+            "type": "gulp",
+            "task": "--no-color",
+            "problemMatcher": [],
+            "group": {
+                "_id": "build",
+                "isDefault": false
+            }
         },
         {
-            "taskName": "watch",
-            "args": [],
+            "label": "watch",
+            "type": "gulp",
+            "task": "--no-color",
             "isBackground": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            "taskName": "watchEval",
-            "args": [],
+            "label": "watchEval",
+            "type": "gulp",
+            "task": "--no-color",
             "isBackground": true,
-            "showOutput": "always"
+            "problemMatcher": []
         },
         {
-            "taskName": "watchProd",
-            "args": [],
+            "label": "watchProd",
+            "type": "gulp",
+            "task": "--no-color",
             "isBackground": true,
-            "showOutput": "always"
+            "problemMatcher": []
         }
     ]
 }

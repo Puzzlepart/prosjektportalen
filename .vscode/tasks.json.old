@@ -1,0 +1,35 @@
+{
+    "version": "0.1.0",
+    "command": "gulp",
+    "isShellCommand": true,
+    "args": [
+        "--no-color"
+    ],
+    "showOutput": "always",
+    "tasks": [
+        {
+            "taskName": "default",
+            "args": [],
+            "isBuildCommand": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "watch",
+            "args": [],
+            "isBackground": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "watchEval",
+            "args": [],
+            "isBackground": true,
+            "showOutput": "always"
+        },
+        {
+            "taskName": "watchProd",
+            "args": [],
+            "isBackground": true,
+            "showOutput": "always"
+        }
+    ]
+}
